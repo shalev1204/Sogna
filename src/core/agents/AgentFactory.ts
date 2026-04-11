@@ -10,7 +10,7 @@ export class AgentFactory {
   private availableProviders: Provider[] = [];
 
   private constructor() {
-    this.agentsMDPath = path.join(process.cwd(), 'references', 'agents.md');
+    this.agentsMDPath = path.join(process.cwd(), 'resources', 'config', 'agents.md');
   }
 
   static async getInstance(): Promise<AgentFactory> {
@@ -116,7 +116,7 @@ export class AgentFactory {
       }
     }
 
-    throw new Error(`Agent type "${type}" not found in references/agents.md`);
+    throw new Error(`Agent type "${type}" not found in resources/config/agents.md`);
   }
 
   private getSwarmForAgent(type: string): AgentSwarm {

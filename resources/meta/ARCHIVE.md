@@ -1,6 +1,6 @@
-# Loki Mode - Claude Code Skill
+# Registro Histórico: Loki Mode
 
-The flagship product of [Autonomi](https://www.autonomi.dev/). Multi-agent autonomous startup system for Claude Code, OpenAI Codex CLI, and Google Gemini CLI. Takes PRD to fully deployed product with minimal human intervention.
+Loki Mode es un sistema de enjambre autónomo multi-agente diseñado para la integración con Claude Code, OpenAI y Google Gemini. Permite transformar un PRD en un producto funcional con mínima intervención humana.
 
 ## Quick Start
 

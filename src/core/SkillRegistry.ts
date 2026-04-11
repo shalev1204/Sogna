@@ -14,7 +14,7 @@ export class SkillRegistry {
   private skills: Map<string, Skill> = new Map();
 
   private constructor() {
-    this.skillsPath = path.join(process.cwd(), 'skills');
+    this.skillsPath = path.join(process.cwd(), 'resources', 'skills');
     this.reload();
   }
 
