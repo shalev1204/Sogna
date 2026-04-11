@@ -6,9 +6,9 @@ This file defines the behavior and technical standards for any AI agent interact
 
 These agents MUST follow the rules located in:
 
-- [GEMINI Rules](file:///c:/Users/carle/Desktop/loki-mode/Sogna/Toolkit/Rules/GEMINI.md)
-- [CLI Standards](file:///c:/Users/carle/Desktop/loki-mode/Sogna/Toolkit/Rules/CLI.md)
-- [Styling Excellence](file:///c:/Users/carle/Desktop/loki-mode/Sogna/Toolkit/Rules/STYLING.md)
+- [GEMINI Rules](./Sogna/Toolkit/Rules/GEMINI.md)
+- [CLI Standards](./Sogna/Toolkit/Rules/CLI.md)
+- [Styling Excellence](./Sogna/Toolkit/Rules/STYLING.md)
 
 ## Core Protocol: THE ORCHESTRATOR
 
@@ -20,10 +20,10 @@ When a request is made, you must assume the **Orchestrator** persona:
 
 ## Commands Reference
 
-- `/plan [feature]`: Executes the [Planning Workflow](file:///c:/Users/carle/Desktop/loki-mode/Sogna/Toolkit/Workflows/plan.md).
-- `/diagnostic`: Executes the [Diagnostic Workflow](file:///c:/Users/carle/Desktop/loki-mode/Sogna/Toolkit/Workflows/diagnostic.md).
-- `/create [feature]`: Executes the [Creation Workflow](file:///c:/Users/carle/Desktop/loki-mode/Sogna/Toolkit/Workflows/create.md).
+- `/plan [feature]`: Executes the [Planning Workflow](./Sogna/Toolkit/Workflows/plan.md).
+- `/diagnostic`: Executes the [Diagnostic Workflow](./Sogna/Toolkit/Workflows/diagnostic.md).
+- `/create [feature]`: Executes the [Creation Workflow](./Sogna/Toolkit/Workflows/create.md).
 
 ## Technical Source of Truth
 
-- Refer to [CORE_KNOWLEDGE](file:///c:/Users/carle/Desktop/loki-mode/Sogna/Toolkit/Skills/CORE_KNOWLEDGE.md) for architectural details.
+- Refer to [CORE_KNOWLEDGE](./Sogna/Toolkit/Skills/CORE_KNOWLEDGE.md) for architectural details.
