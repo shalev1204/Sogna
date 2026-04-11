@@ -1,0 +1,66 @@
+import { execa } from 'execa';
+import { Provider, type ProviderMetadata, type CapabilityTier } from '../core/Provider.js';
+
+export class GeminiProvider extends Provider {
+  readonly metadata: ProviderMetadata = {
+    name: 'gemini',
+    displayName: 'Google Gemini CLI',
+    cli: 'gemini'
+  };
+
+  private readonly defaultModels = {
+    planning: 'gemini-3-pro-preview',
+    development: 'gemini-3-pro-preview',
+    fast: 'gemini-3-flash-preview'
+  };
+
+  async detect(): Promise<boolean> {
+    try {
+      await execa(this.metadata.cli, ['--version']);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async version(): Promise<string> {
+    const { stdout } = await execa(this.metadata.cli, ['--version']);
+    return stdout.split('\n')[0].trim();
+  }
+
+  async invoke(prompt: string, options: any = {}): Promise<string> {
+    const model = options.model || this.defaultModels.planning;
+    return this.execute(prompt, model, options);
+  }
+
+  async invokeWithTier(tier: CapabilityTier, prompt: string, options: any = {}): Promise<string> {
+    const resolvedTier = this.resolveTier(tier);
+    const model = this.defaultModels[resolvedTier];
+    return this.execute(prompt, model, options);
+  }
+
+  private async execute(prompt: string, model: string, options: any): Promise<string> {
+    const args = [
+      '--approval-mode=yolo',
+      '--model', model,
+      prompt
+    ];
+
+    try {
+      const { all } = await execa(this.metadata.cli, args, { 
+        all: true,
+        env: { ...process.env, ...options.env }
+      });
+      return all || '';
+    } catch (error: any) {
+      if (error.message.includes('429') || error.message.includes('Quota')) {
+        // Fallback to flash if pro fails
+        if (model !== this.defaultModels.fast) {
+          console.warn(`[Gemini] Rate limit hit on ${model}, falling back to ${this.defaultModels.fast}`);
+          return this.execute(prompt, this.defaultModels.fast, options);
+        }
+      }
+      throw error;
+    }
+  }
+}
