@@ -2,23 +2,27 @@ import chalk from 'chalk';
 import { StateStore, type LokiState } from './StateStore.js';
 import { Supervisor } from './Supervisor.js';
 import { Provider } from './Provider.js';
-import { GeminiProvider } from '../providers/GeminiProvider.js';
+import { ProviderFactory } from './ProviderFactory.js';
+import { QualityCouncil } from './QualityCouncil.js';
+import { CouncilEvidence } from './gates/types.js';
 import fs from 'fs-extra';
 import path from 'path';
+import { execSync } from 'child_process';
 
 export class Runner {
   private stateStore: StateStore;
   private supervisor: Supervisor;
-  private provider: Provider;
+  private primaryProvider: Provider;
+  private council: QualityCouncil;
 
   constructor(baseDir: string = '.') {
     this.stateStore = new StateStore(baseDir);
     this.supervisor = new Supervisor();
-    // Default to Gemini for Phase 1 testing
-    this.provider = new GeminiProvider();
+    this.primaryProvider = ProviderFactory.getProvider();
+    this.council = new QualityCouncil(baseDir);
   }
 
-  async start(prdPath?: string, providerName: string = 'claude') {
+  async start(prdPath?: string) {
     console.log(chalk.bold.cyan('\nLoki Mode: Autonomous Agent Swarm (Windows Native)'));
     console.log(chalk.dim('===================================================='));
 
@@ -34,47 +38,88 @@ export class Runner {
     if (prdPath && await fs.pathExists(prdPath)) {
       prdContent = await fs.readFile(prdPath, 'utf8');
       console.log(chalk.green(`[INIT] Loaded PRD from ${prdPath}`));
-    } else {
-      console.log(chalk.yellow(`[WARN] No PRD file provided or found.`));
     }
 
-    // 3. Execution Cycle (Basic Phase 1: Reasoning Only)
-    try {
-      await this.runReasoningPhase(state, prdContent);
-    } catch (error: any) {
-      console.error(chalk.red(`\n[FATAL] ${error.message}`));
-      process.exit(1);
+    // 3. Autonomous Loop (RARV Cycle)
+    const MAX_ITERATIONS = parseInt(process.env.LOKI_MAX_ITERATIONS || '10');
+    
+    while (state.currentIteration < MAX_ITERATIONS) {
+      state.currentIteration++;
+      await this.stateStore.saveState(state);
+
+      try {
+        console.log(chalk.bold.magenta(`\n[ITERATION ${state.currentIteration}] Starting loop...`));
+        
+        // 1. REASON: Brainstorm implementation
+        const plan = await this.runReasoning(state, prdContent);
+        
+        // 2. ACT: Execute changes
+        await this.runActing(state, plan);
+        
+        // 3. VERIFY & REFLECT: Run Quality Council
+        const evidence = await this.collectEvidence(state, prdPath);
+        const { passed } = await this.council.evaluate(evidence);
+
+        if (passed) {
+          console.log(chalk.bold.green(`\n[SUCCESS] Project completed and verified at iteration ${state.currentIteration}`));
+          return;
+        }
+
+        console.log(chalk.yellow(`\n[CONTINUE] Project requires further work. Reflecting on findings...`));
+      } catch (error: any) {
+        console.error(chalk.red(`\n[ERROR] Iteration ${state.currentIteration} failed: ${error.message}`));
+        // In a real autonomous system, we might try to auto-fix the error in the next iteration
+      }
     }
+
+    console.log(chalk.bold.red(`\n[LIMIT] Reached maximum iterations (${MAX_ITERATIONS}). Stopping.`));
   }
 
-  private async runReasoningPhase(state: LokiState, prd: string) {
-    console.log(chalk.bold.magenta(`\n[PHASE] Reasoning (Iteration ${state.currentIteration})`));
+  private async runReasoning(state: LokiState, prd: string): Promise<string> {
+    console.log(chalk.cyan(`  ${chalk.bold('🧠')} Reasoning...`));
     
     const prompt = `
       You are the LOKI REASONING AGENT. 
-      Your task is to analyze the following PRD and create an architectural implementation plan.
+      Analyze the PRD and create an implementation strategy for this iteration.
+      Iteration: ${state.currentIteration}
       
       PRD:
-      ${prd || 'No PRD provided. Please help me initialize a new project structure.'}
+      ${prd || 'No PRD. Help me start the project.'}
       
-      Output your plan clearly as Markdown.
+      Current directory status:
+      ${execSync('git status --short').toString() || 'Empty directory'}
+      
+      Output a structured plan for the ACTING agent.
     `;
 
-    const logFile = await this.stateStore.getLogPath('reasoning', state.currentIteration);
-    
-    console.log(chalk.dim(`[EXEC] Running architecture analysis via ${this.provider.metadata.displayName}...`));
-    
-    const output = await this.provider.invoke(prompt, {
-      logFile
-    });
+    return await this.primaryProvider.invoke(prompt, { tier: 'planning' });
+  }
 
-    console.log(chalk.green(`\n[SUCCESS] Reasoning Phase Complete.`));
-    console.log(chalk.dim(`Log saved to: ${logFile}`));
+  private async runActing(state: LokiState, plan: string) {
+    console.log(chalk.cyan(`  ${chalk.bold('🔨')} Acting...`));
     
-    // In a real RARV cycle, we would parse the output and move to 'act'
-    console.log(chalk.bold.yellow('\nNext steps for Porting:'));
-    console.log('1. Implement "Act" phase (Code generation)');
-    console.log('2. Implement "Reflect/Verify" phases (Quality Gates)');
-    console.log('3. Integrate multi-agent coordination');
+    // Default to Aider or Claude for acting
+    const actingProvider = ProviderFactory.getProvider(process.env.LOKI_ACTING_PROVIDER || 'claude');
+    
+    const prompt = `
+      You are the LOKI ACTING AGENT. 
+      Execute the following implementation plan. Perform file edits as needed.
+      
+      PLAN:
+      ${plan}
+    `;
+
+    await actingProvider.invoke(prompt, { tier: 'development' });
+  }
+
+  private async collectEvidence(state: LokiState, prdPath?: string): Promise<CouncilEvidence> {
+    const gitDiff = execSync('git diff HEAD').toString();
+    
+    return {
+      iterationCount: state.currentIteration,
+      prdPath,
+      gitDiff,
+      testLogs: [] // Would be populated from log files
+    };
   }
 }

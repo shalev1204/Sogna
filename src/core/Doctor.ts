@@ -1,6 +1,8 @@
 import { execa } from 'execa';
 import chalk from 'chalk';
 import os from 'os';
+import { ProviderFactory } from './ProviderFactory.js';
+import { ToolResolver } from './ToolResolver.js';
 
 export interface DoctorResult {
   name: string;
@@ -11,6 +13,8 @@ export interface DoctorResult {
 }
 
 export class Doctor {
+  private toolResolver = new ToolResolver(process.cwd());
+
   async checkAll(): Promise<DoctorResult[]> {
     const results: DoctorResult[] = [];
 
@@ -20,10 +24,11 @@ export class Doctor {
     results.push(await this.checkCommand('Git', 'git', true));
     
     // AI Providers
-    results.push(await this.checkCommand('Claude CLI', 'claude', false));
-    results.push(await this.checkCommand('Gemini CLI', 'gemini', false));
-    results.push(await this.checkCommand('Codex CLI', 'codex', false));
-    results.push(await this.checkCommand('Aider CLI', 'aider', false));
+    await this.checkProviders(results);
+
+    // Development Tools (Gate Prerequisites)
+    results.push(await this.checkCommand('ESLint', 'eslint', false));
+    results.push(await this.checkCommand('TypeScript', 'tsc', false));
 
     // Disk Space (rough check)
     results.push(this.checkDiskSpace());
@@ -32,27 +37,56 @@ export class Doctor {
   }
 
   private async checkCommand(name: string, cmd: string, required: boolean, versionSpec?: string): Promise<DoctorResult> {
-    try {
-      const { stdout } = await execa(cmd, ['--version']);
-      const version = stdout.trim();
-      return {
-        name,
-        status: 'PASS',
+    const isPresent = await this.toolResolver.isAvailable(cmd);
+    
+    if (isPresent) {
+      try {
+        const resolved = this.toolResolver.resolve(cmd);
+        const { stdout } = await execa(resolved, ['--version']);
+        return {
+          name,
+          status: 'PASS',
+          version: stdout.split('\n')[0].trim(),
+          required
+        };
+      } catch {
+        return { name, status: 'PASS', required };
+      }
+    }
+
+    return {
+      name,
+      status: required ? 'FAIL' : 'WARN',
+      message: `${name} is not installed locally or in PATH.`,
+      required
+    };
+  }
+
+  private async checkProviders(results: DoctorResult[]) {
+    const providers = [
+      ProviderFactory.getProvider('gemini'),
+      ProviderFactory.getProvider('claude'),
+      ProviderFactory.getProvider('aider')
+    ];
+
+    for (const p of providers) {
+      const isPresent = await p.detect();
+      let version = undefined;
+      if (isPresent) {
+        try { version = await p.version(); } catch {}
+      }
+
+      results.push({
+        name: p.metadata.displayName,
+        status: isPresent ? 'PASS' : 'WARN',
         version,
-        required
-      };
-    } catch (error) {
-      return {
-        name,
-        status: required ? 'FAIL' : 'WARN',
-        message: `${name} is not installed or not in PATH.`,
-        required
-      };
+        message: isPresent ? undefined : `${p.metadata.cli} CLI not found.`,
+        required: false
+      });
     }
   }
 
   private checkDiskSpace(): DoctorResult {
-    // os.freemem() is for RAM, for disk we'd need a lib, but let's do a simple check
     const freeMemGB = Math.round(os.freemem() / (1024 * 1024 * 1024));
     return {
       name: 'System RAM',

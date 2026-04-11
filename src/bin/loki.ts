@@ -37,13 +37,22 @@ program
   });
 
 program
-  .command('start')
-  .description('Start Loki Mode (Basic Mode)')
+  .command('run')
+  .description('Start autonomous Loki Mode RARV cycle')
   .argument('[prd]', 'Path to PRD file')
-  .option('--provider <name>', 'AI provider (claude, gemini, etc.)', 'claude')
-  .action(async (prd, options) => {
+  .action(async (prd) => {
     const runner = new Runner();
-    await runner.start(prd, options.provider);
+    await runner.start(prd);
+  });
+
+// Keep 'start' as an alias for 'run'
+program
+  .command('start')
+  .description('Alias for "run"')
+  .argument('[prd]', 'Path to PRD file')
+  .action(async (prd) => {
+    const runner = new Runner();
+    await runner.start(prd);
   });
 
 program.parse();

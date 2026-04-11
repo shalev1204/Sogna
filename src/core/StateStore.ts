@@ -44,13 +44,13 @@ export class StateStore {
         totalTokens: 0,
         totalCost: 0
       };
-      await this.save(state);
+      await this.saveState(state);
     }
 
     return state;
   }
 
-  async save(state: LokiState): Promise<void> {
+  async saveState(state: LokiState): Promise<void> {
     // Atomic write on Windows is safer via temp file + rename
     const tempFile = `${this.stateFile}.tmp`;
     await fs.writeJson(tempFile, state, { spaces: 2 });
