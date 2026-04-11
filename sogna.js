@@ -55,11 +55,21 @@ program
       // n8n
       await fs.copy(path.join(templatesDir, 'n8n'), path.join(targetDir, 'n8n'));
 
-      // 4. Copiar Wrappers a la carpeta Sogna del nuevo proyecto
+      // 4. Copiar Wrappers y Toolkit a la carpeta Sogna del nuevo proyecto
       await fs.copy(path.join(__dirname, 'sogna.js'), path.join(targetSognaDir, 'sogna.js'));
       await fs.copy(path.join(__dirname, 'sognatore.js'), path.join(targetSognaDir, 'sognatore.js'));
+      
+      const sourceToolkit = path.join(__dirname, 'Sogna', 'Toolkit');
+      const targetToolkit = path.join(targetSognaDir, 'Toolkit');
+      console.log(chalk.blue(`[SOGNA] 🛠️  Desplegando Antigravity Toolkit...`));
+      await fs.copy(sourceToolkit, targetToolkit);
 
-      // 5. Crear package.json básico para el frontend si no existe
+      // 5. Desplegar Identidad Soberana
+      console.log(chalk.blue(`[SOGNA] 🧬 Inyectando Identidad Soberana Sogna...`));
+      await fs.copy(path.join(__dirname, '.sognarules'), path.join(targetDir, '.sognarules'));
+      await fs.copy(path.join(__dirname, '.agent-metadata'), path.join(targetDir, '.agent-metadata'));
+
+      // 6. Crear package.json básico para el frontend si no existe
       const pkgPath = path.join(targetDir, 'package.json');
       if (!fs.existsSync(pkgPath)) {
         const minimalPkg = {
@@ -105,6 +115,51 @@ program
       console.log(chalk.green(`✔ Motor Sognatore detectado.`));
     } else {
       console.log(chalk.red(`✘ Motor Sognatore NO detectado en Sogna/Sognatore.`));
+    }
+
+    const toolkitPath = path.join(process.cwd(), 'Sogna', 'Toolkit');
+    if (fs.existsSync(toolkitPath)) {
+      console.log(chalk.green(`✔ Toolkit Antigravity detectado.`));
+    } else {
+      console.log(chalk.red(`✘ Toolkit Antigravity NO detectado.`));
+    }
+
+    // Sovereign Identity Check
+    const sognarulesPath = path.join(process.cwd(), '.sognarules');
+    if (fs.existsSync(sognarulesPath)) {
+      console.log(chalk.green(`✔ Identidad Soberana (.sognarules) detectada.`));
+    } else {
+      console.log(chalk.yellow(`⚠️  Identidad Soberana (.sognarules) no encontrada.`));
+    }
+
+    const metadataPath = path.join(process.cwd(), '.agent-metadata');
+    if (fs.existsSync(metadataPath)) {
+      console.log(chalk.green(`✔ Metadatos de Agente (.agent-metadata) detectados.`));
+    } else {
+      console.log(chalk.yellow(`⚠️  Carpeta de Metadatos (.agent-metadata) no encontrada.`));
+    }
+  });
+
+program
+  .command('toolkit')
+  .description('Manage and explore the Antigravity Toolkit')
+  .action(async () => {
+    const toolkitPath = path.join(process.cwd(), 'Sogna', 'Toolkit');
+    if (!fs.existsSync(toolkitPath)) {
+      console.log(chalk.red(`\n✘ No se encontró el Toolkit en Sogna/Toolkit.`));
+      return;
+    }
+
+    console.log(chalk.magenta(`\n[SOGNA] 🛠️  Explorando Antigravity Toolkit...`));
+    
+    const categories = ['Agents', 'Rules', 'Workflows', 'Skills'];
+    for (const cat of categories) {
+      const catPath = path.join(toolkitPath, cat);
+      if (fs.existsSync(catPath)) {
+        const files = await fs.readdir(catPath);
+        console.log(chalk.cyan(`\n🔹 ${cat}:`));
+        files.forEach(f => console.log(`  - ${f}`));
+      }
     }
   });
 

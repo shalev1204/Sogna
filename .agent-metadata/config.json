@@ -1,0 +1,10 @@
+{
+  "project": "Sogna",
+  "description": "Universal Agentic Application Forge",
+  "hooks": {
+    "SessionStart": [],
+    "PreToolUse": [],
+    "PostToolUse": [],
+    "Stop": []
+  }
+}
