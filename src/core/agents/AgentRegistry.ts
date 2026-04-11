@@ -27,9 +27,9 @@ export class AgentRegistry {
     }
 
     const factory = await AgentFactory.getInstance();
-    const { role, provider, model } = await factory.getAgent(type);
+    const { role, provider, model, tier } = await factory.getAgent(type);
     
-    const agent = new Agent(agentId, role, provider, model);
+    const agent = new Agent(agentId, role, provider, model, tier);
     this.activeAgents.set(agentId, agent);
     
     return agent;

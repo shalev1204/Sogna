@@ -9,6 +9,8 @@ export class AgentFactory {
   private agentsMDPath: string;
   private availableProviders: Provider[] = [];
 
+  private strategy: any;
+
   private constructor() {
     this.agentsMDPath = path.join(process.cwd(), 'resources', 'config', 'agents.md');
   }
@@ -23,74 +25,45 @@ export class AgentFactory {
 
   private async init() {
     this.availableProviders = await ProviderFactory.getAvailableProviders();
+    const strategyPath = path.join(process.cwd(), 'resources', 'config', 'model_strategy.json');
+    if (fs.existsSync(strategyPath)) {
+      this.strategy = JSON.parse(fs.readFileSync(strategyPath, 'utf8'));
+    }
   }
 
   /**
    * Returns a specific agent by type with the best available provider 
-   * following the 2026 Resilient Hierarchy.
+   * following the 2026 Tiered Efficiency Strategy.
    */
-  async getAgent(type: string): Promise<{ role: AgentRole; provider: Provider; model: string }> {
+  async getAgent(type: string): Promise<{ role: AgentRole; provider: Provider; model: string; tier: string }> {
     const role = await this.parseAgentRole(type);
-    const { provider, model } = this.resolveProviderAndModel(role.swarm);
+    const { provider, model, tier } = this.resolveProviderAndModel(type, role.swarm);
     
-    return { role, provider, model };
+    return { role, provider, model, tier };
   }
 
-  private resolveProviderAndModel(swarm: AgentSwarm): { provider: Provider; model: string } {
-    const hierarchy = this.getHierarchyForSwarm(swarm);
+  private resolveProviderAndModel(type: string, swarm: AgentSwarm): { provider: Provider; model: string; tier: string } {
+    const tierName = this.strategy?.agent_tier_mapping[type] || 
+                     this.strategy?.agent_tier_mapping[swarm] || 
+                     this.strategy?.default_tier || 'gold';
     
-    for (const entry of hierarchy) {
+    const tierInfo = this.strategy?.tiers[tierName];
+    if (!tierInfo) throw new Error(`Model tier "${tierName}" not defined in model_strategy.json`);
+
+    for (const entry of tierInfo.models) {
       const provider = this.availableProviders.find(p => p.metadata.name === entry.provider);
       if (provider) {
-        return { provider, model: entry.model };
+        return { provider, model: entry.model, tier: tierName };
       }
     }
 
-    // Ultimate fallback if no hierarchical match found (should not happen if at least one provider exists)
+    // Fallback logic if tier models are unavailable
     if (this.availableProviders.length > 0) {
       const fallback = this.availableProviders[0];
-      return { provider: fallback, model: 'best' };
+      return { provider: fallback, model: 'best', tier: 'gold' };
     }
 
     throw new Error('No AI providers available. Check your environment keys.');
-  }
-
-  private getHierarchyForSwarm(swarm: AgentSwarm): { provider: string; model: string }[] {
-    switch (swarm) {
-      case 'engineering':
-        return [
-          { provider: 'claude', model: 'claude-4.6-sonnet' },
-          { provider: 'openai', model: 'gpt-5.4' },
-          { provider: 'gemini', model: 'gemini-3.1-pro' }
-        ];
-      case 'review':
-        return [
-          { provider: 'claude', model: 'claude-4.6-opus' },
-          { provider: 'openai', model: 'gpt-5.4' },
-          { provider: 'claude', model: 'claude-4.6-sonnet' }
-        ];
-      case 'operations':
-      case 'data':
-        return [
-          { provider: 'gemini', model: 'gemini-3.1-pro' },
-          { provider: 'openai', model: 'gpt-5.4' },
-          { provider: 'claude', model: 'claude-4.6-sonnet' }
-        ];
-      case 'business':
-      case 'product':
-        return [
-          { provider: 'openai', model: 'gpt-5.4' },
-          { provider: 'claude', model: 'claude-4.6-sonnet' },
-          { provider: 'gemini', model: 'gemini-3.1-pro' }
-        ];
-      case 'orchestration':
-      default:
-        return [
-          { provider: 'claude', model: 'claude-4.6-sonnet' },
-          { provider: 'gemini', model: 'gemini-3.1-pro' },
-          { provider: 'openai', model: 'gpt-5.4' }
-        ];
-    }
   }
 
   private async parseAgentRole(type: string): Promise<AgentRole> {
