@@ -1,5 +1,6 @@
 import { Provider, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
 import { spawn } from 'child_process';
+import { execa } from 'execa';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
@@ -13,10 +14,14 @@ export class ClaudeProvider extends Provider {
 
   private skillDir: string = path.join(os.homedir(), '.claude', 'skills');
 
+  getName(): string {
+    return 'Claude 4.6 (Symmetry-Optimized)';
+  }
+
+
   async detect(): Promise<boolean> {
     try {
-      const { execSync } = await import('child_process');
-      execSync('claude --version', { stdio: 'ignore' });
+      await execa(this.metadata.cli, ['--version'], { timeout: 5000 });
       return true;
     } catch {
       return false;
@@ -56,6 +61,7 @@ export class ClaudeProvider extends Provider {
       });
 
       proc.stdout.on('data', (data) => {
+
         const chunk = data.toString();
         output += chunk;
         if (options.onToken) {

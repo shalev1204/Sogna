@@ -9,6 +9,7 @@ export interface ProviderMetadata {
 export abstract class Provider {
   abstract readonly metadata: ProviderMetadata;
 
+  abstract getName(): string;
   abstract detect(): Promise<boolean>;
   abstract version(): Promise<string>;
   

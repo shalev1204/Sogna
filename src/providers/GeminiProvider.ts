@@ -8,6 +8,10 @@ export class GeminiProvider extends Provider {
     cli: 'gemini'
   };
 
+  getName(): string {
+    return 'Google Gemini 3.1 Pro (Ops-Optimized)';
+  }
+
   private readonly defaultModels = {
     planning: 'gemini-3-pro-preview',
     development: 'gemini-3-pro-preview',

@@ -40,8 +40,13 @@ program
   .command('run')
   .description('Start autonomous Loki Mode RARV cycle')
   .argument('[prd]', 'Path to PRD file')
-  .action(async (prd) => {
+  .option('--stress-test', 'Execute with maximum council intensity')
+  .action(async (prd, options) => {
     const runner = new Runner();
+    if (options.stressTest) {
+      process.env.LOKI_MAX_ITERATIONS = '20';
+      process.env.LOKI_QUALITY_TIER = 'High Assurance';
+    }
     await runner.start(prd);
   });
 

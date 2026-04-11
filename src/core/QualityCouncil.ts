@@ -1,6 +1,8 @@
 import { BaseGate } from './gates/BaseGate.js';
 import { StaticAnalysisGate } from './gates/StaticAnalysisGate.js';
 import { BlindReviewGate } from './gates/BlindReviewGate.js';
+import { AntiSycophancyGate } from './gates/AntiSycophancyGate.js';
+import { CompatibilityGate } from './gates/CompatibilityGate.js';
 import { CouncilEvidence, GateResult } from './gates/types.js';
 import chalk from 'chalk';
 
@@ -9,14 +11,16 @@ export class QualityCouncil {
 
   constructor(private readonly cwd: string) {
     this.gates = [
+      new CompatibilityGate(cwd),    // NEW: Gate 10 (High Priority)
       new StaticAnalysisGate(cwd),
-      new BlindReviewGate(cwd)
-      // Additional gates can be added here
+      new BlindReviewGate(cwd),
+      new AntiSycophancyGate(cwd)    // NEW: Gate 7
     ];
   }
 
   async evaluate(evidence: CouncilEvidence): Promise<{ passed: boolean; results: GateResult[] }> {
     console.log(chalk.bold(`\n${chalk.cyan('⚖️')} Quality Council Evaluation (Iteration ${evidence.iterationCount})`));
+    console.log(chalk.dim(`  Mode: ${process.env.LOKI_QUALITY_TIER || 'Standard Assurance'}`));
     
     const results: GateResult[] = [];
     let allPassed = true;
@@ -37,7 +41,8 @@ export class QualityCouncil {
         // Display findings for failed gates
         if (result.findings.length > 0) {
           result.findings.forEach(f => {
-            console.log(chalk.dim(`    - [${f.severity}] ${f.message}`));
+            const color = f.severity === 'CRITICAL' ? chalk.red : chalk.yellow;
+            console.log(color(`    - [${f.severity}] ${f.message}`));
           });
         }
       } catch (error: any) {

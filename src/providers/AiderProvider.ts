@@ -1,5 +1,5 @@
 import { Provider, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
-import { spawn } from 'child_process';
+import { spawn, execSync } from 'child_process';
 
 export class AiderProvider extends Provider {
   readonly metadata: ProviderMetadata = {
@@ -7,6 +7,10 @@ export class AiderProvider extends Provider {
     displayName: 'Aider (18+ Providers)',
     cli: 'aider'
   };
+
+  getName(): string {
+    return 'Aider (18+ Model Consensus)';
+  }
 
   async detect(): Promise<boolean> {
     try {

@@ -1,6 +1,7 @@
 import { Provider } from './Provider.js';
 import { GeminiProvider } from '../providers/GeminiProvider.js';
 import { ClaudeProvider } from '../providers/ClaudeProvider.js';
+import { OpenAIProvider } from '../providers/OpenAIProvider.js';
 import { AiderProvider } from '../providers/AiderProvider.js';
 
 export class ProviderFactory {
@@ -12,6 +13,8 @@ export class ProviderFactory {
         return new GeminiProvider();
       case 'claude':
         return new ClaudeProvider();
+      case 'openai':
+        return new OpenAIProvider();
       case 'aider':
         return new AiderProvider();
       default:
@@ -23,6 +26,7 @@ export class ProviderFactory {
     const allProviders = [
       new GeminiProvider(),
       new ClaudeProvider(),
+      new OpenAIProvider(),
       new AiderProvider()
     ];
 
