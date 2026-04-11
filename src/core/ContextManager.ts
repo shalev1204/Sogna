@@ -11,7 +11,8 @@ export class ContextManager {
   }
 
   /**
-   * Generates a high-level map of the project, respecting .gitignore
+   * Generates a high-level map of the project, respecting .gitignore.
+   * Optimized to prevent ENAMETOOLONG errors on Windows.
    */
   async getCodeMap(): Promise<string> {
     try {
@@ -19,9 +20,13 @@ export class ContextManager {
       const files = execSync('git ls-files', { cwd: this.cwd }).toString().split('\n');
       
       const tree: Record<string, any> = {};
+      const MAX_FILES = 100; // Cap for individual file listing before summarization
       
-      for (const f of files) {
-        if (!f) continue;
+      const limitedFiles = files.filter(f => f.trim()).length > MAX_FILES 
+        ? files.filter(f => f.trim()).slice(0, MAX_FILES) 
+        : files.filter(f => f.trim());
+
+      for (const f of limitedFiles) {
         const parts = f.split('/');
         let current = tree;
         for (const part of parts) {
@@ -30,9 +35,12 @@ export class ContextManager {
         }
       }
 
-      return this.formatTree(tree);
+      let output = this.formatTree(tree);
+      if (files.length > MAX_FILES) {
+        output += `\n... [${files.length - MAX_FILES} additional files omitted for swarm performance] ...\n`;
+      }
+      return output;
     } catch {
-      // Fallback: simple recursive scan (limited depth)
       return 'Project map unavailable (Git repository not found).';
     }
   }
@@ -47,9 +55,14 @@ export class ContextManager {
     const content = await fs.readFile(fullPath, 'utf8');
     const lines = content.split('\n');
     
+    // Performance cap: don't pass more than 10KB per file summary
+    if (content.length > 10000) {
+      return `[FILE TOO LARGE: ${Math.round(content.length/1024)}KB] - Summarizing head/tail only.\n` + 
+        [...lines.slice(0, 30), '\n... [truncated] ...\n', ...lines.slice(-30)].join('\n');
+    }
+
     if (lines.length < 50) return content;
 
-    // Smart summarize: Head, Tail, and middle placeholders
     return [
       ...lines.slice(0, 20),
       `\n... [${lines.length - 40} lines omitted] ...\n`,
@@ -57,7 +70,9 @@ export class ContextManager {
     ].join('\n');
   }
 
-  private formatTree(tree: any, indent = ''): string {
+  private formatTree(tree: any, indent = '', depth = 0): string {
+    if (depth > 5) return `${indent}... [Deep structure truncated] ...\n`;
+    
     let output = '';
     const keys = Object.keys(tree).sort();
     for (const key of keys) {
@@ -65,7 +80,7 @@ export class ContextManager {
       const isDir = Object.keys(children).length > 0;
       output += `${indent}${isDir ? '📁' : '📄'} ${key}\n`;
       if (isDir) {
-        output += this.formatTree(children, indent + '  ');
+        output += this.formatTree(children, indent + '  ', depth + 1);
       }
     }
     return output;

@@ -3,6 +3,7 @@ import { AgentRole } from './AgentTypes.js';
 import { StateStore } from '../StateStore.js';
 import path from 'path';
 import fs from 'fs';
+import chalk from 'chalk';
 
 export interface AgentState {
   id: string;
@@ -39,6 +40,13 @@ export class Agent {
     this.updateStatus('busy', task);
     
     const systemPrompt = this.buildSystemPrompt();
+    const fullPrompt = `System: ${systemPrompt}\n\nTask: ${task}`;
+
+    // Performance and stability observability
+    if (fullPrompt.length > 50000) {
+      console.warn(chalk.yellow(`[WARN] Large Context detected (${Math.round(fullPrompt.length/1024)}KB). Performance may degrade.`));
+    }
+
     const result = await this.provider.invoke(task, {
       tier: 'development',
       model: this.model,

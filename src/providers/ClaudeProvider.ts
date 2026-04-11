@@ -46,43 +46,25 @@ export class ClaudeProvider extends Provider {
     const resolvedTier = this.resolveTier(tier);
     const model = this.resolveModelForTier(resolvedTier);
     
-    // Build arguments
-    const args = ['--dangerously-skip-permissions', '--model', model, '-p', prompt];
+    // Build arguments - using '-' for stdin input
+    const args = ['--dangerously-skip-permissions', '--model', model, '-p', '-'];
     
     if (options.extraArgs) {
       args.push(...options.extraArgs);
     }
 
-    return new Promise((resolve, reject) => {
-      let output = '';
-      const proc = spawn('claude', args, {
-        shell: true,
+    try {
+      const { all } = await execa('claude', args, {
+        all: true,
+        input: prompt, // Pipe prompt via stdin
         env: { ...process.env, ...options.env }
       });
-
-      proc.stdout.on('data', (data) => {
-
-        const chunk = data.toString();
-        output += chunk;
-        if (options.onToken) {
-          options.onToken(chunk);
-        }
-      });
-
-      proc.stderr.on('data', (data) => {
-        // Claude Code UI output
-      });
-
-      proc.on('close', (code) => {
-        if (code === 0) {
-          resolve(output);
-        } else {
-          // If output was captured, it might be partially successful but exit code 1 due to CLI UI
-          if (output) resolve(output);
-          else reject(new Error(`Claude process exited with code ${code}`));
-        }
-      });
-    });
+      return all || '';
+    } catch (error: any) {
+      // Return partial output if available, otherwise rethrow
+      if (error.all) return error.all;
+      throw new Error(`Claude process failed: ${error.message}`);
+    }
   }
 
   private resolveModelForTier(tier: 'planning' | 'development' | 'fast'): string {

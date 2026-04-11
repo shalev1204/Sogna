@@ -47,12 +47,13 @@ export class GeminiProvider extends Provider {
     const args = [
       '--approval-mode=yolo',
       '--model', model,
-      prompt
+      '-' // Convention for reading from stdin
     ];
 
     try {
       const { all } = await execa(this.metadata.cli, args, { 
         all: true,
+        input: prompt, // Pipe the prompt via stdin
         env: { ...process.env, ...options.env }
       });
       return all || '';
