@@ -30,12 +30,13 @@ wiki-repo/
 
 # Runtime state (regenerated each session)
 # Source hooks live in autonomy/hooks/ (tracked)
-.loki/
+.sognatore/
 
 # Runtime state in subdirectories
-dashboard-ui/.loki/
-vscode-extension/.loki/
+dashboard-ui/.sognatore/
+vscode-extension/.sognatore/
 
 # Test artifacts
 **/test-results/
 .aider*
+.claude/

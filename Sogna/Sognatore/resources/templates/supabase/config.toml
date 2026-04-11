@@ -1,0 +1,25 @@
+# Supabase Local Configuration
+
+[api]
+port = 54321
+external_url = "http://localhost:54321"
+
+[db]
+port = 54322
+shadow_port = 54320
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+
+[realtime]
+enabled = true
+
+# Bridge to Cloud (Placeholder for easy migration)
+# Copy these values from your dashboard when migrating
+# [cloud]
+# project_ref = "YOUR_PROJECT_REF"
+# db_password = "YOUR_DB_PASSWORD"
