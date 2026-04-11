@@ -5,7 +5,7 @@ Este documento define la interfaz entre el agente **Antigravity** y el motor **S
 ## 🚀 Comandos Principales
 
 | Comando | Acción | Cuándo usarlo |
-|---------|--------|---------------|
+| --- | --- | --- |
 | `node sognatore.js setup` | Configura APIs y entorno | Al iniciar un nuevo proyecto o rotar llaves. |
 | `node sognatore.js run` | Inicia el enjambre | Para tareas complejas de ingeniería o refactor masivo. |
 | `node sognatore.js doctor` | Diagnóstico de salud | Si algo falla o tras una actualización. |
@@ -14,6 +14,7 @@ Este documento define la interfaz entre el agente **Antigravity** y el motor **S
 ## 🛡️ Protocolo del Guardián
 
 El motor **Sognatore** incluye un **Guardián Invisible**. Como operador, debes saber que:
+
 1. **Ofuscación**: Por defecto, Sognatore ofuscará el código generado para proteger la IP del usuario.
 2. **Sanitización**: Todas las rutas locales en tus prompts serán enmascaradas como `<<PROTECTED_ROOT>>`.
 3. **Logs Sellados**: Los archivos en `.sognatore/state/` están cifrados. Si necesitas leerlos, usa las herramientas del motor, no intentes leer el JSON directamente.
