@@ -3,6 +3,8 @@ import 'dotenv/config';
 import { Command } from 'commander';
 import { Doctor } from '../core/Doctor.js';
 import { Runner } from '../core/Runner.js';
+import { SetupWizard } from '../core/utils/SetupWizard.js';
+import { ProjectManager } from '../core/ProjectManager.js';
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -58,6 +60,31 @@ program
   .action(async (prd) => {
     const runner = new Runner();
     await runner.start(prd);
+  });
+
+program
+  .command('setup')
+  .description('Configure API keys and project environment')
+  .action(async () => {
+    const wizard = new SetupWizard();
+    await wizard.run();
+  });
+
+program
+  .command('init')
+  .description('Initialize a new independent Loki project')
+  .argument('<name>', 'Name of the project folder')
+  .action(async (name) => {
+    const manager = new ProjectManager();
+    await manager.initProject(name);
+  });
+
+program
+  .command('upgrade')
+  .description('Upgrade Loki core engine from master source')
+  .action(async () => {
+    const manager = new ProjectManager();
+    await manager.upgrade();
   });
 
 program.parse();
