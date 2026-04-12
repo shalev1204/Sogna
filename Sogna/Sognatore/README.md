@@ -1,3 +1,5 @@
+# 🌀 Sognatore Sovereign Swarm (v2.0)
+
 Sognatore is a high-assurance autonomous swarm ecosystem designed for the agentic computing era. It operates as a unified intelligence layer composed of **42 specialized engines** (now including the Evolutionary Brain), governed by the **RARV Protocol**, and protected by a **Sovereign Sandbox** and a **Hardened Guardian**.
 
 ---
@@ -87,7 +89,9 @@ sequenceDiagram
 ```
 
 ### 🧬 The eVolt Pattern (Autonomous Evolution)
+
 When a task type is encountered that is not in the current skill library, Sognatore triggers an **Evolutionary Loop**:
+
 1. **Gap Detection**: The Orchestrator identifies missing technical capabilities.
 2. **Research**: The `orch-researcher` performs a deep-dive into documentation and frameworks.
 3. **Synthesis**: A new skill module is autonomously written to `📁 resources/skills/eVolt/`.
@@ -165,6 +169,7 @@ npm run build
 ---
 
 ### 🛡️ Sovereign Security Core
+
 - **Docker Isolation**: All task execution occurs within a hardened Ubuntu container (Node/Python/Rust).
 - **Guardian Integrity**: Recursive SHA-256 validation detects any tampering of core swarm files.
 - **Secret Decoupling**: Configuration is externalized to `.env` with mandatory key strength validation.
