@@ -1,38 +1,40 @@
 # SOGNA ANTIGRAVITY TOOLKIT
 
-Welcome to the professional operational kit for Sogna agents. This toolkit provides the standards, personas, and workflows required to build premium software at scale.
+Welcome to the professional operational kit for Sogna agents. This toolkit provides 20 specialized agents, 37 domain skills, and 11 advanced workflows required to build premium software at scale.
 
 ## Structure
 
 ```text
 sogna/toolkit/
-├── agents/    # Specialized agent personas (Orchestrator, Planner, etc.)
+├── agents/    # 20 Specialized personas (Orchestrator, Frontend, Security, etc.)
 ├── rules/     # Technical standards (Gemini, CLI, Styling)
-├── workflow/  # Operational command procedures (Plan, Diagnostic, Create)
-├── skills/    # Core repositories of architectural knowledge
-└── shared/    # Reusable assets and configurations
+├── workflow/  # 11 Operational commands (/plan, /create, /debug, etc.)
+├── skills/    # 37 Repositories of architectural knowledge (folders + markdown)
+├── scripts/   # Utility scripts for preview, verification, and sessions
+└── shared/    # Reusable assets (UI/UX Pro Max design system)
 ```
 
 ## How to Use
 
 ### As a Developer
 
-- Use `node sogna.js toolkit` to explore available resources.
+- Explore components in the subdirectories to understand the system's capabilities.
 - Refer to the `rules/` directory when implementing new features to ensure compliance.
-- Use `node sogna.js doctor` to verify your environment health.
+- Workflows can be triggered via slash commands in compatible AI environments.
 
 ### For AI Agents
 
 - The root `.sognarules` automatically configures agents to follow this toolkit.
-- Agents follow the **Orchestrator Pattern**:
-  1. **Socratic Gate**: Asking for clarification.
-  2. **Planning**: Creating a structured execution path.
-  3. **Execution**: Atomic building with specialized personas.
+- Agents follow the **Advanced Orchestrator Pattern**:
+  1. **Quick Context Check**: Quick scan of existing plan files.
+  2. **Socratic Protocol**: Clarifying requirements before orchestration.
+  3. **Multi-Agent Coordination**: Parallel execution across specialist domains.
 
 ## Integration Protocols
 
-- **Specialists**: Agents should assume roles defined in `agents/specialists.md` for technical tasks.
-- **Workflows**: Common tasks like `/plan` and `/create` are documented in `workflow/` for consistent execution.
+- **Specialists**: Agents MUST follow the boundaries defined in their respective persona files (e.g., `agents/frontend-specialist.md`).
+- **Workflows**: Standardized commands (/plan, /create, /debug, etc.) defined in `workflow/` ensure deterministic outcomes.
+- **Skills**: Automatic context enrichment based on folder-level documentation in `skills/`.
 
 ---
 
