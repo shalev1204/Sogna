@@ -1,6 +1,7 @@
 import { Agent } from './agents/Agent.js';
 import { AgentRegistry } from './agents/AgentRegistry.js';
-import { AgentSwarm } from './agents/AgentTypes.js';
+import { AgentRole, AgentSwarm } from './agents/AgentTypes.js';
+import { AgentFactory } from './agents/AgentFactory.js';
 import path from 'path';
 import fs from 'fs';
 import { EventEmitter } from 'events';
@@ -58,8 +59,10 @@ export class SwarmOrchestrator extends EventEmitter {
     this.taskQueue.push(task);
     this.saveQueue();
 
-    // High-Assurance Gap Detection
-    if (this.detectSkillGap(task)) {
+    // High-Assurance Gap Detection (Skills & Agents)
+    if (this.detectAgentGap(task)) {
+      await this.triggerRecruitment(task);
+    } else if (this.detectSkillGap(task)) {
       await this.triggerEvolution(task);
     }
 
@@ -84,6 +87,86 @@ export class SwarmOrchestrator extends EventEmitter {
   }
 
   /**
+   * Triggers the Sovereign Recruitment flow to synthesize and validate new specialists.
+   */
+  private async triggerRecruitment(gapTask: SwarmTask) {
+    console.log(`[RECRUITMENT] Agent Domain Gap identified for: ${gapTask.type}. Initiating Sovereign Recruitment...`);
+    
+    const researcher = await this.registry.getAgent('orch-researcher');
+    const supervisor = await this.registry.getAgent('supervisor');
+    
+    // Step 1: Design the Specialist
+    const designPrompt = `Design a new Sovereign Specialist for the domain '${gapTask.type}'. 
+    Analyze requirements for: ${gapTask.description}.
+    Return a valid JSON profile with: type (e.g. biz-fintech), swarm, capabilities[], taskTypes[], qualityChecks[].`;
+    
+    const profileJson = await researcher.runTask(designPrompt);
+    const role: AgentRole = JSON.parse(profileJson);
+    
+    // Step 2: Council Validation Gate
+    const validationPrompt = `Audit the following new agent profile for the '${gapTask.type}' domain. 
+    Profile: ${JSON.stringify(role)}
+    Verify for: Hallucination risks, role overlap, and security alignment.
+    Reply with "VALIDATED" or a list of required fixes.`;
+    
+    const validationResult = await supervisor.runTask(validationPrompt);
+    
+    if (validationResult.includes('VALIDATED')) {
+      const factory = await AgentFactory.getInstance();
+      await factory.enrollNewSpecialist(role);
+      console.log(`[RECRUITMENT] Specialist '${role.type}' successfully enrolled and validated by the Council.`);
+      this.emit('recruitment:success', { role });
+    } else {
+      console.error(`[RECRUITMENT] Council rejected the specialist profile: ${validationResult}`);
+      throw new Error(`Agent recruitment failed validation: ${validationResult}`);
+    }
+  }
+
+  private detectAgentGap(task: SwarmTask): boolean {
+    const catalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
+    if (!fs.existsSync(catalogPath)) return false;
+    
+    const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+    const knownPrefixes = Object.keys(catalog.swarms).concat(Object.keys(catalog.evolved_swarms));
+    
+    // If the task type doesn't start with any known prefix in the swarms, it's a domain gap
+    // e.g. 'fintech-analyze' vs 'eng-frontend'
+    return !knownPrefixes.some(prefix => task.type.startsWith(prefix));
+  }
+
+  private detectSkillGap(task: SwarmTask): boolean {
+    const knownTypes = ['ui-', 'api-', 'db-', 'sec-', 'prd-', 'ops-', 'research-', 'review-'];
+    return !knownTypes.some(prefix => task.type.startsWith(prefix));
+  }
+
+  private resolveSpecialistForTask(taskType: string): string {
+    const catalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
+    if (fs.existsSync(catalogPath)) {
+      const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+      
+      // Match by exact prefix first
+      const prefix = taskType.split('-')[0];
+      
+      // Check all swarms for an agent that matches this specific task type
+      const swarms = { ...catalog.swarms, ...catalog.evolved_swarms };
+      for (const swarm of Object.values(swarms)) {
+        const agents = (swarm as any).agents;
+        if (agents.includes(taskType)) return taskType;
+        // Fallback to searching if any agent in the swarm handles this prefix
+        const match = agents.find((a: string) => a.startsWith(prefix));
+        if (match) return match;
+      }
+    }
+
+    // Default legacy Fallback
+    if (taskType.startsWith('ui-')) return 'eng-frontend';
+    if (taskType.startsWith('api-')) return 'eng-backend';
+    if (taskType.startsWith('db-')) return 'eng-database';
+    
+    return 'eng-backend';
+  }
+
+  /**
    * Triggers the Evolutionary Brain to synthesize missing skills.
    */
   private async triggerEvolution(gapTask: SwarmTask) {
@@ -102,20 +185,19 @@ export class SwarmOrchestrator extends EventEmitter {
     this.emit('evolution:consensus', { taskType: gapTask.type });
   }
 
-  private detectSkillGap(task: SwarmTask): boolean {
-    const knownTypes = ['ui-', 'api-', 'db-', 'sec-', 'prd-', 'ops-', 'research-', 'review-'];
-    return !knownTypes.some(prefix => task.type.startsWith(prefix));
-  }
-
-  private resolveSpecialistForTask(taskType: string): string {
-    if (taskType.startsWith('ui-')) return 'eng-frontend';
-    if (taskType.startsWith('api-')) return 'eng-backend';
-    if (taskType.startsWith('db-')) return 'eng-database';
-    if (taskType.startsWith('sec-')) return 'ops-security';
-    if (taskType.startsWith('prd-')) return 'prod-pm';
-    if (taskType.startsWith('research-') || taskType.startsWith('synthesize-')) return 'orch-researcher';
-    
-    return 'eng-backend';
+  /**
+   * Broadcasts a message to all agents in the swarm via the message bus.
+   */
+  async broadcast(action: string, context: string) {
+    const broadcastPath = path.join(this.messageBus, 'broadcast', `${Date.now()}.json`);
+    const message = {
+      timestamp: new Date().toISOString(),
+      action,
+      context,
+      sender: 'orchestrator'
+    };
+    fs.writeFileSync(broadcastPath, JSON.stringify(message, null, 2));
+    console.log(`[BROADCAST] ${action}: ${context}`);
   }
 
   private saveQueue() {

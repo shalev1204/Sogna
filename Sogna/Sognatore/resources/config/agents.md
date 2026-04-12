@@ -1,6 +1,6 @@
 # Agent Type Definitions
 
-Complete specifications for all 41 specialized agent types in the Sognatore multi-agent system (37 domain agents + 4 orchestration agents).
+Complete specifications for all 42 specialized agent types in the Sognatore multi-agent system (37 domain agents + 5 orchestration agents).
 
 **Note:** These are agent TYPE definitions, not a fixed count. Sognatore dynamically spawns agents based on project needs - a simple todo app might use 5-10 agents, while a complex startup spawns more as needed.
 

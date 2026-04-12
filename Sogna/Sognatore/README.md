@@ -1,12 +1,12 @@
-# 🌀 Sognatore Sovereign Swarm (v2.0)
+# 🌀 Sognatore Sovereign: The Definitive Swarm Engine (v3.0)
 
-Sognatore is a high-assurance autonomous swarm ecosystem designed for the agentic computing era. It operates as a unified intelligence layer composed of **42 specialized engines** (now including the Evolutionary Brain), governed by the **RARV Protocol**, and protected by a **Sovereign Sandbox** and a **Hardened Guardian**.
+Sognatore is a high-assurance, multi-agent autonomous swarm designed for the 2026 Sovereign Agentic Computing Era. It operates as a decentralized intelligence layer composed of **42 specialized engines**, governed by the **RARV Protocol**, and protected by an isolated **Docker Sandbox** and a self-healing **Guardian**.
 
 ---
 
-## 🏛️ Swarm Architecture (Schematic)
+## 🏛️ Swarm Architecture (8 Functional Units)
 
-The Sognatore ecosystem is organized into **8 functional swarms** that communicate via a secure, file-based message bus. This schematic represents the flow of tasks from the central Orchestrator to the specialist specialists.
+The ecosystem achieves consensus through 8 specialized swarms communicating via a secure, file-based message bus.
 
 ```mermaid
 graph TD
@@ -52,131 +52,77 @@ graph TD
 
 ---
 
-## 🧠 The RARV Protocol (Sequence)
+## 📖 CLI Command Bible
 
-The **RARV Cycle** (Reason, Act, Reflect, Verify) is the operational heartbeat of Sognatore. Every task undergoes this rigorous transformation to ensure convergence and technical excellence.
-
-```mermaid
-sequenceDiagram
-    participant U as User / PRD
-    participant O as Orchestrator
-    participant A as Specialist Agent
-    participant C as Quality Council (Review)
-
-    U->>O: Dispatch PRD / Task
-    Note over O: Step 1: REASON
-    O->>O: Analyze Context & Select Specialist
-    
-    O->>A: Assign Actionable Packet
-    Note over A: Step 2: ACT
-    A->>A: Execute Logic / Code Generation
-    
-    A->>A: Step 3: REFLECT
-    Note right of A: Self-Correction & Refinement
-    A-->>O: Submit Evidence of Completion
-
-    O->>C: Initiate Validation Gate
-    Note over C: Step 4: VERIFY
-    C->>C: Static/Dynamic/Blind Analysis
-    
-    alt PASS
-        C-->>O: Consensus Reached
-        O-->>U: Deliver High-Assurance Output
-    else FAIL
-        C-->>O: Feedback & Deficiencies
-        O->>A: Re-trigger RARV Cycle
-    end
-```
-
-### 🧬 The eVolt Pattern (Autonomous Evolution)
-
-When a task type is encountered that is not in the current skill library, Sognatore triggers an **Evolutionary Loop**:
-
-1. **Gap Detection**: The Orchestrator identifies missing technical capabilities.
-2. **Research**: The `orch-researcher` performs a deep-dive into documentation and frameworks.
-3. **Synthesis**: A new skill module is autonomously written to `📁 resources/skills/eVolt/`.
-4. **Hydration**: The `SkillRegistry` performs a recursive re-load, instantly granting the swarm new powers.
+| Command | Usage | Purpose |
+| :--- | :--- | :--- |
+| **`doctor`** | `sognatore doctor [--fix]` | **Dual-Action**: Performs Deep Diagnostics (API, Security, Sandbox) AND Autonomous Repository Cleanup. |
+| **`run`** | `sognatore run [prd.md]` | Initiates the autonomous development cycle on a specification file. |
+| **`setup`** | `sognatore setup` | Interactive wizard for root-level environment configuration (API Key Passport). |
+| **`upgrade`** | `sognatore upgrade` | Synchronizes the core engine with the master repository. |
+| **`build`** | `npm run build` | Compiles the TypeScript core into high-performance execution units. |
 
 ---
 
-## 📋 The 41-Agent Catalog
+## 🔑 AI Provider Passport (Configuración)
 
-Sognatore manages **41 specialized agents** categorized into 8 functional areas. Each agent utilizes a specific model tier (Platinum, Gold, Silver) to balance performance and cost.
+Para que Sognatore opere a su máxima capacidad, el **EnvOracle** busca tus claves en el archivo `.env` del root:
 
-| Swarm | Agents Count | Primary Focus | Key Specialists |
-| :--- | :--- | :--- | :--- |
-| **Engineering** | 8 | Implementation | `frontend`, `backend`, `database`, `infra` |
-| **Operations** | 8 | Deployment & Sec | `devops`, `security`, `sre`, `incident` |
-| **Business** | 8 | Alignment | `finance`, `legal`, `marketing`, `hr` |
-| **Growth** | 4 | Scale | `hacker`, `community`, `success`, `lifecycle` |
-| **Data** | 3 | Intelligence | `ml`, `eng`, `analytics` |
-| **Product** | 3 | Specs | `pm`, `design`, `techwriter` |
-| **Review** | 3 | Quality | `code`, `business`, `security` |
-| **Orchestration** | 5 | Management | `supervisor`, `brain`, `orch-researcher` |
+- **Anthropic (`ANTHROPIC_API_KEY`)**: Cerebro Platino para Arquitectura y Auditoría.
+- **Google Gemini (`GOOGLE_API_KEY`)**: Motor de alta velocidad para codificación masiva y análisis.
+- **OpenAI (`OPENAI_API_KEY`)**: Especialista versátil para razonamiento y fallback.
+
+Usa `sognatore setup` para configurar estas claves de forma interactiva.
 
 ---
 
-## 💸 Economía de Enjambre 2.0 (Tiered Strategy)
+## 🧠 The RARV & eVolt Protocols
 
-To ensure maximum ROIs, Sognatore employs a intelligent tiered model strategy:
+### The Operational Heartbeat (RARV)
+Every task undergoes a 4-step transformation to ensure technical excellence:
+1. **REASON**: Context analysis and specialist selection.
+2. **ACT**: Atomic execution and logic synthesis.
+3. **REFLECT**: Self-correction and internal refinement.
+4. **VERIFY**: High-assurance gate via the Quality Council.
 
-1. **💎 Platinum (Razonamiento Crítico)**:
-    - **Usage**: Architecture, Security Audits, Final Gates.
-    - **Models**: Claude 4.6 Opus, GPT-5.4-o.
-2. **🥇 Gold (Desarrollo Estándar)**:
-    - **Usage**: General coding, complex debugging, data engineering.
-    - **Models**: Claude 4.6 Sonnet, Gemini 3.1 Pro.
-3. **🥈 Silver (Eficiencia Masiva)**:
-    - **Usage**: Documentation, logs, unit testing, repetitive tasks.
-    - **Models**: Gemini 1.5 Flash, Claude 4.6 Haiku.
+### Autonomous Evolution (eVolt)
+When encountering unknown frameworks, the swarm initiates an **Evolutionary Loop**:
+1. **Gap Detection**: Identification of missing capabilities.
+2. **Synthesis**: Autonomous creation of new skills in `📁 resources/skills/eVolt/`.
+3. **Hydration**: Immediate activation of new powers without system restart.
 
 ---
 
-## 🛠️ Operational Command Reference
+## 👥 The Agent Collective (42 Specialists)
 
-### 🏥 System Doctor
+Sognatore manages **42 specialized agents** across 8 units. Each utilizes a tiered model strategy (Platinum, Gold, Silver) to optimize for reasoning depth and operational cost.
 
-Verify environment prerequisites and AI provider integrations.
+| Swarm | Specialist Highlights |
+| :--- | :--- |
+| **🛠 Engineering (8)** | `eng-frontend`, `eng-backend`, `eng-database`, `eng-mobile` |
+| **⚡ Operations (8)** | `ops-devops`, `ops-security`, `ops-monitor`, `ops-incident` |
+| **💼 Business (8)** | `biz-marketing`, `biz-sales`, `biz-finance`, `biz-legal` |
+| **📊 Data/Product/Review (13)** | `ml-expert`, `data-eng`, `product-pm`, `review-code`, `review-sec` |
+| **🧠 Orchestration (5)** | `supervisor`, `brain`, `task-master`, `orch-researcher` |
 
+---
+
+## 🛡️ Sovereign Security & Infrastructure
+
+### The Guardian & EnvOracle
+The **Guardian** ensures structural integrity using recursive SHA-256 validation. It decouples secrets via the **EnvOracle**, which discovers configuration files at the project root to prevent redundancy.
+
+### Physis Docker Sandbox
+All task execution occurs within an isolated, state-of-the-art Docker container:
+- **Zero-Access**: Path confinement verified (cannot reach host system).
+- **Multi-Runtime**: Native support for Node.js, Python 3, and Rust.
+
+### The Self-Healing Doctor
+If the system detects fragility or "ghost files" (logs/diagnostics accumulate), run:
 ```bash
-node dist/bin/sognatore.js doctor
+sognatore doctor --fix
 ```
-
-### 🚀 Autonomous Execution
-
-Launch the swarm on a PRD or Task file.
-
-```bash
-node dist/bin/sognatore.js run prd.md --stress-test
-```
-
-### 🏗️ Build & Purify
-
-Re-compile the core system logic.
-
-```bash
-npm run build
-```
+The system will autonomously repair configurations, download missing runtimes, and purge unnecessary temporary files.
 
 ---
-
-## 📁 System Core Assets
-
-- `📁 resources/config/`: Swarm definitions and 41-agent catalog.
-- `📁 resources/skills/`: Knowledge base (17+ specialized skill modules).
-- `📁 .sognatore/`: Active session state, message bus, and task queues.
-
----
-
-### 🛡️ Sovereign Security Core
-
-- **Docker Isolation**: All task execution occurs within a hardened Ubuntu container (Node/Python/Rust).
-- **Guardian Integrity**: Recursive SHA-256 validation detects any tampering of core swarm files.
-- **Secret Decoupling**: Configuration is externalized to `.env` with mandatory key strength validation.
-
-> [!IMPORTANT]
-> **Sovereign Autonomy**: Sognatore is built to be a resilient, self-healing system. In case of loop stagnation, the **Crisis Responder** (Operations Swarm) will automatically take control, or the **Orchestration Researcher** will expand the swarm's knowledge to overcome technical barriers.
-
----
-
-Developed for the 2026 Sovereign Agentic Computing Era
+*Sovereign Sognatore v3.0 | 2026 Agentic Era*

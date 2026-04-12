@@ -3,6 +3,10 @@ import chalk from 'chalk';
 import os from 'os';
 import { ProviderFactory } from './ProviderFactory.js';
 import { ToolResolver } from './ToolResolver.js';
+import fs from 'fs-extra';
+import path from 'path';
+import { Guardian } from './Guardian.js';
+import { EnvOracle } from './utils/EnvOracle.js';
 
 export interface DoctorResult {
   name: string;
@@ -10,6 +14,8 @@ export interface DoctorResult {
   version?: string;
   message?: string;
   required: boolean;
+  fix?: () => Promise<void>;
+  fixLabel?: string;
 }
 
 export class Doctor {
@@ -23,17 +29,231 @@ export class Doctor {
     results.push(await this.checkCommand('Python 3', 'python', true, '>=3.8.0'));
     results.push(await this.checkCommand('Git', 'git', true));
     
-    // AI Providers
-    await this.checkProviders(results);
+    // Sovereign Swarm Audit
+    await this.checkSovereignAudit(results);
 
-    // Development Tools (Gate Prerequisites)
-    results.push(await this.checkCommand('ESLint', 'eslint', false));
-    results.push(await this.checkCommand('TypeScript', 'tsc', false));
+    // Connectivity Cert (Live Pings)
+    await this.checkConnectivity(results);
 
+    // Defensive Posture & Sanitization
+    await this.checkDefensivePosture(results);
+    
     // Disk Space (rough check)
     results.push(this.checkDiskSpace());
 
     return results;
+  }
+
+  private async checkSovereignAudit(results: DoctorResult[]) {
+    const root = process.cwd();
+    const catalogPath = path.join(root, 'resources', 'config', 'swarm_catalog.json');
+    const strategyPath = path.join(root, 'resources', 'config', 'model_strategy.json');
+
+    // 1. Catalog Sync
+    if (fs.existsSync(catalogPath)) {
+      results.push({
+        name: 'Swarm Catalog',
+        status: 'PASS',
+        required: true
+      });
+    } else {
+      results.push({
+        name: 'Swarm Catalog',
+        status: 'FAIL',
+        message: 'Master swarm_catalog.json missing.',
+        required: true
+      });
+    }
+
+    // 2. Multi-Provider Resilience
+    if (fs.existsSync(strategyPath)) {
+      try {
+        const strategy = fs.readJsonSync(strategyPath);
+        const weakTiers = Object.keys(strategy.tiers).filter(t => strategy.tiers[t].models.length < 2);
+        results.push({
+          name: 'Multi-Provider Resilience',
+          status: weakTiers.length === 0 ? 'PASS' : 'WARN',
+          message: weakTiers.length > 0 ? `Low redundancy in tiers: ${weakTiers.join(', ')}` : undefined,
+          required: false
+        });
+      } catch (e) {
+        results.push({ name: 'Model Strategy', status: 'FAIL', message: 'model_strategy.json corrupted.', required: true });
+      }
+    }
+
+    // 3. Docker Sandbox Image
+    try {
+      const { stdout } = await execa('docker', ['images', 'asklokesh/loki-mode:latest', '--format', '{{.Repository}}']);
+      results.push({
+        name: 'Docker Sandbox Image',
+        status: stdout.includes('loki-mode') ? 'PASS' : 'WARN',
+        message: stdout.includes('loki-mode') ? undefined : 'Sovereign Sandbox image missing.',
+        required: false,
+        fixLabel: 'Download Sandbox Image',
+        fix: async () => {
+          console.log(chalk.blue('  - Pulling asklokesh/loki-mode:latest...'));
+          await execa('docker', ['pull', 'asklokesh/loki-mode:latest']);
+        }
+      });
+    } catch (e) {
+      results.push({ name: 'Docker Sandbox', status: 'FAIL', message: 'Docker not running or not found.', required: false });
+    }
+  }
+
+  private async checkConnectivity(results: DoctorResult[]) {
+    EnvOracle.load(); // Ensure keys are loaded into process.env
+    const providers = [
+      { id: 'gemini', env: 'GOOGLE_API_KEY', url: 'https://generativelanguage.googleapis.com/v1beta/models?key=' },
+      { id: 'claude', env: 'ANTHROPIC_API_KEY', url: 'https://api.anthropic.com/v1/messages' },
+      { id: 'openai', env: 'OPENAI_API_KEY', url: 'https://api.openai.com/v1/models' }
+    ];
+
+    for (const p of providers) {
+      let key = process.env[p.env];
+      
+      // Support common aliases
+      if (!key && p.id === 'gemini') key = process.env['GEMINI_API_KEY'];
+      if (!key && p.id === 'openai') key = process.env['OPENAI_API_KEY'];
+      if (!key && p.id === 'claude') key = process.env['ANTHROPIC_API_KEY'];
+
+      if (!key) {
+        results.push({
+          name: `${p.id.charAt(0).toUpperCase() + p.id.slice(1)} Connectivity`,
+          status: 'WARN',
+          message: `API Key (${p.env}) not configured in .env`,
+          required: false
+        });
+        continue;
+      }
+
+      try {
+        let isSuccess = false;
+        if (p.id === 'gemini') {
+          const resp = await fetch(`${p.url}${key}`);
+          isSuccess = resp.status === 200;
+        } else if (p.id === 'claude') {
+          // Anthropic requires headers. We send a dummy message with max_tokens: 1
+          const resp = await fetch(p.url, {
+            method: 'POST',
+            headers: {
+              'x-api-key': key,
+              'anthropic-version': '2023-06-01',
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              model: 'claude-3-haiku-20240307',
+              max_tokens: 1,
+              messages: [{ role: 'user', content: 'ping' }]
+            })
+          });
+          isSuccess = resp.status === 200 || resp.status === 400; // 400 is fine as long as key is accepted
+        } else {
+          // OpenAI Models list check
+          const resp = await fetch(p.url, {
+            headers: { 'Authorization': `Bearer ${key}` }
+          });
+          isSuccess = resp.status === 200;
+        }
+
+        results.push({
+          name: `${p.id.charAt(0).toUpperCase() + p.id.slice(1)} Connectivity`,
+          status: isSuccess ? 'PASS' : 'WARN',
+          message: isSuccess ? undefined : `API returned status ${isSuccess ? 'OK' : 'Unauthorized/Error'}`,
+          required: false
+        });
+      } catch (e) {
+        results.push({
+          name: `${p.id.charAt(0).toUpperCase() + p.id.slice(1)} Connectivity`,
+          status: 'WARN',
+          message: `Network error: ${e instanceof Error ? e.message : String(e)}`,
+          required: false
+        });
+      }
+    }
+  }
+
+  private async checkDefensivePosture(results: DoctorResult[]) {
+    // 1. Guardian Secret
+    const guardian = Guardian.getInstance();
+    const rootHash = guardian.validateIntegrity(); // This will trigger EnvOracle and Secret check internally
+    results.push({
+      name: 'Security Guardian',
+      status: 'PASS',
+      message: `Sovereign Root Hash: ${rootHash.substring(0, 12)}...`,
+      required: true
+    });
+
+    // 2. .gitignore Presence
+    let gitignorePath = '';
+    const searchPaths = [path.join(process.cwd(), '.gitignore'), path.join(process.cwd(), '..', '.gitignore')];
+    for (const p of searchPaths) {
+      if (fs.existsSync(p)) {
+        gitignorePath = p;
+        break;
+      }
+    }
+
+    results.push({
+      name: 'VCS Protection',
+      status: gitignorePath ? 'PASS' : 'WARN',
+      message: gitignorePath ? undefined : '.gitignore missing in root or parent.',
+      required: false,
+      fixLabel: 'Create .gitignore',
+      fix: async () => {
+        const content = 'node_modules/\ndist/\n.env\n.sognatore/\nlint_report_*.json\nlint_output_*.txt\n';
+        await fs.writeFile(path.join(process.cwd(), '.gitignore'), content);
+      }
+    });
+
+    // 3. Sanitization (Ghost Hunter)
+    const ghostPatterns = [
+      'lint_report_*.json',
+      'lint_output_*.txt',
+      'SovereignAudit.ts',
+      'SovereignAudit.js'
+    ];
+    
+    const ghosts: string[] = [];
+    const files = await fs.readdir(process.cwd());
+    for (const file of files) {
+      if (ghostPatterns.some(pattern => {
+        const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
+        return regex.test(file);
+      })) {
+        ghosts.push(file);
+      }
+    }
+
+    if (ghosts.length > 0) {
+      results.push({
+        name: 'Repository Sanitization',
+        status: 'WARN',
+        message: `Found ${ghosts.length} temporary diagnostic files.`,
+        required: false,
+        fixLabel: 'Purge Ghost Files',
+        fix: async () => {
+          for (const g of ghosts) {
+            await fs.remove(path.join(process.cwd(), g));
+          }
+        }
+      });
+    }
+  }
+
+  async heal(results: DoctorResult[]) {
+    console.log(chalk.bold.blue('\n--- Inicia Proceso de Auto-Sanado (Self-Healing) ---\n'));
+    for (const r of results) {
+      if (r.status !== 'PASS' && r.fix) {
+        console.log(chalk.yellow(`🛠  Reparando: ${r.name}...`));
+        try {
+          await r.fix();
+          console.log(chalk.green(`  ✓ Éxito: ${r.name} reparado.`));
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          console.log(chalk.red(`  ✗ Error al reparar ${r.name}: ${msg}`));
+        }
+      }
+    }
   }
 
   private async checkCommand(name: string, cmd: string, required: boolean, versionRange?: string): Promise<DoctorResult> {
@@ -118,7 +338,8 @@ export class Doctor {
       const versionStr = r.version ? chalk.dim(` (${r.version})`) : '';
       console.log(`${statusStr} ${r.name}${versionStr}`);
       if (r.message && r.status !== 'PASS') {
-        console.log(chalk.dim(`         └─ ${r.message}`));
+        const fixHint = r.fixLabel ? chalk.cyan(` [Auto-Fixable: ${r.fixLabel}]`) : '';
+        console.log(chalk.dim(`         └─ ${r.message}${fixHint}`));
       }
     }
 

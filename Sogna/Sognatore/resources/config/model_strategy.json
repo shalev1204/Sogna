@@ -6,16 +6,18 @@
       "display_name": "Razonamiento Crítico (Platino)",
       "description": "Máxima capacidad para decisiones arquitectónicas y auditorías finales.",
       "models": [
-        { "provider": "claude", "model": "claude-4.6-opus" },
-        { "provider": "openai", "model": "gpt-5.4-o" }
+        { "provider": "claude", "model": "claude-3-5-opus-latest" },
+        { "provider": "openai", "model": "gpt-4o" },
+        { "provider": "gemini", "model": "gemini-1.5-pro" }
       ]
     },
     "gold": {
       "display_name": "Desarrollo Equilibrado (Oro)",
       "description": "Estándar para implementación de código y resolución de problemas técnicos.",
       "models": [
-        { "provider": "claude", "model": "claude-4.6-sonnet" },
-        { "provider": "gemini", "model": "gemini-3.1-pro" }
+        { "provider": "claude", "model": "claude-3-5-sonnet-latest" },
+        { "provider": "gemini", "model": "gemini-1.5-pro" },
+        { "provider": "openai", "model": "gpt-4o" }
       ]
     },
     "silver": {
@@ -23,7 +25,7 @@
       "description": "Optimizado para tareas repetitivas, logs y documentación.",
       "models": [
         { "provider": "gemini", "model": "gemini-1.5-flash" },
-        { "provider": "claude", "model": "claude-4.6-haiku" },
+        { "provider": "claude", "model": "claude-3-5-haiku-latest" },
         { "provider": "openai", "model": "gpt-4o-mini" }
       ]
     }

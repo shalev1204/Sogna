@@ -18,15 +18,7 @@ export class OpenAIProvider extends Provider {
       execSync('openai --version', { stdio: 'ignore' });
       return true;
     } catch {
-      // Fallback check for alternate CLI names in 2026
-      try {
-        const { execSync } = await import('child_process');
-        execSync('chatgpt --version', { stdio: 'ignore' });
-        this.metadata.cli = 'chatgpt';
-        return true;
-      } catch {
-        return false;
-      }
+      return false;
     }
   }
 

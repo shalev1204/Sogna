@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { Provider } from '../Provider.js';
 import { ProviderFactory } from '../ProviderFactory.js';
-import { AgentRole, AgentSwarm, AGENT_SWARM_MAPPING } from './AgentTypes.js';
+import { AgentRole, AgentSwarm } from './AgentTypes.js';
 
 interface TierInfo {
   display_name: string;
@@ -21,12 +21,16 @@ interface ModelStrategy {
 export class AgentFactory {
   private static instance: AgentFactory;
   private agentsMDPath: string;
+  private evolvedAgentsMDPath: string;
+  private swarmCatalogPath: string;
   private availableProviders: Provider[] = [];
 
   private strategy: ModelStrategy | undefined;
 
   private constructor() {
     this.agentsMDPath = path.join(process.cwd(), 'resources', 'config', 'agents.md');
+    this.evolvedAgentsMDPath = path.join(process.cwd(), 'resources', 'config', 'evolved_agents.md');
+    this.swarmCatalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
   }
 
   static async getInstance(): Promise<AgentFactory> {
@@ -81,35 +85,51 @@ export class AgentFactory {
   }
 
   private async parseAgentRole(type: string): Promise<AgentRole> {
-    const content = fs.readFileSync(this.agentsMDPath, 'utf8');
-    const sections = content.split('---');
+    const registries = [this.agentsMDPath, this.evolvedAgentsMDPath];
     
-    // Simple parser for agents.md specification
-    for (const section of sections) {
-      if (section.includes(`### ${type}`)) {
-        const capabilitiesMatch = section.match(/\*\*Capabilities:\*\*\s*([\s\S]*?)(?=\*\*|$)/);
-        const taskTypesMatch = section.match(/\*\*Task Types:\*\*\s*([\s\S]*?)(?=\*\*|$)/);
-        const qualityChecksMatch = section.match(/\*\*Quality Checks:\*\*\s*([\s\S]*?)(?=\*\*|$)/);
+    for (const registryPath of registries) {
+      if (!fs.existsSync(registryPath)) continue;
+      
+      const content = fs.readFileSync(registryPath, 'utf8');
+      const sections = content.split('---');
+      
+      for (const section of sections) {
+        if (section.includes(`### ${type}`)) {
+          const capabilitiesMatch = section.match(/\*\*Capabilities:\*\*\s*([\s\S]*?)(?=\*\*|$)/);
+          const taskTypesMatch = section.match(/\*\*Task Types:\*\*\s*([\s\S]*?)(?=\*\*|$)/);
+          const qualityChecksMatch = section.match(/\*\*Quality Checks:\*\*\s*([\s\S]*?)(?=\*\*|$)/);
 
-        const swarm = this.getSwarmForAgent(type);
+          const swarm = this.getSwarmForAgent(type);
 
-        return {
-          type,
-          swarm,
-          capabilities: this.cleanList(capabilitiesMatch ? capabilitiesMatch[1] : ''),
-          taskTypes: this.cleanList(taskTypesMatch ? taskTypesMatch[1] : ''),
-          qualityChecks: this.cleanList(qualityChecksMatch ? qualityChecksMatch[1] : '')
-        };
+          return {
+            type,
+            swarm,
+            capabilities: this.cleanList(capabilitiesMatch ? capabilitiesMatch[1] : ''),
+            taskTypes: this.cleanList(taskTypesMatch ? taskTypesMatch[1] : ''),
+            qualityChecks: this.cleanList(qualityChecksMatch ? qualityChecksMatch[1] : '')
+          };
+        }
       }
     }
 
-    throw new Error(`Agent type "${type}" not found in resources/config/agents.md`);
+    throw new Error(`Agent type "${type}" not found in current registries.`);
   }
 
   private getSwarmForAgent(type: string): AgentSwarm {
-    for (const [swarm, agents] of Object.entries(AGENT_SWARM_MAPPING)) {
-      if (agents.includes(type)) return swarm as AgentSwarm;
+    if (!fs.existsSync(this.swarmCatalogPath)) return 'orchestration';
+    
+    const catalog = JSON.parse(fs.readFileSync(this.swarmCatalogPath, 'utf8'));
+    
+    // Check main swarms
+    for (const [swarm, config] of Object.entries(catalog.swarms)) {
+      if ((config as any).agents.includes(type)) return swarm as AgentSwarm;
     }
+    
+    // Check evolved swarms
+    for (const [swarm, config] of Object.entries(catalog.evolved_swarms)) {
+      if ((config as any).agents.includes(type)) return swarm as AgentSwarm;
+    }
+    
     return 'orchestration';
   }
 
@@ -118,5 +138,48 @@ export class AgentFactory {
       .split('\n')
       .map(line => line.trim().replace(/^-\s*/, ''))
       .filter(line => line.length > 0);
+  }
+
+  /**
+   * Autonomously enrolls a new specialist into the Sovereign Swarm.
+   * This involves writing the role to evolved_agents.md and updating the swarm mapping.
+   */
+  async enrollNewSpecialist(role: AgentRole): Promise<void> {
+    const agentEntry = `
+---
+
+### ${role.type}
+**Status:** PENDING_VALIDATION
+**Swarm:** ${role.swarm}
+**Capabilities:**
+${role.capabilities.map(c => `- ${c}`).join('\n')}
+
+**Task Types:**
+${role.taskTypes.map(t => `- ${t}`).join('\n')}
+
+**Quality Checks:**
+${role.qualityChecks.map(q => `- ${q}`).join('\n')}
+`;
+
+    fs.appendFileSync(this.evolvedAgentsMDPath, agentEntry);
+
+    // Update Swarm Catalog
+    const catalog = JSON.parse(fs.readFileSync(this.swarmCatalogPath, 'utf8'));
+    
+    // If swarm exists in base, add to base. If not, add to evolved_swarms.
+    if (catalog.swarms[role.swarm]) {
+      if (!catalog.swarms[role.swarm].agents.includes(role.type)) {
+        catalog.swarms[role.swarm].agents.push(role.type);
+      }
+    } else {
+      if (!catalog.evolved_swarms[role.swarm]) {
+        catalog.evolved_swarms[role.swarm] = { display_name: `Nuevo Enjambre: ${role.swarm}`, agents: [] };
+      }
+      if (!catalog.evolved_swarms[role.swarm].agents.includes(role.type)) {
+        catalog.evolved_swarms[role.swarm].agents.push(role.type);
+      }
+    }
+
+    fs.writeFileSync(this.swarmCatalogPath, JSON.stringify(catalog, null, 2));
   }
 }

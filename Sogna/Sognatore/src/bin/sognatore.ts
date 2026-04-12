@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import 'dotenv/config';
+import { EnvOracle } from '../core/utils/EnvOracle.js';
+EnvOracle.load();
 import { Command } from 'commander';
 import { Doctor } from '../core/Doctor.js';
 import { Runner } from '../core/Runner.js';
@@ -27,14 +28,26 @@ program
   .command('doctor')
   .description('Check system prerequisites for Windows')
   .option('--json', 'Output results as JSON')
+  .option('--fix', 'Automatically repair fixable issues')
   .action(async (options) => {
     const doctor = new Doctor();
     const results = await doctor.checkAll();
     
-    if (options.json) {
-      console.log(JSON.stringify(results, null, 2));
+    if (options.fix) {
+      await doctor.heal(results);
+      // Re-check after healing
+      const finalResults = await doctor.checkAll();
+      if (options.json) {
+        console.log(JSON.stringify(finalResults, null, 2));
+      } else {
+        doctor.displayResults(finalResults);
+      }
     } else {
-      doctor.displayResults(results);
+      if (options.json) {
+        console.log(JSON.stringify(results, null, 2));
+      } else {
+        doctor.displayResults(results);
+      }
     }
   });
 

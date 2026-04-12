@@ -9,11 +9,19 @@ import chalk from 'chalk';
  * Sognatore Guardian - The Security & Privacy Sentinel
  * Replaces Phoenix security logic with a native, integrated engine.
  */
+import { EnvOracle } from './utils/EnvOracle.js';
+
+/**
+ * Sognatore Guardian - The Security & Privacy Sentinel
+ * Replaces Phoenix security logic with a native, integrated engine.
+ */
 export class Guardian {
   private static instance: Guardian;
   private readonly SECRET_KEY: string;
 
   private constructor() {
+    // High-Assurance Envar Discovery
+    EnvOracle.load();
     this.SECRET_KEY = process.env.GUARDIAN_SECRET || '';
     if (!this.SECRET_KEY || this.SECRET_KEY.length < 12) {
       console.warn(chalk.red('\n[SECURITY_ALERT] GUARDIAN_SECRET is missing or too weak!'));
