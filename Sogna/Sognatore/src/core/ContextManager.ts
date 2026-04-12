@@ -3,6 +3,10 @@ import path from 'path';
 import fs from 'fs-extra';
 import { ToolResolver } from './ToolResolver.js';
 
+interface FileTree {
+  [key: string]: FileTree;
+}
+
 export class ContextManager {
   private toolResolver: ToolResolver;
 
@@ -19,7 +23,7 @@ export class ContextManager {
       // Use git to list tracked files (fastest and cleanest)
       const files = execSync('git ls-files', { cwd: this.cwd }).toString().split('\n');
       
-      const tree: Record<string, any> = {};
+      const tree: FileTree = {};
       const MAX_FILES = 100; // Cap for individual file listing before summarization
       
       const limitedFiles = files.filter(f => f.trim()).length > MAX_FILES 
@@ -70,7 +74,7 @@ export class ContextManager {
     ].join('\n');
   }
 
-  private formatTree(tree: any, indent = '', depth = 0): string {
+  private formatTree(tree: FileTree, indent = '', depth = 0): string {
     if (depth > 5) return `${indent}... [Deep structure truncated] ...\n`;
     
     let output = '';

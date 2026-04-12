@@ -1,5 +1,5 @@
 import { execa } from 'execa';
-import { Provider, type ProviderMetadata, type CapabilityTier } from '../core/Provider.js';
+import { Provider, type ProviderMetadata, type CapabilityTier, type InvokeOptions } from '../core/Provider.js';
 
 export class GeminiProvider extends Provider {
   readonly metadata: ProviderMetadata = {
@@ -32,18 +32,18 @@ export class GeminiProvider extends Provider {
     return stdout.split('\n')[0].trim();
   }
 
-  async invoke(prompt: string, options: any = {}): Promise<string> {
-    const model = options.model || this.defaultModels.planning;
+  async invoke(prompt: string, options: InvokeOptions = {}): Promise<string> {
+    const model = (options.model as string) || this.defaultModels.planning;
     return this.execute(prompt, model, options);
   }
 
-  async invokeWithTier(tier: CapabilityTier, prompt: string, options: any = {}): Promise<string> {
+  async invokeWithTier(tier: CapabilityTier, prompt: string, options: InvokeOptions = {}): Promise<string> {
     const resolvedTier = this.resolveTier(tier);
     const model = this.defaultModels[resolvedTier];
     return this.execute(prompt, model, options);
   }
 
-  private async execute(prompt: string, model: string, options: any): Promise<string> {
+  private async execute(prompt: string, model: string, options: InvokeOptions): Promise<string> {
     const args = [
       '--approval-mode=yolo',
       '--model', model,
@@ -54,11 +54,13 @@ export class GeminiProvider extends Provider {
       const { all } = await execa(this.metadata.cli, args, { 
         all: true,
         input: prompt, // Pipe the prompt via stdin
-        env: { ...process.env, ...options.env }
+        env: { ...process.env, ...(options.env as Record<string, string | undefined>) }
       });
       return all || '';
-    } catch (error: any) {
-      if (error.message.includes('429') || error.message.includes('Quota')) {
+    } catch (error: unknown) {
+      const err = error as { message?: string };
+      const message = err.message || String(error);
+      if (message.includes('429') || message.includes('Quota')) {
         // Fallback to flash if pro fails
         if (model !== this.defaultModels.fast) {
           console.warn(`[Gemini] Rate limit hit on ${model}, falling back to ${this.defaultModels.fast}`);

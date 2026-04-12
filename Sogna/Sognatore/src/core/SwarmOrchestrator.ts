@@ -58,7 +58,11 @@ export class SwarmOrchestrator extends EventEmitter {
     this.taskQueue.push(task);
     this.saveQueue();
 
-    // In a high-assurance swarm, we find the specialist
+    // High-Assurance Gap Detection
+    if (this.detectSkillGap(task)) {
+      await this.triggerEvolution(task);
+    }
+
     const agentType = this.resolveSpecialistForTask(task.type);
     const agent = await this.registry.getAgent(agentType);
     
@@ -80,28 +84,37 @@ export class SwarmOrchestrator extends EventEmitter {
   }
 
   /**
-   * Broadcasts a message to all agents in the swarm.
+   * Triggers the Evolutionary Brain to synthesize missing skills.
    */
-  async broadcast(message: string, sender: string) {
-    const broadcastDir = path.join(this.messageBus, 'broadcast');
-    const msgId = `${Date.now()}-${sender}.json`;
+  private async triggerEvolution(gapTask: SwarmTask) {
+    console.log(`[EVOLUTION] Skill Gap identified for task type: ${gapTask.type}. Dispatching Researcher...`);
+    const evolutionTask: SwarmTask = {
+      id: `evo-${Date.now()}`,
+      type: 'research-gap',
+      description: `Analyze the following task type '${gapTask.type}' and synthesize a new skill in resources/skills/eVolt/ to handle it. Context: ${gapTask.description}`,
+      priority: 10,
+      status: 'pending'
+    };
     
-    fs.writeFileSync(path.join(broadcastDir, msgId), JSON.stringify({
-      sender,
-      timestamp: new Date().toISOString(),
-      content: message
-    }));
+    // We run it synchronously to ensure the swarm "learns" before retrying
+    const researcher = await this.registry.getAgent('orch-researcher');
+    await researcher.runTask(evolutionTask.description);
+    this.emit('evolution:consensus', { taskType: gapTask.type });
+  }
+
+  private detectSkillGap(task: SwarmTask): boolean {
+    const knownTypes = ['ui-', 'api-', 'db-', 'sec-', 'prd-', 'ops-', 'research-', 'review-'];
+    return !knownTypes.some(prefix => task.type.startsWith(prefix));
   }
 
   private resolveSpecialistForTask(taskType: string): string {
-    // Simple mapping logic: task types often start with the agent prefix (e.g., 'ui-' -> eng-frontend)
     if (taskType.startsWith('ui-')) return 'eng-frontend';
     if (taskType.startsWith('api-')) return 'eng-backend';
     if (taskType.startsWith('db-')) return 'eng-database';
     if (taskType.startsWith('sec-')) return 'ops-security';
     if (taskType.startsWith('prd-')) return 'prod-pm';
+    if (taskType.startsWith('research-') || taskType.startsWith('synthesize-')) return 'orch-researcher';
     
-    // Default to a general engineer if no match
     return 'eng-backend';
   }
 

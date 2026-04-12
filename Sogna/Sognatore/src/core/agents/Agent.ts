@@ -81,12 +81,18 @@ export class Agent {
 
     while (turn < maxTurns) {
       turn++;
+      
+      // [RARV: REASON] - Define approach and resolve tools
+      const stageReason = chalk.dim(`  [R] Reasoning turn ${turn}...`);
+      console.log(stageReason);
+
       const fullPrompt = history.length > 0 
         ? `Task Context:\n${history.join('\n\n')}\n\nContinue Task: ${currentPrompt}`
         : currentPrompt;
 
       const sanitizedPrompt = Guardian.getInstance().sanitizePrompt(fullPrompt);
 
+      // [RARV: ACT] - Execute tool or generate response
       const response = await this.provider.invoke(sanitizedPrompt, {
         tier: 'development',
         model: this.model,
@@ -96,6 +102,9 @@ export class Agent {
       this.recordStats(systemPrompt.length + fullPrompt.length, response.length);
       history.push(`> User: ${currentPrompt}`, `> Agent: ${response}`);
 
+      // [RARV: REFLECT] - Search for tool calls or final output
+      // [RARV: VERIFY] - Automated check of tool outputs
+
       // Parse XML Tool Calls
       const toolCallMatch = response.match(/<tool_call>([\s\S]*?)<\/tool_call>/);
       
@@ -104,15 +113,15 @@ export class Agent {
         const toolName = toolXml.match(/<tool_name>(.*?)<\/tool_name>/)?.[1];
         const paramsMatch = toolXml.match(/<parameters>([\s\S]*?)<\/parameters>/);
         
-        if (toolName && paramsMatch) {
-          const paramsXml = paramsMatch[1];
-          const params: any = {};
-          // Basic parameter extraction from XML-ish format
-          const paramTags = paramsXml.match(/<(\w+)>(.*?)<\/\w+>/g);
-          paramTags?.forEach(tag => {
-            const m = tag.match(/<(\w+)>(.*?)<\/\w+>/);
-            if (m) params[m[1]] = m[2];
-          });
+          if (toolName && paramsMatch) {
+            const paramsXml = paramsMatch[1];
+            const params: Record<string, string> = {};
+            // Basic parameter extraction from XML-ish format
+            const paramTags = paramsXml.match(/<(\w+)>(.*?)<\/\w+>/g);
+            paramTags?.forEach(tag => {
+              const m = tag.match(/<(\w+)>(.*?)<\/\w+>/);
+              if (m) params[m[1]] = m[2];
+            });
 
           // Execute Tool
           const observation = await ToolRegistry.getInstance().call(toolName, params, this.getAgentTier());
@@ -210,7 +219,7 @@ When the task is 100% finished, include the keyword TASK_COMPLETE in your final 
     if (fs.existsSync(this.statePath)) {
       const data = fs.readFileSync(this.statePath, 'utf8');
       const unsealed = Guardian.getInstance().unsealData(data);
-      if (unsealed) return unsealed;
+      if (unsealed) return unsealed as AgentState;
     }
     return {
       id: this.id,

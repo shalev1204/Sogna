@@ -45,9 +45,10 @@ export class QualityCouncil {
             console.log(color(`    - [${f.severity}] ${f.message}`));
           });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         process.stdout.write(chalk.red('ERROR\n'));
-        console.error(`    Error in gate ${gate.name}: ${error.message}`);
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(`    Error in gate ${gate.name}: ${message}`);
         allPassed = false;
       }
     }

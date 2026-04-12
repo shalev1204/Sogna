@@ -1,9 +1,7 @@
-import { Provider, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
-import { spawn } from 'child_process';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
 import { execa } from 'execa';
 import path from 'path';
 import os from 'os';
-import fs from 'fs';
 
 export class ClaudeProvider extends Provider {
   readonly metadata: ProviderMetadata = {
@@ -37,12 +35,12 @@ export class ClaudeProvider extends Provider {
     }
   }
 
-  async invoke(prompt: string, options: any = {}): Promise<string> {
+  async invoke(prompt: string, options: InvokeOptions = {}): Promise<string> {
     const tier = options.tier || 'development';
     return this.invokeWithTier(tier as CapabilityTier, prompt, options);
   }
 
-  async invokeWithTier(tier: CapabilityTier, prompt: string, options: any = {}): Promise<string> {
+  async invokeWithTier(tier: CapabilityTier, prompt: string, options: InvokeOptions = {}): Promise<string> {
     const resolvedTier = this.resolveTier(tier);
     const model = this.resolveModelForTier(resolvedTier);
     
@@ -50,20 +48,21 @@ export class ClaudeProvider extends Provider {
     const args = ['--dangerously-skip-permissions', '--model', model, '-p', '-'];
     
     if (options.extraArgs) {
-      args.push(...options.extraArgs);
+      args.push(...(options.extraArgs as string[]));
     }
 
     try {
       const { all } = await execa('claude', args, {
         all: true,
         input: prompt, // Pipe prompt via stdin
-        env: { ...process.env, ...options.env }
+        env: { ...process.env, ...(options.env as Record<string, string | undefined>) }
       });
       return all || '';
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Return partial output if available, otherwise rethrow
-      if (error.all) return error.all;
-      throw new Error(`Claude process failed: ${error.message}`);
+      const err = error as { all?: string; message?: string };
+      if (err.all) return err.all;
+      throw new Error(`Claude process failed: ${err.message || String(error)}`, { cause: error });
     }
   }
 

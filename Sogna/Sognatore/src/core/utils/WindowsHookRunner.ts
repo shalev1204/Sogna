@@ -32,8 +32,9 @@ export class WindowsHookRunner {
         stdio: 'pipe' 
       });
       return output.toString();
-    } catch (error: any) {
-      console.error(chalk.red(`  [HOOK ERROR] Failed to execute hook: ${error.message}`));
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(chalk.red(`  [HOOK ERROR] Failed to execute hook: ${message}`));
       return '';
     }
   }

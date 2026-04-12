@@ -44,9 +44,10 @@ export class Supervisor {
       const { all } = await childProcess;
       this.activeProcesses.delete(processId);
       return all || '';
-    } catch (error: any) {
+    } catch (error: unknown) {
       this.activeProcesses.delete(processId);
-      throw new Error(`Agent ${agentName} failed: ${error.message}`);
+      const message = error instanceof Error ? error.message : String(error);
+      throw new Error(`Agent ${agentName} failed: ${message}`, { cause: error });
     }
   }
 

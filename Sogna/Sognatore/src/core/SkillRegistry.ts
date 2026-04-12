@@ -26,28 +26,45 @@ export class SkillRegistry {
   }
 
   /**
-   * Reloadall skills from the skills/ directory.
+   * Reload all skills from the skills/ directory recursively.
    */
   async reload() {
     if (!fs.existsSync(this.skillsPath)) return;
 
-    const files = fs.readdirSync(this.skillsPath).filter(f => f.endsWith('.md'));
+    const getAllFiles = (dirPath: string, arrayOfFiles: string[] = []): string[] => {
+      const files = fs.readdirSync(dirPath);
+
+      files.forEach((file) => {
+        const fullPath = path.join(dirPath, file);
+        if (fs.statSync(fullPath).isDirectory()) {
+          arrayOfFiles = getAllFiles(fullPath, arrayOfFiles);
+        } else if (file.endsWith('.md')) {
+          arrayOfFiles.push(fullPath);
+        }
+      });
+
+      return arrayOfFiles;
+    };
+
+    const files = getAllFiles(this.skillsPath);
     
-    for (const file of files) {
-      const fullPath = path.join(this.skillsPath, file);
+    for (const fullPath of files) {
       const content = fs.readFileSync(fullPath, 'utf8');
+      const fileBase = path.basename(fullPath, '.md');
       
-      // Basic extraction of skill name from YAML frontmatter or title
+      // Extraction of skill name: Priority to yaml frontmatter 'name:', then H1, then filename
       const nameMatch = content.match(/name:\s*(.*)/) || content.match(/^#\s*(.*)/m);
-      const name = nameMatch ? nameMatch[1].trim() : path.basename(file, '.md');
+      const name = nameMatch ? nameMatch[1].trim() : fileBase;
       
       this.skills.set(name.toLowerCase(), {
         name,
-        description: '', // Could be extracted too
+        description: '', 
         content,
         path: fullPath
       });
     }
+    
+    console.log(`[SKILL_REGISTRY] Hydrated ${this.skills.size} capabilities across all tiers (including eVolt).`);
   }
 
   /**
@@ -69,5 +86,9 @@ export class SkillRegistry {
 
   getSkill(name: string): Skill | undefined {
     return this.skills.get(name.toLowerCase());
+  }
+
+  getAllSkills(): Skill[] {
+    return Array.from(this.skills.values());
   }
 }

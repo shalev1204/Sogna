@@ -1041,3 +1041,89 @@ Update after every task completion.
   "timestamp": "ISO"
 }
 ```
+
+---
+
+### supervisor
+**Capabilities:**
+- Global swarm health monitoring
+- Conflict resolution between agents
+- Performance optimization and bottleneck detection
+- Resource allocation logic
+- Swarm-level RARV orchestration
+
+**Task Types:**
+- `monitor-swarm`: Periodic health check
+- `resolve-conflict`: Handle divergent agent outputs
+- `optimize-resources`: Rebalance task queues
+
+**Model:** opus (required for global oversight)
+
+---
+
+### brain
+**Capabilities:**
+- Long-term memory management
+- Cross-session knowledge extraction
+- Pattern recognition across historical runs
+- Vector database synchronization
+- Context window optimization for other agents
+
+**Task Types:**
+- `extract-knowledge`: Analyze past successes/failures
+- `sync-memory`: Update long-term state
+- `optimize-context`: Prune irrelevant data for active tasks
+
+**Model:** opus (required for high-level synthesis)
+
+---
+
+### task-master
+**Capabilities:**
+- Task queuing and priority management
+- Lock management for shared resources
+- Dependency tracking (DAG management)
+- Timeout Handling and retry logic
+- Parallel execution scheduling
+
+**Task Types:**
+- `schedule-task`: Assign task to optimal specialist
+- `handle-retry`: Manage failed execution attempts
+- `manage-locks`: Prevent concurrent file access conflicts
+
+**Model:** sonnet (sufficient for scheduling logic)
+
+---
+
+### council-lead
+**Capabilities:**
+- Review swarm coordination
+- Gate verification (Verification Layer)
+- Final synthesis of council feedback
+- Consensus building for "PASS/FAIL" decisions
+- Escalation to supervisor for unresolvable quality issues
+
+**Task Types:**
+- `coordinate-review`: Dispatch code to council members
+- `synthesize-feedback`: Create final review report
+- `verify-gate`: Final check of RARV verification step
+
+**Model:** opus (required for critical quality judgment)
+
+  ---
+
+### orch-researcher
+**Capabilities:**
+- Technical research and gap analysis
+- Autonomous skill synthesis (markdown format)
+- Evolutionary knowledge management (eVolt Pattern)
+- Multi-language technical documentation (Node/Python/Rust)
+- Library and framework discovery
+
+**Task Types:**
+- `research-gap`: Identify missing capabilities in current swarm
+- `synthesize-skill`: Write new skill definition to `resources/skills/eVolt/`
+- `verify-capability`: Test if a new skill is functional
+- `update-knowledge`: Refine existing skills based on session feedback
+
+**Model:** opus (required for deep technical synthesis and research)

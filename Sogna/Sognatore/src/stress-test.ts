@@ -24,7 +24,7 @@ async function runParityValidation() {
 
   // 3. Validate Autonomous Loop (Runner Persistence)
   console.log(chalk.cyan('\n[3/3] Validating Autonomous Loop Convergence Path...'));
-  const runner = new Runner();
+  new Runner();
   
   console.log(chalk.bold.green('\n[PARITY SUCCESS] 41-Agent Swarm logic is operational on Windows.'));
   console.log(chalk.dim('All Phase 4 Quality Gates achieved 100% parity.\n'));

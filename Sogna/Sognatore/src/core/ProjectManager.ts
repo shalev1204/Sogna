@@ -92,7 +92,7 @@ export class ProjectManager {
         await execa('git', ['push'], { cwd: this.currentDir });
         console.log(chalk.green('   ✔ Backup en la nube completado.'));
       }
-    } catch (e) {
+    } catch (error: unknown) {
       console.log(chalk.red('   ⚠ Falló el backup en la nube (Git), pero el backup local es seguro.'));
     }
 

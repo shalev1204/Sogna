@@ -82,10 +82,19 @@ export class CostTracker {
     
     // Update global aggregated stats
     const globalStatsFile = path.join(this.statsDir, 'global_stats.json');
-    let stats = { totalCost: 0, totalTasks: 0, models: {} as Record<string, number> };
+    interface GlobalStats {
+      totalCost: number;
+      totalTasks: number;
+      models: Record<string, number>;
+    }
+    let stats: GlobalStats = { totalCost: 0, totalTasks: 0, models: {} };
     
     if (fs.existsSync(globalStatsFile)) {
-      stats = JSON.parse(fs.readFileSync(globalStatsFile, 'utf8'));
+      try {
+        stats = JSON.parse(fs.readFileSync(globalStatsFile, 'utf8')) as GlobalStats;
+      } catch (error: unknown) {
+        console.error('[COST] Failed to parse global stats, resetting...');
+      }
     }
 
     stats.totalCost += task.cost;

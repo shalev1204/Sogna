@@ -13,7 +13,7 @@ export interface GateResult {
   gateName: string;
   status: GateStatus;
   findings: GateFinding[];
-  evidence?: any;
+  evidence?: unknown;
 }
 
 export interface CouncilEvidence {

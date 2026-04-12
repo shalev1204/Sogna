@@ -4,12 +4,26 @@ import { Provider } from '../Provider.js';
 import { ProviderFactory } from '../ProviderFactory.js';
 import { AgentRole, AgentSwarm, AGENT_SWARM_MAPPING } from './AgentTypes.js';
 
+interface TierInfo {
+  display_name: string;
+  description: string;
+  models: Array<{ provider: string; model: string }>;
+}
+
+interface ModelStrategy {
+  strategy_name: string;
+  version: string;
+  tiers: Record<string, TierInfo>;
+  agent_tier_mapping: Record<string, string>;
+  default_tier: string;
+}
+
 export class AgentFactory {
   private static instance: AgentFactory;
   private agentsMDPath: string;
   private availableProviders: Provider[] = [];
 
-  private strategy: any;
+  private strategy: ModelStrategy | undefined;
 
   private constructor() {
     this.agentsMDPath = path.join(process.cwd(), 'resources', 'config', 'agents.md');

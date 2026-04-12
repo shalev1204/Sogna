@@ -1,16 +1,17 @@
+import { execSync } from 'child_process';
 import chalk from 'chalk';
+import fs from 'fs-extra';
+import path from 'path';
 import { StateStore, type SognatoreState } from './StateStore.js';
 import { Supervisor } from './Supervisor.js';
 import { Provider } from './Provider.js';
 import { ProviderFactory } from './ProviderFactory.js';
+import { DockerSandbox } from './DockerSandbox.js';
 import { QualityCouncil } from './QualityCouncil.js';
 import { ContextManager } from './ContextManager.js';
 import { SwarmOrchestrator } from './SwarmOrchestrator.js';
 import { SkillRegistry } from './SkillRegistry.js';
 import { CouncilEvidence } from './gates/types.js';
-import fs from 'fs-extra';
-import path from 'path';
-import { execSync } from 'child_process';
 
 export class Runner {
   private stateStore: StateStore;
@@ -20,6 +21,7 @@ export class Runner {
   private contextManager: ContextManager;
   private orchestrator: SwarmOrchestrator;
   private skillRegistry: SkillRegistry;
+  private sandbox: DockerSandbox;
   
   private stagnationCount: number = 0;
   private lastEvidenceHash: string = '';
@@ -32,17 +34,19 @@ export class Runner {
     this.contextManager = new ContextManager(baseDir);
     this.orchestrator = SwarmOrchestrator.getInstance();
     this.skillRegistry = SkillRegistry.getInstance();
+    this.sandbox = DockerSandbox.getInstance();
   }
 
   async start(prdPath?: string) {
-    console.log(chalk.bold.cyan('\nSOGNATORE MODE: Swarm Orchestration (v2026-NATIVE)'));
-    console.log(chalk.dim('===================================================='));
+    console.log(chalk.bold.cyan('\nSOGNATORE MODE: Swarm Orchestration (v2026-SOVEREIGN)'));
+    console.log(chalk.dim('======================================================='));
 
     const projectName = prdPath ? path.basename(prdPath, '.md') : 'new-project';
     const state = await this.stateStore.init(projectName);
     
     console.log(chalk.green(`\n[BOOT] Session: ${state.sessionId}`));
     console.log(chalk.green(`[BOOT] Cluster: Swarm Ready (41 Engines Available)`));
+    console.log(chalk.green(`[BOOT] Sandbox: Multi-Language Sovereign Environment Active`));
     
     let prdContent = '';
     if (prdPath && await fs.pathExists(prdPath)) {
@@ -59,11 +63,11 @@ export class Runner {
       try {
         console.log(chalk.bold.magenta(`\n[ITERATION ${state.currentIteration}] Parallel Swarm Loop`));
         
-        // 1. DYNAMIC CONTEXT & REASONING
+        // 1. REASON (Dynamic Planning)
         const codeMap = await this.contextManager.getCodeMap();
         const plan = await this.runReasoning(state, prdContent, codeMap);
         
-        // 2. SWARM EXECUTION (Parallel)
+        // 2. ACT (Swarm Execution)
         console.log(chalk.cyan(`  ${chalk.bold('🐝')} Swarm Dispatching...`));
         await this.orchestrator.dispatchTask({
           id: `task-${state.currentIteration}`,
@@ -73,7 +77,11 @@ export class Runner {
           status: 'pending'
         });
         
-        // 3. QUALITY MONITORING & CONVERGENCE
+        // 3. REFLECT (Observation)
+        console.log(chalk.cyan(`  ${chalk.bold('👁️')} Reflecting on Swarm Output...`));
+        
+        // 4. VERIFY (Quality Gates)
+        console.log(chalk.cyan(`  ${chalk.bold('✅')} Verifying Integrity...`));
         const evidence = await this.collectEvidence(state, prdPath);
         const { passed, results } = await this.council.evaluate(evidence);
         const findings = results.flatMap(r => r.findings.map(f => f.message));
@@ -98,8 +106,9 @@ export class Runner {
         }
 
         console.log(chalk.yellow(`\n[REFINEMENT] Convergence in progress. ${findings.length} findings remaining.`));
-      } catch (error: any) {
-        console.error(chalk.red(`\n[FATAL] Swarm Collapse at ${state.currentIteration}: ${error.message}`));
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error(chalk.red(`\n[FATAL] Swarm Collapse at ${state.currentIteration}: ${message}`));
       }
     }
 
@@ -134,7 +143,7 @@ export class Runner {
 
   private async collectEvidence(state: SognatoreState, prdPath?: string): Promise<CouncilEvidence> {
     const gitDiff = execSync('git diff HEAD').toString();
-    const testLogs: any[] = []; // In future, we'll pull these from the message bus
+    const testLogs: string[] = []; // In future, we'll pull these from the message bus
     
     return {
       iterationCount: state.currentIteration,

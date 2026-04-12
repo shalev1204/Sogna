@@ -1,4 +1,4 @@
-export type AgentSwarm = 'engineering' | 'operations' | 'business' | 'data' | 'product' | 'review' | 'orchestration';
+export type AgentSwarm = 'engineering' | 'operations' | 'business' | 'data' | 'product' | 'review' | 'growth' | 'orchestration';
 
 export interface AgentRole {
   type: string;
@@ -14,6 +14,7 @@ export const AGENT_SWARM_MAPPING: Record<AgentSwarm, string[]> = {
   business: ['biz-marketing', 'biz-sales', 'biz-finance', 'biz-legal', 'biz-support', 'biz-hr', 'biz-investor', 'biz-partnerships'],
   data: ['data-ml', 'data-eng', 'data-analytics'],
   product: ['prod-pm', 'prod-design', 'prod-techwriter'],
-  review: ['review-code', 'review-security', 'review-architecture'],
-  orchestration: ['supervisor', 'brain', 'task-master', 'council-lead']
+  review: ['review-code', 'review-security', 'review-business'],
+  growth: ['growth-hacker', 'growth-community', 'growth-success', 'growth-lifecycle'],
+  orchestration: ['supervisor', 'brain', 'task-master', 'council-lead', 'orch-researcher']
 };

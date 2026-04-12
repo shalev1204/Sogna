@@ -1,7 +1,8 @@
-import { Agent } from './Agent.js';
+import { Agent, type AgentState } from './Agent.js';
 import { AgentFactory } from './AgentFactory.js';
 import fs from 'fs';
 import path from 'path';
+import { Guardian } from '../Guardian.js';
 
 export class AgentRegistry {
   private static instance: AgentRegistry;
@@ -47,8 +48,12 @@ export class AgentRegistry {
     for (const file of files) {
       if (file.endsWith('.json')) {
         const id = path.basename(file, '.json');
-        const state = JSON.parse(fs.readFileSync(path.join(this.stateDir, file), 'utf8'));
-        discovered.push(await this.getAgent(state.type, id.includes('-') ? id.split('-')[1] : undefined));
+        const encryptedData = fs.readFileSync(path.join(this.stateDir, file), 'utf8');
+        const state = Guardian.getInstance().unsealData<AgentState>(encryptedData);
+        
+        if (state) {
+          discovered.push(await this.getAgent(state.type, id.includes('-') ? id.split('-')[1] : undefined));
+        }
       }
     }
 

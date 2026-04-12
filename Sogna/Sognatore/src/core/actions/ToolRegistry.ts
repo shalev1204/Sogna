@@ -7,7 +7,7 @@ export interface ToolDefinition {
   name: string;
   description: string;
   parameters: Record<string, string>;
-  execute: (args: any, agentTier: string) => Promise<string>;
+  execute: (args: Record<string, string>, agentTier: string) => Promise<string>;
 }
 
 export class ToolRegistry {
@@ -86,8 +86,9 @@ export class ToolRegistry {
         try {
           const output = execSync(args.command, { encoding: 'utf8', timeout: 30000 });
           return output || 'SUCCESS: Comando ejecutado (sin salida)';
-        } catch (error: any) {
-          return `ERROR: ${error.message}\n${error.stdout || ''}`;
+        } catch (error: unknown) {
+          const err = error as { message: string; stdout?: string };
+          return `ERROR: ${err.message}\n${err.stdout || ''}`;
         }
       }
     });
@@ -97,7 +98,7 @@ export class ToolRegistry {
     this.tools.set(tool.name, tool);
   }
 
-  public async call(name: string, args: any, agentTier: string): Promise<string> {
+  public async call(name: string, args: Record<string, string>, agentTier: string): Promise<string> {
     const tool = this.tools.get(name);
     if (!tool) return `ERROR: Herramienta "${name}" no encontrada.`;
     

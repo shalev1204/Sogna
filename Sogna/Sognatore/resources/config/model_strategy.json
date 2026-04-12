@@ -29,22 +29,21 @@
     }
   },
   "agent_tier_mapping": {
-    "frontend-architect": "platinum",
-    "backend-architect": "platinum",
-    "security-audit": "platinum",
-    "council-final": "platinum",
+    "supervisor": "platinum",
+    "brain": "platinum",
+    "council-lead": "platinum",
+    "review-code": "platinum",
+    "review-business": "platinum",
+    "review-security": "platinum",
     
-    "eng-frontend": "gold",
-    "eng-backend": "gold",
-    "eng-mobile": "gold",
-    "product-designer": "gold",
-    
-    "eng-qa": "silver",
-    "ops-monitor": "silver",
-    "ops-logs": "silver",
-    "docs-writer": "silver",
-    "analytics-reporter": "silver",
-    "orchestrator-router": "silver"
+    "engineering": "gold",
+    "operations": "gold",
+    "data": "gold",
+    "orchestration": "platinum",
+    "review": "platinum",
+    "business": "silver",
+    "product": "silver",
+    "growth": "silver"
   },
   "default_tier": "gold"
 }

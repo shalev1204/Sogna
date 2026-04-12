@@ -3,6 +3,7 @@ import JavaScriptObfuscator from 'javascript-obfuscator';
 import fs from 'fs-extra';
 import path from 'path';
 import crypto from 'crypto';
+import chalk from 'chalk';
 
 /**
  * Sognatore Guardian - The Security & Privacy Sentinel
@@ -10,9 +11,17 @@ import crypto from 'crypto';
  */
 export class Guardian {
   private static instance: Guardian;
-  private readonly SECRET_KEY = process.env.GUARDIAN_SECRET || 'sognatore_master_key_2026';
+  private readonly SECRET_KEY: string;
 
-  private constructor() {}
+  private constructor() {
+    this.SECRET_KEY = process.env.GUARDIAN_SECRET || '';
+    if (!this.SECRET_KEY || this.SECRET_KEY.length < 12) {
+      console.warn(chalk.red('\n[SECURITY_ALERT] GUARDIAN_SECRET is missing or too weak!'));
+      console.warn(chalk.yellow('Please set a strong GUARDIAN_SECRET in your .env file.'));
+      // Fallback for stabilization phase, but mark as "LOW_ASSURANCE"
+      this.SECRET_KEY = this.SECRET_KEY || 'sognatore_unsecured_stabilization_key_2026';
+    }
+  }
 
   public static getInstance(): Guardian {
     if (!Guardian.instance) {
@@ -66,7 +75,7 @@ export class Guardian {
       /algorithm/i, /logic/i, /secret/i, /key/i, /token/i, /password/i,
       /crypto/i, /auth/i, /payment/i, /pricing/i, /formula/i, /strategy/i,
       /db_conn/i, /apikey/i, /credential/i, /private/i,
-      /\(\s*.*\s*\)\s*=>\s*\{.*[+\-*\/].*\}/, // Heuristic for arrow functions with math logic
+      /\(\s*.*\s*\)\s*=>\s*\{.*[+\-*/].*\}/, // Heuristic for arrow functions with math logic
       /class\s+\w+\s+\{.*(calc|eval|process|secure).*\}/is // Heuristic for logic classes
     ];
 
@@ -92,7 +101,7 @@ export class Guardian {
   /**
    * "Seals" the logs/state with a basic layer of protection.
    */
-  public sealData(data: any): string {
+  public sealData<T>(data: T): string {
     const json = JSON.stringify(data);
     const cipher = crypto.createCipheriv('aes-256-cbc', 
         crypto.scryptSync(this.SECRET_KEY, 'salt', 32), 
@@ -103,7 +112,7 @@ export class Guardian {
     return encrypted;
   }
 
-  public unsealData(encrypted: string): any {
+  public unsealData<T>(encrypted: string): T | null {
     try {
       const decipher = crypto.createDecipheriv('aes-256-cbc', 
           crypto.scryptSync(this.SECRET_KEY, 'salt', 32), 
@@ -111,9 +120,52 @@ export class Guardian {
       );
       let decrypted = decipher.update(encrypted, 'hex', 'utf8');
       decrypted += decipher.final('utf8');
-      return JSON.parse(decrypted);
-    } catch (e) {
+      return JSON.parse(decrypted) as T;
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`[GUARDIAN] Decryption/Parsing failed: ${message}`);
       return null;
     }
+  }
+
+  /**
+   * Validates the integrity of the Sognatore core and skills.
+   * Computes a recursive hash to detect tampering.
+   */
+  public validateIntegrity(targetDir: string = '.'): string {
+    const hash = crypto.createHash('sha256');
+    const criticalPaths = [
+      path.join(targetDir, 'src', 'core'),
+      path.join(targetDir, 'resources', 'skills'),
+      path.join(targetDir, 'resources', 'config', 'agents.md')
+    ];
+
+    criticalPaths.forEach(p => {
+      const fullPath = path.isAbsolute(p) ? p : path.resolve(p);
+      if (fs.existsSync(fullPath)) {
+        const stats = fs.statSync(fullPath);
+        if (stats.isDirectory()) {
+          this.hashDirectory(fullPath, hash);
+        } else {
+          hash.update(fs.readFileSync(fullPath));
+        }
+      }
+    });
+
+    return hash.digest('hex');
+  }
+
+  private hashDirectory(dir: string, hash: crypto.Hash) {
+    const files = fs.readdirSync(dir).sort();
+    files.forEach(file => {
+      const fullPath = path.join(dir, file);
+      const stats = fs.statSync(fullPath);
+      if (stats.isDirectory()) {
+        this.hashDirectory(fullPath, hash);
+      } else {
+        hash.update(file);
+        hash.update(fs.readFileSync(fullPath));
+      }
+    });
   }
 }

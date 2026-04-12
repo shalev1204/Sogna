@@ -1,5 +1,5 @@
-import { Provider, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
-import { spawn, execSync } from 'child_process';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
+import { spawn } from 'child_process';
 
 export class AiderProvider extends Provider {
   readonly metadata: ProviderMetadata = {
@@ -31,14 +31,14 @@ export class AiderProvider extends Provider {
     }
   }
 
-  async invoke(prompt: string, options: any = {}): Promise<string> {
+  async invoke(prompt: string, options: InvokeOptions = {}): Promise<string> {
     const tier = options.tier || 'development';
     return this.invokeWithTier(tier as CapabilityTier, prompt, options);
   }
 
-  async invokeWithTier(tier: CapabilityTier, prompt: string, options: any = {}): Promise<string> {
-    const model = process.env.SOGNATORE_AIDER_MODEL || 
-                  process.env.SOGNATOREL_DEVELOPMENT || 
+  async invokeWithTier(tier: CapabilityTier, prompt: string, options: InvokeOptions = {}): Promise<string> {
+    const model = (process.env.SOGNATORE_AIDER_MODEL as string) || 
+                  (process.env.SOGNATOREL_DEVELOPMENT as string) || 
                   'claude-3-5-sonnet-20240620';
 
     const args = [
@@ -49,13 +49,13 @@ export class AiderProvider extends Provider {
     ];
 
     if (options.noGit) args.push('--no-git');
-    if (options.extraArgs) args.push(...options.extraArgs);
+    if (options.extraArgs) args.push(...(options.extraArgs as string[]));
 
     return new Promise((resolve, reject) => {
       let output = '';
       const proc = spawn('aider', args, {
         shell: true,
-        env: { ...process.env, ...options.env }
+        env: { ...process.env, ...(options.env as Record<string, string>) }
       });
 
       proc.stdout.on('data', (data) => {

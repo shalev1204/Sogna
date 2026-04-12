@@ -36,7 +36,7 @@ export class Doctor {
     return results;
   }
 
-  private async checkCommand(name: string, cmd: string, required: boolean, versionSpec?: string): Promise<DoctorResult> {
+  private async checkCommand(name: string, cmd: string, required: boolean, versionRange?: string): Promise<DoctorResult> {
     const isPresent = await this.toolResolver.isAvailable(cmd);
     
     if (isPresent) {
@@ -49,7 +49,7 @@ export class Doctor {
           version: stdout.split('\n')[0].trim(),
           required
         };
-      } catch {
+      } catch (error: unknown) {
         return { name, status: 'PASS', required };
       }
     }
@@ -57,7 +57,7 @@ export class Doctor {
     return {
       name,
       status: required ? 'FAIL' : 'WARN',
-      message: `${name} is not installed locally or in PATH.`,
+      message: `${name} is not installed locally or in PATH.${versionRange ? ` Required: ${versionRange}` : ''}`,
       required
     };
   }
@@ -71,9 +71,13 @@ export class Doctor {
 
     for (const p of providers) {
       const isPresent = await p.detect();
-      let version = undefined;
+      let version: string | undefined = undefined;
       if (isPresent) {
-        try { version = await p.version(); } catch {}
+        try { 
+          version = await p.version(); 
+        } catch (error: unknown) {
+          // Version detection fail is not critical
+        }
       }
 
       results.push({
@@ -104,7 +108,7 @@ export class Doctor {
     let allRequiredPassed = true;
 
     for (const r of results) {
-      let statusStr = '';
+      let statusStr: string;
       if (r.status === 'PASS') statusStr = chalk.green('  PASS  ');
       else if (r.status === 'FAIL') {
         statusStr = chalk.red('  FAIL  ');

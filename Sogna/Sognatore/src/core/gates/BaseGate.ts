@@ -19,7 +19,7 @@ export abstract class BaseGate {
   /**
    * Helper to format a quick pass result.
    */
-  protected pass(evidence?: any): GateResult {
+  protected pass(evidence?: unknown): GateResult {
     return {
       gateId: this.id,
       gateName: this.name,
@@ -32,7 +32,7 @@ export abstract class BaseGate {
   /**
    * Helper to format a fail result.
    */
-  protected fail(message: string, severity: any = 'HIGH', evidence?: any): GateResult {
+  protected fail(message: string, severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' = 'HIGH', evidence?: unknown): GateResult {
     return {
       gateId: this.id,
       gateName: this.name,

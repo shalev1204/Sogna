@@ -1,7 +1,8 @@
 import { BaseGate } from './BaseGate.js';
-import { GateResult, CouncilEvidence } from './types.js';
+import { GateResult, CouncilEvidence, type GateFinding } from './types.js';
 import { execa } from 'execa';
 import path from 'path';
+import fs from 'fs-extra';
 
 export class CompatibilityGate extends BaseGate {
   get id() { return 'QG-010'; }
@@ -9,7 +10,7 @@ export class CompatibilityGate extends BaseGate {
 
   async run(evidence: CouncilEvidence): Promise<GateResult> {
     const modifiedFiles = this.getModifiedExistingFiles(evidence.gitDiff || '');
-    const findings: any[] = [];
+    const findings: GateFinding[] = [];
 
     if (modifiedFiles.length === 0) {
       return this.pass({ message: 'No existing files modified.' });
@@ -29,8 +30,7 @@ export class CompatibilityGate extends BaseGate {
       if (!testFile) {
         findings.push({
           severity: 'HIGH',
-          message: `File ${file} was modified but no test suite was found. Regression risk is high.`,
-          file
+          message: `File ${file} was modified but no test suite was found. Regression risk is high.`
         });
         continue;
       }
@@ -38,11 +38,10 @@ export class CompatibilityGate extends BaseGate {
       try {
         // Run specific test for this file
         await execa(resolvedVitest, ['run', testFile], { cwd: this.cwd });
-      } catch (error: any) {
+      } catch (error: unknown) {
         findings.push({
           severity: 'CRITICAL',
-          message: `Regression detected in ${file}. Test suite ${testFile} failed.`,
-          file
+          message: `Regression detected in ${file}. Test suite ${testFile} failed.`
         });
       }
     }
@@ -85,9 +84,7 @@ export class CompatibilityGate extends BaseGate {
     ];
 
     for (const c of candidates) {
-      // Logic would be to check fs.existsSync here
-      // For this implementation, we just return the first that exists
-      if (require('fs').existsSync(path.resolve(this.cwd, c))) {
+      if (fs.existsSync(path.resolve(this.cwd, c))) {
         return c;
       }
     }

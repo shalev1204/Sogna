@@ -6,6 +6,16 @@ export interface ProviderMetadata {
   cli: string;
 }
 
+export interface InvokeOptions {
+  model?: string;
+  tier?: CapabilityTier;
+  env?: Record<string, string>;
+  json?: boolean;
+  extraArgs?: string[];
+  onToken?: (token: string) => void;
+  [key: string]: unknown;
+}
+
 export abstract class Provider {
   abstract readonly metadata: ProviderMetadata;
 
@@ -13,8 +23,8 @@ export abstract class Provider {
   abstract detect(): Promise<boolean>;
   abstract version(): Promise<string>;
   
-  abstract invoke(prompt: string, options?: any): Promise<string>;
-  abstract invokeWithTier(tier: CapabilityTier, prompt: string, options?: any): Promise<string>;
+  abstract invoke(prompt: string, options?: InvokeOptions): Promise<string>;
+  abstract invokeWithTier(tier: CapabilityTier, prompt: string, options?: InvokeOptions): Promise<string>;
 
   protected resolveTier(tier: CapabilityTier): 'planning' | 'development' | 'fast' {
     switch (tier) {

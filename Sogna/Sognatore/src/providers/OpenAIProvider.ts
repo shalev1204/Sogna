@@ -1,5 +1,5 @@
-import { Provider, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
-import { spawn, execSync } from 'child_process';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
+import { spawn } from 'child_process';
 
 export class OpenAIProvider extends Provider {
   readonly metadata: ProviderMetadata = {
@@ -39,12 +39,12 @@ export class OpenAIProvider extends Provider {
     }
   }
 
-  async invoke(prompt: string, options: any = {}): Promise<string> {
+  async invoke(prompt: string, options: InvokeOptions = {}): Promise<string> {
     const tier = options.tier || 'development';
     return this.invokeWithTier(tier as CapabilityTier, prompt, options);
   }
 
-  async invokeWithTier(tier: CapabilityTier, prompt: string, options: any = {}): Promise<string> {
+  async invokeWithTier(tier: CapabilityTier, prompt: string, options: InvokeOptions = {}): Promise<string> {
     const model = this.resolveModelForTier(tier);
     
     // As of 2026, the standard OpenAI CLI uses a direct completion/chat command
@@ -58,7 +58,7 @@ export class OpenAIProvider extends Provider {
       let output = '';
       const proc = spawn(this.metadata.cli, args, {
         shell: true,
-        env: { ...process.env, ...options.env }
+        env: { ...process.env, ...(options.env as Record<string, string>) }
       });
 
       proc.stdout.on('data', (data) => {

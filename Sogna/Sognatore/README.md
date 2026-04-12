@@ -1,82 +1,154 @@
-# 🌀 Sognatore: Guía Maestra del Enjambre (2026)
-
-> **Inteligencia Autónoma de Alta Precisión**  
-> Purificado. Privado. Rendimiento Extremo en Windows.
-
-Sognatore es un sistema de enjambre autónomo multi-agente diseñado para la era de la computación agentica. Este repositorio ha sido transformado en un núcleo puramente TypeScript, optimizado para operaciones locales de alta eficiencia, sin rastro de dependencias externas o identidades comerciales.
+Sognatore is a high-assurance autonomous swarm ecosystem designed for the agentic computing era. It operates as a unified intelligence layer composed of **42 specialized engines** (now including the Evolutionary Brain), governed by the **RARV Protocol**, and protected by a **Sovereign Sandbox** and a **Hardened Guardian**.
 
 ---
 
-## 🏛️ Arquitectura del Enjambre
+## 🏛️ Swarm Architecture (Schematic)
 
-El sistema se basa en un **Swarm de 41 Agentes Especializados**, organizados en 5 enjambres funcionales para cubrir todo el ciclo de vida del desarrollo:
+The Sognatore ecosystem is organized into **8 functional swarms** that communicate via a secure, file-based message bus. This schematic represents the flow of tasks from the central Orchestrator to the specialist specialists.
 
-### 1. 🏗️ Enjambre de Ingeniería
+```mermaid
+graph TD
+    %% Swarms
+    subgraph "Leadership & Routing"
+        OR["🎭 Orchestration Swarm"]
+    end
 
-- **Propósito**: Implementación de código, refactorización y resolución de bugs.
-- **Agentes Clave**: `frontend-architect`, `backend-expert`, `security-auditor`, `database-admin`.
+    subgraph "Core Implementation"
+        EN["🏗️ Engineering Swarm"]
+        OP["⚙️ Operations Swarm"]
+        DT["📊 Data Swarm"]
+    end
 
-### 2. 🔍 Enjambre de Revisión (Council)
+    subgraph "Strategy & Design"
+        PR["📋 Product Swarm"]
+        BI["💰 Business Swarm"]
+        GR["🚀 Growth Swarm"]
+    end
 
-- **Propósito**: Garantía de calidad mediante un sistema de 3 puertas (Estático, Dinámico y Revisión Ciega).
-- **Agentes Clave**: `code-reviewer`, `anti-sycophancy-expert`, `blind-auditor`.
+    subgraph "Quality & Governance"
+        RE["🔍 Review Swarm (Council)"]
+    end
 
-### 3. ⚙️ Enjambre de Operaciones
+    %% Bus
+    MB[("📩 Secure Message Bus")]
 
-- **Propósito**: Despliegue, infraestructura y gestión de recursos.
-- **Agentes Clave**: `deployment-engineer`, `cloud-architect`, `performance-engineer`.
+    %% Connections
+    OR <--> MB
+    MB <--> EN
+    MB <--> OP
+    MB <--> DT
+    MB <--> PR
+    MB <--> BI
+    MB <--> GR
+    RE <--> MB
 
-### 4. 📊 Enjambre de Datos
-
-- **Propósito**: Análisis, gestión de memoria y entrenamiento de contexto.
-- **Agentes Clave**: `data-scientist`, `memory-manager`, `analytics-expert`.
-
-### 5. 🎭 Enjambre de Orquestación
-
-- **Propósito**: Gestión del bus de eventos y direccionamiento de tareas.
-- **Agentes Clave**: `swarm-orchestrator`, `task-dispatcher`.
+    %% Styling
+    style MB fill:#f9f,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+    style OR fill:#bbf,stroke:#333,stroke-width:2px
+    style RE fill:#bfb,stroke:#333,stroke-width:2px
+```
 
 ---
 
-## 💸 Economía de Enjambre 2.0 (Optimización Eficiente)
+## 🧠 The RARV Protocol (Sequence)
 
-Sognatore utiliza ahora una jerarquía inteligente de tres niveles para maximizar el rendimiento reduciendo los costes de API:
+The **RARV Cycle** (Reason, Act, Reflect, Verify) is the operational heartbeat of Sognatore. Every task undergoes this rigorous transformation to ensure convergence and technical excellence.
 
-1. **Nivel Platino (Razonamiento Crítico)**: Reservado para arquitectura, auditorías de seguridad y gatekeepers finales. (Claude 4.6 Opus / GPT 5.4).
-2. **Nivel Oro (Desarrollo Estándar)**: El motor principal para implementación de código y resolución de problemas. (Claude 4.6 Sonnet / Gemini 3.1 Pro).
-3. **Nivel Plata (Eficiencia Masiva)**: Para tareas repetitivas de gran contexto (logs, docs, monitorización) y tests. (Gemini 1.5 Flash / Claude 4.6 Haiku).
+```mermaid
+sequenceDiagram
+    participant U as User / PRD
+    participant O as Orchestrator
+    participant A as Specialist Agent
+    participant C as Quality Council (Review)
 
-### 💰 Transparencia Financiera
+    U->>O: Dispatch PRD / Task
+    Note over O: Step 1: REASON
+    O->>O: Analyze Context & Select Specialist
+    
+    O->>A: Assign Actionable Packet
+    Note over A: Step 2: ACT
+    A->>A: Execute Logic / Code Generation
+    
+    A->>A: Step 3: REFLECT
+    Note right of A: Self-Correction & Refinement
+    A-->>O: Submit Evidence of Completion
 
-El sistema proporciona visibilidad total sobre el consumo en tiempo real:
+    O->>C: Initiate Validation Gate
+    Note over C: Step 4: VERIFY
+    C->>C: Static/Dynamic/Blind Analysis
+    
+    alt PASS
+        C-->>O: Consensus Reached
+        O-->>U: Deliver High-Assurance Output
+    else FAIL
+        C-->>O: Feedback & Deficiencies
+        O->>A: Re-trigger RARV Cycle
+    end
+```
 
-- **Notificaciones de Gasto**: Tras cada tarea, verás el coste exacto en dólares de la interacción.
-- **Acumulado de Sesión**: Un contador persistente que te permite saber cuánto has invertido en tu sesión actual de desarrollo.
-- **Configuración**: Puedes ajustar qué agentes pertenecen a cada tier en `resources/config/model_strategy.json`.
+### 🧬 The eVolt Pattern (Autonomous Evolution)
+When a task type is encountered that is not in the current skill library, Sognatore triggers an **Evolutionary Loop**:
+1. **Gap Detection**: The Orchestrator identifies missing technical capabilities.
+2. **Research**: The `orch-researcher` performs a deep-dive into documentation and frameworks.
+3. **Synthesis**: A new skill module is autonomously written to `📁 resources/skills/eVolt/`.
+4. **Hydration**: The `SkillRegistry` performs a recursive re-load, instantly granting the swarm new powers.
 
 ---
 
-## 🛠️ Comandos de Supervivencia
+## 📋 The 41-Agent Catalog
 
-### Verificación de Salud
+Sognatore manages **41 specialized agents** categorized into 8 functional areas. Each agent utilizes a specific model tier (Platinum, Gold, Silver) to balance performance and cost.
 
-Asegúrate de que tu entorno Windows está listo:
+| Swarm | Agents Count | Primary Focus | Key Specialists |
+| :--- | :--- | :--- | :--- |
+| **Engineering** | 8 | Implementation | `frontend`, `backend`, `database`, `infra` |
+| **Operations** | 8 | Deployment & Sec | `devops`, `security`, `sre`, `incident` |
+| **Business** | 8 | Alignment | `finance`, `legal`, `marketing`, `hr` |
+| **Growth** | 4 | Scale | `hacker`, `community`, `success`, `lifecycle` |
+| **Data** | 3 | Intelligence | `ml`, `eng`, `analytics` |
+| **Product** | 3 | Specs | `pm`, `design`, `techwriter` |
+| **Review** | 3 | Quality | `code`, `business`, `security` |
+| **Orchestration** | 5 | Management | `supervisor`, `brain`, `orch-researcher` |
+
+---
+
+## 💸 Economía de Enjambre 2.0 (Tiered Strategy)
+
+To ensure maximum ROIs, Sognatore employs a intelligent tiered model strategy:
+
+1. **💎 Platinum (Razonamiento Crítico)**:
+    - **Usage**: Architecture, Security Audits, Final Gates.
+    - **Models**: Claude 4.6 Opus, GPT-5.4-o.
+2. **🥇 Gold (Desarrollo Estándar)**:
+    - **Usage**: General coding, complex debugging, data engineering.
+    - **Models**: Claude 4.6 Sonnet, Gemini 3.1 Pro.
+3. **🥈 Silver (Eficiencia Masiva)**:
+    - **Usage**: Documentation, logs, unit testing, repetitive tasks.
+    - **Models**: Gemini 1.5 Flash, Claude 4.6 Haiku.
+
+---
+
+## 🛠️ Operational Command Reference
+
+### 🏥 System Doctor
+
+Verify environment prerequisites and AI provider integrations.
 
 ```bash
 node dist/bin/sognatore.js doctor
 ```
 
-### Ejecución de Ciclo Autónomo
+### 🚀 Autonomous Execution
 
-Lanza el enjambre sobre un PRD para iniciar la generación:
+Launch the swarm on a PRD or Task file.
 
 ```bash
 node dist/bin/sognatore.js run prd.md --stress-test
 ```
 
-### Reconstrucción del Núcleo
+### 🏗️ Build & Purify
 
-Si realizas cambios en la lógica del sistema:
+Re-compile the core system logic.
 
 ```bash
 npm run build
@@ -84,22 +156,22 @@ npm run build
 
 ---
 
-## 📁 Estructura del Sistema Purificado
+## 📁 System Core Assets
 
-- `📁 resources/config/`: El alma del sistema. Contiene las definiciones de los 41 agentes.
-- `📁 resources/skills/`: Base de conocimientos que los agentes consultan bajo demanda.
-- `📁 src/core/`: El motor de ejecución, las puertas de calidad (Gates) y el Consejo (Council).
-- `📁 src/providers/`: Conectores de baja latencia con los LLMs mediante piping de `stdin`.
-- `📁 meta/`: Archivo histórico y registros del sistema.
+- `📁 resources/config/`: Swarm definitions and 41-agent catalog.
+- `📁 resources/skills/`: Knowledge base (17+ specialized skill modules).
+- `📁 .sognatore/`: Active session state, message bus, and task queues.
 
 ---
 
-## 🧠 El Ciclo RARV
+### 🛡️ Sovereign Security Core
+- **Docker Isolation**: All task execution occurs within a hardened Ubuntu container (Node/Python/Rust).
+- **Guardian Integrity**: Recursive SHA-256 validation detects any tampering of core swarm files.
+- **Secret Decoupling**: Configuration is externalized to `.env` with mandatory key strength validation.
 
-Cada acción del enjambre sigue el ciclo de **Reason** (Razonar), **Act** (Actuar), **Reflect** (Reflexionar) y **Verify** (Verificar). No se acepta un cambio si no ha pasado por el **Consejo de Calidad**.
+> [!IMPORTANT]
+> **Sovereign Autonomy**: Sognatore is built to be a resilient, self-healing system. In case of loop stagnation, the **Crisis Responder** (Operations Swarm) will automatically take control, or the **Orchestration Researcher** will expand the swarm's knowledge to overcome technical barriers.
 
 ---
 
-### Desarrollo y Eficiencia
-
-> *Desarrollado para la máxima eficiencia privada | 2026 Era de la Computación Autónoma*
+Developed for the 2026 Sovereign Agentic Computing Era

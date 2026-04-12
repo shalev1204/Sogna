@@ -44,8 +44,9 @@ ${evidence.prdPath ? `PRD: ${evidence.prdPath}` : 'No PRD available.'}
           vote: voteMatch ? voteMatch[1].toUpperCase() : 'REJECT',
           reason: reasonMatch ? reasonMatch[1] : 'No reason provided.'
         };
-      } catch (e) {
-        return { role: r.id, vote: 'REJECT', reason: `Error: ${e}` };
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        return { role: r.id, vote: 'REJECT', reason: `Error: ${message}` };
       }
     }));
 
