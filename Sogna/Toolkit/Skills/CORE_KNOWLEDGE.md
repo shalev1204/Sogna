@@ -6,8 +6,8 @@ Essential technical knowledge for Sogna agents.
 
 - **Root**: Application wrappers and project logic.
 - **Sogna/Sognatore**: The autonomous agent engine (TypeScript/Node).
-- **Sogna/Toolkit**: The operational kit (Rules, Agents, Workflows).
-- **Sogna/Config**: System-wide configuration.
+- **Sogna/toolkit**: The operational kit (rules, agents, workflow).
+- **Sogna/config**: System-wide configuration.
 
 ## Technological Stack
 

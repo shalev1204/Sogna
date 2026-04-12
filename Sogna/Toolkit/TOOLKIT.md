@@ -5,12 +5,12 @@ Welcome to the professional operational kit for Sogna agents. This toolkit provi
 ## Structure
 
 ```text
-Sogna/Toolkit/
-├── Agents/    # Specialized agent personas (Orchestrator, Planner, etc.)
-├── Rules/     # Technical standards (Gemini, CLI, Styling)
-├── Workflows/ # Operational command procedures (Plan, Diagnostic, Create)
-├── Skills/    # Core repositories of architectural knowledge
-└── Shared/    # Reusable assets and configurations
+sogna/toolkit/
+├── agents/    # Specialized agent personas (Orchestrator, Planner, etc.)
+├── rules/     # Technical standards (Gemini, CLI, Styling)
+├── workflow/  # Operational command procedures (Plan, Diagnostic, Create)
+├── skills/    # Core repositories of architectural knowledge
+└── shared/    # Reusable assets and configurations
 ```
 
 ## How to Use
@@ -18,7 +18,7 @@ Sogna/Toolkit/
 ### As a Developer
 
 - Use `node sogna.js toolkit` to explore available resources.
-- Refer to the `Rules/` directory when implementing new features to ensure compliance.
+- Refer to the `rules/` directory when implementing new features to ensure compliance.
 - Use `node sogna.js doctor` to verify your environment health.
 
 ### For AI Agents
@@ -31,8 +31,8 @@ Sogna/Toolkit/
 
 ## Integration Protocols
 
-- **Specialists**: Agents should assume roles defined in `Agents/specialists.md` for technical tasks.
-- **Workflows**: Common tasks like `/plan` and `/create` are documented in `Workflows/` for consistent execution.
+- **Specialists**: Agents should assume roles defined in `agents/specialists.md` for technical tasks.
+- **Workflows**: Common tasks like `/plan` and `/create` are documented in `workflow/` for consistent execution.
 
 ---
 
