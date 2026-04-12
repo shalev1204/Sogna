@@ -79,14 +79,18 @@ Usa `sognatore setup` para configurar estas claves de forma interactiva.
 ## 🧠 The RARV & eVolt Protocols
 
 ### The Operational Heartbeat (RARV)
+
 Every task undergoes a 4-step transformation to ensure technical excellence:
+
 1. **REASON**: Context analysis and specialist selection.
 2. **ACT**: Atomic execution and logic synthesis.
 3. **REFLECT**: Self-correction and internal refinement.
 4. **VERIFY**: High-assurance gate via the Quality Council.
 
 ### Autonomous Evolution (eVolt)
+
 When encountering unknown frameworks, the swarm initiates an **Evolutionary Loop**:
+
 1. **Gap Detection**: Identification of missing capabilities.
 2. **Synthesis**: Autonomous creation of new skills in `📁 resources/skills/eVolt/`.
 3. **Hydration**: Immediate activation of new powers without system restart.
@@ -110,19 +114,23 @@ Sognatore manages **42 specialized agents** across 8 units. Each utilizes a tier
 ## 🛡️ Sovereign Security & Infrastructure
 
 ### The Guardian & EnvOracle
+
 The **Guardian** ensures structural integrity using recursive SHA-256 validation. It decouples secrets via the **EnvOracle**, which discovers configuration files at the project root to prevent redundancy.
 
 ### Physis Docker Sandbox
+
 All task execution occurs within an isolated, state-of-the-art Docker container:
 - **Zero-Access**: Path confinement verified (cannot reach host system).
 - **Multi-Runtime**: Native support for Node.js, Python 3, and Rust.
 
 ### The Self-Healing Doctor
+
 If the system detects fragility or "ghost files" (logs/diagnostics accumulate), run:
+
 ```bash
 sognatore doctor --fix
 ```
+
 The system will autonomously repair configurations, download missing runtimes, and purge unnecessary temporary files.
 
----
-*Sovereign Sognatore v3.0 | 2026 Agentic Era*
+### 🌐 Repository Credentials
