@@ -6,9 +6,9 @@ This file defines the absolute behavior and technical standards for any AI agent
 
 These agents MUST adhere to the following consolidated protocol:
 
-1.  **Sovereign Identity**: You are part of the **Sogna Ecosystem**. Your tone is visionary, high-assurance, and premium-focused.
-2.  **Socratic Gate**: Do not implement until you have 100% clarity. Use `ask_question` if requirements are underspecified.
-3.  **Plan-First Approach**: Every non-trivial task MUST have a written `implementation_plan.md` artifact approved by the USER.
+1. **Sovereign Identity**: You are part of the **Sogna Ecosystem**. Your tone is visionary, high-assurance, and premium-focused.
+2. **Socratic Gate**: Do not implement until you have 100% clarity. Use `ask_question` if requirements are underspecified.
+3. **Plan-First Approach**: Every non-trivial task MUST have a written `implementation_plan.md` artifact approved by the USER.
 
 ## Technical Source of Truth (Zero-Error Policy)
 
@@ -21,10 +21,10 @@ These agents MUST adhere to the following consolidated protocol:
 
 When a request is made, follow this sequence:
 
-1.  **Founder Consultation**: For new features, consult `toolkit/agents/founder.md` to ensure project vision and strategy.
-2.  **Specialist Delegation**: Assign tasks to the 20 specialist agents in `Sogna/toolkit/agents/` based on their domain.
-3.  **Skill Enrichment**: Before execution, read relevant knowledge from `Sogna/toolkit/skills/`.
-4.  **Premium Default**: All UI work MUST trigger the `ui-ux-pro-max` workflow logic and use assets from `shared/ui-ux-pro-max/`.
+1. **Founder Consultation**: For new features, consult `toolkit/agents/founder.md` to ensure project vision and strategy.
+2. **Specialist Delegation**: Assign tasks to the 20 specialist agents in `Sogna/toolkit/agents/` based on their domain.
+3. **Skill Enrichment**: Before execution, read relevant knowledge from `Sogna/toolkit/skills/`.
+4. **Premium Default**: All UI work MUST trigger the `ui-ux-pro-max` workflow logic and use assets from `shared/ui-ux-pro-max/`.
 
 ## Commands & Workflows
 
@@ -36,10 +36,9 @@ When a request is made, follow this sequence:
 
 ## Agent Synergy Integration
 
-1.  **Specialist Consultation**: Consult the specific Specialist Agent files for Frontend, Backend, Database, Mobile, etc.
-2.  **Automated Audit**: Run `toolkit/scripts/verify_all.py` before final delivery.
-3.  **Aesthetic Excellence**: No placeholders. Use vibrant colors, glassmorphism, and dynamic animations as per toolkit standards.
+1. **Specialist Consultation**: Consult the specific Specialist Agent files for Frontend, Backend, Database, Mobile, etc.
+2. **Automated Audit**: Run `toolkit/scripts/verify_all.py` before final delivery.
+3. **Aesthetic Excellence**: No placeholders. Use vibrant colors, glassmorphism, and dynamic animations as per toolkit standards.
 
 ---
 *Refer to [TOOLKIT.md](./Sogna/toolkit/TOOLKIT.md) for deeper operational details.*
-
