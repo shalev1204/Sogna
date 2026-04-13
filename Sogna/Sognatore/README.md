@@ -120,6 +120,7 @@ The **Guardian** ensures structural integrity using recursive SHA-256 validation
 ### Physis Docker Sandbox
 
 All task execution occurs within an isolated, state-of-the-art Docker container:
+
 - **Zero-Access**: Path confinement verified (cannot reach host system).
 - **Multi-Runtime**: Native support for Node.js, Python 3, and Rust.
 
