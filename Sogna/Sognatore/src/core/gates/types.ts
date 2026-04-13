@@ -22,4 +22,5 @@ export interface CouncilEvidence {
   testLogs?: string[];
   buildLog?: string;
   iterationCount: number;
+  actionPlan?: string;
 }

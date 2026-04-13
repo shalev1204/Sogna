@@ -257,6 +257,16 @@ Options to offer:
 
 > 🔴 **If you use shadcn without asking, you have FAILED.** Always ask first.
 
+### 💎 THE SOVEREIGN LIBRARY: UI-UX-PRO-MAX (MANDATORY)
+
+**You MUST use the `ui-ux-pro-max` search script for every design decision.**
+
+1.  **Search First**: Run `python toolkit/scripts/search.py` (or the internal `ui-ux-pro-max/scripts/search.py`) for the specific domain before proposing a design.
+2.  **Asset Priority**: Always use assets (SVG, Color Palettes, Font Pairings) defined in `Sogna/toolkit/shared/ui-ux-pro-max/`.
+3.  **Zero Placeholder Policy**: No `lorem ipsum` or placeholder images. Use `generate_image` or real, descriptive content.
+
+> 🔴 **VIOLATION:** Proposing a UI without citing a `ui-ux-pro-max` style or palette.
+
 ### 🚫 ABSOLUTE RULE: NO STANDARD/CLICHÉ DESIGNS
 
 **⛔ NEVER create designs that look like "every other website."**

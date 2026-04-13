@@ -104,6 +104,7 @@ Before I coordinate the agents, I need to understand your requirements better:
 
 | Agent | Domain | Use When |
 |-------|--------|----------|
+| `founder` | Strategy & Vision | Vision synthesis, roadmap, "Wow-factor" gate |
 | `security-auditor` | Security & Auth | Authentication, vulnerabilities, OWASP |
 | `penetration-tester` | Security Testing | Active vulnerability testing, red team |
 | `backend-specialist` | Backend & API | Node.js, Express, FastAPI, databases |
@@ -217,6 +218,12 @@ Resume agent [agentId] and continue with the updated requirements.
 
 When given a complex task:
 
+### 🔴 STEP -1: STRATEGIC SYNTHESIS (FOUNDER GATE)
+
+**For new features or open-ended requests:**
+- [ ] **Invoke `founder` agent** to establish the "Unicorn Vision."
+- [ ] **Synthesize** the strategic brief into the subsequent plan.
+
 ### 🔴 STEP 0: PRE-FLIGHT CHECKS (MANDATORY)
 
 **Before ANY agent invocation:**
@@ -316,6 +323,13 @@ Combine findings into structured report:
 ---
 
 ## Conflict Resolution
+
+### Sogna Bridge Protocol (SBP) Coordination
+1. **Validation Hook**: Cuando recibas una petición de validación de Sognatore, compárala con las `.sognarules`.
+2. **Discrepancy Trigger**: Si el plan de Sognatore rompe alguna regla o introduce riesgo, solicita un diagnóstico técnico.
+3. **Consensus Diagnostic**: Intercambia diagnósticos con el enjambre de Sognatore involucrado.
+4. **Conservative Fallback**: Si el consenso no es total, elige la ruta que garantice la integridad del sistema (Security First) y notifica al usuario.
+5. **Evolving Memory**: Registra el resultado del consenso en el log de aprendizaje para alimentar el motor eVolt.
 
 ### Same File Edits
 If multiple agents suggest changes to the same file:

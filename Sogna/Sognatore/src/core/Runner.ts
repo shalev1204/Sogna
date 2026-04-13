@@ -12,6 +12,7 @@ import { ContextManager } from './ContextManager.js';
 import { SwarmOrchestrator } from './SwarmOrchestrator.js';
 import { SkillRegistry } from './SkillRegistry.js';
 import { CouncilEvidence } from './gates/types.js';
+import { GitManager } from './GitManager.js';
 
 export class Runner {
   private stateStore: StateStore;
@@ -22,6 +23,7 @@ export class Runner {
   private orchestrator: SwarmOrchestrator;
   private skillRegistry: SkillRegistry;
   private sandbox: DockerSandbox;
+  private gitManager: GitManager;
   
   private stagnationCount: number = 0;
   private lastEvidenceHash: string = '';
@@ -35,6 +37,7 @@ export class Runner {
     this.orchestrator = SwarmOrchestrator.getInstance();
     this.skillRegistry = SkillRegistry.getInstance();
     this.sandbox = DockerSandbox.getInstance();
+    this.gitManager = new GitManager(baseDir, this.primaryProvider);
   }
 
   async start(prdPath?: string) {
@@ -102,6 +105,10 @@ export class Runner {
         if (passed) {
           console.log(chalk.bold.green(`\n[CONVERGENCE] High-Assurance Quality Consensus Reached.`));
           console.log(chalk.green(`Iteration: ${state.currentIteration} | All Gates Clear.`));
+          
+          // SBP: Auto-persist achievements
+          await this.gitManager.commitLog();
+          
           return;
         }
 
@@ -121,9 +128,19 @@ export class Runner {
     const relevantSkills = this.skillRegistry.findRelevantSkills(prd || '');
     const skillContext = relevantSkills.map(s => `SKILL: ${s.name}\n${s.content}`).join('\n\n');
 
+    // SBP: Load Strategic Intent if available
+    const intentPath = path.resolve(process.cwd(), '../memory/strategic_intent.md');
+    let strategicIntent = '';
+    if (fs.existsSync(intentPath)) {
+      strategicIntent = fs.readFileSync(intentPath, 'utf8');
+      console.log(chalk.blue(`  ${chalk.bold('🛡️')} Strategic Intent Ingested.`));
+    }
+
     const prompt = `
       You are the SOGNATORE SWARM ORCHESTRATOR (Windows Native). 
       Current Iteration: ${state.currentIteration}
+      
+      ${strategicIntent ? `### STRATEGIC INTENT (MENTOR GUIDANCE):\n${strategicIntent}\n` : ''}
       
       SKILL CONTEXT:
       ${skillContext}
@@ -136,6 +153,7 @@ export class Runner {
       
       Analyze the project and output a Parallel Execution Plan for the 41-agent swarm.
       Focus on specialized engineers (Frontend, Backend, Database, Security).
+      Ensure compliance with the STRATEGIC INTENT if provided.
     `;
 
     return await this.primaryProvider.invoke(prompt, { tier: 'planning' });

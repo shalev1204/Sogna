@@ -145,7 +145,9 @@ export class Guardian {
     const criticalPaths = [
       path.join(targetDir, 'src', 'core'),
       path.join(targetDir, 'resources', 'skills'),
-      path.join(targetDir, 'resources', 'config', 'agents.md')
+      path.join(targetDir, 'resources', 'config', 'agents.md'),
+      path.join(targetDir, '../toolkit/scripts'), // Mutual Integrity with the Brain
+      path.join(targetDir, '../.architectural_map.md') // Visibility integrity
     ];
 
     criticalPaths.forEach(p => {

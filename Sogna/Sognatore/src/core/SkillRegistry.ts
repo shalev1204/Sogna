@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import chalk from 'chalk';
 
 export interface Skill {
   name: string;
@@ -31,6 +32,17 @@ export class SkillRegistry {
   async reload() {
     if (!fs.existsSync(this.skillsPath)) return;
 
+    // Load Audit Registry (SBP: Reference root sovereign memory)
+    const registryPath = path.resolve(process.cwd(), '../../.sogna_memory/audit_registry.json');
+    let auditRegistry = { verified_knowledge: { skills: [] } };
+    if (fs.existsSync(registryPath)) {
+      try {
+        auditRegistry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      } catch (e) {
+        console.warn('[SKILL_REGISTRY] Failed to parse audit_registry.json. Defaulting to strict mode.');
+      }
+    }
+
     const getAllFiles = (dirPath: string, arrayOfFiles: string[] = []): string[] => {
       const files = fs.readdirSync(dirPath);
 
@@ -51,10 +63,20 @@ export class SkillRegistry {
     for (const fullPath of files) {
       const content = fs.readFileSync(fullPath, 'utf8');
       const fileBase = path.basename(fullPath, '.md');
+      const isQuarantined = fullPath.includes('quarantine');
       
       // Extraction of skill name: Priority to yaml frontmatter 'name:', then H1, then filename
       const nameMatch = content.match(/name:\s*(.*)/) || content.match(/^#\s*(.*)/m);
       const name = nameMatch ? nameMatch[1].trim() : fileBase;
+
+      // Verification Check
+      if (isQuarantined) {
+        const isVerified = (auditRegistry.verified_knowledge.skills as string[]).includes(name);
+        if (!isVerified) {
+          console.log(chalk.yellow(`[SKILL_REGISTRY] Skipping unverified quarantined skill: ${name}`));
+          continue;
+        }
+      }
       
       this.skills.set(name.toLowerCase(), {
         name,
@@ -64,7 +86,7 @@ export class SkillRegistry {
       });
     }
     
-    console.log(`[SKILL_REGISTRY] Hydrated ${this.skills.size} capabilities across all tiers (including eVolt).`);
+    console.log(`[SKILL_REGISTRY] Hydrated ${this.skills.size} capabilities. Audit-gate active.`);
   }
 
   /**

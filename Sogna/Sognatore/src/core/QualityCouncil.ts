@@ -3,6 +3,7 @@ import { StaticAnalysisGate } from './gates/StaticAnalysisGate.js';
 import { BlindReviewGate } from './gates/BlindReviewGate.js';
 import { AntiSycophancyGate } from './gates/AntiSycophancyGate.js';
 import { CompatibilityGate } from './gates/CompatibilityGate.js';
+import { ConsensusGate } from './gates/ConsensusGate.js';
 import { CouncilEvidence, GateResult } from './gates/types.js';
 import chalk from 'chalk';
 
@@ -12,6 +13,7 @@ export class QualityCouncil {
   constructor(private readonly cwd: string) {
     this.gates = [
       new CompatibilityGate(cwd),    // NEW: Gate 10 (High Priority)
+      new ConsensusGate(cwd),        // NEW: SBP Bridge
       new StaticAnalysisGate(cwd),
       new BlindReviewGate(cwd),
       new AntiSycophancyGate(cwd)    // NEW: Gate 7

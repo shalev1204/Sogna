@@ -6,12 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const require = createRequire(import.meta.url);
 
-const SOGNATORE_PATH = path.join(__dirname, 'Sogna', 'Sognatore');
+const SOGNATORE_PATH = path.join(__dirname, 'Sognatore');
 const NODE_MODULES = path.join(SOGNATORE_PATH, 'node_modules');
 
 // Importar directamente desde los entry points de los módulos ESM
-import chalk from './Sogna/Sognatore/node_modules/chalk/source/index.js';
-import { program } from './Sogna/Sognatore/node_modules/commander/esm.mjs';
+import chalk from './Sognatore/node_modules/chalk/source/index.js';
+import { program } from './Sognatore/node_modules/commander/esm.mjs';
 const fs = require(path.join(SOGNATORE_PATH, 'node_modules', 'fs-extra'));
 
 program
@@ -59,15 +59,15 @@ program
       await fs.copy(path.join(__dirname, 'sogna.js'), path.join(targetSognaDir, 'sogna.js'));
       await fs.copy(path.join(__dirname, 'sognatore.js'), path.join(targetSognaDir, 'sognatore.js'));
       
-      const sourceToolkit = path.join(__dirname, 'Sogna', 'Toolkit');
-      const targetToolkit = path.join(targetSognaDir, 'Toolkit');
+      const sourceToolkit = path.join(__dirname, 'toolkit');
+      const targetToolkit = path.join(targetSognaDir, 'toolkit');
       console.log(chalk.blue(`[SOGNA] 🛠️  Desplegando Antigravity Toolkit...`));
       await fs.copy(sourceToolkit, targetToolkit);
 
       // 5. Desplegar Identidad Soberana
       console.log(chalk.blue(`[SOGNA] 🧬 Inyectando Identidad Soberana Sogna...`));
-      await fs.copy(path.join(__dirname, '.sognarules'), path.join(targetDir, '.sognarules'));
-      await fs.copy(path.join(__dirname, '.agent-metadata'), path.join(targetDir, '.agent-metadata'));
+      await fs.copy(path.join(__dirname, 'config', 'sognarules.md'), path.join(targetSognaDir, 'config', 'sognarules.md'));
+      await fs.copy(path.join(__dirname, 'config', 'agent-metadata'), path.join(targetSognaDir, 'config', 'agent-metadata'));
 
       // 6. Crear package.json básico para el frontend si no existe
       const pkgPath = path.join(targetDir, 'package.json');
@@ -125,18 +125,18 @@ program
     }
 
     // Sovereign Identity Check
-    const sognarulesPath = path.join(process.cwd(), '.sognarules');
+    const sognarulesPath = path.join(process.cwd(), 'Sogna', 'config', 'sognarules.md');
     if (fs.existsSync(sognarulesPath)) {
-      console.log(chalk.green(`✔ Identidad Soberana (.sognarules) detectada.`));
+      console.log(chalk.green(`✔ Identidad Soberana (sognarules.md) detectada.`));
     } else {
-      console.log(chalk.yellow(`⚠️  Identidad Soberana (.sognarules) no encontrada.`));
+      console.log(chalk.yellow(`⚠️  Identidad Soberana (sognarules.md) no encontrada.`));
     }
 
-    const metadataPath = path.join(process.cwd(), '.agent-metadata');
+    const metadataPath = path.join(process.cwd(), 'Sogna', 'config', 'agent-metadata');
     if (fs.existsSync(metadataPath)) {
-      console.log(chalk.green(`✔ Metadatos de Agente (.agent-metadata) detectados.`));
+      console.log(chalk.green(`✔ Metadatos de Agente (agent-metadata) detectados.`));
     } else {
-      console.log(chalk.yellow(`⚠️  Carpeta de Metadatos (.agent-metadata) no encontrada.`));
+      console.log(chalk.yellow(`⚠️  Carpeta de Metadatos (agent-metadata) no encontrada.`));
     }
   });
 
