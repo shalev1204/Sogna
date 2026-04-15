@@ -20,6 +20,24 @@ export interface DoctorResult {
 
 export class Doctor {
   private toolResolver = new ToolResolver(process.cwd());
+  private readonly ALLOWED_COMMANDS = ['node', 'git', 'docker', 'python', 'npm', 'pnpm', 'npx'];
+
+  private async runSafeCommand(cmd: string, args: string[]): Promise<{ stdout: string }> {
+    if (!this.ALLOWED_COMMANDS.includes(cmd)) {
+      throw new Error(`[SECURITY] Execution blocked: Command "${cmd}" is not in the whitelist.`);
+    }
+
+    // Basic sanitization: No shell metacharacters in arguments
+    const shellMetachars = /[|&;$><`!\\]/;
+    for (const arg of args) {
+      if (shellMetachars.test(arg)) {
+        throw new Error(`[SECURITY] Execution blocked: Malicious characters detected in argument "${arg}".`);
+      }
+    }
+
+    const resolved = this.toolResolver.resolve(cmd);
+    return await execa(resolved, args);
+  }
 
   async checkAll(): Promise<DoctorResult[]> {
     const results: DoctorResult[] = [];
@@ -83,7 +101,7 @@ export class Doctor {
 
     // 3. Docker Sandbox Image
     try {
-      const { stdout } = await execa('docker', ['images', 'asklokesh/loki-mode:latest', '--format', '{{.Repository}}']);
+      const { stdout } = await this.runSafeCommand('docker', ['images', 'asklokesh/loki-mode:latest', '--format', '{{.Repository}}']);
       results.push({
         name: 'Docker Sandbox Image',
         status: stdout.includes('loki-mode') ? 'PASS' : 'WARN',
@@ -92,7 +110,7 @@ export class Doctor {
         fixLabel: 'Download Sandbox Image',
         fix: async () => {
           console.log(chalk.blue('  - Pulling asklokesh/loki-mode:latest...'));
-          await execa('docker', ['pull', 'asklokesh/loki-mode:latest']);
+          await this.runSafeCommand('docker', ['pull', 'asklokesh/loki-mode:latest']);
         }
       });
     } catch (e) {
@@ -261,8 +279,7 @@ export class Doctor {
     
     if (isPresent) {
       try {
-        const resolved = this.toolResolver.resolve(cmd);
-        const { stdout } = await execa(resolved, ['--version']);
+        const { stdout } = await this.runSafeCommand(cmd, ['--version']);
         return {
           name,
           status: 'PASS',

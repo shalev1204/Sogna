@@ -1,0 +1,1 @@
+# 🛡️ Sogna Threat Intelligence`n`nEste es el registro evolutivo de amenazas detectadas y neutralizadas por el Sentinel.`n`n## Amenazas Conocidas`n*Buscando patrones...*

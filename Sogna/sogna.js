@@ -108,35 +108,36 @@ program
 program
   .command('doctor')
   .description('Check health of the Sogna ecosystem')
-  .action(() => {
+  .option('--secure', 'Run deep security and vulnerability scan')
+  .action(async (options) => {
+    const { execSync } = require('child_process');
     console.log(chalk.cyan(`\n[SOGNA] Diagnosticando ecosistema...`));
-    const sognatorePath = path.join(process.cwd(), 'Sogna', 'Sognatore');
-    if (fs.existsSync(sognatorePath)) {
-      console.log(chalk.green(`✔ Motor Sognatore detectado.`));
-    } else {
-      console.log(chalk.red(`✘ Motor Sognatore NO detectado en Sogna/Sognatore.`));
-    }
+    
+    // Core Checks
+    const checkFile = (name, p) => {
+      if (fs.existsSync(p)) {
+        console.log(chalk.green(`✔ ${name} detectado.`));
+        return true;
+      } else {
+        console.log(chalk.red(`✘ ${name} NO detectado.`));
+        return false;
+      }
+    };
 
-    const toolkitPath = path.join(process.cwd(), 'Sogna', 'Toolkit');
-    if (fs.existsSync(toolkitPath)) {
-      console.log(chalk.green(`✔ Toolkit Antigravity detectado.`));
-    } else {
-      console.log(chalk.red(`✘ Toolkit Antigravity NO detectado.`));
-    }
+    checkFile('Motor Sognatore', path.join(__dirname, 'Sognatore'));
+    checkFile('Toolkit Antigravity', path.join(__dirname, 'toolkit'));
+    checkFile('Identidad Soberana', path.join(__dirname, 'config', 'sognarules.md'));
+    checkFile('Metadatos de Agente', path.join(__dirname, 'config', 'agent-metadata'));
 
-    // Sovereign Identity Check
-    const sognarulesPath = path.join(process.cwd(), 'Sogna', 'config', 'sognarules.md');
-    if (fs.existsSync(sognarulesPath)) {
-      console.log(chalk.green(`✔ Identidad Soberana (sognarules.md) detectada.`));
-    } else {
-      console.log(chalk.yellow(`⚠️  Identidad Soberana (sognarules.md) no encontrada.`));
-    }
-
-    const metadataPath = path.join(process.cwd(), 'Sogna', 'config', 'agent-metadata');
-    if (fs.existsSync(metadataPath)) {
-      console.log(chalk.green(`✔ Metadatos de Agente (agent-metadata) detectados.`));
-    } else {
-      console.log(chalk.yellow(`⚠️  Carpeta de Metadatos (agent-metadata) no encontrada.`));
+    if (options.secure) {
+      console.log(chalk.magenta(`\n[SENTINEL] 🛡️  Iniciando Auditoría de Seguridad Profunda...`));
+      try {
+        execSync(`node "${path.join(__dirname, 'sogna.js')}" sentinel sweep`, { stdio: 'inherit' });
+        console.log(chalk.green(`\n✔ Diagnóstico Secure completado: Ecosistema Blindado.`));
+      } catch (e) {
+        console.log(chalk.red(`\n✘ VETO DE SEGURIDAD: Se detectaron vulnerabilidades críticas en el ecosistema.`));
+        process.exit(1);
+      }
     }
   });
 
@@ -152,13 +153,98 @@ program
 
     console.log(chalk.magenta(`\n[SOGNA] 🛠️  Explorando Antigravity Toolkit...`));
     
-    const categories = ['Agents', 'Rules', 'Workflows', 'Skills'];
+    const categories = ['Agents', 'Rules', 'Workflows', 'Skills', 'Engines'];
     for (const cat of categories) {
       const catPath = path.join(toolkitPath, cat);
       if (fs.existsSync(catPath)) {
         const files = await fs.readdir(catPath);
         console.log(chalk.cyan(`\n🔹 ${cat}:`));
         files.forEach(f => console.log(`  - ${f}`));
+      }
+    }
+  });
+
+program
+  .command('predatore')
+  .description('Despertar al Sogna Predatore para auditoría ofensiva (Zen Mode)')
+  .argument('[command]', 'Comando para Predatore (start, stop, status, logs, workspaces)', 'start')
+  .option('-u, --url <url>', 'URL del objetivo a auditar')
+  .option('-r, --repo <path>', 'Ruta al repositorio del objetivo')
+  .action(async (cmd, options) => {
+    const { spawn } = require('child_process');
+    const predatorePath = path.join(__dirname, 'toolkit', 'engines', 'predatore');
+    const memoryPath = path.join(__dirname, 'memory', 'security');
+
+    console.log(chalk.red(`\n[SOGNA PREDATORE] 🦅 Iniciando incursión ofensiva...`));
+
+    // Asegurar directorio de memoria
+    await fs.ensureDir(memoryPath);
+
+    const args = process.argv.slice(3); // Capturar todos los argumentos después de 'predatore'
+    
+    const child = spawn('node', [path.join(predatorePath, 'predatore'), ...args], {
+      cwd: predatorePath,
+      stdio: 'inherit',
+      env: { ...process.env, PREDATORE_LOCAL: '1', SOGNA_ZEN: 'true' }
+    });
+
+    child.on('exit', async (code) => {
+      if (code === 0) {
+        console.log(chalk.green(`\n✔ Incursión completada con éxito.`));
+        // Sincronización de reportes a memoria
+        console.log(chalk.blue(`[SOGNA] 📥 Sincronizando hallazgos con Sentinel Memory...`));
+        try {
+          const workspacesPath = path.join(predatorePath, 'workspaces');
+          if (fs.existsSync(workspacesPath)) {
+            const sessions = await fs.readdir(workspacesPath);
+            for (const session of sessions) {
+              const deliverPath = path.join(workspacesPath, session, 'deliverables');
+              if (fs.existsSync(deliverPath)) {
+                await fs.copy(deliverPath, memoryPath, { overwrite: true });
+              }
+            }
+            console.log(chalk.green(`✔ Hallazgos integrados en Sogna/memory/security.`));
+          }
+        } catch (err) {
+          console.error(chalk.yellow(`⚠️  Error al sincronizar reportes: ${err.message}`));
+        }
+      } else {
+        console.log(chalk.red(`\n✘ Predatore terminó con código de error ${code}.`));
+      }
+    });
+  });
+
+program
+  .command('sentinel')
+  .description('Despertar a Sogna Sentinel para escudo defensivo (The Tribunal)')
+  .argument('[command]', 'Comando defensivo (sweep)', 'sweep')
+  .action(async (cmd) => {
+    const { execSync } = require('child_process');
+    console.log(chalk.blue(`\n[SENTINEL ENGINE] 🛡️  Iniciando protocolo defensivo...`));
+    
+    if (cmd === 'sweep') {
+      console.log(chalk.cyan(`[SWEEP] Iniciando escaneo super-masivo del Monorepo Soberano...`));
+      console.log(chalk.gray(`(Buscando inyecciones AST, exposición de secretos, y cadenas de suministro corruptas)`));
+      
+      try {
+        // Obtenemos todos los archivos rastreados por Git en el monorepo
+        const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
+          .split('\n')
+          .filter(f => f && (f.endsWith('.ts') || f.endsWith('.js') || f.endsWith('package.json')));
+        
+        console.log(chalk.gray(`Analizando ${trackedFiles.length} archivos críticos...`));
+        
+        // Ejecutamos el tribunal sobre la lista de archivos
+        execSync(`node toolkit/engines/sentinel/bin/sentinel-veto.js ${trackedFiles.join(' ')}`, { 
+          stdio: 'inherit', 
+          cwd: process.cwd(), 
+          env: process.env 
+        });
+        
+        console.log(chalk.green(`\n✔ [CLEAN] Escaneo exhaustivo completado. El monorepo está blindado.`));
+      } catch (err) {
+        console.log(chalk.red(`\n✘ [VETO SWEEP INTERVENTION] Se detectaron vulnerabilidades. Sentinel ha registrado el asalto en THREAD_INTEL.md.`));
+        process.exit(1);
       }
     }
   });

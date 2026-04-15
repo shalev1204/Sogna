@@ -44,7 +44,6 @@
     "src/"
   ],
   "scripts": {
-    "postinstall": "node bin/postinstall.js",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "tsc && node --test dist/tests/**/*.test.js",

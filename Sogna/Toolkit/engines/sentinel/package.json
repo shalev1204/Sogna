@@ -1,0 +1,10 @@
+{
+  "name": "sentinel-engine",
+  "private": true,
+  "description": "Sogna's Sentinel Engine",
+  "scripts": {
+    "build": "turbo run build",
+    "check": "turbo run check",
+    "lint": "turbo run lint"
+  }
+}

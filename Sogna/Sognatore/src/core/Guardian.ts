@@ -23,11 +23,20 @@ export class Guardian {
     // High-Assurance Envar Discovery
     EnvOracle.load();
     this.SECRET_KEY = process.env.GUARDIAN_SECRET || '';
-    if (!this.SECRET_KEY || this.SECRET_KEY.length < 12) {
-      console.warn(chalk.red('\n[SECURITY_ALERT] GUARDIAN_SECRET is missing or too weak!'));
-      console.warn(chalk.yellow('Please set a strong GUARDIAN_SECRET in your .env file.'));
-      // Fallback for stabilization phase, but mark as "LOW_ASSURANCE"
-      this.SECRET_KEY = this.SECRET_KEY || 'sognatore_unsecured_stabilization_key_2026';
+    
+    // Strict Validation: No more hardcoded fallbacks in Sovereign Mode
+    if (!this.SECRET_KEY || this.SECRET_KEY.length < 32) {
+      console.error(chalk.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing, too short, or compromised!'));
+      console.error(chalk.yellow('Sognatore requires a 32+ character GUARDIAN_SECRET to maintain Sovereign Integrity.'));
+      console.error(chalk.dim('Please update your .env file immediately. System is running in Restricted/Fail-Safe mode.'));
+      
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('Sovereign Security Breach: Insufficient Guardian Secret in Production.');
+      }
+      
+      // Fail-Safe for construction phase: Use a temporary session-bound key if absolutely necessary, 
+      // but warn loudly and do not persist data with it if possible.
+      this.SECRET_KEY = crypto.randomBytes(32).toString('hex');
     }
   }
 
@@ -84,10 +93,16 @@ export class Guardian {
       /crypto/i, /auth/i, /payment/i, /pricing/i, /formula/i, /strategy/i,
       /db_conn/i, /apikey/i, /credential/i, /private/i,
       /\(\s*.*\s*\)\s*=>\s*\{.*[+\-*/].*\}/, // Heuristic for arrow functions with math logic
-      /class\s+\w+\s+\{.*(calc|eval|process|secure).*\}/is // Heuristic for logic classes
+      /class\s+\w+\s+\{.*(calc|eval|process|secure).*\}/is, // Heuristic for logic classes
+      /[a-f0-9]{32,}/i, // Long hex strings (potential hashes/keys)
+      /(?:[A-Za-z0-9+/]{4}){10,}(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?/ // Base64 blobs
     ];
 
-    return sensitivePatterns.some(pattern => pattern.test(code));
+    // Additional Entropy Heuristic: High density of non-prose characters
+    const nonAlphaNumeric = (code.match(/[^a-zA-Z0-9\s]/g) || []).length;
+    const entropyScore = nonAlphaNumeric / code.length;
+    
+    return sensitivePatterns.some(pattern => pattern.test(code)) || (entropyScore > 0.4 && code.length > 100);
   }
 
   /**

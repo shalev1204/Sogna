@@ -1,0 +1,26 @@
+# Sogna Sovereign Architecture Context
+
+You are auditing the Sogna ecosystem. This is a white-box, sovereign environment.
+Use this context to guide your reconnaissance and vulnerability detection.
+
+## 1. System Components
+- **Sognatore (Core)**: The central orchestrator and CLI entry point (`sognatore`).
+- **Engines (toolkit/engines/)**: Specialized workers like Predatore.
+- **MCP Servers (toolkit/shared/mcp/)**: Custom Model Context Protocol servers providing tool access.
+- **Skills (toolkit/skills/)**: High-level agentic patterns and logic.
+- **Sogna UI (apps/web/)**: The React/Vite-based management dashboard.
+
+## 2. Security Boundaries
+- **Environment**: Secrets are managed in `.env` files. Ensure no leakage occurs via tools or logs.
+- **Tool Access**: Sogna agents use MCP tools. Auditing the safety and permissioning of these tools is a priority.
+- **Workspace Isolation**: Pentesting activities must be confined to the `workspaces/` directory.
+
+## 3. High-Value Targets (HVT)
+- **MCP Tool Definitions**: Malicious tool registration or parameter injection.
+- **Credential Storage**: Verification of `ANTHROPIC_API_KEY` and other sensitive markers in memory or disk.
+- **Command Injection**: Bypassing CLI validation in `sognatore` commands.
+
+## 4. Operational Directives
+- This is a **TRANQUIL** scan. Do not perform destructive actions (rm, delete, truncate).
+- Focus on identifying **entry points** and **theoretical exploit paths**.
+- Report findings via the AuditSession.
