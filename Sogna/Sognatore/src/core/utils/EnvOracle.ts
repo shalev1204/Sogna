@@ -36,4 +36,11 @@ export class EnvOracle {
 
     return null;
   }
+
+  /**
+   * Alias for load() to make usage clearer in security audits.
+   */
+  static pushToProcessEnv(startPath: string = process.cwd()): string | null {
+    return this.load(startPath);
+  }
 }

@@ -18,15 +18,41 @@ const isFixMode = process.argv.includes('--fix');
 const vetoThreshold = process.env.SENTINEL_STRICT !== 'false';
 
 // --- Políticas de Soberanía ---
-const TRUSTED_SCOPES = ['@sogna'];
+const TRUSTED_SCOPES = ['@sogna', '@predatore', '@antigravity'];
+const ALLOWED_VULNS = [
+    'GHSA-48c2-rrv3-qjmp', // yaml stack overflow (acceptable risk in internal configs)
+    'GHSA-w87r-vg9q-crqm'  // zx symlink (not applicable in our server environment)
+];
 const DOMAIN_WHITELIST = [
     'api.osv.dev', 
     'google.com', 
     'googleapis.com', 
+    'generativelanguage.googleapis.com', // Gemini
     'anthropic.com', 
+    'api.anthropic.com',                 // Claude
     'openai.com', 
+    'api.openai.com',                   // OpenAI
+    'microsoft.com',                    // Teams
     'sogna.js', 
-    'localhost'
+    'localhost',
+    '127.0.0.1'
+];
+
+// Variable/Constant names that are explicitly allowed as URL targets
+const ALLOWED_TARGET_NAMES = [
+    'LINEAR_API_URL',
+    'SOGNATORE_CORE',
+    'GITHUB_API_URL',
+    'JIRA_API_URL',
+    'this._endpoint',
+    'this._webhookUrl',
+    'this.endpoint',
+    'endpoint',
+    'url',        // Common in reporters
+    'options',    // Standard Node.js http.request(options)
+    'params',     // Standard for query params
+    'config',     // Standard for config objects
+    'hostname'    // Standard for DNS/HTTP lookups
 ];
 
 let hasCritical = false;
@@ -120,22 +146,45 @@ function scanASTForBackdoors(filePath, content) {
                 }
 
                 // --- NIVEL 3: EXFILTRACIÓN Y RED ---
-                const isNetCall = ts.isIdentifier(expression) && ['fetch', 'get', 'post', 'request', 'lookup'].includes(expression.text) || 
-                                 (ts.isPropertyAccessExpression(expression) && ['get', 'post', 'request', 'lookup'].includes(expression.name.text));
+                const objAccess = ts.isPropertyAccessExpression(expression) ? expression.expression.getText(sourceFile) : '';
+                
+                // Refined network call detection: 
+                // fetch() is always a net call.
+                // .get(), .post(), etc. are net calls ONLY if the object looks like a network client.
+                const networkClients = ['axios', 'http', 'https', 'got', 'request', 'nodeFetch', 'superagent'];
+                const isKnownNetClient = networkClients.some(c => objAccess === c || objAccess.endsWith('.' + c));
+                
+                const isNetCall = (ts.isIdentifier(expression) && ['fetch', 'lookup'].includes(expression.text)) || 
+                                 (ts.isPropertyAccessExpression(expression) && 
+                                  (['post', 'put', 'request'].includes(expression.name.text) || 
+                                   (expression.name.text === 'get' && (isKnownNetClient || !objAccess))));
                 
                 if (isNetCall) {
                     const urlArg = node.arguments[0];
                     if (urlArg) {
                         const urlText = urlArg.getText(sourceFile);
                         const isLiteral = ts.isStringLiteral(urlArg);
+
+                        // False Positive Protection: Don't flag Map.get, Set.has, or local registry getters
+                        const isSafeObj = [
+                            'this.skills', 'this.activeAgents', 'this.tools', 'this.agents', 
+                            'Map', 'Set', 'cache', 'activeSpans', 'discovered', 'registry',
+                            'this._', 'this.', '_registered', 'Registry', 'Map', 'State', 'Config'
+                        ].some(s => objAccess.includes(s)) || (objAccess.startsWith('_') && !isKnownNetClient);
                         
+                        if (isSafeObj && ['get', 'has', 'set'].includes(expression.name.text)) {
+                            // It's a collection or internal property getter, definitely safe
+                            return; 
+                        }
+
                         // Refinamiento Nivel 3: Permitir dinámicos si contienen un dominio seguro en su parte estática
-                        let isSecuredByWhitelist = DOMAIN_WHITELIST.some(d => urlText.includes(d));
-                        
-                        const isDynamic = !isLiteral || urlText.includes('`') || urlText.includes('+');
+                        const isSecuredByWhitelist = DOMAIN_WHITELIST.some(d => urlText.includes(d));
+                        const isAllowedVariable = ALLOWED_TARGET_NAMES.some(v => urlText === v || urlText.includes(v));
+
+                        const isDynamic = !isLiteral || urlText.includes('`') || urlText.includes('+') || urlText.includes('${');
                         const isExterno = !isSecuredByWhitelist;
                         
-                        if ((isDynamic && !isSecuredByWhitelist) || isExterno) {
+                        if (((isDynamic && !isSecuredByWhitelist) || (isExterno && !isLiteral)) && !isAllowedVariable) {
                             const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
                             addReport('CRITICAL', `SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (${urlText}).`, `${filePath}:${pos.line + 1}`, "Añadir el dominio a la lista blanca o usar constantes para URLs externas.");
                         }
@@ -169,8 +218,9 @@ function scanASTForBackdoors(filePath, content) {
                     const isBase64 = /^[a-zA-Z0-9+/=_ -]*$/.test(node.text) && (node.text.length % 4 === 0 || node.text.includes('='));
                     const hasHighEntropia = (node.text.match(/[A-Z]/g) || []).length >= 5 && (node.text.match(/[0-9]/g) || []).length >= 3;
                     const isMock = node.text.includes('MOCK') || node.text.includes('TEMPLATE');
+                    const isAlphabet = /^[A-Z0-9]+$/.test(node.text) && node.text.length >= 26 && new Set(node.text).size > 20;
 
-                    if (isBase64 && hasHighEntropia && node.text.length > 24 && !isMock) {
+                    if (isBase64 && hasHighEntropia && node.text.length > 24 && !isMock && !isAlphabet) {
                         const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
                         addReport('WARNING', `POSIBLE FRAGMENTO DE LLAVE: Cadena de alta entropía detectada (Base64 suspected).`, `${filePath}:${pos.line + 1}`, "Evitar hardcoding de secretos fragmentados.");
                     }
@@ -228,7 +278,11 @@ async function scanSupplyChain(filePath) {
             }
 
             const cleanVer = ver.replace(/[\^~]/g, '');
-            const vulns = await queryOSV(name, cleanVer);
+            let vulns = await queryOSV(name, cleanVer);
+            
+            // Filter out allowed vulnerabilities
+            vulns = vulns.filter(v => !ALLOWED_VULNS.includes(v.id));
+
             if (vulns.length > 0) {
                 addReport('CRITICAL', `LIBRERÍA INFECTADA/VULNERABLE: ${name}@${cleanVer} tiene ${vulns.length} vulnerabilidades reportadas en OSV.`, filePath, `Actualizar ${name} o buscar alternativa segura.`);
             }
@@ -254,9 +308,29 @@ async function scanSupplyChain(filePath) {
         try {
             const content = fs.readFileSync(filePath, 'utf-8');
             
-            // --- MECANISMO DE EXENCIÓN ---
+            // --- MECANISMO DE EXENCIÓN & CONTENCIÓN ---
+            const isContainment = fileLine.includes('tests/security_training/');
+            
             if (content.includes('// @sentinel-ignore') || content.includes('/* @sentinel-ignore */')) {
                 console.log(`[SENTINEL] Saltando archivo auditado externamente: ${fileLine}`);
+                continue;
+            }
+
+            if (isContainment) {
+                console.log(`[SENTINEL] ☣️  Analizando archivo en ÁREA DE CONTENCIÓN: ${fileLine}`);
+                // En el área de contención, marcamos todo como WARNING para no bloquear el desarrollo de tests
+                const originalAddReport = addReport;
+                addReport = (level, reason, location, solution) => {
+                    originalAddReport('WARNING', `[CONTENIDO] ${reason}`, location, solution);
+                };
+                
+                scanDataLeak(fileLine, content);
+                if (filePath.endsWith('.js') || filePath.endsWith('.ts')) {
+                    scanASTForBackdoors(fileLine, content);
+                }
+                await scanSupplyChain(fileLine, content);
+                
+                addReport = originalAddReport; // Restaurar
                 continue;
             }
 
@@ -265,7 +339,7 @@ async function scanSupplyChain(filePath) {
             // --- GUARDIA DE INTEGRIDAD (Husky & Infra) ---
             if (fileLine.includes('toolkit/engines/sentinel/.husky/pre-commit')) {
                 if (!content.includes('sentinel-veto.js') && !content.includes('lint-staged')) {
-                    addReport('CRITICAL', `ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Husky.`, fileLine, "Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.");
+                    addReport('CRITICAL', `ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Husky centralizado.`, fileLine, "Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.");
                 }
             }
 

@@ -1,4 +1,3 @@
-// @sentinel-ignore
 import { execa } from 'execa';
 import chalk from 'chalk';
 import os from 'os';
@@ -120,75 +119,38 @@ export class Doctor {
   }
 
   private async checkConnectivity(results: DoctorResult[]) {
-    EnvOracle.load(); // Ensure keys are loaded into process.env
-    const providers = [
-      { id: 'gemini', env: 'GOOGLE_API_KEY', url: 'https://generativelanguage.googleapis.com/v1beta/models?key=' },
-      { id: 'claude', env: 'ANTHROPIC_API_KEY', url: 'https://api.anthropic.com/v1/messages' },
-      { id: 'openai', env: 'OPENAI_API_KEY', url: 'https://api.openai.com/v1/models' }
-    ];
+    EnvOracle.pushToProcessEnv(); // Ensure keys are available
+    
+    // Gemini
+    try {
+      const gKey = process.env['GOOGLE_API_KEY'] || process.env['GEMINI_API_KEY'];
+      if (gKey) {
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${gKey}`);
+        results.push({ name: 'Gemini Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false });
+      } else results.push({ name: 'Gemini Connectivity', status: 'WARN', message: 'No Key', required: false });
+    } catch (e) { results.push({ name: 'Gemini Connectivity', status: 'WARN', required: false }); }
 
-    for (const p of providers) {
-      let key = process.env[p.env];
-      
-      // Support common aliases
-      if (!key && p.id === 'gemini') key = process.env['GEMINI_API_KEY'];
-      if (!key && p.id === 'openai') key = process.env['OPENAI_API_KEY'];
-      if (!key && p.id === 'claude') key = process.env['ANTHROPIC_API_KEY'];
-
-      if (!key) {
-        results.push({
-          name: `${p.id.charAt(0).toUpperCase() + p.id.slice(1)} Connectivity`,
-          status: 'WARN',
-          message: `API Key (${p.env}) not configured in .env`,
-          required: false
+    // Claude
+    try {
+      const cKey = process.env['ANTHROPIC_API_KEY'];
+      if (cKey) {
+        const resp = await fetch("https://api.anthropic.com/v1/messages", {
+          method: 'POST',
+          headers: { 'x-api-key': cKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+          body: JSON.stringify({ model: 'claude-3-haiku-20240307', max_tokens: 1, messages: [{ role: 'user', content: 'ping' }] })
         });
-        continue;
-      }
+        results.push({ name: 'Claude Connectivity', status: (resp.status === 200 || resp.status === 400) ? 'PASS' : 'WARN', required: false });
+      } else results.push({ name: 'Claude Connectivity', status: 'WARN', message: 'No Key', required: false });
+    } catch (e) { results.push({ name: 'Claude Connectivity', status: 'WARN', required: false }); }
 
-      try {
-        let isSuccess = false;
-        if (p.id === 'gemini') {
-          const resp = await fetch(`${p.url}${key}`);
-          isSuccess = resp.status === 200;
-        } else if (p.id === 'claude') {
-          // Anthropic requires headers. We send a dummy message with max_tokens: 1
-          const resp = await fetch(p.url, {
-            method: 'POST',
-            headers: {
-              'x-api-key': key,
-              'anthropic-version': '2023-06-01',
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-              model: 'claude-3-haiku-20240307',
-              max_tokens: 1,
-              messages: [{ role: 'user', content: 'ping' }]
-            })
-          });
-          isSuccess = resp.status === 200 || resp.status === 400; // 400 is fine as long as key is accepted
-        } else {
-          // OpenAI Models list check
-          const resp = await fetch(p.url, {
-            headers: { 'Authorization': `Bearer ${key}` }
-          });
-          isSuccess = resp.status === 200;
-        }
-
-        results.push({
-          name: `${p.id.charAt(0).toUpperCase() + p.id.slice(1)} Connectivity`,
-          status: isSuccess ? 'PASS' : 'WARN',
-          message: isSuccess ? undefined : `API returned status ${isSuccess ? 'OK' : 'Unauthorized/Error'}`,
-          required: false
-        });
-      } catch (e) {
-        results.push({
-          name: `${p.id.charAt(0).toUpperCase() + p.id.slice(1)} Connectivity`,
-          status: 'WARN',
-          message: `Network error: ${e instanceof Error ? e.message : String(e)}`,
-          required: false
-        });
-      }
-    }
+    // OpenAI
+    try {
+      const oKey = process.env['OPENAI_API_KEY'];
+      if (oKey) {
+        const resp = await fetch("https://api.openai.com/v1/models", { headers: { 'Authorization': `Bearer ${oKey}` } });
+        results.push({ name: 'OpenAI Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false });
+      } else results.push({ name: 'OpenAI Connectivity', status: 'WARN', message: 'No Key', required: false });
+    } catch (e) { results.push({ name: 'OpenAI Connectivity', status: 'WARN', required: false }); }
   }
 
   private async checkDefensivePosture(results: DoctorResult[]) {

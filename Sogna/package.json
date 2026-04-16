@@ -9,7 +9,9 @@
     "check": "turbo run check",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
-    "prepare": "cd .. && husky Sogna/toolkit/engines/sentinel/.husky"
+    "prepare": "cd .. && husky Sogna/toolkit/engines/sentinel/.husky",
+    "sogna": "node toolkit/bin/sogna.js",
+    "sognatore": "node toolkit/bin/sognatore.js"
   },
   "packageManager": "pnpm@10.33.0",
   "engines": {

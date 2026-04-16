@@ -6,12 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const require = createRequire(import.meta.url);
 
-const SOGNATORE_PATH = path.join(__dirname, 'Sognatore');
+const SOGNATORE_PATH = path.join(__dirname, '..', '..', 'Sognatore');
 const NODE_MODULES = path.join(SOGNATORE_PATH, 'node_modules');
 
 // Importar directamente desde los entry points de los módulos ESM
-import chalk from './Sognatore/node_modules/chalk/source/index.js';
-import { program } from './Sognatore/node_modules/commander/esm.mjs';
+import chalk from '../../Sognatore/node_modules/chalk/source/index.js';
+import { program } from '../../Sognatore/node_modules/commander/esm.mjs';
 const fs = require(path.join(SOGNATORE_PATH, 'node_modules', 'fs-extra'));
 
 program
@@ -44,9 +44,10 @@ program
       
       // Copiar TODO el contenido de la carpeta Sogna actual al destino
       // Excluimos node_modules, .git y archivos de estado temporal
-      await fs.copy(__dirname, targetSognaDir, {
+      const SOGNA_ROOT = path.join(__dirname, '..', '..');
+      await fs.copy(SOGNA_ROOT, targetSognaDir, {
         filter: (src) => {
-          const relative = path.relative(__dirname, src);
+          const relative = path.relative(SOGNA_ROOT, src);
           return !relative.includes('node_modules') && 
                  !relative.includes('.git') && 
                  !relative.includes('.turbo') &&
@@ -71,7 +72,7 @@ program
       try {
         execSync('git init', { cwd: targetDir });
         // Asegurar que el .gitignore esté en la raíz del nuevo proyecto
-        await fs.copy(path.join(__dirname, '..', '.gitignore'), path.join(targetDir, '.gitignore'));
+        await fs.copy(path.join(__dirname, '..', '..', '.gitignore'), path.join(targetDir, '.gitignore'));
       } catch (e) {
         console.warn(chalk.yellow(`[SOGNA] ⚠️  No se pudo inicializar git. Asegúrate de tenerlo instalado.`));
       }
@@ -146,10 +147,11 @@ program
       }
     };
 
-    checkFile('Motor Sognatore', path.join(__dirname, 'Sognatore'));
-    checkFile('Toolkit Antigravity', path.join(__dirname, 'toolkit'));
-    checkFile('Identidad Soberana', path.join(__dirname, 'config', 'sognarules.md'));
-    checkFile('Metadatos de Agente', path.join(__dirname, 'config', 'agent-metadata'));
+    const SOGNA_ROOT_CHECK = path.join(__dirname, '..', '..');
+    checkFile('Motor Sognatore', path.join(SOGNA_ROOT_CHECK, 'Sognatore'));
+    checkFile('Toolkit Antigravity', path.join(SOGNA_ROOT_CHECK, 'toolkit'));
+    checkFile('Identidad Soberana', path.join(SOGNA_ROOT_CHECK, 'config', 'sognarules.md'));
+    checkFile('Metadatos de Agente', path.join(SOGNA_ROOT_CHECK, 'config', 'agent-metadata'));
 
     if (options.secure) {
       console.log(chalk.magenta(`\n[SENTINEL] 🛡️  Iniciando Auditoría de Seguridad Profunda...`));
@@ -194,8 +196,8 @@ program
   .option('-r, --repo <path>', 'Ruta al repositorio del objetivo')
   .action(async (cmd, options) => {
     const { spawn } = require('child_process');
-    const predatorePath = path.join(__dirname, 'toolkit', 'engines', 'predatore');
-    const memoryPath = path.join(__dirname, 'memory', 'security');
+    const predatorePath = path.join(__dirname, '..', 'engines', 'predatore');
+    const memoryPath = path.join(__dirname, '..', '..', 'memory', 'security');
 
     console.log(chalk.red(`\n[SOGNA PREDATORE] 🦅 Iniciando incursión ofensiva...`));
 
@@ -250,25 +252,52 @@ program
       
       try {
         // Obtenemos todos los archivos rastreados por Git en el monorepo
-        const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
+        const allTracked = execSync('git ls-files', { encoding: 'utf8' })
           .split('\n')
           .filter(f => f && (f.endsWith('.ts') || f.endsWith('.js') || f.endsWith('package.json')));
         
-        console.log(chalk.gray(`Analizando ${trackedFiles.length} archivos críticos...`));
+        console.log(chalk.gray(`Analizando ${allTracked.length} archivos críticos en lotes...`));
         
-        // Ejecutamos el tribunal sobre la lista de archivos
-        execSync(`node toolkit/engines/sentinel/bin/sentinel-veto.js ${trackedFiles.join(' ')}`, { 
-          stdio: 'inherit', 
-          cwd: process.cwd(), 
-          env: process.env 
-        });
+        // Chunking para evitar errores de longitud de comando en Windows (Límite ~8191 caracteres)
+        const CHUNK_SIZE = 40; 
+        for (let i = 0; i < allTracked.length; i += CHUNK_SIZE) {
+          const chunk = allTracked.slice(i, i + CHUNK_SIZE);
+          const batchNum = Math.floor(i / CHUNK_SIZE) + 1;
+          const totalBatches = Math.ceil(allTracked.length / CHUNK_SIZE);
+          
+          process.stdout.write(chalk.gray(`  [Batch ${batchNum}/${totalBatches}] Procesando... `));
+          
+          try {
+            execSync(`node toolkit/engines/sentinel/bin/sentinel-veto.js ${chunk.join(' ')}`, { 
+              stdio: ['ignore', 'ignore', 'pipe'], // Ignoramos stdout/stdin, capturamos stderr
+              cwd: process.cwd(), 
+              env: process.env 
+            });
+            process.stdout.write(chalk.green(`OK\n`));
+          } catch (err) {
+            process.stdout.write(chalk.red(`VETO\n`));
+            // Si el error contiene el reporte de Sentinel, lo mostramos
+            const stderr = err.stderr ? err.stderr.toString() : '';
+            if (stderr.includes('SENTINEL')) {
+               console.error(stderr);
+            } else {
+               console.error(chalk.red(`Error en lote ${batchNum}: ${err.message}`));
+            }
+            // En caso de error crítico, nos detenemos si Sentinel así lo indica (exit code 1)
+            if (err.status === 1) {
+              console.log(chalk.red(`\n✘ [VETO SWEEP INTERVENTION] Se detectaron vulnerabilidades críticas. Abortando.`));
+              process.exit(1);
+            }
+          }
+        }
         
         console.log(chalk.green(`\n✔ [CLEAN] Escaneo exhaustivo completado. El monorepo está blindado.`));
       } catch (err) {
-        console.log(chalk.red(`\n✘ [VETO SWEEP INTERVENTION] Se detectaron vulnerabilidades. Sentinel ha registrado el asalto en THREAD_INTEL.md.`));
+        console.log(chalk.red(`\n✘ [SWEEP ERROR] No se pudo completar el escaneo: ${err.message}`));
         process.exit(1);
       }
     }
+
   });
 
 program.parse();

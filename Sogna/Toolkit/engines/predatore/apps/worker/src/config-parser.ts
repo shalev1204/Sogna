@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2025 Sogna, Inc.
+// Copyright (C) 2025 Sogna, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License version 3
@@ -7,8 +7,8 @@
 import { createRequire } from 'node:module';
 import { Ajv, type ErrorObject, type ValidateFunction } from 'ajv';
 import type { FormatsPlugin } from 'ajv-formats';
-import yaml from 'js-yaml';
-import { fs } from 'zx';
+import YAML from 'yaml';
+import fs from 'node:fs/promises';
 import { PentestError } from './services/error-handling.js';
 import type { Authentication, Config, DistributedConfig, Rule } from './types/config.js';
 import { ErrorCode } from './types/errors.js';
@@ -172,8 +172,9 @@ function formatAjvErrors(errors: ErrorObject[]): string[] {
 export const parseConfig = async (configPath: string): Promise<Config> => {
   try {
     // 1. Verify file exists
-    if (!(await fs.pathExists(configPath))) {
-      throw new PentestError(
+    try {
+      await fs.access(configPath);
+    } catch {
         `Configuration file not found: ${configPath}`,
         'config',
         false,
@@ -211,10 +212,8 @@ export const parseConfig = async (configPath: string): Promise<Config> => {
     // 4. Parse YAML with safe schema
     let config: unknown;
     try {
-      config = yaml.load(configContent, {
-        schema: yaml.FAILSAFE_SCHEMA, // Only basic YAML types, no JS evaluation
-        json: false, // Don't allow JSON-specific syntax
-        filename: configPath,
+      config = YAML.parse(configContent, {
+        schema: 'failsafe', // Only basic YAML types, no JS evaluation
       });
     } catch (yamlError) {
       const errMsg = yamlError instanceof Error ? yamlError.message : String(yamlError);
@@ -277,9 +276,8 @@ export const parseConfigYAML = (yamlContent: string): Config => {
 
   let config: unknown;
   try {
-    config = yaml.load(yamlContent, {
-      schema: yaml.FAILSAFE_SCHEMA,
-      json: false,
+    config = YAML.parse(yamlContent, {
+      schema: 'failsafe',
     });
   } catch (yamlError) {
     const errMsg = yamlError instanceof Error ? yamlError.message : String(yamlError);

@@ -146,3 +146,183 @@ Fecha: 2026-04-15T20:49:17.954Z
 [CRITICAL]	ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Husky.
 	Ubicación: .husky/pre-commit
 	Solución : Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:54:38.224Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (url).
+	Ubicación: Sognatore/src/core/Doctor.ts:126
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (name.toLowerCase()).
+	Ubicación: Sognatore/src/core/SkillRegistry.ts:110
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (name).
+	Ubicación: Sognatore/src/core/actions/ToolRegistry.ts:102
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (agentId).
+	Ubicación: Sognatore/src/core/agents/AgentRegistry.ts:27
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:55:31.805Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (url).
+	Ubicación: Sognatore/src/integrations/github/GitHubReporter.ts:307
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (url).
+	Ubicación: Sognatore/src/integrations/jira/JiraApiClient.ts:106
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (teamId).
+	Ubicación: Sognatore/src/integrations/linear/LinearAdapter.ts:217
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (LINEAR_API_URL).
+	Ubicación: Sognatore/src/integrations/linear/LinearApiClient.ts:63
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (this._webhookUrl).
+	Ubicación: Sognatore/src/integrations/teams/TeamsAdapter.ts:120
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (key).
+	Ubicación: Sognatore/src/observability/OtelBridge.ts:78
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (spanName).
+	Ubicación: Sognatore/src/observability/OtelBridge.ts:109
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (`${this._endpoint}${path}`).
+	Ubicación: Sognatore/src/observability/OtelEngine.ts:213
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (key).
+	Ubicación: Sognatore/src/observability/otel-bridge.ts:74
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (spanName).
+	Ubicación: Sognatore/src/observability/otel-bridge.ts:103
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:56:11.978Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (url).
+	Ubicación: Sognatore/src/integrations/github/GitHubReporter.ts:307
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (url).
+	Ubicación: Sognatore/src/integrations/jira/JiraApiClient.ts:106
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (LINEAR_API_URL).
+	Ubicación: Sognatore/src/integrations/linear/LinearApiClient.ts:63
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (this._webhookUrl).
+	Ubicación: Sognatore/src/integrations/teams/TeamsAdapter.ts:120
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (`${this._endpoint}${path}`).
+	Ubicación: Sognatore/src/observability/OtelEngine.ts:213
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:57:13.403Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (options).
+	Ubicación: Sognatore/src/observability/otel.ts:383
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (name).
+	Ubicación: Sognatore/src/plugins/AgentPluginHandler.ts:101
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (name).
+	Ubicación: Sognatore/src/plugins/McpPluginHandler.ts:138
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (section).
+	Ubicación: Toolkit/engines/predatore/apps/cli/src/config/resolver.ts:117
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (section).
+	Ubicación: Toolkit/engines/predatore/apps/cli/src/config/resolver.ts:210
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (key).
+	Ubicación: Toolkit/engines/predatore/apps/cli/src/config/resolver.ts:225
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:58:23.128Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (options).
+	Ubicación: Sognatore/src/observability/otel.ts:383
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:58:55.873Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: ajv@8.12.0 tiene 1 vulnerabilidades reportadas en OSV.
+	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
+	Solución : Actualizar ajv o buscar alternativa segura.
+
+[CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: js-yaml@4.1.0 tiene 1 vulnerabilidades reportadas en OSV.
+	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
+	Solución : Actualizar js-yaml o buscar alternativa segura.
+
+[CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: zx@8.0.0 tiene 1 vulnerabilidades reportadas en OSV.
+	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
+	Solución : Actualizar zx o buscar alternativa segura.
+
+[WARNING]	POSIBLE FRAGMENTO DE LLAVE: Cadena de alta entropía detectada (Base64 suspected).
+	Ubicación: Toolkit/engines/predatore/apps/worker/src/scripts/generate-totp.ts:25
+	Solución : Evitar hardcoding de secretos fragmentados.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (hostname).
+	Ubicación: Toolkit/engines/predatore/apps/worker/src/services/preflight.ts:409
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T21:00:27.453Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: ajv@8.17.1 tiene 1 vulnerabilidades reportadas en OSV.
+	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
+	Solución : Actualizar ajv o buscar alternativa segura.
+
+[CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: js-yaml@4.1.0 tiene 1 vulnerabilidades reportadas en OSV.
+	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
+	Solución : Actualizar js-yaml o buscar alternativa segura.
+
+[CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: zx@8.1.9 tiene 1 vulnerabilidades reportadas en OSV.
+	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
+	Solución : Actualizar zx o buscar alternativa segura.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T21:02:03.541Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: yaml@2.7.0 tiene 1 vulnerabilidades reportadas en OSV.
+	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
+	Solución : Actualizar yaml o buscar alternativa segura.
