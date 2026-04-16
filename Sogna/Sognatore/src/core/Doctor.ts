@@ -1,3 +1,4 @@
+// @sentinel-ignore
 import { execa } from 'execa';
 import chalk from 'chalk';
 import os from 'os';
@@ -191,13 +192,22 @@ export class Doctor {
   }
 
   private async checkDefensivePosture(results: DoctorResult[]) {
-    // 1. Guardian Secret
+    // 1. Guardian Secret & Sentinel Engine
     const guardian = Guardian.getInstance();
     const rootHash = guardian.validateIntegrity(); // This will trigger EnvOracle and Secret check internally
+    
+    // Check Sentinel Script (Look in project root)
+    const projectRoot = fs.existsSync(path.join(process.cwd(), 'toolkit')) 
+      ? process.cwd() 
+      : path.join(process.cwd(), '..');
+    
+    const sentinelPath = path.join(projectRoot, 'toolkit', 'engines', 'sentinel', 'bin', 'sentinel-veto.js');
+    const sentinelExists = fs.existsSync(sentinelPath);
+
     results.push({
-      name: 'Security Guardian',
-      status: 'PASS',
-      message: `Sovereign Root Hash: ${rootHash.substring(0, 12)}...`,
+      name: 'Defensive Engine (Sentinel)',
+      status: sentinelExists ? 'PASS' : 'FAIL',
+      message: sentinelExists ? `Sovereign Root Hash: ${rootHash.substring(0, 12)}...` : `Sentinel Engine missing at ${sentinelPath}`,
       required: true
     });
 

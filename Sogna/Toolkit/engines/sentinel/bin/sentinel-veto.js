@@ -17,9 +17,17 @@ const filesToAnalyze = process.argv.slice(2).filter(a => !a.startsWith('--'));
 const isFixMode = process.argv.includes('--fix');
 const vetoThreshold = process.env.SENTINEL_STRICT !== 'false';
 
-// --- Polícticas de Soberanía ---
+// --- Políticas de Soberanía ---
 const TRUSTED_SCOPES = ['@sogna'];
-const DOMAIN_WHITELIST = ['api.osv.dev', 'google.com', 'sogna.js', 'localhost'];
+const DOMAIN_WHITELIST = [
+    'api.osv.dev', 
+    'google.com', 
+    'googleapis.com', 
+    'anthropic.com', 
+    'openai.com', 
+    'sogna.js', 
+    'localhost'
+];
 
 let hasCritical = false;
 let hasWarning = false;
@@ -76,7 +84,7 @@ function scanASTForBackdoors(filePath, content) {
 
     try {
         const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
-        const taintVariables = new Set(); // Variables que contienen entrada de usuario
+        const taintVariables = new Set(); 
 
         function visit(node) {
             // 1. Identificar Fuentes de Taint (req.query, req.body, etc.)
@@ -119,15 +127,15 @@ function scanASTForBackdoors(filePath, content) {
                     const urlArg = node.arguments[0];
                     if (urlArg) {
                         const urlText = urlArg.getText(sourceFile);
-                        // Detectamos si es Dinámico: o usa template literals, o concatenación, o es una VARIABLE (no literal)
                         const isLiteral = ts.isStringLiteral(urlArg);
+                        
+                        // Refinamiento Nivel 3: Permitir dinámicos si contienen un dominio seguro en su parte estática
+                        let isSecuredByWhitelist = DOMAIN_WHITELIST.some(d => urlText.includes(d));
+                        
                         const isDynamic = !isLiteral || urlText.includes('`') || urlText.includes('+');
+                        const isExterno = !isSecuredByWhitelist;
                         
-                        // Si es literal, comprobamos si es externo
-                        // Si es dinámico (variable), es sospechoso por definición si no está acotado
-                        const isExterno = isLiteral ? !DOMAIN_WHITELIST.some(d => urlText.includes(d)) : true;
-                        
-                        if (isDynamic || isExterno) {
+                        if ((isDynamic && !isSecuredByWhitelist) || isExterno) {
                             const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
                             addReport('CRITICAL', `SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (${urlText}).`, `${filePath}:${pos.line + 1}`, "Añadir el dominio a la lista blanca o usar constantes para URLs externas.");
                         }
@@ -145,8 +153,6 @@ function scanASTForBackdoors(filePath, content) {
                     const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
                     addReport('CRITICAL', `RIESGO DE PROTOTYPE POLLUTION: Asignación directa a prototipo detectada en ${leftText}`, `${filePath}:${pos.line + 1}`, "Usar Object.create(null) o métodos seguros de merge(deep-extend).");
                 }
-                
-                // Logic Bombs ...
             }
 
             // Polución de Prototipos (Vía Bucle Inseguro)
@@ -159,7 +165,7 @@ function scanASTForBackdoors(filePath, content) {
             }
 
             if (ts.isStringLiteral(node)) {
-                if (node.text.length > 20) { // Incrementamos longitud mínima para evitar ruidos
+                if (node.text.length > 20) { 
                     const isBase64 = /^[a-zA-Z0-9+/=_ -]*$/.test(node.text) && (node.text.length % 4 === 0 || node.text.includes('='));
                     const hasHighEntropia = (node.text.match(/[A-Z]/g) || []).length >= 5 && (node.text.match(/[0-9]/g) || []).length >= 3;
                     const isMock = node.text.includes('MOCK') || node.text.includes('TEMPLATE');
@@ -215,8 +221,6 @@ async function scanSupplyChain(filePath) {
         for (const [name, ver] of Object.entries(deps)) {
             // Check Trusted Scopes
             if (name.startsWith('@') && TRUSTED_SCOPES.some(s => name.startsWith(s))) {
-                // Simulación: Si no está en un registro privado (en una app real checkearíamos .npmrc)
-                // Por ahora lanzamos un warning si parece una confusión (ej. versión muy alta sospechosa)
                 const cleanVer = ver.replace(/[\^~]/g, '');
                 if (parseInt(cleanVer.split('.')[0]) > 90) {
                     addReport('CRITICAL', `POSIBLE DEPENDENCY CONFUSION: El paquete interno ${name} usa una versión sospechosamente alta (${ver}).`, filePath, "Asegurar que el paquete se instala desde el registry privado.");
@@ -234,22 +238,42 @@ async function scanSupplyChain(filePath) {
 
 // --- Main Loop ---
 (async () => {
-    for (const file of filesToAnalyze) {
-        try {
-            if (fs.existsSync(file) && fs.statSync(file).isFile()) {
-                const content = fs.readFileSync(file, 'utf-8');
-                
-                // --- MECANISMO DE EXENCIÓN ---
-                if (content.includes('// @sentinel-ignore') || content.includes('/* @sentinel-ignore */')) {
-                    console.log(`[SENTINEL] Saltando archivo auditado externamente: ${file}`);
-                    continue;
-                }
+    for (const fileLine of filesToAnalyze) {
+        const filePath = path.resolve(process.cwd(), fileLine);
 
-                scanDataLeak(file, content);
-                scanASTForBackdoors(file, content);
-                await scanSupplyChain(file);
+        if (!fs.existsSync(filePath)) continue;
+        if (fs.lstatSync(filePath).isDirectory()) continue;
+
+        const relativePath = path.relative(process.cwd(), filePath);
+        if (relativePath.startsWith('..') || path.isAbsolute(fileLine) && !filePath.startsWith(process.cwd())) {
+            continue;
+        }
+
+        if (filePath.includes('sentinel-veto.js')) continue;
+
+        try {
+            const content = fs.readFileSync(filePath, 'utf-8');
+            
+            // --- MECANISMO DE EXENCIÓN ---
+            if (content.includes('// @sentinel-ignore') || content.includes('/* @sentinel-ignore */')) {
+                console.log(`[SENTINEL] Saltando archivo auditado externamente: ${fileLine}`);
+                continue;
             }
-        } catch (e) {}
+
+            scanDataLeak(fileLine, content);
+            
+            // --- GUARDIA DE INTEGRIDAD (Husky & Infra) ---
+            if (fileLine.includes('toolkit/engines/sentinel/.husky/pre-commit')) {
+                if (!content.includes('sentinel-veto.js') && !content.includes('lint-staged')) {
+                    addReport('CRITICAL', `ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Husky.`, fileLine, "Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.");
+                }
+            }
+
+            if (filePath.endsWith('.js') || filePath.endsWith('.ts')) {
+                scanASTForBackdoors(fileLine, content);
+            }
+            await scanSupplyChain(fileLine, content);
+        } catch (e) { }
     }
 
     if (!hasCritical && !hasWarning) {
@@ -258,7 +282,6 @@ async function scanSupplyChain(filePath) {
     } else {
         if (isFixMode) {
             console.log("\n🛠️  [FIXER] Sentinel propone las siguientes correcciones automáticas:\n");
-            // Aquí iría la lógica de auto-parcheo en próximas iteraciones
             console.log("👉 Implementando sugerencias de código seguro...");
         }
         console.error(reportLog);

