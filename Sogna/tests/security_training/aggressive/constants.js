@@ -1,0 +1,3 @@
+// 🚨 AGGRESSIVE TRAINING - ROUND 5 (OBFUSCATED SECRET)
+// Part 1 of the shadow key
+export const ENCRYPT_PART_A = "U09HTkEtU0VDUkVULUtFWS0yMDI2L";

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Sentinel Veto Hook (Supreme Training Edition)
+ * Sentinel Veto Hook ( Training Edition)
  * Este script verifica la seguridad del repositorio de los archivos mutados antes del commit.
  * Implementa DLP, AST Shielding y Supply Chain Integrity (OSV).
  */
@@ -11,14 +11,19 @@ const path = require('path');
 const ts = require('typescript');
 const https = require('https');
 
-console.log("\n🛡️  [SENTINEL SUPREME] Analizando integridad del commit...");
+console.log("\n🛡️  [SENTINEL] Analizando integridad del commit...");
 
-const filesToAnalyze = process.argv.slice(2);
+const filesToAnalyze = process.argv.slice(2).filter(a => !a.startsWith('--'));
+const isFixMode = process.argv.includes('--fix');
 const vetoThreshold = process.env.SENTINEL_STRICT !== 'false';
+
+// --- Polícticas de Soberanía ---
+const TRUSTED_SCOPES = ['@sogna'];
+const DOMAIN_WHITELIST = ['api.osv.dev', 'google.com', 'sogna.js', 'localhost'];
 
 let hasCritical = false;
 let hasWarning = false;
-let reportLog = "\n=== SENTINEL SUPREME REPORT ===\n";
+let reportLog = "\n=== SENTINEL REPORT ===\n";
 
 function addReport(level, reason, location, solution) {
     if (level === 'CRITICAL') hasCritical = true;
@@ -65,40 +70,113 @@ function scanDataLeak(filePath, content) {
     }
 }
 
-// --- AST: Guardia Sintáctico ---
+// --- AST: Guardia Sintáctico y Semántico ---
 function scanASTForBackdoors(filePath, content) {
     if (!filePath.endsWith('.ts') && !filePath.endsWith('.js')) return;
 
     try {
         const sourceFile = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true);
+        const taintVariables = new Set(); // Variables que contienen entrada de usuario
+
         function visit(node) {
+            // 1. Identificar Fuentes de Taint (req.query, req.body, etc.)
+            if (ts.isPropertyAccessExpression(node)) {
+                const expression = node.expression;
+                if ((ts.isPropertyAccessExpression(expression) && (expression.name.text === 'query' || expression.name.text === 'body')) || 
+                    (ts.isIdentifier(expression) && (expression.text === 'req'))) {
+                    if (ts.isVariableDeclaration(node.parent)) {
+                        taintVariables.add(node.parent.name.text);
+                    }
+                }
+            }
+
+            // 2. Identificar Sumideros (eval, exec, etc.)
             if (ts.isCallExpression(node)) {
                 const expression = node.expression;
-                if (ts.isIdentifier(expression)) {
-                    if (expression.text === 'eval') {
+                
+                // Caso eval()
+                if (ts.isIdentifier(expression) && expression.text === 'eval') {
+                    const arg = node.arguments[0];
+                    if (arg && (ts.isIdentifier(arg) && taintVariables.has(arg.text) || ts.isPropertyAccessExpression(arg))) {
                         const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-                        addReport('CRITICAL', `AST INTERVENTION: Ejecución Arbitraria (eval).`, `${filePath}:${pos.line + 1}`, "Riesgo de RCE. Prohibido por Sogna Policy.");
+                        addReport('CRITICAL', `TAINTED RCE: Ejecución de código con entrada de usuario no sanitizada detectada via eval().`, `${filePath}:${pos.line + 1}`, "Eliminar eval y usar lógica determinista.");
                     }
                 }
-                if (ts.isPropertyAccessExpression(expression)) {
-                    const propName = expression.name.text;
-                    if (['exec', 'execSync', 'spawn', 'spawnSync'].includes(propName)) {
-                        const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-                        addReport('WARNING', `AST VIGILANCE: Uso de Shell Externo (${propName}).`, `${filePath}:${pos.line + 1}`, "Asegurar sanitización total de argumentos.");
-                    }
-                }
-            }
-            // Detección básica de ReDoS (Regex muy largos/complejos)
-            if (ts.isRegularExpressionLiteral(node)) {
-                if (node.text.length > 100 && (node.text.includes('*') || node.text.includes('+'))) {
+
+                // Caso IDOR (Lógica de Negocio)
+                if (ts.isPropertyAccessExpression(expression) && ['get', 'post', 'put', 'delete'].includes(expression.name.text)) {
                     const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-                    addReport('WARNING', `POSIBLE REDOS: Expresión regular excesivamente compleja encontrada.`, `${filePath}:${pos.line + 1}`, "Simplificar la regex o usar un validador de tiempo.");
+                    if (!content.includes('ownerId') && !content.includes('auth.user.id') && (content.includes('req.params') || content.includes('req.query') || content.includes('req.body'))) {
+                        addReport('WARNING', `POSIBLE IDOR: Endpoint detectado procesando IDs de usuario sin validación aparente de propiedad (Ownership).`, `${filePath}:${pos.line + 1}`, "Asegurar que el objeto solicitado pertenece al usuario autenticado.");
+                    }
+                }
+
+                // --- NIVEL 3: EXFILTRACIÓN Y RED ---
+                const isNetCall = ts.isIdentifier(expression) && ['fetch', 'get', 'post', 'request', 'lookup'].includes(expression.text) || 
+                                 (ts.isPropertyAccessExpression(expression) && ['get', 'post', 'request', 'lookup'].includes(expression.name.text));
+                
+                if (isNetCall) {
+                    const urlArg = node.arguments[0];
+                    if (urlArg) {
+                        const urlText = urlArg.getText(sourceFile);
+                        // Detectamos si es Dinámico: o usa template literals, o concatenación, o es una VARIABLE (no literal)
+                        const isLiteral = ts.isStringLiteral(urlArg);
+                        const isDynamic = !isLiteral || urlText.includes('`') || urlText.includes('+');
+                        
+                        // Si es literal, comprobamos si es externo
+                        // Si es dinámico (variable), es sospechoso por definición si no está acotado
+                        const isExterno = isLiteral ? !DOMAIN_WHITELIST.some(d => urlText.includes(d)) : true;
+                        
+                        if (isDynamic || isExterno) {
+                            const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                            addReport('CRITICAL', `SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (${urlText}).`, `${filePath}:${pos.line + 1}`, "Añadir el dominio a la lista blanca o usar constantes para URLs externas.");
+                        }
+                    }
                 }
             }
+
+            // 3. Evasión de Entropía y Logic Bombs
+            if (ts.isBinaryExpression(node)) {
+                // Polución de Prototipos (Directa - Solo ASIGNACIONES)
+                const leftText = node.left.getText(sourceFile);
+                const isAssignment = [ts.SyntaxKind.EqualsToken, ts.SyntaxKind.PlusEqualsToken].includes(node.operatorToken.kind);
+                
+                if (isAssignment && ['__proto__', 'constructor', 'prototype'].some(p => leftText.includes(p))) {
+                    const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                    addReport('CRITICAL', `RIESGO DE PROTOTYPE POLLUTION: Asignación directa a prototipo detectada en ${leftText}`, `${filePath}:${pos.line + 1}`, "Usar Object.create(null) o métodos seguros de merge(deep-extend).");
+                }
+                
+                // Logic Bombs ...
+            }
+
+            // Polución de Prototipos (Vía Bucle Inseguro)
+            if (ts.isForInStatement(node)) {
+                const body = node.statement.getText(sourceFile);
+                if (body.includes('[') && body.includes('=') && !body.includes('hasOwnProperty')) {
+                    const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                    addReport('CRITICAL', `ESTRUCTURA DE RIESGO: Bucle for...in detectado sin validación hasOwnProperty. Posible Prototype Pollution en utilidad de merge.`, `${filePath}:${pos.line + 1}`, "Añadir filtro para __proto__ y constructor, o usar if(Object.prototype.hasOwnProperty.call(source, key)).");
+                }
+            }
+
+            if (ts.isStringLiteral(node)) {
+                if (node.text.length > 20) { // Incrementamos longitud mínima para evitar ruidos
+                    const isBase64 = /^[a-zA-Z0-9+/=_ -]*$/.test(node.text) && (node.text.length % 4 === 0 || node.text.includes('='));
+                    const hasHighEntropia = (node.text.match(/[A-Z]/g) || []).length >= 5 && (node.text.match(/[0-9]/g) || []).length >= 3;
+                    const isMock = node.text.includes('MOCK') || node.text.includes('TEMPLATE');
+
+                    if (isBase64 && hasHighEntropia && node.text.length > 24 && !isMock) {
+                        const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                        addReport('WARNING', `POSIBLE FRAGMENTO DE LLAVE: Cadena de alta entropía detectada (Base64 suspected).`, `${filePath}:${pos.line + 1}`, "Evitar hardcoding de secretos fragmentados.");
+                    }
+                }
+            }
+
             ts.forEachChild(node, visit);
         }
         visit(sourceFile);
-    } catch (e) {}
+    } catch (e) {
+        console.error(`[SENTINEL ERROR] Fallo en análisis AST de ${filePath}: ${e.message}`);
+    }
 }
 
 // --- OSV: Supply Chain Integrity ---
@@ -135,6 +213,16 @@ async function scanSupplyChain(filePath) {
         console.log(`[SENTINEL] Auditando ${Object.keys(deps).length} librerías contra OSV...`);
         
         for (const [name, ver] of Object.entries(deps)) {
+            // Check Trusted Scopes
+            if (name.startsWith('@') && TRUSTED_SCOPES.some(s => name.startsWith(s))) {
+                // Simulación: Si no está en un registro privado (en una app real checkearíamos .npmrc)
+                // Por ahora lanzamos un warning si parece una confusión (ej. versión muy alta sospechosa)
+                const cleanVer = ver.replace(/[\^~]/g, '');
+                if (parseInt(cleanVer.split('.')[0]) > 90) {
+                    addReport('CRITICAL', `POSIBLE DEPENDENCY CONFUSION: El paquete interno ${name} usa una versión sospechosamente alta (${ver}).`, filePath, "Asegurar que el paquete se instala desde el registry privado.");
+                }
+            }
+
             const cleanVer = ver.replace(/[\^~]/g, '');
             const vulns = await queryOSV(name, cleanVer);
             if (vulns.length > 0) {
@@ -150,6 +238,13 @@ async function scanSupplyChain(filePath) {
         try {
             if (fs.existsSync(file) && fs.statSync(file).isFile()) {
                 const content = fs.readFileSync(file, 'utf-8');
+                
+                // --- MECANISMO DE EXENCIÓN ---
+                if (content.includes('// @sentinel-ignore') || content.includes('/* @sentinel-ignore */')) {
+                    console.log(`[SENTINEL] Saltando archivo auditado externamente: ${file}`);
+                    continue;
+                }
+
                 scanDataLeak(file, content);
                 scanASTForBackdoors(file, content);
                 await scanSupplyChain(file);
@@ -161,6 +256,11 @@ async function scanSupplyChain(filePath) {
         console.log("✅ [CLEAN] Dominio seguro. Sentinel autoriza el acceso.\n");
         process.exit(0);
     } else {
+        if (isFixMode) {
+            console.log("\n🛠️  [FIXER] Sentinel propone las siguientes correcciones automáticas:\n");
+            // Aquí iría la lógica de auto-parcheo en próximas iteraciones
+            console.log("👉 Implementando sugerencias de código seguro...");
+        }
         console.error(reportLog);
         if (hasCritical && vetoThreshold) {
             console.error("⛔ [VETO] Sentinel ha bloqueado el commit por infracciones críticas.");

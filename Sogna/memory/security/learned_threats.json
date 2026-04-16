@@ -1,1 +1,85 @@
-{}
+[
+    {
+      "id": "T001",
+      "type": "Data Leak Prevention (DLP)",
+      "severity": "CRITICAL",
+      "signature": "sk-[a-zA-Z0-9]{32}",
+      "description": "Detección de secretos hardcodeados (API Keys) en el código fuente."
+    },
+    {
+      "id": "T002",
+      "type": "Instruction Injection",
+      "severity": "WARNING",
+      "signature": "exec(req.query.*)",
+      "description": "Inyección de comandos directos desde parámetros de entrada no saneados."
+    },
+    {
+      "id": "T003",
+      "type": "Supply Chain Vulnerability",
+      "severity": "CRITICAL",
+      "signature": "OSV-2023-*",
+      "description": "Dependencias de terceros con vulnerabilidades conocidas reportadas en OSV."
+    },
+    {
+      "id": "T004",
+      "type": "Obfuscated Backdoor",
+      "signature": "eval(String.fromCharCode)",
+      "description": "Uso de funciones dinámicas y ofuscación para ocultar payloads maliciosos."
+    },
+    {
+      "id": "T005",
+      "type": "Fragmented Secret",
+      "severity": "WARNING",
+      "signature": "Base64 Entropy > Threshold",
+      "description": "Cadenas de alta entropía que sugieren secretos fragmentados (DLP evasión)."
+    },
+    {
+      "id": "T006",
+      "type": "IDOR (Business Logic)",
+      "severity": "WARNING",
+      "signature": "Endpoint(params) + !ownerCheck",
+      "description": "Falta de validación de propiedad (Ownership) en endpoints que manipulan recursos."
+    },
+    {
+      "id": "T007",
+      "type": "SCA Confusion",
+      "severity": "CRITICAL",
+      "signature": "minimist < 1.2.6",
+      "description": "Uso de versiones específicas de librerías con exploits críticos conocidos."
+    },
+    {
+      "id": "T008",
+      "type": "Adversarial AI Payload",
+      "severity": "CRITICAL",
+      "signature": "Dynamic Property Access (eval-bypass)",
+      "description": "Uso de proxies o acceso dinámico a miembros para ejecutar código prohibido."
+    },
+    {
+      "id": "T009",
+      "type": "Dependency Confusion",
+      "severity": "CRITICAL",
+      "signature": "@sogna/* @ >=90.0.0",
+      "description": "Intento de secuestro de scope interno mediante versiones infladas en public registry."
+    },
+    {
+      "id": "T010",
+      "type": "Logic Bomb",
+      "severity": "WARNING",
+      "signature": "Date.now() > [TIMESTAMP]",
+      "description": "Código latente condicionado a factores temporales para evadir auditoría inmediata."
+    },
+    {
+      "id": "T011",
+      "type": "Prototype Pollution",
+      "severity": "CRITICAL",
+      "signature": "for..in + assigned without hasOwnProperty",
+      "description": "Inyección de propiedades en el prototipo global mediante merges inseguros."
+    },
+    {
+      "id": "T012",
+      "type": "Data Exfiltration",
+      "severity": "CRITICAL",
+      "signature": "NetworkCall(dynamic_url) + !whitelist",
+      "description": "Extracción de secretos (API Keys) hacia dominios externos no autorizados."
+    }
+]

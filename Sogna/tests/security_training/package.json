@@ -1,0 +1,9 @@
+{
+  "name": "sogna-vulnerable-module",
+  "version": "1.0.0",
+  "description": "Security training instance for Supply Chain Audit",
+  "dependencies": {
+    "lodash": "4.17.4",
+    "axios": "0.18.0"
+  }
+}

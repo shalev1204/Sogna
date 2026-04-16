@@ -23,82 +23,104 @@ program
   .command('init')
   .description('Scaffold a new Sogna project (Tauri, Supabase, n8n)')
   .argument('<name>', 'Name of the project')
-  .action(async (name) => {
+    .action(async (name) => {
     const { execSync } = require('child_process');
     const targetDir = path.join(process.cwd(), name);
     const templatesDir = path.join(SOGNATORE_PATH, 'resources', 'templates');
 
-    console.log(chalk.green(`\n[SOGNA] 🔨 Forjando Fábrica Unicornio: ${name}...`));
+    console.log(chalk.green(`\n[SOGNA FORGE] 🔨 Forjando Nueva Instancia Soberana: ${name}...`));
 
     try {
-      // 1. Crear Estructura Base
-      await fs.ensureDir(targetDir);
+      // 1. Crear Estructura Base y Limpieza
+      if (fs.existsSync(targetDir)) {
+        console.log(chalk.yellow(`[SOGNA] ⚠️  El directorio ya existe. Usando estructura existente...`));
+      } else {
+        await fs.ensureDir(targetDir);
+      }
       
-      // 2. Desplegar Motor Sognatore
+      // 2. Desplegar Núcleo Sogna (El ADN)
       const targetSognaDir = path.join(targetDir, 'Sogna');
-      const targetSognatorePath = path.join(targetSognaDir, 'Sognatore');
+      console.log(chalk.blue(`[SOGNA] 🧬 Inyectando ADN Soberano (Toolkit, Engines, Config)...`));
       
-      console.log(chalk.blue(`[SOGNA] ⚙️  Instalando Motor Sognatore Autónomo...`));
-      await fs.copy(SOGNATORE_PATH, targetSognatorePath, {
-        filter: (src) => !src.includes('node_modules') && !src.includes('.sognatore/state')
+      // Copiar TODO el contenido de la carpeta Sogna actual al destino
+      // Excluimos node_modules, .git y archivos de estado temporal
+      await fs.copy(__dirname, targetSognaDir, {
+        filter: (src) => {
+          const relative = path.relative(__dirname, src);
+          return !relative.includes('node_modules') && 
+                 !relative.includes('.git') && 
+                 !relative.includes('.turbo') &&
+                 !relative.includes('logs') &&
+                 !relative.includes('memory/security') &&
+                 !src.includes('.env'); // Importante: No clonamos las API Keys
+        }
       });
 
-      // 3. Desplegar Plantillas (Tauri, Supabase, n8n)
-      console.log(chalk.blue(`[SOGNA] 📦 Desplegando infraestructuras (Tauri 2.0, Supabase, n8n)...`));
+      // 3. Desplegar Infraestructura del Producto
+      console.log(chalk.blue(`[SOGNA] 📦 Desplegando infraestructuras base (Tauri 2.0, Supabase, n8n)...`));
       
-      // Tauri 2.0
-      await fs.copy(path.join(templatesDir, 'tauri-v2'), targetDir);
+      // Tauri 2.0 (Product Core)
+      await fs.copy(path.join(templatesDir, 'tauri-v2'), targetDir, { overwrite: false });
       
-      // Supabase
-      await fs.copy(path.join(templatesDir, 'supabase'), path.join(targetDir, 'supabase'));
+      // Supabase & n8n
+      await fs.copy(path.join(templatesDir, 'supabase'), path.join(targetDir, 'supabase'), { overwrite: false });
+      await fs.copy(path.join(templatesDir, 'n8n'), path.join(targetDir, 'n8n'), { overwrite: false });
 
-      // n8n
-      await fs.copy(path.join(templatesDir, 'n8n'), path.join(targetDir, 'n8n'));
-
-      // 4. Copiar Wrappers y Toolkit a la carpeta Sogna del nuevo proyecto
-      await fs.copy(path.join(__dirname, 'sogna.js'), path.join(targetSognaDir, 'sogna.js'));
-      await fs.copy(path.join(__dirname, 'sognatore.js'), path.join(targetSognaDir, 'sognatore.js'));
-      
-      const sourceToolkit = path.join(__dirname, 'toolkit');
-      const targetToolkit = path.join(targetSognaDir, 'toolkit');
-      console.log(chalk.blue(`[SOGNA] 🛠️  Desplegando Antigravity Toolkit...`));
-      await fs.copy(sourceToolkit, targetToolkit);
-
-      // 5. Desplegar Identidad Soberana
-      console.log(chalk.blue(`[SOGNA] 🧬 Inyectando Identidad Soberana Sogna...`));
-      await fs.copy(path.join(__dirname, 'config', 'sognarules.md'), path.join(targetSognaDir, 'config', 'sognarules.md'));
-      await fs.copy(path.join(__dirname, 'config', 'agent-metadata'), path.join(targetSognaDir, 'config', 'agent-metadata'));
-
-      // 6. Crear package.json básico para el frontend si no existe
-      const pkgPath = path.join(targetDir, 'package.json');
-      if (!fs.existsSync(pkgPath)) {
-        const minimalPkg = {
-          name: name.toLowerCase(),
-          version: "0.1.0",
-          private: true,
-          dependencies: { "react": "^18.3.1", "react-dom": "^18.3.1" },
-          devDependencies: { "vite": "^5.4.1", "@tauri-apps/cli": "2.0.0-rc" },
-          scripts: { "dev": "vite", "build": "vite build", "tauri": "tauri" }
-        };
-        await fs.writeJSON(pkgPath, minimalPkg, { spaces: 2 });
+      // 4. Inicializar Repositorio Local (Independencia)
+      console.log(chalk.blue(`[SOGNA] 🏁 Inicializando Repositorio Git Independiente...`));
+      try {
+        execSync('git init', { cwd: targetDir });
+        // Asegurar que el .gitignore esté en la raíz del nuevo proyecto
+        await fs.copy(path.join(__dirname, '..', '.gitignore'), path.join(targetDir, '.gitignore'));
+      } catch (e) {
+        console.warn(chalk.yellow(`[SOGNA] ⚠️  No se pudo inicializar git. Asegúrate de tenerlo instalado.`));
       }
 
-      // 6. Ejecutar Instalación y Compilación (Fábrica Viva)
-      console.log(chalk.yellow(`[SOGNA] ⚡ Instalando dependencias (npm install)...`));
+      // 5. Configuración de Identidad (package.json)
+      const pkgPath = path.join(targetDir, 'package.json');
+      let pkg = {
+        name: name.toLowerCase(),
+        version: "1.0.0-sovereign",
+        private: true,
+        type: "module",
+        scripts: {
+          "dev": "vite",
+          "build": "vite build",
+          "preview": "vite preview",
+          "tauri": "tauri"
+        },
+        dependencies: {
+          "@tauri-apps/api": "^2.0.0",
+          "framer-motion": "^12.4.7",
+          "react": "^19.0.0",
+          "react-dom": "^19.0.0"
+        },
+        devDependencies: {
+          "@tauri-apps/cli": "^2.0.0",
+          "@types/react": "^19.0.10",
+          "@types/react-dom": "^19.0.4",
+          "@vitejs/plugin-react": "^4.3.4",
+          "typescript": "^5.7.3",
+          "vite": "^6.2.0"
+        }
+      };
+      
+      await fs.writeJSON(pkgPath, pkg, { spaces: 2 });
+
+      // 6. Instalación de Dependencias
+      console.log(chalk.yellow(`\n[SOGNA] ⚡ Instalando dependencias en la nueva instancia (npm install)...`));
+      console.log(chalk.gray(`Esto puede tardar un momento...`));
       execSync('npm install', { cwd: targetDir, stdio: 'inherit' });
 
-      console.log(chalk.magenta(`[SOGNA] 🦀 Iniciando Vuelo de Tauri (cargo build)...`));
-      console.log(chalk.gray(`Nota: Esto puede tardar varios minutos la primera vez.`));
-      try {
-        execSync('cargo build', { cwd: path.join(targetDir, 'src-tauri'), stdio: 'inherit' });
-      } catch (e) {
-        console.warn(chalk.yellow(`[SOGNA] ⚠️  Cargo build falló o Rust no está instalado. El proyecto está listo pero requiere compilación manual.`));
-      }
-
-      console.log(chalk.green(`\n✔ ¡Fábrica ${name} forjada y lista para el segundo uno!`));
-      console.log(chalk.cyan(`\nPróximos pasos:`));
-      console.log(`1. cd ${name}`);
-      console.log(`2. node Sogna/sognatore.js run   # Despierta a los agentes`);
+      // 7. Bienvenida y Asistente de Claves (Placeholder para Task 2)
+      console.log(chalk.green(`\n✔ ¡La instancia ${name} ha nacido con éxito!`));
+      console.log(chalk.cyan(`\n🚀 ¡BIENVENIDO AL SEGUNDO UNO!`));
+      console.log(chalk.white(`Tu nuevo proyecto es totalmente autónomo y tiene su propio aprendizaje.`));
+      
+      console.log(chalk.magenta(`\n🚨 PRÓXIMO PASO CRÍTICO:`));
+      console.log(chalk.white(`1. Entra en el directorio: `) + chalk.bold(`cd ${name}`));
+      console.log(chalk.white(`2. Configura tus API Keys locales (Manus, Perplexity, etc.) en el archivo .env`));
+      console.log(chalk.white(`3. Despierta a los agentes: `) + chalk.bold(`node Sogna/sognatore.js run`));
       
     } catch (err) {
       console.error(chalk.red(`\n✘ Error en la forja: ${err.message}`));
