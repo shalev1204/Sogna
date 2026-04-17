@@ -2,6 +2,7 @@ import { Agent } from './agents/Agent.js';
 import { AgentRegistry } from './agents/AgentRegistry.js';
 import { AgentRole, AgentSwarm } from './agents/AgentTypes.js';
 import { AgentFactory } from './agents/AgentFactory.js';
+import { DockerSandbox } from './DockerSandbox.js';
 import path from 'path';
 import fs from 'fs';
 import { EventEmitter } from 'events';
@@ -67,6 +68,15 @@ export class SwarmOrchestrator extends EventEmitter {
     }
 
     const agentType = this.resolveSpecialistForTask(task.type);
+    
+    // Sandbox Profile Selection
+    const sandbox = DockerSandbox.getInstance();
+    if (task.type.startsWith('sec-') || task.type === 'ops-security') {
+      sandbox.setProfile('security');
+    } else {
+      sandbox.setProfile('standard');
+    }
+
     const agent = await this.registry.getAgent(agentType);
     
     this.emit('task:started', { taskId: task.id, agentId: agent.id });
@@ -99,16 +109,16 @@ export class SwarmOrchestrator extends EventEmitter {
   }
 
   /**
-   * Triggers the Sovereign Recruitment flow to synthesize and validate new specialists.
+   * Triggers the  Recruitment flow to synthesize and validate new specialists.
    */
   private async triggerRecruitment(gapTask: SwarmTask) {
-    console.log(`[RECRUITMENT] Agent Domain Gap identified for: ${gapTask.type}. Initiating Sovereign Recruitment...`);
+    console.log(`[RECRUITMENT] Agent Domain Gap identified for: ${gapTask.type}. Initiating  Recruitment...`);
     
     const researcher = await this.registry.getAgent('orch-researcher');
     const supervisor = await this.registry.getAgent('supervisor');
     
     // Step 1: Design the Specialist
-    const designPrompt = `Design a new Sovereign Specialist for the domain '${gapTask.type}'. 
+    const designPrompt = `Design a new  Specialist for the domain '${gapTask.type}'. 
     Analyze requirements for: ${gapTask.description}.
     Return a valid JSON profile with: type (e.g. biz-fintech), swarm, capabilities[], taskTypes[], qualityChecks[].`;
     
@@ -231,7 +241,7 @@ export class SwarmOrchestrator extends EventEmitter {
 **Timestamp:** ${new Date().toISOString()}
 
 ## Conflict Analysis
-Discrepancy detected between Sognatore eVolt Proposal and Antigravity Sovereign Standards.
+Discrepancy detected between Sognatore eVolt Proposal and Antigravity  Standards.
 
 ## Dual Diagnostic
 - **Sognatore View:** Target action deemed necessary for autonomous evolution.

@@ -6,25 +6,25 @@ AI-powered penetration testing agent for defensive security analysis. Automates 
 
 **Prerequisites:** Docker, AI provider credentials (`.env` for local, env vars for npx)
 
-### Sovereign Integration
+###  Integration
 
-Predatore is integrated into the Sogna ecosystem as a native engine. It is managed via the `sogna predatore` command from the root.
+Predatore is integrated into the Sognatore ecosystem as a native engine. It is managed via the `Sognatore predatore` command from the root.
 
-| | **Sognatore Native** (`sogna predatore`) |
+| | **Sognatore Native** (`Sognatore predatore`) |
 | --- | --- |
-| **Install** | Part of Sogna Toolkit |
+| **Install** | Part of Sognatore Toolkit |
 | **Image** | Built locally (`predatore-worker`) |
 | **State** | `Sogna/toolkit/engines/predatore/workspaces/` |
-| **Credentials** | Global Sogna `.env` |
+| **Credentials** | Global Sognatore `.env` |
 | **Prompts** | Mounted from `./apps/worker/prompts/` |
 
-Mode: Activated via `sogna predatore` which sets `PREDATORE_LOCAL=1`.
+Mode: Activated via `Sognatore predatore` which sets `PREDATORE_LOCAL=1`.
 
 ### Usage via Sogna
 
 ```bash
-# Run a pentest via the Sogna orchestrator
-node sogna.js predatore start -u <url> -r /path/to/repo
+# Run a pentest via the Sognatore orchestrator
+node Sognatore.js predatore start -u <url> -r /path/to/repo
 ```
 
 ### Local Native Start
@@ -72,7 +72,7 @@ pnpm biome:fix                       # Auto-fix lint, format, and import sorting
 ### Monorepo Layout
 
 ```text
-apps/cli/        — @Sogna/Predatore (Sogna native engine)
+apps/cli/        — @Sogna/Predatore (Sognatore native engine)
 apps/worker/     — @Predatore/worker (Temporal worker + pipeline logic)
 ```
 

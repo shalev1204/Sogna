@@ -1,0 +1,69 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-04-17",
+  "swarms": [
+    {
+      "id": "essentials",
+      "name": "Swarms",
+      "description": "Core utility and productivity tools for the daily workflow.",
+      "assets": {
+        "skills": [
+          "ask-questions-if-underspecified",
+          "concise-planning",
+          "documentation",
+          "lint-and-validate",
+          "systematic-debugging"
+        ],
+        "agents": [],
+        "workflows": []
+      }
+    },
+    {
+      "id": "sentinel-security",
+      "name": "Sentinel Shield",
+      "description": "Advanced defensive and offensive security audit enjambre.",
+      "assets": {
+        "skills": [
+          "api-security-testing",
+          "audit-skills",
+          "pentest-checklist",
+          "security-audit",
+          "skill-sentinel"
+        ],
+        "agents": ["sentinel-fixer"],
+        "workflows": ["deep-global-audit"]
+      }
+    },
+    {
+      "id": "web-wizard",
+      "name": "Web Wizardry",
+      "description": "High-fidelity frontend and animation development swarm.",
+      "assets": {
+        "skills": [
+          "animejs-animation",
+          "frontend-design",
+          "nextjs-best-practices",
+          "react-patterns",
+          "tailwind-patterns"
+        ],
+        "agents": ["ui-architect"],
+        "workflows": ["scaffold-nextjs-app"]
+      }
+    },
+    {
+      "id": "agent-master",
+      "name": "Agent Master",
+      "description": "Management and orchestration of multi-agent systems.",
+      "assets": {
+        "skills": [
+          "agent-manager-skill",
+          "agent-orchestrator",
+          "crewai",
+          "multi-agent-patterns"
+        ],
+        "agents": ["sognatore-coordinator"],
+        "workflows": []
+      }
+    }
+  ]
+}

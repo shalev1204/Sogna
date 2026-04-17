@@ -417,8 +417,8 @@ npm view sognatore version
 npm pack sognatore --dry-run 2>&1 | grep dashboard/static
 
 # Docker - verify dashboard works
-docker pull sognatore/sovereign:X.Y.Z
-docker run --rm sognatore/sovereign:X.Y.Z sognatore version
+docker pull sognatore/:X.Y.Z
+docker run --rm sognatore/:X.Y.Z sognatore version
 
 # Homebrew
 brew update && brew info sognatore

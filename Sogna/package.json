@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "description": "Sogna Sovereign Ecosystem - Orchestrated by Turbo",
+  "description": "Sogna  Ecosystem - Orchestrated by Turbo",
   "scripts": {
     "build": "turbo run build",
     "check": "turbo run check",

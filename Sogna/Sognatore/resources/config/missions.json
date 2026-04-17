@@ -1,0 +1,67 @@
+{
+  "missions": [
+    {
+      "id": "ship-saas-mvp",
+      "name": "SaaS MVP Delivery",
+      "description": "End-to-end execution from project initialization to production deployment.",
+      "phases": [
+        "Infrastructure Setup",
+        "Authentication & Security",
+        "Core Feature Implementation",
+        "Database Schema Design",
+        "Deployment Automation"
+      ],
+      "required_swarms": ["core_dev", "security_core", "data_core", "ops_core"]
+    },
+    {
+      "id": "security-audit",
+      "name": "Full Security Audit",
+      "description": "Comprehensive security assessment and vulnerability remediation.",
+      "phases": [
+        "Vulnerability Scanning",
+        "Code Review & Static Analysis",
+        "Authentication Hardening",
+        "Dependency Audit",
+        "Sentinel Policy Verification"
+      ],
+      "required_swarms": ["security_core", "ops_core"]
+    },
+    {
+      "id": "ai-agent-system",
+      "name": "AI Agent System Design",
+      "description": "Architecting and deploying multi-agent autonomous systems.",
+      "phases": [
+        "Requirement Extraction",
+        "Specialist Agent Configuration",
+        "Skill & Tool Integration",
+        "Orchestration Logic Implementation",
+        "Performance Benchmarking"
+      ],
+      "required_swarms": ["core_dev", "automation_core", "data_core"]
+    },
+    {
+      "id": "automation-orchestrator",
+      "name": "Business Workflow Automation",
+      "description": "Designing and implementing automated business pipelines.",
+      "phases": [
+        "Process Mapping",
+        "Integration Engineering",
+        "Pipeline Hardening",
+        "Observability Setup"
+      ],
+      "required_swarms": ["automation_core", "ops_core"]
+    },
+    {
+      "id": "ddd-architect",
+      "name": "Core Domain Hardening",
+      "description": "Domain-Driven Design refactoring and core logic stabilization.",
+      "phases": [
+        "Context Mapping",
+        "Entity & Value Object Design",
+        "Repository Pattern Implementation",
+        "Aggregate Root Hardening"
+      ],
+      "required_swarms": ["core_dev", "data_core"]
+    }
+  ]
+}

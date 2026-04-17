@@ -21,7 +21,7 @@ Utiliza esta capacidad para:
 
 ## 🔗 Sincronización n8n & Supabase
 
-Capacidad de interactuar con las infraestructuras creadas durante el `sogna init`.
+Capacidad de interactuar con las infraestructuras creadas durante el `Sognatore init`.
 
 ### Protocolo de Sincronización:
 - **Supabase:** Aplicar migraciones locales al entorno de nube usando la `supabase-cli`.

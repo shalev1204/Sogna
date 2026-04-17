@@ -326,3 +326,181 @@ Fecha: 2026-04-15T20:49:17.954Z
 [CRITICAL]	LIBRERÍA INFECTADA/VULNERABLE: yaml@2.7.0 tiene 1 vulnerabilidades reportadas en OSV.
 	Ubicación: Toolkit/engines/predatore/apps/worker/package.json
 	Solución : Actualizar yaml o buscar alternativa segura.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-17T23:09:15.172Z
+
+=== SENTINEL REPORT ===
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:1
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:21
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:136
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:136
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:140
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:140
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:142
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:142
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:144
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:144
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[CRITICAL]	DOMINIO DE RIESGO APRENDIDO: El destino de red coincide con patrones de exfiltración detectados en habilidades ofensivas.
+	Ubicación: Sognatore/src/core/Doctor.ts:144
+	Solución : Bloquear acceso a dominios de riesgo conocidos.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:150
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:150
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:152
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:152
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:154
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:154
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[CRITICAL]	DOMINIO DE RIESGO APRENDIDO: El destino de red coincide con patrones de exfiltración detectados en habilidades ofensivas.
+	Ubicación: Sognatore/src/core/Doctor.ts:154
+	Solución : Bloquear acceso a dominios de riesgo conocidos.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:164
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:164
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:166
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:166
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:168
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/Doctor.ts:168
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[CRITICAL]	DOMINIO DE RIESGO APRENDIDO: El destino de red coincide con patrones de exfiltración detectados en habilidades ofensivas.
+	Ubicación: Sognatore/src/core/Doctor.ts:168
+	Solución : Bloquear acceso a dominios de riesgo conocidos.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-17T23:15:49.565Z
+
+=== SENTINEL REPORT ===
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:1
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:4
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:152
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:152
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:154
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:154
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[CRITICAL]	DOMINIO DE RIESGO APRENDIDO: El destino de red coincide con patrones de exfiltración detectados en habilidades ofensivas.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:154
+	Solución : Bloquear acceso a dominios de riesgo conocidos.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:161
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:164
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:167
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:167
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:168
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:168
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:170
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:170
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[CRITICAL]	DOMINIO DE RIESGO APRENDIDO: El destino de red coincide con patrones de exfiltración detectados en habilidades ofensivas.
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:170
+	Solución : Bloquear acceso a dominios de riesgo conocidos.
+
+[WARNING]	POSIBLE LOGIC BOMB: Temporizador detectado con retraso dinámico o excesivo (delay).
+	Ubicación: Sognatore/resources/skills/engineering/whatsapp-cloud-api/assets/boilerplate/nodejs/src/whatsapp-client.ts:185
+	Solución : Asegurar que los temporizadores tengan valores estáticos o acotados con Math.min.

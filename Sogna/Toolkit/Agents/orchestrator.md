@@ -324,7 +324,7 @@ Combine findings into structured report:
 
 ## Conflict Resolution
 
-### Sogna Bridge Protocol (SBP) Coordination
+### Sognatore Bridge Protocol (SBP) Coordination
 1. **Validation Hook**: Cuando recibas una petición de validación de Sognatore, compárala con las `.sognarules`.
 2. **Discrepancy Trigger**: Si el plan de Sognatore rompe alguna regla o introduce riesgo, solicita un diagnóstico técnico.
 3. **Consensus Diagnostic**: Intercambia diagnósticos con el enjambre de Sognatore involucrado.

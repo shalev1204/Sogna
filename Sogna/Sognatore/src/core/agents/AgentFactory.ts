@@ -4,6 +4,8 @@ import { Provider } from '../Provider.js';
 import { ProviderFactory } from '../ProviderFactory.js';
 import { AgentRole, AgentSwarm } from './AgentTypes.js';
 
+import { fileURLToPath } from 'url';
+
 interface TierInfo {
   display_name: string;
   description: string;
@@ -28,9 +30,13 @@ export class AgentFactory {
   private strategy: ModelStrategy | undefined;
 
   private constructor() {
-    this.agentsMDPath = path.join(process.cwd(), 'resources', 'config', 'agents.md');
-    this.evolvedAgentsMDPath = path.join(process.cwd(), 'resources', 'config', 'evolved_agents.md');
-    this.swarmCatalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const sognatoreSrc = path.join(__dirname, '..', '..');
+    const sognatoreRoot = path.join(sognatoreSrc, '..');
+
+    this.agentsMDPath = path.join(sognatoreRoot, 'resources', 'config', 'agents.md');
+    this.evolvedAgentsMDPath = path.join(sognatoreRoot, 'resources', 'config', 'evolved_agents.md');
+    this.swarmCatalogPath = path.join(sognatoreRoot, 'resources', 'config', 'swarm_catalog.json');
   }
 
   static async getInstance(): Promise<AgentFactory> {
@@ -141,7 +147,7 @@ export class AgentFactory {
   }
 
   /**
-   * Autonomously enrolls a new specialist into the Sovereign Swarm.
+   * Autonomously enrolls a new specialist into the  Swarm.
    * This involves writing the role to evolved_agents.md and updating the swarm mapping.
    */
   async enrollNewSpecialist(role: AgentRole): Promise<void> {

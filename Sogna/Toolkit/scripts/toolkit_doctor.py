@@ -2,7 +2,7 @@ import os
 import sys
 from pathlib import Path
 
-# SOGNA TOOLKIT DOCTOR (v2.0)
+# Sognatore TOOLKIT DOCTOR (v2.0)
 # Professional Diagnostic Suite for the Antigravity Toolkit
 
 def check_status(label, success, message=""):
@@ -18,10 +18,10 @@ def check_status(label, success, message=""):
     print(f"{label:<30} {status} {message}")
 
 def run_diagnostic():
-    # Detect Toolkit Path relative to Sogna directory
+    # Detect Toolkit Path relative to Sognatore directory
     base_path = Path(__file__).parent.parent
     
-    print("\n[SOGNA TOOLKIT] Deep Intelligence Audit")
+    print("\n[Sognatore TOOLKIT] Deep Intelligence Audit")
     print("=" * 45)
     
     # 1. Structure Audit
@@ -37,7 +37,7 @@ def run_diagnostic():
     # Agents
     agents_dir = base_path / "agents"
     agents = list(agents_dir.glob("*.md")) if agents_dir.exists() else []
-    check_status("Sovereign Agents", len(agents) >= 20, f"({len(agents)}/21 verified)")
+    check_status("Agents", len(agents) >= 20, f"({len(agents)}/21 verified)")
     
     # Workflows
     workflow_dir = base_path / "workflow"
@@ -53,7 +53,7 @@ def run_diagnostic():
     print("\n[SYSTEM INFRASTRUCTURE]")
     infra = [
         ("Agent Metadata Registry", "mcp_config.json"),
-        ("Sovereign Architecture Map", "ARCHITECTURE.md"),
+        ("Architecture Map", "ARCHITECTURE.md"),
         ("Toolkit Manual", "TOOLKIT.md"),
         ("Verification Suite", "scripts/verify_all.py"),
         ("Global Guard Rules", "rules/GEMINI.md")

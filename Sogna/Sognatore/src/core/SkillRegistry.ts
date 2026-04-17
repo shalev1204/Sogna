@@ -32,7 +32,7 @@ export class SkillRegistry {
   async reload() {
     if (!fs.existsSync(this.skillsPath)) return;
 
-    // Load Audit Registry (SBP: Reference root sovereign memory)
+    // Load Audit Registry (SBP: Reference root  memory)
     const registryPath = path.resolve(process.cwd(), '../../.sogna_memory/audit_registry.json');
     let auditRegistry = { verified_knowledge: { skills: [] } };
     if (fs.existsSync(registryPath)) {

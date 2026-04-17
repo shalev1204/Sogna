@@ -257,7 +257,7 @@ Options to offer:
 
 > 🔴 **If you use shadcn without asking, you have FAILED.** Always ask first.
 
-### 💎 THE SOVEREIGN LIBRARY: UI-UX-PRO-MAX (MANDATORY)
+### 💎 THE  LIBRARY: UI-UX-PRO-MAX (MANDATORY)
 
 **You MUST use the `ui-ux-pro-max` search script for every design decision.**
 

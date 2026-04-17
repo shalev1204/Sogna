@@ -1,10 +1,10 @@
 # Skill: MCP Guard (Security Protocol)
 
-Protocol for securing and auditing Model Context Protocol (MCP) server integrations within the Sogna Ecosystem.
+Protocol for securing and auditing Model Context Protocol (MCP) server integrations within the Sognatore Ecosystem.
 
 ## Overview
 
-As Sogna grows, it will rely on multiple MCP servers. This skill provides the standards to ensure these servers do not become vectors for hacking or unauthorized data extraction.
+As Sognatore grows, it will rely on multiple MCP servers. This skill provides the standards to ensure these servers do not become vectors for hacking or unauthorized data extraction.
 
 ## Security Standards
 
@@ -31,4 +31,4 @@ As Sogna grows, it will rely on multiple MCP servers. This skill provides the st
 
 ---
 
-*Created by the Sentinel Agent for Sogna Sovereignty.*
+*Created by the Sentinel Agent for Sognatore ty.*

@@ -2,7 +2,7 @@ import { DockerSandbox } from '../src/core/DockerSandbox.js';
 import chalk from 'chalk';
 
 async function testSandbox() {
-  console.log(chalk.bold.cyan('\n[DIAGNOSTIC] Validating Sovereign Sandbox Isolation...'));
+  console.log(chalk.bold.cyan('\n[DIAGNOSTIC] Validating  Sandbox Isolation...'));
   const sandbox = DockerSandbox.getInstance();
 
   try {
@@ -30,7 +30,7 @@ async function testSandbox() {
       console.log(chalk.green('   [SUCCESS] Sandbox is isolated from host /Users directory.'));
     }
 
-    console.log(chalk.bold.green('\n[RESULT] Sandbox diagnostics PASSED. Sovereign environment is secure.'));
+    console.log(chalk.bold.green('\n[RESULT] Sandbox diagnostics PASSED.  environment is secure.'));
   } catch (error) {
     console.error(chalk.bold.red('\n[RESULT] Sandbox diagnostics FAILED.'));
     console.error(error);

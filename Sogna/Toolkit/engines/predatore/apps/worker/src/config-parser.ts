@@ -175,6 +175,7 @@ export const parseConfig = async (configPath: string): Promise<Config> => {
     try {
       await fs.access(configPath);
     } catch {
+      throw new PentestError(
         `Configuration file not found: ${configPath}`,
         'config',
         false,

@@ -5,7 +5,7 @@ import time
 import json
 from datetime import datetime
 
-# Sogna Sovereign Activator (Shadow Mode)
+# Sognatore Activator (Shadow Mode)
 # This script launches Sognatore headlessly and monitors for convergence.
 
 def log_event(message):

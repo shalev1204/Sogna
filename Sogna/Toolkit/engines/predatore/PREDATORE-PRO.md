@@ -1,4 +1,4 @@
-﻿# Predatore Pro
+# Predatore Pro
 
 Predatore Pro is Sogna's comprehensive AppSec platform, combining SAST, SCA, secrets scanning, business logic security testing, and autonomous pentesting in a single correlated workflow:
 
@@ -205,7 +205,7 @@ Predatore Pro is engineered with a secure-by-design philosophy to ensure code pr
 
 ## Per-Organization Infrastructure
 
-Each organization receives its own isolated compute environment. In the managed deployment, Sogna provisions dedicated ECS infrastructure (containers, IAM roles, task queues) per organization. In the self-hosted runner deployment, the organization provisions and controls the data plane, which handles all code access and LLM calls using the organization's own API keys. The Sogna control plane receives only aggregate findings. In either model, organizations never share compute environments with other organizations.
+Each organization receives its own isolated compute environment. In the managed deployment, Sognatore provisions dedicated ECS infrastructure (containers, IAM roles, task queues) per organization. In the self-hosted runner deployment, the organization provisions and controls the data plane, which handles all code access and LLM calls using the organization's own API keys. The Sognatore control plane receives only aggregate findings. In either model, organizations never share compute environments with other organizations.
 
 ## Ephemeral Code Handling
 
@@ -223,7 +223,7 @@ Isolated workers run in private subnets with org-specific security groups, ensur
 
 ## Self-Hosted Runner
 
-Predatore Pro supports a self-hosted runner deployment model, following the same architecture as GitHub Actions self-hosted runners. The data plane (the runner that clones code, executes scans, and makes all LLM API calls) runs entirely within the customer's infrastructure using the customer's own LLM API keys. Source code never leaves the customer's network, and no code or LLM interactions pass through Sogna's systems. The control plane (job orchestration, scan scheduling, and the reporting UI) is hosted by Sogna and receives only aggregate findings to power dashboards, search, and reporting. This separation ensures that Sogna never has access to customer source code or raw LLM call content.
+Predatore Pro supports a self-hosted runner deployment model, following the same architecture as GitHub Actions self-hosted runners. The data plane (the runner that clones code, executes scans, and makes all LLM API calls) runs entirely within the customer's infrastructure using the customer's own LLM API keys. Source code never leaves the customer's network, and no code or LLM interactions pass through Sogna's systems. The control plane (job orchestration, scan scheduling, and the reporting UI) is hosted by Sognatore and receives only aggregate findings to power dashboards, search, and reporting. This separation ensures that Sognatore never has access to customer source code or raw LLM call content.
 
 ---
 
@@ -239,7 +239,7 @@ Predatore is offered in two editions to serve different operational needs:
 | **Analysis Engine** | Code review prompting | CPG-based data flow with LLM reasoning at every node |
 | **Business Logic** | N/A | Automated invariant discovery, test scenario generation, and exploit synthesis |
 | **Integration** | Manual / CLI | Native CI/CD, GitHub PR scanning, enterprise support, self-hosted runner |
-| **Deployment** | CLI / manual | Managed cloud or self-hosted runner (customer data plane, Sogna control plane) |
+| **Deployment** | CLI / manual | Managed cloud or self-hosted runner (customer data plane, Sognatore control plane) |
 | **Boundary Analysis** | N/A | Automatic service boundary detection with team routing |
 | **Best For** | Local testing of own applications | Enterprise application security posture management |
 
@@ -247,7 +247,7 @@ Predatore is offered in two editions to serve different operational needs:
 
 # Compliance Integration
 
-Within the broader Sogna ecosystem, Predatore Pro serves as the primary engine for automated compliance evidence generation. By automating penetration testing and static analysis requirements, Predatore Pro generates real-time evidence for frameworks such as SOC 2 and HIPAA, transforming security testing from a periodic audit obligation into a continuous component of the compliance program.
+Within the broader Sognatore ecosystem, Predatore Pro serves as the primary engine for automated compliance evidence generation. By automating penetration testing and static analysis requirements, Predatore Pro generates real-time evidence for frameworks such as SOC 2 and HIPAA, transforming security testing from a periodic audit obligation into a continuous component of the compliance program.
 
 ---
 

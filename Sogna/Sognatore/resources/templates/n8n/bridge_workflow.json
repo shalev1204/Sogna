@@ -17,7 +17,7 @@
     },
     {
       "parameters": {
-        "content": "## Sognatore Bridge\nEste flujo recibe eventos de tu aplicación Sogna y los procesa a través del motor Sognatore para ejecución autónoma."
+        "content": "## Sognatore Bridge\nEste flujo recibe eventos de tu aplicación Sognatore y los procesa a través del motor Sognatore para ejecución autónoma."
       },
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",

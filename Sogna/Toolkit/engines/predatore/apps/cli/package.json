@@ -1,7 +1,7 @@
 {
   "name": "@sogna/predatore",
   "version": "0.0.0",
-  "description": "Sogna Predatore - Sovereign AI Pentester",
+  "description": "Sognatore Predatore -  AI Pentester",
   "type": "module",
   "main": "dist/index.mjs",
   "bin": {

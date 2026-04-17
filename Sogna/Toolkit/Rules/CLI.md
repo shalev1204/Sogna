@@ -1,10 +1,10 @@
 # RULE: CLI - TERMINAL STANDARDS
 
-Guidelines for creating and interacting with CLI tools within the Sogna ecosystem.
+Guidelines for creating and interacting with CLI tools within the Sognatore ecosystem.
 
 ## Core Commands Pattern
 
-Every CLI tool (e.g., `sogna.js`) should follow these command patterns:
+Every CLI tool (e.g., `Sognatore.js`) should follow these command patterns:
 - `doctor`: For environment diagnostics.
 - `plan`: For generating structural implementation plans.
 - `run`: For execution.

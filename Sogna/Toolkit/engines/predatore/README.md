@@ -1,6 +1,6 @@
-# Sogna Predatore — Sovereign AI Pentester
+# Sognatore Predatore —  AI Pentester
 
-Sogna Predatore is an autonomous, white-box AI pentester for web applications and APIs.
+Sognatore Predatore is an autonomous, white-box AI pentester for web applications and APIs.
 
 It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production.
 
@@ -8,7 +8,7 @@ It analyzes your source code, identifies attack vectors, and executes real explo
 
 ## What is Predatore?
 
-Predatore is an AI pentester developed by [Sogna](https://Sogna.io). It performs white-box security testing of web applications and their underlying APIs by combining source code analysis with live exploitation.
+Predatore is an AI pentester developed by [Sogna](https://Sognatore.io). It performs white-box security testing of web applications and their underlying APIs by combining source code analysis with live exploitation.
 
 Predatore analyzes your web application's source code to identify potential attack vectors, then uses browser automation and command-line tools to execute real exploits (injection attacks, authentication bypass, SSRF, XSS) against the running application and its APIs. Only vulnerabilities with a working proof-of-concept are included in the final report.
 
@@ -33,12 +33,12 @@ Predatore analyzes your web application's source code to identify potential atta
 
 ## Product Line
 
-Predatore is developed by [Sogna](https://Sogna.io) and available in two editions:
+Predatore is developed by [Sogna](https://Sognatore.io) and available in two editions:
 
 | Edition | Description |
 | --- | --- |
-| **Sognatore Native** | Integrated as a core engine in the Sogna Toolkit. |
-| **Sogna Predatore Pro** | Sogna's all-in-one AppSec platform with full CI/CD correlation. |
+| **Sognatore Native** | Integrated as a core engine in the Sognatore Toolkit. |
+| **Sognatore Predatore Pro** | Sogna's all-in-one AppSec platform with full CI/CD correlation. |
 
 > **This repository contains Predatore Lite,** the core autonomous AI pentesting framework. **Predatore Pro** is Sogna's all-in-one AppSec platform, combining SAST, SCA, secrets scanning, business logic security testing, and autonomous AI pentesting in a single correlated workflow. Every finding is validated with a working proof-of-concept exploit.
 > **White-box only.** Predatore Lite is designed for **white-box (source-available)** application security testing.
@@ -68,7 +68,7 @@ This is the core differentiator. A data flow vulnerability identified in static 
 
 #### Deployment Model
 
-Predatore Pro supports a self-hosted runner model (similar to GitHub Actions self-hosted runners). The data plane, which handles code access and all LLM API calls, runs entirely within the customer's infrastructure using the customer's own API keys. Source code never leaves the customer's network. The Sogna control plane handles job orchestration, scan scheduling, and the reporting UI, receiving only aggregate findings.
+Predatore Pro supports a self-hosted runner model (similar to GitHub Actions self-hosted runners). The data plane, which handles code access and all LLM API calls, runs entirely within the customer's infrastructure using the customer's own API keys. Source code never leaves the customer's network. The Sognatore control plane handles job orchestration, scan scheduling, and the reporting UI, receiving only aggregate findings.
 
 | Capability | Predatore Lite | Predatore Pro (All-in-One AppSec) |
 | --- | --- | --- |
@@ -124,8 +124,8 @@ Predatore Pro supports a self-hosted runner model (similar to GitHub Actions sel
 ### Quick Start (Recommended: npx)
 
 ```bash
-# Via the Sogna orchestrator
-node sogna.js predatore start -u <url> -r /path/to/repo
+# Via the Sognatore orchestrator
+node Sognatore.js predatore start -u <url> -r /path/to/repo
 ```
 
 ### Prepare Your Repository
@@ -590,7 +590,7 @@ Sample reports will be available here soon.
 
 ## Performance Benchmarks
 
-Detailed benchmarks of Sogna Predatore's performance across various targets.
+Detailed benchmarks of Sognatore Predatore's performance across various targets.
 
 ---
 
@@ -690,7 +690,7 @@ Predatore is designed for legitimate security auditing purposes only.
 > [!CAUTION]
 > **You must have explicit, written authorization** from the owner of the target system before running Predatore.
 >
-> Unauthorized scanning and exploitation of systems you do not own is illegal and can be prosecuted under laws such as the Computer Fraud and Abuse Act (CFAA). Sogna is not responsible for any misuse of Predatore.
+> Unauthorized scanning and exploitation of systems you do not own is illegal and can be prosecuted under laws such as the Computer Fraud and Abuse Act (CFAA). Sognatore is not responsible for any misuse of Predatore.
 
 #### **3. LLM & Automation Caveats**
 
@@ -751,7 +751,7 @@ Issues are welcome for bug reports and feature requests.
 
 - **Twitter**: [@SognaHQ](https://twitter.com/SognaHQ)
 - **LinkedIn**: [Sogna](https://linkedin.com/company/Sogna)
-- **Website**: [Sogna.io](https://Sogna.io)
+- **Website**: [Sognatore.io](https://Sognatore.io)
 
 ## Get in Touch
 
@@ -759,8 +759,8 @@ Issues are welcome for bug reports and feature requests.
 
 Predatore Pro is Sogna's all-in-one AppSec platform. For organizations that need unified SAST, SCA, and autonomous pentesting with static-dynamic correlation, CI/CD integration, or self-hosted deployment, see the [Predatore Pro technical overview](./Predatore-PRO.md).
 
-**Email**: [Predatore@Sogna.io](mailto:Predatore@Sogna.io)
+**Email**: [Predatore@Sognatore.io](mailto:Predatore@Sognatore.io)
 
 ---
 
-**Built by [Sogna](https://Sogna.io)**
+**Built by [Sogna](https://Sognatore.io)**

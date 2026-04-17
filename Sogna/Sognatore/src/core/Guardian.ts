@@ -24,14 +24,14 @@ export class Guardian {
     EnvOracle.load();
     this.SECRET_KEY = process.env.GUARDIAN_SECRET || '';
     
-    // Strict Validation: No more hardcoded fallbacks in Sovereign Mode
+    // Strict Validation: No more hardcoded fallbacks in  Mode
     if (!this.SECRET_KEY || this.SECRET_KEY.length < 32) {
       console.error(chalk.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing, too short, or compromised!'));
-      console.error(chalk.yellow('Sognatore requires a 32+ character GUARDIAN_SECRET to maintain Sovereign Integrity.'));
+      console.error(chalk.yellow('Sognatore requires a 32+ character GUARDIAN_SECRET to maintain  Integrity.'));
       console.error(chalk.dim('Please update your .env file immediately. System is running in Restricted/Fail-Safe mode.'));
       
       if (process.env.NODE_ENV === 'production') {
-        throw new Error('Sovereign Security Breach: Insufficient Guardian Secret in Production.');
+        throw new Error(' Security Breach: Insufficient Guardian Secret in Production.');
       }
       
       // Fail-Safe for construction phase: Use a temporary session-bound key if absolutely necessary, 

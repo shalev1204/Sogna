@@ -40,7 +40,7 @@ const FORWARD_VARS = [
  */
 export function loadEnv(): void {
   if (getMode() === 'local') {
-    // Sogna Sovereign: Check for .env in current CWD (root if run via sogna.js)
+    // Sogna : Check for .env in current CWD (root if run via sogna.js)
     // or relative to the engine directory (3 levels up)
     const rootEnv = path.resolve(process.cwd(), '../../../.env');
     dotenv.config({ path: rootEnv, quiet: true });

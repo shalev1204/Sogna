@@ -3,7 +3,7 @@ import json
 import sys
 from datetime import datetime
 
-# Sogna Mentor Audit (Strategic Review)
+# Sognatore Mentor Audit (Strategic Review)
 # This script manages the audit_registry.json to approve/reject evolutions.
 
 REGISTRY_PATH = os.path.abspath("../../../.sogna_memory/audit_registry.json")

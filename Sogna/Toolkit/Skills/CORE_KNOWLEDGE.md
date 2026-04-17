@@ -1,6 +1,6 @@
 # skill: CORE_KNOWLEDGE - THE FOUNDATION
 
-Essential technical knowledge for Sogna agents.
+Essential technical knowledge for Sognatore agents.
 
 ## Repository Architecture
 

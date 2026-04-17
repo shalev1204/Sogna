@@ -1,6 +1,6 @@
-# 🌀 Sognatore Sovereign: The Definitive Swarm Engine (v3.0)
+# 🌀 Sognatore: The Definitive Swarm Engine (v3.0)
 
-Sognatore is a high-assurance, multi-agent autonomous swarm designed for the 2026 Sovereign Agentic Computing Era. It operates as a decentralized intelligence layer composed of **42 specialized engines**, governed by the **RARV Protocol**, and protected by an isolated **Docker Sandbox** and a self-healing **Guardian**.
+Sognatore is a high-assurance, multi-agent autonomous swarm designed for the 2026  Agentic Computing Era. It operates as a decentralized intelligence layer composed of **42 specialized engines**, governed by the **RARV Protocol**, and protected by an isolated **Docker Sandbox** and a self-healing **Guardian**.
 
 ---
 
@@ -111,7 +111,7 @@ Sognatore manages **42 specialized agents** across 8 units. Each utilizes a tier
 
 ---
 
-## 🛡️ Sovereign Security & Infrastructure
+## 🛡️  Security & Infrastructure
 
 ### The Guardian & EnvOracle
 

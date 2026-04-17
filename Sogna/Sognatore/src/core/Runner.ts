@@ -41,7 +41,7 @@ export class Runner {
   }
 
   async start(prdPath?: string) {
-    console.log(chalk.bold.cyan('\nSOGNATORE MODE: Swarm Orchestration (v2026-SOVEREIGN)'));
+    console.log(chalk.bold.cyan('\nSOGNATORE MODE: Swarm Orchestration (v2026)'));
     console.log(chalk.dim('======================================================='));
 
     const projectName = prdPath ? path.basename(prdPath, '.md') : 'new-project';
@@ -49,7 +49,7 @@ export class Runner {
     
     console.log(chalk.green(`\n[BOOT] Session: ${state.sessionId}`));
     console.log(chalk.green(`[BOOT] Cluster: Swarm Ready (41 Engines Available)`));
-    console.log(chalk.green(`[BOOT] Sandbox: Multi-Language Sovereign Environment Active`));
+    console.log(chalk.green(`[BOOT] Sandbox: Multi-Language  Environment Active`));
     
     let prdContent = '';
     if (prdPath && await fs.pathExists(prdPath)) {
@@ -120,6 +120,14 @@ export class Runner {
     }
 
     console.log(chalk.bold.red(`\n[LIMIT] Reached maximum iterations. High-assurance parity maintained.`));
+
+    // SYSTEM PURIFICATION GATE
+    console.log(chalk.bold.blue('\n[POST-MISSION] Triggering System Purification...'));
+    try {
+      execSync('node toolkit/bin/purify.js', { stdio: 'inherit' });
+    } catch (e: any) {
+      console.warn(chalk.yellow(`[POST-MISSION] Purification warning: ${e.message}`));
+    }
   }
 
   private async runReasoning(state: SognatoreState, prd: string, codeMap: string): Promise<string> {

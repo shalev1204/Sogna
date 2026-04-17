@@ -1,12 +1,14 @@
 import { execa } from 'execa';
 import chalk from 'chalk';
 import os from 'os';
+import { AgentFactory } from './agents/AgentFactory.js';
 import { ProviderFactory } from './ProviderFactory.js';
 import { ToolResolver } from './ToolResolver.js';
 import fs from 'fs-extra';
 import path from 'path';
 import { Guardian } from './Guardian.js';
 import { EnvOracle } from './utils/EnvOracle.js';
+import { fileURLToPath } from 'url';
 
 export interface DoctorResult {
   name: string;
@@ -47,8 +49,8 @@ export class Doctor {
     results.push(await this.checkCommand('Python 3', 'python', true, '>=3.8.0'));
     results.push(await this.checkCommand('Git', 'git', true));
     
-    // Sovereign Swarm Audit
-    await this.checkSovereignAudit(results);
+    //  Swarm Audit
+    await this.checkAudit(results);
 
     // Connectivity Cert (Live Pings)
     await this.checkConnectivity(results);
@@ -62,10 +64,16 @@ export class Doctor {
     return results;
   }
 
-  private async checkSovereignAudit(results: DoctorResult[]) {
-    const root = process.cwd();
-    const catalogPath = path.join(root, 'resources', 'config', 'swarm_catalog.json');
-    const strategyPath = path.join(root, 'resources', 'config', 'model_strategy.json');
+  private async checkAudit(results: DoctorResult[]) {
+    // Find project root robustly using module-relative paths
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const sognatoreSrc = path.join(__dirname, '..', '..');
+    const projectRoot = path.join(sognatoreSrc, '..');
+    const sognatoreRoot = sognatoreSrc; // In this monorepo, sognatore is the folder
+    
+    const configDir = path.join(sognatoreRoot, 'resources', 'config');
+    const catalogPath = path.join(configDir, 'swarm_catalog.json');
+    const strategyPath = path.join(configDir, 'model_strategy.json');
 
     // 1. Catalog Sync
     if (fs.existsSync(catalogPath)) {
@@ -78,7 +86,7 @@ export class Doctor {
       results.push({
         name: 'Swarm Catalog',
         status: 'FAIL',
-        message: 'Master swarm_catalog.json missing.',
+        message: `Master swarm_catalog.json missing at ${catalogPath}`,
         required: true
       });
     }
@@ -99,22 +107,32 @@ export class Doctor {
       }
     }
 
-    // 3. Docker Sandbox Image
-    try {
-      const { stdout } = await this.runSafeCommand('docker', ['images', 'asklokesh/loki-mode:latest', '--format', '{{.Repository}}']);
-      results.push({
-        name: 'Docker Sandbox Image',
-        status: stdout.includes('loki-mode') ? 'PASS' : 'WARN',
-        message: stdout.includes('loki-mode') ? undefined : 'Sovereign Sandbox image missing.',
-        required: false,
-        fixLabel: 'Download Sandbox Image',
-        fix: async () => {
-          console.log(chalk.blue('  - Pulling asklokesh/loki-mode:latest...'));
-          await this.runSafeCommand('docker', ['pull', 'asklokesh/loki-mode:latest']);
-        }
-      });
-    } catch (e) {
-      results.push({ name: 'Docker Sandbox', status: 'FAIL', message: 'Docker not running or not found.', required: false });
+    // 3. Docker Sandbox Images (Profiles)
+    const images = [
+      { id: 'standard', name: 'sognatore:latest', file: '.Dockerfile' },
+      { id: 'security', name: 'sognatore-security:latest', file: 'Security.Dockerfile' }
+    ];
+
+    for (const img of images) {
+      try {
+        const { stdout } = await this.runSafeCommand('docker', ['images', img.name, '--format', '{{.Repository}}']);
+        const exists = stdout.includes(img.name.split(':')[0]);
+        
+        results.push({
+          name: `Sandbox Image: ${img.id}`,
+          status: exists ? 'PASS' : 'WARN',
+          message: exists ? undefined : `${img.id} profile image missing (${img.name})`,
+          required: false,
+          fixLabel: `Build ${img.id} Image`,
+          fix: async () => {
+            console.log(chalk.blue(`  - Building ${img.name}...`));
+            const dfPath = path.join(projectRoot, 'Sognatore', 'resources', 'docker', img.file);
+            await this.runSafeCommand('docker', ['build', '-t', img.name, '-f', dfPath, '.']);
+          }
+        });
+      } catch (e) {
+        results.push({ name: `Docker Sandbox (${img.id})`, status: 'FAIL', message: 'Docker not running or error inspecting image.', required: false });
+      }
     }
   }
 
@@ -169,7 +187,7 @@ export class Doctor {
     results.push({
       name: 'Defensive Engine (Sentinel)',
       status: sentinelExists ? 'PASS' : 'FAIL',
-      message: sentinelExists ? `Sovereign Root Hash: ${rootHash.substring(0, 12)}...` : `Sentinel Engine missing at ${sentinelPath}`,
+      message: sentinelExists ? ` Root Hash: ${rootHash.substring(0, 12)}...` : `Sentinel Engine missing at ${sentinelPath}`,
       required: true
     });
 
@@ -199,8 +217,8 @@ export class Doctor {
     const ghostPatterns = [
       'lint_report_*.json',
       'lint_output_*.txt',
-      'SovereignAudit.ts',
-      'SovereignAudit.js'
+      'Audit.ts',
+      'Audit.js'
     ];
     
     const ghosts: string[] = [];

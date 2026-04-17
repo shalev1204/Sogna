@@ -1,6 +1,6 @@
-# SOGNA ANTIGRAVITY TOOLKIT
+# Sognatore ANTIGRAVITY TOOLKIT
 
-Welcome to the professional operational kit for Sogna agents. This toolkit provides 20 specialized agents, 37 domain skills, and 11 advanced workflows required to build premium software at scale.
+Welcome to the professional operational kit for Sognatore agents. This toolkit provides 20 specialized agents, 37 domain skills, and 11 advanced workflows required to build premium software at scale.
 
 ## Structure
 
@@ -38,4 +38,4 @@ sogna/toolkit/
 
 ---
 
-Powered by Sogna & Antigravity Kit
+Powered by Sognatore & Antigravity Kit

@@ -265,12 +265,12 @@ export async function loadPrompt(
     // 5. Interpolate variables
     let result = await interpolateVariables(template, enhancedVariables, config, logger, basePromptsDir);
 
-    // 6. Inject Sovereign Context if available
-    const sovereignContextPath = path.join(basePromptsDir, 'sogna-context.txt');
-    if (await fs.pathExists(sovereignContextPath)) {
-      const sovereignContext = await fs.readFile(sovereignContextPath, 'utf8');
-      result = `${sovereignContext}\n\n${result}`;
-      logger.info('Sovereign context injected successfully');
+    // 6. Inject  Context if available
+    const ContextPath = path.join(basePromptsDir, 'sogna-context.txt');
+    if (await fs.pathExists(ContextPath)) {
+      const Context = await fs.readFile(ContextPath, 'utf8');
+      result = `${Context}\n\n${result}`;
+      logger.info(' context injected successfully');
     }
 
     return result;

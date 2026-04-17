@@ -51,7 +51,7 @@ Extract key information from user request:
 
 ### Step 2: Generate Design System (REQUIRED GATE)
 
-**Before any implementation, you MUST run this command** to get the sovereign design system for the context:
+**Before any implementation, you MUST run this command** to get the  design system for the context:
 
 ```bash
 python Sogna/toolkit/shared/ui-ux-pro-max/scripts/search.py "<product_type> <industry> <keywords>" --design-system [-p "Project Name"]

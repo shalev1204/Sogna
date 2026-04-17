@@ -12,7 +12,7 @@ export class ConsensusGate extends BaseGate {
     
     // 1. Check for SBP existence
     if (!fs.existsSync(rulesPath)) {
-      return this.fail('Missing .sognarules. SBP cannot be established without sovereign guidelines.', 'CRITICAL');
+      return this.fail('Missing .sognarules. SBP cannot be established without  guidelines.', 'CRITICAL');
     }
 
     const rules = fs.readFileSync(rulesPath, 'utf8');
@@ -28,7 +28,7 @@ export class ConsensusGate extends BaseGate {
     if (this.detectSbpConflict(actionPlan, rules)) {
       console.log('[SBP] Conflict detected! Initiating Dual Diagnostic Protocol...');
       return this.fail(
-        'SBP Conflict: The proposed plan deviates from established sovereign standards. Consult sb_conflict_resolution.md if fallback is triggered.',
+        'SBP Conflict: The proposed plan deviates from established  standards. Consult sb_conflict_resolution.md if fallback is triggered.',
         'HIGH',
         { conflictContext: actionPlan }
       );

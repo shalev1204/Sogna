@@ -14,8 +14,8 @@ function App() {
           transition={{ duration: 0.8 }}
           className="hero-content"
         >
-          <h1 className="title-gradient">Sovereign Unicorn</h1>
-          <p className="subtitle">Born from the Sogna Forge. Autonomous. Powerful. Yours.</p>
+          <h1 className="title-gradient">Unicorn</h1>
+          <p className="subtitle">Born from the Sognatore Forge. Autonomous. Powerful. Yours.</p>
           
           <motion.button
             whileHover={{ scale: 1.05 }}

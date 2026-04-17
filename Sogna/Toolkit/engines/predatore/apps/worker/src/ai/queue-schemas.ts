@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2025 Sogna, Inc.
+// Copyright (C) 2025 Sogna, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License version 3
@@ -11,6 +11,7 @@
  * The SDK validates the output against the JSON Schema generated from these Zod definitions.
  */
 
+import { zodToJsonSchema } from 'zod-to-json-schema';
 import type { JsonSchemaOutputFormat } from '@anthropic-ai/claude-agent-sdk';
 import { z } from 'zod';
 import type { AgentName } from '../types/agents.js';
@@ -92,7 +93,7 @@ const AuthzQueueSchema = z.object({ vulnerabilities: z.array(AuthzVulnerability)
 // NOTE: The SDK's AJV validator expects draft-07. Zod defaults to draft-2020-12 which
 // causes the SDK to silently skip structured output.
 function toOutputFormat(zodSchema: z.ZodType): JsonSchemaOutputFormat {
-  return { type: 'json_schema', schema: z.toJSONSchema(zodSchema, { target: 'draft-07' }) as Record<string, unknown> };
+  return { type: 'json_schema', schema: zodToJsonSchema(zodSchema, { target: 'openApi3' }) as Record<string, unknown> };
 }
 
 // === Lookup Maps ===

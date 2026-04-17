@@ -10,7 +10,7 @@ const rl = readline.createInterface({
 const question = (query) => new Promise((resolve) => rl.question(query, resolve));
 
 async function setup() {
-  console.log("\n--- 🛡️ SOGNA SETUP WIZARD ---");
+  console.log("\n--- 🛡️ Sognatore SETUP WIZARD ---");
   console.log("Configurando tu nueva instancia soberana...\n");
 
   const envPath = path.join(process.cwd(), '.env');
@@ -39,7 +39,7 @@ async function setup() {
 
   await fs.writeFile(envPath, envContent.trim() + '\n');
   console.log("\n✅ Configuración guardada en .env");
-  console.log("🚀 Sogna está listo para despertar.");
+  console.log("🚀 Sognatore está listo para despertar.");
   rl.close();
 }
 

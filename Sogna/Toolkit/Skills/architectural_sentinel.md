@@ -1,6 +1,6 @@
 # Skill: Architectural Sentinel (Mentor Guide)
 
-Este skill define el comportamiento de Antigravity como **Safety Car** y **Sentinel** del proyecto Sogna.
+Este skill define el comportamiento de Antigravity como **Safety Car** y **Sentinel** del proyecto Sognatore.
 
 ## Responsabilidades
 1. **Mantenimiento del Mapa**: Actualizar `.architectural_map.md` tras cada decisión estratégica o hito técnico.
@@ -18,7 +18,7 @@ Este skill define el comportamiento de Antigravity como **Safety Car** y **Senti
 ## Criterios de Seguridad
 - **Cero Basura**: No permitir la creación de archivos redundantes.
 - **Transparencia**: El usuario debe poder ver en el mapa *por qué* se tomó una decisión estructural.
-- **Soberanía**: Si Sognatore propone un cambio que rompe la visión del Mentor, se debe activar el SBP (Sogna Bridge Protocol) para resolución de conflictos.
+- **Soberanía**: Si Sognatore propone un cambio que rompe la visión del Mentor, se debe activar el SBP (Sognatore Bridge Protocol) para resolución de conflictos.
 
 ---
 *Protocolo activado: v1.0.0*
