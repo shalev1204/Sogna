@@ -70,8 +70,10 @@ Para que Sognatore opere a su máxima capacidad, el **EnvOracle** busca tus clav
 
 - **Anthropic (`ANTHROPIC_API_KEY`)**: Cerebro Platino para Arquitectura y Auditoría.
 - **Google Gemini (`GOOGLE_API_KEY`)**: Motor de alta velocidad para codificación masiva y análisis.
+- **Moonshot AI (`KIMI_API_KEY`)**: Especialista en contexto masivo (256k) para análisis de arquitecturas complejas.
+- **DeepSeek (`DEEPSEEK_API_KEY`)**: Líder en eficiencia y razonamiento avanzado para codificación.
+- **OpenRouter (`OPENROUTER_API_KEY`)**: Pasarela universal para acceder a cientos de modelos (Llama 3, Qwen, Mistral).
 - **OpenAI (`OPENAI_API_KEY`)**: Especialista versátil para razonamiento y fallback.
-
 Usa `sognatore setup` para configurar estas claves de forma interactiva.
 
 ---

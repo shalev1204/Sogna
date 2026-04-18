@@ -3,6 +3,7 @@ import { AgentRegistry } from './agents/AgentRegistry.js';
 import { AgentRole, AgentSwarm } from './agents/AgentTypes.js';
 import { AgentFactory } from './agents/AgentFactory.js';
 import { DockerSandbox } from './DockerSandbox.js';
+import { Chronicler } from './memory/Chronicler.js';
 import path from 'path';
 import fs from 'fs';
 import { EventEmitter } from 'events';
@@ -23,12 +24,15 @@ export class SwarmOrchestrator extends EventEmitter {
   private messageBus: string;
   private taskQueue: SwarmTask[] = [];
   private registry: AgentRegistry;
+  private chronicler: Chronicler;
 
   private constructor() {
     super();
     this.messageBus = path.join(process.cwd(), '.sognatore', 'messages');
     this.registry = AgentRegistry.getInstance();
+    this.chronicler = new Chronicler();
     this.initFileSystem();
+    this.chronicler.init();
   }
 
   static getInstance(): SwarmOrchestrator {
@@ -94,10 +98,26 @@ export class SwarmOrchestrator extends EventEmitter {
     }
 
     try {
-      const result = await agent.runTask(task.description);
+      // Step A: Recall previous knowledge (RAG)
+      const memory = await this.chronicler.recall(task.type + ' ' + task.description);
+      const contextualPrompt = memory.length > 0 
+        ? `SABIDURÍA PREVIA (Fragmentos de Memoria):\n${memory.map(m => `--- ${m.key} ---\n${m.content}`).join('\n')}\n\nREQUERIMIENTO ACTUAL: ${task.description}`
+        : task.description;
+
+      const result = await agent.runTask(contextualPrompt);
       task.status = 'completed';
       task.result = result;
       this.saveQueue();
+
+      // Step B: Memorize completion (if successful and relevant)
+      if (result.length > 100) {
+        await this.chronicler.memorize({
+          key: `Task result: ${task.type} - ${task.id}`,
+          content: result,
+          tags: [task.type, 'task-result'],
+          project: process.env.PROJECT_NAME || 'Sognatore'
+        });
+      }
       
       this.emit('task:completed', { taskId: task.id, result });
       return result;

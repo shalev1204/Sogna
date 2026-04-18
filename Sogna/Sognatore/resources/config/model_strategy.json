@@ -8,7 +8,10 @@
       "models": [
         { "provider": "claude", "model": "claude-3-5-opus-latest" },
         { "provider": "openai", "model": "gpt-4o" },
-        { "provider": "gemini", "model": "gemini-1.5-pro" }
+        { "provider": "gemini", "model": "gemini-1.5-pro" },
+        { "provider": "kimi", "model": "kimi-k2.5" },
+        { "provider": "deepseek", "model": "deepseek-reasoner" },
+        { "provider": "openrouter", "model": "anthropic/claude-3.5-sonnet" }
       ]
     },
     "gold": {
@@ -17,7 +20,10 @@
       "models": [
         { "provider": "claude", "model": "claude-3-5-sonnet-latest" },
         { "provider": "gemini", "model": "gemini-1.5-pro" },
-        { "provider": "openai", "model": "gpt-4o" }
+        { "provider": "openai", "model": "gpt-4o" },
+        { "provider": "kimi", "model": "kimi-k2-turbo" },
+        { "provider": "deepseek", "model": "deepseek-chat" },
+        { "provider": "openrouter", "model": "meta-llama/llama-3.1-405b" }
       ]
     },
     "silver": {
@@ -26,7 +32,10 @@
       "models": [
         { "provider": "gemini", "model": "gemini-1.5-flash" },
         { "provider": "claude", "model": "claude-3-5-haiku-latest" },
-        { "provider": "openai", "model": "gpt-4o-mini" }
+        { "provider": "openai", "model": "gpt-4o-mini" },
+        { "provider": "kimi", "model": "moonshot-v1-8k" },
+        { "provider": "deepseek", "model": "deepseek-chat" },
+        { "provider": "openrouter", "model": "google/gemini-flash-1.5" }
       ]
     }
   },

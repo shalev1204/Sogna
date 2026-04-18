@@ -24,6 +24,9 @@ export class SetupWizard {
 
     const anthropicKey = await this.ask('Clave API de Anthropic (clau-...)');
     const googleKey = await this.ask('Clave API de Google Gemini');
+    const kimiKey = await this.ask('Clave API de Kimi (Moonshot AI)');
+    const deepseekKey = await this.ask('Clave API de DeepSeek (sk-...)');
+    const openrouterKey = await this.ask('Clave API de OpenRouter (sk-or-...)');
     const openaiKey = await this.ask('Clave API de OpenAI (sk-...)');
     
     console.log(chalk.yellow('\n--- Configurar Sistema de Actualizaciones ---'));
@@ -38,6 +41,9 @@ ANTHROPIC_API_KEY=${anthropicKey}
 
 # Desarrollador Oro/Plata
 GOOGLE_API_KEY=${googleKey}
+KIMI_API_KEY=${kimiKey}
+DEEPSEEK_API_KEY=${deepseekKey}
+OPENROUTER_API_KEY=${openrouterKey}
 
 # Especialista Versátil
 OPENAI_API_KEY=${openaiKey}

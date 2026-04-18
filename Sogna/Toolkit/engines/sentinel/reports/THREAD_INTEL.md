@@ -2284,3 +2284,20 @@
 [CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (\b__proto__\b).
 	Ubicación: research/pentest-lab/vulnerable-api-elite.cjs
 	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-18T16:58:55.968Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado ((?:password|secret|key|token|auth)\s*[:=]\s*["\'](?!pk|sk|sb|ak|id)[^"\']{8,}["\']).
+	Ubicación: Sognatore/src/core/security/HoneypotManager.ts
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/security/HoneypotManager.ts:2
+	Solución : Justificar la excepción de seguridad en el comentario.
+
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel.
+	Ubicación: Sognatore/src/core/security/HoneypotManager.ts:2
+	Solución : Justificar la excepción de seguridad en el comentario.

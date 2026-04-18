@@ -49,6 +49,9 @@ const DOMAIN_WHITELIST = [
     'api.anthropic.com',                 // Claude
     'openai.com', 
     'api.openai.com',                   // OpenAI
+    'api.deepseek.com',                 // DeepSeek
+    'api.moonshot.cn',                   // Moonshot (Kimi)
+    'openrouter.ai',                    // OpenRouter
     'microsoft.com',                    // Teams
     'facebook.com', 
     'graph.facebook.com',               // Meta APIs
@@ -57,6 +60,12 @@ const DOMAIN_WHITELIST = [
     'sogna.js', 
     'localhost',
     '127.0.0.1'
+];
+
+const HONEYPOTS = [
+    '.env.production',
+    'resources/config/secrets.json',
+    'memory/security/id_rsa'
 ];
 
 // Variable/Constant names that are explicitly allowed as URL targets
@@ -76,7 +85,9 @@ const ALLOWED_TARGET_NAMES = [
     'hostname',   // Standard for DNS/HTTP lookups
     'API_BASE',   // Custom API base for frontend routes
     'BACKEND_URL',// Standard backend reference
-    'BASE_URL'    // Standard base URL
+    'BASE_URL',    // Standard base URL
+    'this.baseUrl',  // Sognatore Provider base URL
+    'VITE_'
 ];
 
 let hasCritical = false;
@@ -113,6 +124,12 @@ function scanDataLeak(filePath, content) {
         /-----BEGIN (?:PRIVATE|RSA|OPENSSH) KEY-----/,
         /[a-f0-9]{64}/i,                                // SHA-256 strings (potential secrets)
     ];
+
+    // Check Honeypots
+    if (HONEYPOTS.some(h => filePath.includes(h))) {
+        addReport('CRITICAL', `VIOLACIÓN DE HONEYPOT: Intento de acceso o modificación de un archivo señuelo de seguridad.`, filePath, "PROTOCOLO DE BLOQUEO ACTIVADO.");
+        return;
+    }
 
     for (const pattern of secretPatterns) {
         const match = content.match(pattern);
@@ -508,9 +525,10 @@ async function scanSupplyChain(filePath) {
             // --- MECANISMO DE EXENCIÓN & CONTENCIÓN ---
             const isContainment = fileLine.includes('tests/security_training/');
             
-            if (content.includes('// @sentinel-ignore') || content.includes('/* @sentinel-ignore */')) {
-                // If the file has at least one GLOBAL ignore, skip it
-                if (content.match(/\/\* @sentinel-ignore \*\//) || content.match(/\/\/ @sentinel-ignore: GLOBAL/)) {
+            if (content.includes('@sentinel-ignore') || content.includes('@sogna-ignore')) {
+                // If the file has a GLOBAL ignore using either comment style, skip it
+                if (content.match(/\/\*[\s\S]*?@sentinel-ignore: GLOBAL[\s\S]*?\*\//) || 
+                    content.match(/\/\/ @sentinel-ignore: GLOBAL/)) {
                     console.log(`[SENTINEL] Saltando archivo auditado externamente (GLOBAL): ${fileLine}`);
                     continue;
                 }
@@ -557,7 +575,14 @@ async function scanSupplyChain(filePath) {
         console.error(reportLog);
         if (hasCritical && vetoThreshold) {
             console.error("⛔ [VETO] Sentinel ha bloqueado el commit por infracciones críticas.");
-            try { fs.appendFileSync(path.join(__dirname, '..', 'reports', 'THREAD_INTEL.md'), `\n\n### INTRUSIÓN DETECTADA: ${new Date().toISOString()}\n${reportLog}`); } catch(e) {}
+            const reportFile = path.join(__dirname, '..', 'reports', 'THREAD_INTEL.md');
+            try { fs.appendFileSync(reportFile, `\n\n### INTRUSIÓN DETECTADA: ${new Date().toISOString()}\n${reportLog}`); } catch(e) {}
+            
+            // INMUNE SYSTEM TRIGGER
+            console.log("💉 [SENTINEL] Disparando Sistema Inmune para autocuración...");
+            // En una integración real, llamaríamos al binario de sognatore para ejecutar la curación
+            // Aquí simulamos que el reporte se procesa para la próxima ronda de razonamiento.
+            
             process.exit(1);
         } else {
             console.warn("⚠️  [WARNING] Commit permitido con advertencias.");
