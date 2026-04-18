@@ -427,7 +427,7 @@ program
         // Obtenemos todos los archivos rastreados por Git en el monorepo
         const allTracked = execSync('git ls-files', { encoding: 'utf8' })
           .split('\n')
-          .filter(f => f && (f.endsWith('.ts') || f.endsWith('.js') || f.endsWith('package.json')));
+          .filter(f => f && (f.endsWith('.ts') || f.endsWith('.js') || f.endsWith('package.json') || f.endsWith('.md')));
         
         console.log(chalk.gray(`Analizando ${allTracked.length} archivos críticos en lotes...`));
         

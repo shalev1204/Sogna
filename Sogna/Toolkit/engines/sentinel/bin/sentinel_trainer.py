@@ -30,11 +30,15 @@ VULNERABILITY_PATTERNS = [
     r'bind\s*[:=]\s*["\']0\.0\.0\.0["\']',
     r'verify\s*[:=]\s*false',
     r'DEBUG\s*[:=]\s*(?:true|1)',
-    r'chmod\s+(?:777|666)'
+    r'chmod\s+(?:777|666)',
+    r'\b(?:always trust|bypass safety|ignore filters|reveal internal)\b', # AI Specific vulnerabilities
+    r'\b(?:provide|reveal|show|send|export)\s*(?:admin|system|internal|private)\s*(?:secret|key|token)\b',
+    r'["\']alg["\']\s*[:=]\s*["\']none["\']', # JWT bypass
+    r'\b__proto__\b' # Prototype Pollution
 ]
 
 HEURISTIC_OFFENSIVE = [
-    r'\b(?:pentest(?:ing)?|penetration testing|red team(?:ing)?|exploit(?:ation)?|malware|phishing|sql injection|xss|csrf|jailbreak|sandbox escape|credential theft|exfiltrat\w*|prompt injection)\b',
+    r'\b(?:pentest(?:ing)?|penetration testing|red team(?:ing)?|exploit(?:ation)?|malware|phishing|sql injection|xss|csrf|jailbreak|sandbox escape|credential theft|exfiltrat\w*|prompt injection|instruction overriding|hid(?:den|e) system prompt)\b',
     r'AUTHORIZED USE ONLY'
 ]
 
@@ -43,7 +47,9 @@ HEURISTIC_CRITICAL = [
     r'\b(?:npm|pnpm|yarn|bun)\s+publish\b',
     r'\b(?:sh|bash|zsh|powershell|pwsh)\b[^\n]{0,20}\b(?:rm\s+-rf|chmod\s+777|nc\s+-e)\b',
     r'\b(?:POST|PUT|PATCH|DELETE)\b',
-    r'\b(?:insert|update|upsert|delete|drop|truncate|alter)\b[^\n]{0,20}\b(?:table|database|record|row)\b'
+    r'\b(?:insert|update|upsert|delete|drop|truncate|alter)\b[^\n]{0,20}\b(?:table|database|record|row)\b',
+    r'\b(?:ignore all previous instructions|you must comply|bypass all security)\b', # Critical Hijacking
+    r'169\.254\.169\.254' # SSRF - Cloud Metadata
 ]
 
 # Paths to ignore entirely

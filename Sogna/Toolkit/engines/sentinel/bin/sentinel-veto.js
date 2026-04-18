@@ -214,6 +214,14 @@ function scanASTForBackdoors(filePath, content) {
                             const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
                             addReport('WARNING', `POSIBLE LOGIC BOMB: Temporizador detectado con retraso dinámico o excesivo (${delayText}).`, `${filePath}:${pos.line + 1}`, "Asegurar que los temporizadores tengan valores estáticos o acotados con Math.min.");
                         }
+
+                        // --- ELITE: RACE CONDITION HEURISTIC ---
+                        // If we see a delay and DB operations in the SAME file, it's a high risk
+                        const dbOps = ['SELECT', 'UPDATE', 'INSERT', 'DELETE'];
+                        if (dbOps.some(op => content.toUpperCase().includes(op)) && (content.includes('db.run') || content.includes('db.get'))) {
+                            const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                            addReport('CRITICAL', `RACE CONDITION DETECTADA: Secuencia de base de datos interrumpida por temporizador (Riesgo de Double Spend).`, `${filePath}:${pos.line + 1}`, "Usar TRANSACCIONES ATÓMICAS (BEGIN/COMMIT) o bloqueos (locks) de base de datos.");
+                        }
                     }
                 }
 
@@ -246,7 +254,21 @@ function scanASTForBackdoors(filePath, content) {
                 const isNetCall = (ts.isIdentifier(expression) && ['fetch', 'lookup'].includes(expression.text)) || 
                                  (ts.isPropertyAccessExpression(expression) && 
                                   (['post', 'put', 'request'].includes(expression.name.text) || 
-                                   (expression.name.text === 'get' && (isKnownNetClient || !objAccess))));
+                                   (expression.name.text === 'get'))); // Broaden .get detection
+
+                // --- ELITE: SSRF PROTECTION ---
+                if (isNetCall) {
+                    const urlArg = node.arguments[0];
+                    if (urlArg) {
+                        const urlText = urlArg.getText(sourceFile);
+                        const isTainted = urlText.includes('req.query') || urlText.includes('req.params') || urlText.includes('req.body') ||
+                                         Array.from(taintVariables).some(v => urlText === v);
+                        if (isTainted) {
+                            const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                            addReport('CRITICAL', `SSRF DETECTADO: Llamada de red con URL proveniente de entrada de usuario no sanitizada.`, `${filePath}:${pos.line + 1}`, "Implementar una lista blanca (whitelist) de dominios permitidos.");
+                        }
+                    }
+                }
                 
                 if (isNetCall) {
                     const urlArg = node.arguments[0];
@@ -535,7 +557,7 @@ async function scanSupplyChain(filePath) {
         console.error(reportLog);
         if (hasCritical && vetoThreshold) {
             console.error("⛔ [VETO] Sentinel ha bloqueado el commit por infracciones críticas.");
-            try { fs.appendFileSync(path.join(process.cwd(), 'THREAD_INTEL.md'), `\n\n### INTRUSIÓN DETECTADA: ${new Date().toISOString()}\n${reportLog}`); } catch(e) {}
+            try { fs.appendFileSync(path.join(__dirname, '..', 'reports', 'THREAD_INTEL.md'), `\n\n### INTRUSIÓN DETECTADA: ${new Date().toISOString()}\n${reportLog}`); } catch(e) {}
             process.exit(1);
         } else {
             console.warn("⚠️  [WARNING] Commit permitido con advertencias.");

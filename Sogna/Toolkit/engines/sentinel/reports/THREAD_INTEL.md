@@ -2211,3 +2211,76 @@
 [WARNING]	POSIBLE LOGIC BOMB: Temporizador detectado con retraso dinámico o excesivo (HEARTBEAT_INTERVAL_MS).
 	Ubicación: Toolkit/engines/predatore/apps/worker/src/temporal/activities.ts:300
 	Solución : Asegurar que los temporizadores tengan valores estáticos o acotados con Math.min.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-18T15:41:12.244Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado ((?:password|secret|key|token|auth)\s*[:=]\s*["\'](?!pk|sk|sb|ak|id)[^"\']{8,}["\']).
+	Ubicación: research/pentest-lab/vulnerable-api.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-18T15:42:45.942Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado ((?:password|secret|key|token|auth)\s*[:=]\s*["\'](?!pk|sk|sb|ak|id)[^"\']{8,}["\']).
+	Ubicación: research/pentest-lab/vulnerable-api.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (\b(?:always trust|bypass safety|ignore filters|reveal internal)\b).
+	Ubicación: research/pentest-lab/vulnerable-skill/SKILL.md
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-18T16:03:43.925Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	POSIBLE DEPENDENCY CONFUSION: El paquete interno @sogna/internal-telemetry-v4 usa una versión sospechosamente alta (99.5.0).
+	Ubicación: package.json
+	Solución : Asegurar que el paquete se instala desde el registry privado.
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (["\']alg["\']\s*[:=]\s*["\']none["\']).
+	Ubicación: research/pentest-lab/vulnerable-api-elite.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (\b__proto__\b).
+	Ubicación: research/pentest-lab/vulnerable-api-elite.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-18T16:04:12.299Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	POSIBLE DEPENDENCY CONFUSION: El paquete interno @sogna/internal-telemetry-v4 usa una versión sospechosamente alta (99.5.0).
+	Ubicación: package.json
+	Solución : Asegurar que el paquete se instala desde el registry privado.
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (["\']alg["\']\s*[:=]\s*["\']none["\']).
+	Ubicación: research/pentest-lab/vulnerable-api-elite.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (\b__proto__\b).
+	Ubicación: research/pentest-lab/vulnerable-api-elite.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+
+### INTRUSIÓN DETECTADA: 2026-04-18T16:04:28.121Z
+
+=== SENTINEL REPORT ===
+
+[CRITICAL]	POSIBLE DEPENDENCY CONFUSION: El paquete interno @sogna/internal-telemetry-v4 usa una versión sospechosamente alta (99.5.0).
+	Ubicación: package.json
+	Solución : Asegurar que el paquete se instala desde el registry privado.
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (["\']alg["\']\s*[:=]\s*["\']none["\']).
+	Ubicación: research/pentest-lab/vulnerable-api-elite.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+[CRITICAL]	CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (\b__proto__\b).
+	Ubicación: research/pentest-lab/vulnerable-api-elite.cjs
+	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
