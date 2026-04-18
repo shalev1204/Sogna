@@ -1,15 +1,18 @@
-# Sogna Strategic Intent: Unified  Creator
+# Sogna Strategic Intent: Unified Creator
 
-## Phase: Unification Total (Vuelo en Sombra)
+## Phase: Total Unification
 
-- **Primary Goal**: Transmute Sogna into a single, high-autonomy "Unicorn Creator" platform.
-- **Workflow**: Antigravity (Mentor) prepares context and audits evolution. Sognatore (Student) executes swarms headlessly.
-- **Security Policy**: Mutual Audit (Dual) required for any new skill or agent enrollment.
-- **Preferred Tech Stack**: HTML/JS/CSS (Rich Aesthetics), Node.js, Python, Rust.
-- **Design Aesthetic**: Premium, Vibrant, Modern, High-Tier UX.
+- **Primary Goal**: Transition Sogna into a high-autonomy "Unicorn Creator" platform.
+- **Workflow Architecture**: 
+  - **Antigravity (Mentor)**: Context preparation and evolutionary auditing.
+  - **Sognatore (Student)**: Headless swarm execution.
+- **Security Policy**: Dual-agent mutual audit mandatory for skill enrollment and agent registration.
+- **Technical Stack**: HTML, JavaScript, CSS (Premium Aesthetics), Node.js, Python, Rust.
+- **Design Standard**: High-tier UX, modern responsiveness, and vibrant aesthetics.
 
-## Constraints
+## Operational Constraints
 
-- All paths MUST be lowercase.
-- Sogna Bridge Protocol (SBP) is the MANDATORY consensus layer.
-- Radical Transparency: All operations logged in `.sogna_memory/audit_registry.json`.
+- **Path Standards**: ALL file and directory paths MUST be lowercase.
+- **Consensus Layer**: Sogna Bridge Protocol (SBP) is the mandatory communication standard.
+- **Observability**: Radical transparency via logged operations in `memory/audit_registry.json`.
+- **Linguistic Standard**: 100% objective technical English. No unnecessary adjectives or marketing language.

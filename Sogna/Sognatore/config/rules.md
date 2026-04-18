@@ -13,7 +13,7 @@ These agents MUST adhere to the following consolidated protocol:
 ## Technical Source of Truth (Zero-Error Policy)
 
 - **Language**: TypeScript is MANDATORY for all core modules. Use ES Modules (ESM) exclusively.
-- **Stability**: `python Sogna/toolkit/scripts/verify_all.py` (or individual runners) MUST be executed to maintain 100% ecosystem integrity.
+- **Stability**: `python ../../toolkit/scripts/verify_all.py` (or individual runners) MUST be executed to maintain 100% ecosystem integrity.
 - **Resilient Error Handling**: Every re-thrown error MUST include a `{ cause: error }` property.
 - **Security**: Mandatory consultation with `@security-auditor` for any authentication or sensitive data logic.
 
@@ -21,24 +21,24 @@ These agents MUST adhere to the following consolidated protocol:
 
 When a request is made, follow this sequence:
 
-1. **Founder Consultation**: For new features, consult `toolkit/agents/founder.md` to ensure project vision and strategy.
-2. **Specialist Delegation**: Assign tasks to the 20 specialist agents in `Sogna/toolkit/agents/` based on their domain.
-3. **Skill Enrichment**: Before execution, read relevant knowledge from `Sogna/toolkit/skills/`.
+1. **Founder Consultation**: For new features, consult `../../toolkit/agents/founder.md` to ensure project vision and strategy.
+2. **Specialist Delegation**: Assign tasks to the 20 specialist agents in `../../toolkit/agents/` based on their domain.
+3. **Skill Enrichment**: Before execution, read relevant knowledge from `../../toolkit/skills/`.
 4. **Premium Default**: All UI work MUST trigger the `ui-ux-pro-max` workflow logic and use assets from `shared/ui-ux-pro-max/`.
 
 ## Commands & Workflows
 
-- `/plan [feature]`: Executes [plan.md](./Sogna/toolkit/workflow/plan.md).
-- `/debug`: Executes [debug.md](./Sogna/toolkit/workflow/debug.md).
-- `/status`: Executes [status.md](./Sogna/toolkit/workflow/status.md).
-- `/create [feature]`: Executes [create.md](./Sogna/toolkit/workflow/create.md).
-- `/ui-ux-pro-max`: Premium design enhancement from [ui-ux-pro-max.md](./Sogna/toolkit/workflow/ui-ux-pro-max.md).
+- `/plan [feature]`: Executes [plan.md](../../toolkit/workflow/plan.md).
+- `/debug`: Executes [debug.md](../../toolkit/workflow/debug.md).
+- `/status`: Executes [status.md](../../toolkit/workflow/status.md).
+- `/create [feature]`: Executes [create.md](../../toolkit/workflow/create.md).
+- `/ui-ux-pro-max`: Premium design enhancement from [ui-ux-pro-max.md](../../toolkit/workflow/ui-ux-pro-max.md).
 
 ## Agent Synergy Integration
 
 1. **Specialist Consultation**: Consult the specific Specialist Agent files for Frontend, Backend, Database, Mobile, etc.
-2. **Automated Audit**: Run `toolkit/scripts/verify_all.py` before final delivery.
+2. **Automated Audit**: Run `../../toolkit/scripts/verify_all.py` before final delivery.
 3. **Aesthetic Excellence**: No placeholders. Use vibrant colors, glassmorphism, and dynamic animations as per toolkit standards.
 
 ---
-*Refer to [TOOLKIT.md](./Sogna/toolkit/TOOLKIT.md) for deeper operational details.*
+*Refer to [TOOLKIT.md](../../toolkit/TOOLKIT.md) for deeper operational details.*

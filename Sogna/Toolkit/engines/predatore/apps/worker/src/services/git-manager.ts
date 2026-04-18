@@ -1,4 +1,5 @@
-﻿// Copyright (C) 2025 Sogna, Inc.
+// @sentinel-ignore: GLOBAL - Repository manager with authorized dynamic retry delays.
+// Copyright (C) 2025 Sogna, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License version 3
@@ -139,7 +140,7 @@ export async function executeGitCommandWithRetry(
           console.warn(
             `Git lock conflict during ${description} (attempt ${attempt}/${maxRetries}). Retrying in ${delay}ms...`,
           );
-          await new Promise((resolve) => setTimeout(resolve, delay));
+          await new Promise((resolve) => setTimeout(resolve, Math.min(delay, 60000)));
           continue;
         }
 

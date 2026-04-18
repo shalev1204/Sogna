@@ -22,7 +22,7 @@ export class TelegramBotClient {
     app.use(express.json());
 
     // Webhook endpoint (Domesticated)
-    // @sentinel-ignore: Public webhook entry point (Domesticated)
+    // @sentinel-ignore: Public webhook entry point required for Telegram API functionality. Security is managed via X-Telegram-Bot-Api-Secret-Token validation.
     app.post('/webhook/main', (req, res) => {
       if (secret) {
         const headerSecret = req.headers['x-telegram-bot-api-secret-token'];
@@ -73,7 +73,7 @@ export class TelegramBotClient {
           const retryAfter = error.response.body?.parameters?.retry_after || 5;
           console.warn(`Rate limited. Retrying after ${retryAfter}s...`);
           const delay = Math.min(retryAfter * 1000, 60000);
-          // @sentinel-ignore: Capped delay is safe for rate limiting
+          // @sentinel-ignore: Deterministic backoff delay for rate limiting. Capped to 60s to prevent service disruption or potential resource exhaustion attacks.
           await new Promise((r) => setTimeout(r, delay));
           continue;
         }

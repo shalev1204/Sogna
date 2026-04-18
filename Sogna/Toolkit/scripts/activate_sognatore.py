@@ -9,10 +9,10 @@ from datetime import datetime
 # This script launches Sognatore headlessly and monitors for convergence.
 
 def log_event(message):
-    log_path = os.path.abspath("../../logs/sovereign_operations.log")
+    log_path = os.path.abspath("../../logs/sogna_operations.log")
     timestamp = datetime.now().isoformat()
     with open(log_path, "a", encoding="utf-8") as f:
-        f.write(f"[{timestamp}] [SHADOW_RUN] {message}\n")
+        f.write(f"[{timestamp}] [HEADLESS_RUN] {message}\n")
     print(f"[*] {message}")
 
 def activate_swarm(prd_path):

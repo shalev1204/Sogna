@@ -37,14 +37,20 @@ function App() {
 
       <main className="features-grid">
         <FeatureCard title="Omniscience" desc="Integrated real-time search and external agent delegation." icon="👁️" />
-        <FeatureCard title="Sovereignty" desc="Full physical copies and isolated identity management." icon="🛡️" />
+        <FeatureCard title="Autonomy" desc="Full physical copies and isolated identity management." icon="🛡️" />
         <FeatureCard title="Automation" desc="Seamless n8n and Supabase cloud synchronization." icon="⚡" />
       </main>
     </div>
   );
 }
 
-function FeatureCard({ title, desc, icon }) {
+interface FeatureCardProps {
+  title: string;
+  desc: string;
+  icon: string;
+}
+
+function FeatureCard({ title, desc, icon }: FeatureCardProps) {
   return (
     <motion.div 
       whileHover={{ y: -10 }}

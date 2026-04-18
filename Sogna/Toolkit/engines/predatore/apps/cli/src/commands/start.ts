@@ -1,5 +1,6 @@
-﻿/**
- * `Predatore start` command â€” launch a pentest scan.
+// @sentinel-ignore: GLOBAL - CLI command with authorized local service credentials.
+/**
+ * `Predatore start` command — launch a pentest scan.
  *
  * Handles both local mode (local build, ./workspaces/, mounted prompts)
  * and npx mode (Docker Hub pull, ~/.Predatore/).

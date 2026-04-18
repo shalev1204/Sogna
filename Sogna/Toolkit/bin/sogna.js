@@ -150,8 +150,8 @@ program
     const SOGNA_ROOT_CHECK = path.join(__dirname, '..', '..');
     checkFile('Motor Sognatore', path.join(SOGNA_ROOT_CHECK, 'Sognatore'));
     checkFile('Toolkit Antigravity', path.join(SOGNA_ROOT_CHECK, 'toolkit'));
-    checkFile('Identidad Soberana', path.join(SOGNA_ROOT_CHECK, 'config', 'sognarules.md'));
-    checkFile('Metadatos de Agente', path.join(SOGNA_ROOT_CHECK, 'config', 'agent-metadata'));
+    checkFile('Identidad Soberana', path.join(SOGNA_ROOT_CHECK, 'Sognatore', 'config', 'rules.md'));
+    checkFile('Metadatos de Agente', path.join(SOGNA_ROOT_CHECK, 'Sognatore', 'config', 'agent_metadata.json'));
 
     if (options.secure) {
       console.log(chalk.magenta(`\n[SENTINEL] 🛡️  Iniciando Auditoría de Seguridad Profunda...`));
@@ -558,7 +558,7 @@ program
       // Lógica de inyección simplificada para el MVP
       try {
         if (target.name === 'Cursor') {
-          const rulesPath = path.join(__dirname, '..', '..', 'config', 'sognarules.md');
+          const rulesPath = path.join(__dirname, '..', '..', 'Sognatore', 'config', 'rules.md');
           if (fs.existsSync(rulesPath)) {
             await fs.copy(rulesPath, target.path);
             console.log(chalk.green(`✔ .cursorrules actualizado con ADN Sognatore.`));

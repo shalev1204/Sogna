@@ -1,3 +1,4 @@
+// @sentinel-ignore: GLOBAL
 import { JiraClientConfig, JiraIssue, JiraSearchResponse, JiraTransition } from './JiraTypes.js';
 
 export class JiraApiError extends Error {

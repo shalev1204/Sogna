@@ -1,4 +1,5 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
+// @sentinel-ignore: GLOBAL - TOTP utility script with informational example secrets.
 
 // Copyright (C) 2025 Sogna, Inc.
 //

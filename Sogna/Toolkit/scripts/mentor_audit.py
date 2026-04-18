@@ -19,7 +19,7 @@ def save_registry(registry):
         json.dump(registry, f, indent=2)
 
 def log_audit(message):
-    log_path = os.path.abspath("../../../logs/sovereign_operations.log")
+    log_path = os.path.abspath("../../../logs/sogna_operations.log")
     timestamp = datetime.now().isoformat()
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(f"[{timestamp}] [MENTOR_AUDIT] {message}\n")

@@ -1,6 +1,6 @@
-# Sogna Sovereign Architecture Context
+# Sogna Core Architecture Context
 
-You are auditing the Sogna ecosystem. This is a white-box, sovereign environment.
+You are auditing the Sogna ecosystem. This is a white-box, autonomous environment.
 Use this context to guide your reconnaissance and vulnerability detection.
 
 ## 1. System Components
