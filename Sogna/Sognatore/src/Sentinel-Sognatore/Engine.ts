@@ -16,6 +16,7 @@ import { PermissionMode } from './Shield.js';
 import { spawnSync } from 'child_process';
 import { Hub, SecurityState } from './Hub.js';
 import { Honeypots } from './Honeypots.js';
+import { MemoryHub } from '../core/memory/MemoryHub.js';
 
 /**
  * Sognatore Policy Engine - Core Evaluation Engine
@@ -171,6 +172,7 @@ function _parseScalar(v: string): any {
 }
 
 export class Engine {
+  private static instance: Engine | null = null;
   private _projectDir: string;
   private _options: any;
   private _policies: any = null;
@@ -180,6 +182,13 @@ export class Engine {
   private _validationErrors: string[] = [];
   private static _globalMode: PermissionMode = PermissionMode.Balanced;
   private _executiveBinaryPath: string;
+
+  public static getInstance(projectDir?: string, options?: any): Engine {
+    if (!this.instance) {
+      this.instance = new Engine(projectDir, options);
+    }
+    return this.instance;
+  }
   private _honeypotSet: Set<string> = new Set();
 
   public static setGlobalMode(mode: string): void {
@@ -563,6 +572,30 @@ export class Engine {
       fs.unwatchFile(this._policyPath);
       this._watcher = false;
     }
+  }
+
+  public validateCommand(command: string): { isSafe: boolean; category: string; violations: string[] } {
+    const evaluation = this.evaluate('pre_execution', { command });
+    
+    // INSTITUTIONAL CATEGORIZATION (SBP Alignment)
+    let category = 'READ_ONLY';
+    const cmdLower = command.toLowerCase();
+    
+    if (cmdLower.match(/\b(rm|rf|delete|drop|purge|wipe|format|truncate)\b/)) {
+      category = 'DESTRUCTIVE';
+    } else if (cmdLower.match(/\b(sudo|chmod|chown|root|passwd|shadow|visudo)\b/)) {
+      category = 'DANGER_ZONE';
+    } else if (cmdLower.match(/\b(deploy|publish|release|sync|push|production)\b/)) {
+      category = 'deployment';
+    } else if (cmdLower.match(/\b(apt|npm|yarn|pip|install|upgrade|update)\b/)) {
+      category = 'system_modification';
+    }
+
+    return {
+      isSafe: evaluation.allowed,
+      category,
+      violations: evaluation.violations.map((v: any) => v.reason || v.name)
+    };
   }
 
   public reload(): void {

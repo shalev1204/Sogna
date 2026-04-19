@@ -184,7 +184,7 @@ export class Agent {
 
             // Execute Tool
             const startTime = Date.now();
-            const observation = await ToolRegistry.getInstance().call(toolName, params, this.getAgentTier());
+            const observation = await ToolRegistry.getInstance().execute(toolName, params, this.getAgentTier());
             const duration = Date.now() - startTime;
 
             // AUDIT VAULT: Tool End

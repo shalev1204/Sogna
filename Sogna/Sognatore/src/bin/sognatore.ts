@@ -4,7 +4,7 @@ EnvOracle.load();
 import { Command } from 'commander';
 import { Doctor } from '../core/Doctor.js';
 import { Runner } from '../core/Runner.js';
-import { PolicyEngine } from '../policies/PolicyEngine.js';
+import { Engine as PolicyEngine } from '../Sentinel-Sognatore/Engine.js';
 import { SetupWizard } from '../core/utils/SetupWizard.js';
 import { ProjectManager } from '../core/ProjectManager.js';
 import { BootstrapEngine } from '../core/BootstrapEngine.js';

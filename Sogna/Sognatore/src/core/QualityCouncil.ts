@@ -6,8 +6,7 @@ import { CompatibilityGate } from './gates/CompatibilityGate.js';
 import { ConsensusGate } from './gates/ConsensusGate.js';
 import { VitalsGate } from './gates/VitalsGate.js';
 import { CouncilEvidence, GateResult } from './gates/types.js';
-import { AgentFactory } from './agents/AgentFactory.js';
-import { ProviderFactory } from './ProviderFactory.js';
+import { AgentRegistry } from './agents/AgentRegistry.js';
 import chalk from 'chalk';
 
 export class QualityCouncil {
@@ -15,12 +14,12 @@ export class QualityCouncil {
 
   constructor(private readonly cwd: string) {
     this.gates = [
-      new VitalsGate(cwd),           // NEW: Institutional Pre-flight
-      new CompatibilityGate(cwd),    // NEW: Gate 10 (High Priority)
-      new ConsensusGate(cwd),        // NEW: SBP Bridge
+      new VitalsGate(cwd),           // INSTITUTIONAL PRE-FLIGHT
+      new CompatibilityGate(cwd),    // GATE 10 (High Priority)
+      new ConsensusGate(cwd),        // SBP Bridge
       new StaticAnalysisGate(cwd),
       new BlindReviewGate(cwd),
-      new AntiSycophancyGate(cwd)    // NEW: Gate 7
+      new AntiSycophancyGate(cwd)    // GATE 7
     ];
   }
 
@@ -56,7 +55,7 @@ export class QualityCouncil {
 
         // Display findings for failed gates
         if (result.findings.length > 0) {
-          result.findings.forEach(f => {
+          result.findings.forEach((f: any) => {
             const color = f.severity === 'CRITICAL' ? chalk.red : chalk.yellow;
             console.log(color(`    - [${f.severity}] ${f.message}`));
           });
@@ -85,15 +84,15 @@ export class QualityCouncil {
   private async triggerDebate(gate: BaseGate, failedResult: GateResult, evidence: CouncilEvidence): Promise<{ resolved: boolean; reason: string }> {
     console.log(chalk.bold.magenta('  [CONCENSUS_DEBATE] Spawning Dialectic Peer Review...'));
 
-    const factory = AgentFactory.getInstance();
-    const architect = factory.createAgent('architect', 'Architect');
-    const auditor = factory.createAgent('auditor', 'System Auditor');
+    const registry = AgentRegistry.getInstance();
+    const architect = await registry.getAgent('prod-design'); // Representative for Architecture
+    const auditor = await registry.getAgent('supervisor');    // Representative for Quality Audit
 
     const debateContext = `
     TASK UNDER REVIEW: ${evidence.actionPlan || 'No plan provided'}
     FAILED GATE: ${gate.name}
     FINDINGS:
-    ${failedResult.findings.map(f => `- [${f.severity}] ${f.message}`).join('\n')}
+    ${failedResult.findings.map((f: any) => `- [${f.severity}] ${f.message}`).join('\n')}
     
     INSTRUCTIONS:
     Architect: Defend the plan or propose a fix.

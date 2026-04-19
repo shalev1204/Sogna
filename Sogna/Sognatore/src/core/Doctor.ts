@@ -11,7 +11,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { Guardian } from './Guardian.js';
 import { EnvOracle } from './utils/EnvOracle.js';
-import { BashShield, PermissionMode } from '../policies/BashShield.js';
+import { Shield as BashShield, PermissionMode } from '../Sentinel-Sognatore/Shield.js';
 import { fileURLToPath } from 'url';
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 import { execSync } from 'child_process';
@@ -64,6 +64,9 @@ export class Doctor {
     // Defensive Posture & Sanitization
     await this.checkDefensivePosture(results);
     
+    // Core Systems Logic (Security + Env)
+    await this.checkCoreSystems(results);
+
     // Disk Space (rough check)
     results.push(this.checkDiskSpace());
 
@@ -305,7 +308,7 @@ export class Doctor {
     });
 
     // 2. EnvOracle & Configuration
-    const hasEnv = fs.existsSync(path.join(process.cwd(), '.env')) || fs.existsSync(path.join(process.cwd(), '.sognatore', 'config.json'));
+    const hasEnv = EnvOracle.load() !== null || fs.existsSync(path.join(process.cwd(), '.sognatore', 'config.json'));
     results.push({
       name: 'Configuration Integrity',
       status: hasEnv ? 'PASS' : 'WARN',

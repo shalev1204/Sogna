@@ -86,7 +86,7 @@ export class JiraApiClient {
     const delay = Math.max(0, this._rateDelayMs - (now - this._lastRequestTime));
 
     if (delay > 0) {
-      await new Promise(resolve => setTimeout(resolve, Math.min(delay, 60000)) // @sentinel: Capped for institutional performance);
+      await new Promise(resolve => setTimeout(resolve, Math.min(delay, 60000))); // @sentinel: Capped for institutional performance
     }
 
     this._lastRequestTime = Date.now();

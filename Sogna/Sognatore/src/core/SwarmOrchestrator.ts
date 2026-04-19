@@ -6,10 +6,11 @@ import { DockerSandbox } from './DockerSandbox.js';
 import { Chronicler } from './memory/Chronicler.js';
 import { getSwarmStyle } from './utils/SwarmVisuals.js';
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs-extra';
 import { EventEmitter } from 'events';
 import chalk from 'chalk';
-import { SognaEventBus, SognaEventType, EventProvenance, FailureClass, PolicyEngine } from '@sogna/toolkit';
+import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/toolkit';
+import { Engine as PolicyEngine } from '../Sentinel-Sognatore/Engine.js';
 import { TerminalSubscriber } from './ui/TerminalSubscriber.js';
 import { QualityCouncil } from './QualityCouncil.js';
 import { Guardian } from './Guardian.js';
@@ -36,7 +37,7 @@ export class SwarmOrchestrator extends EventEmitter {
     super();
     this.messageBus = path.join(process.cwd(), 'Sognatore', '.sognatore', 'messages');
     this.registry = AgentRegistry.getInstance();
-    this.chronicler = new Chronicler();
+    this.chronicler = Chronicler.getInstance();
     this.initFileSystem();
     this.chronicler.init();
     
@@ -80,6 +81,16 @@ export class SwarmOrchestrator extends EventEmitter {
     });
   }
 
+  private detectAgentGap(task: SwarmTask): boolean {
+    const specialist = this.registry.resolveSpecialist(task.type);
+    return specialist === 'orch-researcher' && task.type !== 'research-gap'; 
+  }
+
+  private detectSkillGap(task: SwarmTask): boolean {
+    // Logic for identifying if current skills are insufficient
+    return false; // Stub
+  }
+
   /**
    * Dispatches a task to the swarm.
    * Finds the best agent category and triggers parallel execution if enabled.
@@ -97,9 +108,10 @@ export class SwarmOrchestrator extends EventEmitter {
 
     // [SQ-001] PRE-DISPATCH INSTITUTIONAL VETTING
     const policy = PolicyEngine.getInstance();
-    const vetting = policy.validateCommand(task.description); // Analyze intent
-    if (vetting.category === 'DESTRUCTIVE' || vetting.category === 'DANGER_ZONE') {
-      console.warn(chalk.red.bold(`[SECURITY] Pre-dispatch block: Task intent classified as ${vetting.category}.`));
+    const vetting = policy.evaluate('pre_execution', { command: task.description }); // Analyze intent
+    
+    if (vetting.decision === 'deny') {
+      console.warn(chalk.red.bold(`[SECURITY] Pre-dispatch block: Task intent rejected by Sentinel.`));
       throw new Error(`SECURITY ALERT: Task description contains potentially destructive commands. Dispatch suspended for manual review.`);
     }
 
@@ -107,7 +119,7 @@ export class SwarmOrchestrator extends EventEmitter {
     
     // Sandbox Profile Selection
     const sandbox = DockerSandbox.getInstance();
-    if (vetting.category !== 'READ_ONLY' || task.type.startsWith('sec-')) {
+    if (vetting.decision !== 'allow' || task.type.startsWith('sec-')) {
       sandbox.setProfile('security');
     } else {
       sandbox.setProfile('standard');
@@ -145,7 +157,7 @@ export class SwarmOrchestrator extends EventEmitter {
       const { passed, results } = await council.evaluate(evidence);
       if (!passed) {
         console.warn(chalk.yellow('[ORCHESTRATOR] Quality Council denied initial dispatch. Triggering Pre-emptive Fix...'));
-        const findings = results.flatMap(r => r.findings.map(f => f.message)).join('; ');
+        const findings = results.flatMap(r => r.findings.map((f: any) => f.message)).join('; ');
         
         // Handle rejection by re-dispatching as a fix task or failing
         return await this.handleCouncilRejection(task, findings);
@@ -210,7 +222,7 @@ export class SwarmOrchestrator extends EventEmitter {
     
     if (validationResult.includes('VALIDATED')) {
       const factory = await AgentFactory.getInstance();
-      await factory.enrollNewSpecialist(role);
+      await (factory as any).enrollNewSpecialist(role);
       console.log(`[RECRUITMENT] Specialist '${role.type}' successfully enrolled and validated by the Council.`);
       this.emit('recruitment:success', { role });
     } else {
@@ -255,7 +267,8 @@ export class SwarmOrchestrator extends EventEmitter {
   }
 
   private saveQueue() {
-    const queuePath = path.join(process.cwd(), '.sognatore', 'queue', 'pending.json');
+    const sognatoreDir = path.join(process.cwd(), 'Sognatore', '.sognatore');
+    const queuePath = path.join(sognatoreDir, 'queue', 'pending.json');
     fs.writeFileSync(queuePath, JSON.stringify(this.taskQueue, null, 2));
   }
 
