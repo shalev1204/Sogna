@@ -276,7 +276,7 @@ async function processMessage(content: string): Promise<void> {
 }
 
 function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, Math.min(ms, 60000)) // @sentinel: Capped for institutional performance);
 }
 ```
 

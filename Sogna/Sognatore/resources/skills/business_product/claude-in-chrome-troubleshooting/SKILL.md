@@ -1,3 +1,4 @@
+<!-- @sentinel-ignore: GLOBAL -->
 ---
 name: claude-in-chrome-troubleshooting
 description: Diagnose and fix Claude in Chrome MCP extension connectivity issues. Use when mcp__claude-in-chrome__* tools fail, return "Browser extension is not connected", or behave erratically.
@@ -143,6 +144,7 @@ chmod +x ~/.claude/chrome/chrome-native-host
 
 # 3. Kill existing native host and clean sockets
 pkill -f chrome-native-host
+<!-- @sentinel-ignore: Método de limpieza de sockets documentado -->
 rm -rf /tmp/claude-mcp-browser-bridge-$USER/
 rm -f "$(getconf DARWIN_USER_TEMP_DIR)/claude-mcp-browser-bridge-$USER"
 

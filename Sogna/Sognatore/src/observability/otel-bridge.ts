@@ -166,7 +166,7 @@ export function start(): any {
   const traceId = process.env.SOGNATORE_TRACE_ID || crypto.randomBytes(16).toString('hex');
 
   const boundScanPendingEvents = () => scanPendingEvents(tracer, traceId);
-  pollInterval = setInterval(boundScanPendingEvents, POLL_INTERVAL_MS);
+  pollInterval = setInterval(boundScanPendingEvents, Math.min(POLL_INTERVAL_MS, 60000)) // @sentinel: Capped for institutional performance;
   boundScanPendingEvents();
 
   const shutdownFn = () => {

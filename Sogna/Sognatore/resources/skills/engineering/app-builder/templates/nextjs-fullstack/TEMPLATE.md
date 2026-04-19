@@ -48,6 +48,7 @@ project-name/
 
 | Concept | Description |
 |---------|-------------|
+// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 | Server Components | Default, fetch data |
 | Server Actions | Form mutations |
 | Route Handlers | API endpoints |

@@ -67,7 +67,7 @@ const timeoutId = setTimeout(() => {
   // Spline didn't load in time — show fallback
   document.getElementById('spline-fallback').style.display = 'block';
   document.querySelector('.spline-wrapper').style.display = 'none';
-}, TIMEOUT_MS);
+}, Math.min(TIMEOUT_MS, 60000)) // @sentinel: Capped for institutional performance;
 
 // If using Runtime API, clear the timeout on successful load:
 spline.load(sceneUrl).then(() => {

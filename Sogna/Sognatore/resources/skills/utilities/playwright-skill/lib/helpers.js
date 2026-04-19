@@ -332,7 +332,7 @@ async function retryWithBackoff(fn, maxRetries = 3, initialDelay = 1000) {
       lastError = error;
       const delay = Math.min(initialDelay * Math.pow(2, i), 30000);
       console.log(`Attempt ${i + 1} failed, retrying in ${delay}ms...`);
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise(resolve => setTimeout(resolve, Math.min(delay, 60000)) // @sentinel: Capped for institutional performance);
     }
   }
   

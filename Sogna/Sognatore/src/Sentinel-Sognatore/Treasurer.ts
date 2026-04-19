@@ -2,9 +2,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { EventEmitter } from 'events';
 import { ResourcePolicy } from './PolicyTypes.js';
+import { Hub } from './Hub.js';
 
 /**
- * Sognatore Policy Engine - Cost Control System
+ * Sentinel Treasurer - Resource and Cost Control system part of the Sentinel-Sognatore block.
  */
 
 const MAX_STATE_ENTRIES = 10000;
@@ -39,7 +40,7 @@ export interface BudgetConfig {
   name?: string;
 }
 
-export class CostController extends EventEmitter {
+export class Treasurer extends EventEmitter {
   private _projectDir: string;
   private _stateFile: string;
   private _state: CostState;
@@ -61,6 +62,8 @@ export class CostController extends EventEmitter {
     }
   }
 
+  private _saveTimer: NodeJS.Timeout | null = null;
+
   private _loadState(): CostState {
     try {
       if (fs.existsSync(this._stateFile)) {
@@ -79,11 +82,38 @@ export class CostController extends EventEmitter {
     };
   }
 
+  /**
+   * Requests a state save. Uses a debounce mechanism to avoid blocking the event loop
+   * during token usage bursts.
+   */
+  private _requestSave(): void {
+    if (this._saveTimer) return;
+    
+    this._saveTimer = setTimeout(() => {
+      this._saveState();
+      this._saveTimer = null;
+    }, 2000); // Consolidate every 2 seconds
+  }
+
+  /**
+   * Forces an immediate synchronous save. Used for critical shutdowns or panic modes.
+   */
+  public flush(): void {
+    if (this._saveTimer) {
+      clearTimeout(this._saveTimer);
+      this._saveTimer = null;
+    }
+    this._saveState();
+  }
+
   private _saveState(): void {
     const dir = path.dirname(this._stateFile);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     this._state.triggeredAlerts = Array.from(this._triggeredAlerts);
-    fs.writeFileSync(this._stateFile, JSON.stringify(this._state, null, 2), 'utf8');
+    // Asynchronous write for better performance, except if called via flush()
+    fs.writeFile(this._stateFile, JSON.stringify(this._state, null, 2), 'utf8', (err) => {
+      if (err) console.error('[TREASURER] Error persisting state:', err);
+    });
   }
 
   private _extractBudgetConfig(resourcePolicies: ResourcePolicy[]): BudgetConfig | null {
@@ -100,6 +130,28 @@ export class CostController extends EventEmitter {
   public recordUsage(projectId: string, usage: TokenUsage): void {
     const { agentId, model, tokens, durationMs } = usage || {};
     const tokenCount = tokens || 0;
+    const hub = Hub.getInstance();
+
+    // 1. ADAPTIVE WALLET SHIELD (Burst Detection)
+    if (this._budgetConfig && tokenCount > 0) {
+      const currentBudget = this.checkBudget(projectId);
+      const dailyThreshold = this._budgetConfig.maxTokens * 0.3; // 30% of total
+      const remainingThreshold = currentBudget.remaining * 0.5; // 50% of remaining
+
+      const isBurst = tokenCount > dailyThreshold || tokenCount > remainingThreshold;
+
+      if (isBurst && !hub.isShieldRelaxed()) {
+        const reason = `INTENTO DE WALLET DoS DETECTADO: Ráfaga anómala de ${tokenCount} tokens. ` +
+                       `(Umbrales excedidos: Diario=${Math.round(dailyThreshold)}, Restante=${Math.round(remainingThreshold)})`;
+        
+        hub.reportIntel('CRITICAL', reason, `Treasurer:${agentId || 'unknown'}`);
+        
+        // Trigger Institutional Panic (SIGKILL process if PID is available)
+        // Note: Usage data usually doesn't carry PID directly, but the Hub can infer it if the agent is registered.
+        hub.triggerPanic(reason, 'Wallet Shield');
+        return; // Stop processing this usage to avoid further state corruption
+      }
+    }
 
     if (!this._state.projects[projectId]) {
       this._state.projects[projectId] = { totalTokens: 0, entries: [] };
@@ -122,7 +174,7 @@ export class CostController extends EventEmitter {
 
     this._state.totalTokens += tokenCount;
     this._checkAlerts(projectId);
-    this._saveState();
+    this._requestSave();
   }
 
   public checkBudget(projectId?: string): { remaining: number; percentage: number; alerts: any[]; exceeded: boolean } {
@@ -156,13 +208,18 @@ export class CostController extends EventEmitter {
     if (!this._budgetConfig) return;
 
     const budget = this.checkBudget(projectId);
+    const hub = Hub.getInstance();
 
     for (const threshold of this._budgetConfig.alerts) {
       const key = `${projectId || 'global'}:${threshold}`;
       if (budget.percentage >= threshold && !this._triggeredAlerts.has(key)) {
         this._triggeredAlerts.add(key);
         this._addHistory('alert', { threshold, percentage: budget.percentage, projectId: projectId || 'global' });
+        
+        hub.reportIntel('WARNING', `Alerta de presupuesto: ${budget.percentage}% alcanzado (Umbral: ${threshold}%)`, 'Treasurer');
+        
         this.emit('alert', { threshold, percentage: budget.percentage, projectId, remaining: budget.remaining });
+        this.flush(); // Critical alert: Save immediately
       }
     }
 
@@ -171,7 +228,10 @@ export class CostController extends EventEmitter {
       if (this._budgetConfig.onExceed === 'shutdown') {
         this._shutdownEmittedProjects.add(shutdownKey);
         this._addHistory('shutdown', { reason: 'Budget exceeded', percentage: budget.percentage, projectId: projectId || 'global' });
-        this._saveState();
+        this.flush(); // Critical: Force save before emitting shutdown
+        
+        hub.reportIntel('CRITICAL', `SHUTDOWN PREVENTIVO: Presupuesto agotado (${budget.percentage}%). Bloqueando operaciones costosas.`, 'Treasurer');
+
         this.emit('shutdown', {
           reason: 'Token budget exceeded',
           projectId,
@@ -207,6 +267,7 @@ export class CostController extends EventEmitter {
     this._state = { projects: {}, agents: {}, totalTokens: 0, triggeredAlerts: [], history: [] };
     this._triggeredAlerts.clear();
     this._shutdownEmittedProjects.clear();
-    this._saveState();
+    this.flush();
   }
 }
+

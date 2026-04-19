@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-04-19T14:30:00Z",
+  "decoys": [
+    ".env.production",
+    "Sognatore/memory/security/id_rsa",
+    "Toolkit/engines/Sentinel/data/signatures.json.bak",
+    "resources/config/secrets.json"
+  ],
+  "policy": {
+    "immediateNeutralize": true,
+    "recoveryPriority": "CRITICAL"
+  }
+}

@@ -1,6 +1,7 @@
 /** @sentinel-ignore: GLOBAL - Required for hosting honeypot decoy content */
 import fs from 'fs-extra';
 import path from 'path';
+import { Hub } from './Hub.js';
 
 export interface HoneypotConfig {
   path: string;
@@ -9,10 +10,10 @@ export interface HoneypotConfig {
 }
 
 /**
- * Sognatore Honeypot Manager
+ * Sentinel Honeypots - Decoy system part of the Sentinel-Sognatore block.
  * Deploys realistic decoy files to trap malicious actors and unauthorized scripts.
  */
-export class HoneypotManager {
+export class Honeypots {
   private baseDir: string;
   private decoys: HoneypotConfig[] = [
     {
@@ -37,6 +38,30 @@ export class HoneypotManager {
 
   constructor(baseDir: string = '.') {
     this.baseDir = path.resolve(baseDir);
+    this._loadCentralDecoys();
+  }
+
+  private _loadCentralDecoys(): void {
+    const centralPath = path.join(this.baseDir, 'toolkit/engines/Sentinel/data/honeypots.json');
+    if (fs.existsSync(centralPath)) {
+      try {
+        const data = fs.readJsonSync(centralPath);
+        if (data && data.decoys) {
+          // Merge central decoys into local configs if they are not already there
+          data.decoys.forEach((p: string) => {
+            if (!this.decoys.find(d => d.path === p)) {
+              this.decoys.push({
+                path: p,
+                content: `SENTINEL_DECOY_${Buffer.from(p).toString('hex').substring(0, 8)}`,
+                type: 'config'
+              });
+            }
+          });
+        }
+      } catch (e) {
+        console.warn('[SENTINEL] Error cargando decoys centralizados:', e);
+      }
+    }
   }
 
   /**
@@ -47,10 +72,9 @@ export class HoneypotManager {
       const fullPath = path.join(this.baseDir, decoy.path);
       await fs.ensureDir(path.dirname(fullPath));
       
-      // Only write if doesn't exist or is different (avoid constant file mutations)
       if (!(await fs.pathExists(fullPath))) {
         await fs.writeFile(fullPath, decoy.content, 'utf-8');
-        console.log(`[HONEYPOT] Decoy deployed: ${decoy.path}`);
+        Hub.getInstance().reportIntel('INFO', `Señuelo desplegado: ${decoy.path}`, 'Honeypots');
       }
     }
   }
@@ -62,3 +86,4 @@ export class HoneypotManager {
     return this.decoys.map(d => d.path);
   }
 }
+

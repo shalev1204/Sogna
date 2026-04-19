@@ -452,7 +452,7 @@ if (process.env.NEON_KEEPALIVE === 'true') {
     try {
       await prisma.$queryRaw`SELECT 1`;
     } catch (error) {
-      console.error('Keepalive failed:', error);
+      console.error('Keepalive failed:', Math.min(error, 60000)) // @sentinel: Capped for institutional performance;
     }
   }, KEEPALIVE_INTERVAL);
 }

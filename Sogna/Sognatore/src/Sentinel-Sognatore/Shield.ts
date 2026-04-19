@@ -1,4 +1,5 @@
-import { PolicyEngine } from '@sogna/toolkit';
+import { Engine } from './Engine.js';
+import { Hub, SecurityState } from './Hub.js';
 
 export enum PermissionMode {
   ReadOnly = 'readonly',
@@ -12,7 +13,10 @@ export interface ValidationResult {
   reason?: string;
 }
 
-export class BashShield {
+/**
+ * Sentinel Shield - Terminal enforcement part of the Sentinel-Sognatore block.
+ */
+export class Shield {
   /**
    * Extracts the first command from a string, handling env vars and sudo.
    */
@@ -20,7 +24,6 @@ export class BashShield {
     const trimmed = command.trim();
     if (!trimmed) return '';
 
-    // Simplified env var skipping (handles KEY=val ...)
     const parts = trimmed.split(/\s+/);
     let i = 0;
     while (i < parts.length && parts[i].includes('=')) {
@@ -29,7 +32,6 @@ export class BashShield {
 
     let cmd = parts[i] || '';
     if (cmd === 'sudo') {
-      // Skip flags and take the next part
       i++;
       while (i < parts.length && parts[i].startsWith('-')) {
         i++;
@@ -44,12 +46,18 @@ export class BashShield {
    * Validates a command against a permission mode and workspace.
    */
   static validate(command: string, mode: PermissionMode, workspace?: string): ValidationResult {
-    const policy = PolicyEngine.getInstance();
-    const result = policy.validateCommand(command);
+    const engine = Engine.getInstance();
+    const hub = Hub.getInstance();
+    
+    // Enforcement: Override mode to ReadOnly if Hub is in PANIC
+    const effectiveMode = hub.getState() === SecurityState.PANIC ? PermissionMode.ReadOnly : mode;
+
+    const result = engine.validateCommand(command);
 
     // 1. Path Traversal & Out-of-Workspace (Balanced/ReadOnly)
-    if (mode !== PermissionMode.Full) {
+    if (effectiveMode !== PermissionMode.Full) {
       if (command.includes('../')) {
+        hub.reportIntel('WARNING', `Intento de Path Traversal bloqueado: ${command}`, 'Shield');
         return { allow: false, reason: 'Directory traversal (../) is restricted in this mode.' };
       }
       
@@ -59,6 +67,7 @@ export class BashShield {
         const pathStr = match[0].trim().replace(/['"]/g, '');
         const systemDirs = ['/etc', '/usr', '/var', '/bin', '/sbin', '/sys', '/proc', '/dev'];
         if (systemDirs.some(dir => pathStr.startsWith(dir)) || pathStr === '/') {
+          hub.reportIntel('CRITICAL', `Intento de acceso a ruta de sistema bloqueado: ${pathStr}`, 'Shield');
           return { allow: false, reason: `System path "${pathStr}" targets are restricted in this mode.` };
         }
       }
@@ -66,17 +75,24 @@ export class BashShield {
 
     // 2. Rule-based blocking (Institutional Parity)
     if (!result.isSafe) {
-        if (mode === PermissionMode.ReadOnly || result.category === 'DANGER_ZONE') {
-            return { allow: false, reason: result.violations.join('; ') };
+        const violations = result.violations.join('; ');
+        if (effectiveMode === PermissionMode.ReadOnly || result.category === 'DANGER_ZONE') {
+            hub.reportIntel('WARNING', `Comando denegado por política (${result.category}): ${violations}`, 'Shield');
+            return { allow: false, reason: violations };
         }
-        return { allow: true, warn: true, reason: result.violations.join('; ') };
+        hub.reportIntel('INFO', `Comando sospechoso permitido con advertencia: ${violations}`, 'Shield');
+        return { allow: true, warn: true, reason: violations };
     }
 
     // 3. Category Protections in ReadOnly
-    if (mode === PermissionMode.ReadOnly && result.category !== 'READ_ONLY') {
-        return { allow: false, reason: `Command classified as "${result.category}" is not allowed in ReadOnly mode.` };
+    if (effectiveMode === PermissionMode.ReadOnly && result.category !== 'READ_ONLY') {
+        const panicReason = hub.getState() === SecurityState.PANIC ? ' (FORCED BY SECURITY PANIC)' : '';
+        hub.reportIntel('WARNING', `Comando bloqueado por Modo ReadOnly${panicReason}: ${command}`, 'Shield');
+        return { allow: false, reason: `Command classified as "${result.category}" is not allowed in ReadOnly mode${panicReason}.` };
     }
 
     return { allow: true };
   }
 }
+
+

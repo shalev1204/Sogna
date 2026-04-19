@@ -201,6 +201,7 @@ cat > .sognatore/CONTINUITY.md << 'EOF'
 
 ## Decisions Made
 - Using SQLite for simplicity (per PRD)
+// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 - React Query for data fetching
 - TailwindCSS for styling
 

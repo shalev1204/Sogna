@@ -13,6 +13,7 @@ import os from 'os';
 import { EnvOracle } from './utils/EnvOracle.js';
 import { MemoryHub } from './memory/MemoryHub.js';
 import { ConfigDiscovery } from '../shared/ConfigDiscovery.js';
+import { Hub, SecurityState } from '../Sentinel-Sognatore/Hub.js';
 
 /**
  * Sognatore Guardian - The Security & Privacy Sentinel
@@ -28,7 +29,7 @@ export class Guardian {
     const config = ConfigDiscovery.getInstance().getConfig();
     this.SECRET_KEY = process.env.GUARDIAN_SECRET || config.guardianSecret || '';
     
-    // Strict Validation: No more hardcoded fallbacks in  Mode
+    // Strict Validation: No more hardcoded fallbacks in Apex Mode
     if (!this.SECRET_KEY || this.SECRET_KEY.length < 32) {
       console.error(chalk.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing or insufficient!'));
       
@@ -38,6 +39,40 @@ export class Guardian {
       
       this.SECRET_KEY = crypto.randomBytes(32).toString('hex');
     }
+
+    // MANDATORY APEX BOOT GATE: Validate Sentinel Pulse and Signatures
+    this.enforceSovereignty();
+  }
+
+  /**
+   * Enforces Sentinel sovereignty by checking pulse and signatures.
+   */
+  private async enforceSovereignty(): Promise<void> {
+    const hub = Hub.getInstance();
+    
+    // 1. Pulse Check
+    if (hub.getState() === SecurityState.PANIC) {
+        console.log(chalk.red.bold('🚨 [GUARDIAN] Sentinel is unresponsive! Entering Panic Mode.'));
+        await hub.recoverSentinel();
+        if (hub.getState() === SecurityState.PANIC) {
+            throw new Error('Sentinel Sovereign Crisis: Automatic curation failed. Boot aborted.');
+        }
+    }
+
+    // 2. Critical Integrity Signature Check
+    const criticalFiles = [
+        path.join(process.cwd(), 'src/core/Guardian.ts'),
+        path.join(process.cwd(), '../Toolkit/engines/Sentinel/bin/sentinel-veto.js')
+    ];
+
+    for (const file of criticalFiles) {
+        if (!hub.validateSignature(file)) {
+            console.error(chalk.red(`[CRITICAL] Unauthorized file modification! No valid Sentinel signature for: ${path.basename(file)}`));
+            throw new Error(`Sentinel Integrity Breach: Unsigned critical file detected.`);
+        }
+    }
+
+    console.log(chalk.green('🛡️ [GUARDIAN] Sentinel Sovereign validation passed. Project is secure.'));
   }
 
   public static getInstance(): Guardian {

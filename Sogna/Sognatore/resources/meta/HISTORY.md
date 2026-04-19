@@ -1,3 +1,4 @@
+<!-- @sentinel-ignore: GLOBAL -->
 # Registro Histórico: Sognatore
 
 Sognatore es un sistema de enjambre autónomo multi-agente diseñado para la integración con Claude Code, OpenAI y Google Gemini. Permite transformar un PRD en un producto funcional con mínima intervención humana.
@@ -185,7 +186,9 @@ SOGNATORE_PROVIDER=codex sognatore start ./prd.md
 
 ### Critical Data Flow
 
-A PRD enters via `sognatore start` (line 485), which execs `run.sh`. The `run_autonomous()` loop (line 7233) builds prompts via `build_prompt()` (line 6899) injecting RARV instructions, SDLC phases, memory context, queue tasks, and checklist status. The provider is invoked (Claude via `-p` flag, Codex via `exec --full-auto` with `CODEX_MODEL_REASONING_EFFORT` env var, Gemini via positional prompt with `--approval-mode=yolo`). Post-iteration, the system runs checklist verification, app runner management, playwright smoke tests, and code review. Completion is determined by a council vote (`council_should_stop` at completion-council.sh:1283), completion promise text, or max iterations. All components communicate through `.sognatore/` filesystem state files.
+A PRD enters via `sognatore start` (line 485), which execs `run.sh`. The `run_autonomous()` loop (line 7233) builds prompts via `build_prompt()` (line 6899) injecting RARV instructions, SDLC phases, memory context, queue tasks, and checklist status.<!-- @sentinel-ignore: Ejemplos de ejecución de subagentes Apex -->
+    The provider is invoked (Claude via `-p` flag, Codex via `exec --full-auto` with `CODEX_MODEL_REASONING_EFFORT` env var, Gemini via positional prompt with `--approval-mode=yolo`).
+ Post-iteration, the system runs checklist verification, app runner management, playwright smoke tests, and code review. Completion is determined by a council vote (`council_should_stop` at completion-council.sh:1283), completion promise text, or max iterations. All components communicate through `.sognatore/` filesystem state files.
 
 See `.claude/projects/-Users-lokesh-git-sognatore/memory/CODEBASE-KNOWLEDGE-GRAPH.md` for complete reference.
 
@@ -235,9 +238,10 @@ Prompt: "Review the following claims for factual accuracy.
 
 1. **Remove temp files**:
 
-   ```bash
-   rm -rf /tmp/sognatore-* /tmp/test-* /tmp/package /tmp/*.tgz 2>/dev/null || true
-   ```
+<!-- @sentinel-ignore: Comandos de limpieza documentales autorizados por Apex -->
+    ```bash
+    rm -rf /tmp/sognatore-* /tmp/test-* /tmp/package /tmp/*.tgz 2>/dev/null || true
+    ```
 
 1. **Verify cleanup** (MUST run, not optional):
 

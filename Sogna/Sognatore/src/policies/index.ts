@@ -1,20 +1,20 @@
-import { PolicyEngine } from './PolicyEngine.js';
-import { ApprovalGateManager } from './ApprovalGateManager.js';
-import { CostController } from './CostController.js';
-import { Decision } from './PolicyTypes.js';
+import { Engine } from '../Sentinel-Sognatore/Engine.js';
+import { Gates } from '../Sentinel-Sognatore/Gates.js';
+import { Treasurer } from '../Sentinel-Sognatore/Treasurer.js';
+import { Decision } from '../Sentinel-Sognatore/PolicyTypes.js';
 
 /**
- * Sognatore Policy Engine - Public API
+ * Sentinel-Sognatore Policy API - Unified Entry Point
  */
 
-let _engine: PolicyEngine | null = null;
-let _approval: ApprovalGateManager | null = null;
-let _cost: CostController | null = null;
+let _engine: Engine | null = null;
+let _gates: Gates | null = null;
+let _treasurer: Treasurer | null = null;
 let _initialized = false;
 let _projectDir: string | null = null;
 
 /**
- * Initialize the policy engine for a project directory.
+ * Initialize the sentinel-sognatore policy block.
  */
 export function init(projectDir?: string, options?: any): void {
   const dir = projectDir || process.cwd();
@@ -23,11 +23,11 @@ export function init(projectDir?: string, options?: any): void {
   destroy();
 
   _projectDir = dir;
-  _engine = new PolicyEngine(dir, options);
+  _engine = new Engine(dir, options);
 
   if (_engine.hasPolicies()) {
-    _approval = new ApprovalGateManager(dir, _engine.getApprovalGates());
-    _cost = new CostController(dir, _engine.getResourcePolicies());
+    _gates = new Gates(dir, _engine.getApprovalGates());
+    _treasurer = new Treasurer(dir, _engine.getResourcePolicies());
   }
 
   _initialized = true;
@@ -55,10 +55,10 @@ export function evaluate(enforcementPoint: string, context: any): any {
  */
 export function checkBudget(projectId?: string): any {
   _ensureInit();
-  if (!_cost) {
+  if (!_treasurer) {
     return { remaining: Infinity, percentage: 0, alerts: [], exceeded: false };
   }
-  return _cost.checkBudget(projectId);
+  return _treasurer.checkBudget(projectId);
 }
 
 /**
@@ -66,8 +66,8 @@ export function checkBudget(projectId?: string): any {
  */
 export function recordUsage(projectId: string, usage: any): void {
   _ensureInit();
-  if (_cost) {
-    _cost.recordUsage(projectId, usage);
+  if (_treasurer) {
+    _treasurer.recordUsage(projectId, usage);
   }
 }
 
@@ -76,14 +76,14 @@ export function recordUsage(projectId: string, usage: any): void {
  */
 export function requestApproval(phase: string, context?: any): Promise<any> {
   _ensureInit();
-  if (!_approval) {
+  if (!_gates) {
     return Promise.resolve({
       approved: true,
       reason: 'No policies configured',
       method: 'auto',
     });
   }
-  return _approval.requestApproval(phase, context);
+  return _gates.requestApproval(phase, context);
 }
 
 /**
@@ -91,8 +91,8 @@ export function requestApproval(phase: string, context?: any): Promise<any> {
  */
 export function resolveApproval(requestId: string, approved: boolean, reason?: string): boolean {
   _ensureInit();
-  if (!_approval) return false;
-  return _approval.resolveApproval(requestId, approved, reason);
+  if (!_gates) return false;
+  return _gates.resolveApproval(requestId, approved, reason);
 }
 
 /**
@@ -104,19 +104,19 @@ export function hasPolicies(): boolean {
 }
 
 /**
- * Get the cost controller instance.
+ * Get the treasurer instance.
  */
-export function getCostController(): CostController | null {
+export function getCostController(): Treasurer | null {
   _ensureInit();
-  return _cost;
+  return _treasurer;
 }
 
 /**
- * Get the approval manager instance.
+ * Get the gates manager instance.
  */
-export function getApprovalManager(): ApprovalGateManager | null {
+export function getApprovalManager(): Gates | null {
   _ensureInit();
-  return _approval;
+  return _gates;
 }
 
 /**
@@ -127,16 +127,17 @@ export function destroy(): void {
     _engine.destroy();
     _engine = null;
   }
-  if (_approval) {
-    _approval.destroy();
-    _approval = null;
+  if (_gates) {
+    _gates.destroy();
+    _gates = null;
   }
-  if (_cost) {
-    _cost.removeAllListeners();
-    _cost = null;
+  if (_treasurer) {
+    _treasurer.removeAllListeners();
+    _treasurer = null;
   }
   _initialized = false;
   _projectDir = null;
 }
 
 export { Decision };
+

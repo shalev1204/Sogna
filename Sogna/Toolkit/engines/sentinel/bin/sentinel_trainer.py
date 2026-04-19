@@ -207,7 +207,7 @@ class SentinelTrainer:
         print(f"   Intelligence fully updated at: {self.output_path}")
 
 if __name__ == "__main__":
-    output_file = Path(r"c:\Users\carle\Desktop\Sogna\Sogna\toolkit\engines\sentinel\data\risk_dna_feed.json")
+    output_file = Path(r"c:\Users\carle\Desktop\Sogna\Sogna\Toolkit\engines\Sentinel\data\risk_dna_feed.json")
     root_to_scan = Path(r"c:\Users\carle\Desktop\Sogna")
     
     trainer = SentinelTrainer(output_file)
