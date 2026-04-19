@@ -1,4 +1,3 @@
-<!-- @sentinel-ignore: GLOBAL -->
 ---
 name: bun-development
 description: "Fast, modern JavaScript/TypeScript development with the Bun runtime, inspired by [oven-sh/bun](https://github.com/oven-sh/bun)."
@@ -6,6 +5,7 @@ risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
 ---
+<!-- @sentinel-ignore: GLOBAL -->
 
 <!-- security-allowlist: curl-pipe-bash, irm-pipe-iex -->
 

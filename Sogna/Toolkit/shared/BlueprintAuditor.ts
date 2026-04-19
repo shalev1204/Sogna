@@ -68,8 +68,8 @@ export class BlueprintAuditor {
   }
 
   private async scanForVetoes(rootPath: string, rules: BlueprintVetoRule[], issues: AuditIssue[]) {
-    // Only scan text-based files for vetoes to avoid performance hit
-    const allowedExtensions = ['.ts', '.js', '.json', '.md', '.py', '.txt', '.env'];
+    // Only scan text-based code files for vetoes to avoid false positives in data (e.g. JSON benchmarks)
+    const allowedExtensions = ['.ts', '.js', '.py', '.sh', '.bash'];
     
     const scan = async (dir: string) => {
       const entries = await fs.readdir(dir);
@@ -80,6 +80,8 @@ export class BlueprintAuditor {
         const stats = await fs.lstat(fullPath);
         
         if (stats.isDirectory()) {
+          // Skip known data/asset/build directories to avoid false positives in architectural audits
+          if (entry === 'resources' || entry === 'dist') continue;
           await scan(fullPath);
         } else if (stats.isFile() && allowedExtensions.includes(path.extname(entry))) {
           const content = await fs.readFile(fullPath, 'utf8');

@@ -10,8 +10,7 @@
     "baseUrl": ".",
     "paths": {
       "@sogna/toolkit": ["../toolkit/index.ts"],
-      "@sogna/toolkit/*": ["../toolkit/*"],
-      "chalk": ["./node_modules/chalk"]
+      "@sogna/toolkit/*": ["../toolkit/*"]
     }
   },
   "include": [

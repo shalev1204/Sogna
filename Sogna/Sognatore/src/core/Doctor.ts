@@ -11,7 +11,9 @@ import fs from 'fs-extra';
 import path from 'path';
 import { Guardian } from './Guardian.js';
 import { EnvOracle } from './utils/EnvOracle.js';
-import { Shield as BashShield, PermissionMode } from '../Sentinel-Sognatore/Shield.js';
+import { Shield as BashShield } from '../Sentinel-Sognatore/Shield.js';
+import { PermissionMode } from '../Sentinel-Sognatore/SecurityTypes.js';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import { fileURLToPath } from 'url';
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 import { execSync } from 'child_process';
@@ -91,11 +93,13 @@ export class Doctor {
   }
 
   private async checkBlueprints(results: DoctorResult[]) {
+    const hub = Hub.getInstance();
+    const sognatoreRoot = hub.getSognatoreRoot();
     const auditor = new BlueprintAuditor();
     const blueprint = getBlueprint('sognatore-core');
     
     if (blueprint) {
-      const report = await auditor.audit(process.cwd(), blueprint);
+      const report = await auditor.audit(sognatoreRoot, blueprint);
       results.push({
         name: `Architecture: ${blueprint.name}`,
         status: report.integrityScore === 100 ? 'PASS' : (report.integrityScore > 70 ? 'WARN' : 'FAIL'),
@@ -110,11 +114,8 @@ export class Doctor {
   }
 
   private async checkAudit(results: DoctorResult[]) {
-    // Find project root robustly using module-relative paths
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const sognatoreSrc = path.join(__dirname, '..', '..');
-    const projectRoot = path.join(sognatoreSrc, '..');
-    const sognatoreRoot = sognatoreSrc; // In this monorepo, sognatore is the folder
+    const hub = Hub.getInstance();
+    const sognatoreRoot = hub.getSognatoreRoot();
     
     const configDir = path.join(sognatoreRoot, 'resources', 'config');
     const catalogPath = path.join(configDir, 'swarm_catalog.json');
@@ -170,8 +171,11 @@ export class Doctor {
           required: false,
           fixLabel: `Build ${img.id} Image`,
           fix: async () => {
+            const hub = Hub.getInstance();
+            const sognatoreRoot = hub.getSognatoreRoot();
+            const projectRoot = path.join(sognatoreRoot, '..');
             console.log(chalk.blue(`  - Building ${img.name}...`));
-            const dfPath = path.join(projectRoot, 'Sognatore', 'resources', 'docker', img.file);
+            const dfPath = path.join(sognatoreRoot, 'resources', 'docker', img.file);
             await this.runSafeCommand('docker', ['build', '-t', img.name, '-f', dfPath, '.']);
           }
         });

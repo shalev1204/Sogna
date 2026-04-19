@@ -16340,9 +16340,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/bin/sognatore.ts": {
-    "hash": "03c710cd85bf797dace02d7dae22e0769dcccf5eb20ba31cf4c8ea119fe516ce",
-    "timestamp": "2026-04-19T13:49:10.991Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "53c7f27c58f28484989d8d7d965fb194f6d45849c6a61005ec079bfa6ec60f3d",
+    "timestamp": "2026-04-19T22:13:54.582Z",
+    "signedBy": "Antigravity-Restoration"
   },
   "Sogna/Sognatore/src/core/BootstrapEngine.ts": {
     "hash": "b0289653ccc60d4e683ed522ee9334766b682f3a8992f35a3fb24a06e26b8b08",
@@ -16355,9 +16355,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/core/DockerSandbox.ts": {
-    "hash": "7741b871ec186dbcd9705bc07e9b0a69a954018f75bdb720ca4106527ba4d625",
-    "timestamp": "2026-04-19T13:49:10.992Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "1a82440ed202431eee59e712bc0f83a96812ed5f20ea4bb026902e9eb7998a70",
+    "timestamp": "2026-04-19T22:13:54.582Z",
+    "signedBy": "Antigravity-Restoration"
   },
   "Sogna/Sognatore/src/core/Doctor.ts": {
     "hash": "30070185713a4e0d09613be1a8d732340597a27f686a32d435967e9a0ca7473e",
@@ -16370,9 +16370,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/core/Guardian.ts": {
-    "hash": "3e9dbb0f8e694ecb9d653b8fffc6c45219f4386bc0384aace75bc544076da005",
-    "timestamp": "2026-04-19T13:49:10.992Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "83ad184c487862af8f13ae1022ac743575e34cf17a83d4ac67a2726a02217e7d",
+    "timestamp": "2026-04-19T22:13:54.582Z",
+    "signedBy": "Antigravity-Restoration"
   },
   "Sogna/Sognatore/src/core/LspBridge.ts": {
     "hash": "dd4e7fed8a084cd6281cc411de6629de9964f4e4469e8098684cd8dbc085f1b6",
@@ -16445,9 +16445,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/core/agents/AgentFactory.ts": {
-    "hash": "49086a26b05aef989965866e5c0c142c104bf97abad2b3722b374e408a8a6229",
-    "timestamp": "2026-04-19T13:49:10.994Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "968516d3dfb0e221c1a8adf8692d1c33c72ba6ad71d7c7d0a1655627c15206a0",
+    "timestamp": "2026-04-19T22:13:54.582Z",
+    "signedBy": "Antigravity-Restoration"
   },
   "Sogna/Sognatore/src/core/agents/AgentRegistry.ts": {
     "hash": "d6c51f259e8a389e6152e5b4a6072626b0826bd5ed219cf9e70a4bd4ea2d7e6a",
@@ -31435,9 +31435,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/bin/sognatore.ts": {
-    "hash": "0bcc8daf9e6ec3aff0ea86bd829836fe8c24bf7d8d93574fbde7d4e6f72d2159",
-    "timestamp": "2026-04-19T19:50:39.247Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "53c7f27c58f28484989d8d7d965fb194f6d45849c6a61005ec079bfa6ec60f3d",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
   },
   "Sognatore/src/core/BootstrapEngine.ts": {
     "hash": "b0289653ccc60d4e683ed522ee9334766b682f3a8992f35a3fb24a06e26b8b08",
@@ -31450,9 +31450,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/DockerSandbox.ts": {
-    "hash": "7741b871ec186dbcd9705bc07e9b0a69a954018f75bdb720ca4106527ba4d625",
-    "timestamp": "2026-04-19T15:09:29.957Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "1a82440ed202431eee59e712bc0f83a96812ed5f20ea4bb026902e9eb7998a70",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
   },
   "Sognatore/src/core/Doctor.ts": {
     "hash": "a3270fcd4f75431fd57da2e81674d321a2be7df3ae57d463c411951a5817533f",
@@ -31465,9 +31465,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Guardian.ts": {
-    "hash": "a37977a987a70e86a5bafd1db42dd2df0c142971c9276cc8eb68ca957b27aabf",
-    "timestamp": "2026-04-19T19:50:39.248Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "83ad184c487862af8f13ae1022ac743575e34cf17a83d4ac67a2726a02217e7d",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
   },
   "Sognatore/src/core/LspBridge.ts": {
     "hash": "dd4e7fed8a084cd6281cc411de6629de9964f4e4469e8098684cd8dbc085f1b6",
@@ -31540,9 +31540,9 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/agents/AgentFactory.ts": {
-    "hash": "49086a26b05aef989965866e5c0c142c104bf97abad2b3722b374e408a8a6229",
-    "timestamp": "2026-04-19T15:09:29.962Z",
-    "signedBy": "Sentinel-Apex"
+    "hash": "968516d3dfb0e221c1a8adf8692d1c33c72ba6ad71d7c7d0a1655627c15206a0",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
   },
   "Sognatore/src/core/agents/AgentRegistry.ts": {
     "hash": "d6c51f259e8a389e6152e5b4a6072626b0826bd5ed219cf9e70a4bd4ea2d7e6a",
@@ -33488,5 +33488,35 @@
     "hash": "15872973adad840c7af4abf0abb9617528b21da0f0e069386b08bf24776f99e1",
     "timestamp": "2026-04-19T19:50:39.247Z",
     "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Sognatore/src/Sentinel-Sognatore/Hub.ts": {
+    "hash": "1ce288f0278ccd615cdb7aa79fe8854a9fc6e3577e410d8756868e5ae3bbf69c",
+    "timestamp": "2026-04-19T22:13:54.582Z",
+    "signedBy": "Antigravity-Restoration"
+  },
+  "Sognatore/src/Sentinel-Sognatore/Hub.ts": {
+    "hash": "1ce288f0278ccd615cdb7aa79fe8854a9fc6e3577e410d8756868e5ae3bbf69c",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
+  },
+  "Sogna/toolkit/engines/Sentinel/bin/sentinel-veto.js": {
+    "hash": "afaa0ed1d1c0e7bd924178e712b889500eb4324bece9a232a1b9344282a7bf20",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
+  },
+  "toolkit/engines/Sentinel/bin/sentinel-veto.js": {
+    "hash": "afaa0ed1d1c0e7bd924178e712b889500eb4324bece9a232a1b9344282a7bf20",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
+  },
+  "Toolkit/engines/Sentinel/bin/sentinel-veto.js": {
+    "hash": "afaa0ed1d1c0e7bd924178e712b889500eb4324bece9a232a1b9344282a7bf20",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
+  },
+  "toolkit/engines/Sentinel/bin/Sentinel-veto.js": {
+    "hash": "afaa0ed1d1c0e7bd924178e712b889500eb4324bece9a232a1b9344282a7bf20",
+    "timestamp": "2026-04-19T22:15:00.429Z",
+    "signedBy": "Antigravity-Restoration-Final"
   }
 }

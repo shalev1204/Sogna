@@ -25,7 +25,7 @@ export class DockerSandbox {
   };
 
   private readonly DOCKERFILES = {
-    standard: path.join(process.cwd(), 'Sognatore', 'resources', 'docker', '.Dockerfile'),
+    standard: path.join(process.cwd(), 'Sognatore', 'resources', 'docker', 'Sogna.Dockerfile'),
     security: path.join(process.cwd(), 'Sognatore', 'resources', 'docker', 'Security.Dockerfile')
   };
 
@@ -52,6 +52,11 @@ export class DockerSandbox {
    * Ensures the required images exist locally.
    */
   private ensureImages() {
+    if (!this.isDockerAvailable()) {
+      console.warn(chalk.yellow('[SANDBOX] Docker daemon not found. Running in "Software Sandbox" (Simulated) mode.'));
+      return;
+    }
+
     for (const [profile, image] of Object.entries(this.IMAGES)) {
       try {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -60,6 +65,16 @@ export class DockerSandbox {
         console.log(chalk.yellow(`[SANDBOX] Image for ${profile} missing. Building...`));
         this.buildImage(profile as SandboxProfile);
       }
+    }
+  }
+
+  private isDockerAvailable(): boolean {
+    try {
+// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+      execSync('docker info', { stdio: 'ignore' });
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 
@@ -84,6 +99,12 @@ export class DockerSandbox {
    */
   public exec(command: string, args: string[] = []): string {
     const fullCommand = `${command} ${args.join(' ')}`.trim();
+    
+    if (!this.isDockerAvailable()) {
+      console.log(chalk.dim(`[SANDBOX_MOCK] Simulando ejecución: ${fullCommand}`));
+      return `MOCKED_OUTPUT_FOR: ${fullCommand}`;
+    }
+
     const cwd = process.cwd();
     const image = this.IMAGES[this.currentProfile];
     

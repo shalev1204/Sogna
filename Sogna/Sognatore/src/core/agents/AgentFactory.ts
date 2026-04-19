@@ -27,16 +27,30 @@ export class AgentFactory {
   private swarmCatalogPath: string;
   private availableProviders: Provider[] = [];
 
+  private sognatoreRoot: string;
   private strategy: ModelStrategy | undefined;
 
   private constructor() {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const sognatoreSrc = path.join(__dirname, '..', '..');
-    const sognatoreRoot = path.join(sognatoreSrc, '..');
+    
+    // Robust root discovery: Look for the directory containing 'resources'
+    const findRoot = (start: string): string => {
+      let curr = start;
+      const root = path.parse(curr).root;
+      while (curr !== root) {
+        if (fs.existsSync(path.join(curr, 'resources')) && fs.existsSync(path.join(curr, 'package.json'))) {
+          return curr;
+        }
+        curr = path.join(curr, '..');
+      }
+      return path.join(__dirname, '..', '..', '..'); // Legacy Fallback
+    };
 
-    this.agentsMDPath = path.join(sognatoreRoot, 'resources', 'config', 'agents.md');
-    this.evolvedAgentsMDPath = path.join(sognatoreRoot, 'resources', 'config', 'evolved_agents.md');
-    this.swarmCatalogPath = path.join(sognatoreRoot, 'resources', 'config', 'swarm_catalog.json');
+    this.sognatoreRoot = process.env.SOGNATORE_ROOT || findRoot(__dirname);
+
+    this.agentsMDPath = path.join(this.sognatoreRoot, 'resources', 'config', 'agents.md');
+    this.evolvedAgentsMDPath = path.join(this.sognatoreRoot, 'resources', 'config', 'evolved_agents.md');
+    this.swarmCatalogPath = path.join(this.sognatoreRoot, 'resources', 'config', 'swarm_catalog.json');
   }
 
   static async getInstance(): Promise<AgentFactory> {
@@ -49,7 +63,7 @@ export class AgentFactory {
 
   private async init() {
     this.availableProviders = await ProviderFactory.getAvailableProviders();
-    const strategyPath = path.join(process.cwd(), 'resources', 'config', 'model_strategy.json');
+    const strategyPath = path.join(this.sognatoreRoot, 'resources', 'config', 'model_strategy.json');
     if (fs.existsSync(strategyPath)) {
       this.strategy = JSON.parse(fs.readFileSync(strategyPath, 'utf8'));
     }

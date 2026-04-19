@@ -17,8 +17,21 @@ const __dirname = path.dirname(__filename);
 
 const program = new Command();
 
-// Load version
-const packageJson = fs.readJsonSync(path.join(__dirname, '../../package.json'));
+// Robust root discovery
+const findRoot = (start: string): string => {
+  let curr = start;
+  const root = path.parse(curr).root;
+  while (curr !== root) {
+    if (fs.existsSync(path.join(curr, 'package.json'))) {
+      return curr;
+    }
+    curr = path.join(curr, '..');
+  }
+  return path.join(__dirname, '../../'); // Fallback
+};
+
+const sognatoreRoot = process.env.SOGNATORE_ROOT || findRoot(__dirname);
+const packageJson = fs.readJsonSync(path.join(sognatoreRoot, 'package.json'));
 const version = packageJson.version;
 
 program

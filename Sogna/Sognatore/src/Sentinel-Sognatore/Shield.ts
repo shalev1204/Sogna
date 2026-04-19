@@ -1,17 +1,6 @@
 import { Engine } from './Engine.js';
 import { Hub, SecurityState } from './Hub.js';
-
-export enum PermissionMode {
-  ReadOnly = 'readonly',
-  Balanced = 'balanced',
-  Full = 'full'
-}
-
-export interface ValidationResult {
-  allow: boolean;
-  warn?: boolean;
-  reason?: string;
-}
+import { PermissionMode, ValidationResult } from './SecurityTypes.js';
 
 /**
  * Sentinel Shield - Terminal enforcement part of the Sentinel-Sognatore block.
@@ -61,12 +50,12 @@ export class Shield {
         return { allow: false, reason: 'Directory traversal (../) is restricted in this mode.' };
       }
       
-      const absolutePathPattern = /[\s'"](\/[a-z]+|~)/i;
+      const absolutePathPattern = /[\s'"](\/[a-z]*|\\|[a-z]:\\|~)/i;
       const match = command.match(absolutePathPattern);
       if (match) {
         const pathStr = match[0].trim().replace(/['"]/g, '');
-        const systemDirs = ['/etc', '/usr', '/var', '/bin', '/sbin', '/sys', '/proc', '/dev'];
-        if (systemDirs.some(dir => pathStr.startsWith(dir)) || pathStr === '/') {
+        const systemDirs = ['/etc', '/usr', '/var', '/bin', '/sbin', '/sys', '/proc', '/dev', 'C:\\Windows', 'C:\\Users'];
+        if (systemDirs.some(dir => pathStr.toLowerCase().startsWith(dir.toLowerCase())) || pathStr === '/' || pathStr === '\\') {
           hub.reportIntel('CRITICAL', `Intento de acceso a ruta de sistema bloqueado: ${pathStr}`, 'Shield');
           return { allow: false, reason: `System path "${pathStr}" targets are restricted in this mode.` };
         }

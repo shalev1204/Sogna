@@ -11,7 +11,7 @@ import {
   validateApprovalGate,
   RULE_EVALUATORS 
 } from './PolicyTypes.js';
-import { PermissionMode } from './Shield.js';
+import { PermissionMode } from './SecurityTypes.js';
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 import { spawnSync } from 'child_process';
 import { Hub, SecurityState } from './Hub.js';

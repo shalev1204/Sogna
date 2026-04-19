@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SOGNATORE_CORE = path.join(__dirname, '..', '..', 'Sognatore');
-const enginePath = path.join(SOGNATORE_CORE, 'dist', 'bin', 'sognatore.js');
+const enginePath = path.join(SOGNATORE_CORE, 'dist', 'Sognatore', 'src', 'bin', 'sognatore.js');
 const args = process.argv.slice(2);
 
 const child = spawn('node', [enginePath, ...args], {

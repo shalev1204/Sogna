@@ -60,9 +60,12 @@ export class Guardian {
     }
 
     // 2. Critical Integrity Signature Check
+    const sognatoreRoot = hub.getSognatoreRoot();
+    const toolkitRoot = path.join(sognatoreRoot, '..', 'toolkit');
+
     const criticalFiles = [
-        path.join(process.cwd(), 'src/core/Guardian.ts'),
-        path.join(process.cwd(), '../Toolkit/engines/Sentinel/bin/sentinel-veto.js')
+        path.join(sognatoreRoot, 'src', 'core', 'Guardian.ts'),
+        path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'sentinel-veto.js')
     ];
 
     for (const file of criticalFiles) {
@@ -231,12 +234,15 @@ export class Guardian {
    */
   public validateIntegrity(targetDir: string = '.'): string {
     const hash = crypto.createHash('sha256');
+    const sognatoreRoot = Hub.getInstance().getSognatoreRoot();
+    const toolkitRoot = path.join(sognatoreRoot, '..', 'toolkit');
+
     const criticalPaths = [
       path.join(targetDir, 'src', 'core'),
       path.join(targetDir, 'resources', 'skills'),
       path.join(targetDir, 'resources', 'config', 'agents.md'),
-      path.join(targetDir, '../toolkit/scripts'), // Mutual Integrity with the Brain
-      path.join(targetDir, '../.architectural_map.md') // Visibility integrity
+      path.join(toolkitRoot, 'scripts'), // Mutual Integrity with the Brain
+      path.join(sognatoreRoot, '..', '.architectural_map.md') // Visibility integrity
     ];
 
     criticalPaths.forEach(p => {

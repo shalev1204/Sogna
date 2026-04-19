@@ -36,7 +36,7 @@
   "license": "UNLICENSED",
   "author": "Sognatore Engine",
   "bin": {
-    "sognatore": "dist/bin/sognatore.js"
+    "sognatore": "dist/Sognatore/src/bin/sognatore.js"
   },
   "files": [
     "config/",
@@ -48,7 +48,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "tsc && node --test dist/tests/**/*.test.js",
-    "start": "node dist/bin/sognatore.js",
+    "start": "node dist/Sognatore/src/bin/sognatore.js",
     "lint": "eslint src"
   },
   "engines": {

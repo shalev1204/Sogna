@@ -163,7 +163,8 @@ export class ToolRegistry {
         taskId: 'Unique ID for background task (required if background=true)'
       },
       execute: async (args, tier) => {
-        const { Shield: BashShield, PermissionMode } = await import('../../Sentinel-Sognatore/Shield.js');
+        const { Shield: BashShield } = await import('../../Sentinel-Sognatore/Shield.js');
+        const { PermissionMode } = await import('../../Sentinel-Sognatore/SecurityTypes.js');
         
         // 1. Safety Audit with institutional heuristics
         const mode = tier === 'gold' ? PermissionMode.Full : PermissionMode.Balanced;

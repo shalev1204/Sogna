@@ -1,7 +1,9 @@
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import * as path from 'path';
 import { spawnSync } from 'child_process';
+import { fileURLToPath } from 'url';
 import chalk from 'chalk';
+import crypto from 'crypto';
 
 export enum SecurityState {
   ALIVE = 'ALIVE',
@@ -18,16 +20,36 @@ export class Hub {
   private shieldRelaxed: boolean = false;
   private shieldTimer: NodeJS.Timeout | null = null;
   
+  private readonly sognatoreRoot: string;
   private readonly SENTINEL_PATH: string;
   private readonly SIGNATURES_PATH: string;
   private readonly INTEL_REPORT_PATH: string;
-  private signaturesCache: Record<string, { hash: string, timestamp: string }> = {};
+  private signaturesCache: Record<string, any> = {};
   private mtimeCache: Record<string, number> = {};
 
   private constructor() {
-    this.SENTINEL_PATH = path.resolve(process.cwd(), '../Toolkit/engines/Sentinel/bin/sentinel-veto.js');
-    this.SIGNATURES_PATH = path.resolve(process.cwd(), '../Toolkit/engines/Sentinel/data/signatures.json');
-    this.INTEL_REPORT_PATH = path.resolve(process.cwd(), '../Toolkit/engines/Sentinel/reports/THREAD_INTEL.md');
+    // Robust root discovery: Look for the directory containing 'resources'
+    const findRoot = (start: string): string => {
+      let curr = start;
+      const root = path.parse(curr).root;
+      while (curr !== root) {
+        if (fs.existsSync(path.join(curr, 'resources')) && fs.existsSync(path.join(curr, 'package.json'))) {
+          return curr;
+        }
+        curr = path.join(curr, '..');
+      }
+      return process.cwd(); // Fallback
+    };
+
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    this.sognatoreRoot = findRoot(__dirname);
+
+    // Use monorepo-safe paths
+    const toolkitRoot = path.join(this.sognatoreRoot, '..', 'toolkit');
+    this.SENTINEL_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'sentinel-veto.js');
+    this.SIGNATURES_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'data', 'signatures.json');
+    this.INTEL_REPORT_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'reports', 'THREAD_INTEL.md');
+    
     this.checkSentinelPulse();
     this.refreshCache();
   }
@@ -219,7 +241,7 @@ export class Hub {
       }
 
       const content = fs.readFileSync(absPath);
-      const currentHash = require('crypto').createHash('sha256').update(content).digest('hex');
+      const currentHash = crypto.createHash('sha256').update(content).digest('hex');
       
       const isValid = sig.hash === currentHash;
       if (isValid) {
@@ -250,6 +272,10 @@ export class Hub {
       console.error(chalk.red('[RECOVERY] Git restoration failed.'));
     }
     return false;
+  }
+
+  public getSognatoreRoot(): string {
+    return this.sognatoreRoot;
   }
 }
 
