@@ -858,6 +858,8 @@
 
 # 🛡️  SENTINEL THREAD INTEL (Apex Feed)
 
+# 🛡️  SENTINEL THREAD INTEL (Apex Feed)
+
 ### EVENTO: 2026-04-19T13:49:10.351Z
 
 === SENTINEL REPORT ===
@@ -58588,4 +58590,9 @@
 [WARNING]	POSIBLE LOGIC BOMB: Temporizador detectado con retraso dinámico o excesivo (durationMs).
 	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/Sentinel-Sognatore/Hub.ts:169
 	Solución : Asegurar que los temporizadores tengan valores estáticos o acotados con Math.min.
+
+### EVENTO: 2026-04-19T19:50:39.208Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:1
+	Solución : Justificar la excepción de seguridad en el comentario.
 

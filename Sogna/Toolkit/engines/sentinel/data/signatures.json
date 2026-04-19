@@ -31435,8 +31435,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/bin/sognatore.ts": {
-    "hash": "03c710cd85bf797dace02d7dae22e0769dcccf5eb20ba31cf4c8ea119fe516ce",
-    "timestamp": "2026-04-19T15:09:29.957Z",
+    "hash": "0bcc8daf9e6ec3aff0ea86bd829836fe8c24bf7d8d93574fbde7d4e6f72d2159",
+    "timestamp": "2026-04-19T19:50:39.247Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/BootstrapEngine.ts": {
@@ -31455,8 +31455,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Doctor.ts": {
-    "hash": "30070185713a4e0d09613be1a8d732340597a27f686a32d435967e9a0ca7473e",
-    "timestamp": "2026-04-19T15:09:29.958Z",
+    "hash": "a3270fcd4f75431fd57da2e81674d321a2be7df3ae57d463c411951a5817533f",
+    "timestamp": "2026-04-19T19:50:39.248Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/GitManager.ts": {
@@ -31465,8 +31465,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Guardian.ts": {
-    "hash": "816a8bcbd25b60c0cc810a0e46bcecfe97fd71b405617d1b6200041658a4a422",
-    "timestamp": "2026-04-19T15:09:29.960Z",
+    "hash": "a37977a987a70e86a5bafd1db42dd2df0c142971c9276cc8eb68ca957b27aabf",
+    "timestamp": "2026-04-19T19:50:39.248Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/LspBridge.ts": {
@@ -31495,8 +31495,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/QualityCouncil.ts": {
-    "hash": "5b118f2cdb8e773cabb0cd495e4f519b332c2a815dead16c2aa454d9ec39fced",
-    "timestamp": "2026-04-19T15:09:29.960Z",
+    "hash": "46db91a11f3f7b10c404866c2cf562bbb56fa7b9966e7922695fe5ef2c16ecd3",
+    "timestamp": "2026-04-19T19:50:39.248Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Runner.ts": {
@@ -31520,8 +31520,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/SwarmOrchestrator.ts": {
-    "hash": "6a8b0e453fdba5bd6f83fb6759ff685dbe02e0e1179390b8d51a6ea556a90e56",
-    "timestamp": "2026-04-19T15:09:29.961Z",
+    "hash": "572771995ca71ce81cb38782402b601f39b11a4167249b38a31c6a7789d415d0",
+    "timestamp": "2026-04-19T19:50:39.248Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/ToolResolver.ts": {
@@ -31530,13 +31530,13 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/actions/ToolRegistry.ts": {
-    "hash": "937462736477fdb647ca121ef26a173a2c3d8ed31d940351ab5c116865529340",
-    "timestamp": "2026-04-19T15:09:29.962Z",
+    "hash": "cfb2bbc507866fac0e2ad2ec8d517b5771faae4f8ead151187bff7d8809c5601",
+    "timestamp": "2026-04-19T19:50:39.248Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/agents/Agent.ts": {
-    "hash": "3dbc4a982cb44c6e3730e67b34b34a63e19d983bf87ccd8a72eb095dbcc49bae",
-    "timestamp": "2026-04-19T15:09:29.962Z",
+    "hash": "5a1ea7c95997087152ba9dcce656487bf08037dbf3973efefb451cb6d5164fda",
+    "timestamp": "2026-04-19T19:50:39.249Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/agents/AgentFactory.ts": {
@@ -31655,8 +31655,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/integrations/Adapter.ts": {
-    "hash": "8fafcb258fbac402a581ea233adcbc83c383f0eccb0f3074a9684c176f5752d4",
-    "timestamp": "2026-04-19T15:09:30.206Z",
+    "hash": "63b2ffd54623bfc91d157d69c7a51a50e4862347fec3cd1ac40f4ecf33479c64",
+    "timestamp": "2026-04-19T19:50:39.249Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/integrations/SyncSubscriber.ts": {
@@ -31700,8 +31700,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/integrations/jira/JiraApiClient.ts": {
-    "hash": "9d9804fff7e5f796e65d728453371124abbe4d6d769c3069d0bd84069a0aee94",
-    "timestamp": "2026-04-19T15:09:30.207Z",
+    "hash": "f9ce83e73f05cf27fcbf77498860dc308e1493856765aac7775b2e09c0710a18",
+    "timestamp": "2026-04-19T19:50:39.249Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/integrations/jira/JiraTypes.ts": {
@@ -33477,6 +33477,16 @@
   "scratch/test_policy_executive.ts": {
     "hash": "337ae9dbb85fc70885746499e5ca9c3104911149c375836571bf9889e2280355",
     "timestamp": "2026-04-19T15:09:44.720Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/Sentinel-Sognatore/Engine.ts": {
+    "hash": "18bea8b5691bb654865497ef8641feb061fa3243c9dfc1e16f0c5b1db663f473",
+    "timestamp": "2026-04-19T19:50:39.247Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/Sentinel-Sognatore/PolicyTypes.ts": {
+    "hash": "15872973adad840c7af4abf0abb9617528b21da0f0e069386b08bf24776f99e1",
+    "timestamp": "2026-04-19T19:50:39.247Z",
     "signedBy": "Sentinel-Apex"
   }
 }
