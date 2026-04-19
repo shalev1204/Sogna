@@ -860,6 +860,8 @@
 
 # 🛡️  SENTINEL THREAD INTEL (Apex Feed)
 
+# 🛡️  SENTINEL THREAD INTEL (Apex Feed)
+
 ### EVENTO: 2026-04-19T13:49:10.351Z
 
 === SENTINEL REPORT ===
@@ -58614,3 +58616,238 @@
 	Ubicación: Shield
 	Estado: ALIVE
 ---
+### EVENTO: 2026-04-19T22:24:54.143Z
+[WARNING]	POSIBLE LOGIC BOMB: Temporizador detectado con retraso dinámico o excesivo (durationMs).
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/Sentinel-Sognatore/Hub.ts:191
+	Solución : Asegurar que los temporizadores tengan valores estáticos o acotados con Math.min.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:2
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:2
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:18
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:54
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:54
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:60
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:60
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:61
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:61
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:63
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:63
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:63
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:71
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:71
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:72
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:72
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:74
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:74
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:74
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:81
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:81
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:92
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:92
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.149Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:92
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.150Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:100
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.150Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:100
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.150Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:117
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.150Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:117
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.150Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:119
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.150Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/DockerSandbox.ts:119
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.155Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:1
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.155Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:19
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.155Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:31
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.155Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:188
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:188
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:192
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:192
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:194
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:194
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:196
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:196
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:202
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:202
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:204
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:204
+	Solución : Justificar la excepción de seguridad en el comentario.
+---
+### EVENTO: 2026-04-19T22:24:54.156Z
+[WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:206
+	Solución : Justificar la excepción de seguridad en el comentario.
+

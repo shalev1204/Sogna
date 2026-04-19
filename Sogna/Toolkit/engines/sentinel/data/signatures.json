@@ -31436,8 +31436,8 @@
   },
   "Sognatore/src/bin/sognatore.ts": {
     "hash": "53c7f27c58f28484989d8d7d965fb194f6d45849c6a61005ec079bfa6ec60f3d",
-    "timestamp": "2026-04-19T22:15:00.429Z",
-    "signedBy": "Antigravity-Restoration-Final"
+    "timestamp": "2026-04-19T22:24:54.201Z",
+    "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/BootstrapEngine.ts": {
     "hash": "b0289653ccc60d4e683ed522ee9334766b682f3a8992f35a3fb24a06e26b8b08",
@@ -31451,12 +31451,12 @@
   },
   "Sognatore/src/core/DockerSandbox.ts": {
     "hash": "1a82440ed202431eee59e712bc0f83a96812ed5f20ea4bb026902e9eb7998a70",
-    "timestamp": "2026-04-19T22:15:00.429Z",
-    "signedBy": "Antigravity-Restoration-Final"
+    "timestamp": "2026-04-19T22:24:54.202Z",
+    "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Doctor.ts": {
-    "hash": "a3270fcd4f75431fd57da2e81674d321a2be7df3ae57d463c411951a5817533f",
-    "timestamp": "2026-04-19T19:50:39.248Z",
+    "hash": "e36203abc8c78528976cb34912db0293655e46a1796dbde455260f25c817eff7",
+    "timestamp": "2026-04-19T22:24:54.202Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/GitManager.ts": {
@@ -31466,8 +31466,8 @@
   },
   "Sognatore/src/core/Guardian.ts": {
     "hash": "83ad184c487862af8f13ae1022ac743575e34cf17a83d4ac67a2726a02217e7d",
-    "timestamp": "2026-04-19T22:15:00.429Z",
-    "signedBy": "Antigravity-Restoration-Final"
+    "timestamp": "2026-04-19T22:24:54.202Z",
+    "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/LspBridge.ts": {
     "hash": "dd4e7fed8a084cd6281cc411de6629de9964f4e4469e8098684cd8dbc085f1b6",
@@ -31530,8 +31530,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/actions/ToolRegistry.ts": {
-    "hash": "cfb2bbc507866fac0e2ad2ec8d517b5771faae4f8ead151187bff7d8809c5601",
-    "timestamp": "2026-04-19T19:50:39.248Z",
+    "hash": "0b18e867a2cd4dd65952bb484b096a860cf252ee9815f4cd4d441486ee6bc151",
+    "timestamp": "2026-04-19T22:24:54.202Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/agents/Agent.ts": {
@@ -31541,8 +31541,8 @@
   },
   "Sognatore/src/core/agents/AgentFactory.ts": {
     "hash": "968516d3dfb0e221c1a8adf8692d1c33c72ba6ad71d7c7d0a1655627c15206a0",
-    "timestamp": "2026-04-19T22:15:00.429Z",
-    "signedBy": "Antigravity-Restoration-Final"
+    "timestamp": "2026-04-19T22:24:54.202Z",
+    "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/agents/AgentRegistry.ts": {
     "hash": "d6c51f259e8a389e6152e5b4a6072626b0826bd5ed219cf9e70a4bd4ea2d7e6a",
@@ -32705,8 +32705,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/bin/sognatore.js": {
-    "hash": "22475ec68540c28a4111c442c901a9acfe72b32e3456f0db864ed10345f5b951",
-    "timestamp": "2026-04-19T15:09:36.541Z",
+    "hash": "f580ec27597d5ee69f9d8b3c3b564f4702b5a6be00c0f103fdd11e8a8d865442",
+    "timestamp": "2026-04-19T22:24:54.202Z",
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/bin/verify.js": {
@@ -33245,8 +33245,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/shared/BlueprintAuditor.ts": {
-    "hash": "2c5498d4459e4e9aeea87b50b981166461c95b50b3556bf6c1abbca62c1e41ab",
-    "timestamp": "2026-04-19T15:09:41.730Z",
+    "hash": "f9a11e58709b5f288af9d42918442dee05bca410adb30f6448d4cd483e29061a",
+    "timestamp": "2026-04-19T22:24:54.203Z",
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/shared/BlueprintRegistry.ts": {
@@ -33480,8 +33480,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/Engine.ts": {
-    "hash": "18bea8b5691bb654865497ef8641feb061fa3243c9dfc1e16f0c5b1db663f473",
-    "timestamp": "2026-04-19T19:50:39.247Z",
+    "hash": "efb22d1aeb7cd7ed4c14aeef7597d7cbcc68b573ef9f62cc527c9d345f118028",
+    "timestamp": "2026-04-19T22:24:54.201Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/PolicyTypes.ts": {
@@ -33495,9 +33495,9 @@
     "signedBy": "Antigravity-Restoration"
   },
   "Sognatore/src/Sentinel-Sognatore/Hub.ts": {
-    "hash": "1ce288f0278ccd615cdb7aa79fe8854a9fc6e3577e410d8756868e5ae3bbf69c",
-    "timestamp": "2026-04-19T22:15:00.429Z",
-    "signedBy": "Antigravity-Restoration-Final"
+    "hash": "b6704b3b4c356189c7ab0c22e458deee3ef37f53979963c14b43bca29c1e5626",
+    "timestamp": "2026-04-19T22:24:54.201Z",
+    "signedBy": "Sentinel-Apex"
   },
   "Sogna/toolkit/engines/Sentinel/bin/sentinel-veto.js": {
     "hash": "afaa0ed1d1c0e7bd924178e712b889500eb4324bece9a232a1b9344282a7bf20",
@@ -33518,5 +33518,65 @@
     "hash": "afaa0ed1d1c0e7bd924178e712b889500eb4324bece9a232a1b9344282a7bf20",
     "timestamp": "2026-04-19T22:15:00.429Z",
     "signedBy": "Antigravity-Restoration-Final"
+  },
+  "Sognatore/src/Sentinel-Sognatore/SecurityTypes.ts": {
+    "hash": "d19b839cb91170c167fcbe2056602a20e469f9e38e3dde739a037c9536f0b641",
+    "timestamp": "2026-04-19T22:24:54.201Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/Sentinel-Sognatore/Shield.ts": {
+    "hash": "50aaa8d5a00b675eeb23902a7cba0ef0d1de959f740ba6e5ef69030c67c6c23d",
+    "timestamp": "2026-04-19T22:24:54.201Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/index.js": {
+    "hash": "4f85b59fa15545884c4b566de24414f7b7bd176d9320a5f7b7bffcf8caefce0b",
+    "timestamp": "2026-04-19T22:24:54.202Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/AuditVault.js": {
+    "hash": "18758a2f68998e9819e98b4353ac828972bb6a4d563b4e8d039380bf6157c1e9",
+    "timestamp": "2026-04-19T22:24:54.202Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/AutoHealer.js": {
+    "hash": "cef559bca4c7dfd9faffe1a5324195820180afaf1ec7ee27193b8d9495ca74b0",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/BlueprintAuditor.js": {
+    "hash": "dfe6cc37720432d4c07585aa5980c6f7d370d0205adc42a5b957531dd57a4216",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/BlueprintRegistry.js": {
+    "hash": "f76d68d94b670ebc4bf6db9b9f64dc6a92ab4ea577ea7baae933ea621673359f",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/ConfigDiscovery.js": {
+    "hash": "43d884151712210c18b8f88a0513371af52e2907465ce85a5f67c02ee439f281",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/PolicyEngine.js": {
+    "hash": "6b619172d447b57f05e0e89bd17777d8f0769979e2aa3c2277a14b5177f644c3",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/RecoveryRecipes.js": {
+    "hash": "7a39587e22032e4a4a04a10428b5c8b3f4524afde4458ecdea9494c61f1584bb",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/SummaryCompressor.js": {
+    "hash": "a701f320fb2b7f6ff590b0cba169d5817fc06dd6432d67722ed6f469fe89fbb0",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Toolkit/shared/events/SognaEventBus.js": {
+    "hash": "f04449ab00839c4c7d504ed71307aeccddec3b76846c6a303692f21fa09eec6e",
+    "timestamp": "2026-04-19T22:24:54.203Z",
+    "signedBy": "Sentinel-Apex"
   }
 }
