@@ -13,6 +13,7 @@ import { SwarmOrchestrator } from './SwarmOrchestrator.js';
 import { SkillRegistry } from './SkillRegistry.js';
 import { CouncilEvidence } from './gates/types.js';
 import { GitManager } from './GitManager.js';
+import { SognaEventBus, SognaEventType } from '@sogna/toolkit';
 
 export class Runner {
   private stateStore: StateStore;
@@ -38,6 +39,24 @@ export class Runner {
     this.skillRegistry = SkillRegistry.getInstance();
     this.sandbox = DockerSandbox.getInstance();
     this.gitManager = new GitManager(baseDir, this.primaryProvider);
+    
+    // Multi-Task Visibility: Live stream background logs
+    this.setupBackgroundMonitor();
+  }
+
+  private setupBackgroundMonitor() {
+    const bus = SognaEventBus.getInstance();
+    bus.on(SognaEventType.LOG, (event) => {
+      if (event.emitter.startsWith('BackgroundTask:')) {
+        console.log(chalk.dim(`  [${event.emitter.split(':')[1]}] `) + chalk.gray(event.data.message));
+      }
+    });
+
+    bus.on(SognaEventType.ERROR, (event) => {
+      if (event.emitter.startsWith('BackgroundTask:')) {
+        console.log(chalk.red(`  [${event.emitter.split(':')[1]}] ERROR: ${event.data.message}`));
+      }
+    });
   }
 
   async start(prdPath?: string) {
@@ -68,7 +87,8 @@ export class Runner {
         
         // 1. REASON (Dynamic Planning)
         const codeMap = await this.contextManager.getCodeMap();
-        const plan = await this.runReasoning(state, prdContent, codeMap);
+        const instructions = await this.contextManager.discoverInstructions();
+        const plan = await this.runReasoning(state, prdContent, codeMap, instructions);
         
         // 2. ACT (Swarm Execution)
         console.log(chalk.cyan(`  ${chalk.bold('🐝')} Swarm Dispatching...`));
@@ -91,7 +111,8 @@ export class Runner {
 
         // CIRCUIT BREAKER: Check for stagnation
         if (this.detectStagnation(evidence)) {
-          console.log(chalk.red(`\n[CIRCUIT BREAKER] Loop detected (Stagnation). Triggering Crisis Responder Agent...`));
+          console.log(chalk.red(`\n[CIRCUIT BREAKER] Loop detected (Stagnation). Entering Safety Mode...`));
+          this.contextManager.setHealthStatus(false); // Switch to ROOT (Safe) instructions
           await this.orchestrator.dispatchTask({
             id: `fix-${state.currentIteration}`,
             type: 'ops-security',
@@ -124,13 +145,16 @@ export class Runner {
     // SYSTEM PURIFICATION GATE
     console.log(chalk.bold.blue('\n[POST-MISSION] Triggering System Purification...'));
     try {
-      execSync('node toolkit/bin/purify.js', { stdio: 'inherit' });
+      const purifyPath = path.resolve(process.cwd(), 'Toolkit', 'bin', 'purify.js');
+      if (fs.existsSync(purifyPath)) {
+        execSync(`node "${purifyPath}"`, { stdio: 'inherit' });
+      }
     } catch (e: any) {
       console.warn(chalk.yellow(`[POST-MISSION] Purification warning: ${e.message}`));
     }
   }
 
-  private async runReasoning(state: SognatoreState, prd: string, codeMap: string): Promise<string> {
+  private async runReasoning(state: SognatoreState, prd: string, codeMap: string, instructions: string): Promise<string> {
     console.log(chalk.cyan(`  ${chalk.bold('🧠')} Orchestrator Reasoning...`));
     
     const relevantSkills = this.skillRegistry.findRelevantSkills(prd || '');
@@ -152,6 +176,9 @@ export class Runner {
       
       SKILL CONTEXT:
       ${skillContext}
+      
+      INSTRUCTIONS & CONSTRAINTS:
+      ${instructions}
       
       CODE MAP:
       ${codeMap}

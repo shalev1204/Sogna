@@ -4,8 +4,10 @@ EnvOracle.load();
 import { Command } from 'commander';
 import { Doctor } from '../core/Doctor.js';
 import { Runner } from '../core/Runner.js';
+import { PolicyEngine } from '../policies/PolicyEngine.js';
 import { SetupWizard } from '../core/utils/SetupWizard.js';
 import { ProjectManager } from '../core/ProjectManager.js';
+import { BootstrapEngine } from '../core/BootstrapEngine.js';
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -56,12 +58,22 @@ program
   .description('Start autonomous Sognatore RARV cycle')
   .argument('[prd]', 'Path to PRD file')
   .option('--stress-test', 'Execute with maximum council intensity')
+  .option('--mode <level>', 'Permission mode (readonly|balanced|full)', 'balanced')
   .action(async (prd, options) => {
+    PolicyEngine.setGlobalMode(options.mode);
     const runner = new Runner();
     if (options.stressTest) {
       process.env.SOGNATORE_MAX_ITERATIONS = '20';
       process.env.SOGNATORE_QUALITY_TIER = 'High Assurance';
     }
+
+    const bootstrap = BootstrapEngine.getInstance();
+    const ready = await bootstrap.run();
+    
+    if (!ready) {
+      process.exit(1);
+    }
+
     await runner.start(prd);
   });
 
@@ -70,7 +82,9 @@ program
   .command('start')
   .description('Alias for "run"')
   .argument('[prd]', 'Path to PRD file')
-  .action(async (prd) => {
+  .option('--mode <level>', 'Permission mode (readonly|balanced|full)', 'balanced')
+  .action(async (prd, options) => {
+    PolicyEngine.setGlobalMode(options.mode);
     const runner = new Runner();
     await runner.start(prd);
   });

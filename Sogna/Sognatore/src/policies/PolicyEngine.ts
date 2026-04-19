@@ -11,6 +11,9 @@ import {
   validateApprovalGate,
   RULE_EVALUATORS 
 } from './PolicyTypes.js';
+import { PermissionMode } from './BashShield.js';
+import { spawnSync } from 'child_process';
+import { MemoryHub } from '../memory/MemoryHub.js';
 
 /**
  * Sognatore Policy Engine - Core Evaluation Engine
@@ -173,10 +176,24 @@ export class PolicyEngine {
   private _loaded = false;
   private _watcher: boolean = false;
   private _validationErrors: string[] = [];
+  private static _globalMode: PermissionMode = PermissionMode.Balanced;
+  private _executiveBinaryPath: string;
+
+  public static setGlobalMode(mode: string): void {
+    const m = mode.toLowerCase();
+    if (m === 'readonly') this._globalMode = PermissionMode.ReadOnly;
+    else if (m === 'full') this._globalMode = PermissionMode.Full;
+    else this._globalMode = PermissionMode.Balanced;
+  }
+
+  public static getGlobalMode(): PermissionMode {
+    return this._globalMode;
+  }
 
   constructor(projectDir?: string, options?: any) {
     this._projectDir = projectDir || process.cwd();
     this._options = options || {};
+    this._executiveBinaryPath = path.resolve(this._projectDir, 'toolkit/executive-core/target/release/executive-core.exe');
     this._init();
   }
 
@@ -269,45 +286,79 @@ export class PolicyEngine {
     this._watcher = true;
   }
 
+  private async _evaluateMemoryPatterns(context: any, violations: any[]): Promise<void> {
+    const intent = context.intent || context.command || '';
+    if (!intent) return;
+
+    try {
+      const hub = MemoryHub.getInstance();
+      const memories = await hub.unifiedRecall(intent);
+      
+      // Look for high-relevance immunological or episodic threats
+      const threatMatches = memories.filter(m => 
+        (m.source === 'immunological' || m.source === 'episodic') && 
+        m.relevance >= 1.0 && 
+        (m.metadata?.tags?.includes('#threat') || m.content.toLowerCase().includes('veto'))
+      );
+
+      if (threatMatches.length > 0) {
+        violations.push({
+          name: 'InstitutionalMemoryGate',
+          action: 'deny',
+          reason: `Task intent resembles a previously blocked attack pattern: ${threatMatches[0].key}`,
+          metadata: { matches: threatMatches.length }
+        });
+      }
+    } catch (error) {
+      console.warn('[POLICY_ENGINE] Failed to query MemoryHub for patterns:', error);
+    }
+  }
+
   public evaluate(enforcementPoint: string, context: any): any {
+    const ctx = context || {};
+    const violations: any[] = [];
+
+    // PROACTIVE APEX GATE: Check Unified Memory for past threats
+    // This allows Sentinel to learn from experience without manual rule updates.
+    this._evaluateMemoryPatterns(ctx, violations);
+
+    // Grade Executive: Sensitive operations are double-checked by the Rust core
+    // This happens BEFORE checking local policies to ensure hard-gate security.
+    if (enforcementPoint === 'pre_execution' && ctx.sensitive) {
+      const executiveResult = this._callExecutiveCore(ctx);
+      if (executiveResult.decision === Decision.DENY) {
+        return {
+          allowed: false,
+          decision: Decision.DENY,
+          reason: `Executive Core: ${executiveResult.reason}`,
+          requiresApproval: false,
+          violations: [{ name: 'ExecutiveProtocol', action: 'deny', reason: executiveResult.reason }],
+        };
+      }
+    }
+
     if (!this._policies) {
       return {
         allowed: true,
         decision: Decision.ALLOW,
-        reason: 'No policies configured',
+        reason: 'No local policies configured; Executive check passed.',
         requiresApproval: false,
         violations: [],
       };
     }
-
-    const policies = this._policies.policies || this._policies;
-    const entries = policies[enforcementPoint];
-
-    if (!entries || !Array.isArray(entries) || entries.length === 0) {
-      return {
-        allowed: true,
-        decision: Decision.ALLOW,
-        reason: `No policies defined for ${enforcementPoint}`,
-        requiresApproval: false,
-        violations: [],
-      };
-    }
-
-    const ctx = context || {};
-    const violations: any[] = [];
 
     switch (enforcementPoint) {
       case 'pre_execution':
-        this._evaluatePreExecution(entries, ctx, violations);
+        this._evaluatePreExecution(this._policies.pre_execution || [], ctx, violations);
         break;
       case 'pre_deployment':
-        this._evaluatePreDeployment(entries, ctx, violations);
+        this._evaluatePreDeployment(this._policies.pre_deployment || [], ctx, violations);
         break;
       case 'resource':
-        this._evaluateResource(entries, ctx, violations);
+        this._evaluateResource(this._policies.resource || [], ctx, violations);
         break;
       case 'data':
-        this._evaluateData(entries, ctx, violations);
+        this._evaluateData(this._policies.data || [], ctx, violations);
         break;
       default:
         return {
@@ -415,6 +466,33 @@ export class PolicyEngine {
           findings,
         });
       }
+    }
+  }
+
+  private _callExecutiveCore(context: any): { decision: Decision; reason: string } {
+    const cargoContext = {
+      tool_name: context.tool_name || 'policy_eval',
+      arguments: context.arguments || {},
+      trust_score: context.trust_score || 0.5,
+    };
+
+    try {
+      const result = spawnSync(this._executiveBinaryPath, [], {
+        input: JSON.stringify(cargoContext),
+        encoding: 'utf8',
+      });
+
+      if (result.error) throw result.error;
+      const evaluation = JSON.parse(result.stdout);
+      
+      // Map Rust strings to Decision enum
+      let decision = Decision.ALLOW;
+      if (evaluation.decision === 'Deny') decision = Decision.DENY;
+      if (evaluation.decision === 'RequireApproval') decision = Decision.REQUIRE_APPROVAL;
+
+      return { decision, reason: evaluation.reason };
+    } catch (err: any) {
+      return { decision: Decision.ALLOW, reason: `Policy fallback: ${err.message}` };
     }
   }
 

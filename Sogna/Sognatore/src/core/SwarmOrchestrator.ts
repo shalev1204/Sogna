@@ -4,9 +4,15 @@ import { AgentRole, AgentSwarm } from './agents/AgentTypes.js';
 import { AgentFactory } from './agents/AgentFactory.js';
 import { DockerSandbox } from './DockerSandbox.js';
 import { Chronicler } from './memory/Chronicler.js';
+import { getSwarmStyle } from './utils/SwarmVisuals.js';
 import path from 'path';
 import fs from 'fs';
 import { EventEmitter } from 'events';
+import chalk from 'chalk';
+import { SognaEventBus, SognaEventType, EventProvenance, FailureClass, PolicyEngine } from '@sogna/toolkit';
+import { TerminalSubscriber } from './ui/TerminalSubscriber.js';
+import { QualityCouncil } from './QualityCouncil.js';
+import { Guardian } from './Guardian.js';
 
 export interface SwarmTask {
   id: string;
@@ -28,11 +34,14 @@ export class SwarmOrchestrator extends EventEmitter {
 
   private constructor() {
     super();
-    this.messageBus = path.join(process.cwd(), '.sognatore', 'messages');
+    this.messageBus = path.join(process.cwd(), 'Sognatore', '.sognatore', 'messages');
     this.registry = AgentRegistry.getInstance();
     this.chronicler = new Chronicler();
     this.initFileSystem();
     this.chronicler.init();
+    
+    // Initialize Nervous System UI
+    new TerminalSubscriber();
   }
 
   static getInstance(): SwarmOrchestrator {
@@ -43,12 +52,27 @@ export class SwarmOrchestrator extends EventEmitter {
   }
 
   private initFileSystem() {
+    const sognatoreDir = path.join(process.cwd(), 'Sognatore', '.sognatore');
+    
+    // INSTITUTIONAL PURGE: Clear volatile messages and queue on startup to ensure state integrity
+    const volatileDirs = [
+      path.join(sognatoreDir, 'messages'),
+      path.join(sognatoreDir, 'queue')
+    ];
+    
+    volatileDirs.forEach(dir => {
+      if (fs.existsSync(dir)) {
+        fs.emptyDirSync(dir);
+        console.log(`[ORCHESTRATOR] Purged operational state: ${path.basename(dir)}`);
+      }
+    });
+
     const dirs = [
       this.messageBus,
       path.join(this.messageBus, 'inbox'),
       path.join(this.messageBus, 'outbox'),
       path.join(this.messageBus, 'broadcast'),
-      path.join(process.cwd(), '.sognatore', 'queue')
+      path.join(sognatoreDir, 'queue')
     ];
     
     dirs.forEach(dir => {
@@ -71,30 +95,61 @@ export class SwarmOrchestrator extends EventEmitter {
       await this.triggerEvolution(task);
     }
 
-    const agentType = this.resolveSpecialistForTask(task.type);
+    // [SQ-001] PRE-DISPATCH INSTITUTIONAL VETTING
+    const policy = PolicyEngine.getInstance();
+    const vetting = policy.validateCommand(task.description); // Analyze intent
+    if (vetting.category === 'DESTRUCTIVE' || vetting.category === 'DANGER_ZONE') {
+      console.warn(chalk.red.bold(`[SECURITY] Pre-dispatch block: Task intent classified as ${vetting.category}.`));
+      throw new Error(`SECURITY ALERT: Task description contains potentially destructive commands. Dispatch suspended for manual review.`);
+    }
+
+    const agentType = this.registry.resolveSpecialist(task.type);
     
     // Sandbox Profile Selection
     const sandbox = DockerSandbox.getInstance();
-    if (task.type.startsWith('sec-') || task.type === 'ops-security') {
+    if (vetting.category !== 'READ_ONLY' || task.type.startsWith('sec-')) {
       sandbox.setProfile('security');
     } else {
       sandbox.setProfile('standard');
     }
 
     const agent = await this.registry.getAgent(agentType);
+    const agentMeta = agent.getMetadata();
+    const swarmName = agentMeta.swarm;
+    
+    const guardian = Guardian.getInstance();
+    
+    // MATERIALIZE SWARM SUMMONING (Redacted for neutrality)
+    SognaEventBus.getInstance().publish({
+      type: SognaEventType.LOG,
+      emitter: 'Orchestrator',
+      swarm: swarmName,
+      provenance: EventProvenance.LIVE,
+      failureClass: FailureClass.NONE,
+      data: { message: guardian.redactIntel(`[SUMMON] ${agentType} reclutado para '${task.type}'`) }
+    });
     
     this.emit('task:started', { taskId: task.id, agentId: agent.id });
     
-    // SBP CONSENSUS GATE
-    if (process.env.SOGNA_BRIDGE_PROTOCOL !== 'disabled') {
-       try {
-         await this.registry.getAgent('supervisor'); // Pre-warm council
-         // In a real flow, the QualityCouncil would run here.
-         // For now, we simulate the SBP handshake logic.
-       } catch (sbpError) {
-         console.warn('[SBP] Bridge Handshake failed. Attempting SBP Resolution...');
-         return await this.handleSbpConflict(task);
-       }
+    // [QG-010] INSTITUTIONAL CONSENSUS GATE
+    if (process.env.SOGNARE_QUALITY_TIER !== 'disabled') {
+      const council = new QualityCouncil(process.cwd());
+      const evidence = {
+        iterationCount: 0, // Initial dispatch
+        gitDiff: '', 
+        testLogs: [],
+        actionPlan: task.description,
+        isCritical: task.priority >= 10
+      };
+
+      const { passed, results } = await council.evaluate(evidence);
+      if (!passed) {
+        console.warn(chalk.yellow('[ORCHESTRATOR] Quality Council denied initial dispatch. Triggering Pre-emptive Fix...'));
+        const findings = results.flatMap(r => r.findings.map(f => f.message)).join('; ');
+        
+        // Handle rejection by re-dispatching as a fix task or failing
+        return await this.handleCouncilRejection(task, findings);
+      }
     }
 
     try {
@@ -164,49 +219,6 @@ export class SwarmOrchestrator extends EventEmitter {
     }
   }
 
-  private detectAgentGap(task: SwarmTask): boolean {
-    const catalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
-    if (!fs.existsSync(catalogPath)) return false;
-    
-    const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-    const knownPrefixes = Object.keys(catalog.swarms).concat(Object.keys(catalog.evolved_swarms));
-    
-    // If the task type doesn't start with any known prefix in the swarms, it's a domain gap
-    // e.g. 'fintech-analyze' vs 'eng-frontend'
-    return !knownPrefixes.some(prefix => task.type.startsWith(prefix));
-  }
-
-  private detectSkillGap(task: SwarmTask): boolean {
-    const knownTypes = ['ui-', 'api-', 'db-', 'sec-', 'prd-', 'ops-', 'research-', 'review-'];
-    return !knownTypes.some(prefix => task.type.startsWith(prefix));
-  }
-
-  private resolveSpecialistForTask(taskType: string): string {
-    const catalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
-    if (fs.existsSync(catalogPath)) {
-      const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-      
-      // Match by exact prefix first
-      const prefix = taskType.split('-')[0];
-      
-      // Check all swarms for an agent that matches this specific task type
-      const swarms = { ...catalog.swarms, ...catalog.evolved_swarms };
-      for (const swarm of Object.values(swarms)) {
-        const agents = (swarm as any).agents;
-        if (agents.includes(taskType)) return taskType;
-        // Fallback to searching if any agent in the swarm handles this prefix
-        const match = agents.find((a: string) => a.startsWith(prefix));
-        if (match) return match;
-      }
-    }
-
-    // Default legacy Fallback
-    if (taskType.startsWith('ui-')) return 'eng-frontend';
-    if (taskType.startsWith('api-')) return 'eng-backend';
-    if (taskType.startsWith('db-')) return 'eng-database';
-    
-    return 'eng-backend';
-  }
 
   /**
    * Triggers the Evolutionary Brain to synthesize missing skills.
@@ -278,5 +290,29 @@ No absolute consensus reached. Applying the most conservative safety-first appro
     console.log(`[SBP] Conservative Fallback triggered. Diagnostic saved to: ${diagnosticPath}`);
     
     return "SBP: Task executed via Conservative Fallback. Check sbp_conflict_resolution.md for details.";
+  }
+
+  /**
+   * Handles a task rejection from the Quality Council by attempting a fix
+   * or failing gracefully.
+   */
+  private async handleCouncilRejection(task: SwarmTask, findings: string): Promise<string> {
+    console.log(chalk.red(`[ORCHESTRATOR] Council Rejection: ${findings}`));
+    
+    const supervisor = await this.registry.getAgent('supervisor');
+    const fixPrompt = `
+      The Quality Council rejected the following task dispatch.
+      TASK: ${task.description}
+      FINDINGS: ${findings}
+      
+      Please refine the task description and requirements to address the council's concerns.
+      Return the refined task description.
+    `;
+    
+    const refinedDescription = await supervisor.runTask(fixPrompt);
+    console.log(chalk.green(`[ORCHESTRATOR] Task refined by supervisor. Re-dispatching...`));
+    
+    task.description = refinedDescription;
+    return await this.dispatchTask(task);
   }
 }

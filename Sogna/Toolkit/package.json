@@ -1,0 +1,16 @@
+{
+  "name": "@sogna/toolkit",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Sogna Institutional Ecosystem - Shared Utilities",
+  "private": true,
+  "main": "index.js",
+  "types": "index.d.ts",
+  "dependencies": {
+    "chalk": "catalog:",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4"
+  }
+}

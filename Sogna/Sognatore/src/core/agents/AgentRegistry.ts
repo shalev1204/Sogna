@@ -10,7 +10,7 @@ export class AgentRegistry {
   private stateDir: string;
 
   private constructor() {
-    this.stateDir = path.join(process.cwd(), '.sognatore', 'state', 'agents');
+    this.stateDir = path.join(process.cwd(), 'Sognatore', '.sognatore', 'state', 'agents');
   }
 
   static getInstance(): AgentRegistry {
@@ -66,5 +66,42 @@ export class AgentRegistry {
 
   getAgentsBySwarm(swarm: string): Agent[] {
     return this.getActiveAgents().filter(a => a.getMetadata().swarm === swarm);
+  }
+
+  /**
+   * Resolves the correct specialist (agent type) for a given task type.
+   * Centralizes the mapping logic for institutional consistency.
+   */
+  resolveSpecialist(taskType: string): string {
+    const catalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
+    if (fs.existsSync(catalogPath)) {
+      try {
+        const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+        
+        // 1. Precise Match in Swarms or Evolved Swarms
+        const swarms = { ...catalog.swarms, ...catalog.evolved_swarms };
+        for (const swarm of Object.values(swarms)) {
+          const agents = (swarm as any).agents || [];
+          if (agents.includes(taskType)) return taskType;
+          
+          // 2. Prefix Match (e.g. 'ui-' -> 'eng-frontend')
+          const prefix = taskType.split('-')[0];
+          const match = agents.find((a: string) => a.startsWith(prefix));
+          if (match) return match;
+        }
+      } catch (e) {
+        console.error('[REGISTRY] Failed to parse swarm_catalog.json. Using fallbacks.');
+      }
+    }
+
+    // 3. Institutional Legacy Fallbacks (Centralized)
+    if (taskType.startsWith('ui-')) return 'eng-frontend';
+    if (taskType.startsWith('api-')) return 'eng-backend';
+    if (taskType.startsWith('db-')) return 'eng-database';
+    if (taskType.startsWith('sec-')) return 'ops-security';
+    if (taskType.startsWith('research-')) return 'orch-researcher';
+    if (taskType.startsWith('review-')) return 'supervisor';
+    
+    return 'eng-backend'; // Global baseline fallback
   }
 }

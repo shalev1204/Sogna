@@ -1,14 +1,21 @@
 {
-  "system": "Sogna ",
-  "version": "1.0.0",
-  "last_synchronized": "2026-04-12T22:27:56.468899",
-  "pending_audits": [],
-  "verified_knowledge": {
-    "skills": [
-      "Shadow Telemetry"
+  "institutional_audit_registry": {
+    "version": "1.1.0",
+    "tier": "apex",
+    "last_sync": "2026-04-19T11:55:00Z",
+    "events": [
+      {
+        "type": "INITIALIZATION",
+        "description": "Unified Memory Architecture (UMA) integrated successfully.",
+        "timestamp": "2026-04-19T10:04:00Z"
+      }
     ],
-    "agents": [],
-    "rules": []
-  },
-  "mentor_decisions": []
+    "verified_threat_patterns": [],
+    "policy_exemptions": [],
+    "trust_scores": {
+      "default_agent": 0.8,
+      "sec-hardener": 0.95,
+      "orch-researcher": 0.9
+    }
+  }
 }

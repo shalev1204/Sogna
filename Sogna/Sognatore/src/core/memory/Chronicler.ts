@@ -10,28 +10,74 @@ export interface KnowledgeFragment {
   project: string;
 }
 
+interface MemoryIndex {
+  fragments: Array<{
+    key: string;
+    tags: string[];
+    fileName: string;
+    timestamp: string;
+  }>;
+  lastUpdated: string;
+}
+
 /**
  * Sognatore Chronicler - The Long-Term Memory Engine
- * Manages persistent knowledge fragments in Markdown format.
+ * Manages persistent knowledge fragments with High-Speed Indexing.
  */
 export class Chronicler {
+  private static instance: Chronicler;
   private memoryDir: string;
   private intelligenceDir: string;
+  private indexFile: string;
 
-  constructor(baseDir: string = '.') {
+  public static getInstance(baseDir: string = '.'): Chronicler {
+    if (!Chronicler.instance) {
+      Chronicler.instance = new Chronicler(baseDir);
+    }
+    return Chronicler.instance;
+  }
+
+  private constructor(baseDir: string = '.') {
     this.memoryDir = path.resolve(baseDir, 'memory');
     this.intelligenceDir = path.join(this.memoryDir, 'intelligence');
+    this.indexFile = path.join(this.intelligenceDir, 'index.json');
   }
 
   /**
-   * Initializes the memory directories.
+   * Initializes the memory directories and indexing.
    */
   async init(): Promise<void> {
     await fs.ensureDir(this.intelligenceDir);
+    if (!(await fs.pathExists(this.indexFile))) {
+      await this.rebuildIndex();
+    }
   }
 
   /**
-   * Memorizes a new fragment of knowledge.
+   * Rebuilds the entire memory index from disk.
+   */
+  async rebuildIndex(): Promise<void> {
+    const files = await fs.readdir(this.intelligenceDir);
+    const index: MemoryIndex = { fragments: [], lastUpdated: new Date().toISOString() };
+
+    for (const file of files) {
+      if (!file.endsWith('.md') || file === 'index.json') continue;
+      
+      const content = await fs.readFile(path.join(this.intelligenceDir, file), 'utf-8');
+      const fragment = this.parseFragment(content);
+      index.fragments.push({
+        key: fragment.key,
+        tags: fragment.tags,
+        fileName: file,
+        timestamp: fragment.timestamp
+      });
+    }
+
+    await fs.writeJson(this.indexFile, index, { spaces: 2 });
+  }
+
+  /**
+   * Memorizes a new fragment of knowledge and updates the index.
    */
   async memorize(fragment: Omit<KnowledgeFragment, 'timestamp'>): Promise<string> {
     const timestamp = new Date().toISOString();
@@ -51,28 +97,40 @@ ${fragment.content}
 `;
 
     await fs.writeFile(filePath, markdown, 'utf-8');
+    
+    // Incrementally update index
+    const index: MemoryIndex = await fs.readJson(this.indexFile);
+    index.fragments.push({
+      key: fragment.key,
+      tags: fragment.tags,
+      fileName,
+      timestamp
+    });
+    index.lastUpdated = timestamp;
+    await fs.writeJson(this.indexFile, index, { spaces: 2 });
+
     return filePath;
   }
 
   /**
-   * Recalls knowledge related to a query.
-   * Simple implementation: matches keys or tags.
+   * Recalls knowledge related to a query using the index.
    */
   async recall(query: string): Promise<KnowledgeFragment[]> {
-    if (!(await fs.pathExists(this.intelligenceDir))) return [];
+    if (!(await fs.pathExists(this.indexFile))) return [];
 
-    const files = await fs.readdir(this.intelligenceDir);
+    const index: MemoryIndex = await fs.readJson(this.indexFile);
+    const q = query.toLowerCase();
+    
+    // Filter by index first (No Disk I/O for body content yet)
+    const matches = index.fragments.filter(f => 
+      f.key.toLowerCase().includes(q) || 
+      f.tags.some(t => t.toLowerCase().includes(q))
+    );
+
     const results: KnowledgeFragment[] = [];
-
-    for (const file of files) {
-      if (!file.endsWith('.md')) continue;
-      
-      const content = await fs.readFile(path.join(this.intelligenceDir, file), 'utf-8');
-      const fragment = this.parseFragment(content);
-      
-      if (this.isMatch(fragment, query)) {
-        results.push(fragment);
-      }
+    for (const match of matches) {
+      const content = await fs.readFile(path.join(this.intelligenceDir, match.fileName), 'utf-8');
+      results.push(this.parseFragment(content));
     }
 
     // Sort by most recent
@@ -100,16 +158,7 @@ ${fragment.content}
       project: metadata.project || 'global',
       tags: (metadata.tags || '').split(',').map((t: string) => t.trim()).filter(Boolean),
       timestamp: metadata.timestamp || new Date().toISOString(),
-      content: content.split('\n').slice(2).join('\n').trim() // Skip H1 title
+      content: content.split('\n').filter(l => !l.startsWith('#')).join('\n').trim()
     };
-  }
-
-  private isMatch(fragment: KnowledgeFragment, query: string): boolean {
-    const q = query.toLowerCase();
-    return (
-      fragment.key.toLowerCase().includes(q) ||
-      fragment.tags.some(t => t.toLowerCase().includes(q)) ||
-      fragment.content.toLowerCase().includes(q)
-    );
   }
 }

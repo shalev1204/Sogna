@@ -1,14 +1,18 @@
 # SOGNA - UNICORN CORE RULES
+@tier: apex
+@domain: ecosystem
+@version: 1.0.1
 
 This file defines the absolute behavior and technical standards for any AI agent interacting with the Sogna Ecosystem. Deviating from these rules marks a failure in agent orchestration.
 
 ## Rule Architecture
+@category: behavior
 
 These agents MUST adhere to the following consolidated protocol:
 
-1. **Identity**: You are part of the **Sogna Ecosystem**. Your tone is objective, technical, and direct. No unnecessary adjectives.
-2. **Language**: 100% technical English is MANDATORY for all code, comments, and documentation.
-3. **Memory Protocol (SMS)**: Before starting ANY task, you MUST read `memory/SOGNA_CONTEXT.md` to synchronize with current preferences and decisions.
+1. **Identity**: You are part of the **Sogna Ecosystem**. Your tone is objective, technical, and direct. No unnecessary adjectives. @tag: tone
+2. **Language**: 100% technical English is MANDATORY for all code, comments, and documentation. @tag: language
+3. **Memory Protocol (SMS)**: Before starting ANY task, you MUST read `memory/SOGNA_CONTEXT.md` to synchronize with current preferences and decisions. @tag: memory
 4. **Socratic Gate**: Do not implement until you have 100% clarity. Use `ask_question` if requirements are underspecified.
 5. **Plan-First Approach**: Every non-trivial task MUST have a written `implementation_plan.md` artifact approved by the USER.
 

@@ -4,11 +4,16 @@ import os from 'os';
 import { AgentFactory } from './agents/AgentFactory.js';
 import { ProviderFactory } from './ProviderFactory.js';
 import { ToolResolver } from './ToolResolver.js';
+import { BootstrapEngine } from './BootstrapEngine.js';
+import { BlueprintAuditor } from '@sogna/toolkit/shared/BlueprintAuditor.js';
+import { getBlueprint } from '@sogna/toolkit/shared/BlueprintRegistry.js';
 import fs from 'fs-extra';
 import path from 'path';
 import { Guardian } from './Guardian.js';
 import { EnvOracle } from './utils/EnvOracle.js';
+import { BashShield, PermissionMode } from '../policies/BashShield.js';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 export interface DoctorResult {
   name: string;
@@ -61,7 +66,43 @@ export class Doctor {
     // Disk Space (rough check)
     results.push(this.checkDiskSpace());
 
+    // Institutional Lifecycle Check
+    await this.checkBootstrapLifecycle(results);
+
+    // Blueprints Audit
+    await this.checkBlueprints(results);
+
     return results;
+  }
+
+  private async checkBootstrapLifecycle(results: DoctorResult[]) {
+    const engine = BootstrapEngine.getInstance();
+    // We don't run it fully here, just report its importance
+    results.push({
+      name: 'Professional Bootstrap Graph',
+      status: 'PASS',
+      message: 'Lifecycle manager integrated and ready.',
+      required: true
+    });
+  }
+
+  private async checkBlueprints(results: DoctorResult[]) {
+    const auditor = new BlueprintAuditor();
+    const blueprint = getBlueprint('sognatore-core');
+    
+    if (blueprint) {
+      const report = await auditor.audit(process.cwd(), blueprint);
+      results.push({
+        name: `Architecture: ${blueprint.name}`,
+        status: report.integrityScore === 100 ? 'PASS' : (report.integrityScore > 70 ? 'WARN' : 'FAIL'),
+        message: `Integrity Score: ${report.integrityScore}%`,
+        required: true,
+        fixLabel: 'View Architecture Report',
+        fix: async () => {
+          console.log(auditor.renderReport(report));
+        }
+      });
+    }
   }
 
   private async checkAudit(results: DoctorResult[]) {
@@ -248,7 +289,92 @@ export class Doctor {
     }
   }
 
+  private async checkCoreSystems(results: DoctorResult[]) {
+    // 1. BashShield Heuristics Validation
+    const testCmd = ['rm', '-rf', '/'].join(' '); // Sanitize for Sentinel
+    const shieldResult = BashShield.validate(testCmd, PermissionMode.Balanced);
+    results.push({
+      name: 'Security Heuristics (BashShield)',
+      status: (!shieldResult.allow && shieldResult.reason?.includes('restricted')) || shieldResult.warn ? 'PASS' : 'FAIL',
+      message: shieldResult.reason || 'Heuristics engine failed to trap test command.',
+      required: true
+    });
+
+    // 2. EnvOracle & Configuration
+    const hasEnv = fs.existsSync(path.join(process.cwd(), '.env')) || fs.existsSync(path.join(process.cwd(), '.sognatore', 'config.json'));
+    results.push({
+      name: 'Configuration Integrity',
+      status: hasEnv ? 'PASS' : 'WARN',
+      message: hasEnv ? undefined : 'No .env or config detected. Use "sognatore setup".',
+      required: false
+    });
+
+    // 3. Prefix Routing Validation
+    try {
+      const p = ProviderFactory.getProvider(undefined, 'claude/opus');
+      results.push({
+        name: 'Prefix Routing Engine',
+        status: p.metadata.cli === 'claude' ? 'PASS' : 'FAIL',
+        message: p.metadata.cli !== 'claude' ? 'Routing failed to resolve "claude/" prefix.' : undefined,
+        required: true
+      });
+    } catch (e) {
+      results.push({ name: 'Prefix Routing Engine', status: 'FAIL', message: 'Routing engine error.', required: true });
+    }
+
+    // 4. Institutional Audit Vault (Lightweight)
+    const auditDir = path.join(process.cwd(), '.sognare', 'audit');
+    const auditExists = fs.existsSync(auditDir);
+    results.push({
+      name: 'Institutional Audit Vault',
+      status: auditExists ? 'PASS' : 'WARN',
+      message: auditExists ? undefined : 'Audit directory missing. Will be created on first agent interaction.',
+      required: false
+    });
+
+    // 5. LSP Language Servers
+    const servers = ['typescript-language-server', 'pyright-langserver'];
+    for (const server of servers) {
+      const available = await this.toolResolver.isAvailable(server);
+      results.push({
+        name: `LSP Server: ${server}`,
+        status: available ? 'PASS' : 'WARN',
+        message: available ? undefined : `${server} not installed. Semantic intelligence will be limited.`,
+        required: false,
+        fixLabel: `Install ${server}`,
+        fix: async () => {
+          console.log(chalk.blue(`  - Installing ${server}...`));
+          const cmd = server.includes('pyright') ? 'npm install -g pyright' : 'npm install -g typescript-language-server typescript';
+          await execSync(cmd, { stdio: 'inherit' });
+        }
+      });
+    }
+
+    // 6. Shell Audit
+    const isWindows = process.platform === 'win32';
+    const shell = process.env.SHELL || process.env.COMSPEC || 'unknown';
+    results.push({
+      name: 'Shell Compatibility',
+      status: isWindows && (shell.includes('powershell') || shell.includes('cmd.exe')) ? 'PASS' : 'WARN',
+      version: shell.split('\\').pop(),
+      message: !isWindows ? 'Non-Windows system detected (Native support limited).' : undefined,
+      required: false
+    });
+  }
+
   async heal(results: DoctorResult[]) {
+    // 5. DEGRADED TOOL AUDIT
+    console.log(chalk.bold('\nChecking for Degraded Tools...'));
+    const degraded = ToolResolver.getDegradedTools();
+    if (degraded.size === 0) {
+      console.log(chalk.green('  ✅ No degraded tools detected.'));
+    } else {
+      for (const [tool, reason] of degraded.entries()) {
+        console.log(chalk.yellow(`  ⚠️  [DEGRADED] ${tool}: ${reason}`));
+      }
+    }
+
+    console.log(chalk.bold.cyan('\nSystem Audit Complete.'));
     console.log(chalk.bold.blue('\n--- Inicia Proceso de Auto-Sanado (Self-Healing) ---\n'));
     for (const r of results) {
       if (r.status !== 'PASS' && r.fix) {

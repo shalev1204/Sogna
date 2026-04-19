@@ -4,15 +4,19 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@sogna/toolkit": ["../toolkit/index.ts"],
+      "@sogna/toolkit/*": ["../toolkit/*"],
+      "chalk": ["./node_modules/chalk"]
+    }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "../toolkit/shared/**/*"
   ],
   "exclude": [
     "node_modules",

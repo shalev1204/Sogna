@@ -1,0 +1,122 @@
+import fs from 'fs-extra';
+import path from 'path';
+import { ProjectBlueprint, RequiredNode, BlueprintVetoRule } from './BlueprintRegistry.js';
+import chalk from 'chalk';
+
+export interface AuditIssue {
+  type: 'MISSING' | 'VETO' | 'EXTRA';
+  node: string;
+  message: string;
+  severity: 'error' | 'warning';
+}
+
+export interface AuditReport {
+  blueprintId: string;
+  blueprintName: string;
+  rootPath: string;
+  issues: AuditIssue[];
+  integrityScore: number; // 0-100
+}
+
+export class BlueprintAuditor {
+  async audit(rootPath: string, blueprint: ProjectBlueprint): Promise<AuditReport> {
+    const issues: AuditIssue[] = [];
+
+    // 1. Check Required Nodes
+    for (const node of blueprint.requiredNodes) {
+      const fullPath = path.join(rootPath, node.path);
+      const exists = await fs.pathExists(fullPath);
+      
+      if (!exists) {
+        issues.push({
+          type: 'MISSING',
+          node: node.path,
+          message: `Required ${node.type} missing: ${node.description}`,
+          severity: 'error'
+        });
+      } else {
+        const stats = await fs.lstat(fullPath);
+        const isDir = stats.isDirectory();
+        if ((node.type === 'directory' && !isDir) || (node.type === 'file' && isDir)) {
+          issues.push({
+            type: 'MISSING',
+            node: node.path,
+            message: `Node found at ${node.path} but expected ${node.type}, found ${isDir ? 'directory' : 'file'}.`,
+            severity: 'error'
+          });
+        }
+      }
+    }
+
+    // 2. Scan for Veto Patterns (Quick scan for source files)
+    if (blueprint.vetoRules.length > 0) {
+      await this.scanForVetoes(rootPath, blueprint.vetoRules, issues);
+    }
+
+    // Calculate score (simple metric)
+    const requiredCount = blueprint.requiredNodes.length;
+    const errors = issues.filter(i => i.severity === 'error').length;
+    const integrityScore = Math.max(0, 100 - (errors * (100 / (requiredCount || 1))));
+
+    return {
+      blueprintId: blueprint.id,
+      blueprintName: blueprint.name,
+      rootPath,
+      issues,
+      integrityScore
+    };
+  }
+
+  private async scanForVetoes(rootPath: string, rules: BlueprintVetoRule[], issues: AuditIssue[]) {
+    // Only scan text-based files for vetoes to avoid performance hit
+    const allowedExtensions = ['.ts', '.js', '.json', '.md', '.py', '.txt', '.env'];
+    
+    const scan = async (dir: string) => {
+      const entries = await fs.readdir(dir);
+      for (const entry of entries) {
+        if (entry === 'node_modules' || entry === '.git') continue;
+        
+        const fullPath = path.join(dir, entry);
+        const stats = await fs.lstat(fullPath);
+        
+        if (stats.isDirectory()) {
+          await scan(fullPath);
+        } else if (stats.isFile() && allowedExtensions.includes(path.extname(entry))) {
+          const content = await fs.readFile(fullPath, 'utf8');
+          for (const rule of rules) {
+            if (new RegExp(rule.pattern).test(content)) {
+              issues.push({
+                type: 'VETO',
+                node: path.relative(rootPath, fullPath),
+                message: rule.message,
+                severity: rule.severity
+              });
+            }
+          }
+        }
+      }
+    };
+
+    await scan(rootPath);
+  }
+
+  renderReport(report: AuditReport): string {
+    let output = chalk.bold(`\nArchitecture Audit: ${report.blueprintName}\n`);
+    output += `Status: ${report.integrityScore === 100 ? chalk.green('PASS') : chalk.red('DEVIATING')} (Integrity: ${report.integrityScore}%)\n`;
+    output += `Root: ${report.rootPath}\n\n`;
+
+    if (report.issues.length === 0) {
+      output += chalk.green('  ✓ Architectural state matches the blueprint perfectly.\n');
+      return output;
+    }
+
+    for (const issue of report.issues) {
+      const color = issue.severity === 'error' ? chalk.red : chalk.yellow;
+      const typeStr = chalk.bold(`[${issue.type}]`);
+      output += color(`  ${typeStr} ${issue.node}\n`);
+      output += chalk.dim(`           └─ ${issue.message}\n`);
+    }
+
+    return output;
+  }
+}

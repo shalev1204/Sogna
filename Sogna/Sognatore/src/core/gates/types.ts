@@ -23,4 +23,5 @@ export interface CouncilEvidence {
   buildLog?: string;
   iterationCount: number;
   actionPlan?: string;
+  isCritical?: boolean;
 }

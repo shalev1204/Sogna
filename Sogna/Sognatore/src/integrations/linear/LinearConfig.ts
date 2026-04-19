@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { LinearConfig, DEFAULT_STATUS_MAPPING } from './LinearTypes.js';
+import { LinearClientConfig, DEFAULT_STATUS_MAPPING } from './LinearTypes.js';
 
 /**
  * Minimal YAML parser for flat and one-level-nested key-value pairs.
@@ -74,7 +74,7 @@ function setNested(obj: any, keys: string[], value: any) {
 /**
  * Load Linear integration configuration.
  */
-export function loadConfig(configDir?: string): LinearConfig | null {
+export function loadConfig(configDir?: string): LinearClientConfig | null {
   const dir = configDir || path.join(process.cwd(), '.sognatore');
   const yamlPath = path.join(dir, 'config.yaml');
   const jsonPath = path.join(dir, 'config.json');

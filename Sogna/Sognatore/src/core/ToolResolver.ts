@@ -3,7 +3,22 @@ import fs from 'fs';
 import { execSync } from 'child_process';
 
 export class ToolResolver {
+  private static degradedTools: Map<string, string> = new Map();
+
   constructor(private readonly cwd: string) {}
+
+  static registerDegraded(toolName: string, reason: string) {
+    this.degradedTools.set(toolName, reason);
+    console.warn(`  [TOOL-RESOLVER] Tool '${toolName}' registered as DEGRADED: ${reason}`);
+  }
+
+  static getDegradedTools(): Map<string, string> {
+    return this.degradedTools;
+  }
+
+  static isDegraded(toolName: string): boolean {
+    return this.degradedTools.has(toolName);
+  }
 
   /**
    * Resolves the "correct" path to a tool, prioritizing project-local versions.

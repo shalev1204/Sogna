@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.2.0",
+    "chalk": "catalog:",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "turbo": "^2.4.0",

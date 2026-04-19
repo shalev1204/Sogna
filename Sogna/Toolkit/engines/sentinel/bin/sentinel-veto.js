@@ -87,8 +87,26 @@ const ALLOWED_TARGET_NAMES = [
     'BACKEND_URL',// Standard backend reference
     'BASE_URL',    // Standard base URL
     'this.baseUrl',  // Sognatore Provider base URL
-    'VITE_'
+    'VITE_',
+    'env', 'process', 'Map', 'Set', 'Cache', 'Buffer', 'config', 'user', 'settings',
+    'auth', 'token', 'key', 'secret', 'password', 'url', 'host', 'port'
 ];
+
+const KNOWN_NET_CLIENTS = ['axios', 'fetch', 'got', 'request', 'https', 'http', 'superagent', 'rest', 'client'];
+
+// --- BashShield: Intent & Classification (Heuristic Port) ---
+const SHIELD_WRITE_COMMANDS = ['cp', 'mv', 'rm', 'mkdir', 'rmdir', 'touch', 'chmod', 'chown', 'chgrp', 'ln', 'install', 'tee', 'truncate', 'shred', 'mkfifo', 'mknod', 'dd'];
+const SHIELD_READ_ONLY_COMMANDS = ['ls', 'cat', 'head', 'tail', 'less', 'more', 'wc', 'sort', 'uniq', 'grep', 'egrep', 'fgrep', 'find', 'which', 'whereis', 'whatis', 'man', 'info', 'file', 'stat', 'du', 'df', 'free', 'uptime', 'uname', 'hostname', 'whoami', 'id', 'groups', 'env', 'printenv', 'echo', 'printf', 'date', 'cal', 'bc', 'expr', 'test', 'true', 'false', 'pwd', 'tree', 'diff', 'cmp', 'md5sum', 'sha256sum', 'sha1sum', 'xxd', 'od', 'hexdump', 'strings', 'readlink', 'realpath', 'basename', 'dirname', 'seq', 'yes', 'tput', 'column', 'jq', 'yq', 'xargs', 'tr', 'cut', 'paste', 'awk', 'sed'];
+
+function classifyBashCommand(cmdString) {
+    const trimmed = cmdString.trim().replace(/['"`]/g, '');
+    const first = trimmed.split(/\s+/).find(p => !p.includes('=') && p !== 'sudo' && !p.startsWith('-')) || '';
+    
+    if (SHIELD_READ_ONLY_COMMANDS.includes(first)) return 'ReadOnly';
+    if (SHIELD_WRITE_COMMANDS.includes(first)) return 'Write';
+    if (['rm', 'shred', 'truncate'].includes(first)) return 'Destructive';
+    return 'Unknown';
+}
 
 let hasCritical = false;
 let hasWarning = false;
@@ -265,9 +283,6 @@ function scanASTForBackdoors(filePath, content) {
                 // Refined network call detection: 
                 // fetch() is always a net call.
                 // .get(), .post(), etc. are net calls ONLY if the object looks like a network client.
-                const networkClients = ['axios', 'http', 'https', 'got', 'request', 'nodeFetch', 'superagent'];
-                const isKnownNetClient = networkClients.some(c => objAccess === c || objAccess.endsWith('.' + c));
-                
                 const isNetCall = (ts.isIdentifier(expression) && ['fetch', 'lookup'].includes(expression.text)) || 
                                  (ts.isPropertyAccessExpression(expression) && 
                                   (['post', 'put', 'request'].includes(expression.name.text) || 
@@ -276,13 +291,62 @@ function scanASTForBackdoors(filePath, content) {
                 // --- ELITE: SSRF PROTECTION ---
                 if (isNetCall) {
                     const urlArg = node.arguments[0];
-                    if (urlArg) {
-                        const urlText = urlArg.getText(sourceFile);
-                        const isTainted = urlText.includes('req.query') || urlText.includes('req.params') || urlText.includes('req.body') ||
-                                         Array.from(taintVariables).some(v => urlText === v);
-                        if (isTainted) {
+                    if (urlArg && ts.isStringLiteral(urlArg)) {
+                        const url = urlArg.text;
+                        const domainMatch = url.match(/https?:\/\/([^/:]+)/);
+                        const domain = domainMatch ? domainMatch[1] : null;
+
+                        if (domain && !DOMAIN_WHITELIST.some(d => domain.endsWith(d))) {
                             const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-                            addReport('CRITICAL', `SSRF DETECTADO: Llamada de red con URL proveniente de entrada de usuario no sanitizada.`, `${filePath}:${pos.line + 1}`, "Implementar una lista blanca (whitelist) de dominios permitidos.");
+                            addReport('WARNING', `DOMINIO NO RECONOCIDO: Intento de conexión a ${domain}`, `${filePath}:${pos.line + 1}`, "Añadir el dominio a la lista blanca de Sognatore.");
+                        }
+                    }
+                }
+
+                if (callText.includes('.get(')) {
+                    const expression = node.expression;
+                    if (ts.isPropertyAccessExpression(expression)) {
+                        const target = expression.expression;
+                        const targetName = target.getText();
+                        
+                        // False Positive Protection: Only alert if it's a known net client
+                        const isNetClient = KNOWN_NET_CLIENTS.some(nc => targetName.toLowerCase().includes(nc));
+                        if (!isNetClient) return; // Skip Map, Set, generic objects
+                        
+                        const arg = node.arguments[0];
+                        if (arg && ts.isStringLiteral(arg)) {
+                            // Check if arg name looks like exfiltration
+                            const sensitiveTerms = ['key', 'secret', 'password', 'token', 'config', 'auth'];
+                            if (sensitiveTerms.some(t => arg.text.toLowerCase().includes(t))) {
+                                const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                                addReport('WARNING', `POSIBLE EXFILTRACIÓN: Acceso a dato sensible via ${targetName}.get("${arg.text}")`, `${filePath}:${pos.line + 1}`, "Verificar que el dato no se envía a un servidor externo.");
+                            }
+                        }
+                    }
+                }
+
+                // --- BASH SHIELD INTEGRATION IN AST ---
+                const shellTools = ['exec', 'execSync', 'spawn', 'execa', 'runSafeCommand', 'bash', 'sh'];
+                if (shellTools.some(t => callText.includes(t))) {
+                    const cmdArg = node.arguments[0];
+                    if (cmdArg && ts.isStringLiteral(cmdArg)) {
+                        const cmd = cmdArg.text;
+                        const intent = classifyBashCommand(cmd);
+                        
+                        // Heuristic: Check for destructive patterns in strings
+                        const DESTRUCTIVE_PATTERNS = [['rm -rf', 'Borrado recursivo forzado'], ['mkfs', 'Formateo de disco']];
+                        for (const dp of DESTRUCTIVE_PATTERNS) {
+                            if (cmd.includes(dp[0])) {
+                                const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                                addReport('CRITICAL', `COMANDO DESTRUCTIVO HARCODED: ${dp[1]}`, `${filePath}:${pos.line + 1}`, "Eliminar el comando destructivo literal o usar una ruta segura.");
+                            }
+                        }
+
+                        // Heuristic: Check for outside-workspace system targets
+                        const systemDirs = ['/etc/', '/usr/', '/var/', '/bin/', '/sbin/'];
+                        if (systemDirs.some(dir => cmd.includes(dir))) {
+                            const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+                            addReport('WARNING', `ACCESO A SISTEMA EXTERNO: El comando parece apuntar a directorios protegidos fuera del workspace (${cmd}).`, `${filePath}:${pos.line + 1}`, "Asegurar que el comando tiene privilegios mínimos.");
                         }
                     }
                 }
@@ -568,24 +632,40 @@ async function scanSupplyChain(filePath) {
         }
     }
 
+    const result = {
+        status: hasCritical ? 'VETO' : (hasWarning ? 'WARNING' : 'CLEAN'),
+        scenarios: [],
+        recommendations: [],
+        report: reportLog
+    };
+
+    // Mapping detected issues to Recovery Scenarios
+    if (reportLog.includes('CONFLIC')) result.scenarios.push('git_conflict');
+    if (reportLog.includes('permission') || reportLog.includes('EACCES')) result.scenarios.push('access_denied');
+    if (reportLog.includes('not found') || reportLog.includes('module')) result.scenarios.push('module_not_found');
+
+    if (hasCritical) {
+        result.recommendations = result.scenarios.map(s => `RECIPE:${s}`);
+        if (result.recommendations.length === 0) {
+            result.recommendations.push('RECIPE:manual_review');
+        }
+    }
+
     if (!hasCritical && !hasWarning) {
         console.log("✅ [CLEAN] Dominio seguro. Sentinel autoriza el acceso.\n");
         process.exit(0);
     } else {
-        console.error(reportLog);
         if (hasCritical && vetoThreshold) {
-            console.error("⛔ [VETO] Sentinel ha bloqueado el commit por infracciones críticas.");
+            console.error("⛔ [VETO] Sentinel ha bloqueado la operación por infracciones críticas.");
+            console.error(JSON.stringify(result, null, 2)); // OUTPUT JSON FOR AUTO-HEALER
+            
             const reportFile = path.join(__dirname, '..', 'reports', 'THREAD_INTEL.md');
             try { fs.appendFileSync(reportFile, `\n\n### INTRUSIÓN DETECTADA: ${new Date().toISOString()}\n${reportLog}`); } catch(e) {}
             
-            // INMUNE SYSTEM TRIGGER
-            console.log("💉 [SENTINEL] Disparando Sistema Inmune para autocuración...");
-            // En una integración real, llamaríamos al binario de sognatore para ejecutar la curación
-            // Aquí simulamos que el reporte se procesa para la próxima ronda de razonamiento.
-            
             process.exit(1);
         } else {
-            console.warn("⚠️  [WARNING] Commit permitido con advertencias.");
+            console.warn("⚠️  [WARNING] Operación permitida con advertencias.");
+            console.warn(reportLog);
             process.exit(0);
         }
     }

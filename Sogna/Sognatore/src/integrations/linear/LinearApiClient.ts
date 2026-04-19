@@ -1,5 +1,5 @@
 // @sentinel-ignore: GLOBAL - Core Linear integration with authorized API capabilities.
-import { LinearAuditLog, LinearClientConfig, LinearIssue, LinearSearchResponse } from './LinearTypes.js';
+import { LinearAuditLog, LinearClientConfig, LinearIssue, LinearSearchResponse, LinearProject, LinearTeamState, LinearClientOptions } from './LinearTypes.js';
 
 export const LINEAR_API_URL = 'https://api.linear.app/graphql';
 export const DEFAULT_RATE_LIMIT_RETRY_MS = 60000;

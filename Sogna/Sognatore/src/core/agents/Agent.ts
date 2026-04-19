@@ -7,6 +7,10 @@ import chalk from 'chalk';
 import { ToolRegistry } from '../actions/ToolRegistry.js';
 import { AgentFactory } from './AgentFactory.js';
 import { Guardian } from '../Guardian.js';
+import { AutoHealer } from '@sogna/toolkit/shared/AutoHealer.js';
+import { AuditVault } from '@sogna/toolkit/shared/AuditVault.js';
+import { Orchestrator, Turn } from '../Orchestrator.js';
+import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@sogna/toolkit';
 
 export interface AgentState {
   id: string;
@@ -73,11 +77,18 @@ export class Agent {
   private async executeNativeLoop(initialTask: string): Promise<string> {
     let currentPrompt = initialTask;
     let turn = 0;
-    const maxTurns = 10;
-    const history: string[] = [];
-    const systemPrompt = this.buildSystemPrompt() + "\n\n" + ToolRegistry.getInstance().getToolsDefinition();
+    const maxTurns = 15; // Increased budget for complex institutional tasks
+    const history: Turn[] = [];
+    const orchestrator = Orchestrator.getInstance();
 
-    console.log(chalk.blue(`[SOGNATORE-LOOP] Iniciando bucle agéntico para ${this.id} (${this.model})`));
+    SognaEventBus.getInstance().publish({
+      type: SognaEventType.LOG,
+      emitter: this.id,
+      swarm: this.role.swarm,
+      failureClass: FailureClass.NONE,
+      provenance: EventProvenance.LIVE,
+      data: { message: Guardian.getInstance().redactIntel(`Iniciando bucle agéntico institucional para ${this.id} (${this.model})`) }
+    });
 
     while (turn < maxTurns) {
       turn++;
@@ -86,11 +97,29 @@ export class Agent {
       const stageReason = chalk.dim(`  [R] Reasoning turn ${turn}...`);
       console.log(stageReason);
 
-      const fullPrompt = history.length > 0 
-        ? `Task Context:\n${history.join('\n\n')}\n\nContinue Task: ${currentPrompt}`
-        : currentPrompt;
+      // [HEURISTIC ROUTING] - Dynamic tool selection based on prompt
+      const relevantTools = await orchestrator.routeTools(currentPrompt);
+      const toolDefs = "Herramientas Sugeridas (Orquestador):\n" + 
+                       relevantTools.map(t => `- ${t.name}: ${t.description}`).join('\n');
 
-      const sanitizedPrompt = Guardian.getInstance().sanitizePrompt(fullPrompt);
+      // [PHASE 5: PREDICTIVE PREFETCH] - Intelligence Warming
+      const prefetchContext = await orchestrator.predictivePrefetch(currentPrompt);
+
+      const systemPrompt = this.buildSystemPrompt() + "\n\n" + toolDefs + (prefetchContext ? `\n\n${prefetchContext}` : "");
+
+      // [CONTEXT COMPACTION] - Automatic pruning with Recursive Summarization
+      const optimizedHistory = await orchestrator.compact(history, this);
+      
+      // Update local history if compaction occurred to maintain state
+      if (optimizedHistory.length < history.length) {
+        history.length = 0;
+        history.push(...optimizedHistory);
+      }
+
+      const historyContext = optimizedHistory.map(h => `${h.role.toUpperCase()}: ${h.content}`).join('\n\n');
+      
+      // [PHASE 5: VANGUARD FILTERING] - Decoupling operational noise
+      const sanitizedPrompt = Guardian.getInstance().sanitizePrompt(`${historyContext}\n\nTask: ${currentPrompt}`);
 
       // [RARV: ACT] - Execute tool or generate response
       const response = await this.provider.invoke(sanitizedPrompt, {
@@ -99,8 +128,23 @@ export class Agent {
         system: systemPrompt
       });
 
-      this.recordStats(systemPrompt.length + fullPrompt.length, response.length);
-      history.push(`> User: ${currentPrompt}`, `> Agent: ${response}`);
+      // Publish Thought Event
+      SognaEventBus.getInstance().publish({
+        type: SognaEventType.THOUGHT,
+        emitter: this.id,
+        swarm: this.role.swarm,
+        failureClass: FailureClass.NONE,
+        provenance: EventProvenance.LIVE,
+        data: { content: Guardian.getInstance().redactIntel(response) }
+      });
+
+
+      // AUDIT VAULT: Record Reasoning Summary
+      AuditVault.getInstance().recordReasoning(this.id, turn, response.substring(0, 200) + "...");
+
+      // Update history using structured Turns
+      history.push({ role: 'user', content: currentPrompt });
+      history.push({ role: 'assistant', content: response });
 
       // [RARV: REFLECT] - Search for tool calls or final output
       // [RARV: VERIFY] - Automated check of tool outputs
@@ -113,20 +157,73 @@ export class Agent {
         const toolName = toolXml.match(/<tool_name>(.*?)<\/tool_name>/)?.[1];
         const paramsMatch = toolXml.match(/<parameters>([\s\S]*?)<\/parameters>/);
         
-          if (toolName && paramsMatch) {
+        if (toolName && paramsMatch) {
             const paramsXml = paramsMatch[1];
             const params: Record<string, string> = {};
-            // Basic parameter extraction from XML-ish format
             const paramTags = paramsXml.match(/<(\w+)>(.*?)<\/\w+>/g);
             paramTags?.forEach(tag => {
               const m = tag.match(/<(\w+)>(.*?)<\/\w+>/);
               if (m) params[m[1]] = m[2];
             });
 
-          // Execute Tool
-          const observation = await ToolRegistry.getInstance().call(toolName, params, this.getAgentTier());
-          history.push(`> Observation (${toolName}): ${observation}`);
-          currentPrompt = `Observation from ${toolName}: ${observation}. Please decide your next step. If finished, reply with TASK_COMPLETE.`;
+          try {
+            // Publish Action Start Event
+            SognaEventBus.getInstance().publish({
+              type: SognaEventType.ACTION_START,
+              emitter: this.id,
+              swarm: this.role.swarm,
+              failureClass: FailureClass.NONE,
+              provenance: EventProvenance.LIVE,
+              data: { tool: toolName, args: params }
+            });
+
+            // AUDIT VAULT: Tool Start
+            AuditVault.getInstance().recordTool(this.id, toolName, 'START', undefined, { params });
+
+            // Execute Tool
+            const startTime = Date.now();
+            const observation = await ToolRegistry.getInstance().call(toolName, params, this.getAgentTier());
+            const duration = Date.now() - startTime;
+
+            // AUDIT VAULT: Tool End
+            AuditVault.getInstance().recordTool(this.id, toolName, 'END', duration);
+
+            // Publish Observation Event
+            SognaEventBus.getInstance().publish({
+              type: SognaEventType.OBSERVATION,
+              emitter: this.id,
+              swarm: this.role.swarm,
+              failureClass: FailureClass.NONE,
+              provenance: EventProvenance.LIVE,
+              data: { tool: toolName, result: Guardian.getInstance().redactIntel(String(observation)) }
+            });
+
+            history.push({ role: 'tool', content: `Observation from ${toolName}: ${observation}` });
+            currentPrompt = `Observation from ${toolName}: ${observation}. Please decide your next step. If finished, reply with TASK_COMPLETE.`;
+          } catch (toolError: any) {
+            // SOGNA-WIDE AUTO-HEALING
+            const healer = AutoHealer.getInstance();
+            const scenario = healer.detectScenario(toolError.message);
+            if (scenario) {
+              const recovered = await healer.attemptRecovery(scenario, this.id);
+              if (recovered) {
+                // Publish Recovery Event
+                SognaEventBus.getInstance().publish({
+                  type: SognaEventType.RECOVERY,
+                  emitter: this.id,
+                  swarm: this.role.swarm,
+                  failureClass: scenario,
+                  provenance: EventProvenance.LIVE,
+                  data: { recipe: scenario }
+                });
+                currentPrompt = `Critical: I just recovered from a ${scenario} error. Let's retry the tool call correctly.`;
+                continue;
+              }
+            }
+            history.push({ role: 'tool', content: `Tool Error (${toolName}): ${toolError.message}` });
+            currentPrompt = `Error from ${toolName}: ${toolError.message}. Help me fix this or try another approach.`;
+          }
+          
           continue;
         }
       }
@@ -137,16 +234,17 @@ export class Agent {
     }
 
     this.updateStatus('idle');
-    return history[history.length - 1];
+    const lastMessage = history[history.length - 1];
+    return lastMessage ? lastMessage.content : "Task finished with no output.";
   }
 
-  private recordStats(inputLen: number, outputLen: number) {
+  private recordStats(inputLen: number, outputLen: number, cacheWrite: number = 0, cacheRead: number = 0) {
     const inputTokens = Math.ceil(inputLen / 4);
     const outputTokens = Math.ceil(outputLen / 4);
     
-    // Report to central cost tracker
+    // High-Fidelity cost tracking
     import('../utils/CostTracker.js').then(m => {
-      m.CostTracker.getInstance().calculateAndReport(this.model, inputTokens, outputTokens);
+      m.CostTracker.getInstance().calculateAndReport(this.model, inputTokens, outputTokens, cacheWrite, cacheRead);
     });
 
     this.state.stats.tasksCompleted++;

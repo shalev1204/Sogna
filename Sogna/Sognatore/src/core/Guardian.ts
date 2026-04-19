@@ -4,12 +4,15 @@ import fs from 'fs-extra';
 import path from 'path';
 import crypto from 'crypto';
 import chalk from 'chalk';
+import os from 'os';
 
 /**
  * Sognatore Guardian - The Security & Privacy Sentinel
  * Replaces Phoenix security logic with a native, integrated engine.
  */
 import { EnvOracle } from './utils/EnvOracle.js';
+import { MemoryHub } from './memory/MemoryHub.js';
+import { ConfigDiscovery } from '../shared/ConfigDiscovery.js';
 
 /**
  * Sognatore Guardian - The Security & Privacy Sentinel
@@ -22,20 +25,17 @@ export class Guardian {
   private constructor() {
     // High-Assurance Envar Discovery
     EnvOracle.load();
-    this.SECRET_KEY = process.env.GUARDIAN_SECRET || '';
+    const config = ConfigDiscovery.getInstance().getConfig();
+    this.SECRET_KEY = process.env.GUARDIAN_SECRET || config.guardianSecret || '';
     
     // Strict Validation: No more hardcoded fallbacks in  Mode
     if (!this.SECRET_KEY || this.SECRET_KEY.length < 32) {
-      console.error(chalk.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing, too short, or compromised!'));
-      console.error(chalk.yellow('Sognatore requires a 32+ character GUARDIAN_SECRET to maintain  Integrity.'));
-      console.error(chalk.dim('Please update your .env file immediately. System is running in Restricted/Fail-Safe mode.'));
+      console.error(chalk.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing or insufficient!'));
       
-      if (process.env.NODE_ENV === 'production') {
-        throw new Error(' Security Breach: Insufficient Guardian Secret in Production.');
+      if (config.securityTier === 'apex') {
+        throw new Error('Apex Security Breach: Insufficient Guardian Secret.');
       }
       
-      // Fail-Safe for construction phase: Use a temporary session-bound key if absolutely necessary, 
-      // but warn loudly and do not persist data with it if possible.
       this.SECRET_KEY = crypto.randomBytes(32).toString('hex');
     }
   }
@@ -106,19 +106,58 @@ export class Guardian {
   }
 
   /**
-   * Sanitizes prompts by removing path patterns and potential sensitive data.
+   * Sanitizes prompts by removing path patterns, sensitive names, and potential leaks.
    */
   public sanitizePrompt(prompt: string): string {
     let sanitized = prompt;
     
-    // Obfuscate local paths (e.g., C:\Users\carle\ -> USER_ROOT\)
+    // 1. Obfuscate local paths (e.g., C:\Users\carle\ -> USER_ROOT\)
     const userRootPattern = new RegExp(path.join('C:', 'Users', '[^/\\\\]+'), 'gi');
     sanitized = sanitized.replace(userRootPattern, '<<PROTECTED_ROOT>>');
 
-    // Remove specific potential markers of "AI Generated" if present
+    // 2. SMART INTEL REDACTION (Project Anonymization)
+    sanitized = this.redactIntel(sanitized);
+
+    // 3. Remove specific markers of "AI Generated" if present
     sanitized = sanitized.replace(/As an AI engineer/gi, 'Directly');
     
     return sanitized;
+  }
+
+  /**
+   * Redacts project-specific intelligence keywords to ensure log neutrality.
+   * Replaces Sogna/Sognatore with generic placeholders for external analysis (Sentinel).
+   */
+  public redactIntel(text: string): string {
+    let redacted = text;
+    const config = ConfigDiscovery.getInstance().getConfig();
+    
+    const mappings: Record<string, string> = {
+      'Sognatore': '[CORE_ENGINE]',
+      'Sogna': '[PROJECT_ALPHA]',
+      'Antigravity': '[TOOLKIT_OMEGA]',
+      'Sentinel': '[SECURITY_LAYER]',
+      ...(config.customRedactions || {}) // Consume from .sognarc.json
+    };
+
+    // 1. Redact Project Keywords
+    for (const [key, placeholder] of Object.entries(mappings)) {
+      const regex = new RegExp(key, 'gi');
+      redacted = redacted.replace(regex, placeholder);
+    }
+
+    // 2. Redact OS Username for Institutional Anonymity
+    try {
+      const username = os.userInfo().username;
+      if (username) {
+        const userRegex = new RegExp(username, 'gi');
+        redacted = redacted.replace(userRegex, '[OFFICER_NAME]');
+      }
+    } catch (e) {
+      // Username detection failed
+    }
+
+    return redacted;
   }
 
   /**

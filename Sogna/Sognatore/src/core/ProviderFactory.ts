@@ -8,8 +8,17 @@ import { OpenRouterProvider } from '../providers/OpenRouterProvider.js';
 import { AiderProvider } from '../providers/AiderProvider.js';
 
 export class ProviderFactory {
-  static getProvider(name?: string): Provider {
-    const providerName = name || process.env.SOGNATORE_PROVIDER || 'gemini';
+  static getProvider(name?: string, model?: string): Provider {
+    let providerName = name || process.env.SOGNATORE_PROVIDER || 'gemini';
+
+    // Model-based Prefix Routing (Claw-inspired)
+    if (model && model.includes('/')) {
+      const prefix = model.split('/')[0].toLowerCase();
+      const validPrefixes = ['gemini', 'claude', 'openai', 'kimi', 'moonshot', 'deepseek', 'openrouter', 'aider'];
+      if (validPrefixes.includes(prefix)) {
+        providerName = prefix;
+      }
+    }
 
     switch (providerName.toLowerCase()) {
       case 'gemini':

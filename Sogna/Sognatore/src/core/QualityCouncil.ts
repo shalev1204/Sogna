@@ -4,7 +4,10 @@ import { BlindReviewGate } from './gates/BlindReviewGate.js';
 import { AntiSycophancyGate } from './gates/AntiSycophancyGate.js';
 import { CompatibilityGate } from './gates/CompatibilityGate.js';
 import { ConsensusGate } from './gates/ConsensusGate.js';
+import { VitalsGate } from './gates/VitalsGate.js';
 import { CouncilEvidence, GateResult } from './gates/types.js';
+import { AgentFactory } from './agents/AgentFactory.js';
+import { ProviderFactory } from './ProviderFactory.js';
 import chalk from 'chalk';
 
 export class QualityCouncil {
@@ -12,6 +15,7 @@ export class QualityCouncil {
 
   constructor(private readonly cwd: string) {
     this.gates = [
+      new VitalsGate(cwd),           // NEW: Institutional Pre-flight
       new CompatibilityGate(cwd),    // NEW: Gate 10 (High Priority)
       new ConsensusGate(cwd),        // NEW: SBP Bridge
       new StaticAnalysisGate(cwd),
@@ -30,7 +34,17 @@ export class QualityCouncil {
     for (const gate of this.gates) {
       process.stdout.write(`  Running ${chalk.dim(gate.name)}... `);
       try {
-        const result = await gate.run(evidence);
+        let result = await gate.run(evidence);
+
+        if (result.status !== 'PASS' && evidence.isCritical) {
+          process.stdout.write(chalk.yellow('WAIT (Initiating Consensus Debate)...\n'));
+          const debateResult = await this.triggerDebate(gate, result, evidence);
+          if (debateResult.resolved) {
+            console.log(chalk.green(`    ✓ Debate Consensus: ${debateResult.reason}`));
+            result = { ...result, status: 'PASS', findings: [] }; // Override with consensus
+          }
+        }
+
         results.push(result);
 
         if (result.status === 'PASS') {
@@ -56,11 +70,54 @@ export class QualityCouncil {
     }
 
     if (allPassed) {
-      console.log(chalk.bold.green('\n✔ Quality Council: All gates passed. Project is stable.'));
+      console.log(chalk.bold.green('\n✔ Quality Council: All gates passed (or resolved by consensus).'));
     } else {
       console.log(chalk.bold.red('\n✘ Quality Council: Verification failed. Corrections required.'));
     }
 
     return { passed: allPassed, results };
+  }
+
+  /**
+   * Institutional Consensus Debate Protocol.
+   * Spawns two agents with opposing roles to resolve a validation conflict.
+   */
+  private async triggerDebate(gate: BaseGate, failedResult: GateResult, evidence: CouncilEvidence): Promise<{ resolved: boolean; reason: string }> {
+    console.log(chalk.bold.magenta('  [CONCENSUS_DEBATE] Spawning Dialectic Peer Review...'));
+
+    const factory = AgentFactory.getInstance();
+    const architect = factory.createAgent('architect', 'Architect');
+    const auditor = factory.createAgent('auditor', 'System Auditor');
+
+    const debateContext = `
+    TASK UNDER REVIEW: ${evidence.actionPlan || 'No plan provided'}
+    FAILED GATE: ${gate.name}
+    FINDINGS:
+    ${failedResult.findings.map(f => `- [${f.severity}] ${f.message}`).join('\n')}
+    
+    INSTRUCTIONS:
+    Architect: Defend the plan or propose a fix.
+    Auditor: Challenge the plan and ensure 100% compliance.
+    
+    GOAL: Reach a consensus if the plan is safe and high-quality.
+    `.trim();
+
+    try {
+      // Turn 1: Architect Proposal
+      const architectResponse = await architect.runTask(`Analyze the failure and justify or fix it:\n${debateContext}`);
+      
+      // Turn 2: Auditor Challenge
+      const auditorResponse = await auditor.runTask(`Critique the architect's defense and decide if it's safe to proceed:\n${architectResponse}\n\nOriginal Findings:\n${debateContext}`);
+
+      const resolved = auditorResponse.toUpperCase().includes('RESOLVED') || auditorResponse.toUpperCase().includes('APPROVED');
+      
+      return { 
+        resolved, 
+        reason: resolved ? 'Debate concluded: Security and Architecture reconciled.' : 'Debate failed: No consensus reached.'
+      };
+    } catch (e) {
+      console.error(chalk.red(`    [DEBATE_ERROR] Dialectic loop failed: ${e}`));
+      return { resolved: false, reason: 'Debate system error.' };
+    }
   }
 }

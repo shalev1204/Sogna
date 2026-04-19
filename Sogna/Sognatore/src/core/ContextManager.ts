@@ -9,9 +9,68 @@ interface FileTree {
 
 export class ContextManager {
   private toolResolver: ToolResolver;
+  private isSystemHealthy: boolean = true;
 
   constructor(private readonly cwd: string) {
     this.toolResolver = new ToolResolver(cwd);
+  }
+
+  setHealthStatus(isHealthy: boolean) {
+    this.isSystemHealthy = isHealthy;
+  }
+
+  /**
+   * Discovers instruction files (.sognare/instructions.md, SOGNARE.md, CLAUDE.md)
+   * recursively up the directory tree.
+   */
+  async discoverInstructions(): Promise<string> {
+    const instructionFiles = ['.sognare/instructions.md', 'SOGNARE.md', 'CLAUDE.md'];
+    const rootInstructions: string[] = [];
+    const localInstructions: string[] = [];
+
+    let currentDir = this.cwd;
+    const projectRoot = this.findProjectRoot(currentDir);
+
+    while (true) {
+      for (const fileName of instructionFiles) {
+        const filePath = path.join(currentDir, fileName);
+        if (await fs.pathExists(filePath)) {
+          const content = await fs.readFile(filePath, 'utf8');
+          const header = `\n### INSTRUCCIONES (${path.relative(projectRoot, filePath)})\n`;
+          
+          if (currentDir === projectRoot) {
+            rootInstructions.push(header + content);
+          } else {
+            localInstructions.push(header + content);
+          }
+        }
+      }
+
+      const parentDir = path.dirname(currentDir);
+      if (parentDir === currentDir) break; // Reached system root
+      currentDir = parentDir;
+    }
+
+    // DYNAMIC PRIORITY LOGIC
+    if (!this.isSystemHealthy) {
+      console.log('  [CONTEXT] System Crisis Detected: Prioritizing ROOT (Safe) instructions.');
+      return [...rootInstructions].join('\n');
+    }
+
+    console.log('  [CONTEXT] Healthy state: Merging instructions (Local specificity prioritized).');
+    return [...localInstructions, ...rootInstructions].join('\n');
+  }
+
+  private findProjectRoot(startDir: string): string {
+    let current = startDir;
+    while (true) {
+      if (fs.existsSync(path.join(current, '.git')) || fs.existsSync(path.join(current, '.sognatore'))) {
+        return current;
+      }
+      const parent = path.dirname(current);
+      if (parent === current) return startDir;
+      current = parent;
+    }
   }
 
   /**

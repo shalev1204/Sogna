@@ -82,6 +82,20 @@ export const DEFAULT_STATUS_MAPPING: Record<string, string> = {
   'DONE': 'Done',
 };
 
+export interface LinearAuditLog {
+  id: string;
+  createdAt: string;
+  actor?: {
+    id: string;
+    name: string;
+  };
+  event: string;
+}
+
+export interface LinearSearchResponse {
+  nodes: LinearIssue[];
+}
+
 export interface LinearTeamState {
   id: string;
   name: string;
@@ -92,7 +106,7 @@ export interface LinearClientOptions {
   timeout?: number;
 }
 
-export interface LinearConfig {
+export interface LinearClientConfig {
   apiKey: string;
   teamId?: string;
   statusMapping?: Record<string, string>;

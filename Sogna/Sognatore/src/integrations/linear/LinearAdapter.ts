@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { IntegrationAdapter } from '../Adapter.js';
 import { 
-  LinearConfig, 
+  LinearClientConfig, 
   PRIORITY_MAP, 
   VALID_RARV_STATUSES, 
   DEFAULT_STATUS_MAPPING,
@@ -13,11 +13,11 @@ import { LinearApiClient, LinearApiError } from './LinearApiClient.js';
 const MAX_WEBHOOK_BODY_BYTES = 1 * 1024 * 1024; // 1MB
 
 export class LinearAdapter extends IntegrationAdapter {
-  private config: LinearConfig;
+  private config: LinearClientConfig;
   private client: LinearApiClient;
   private _stateCache: Map<string, any[]> = new Map();
 
-  constructor(config: LinearConfig, options = {}) {
+  constructor(config: LinearClientConfig, options = {}) {
     super('linear', options);
     this.config = config;
     if (!config.apiKey) {
