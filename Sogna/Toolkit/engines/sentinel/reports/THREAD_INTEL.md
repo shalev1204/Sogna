@@ -856,6 +856,8 @@
 
 # 🛡️  SENTINEL THREAD INTEL (Apex Feed)
 
+# 🛡️  SENTINEL THREAD INTEL (Apex Feed)
+
 ### EVENTO: 2026-04-19T13:49:10.351Z
 
 === SENTINEL REPORT ===
@@ -58581,4 +58583,9 @@
 [WARNING]	[CONTENIDO] CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (\b__proto__\b).
 	Ubicación: Toolkit/tests/security_training/level_3/round_11_pollution.js
 	Solución : Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.
+
+### EVENTO: 2026-04-19T15:15:14.372Z
+[WARNING]	POSIBLE LOGIC BOMB: Temporizador detectado con retraso dinámico o excesivo (durationMs).
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/Sentinel-Sognatore/Hub.ts:169
+	Solución : Asegurar que los temporizadores tengan valores estáticos o acotados con Math.min.
 
