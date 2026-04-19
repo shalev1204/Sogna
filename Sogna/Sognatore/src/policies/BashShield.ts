@@ -1,5 +1,17 @@
 import { PolicyEngine } from '@sogna/toolkit';
 
+export enum PermissionMode {
+  ReadOnly = 'readonly',
+  Balanced = 'balanced',
+  Full = 'full'
+}
+
+export interface ValidationResult {
+  allow: boolean;
+  warn?: boolean;
+  reason?: string;
+}
+
 export class BashShield {
   /**
    * Extracts the first command from a string, handling env vars and sudo.
