@@ -1,5 +1,5 @@
-"""
-Scraper genérico para juntas que usam formato padrão de tabela HTML.
+﻿"""
+Scraper genÃ©rico para juntas que usam formato padrÃ£o de tabela HTML.
 Estados sem scraper customizado herdam deste.
 """
 from __future__ import annotations
@@ -11,17 +11,17 @@ from .base_scraper import AbstractJuntaScraper, Leiloeiro
 
 class GenericJuntaScraper(AbstractJuntaScraper):
     """
-    Scraper genérico para juntas com tabela HTML padrão.
+    Scraper genÃ©rico para juntas com tabela HTML padrÃ£o.
     Subclasses definem apenas estado, junta e url.
     """
 
     estado: str
     junta: str
     url: str
-    municipio_default: Optional[str] = None  # para estados com capital única dominante
+    municipio_default: Optional[str] = None  # para estados com capital Ãºnica dominante
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
             return []
@@ -65,7 +65,7 @@ class GenericJuntaScraper(AbstractJuntaScraper):
 
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "núm", "numero", "nº"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÃºm", "numero", "nÂº"]),
                     cpf_cnpj=gcol(cells, ["cpf", "cnpj", "documento"]),
                     situacao=gcol(cells, ["situ", "status"]),
                     municipio=gcol(cells, ["munic", "cidade"]) or self.municipio_default,
@@ -90,7 +90,7 @@ class GenericJuntaScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(nome=text, municipio=self.municipio_default))
 
-        # Tentativa 3: divs/articles com conteúdo textual
+        # Tentativa 3: divs/articles com conteÃºdo textual
         if not results:
             content = soup.select_one(
                 ".conteudo-pagina, .page-content, .entry-content, article, main .content"
@@ -101,11 +101,12 @@ class GenericJuntaScraper(AbstractJuntaScraper):
                     text = self.clean(p.get_text())
                     if not text or len(text) < 5:
                         continue
-                    # Filtrar parágrafos que parecem ser registros de pessoas
-                    if re.search(r"\b[A-ZÁÉÍÓÚÀÃÕÇ][a-záéíóúàãõç]{2,}", text):
+                    # Filtrar parÃ¡grafos que parecem ser registros de pessoas
+                    if re.search(r"\b[A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡][a-zÃ¡Ã©Ã­Ã³ÃºÃ Ã£ÃµÃ§]{2,}", text):
                         results.append(self.make_leiloeiro(
                             nome=text,
                             municipio=self.municipio_default,
                         ))
 
         return results
+

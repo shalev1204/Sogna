@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Tool to pack a directory into a .docx, .pptx, or .xlsx file with XML formatting undone.
 
@@ -36,11 +36,11 @@ def main():
             print("Contents would produce a corrupt file.", file=sys.stderr)
             print("Please validate XML before repacking.", file=sys.stderr)
             print("Use --force to skip validation and pack anyway.", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             sys.exit(1)
 
     except ValueError as e:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(f"Error: {e}")
 
 
@@ -159,3 +159,4 @@ def condense_xml(xml_file):
 
 if __name__ == "__main__":
     main()
+

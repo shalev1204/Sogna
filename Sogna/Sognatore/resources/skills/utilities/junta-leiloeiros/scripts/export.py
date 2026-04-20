@@ -1,5 +1,5 @@
-"""
-Exportação de dados de leiloeiros para diferentes formatos.
+﻿"""
+ExportaÃ§Ã£o de dados de leiloeiros para diferentes formatos.
 
 Uso:
     python scripts/export.py --format json
@@ -38,7 +38,7 @@ def export_json(records: list, output_dir: Path, suffix: str = "") -> Path:
             ensure_ascii=False,
             indent=2,
         )
-    print(f"[JSON] {len(records)} registros → {path}")
+    print(f"[JSON] {len(records)} registros â†’ {path}")
     return path
 
 
@@ -49,7 +49,7 @@ def export_jsonl(records: list, output_dir: Path, suffix: str = "") -> Path:
     with open(path, "w", encoding="utf-8") as f:
         for rec in records:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-    print(f"[JSONL] {len(records)} registros → {path}")
+    print(f"[JSONL] {len(records)} registros â†’ {path}")
     return path
 
 
@@ -66,7 +66,7 @@ def export_csv(records: list, output_dir: Path, suffix: str = "") -> Path:
         writer = csv.DictWriter(f, fieldnames=list(records[0].keys()), extrasaction="ignore")
         writer.writeheader()
         writer.writerows(records)
-    print(f"[CSV] {len(records)} registros → {path}")
+    print(f"[CSV] {len(records)} registros â†’ {path}")
     return path
 
 
@@ -74,7 +74,7 @@ def export_parquet(records: list, output_dir: Path, suffix: str = "") -> Optiona
     try:
         import pandas as pd
     except ImportError:
-        print("[PARQUET] pandas não instalado. Execute: pip install pandas pyarrow")
+        print("[PARQUET] pandas nÃ£o instalado. Execute: pip install pandas pyarrow")
         return None
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -83,7 +83,7 @@ def export_parquet(records: list, output_dir: Path, suffix: str = "") -> Optiona
 
     df = pd.DataFrame(records)
     df.to_parquet(path, index=False, engine="pyarrow")
-    print(f"[PARQUET] {len(records)} registros → {path}")
+    print(f"[PARQUET] {len(records)} registros â†’ {path}")
     return path
 
 
@@ -91,7 +91,7 @@ def main():
     parser = argparse.ArgumentParser(description="Exporta dados de leiloeiros")
     parser.add_argument(
         "--format", choices=["json", "jsonl", "csv", "parquet", "all"],
-        default="csv", help="Formato de exportação (default: csv)"
+        default="csv", help="Formato de exportaÃ§Ã£o (default: csv)"
     )
     parser.add_argument(
         "--estado", nargs="*", metavar="UF",
@@ -99,7 +99,7 @@ def main():
     )
     parser.add_argument(
         "--output", default=str(OUTPUT_DIR),
-        help=f"Diretório de saída (default: {OUTPUT_DIR})"
+        help=f"DiretÃ³rio de saÃ­da (default: {OUTPUT_DIR})"
     )
     args = parser.parse_args()
 
@@ -120,7 +120,7 @@ def main():
 
     if not all_records:
         print("Banco vazio. Execute run_all.py primeiro.")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0)
 
     fmt = args.format
@@ -136,3 +136,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

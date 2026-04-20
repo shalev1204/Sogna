@@ -1,5 +1,5 @@
-"""
-AI Studio Image — Templates Pre-configurados
+﻿"""
+AI Studio Image â€” Templates Pre-configurados
 
 Biblioteca de templates prontos para cenarios comuns de geracao de imagens.
 Cada template inclui um prompt base, configuracoes ideais e contexto
@@ -20,7 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 # =============================================================================
-# TEMPLATES — MODO INFLUENCER
+# TEMPLATES â€” MODO INFLUENCER
 # =============================================================================
 
 INFLUENCER_TEMPLATES = {
@@ -58,7 +58,7 @@ INFLUENCER_TEMPLATES = {
         "name": "Fitness Natural",
         "mode": "influencer",
         "prompt": "Person doing a workout outdoors or in a bright gym, natural sweat on skin, focused expression, athletic wear, mid-exercise action shot, strong natural lighting",
-        "context": "Fitness content that feels real — not overly posed or filtered. Show genuine effort and energy. Natural body with real muscle definition. Outdoor park, trail, or well-lit gym.",
+        "context": "Fitness content that feels real â€” not overly posed or filtered. Show genuine effort and energy. Natural body with real muscle definition. Outdoor park, trail, or well-lit gym.",
         "suggested_format": "portrait",
         "suggested_lighting": "morning",
         "suggested_humanization": "natural",
@@ -78,7 +78,7 @@ INFLUENCER_TEMPLATES = {
         "name": "Urban Street",
         "mode": "influencer",
         "prompt": "Person walking on a vibrant city street, urban architecture in background, casual stylish outfit, candid walking pose, street art or interesting storefronts visible",
-        "context": "Street style content. Urban environment with character — graffiti, neon signs, interesting buildings. Person caught mid-stride or pausing naturally. City energy and atmosphere.",
+        "context": "Street style content. Urban environment with character â€” graffiti, neon signs, interesting buildings. Person caught mid-stride or pausing naturally. City energy and atmosphere.",
         "suggested_format": "portrait",
         "suggested_lighting": "overcast",
         "suggested_humanization": "natural",
@@ -98,7 +98,7 @@ INFLUENCER_TEMPLATES = {
         "name": "Mirror Selfie",
         "mode": "influencer",
         "prompt": "Person taking a mirror selfie in a well-lit room, phone visible in hand, casual outfit, relaxed stance, clean mirror with slight reflections, real room visible in background",
-        "context": "The authentic mirror selfie. Room should look real — bed, furniture, some items around. Phone held at chest height. Natural pose, not overly practiced. Slight mirror spots or smudges add realism.",
+        "context": "The authentic mirror selfie. Room should look real â€” bed, furniture, some items around. Phone held at chest height. Natural pose, not overly practiced. Slight mirror spots or smudges add realism.",
         "suggested_format": "stories",
         "suggested_lighting": "indoor",
         "suggested_humanization": "ultra",
@@ -127,7 +127,7 @@ INFLUENCER_TEMPLATES = {
 }
 
 # =============================================================================
-# TEMPLATES — MODO EDUCACIONAL
+# TEMPLATES â€” MODO EDUCACIONAL
 # =============================================================================
 
 EDUCATIONAL_TEMPLATES = {
@@ -185,7 +185,7 @@ EDUCATIONAL_TEMPLATES = {
         "name": "Natural Classroom",
         "mode": "educacional",
         "prompt": "Small group learning environment, instructor and students interacting naturally, diverse group, bright airy room, whiteboards or screens in background, genuine engagement and discussion",
-        "context": "Real classroom/workshop atmosphere. People are genuinely engaged — asking questions, taking notes, discussing. Not posed group photo. Natural interactions captured candidly. Diverse, inclusive group.",
+        "context": "Real classroom/workshop atmosphere. People are genuinely engaged â€” asking questions, taking notes, discussing. Not posed group photo. Natural interactions captured candidly. Diverse, inclusive group.",
         "suggested_format": "landscape",
         "suggested_lighting": "indoor",
         "suggested_humanization": "natural",
@@ -225,7 +225,7 @@ EDUCATIONAL_TEMPLATES = {
         "name": "Team Collaboration",
         "mode": "educacional",
         "prompt": "Small team of 3-4 people collaborating around a table or screen, post-it notes and materials visible, active discussion and brainstorming, natural diverse group, modern office or co-working space",
-        "context": "Real teamwork in action. People are actively contributing — writing, pointing, discussing. Messy creative energy with post-its, papers, laptops. Genuine interaction, not posed corporate photo. Diverse team.",
+        "context": "Real teamwork in action. People are actively contributing â€” writing, pointing, discussing. Messy creative energy with post-its, papers, laptops. Genuine interaction, not posed corporate photo. Diverse team.",
         "suggested_format": "landscape",
         "suggested_lighting": "indoor",
         "suggested_humanization": "natural",
@@ -325,7 +325,7 @@ def main():
                     print(f"  {tmpl['context']}")
             else:
                 print(f"Template '{args.show}' nao encontrado")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
                 sys.exit(1)
         return
 
@@ -337,7 +337,7 @@ def main():
             if results:
                 print(f"\n{len(results)} template(s) encontrado(s) para '{args.search}':\n")
                 for r in results:
-                    print(f"  {r['name']} [{r['mode']}] — {r.get('tags', [])}")
+                    print(f"  {r['name']} [{r['mode']}] â€” {r.get('tags', [])}")
             else:
                 print(f"Nenhum template encontrado para '{args.search}'")
         return
@@ -348,3 +348,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

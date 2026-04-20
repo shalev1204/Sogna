@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Skill Detector - Find uninstalled skills in common locations.
 
@@ -21,7 +21,7 @@ import re
 from pathlib import Path
 from datetime import datetime
 
-# ── Configuration ──────────────────────────────────────────────────────────
+# â”€â”€ Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 SKILLS_ROOT = Path(r"C:\Users\renat\skills")
 USER_HOME = Path(os.path.expanduser("~"))
@@ -57,7 +57,7 @@ MAX_SCAN_DEPTH = 5
 WORKSPACE_PATTERN = re.compile(r".*-workspace[/\\]v\d+[/\\]skill$", re.IGNORECASE)
 
 
-# ── YAML Frontmatter Parser ───────────────────────────────────────────────
+# â”€â”€ YAML Frontmatter Parser â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def parse_yaml_frontmatter(path: Path) -> dict:
     """Extract YAML frontmatter from a SKILL.md file."""
@@ -90,7 +90,7 @@ def parse_yaml_frontmatter(path: Path) -> dict:
         return result
 
 
-# ── Core Functions ─────────────────────────────────────────────────────────
+# â”€â”€ Core Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def get_installed_skill_names() -> set:
     """Get set of skill names already installed in the ecosystem."""
@@ -234,7 +234,7 @@ def _classify_location(path: Path) -> str:
     return "other"
 
 
-# ── Main Logic ─────────────────────────────────────────────────────────────
+# â”€â”€ Main Logic â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def detect(paths: list[Path] = None, scan_all: bool = False) -> dict:
     """
@@ -287,7 +287,7 @@ def detect(paths: list[Path] = None, scan_all: bool = False) -> dict:
     }
 
 
-# ── CLI Entry Point ───────────────────────────────────────────────────────
+# â”€â”€ CLI Entry Point â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def main():
     paths = []
@@ -305,16 +305,17 @@ def main():
                     "total_found": 0,
                     "candidates": [],
                 }, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
                 sys.exit(1)
 
     result = detect(paths=paths if paths else None, scan_all=scan_all)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
     # Exit with 0 if candidates found, 1 if none
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     sys.exit(0 if result["total_found"] > 0 else 1)
 
 
 if __name__ == "__main__":
     main()
+

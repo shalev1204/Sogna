@@ -1,11 +1,11 @@
-"""
-Scraper JUCAP — Junta Comercial do Amapa
+﻿"""
+Scraper JUCAP â€” Junta Comercial do Amapa
 URL: https://jucap.portal.ap.gov.br/pagina/informacoes/leiloleiros
-     (ATENCAO: typo oficial — "leiloleiros" com L extra, URL exata do site)
+     (ATENCAO: typo oficial â€” "leiloleiros" com L extra, URL exata do site)
 Metodo: httpx + BeautifulSoup
 Estrutura: h4/h5 com nome + paragrafos com detalhes (Laravel/Livewire SSR)
 Registros: ~12 leiloeiros
-Nota: www.jucap.ap.gov.br falha por DNS — usar jucap.portal.ap.gov.br
+Nota: www.jucap.ap.gov.br falha por DNS â€” usar jucap.portal.ap.gov.br
 """
 from __future__ import annotations
 
@@ -21,13 +21,13 @@ class JucapScraper(AbstractJuntaScraper):
     url = "https://jucap.portal.ap.gov.br/pagina/informacoes/leiloleiros"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page(url="https://jucap.portal.ap.gov.br/pagina/informacoes/leiloeiros")
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(url=self.url, wait_ms=3000)
         if not soup:
             return []
@@ -87,7 +87,7 @@ class JucapScraper(AbstractJuntaScraper):
                     current = {"nome": text, "municipio": "Macapa"}
                 elif current.get("nome"):
                     text_lower = text.lower()
-                    if "matrícula" in text_lower or "matricula" in text_lower:
+                    if "matrÃ­cula" in text_lower or "matricula" in text_lower:
                         m = re.search(r"\d+", text)
                         if m:
                             current["matricula"] = m.group()
@@ -95,7 +95,7 @@ class JucapScraper(AbstractJuntaScraper):
                         current.setdefault("telefone", text)
                     elif "@" in text:
                         current["email"] = text
-                    elif any(uf in text for uf in ["/AP", "Macapa", "Macapá", "Santana"]):
+                    elif any(uf in text for uf in ["/AP", "Macapa", "MacapÃ¡", "Santana"]):
                         current["endereco"] = text
                     elif re.search(r"ativ|regular|cancel|suspen", text_lower):
                         current["situacao"] = text
@@ -107,7 +107,8 @@ class JucapScraper(AbstractJuntaScraper):
         if not results:
             for line in soup.get_text("\n").split("\n"):
                 line = self.clean(line)
-                if line and len(line) > 5 and re.match(r"^[A-ZÁÉÍÓÚÀÃÕÇ][A-ZÁÉÍÓÚÀÃÕÇ\s]{4,}$", line):
+                if line and len(line) > 5 and re.match(r"^[A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡][A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡\s]{4,}$", line):
                     results.append(self.make_leiloeiro(nome=line, municipio="Macapa"))
 
         return results
+

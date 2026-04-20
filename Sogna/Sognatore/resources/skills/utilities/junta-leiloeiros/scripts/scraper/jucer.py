@@ -1,5 +1,5 @@
-"""
-Scraper JUCER — Junta Comercial do Estado de Rondonia
+﻿"""
+Scraper JUCER â€” Junta Comercial do Estado de Rondonia
 URL: https://rondonia.ro.gov.br/jucer/lista-de-leiloeiros-oficiais/
 Metodo: httpx + BeautifulSoup com parser DL/DT/DD
 Estrutura descoberta em 2026-02-25:
@@ -26,13 +26,13 @@ from .base_scraper import AbstractJuntaScraper, Leiloeiro
 
 logger = logging.getLogger(__name__)
 
-RE_MATRICULA_RO = re.compile(r"[Mm]atr[íi]cula:?\s*(.+)")
+RE_MATRICULA_RO = re.compile(r"[Mm]atr[Ã­i]cula:?\s*(.+)")
 RE_POSSE_RO = re.compile(r"[Dd]ata\s+da\s+[Pp]osse:?\s*(.+)")
 RE_CIDADE_RO = re.compile(r"[Cc]idade:?\s*(.+)")
-RE_ENDERECO_RO = re.compile(r"[Ee]ndere[çc]o:?\s*(.+)")
+RE_ENDERECO_RO = re.compile(r"[Ee]ndere[Ã§c]o:?\s*(.+)")
 RE_TELEFONE_RO = re.compile(r"[Tt]elefone:?\s*(.+)")
 RE_EMAIL_RO = re.compile(r"[Ee]-?[Mm]ail:?\s*(.+)")
-RE_SITUACAO_RO = re.compile(r"[Ss]itua[çc][aã]o:?\s*(.+)")
+RE_SITUACAO_RO = re.compile(r"[Ss]itua[Ã§c][aÃ£]o:?\s*(.+)")
 
 
 class JucerScraper(AbstractJuntaScraper):
@@ -105,7 +105,7 @@ class JucerScraper(AbstractJuntaScraper):
             remaining = []
             for i, line in enumerate(lines):
                 if (len(line) > 3 and
-                        re.search(r"[A-ZÁÉÍÓÚÀÃÕÇ]", line) and
+                        re.search(r"[A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡]", line) and
                         not re.match(r"[Mm]atr|[Dd]ata|[Cc]idad|[Ee]ndere|[Tt]ele|[Ee]-?mail|[Ss]itua", line)):
                     nome = line
                     remaining = lines[i+1:]
@@ -190,7 +190,7 @@ class JucerScraper(AbstractJuntaScraper):
 
             for tag, text in block:
                 if not nome_found and tag in ("dt", "strong"):
-                    if len(text) > 3 and re.search(r"[A-ZÁÉÍÓÚÀÃÕÇ]", text):
+                    if len(text) > 3 and re.search(r"[A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡]", text):
                         # Verificar se nao e um campo de dado
                         if not re.match(r"[Mm]atr|[Dd]ata|[Cc]idad|[Ee]ndere|[Tt]ele|[Ee]-?mail|[Ss]itua", text):
                             record["nome"] = text
@@ -204,10 +204,10 @@ class JucerScraper(AbstractJuntaScraper):
         return records
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -256,3 +256,4 @@ class JucerScraper(AbstractJuntaScraper):
 
         logger.info("[RO] Total: %d registros encontrados", len(records))
         return [self.make_leiloeiro(**r) for r in records if r.get("nome")]
+

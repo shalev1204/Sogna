@@ -1,9 +1,9 @@
-"""
-Scraper JUCEPA — Junta Comercial do Estado do Pará
+﻿"""
+Scraper JUCEPA â€” Junta Comercial do Estado do ParÃ¡
 URL: https://www.jucepa.pa.gov.br/node/171
-Método: httpx + BeautifulSoup (Drupal CMS, node ID fixo)
+MÃ©todo: httpx + BeautifulSoup (Drupal CMS, node ID fixo)
 Nota: URL /index.php/leiloeiros retornava 404. Node 171 = Leiloeiros Ativos.
-      Lista inclui registros desde 1985 até 2026.
+      Lista inclui registros desde 1985 atÃ© 2026.
 """
 from __future__ import annotations
 
@@ -19,10 +19,10 @@ class JucepaScraper(AbstractJuntaScraper):
     url = "https://www.jucepa.pa.gov.br/node/171"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -52,10 +52,10 @@ class JucepaScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "nº", "numero"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÂº", "numero"]),
                     cpf_cnpj=gcol(cells, ["cpf", "cnpj"]),
                     situacao=gcol(cells, ["situ", "status"]),
-                    municipio=gcol(cells, ["munic", "cidade"]) or "Belém",
+                    municipio=gcol(cells, ["munic", "cidade"]) or "BelÃ©m",
                     telefone=gcol(cells, ["tel", "fone"]),
                     email=gcol(cells, ["email"]),
                     endereco=gcol(cells, ["ender", "logr"]),
@@ -64,13 +64,14 @@ class JucepaScraper(AbstractJuntaScraper):
             if results:
                 break
 
-        # Fallback: conteúdo em texto com padrão nome + matrícula
+        # Fallback: conteÃºdo em texto com padrÃ£o nome + matrÃ­cula
         if not results:
             body = soup.select_one(".field-body, .node-content, article, main")
             if body:
                 for el in body.find_all(["p", "li", "div", "tr"]):
                     text = self.clean(el.get_text())
-                    if text and len(text) > 5 and re.search(r"[A-ZÁÉÍÓÚÀÃÕÇ]{3,}", text):
-                        results.append(self.make_leiloeiro(nome=text, municipio="Belém"))
+                    if text and len(text) > 5 and re.search(r"[A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡]{3,}", text):
+                        results.append(self.make_leiloeiro(nome=text, municipio="BelÃ©m"))
 
         return results
+

@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Collect table and column lineage from Snowflake — collection only.
+Collect table and column lineage from Snowflake â€” collection only.
 
 Queries ACCOUNT_USAGE for DML/DDL statements in the last 24 hours, parses each
 QUERY_TEXT with regex to extract source and destination tables, then writes the
@@ -44,7 +44,7 @@ from datetime import datetime, timezone
 
 import snowflake.connector
 
-# ← SUBSTITUTE: set RESOURCE_TYPE to match your Monte Carlo connection type
+# â† SUBSTITUTE: set RESOURCE_TYPE to match your Monte Carlo connection type
 RESOURCE_TYPE = "snowflake"
 
 
@@ -56,7 +56,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
             avail_pages = os.sysconf("SC_AVPHYS_PAGES")
             avail_gb = (page_size * avail_pages) / (1024 ** 3)
         else:
-            return  # Windows — skip check
+            return  # Windows â€” skip check
     except (ValueError, OSError):
         return
     if avail_gb < min_gb:
@@ -67,7 +67,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
         )
 
 # Hours to look back in ACCOUNT_USAGE.QUERY_HISTORY
-# ← SUBSTITUTE: adjust the lookback window to match your collection cadence
+# â† SUBSTITUTE: adjust the lookback window to match your collection cadence
 _LOOKBACK_HOURS = 24
 
 # Regex for CTAS: CREATE [OR REPLACE] [TRANSIENT] TABLE [IF NOT EXISTS] [db.][schema.]table AS SELECT
@@ -180,7 +180,7 @@ def _parse_edges(rows: list[dict]) -> list[_LineageEdge]:
     return list(edges.values())
 
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
 def _fetch_query_history(conn, lookback_hours: int) -> list[dict]:
     cursor = conn.cursor()
     cursor.execute(
@@ -193,12 +193,12 @@ def _fetch_query_history(conn, lookback_hours: int) -> list[dict]:
         ORDER BY START_TIME
         LIMIT 50000
         """
-        # ← SUBSTITUTE: adjust QUERY_TYPE list, LIMIT, or add a WHERE clause to scope to specific databases
+        # â† SUBSTITUTE: adjust QUERY_TYPE list, LIMIT, or add a WHERE clause to scope to specific databases
     )
     columns = [col[0] for col in cursor.description]
     rows = []
     while True:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         batch = cursor.fetchmany(1000)
         if not batch:
             break
@@ -231,7 +231,7 @@ def collect(
     )
 
     print(f"Fetching QUERY_HISTORY for the last {lookback_hours} hour(s) ...")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     rows = _fetch_query_history(conn, lookback_hours)
     conn.close()
     print(f"  Retrieved {len(rows)} qualifying query/queries.")
@@ -350,3 +350,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

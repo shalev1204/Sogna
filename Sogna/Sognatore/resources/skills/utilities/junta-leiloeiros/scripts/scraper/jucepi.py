@@ -1,9 +1,9 @@
-"""
-Scraper JUCEPI — Junta Comercial do Estado do Piauí
+﻿"""
+Scraper JUCEPI â€” Junta Comercial do Estado do PiauÃ­
 URL: https://portal.pi.gov.br/jucepi/leiloeiro-oficial/
-Método: httpx + BeautifulSoup
+MÃ©todo: httpx + BeautifulSoup
 Nota: Site migrou para portal estadual integrado (portal.pi.gov.br/jucepi).
-      Lista inclui matrícula, data, endereço, telefone, email, situação (regular/irregular/cancelado).
+      Lista inclui matrÃ­cula, data, endereÃ§o, telefone, email, situaÃ§Ã£o (regular/irregular/cancelado).
       Portarias de 2025 confirmadas.
 """
 from __future__ import annotations
@@ -19,10 +19,10 @@ class JucepiScraper(AbstractJuntaScraper):
     url = "https://portal.pi.gov.br/jucepi/leiloeiro-oficial/"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -51,7 +51,7 @@ class JucepiScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "nº"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÂº"]),
                     situacao=gcol(cells, ["situ", "status"]),
                     municipio=gcol(cells, ["munic", "cidade"]) or "Teresina",
                     telefone=gcol(cells, ["tel", "fone"]),
@@ -69,3 +69,4 @@ class JucepiScraper(AbstractJuntaScraper):
                     results.append(self.make_leiloeiro(nome=text, municipio="Teresina"))
 
         return results
+

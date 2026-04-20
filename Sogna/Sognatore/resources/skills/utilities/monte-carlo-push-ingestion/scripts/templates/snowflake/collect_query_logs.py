@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Collect query logs from Snowflake ACCOUNT_USAGE.QUERY_HISTORY — collection only.
+Collect query logs from Snowflake ACCOUNT_USAGE.QUERY_HISTORY â€” collection only.
 
 Queries a 24-hour window ending 1 hour ago (ACCOUNT_USAGE views have an
 approximate 45-minute ingestion latency, so the last hour is intentionally
@@ -36,7 +36,7 @@ from datetime import datetime, timezone
 
 import snowflake.connector
 
-# ← SUBSTITUTE: set LOG_TYPE to match your warehouse type (query logs use log_type, not resource_type)
+# â† SUBSTITUTE: set LOG_TYPE to match your warehouse type (query logs use log_type, not resource_type)
 LOG_TYPE = "snowflake"
 
 
@@ -48,7 +48,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
             avail_pages = os.sysconf("SC_AVPHYS_PAGES")
             avail_gb = (page_size * avail_pages) / (1024 ** 3)
         else:
-            return  # Windows — skip check
+            return  # Windows â€” skip check
     except (ValueError, OSError):
         return
     if avail_gb < min_gb:
@@ -59,20 +59,20 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
         )
 
 # How many hours to look back from the trailing-edge cutoff
-# ← SUBSTITUTE: adjust to match your collection cadence (e.g. 2 for every-2-hours runs)
+# â† SUBSTITUTE: adjust to match your collection cadence (e.g. 2 for every-2-hours runs)
 _WINDOW_HOURS = 25
 
-# Hours to skip at the trailing edge — ACCOUNT_USAGE has ~45-minute latency;
+# Hours to skip at the trailing edge â€” ACCOUNT_USAGE has ~45-minute latency;
 # skipping 1 hour provides a comfortable buffer.
-# ← SUBSTITUTE: lower to 0 if you have confirmed real-time access to ACCOUNT_USAGE
+# â† SUBSTITUTE: lower to 0 if you have confirmed real-time access to ACCOUNT_USAGE
 _TRAILING_SKIP_HOURS = 1
 
-# Maximum rows to collect per run — increase if your warehouse has higher query volume
-# ← SUBSTITUTE: adjust based on your Snowflake query volume
+# Maximum rows to collect per run â€” increase if your warehouse has higher query volume
+# â† SUBSTITUTE: adjust based on your Snowflake query volume
 _QUERY_LIMIT = 10000
 
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
 def _fetch_query_history(conn) -> list[dict]:
     """
     Fetch recent query history from SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY.
@@ -104,13 +104,13 @@ def _fetch_query_history(conn) -> list[dict]:
         ORDER BY START_TIME
         LIMIT {_QUERY_LIMIT}
         """
-        # ← SUBSTITUTE: add AND DATABASE_NAME = '<db>' or AND WAREHOUSE_NAME = '<wh>'
+        # â† SUBSTITUTE: add AND DATABASE_NAME = '<db>' or AND WAREHOUSE_NAME = '<wh>'
         #   to restrict collection to a specific database or warehouse
     )
     columns = [col[0] for col in cursor.description]
     rows = []
     while True:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -150,7 +150,7 @@ def collect(
         f"Fetching QUERY_HISTORY (last {_WINDOW_HOURS}h, excluding final {_TRAILING_SKIP_HOURS}h, "
         f"limit {_QUERY_LIMIT}) ..."
     )
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     rows = _fetch_query_history(conn)
     conn.close()
     print(f"  Retrieved {len(rows)} query log row(s).")
@@ -206,7 +206,7 @@ def main() -> None:
     parser.add_argument(
         "--account",
         default=os.environ.get("SNOWFLAKE_ACCOUNT"),
-        help="Snowflake account identifier, e.g. xy12345.us-east-1 (env: SNOWFLAKE_ACCOUNT)",  # ← SUBSTITUTE
+        help="Snowflake account identifier, e.g. xy12345.us-east-1 (env: SNOWFLAKE_ACCOUNT)",  # â† SUBSTITUTE
     )
     parser.add_argument(
         "--user",
@@ -221,7 +221,7 @@ def main() -> None:
     parser.add_argument(
         "--warehouse",
         default=os.environ.get("SNOWFLAKE_WAREHOUSE"),
-        help="Snowflake virtual warehouse (env: SNOWFLAKE_WAREHOUSE)",  # ← SUBSTITUTE
+        help="Snowflake virtual warehouse (env: SNOWFLAKE_WAREHOUSE)",  # â† SUBSTITUTE
     )
     parser.add_argument(
         "--output-file",
@@ -255,3 +255,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

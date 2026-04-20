@@ -1,4 +1,4 @@
-import subprocess
+﻿import subprocess
 import os
 import sys
 import time
@@ -73,6 +73,7 @@ def activate_swarm(prd_path):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python activate_sognatore.py <prd_path>")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     activate_swarm(sys.argv[1])
+

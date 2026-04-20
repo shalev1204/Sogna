@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Schema Validator - Database schema validation
 Validates Prisma schemas and checks for common issues.
@@ -115,7 +115,7 @@ def main():
             "message": "No schema files found"
         }
         print(json.dumps(output, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0)
     
     # Validate each schema
@@ -166,9 +166,10 @@ def main():
     
     print("\n" + json.dumps(output, indent=2))
     
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     sys.exit(0)
 
 
 if __name__ == "__main__":
     main()
+

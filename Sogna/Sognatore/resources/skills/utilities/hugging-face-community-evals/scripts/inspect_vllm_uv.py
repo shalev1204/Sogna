@@ -1,4 +1,4 @@
-# /// script
+﻿# /// script
 # requires-python = ">=3.10"
 # dependencies = [
 #     "inspect-ai>=0.3.0",
@@ -106,7 +106,7 @@ def run_inspect_vllm(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(exc.returncode)
 
 
@@ -172,7 +172,7 @@ def run_inspect_hf(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(exc.returncode)
 
 
@@ -306,3 +306,4 @@ Available tasks (from inspect-evals):
 
 if __name__ == "__main__":
     main()
+

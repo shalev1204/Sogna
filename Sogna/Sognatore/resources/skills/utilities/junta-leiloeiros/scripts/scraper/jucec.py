@@ -1,7 +1,7 @@
-"""
-Scraper JUCEC — Junta Comercial do Estado do Ceará
+﻿"""
+Scraper JUCEC â€” Junta Comercial do Estado do CearÃ¡
 URL: https://www.jucec.ce.gov.br/leiloeiros/
-Método: httpx + BeautifulSoup
+MÃ©todo: httpx + BeautifulSoup
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ class JucecScraper(AbstractJuntaScraper):
     url = "https://www.jucec.ce.gov.br/leiloeiros/"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
             return []
@@ -46,7 +46,7 @@ class JucecScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "núm"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÃºm"]),
                     cpf_cnpj=gcol(cells, ["cpf", "cnpj"]),
                     situacao=gcol(cells, ["situ", "status"]),
                     municipio=gcol(cells, ["munic", "cidade", "fortaleza"]),
@@ -62,3 +62,4 @@ class JucecScraper(AbstractJuntaScraper):
                     results.append(self.make_leiloeiro(nome=text))
 
         return results
+

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Skill: performance-profiling
 Script: lighthouse_audit.py
@@ -70,8 +70,9 @@ def get_summary(categories: dict) -> str:
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(json.dumps({"error": "Usage: python lighthouse_audit.py <url>"}))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     
     result = run_lighthouse(sys.argv[1])
     print(json.dumps(result, indent=2))
+

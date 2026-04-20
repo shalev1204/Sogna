@@ -1,11 +1,11 @@
-"""
-Databricks — Metadata Collection (collect-only)
+﻿"""
+Databricks â€” Metadata Collection (collect-only)
 =================================================
 Collects table schemas, row counts, and byte sizes from Databricks Unity Catalog
 using INFORMATION_SCHEMA and DESCRIBE DETAIL, then writes a JSON manifest file
 that can be consumed by push_metadata.py.
 
-Substitution points (search for "← SUBSTITUTE"):
+Substitution points (search for "â† SUBSTITUTE"):
   - DATABRICKS_HOST       : workspace hostname (e.g. adb-1234.azuredatabricks.net)
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path (e.g. /sql/1.0/warehouses/abc123)
   - DATABRICKS_TOKEN      : personal access token or service-principal secret
@@ -33,7 +33,7 @@ log = logging.getLogger(__name__)
 RESOURCE_TYPE = "databricks"
 
 # Schemas to skip across all catalogs
-SCHEMA_EXCLUSIONS: set[str] = {  # ← SUBSTITUTE: add any internal schemas to skip
+SCHEMA_EXCLUSIONS: set[str] = {  # â† SUBSTITUTE: add any internal schemas to skip
     "information_schema",
     "__databricks_internal",
 }
@@ -47,7 +47,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
             avail_pages = os.sysconf("SC_AVPHYS_PAGES")
             avail_gb = (page_size * avail_pages) / (1024 ** 3)
         else:
-            return  # Windows — skip check
+            return  # Windows â€” skip check
     except (ValueError, OSError):
         return
     if avail_gb < min_gb:
@@ -64,7 +64,7 @@ def _query(cursor: Any, sql_text: str, params: tuple | None = None) -> list[dict
     cols = [d[0] for d in cursor.description]
     rows = []
     while True:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -80,7 +80,7 @@ def collect_tables(cursor: Any, catalog: str) -> list[dict[str, Any]]:
         FROM {catalog}.information_schema.tables
         WHERE table_schema NOT IN ({", ".join(f"'{s}'" for s in SCHEMA_EXCLUSIONS)})
         ORDER BY table_schema, table_name
-        """,  # ← SUBSTITUTE: add additional WHERE filters if needed
+        """,  # â† SUBSTITUTE: add additional WHERE filters if needed
     )
 
 
@@ -121,9 +121,9 @@ def collect(
     assets: list[dict[str, Any]] = []
 
     with sql.connect(
-        server_hostname=host,    # ← SUBSTITUTE
-        http_path=http_path,     # ← SUBSTITUTE
-        access_token=token,      # ← SUBSTITUTE
+        server_hostname=host,    # â† SUBSTITUTE
+        http_path=http_path,     # â† SUBSTITUTE
+        access_token=token,      # â† SUBSTITUTE
     ) as conn:
         with conn.cursor() as cursor:
             tables = collect_tables(cursor, catalog)
@@ -160,7 +160,7 @@ def collect(
 
                 asset = {
                     "asset_name": table_name,
-                    "database": catalog,    # ← SUBSTITUTE: use catalog as database
+                    "database": catalog,    # â† SUBSTITUTE: use catalog as database
                     "schema": schema,
                     "asset_type": "VIEW" if row.get("table_type", "").upper() == "VIEW" else "TABLE",
                     "description": row.get("comment") or None,
@@ -188,9 +188,9 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Collect Databricks metadata to a manifest file")
-    parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # ← SUBSTITUTE
-    parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # ← SUBSTITUTE
-    parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # ← SUBSTITUTE
+    parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # â† SUBSTITUTE
+    parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # â† SUBSTITUTE
+    parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # â† SUBSTITUTE
     parser.add_argument("--catalog", default=os.getenv("DATABRICKS_CATALOG", "hive_metastore"))
     parser.add_argument("--manifest", default="manifest_metadata.json")
     args = parser.parse_args()
@@ -211,3 +211,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

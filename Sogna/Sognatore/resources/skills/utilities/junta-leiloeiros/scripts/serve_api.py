@@ -1,4 +1,4 @@
-"""
+﻿"""
 API REST para consulta de leiloeiros das Juntas Comerciais do Brasil.
 
 Uso:
@@ -6,13 +6,13 @@ Uso:
     python scripts/serve_api.py --port 8080 --host 0.0.0.0
 
 Endpoints:
-    GET /                       → info da API
-    GET /leiloeiros             → lista todos (filtros: estado, situacao, nome, limit, offset)
-    GET /leiloeiros/{estado}    → por UF
-    GET /busca?q=texto          → busca por nome/matrícula/município
-    GET /stats                  → contagem por estado
-    GET /export/json            → dump completo em JSON
-    GET /export/csv             → dump completo em CSV
+    GET /                       â†’ info da API
+    GET /leiloeiros             â†’ lista todos (filtros: estado, situacao, nome, limit, offset)
+    GET /leiloeiros/{estado}    â†’ por UF
+    GET /busca?q=texto          â†’ busca por nome/matrÃ­cula/municÃ­pio
+    GET /stats                  â†’ contagem por estado
+    GET /export/json            â†’ dump completo em JSON
+    GET /export/csv             â†’ dump completo em CSV
 """
 from __future__ import annotations
 
@@ -33,8 +33,8 @@ try:
     from fastapi.responses import JSONResponse, PlainTextResponse, StreamingResponse
     import uvicorn
 except ImportError:
-    print("FastAPI não instalado. Execute: pip install fastapi uvicorn")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+    print("FastAPI nÃ£o instalado. Execute: pip install fastapi uvicorn")
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     sys.exit(1)
 
 app = FastAPI(
@@ -47,7 +47,7 @@ db = Database()
 db.init()
 
 
-@app.get("/", summary="Informações da API")
+@app.get("/", summary="InformaÃ§Ãµes da API")
 def root():
     total = db.get_total()
     return {
@@ -83,7 +83,7 @@ def list_leiloeiros(
     return {"total": len(records), "offset": offset, "data": records}
 
 
-@app.get("/leiloeiros/{estado}", summary="Leiloeiros de um estado específico")
+@app.get("/leiloeiros/{estado}", summary="Leiloeiros de um estado especÃ­fico")
 def leiloeiros_por_estado(estado: str):
     estado = estado.upper()
     if len(estado) != 2:
@@ -92,7 +92,7 @@ def leiloeiros_por_estado(estado: str):
     return {"estado": estado, "total": len(records), "data": records}
 
 
-@app.get("/busca", summary="Busca por nome, matrícula ou município")
+@app.get("/busca", summary="Busca por nome, matrÃ­cula ou municÃ­pio")
 def busca(
     q: str = Query(..., description="Texto para buscar"),
     limit: int = Query(50, ge=1, le=500),
@@ -103,7 +103,7 @@ def busca(
     return {"query": q, "total": len(records), "data": records}
 
 
-@app.get("/stats", summary="Estatísticas por estado")
+@app.get("/stats", summary="EstatÃ­sticas por estado")
 def stats():
     data = db.get_stats()
     total = sum(r["total"] for r in data)
@@ -149,7 +149,7 @@ def main():
     parser.add_argument("--reload", action="store_true")
     args = parser.parse_args()
 
-    print(f"\nAPI disponível em: http://{args.host}:{args.port}")
+    print(f"\nAPI disponÃ­vel em: http://{args.host}:{args.port}")
     print(f"Docs interativos: http://{args.host}:{args.port}/docs\n")
 
     uvicorn.run(
@@ -163,3 +163,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

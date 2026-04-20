@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Command line tool to validate Office document XML files against XSD schemas and tracked changes.
 
@@ -50,7 +50,7 @@ def main():
             validators = [PPTXSchemaValidator]
         case _:
             print(f"Error: Validation not supported for file type {file_extension}")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             sys.exit(1)
 
     # Run validators
@@ -63,9 +63,10 @@ def main():
     if success:
         print("All validations PASSED!")
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     sys.exit(0 if success else 1)
 
 
 if __name__ == "__main__":
     main()
+

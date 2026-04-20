@@ -1,5 +1,5 @@
-"""
-Redshift — Query Log Collect & Push (combined)
+﻿"""
+Redshift â€” Query Log Collect & Push (combined)
 ================================================
 Collects completed query execution records from Redshift using sys_query_history
 and sys_querytext, then pushes them to Monte Carlo for query-pattern analysis,
@@ -8,11 +8,11 @@ lineage derivation, and usage attribution.
 This script imports and calls collect() from collect_query_logs and push() from
 push_query_logs, running both in sequence.
 
-Substitution points (search for "← SUBSTITUTE"):
+Substitution points (search for "â† SUBSTITUTE"):
   - REDSHIFT_HOST / REDSHIFT_DB / REDSHIFT_USER / REDSHIFT_PASSWORD : connection
   - LOOKBACK_HOURS    : hours back from [now - LAG_HOURS] to collect (default 25)
   - LOOKBACK_LAG_HOURS: lag behind now to avoid in-flight queries (default 1)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
   - BATCH_SIZE        : number of query_ids to fetch texts for in one SQL call
   - MAX_QUERIES       : maximum query rows to process per run
   - MCD_INGEST_ID / MCD_INGEST_TOKEN : Monte Carlo API credentials
@@ -38,10 +38,10 @@ log = logging.getLogger(__name__)
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Collect and push Redshift query logs to Monte Carlo")
-    parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # ← SUBSTITUTE
-    parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # ← SUBSTITUTE
-    parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # ← SUBSTITUTE
-    parser.add_argument("--password", default=os.getenv("REDSHIFT_PASSWORD")) # ← SUBSTITUTE
+    parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # â† SUBSTITUTE
+    parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # â† SUBSTITUTE
+    parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # â† SUBSTITUTE
+    parser.add_argument("--password", default=os.getenv("REDSHIFT_PASSWORD")) # â† SUBSTITUTE
     parser.add_argument("--port", type=int, default=int(os.getenv("REDSHIFT_PORT", "5439")))
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -59,7 +59,7 @@ def main() -> None:
     if missing:
         parser.error(f"Missing required arguments/env vars: {missing}")
 
-    log.info("Step 1: Collecting query logs …")
+    log.info("Step 1: Collecting query logs â€¦")
     collect(
         host=args.host,
         db=args.db,
@@ -73,7 +73,7 @@ def main() -> None:
         max_queries=args.max_queries,
     )
 
-    log.info("Step 2: Pushing query logs to Monte Carlo …")
+    log.info("Step 2: Pushing query logs to Monte Carlo â€¦")
     push(
         manifest_path=args.manifest,
         resource_uuid=args.resource_uuid,
@@ -82,8 +82,9 @@ def main() -> None:
         batch_size=args.push_batch_size,
     )
 
-    log.info("Done — collect and push complete.")
+    log.info("Done â€” collect and push complete.")
 
 
 if __name__ == "__main__":
     main()
+

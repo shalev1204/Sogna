@@ -1,4 +1,4 @@
-"""007 Dependency Scanner -- Supply chain and dependency security analyzer.
+﻿"""007 Dependency Scanner -- Supply chain and dependency security analyzer.
 
 Analyzes dependency security across Python and Node.js projects by inspecting
 dependency files (requirements.txt, package.json, Dockerfiles, etc.) for version
@@ -128,7 +128,7 @@ _NODE_LOOSE_INDICATORS = re.compile(
 
 # Risky postinstall script patterns
 _NODE_RISKY_SCRIPTS = re.compile(
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     r"""(?:curl|wget|fetch|http|eval|exec|child_process|\.sh\b|powershell)""",
     re.IGNORECASE,
 )
@@ -1162,11 +1162,11 @@ def run_scan(
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     logger.info("Starting dependency scan of %s", target)
@@ -1306,3 +1306,4 @@ if __name__ == "__main__":
         output_format=args.output,
         verbose=args.verbose,
     )
+

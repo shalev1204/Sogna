@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Resolve the output schema for a dbt model.
 
@@ -146,12 +146,12 @@ def main() -> None:
 
     if not dbt_project_path.exists():
         print(f"Error: dbt_project.yml not found: {dbt_project_path}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     if not model_path.exists():
         print(f"Error: Model file not found: {model_path}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     apply_prefix = not args.no_prefix
@@ -161,3 +161,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

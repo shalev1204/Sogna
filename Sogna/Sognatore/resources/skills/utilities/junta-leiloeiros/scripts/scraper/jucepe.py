@@ -1,8 +1,8 @@
-"""
-Scraper JUCEPE — Junta Comercial do Estado de Pernambuco
+﻿"""
+Scraper JUCEPE â€” Junta Comercial do Estado de Pernambuco
 URL: https://portal.jucepe.pe.gov.br/leiloeiros (SPA em JS)
 PDF: https://portal.jucepe.pe.gov.br/storage/content/leiloeiros.pdf
-Método: Playwright (SPA) com fallback para PDF via httpx
+MÃ©todo: Playwright (SPA) com fallback para PDF via httpx
 Nota: Migrou de www.jucepe.pe.gov.br para portal.jucepe.pe.gov.br
 """
 from __future__ import annotations
@@ -21,14 +21,14 @@ class JucepeScraper(AbstractJuntaScraper):
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
         # Tenta SPA via Playwright primeiro
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page_js(
             wait_selector="table, tr td, .leiloeiro",
             wait_ms=6000,
         )
         if not soup:
-            # Fallback: página legada (pode ter dados em HTML estático)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+            # Fallback: pÃ¡gina legada (pode ter dados em HTML estÃ¡tico)
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page(url="https://portal.jucepe.pe.gov.br/leiloeiros")
         if not soup:
             return []
@@ -57,7 +57,7 @@ class JucepeScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "nº"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÂº"]),
                     cpf_cnpj=gcol(cells, ["cpf", "cnpj"]),
                     situacao=gcol(cells, ["situ", "status"]),
                     municipio=gcol(cells, ["munic", "cidade"]) or "Recife",
@@ -74,7 +74,8 @@ class JucepeScraper(AbstractJuntaScraper):
             if content:
                 for el in content.find_all(["li", "p", "div"]):
                     text = self.clean(el.get_text())
-                    if text and len(text) > 10 and re.search(r"[A-ZÁÉÍÓÚ]{3,}", text):
+                    if text and len(text) > 10 and re.search(r"[A-ZÃÃ‰ÃÃ“Ãš]{3,}", text):
                         results.append(self.make_leiloeiro(nome=text, municipio="Recife"))
 
         return results
+

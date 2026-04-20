@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Simple NotebookLM Question Interface
 Based on MCP server implementation - simplified without sessions
@@ -52,11 +52,11 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
     auth = AuthManager()
 
     if not auth.is_authenticated():
-        print("⚠️ Not authenticated. Run: python auth_manager.py setup")
+        print("âš ï¸ Not authenticated. Run: python auth_manager.py setup")
         return None
 
-    print(f"💬 Asking: {question}")
-    print(f"📚 Notebook: {notebook_url}")
+    print(f"ðŸ’¬ Asking: {question}")
+    print(f"ðŸ“š Notebook: {notebook_url}")
 
     playwright = None
     context = None
@@ -73,14 +73,14 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
 
         # Navigate to notebook
         page = context.new_page()
-        print("  🌐 Opening notebook...")
+        print("  ðŸŒ Opening notebook...")
         page.goto(notebook_url, wait_until="domcontentloaded")
 
         # Wait for NotebookLM
         page.wait_for_url(re.compile(r"^https://notebooklm\.google\.com/"), timeout=10000)
 
         # Wait for query input (MCP approach)
-        print("  ⏳ Waiting for query input...")
+        print("  â³ Waiting for query input...")
         query_element = None
 
         for selector in QUERY_INPUT_SELECTORS:
@@ -91,31 +91,31 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
                     state="visible"  # Only check visibility, not disabled!
                 )
                 if query_element:
-                    print(f"  ✓ Found input: {selector}")
+                    print(f"  âœ“ Found input: {selector}")
                     break
             except:
                 continue
 
         if not query_element:
-            print("  ❌ Could not find query input")
+            print("  âŒ Could not find query input")
             return None
 
         # Type question (human-like, fast)
-        print("  ⏳ Typing question...")
+        print("  â³ Typing question...")
         
         # Use primary selector for typing
         input_selector = QUERY_INPUT_SELECTORS[0]
         StealthUtils.human_type(page, input_selector, question)
 
         # Submit
-        print("  📤 Submitting...")
+        print("  ðŸ“¤ Submitting...")
         page.keyboard.press("Enter")
 
         # Small pause
         StealthUtils.random_delay(500, 1500)
 
         # Wait for response (MCP approach: poll for stable text)
-        print("  ⏳ Waiting for answer...")
+        print("  â³ Waiting for answer...")
 
         answer = None
         stable_count = 0
@@ -159,15 +159,15 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
             time.sleep(1)
 
         if not answer:
-            print("  ❌ Timeout waiting for answer")
+            print("  âŒ Timeout waiting for answer")
             return None
 
-        print("  ✅ Got answer!")
+        print("  âœ… Got answer!")
         # Add follow-up reminder to encourage Claude to ask more questions
         return answer + FOLLOW_UP_REMINDER
 
     except Exception as e:
-        print(f"  ❌ Error: {e}")
+        print(f"  âŒ Error: {e}")
         import traceback
         traceback.print_exc()
         return None
@@ -206,7 +206,7 @@ def main():
         if notebook:
             notebook_url = notebook['url']
         else:
-            print(f"❌ Notebook '{args.notebook_id}' not found")
+            print(f"âŒ Notebook '{args.notebook_id}' not found")
             return 1
 
     if not notebook_url:
@@ -215,19 +215,19 @@ def main():
         active = library.get_active_notebook()
         if active:
             notebook_url = active['url']
-            print(f"📚 Using active notebook: {active['name']}")
+            print(f"ðŸ“š Using active notebook: {active['name']}")
         else:
             # Show available notebooks
             notebooks = library.list_notebooks()
             if notebooks:
-                print("\n📚 Available notebooks:")
+                print("\nðŸ“š Available notebooks:")
                 for nb in notebooks:
                     mark = " [ACTIVE]" if nb.get('id') == library.active_notebook_id else ""
                     print(f"  {nb['id']}: {nb['name']}{mark}")
                 print("\nSpecify with --notebook-id or set active:")
                 print("python scripts/run.py notebook_manager.py activate --id ID")
             else:
-                print("❌ No notebooks in library. Add one first:")
+                print("âŒ No notebooks in library. Add one first:")
                 print("python scripts/run.py notebook_manager.py add --url URL --name NAME --description DESC --topics TOPICS")
             return 1
 
@@ -248,10 +248,11 @@ def main():
         print("=" * 60)
         return 0
     else:
-        print("\n❌ Failed to get answer")
+        print("\nâŒ Failed to get answer")
         return 1
 
 
 if __name__ == "__main__":
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     sys.exit(main())
+

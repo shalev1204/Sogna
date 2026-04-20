@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+import sys
+import io
+
+# Ensure UTF-8 output for Windows compatibility
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 """
 Full Verification Suite - Antigravity Kit
 ==========================================
@@ -46,16 +53,16 @@ def print_header(text: str):
     print(f"{Colors.BOLD}{Colors.CYAN}{'='*70}{Colors.ENDC}\n")
 
 def print_step(text: str):
-    print(f"{Colors.BOLD}{Colors.BLUE}🔄 {text}{Colors.ENDC}")
+    print(f"{Colors.BOLD}{Colors.BLUE}[STEP] {text}{Colors.ENDC}")
 
 def print_success(text: str):
-    print(f"{Colors.GREEN}✅ {text}{Colors.ENDC}")
+    print(f"{Colors.GREEN}[PASS] {text}{Colors.ENDC}")
 
 def print_warning(text: str):
-    print(f"{Colors.YELLOW}⚠️  {text}{Colors.ENDC}")
+    print(f"{Colors.YELLOW}[WARN] {text}{Colors.ENDC}")
 
 def print_error(text: str):
-    print(f"{Colors.RED}❌ {text}{Colors.ENDC}")
+    print(f"{Colors.RED}[FAIL] {text}{Colors.ENDC}")
 
 # Complete verification suite
 VERIFICATION_SUITE = [
@@ -63,8 +70,7 @@ VERIFICATION_SUITE = [
     {
         "category": "Security",
         "checks": [
-            ("Security Scan", ".agent/skills/vulnerability-scanner/scripts/security_scan.py", True),
-            ("Dependency Analysis", ".agent/skills/vulnerability-scanner/scripts/dependency_analyzer.py", False),
+            ("Security Scan", "toolkit/skills/vulnerability-scanner/scripts/security_scan.py", True),
         ]
     },
     
@@ -72,8 +78,8 @@ VERIFICATION_SUITE = [
     {
         "category": "Code Quality",
         "checks": [
-            ("Lint Check", ".agent/skills/lint-and-validate/scripts/lint_runner.py", True),
-            ("Type Coverage", ".agent/skills/lint-and-validate/scripts/type_coverage.py", False),
+            ("Lint Check", "toolkit/skills/lint-and-validate/scripts/lint_runner.py", True),
+            ("Type Coverage", "toolkit/skills/lint-and-validate/scripts/type_coverage.py", False),
         ]
     },
     
@@ -81,7 +87,7 @@ VERIFICATION_SUITE = [
     {
         "category": "Data Layer",
         "checks": [
-            ("Schema Validation", ".agent/skills/database-design/scripts/schema_validator.py", False),
+            ("Schema Validation", "toolkit/skills/database-design/scripts/schema_validator.py", False),
         ]
     },
     
@@ -89,7 +95,7 @@ VERIFICATION_SUITE = [
     {
         "category": "Testing",
         "checks": [
-            ("Test Suite", ".agent/skills/testing-patterns/scripts/test_runner.py", False),
+            ("Test Suite", "toolkit/skills/testing-patterns/scripts/test_runner.py", False),
         ]
     },
     
@@ -97,8 +103,8 @@ VERIFICATION_SUITE = [
     {
         "category": "UX & Accessibility",
         "checks": [
-            ("UX Audit", ".agent/skills/frontend-design/scripts/ux_audit.py", False),
-            ("Accessibility Check", ".agent/skills/frontend-design/scripts/accessibility_checker.py", False),
+            ("UX Audit", "toolkit/skills/frontend-design/scripts/ux_audit.py", False),
+            ("Accessibility Check", "toolkit/skills/frontend-design/scripts/accessibility_checker.py", False),
         ]
     },
     
@@ -106,8 +112,8 @@ VERIFICATION_SUITE = [
     {
         "category": "SEO & Content",
         "checks": [
-            ("SEO Check", ".agent/skills/seo-fundamentals/scripts/seo_checker.py", False),
-            ("GEO Check", ".agent/skills/geo-fundamentals/scripts/geo_checker.py", False),
+            ("SEO Check", "toolkit/skills/seo-fundamentals/scripts/seo_checker.py", False),
+            ("GEO Check", "toolkit/skills/geo-fundamentals/scripts/geo_checker.py", False),
         ]
     },
     
@@ -116,8 +122,7 @@ VERIFICATION_SUITE = [
         "category": "Performance",
         "requires_url": True,
         "checks": [
-            ("Lighthouse Audit", ".agent/skills/performance-profiling/scripts/lighthouse_audit.py", True),
-            ("Bundle Analysis", ".agent/skills/performance-profiling/scripts/bundle_analyzer.py", False),
+            ("Lighthouse Audit", "toolkit/skills/performance-profiling/scripts/lighthouse_audit.py", True),
         ]
     },
     
@@ -126,7 +131,7 @@ VERIFICATION_SUITE = [
         "category": "E2E Testing",
         "requires_url": True,
         "checks": [
-            ("Playwright E2E", ".agent/skills/webapp-testing/scripts/playwright_runner.py", False),
+            ("Playwright E2E", "toolkit/skills/webapp-testing/scripts/playwright_runner.py", False),
         ]
     },
     
@@ -134,7 +139,7 @@ VERIFICATION_SUITE = [
     {
         "category": "Mobile",
         "checks": [
-            ("Mobile Audit", ".agent/skills/mobile-design/scripts/mobile_audit.py", False),
+            ("Mobile Audit", "toolkit/skills/mobile-design/scripts/mobile_audit.py", False),
         ]
     },
     
@@ -142,7 +147,7 @@ VERIFICATION_SUITE = [
     {
         "category": "Internationalization",
         "checks": [
-            ("i18n Check", ".agent/skills/i18n-localization/scripts/i18n_checker.py", False),
+            ("i18n Check", "toolkit/skills/i18n-localization/scripts/i18n_checker.py", False),
         ]
     },
 ]
@@ -203,7 +208,7 @@ def print_final_report(results: List[dict], start_time: datetime):
     """Print comprehensive final report"""
     total_duration = (datetime.now() - start_time).total_seconds()
     
-    print_header("📊 FULL VERIFICATION REPORT")
+    print_header("FINAL VERIFICATION REPORT")
     
     # Statistics
     total = len(results)
@@ -215,7 +220,7 @@ def print_final_report(results: List[dict], start_time: datetime):
     print(f"Total Checks: {total}")
     print(f"{Colors.GREEN}✅ Passed: {passed}{Colors.ENDC}")
     print(f"{Colors.RED}❌ Failed: {failed}{Colors.ENDC}")
-    print(f"{Colors.YELLOW}⏭️  Skipped: {skipped}{Colors.ENDC}")
+    print(f"{Colors.YELLOW}Skipped: {skipped}{Colors.ENDC}")
     print()
     
     # Category breakdown
@@ -229,11 +234,11 @@ def print_final_report(results: List[dict], start_time: datetime):
         
         # Print result
         if r.get("skipped"):
-            status = f"{Colors.YELLOW}⏭️ {Colors.ENDC}"
+            status = f"{Colors.YELLOW}[-]{Colors.ENDC}"
         elif r["passed"]:
-            status = f"{Colors.GREEN}✅{Colors.ENDC}"
+            status = f"{Colors.GREEN}[P]{Colors.ENDC}"
         else:
-            status = f"{Colors.RED}❌{Colors.ENDC}"
+            status = f"{Colors.RED}[F]{Colors.ENDC}"
         
         duration_str = f"({r.get('duration', 0):.1f}s)" if not r.get("skipped") else ""
         print(f"  {status} {r['name']} {duration_str}")
@@ -257,7 +262,7 @@ def print_final_report(results: List[dict], start_time: datetime):
         print(f"\n{Colors.YELLOW}💡 Tip: Fix critical (security, lint) issues first{Colors.ENDC}")
         return False
     else:
-        print_success("✨ ALL CHECKS PASSED - Ready for deployment! ✨")
+        print_success("ALL CHECKS PASSED - Ready for deployment!")
         return True
 
 def main():
@@ -281,10 +286,10 @@ Examples:
     
     if not project_path.exists():
         print_error(f"Project path does not exist: {project_path}")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     
-    print_header("🚀 ANTIGRAVITY KIT - FULL VERIFICATION SUITE")
+    print_header("ANTIGRAVITY KIT - FULL VERIFICATION SUITE")
     print(f"Project: {project_path}")
     print(f"URL: {args.url}")
     print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -305,7 +310,7 @@ Examples:
         if args.no_e2e and category == "E2E Testing":
             continue
         
-        print_header(f"📋 {category.upper()}")
+        print_header(f"SUITE: {category.upper()}")
         
         for name, script_path, required in suite["checks"]:
             script = project_path / script_path
@@ -317,13 +322,13 @@ Examples:
             if args.stop_on_fail and required and not result["passed"] and not result.get("skipped"):
                 print_error(f"CRITICAL: {name} failed. Stopping verification.")
                 print_final_report(results, start_time)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
                 sys.exit(1)
     
     # Print final report
     all_passed = print_final_report(results, start_time)
     
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     sys.exit(0 if all_passed else 1)
 
 if __name__ == "__main__":

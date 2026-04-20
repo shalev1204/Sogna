@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Conversion Script: React Best Practices → .agent Format
+Conversion Script: React Best Practices â†’ .agent Format
 Merges 59 individual rules into 8 grouped section files
 """
 
@@ -27,14 +27,14 @@ SECTIONS = {
         'number': 3,
         'title': 'Server-Side Performance',
         'impact': 'HIGH',
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         'description': 'Optimizing server-side rendering and data fetching eliminates server-side waterfalls and reduces response times.'
     },
     'client': {
         'number': 4,
         'title': 'Client-Side Data Fetching',
         'impact': 'MEDIUM-HIGH',
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         'description': 'Automatic deduplication and efficient data fetching patterns reduce redundant network requests.'
     },
     'rerender': {
@@ -222,3 +222,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

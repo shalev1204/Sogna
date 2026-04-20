@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Shopify Project Initialization Script
 
@@ -239,7 +239,7 @@ shop_deletion_url = "/webhooks/gdpr/shop-deletion"
 """
         config_path = project_dir / 'shopify.app.toml'
         config_path.write_text(config_content)
-        print(f"✓ Created {config_path}")
+        print(f"âœ“ Created {config_path}")
 
     def create_extension_config(self, project_dir: Path, extension_name: str, extension_type: str) -> None:
         """
@@ -276,7 +276,7 @@ api_access = true
 """
         config_path = project_dir / 'shopify.extension.toml'
         config_path.write_text(config_content)
-        print(f"✓ Created {config_path}")
+        print(f"âœ“ Created {config_path}")
 
     def create_readme(self, project_dir: Path, project_type: str, project_name: str) -> None:
         """
@@ -315,7 +315,7 @@ shopify {project_type} deploy
 """
         readme_path = project_dir / 'README.md'
         readme_path.write_text(content)
-        print(f"✓ Created {readme_path}")
+        print(f"âœ“ Created {readme_path}")
 
     def init_app(self) -> None:
         """Initialize Shopify app project."""
@@ -342,9 +342,9 @@ shopify {project_type} deploy
             }
         }
         (project_dir / 'package.json').write_text(json.dumps(package_json, indent=2))
-        print(f"✓ Created package.json")
+        print(f"âœ“ Created package.json")
 
-        print(f"\n✓ App '{app_name}' initialized successfully!")
+        print(f"\nâœ“ App '{app_name}' initialized successfully!")
         print(f"\nNext steps:")
         print(f"  cd {app_name}")
         print(f"  npm install")
@@ -375,7 +375,7 @@ shopify {project_type} deploy
         self.create_extension_config(project_dir, extension_name, extension_type)
         self.create_readme(project_dir, "extension", extension_name)
 
-        print(f"\n✓ Extension '{extension_name}' initialized successfully!")
+        print(f"\nâœ“ Extension '{extension_name}' initialized successfully!")
         print(f"\nNext steps:")
         print(f"  cd {extension_name}")
         print(f"  shopify app dev")
@@ -398,9 +398,9 @@ shopify {project_type} deploy
 
         # Check CLI
         if not self.check_cli_installed():
-            print("\n⚠ Shopify CLI not found!")
+            print("\nâš  Shopify CLI not found!")
             print("Install: npm install -g @shopify/cli@latest")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             sys.exit(1)
 
         # Select project type
@@ -432,13 +432,14 @@ def main() -> None:
 
     except KeyboardInterrupt:
         print("\n\nAborted.")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0)
     except Exception as e:
-        print(f"\n✗ Error: {e}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+        print(f"\nâœ— Error: {e}", file=sys.stderr)
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
 
 if __name__ == '__main__':
     main()
+

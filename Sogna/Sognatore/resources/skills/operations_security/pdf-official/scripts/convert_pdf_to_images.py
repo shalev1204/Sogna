@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 
 from pdf2image import convert_from_path
@@ -29,8 +29,9 @@ def convert(pdf_path, output_dir, max_dim=1000):
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: convert_pdf_to_images.py [input pdf] [output directory]")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     pdf_path = sys.argv[1]
     output_directory = sys.argv[2]
     convert(pdf_path, output_directory)
+

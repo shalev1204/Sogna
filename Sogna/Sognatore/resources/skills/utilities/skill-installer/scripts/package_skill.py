@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Skill Packager - Create ZIP files for Claude.ai web/desktop upload.
 
@@ -25,7 +25,7 @@ import re
 import zipfile
 from pathlib import Path
 
-# ── Configuration ──────────────────────────────────────────────────────────
+# â”€â”€ Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 SKILLS_ROOT = Path(r"C:\Users\renat\skills")
 DEFAULT_OUTPUT = Path(os.path.expanduser("~")) / "Desktop"
@@ -48,7 +48,7 @@ EXCLUDE_EXTENSIONS = {
 }
 
 
-# ── YAML Frontmatter Parser ───────────────────────────────────────────────
+# â”€â”€ YAML Frontmatter Parser â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def parse_yaml_frontmatter(path: Path) -> dict:
     """Extract YAML frontmatter from a SKILL.md file."""
@@ -81,7 +81,7 @@ def parse_yaml_frontmatter(path: Path) -> dict:
         return result
 
 
-# ── Validation ─────────────────────────────────────────────────────────────
+# â”€â”€ Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def validate_for_web(skill_dir: Path) -> dict:
     """Validate skill meets Claude.ai web upload requirements."""
@@ -149,7 +149,7 @@ def should_include(file_path: Path, skill_dir: Path) -> bool:
     return True
 
 
-# ── Packaging ──────────────────────────────────────────────────────────────
+# â”€â”€ Packaging â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
     """
@@ -157,11 +157,11 @@ def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
 
     The ZIP format required by Claude.ai:
         skill-name.zip
-        └── skill-name/
-              ├── SKILL.md
-              ├── scripts/
-              ├── references/
-              └── ...
+        â””â”€â”€ skill-name/
+              â”œâ”€â”€ SKILL.md
+              â”œâ”€â”€ scripts/
+              â”œâ”€â”€ references/
+              â””â”€â”€ ...
     """
     skill_dir = Path(skill_dir).resolve()
 
@@ -291,7 +291,7 @@ def package_all(output_dir: Path = None) -> dict:
     }
 
 
-# ── Verify Existing ZIPs ──────────────────────────────────────────────────
+# â”€â”€ Verify Existing ZIPs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def verify_zips(output_dir: Path = None) -> dict:
     """Verify all existing skill ZIPs for integrity.
@@ -364,7 +364,7 @@ def verify_zips(output_dir: Path = None) -> dict:
     }
 
 
-# ── CLI Entry Point ───────────────────────────────────────────────────────
+# â”€â”€ CLI Entry Point â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def main():
     args = sys.argv[1:]
@@ -387,7 +387,7 @@ def main():
     if do_verify:
         result = verify_zips(Path(output_dir) if output_dir else None)
         print(json.dumps(result, indent=2, ensure_ascii=False))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0 if result["invalid"] == 0 else 1)
 
     if not source and not do_all:
@@ -402,20 +402,21 @@ def main():
                 "--verify --output <dir>": "Verify ZIPs in specific directory",
             },
         }, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     if source:
         result = package_skill(Path(source), output_dir)
         print(json.dumps(result, indent=2, ensure_ascii=False))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0 if result["success"] else 1)
     elif do_all:
         result = package_all(output_dir)
         print(json.dumps(result, indent=2, ensure_ascii=False))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0 if result["failed"] == 0 else 1)
 
 
 if __name__ == "__main__":
     main()
+

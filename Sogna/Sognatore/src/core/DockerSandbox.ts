@@ -120,7 +120,7 @@ export class DockerSandbox {
       return output.trim();
     } catch (error: any) {
       const errorMessage = error.stderr ? error.stderr.toString() : error.message;
-      throw new Error(`[SANDBOX_FAILURE] [${this.currentProfile}] ${errorMessage}`);
+      throw new Error(`[SANDBOX_FAILURE] [${this.currentProfile}] ${errorMessage}`, { cause: error });
     }
   }
 }

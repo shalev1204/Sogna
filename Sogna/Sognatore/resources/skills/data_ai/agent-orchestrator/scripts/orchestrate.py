@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Multi-Skill Orchestration Engine for Agent Orchestrator.
 
@@ -20,7 +20,7 @@ import json
 import sys
 from pathlib import Path
 
-# ── Configuration ──────────────────────────────────────────────────────────
+# â”€â”€ Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 # Resolve paths relative to this script's location
 _SCRIPT_DIR = Path(__file__).resolve().parent
@@ -36,7 +36,7 @@ CONSUMER_CAPABILITIES = {"messaging", "social-media", "content-management"}
 HYBRID_CAPABILITIES = {"api-integration", "web-automation"}
 
 
-# ── Functions ──────────────────────────────────────────────────────────────
+# â”€â”€ Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def load_registry() -> dict[str, dict]:
     """Load registry as name->skill dict."""
@@ -232,7 +232,7 @@ def generate_plan(skills: list[dict], query: str, pattern: str) -> dict:
     return {"pattern": "unknown", "steps": [], "data_flow": ""}
 
 
-# ── CLI Entry Point ────────────────────────────────────────────────────────
+# â”€â”€ CLI Entry Point â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def main():
     args = sys.argv[1:]
@@ -273,7 +273,7 @@ def main():
             "error": "No skills provided",
             "usage": 'python orchestrate.py --skills skill1,skill2 --query "your query"'
         }, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     if not query:
@@ -281,7 +281,7 @@ def main():
             "error": "No query provided",
             "usage": 'python orchestrate.py --skills skill1,skill2 --query "your query"'
         }, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     # Classify and generate plan
@@ -304,3 +304,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

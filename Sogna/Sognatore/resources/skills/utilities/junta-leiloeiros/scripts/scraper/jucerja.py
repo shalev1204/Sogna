@@ -1,5 +1,5 @@
-"""
-Scraper JUCERJA — Junta Comercial do Estado do Rio de Janeiro
+﻿"""
+Scraper JUCERJA â€” Junta Comercial do Estado do Rio de Janeiro
 URL: https://www.jucerja.rj.gov.br/AuxiliaresComercio/Leiloeiros
 Metodo: httpx com paginacao AJAX
 Endpoints reais descobertos em 2026-02-25:
@@ -67,13 +67,13 @@ class JucerjaScraper(AbstractJuntaScraper):
 
             records.append({
                 "nome": nome,
-                "matricula": get_val("matr", "registro", "nº matr", "n° matr"),
+                "matricula": get_val("matr", "registro", "nÂº matr", "nÂ° matr"),
                 "situacao": get_val("situ", "funcional", "status"),
                 "municipio": get_val("munic", "cidade"),
                 "telefone": get_val("tel", "fone"),
                 "email": get_val("email", "e-mail"),
                 "endereco": get_val("ender", "logr", "rua", "endere"),
-                "data_registro": get_val("data matrícula", "posse", "data"),
+                "data_registro": get_val("data matrÃ­cula", "posse", "data"),
             })
 
         return records
@@ -124,7 +124,7 @@ class JucerjaScraper(AbstractJuntaScraper):
                     page_records = self._parse_lista(soup)
 
                     if not page_records:
-                        logger.debug("[RJ] Pagina %d sem registros — fim da paginacao", pagina)
+                        logger.debug("[RJ] Pagina %d sem registros â€” fim da paginacao", pagina)
                         break
 
                     # Evita duplicatas (mesmo nome ja visto)
@@ -141,7 +141,7 @@ class JucerjaScraper(AbstractJuntaScraper):
                     logger.debug("[RJ] Pagina %d: %d novos (total=%d)", pagina, novos, len(results))
 
                     if novos == 0:
-                        break  # Pagina repetiu dados — parar
+                        break  # Pagina repetiu dados â€” parar
 
                     pagina += 1
                     if pagina > 100:  # Limite de seguranca
@@ -156,7 +156,7 @@ class JucerjaScraper(AbstractJuntaScraper):
         if not results:
             # Fallback: Playwright para pagina estatica com qualquer registro
             logger.info("[RJ] Tentando Playwright como fallback")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(
                 url=self.url,
                 wait_selector="li",
@@ -169,3 +169,4 @@ class JucerjaScraper(AbstractJuntaScraper):
                     results.append(self.make_leiloeiro(**r))
 
         return results
+

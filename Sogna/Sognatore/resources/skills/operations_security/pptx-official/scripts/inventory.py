@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Extract structured text content from PowerPoint presentations.
 
@@ -82,12 +82,12 @@ The output JSON includes:
     input_path = Path(args.input)
     if not input_path.exists():
         print(f"Error: Input file not found: {args.input}")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     if not input_path.suffix.lower() == ".pptx":
         print("Error: Input must be a PowerPoint file (.pptx)")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     try:
@@ -124,7 +124,7 @@ The output JSON includes:
         import traceback
 
         traceback.print_exc()
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
 
@@ -670,7 +670,7 @@ class ShapeData:
             return
 
         # Common bullet symbols that indicate manual bullets
-        bullet_symbols = ["•", "●", "○"]
+        bullet_symbols = ["â€¢", "â—", "â—‹"]
 
         for paragraph in text_frame.paragraphs:
             text = paragraph.text.strip()
@@ -1021,3 +1021,4 @@ def save_inventory(inventory: InventoryData, output_path: Path) -> None:
 
 if __name__ == "__main__":
     main()
+

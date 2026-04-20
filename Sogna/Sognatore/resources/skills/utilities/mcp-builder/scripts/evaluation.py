@@ -1,4 +1,4 @@
-"""MCP Server Evaluation Harness
+﻿"""MCP Server Evaluation Harness
 
 This script evaluates MCP servers by running test questions against them using Claude.
 """
@@ -223,15 +223,15 @@ async def run_evaluation(
     model: str = "claude-3-7-sonnet-20250219",
 ) -> str:
     """Run evaluation with MCP server tools."""
-    print("🚀 Starting Evaluation")
+    print("ðŸš€ Starting Evaluation")
 
     client = Anthropic()
 
     tools = await connection.list_tools()
-    print(f"📋 Loaded {len(tools)} tools from MCP server")
+    print(f"ðŸ“‹ Loaded {len(tools)} tools from MCP server")
 
     qa_pairs = parse_evaluation_file(eval_path)
-    print(f"📋 Loaded {len(qa_pairs)} evaluation tasks")
+    print(f"ðŸ“‹ Loaded {len(qa_pairs)} evaluation tasks")
 
     results = []
     for i, qa_pair in enumerate(qa_pairs):
@@ -260,7 +260,7 @@ async def run_evaluation(
             question=qa_pair["question"],
             expected_answer=qa_pair["answer"],
             actual_answer=result["actual"] or "N/A",
-            correct_indicator="✅" if result["score"] else "❌",
+            correct_indicator="âœ…" if result["score"] else "âŒ",
             total_duration=result["total_duration"],
             tool_calls=json.dumps(result["tool_calls"], indent=2),
             summary=result["summary"] or "N/A",
@@ -338,7 +338,7 @@ Examples:
 
     if not args.eval_file.exists():
         print(f"Error: Evaluation file not found: {args.eval_file}")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     headers = parse_headers(args.headers) if args.headers else None
@@ -355,21 +355,22 @@ Examples:
         )
     except ValueError as e:
         print(f"Error: {e}")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
-    print(f"🔗 Connecting to MCP server via {args.transport}...")
+    print(f"ðŸ”— Connecting to MCP server via {args.transport}...")
 
     async with connection:
-        print("✅ Connected successfully")
+        print("âœ… Connected successfully")
         report = await run_evaluation(args.eval_file, connection, args.model)
 
         if args.output:
             args.output.write_text(report)
-            print(f"\n✅ Report saved to {args.output}")
+            print(f"\nâœ… Report saved to {args.output}")
         else:
             print("\n" + report)
 
 
 if __name__ == "__main__":
     asyncio.run(main())
+

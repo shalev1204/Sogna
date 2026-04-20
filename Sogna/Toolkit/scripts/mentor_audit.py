@@ -1,4 +1,4 @@
-import os
+﻿import os
 import json
 import sys
 from datetime import datetime
@@ -63,7 +63,7 @@ def list_pending():
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python mentor_audit.py <list|approve|reject> [skill_name]")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     
     cmd = sys.argv[1]
@@ -73,3 +73,4 @@ if __name__ == "__main__":
         audit_skill(sys.argv[2], "approve")
     elif cmd == "reject" and len(sys.argv) == 3:
         audit_skill(sys.argv[2], "reject")
+

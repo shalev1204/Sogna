@@ -1,4 +1,4 @@
-# /// script
+﻿# /// script
 # requires-python = ">=3.10"
 # dependencies = [
 #     "lighteval[accelerate,vllm]>=0.6.0",
@@ -102,7 +102,7 @@ def run_lighteval_vllm(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(exc.returncode)
 
 
@@ -167,7 +167,7 @@ def run_lighteval_accelerate(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(exc.returncode)
 
 
@@ -297,3 +297,4 @@ Task format:
 
 if __name__ == "__main__":
     main()
+

@@ -1,11 +1,11 @@
-"""
-Databricks — Query Log Collection (collect-only)
+﻿"""
+Databricks â€” Query Log Collection (collect-only)
 ==================================================
 Collects finished query execution records from the Databricks system table
 system.query.history and writes a JSON manifest file that can be consumed
 by push_query_logs.py.
 
-Substitution points (search for "← SUBSTITUTE"):
+Substitution points (search for "â† SUBSTITUTE"):
   - DATABRICKS_HOST       : workspace hostname
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path
   - DATABRICKS_TOKEN      : PAT or service-principal secret
@@ -33,9 +33,9 @@ log = logging.getLogger(__name__)
 
 LOG_TYPE = "databricks"
 
-LOOKBACK_HOURS: int = int(os.getenv("LOOKBACK_HOURS", "25"))        # ← SUBSTITUTE
-LOOKBACK_LAG_HOURS: int = int(os.getenv("LOOKBACK_LAG_HOURS", "1")) # ← SUBSTITUTE
-MAX_ROWS: int = int(os.getenv("MAX_ROWS", "10000"))                  # ← SUBSTITUTE
+LOOKBACK_HOURS: int = int(os.getenv("LOOKBACK_HOURS", "25"))        # â† SUBSTITUTE
+LOOKBACK_LAG_HOURS: int = int(os.getenv("LOOKBACK_LAG_HOURS", "1")) # â† SUBSTITUTE
+MAX_ROWS: int = int(os.getenv("MAX_ROWS", "10000"))                  # â† SUBSTITUTE
 
 _QUERY_LOG_SQL = """\
 SELECT
@@ -54,7 +54,7 @@ WHERE start_time >= DATEADD(HOUR, -{lookback_hours}, NOW())
   AND status = 'FINISHED'
 ORDER BY start_time
 LIMIT {max_rows}
-"""  # ← SUBSTITUTE: adjust status filter or add warehouse_id filter as needed
+"""  # â† SUBSTITUTE: adjust status filter or add warehouse_id filter as needed
 
 
 def _check_available_memory(min_gb: float = 2.0) -> None:
@@ -65,7 +65,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
             avail_pages = os.sysconf("SC_AVPHYS_PAGES")
             avail_gb = (page_size * avail_pages) / (1024 ** 3)
         else:
-            return  # Windows — skip check
+            return  # Windows â€” skip check
     except (ValueError, OSError):
         return
     if avail_gb < min_gb:
@@ -92,7 +92,7 @@ def _query(cursor: Any, sql_text: str) -> list[dict[str, Any]]:
     cols = [d[0] for d in cursor.description]
     rows = []
     while True:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -118,7 +118,7 @@ def collect_query_logs(
     for row in rows:
         query_text: str = row.get("query_text") or ""
         if not query_text.strip():
-            continue  # ← SUBSTITUTE: decide whether to skip empty-text rows
+            continue  # â† SUBSTITUTE: decide whether to skip empty-text rows
 
         entry = {
             "query_id": row.get("query_id"),
@@ -150,9 +150,9 @@ def collect(
     collected_at = datetime.now(timezone.utc).isoformat()
 
     with sql.connect(
-        server_hostname=host,    # ← SUBSTITUTE
-        http_path=http_path,     # ← SUBSTITUTE
-        access_token=token,      # ← SUBSTITUTE
+        server_hostname=host,    # â† SUBSTITUTE
+        http_path=http_path,     # â† SUBSTITUTE
+        access_token=token,      # â† SUBSTITUTE
     ) as conn:
         with conn.cursor() as cursor:
             entries = collect_query_logs(cursor, lookback_hours, lookback_lag_hours, max_rows)
@@ -176,9 +176,9 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Collect Databricks query logs to a manifest file")
-    parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # ← SUBSTITUTE
-    parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # ← SUBSTITUTE
-    parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # ← SUBSTITUTE
+    parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # â† SUBSTITUTE
+    parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # â† SUBSTITUTE
+    parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # â† SUBSTITUTE
     parser.add_argument("--lookback-hours", type=int, default=LOOKBACK_HOURS)
     parser.add_argument("--lookback-lag-hours", type=int, default=LOOKBACK_LAG_HOURS)
     parser.add_argument("--max-rows", type=int, default=MAX_ROWS)
@@ -203,3 +203,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

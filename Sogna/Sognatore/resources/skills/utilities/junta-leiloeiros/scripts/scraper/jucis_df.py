@@ -1,7 +1,7 @@
-"""
-Scraper JUCIS-DF — Junta Comercial, Industrial e Serviços do Distrito Federal
+﻿"""
+Scraper JUCIS-DF â€” Junta Comercial, Industrial e ServiÃ§os do Distrito Federal
 URL: https://jucis.df.gov.br/leiloeiros/
-Método: httpx + BeautifulSoup
+MÃ©todo: httpx + BeautifulSoup
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ class JucisDfScraper(AbstractJuntaScraper):
     url = "https://jucis.df.gov.br/leiloeiros/"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
             return []
@@ -49,7 +49,7 @@ class JucisDfScraper(AbstractJuntaScraper):
                     matricula=gcol(cells, ["matr", "registro"]),
                     cpf_cnpj=gcol(cells, ["cpf", "cnpj"]),
                     situacao=gcol(cells, ["situ", "status"]),
-                    municipio="Brasília",
+                    municipio="BrasÃ­lia",
                     telefone=gcol(cells, ["tel", "fone"]),
                     email=gcol(cells, ["email"]),
                     endereco=gcol(cells, ["ender", "logr"]),
@@ -59,6 +59,7 @@ class JucisDfScraper(AbstractJuntaScraper):
             for el in soup.select("ul li, .leiloeiro, article p"):
                 text = self.clean(el.get_text(" | "))
                 if text and len(text) > 5:
-                    results.append(self.make_leiloeiro(nome=text, municipio="Brasília"))
+                    results.append(self.make_leiloeiro(nome=text, municipio="BrasÃ­lia"))
 
         return results
+

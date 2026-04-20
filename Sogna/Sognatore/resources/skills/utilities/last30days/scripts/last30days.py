@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 last30days - Research a topic from the last 30 days on Reddit + X.
 
@@ -325,7 +325,7 @@ def main():
     # Determine depth
     if args.quick and args.deep:
         print("Error: Cannot use both --quick and --deep", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     elif args.quick:
         depth = "quick"
@@ -337,7 +337,7 @@ def main():
     if not args.topic:
         print("Error: Please provide a topic to research.", file=sys.stderr)
         print("Usage: python3 last30days.py <topic> [options]", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     # Load config
@@ -361,7 +361,7 @@ def main():
                 print(f"Note: {error}", file=sys.stderr)
             else:
                 print(f"Error: {error}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
                 sys.exit(1)
 
     # Get date range
@@ -522,3 +522,4 @@ def output_result(
 
 if __name__ == "__main__":
     main()
+

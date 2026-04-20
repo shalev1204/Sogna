@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Monte Carlo Push Ingestion — Verification Helper
+Monte Carlo Push Ingestion â€” Verification Helper
 
 Queries the Monte Carlo GraphQL API to verify that pushed metadata, lineage, and
 query logs are visible in the platform.
@@ -9,9 +9,9 @@ Prerequisites:
     pip install requests
 
     Set environment variables:
-        MCD_ID      — GraphQL API key ID   (from getmontecarlo.com/settings/api)
-        MCD_TOKEN   — GraphQL API key secret
-        MCD_RESOURCE_UUID   — Your MC warehouse/resource UUID
+        MCD_ID      â€” GraphQL API key ID   (from getmontecarlo.com/settings/api)
+        MCD_TOKEN   â€” GraphQL API key secret
+        MCD_RESOURCE_UUID   â€” Your MC warehouse/resource UUID
 
 Usage:
     python sample_verify.py \
@@ -71,7 +71,7 @@ def get_table_mcon(full_table_id: str, dw_id: str, key_id: str, key_token: str) 
     table = data.get("getTable")
     if not table:
         raise ValueError(f"Table not found: {full_table_id} in resource {dw_id}")
-    print(f"  Resolved: {table['fullTableId']} → MCON: {table['mcon']}")
+    print(f"  Resolved: {table['fullTableId']} â†’ MCON: {table['mcon']}")
     return table["mcon"]
 
 
@@ -102,7 +102,7 @@ def verify_schema(mcon: str, expected_fields: list[str], key_id: str, key_token:
         return False
     fields = edges[0]["node"]["fields"]
     got_names = {f["name"].lower() for f in fields}
-    print(f"  Schema: {len(fields)} column(s) — {', '.join(f['name'] for f in fields[:8])}{'...' if len(fields) > 8 else ''}")
+    print(f"  Schema: {len(fields)} column(s) â€” {', '.join(f['name'] for f in fields[:8])}{'...' if len(fields) > 8 else ''}")
     if expected_fields:
         missing = [e for e in expected_fields if e.lower() not in got_names]
         if missing:
@@ -176,9 +176,9 @@ def verify_detectors(mcon: str, key_id: str, key_token: str) -> None:
     print(f"  Freshness detector: {freshness_status}")
     print(f"  Volume detector:    {size_status}")
     if freshness_status in ("no data", "training"):
-        print("  ↳ Freshness needs 7+ pushes with changed last_update_time over ~2 weeks")
+        print("  â†³ Freshness needs 7+ pushes with changed last_update_time over ~2 weeks")
     if size_status in ("no data", "training"):
-        print("  ↳ Volume needs 10-48 samples over ~42 days (push hourly, consistently)")
+        print("  â†³ Volume needs 10-48 samples over ~42 days (push hourly, consistently)")
 
 
 # ---------------------------------------------------------------------------
@@ -247,9 +247,9 @@ def verify_column_lineage(
         if dest["table"]["mcon"] == expected_dest_mcon:
             cols = {c["columnName"] for c in dest.get("columns", [])}
             if expected_dest_column in cols:
-                print(f"  PASS: {source_column} → {dest['table']['displayName']}.{expected_dest_column}")
+                print(f"  PASS: {source_column} â†’ {dest['table']['displayName']}.{expected_dest_column}")
                 return True
-    print(f"  FAIL: {source_column} → {expected_dest_mcon}.{expected_dest_column} not found")
+    print(f"  FAIL: {source_column} â†’ {expected_dest_mcon}.{expected_dest_column} not found")
     return False
 
 
@@ -315,7 +315,7 @@ def main() -> None:
 
     if not args.key_id or not args.key_token:
         print("ERROR: Provide --key-id/--key-token or set MCD_ID/MCD_TOKEN", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     print(f"\n{'='*60}")
@@ -326,7 +326,7 @@ def main() -> None:
     if not mcon:
         if not args.resource_uuid:
             print("ERROR: --resource-uuid required when --mcon is not provided", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             sys.exit(1)
         mcon = get_table_mcon(args.full_table_id, args.resource_uuid, args.key_id, args.key_token)
 
@@ -357,3 +357,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

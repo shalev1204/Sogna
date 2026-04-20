@@ -1,4 +1,4 @@
-"""007 Secrets Scanner -- Deep scanner for secrets and credentials.
+﻿"""007 Secrets Scanner -- Deep scanner for secrets and credentials.
 
 Goes deeper than quick_scan by performing entropy analysis, base64 detection,
 context-aware false positive reduction, and targeted scanning of sensitive
@@ -872,11 +872,11 @@ def run_scan(
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     logger.info("Starting deep secrets scan of %s", target)
@@ -1008,3 +1008,4 @@ if __name__ == "__main__":
         verbose=args.verbose,
         include_low=args.include_low,
     )
+

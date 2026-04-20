@@ -27,7 +27,7 @@ export class Orchestrator {
    */
   public async routeTools(prompt: string, limit: number = 5): Promise<ToolDefinition[]> {
     const registry = ToolRegistry.getInstance();
-    // @ts-ignore - Accessing private tools for routing purposes
+    // @ts-expect-error - Accessing private tools for routing purposes
     const allTools: ToolDefinition[] = Array.from(registry.tools.values());
     
     const tokens = prompt.toLowerCase().split(/\s+/).filter(t => t.length > 2);
@@ -88,7 +88,7 @@ export class Orchestrator {
     const path = (await import('path')).default;
     
     // Heuristic: Search for strings that look like relative or absolute paths within the workspace
-    const pathRegex = /([a-zA-Z0-9_\-\.]+\/)*[a-zA-Z0-9_\-\.]+\.(ts|js|py|json|md|txt)/g;
+    const pathRegex = /([a-zA-Z0-9_\-.]+\/)*[a-zA-Z0-9_\-.]+\.(ts|js|py|json|md|txt)/g;
     const matches = prompt.match(pathRegex) || [];
     
     if (matches.length === 0) return '';

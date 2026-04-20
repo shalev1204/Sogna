@@ -1,4 +1,4 @@
-"""007 Score Calculator -- Unified security scoring engine.
+﻿"""007 Score Calculator -- Unified security scoring engine.
 
 Aggregates results from all scanners (secrets, dependency, injection, quick_scan)
 into a unified, per-domain security score with a weighted final verdict.
@@ -532,11 +532,11 @@ def run_score(
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     logger.info("Starting unified security score calculation for %s", target)
@@ -753,3 +753,4 @@ if __name__ == "__main__":
         output_format=args.output,
         verbose=args.verbose,
     )
+

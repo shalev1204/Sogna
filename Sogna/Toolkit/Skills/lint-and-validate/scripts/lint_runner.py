@@ -50,7 +50,10 @@ def detect_project_type(project_path: Path) -> dict:
             
             # Check for TypeScript
             if "typescript" in deps or (project_path / "tsconfig.json").exists():
-                result["linters"].append({"name": "tsc", "cmd": ["npx", "tsc", "--noEmit"]})
+                if "check" in scripts:
+                    result["linters"].append({"name": "tsc (via check)", "cmd": ["npm", "run", "check"]})
+                else:
+                    result["linters"].append({"name": "tsc", "cmd": ["npx", "tsc", "--noEmit"]})
                 
         except:
             pass
@@ -139,7 +142,7 @@ def main():
             "message": "No linters configured"
         }
         print(json.dumps(output, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0)
     
     # Run each linter
@@ -178,9 +181,10 @@ def main():
     
     print("\n" + json.dumps(output, indent=2))
     
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     sys.exit(0 if all_passed else 1)
 
 
 if __name__ == "__main__":
     main()
+

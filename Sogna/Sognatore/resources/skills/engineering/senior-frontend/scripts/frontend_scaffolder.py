@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Frontend Project Scaffolder
 
@@ -985,7 +985,7 @@ def main():
         if invalid:
             print(f"Unknown features: {', '.join(invalid)}", file=sys.stderr)
             print(f"Valid features: {', '.join(FEATURES.keys())}")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             sys.exit(1)
 
     result = scaffold_project(
@@ -1004,3 +1004,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

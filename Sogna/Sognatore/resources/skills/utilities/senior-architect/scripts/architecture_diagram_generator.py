@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Architecture Diagram Generator
 Automated tool for senior architect tasks
@@ -21,20 +21,20 @@ class ArchitectureDiagramGenerator:
     
     def run(self) -> Dict:
         """Execute the main functionality"""
-        print(f"🚀 Running {self.__class__.__name__}...")
-        print(f"📁 Target: {self.target_path}")
+        print(f"ðŸš€ Running {self.__class__.__name__}...")
+        print(f"ðŸ“ Target: {self.target_path}")
         
         try:
             self.validate_target()
             self.analyze()
             self.generate_report()
             
-            print("✅ Completed successfully!")
+            print("âœ… Completed successfully!")
             return self.results
             
         except Exception as e:
-            print(f"❌ Error: {e}")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+            print(f"âŒ Error: {e}")
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             sys.exit(1)
     
     def validate_target(self):
@@ -43,12 +43,12 @@ class ArchitectureDiagramGenerator:
             raise ValueError(f"Target path does not exist: {self.target_path}")
         
         if self.verbose:
-            print(f"✓ Target validated: {self.target_path}")
+            print(f"âœ“ Target validated: {self.target_path}")
     
     def analyze(self):
         """Perform the main analysis or operation"""
         if self.verbose:
-            print("📊 Analyzing...")
+            print("ðŸ“Š Analyzing...")
         
         # Main logic here
         self.results['status'] = 'success'
@@ -57,7 +57,7 @@ class ArchitectureDiagramGenerator:
         
         # Add analysis results
         if self.verbose:
-            print(f"✓ Analysis complete: {len(self.results.get('findings', []))} findings")
+            print(f"âœ“ Analysis complete: {len(self.results.get('findings', []))} findings")
     
     def generate_report(self):
         """Generate and display the report"""
@@ -113,3 +113,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

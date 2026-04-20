@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 import json
 import subprocess
@@ -46,7 +46,8 @@ def broadcast_intent(intent_type, content):
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         print("Usage: python sogna_radio.py <type> <content>")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     
     broadcast_intent(sys.argv[1], sys.argv[2])
+

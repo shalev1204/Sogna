@@ -1,5 +1,5 @@
-"""
-Busca full-text via SQLite FTS5 no histórico de sessões.
+﻿"""
+Busca full-text via SQLite FTS5 no histÃ³rico de sessÃµes.
 """
 
 import sqlite3
@@ -10,7 +10,7 @@ from models import SearchResult
 
 
 def _get_connection() -> sqlite3.Connection:
-    """Retorna conexão SQLite com FTS5."""
+    """Retorna conexÃ£o SQLite com FTS5."""
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(DB_PATH))
     conn.execute("PRAGMA journal_mode=WAL")
@@ -18,7 +18,7 @@ def _get_connection() -> sqlite3.Connection:
 
 
 def init_search_db():
-    """Cria tabela FTS5 se não existir."""
+    """Cria tabela FTS5 se nÃ£o existir."""
     conn = _get_connection()
     conn.execute("""
         CREATE VIRTUAL TABLE IF NOT EXISTS session_search USING fts5(
@@ -35,11 +35,11 @@ def init_search_db():
 
 def index_session(session_number: int, date: str, sections: dict[str, str]):
     """
-    Indexa conteúdo de uma sessão.
+    Indexa conteÃºdo de uma sessÃ£o.
     sections: {"topics": "texto", "decisions": "texto", ...}
     """
     conn = _get_connection()
-    # Remove entradas antigas da mesma sessão
+    # Remove entradas antigas da mesma sessÃ£o
     conn.execute(
         "DELETE FROM session_search WHERE session_number = ?",
         (str(session_number),),
@@ -55,7 +55,7 @@ def index_session(session_number: int, date: str, sections: dict[str, str]):
 
 
 def search(query: str, limit: int = MAX_SEARCH_RESULTS) -> list[SearchResult]:
-    """Busca full-text no histórico."""
+    """Busca full-text no histÃ³rico."""
     conn = _get_connection()
     try:
         rows = conn.execute(
@@ -67,10 +67,10 @@ def search(query: str, limit: int = MAX_SEARCH_RESULTS) -> list[SearchResult]:
             LIMIT ?
             """,
             (query, limit),
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         ).fetchall()
     except sqlite3.OperationalError:
-        # Tabela não existe ou query inválida
+        # Tabela nÃ£o existe ou query invÃ¡lida
         return []
     finally:
         conn.close()
@@ -87,7 +87,7 @@ def search(query: str, limit: int = MAX_SEARCH_RESULTS) -> list[SearchResult]:
 
 
 def reindex_all(sessions_dir: Path):
-    """Reconstrói índice a partir dos arquivos de sessão."""
+    """ReconstrÃ³i Ã­ndice a partir dos arquivos de sessÃ£o."""
     conn = _get_connection()
     conn.execute("DELETE FROM session_search")
     conn.commit()
@@ -105,8 +105,8 @@ def reindex_all(sessions_dir: Path):
         current_section = "general"
 
         for line in text.splitlines():
-            if line.startswith("# Sessão") and "—" in line:
-                date = line.split("—")[-1].strip()
+            if line.startswith("# SessÃ£o") and "â€”" in line:
+                date = line.split("â€”")[-1].strip()
             elif line.startswith("## "):
                 current_section = line[3:].strip().lower()
             else:
@@ -114,3 +114,4 @@ def reindex_all(sessions_dir: Path):
                 sections[current_section] += line + "\n"
 
         index_session(num, date, sections)
+

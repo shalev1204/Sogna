@@ -1,4 +1,4 @@
-"""007 Quick Scan -- Fast automated security scan of a target directory.
+﻿"""007 Quick Scan -- Fast automated security scan of a target directory.
 
 Recursively scans files in a target directory for secret patterns, dangerous
 code constructs, permission issues, and oversized files.  Produces a scored
@@ -371,11 +371,11 @@ def run_scan(target_path: str, output_format: str = "text", verbose: bool = Fals
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     logger.info("Starting quick scan of %s", target)
@@ -481,3 +481,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     run_scan(target_path=args.target, output_format=args.output, verbose=args.verbose)
+

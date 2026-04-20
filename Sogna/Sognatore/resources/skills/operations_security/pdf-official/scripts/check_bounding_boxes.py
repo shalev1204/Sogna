@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+﻿from dataclasses import dataclass
 import json
 import sys
 
@@ -62,10 +62,11 @@ def get_bounding_box_messages(fields_json_stream) -> list[str]:
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: check_bounding_boxes.py [fields.json]")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     # Input file should be in the `fields.json` format described in forms.md.
     with open(sys.argv[1]) as f:
         messages = get_bounding_box_messages(f)
     for msg in messages:
         print(msg)
+

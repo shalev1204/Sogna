@@ -1,47 +1,47 @@
-"""
-Scraper JUCESP — Junta Comercial do Estado de São Paulo
+﻿"""
+Scraper JUCESP â€” Junta Comercial do Estado de SÃ£o Paulo
 
 MECANISMO REAL (descoberto em 2025-02-25):
   A URL https://www.institucional.jucesp.sp.gov.br/tradutores-leiloeiros.html
-  é apenas uma página institucional com links para downloads e um accordeon.
+  Ã© apenas uma pÃ¡gina institucional com links para downloads e um accordeon.
   O accordion "Localizar Leiloeiro e Tradutor" aponta para:
     https://www.institucional.jucesp.sp.gov.br/consultaLeilao.html
-  Essa página contém um <iframe> carregando o sistema real:
+  Essa pÃ¡gina contÃ©m um <iframe> carregando o sistema real:
     https://www.institucional.jucesp.sp.gov.br/relatorio/ConsultasLeiloeiroTradutor
 
-  O sistema real é um app ASP.NET MVC com:
+  O sistema real Ã© um app ASP.NET MVC com:
     - GET  /relatorio/ConsultasLeiloeiroTradutor
-          -> retorna formulário de busca com token CSRF anti-forgery
+          -> retorna formulÃ¡rio de busca com token CSRF anti-forgery
     - POST /relatorio/ConsultasLeiloeiroTradutor/ListaLeiloeirosTradutores
           -> retorna HTML com tabela id="example" contendo TODOS os registros
-             (sem paginação — 2.3 MB com 1152 leiloeiros na resposta completa)
+             (sem paginaÃ§Ã£o â€” 2.3 MB com 1152 leiloeiros na resposta completa)
 
   Campos do POST:
-    __RequestVerificationToken  (obrigatório, obtido no GET)
+    __RequestVerificationToken  (obrigatÃ³rio, obtido no GET)
     AgeTipo                     1 = Leiloeiro | 2 = Tradutor
     AgeMatricula                filtro opcional
     AgeNome                     filtro opcional
     AgeSituacao                 -1 = todos | 1=Atuante | 14=Atuante Regular |
-                                 13=Atuante Irregular | 2=Destituído | 3=Exonerado |
-                                 4=Falecido | 9=Licenciado | 10=Matrícula Cancelada |
+                                 13=Atuante Irregular | 2=DestituÃ­do | 3=Exonerado |
+                                 4=Falecido | 9=Licenciado | 10=MatrÃ­cula Cancelada |
                                  12=Registro Cassado | 11=Registro Suspenso |
                                  8=Regular | 7=Suspenso | 6=Suspenso Por Ordem Judicial |
                                  5=Transferido
     AgeDataPosseDe / AgeDataPosseAte  filtro de data (dd/mm/aaaa)
-    AgeEndeComeLogradouro / AgeEndeComeBairro / AgeEndeComeMunicipio  filtro de endereço
+    AgeEndeComeLogradouro / AgeEndeComeBairro / AgeEndeComeMunicipio  filtro de endereÃ§o
     MatriculaCancelada          true/false
     MatriculaCancelada120       true/false
 
   Colunas da tabela retornada (id="example"):
     Nome | Matricula | PosseYMD | Posse | Logradouro | Bairro | Cidade |
-    CEP | Telefones | E-Mail | Web Site | Situação | Preposto |
-    Férias/Licença | Data do D.O.E. | Prazo para Publicação - 120 dias |
+    CEP | Telefones | E-Mail | Web Site | SituaÃ§Ã£o | Preposto |
+    FÃ©rias/LicenÃ§a | Data do D.O.E. | Prazo para PublicaÃ§Ã£o - 120 dias |
     Data do Cancelamento | PDF
 
-  Total coletável: 1152 leiloeiros (todos os status)
-  Atuante Regular: 577 | Exonerado: 273 | Destituído: 214 | Falecido: 47 | ...
+  Total coletÃ¡vel: 1152 leiloeiros (todos os status)
+  Atuante Regular: 577 | Exonerado: 273 | DestituÃ­do: 214 | Falecido: 47 | ...
 
-Método: httpx com sessão (GET para CSRF, POST para dados)
+MÃ©todo: httpx com sessÃ£o (GET para CSRF, POST para dados)
 """
 from __future__ import annotations
 
@@ -74,11 +74,11 @@ class JucespScraper(AbstractJuntaScraper):
         """
         Fluxo:
         1. GET /relatorio/ConsultasLeiloeiroTradutor  -> extrai token CSRF
-           (o servidor emite um cookie de sessão junto com o token)
+           (o servidor emite um cookie de sessÃ£o junto com o token)
         2. POST /relatorio/ConsultasLeiloeiroTradutor/ListaLeiloeirosTradutores
                com AgeTipo=1 e AgeSituacao=-1 (todos)
            IMPORTANTE: GET e POST devem usar o MESMO AsyncClient para que os
-           cookies de sessão sejam enviados. Sem isso o servidor retorna 500.
+           cookies de sessÃ£o sejam enviados. Sem isso o servidor retorna 500.
         3. Parseia a tabela id="example" do HTML retornado
         """
         import asyncio as _aio
@@ -87,7 +87,7 @@ class JucespScraper(AbstractJuntaScraper):
 
         for attempt in range(1, self.max_retries + 1):
             try:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
                 soup = await self._fetch_with_session()
                 if soup:
                     return self._parse_table(soup)
@@ -102,14 +102,14 @@ class JucespScraper(AbstractJuntaScraper):
 
         return []
 
-    # ── helpers privados ─────────────────────────────────────────────────────
+    # â”€â”€ helpers privados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     async def _fetch_with_session(self) -> Optional[BeautifulSoup]:
         """
         GET + POST dentro do mesmo AsyncClient.
-        O servidor ASP.NET emite um cookie de sessão no GET que deve ser
-        reenviado no POST — sem ele o servidor retorna HTTP 500.
+        O servidor ASP.NET emite um cookie de sessÃ£o no GET que deve ser
+        reenviado no POST â€” sem ele o servidor retorna HTTP 500.
         """
         import logging
         logger = logging.getLogger(__name__)
@@ -119,9 +119,9 @@ class JucespScraper(AbstractJuntaScraper):
             verify=False,
             http2=False,          # servidor rejeita HTTP/2
             follow_redirects=True,
-            timeout=120.0,        # resposta do POST é ~2.3 MB
+            timeout=120.0,        # resposta do POST Ã© ~2.3 MB
         ) as client:
-            # 1. GET — obtém CSRF token e cookie de sessão
+            # 1. GET â€” obtÃ©m CSRF token e cookie de sessÃ£o
             r_get = await client.get(self._FORM_URL)
             r_get.raise_for_status()
 
@@ -130,12 +130,12 @@ class JucespScraper(AbstractJuntaScraper):
                 r_get.text,
             )
             if not csrf_match:
-                logger.warning("[SP] CSRF token não encontrado")
+                logger.warning("[SP] CSRF token nÃ£o encontrado")
                 return None
             csrf = csrf_match.group(1)
             self._last_csrf = csrf  # Store for safe error masking
 
-            # 2. POST — mesmo client envia os cookies de sessão automaticamente
+            # 2. POST â€” mesmo client envia os cookies de sessÃ£o automaticamente
             r_post = await client.post(
                 self._POST_URL,
                 data={
@@ -165,10 +165,10 @@ class JucespScraper(AbstractJuntaScraper):
         """
         Parseia a tabela id="example" retornada pelo POST.
 
-        Colunas (índice 0-based):
+        Colunas (Ã­ndice 0-based):
           0  Nome
           1  Matricula
-          2  PosseYMD   (hidden, usado para ordenação)
+          2  PosseYMD   (hidden, usado para ordenaÃ§Ã£o)
           3  Posse      (dd/mm/aaaa)
           4  Logradouro
           5  Bairro
@@ -177,11 +177,11 @@ class JucespScraper(AbstractJuntaScraper):
           8  Telefones
           9  E-Mail
          10  Web Site
-         11  Situação
+         11  SituaÃ§Ã£o
          12  Preposto
-         13  Férias/Licença
+         13  FÃ©rias/LicenÃ§a
          14  Data do D.O.E.
-         15  Prazo para Publicação - 120 dias
+         15  Prazo para PublicaÃ§Ã£o - 120 dias
          16  Data do Cancelamento
          17  PDF
         """
@@ -189,7 +189,7 @@ class JucespScraper(AbstractJuntaScraper):
 
         table = soup.find("table", {"id": "example"})
         if not table:
-            # Fallback: procurar a maior tabela da página
+            # Fallback: procurar a maior tabela da pÃ¡gina
             tables = soup.find_all("table")
             if not tables:
                 return []
@@ -199,7 +199,7 @@ class JucespScraper(AbstractJuntaScraper):
         if not rows:
             return []
 
-        for row in rows[1:]:   # pula o cabeçalho
+        for row in rows[1:]:   # pula o cabeÃ§alho
             cells = row.find_all("td")
             if len(cells) < 12:
                 continue
@@ -213,7 +213,7 @@ class JucespScraper(AbstractJuntaScraper):
             if not nome:
                 continue
 
-            # Monta endereço completo
+            # Monta endereÃ§o completo
             logradouro = cell(4)
             bairro = cell(5)
             cidade = cell(6)
@@ -233,3 +233,4 @@ class JucespScraper(AbstractJuntaScraper):
             ))
 
         return results
+

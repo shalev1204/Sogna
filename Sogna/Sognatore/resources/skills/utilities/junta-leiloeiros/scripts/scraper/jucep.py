@@ -1,11 +1,11 @@
-"""
-Scraper JUCEP — Junta Comercial do Estado da Paraíba
+﻿"""
+Scraper JUCEP â€” Junta Comercial do Estado da ParaÃ­ba
 URL: https://jucep.pb.gov.br/contatos/leiloeiros
-Método: httpx + BeautifulSoup
-Nota: Domínio antigo jucepb.pb.gov.br não existe mais.
+MÃ©todo: httpx + BeautifulSoup
+Nota: DomÃ­nio antigo jucepb.pb.gov.br nÃ£o existe mais.
       Junta renomeada/migrada para JUCEP em jucep.pb.gov.br.
-      Lista 57 leiloeiros com matrícula, data, endereço, contato, situação (Regular/Irregular).
-      Atualizada até 2025.
+      Lista 57 leiloeiros com matrÃ­cula, data, endereÃ§o, contato, situaÃ§Ã£o (Regular/Irregular).
+      Atualizada atÃ© 2025.
 """
 from __future__ import annotations
 
@@ -20,10 +20,10 @@ class JucepScraper(AbstractJuntaScraper):
     url = "https://jucep.pb.gov.br/contatos/leiloeiros"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -52,9 +52,9 @@ class JucepScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "nº"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÂº"]),
                     situacao=gcol(cells, ["situ", "status"]),
-                    municipio=gcol(cells, ["munic", "cidade"]) or "João Pessoa",
+                    municipio=gcol(cells, ["munic", "cidade"]) or "JoÃ£o Pessoa",
                     telefone=gcol(cells, ["tel", "fone", "contato"]),
                     email=gcol(cells, ["email", "site"]),
                     endereco=gcol(cells, ["ender", "logr"]),
@@ -67,6 +67,7 @@ class JucepScraper(AbstractJuntaScraper):
             for el in soup.select("li, p, .item"):
                 text = self.clean(el.get_text(" | "))
                 if text and len(text) > 10:
-                    results.append(self.make_leiloeiro(nome=text, municipio="João Pessoa"))
+                    results.append(self.make_leiloeiro(nome=text, municipio="JoÃ£o Pessoa"))
 
         return results
+

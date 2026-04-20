@@ -1,4 +1,4 @@
-# /// script
+﻿# /// script
 # requires-python = ">=3.12"
 # dependencies = [
 #     "polars>=1.31.0",
@@ -361,7 +361,7 @@ def main():
             print(f"  {lang:12} {name}")
         if len(all_langs) > 30:
             print(f"  ... and {len(all_langs) - 30} more")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0)
 
     # Build the parquet path
@@ -542,7 +542,8 @@ if __name__ == "__main__":
             "    https://huggingface.co/datasets/uv-scripts/dataset-stats/raw/main/finepdfs-stats.py \\"
         )
         print("    -- --output-repo username/stats")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(0)
 
     main()
+

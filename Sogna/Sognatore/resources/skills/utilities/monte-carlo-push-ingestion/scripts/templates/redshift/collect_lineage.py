@@ -1,14 +1,14 @@
-"""
-Redshift — Lineage Collection (collect-only)
+﻿"""
+Redshift â€” Lineage Collection (collect-only)
 ==============================================
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
 Collects table-level lineage from Redshift by fetching recent successful query
 history from sys_query_history + sys_querytext and parsing CREATE TABLE AS SELECT
 (CTAS) and INSERT INTO SELECT patterns to derive source->destination relationships.
 
 Writes a JSON manifest file that can be consumed by push_lineage.py.
 
-Substitution points (search for "← SUBSTITUTE"):
+Substitution points (search for "â† SUBSTITUTE"):
   - REDSHIFT_HOST / REDSHIFT_DB / REDSHIFT_USER / REDSHIFT_PASSWORD : connection
   - LOOKBACK_HOURS    : how far back to scan query history (default 24 h)
 
@@ -32,7 +32,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger(__name__)
 
 RESOURCE_TYPE = "redshift"
-LOOKBACK_HOURS: int = int(os.getenv("LOOKBACK_HOURS", "24"))  # ← SUBSTITUTE
+LOOKBACK_HOURS: int = int(os.getenv("LOOKBACK_HOURS", "24"))  # â† SUBSTITUTE
 
 
 def _check_available_memory(min_gb: float = 2.0) -> None:
@@ -43,7 +43,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
             avail_pages = os.sysconf("SC_AVPHYS_PAGES")
             avail_gb = (page_size * avail_pages) / (1024 ** 3)
         else:
-            return  # Windows — skip check
+            return  # Windows â€” skip check
     except (ValueError, OSError):
         return
     if avail_gb < min_gb:
@@ -55,12 +55,12 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
         )
 
 
-# Regex: CTAS — CREATE [OR REPLACE] TABLE <dest> AS SELECT
+# Regex: CTAS â€” CREATE [OR REPLACE] TABLE <dest> AS SELECT
 _CTAS_RE = re.compile(
     r"CREATE\s+(?:OR\s+REPLACE\s+)?(?:TABLE|VIEW)\s+(?P<dest>\"?[\w.\"]+\"?)\s*(?:\([^)]*\))?\s*AS\s+SELECT\b",
     re.IGNORECASE | re.DOTALL,
 )
-# Regex: INSERT INTO <dest> … SELECT
+# Regex: INSERT INTO <dest> â€¦ SELECT
 _INSERT_RE = re.compile(
     r"INSERT\s+INTO\s+(?P<dest>\"?[\w.\"]+\"?)\s.*?SELECT\b",
     re.IGNORECASE | re.DOTALL,
@@ -83,13 +83,13 @@ def _parse_ref(ref: str) -> tuple[str, str, str]:
     return "", "", parts[0]
 
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
 def _dictfetch(cursor: Any, sql: str, params: tuple | None = None) -> list[dict[str, Any]]:
     cursor.execute(sql, params)
     cols = [d.name for d in cursor.description]
     rows = []
     while True:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -97,10 +97,10 @@ def _dictfetch(cursor: Any, sql: str, params: tuple | None = None) -> list[dict[
     return rows
 
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
 def fetch_query_texts(cursor: Any, lookback_hours: int) -> list[str]:
     """Assemble full query texts from sys_query_history + sys_querytext."""
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     rows = _dictfetch(
         cursor,
         f"""
@@ -116,7 +116,7 @@ def fetch_query_texts(cursor: Any, lookback_hours: int) -> list[str]:
           AND sq.status = 'success'
         GROUP BY sq.query_id
         LIMIT 50000
-        """,  # ← SUBSTITUTE: adjust lookback_hours, LIMIT, or add user/database filters
+        """,  # â† SUBSTITUTE: adjust lookback_hours, LIMIT, or add user/database filters
     )
     return [r["full_text"] for r in rows if r.get("full_text")]
 
@@ -183,12 +183,12 @@ def collect(
     )
     try:
         with conn.cursor() as cursor:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             query_texts = fetch_query_texts(cursor, lookback_hours)
     finally:
         conn.close()
 
-    log.info("Parsing lineage from %d query texts …", len(query_texts))
+    log.info("Parsing lineage from %d query texts â€¦", len(query_texts))
     all_events: list[dict[str, Any]] = []
     for sql_text in query_texts:
         all_events.extend(parse_lineage_from_sql(sql_text))
@@ -212,10 +212,10 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Collect Redshift lineage to a manifest file")
-    parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # ← SUBSTITUTE
-    parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # ← SUBSTITUTE
-    parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # ← SUBSTITUTE
-    parser.add_argument("--password", default=os.getenv("REDSHIFT_PASSWORD")) # ← SUBSTITUTE
+    parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # â† SUBSTITUTE
+    parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # â† SUBSTITUTE
+    parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # â† SUBSTITUTE
+    parser.add_argument("--password", default=os.getenv("REDSHIFT_PASSWORD")) # â† SUBSTITUTE
     parser.add_argument("--port", type=int, default=int(os.getenv("REDSHIFT_PORT", "5439")))
     parser.add_argument("--lookback-hours", type=int, default=LOOKBACK_HOURS)
     parser.add_argument("--manifest", default="manifest_lineage.json")
@@ -239,3 +239,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

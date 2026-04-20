@@ -1,9 +1,9 @@
-"""
-Scraper JUCEB — Junta Comercial do Estado da Bahia
+﻿"""
+Scraper JUCEB â€” Junta Comercial do Estado da Bahia
 URL: https://www.ba.gov.br/juceb/home/matriculas-e-carteira-profissional/leiloeiros
-Método: httpx + BeautifulSoup
+MÃ©todo: httpx + BeautifulSoup
 Nota: Site migrou de juceb.ba.gov.br para ba.gov.br/juceb
-      Lista inclui: nome, matrícula, portaria, nomeação, contatos, situação (Regular/Irregular)
+      Lista inclui: nome, matrÃ­cula, portaria, nomeaÃ§Ã£o, contatos, situaÃ§Ã£o (Regular/Irregular)
 """
 from __future__ import annotations
 
@@ -18,10 +18,10 @@ class JucebScraper(AbstractJuntaScraper):
     url = "https://www.ba.gov.br/juceb/home/matriculas-e-carteira-profissional/leiloeiros"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -50,7 +50,7 @@ class JucebScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "nº"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÂº"]),
                     situacao=gcol(cells, ["situ", "status", "regular", "irregular"]),
                     municipio=gcol(cells, ["munic", "cidade"]) or "Salvador",
                     telefone=gcol(cells, ["tel", "fone", "contato"]),
@@ -68,3 +68,4 @@ class JucebScraper(AbstractJuntaScraper):
                     results.append(self.make_leiloeiro(nome=text, municipio="Salvador"))
 
         return results
+

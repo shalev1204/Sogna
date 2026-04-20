@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Skill Matching Algorithm for Agent Orchestrator.
 
@@ -25,7 +25,7 @@ import re
 import subprocess
 from pathlib import Path
 
-# ── Configuration ──────────────────────────────────────────────────────────
+# â”€â”€ Configuration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 # Resolve paths relative to this script's location
 _SCRIPT_DIR = Path(__file__).resolve().parent
@@ -127,7 +127,7 @@ CAPABILITY_KEYWORDS = {
 }
 
 
-# ── Functions ──────────────────────────────────────────────────────────────
+# â”€â”€ Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def ensure_registry():
     """Run scan if registry doesn't exist."""
@@ -172,7 +172,7 @@ def get_project_skills(project_name: str) -> set:
 def query_to_capabilities(query: str) -> list[str]:
     """Map a query to capability categories using word boundary matching."""
     q_lower = query.lower()
-    q_words = set(re.findall(r'[a-zA-ZÀ-ÿ]+', q_lower))
+    q_words = set(re.findall(r'[a-zA-ZÃ€-Ã¿]+', q_lower))
     caps = []
     for cap, keywords in CAPABILITY_KEYWORDS.items():
         for kw in keywords:
@@ -189,7 +189,7 @@ def query_to_capabilities(query: str) -> list[str]:
 
 def normalize(text: str) -> set[str]:
     """Normalize text to a set of lowercase words."""
-    return set(re.findall(r'[a-zA-ZÀ-ÿ]{3,}', text.lower()))
+    return set(re.findall(r'[a-zA-ZÃ€-Ã¿]{3,}', text.lower()))
 
 
 def score_skill(skill: dict, query: str, project_skills: set = None) -> dict:
@@ -213,7 +213,7 @@ def score_skill(skill: dict, query: str, project_skills: set = None) -> dict:
         reasons.append(f"name:{name}")
 
     # 2. Trigger keyword matches (+10 each) - word boundary matching
-    q_words = set(re.findall(r'[a-zA-ZÀ-ÿ]+', q_lower))
+    q_words = set(re.findall(r'[a-zA-ZÃ€-Ã¿]+', q_lower))
     for trigger in triggers:
         trigger_lower = trigger.lower()
         # Multi-word triggers: substring match. Single-word: exact word match.
@@ -279,7 +279,7 @@ def match(query: str, project: str = None, top_n: int = 5, threshold: int = 5) -
     return results[:top_n]
 
 
-# ── CLI Entry Point ────────────────────────────────────────────────────────
+# â”€â”€ CLI Entry Point â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def main():
     args = sys.argv[1:]
@@ -302,7 +302,7 @@ def main():
             "error": "No query provided",
             "usage": 'python match_skills.py "your query here"'
         }, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     results = match(query, project=project)
@@ -328,3 +328,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

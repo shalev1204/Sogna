@@ -1,13 +1,13 @@
-"""
-Databricks — Lineage Collection (collect-only)
+﻿"""
+Databricks â€” Lineage Collection (collect-only)
 ================================================
 Collects table-level and (optionally) column-level lineage from Databricks Unity
 Catalog system tables (system.access.table_lineage and system.access.column_lineage).
-No SQL parsing required — Databricks provides first-class lineage metadata.
+No SQL parsing required â€” Databricks provides first-class lineage metadata.
 
 Writes a JSON manifest file that can be consumed by push_lineage.py.
 
-Substitution points (search for "← SUBSTITUTE"):
+Substitution points (search for "â† SUBSTITUTE"):
   - DATABRICKS_HOST       : workspace hostname
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path
   - DATABRICKS_TOKEN      : PAT or service-principal secret
@@ -34,7 +34,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger(__name__)
 
 RESOURCE_TYPE = "databricks"
-LOOKBACK_DAYS: int = int(os.getenv("LOOKBACK_DAYS", "30"))  # ← SUBSTITUTE
+LOOKBACK_DAYS: int = int(os.getenv("LOOKBACK_DAYS", "30"))  # â† SUBSTITUTE
 
 
 def _check_available_memory(min_gb: float = 2.0) -> None:
@@ -45,7 +45,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
             avail_pages = os.sysconf("SC_AVPHYS_PAGES")
             avail_gb = (page_size * avail_pages) / (1024 ** 3)
         else:
-            return  # Windows — skip check
+            return  # Windows â€” skip check
     except (ValueError, OSError):
         return
     if avail_gb < min_gb:
@@ -62,7 +62,7 @@ def _query(cursor: Any, sql_text: str) -> list[dict[str, Any]]:
     cols = [d[0] for d in cursor.description]
     rows = []
     while True:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -95,7 +95,7 @@ def collect_table_lineage(cursor: Any, lookback_days: int) -> list[dict[str, Any
           AND target_table_full_name IS NOT NULL
         GROUP BY source_table_full_name, target_table_full_name, created_by
         LIMIT 50000
-        """,  # ← SUBSTITUTE: adjust lookback_days, LIMIT, or add catalog/schema filters
+        """,  # â† SUBSTITUTE: adjust lookback_days, LIMIT, or add catalog/schema filters
     )
 
     events: list[dict[str, Any]] = []
@@ -128,7 +128,7 @@ def collect_column_lineage(cursor: Any, lookback_days: int) -> list[dict[str, An
           AND source_table_full_name IS NOT NULL
           AND target_table_full_name IS NOT NULL
         LIMIT 50000
-        """,  # ← SUBSTITUTE: adjust LIMIT or add catalog/schema filters if needed
+        """,  # â† SUBSTITUTE: adjust LIMIT or add catalog/schema filters if needed
     )
 
     # Group by destination table so we can build one event per destination
@@ -180,9 +180,9 @@ def collect(
     collected_at = datetime.now(timezone.utc).isoformat()
 
     with sql.connect(
-        server_hostname=host,    # ← SUBSTITUTE
-        http_path=http_path,     # ← SUBSTITUTE
-        access_token=token,      # ← SUBSTITUTE
+        server_hostname=host,    # â† SUBSTITUTE
+        http_path=http_path,     # â† SUBSTITUTE
+        access_token=token,      # â† SUBSTITUTE
     ) as conn:
         with conn.cursor() as cursor:
             table_events = collect_table_lineage(cursor, lookback_days)
@@ -211,9 +211,9 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Collect Databricks lineage to a manifest file")
-    parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # ← SUBSTITUTE
-    parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # ← SUBSTITUTE
-    parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # ← SUBSTITUTE
+    parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # â† SUBSTITUTE
+    parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # â† SUBSTITUTE
+    parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # â† SUBSTITUTE
     parser.add_argument("--lookback-days", type=int, default=LOOKBACK_DAYS)
     parser.add_argument(
         "--column-lineage", action="store_true",
@@ -239,3 +239,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

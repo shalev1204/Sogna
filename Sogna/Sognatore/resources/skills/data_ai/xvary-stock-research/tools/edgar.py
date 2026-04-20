@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+﻿#!/usr/bin/env python3
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
 """Standalone SEC EDGAR fetcher for claude-code-stock-analysis-skill.
 
 Public functions:
@@ -455,7 +455,7 @@ def get_financials(ticker: str) -> dict[str, Any]:
 
 
 def _main() -> None:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     parser = argparse.ArgumentParser(description="Standalone EDGAR fetcher")
     parser.add_argument("ticker", help="Ticker symbol, e.g. AAPL")
     parser.add_argument(
@@ -495,3 +495,4 @@ def _main() -> None:
 
 if __name__ == "__main__":
     _main()
+

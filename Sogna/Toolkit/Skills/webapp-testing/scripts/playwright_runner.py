@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Skill: webapp-testing
 Script: playwright_runner.py
@@ -159,7 +159,7 @@ if __name__ == "__main__":
                 "python playwright_runner.py https://example.com --a11y"
             ]
         }, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     
     url = sys.argv[1]
@@ -172,3 +172,4 @@ if __name__ == "__main__":
         result = run_basic_test(url, take_screenshot)
     
     print(json.dumps(result, indent=2))
+

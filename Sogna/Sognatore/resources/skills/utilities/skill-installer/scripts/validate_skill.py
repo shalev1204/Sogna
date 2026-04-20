@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Skill Validator - Deep validation of a skill directory.
 
@@ -17,7 +17,7 @@ import json
 import re
 from pathlib import Path
 
-# ── Constants ──────────────────────────────────────────────────────────────
+# â”€â”€ Constants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 FORBIDDEN_PATTERNS = [
     ".env",
@@ -41,7 +41,7 @@ SKILLS_ROOT = Path(r"C:\Users\renat\skills")
 REGISTRY_PATH = SKILLS_ROOT / "agent-orchestrator" / "data" / "registry.json"
 
 
-# ── YAML Frontmatter Parser ───────────────────────────────────────────────
+# â”€â”€ YAML Frontmatter Parser â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def parse_yaml_frontmatter(path: Path) -> dict:
     """Extract YAML frontmatter from a SKILL.md file.
@@ -78,7 +78,7 @@ def parse_yaml_frontmatter(path: Path) -> dict:
         return result
 
 
-# ── Validation Checks ─────────────────────────────────────────────────────
+# â”€â”€ Validation Checks â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def check_skill_md_exists(skill_dir: Path) -> dict:
     """Check 1: SKILL.md exists."""
@@ -336,7 +336,7 @@ def check_duplicate_name(meta: dict, registry_path: Path) -> dict:
     }
 
 
-# ── Main Validation ───────────────────────────────────────────────────────
+# â”€â”€ Main Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def validate(skill_dir: Path, strict: bool = False, registry_path: Path = None) -> dict:
     """Run all 10 validation checks on a skill directory.
@@ -401,7 +401,7 @@ def validate(skill_dir: Path, strict: bool = False, registry_path: Path = None) 
     }
 
 
-# ── CLI Entry Point ───────────────────────────────────────────────────────
+# â”€â”€ CLI Entry Point â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def main():
     if len(sys.argv) < 2:
@@ -409,7 +409,7 @@ def main():
             "valid": False,
             "error": "Usage: python validate_skill.py <skill-directory> [--strict] [--registry <path>]",
         }, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     skill_dir = Path(sys.argv[1]).resolve()
@@ -424,9 +424,10 @@ def main():
     result = validate(skill_dir, strict=strict, registry_path=registry_path)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
     sys.exit(0 if result["valid"] else 1)
 
 
 if __name__ == "__main__":
     main()
+

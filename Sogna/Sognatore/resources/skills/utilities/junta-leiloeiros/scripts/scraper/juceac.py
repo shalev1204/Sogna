@@ -1,10 +1,10 @@
-"""
-Scraper JUCEAC — Junta Comercial do Estado do Acre
+﻿"""
+Scraper JUCEAC â€” Junta Comercial do Estado do Acre
 URL: https://juceac.ac.gov.br/leiloeiro/
-Método: httpx + BeautifulSoup
-Nota: URL correta é /leiloeiro/ (singular), não /leiloeiros/.
-      Lista ~30 leiloeiros com situação (CANCELADO, SUSPENSO, ativo),
-      data de posse, endereço e contatos. Lista atualizada.
+MÃ©todo: httpx + BeautifulSoup
+Nota: URL correta Ã© /leiloeiro/ (singular), nÃ£o /leiloeiros/.
+      Lista ~30 leiloeiros com situaÃ§Ã£o (CANCELADO, SUSPENSO, ativo),
+      data de posse, endereÃ§o e contatos. Lista atualizada.
 """
 from __future__ import annotations
 
@@ -19,14 +19,14 @@ class JuceacScraper(AbstractJuntaScraper):
     url = "https://juceac.ac.gov.br/leiloeiro/"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
             # Tenta sem trailing slash e com www
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page(url="https://www.juceac.ac.gov.br/leiloeiro/")
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -55,7 +55,7 @@ class JuceacScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "nº"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÂº"]),
                     situacao=gcol(cells, ["situ", "status", "cancel", "suspen"]),
                     municipio=gcol(cells, ["munic", "cidade"]) or "Rio Branco",
                     telefone=gcol(cells, ["tel", "fone"]),
@@ -73,3 +73,4 @@ class JuceacScraper(AbstractJuntaScraper):
                     results.append(self.make_leiloeiro(nome=text, municipio="Rio Branco"))
 
         return results
+

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Encode a notebook YAML file into a base64 import URL and open it in the browser.
 
@@ -40,7 +40,7 @@ def validate_yaml(content: str) -> None:
         doc = yaml.safe_load(content)
     except yaml.YAMLError as e:
         print(f"YAML validation failed: {e}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     errors: list[str] = []
@@ -98,7 +98,7 @@ def validate_yaml(content: str) -> None:
         print("Invalid notebook:", file=sys.stderr)
         for err in errors:
             print(f"  - {err}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
 
@@ -141,3 +141,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

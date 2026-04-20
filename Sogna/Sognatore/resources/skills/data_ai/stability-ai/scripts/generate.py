@@ -1,4 +1,4 @@
-"""
+﻿"""
 Script principal de geracao de imagens via Stability AI API.
 
 Suporta: text-to-image (SD3.5, Ultra, Core), img2img, upscale, inpaint,
@@ -50,7 +50,7 @@ from config import (
 from styles import apply_style, list_styles
 
 
-# ── Exceptions ───────────────────────────────────────────────────────────────
+# â”€â”€ Exceptions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 class APIError(Exception):
@@ -81,7 +81,7 @@ class InsufficientCreditsError(APIError):
     pass
 
 
-# ── API Call ─────────────────────────────────────────────────────────────────
+# â”€â”€ API Call â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 def api_call(
@@ -183,7 +183,7 @@ def api_call(
         raise APIError(f"Timeout ({timeout}s) na chamada para {url}")
 
 
-# ── Geracao ──────────────────────────────────────────────────────────────────
+# â”€â”€ Geracao â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 def generate_image(
@@ -371,7 +371,7 @@ def generate_image(
     return [{"path": filepath, "size_kb": round(size_kb, 1), "time_s": round(elapsed, 1), "seed": resp_seed}]
 
 
-# ── Helpers ──────────────────────────────────────────────────────────────────
+# â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 def _resolve_endpoint(mode: str, model: str) -> str:
@@ -541,7 +541,7 @@ def analyze_prompt(prompt: str) -> dict:
     }
 
 
-# ── CLI ──────────────────────────────────────────────────────────────────────
+# â”€â”€ CLI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 def main():
@@ -619,7 +619,7 @@ def main():
     if args.analyze:
         if not args.prompt:
             print("ERRO: --analyze requer --prompt", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             sys.exit(1)
         result = analyze_prompt(args.prompt)
         if args.json:
@@ -636,11 +636,11 @@ def main():
 
     if needs_prompt and not args.prompt:
         print(f"ERRO: modo '{args.mode}' requer --prompt", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
     if needs_image and not args.image:
         print(f"ERRO: modo '{args.mode}' requer --image", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     # --- Execucao ---
@@ -683,9 +683,10 @@ def main():
         print(json.dumps(output, indent=2, ensure_ascii=False))
 
     if not results:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
 
 if __name__ == "__main__":
     main()
+

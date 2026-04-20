@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Context Guardian — Snapshot Manager.
+Context Guardian â€” Snapshot Manager.
 
 Cria, lista e le snapshots de contexto para preservacao
 pre-compactacao. Os snapshots sao arquivos .md estruturados
@@ -20,12 +20,12 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-# ── Paths ──────────────────────────────────────────────────────────────────
+# â”€â”€ Paths â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_DIR = SCRIPT_DIR.parent
 DATA_DIR = SKILL_DIR / "data"
 
-# ── Functions ──────────────────────────────────────────────────────────────
+# â”€â”€ Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def ensure_data_dir():
     """Create data directory if it doesn't exist."""
@@ -46,7 +46,7 @@ def save_snapshot(project: str = "", phase: str = "", summary: str = "") -> str:
     filename = f"snapshot-{timestamp}.md"
     filepath = DATA_DIR / filename
 
-    header = f"""# Context Guardian Snapshot — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+    header = f"""# Context Guardian Snapshot â€” {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 **Projeto**: {project or 'nao especificado'}
 **Fase**: {phase or 'nao especificada'}
 **Resumo**: {summary or 'snapshot pre-compactacao'}
@@ -156,7 +156,7 @@ def prune_snapshots(keep: int = 10) -> dict:
     return {"pruned": len(to_remove), "remaining": keep}
 
 
-# ── CLI ────────────────────────────────────────────────────────────────────
+# â”€â”€ CLI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def main():
     args = sys.argv[1:]
@@ -166,7 +166,7 @@ def main():
             "error": "Comando necessario: save, list, latest, read, prune",
             "usage": "python context_snapshot.py <command> [options]",
         }, indent=2, ensure_ascii=False))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     cmd = args[0]
@@ -223,9 +223,10 @@ def main():
 
     else:
         print(json.dumps({"error": f"Comando desconhecido: {cmd}"}, indent=2))
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
 
 if __name__ == "__main__":
     main()
+

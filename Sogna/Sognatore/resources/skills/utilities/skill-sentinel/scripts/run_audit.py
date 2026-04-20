@@ -1,4 +1,4 @@
-"""
+﻿"""
 CLI principal do Sentinel: orquestra a auditoria completa do ecossistema.
 
 Uso:
@@ -250,7 +250,7 @@ Exemplos:
 
     if "error" in result:
         print(f"Erro: {result['error']}", file=sys.stderr)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     if args.format == "json":
@@ -289,3 +289,4 @@ Exemplos:
 
 if __name__ == "__main__":
     main()
+

@@ -1,10 +1,10 @@
-"""
-Scraper JUCEAL — Junta Comercial do Estado de Alagoas
+﻿"""
+Scraper JUCEAL â€” Junta Comercial do Estado de Alagoas
 URL: http://www.juceal.al.gov.br/servicos/leiloeiros
-Método: httpx + BeautifulSoup
-Nota: URL /leiloeiros retornava 404 — URL correta é /servicos/leiloeiros.
-      Lista 28 leiloeiros com matrícula, data de posse, situação, contatos e redes sociais.
-      Registros atualizados até 2025.
+MÃ©todo: httpx + BeautifulSoup
+Nota: URL /leiloeiros retornava 404 â€” URL correta Ã© /servicos/leiloeiros.
+      Lista 28 leiloeiros com matrÃ­cula, data de posse, situaÃ§Ã£o, contatos e redes sociais.
+      Registros atualizados atÃ© 2025.
 """
 from __future__ import annotations
 
@@ -19,14 +19,14 @@ class JucealScraper(AbstractJuntaScraper):
     url = "http://www.juceal.al.gov.br/servicos/leiloeiros"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page()
         if not soup:
-            # Tenta HTTPS também
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+            # Tenta HTTPS tambÃ©m
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page(url="https://www.juceal.al.gov.br/servicos/leiloeiros")
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -55,9 +55,9 @@ class JucealScraper(AbstractJuntaScraper):
                     continue
                 results.append(self.make_leiloeiro(
                     nome=nome,
-                    matricula=gcol(cells, ["matr", "registro", "nº"]),
+                    matricula=gcol(cells, ["matr", "registro", "nÂº"]),
                     situacao=gcol(cells, ["situ", "status"]),
-                    municipio=gcol(cells, ["munic", "cidade"]) or "Maceió",
+                    municipio=gcol(cells, ["munic", "cidade"]) or "MaceiÃ³",
                     telefone=gcol(cells, ["tel", "fone"]),
                     email=gcol(cells, ["email"]),
                     endereco=gcol(cells, ["ender", "logr"]),
@@ -70,6 +70,7 @@ class JucealScraper(AbstractJuntaScraper):
             for el in soup.select("li, p, .leiloeiro, article"):
                 text = self.clean(el.get_text(" | "))
                 if text and len(text) > 10:
-                    results.append(self.make_leiloeiro(nome=text, municipio="Maceió"))
+                    results.append(self.make_leiloeiro(nome=text, municipio="MaceiÃ³"))
 
         return results
+

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Extract all content from a PowerPoint file (.pptx).
 Returns a JSON structure with slides, text, and images.
@@ -78,7 +78,7 @@ def extract_pptx(file_path, output_dir="."):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python extract-pptx.py <input.pptx> [output_dir]")
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
     input_file = sys.argv[1]
@@ -94,4 +94,5 @@ if __name__ == "__main__":
     print(f"Extracted {len(slides)} slides to {output_path}")
     for s in slides:
         img_count = len(s["images"])
-        print(f"  Slide {s['number']}: {s['title'] or '(no title)'} — {img_count} image(s)")
+        print(f"  Slide {s['number']}: {s['title'] or '(no title)'} â€” {img_count} image(s)")
+

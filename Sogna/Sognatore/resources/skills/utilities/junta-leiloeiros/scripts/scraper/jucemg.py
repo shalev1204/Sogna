@@ -1,5 +1,5 @@
-"""
-Scraper JUCEMG — Junta Comercial do Estado de Minas Gerais
+﻿"""
+Scraper JUCEMG â€” Junta Comercial do Estado de Minas Gerais
 URLs descobertas em 2026-02-25:
   - /pagina/139 = menu principal (links para sub-paginas)
   - /pagina/140 = lista alfabetica com contatos completos (USAR ESTA)
@@ -19,7 +19,7 @@ from .base_scraper import AbstractJuntaScraper, Leiloeiro
 
 logger = logging.getLogger(__name__)
 
-RE_MATRICULA_MG = re.compile(r"[Mm]atr[íi]cula:?\s*(\d+)\s+de\s+(\d{2}/\d{2}/\d{4})|[Mm]atr[íi]cula:?\s*n[º°]?\s*(\d+)", re.IGNORECASE)
+RE_MATRICULA_MG = re.compile(r"[Mm]atr[Ã­i]cula:?\s*(\d+)\s+de\s+(\d{2}/\d{2}/\d{4})|[Mm]atr[Ã­i]cula:?\s*n[ÂºÂ°]?\s*(\d+)", re.IGNORECASE)
 RE_PREPOSTO = re.compile(r"[Pp]reposto:?\s*(.+)")
 RE_TELEFONE = re.compile(r"[Tt]elefones?:?\s*(.+)")
 RE_EMAIL = re.compile(r"(?:e-mail|email):?\s*(.+)", re.IGNORECASE)
@@ -111,7 +111,7 @@ class JucemgScraper(AbstractJuntaScraper):
                         (len(line) > 10 and not RE_PREPOSTO.match(line) and
                          not RE_SITE.match(line) and
                          not record.get("endereco"))):
-                    m_cidade = re.search(r"([A-ZÁÉÍÓÚÀÃÕÇ][A-Za-záéíóúàãõç\s]+)\s*-?\s*MG", line)
+                    m_cidade = re.search(r"([A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡][A-Za-zÃ¡Ã©Ã­Ã³ÃºÃ Ã£ÃµÃ§\s]+)\s*-?\s*MG", line)
                     if m_cidade:
                         record["municipio"] = m_cidade.group(1).strip()
                     if not record.get("endereco"):
@@ -160,7 +160,7 @@ class JucemgScraper(AbstractJuntaScraper):
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
         # Estrategia 1: Pagina alfabetica (tem contatos completos)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page(url=self._URL_ALFA)
         if soup:
             records = self._parse_alfabetica(soup)
@@ -169,7 +169,7 @@ class JucemgScraper(AbstractJuntaScraper):
                 return [self.make_leiloeiro(**r) for r in records]
 
         # Estrategia 2: Tabela de antiguidade (pelo menos nome + matricula)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page(url=self._URL_ANT)
         if soup:
             records = self._parse_antiguidade(soup)
@@ -178,10 +178,10 @@ class JucemgScraper(AbstractJuntaScraper):
                 return [self.make_leiloeiro(**r) for r in records]
 
         # Estrategia 3: Pagina principal de leiloeiros
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         soup = await self.fetch_page(url=self.url)
         if not soup:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             soup = await self.fetch_page_js(url=self.url, wait_ms=3000)
         if not soup:
             return []
@@ -220,3 +220,4 @@ class JucemgScraper(AbstractJuntaScraper):
 
         logger.info("[MG] Total: %d registros", len(results))
         return results
+

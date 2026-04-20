@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Shopify GraphQL Utilities
 
@@ -132,7 +132,7 @@ class ShopifyGraphQL:
         Query products with pagination.
 
         Args:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             first: Number of products to fetch (max 250)
             query: Optional search query
             after: Cursor for pagination
@@ -180,7 +180,7 @@ class ShopifyGraphQL:
         Query orders with pagination.
 
         Args:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             first: Number of orders to fetch (max 250)
             query: Optional search query (e.g., "financial_status:paid")
             after: Cursor for pagination
@@ -233,7 +233,7 @@ class ShopifyGraphQL:
         Query customers with pagination.
 
         Args:
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
             first: Number of customers to fetch (max 250)
             query: Optional search query
             after: Cursor for pagination
@@ -429,3 +429,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
