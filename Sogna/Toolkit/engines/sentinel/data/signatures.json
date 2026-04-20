@@ -31450,8 +31450,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/DockerSandbox.ts": {
-    "hash": "4bcab209302febd05ff2b6ca479dc9c0b53fb83561f6415d2c063b96beea5464",
-    "timestamp": "2026-04-20T20:32:42.221Z",
+    "hash": "0703adb841a5af453f7f350d20791f118c661415e2cc4b597a5e392ef6a84909",
+    "timestamp": "2026-04-20T20:41:36.129Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Doctor.ts": {
@@ -31475,8 +31475,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Orchestrator.ts": {
-    "hash": "2275b78f35120eba8fe06fb908fabaf0ae9e31e7d287504d1f4fb3262eae6e5c",
-    "timestamp": "2026-04-20T20:32:42.221Z",
+    "hash": "1eaf95596a72dae2cb03dbab07cc53a0f193899c270c6c8393b09c638117df2d",
+    "timestamp": "2026-04-20T20:41:36.129Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/ProjectManager.ts": {
