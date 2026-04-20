@@ -2069,11 +2069,6 @@
     "timestamp": "2026-04-19T13:49:10.452Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/data_ai/neon-postgres/SKILL.md": {
-    "hash": "51a843f46e023db5aa0907137acbd639816d1ac7c173b89b5e417f93e2597b4f",
-    "timestamp": "2026-04-19T13:49:10.452Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sogna/Sognatore/resources/skills/data_ai/new-rails-project/SKILL.md": {
     "hash": "c743d6e4ce866e8599b4c54206a0913b5b7772df34a1ca9250ee3c0d8d3a2493",
     "timestamp": "2026-04-19T13:49:10.452Z",
@@ -3771,11 +3766,6 @@
   },
   "Sogna/Sognatore/resources/skills/engineering/azure-monitor-query-java/SKILL.md": {
     "hash": "08a6b4a12f7e1ebd1171c98200beeb2865ab8118ced83629989c7c35de57b857",
-    "timestamp": "2026-04-19T13:49:10.513Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/resources/skills/engineering/azure-postgres-ts/SKILL.md": {
-    "hash": "09a045072fd0562a852c8139d986d42074a32071f6655f02245422d65cbc2f61",
     "timestamp": "2026-04-19T13:49:10.513Z",
     "signedBy": "Sentinel-Apex"
   },
@@ -8189,11 +8179,6 @@
     "timestamp": "2026-04-19T13:49:10.687Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/operations_security/k8s-manifest-generator/resources/implementation-playbook.md": {
-    "hash": "2eb9958b048cdb19c9abecc05cad17f456be502baa5db8fe1bc65b9e009c969a",
-    "timestamp": "2026-04-19T13:49:10.688Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sogna/Sognatore/resources/skills/operations_security/k8s-security-policies/SKILL.md": {
     "hash": "2a19625916aac6a19c571ee1e5a44666a9e497174ab90bc8fc76fa3e3b7fffb7",
     "timestamp": "2026-04-19T13:49:10.688Z",
@@ -8641,11 +8626,6 @@
   },
   "Sogna/Sognatore/resources/skills/operations_security/security/aws-compliance-checker/SKILL.md": {
     "hash": "ab66f4e0d830a317adda09ef3fed2477c5d1279b5bacdbae1fc3fd53d1291335",
-    "timestamp": "2026-04-19T13:49:10.708Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/resources/skills/operations_security/security/aws-iam-best-practices/SKILL.md": {
-    "hash": "057cd96d8a13dad170d5e676fec01b92557c131bebf1cd66812991b45674cb58",
     "timestamp": "2026-04-19T13:49:10.708Z",
     "signedBy": "Sentinel-Apex"
   },
@@ -9494,11 +9474,6 @@
     "timestamp": "2026-04-19T13:49:10.737Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/clarity-gate/SKILL.md": {
-    "hash": "090f5c69464505e12d79a21c31d3288ba5a87dd12a19b2a2539596eda88d2ecb",
-    "timestamp": "2026-04-19T13:49:10.737Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sogna/Sognatore/resources/skills/utilities/clarvia-aeo-check/SKILL.md": {
     "hash": "c8209756e3c640dd3e23aa582c97bb7ea9f996e9e30a12311d4129839fa22ba5",
     "timestamp": "2026-04-19T13:49:10.738Z",
@@ -9541,16 +9516,6 @@
   },
   "Sogna/Sognatore/resources/skills/utilities/comfyui-gateway/SKILL.md": {
     "hash": "511cc2a274ab5f323a3bb6f92228a4ed029455ab2cfaf26086348739277d7f28",
-    "timestamp": "2026-04-19T13:49:10.739Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/resources/skills/utilities/comfyui-gateway/references/integration.md": {
-    "hash": "9734c23e7b02e99da76feced03097ad6be2381486e50d68b7a57ef7cb599a1df",
-    "timestamp": "2026-04-19T13:49:10.739Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/resources/skills/utilities/comfyui-gateway/references/troubleshooting.md": {
-    "hash": "ac24e116f3d2a4f26ab04428b627cedf6e70ee6076aacdeda9a71a66d04a0c5c",
     "timestamp": "2026-04-19T13:49:10.739Z",
     "signedBy": "Sentinel-Apex"
   },
@@ -16519,16 +16484,6 @@
     "timestamp": "2026-04-19T13:49:10.996Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/core/security/HoneypotManager.ts": {
-    "hash": "e3e67f7ba60526f4bb31bdb5f4edeb29ea34da696c4515bae9165a517c063a3c",
-    "timestamp": "2026-04-19T13:49:10.996Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/src/core/security/ImmuneSystem.ts": {
-    "hash": "300230163c4b5f0bb17f68dfc78fb9806c424d81d719a56f86f7cf6e254fd898",
-    "timestamp": "2026-04-19T13:49:10.997Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sogna/Sognatore/src/core/tasks/BackgroundTaskManager.ts": {
     "hash": "375641c4e92efb588ef9f8ca5fdc671bc663d504b7d61280ecd5939598757670",
     "timestamp": "2026-04-19T13:49:10.997Z",
@@ -16822,36 +16777,6 @@
   "Sogna/Sognatore/src/plugins/schemas/quality_gate.json": {
     "hash": "a497b560a114b0b66a47f9c9ecd5e66772fa2ba147dae63a9f9b95cba0843bec",
     "timestamp": "2026-04-19T13:49:11.006Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/src/policies/ApprovalGateManager.ts": {
-    "hash": "65bf2a26e5ba3a49b610a74e9d2ddb3cb3500bb70d36bcf6e2fef856fc0c3c1a",
-    "timestamp": "2026-04-19T13:49:11.007Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/src/policies/BashShield.ts": {
-    "hash": "83f9dc9e444585a4f2dd1f839e478dd39912f840e6ba2f80abaff70834184c85",
-    "timestamp": "2026-04-19T13:49:11.007Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/src/policies/CostController.ts": {
-    "hash": "288f3099b4c023e2b8c88e3e42415ff5377f90eb6362eac7e1f5e77dffdc95d0",
-    "timestamp": "2026-04-19T13:49:11.007Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/src/policies/PolicyCheck.ts": {
-    "hash": "d32a242c4bd72b386ecbb0229b4e7625bda4ae3330dcbecf914104c1bff19ad3",
-    "timestamp": "2026-04-19T13:49:11.007Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/src/policies/PolicyEngine.ts": {
-    "hash": "b66db4f8d0821df96bdd18b78ac62396b1a14e3b7366f1011e7707cd4f8146fa",
-    "timestamp": "2026-04-19T13:49:11.008Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/Sognatore/src/policies/PolicyTypes.ts": {
-    "hash": "f5c48e8d21d1090ee2a1c193577e0ab6c8e6425ba4c5e0563f18144ea9c6040a",
-    "timestamp": "2026-04-19T13:49:11.008Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/policies/index.ts": {
@@ -18359,11 +18284,6 @@
     "timestamp": "2026-04-19T13:49:11.059Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Toolkit/scratch/cleanup-bridge.js": {
-    "hash": "65da34e58f03d570d1b3404121ea872f3ee9780ecf598f8fd03348d431ac5d6a",
-    "timestamp": "2026-04-19T13:49:11.059Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sogna/Toolkit/scripts/activate_sognatore.py": {
     "hash": "5fd651a408f160da7a26c436d56809f6e815f9b6f7dfcd03336daf052afa0f32",
     "timestamp": "2026-04-19T13:49:11.059Z",
@@ -18669,39 +18589,9 @@
     "timestamp": "2026-04-19T13:49:11.068Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/scratch/check-osv.js": {
-    "hash": "c51729ac65b1e44a2de51d765dcaadcb46cd961448f1279d6c17195b1e1bcd30",
-    "timestamp": "2026-04-19T13:49:11.068Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/scratch/deploy_honeypots.js": {
-    "hash": "e6dcda169c459d3453c5caed68617e11b59360e2627bbdff99c9161bf786d49d",
-    "timestamp": "2026-04-19T13:49:11.068Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/scratch/memory_diag.ts": {
-    "hash": "b29df1bd0b799d78fc3e5aa08d271bb63f3f114d8ca73f1577615e270d728857",
-    "timestamp": "2026-04-19T13:49:11.068Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/scratch/test_executive.ts": {
-    "hash": "77ca09a57d77af01de919845576bf9125843cb6ab5cde0a4001c81d7a7fdb8c2",
-    "timestamp": "2026-04-19T13:49:11.069Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sogna/scratch/test_policy_executive.ts": {
-    "hash": "337ae9dbb85fc70885746499e5ca9c3104911149c375836571bf9889e2280355",
-    "timestamp": "2026-04-19T13:49:11.069Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sogna/turbo.json": {
     "hash": "da73beaa885dfbae6daa4ef9c8b14484d8497b739b9e48f821c576c4931da52b",
     "timestamp": "2026-04-19T13:49:11.069Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sognatore/src/core/security/SecurityHub.ts": {
-    "hash": "6e36e0522f886a49c4649e0bca0ca72002b2727b594c9c3ae462a40482698bd8",
-    "timestamp": "2026-04-19T14:00:15.363Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/README.md": {
@@ -20464,11 +20354,6 @@
     "timestamp": "2026-04-20T21:16:48.581Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/data_ai/neon-postgres/SKILL.md": {
-    "hash": "51a843f46e023db5aa0907137acbd639816d1ac7c173b89b5e417f93e2597b4f",
-    "timestamp": "2026-04-20T20:32:41.760Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sognatore/resources/skills/data_ai/new-rails-project/SKILL.md": {
     "hash": "c743d6e4ce866e8599b4c54206a0913b5b7772df34a1ca9250ee3c0d8d3a2493",
     "timestamp": "2026-04-20T21:16:48.581Z",
@@ -21942,11 +21827,6 @@
   "Sognatore/resources/skills/engineering/azure-monitor-query-java/SKILL.md": {
     "hash": "08a6b4a12f7e1ebd1171c98200beeb2865ab8118ced83629989c7c35de57b857",
     "timestamp": "2026-04-20T21:16:48.638Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sognatore/resources/skills/engineering/azure-postgres-ts/SKILL.md": {
-    "hash": "09a045072fd0562a852c8139d986d42074a32071f6655f02245422d65cbc2f61",
-    "timestamp": "2026-04-20T20:32:41.812Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/resources/skills/engineering/azure-search-documents-dotnet/SKILL.md": {
@@ -26204,11 +26084,6 @@
     "timestamp": "2026-04-20T21:16:48.784Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/operations_security/k8s-manifest-generator/resources/implementation-playbook.md": {
-    "hash": "2eb9958b048cdb19c9abecc05cad17f456be502baa5db8fe1bc65b9e009c969a",
-    "timestamp": "2026-04-20T20:32:41.963Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sognatore/resources/skills/operations_security/k8s-security-policies/SKILL.md": {
     "hash": "2a19625916aac6a19c571ee1e5a44666a9e497174ab90bc8fc76fa3e3b7fffb7",
     "timestamp": "2026-04-20T21:16:48.784Z",
@@ -26552,11 +26427,6 @@
   "Sognatore/resources/skills/operations_security/security/aws-compliance-checker/SKILL.md": {
     "hash": "ab66f4e0d830a317adda09ef3fed2477c5d1279b5bacdbae1fc3fd53d1291335",
     "timestamp": "2026-04-20T21:16:48.798Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sognatore/resources/skills/operations_security/security/aws-iam-best-practices/SKILL.md": {
-    "hash": "057cd96d8a13dad170d5e676fec01b92557c131bebf1cd66812991b45674cb58",
-    "timestamp": "2026-04-20T20:32:41.978Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/resources/skills/operations_security/security/aws-secrets-rotation/SKILL.md": {
@@ -27324,11 +27194,6 @@
     "timestamp": "2026-04-20T21:16:48.825Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/clarity-gate/SKILL.md": {
-    "hash": "090f5c69464505e12d79a21c31d3288ba5a87dd12a19b2a2539596eda88d2ecb",
-    "timestamp": "2026-04-20T20:32:42.003Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Sognatore/resources/skills/utilities/clarvia-aeo-check/SKILL.md": {
     "hash": "c8209756e3c640dd3e23aa582c97bb7ea9f996e9e30a12311d4129839fa22ba5",
     "timestamp": "2026-04-20T21:16:48.826Z",
@@ -27372,16 +27237,6 @@
   "Sognatore/resources/skills/utilities/comfyui-gateway/SKILL.md": {
     "hash": "6cd3397309fbd0ceec10344ab4c0a4bf57677078a47d2b7dca02cfd896c57db9",
     "timestamp": "2026-04-20T21:16:48.827Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sognatore/resources/skills/utilities/comfyui-gateway/references/integration.md": {
-    "hash": "a6a700f2aa4a2563ff49ba773407d3332d9e613879e268185c79d93d1e82ed25",
-    "timestamp": "2026-04-20T20:32:42.005Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "Sognatore/resources/skills/utilities/comfyui-gateway/references/troubleshooting.md": {
-    "hash": "ac24e116f3d2a4f26ab04428b627cedf6e70ee6076aacdeda9a71a66d04a0c5c",
-    "timestamp": "2026-04-20T20:32:42.005Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/resources/skills/utilities/commit/SKILL.md": {
@@ -33224,11 +33079,6 @@
     "timestamp": "2026-04-19T15:09:41.730Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Toolkit/scratch/cleanup-bridge.js": {
-    "hash": "65da34e58f03d570d1b3404121ea872f3ee9780ecf598f8fd03348d431ac5d6a",
-    "timestamp": "2026-04-19T15:09:41.730Z",
-    "signedBy": "Sentinel-Apex"
-  },
   "Toolkit/scripts/cleanup.js": {
     "hash": "3335ad681df479c4b4a22d408c1dc8551586bcb1fb4eae37329f04e228339c90",
     "timestamp": "2026-04-19T15:09:41.730Z",
@@ -33451,31 +33301,6 @@
   },
   "package.json": {
     "hash": "0b6d46fcbe3141d1d7da29cb3d2951c0f53856a607c6470cd82eaaad60e692dd",
-    "timestamp": "2026-04-19T15:09:44.720Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "scratch/check-osv.js": {
-    "hash": "c51729ac65b1e44a2de51d765dcaadcb46cd961448f1279d6c17195b1e1bcd30",
-    "timestamp": "2026-04-19T15:15:14.471Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "scratch/deploy_honeypots.js": {
-    "hash": "e6dcda169c459d3453c5caed68617e11b59360e2627bbdff99c9161bf786d49d",
-    "timestamp": "2026-04-19T15:09:44.720Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "scratch/memory_diag.ts": {
-    "hash": "b29df1bd0b799d78fc3e5aa08d271bb63f3f114d8ca73f1577615e270d728857",
-    "timestamp": "2026-04-19T15:09:44.720Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "scratch/test_executive.ts": {
-    "hash": "77ca09a57d77af01de919845576bf9125843cb6ab5cde0a4001c81d7a7fdb8c2",
-    "timestamp": "2026-04-19T15:09:44.720Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "scratch/test_policy_executive.ts": {
-    "hash": "337ae9dbb85fc70885746499e5ca9c3104911149c375836571bf9889e2280355",
     "timestamp": "2026-04-19T15:09:44.720Z",
     "signedBy": "Sentinel-Apex"
   },
@@ -37322,11 +37147,6 @@
   "memory/intelligence/index.json": {
     "hash": "5f55da07ce125a9d550c773fe9a49fdf1cc0238aeed32a0a2d3820c8664e1922",
     "timestamp": "2026-04-20T21:16:49.027Z",
-    "signedBy": "Sentinel-Apex"
-  },
-  "memory/security/id_rsa": {
-    "hash": "9b11c5276c2ad44be9c11ee16e6ddfaf4870d3f469a98c60ac2248c6e944490f",
-    "timestamp": "2026-04-20T20:58:14.077Z",
     "signedBy": "Sentinel-Apex"
   },
   "memory/security/learned_threats.json": {

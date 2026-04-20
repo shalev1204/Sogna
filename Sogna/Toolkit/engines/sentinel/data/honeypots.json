@@ -1,14 +1,17 @@
 {
-  "version": "1.0.0",
-  "updatedAt": "2026-04-19T14:30:00Z",
+  "version": "1.1.0",
   "decoys": [
     ".env.production",
-    "Sognatore/memory/security/id_rsa",
-    "Toolkit/engines/Sentinel/data/signatures.json.bak",
-    "resources/config/secrets.json"
+    "resources/config/secrets.json",
+    "memory/security/id_rsa",
+    "Sognatore/src/core/auth_vault.ts",
+    "toolkit/scripts/db_backup.sh",
+    "memory/security/master_key.bak",
+    "Sognatore/src/core/Sentinel-Sognatore/access_keys.json",
+    "toolkit/engines/Predatore/credentials/root_db_pass"
   ],
-  "policy": {
-    "immediateNeutralize": true,
-    "recoveryPriority": "CRITICAL"
+  "monitoring": {
+    "alert_level": "CRITICAL",
+    "protocol": "RADICAL_NEUTRALIZATION"
   }
 }

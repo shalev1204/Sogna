@@ -1,0 +1,92 @@
+{
+  "version": "1.0.0",
+  "apex_sovereignty": {
+    "trusted_scopes": [
+      "@sogna",
+      "@predatore",
+      "@antigravity"
+    ],
+    "trusted_paths": [
+      "Sognatore/",
+      "toolkit/",
+      "memory/",
+      "README.md",
+      ".sognarc.json"
+    ],
+    "domain_whitelist": [
+      "api.osv.dev",
+      "google.com",
+      "googleapis.com",
+      "generativelanguage.googleapis.com",
+      "anthropic.com",
+      "api.anthropic.com",
+      "openai.com",
+      "api.openai.com",
+      "api.deepseek.com",
+      "api.moonshot.cn",
+      "openrouter.ai",
+      "microsoft.com",
+      "sogna.js",
+      "localhost",
+      "127.0.0.1"
+    ],
+    "allowed_target_names": [
+      "LINEAR_API_URL",
+      "SOGNATORE_CORE",
+      "GITHUB_API_URL",
+      "JIRA_API_URL",
+      "this._endpoint",
+      "this._webhookUrl",
+      "this.endpoint",
+      "endpoint",
+      "url",
+      "options",
+      "params",
+      "config",
+      "hostname",
+      "API_BASE",
+      "BACKEND_URL",
+      "BASE_URL",
+      "this.baseUrl",
+      "VITE_",
+      "env",
+      "process",
+      "Map",
+      "Set",
+      "Cache",
+      "Buffer",
+      "user",
+      "settings",
+      "auth",
+      "token",
+      "key",
+      "secret",
+      "password"
+    ],
+    "known_net_clients": [
+      "axios",
+      "fetch",
+      "got",
+      "request",
+      "https",
+      "http",
+      "superagent",
+      "rest",
+      "client"
+    ],
+    "bash_shield": {
+      "write_commands": [
+        "cp", "mv", "rm", "mkdir", "rmdir", "touch", "chmod", "chown", "chgrp", "ln", "install", "tee", "truncate", "shred", "mkfifo", "mknod", "dd"
+      ],
+      "read_only_commands": [
+        "ls", "cat", "head", "tail", "less", "more", "wc", "sort", "uniq", "grep", "egrep", "fgrep", "find", "which", "whereis", "whatis", "man", "info", "file", "stat", "du", "df", "free", "uptime", "uname", "hostname", "whoami", "id", "groups", "env", "printenv", "echo", "printf", "date", "cal", "bc", "expr", "test", "true", "false", "pwd", "tree", "diff", "cmp", "md5sum", "sha256sum", "sha1sum", "xxd", "od", "hexdump", "strings", "readlink", "realpath", "basename", "dirname", "seq", "yes", "tput", "column", "jq", "yq", "xargs", "tr", "cut", "paste", "awk", "sed"
+      ],
+      "destructive_patterns": [
+        ["rm -rf", "Borrado recursivo forzado"],
+        ["mkfs", "Formateo de disco"],
+        ["dd if=/dev/zero", "Sobrescritura de disco"],
+        [":(){ :|:& };:", "Bomba Fork"]
+      ]
+    }
+  }
+}

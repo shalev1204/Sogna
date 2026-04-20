@@ -19,7 +19,8 @@ const ROOT_DIR = process.cwd();
 const INTEL_REPORT = path.join(__dirname, '../reports/THREAD_INTEL.md');
 const CONFIG_FEED = path.join(__dirname, '../data/risk_dna_feed.json');
 const SIGNATURE_DB = path.join(__dirname, '../data/signatures.json');
-const VERSION = '1.4.0-Apex';
+const SOBERANIA_DB = path.join(__dirname, '../data/soberania.json');
+const VERSION = '1.5.0-Apex';
 
 const MAX_LOG_EVENTS = 100; // Apex Rotation Limit
 
@@ -47,6 +48,8 @@ const vetoThreshold = process.env.SENTINEL_STRICT !== 'false';
 let report = [];
 let fixesApplied = 0;
 let signatures = {};
+let signaturesUpdated = false;
+let fileHashes = {}; // Cache for optimization
 
 // Cargar base de datos de firmas
 if (fs.existsSync(SIGNATURE_DB)) {
@@ -54,23 +57,31 @@ if (fs.existsSync(SIGNATURE_DB)) {
 }
 
 function saveSignatures() {
+    if (!signaturesUpdated) return;
     fs.writeFileSync(SIGNATURE_DB, JSON.stringify(signatures, null, 2));
 }
 
-function signFile(filePath) {
+function signFile(filePath, cachedHash = null) {
     try {
         const absolutePath = path.isAbsolute(filePath) ? filePath : path.join(ROOT_DIR, filePath);
-        if (!fs.existsSync(absolutePath)) return false;
         
-        const content = fs.readFileSync(absolutePath);
-        const hash = crypto.createHash('sha256').update(content).digest('hex');
+        let hash = cachedHash;
+        if (!hash) {
+            if (!fs.existsSync(absolutePath)) return false;
+            const content = fs.readFileSync(absolutePath);
+            hash = crypto.createHash('sha256').update(content).digest('hex');
+        }
         
         const relativePath = path.relative(ROOT_DIR, absolutePath).replace(/\\/g, '/');
+        const existing = signatures[relativePath];
+        if (existing && existing.hash === hash) return true; // No update needed
+
         signatures[relativePath] = {
             hash,
             timestamp: new Date().toISOString(),
             signedBy: 'Sentinel-Apex'
         };
+        signaturesUpdated = true;
         return true;
     } catch (e) {
         console.error(`[SENTINEL] Error al firmar ${filePath}: ${e.message}`);
@@ -94,82 +105,33 @@ if (scanAll) {
     }
 }
 
-// --- Políticas de Soberanía ---
-const TRUSTED_SCOPES = ['@sogna', '@predatore', '@antigravity'];
-const ALLOWED_VULNS = [
-    'GHSA-48c2-rrv3-qjmp', // yaml stack overflow (acceptable risk in internal configs)
-    'GHSA-w87r-vg9q-crqm'  // zx symlink (not applicable in our server environment)
-];
-const TRUSTED_PATHS = [
-    'Sognatore/',
-    'toolkit/',
-    'memory/',
-    'README.md',
-    '.sognarc.json'
-];
-const DOMAIN_WHITELIST = [
-    'api.osv.dev', 
-    'google.com', 
-    'googleapis.com', 
-    'generativelanguage.googleapis.com', // Gemini
-    'anthropic.com', 
-    'api.anthropic.com',                 // Claude
-    'openai.com', 
-    'api.openai.com',                   // OpenAI
-    'api.deepseek.com',                 // DeepSeek
-    'api.moonshot.cn',                   // Moonshot (Kimi)
-    'openrouter.ai',                    // OpenRouter
-    'microsoft.com',                    // Teams
-    'sogna.js', 
-    'localhost',
-    '127.0.0.1'
-];
-
-const HONEYPOT_DATA_PATH = path.join(__dirname, '../data/honeypots.json');
-let HONEYPOTS = [
-    '.env.production',
-    'resources/config/secrets.json',
-    'memory/security/id_rsa'
-];
+// --- Carga de Soberanía Apex ---
+let SOBERANIA = { 
+    apex_sovereignty: { 
+        trusted_scopes: [], trusted_paths: [], domain_whitelist: [], 
+        allowed_target_names: [], known_net_clients: [], 
+        bash_shield: { write_commands: [], read_only_commands: [], destructive_patterns: [] } 
+    } 
+};
 
 try {
-    if (fs.existsSync(HONEYPOT_DATA_PATH)) {
-        const hData = JSON.parse(fs.readFileSync(HONEYPOT_DATA_PATH, 'utf-8'));
-        HONEYPOTS = hData.decoys || HONEYPOTS;
+    if (fs.existsSync(SOBERANIA_DB)) {
+        SOBERANIA = JSON.parse(fs.readFileSync(SOBERANIA_DB, 'utf-8'));
     }
 } catch (e) {
-    console.warn(`[SENTINEL] No se pudo cargar Honeypots centralizados: ${e.message}`);
+    console.warn(`[SENTINEL] Error crítico cargando Soberanía Apex: ${e.message}`);
 }
 
-// Variable/Constant names that are explicitly allowed as URL targets
-const ALLOWED_TARGET_NAMES = [
-    'LINEAR_API_URL',
-    'SOGNATORE_CORE',
-    'GITHUB_API_URL',
-    'JIRA_API_URL',
-    'this._endpoint',
-    'this._webhookUrl',
-    'this.endpoint',
-    'endpoint',
-    'url',        // Common in reporters
-    'options',    // Standard Node.js http.request(options)
-    'params',     // Standard for query params
-    'config',     // Standard for config objects
-    'hostname',   // Standard for DNS/HTTP lookups
-    'API_BASE',   // Custom API base for frontend routes
-    'BACKEND_URL',// Standard backend reference
-    'BASE_URL',    // Standard base URL
-    'this.baseUrl',  // Sognatore Provider base URL
-    'VITE_',
-    'env', 'process', 'Map', 'Set', 'Cache', 'Buffer', 'config', 'user', 'settings',
-    'auth', 'token', 'key', 'secret', 'password', 'url', 'host', 'port'
-];
+const APEX = SOBERANIA.apex_sovereignty;
+const TRUSTED_SCOPES = APEX.trusted_scopes;
+const TRUSTED_PATHS = APEX.trusted_paths;
+const DOMAIN_WHITELIST = APEX.domain_whitelist;
+const ALLOWED_TARGET_NAMES = APEX.allowed_target_names;
+const KNOWN_NET_CLIENTS = APEX.known_net_clients;
 
-const KNOWN_NET_CLIENTS = ['axios', 'fetch', 'got', 'request', 'https', 'http', 'superagent', 'rest', 'client'];
-
-// --- BashShield: Intent & Classification (Heuristic Port) ---
-const SHIELD_WRITE_COMMANDS = ['cp', 'mv', 'rm', 'mkdir', 'rmdir', 'touch', 'chmod', 'chown', 'chgrp', 'ln', 'install', 'tee', 'truncate', 'shred', 'mkfifo', 'mknod', 'dd'];
-const SHIELD_READ_ONLY_COMMANDS = ['ls', 'cat', 'head', 'tail', 'less', 'more', 'wc', 'sort', 'uniq', 'grep', 'egrep', 'fgrep', 'find', 'which', 'whereis', 'whatis', 'man', 'info', 'file', 'stat', 'du', 'df', 'free', 'uptime', 'uname', 'hostname', 'whoami', 'id', 'groups', 'env', 'printenv', 'echo', 'printf', 'date', 'cal', 'bc', 'expr', 'test', 'true', 'false', 'pwd', 'tree', 'diff', 'cmp', 'md5sum', 'sha256sum', 'sha1sum', 'xxd', 'od', 'hexdump', 'strings', 'readlink', 'realpath', 'basename', 'dirname', 'seq', 'yes', 'tput', 'column', 'jq', 'yq', 'xargs', 'tr', 'cut', 'paste', 'awk', 'sed'];
+// --- BashShield: Intent & Classification ---
+const SHIELD_WRITE_COMMANDS = APEX.bash_shield.write_commands;
+const SHIELD_READ_ONLY_COMMANDS = APEX.bash_shield.read_only_commands;
 
 function classifyBashCommand(cmdString) {
     const trimmed = cmdString.trim().replace(/['"`]/g, '');
@@ -179,6 +141,17 @@ function classifyBashCommand(cmdString) {
     if (SHIELD_WRITE_COMMANDS.includes(first)) return 'Write';
     if (['rm', 'shred', 'truncate'].includes(first)) return 'Destructive';
     return 'Unknown';
+}
+
+const HONEYPOT_DATA_PATH = path.join(__dirname, '../data/honeypots.json');
+let HONEYPOTS = [];
+try {
+    if (fs.existsSync(HONEYPOT_DATA_PATH)) {
+        const hData = JSON.parse(fs.readFileSync(HONEYPOT_DATA_PATH, 'utf-8'));
+        HONEYPOTS = hData.decoys || [];
+    }
+} catch (e) {
+    console.warn(`[SENTINEL] No se pudo cargar Honeypots centralizados: ${e.message}`);
 }
 
 let hasCritical = false;
@@ -326,6 +299,9 @@ function scanASTForBackdoors(filePath, content) {
         const taintVariables = new Set(); 
 
         function visit(node) {
+            // Optimization: Skip nodes that are unlikely to contain security issues (comments are still checked as text)
+            if (ts.isToken(node) && !ts.isStringLiteral(node)) return;
+
             // --- BYPASS TRACKING ---
             const fullText = node.getFullText(sourceFile);
             if (fullText.includes('@sentinel-ignore') || fullText.includes('@sogna-ignore')) {
@@ -431,7 +407,7 @@ function scanASTForBackdoors(filePath, content) {
                         const targetName = target.getText();
                         
                         // False Positive Protection: Only alert if it's a known net client
-                        const isNetClient = KNOWN_NET_CLIENTS.some(nc => targetName.toLowerCase().includes(nc));
+                        const isNetClient = KNOWN_NET_CLIENTS.some(nc => targetName.toLowerCase().includes(nc.toLowerCase()));
                         if (!isNetClient) return; // Skip Map, Set, generic objects
                         
                         const arg = node.arguments[0];
@@ -455,7 +431,7 @@ function scanASTForBackdoors(filePath, content) {
                         const intent = classifyBashCommand(cmd);
                         
                         // Heuristic: Check for destructive patterns in strings
-                        const DESTRUCTIVE_PATTERNS = [['rm -rf', 'Borrado recursivo forzado'], ['mkfs', 'Formateo de disco']];
+                        const DESTRUCTIVE_PATTERNS = APEX.bash_shield.destructive_patterns;
                         for (const dp of DESTRUCTIVE_PATTERNS) {
                             if (cmd.includes(dp[0])) {
                                 const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
@@ -662,7 +638,7 @@ async function scanSupplyChain(filePath) {
         
         console.log(`[SENTINEL] Auditando ${Object.keys(deps).length} librerías contra OSV...`);
         
-        for (const [name, ver] of Object.entries(deps)) {
+        const auditPromises = Object.entries(deps).map(async ([name, ver]) => {
             // Check Trusted Scopes
             if (name.startsWith('@') && TRUSTED_SCOPES.some(s => name.startsWith(s))) {
                 const cleanVer = ver.replace(/[\^~]/g, '');
@@ -675,12 +651,14 @@ async function scanSupplyChain(filePath) {
             let vulns = await queryOSV(name, cleanVer);
             
             // Filter out allowed vulnerabilities
-            vulns = vulns.filter(v => !ALLOWED_VULNS.includes(v.id));
+            vulns = vulns.filter(v => !(SOBERANIA.apex_sovereignty.allowed_vulns || []).includes(v.id));
 
             if (vulns.length > 0) {
                 addReport('CRITICAL', `LIBRERÍA INFECTADA/VULNERABLE: ${name}@${cleanVer} tiene ${vulns.length} vulnerabilidades reportadas en OSV.`, filePath, `Actualizar ${name} o buscar alternativa segura.`);
             }
-        }
+        });
+
+        await Promise.all(auditPromises);
     } catch (e) {}
 }
 
@@ -701,6 +679,8 @@ async function scanSupplyChain(filePath) {
 
         try {
             let content = fs.readFileSync(filePath, 'utf-8');
+            // Cache hash for the signing phase
+            fileHashes[fileLine] = crypto.createHash('sha256').update(content).digest('hex');
             
             if (isFixMode) {
                 applyFixes(filePath, content);
@@ -800,7 +780,7 @@ async function scanSupplyChain(filePath) {
     filesToAnalyze.forEach(file => {
         const hasCriticalEntry = pendingEvents.some(ev => ev.location === file && ev.level === 'CRITICAL');
         if (!hasCriticalEntry) {
-            if (signFile(file)) signedCount++;
+            if (signFile(file, fileHashes[file])) signedCount++;
         }
     });
 
