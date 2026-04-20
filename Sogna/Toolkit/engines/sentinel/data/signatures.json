@@ -31531,7 +31531,7 @@
   },
   "Sognatore/src/core/actions/ToolRegistry.ts": {
     "hash": "481edfde74217e368f603de1914cff7bd656f20387daac85b395ce9625c10de7",
-    "timestamp": "2026-04-20T21:16:49.016Z",
+    "timestamp": "2026-04-20T21:18:10.593Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/agents/Agent.ts": {
@@ -31606,12 +31606,12 @@
   },
   "Sognatore/src/core/memory/Chronicler.ts": {
     "hash": "501414bd88dc92c078a3d2f83e023ae768862cd06cde3b019521a57ca3fa5416",
-    "timestamp": "2026-04-20T21:16:49.018Z",
+    "timestamp": "2026-04-20T21:18:10.593Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/MemoryHub.ts": {
     "hash": "9ce91aadb02a5ccf84d9022b92ff89edcb8ec16a875f3971b37aaf95cd5eddeb",
-    "timestamp": "2026-04-20T21:16:49.018Z",
+    "timestamp": "2026-04-20T21:18:10.593Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/tasks/BackgroundTaskManager.ts": {
@@ -32700,8 +32700,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/bin/sogna.js": {
-    "hash": "03f3526ac373e178815fe7b94613785e294a8f6df9762c138137d66d489e8716",
-    "timestamp": "2026-04-19T15:09:31.314Z",
+    "hash": "d9563b2d2bebe8b049e022d6347a6a4954023254225f5f80f1841f3b9a2b831d",
+    "timestamp": "2026-04-20T21:18:10.593Z",
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/bin/sognatore.js": {
@@ -33195,8 +33195,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/engines/sentinel/bin/sentinel-veto.js": {
-    "hash": "afaa0ed1d1c0e7bd924178e712b889500eb4324bece9a232a1b9344282a7bf20",
-    "timestamp": "2026-04-19T15:15:14.471Z",
+    "hash": "57a08c3a5d4357702da495c856939a7c3e07f7b50e6072557da45ef29c98cde1",
+    "timestamp": "2026-04-20T21:18:10.593Z",
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/engines/sentinel/package.json": {
@@ -33496,7 +33496,7 @@
   },
   "Sognatore/src/Sentinel-Sognatore/Hub.ts": {
     "hash": "35d70d4a941669bd346b9714fd02854098f24a7a53aef4ae2c88060beef8cdad",
-    "timestamp": "2026-04-20T21:16:49.013Z",
+    "timestamp": "2026-04-20T21:18:10.593Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/toolkit/engines/Sentinel/bin/sentinel-veto.js": {
