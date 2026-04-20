@@ -58851,3 +58851,15 @@
 	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:206
 	Solución : Justificar la excepción de seguridad en el comentario.
 
+
+### EVENTO (Sognatore Base): 2026-04-20T18:08:40.686Z
+[CRITICAL]	Intento de acceso a ruta de sistema bloqueado: /
+	Ubicación: Shield
+	Estado: ALIVE
+---
+
+### EVENTO (Sognatore Base): 2026-04-20T18:08:53.112Z
+[CRITICAL]	Intento de acceso a ruta de sistema bloqueado: /
+	Ubicación: Shield
+	Estado: ALIVE
+---

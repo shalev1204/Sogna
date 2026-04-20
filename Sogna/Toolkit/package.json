@@ -8,9 +8,11 @@
   "types": "index.d.ts",
   "dependencies": {
     "chalk": "catalog:",
+    "dotenv": "^16.4.5",
     "fs-extra": "^11.2.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/fs-extra": "^11.0.4"
   }
 }

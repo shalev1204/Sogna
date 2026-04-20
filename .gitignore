@@ -1,42 +1,90 @@
+# --- SOGNA MASTER GITIGNORE ---
+
+# OS / IDE
 .DS_Store
-
-# OS files
 *.DS_Store
-
-# Python virtualenv
-.venv/
-dashboard/.venv/
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # Node.js
 node_modules/
+**/node_modules/
+dist/
+**/dist/
+build/
+**/build/
+.next/
+**/.next/
+.turbo/
+**/.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 *.log
 *.tgz
-/package-lock.json
+package-lock.json
+
+# Rust
+target/
+**/target/
+**/*.pdb
+**/*.exe
+**/*.rlib
+**/*.rmeta
 
 # Python
 __pycache__/
-*.pyc
-*.pyo
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+**/env/
+**/venv/
+**/.venv/
+pip-log.txt
 .pytest_cache/
+**/.pytest_cache/
 
-# Build outputs
-dist/
-!web-app/dist/
-*.vsix
+# Operational State (Sognatore)
+.sognatore/
+**/.sognatore/
+intelligence/index.json
+**/intelligence/index.json
 
-# Local development (not tracked)
+# Sensitive
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+**/.env*
+
+# Sogna Specific Patterns
+*.sognatore_active
+temp/
+**/temp/
 the_app/
 wiki-repo/
 
-# Runtime state (regenerated each session)
-# Source hooks live in autonomy/hooks/ (tracked)
-.sognatore/
+# Consolidated Scratch (toolkit/tests/scratch)
+# We ignore the folder except for specific tracked diagnostic tools
+Sogna/toolkit/tests/scratch/*
+!Sogna/toolkit/tests/scratch/memory_diag.ts
+!Sogna/toolkit/tests/scratch/test_executive.ts
+!Sogna/toolkit/tests/scratch/test_policy_executive.ts
 
-# Runtime state in subdirectories
-dashboard-ui/.sognatore/
-vscode-extension/.sognatore/
+# Legacy Scratch cleanup rules (for transition)
+scratch/
+Sogna/scratch/
 
-# Test artifacts
+# Agent & Test artifacts
 **/test-results/
 .aider*
 .claude/
