@@ -862,6 +862,10 @@
 
 # 🛡️  SENTINEL THREAD INTEL (Apex Feed)
 
+# 🛡️  SENTINEL THREAD INTEL (Apex Feed)
+
+# 🛡️  SENTINEL THREAD INTEL (Apex Feed)
+
 ### EVENTO: 2026-04-19T13:49:10.351Z
 
 === SENTINEL REPORT ===
@@ -58850,4 +58854,16 @@
 [WARNING]	BYPASS DETECTADO: El archivo utiliza una directiva de ignorado de Sentinel sin justificación adecuada o en el núcleo.
 	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/Doctor.ts:206
 	Solución : Justificar la excepción de seguridad en el comentario.
+
+### EVENTO: 2026-04-20T20:15:34.747Z
+[WARNING]	[Soberanía Apex] EXPOSICIÓN DE SECRETO: Firma detectada vinculada a servicios externos o credenciales.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Toolkit/tests/scratch/update_signatures.js
+	Solución : Eliminar la cadena y usar EnvOracle.
+---
+
+### EVENTO: 2026-04-20T20:15:55.341Z
+[WARNING]	[Soberanía Apex] EXPOSICIÓN DE SECRETO: Firma detectada vinculada a servicios externos o credenciales.
+	Ubicación: C:/Users/carle/Desktop/Sogna/Sogna/Toolkit/tests/scratch/update_signatures.js
+	Solución : Eliminar la cadena y usar EnvOracle.
+---
 
