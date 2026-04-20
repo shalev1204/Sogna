@@ -1,0 +1,35 @@
+{
+  "uma_version": "1.0.0",
+  "layers": {
+    "identity": {
+      "weight": 1.0,
+      "files": [
+        "rules.md",
+        "SOGNA_CONTEXT.md",
+        "strategic_intent.md",
+        "user_profile.md"
+      ],
+      "description": "Core system behaviors and personality"
+    },
+    "immunological": {
+      "weight": 0.9,
+      "path": "security/vaccines",
+      "description": "Threat patterns and security history"
+    },
+    "episodic": {
+      "weight": 0.6,
+      "path": "intelligence",
+      "description": "Historical task fragments"
+    },
+    "operational": {
+      "weight": 0.4,
+      "path": "agent",
+      "description": "Active session context"
+    }
+  },
+  "synthesis": {
+    "target": "SOGNA_CONTEXT.md",
+    "trigger_count": 50,
+    "archive_after_days": 30
+  }
+}

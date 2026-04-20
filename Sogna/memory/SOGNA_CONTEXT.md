@@ -27,3 +27,12 @@ This file is the primary semantic memory for the Sogna Ecosystem. It contains te
 
 - [2026-04-18] **Sovereign Purge**: The term "Sovereign" is deprecated and removed from the entire ecosystem.
 - [2026-04-18] **SMS Initialization**: Sogna Memory System (SMS) established in `memory/`.
+- [2026-04-20] **UMA Optimization**: Unified Memory Architecture stabilized and hardened.
+
+## 5. Synthesized Intelligence (Loom)
+
+This section contains compressed knowledge extracted from episodic fragments.
+
+> [!NOTE]
+> No synthesized data yet. The Loom Synthesizer resides in `toolkit/scripts/memory_loom.py`.
+

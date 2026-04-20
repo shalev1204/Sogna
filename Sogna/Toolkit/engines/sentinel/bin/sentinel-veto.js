@@ -12,6 +12,7 @@ const ts = require('typescript');
 const https = require('https');
 const { spawnSync } = require('child_process');
 const crypto = require('crypto');
+const uma = require('../../../shared/uma_bridge.cjs');
 
 const ROOT_DIR = process.cwd();
 // ROOT_DIR is now dynamically resolved to the execution context (Sogna root)
@@ -83,9 +84,9 @@ if (scanAll) {
     console.log('[SENTINEL] Escaneando todo el proyecto Sogna...');
     try {
         const { execSync } = require('child_process');
-        const output = execSync('git ls-files "Sognatore/**" "toolkit/**"', { encoding: 'utf-8' });
+        const output = execSync('git ls-files "Sognatore/**" "toolkit/**" "memory/**"', { encoding: 'utf-8' });
         const allFiles = output.split('\n')
-            .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json')))
+            .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json') || f === 'memory/security/id_rsa'))
             .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini'));
         filesToAnalyze = [...new Set([...filesToAnalyze, ...allFiles])];
     } catch (err) {
@@ -183,13 +184,16 @@ function classifyBashCommand(cmdString) {
 let hasCritical = false;
 let hasWarning = false;
 let pendingEvents = [];
+let pendingAsyncOps = [];
 
 function addReport(level, reason, location, solution) {
     // Normalizar ruta para compatibilidad Windows/Unix en Senderos de Confianza
     const normalizedLocation = location.replace(/\\/g, '/');
 
     // Apex Sovereign Path Exception: Downgrade CRITICAL to WARNING for trusted resource paths
-    if (level === 'CRITICAL' && TRUSTED_PATHS.some(p => normalizedLocation.toLowerCase().includes(p.toLowerCase()))) {
+    // BUT: Never downgrade SECRET EXPOSURE in the memory hub.
+    const isSecretExposure = reason.includes('EXPOSICIÓN DE SECRETO') || reason.includes('ARCHIVO PROHIBIDO');
+    if (level === 'CRITICAL' && !isSecretExposure && TRUSTED_PATHS.some(p => normalizedLocation.toLowerCase().includes(p.toLowerCase()))) {
         level = 'WARNING';
         reason = `[Soberanía Apex] ${reason}`;
         console.log(`🛡️  [SOBERANÍA] Autorizando excepcionalmente: ${normalizedLocation}`);
@@ -215,7 +219,16 @@ function scanDataLeak(filePath, content) {
     const fileName = path.basename(filePath);
     
     if (forbiddenFiles.some(f => fileName.includes(f))) {
-        addReport('CRITICAL', `ARCHIVO PROHIBIDO DETECTADO: Los archivos sensibles de configuración o llaves no deben estar en staging.`, filePath, "Añadir este archivo a .gitignore y encriptar los secretos.");
+        addReport('CRITICAL', `ARCHIVO PROHIBIDO DETECTADO: Los archivos sensibles de configuración o llaves no deben estar en staging.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El archivo será eliminado permanentemente.");
+        if (isFixMode) {
+           pendingAsyncOps.push(uma.logIncident('FORBIDDEN_FILE_PURGE', filePath).then(() => {
+               try { 
+                 const abs = path.resolve(process.cwd(), filePath);
+                 fs.unlinkSync(abs); 
+                 console.log(`[SENTINEL] Archivo purgado: ${filePath}`); 
+               } catch(e){ console.error(`[SENTINEL] Fallo al purgar: ${e.message}`); }
+           }));
+        }
         return;
     }
 
@@ -240,7 +253,21 @@ function scanDataLeak(filePath, content) {
     for (const pattern of secretPatterns) {
         const match = content.match(pattern);
         if (match) {
-            addReport('CRITICAL', `EXPOSICIÓN DE SECRETO: Firma detectada vinculada a servicios externos o credenciales.`, filePath, "Eliminar la cadena y usar EnvOracle.");
+            const secret = match[0];
+            addReport('CRITICAL', `EXPOSICIÓN DE SECRETO: Firma detectada vinculada a servicios externos o credenciales.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El secreto será eliminado y puesto en blacklist de hashes.");
+            
+            if (isFixMode) {
+               // Push to promise queue to await before exit
+               pendingAsyncOps.push(uma.logIncident('SECRET_EXPOSURE', filePath, secret).then(() => {
+                   try { 
+                     const abs = path.resolve(process.cwd(), filePath);
+                     fs.unlinkSync(abs); 
+                     console.log(`[SENTINEL] Archivo purgado: ${filePath}`); 
+                   } catch(e){ console.error(`[SENTINEL] Fallo al purgar: ${e.message}`); }
+               }));
+            } else {
+               pendingAsyncOps.push(uma.logIncident('SECRET_EXPOSURE_ALERT', filePath));
+            }
         }
     }
 
@@ -725,6 +752,12 @@ async function scanSupplyChain(filePath) {
         } catch (e) { 
             console.error(`[SENTINEL ERROR] Fallo procesando ${fileLine}: ${e.message}`);
         }
+    }
+
+    // Await all radical security operations before finalizing report
+    if (pendingAsyncOps.length > 0) {
+        console.log(`[SENTINEL] Finalizando ${pendingAsyncOps.length} operaciones de saneamiento radical...`);
+        await Promise.all(pendingAsyncOps);
     }
 
     if (pendingEvents.length > 0) {

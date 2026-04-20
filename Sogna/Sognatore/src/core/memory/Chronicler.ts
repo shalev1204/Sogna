@@ -113,7 +113,7 @@ ${fragment.content}
   }
 
   /**
-   * Recalls knowledge related to a query using the index.
+   * Recalls knowledge related to a query using the index with full-body fallback.
    */
   async recall(query: string): Promise<KnowledgeFragment[]> {
     if (!(await fs.pathExists(this.indexFile))) return [];
@@ -121,16 +121,33 @@ ${fragment.content}
     const index: MemoryIndex = await fs.readJson(this.indexFile);
     const q = query.toLowerCase();
     
-    // Filter by index first (No Disk I/O for body content yet)
-    const matches = index.fragments.filter(f => 
+    // 1. Filter by index (High Speed)
+    const indexMatches = index.fragments.filter(f => 
       f.key.toLowerCase().includes(q) || 
       f.tags.some(t => t.toLowerCase().includes(q))
     );
 
     const results: KnowledgeFragment[] = [];
-    for (const match of matches) {
+    const seenFiles = new Set<string>();
+
+    for (const match of indexMatches) {
       const content = await fs.readFile(path.join(this.intelligenceDir, match.fileName), 'utf-8');
       results.push(this.parseFragment(content));
+      seenFiles.add(match.fileName);
+    }
+
+    // 2. Fallback: Full Body Search (If results are low)
+    if (results.length < 3) {
+      const allFiles = await fs.readdir(this.intelligenceDir);
+      for (const file of allFiles) {
+        if (!file.endsWith('.md') || seenFiles.has(file) || file === 'index.json') continue;
+        
+        const content = await fs.readFile(path.join(this.intelligenceDir, file), 'utf-8');
+        if (content.toLowerCase().includes(q)) {
+          results.push(this.parseFragment(content));
+          if (results.length >= 10) break; // Cap fallback results
+        }
+      }
     }
 
     // Sort by most recent

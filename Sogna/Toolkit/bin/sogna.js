@@ -13,6 +13,7 @@ const NODE_MODULES = path.join(SOGNATORE_PATH, 'node_modules');
 import chalk from '../../Sognatore/node_modules/chalk/source/index.js';
 import { program } from '../../Sognatore/node_modules/commander/esm.mjs';
 const fs = require(path.join(SOGNATORE_PATH, 'node_modules', 'fs-extra'));
+const uma = require('../shared/uma_bridge.cjs');
 
 program
   .name('sogna')
@@ -362,10 +363,11 @@ program
             for (const session of sessions) {
               const deliverPath = path.join(workspacesPath, session, 'deliverables');
               if (fs.existsSync(deliverPath)) {
-                await fs.copy(deliverPath, memoryPath, { overwrite: true });
+                // Securely report deliverables to UMA instead of a raw copy
+                await uma.reportDiscovery(deliverPath, `Predatore Session: ${session}`);
               }
             }
-            console.log(chalk.green(`✔ Hallazgos integrados en Sogna/memory/security.`));
+            console.log(chalk.green(`✔ Hallazgos notificados al Memory Hub.`));
           }
         } catch (err) {
           console.error(chalk.yellow(`⚠️  Error al sincronizar reportes: ${err.message}`));
@@ -433,52 +435,12 @@ program
       console.log(chalk.gray(`(Buscando inyecciones AST, exposición de secretos, y cadenas de suministro corruptas)`));
       
       try {
-        // Obtenemos todos los archivos rastreados por Git en el monorepo
+        const vetoPath = path.join(__dirname, '..', 'engines', 'Sentinel', 'bin', 'sentinel-veto.js');
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-        const allTracked = execSync('git ls-files', { encoding: 'utf8' })
-          .split('\n')
-          .filter(f => f && (f.endsWith('.ts') || f.endsWith('.js') || f.endsWith('package.json') || f.endsWith('.md')));
-        
-        console.log(chalk.gray(`Analizando ${allTracked.length} archivos críticos en lotes...`));
-        
-        // Chunking para evitar errores de longitud de comando en Windows (Límite ~8191 caracteres)
-        const CHUNK_SIZE = 40; 
-        for (let i = 0; i < allTracked.length; i += CHUNK_SIZE) {
-          const chunk = allTracked.slice(i, i + CHUNK_SIZE);
-          const batchNum = Math.floor(i / CHUNK_SIZE) + 1;
-          const totalBatches = Math.ceil(allTracked.length / CHUNK_SIZE);
-          
-          process.stdout.write(chalk.gray(`  [Batch ${batchNum}/${totalBatches}] Procesando... `));
-          
-          try {
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-            execSync(`node toolkit/engines/Sentinel/bin/sentinel-veto.js ${chunk.join(' ')}`, { 
-              stdio: ['ignore', 'ignore', 'pipe'], // Ignoramos stdout/stdin, capturamos stderr
-              cwd: process.cwd(), 
-              env: process.env 
-            });
-            process.stdout.write(chalk.green(`OK\n`));
-          } catch (err) {
-            process.stdout.write(chalk.red(`VETO\n`));
-            // Si el error contiene el reporte de Sentinel, lo mostramos
-            const stderr = err.stderr ? err.stderr.toString() : '';
-            if (stderr.includes('SENTINEL')) {
-               console.error(stderr);
-            } else {
-               console.error(chalk.red(`Error en lote ${batchNum}: ${err.message}`));
-            }
-            // En caso de error crítico, nos detenemos si Sentinel así lo indica (exit code 1)
-            if (err.status === 1) {
-              console.log(chalk.red(`\n✘ [VETO SWEEP INTERVENTION] Se detectaron vulnerabilidades críticas. Abortando.`));
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-              process.exit(err.status || 1);
-            }
-          }
-        }
-        
+        execSync(`node "${vetoPath}" --all --fix`, { stdio: 'inherit' });
         console.log(chalk.green(`\n✔ [CLEAN] Escaneo exhaustivo completado. El monorepo está blindado.`));
       } catch (err) {
-        console.log(chalk.red(`\n✘ [SWEEP ERROR] No se pudo completar el escaneo: ${err.message}`));
+        console.log(chalk.red(`\n✘ [VETO SWEEP] Sentinel detectó vulnerabilidades críticas.`));
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         process.exit(1);
       }
