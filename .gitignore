@@ -88,3 +88,6 @@ Sogna/scratch/
 **/test-results/
 .aider*
 .claude/
+
+# Sentinel Reports
+Sogna/Toolkit/engines/sentinel/reports/THREAD_INTEL.md
