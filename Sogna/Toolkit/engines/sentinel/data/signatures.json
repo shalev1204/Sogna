@@ -33050,8 +33050,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/engines/sentinel/bin/sentinel-veto.js": {
-    "hash": "57a08c3a5d4357702da495c856939a7c3e07f7b50e6072557da45ef29c98cde1",
-    "timestamp": "2026-04-20T21:18:10.593Z",
+    "hash": "f4bf2410a7abe9089b11915c3a02ae0b4d343c75d27efa32240e4b682a75cbb3",
+    "timestamp": "2026-04-20T21:36:56.869Z",
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/engines/sentinel/package.json": {
@@ -37152,6 +37152,11 @@
   "memory/security/learned_threats.json": {
     "hash": "d9da17aab94c7e346b3aa4d90f5520a98522b4e0f2e8664e3b6238d288dc8708",
     "timestamp": "2026-04-20T21:16:49.028Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/auth_vault.ts": {
+    "hash": "e58956915de54c371e23eecff1a283e69a3d40933cc84ff426af16e3b81cae65",
+    "timestamp": "2026-04-20T21:36:56.868Z",
     "signedBy": "Sentinel-Apex"
   }
 }
