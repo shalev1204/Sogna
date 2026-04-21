@@ -442,3 +442,4 @@ export const isUsingRealSDK = () => _usingRealSDK;
 export const getExporter = () => _activeExporter;
 export const tracerProvider = () => _tracerProvider;
 export const meterProvider = () => _meterProvider;
+

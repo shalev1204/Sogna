@@ -493,3 +493,4 @@ export class Doctor {
       : chalk.red('✘ System is missing required prerequisites.')));
   }
 }
+

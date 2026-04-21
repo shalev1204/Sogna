@@ -240,3 +240,4 @@ export class Gates {
     this._pendingTimers = {};
   }
 }
+

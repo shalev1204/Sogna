@@ -211,3 +211,4 @@ if (process.env.RUN_AS_MAIN === '1') {
   process.on('SIGTERM', shutdown);
   process.on('SIGINT', shutdown);
 }
+

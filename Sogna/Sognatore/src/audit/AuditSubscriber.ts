@@ -98,3 +98,4 @@ export const _testHelpers = {
   getLastProcessedFile: () => lastProcessedFile,
   resetState: () => { lastProcessedFile = ''; },
 };
+

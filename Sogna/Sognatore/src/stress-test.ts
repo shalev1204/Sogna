@@ -35,3 +35,4 @@ runParityValidation().catch(err => {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   process.exit(1);
 });
+

@@ -208,3 +208,4 @@ if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith
   const subscriber = new SyncSubscriber();
   subscriber.init().catch(console.error);
 }
+

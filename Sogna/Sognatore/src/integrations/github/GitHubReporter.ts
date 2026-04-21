@@ -325,3 +325,4 @@ export class GitHubReporter {
     return response.json();
   }
 }
+

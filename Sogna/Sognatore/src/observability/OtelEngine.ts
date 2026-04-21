@@ -238,3 +238,4 @@ export const isInitialized = () => _initialized;
 export const getExporter = () => _activeExporter;
 export const getTracerProvider = () => _tracerProvider;
 export const getMeterProvider = () => _meterProvider;
+

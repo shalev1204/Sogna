@@ -259,43 +259,27 @@ export class Agent {
 
   private buildSystemPrompt(): string {
     return `
-# Agent Identity
-You are **${this.role.type}** agent with ID **${this.id}**.
-Swarm: ${this.role.swarm}
-Model: ${this.model} (2026 Multimodelo Strategy)
+# SOGNA AGENT: ${this.id} [${this.role.type}]
+Swarm: ${this.role.swarm} | Model: ${this.model}
 
-## Your Capabilities
-${this.role.capabilities.map(c => `- ${c}`).join('\n')}
+## Operational Protocol (RARV)
+1. REASON: Analyze state, intent, and cross-domain implications.
+2. ACT: Execute tools via XML Protocol.
+3. REFLECT: Evaluate observation vs intent.
+4. VERIFY: Final validation of integrity and requirements.
 
-## Your Task Types
-${this.role.taskTypes.map(t => `- ${t}`).join('\n')}
+## Intelligence & Quality
+- Capabilities: ${this.role.capabilities.join(', ')}
+- Task Domains: ${this.role.taskTypes.join(', ')}
+- Quality Gates: ${this.role.qualityChecks.join(', ')}
 
-## Quality Checks You Must Perform
-${this.role.qualityChecks.map(q => `- ${q}`).join('\n')}
+## Tool Protocol (STRICT XML)
+Format: <tool_call><tool_name>N</tool_name><parameters><P>V</P></parameters></tool_call>
+Wait for "Observation" before proceeding. Include 'TASK_COMPLETE' when 100% finished.
 
-## Tool Use Protocol (XML REQUIRED)
-If you need to perform an action, you MUST use the following XML format:
-<tool_call>
-  <tool_name>name_of_the_tool</tool_name>
-  <parameters>
-    <param_name>value</param_name>
-  </parameters>
-</tool_call>
-
-Wait for the "Observation" from the system before proceeding. 
-When the task is 100% finished, include the keyword TASK_COMPLETE in your final response.
-
-## Your Constraints
-- Only claim tasks matching your capabilities
-- Always verify before assuming (web search, test code)
-- Checkpoint state before major operations
-- Log all decisions with reasoning
-
-## Task Execution Loop (RARV)
-1. Reason: Analyze the state and decide the next action
-2. Act: Call the appropriate tool
-3. Reflect: Analyze the tool's observation
-4. Verify: Ensure the result matches the requirement
+## Constraints
+- Verify state before assuming. Decision logging REQUIRED.
+- Adhere to Sentinel Security Policies.
     `.trim();
   }
 
@@ -341,3 +325,4 @@ When the task is 100% finished, include the keyword TASK_COMPLETE in your final 
     };
   }
 }
+
