@@ -31460,13 +31460,13 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/Chronicler.ts": {
-    "hash": "501414bd88dc92c078a3d2f83e023ae768862cd06cde3b019521a57ca3fa5416",
-    "timestamp": "2026-04-20T21:18:10.593Z",
+    "hash": "e3ed8b7866cfd9021b0346679571842f80cef993ad82f5dcf13ef3f0ed8973db",
+    "timestamp": "2026-04-27T20:38:24.766Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/MemoryHub.ts": {
-    "hash": "9ce91aadb02a5ccf84d9022b92ff89edcb8ec16a875f3971b37aaf95cd5eddeb",
-    "timestamp": "2026-04-20T21:18:10.593Z",
+    "hash": "1018264667dda9a37ad845ab9aa8550fd0ea2b6e780efd37d3c377b4ca8a1291",
+    "timestamp": "2026-04-27T20:38:24.767Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/tasks/BackgroundTaskManager.ts": {
@@ -37157,6 +37157,21 @@
   "Sognatore/src/core/auth_vault.ts": {
     "hash": "e58956915de54c371e23eecff1a283e69a3d40933cc84ff426af16e3b81cae65",
     "timestamp": "2026-04-20T21:36:56.868Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/memory/ImmuneSystem.ts": {
+    "hash": "2e3dd3b77162a66cda4af6cc9ca4dfe016bb2c6589394d7c873e5594c10e06a6",
+    "timestamp": "2026-04-27T20:38:24.767Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/memory/NeuralLearning.ts": {
+    "hash": "fa50be0af50bbf953749f198761f06c2f6aec9be7fbbaa72dfa955f582181b92",
+    "timestamp": "2026-04-27T20:38:24.767Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/orchestration/SwarmCommander.ts": {
+    "hash": "72febae8aab403c63eed5663a9078ed25ee09c38df5da23690d8c672185e7c8a",
+    "timestamp": "2026-04-27T20:38:24.767Z",
     "signedBy": "Sentinel-Apex"
   }
 }
