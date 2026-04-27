@@ -77,6 +77,15 @@ export class MemoryHub {
     const lowerQuery = query.toLowerCase();
     if (trapConcepts.some(trap => lowerQuery.includes(trap))) {
       const hub = (await import('../../Sentinel-Sognatore/Hub.js')).Hub.getInstance();
+      
+      // Apex Hardening: Trigger Auto-Panic if the attempt is highly critical
+      const criticality = this.evaluateSemanticCriticality(query);
+      if (criticality > 0.8) {
+          hub.reportIntel('CRITICAL', `BLOQUEO NEURONAL: Intento de pesca semántica crítica detectado "${query}"`, 'MemoryHub');
+          await hub.triggerPanic(`Semantic exfiltration attempt detected: ${query}`);
+          return []; // Return empty results on panic
+      }
+      
       hub.reportIntel('WARNING', `INTENTO DE PESCA SEMÁNTICA DETECTADO: Búsqueda de concepto prohibido "${query}"`, 'MemoryHub');
       // We still return results to avoid breaking the UI, but the attempt is flagged.
     }
@@ -263,6 +272,31 @@ export class MemoryHub {
     this.graphCache = { nodes, edges };
     this.lastGraphUpdate = now;
     return this.graphCache;
+  }
+
+  /**
+   * Evaluates the security criticality of a memory query.
+   */
+  private evaluateSemanticCriticality(query: string): number {
+      const q = query.toLowerCase();
+      let score = 0;
+      if (q.includes('password') || q.includes('private_key')) score += 0.5;
+      if (q.includes('admin') || q.includes('root')) score += 0.3;
+      if (q.includes('bypass') || q.includes('exploit')) score += 0.4;
+      return Math.min(score, 1.0);
+  }
+
+  /**
+   * Performs an entropy audit on a string to detect encrypted or compressed secrets.
+   */
+  public entropyAudit(content: string): { entropy: number, suspicious: boolean } {
+      if (!content || content.length < 20) return { entropy: 0, suspicious: false };
+      const nonAlphaNumeric = (content.match(/[^a-zA-Z0-9\s]/g) || []).length;
+      const entropy = nonAlphaNumeric / content.length;
+      return {
+          entropy,
+          suspicious: entropy > 0.45 && content.length > 100
+      };
   }
 
   /**

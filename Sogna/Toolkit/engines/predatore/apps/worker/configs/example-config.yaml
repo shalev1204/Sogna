@@ -10,7 +10,7 @@ authentication:
   credentials:
     username: "testuser"
     password: "testpassword"
-    totp_secret: "JBSWY3DPEHPK3PXP"  # Optional TOTP secret for 2FA
+    totp_secret: "[REDACTED_TOTP_SECRET]"  # Optional TOTP secret for 2FA
   
   # Natural language instructions for login flow
   login_flow:

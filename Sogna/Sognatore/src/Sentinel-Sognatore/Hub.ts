@@ -167,6 +167,15 @@ export class Hub {
     console.log(chalk.yellow.bold('[AUTO-HEALER] Iniciando ciclo prioritario de reconstrucción institucional...'));
     await this.recoverSentinel();
     
+    // Refinement: Memory-specific stabilization
+    if (location === 'MemoryHub') {
+      console.log(chalk.red.bold('[NEURAL_GUARD] Pánico de Memoria detectado. Iniciando purga semántica preventiva...'));
+      try {
+        const { MemoryHub } = await import('../core/memory/MemoryHub.js');
+        await MemoryHub.getInstance().checkHealth();
+      } catch (e) { /* silent */ }
+    }
+
     // Deep Scan via AutoHealer (Toolkit module)
     try {
       // Lazy import to avoid circular dependencies and ensure toolkit access
@@ -299,6 +308,30 @@ export class Hub {
 
   public getSognatoreRoot(): string {
     return this.sognatoreRoot;
+  }
+
+  /**
+   * Reports the integrity of the neural network connections.
+   */
+  public async reportNeuralIntegrity(): Promise<void> {
+    try {
+      const { MemoryHub } = await import('../core/memory/MemoryHub.js');
+      const memory = MemoryHub.getInstance();
+      const graph = await memory.getNeuralGraph();
+      const health = await memory.checkHealth();
+      
+      const status = (health.status === 'healthy') ? chalk.green('SECURE') : chalk.red('VULNERABLE');
+      console.log(`\n🧠 [NEURAL INTEGRITY] Status: ${status}`);
+      console.log(`  - Conceptos Activos: ${graph.nodes.length}`);
+      console.log(`  - Conexiones Vivas : ${graph.edges.length}`);
+      console.log(`  - Recomendaciones : ${health.recommendations.length}`);
+      
+      if (health.status !== 'healthy') {
+          this.reportIntel('WARNING', `Integridad Neuronal Comprometida: ${health.recommendations.join(', ')}`, 'MemoryHub');
+      }
+    } catch (e) {
+      console.error(chalk.red('[SENTINEL_HUB] Failed to analyze neural integrity.'));
+    }
   }
 }
 

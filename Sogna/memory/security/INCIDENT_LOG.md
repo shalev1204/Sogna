@@ -10,3 +10,4 @@
 | 2026-04-20T20:58:05.370Z | SECRET_EXPOSURE | Sognatore/resources/skills/utilities/clarity-gate/SKILL.md | Neutralized |
 | 2026-04-20T20:58:05.378Z | SECRET_EXPOSURE | Sognatore/resources/skills/utilities/comfyui-gateway/references/troubleshooting.md | Neutralized |
 | 2026-04-20T21:00:00.208Z | FORBIDDEN_FILE_PURGE | memory/security/id_rsa | Neutralized |
+| 2026-04-27T21:49:57.450Z | SECRET_EXPOSURE | memory/security/blacklist.json | Neutralized |

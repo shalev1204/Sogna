@@ -15,7 +15,7 @@
  * Based on RFC 6238 (TOTP) and RFC 4226 (HOTP).
  *
  * Usage:
- *   generate-totp --secret JBSWY3DPEHPK3PXP
+ *   generate-totp --secret [REDACTED_TOTP_SECRET]
  */
 
 import { createHmac } from 'node:crypto';
