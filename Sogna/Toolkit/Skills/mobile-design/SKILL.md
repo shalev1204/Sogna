@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.566Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: mobile-design
 
 description: Mobile-first design thinking and decision-making for iOS and Android apps. Touch interaction, performance patterns, platform conventions. Teaches principles, not fixed values. Use when building React Native, Flutter, or native mobile apps.

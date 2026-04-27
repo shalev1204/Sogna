@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.537Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: explorer-agent
 name: explorer-agent
 description: Advanced codebase discovery, deep architectural analysis, and proactive research agent. The eyes and ears of the framework. Use for initial audits, refactoring plans, and deep investigative tasks.

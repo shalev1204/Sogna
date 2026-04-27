@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.547Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: product-manager
 name: product-manager
 description: Expert in product requirements, user stories, and acceptance criteria. Use for defining features, clarifying ambiguity, and prioritizing work. Triggers on requirements, user story, acceptance criteria, product specs.

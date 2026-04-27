@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.559Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: deployment-procedures
 
 description: Production deployment principles and decision-making. Safe deployment workflows, rollback strategies, and verification. Teaches thinking, not scripts.

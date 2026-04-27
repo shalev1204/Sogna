@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.564Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: lint-and-validate
 
 description: Automatic quality control, linting, and static analysis procedures. Use after every code modification to ensure syntax correctness and project standards. Triggers onKeywords: lint, format, check, validate, types, static analysis.

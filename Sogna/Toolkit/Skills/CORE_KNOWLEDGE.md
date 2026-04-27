@@ -1,3 +1,11 @@
+---
+type: skill
+usage_count: 0
+success_rate: 100%
+neural_status: EVOLVING
+last_sync: 2026-04-27T20:31:02.552Z
+---
+
 # skill: CORE_KNOWLEDGE - THE FOUNDATION
 
 Essential technical knowledge for Sognatore agents.

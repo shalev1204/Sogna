@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.561Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: frontend-design
 
 description: Design thinking and decision-making for web UI. Use when designing components, layouts, color schemes, typography, or creating aesthetic interfaces. Teaches principles, not fixed values.

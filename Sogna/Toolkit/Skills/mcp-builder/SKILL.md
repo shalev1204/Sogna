@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.564Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: mcp-builder
 description: MCP (Model Context Protocol) server building principles. Tool design, resource patterns, best practices.
 allowed-tools: Read, Write, Edit, Glob, Grep

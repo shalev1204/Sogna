@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.556Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: behavioral-modes
 
 description: AI operational modes (brainstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type.

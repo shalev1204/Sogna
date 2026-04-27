@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.555Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: bash-linux
 
 description: Bash/Linux terminal patterns. Critical commands, piping, error handling, scripting. Use when working on macOS or Linux systems.

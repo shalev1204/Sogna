@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.563Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: intelligent-routing
 description: Automatic agent selection and intelligent task routing. Analyzes user requests and automatically selects the best specialist agent(s) without requiring explicit user mentions.
 version: 1.0.0

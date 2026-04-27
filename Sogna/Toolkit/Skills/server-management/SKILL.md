@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.573Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: server-management
 
 description: Server management principles and decision-making. Process management, monitoring strategy, and scaling decisions. Teaches thinking, not commands.

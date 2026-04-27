@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.532Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: debugger
 name: debugger
 description: Expert in systematic debugging, root cause analysis, and crash investigation. Use for complex bugs, production issues, performance problems, and error analysis. Triggers on bug, error, crash, not working, broken, investigate, fix.

@@ -5,6 +5,15 @@ Este documento actúa como el mapa de interconexión de los enjambres de agentes
 
 ---
 
+## 💎 0. El Núcleo (Sognatore Core)
+**Propósito**: El motor de ejecución, el sistema inmunológico y la consciencia técnica del ecosistema. Sognatore es el cuerpo donde habita el Toolkit.
+- **Corazón (Core Logic)**: Gestionado por [[orchestrator]] y [[brain]]
+- **Defensa (Sentinel)**: Supervisado por [[security-auditor]] y [[ops-security]]
+- **Nervios (Integrations)**: Mantenido por [[eng-api]] y [[eng-infra]]
+- **Sentidos (Observability)**: Operado por [[ops-monitor]] y [[ops-incident]]
+
+---
+
 ## 🏗️ 1. Orchestration Swarm
 **Propósito**: Coordinación de alto nivel, gestión de memoria y supervisión.
 - **Líder**: [[orchestrator]]

@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.560Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: documentation-templates
 description: Documentation templates and structure guidelines. README, API docs, code comments, and AI-friendly documentation.
 allowed-tools: Read, Glob, Grep

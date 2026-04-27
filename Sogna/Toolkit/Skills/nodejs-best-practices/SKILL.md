@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.567Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: nodejs-best-practices
 description: Node.js development principles and decision-making. Framework selection, async patterns, security, and architecture. Teaches thinking, not copying.
 allowed-tools: Read, Write, Edit, Glob, Grep

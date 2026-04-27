@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.573Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: seo-fundamentals
 
 description: SEO fundamentals, E-E-A-T, Core Web Vitals, and Google algorithm principles.

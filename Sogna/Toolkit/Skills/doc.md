@@ -1,3 +1,11 @@
+---
+type: skill
+usage_count: 0
+success_rate: 100%
+neural_status: EVOLVING
+last_sync: 2026-04-27T20:31:02.560Z
+---
+
 # Antigravity Skills
 
 > **Guide to creating and using Skills in the Antigravity Kit**

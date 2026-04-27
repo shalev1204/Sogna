@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.530Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: code-archaeologist
 name: code-archaeologist
 description: Expert in legacy code, refactoring, and understanding undocumented systems. Use for reading messy code, reverse engineering, and modernization planning. Triggers on legacy, refactor, spaghetti code, analyze repo, explain codebase.

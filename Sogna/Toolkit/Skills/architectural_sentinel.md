@@ -1,3 +1,11 @@
+---
+type: skill
+usage_count: 0
+success_rate: 100%
+neural_status: EVOLVING
+last_sync: 2026-04-27T20:31:02.554Z
+---
+
 # Skill: Architectural Sentinel (Mentor Guide)
 
 Este skill define el comportamiento de Antigravity como **Safety Car** y **Sentinel** del proyecto Sognatore.

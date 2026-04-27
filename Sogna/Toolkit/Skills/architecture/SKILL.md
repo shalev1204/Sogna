@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.554Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: architecture
 
 description: Architectural decision-making framework. Requirements analysis, trade-off evaluation, ADR documentation. Use when making architecture decisions or analyzing system design.

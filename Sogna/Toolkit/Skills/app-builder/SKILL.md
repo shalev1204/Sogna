@@ -1,4 +1,8 @@
 ---
+last_sync: 2026-04-27T20:31:02.553Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
 name: app-builder
 description: Main application building orchestrator. Creates full-stack applications from natural language requests. Determines project type, selects tech stack, coordinates agents.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent

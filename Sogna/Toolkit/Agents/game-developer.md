@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.538Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: game-developer
 name: game-developer
 description: Game development across all platforms (PC, Web, Mobile, VR/AR). Use when building games with Unity, Godot, Unreal, Phaser, Three.js, or any game engine. Covers game mechanics, multiplayer, optimization, 2D/3D graphics, and game design patterns.

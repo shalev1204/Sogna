@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.574Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: systematic-debugging
 
 description: 4-phase systematic debugging methodology with root cause analysis and evidence-based verification. Use when debugging complex issues.

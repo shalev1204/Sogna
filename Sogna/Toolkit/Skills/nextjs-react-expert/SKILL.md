@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.567Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: react-best-practices
 description: React and Next.js performance optimization from Vercel Engineering. Use when building React components, optimizing performance, eliminating waterfalls, reducing bundle size, reviewing code for performance issues, or implementing server/client-side optimizations.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash

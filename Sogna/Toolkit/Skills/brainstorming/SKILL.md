@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.556Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: brainstorming
 
 description: Socratic questioning protocol + user communication. MANDATORY for complex requests, new features, or unclear requirements. Includes progress reporting and error handling.

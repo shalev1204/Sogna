@@ -1,4 +1,6 @@
 ---
+last_sync: 2026-04-27T20:31:02.535Z
+neural_status: EVOLVING
 id: eng-infra
 name: Infrastructure Engineering Agent
 type: domain
@@ -24,6 +26,10 @@ quality_checks:
 links:
   - swarm: Engineering
   - colleagues: [[code-archaeologist]], [[debugger]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[game-developer]], [[test-engineer]]
+usage_count: 1
+success_count: 1
+success_rate: 100.0%
+last_evolution: 2026-04-27T20:27:52.408Z
 ---
 
 # Infrastructure Engineering Agent

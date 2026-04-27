@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.533Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: documentation-writer
 name: documentation-writer
 description: Expert in technical documentation. Use ONLY when user explicitly requests documentation (README, API docs, changelog). DO NOT auto-invoke during normal development.

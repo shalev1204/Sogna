@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.563Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: i18n-localization
 
 description: Internationalization and localization patterns. Detecting hardcoded strings, managing translations, locale files, RTL support.

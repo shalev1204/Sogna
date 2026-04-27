@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "name": "Sognatore Reactive Skins",
+  "swarms": {
+    "orchestration": {
+      "primary": "#FFD700",
+      "secondary": "#1E90FF",
+      "background": "rgba(10, 10, 20, 0.8)",
+      "accent": "rgba(255, 215, 0, 0.2)",
+      "blur": "20px",
+      "font": "Outfit, sans-serif",
+      "animation": "smooth-flow"
+    },
+    "security": {
+      "primary": "#FF4500",
+      "secondary": "#000000",
+      "background": "rgba(20, 0, 0, 0.9)",
+      "accent": "rgba(255, 69, 0, 0.1)",
+      "blur": "10px",
+      "font": "JetBrains Mono, monospace",
+      "animation": "pulse-alert"
+    },
+    "execution": {
+      "primary": "#00FF41",
+      "secondary": "#0D0D0D",
+      "background": "rgba(0, 10, 0, 0.95)",
+      "accent": "rgba(0, 255, 65, 0.15)",
+      "blur": "5px",
+      "font": "Fira Code, monospace",
+      "animation": "terminal-glitch"
+    },
+    "memory": {
+      "primary": "#9370DB",
+      "secondary": "#4B0082",
+      "background": "rgba(15, 0, 30, 0.85)",
+      "accent": "rgba(147, 112, 219, 0.25)",
+      "blur": "30px",
+      "font": "Inter, sans-serif",
+      "animation": "dream-drift"
+    }
+  },
+  "global": {
+    "glassmorphism": {
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "shadow": "0 8px 32px 0 rgba(0, 0, 0, 0.37)"
+    },
+    "transitions": {
+      "duration": "0.5s",
+      "timing": "cubic-bezier(0.4, 0, 0.2, 1)"
+    }
+  }
+}

@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.533Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: devops-engineer
 name: devops-engineer
 description: Expert in deployment, server management, CI/CD, and production operations. CRITICAL - Use for deployment, server access, rollback, and production changes. HIGH RISK operations. Triggers on deploy, production, server, pm2, ssh, release, rollback, ci/cd.

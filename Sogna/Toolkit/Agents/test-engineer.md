@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.551Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: agent
 id: test-engineer
 name: test-engineer
 description: Expert in testing, TDD, and test automation. Use for writing tests, improving coverage, debugging test failures. Triggers on test, spec, coverage, jest, pytest, playwright, e2e, unit test.

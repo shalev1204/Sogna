@@ -1,4 +1,9 @@
 ---
+last_sync: 2026-04-27T20:31:02.552Z
+neural_status: EVOLVING
+success_rate: 100%
+usage_count: 0
+type: skill
 name: api-patterns
 
 description: API design principles and decision-making. REST vs GraphQL vs tRPC selection, response formats, versioning, pagination.
