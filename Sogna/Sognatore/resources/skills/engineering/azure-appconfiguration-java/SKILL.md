@@ -299,7 +299,7 @@ import com.azure.data.appconfiguration.models.SecretReferenceConfigurationSettin
 
 SecretReferenceConfigurationSetting secretRef = new SecretReferenceConfigurationSetting(
     "app/secrets/api-key",
-    "https://myvault.vault.azure.net/secrets/api-key"
+    "https://myecosistema.ecosistema.azure.net/secrets/api-key"
 );
 
 SecretReferenceConfigurationSetting created = (SecretReferenceConfigurationSetting)

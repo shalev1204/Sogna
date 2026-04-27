@@ -67,7 +67,7 @@ Platforms that provide visibility but you don't control. Algorithms shift, rules
 - Use them to drive traffic to owned channels
 - Don't rely on them as your only strategy
 
-**Example - Notion:**
+**Example - Sogna Cloud:**
 Hacked virality through Twitter, YouTube, and Reddit where productivity enthusiasts were active. Encouraged community to share templates and workflows. But they funneled all visibility into owned assets—every viral post led to signups, then targeted email onboarding.
 
 **Platform-specific tactics:**

@@ -1,10 +1,10 @@
 ---
-name: azure-keyvault-certificates-rust
+name: azure-keyecosistema-certificates-rust
 description: Azure Key Vault Certificates SDK for Rust. Use for creating, importing, and managing certificates.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
-id: skill-azure-keyvault-certificates-rust
+id: skill-azure-keyecosistema-certificates-rust
 owner: [[orchestrator]]
 ---
 
@@ -16,24 +16,24 @@ Client library for Azure Key Vault Certificates — secure storage and managemen
 ## Installation
 
 ```sh
-cargo add azure_security_keyvault_certificates azure_identity
+cargo add azure_security_keyecosistema_certificates azure_identity
 ```
 
 ## Environment Variables
 
 ```bash
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/
+AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net/
 ```
 
 ## Authentication
 
 ```rust
 use azure_identity::DeveloperToolsCredential;
-use azure_security_keyvault_certificates::CertificateClient;
+use azure_security_keyecosistema_certificates::CertificateClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let client = CertificateClient::new(
-    "https://<vault-name>.vault.azure.net/",
+    "https://<ecosistema-name>.ecosistema.azure.net/",
     credential.clone(),
     None,
 )?;
@@ -60,7 +60,7 @@ println!(
 ### Create Certificate
 
 ```rust
-use azure_security_keyvault_certificates::models::{
+use azure_security_keyecosistema_certificates::models::{
     CreateCertificateParameters, CertificatePolicy,
     IssuerParameters, X509CertificateProperties,
 };
@@ -90,7 +90,7 @@ let operation = client
 ### Import Certificate
 
 ```rust
-use azure_security_keyvault_certificates::models::ImportCertificateParameters;
+use azure_security_keyecosistema_certificates::models::ImportCertificateParameters;
 
 let params = ImportCertificateParameters {
     base64_encoded_certificate: Some(base64_cert_data),
@@ -113,7 +113,7 @@ client.delete_certificate("certificate-name", None).await?;
 ### List Certificates
 
 ```rust
-use azure_security_keyvault_certificates::ResourceExt;
+use azure_security_keyecosistema_certificates::ResourceExt;
 use futures::TryStreamExt;
 
 let mut pager = client.list_certificate_properties(None)?.into_stream();
@@ -135,7 +135,7 @@ let policy = client
 ### Update Certificate Policy
 
 ```rust
-use azure_security_keyvault_certificates::models::UpdateCertificatePolicyParameters;
+use azure_security_keyecosistema_certificates::models::UpdateCertificatePolicyParameters;
 
 let params = UpdateCertificatePolicyParameters {
     // Update policy properties
@@ -163,7 +163,7 @@ client
 3. **Set proper validity period** — balance security and maintenance
 4. **Use certificate policies** — define renewal and key properties
 5. **Monitor expiration** — set up alerts for expiring certificates
-6. **Enable soft delete** — required for production vaults
+6. **Enable soft delete** — required for production ecosistemas
 
 ## RBAC Permissions
 
@@ -175,9 +175,9 @@ Assign these Key Vault roles:
 
 | Resource | Link |
 |----------|------|
-| API Reference | https://docs.rs/azure_security_keyvault_certificates |
-| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/keyvault/azure_security_keyvault_certificates |
-| crates.io | https://crates.io/crates/azure_security_keyvault_certificates |
+| API Reference | https://docs.rs/azure_security_keyecosistema_certificates |
+| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/keyecosistema/azure_security_keyecosistema_certificates |
+| crates.io | https://crates.io/crates/azure_security_keyecosistema_certificates |
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.

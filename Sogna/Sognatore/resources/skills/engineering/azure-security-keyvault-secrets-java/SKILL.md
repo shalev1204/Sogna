@@ -1,10 +1,10 @@
 ---
-name: azure-security-keyvault-secrets-java
+name: azure-security-keyecosistema-secrets-java
 description: "Azure Key Vault Secrets Java SDK for secret management. Use when storing, retrieving, or managing passwords, API keys, connection strings, or other sensitive configuration data."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
-id: skill-azure-security-keyvault-secrets-java
+id: skill-azure-security-keyecosistema-secrets-java
 owner: [[ops-security]]
 ---
 
@@ -18,7 +18,7 @@ Securely store and manage secrets like passwords, API keys, and connection strin
 ```xml
 <dependency>
     <groupId>com.azure</groupId>
-    <artifactId>azure-security-keyvault-secrets</artifactId>
+    <artifactId>azure-security-keyecosistema-secrets</artifactId>
     <version>4.9.0</version>
 </dependency>
 ```
@@ -26,19 +26,19 @@ Securely store and manage secrets like passwords, API keys, and connection strin
 ## Client Creation
 
 ```java
-import com.azure.security.keyvault.secrets.SecretClient;
-import com.azure.security.keyvault.secrets.SecretClientBuilder;
+import com.azure.security.keyecosistema.secrets.SecretClient;
+import com.azure.security.keyecosistema.secrets.SecretClientBuilder;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 
 // Sync client
 SecretClient secretClient = new SecretClientBuilder()
-    .vaultUrl("https://<vault-name>.vault.azure.net")
+    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 
 // Async client
 SecretAsyncClient secretAsyncClient = new SecretClientBuilder()
-    .vaultUrl("https://<vault-name>.vault.azure.net")
+    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildAsyncClient();
 ```
@@ -46,7 +46,7 @@ SecretAsyncClient secretAsyncClient = new SecretClientBuilder()
 ## Create/Set Secret
 
 ```java
-import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
+import com.azure.security.keyecosistema.secrets.models.KeyVaultSecret;
 
 // Simple secret
 KeyVaultSecret secret = secretClient.setSecret("database-password", "P@ssw0rd123!");
@@ -106,7 +106,7 @@ System.out.println("Updated: " + updated.getUpdatedOn());
 
 ```java
 import com.azure.core.util.paging.PagedIterable;
-import com.azure.security.keyvault.secrets.models.SecretProperties;
+import com.azure.security.keyecosistema.secrets.models.SecretProperties;
 
 // List all secrets (properties only, no values)
 for (SecretProperties secretProps : secretClient.listPropertiesOfSecrets()) {
@@ -134,9 +134,9 @@ for (SecretProperties version : secretClient.listPropertiesOfSecretVersions("dat
 
 ```java
 import com.azure.core.util.polling.SyncPoller;
-import com.azure.security.keyvault.secrets.models.DeletedSecret;
+import com.azure.security.keyecosistema.secrets.models.DeletedSecret;
 
-// Begin delete (returns poller for soft-delete enabled vaults)
+// Begin delete (returns poller for soft-delete enabled ecosistemas)
 SyncPoller<DeletedSecret, Void> deletePoller = secretClient.beginDeleteSecret("old-secret");
 
 // Wait for deletion
@@ -195,7 +195,7 @@ System.out.println("Restored: " + restored.getName());
 
 ```java
 SecretAsyncClient asyncClient = new SecretClientBuilder()
-    .vaultUrl("https://<vault>.vault.azure.net")
+    .ecosistemaUrl("https://<ecosistema>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildAsyncClient();
 
@@ -224,9 +224,9 @@ asyncClient.listPropertiesOfSecrets()
 public class ConfigLoader {
     private final SecretClient client;
     
-    public ConfigLoader(String vaultUrl) {
+    public ConfigLoader(String ecosistemaUrl) {
         this.client = new SecretClientBuilder()
-            .vaultUrl(vaultUrl)
+            .ecosistemaUrl(ecosistemaUrl)
             .credential(new DefaultAzureCredentialBuilder().build())
             .buildClient();
     }
@@ -246,7 +246,7 @@ public class ConfigLoader {
 }
 
 // Usage
-ConfigLoader loader = new ConfigLoader("https://my-vault.vault.azure.net");
+ConfigLoader loader = new ConfigLoader("https://my-ecosistema.ecosistema.azure.net");
 Map<String, String> config = loader.loadSecrets(
     Arrays.asList("db-connection-string", "api-key", "jwt-secret")
 );
@@ -311,7 +311,7 @@ try {
 ## Environment Variables
 
 ```bash
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net
+AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net
 ```
 
 ## Best Practices
@@ -322,7 +322,7 @@ AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net
 4. **Content Type** - Set `contentType` to indicate format (e.g., `application/json`)
 5. **Version Management** - Don't delete old versions immediately during rotation
 6. **Access Logging** - Enable diagnostic logging on Key Vault
-7. **Least Privilege** - Use separate vaults for different environments
+7. **Least Privilege** - Use separate ecosistemas for different environments
 
 ## Common Secret Types
 
@@ -358,7 +358,7 @@ secretClient.setSecret(new KeyVaultSecret("cert-password", "CertP@ss!")
 - "Key Vault secrets Java", "secret management Java"
 - "store password", "store API key", "connection string"
 - "retrieve secret", "rotate secret"
-- "Azure secrets", "vault secrets"
+- "Azure secrets", "ecosistema secrets"
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.

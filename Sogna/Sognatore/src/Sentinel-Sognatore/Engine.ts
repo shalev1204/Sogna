@@ -17,6 +17,10 @@ import { spawnSync } from 'child_process';
 import { Hub, SecurityState } from './Hub.js';
 import { Honeypots } from './Honeypots.js';
 import { MemoryHub } from '../core/memory/MemoryHub.js';
+import { SecurityAudit } from './SecurityAudit.js';
+import { ActivityProfile } from './ActivityProfile.js';
+import { SecurityAudit } from './SecurityAudit.js';
+import { ActivityProfile } from './ActivityProfile.js';
 
 /**
  * Sognatore Policy Engine - Core Evaluation Engine
@@ -182,6 +186,8 @@ export class Engine {
   private _validationErrors: string[] = [];
   private static _globalMode: PermissionMode = PermissionMode.Balanced;
   private _executiveBinaryPath: string;
+  private _threatL1Cache: Map<string, { decision: Decision; reason: string; timestamp: number }> = new Map();
+  private readonly THREAT_CACHE_TTL = 300000; // 5 minutes
 
   public static getInstance(projectDir?: string, options?: any): Engine {
     if (!this.instance) {
@@ -338,6 +344,19 @@ export class Engine {
   public evaluate(enforcementPoint: string, context: any): any {
     const ctx = context || {};
     const violations: any[] = [];
+    
+    // 0. L1 THREAT CACHE: Instant denial for repeated attacks
+    const threatKey = `${enforcementPoint}:${ctx.intent || ctx.command || 'none'}`;
+    const cachedThreat = this._threatL1Cache.get(threatKey);
+    if (cachedThreat && (Date.now() - cachedThreat.timestamp < this.THREAT_CACHE_TTL)) {
+      return {
+        allowed: false,
+        decision: cachedThreat.decision,
+        reason: `[L1_CACHE] ${cachedThreat.reason}`,
+        requiresApproval: false,
+        violations: [{ name: 'ThreatL1Gate', action: 'deny', reason: cachedThreat.reason }],
+      };
+    }
 
     // PROACTIVE APEX GATE: Check Sentinel Pulse and Unified Memory
     // This allows Sentinel to learn from experience without manual rule updates.
@@ -354,103 +373,78 @@ export class Engine {
 
     this._evaluateMemoryPatterns(ctx, violations);
 
-    // HONEYPOT INTERCEPTION: Physical file access to decoys triggers immediate PANIC.
-    // Optimized with O(1) Set lookup.
+    // 2. BEHAVIORAL ANALYSIS: Detect hijacking/bursts
+    const isSensitive = enforcementPoint === 'pre_execution' && ctx.sensitive;
+    const behavioralResult = ActivityProfile.getInstance().analyzeActivity(ctx.command || ctx.intent || 'unknown', isSensitive);
+    if (behavioralResult.isAnomalous) {
+      const reason = `ANOMALÍA DE COMPORTAMIENTO: ${behavioralResult.reason}`;
+      hub.reportIntel('WARNING', reason, 'ActivityProfile');
+      violations.push({ name: 'ActivityGate', action: 'require_approval', reason });
+    }
+
+    // 3. HONEYPOT INTERCEPTION
     const targetPath = ctx.path || ctx.arguments?.path || ctx.arguments?.filePath;
     if (targetPath) {
       const absTarget = path.resolve(this._projectDir, targetPath);
       if (this._honeypotSet.has(absTarget)) {
         const reason = `BRECHA DE SEGURIDAD DETECTADA: Interacción física con Honeypot (${path.basename(absTarget)})`;
         hub.triggerPanic(reason, 'Honeypot Engine', ctx.agentPid);
-        return {
-          allowed: false,
-          decision: Decision.DENY,
-          reason,
-          requiresApproval: false,
-          violations: [{ name: 'HoneypotGate', action: 'deny', reason }],
-        };
+        violations.push({ name: 'HoneypotGate', action: 'deny', reason });
       }
     }
 
-    // Grade Executive: Sensitive operations are double-checked by the Rust core
-    // This happens BEFORE checking local policies to ensure hard-gate security.
+    // 4. EXECUTIVE CORE (Hard Gate)
     if (enforcementPoint === 'pre_execution' && ctx.sensitive) {
       const executiveResult = this._callExecutiveCore(ctx);
       if (executiveResult.decision === Decision.DENY) {
-        return {
-          allowed: false,
-          decision: Decision.DENY,
-          reason: `Executive Core: ${executiveResult.reason}`,
-          requiresApproval: false,
-          violations: [{ name: 'ExecutiveProtocol', action: 'deny', reason: executiveResult.reason }],
-        };
+        violations.push({ name: 'ExecutiveProtocol', action: 'deny', reason: executiveResult.reason });
       }
     }
 
-    if (!this._policies) {
-      return {
-        allowed: true,
-        decision: Decision.ALLOW,
-        reason: 'No local policies configured; Executive check passed.',
-        requiresApproval: false,
-        violations: [],
-      };
+    // 5. LOCAL POLICIES
+    if (this._policies) {
+      switch (enforcementPoint) {
+        case 'pre_execution':
+          this._evaluatePreExecution(this._policies.pre_execution || [], ctx, violations);
+          break;
+        case 'pre_deployment':
+          this._evaluatePreDeployment(this._policies.pre_deployment || [], ctx, violations);
+          break;
+        case 'resource':
+          this._evaluateResource(this._policies.resource || [], ctx, violations);
+          break;
+        case 'data':
+          this._evaluateData(this._policies.data || [], ctx, violations);
+          break;
+      }
     }
 
-    switch (enforcementPoint) {
-      case 'pre_execution':
-        this._evaluatePreExecution(this._policies.pre_execution || [], ctx, violations);
-        break;
-      case 'pre_deployment':
-        this._evaluatePreDeployment(this._policies.pre_deployment || [], ctx, violations);
-        break;
-      case 'resource':
-        this._evaluateResource(this._policies.resource || [], ctx, violations);
-        break;
-      case 'data':
-        this._evaluateData(this._policies.data || [], ctx, violations);
-        break;
-      default:
-        return {
-          allowed: true,
-          decision: Decision.ALLOW,
-          reason: `Unknown enforcement point: ${enforcementPoint}`,
-          requiresApproval: false,
-          violations: [],
-        };
-    }
-
+    // 6. FINAL VERDICT & AUDIT
     const requiresApproval = violations.some(v => v.action === 'require_approval');
     const denied = violations.some(v => v.action === 'deny');
+    const finalDecision = denied ? Decision.DENY : (requiresApproval ? Decision.REQUIRE_APPROVAL : Decision.ALLOW);
+    const reasons = violations.length > 0 ? violations.map(v => `${v.name}: ${v.reason}`).join('; ') : 'All policies passed';
 
+    // Sign the decision
+    SecurityAudit.getInstance(this._projectDir).logDecision(
+      enforcementPoint, 
+      finalDecision, 
+      reasons,
+      { command: ctx.command, intent: ctx.intent, category: (ctx as any).category }
+    );
+
+    // Update L1 Cache if denied
     if (denied) {
-      const reasons = violations.map(v => `${v.name}: ${v.reason}`).join('; ');
-      Hub.getInstance().reportIntel('WARNING', `Acción denegada por política: ${reasons}`, enforcementPoint);
-      return {
-        allowed: false,
-        decision: Decision.DENY,
-        reason: reasons,
-        requiresApproval: false,
-        violations,
-      };
-    }
-
-    if (requiresApproval) {
-      return {
-        allowed: false,
-        decision: Decision.REQUIRE_APPROVAL,
-        reason: violations.map(v => `${v.name}: ${v.reason}`).join('; '),
-        requiresApproval: true,
-        violations,
-      };
+      const threatKey = `${enforcementPoint}:${ctx.intent || ctx.command || 'none'}`;
+      this._threatL1Cache.set(threatKey, { decision: Decision.DENY, reason: reasons, timestamp: Date.now() });
     }
 
     return {
-      allowed: true,
-      decision: Decision.ALLOW,
-      reason: 'All policies passed',
-      requiresApproval: false,
-      violations: [],
+      allowed: !denied,
+      decision: finalDecision,
+      reason: reasons,
+      requiresApproval,
+      violations,
     };
   }
 

@@ -37,11 +37,11 @@ The recommended credential for local development. Tries developer tools in order
 
 ```rust
 use azure_identity::DeveloperToolsCredential;
-use azure_security_keyvault_secrets::SecretClient;
+use azure_security_keyecosistema_secrets::SecretClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let client = SecretClient::new(
-    "https://my-vault.vault.azure.net/",
+    "https://my-ecosistema.ecosistema.azure.net/",
     credential.clone(),
     None,
 )?;

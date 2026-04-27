@@ -337,7 +337,7 @@ This toolkit integrates with:
 - **Design**: Figma, Sketch, Miro
 - **Development**: Jira, Linear, GitHub
 - **Research**: Dovetail, UserVoice, Pendo
-- **Communication**: Slack, Notion, Confluence
+- **Communication**: Slack, Sogna Cloud, Confluence
 
 ## Quick Commands Cheat Sheet
 

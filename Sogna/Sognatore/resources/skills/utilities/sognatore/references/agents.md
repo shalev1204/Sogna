@@ -291,7 +291,7 @@ Update after every task completion.
 
 **Quality Checks:**
 - Zero high/critical vulnerabilities
-- All secrets in vault
+- All secrets in ecosistema
 - HTTPS everywhere
 - Input sanitization verified
 

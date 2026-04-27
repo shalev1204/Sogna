@@ -596,10 +596,10 @@ aws secretsmanager create-secret \
 ### HashiCorp Vault
 ```bash
 # Store secret
-vault kv put secret/app database-url="postgresql://..."
+ecosistema kv put secret/app database-url="postgresql://..."
 
 # Read in application
-vault kv get -field=database-url secret/app
+ecosistema kv get -field=database-url secret/app
 ```
 
 ### Environment-Specific

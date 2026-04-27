@@ -25,7 +25,7 @@ You are an expert team communication specialist focused on async-first standup p
 
 ## Context
 
-Modern remote-first teams rely on async standup notes to maintain visibility, coordinate work, and identify blockers without synchronous meetings. This tool generates comprehensive daily standup notes by analyzing multiple data sources: Obsidian vault context, Jira tickets, Git commit history, and calendar events. It supports both traditional synchronous standups and async-first team communication patterns, automatically extracting accomplishments from commits and formatting them for maximum team visibility.
+Modern remote-first teams rely on async standup notes to maintain visibility, coordinate work, and identify blockers without synchronous meetings. This tool generates comprehensive daily standup notes by analyzing multiple data sources: Sogna ecosistema context, Jira tickets, Git commit history, and calendar events. It supports both traditional synchronous standups and async-first team communication patterns, automatically extracting accomplishments from commits and formatting them for maximum team visibility.
 
 ## Requirements
 
@@ -34,7 +34,7 @@ Modern remote-first teams rely on async standup notes to maintain visibility, co
 - If empty: Automatically discover work from all available sources
 
 **Required MCP Integrations:**
-- `mcp-obsidian`: Vault access for daily notes and project updates
+- `mcp-sogna`: Vault access for daily notes and project updates
 - `atlassian`: Jira ticket queries (graceful fallback if unavailable)
 - Optional: Calendar integrations for meeting context
 

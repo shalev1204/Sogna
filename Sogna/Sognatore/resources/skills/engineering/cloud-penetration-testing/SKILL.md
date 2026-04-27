@@ -172,10 +172,10 @@ $vms = Get-AzVM
 $vms.UserData
 
 # Dump Key Vault secrets
-az keyvault list --query '[].name' --output tsv
-az keyvault set-policy --name <vault> --upn <user> --secret-permissions get list
-az keyvault secret list --vault-name <vault> --query '[].id' --output tsv
-az keyvault secret show --id <URI>
+az keyecosistema list --query '[].name' --output tsv
+az keyecosistema set-policy --name <ecosistema> --upn <user> --secret-permissions get list
+az keyecosistema secret list --ecosistema-name <ecosistema> --query '[].id' --output tsv
+az keyecosistema secret show --id <URI>
 ```
 
 ### Phase 5: Azure Persistence
@@ -373,7 +373,7 @@ gcloud auth list
 | Current roles | `Get-AzRoleAssignment` |
 | List VMs | `Get-AzVM` |
 | List storage | `Get-AzStorageAccount` |
-| Key Vault secrets | `az keyvault secret list --vault-name <name>` |
+| Key Vault secrets | `az keyecosistema secret list --ecosistema-name <name>` |
 
 ### AWS Key Commands
 

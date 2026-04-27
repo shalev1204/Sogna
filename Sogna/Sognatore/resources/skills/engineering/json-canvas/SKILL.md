@@ -1,6 +1,6 @@
 ---
 name: json-canvas
-description: Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections. Use when working with .canvas files, creating visual canvases, mind maps, flowcharts, or when the user mentions Canvas files in Obsidian.
+description: Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections. Use when working with .canvas files, creating visual canvases, mind maps, flowcharts, or when the user mentions Canvas files in Sogna.
 risk: critical
 date_added: "2026-03-21"
 version: 1.0.0
@@ -12,9 +12,9 @@ owner: [[orchestrator]]
 # JSON Canvas Skill
 
 ## When to Use
-- Use when creating or editing `.canvas` files for Obsidian.
+- Use when creating or editing `.canvas` files for Sogna.
 - Use for mind maps, flowcharts, visual note structures, or connected canvases.
-- Use when the user explicitly mentions JSON Canvas or Obsidian Canvas files.
+- Use when the user explicitly mentions JSON Canvas or Sogna Canvas files.
 
 ## File Structure
 
@@ -101,7 +101,7 @@ Nodes are objects placed on the canvas. Array order determines z-index: first no
 }
 ```
 
-**Newline pitfall**: Use `\n` for line breaks in JSON strings. Do **not** use the literal `\\n` -- Obsidian renders that as the characters `\` and `n`.
+**Newline pitfall**: Use `\n` for line breaks in JSON strings. Do **not** use the literal `\\n` -- Sogna renders that as the characters `\` and `n`.
 
 ### File Nodes
 
@@ -136,7 +136,7 @@ Nodes are objects placed on the canvas. Array order determines z-index: first no
   "y": 0,
   "width": 400,
   "height": 200,
-  "url": "https://obsidian.md"
+  "url": "https://sogna.md"
 }
 ```
 
@@ -252,7 +252,7 @@ See [references/EXAMPLES.md](references/EXAMPLES.md) for full canvas examples in
 ## References
 
 - [JSON Canvas Spec 1.0](https://jsoncanvas.org/spec/1.0/)
-- [JSON Canvas GitHub](https://github.com/obsidianmd/jsoncanvas)
+- [JSON Canvas GitHub](https://github.com/sognamd/jsoncanvas)
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

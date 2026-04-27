@@ -1,10 +1,10 @@
 ---
-name: azure-keyvault-keys-rust
-description: 'Azure Key Vault Keys SDK for Rust. Use for creating, managing, and using cryptographic keys. Triggers: "keyvault keys rust", "KeyClient rust", "create key rust", "encrypt rust", "sign rust".'
+name: azure-keyecosistema-keys-rust
+description: 'Azure Key Vault Keys SDK for Rust. Use for creating, managing, and using cryptographic keys. Triggers: "keyecosistema keys rust", "KeyClient rust", "create key rust", "encrypt rust", "sign rust".'
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
-id: skill-azure-keyvault-keys-rust
+id: skill-azure-keyecosistema-keys-rust
 owner: [[orchestrator]]
 ---
 
@@ -16,24 +16,24 @@ Client library for Azure Key Vault Keys — secure storage and management of cry
 ## Installation
 
 ```sh
-cargo add azure_security_keyvault_keys azure_identity
+cargo add azure_security_keyecosistema_keys azure_identity
 ```
 
 ## Environment Variables
 
 ```bash
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/
+AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net/
 ```
 
 ## Authentication
 
 ```rust
 use azure_identity::DeveloperToolsCredential;
-use azure_security_keyvault_keys::KeyClient;
+use azure_security_keyecosistema_keys::KeyClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let client = KeyClient::new(
-    "https://<vault-name>.vault.azure.net/",
+    "https://<ecosistema-name>.ecosistema.azure.net/",
     credential.clone(),
     None,
 )?;
@@ -64,7 +64,7 @@ println!("Key ID: {:?}", key.key.as_ref().map(|k| &k.kid));
 ### Create Key
 
 ```rust
-use azure_security_keyvault_keys::models::{CreateKeyParameters, KeyType};
+use azure_security_keyecosistema_keys::models::{CreateKeyParameters, KeyType};
 
 let params = CreateKeyParameters {
     kty: KeyType::Rsa,
@@ -81,7 +81,7 @@ let key = client
 ### Create EC Key
 
 ```rust
-use azure_security_keyvault_keys::models::{CreateKeyParameters, KeyType, CurveName};
+use azure_security_keyecosistema_keys::models::{CreateKeyParameters, KeyType, CurveName};
 
 let params = CreateKeyParameters {
     kty: KeyType::Ec,
@@ -104,7 +104,7 @@ client.delete_key("key-name", None).await?;
 ### List Keys
 
 ```rust
-use azure_security_keyvault_keys::ResourceExt;
+use azure_security_keyecosistema_keys::ResourceExt;
 use futures::TryStreamExt;
 
 let mut pager = client.list_key_properties(None)?.into_stream();
@@ -124,7 +124,7 @@ let backup = client.backup_key("key-name", None).await?;
 ### Restore Key
 
 ```rust
-use azure_security_keyvault_keys::models::RestoreKeyParameters;
+use azure_security_keyecosistema_keys::models::RestoreKeyParameters;
 
 let params = RestoreKeyParameters {
     key_bundle_backup: backup_bytes,
@@ -152,7 +152,7 @@ Key Vault can perform crypto operations without exposing the private key:
 3. **Use EC for signing** — more efficient than RSA
 4. **Use RSA for encryption** — when encrypting data
 5. **Backup keys** — for disaster recovery
-6. **Enable soft delete** — required for production vaults
+6. **Enable soft delete** — required for production ecosistemas
 7. **Use key rotation** — create new versions periodically
 
 ## RBAC Permissions
@@ -165,9 +165,9 @@ Assign these Key Vault roles:
 
 | Resource | Link |
 |----------|------|
-| API Reference | https://docs.rs/azure_security_keyvault_keys |
-| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/keyvault/azure_security_keyvault_keys |
-| crates.io | https://crates.io/crates/azure_security_keyvault_keys |
+| API Reference | https://docs.rs/azure_security_keyecosistema_keys |
+| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/keyecosistema/azure_security_keyecosistema_keys |
+| crates.io | https://crates.io/crates/azure_security_keyecosistema_keys |
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.

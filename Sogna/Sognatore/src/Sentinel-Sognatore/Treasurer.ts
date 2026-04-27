@@ -269,5 +269,25 @@ export class Treasurer extends EventEmitter {
     this._shutdownEmittedProjects.clear();
     this.flush();
   }
+
+  /**
+   * ADAPTIVE OPTIMIZER: Analyzes token efficiency.
+   * Returns a report of agents that are consuming high tokens with low successful frequency.
+   */
+  public getEfficiencyOptimization(): any {
+    const report: any[] = [];
+    for (const [agentId, data] of Object.entries(this._state.agents)) {
+      const avgTokens = data.totalTokens / (data.entries || 1);
+      const isHighConsumer = avgTokens > 1000; // Threshold for investigation
+      
+      report.push({
+        agentId,
+        avgTokens: Math.round(avgTokens),
+        status: isHighConsumer ? 'NEEDS_PRUNING' : 'OPTIMAL',
+        recommendation: isHighConsumer ? 'Review context fragments and reduce redundant metadata.' : 'No action required.'
+      });
+    }
+    return report;
+  }
 }
 

@@ -83,7 +83,7 @@ Gather this context (ask if not provided):
 |------|----------|--------|----------------|
 | Checklist | Quick wins, process steps | Low | 1-2 hours |
 | Cheat sheet | Reference material, shortcuts | Low | 2-4 hours |
-| Template (doc/spreadsheet/Notion) | Repeatable processes, workflows | Low-Med | 2-8 hours |
+| Template (doc/spreadsheet/Sogna Cloud) | Repeatable processes, workflows | Low-Med | 2-8 hours |
 | Swipe file | Inspiration, examples | Medium | 4-8 hours |
 | Ebook/guide | Deep education, authority | High | 1-3 weeks |
 | Mini-course (email) | Education + nurture | Medium | 1-2 weeks |

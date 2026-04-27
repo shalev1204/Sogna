@@ -8,7 +8,7 @@ tags:
 - secrets
 - security
 - api-keys
-- vault
+- ecosistema
 tools:
 - claude-code
 - Sognatore
@@ -123,7 +123,7 @@ Pense como um atacante para defender como um profissional:
 - Screenshots e screen recordings
 - Tickets (Jira, Linear) com segredos colados
 - Slack/Teams/email com chaves compartilhadas
-- Documentacao interna (Confluence, Notion)
+- Documentacao interna (Confluence, Sogna Cloud)
 - Backups nao criptografados (zip, tar, snapshots)
 
 ---
@@ -286,7 +286,7 @@ Para cada achado, classificar usando esta matriz:
 **Formula de Criticidade:**
 ```
 Criticidade = (Exposicao x Privilegio x Blast_Radius) / Tempo_Deteccao
-- Exposicao: publico(10), privado-multi(7), privado-solo(4), vault(1)
+- Exposicao: publico(10), privado-multi(7), privado-solo(4), ecosistema(1)
 - Privilegio: admin(10), write(7), read(4), minimal(1)
 - Blast_Radius: producao-all(10), producao-parcial(7), staging(4), dev(1)
 - Tempo_Deteccao: sem_monitoramento(10), semanal(5), diario(2), realtime(1)

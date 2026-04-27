@@ -301,7 +301,7 @@ Skills are organized by **language** and **product area** in the `skills/` direc
 | `messaging` | Event Hubs, Service Bus, Event Grid | `azure-eventhub-py`, `azure-servicebus-py` |
 | `monitoring` | OpenTelemetry, App Insights, Query | `azure-monitor-opentelemetry-py` |
 | `identity` | Authentication, DefaultAzureCredential | `azure-identity-py` |
-| `security` | Key Vault, secrets, keys, certificates | `azure-keyvault-py` |
+| `security` | Key Vault, secrets, keys, certificates | `azure-keyecosistema-py` |
 | `integration` | API Management, App Configuration | `azure-appconfiguration-py` |
 | `compute` | Batch, ML compute | `azure-compute-batch-java` |
 | `container` | Container Registry, ACR | `azure-containerregistry-py` |

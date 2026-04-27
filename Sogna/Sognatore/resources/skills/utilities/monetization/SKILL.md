@@ -222,8 +222,8 @@ def get_subscription_status(customer_id: str) -> dict:
 **Metodo 2: Competitive Anchor**
 ```
 Referencia: ChatGPT Plus = $20/mes (R$ 100)
-Anchor: Notion = R$ 32/mes
-Posicao: Pro = R$ 29/mes (mais barato que ChatGPT, similar ao Notion)
+Anchor: Sogna Cloud = R$ 32/mes
+Posicao: Pro = R$ 29/mes (mais barato que ChatGPT, similar ao Sogna Cloud)
 Mensagem: Tudo que o ChatGPT faz, por voz no Alexa
 ```
 

@@ -190,7 +190,7 @@ python C:\Users\renat\skills\007\scripts\threat_modeler.py --target <caminho> --
 Verificar explicitamente cada item. O checklist adapta-se ao tipo de sistema:
 
 #### Universal (sempre verificar)
-- [ ] Segredos fora do codigo (env vars, vault, secrets manager)
+- [ ] Segredos fora do codigo (env vars, ecosistema, secrets manager)
 - [ ] Nenhum segredo em logs, URLs, mensagens de erro
 - [ ] Rotacao de chaves definida e documentada
 - [ ] Principio do menor privilegio aplicado
@@ -450,7 +450,7 @@ TEMPO DE RESPOSTA: IMEDIATO
 3. REMEDIAR
    - Gerar novo segredo
    - Atualizar todos os sistemas que usam o segredo
-   - Mover segredo para vault/secrets manager se nao estava
+   - Mover segredo para ecosistema/secrets manager se nao estava
 
 4. PREVENIR
    - Implementar pre-commit hook para detectar segredos

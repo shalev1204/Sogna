@@ -1,10 +1,10 @@
 ---
-name: azure-keyvault-secrets-rust
-description: 'Azure Key Vault Secrets SDK for Rust. Use for storing and retrieving secrets, passwords, and API keys. Triggers: "keyvault secrets rust", "SecretClient rust", "get secret rust", "set secret rust".'
+name: azure-keyecosistema-secrets-rust
+description: 'Azure Key Vault Secrets SDK for Rust. Use for storing and retrieving secrets, passwords, and API keys. Triggers: "keyecosistema secrets rust", "SecretClient rust", "get secret rust", "set secret rust".'
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
-id: skill-azure-keyvault-secrets-rust
+id: skill-azure-keyecosistema-secrets-rust
 owner: [[orchestrator]]
 ---
 
@@ -16,24 +16,24 @@ Client library for Azure Key Vault Secrets — secure storage for passwords, API
 ## Installation
 
 ```sh
-cargo add azure_security_keyvault_secrets azure_identity
+cargo add azure_security_keyecosistema_secrets azure_identity
 ```
 
 ## Environment Variables
 
 ```bash
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/
+AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net/
 ```
 
 ## Authentication
 
 ```rust
 use azure_identity::DeveloperToolsCredential;
-use azure_security_keyvault_secrets::SecretClient;
+use azure_security_keyecosistema_secrets::SecretClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let client = SecretClient::new(
-    "https://<vault-name>.vault.azure.net/",
+    "https://<ecosistema-name>.ecosistema.azure.net/",
     credential.clone(),
     None,
 )?;
@@ -55,7 +55,7 @@ println!("Secret value: {:?}", secret.value);
 ### Set Secret
 
 ```rust
-use azure_security_keyvault_secrets::models::SetSecretParameters;
+use azure_security_keyecosistema_secrets::models::SetSecretParameters;
 
 let params = SetSecretParameters {
     value: Some("secret-value".into()),
@@ -71,7 +71,7 @@ let secret = client
 ### Update Secret Properties
 
 ```rust
-use azure_security_keyvault_secrets::models::UpdateSecretPropertiesParameters;
+use azure_security_keyecosistema_secrets::models::UpdateSecretPropertiesParameters;
 use std::collections::HashMap;
 
 let params = UpdateSecretPropertiesParameters {
@@ -94,7 +94,7 @@ client.delete_secret("secret-name", None).await?;
 ### List Secrets
 
 ```rust
-use azure_security_keyvault_secrets::ResourceExt;
+use azure_security_keyecosistema_secrets::ResourceExt;
 use futures::TryStreamExt;
 
 let mut pager = client.list_secret_properties(None)?.into_stream();
@@ -107,7 +107,7 @@ while let Some(secret) = pager.try_next().await? {
 ### Get Specific Version
 
 ```rust
-use azure_security_keyvault_secrets::models::SecretClientGetSecretOptions;
+use azure_security_keyecosistema_secrets::models::SecretClientGetSecretOptions;
 
 let options = SecretClientGetSecretOptions {
     secret_version: Some("version-id".into()),
@@ -140,9 +140,9 @@ Assign these Key Vault roles:
 
 | Resource | Link |
 |----------|------|
-| API Reference | https://docs.rs/azure_security_keyvault_secrets |
-| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/keyvault/azure_security_keyvault_secrets |
-| crates.io | https://crates.io/crates/azure_security_keyvault_secrets |
+| API Reference | https://docs.rs/azure_security_keyecosistema_secrets |
+| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/keyecosistema/azure_security_keyecosistema_secrets |
+| crates.io | https://crates.io/crates/azure_security_keyecosistema_secrets |
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.

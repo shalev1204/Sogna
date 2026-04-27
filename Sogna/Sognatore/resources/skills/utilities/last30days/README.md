@@ -290,7 +290,7 @@ This example shows /last30days learning **AI image generation prompting patterns
 
 **Notable single mentions:** UI/UX Pro Max (16.9K stars), SuperClaude framework, Compound Engineering Plugin, docx/pdf/pptx document skills, Nano-Banana, Connect (1000+ app integrations)
 
-**Marketer skill stack** (from @vibecode_edu): Slack, Email Knowledge, Nano-Banana, Notion, Skill Creator, Twitter post, Typefully
+**Marketer skill stack** (from @vibecode_edu): Slack, Email Knowledge, Nano-Banana, Sogna Cloud, Skill Creator, Twitter post, Typefully
 
 **Key insight from Reddit:** Keep CLAUDE.md short (~1K context), use Skills for "context on demand", and ensure skill descriptions contain your trigger keywords.
 

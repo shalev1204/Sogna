@@ -1,10 +1,10 @@
 ---
-name: azure-security-keyvault-keys-dotnet
+name: azure-security-keyecosistema-keys-dotnet
 description: Azure Key Vault Keys SDK for .NET. Client library for managing cryptographic keys in Azure Key Vault and Managed HSM. Use for key creation, rotation, encryption, decryption, signing, and verification.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
-id: skill-azure-security-keyvault-keys-dotnet
+id: skill-azure-security-keyecosistema-keys-dotnet
 owner: [[ops-security]]
 ---
 
@@ -25,9 +25,9 @@ dotnet add package Azure.Identity
 ## Environment Variables
 
 ```bash
-KEY_VAULT_NAME=<your-key-vault-name>
+KEY_VAULT_NAME=<your-key-ecosistema-name>
 # Or full URI
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net
+AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net
 ```
 
 ## Client Hierarchy
@@ -60,7 +60,7 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Keys;
 
 var keyVaultName = Environment.GetEnvironmentVariable("KEY_VAULT_NAME");
-var kvUri = $"https://{keyVaultName}.vault.azure.net";
+var kvUri = $"https://{keyVaultName}.ecosistema.azure.net";
 
 var client = new KeyClient(new Uri(kvUri), new DefaultAzureCredential());
 ```
@@ -194,7 +194,7 @@ CryptographyClient cryptoClient = client.GetCryptographyClient(
 
 // Or create directly with key ID
 CryptographyClient cryptoClient = new CryptographyClient(
-    new Uri("https://myvault.vault.azure.net/keys/my-rsa-key/version"),
+    new Uri("https://myecosistema.ecosistema.azure.net/keys/my-rsa-key/version"),
     new DefaultAzureCredential());
 ```
 
@@ -271,7 +271,7 @@ var resolver = new KeyResolver(new DefaultAzureCredential());
 
 // Resolve key by ID to get CryptographyClient
 CryptographyClient cryptoClient = await resolver.ResolveAsync(
-    new Uri("https://myvault.vault.azure.net/keys/my-key/version"));
+    new Uri("https://myecosistema.ecosistema.azure.net/keys/my-key/version"));
 
 // Use for encryption
 EncryptResult result = await cryptoClient.EncryptAsync(
@@ -405,9 +405,9 @@ catch (RequestFailedException ex)
 | Resource | URL |
 |----------|-----|
 | NuGet Package | https://www.nuget.org/packages/Azure.Security.KeyVault.Keys |
-| API Reference | https://learn.microsoft.com/dotnet/api/azure.security.keyvault.keys |
-| Quickstart | https://learn.microsoft.com/azure/key-vault/keys/quick-create-net |
-| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/keyvault/Azure.Security.KeyVault.Keys |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.security.keyecosistema.keys |
+| Quickstart | https://learn.microsoft.com/azure/key-ecosistema/keys/quick-create-net |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/keyecosistema/Azure.Security.KeyVault.Keys |
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.

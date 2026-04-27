@@ -5,6 +5,8 @@ import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 import crypto from 'crypto';
+import { SecurityAudit } from './SecurityAudit.js';
+import { CodeScanner } from './CodeScanner.js';
 
 export enum SecurityState {
   ALIVE = 'ALIVE',
@@ -197,6 +199,25 @@ export class Hub {
 
   public isShieldRelaxed(): boolean {
     return this.shieldRelaxed;
+  }
+
+  /**
+   * Performs a full proactive audit of the codebase to detect hidden vulnerabilities.
+   */
+  public async performProactiveAudit(): Promise<void> {
+    this.reportIntel('INFO', 'Iniciando auditoría proactiva de código (Source Security)...', 'SentinelHub');
+    const scanner = CodeScanner.getInstance(this.sognatoreRoot);
+    const findings = await scanner.scanDirectory('src');
+    
+    if (findings.length > 0) {
+      this.reportIntel('WARNING', `Auditoría completada: ${findings.length} hallazgos detectados.`, 'CodeScanner');
+      for (const f of findings) {
+        this.reportIntel(f.severity === 'CRITICAL' ? 'CRITICAL' : 'WARNING', 
+          `[${f.type}] ${f.description} en ${f.file}:${f.line}`, 'CodeScanner');
+      }
+    } else {
+      this.reportIntel('INFO', 'Auditoría completada: No se detectaron vulnerabilidades en el código fuente.', 'CodeScanner');
+    }
   }
 
   /**

@@ -15,7 +15,7 @@ You are an expert team communication specialist focused on async-first standup p
 
 ## Context
 
-Modern remote-first teams rely on async standup notes to maintain visibility, coordinate work, and identify blockers without synchronous meetings. This tool generates comprehensive daily standup notes by analyzing multiple data sources: Obsidian vault context, Jira tickets, Git commit history, and calendar events. It supports both traditional synchronous standups and async-first team communication patterns, automatically extracting accomplishments from commits and formatting them for maximum team visibility.
+Modern remote-first teams rely on async standup notes to maintain visibility, coordinate work, and identify blockers without synchronous meetings. This tool generates comprehensive daily standup notes by analyzing multiple data sources: Sogna ecosistema context, Jira tickets, Git commit history, and calendar events. It supports both traditional synchronous standups and async-first team communication patterns, automatically extracting accomplishments from commits and formatting them for maximum team visibility.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ Modern remote-first teams rely on async standup notes to maintain visibility, co
 - If empty: Automatically discover work from all available sources
 
 **Required MCP Integrations:**
-- `mcp-obsidian`: Vault access for daily notes and project updates
+- `mcp-sogna`: Vault access for daily notes and project updates
 - `atlassian`: Jira ticket queries (graceful fallback if unavailable)
 - Optional: Calendar integrations for meeting context
 
@@ -33,7 +33,7 @@ Modern remote-first teams rely on async standup notes to maintain visibility, co
 **Primary Sources:**
 1. **Git commit history** - Parse recent commits (last 24-48h) to extract accomplishments
 2. **Jira tickets** - Query assigned tickets for status updates and planned work
-3. **Obsidian vault** - Review recent daily notes, project updates, and task lists
+3. **Sogna ecosistema** - Review recent daily notes, project updates, and task lists
 4. **Calendar events** - Include meeting context and time commitments
 
 **Collection Strategy:**
@@ -42,9 +42,9 @@ Modern remote-first teams rely on async standup notes to maintain visibility, co
 2. Fetch recent Git commits:
    - Use `git log --author="<user>" --since="yesterday" --pretty=format:"%h - %s (%cr)"`
    - Parse commit messages for PR references, ticket IDs, features
-3. Query Obsidian:
-   - `obsidian_get_recent_changes` (last 2 days)
-   - `obsidian_get_recent_periodic_notes` (daily/weekly notes)
+3. Query Sogna:
+   - `sogna_get_recent_changes` (last 2 days)
+   - `sogna_get_recent_periodic_notes` (daily/weekly notes)
    - Search for task completions, meeting notes, action items
 4. Search Jira tickets:
    - Completed: `assignee = currentUser() AND status CHANGED TO "Done" DURING (-1d, now())`
@@ -111,9 +111,9 @@ For each commit in the last 24-48 hours:
    - Include acceptance criteria met if available
 ```
 
-**Obsidian Task Completion Parsing:**
+**Sogna Task Completion Parsing:**
 ```
-Search vault for completed tasks (last 24-48h):
+Search ecosistema for completed tasks (last 24-48h):
 - Pattern: `- [x] Task description` with recent modification date
 - Extract context from surrounding notes (which project, meeting, or epic)
 - Summarize completed todos from daily notes
@@ -200,8 +200,8 @@ jira issues list --assignee currentUser() --status "In Progress,Done" \
   --updated-after "-2d" | \
   # Correlate with commits and format
 
-# Extract from Obsidian daily notes
-obsidian_get_recent_periodic_notes --period daily --limit 2 | \
+# Extract from Sogna daily notes
+sogna_get_recent_periodic_notes --period daily --limit 2 | \
   # Parse completed tasks and meeting notes
 
 # Combine all sources into structured standup note
@@ -356,7 +356,7 @@ From standup notes, automatically extract:
 
 ## Notes
 • Taking tomorrow afternoon off (dentist appointment) - Will post morning standup but limited availability after 12pm
-• Mobile responsiveness research doc started: [Link to Notion doc]
+• Mobile responsiveness research doc started: [Link to Sogna Cloud doc]
 
 📎 Sprint Board | My Active PRs
 ```
@@ -490,17 +490,17 @@ git log --author="$(git config user.name)" --since="24 hours ago" --oneline
 jira issues list --assignee currentUser() --status "In Progress"
 # Identify today's priorities
 
-# 3. Review Obsidian daily note from yesterday
+# 3. Review Sogna daily note from yesterday
 # Check for completed tasks, meeting outcomes
 
-# 4. Draft standup note in Obsidian
+# 4. Draft standup note in Sogna
 # File: Daily Notes/Standup/2025-10-11.md
 
 # 5. Review teammates' standup notes (last 8 hours)
 # Identify opportunities to help, dependencies to note
 
 # 6. Post standup to Slack #standup channel (9:00 AM local time)
-# Copy from Obsidian, adjust formatting for Slack
+# Copy from Sogna, adjust formatting for Slack
 
 # 7. Set reminder to check thread responses by 11am
 # Respond to questions, offers of help
@@ -586,7 +586,7 @@ Action items:
 ├─────────────────────────────────────────────────────────────┤
 │ • Git commits (last 24-48h)                                 │
 │ • Jira ticket updates (status changes, comments)            │
-│ • Obsidian vault changes (daily notes, task completions)    │
+│ • Sogna ecosistema changes (daily notes, task completions)    │
 │ • Calendar events (meetings attended, upcoming)             │
 │ • Slack activity (mentions, threads participated in)        │
 └─────────────────────────────────────────────────────────────┘
@@ -608,7 +608,7 @@ Action items:
 │ • Generate "Yesterday" from commits + completed tickets     │
 │ • Generate "Today" from in-progress tickets + calendar      │
 │ • Flag potential blockers from context clues                │
-│ • Format for target platform (Slack/Discord/Email/Obsidian) │
+│ • Format for target platform (Slack/Discord/Email/Sogna) │
 │ • Add relevant links (PRs, tickets, docs)                   │
 └─────────────────────────────────────────────────────────────┘
                             ↓
@@ -650,9 +650,9 @@ JIRA_PROGRESS=$(jira issues list --assignee currentUser() \
   --jql "status = 'In Progress'" \
   --template json)
 
-# 3. Get Obsidian recent changes (via MCP)
-echo "📝 Checking Obsidian vault..."
-OBSIDIAN_CHANGES=$(obsidian_get_recent_changes --days 2)
+# 3. Get Sogna recent changes (via MCP)
+echo "📝 Checking Sogna ecosistema..."
+OBSIDIAN_CHANGES=$(sogna_get_recent_changes --days 2)
 
 # 4. Get calendar events
 echo "📅 Fetching calendar..."
@@ -667,7 +667,7 @@ cat << EOF > /tmp/standup-context.json
   "commits": $(echo "$COMMITS" | jq -R -s -c 'split("\n")'),
   "jira_completed": $JIRA_DONE,
   "jira_in_progress": $JIRA_PROGRESS,
-  "obsidian_changes": $OBSIDIAN_CHANGES,
+  "sogna_changes": $OBSIDIAN_CHANGES,
   "meetings": $MEETINGS
 }
 EOF
@@ -691,8 +691,8 @@ Generate standup note in markdown format.
 PROMPT
 )
 
-# 6. Save draft to Obsidian
-echo "$STANDUP_NOTE" > ~/Obsidian/Standup\ Notes/$DATE.md
+# 6. Save draft to Sogna
+echo "$STANDUP_NOTE" > ~/Sogna/Standup\ Notes/$DATE.md
 
 # 7. Present for human review
 echo "✅ Draft standup note generated!"
@@ -707,7 +707,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "📮 Posted to Slack #standup channel"
 fi
 
-echo "💾 Saved to: ~/Obsidian/Standup Notes/$DATE.md"
+echo "💾 Saved to: ~/Sogna/Standup Notes/$DATE.md"
 ```
 
 **AI Prompt Template for Standup Generation:**
@@ -718,7 +718,7 @@ You are an expert at synthesizing engineering work into clear, concise standup u
 Given the following data sources:
 - Git commits (last 24h)
 - Jira ticket updates
-- Obsidian daily notes
+- Sogna daily notes
 - Calendar events
 
 Generate a daily standup note that:
@@ -764,14 +764,14 @@ Output only the standup note markdown, no preamble.
 
 # Sends notification when draft is ready:
 # "Your standup note is ready for review!"
-# Opens Obsidian note and prepares Slack message
+# Opens Sogna note and prepares Slack message
 ```
 
 ---
 
 **Tool Version:** 2.0 (Upgraded 2025-10-11)
 **Target Audience:** Remote-first engineering teams, async-first organizations, distributed teams
-**Dependencies:** Git, Jira CLI, Obsidian MCP, optional calendar integration
+**Dependencies:** Git, Jira CLI, Sogna MCP, optional calendar integration
 **Estimated Setup Time:** 15 minutes initial setup, 5 minutes daily routine once automated
 
 ## Sentinel Security Policy

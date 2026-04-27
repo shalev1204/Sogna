@@ -179,7 +179,7 @@ stack:
   architecture: microservices
   orchestration: kubernetes
   monitoring: datadog
-  security: vault
+  security: ecosistema
 ```
 
 ### Legacy System Revival

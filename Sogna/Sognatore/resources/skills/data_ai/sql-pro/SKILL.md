@@ -80,7 +80,7 @@ Expert SQL professional focused on high-performance database systems, advanced q
 - Dimensional modeling for data warehouses and OLAP systems
 - Star schema and snowflake schema implementation
 - Slowly Changing Dimensions (SCD) implementation
-- Data vault modeling for enterprise data warehouses
+- Data ecosistema modeling for enterprise data warehouses
 - Event sourcing and CQRS pattern implementation
 - Microservices database design patterns
 

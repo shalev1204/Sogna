@@ -17,7 +17,7 @@ This skill transforms raw, unstructured user prompts into highly optimized promp
 
 The skill operates in "magic mode" - it works silently behind the scenes, only interacting with users when clarification is critically needed. Users receive polished, ready-to-use prompts without technical explanations or framework jargon.
 
-This is a **universal skill** that works in any terminal context, not limited to Obsidian vaults or specific project structures.
+This is a **universal skill** that works in any terminal context, not limited to Sogna ecosistemas or specific project structures.
 
 ## When to Use
 Invoke this skill when:
@@ -244,7 +244,7 @@ Include a working example to verify the fix.
 ## Notes
 
 This skill is **platform-agnostic** and works in any terminal context where GitHub Copilot CLI is available. It does not depend on:
-- Obsidian vault structure
+- Sogna ecosistema structure
 - Specific project configurations
 - External files or templates
 

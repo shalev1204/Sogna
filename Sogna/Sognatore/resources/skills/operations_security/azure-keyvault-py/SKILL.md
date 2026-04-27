@@ -1,10 +1,10 @@
 ---
-name: azure-keyvault-py
+name: azure-keyecosistema-py
 description: Azure Key Vault SDK for Python. Use for secrets, keys, and certificates management with secure storage.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
-id: skill-azure-keyvault-py
+id: skill-azure-keyecosistema-py
 owner: [[ops-security]]
 ---
 
@@ -17,22 +17,22 @@ Secure storage and management for secrets, cryptographic keys, and certificates.
 
 ```bash
 # Secrets
-pip install azure-keyvault-secrets azure-identity
+pip install azure-keyecosistema-secrets azure-identity
 
 # Keys (cryptographic operations)
-pip install azure-keyvault-keys azure-identity
+pip install azure-keyecosistema-keys azure-identity
 
 # Certificates
-pip install azure-keyvault-certificates azure-identity
+pip install azure-keyecosistema-certificates azure-identity
 
 # All
-pip install azure-keyvault-secrets azure-keyvault-keys azure-keyvault-certificates azure-identity
+pip install azure-keyecosistema-secrets azure-keyecosistema-keys azure-keyecosistema-certificates azure-identity
 ```
 
 ## Environment Variables
 
 ```bash
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/
+AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net/
 ```
 
 ## Secrets
@@ -41,12 +41,12 @@ AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/
 
 ```python
 from azure.identity import DefaultAzureCredential
-from azure.keyvault.secrets import SecretClient
+from azure.keyecosistema.secrets import SecretClient
 
 credential = DefaultAzureCredential()
-vault_url = "https://<vault-name>.vault.azure.net/"
+ecosistema_url = "https://<ecosistema-name>.ecosistema.azure.net/"
 
-client = SecretClient(vault_url=vault_url, credential=credential)
+client = SecretClient(ecosistema_url=ecosistema_url, credential=credential)
 ```
 
 ### Secret Operations
@@ -88,18 +88,18 @@ client.begin_recover_deleted_secret("database-password").result()
 
 ```python
 from azure.identity import DefaultAzureCredential
-from azure.keyvault.keys import KeyClient
+from azure.keyecosistema.keys import KeyClient
 
 credential = DefaultAzureCredential()
-vault_url = "https://<vault-name>.vault.azure.net/"
+ecosistema_url = "https://<ecosistema-name>.ecosistema.azure.net/"
 
-client = KeyClient(vault_url=vault_url, credential=credential)
+client = KeyClient(ecosistema_url=ecosistema_url, credential=credential)
 ```
 
 ### Key Operations
 
 ```python
-from azure.keyvault.keys import KeyType
+from azure.keyecosistema.keys import KeyType
 
 # Create RSA key
 rsa_key = client.create_rsa_key("rsa-key", size=2048)
@@ -123,13 +123,13 @@ deleted_key = poller.result()
 ### Cryptographic Operations
 
 ```python
-from azure.keyvault.keys.crypto import CryptographyClient, EncryptionAlgorithm
+from azure.keyecosistema.keys.crypto import CryptographyClient, EncryptionAlgorithm
 
 # Get crypto client for a specific key
 crypto_client = CryptographyClient(key, credential=credential)
 # Or from key ID
 crypto_client = CryptographyClient(
-    "https://<vault>.vault.azure.net/keys/<key-name>/<version>",
+    "https://<ecosistema>.ecosistema.azure.net/keys/<key-name>/<version>",
     credential=credential
 )
 
@@ -143,7 +143,7 @@ result = crypto_client.decrypt(EncryptionAlgorithm.rsa_oaep, ciphertext)
 decrypted = result.plaintext
 
 # Sign
-from azure.keyvault.keys.crypto import SignatureAlgorithm
+from azure.keyecosistema.keys.crypto import SignatureAlgorithm
 import hashlib
 
 digest = hashlib.sha256(b"data to sign").digest()
@@ -161,12 +161,12 @@ print(f"Valid: {result.is_valid}")
 
 ```python
 from azure.identity import DefaultAzureCredential
-from azure.keyvault.certificates import CertificateClient, CertificatePolicy
+from azure.keyecosistema.certificates import CertificateClient, CertificatePolicy
 
 credential = DefaultAzureCredential()
-vault_url = "https://<vault-name>.vault.azure.net/"
+ecosistema_url = "https://<ecosistema-name>.ecosistema.azure.net/"
 
-client = CertificateClient(vault_url=vault_url, credential=credential)
+client = CertificateClient(ecosistema_url=ecosistema_url, credential=credential)
 ```
 
 ### Certificate Operations
@@ -182,8 +182,8 @@ certificate = client.get_certificate("my-cert")
 print(f"Thumbprint: {certificate.properties.x509_thumbprint.hex()}")
 
 # Get certificate with private key (as secret)
-from azure.keyvault.secrets import SecretClient
-secret_client = SecretClient(vault_url=vault_url, credential=credential)
+from azure.keyecosistema.secrets import SecretClient
+secret_client = SecretClient(ecosistema_url=ecosistema_url, credential=credential)
 cert_secret = secret_client.get_secret("my-cert")
 # cert_secret.value contains PEM or PKCS12
 
@@ -200,20 +200,20 @@ deleted = poller.result()
 
 | Client | Package | Purpose |
 |--------|---------|---------|
-| `SecretClient` | `azure-keyvault-secrets` | Store/retrieve secrets |
-| `KeyClient` | `azure-keyvault-keys` | Manage cryptographic keys |
-| `CryptographyClient` | `azure-keyvault-keys` | Encrypt/decrypt/sign/verify |
-| `CertificateClient` | `azure-keyvault-certificates` | Manage certificates |
+| `SecretClient` | `azure-keyecosistema-secrets` | Store/retrieve secrets |
+| `KeyClient` | `azure-keyecosistema-keys` | Manage cryptographic keys |
+| `CryptographyClient` | `azure-keyecosistema-keys` | Encrypt/decrypt/sign/verify |
+| `CertificateClient` | `azure-keyecosistema-certificates` | Manage certificates |
 
 ## Async Clients
 
 ```python
 from azure.identity.aio import DefaultAzureCredential
-from azure.keyvault.secrets.aio import SecretClient
+from azure.keyecosistema.secrets.aio import SecretClient
 
 async def get_secret():
     credential = DefaultAzureCredential()
-    client = SecretClient(vault_url=vault_url, credential=credential)
+    client = SecretClient(ecosistema_url=ecosistema_url, credential=credential)
     
     async with client:
         secret = await client.get_secret("my-secret")

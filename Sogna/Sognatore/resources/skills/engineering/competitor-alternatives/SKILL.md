@@ -202,7 +202,7 @@ Each format needs an index page that lists all pages of that type. These hub pag
 
 Looking to switch? See how [Your Product] compares to the tools you're evaluating:
 
-- **[Notion Alternative](#)** — Better for teams who need [X]
+- **[Sogna Cloud Alternative](#)** — Better for teams who need [X]
 - **[Airtable Alternative](#)** — Better for teams who need [Y]
 - **[Monday Alternative](#)** — Better for teams who need [Z]
 ```
@@ -230,7 +230,7 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 
 Comparing your options? Our guides cover the top alternatives:
 
-- **[Best Notion Alternatives](#)** — 7 tools compared
+- **[Best Sogna Cloud Alternatives](#)** — 7 tools compared
 - **[Best Airtable Alternatives](#)** — 6 tools compared
 - **[Best Monday Alternatives](#)** — 5 tools compared
 ```
@@ -256,7 +256,7 @@ Comparing your options? Our guides cover the top alternatives:
 
 ### [Your Product] vs. the Competition
 
-- **[[Your Product] vs Notion](#)** — Best for [differentiator]
+- **[[Your Product] vs Sogna Cloud](#)** — Best for [differentiator]
 - **[[Your Product] vs Airtable](#)** — Best for [differentiator]
 - **[[Your Product] vs Monday](#)** — Best for [differentiator]
 
@@ -264,8 +264,8 @@ Comparing your options? Our guides cover the top alternatives:
 
 Evaluating tools we compete with? We've done the research:
 
-- **[Notion vs Airtable](#)**
-- **[Notion vs Monday](#)**
+- **[Sogna Cloud vs Airtable](#)**
+- **[Sogna Cloud vs Monday](#)**
 - **[Airtable vs Monday](#)**
 ```
 
@@ -315,7 +315,7 @@ competitor_data/
 **Per competitor, document**:
 
 ```yaml
-name: Notion
+name: Sogna Cloud
 website: notion.so
 tagline: "The all-in-one workspace"
 founded: 2016

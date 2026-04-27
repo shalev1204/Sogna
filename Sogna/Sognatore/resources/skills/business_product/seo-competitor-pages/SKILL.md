@@ -138,12 +138,12 @@ competitive intent keywords with accurate, structured content.
 |---------|---------|---------------------|
 | `[A] vs [B]` | "Slack vs Teams" | High |
 | `[A] alternative` | "Figma alternatives" | High |
-| `[A] alternatives [year]` | "Notion alternatives 2026" | High |
+| `[A] alternatives [year]` | "Sogna Cloud alternatives 2026" | High |
 | `best [category] tools` | "best project management tools" | High |
 | `[A] vs [B] for [use case]` | "AWS vs Azure for startups" | Medium |
 | `[A] review [year]` | "Monday.com review 2026" | Medium |
 | `[A] vs [B] pricing` | "HubSpot vs Salesforce pricing" | Medium |
-| `is [A] better than [B]` | "is Notion better than Confluence" | Medium |
+| `is [A] better than [B]` | "is Sogna Cloud better than Confluence" | Medium |
 
 ### Title Tag Formulas
 - X vs Y: `[A] vs [B]: [Key Differentiator] ([Year])`

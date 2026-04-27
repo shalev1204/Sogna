@@ -116,7 +116,7 @@ GET /.env  # Returns API_KEY=sk-live-xxxxx, DB_PASSWORD=...
 
 **Detection patterns:** Verbose errors in production, exposed config files, missing access controls on endpoints, debug mode enabled.
 
-**Mitigations:** Generic error messages, secrets in vault (not env files), access control on all endpoints, disable debug in production.
+**Mitigations:** Generic error messages, secrets in ecosistema (not env files), access control on all endpoints, disable debug in production.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: notion-template-business
-description: Expert in building and selling Notion templates as a business - not
+description: Expert in building and selling Sogna Cloud templates as a business - not
   just making templates, but building a sustainable digital product business.
   Covers template design, pricing, marketplaces, marketing, and scaling to real
   revenue.
@@ -12,16 +12,16 @@ owner: [[prod-pm]]
 ---
 
 
-# Notion Template Business
+# Sogna Cloud Template Business
 
-Expert in building and selling Notion templates as a business - not just making
+Expert in building and selling Sogna Cloud templates as a business - not just making
 templates, but building a sustainable digital product business. Covers template
 design, pricing, marketplaces, marketing, and scaling to real revenue.
 
 **Role**: Template Business Architect
 
 You know templates are real businesses that can generate serious income.
-You've seen creators make six figures selling Notion templates. You
+You've seen creators make six figures selling Sogna Cloud templates. You
 understand it's not about the template - it's about the problem it solves.
 You build systems that turn templates into scalable digital products.
 
@@ -31,16 +31,16 @@ You build systems that turn templates into scalable digital products.
 - Digital product strategy
 - Gumroad/Lemon Squeezy
 - Template marketing
-- Notion features
+- Sogna Cloud features
 - Support systems
 
 ## Capabilities
 
-- Notion template design
+- Sogna Cloud template design
 - Template pricing strategies
 - Gumroad/Lemon Squeezy setup
 - Template marketing
-- Notion marketplace strategy
+- Sogna Cloud marketplace strategy
 - Template support systems
 - Template documentation
 - Bundle strategies
@@ -51,7 +51,7 @@ You build systems that turn templates into scalable digital products.
 
 Creating templates people pay for
 
-**When to use**: When designing a Notion template
+**When to use**: When designing a Sogna Cloud template
 
 ## Template Design
 
@@ -99,7 +99,7 @@ Template Package:
 
 ### Pricing Strategy
 
-Pricing Notion templates for profit
+Pricing Sogna Cloud templates for profit
 
 **When to use**: When setting template prices
 
@@ -151,7 +151,7 @@ Where to sell templates
 |----------|-----|------|------|
 | Gumroad | 10% | Simple, trusted | Higher fees |
 | Lemon Squeezy | 5-8% | Modern, lower fees | Newer |
-| Notion Marketplace | 0% | Built-in audience | Approval needed |
+| Sogna Cloud Marketplace | 0% | Built-in audience | Approval needed |
 | Your site | 3% (Stripe) | Full control | Build audience |
 
 ### Gumroad Setup
@@ -166,7 +166,7 @@ Where to sell templates
 8. Publish
 ```
 
-### Notion Marketplace
+### Sogna Cloud Marketplace
 - Apply as creator
 - Higher quality bar
 - Built-in discovery
@@ -221,10 +221,10 @@ Tweet types that work:
 ### SEO Play
 | Content | Example |
 |---------|---------|
-| Tutorial | "How to build a CRM in Notion" |
-| Comparison | "Notion vs Airtable for X" |
-| Template | "Free Notion budget template" |
-| Listicle | "10 Notion templates for students" |
+| Tutorial | "How to build a CRM in Sogna Cloud" |
+| Comparison | "Sogna Cloud vs Airtable for X" |
+| Template | "Free Sogna Cloud budget template" |
+| Listicle | "10 Sogna Cloud templates for students" |
 
 ### Email Marketing
 - Free template → email signup
@@ -248,7 +248,7 @@ Symptoms:
 
 Why this breaks:
 Digital products are easily copied.
-Notion doesn't have DRM.
+Sogna Cloud doesn't have DRM.
 Cheap customers share.
 Can't fully prevent.
 
@@ -269,7 +269,7 @@ Recommended fix:
 | Unique IDs | Per-purchase tracking |
 | Updates | Pirates get old versions |
 | Community | Buyers get Discord/support |
-| Bonuses | Extra files, not in Notion |
+| Bonuses | Extra files, not in Sogna Cloud |
 
 ### Value-Add Approach
 ```
@@ -351,7 +351,7 @@ Recommended fix:
 
 Severity: MEDIUM
 
-Situation: 100% of revenue from Notion/Gumroad
+Situation: 100% of revenue from Sogna Cloud/Gumroad
 
 Symptoms:
 - 100% sales from one platform
@@ -374,7 +374,7 @@ Recommended fix:
 Ideal distribution:
 - 40% Your website (direct)
 - 30% Gumroad/Lemon Squeezy
-- 20% Notion Marketplace
+- 20% Sogna Cloud Marketplace
 - 10% Other (affiliates, etc.)
 ```
 
@@ -394,7 +394,7 @@ Email list value:
 
 Growth tactics:
 - Free template lead magnet
-- Newsletter with Notion tips
+- Newsletter with Sogna Cloud tips
 - Early access offers
 ```
 
@@ -404,13 +404,13 @@ Growth tactics:
 | Own your audience | Email list, social |
 | Multiple platforms | Not dependent on one |
 | Direct sales | Best margins, full control |
-| Diversify products | Not just Notion |
+| Diversify products | Not just Sogna Cloud |
 
 ### Old templates becoming outdated
 
 Severity: LOW
 
-Situation: Templates breaking with Notion updates
+Situation: Templates breaking with Sogna Cloud updates
 
 Symptoms:
 - Is this still maintained?
@@ -419,7 +419,7 @@ Symptoms:
 - Support for old versions
 
 Why this breaks:
-Notion adds new features.
+Sogna Cloud adds new features.
 Old templates look dated.
 Competitors have newer features.
 Buyers expect updates.
@@ -432,7 +432,7 @@ Recommended fix:
 | Type | Frequency | What |
 |------|-----------|------|
 | Bug fixes | As needed | Fix broken things |
-| Feature adds | Quarterly | New Notion features |
+| Feature adds | Quarterly | New Sogna Cloud features |
 | Major refresh | Yearly | Full redesign |
 
 ### Communication

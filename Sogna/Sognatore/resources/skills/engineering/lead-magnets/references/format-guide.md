@@ -40,7 +40,7 @@ Detailed creation guidance for each lead magnet format.
 - End each chapter with a quick takeaway
 - Don't pad — density beats length
 
-**Tools**: Canva, Google Docs → PDF, Notion export, Designrr, Beacon.by
+**Tools**: Canva, Google Docs → PDF, Sogna Cloud export, Designrr, Beacon.by
 
 ---
 
@@ -98,11 +98,11 @@ Detailed creation guidance for each lead magnet format.
 - Lock formula cells, leave input cells editable
 - Include a "Make a Copy" link (Google Sheets)
 
-### Notion Templates
+### Sogna Cloud Templates
 - Provide a duplicate link
 - Include a getting-started guide
 - Pre-populate with example content
-- Use Notion's database features (views, filters, relations)
+- Use Sogna Cloud's database features (views, filters, relations)
 - Keep it simple — don't over-engineer
 
 ### Document Templates

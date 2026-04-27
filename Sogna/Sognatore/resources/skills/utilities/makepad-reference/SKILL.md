@@ -51,7 +51,7 @@ log!("State: {} / {}", self.counter, self.is_loading);
 
 ## Resources
 
-- [Makepad Official Docs](https://publish.obsidian.md/makepad-docs/) - Obsidian-based documentation
+- [Makepad Official Docs](https://publish.sogna.md/makepad-docs/) - Sogna-based documentation
 - [Makepad Repository](https://github.com/makepad/makepad)
 - [Robrix](https://github.com/project-robius/robrix) - Production reference
 - [Moly](https://github.com/moxin-org/moly) - Production reference

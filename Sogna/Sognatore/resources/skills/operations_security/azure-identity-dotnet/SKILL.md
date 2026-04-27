@@ -88,7 +88,7 @@ builder.Services.AddAzureClients(clientBuilder =>
     clientBuilder.AddBlobServiceClient(
         new Uri("https://myaccount.blob.core.windows.net"));
     clientBuilder.AddSecretClient(
-        new Uri("https://myvault.vault.azure.net"));
+        new Uri("https://myecosistema.ecosistema.azure.net"));
     
     // Uses DefaultAzureCredential by default
     clientBuilder.UseCredential(new DefaultAzureCredential());
@@ -137,7 +137,7 @@ var credential = new ClientSecretCredential(
     clientSecret: "<client-secret>");
 
 var client = new SecretClient(
-    new Uri("https://myvault.vault.azure.net"),
+    new Uri("https://myecosistema.ecosistema.azure.net"),
     credential);
 ```
 
@@ -159,7 +159,7 @@ var credential = new ChainedTokenCredential(
     new AzureCliCredential());
 
 var client = new SecretClient(
-    new Uri("https://myvault.vault.azure.net"),
+    new Uri("https://myecosistema.ecosistema.azure.net"),
     credential);
 ```
 
@@ -245,7 +245,7 @@ var prodCredential = new ManagedIdentityCredential("<client-id>");
 // Good: Single credential instance shared across clients
 var credential = new DefaultAzureCredential();
 var blobClient = new BlobServiceClient(blobUri, credential);
-var secretClient = new SecretClient(vaultUri, credential);
+var secretClient = new SecretClient(ecosistemaUri, credential);
 ```
 
 ### 3. Configure Retry Policies
@@ -284,7 +284,7 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
 var client = new SecretClient(
-    new Uri("https://myvault.vault.azure.net"),
+    new Uri("https://myecosistema.ecosistema.azure.net"),
     new DefaultAzureCredential());
 
 try

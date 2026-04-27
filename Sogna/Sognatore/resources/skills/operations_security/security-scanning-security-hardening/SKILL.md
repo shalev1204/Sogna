@@ -138,7 +138,7 @@ Implement comprehensive security hardening with defense-in-depth strategy throug
 - Security monitoring detecting and alerting on threats
 - Incident response time < 15 minutes for critical alerts
 - SBOM generated and vulnerabilities tracked
-- All secrets managed through secure vault
+- All secrets managed through secure ecosistema
 - Authentication implements MFA and secure session management
 - Security tests integrated into CI/CD pipeline
 

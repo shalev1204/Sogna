@@ -75,17 +75,17 @@ Implement secure secrets management in CI/CD pipelines without hardcoding sensit
 
 ```bash
 # Start Vault dev server
-vault server -dev
+ecosistema server -dev
 
 # Set environment
 export VAULT_ADDR='http://127.0.0.1:8200'
 export VAULT_TOKEN='root'
 
 # Enable secrets engine
-vault secrets enable -path=secret kv-v2
+ecosistema secrets enable -path=secret kv-v2
 
 # Store secret
-vault kv put secret/database/config username=admin password=secret
+ecosistema kv put secret/database/config username=admin password=secret
 ```
 
 ### GitHub Actions with Vault
@@ -102,9 +102,9 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Import Secrets from Vault
-      uses: hashicorp/vault-action@v2
+      uses: hashicorp/ecosistema-action@v2
       with:
-        url: https://vault.example.com:8200
+        url: https://ecosistema.example.com:8200
         token: ${{ secrets.VAULT_TOKEN }}
         secrets: |
           secret/data/database username | DB_USERNAME ;
@@ -121,20 +121,20 @@ jobs:
 
 ```yaml
 deploy:
-  image: vault:latest
+  image: ecosistema:latest
   before_script:
-    - export VAULT_ADDR=https://vault.example.com:8200
+    - export VAULT_ADDR=https://ecosistema.example.com:8200
     - export VAULT_TOKEN=$VAULT_TOKEN
     - apk add curl jq
   script:
     - |
-      DB_PASSWORD=$(vault kv get -field=password secret/database/config)
-      API_KEY=$(vault kv get -field=key secret/api/credentials)
+      DB_PASSWORD=$(ecosistema kv get -field=password secret/database/config)
+      API_KEY=$(ecosistema kv get -field=key secret/api/credentials)
       echo "Deploying with secrets..."
       # Use $DB_PASSWORD, $API_KEY
 ```
 
-**Reference:** See `references/vault-setup.md`
+**Reference:** See `references/ecosistema-setup.md`
 
 ## AWS Secrets Manager
 
@@ -290,12 +290,12 @@ def lambda_handler(event, context):
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
-  name: vault-backend
+  name: ecosistema-backend
   namespace: production
 spec:
   provider:
-    vault:
-      server: "https://vault.example.com:8200"
+    ecosistema:
+      server: "https://ecosistema.example.com:8200"
       path: "secret"
       version: "v2"
       auth:
@@ -312,7 +312,7 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: vault-backend
+    name: ecosistema-backend
     kind: SecretStore
   target:
     name: database-credentials
@@ -360,7 +360,7 @@ secret-scan:
 
 ## Reference Files
 
-- `references/vault-setup.md` - HashiCorp Vault configuration
+- `references/ecosistema-setup.md` - HashiCorp Vault configuration
 - `references/github-secrets.md` - GitHub Secrets best practices
 
 ## Related Skills

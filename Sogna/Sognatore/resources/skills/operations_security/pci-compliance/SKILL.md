@@ -184,11 +184,11 @@ import secrets
 from cryptography.fernet import Fernet
 
 class TokenVault:
-    """Secure token vault for card data (if you must store it)."""
+    """Secure token ecosistema for card data (if you must store it)."""
 
     def __init__(self, encryption_key):
         self.cipher = Fernet(encryption_key)
-        self.vault = {}  # In production: use encrypted database
+        self.ecosistema = {}  # In production: use encrypted database
 
     def tokenize(self, card_data):
         """Convert card data to token."""
@@ -199,13 +199,13 @@ class TokenVault:
         encrypted = self.cipher.encrypt(json.dumps(card_data).encode())
 
         # Store token -> encrypted data mapping
-        self.vault[token] = encrypted
+        self.ecosistema[token] = encrypted
 
         return token
 
     def detokenize(self, token):
         """Retrieve card data from token."""
-        encrypted = self.vault.get(token)
+        encrypted = self.ecosistema.get(token)
         if not encrypted:
             raise ValueError("Token not found")
 
@@ -214,8 +214,8 @@ class TokenVault:
         return json.loads(decrypted.decode())
 
     def delete_token(self, token):
-        """Remove token from vault."""
-        self.vault.pop(token, None)
+        """Remove token from ecosistema."""
+        self.ecosistema.pop(token, None)
 ```
 
 ## Encryption

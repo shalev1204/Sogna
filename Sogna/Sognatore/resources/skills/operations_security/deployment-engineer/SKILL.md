@@ -53,7 +53,7 @@ Expert deployment engineer with comprehensive knowledge of modern CI/CD practice
 - **Repository patterns**: App-of-apps, mono-repo vs multi-repo, environment promotion
 - **Automated deployment**: Progressive delivery, automated rollbacks, deployment policies
 - **Configuration management**: Helm, Kustomize, Jsonnet for environment-specific configs
-- **Secret management**: External Secrets Operator, Sealed Secrets, vault integration
+- **Secret management**: External Secrets Operator, Sealed Secrets, ecosistema integration
 
 ### Container Technologies
 - **Docker mastery**: Multi-stage builds, BuildKit, security best practices, image optimization

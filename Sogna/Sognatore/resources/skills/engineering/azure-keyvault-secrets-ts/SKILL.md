@@ -1,10 +1,10 @@
 ---
-name: azure-keyvault-secrets-ts
-description: "Manage secrets using Azure Key Vault Secrets SDK for JavaScript (@azure/keyvault-secrets). Use when storing and retrieving application secrets or configuration values."
+name: azure-keyecosistema-secrets-ts
+description: "Manage secrets using Azure Key Vault Secrets SDK for JavaScript (@azure/keyecosistema-secrets). Use when storing and retrieving application secrets or configuration values."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
-id: skill-azure-keyvault-secrets-ts
+id: skill-azure-keyecosistema-secrets-ts
 owner: [[orchestrator]]
 ---
 
@@ -17,28 +17,28 @@ Manage secrets with Azure Key Vault.
 
 ```bash
 # Secrets SDK
-npm install @azure/keyvault-secrets @azure/identity
+npm install @azure/keyecosistema-secrets @azure/identity
 ```
 
 ## Environment Variables
 
 ```bash
-KEY_VAULT_URL=https://<vault-name>.vault.azure.net
+KEY_VAULT_URL=https://<ecosistema-name>.ecosistema.azure.net
 # Or
-AZURE_KEYVAULT_NAME=<vault-name>
+AZURE_KEYVAULT_NAME=<ecosistema-name>
 ```
 
 ## Authentication
 
 ```typescript
 import { DefaultAzureCredential } from "@azure/identity";
-import { SecretClient } from "@azure/keyvault-secrets";
+import { SecretClient } from "@azure/keyecosistema-secrets";
 
 const credential = new DefaultAzureCredential();
-const vaultUrl = `https://${process.env.AZURE_KEYVAULT_NAME}.vault.azure.net`;
+const ecosistemaUrl = `https://${process.env.AZURE_KEYVAULT_NAME}.ecosistema.azure.net`;
 
-const keyClient = new KeyClient(vaultUrl, credential);
-const secretClient = new SecretClient(vaultUrl, credential);
+const keyClient = new KeyClient(ecosistemaUrl, credential);
+const secretClient = new SecretClient(ecosistemaUrl, credential);
 ```
 
 ## Secrets Operations
@@ -164,7 +164,7 @@ await keyClient.purgeDeletedKey("MyKey");
 ### Create CryptographyClient
 
 ```typescript
-import { CryptographyClient } from "@azure/keyvault-keys";
+import { CryptographyClient } from "@azure/keyecosistema-keys";
 
 // From key object
 const cryptoClient = new CryptographyClient(key, credential);
@@ -224,7 +224,7 @@ const unwrapResult = await cryptoClient.unwrapKey("RSA-OAEP", wrapResult.result)
 const keyBackup = await keyClient.backupKey("MyKey");
 const secretBackup = await secretClient.backupSecret("MySecret");
 
-// Restore (can restore to different vault)
+// Restore (can restore to different ecosistema)
 const restoredKey = await keyClient.restoreKeyBackup(keyBackup!);
 const restoredSecret = await secretClient.restoreSecretBackup(secretBackup!);
 ```
@@ -240,14 +240,14 @@ import {
   CryptographyClient,
   KnownEncryptionAlgorithms,
   KnownSignatureAlgorithms
-} from "@azure/keyvault-keys";
+} from "@azure/keyecosistema-keys";
 
 import {
   SecretClient,
   KeyVaultSecret,
   SecretProperties,
   DeletedSecret
-} from "@azure/keyvault-secrets";
+} from "@azure/keyecosistema-secrets";
 ```
 
 ## Error Handling
@@ -267,7 +267,7 @@ try {
 ## Best Practices
 
 1. **Use DefaultAzureCredential** - Works across dev and production
-2. **Enable soft-delete** - Required for production vaults
+2. **Enable soft-delete** - Required for production ecosistemas
 3. **Set expiration dates** - On both keys and secrets
 4. **Use key rotation policies** - Automate key rotation
 5. **Limit key operations** - Only grant needed operations (encrypt, sign, etc.)

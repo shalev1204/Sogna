@@ -3,7 +3,7 @@
 Master Diary Sync Script v2
 Two-mode operation:
   --inject-only : Scan desktop projects, inject today's diaries into global diary.
-  --sync-only   : Push the global diary to Notion and Obsidian.
+  --sync-only   : Push the global diary to Sogna Cloud and Sogna.
 
 Usage:
   python master_diary_sync.py --inject-only
@@ -158,10 +158,10 @@ def run_inject(date_str):
 # â”€â”€ SYNC MODE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def sync_to_notion(global_path):
-    """Push global diary to Notion."""
-    print("ðŸš€ Syncing to Notion...")
+    """Push global diary to Sogna Cloud."""
+    print("ðŸš€ Syncing to Sogna Cloud...")
     if not NOTION_SYNC_SCRIPT.exists():
-        print(f"âŒ Notion sync script not found: {NOTION_SYNC_SCRIPT}")
+        print(f"âŒ Sogna Cloud sync script not found: {NOTION_SYNC_SCRIPT}")
         return False
 
     env = os.environ.copy()
@@ -180,21 +180,21 @@ def sync_to_notion(global_path):
         print(result.stdout)
         return True
     except subprocess.CalledProcessError as e:
-        print(f"âŒ Notion sync failed:\n{e.stderr}")
+        print(f"âŒ Sogna Cloud sync failed:\n{e.stderr}")
         return False
 
 
-def backup_to_obsidian(global_path):
-    # Copy global diary to Obsidian vault.
-    print("ðŸ“‚ Backing up to Obsidian...")
+def backup_to_sogna(global_path):
+    # Copy global diary to Sogna ecosistema.
+    print("ðŸ“‚ Backing up to Sogna...")
     
     # Safety Check: If path is empty, it shouldn't backup
     if not str(OBSIDIAN_DAILY_NOTES).strip():
-        print("â„¹ï¸  Obsidian path is not set (empty). Skipping backup.")
+        print("â„¹ï¸  Sogna path is not set (empty). Skipping backup.")
         return False
         
     if not OBSIDIAN_DAILY_NOTES.exists():
-        print(f"âš ï¸  Obsidian path not found: {OBSIDIAN_DAILY_NOTES}. Skipping backup.")
+        print(f"âš ï¸  Sogna path not found: {OBSIDIAN_DAILY_NOTES}. Skipping backup.")
         return False
     try:
         dest = OBSIDIAN_DAILY_NOTES / global_path.name
@@ -202,7 +202,7 @@ def backup_to_obsidian(global_path):
         print(f"âœ… Backed up to: {dest}")
         return True
     except Exception as e:
-        print(f"âŒ Obsidian backup failed: {e}")
+        print(f"âŒ Sogna backup failed: {e}")
         return False
 
 
@@ -233,11 +233,11 @@ def run_sync(date_str):
 # @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
         sys.exit(1)
 
-    # 4a. Notion
+    # 4a. Sogna Cloud
     sync_to_notion(global_path)
 
-    # 4b. Obsidian
-    backup_to_obsidian(global_path)
+    # 4b. Sogna
+    backup_to_sogna(global_path)
 
     # 5. Semantic Update
     run_qmd_embed()

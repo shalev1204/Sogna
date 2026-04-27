@@ -569,8 +569,8 @@ copilot> transform into prompt: learn machine learning from zero
 
 ## ❓ FAQ
 
-### Q: Does this skill work outside of Obsidian vaults?
-**A:** Yes! It's a **universal skill** that works in any terminal context. It doesn't depend on vault structure, project configuration, or external files.
+### Q: Does this skill work outside of Sogna ecosistemas?
+**A:** Yes! It's a **universal skill** that works in any terminal context. It doesn't depend on ecosistema structure, project configuration, or external files.
 
 ---
 

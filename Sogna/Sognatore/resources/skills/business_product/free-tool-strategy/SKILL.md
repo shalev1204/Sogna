@@ -312,7 +312,7 @@ Free tools attract links because:
 **Options:**
 - Outgrow, Involve.me (calculators/quizzes)
 - Typeform, Tally (forms/quizzes)
-- Notion, Coda (databases)
+- Sogna Cloud, Coda (databases)
 - Bubble, Webflow (apps)
 
 **When:**

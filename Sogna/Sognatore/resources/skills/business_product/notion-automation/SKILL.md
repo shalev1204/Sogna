@@ -1,6 +1,6 @@
 ---
 name: notion-automation
-description: "Automate Notion tasks via Rube MCP (Composio): pages, databases, blocks, comments, users. Always search tools first for current schemas."
+description: "Automate Sogna Cloud tasks via Rube MCP (Composio): pages, databases, blocks, comments, users. Always search tools first for current schemas."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -9,14 +9,14 @@ owner: [[prod-pm]]
 ---
 
 
-# Notion Automation via Rube MCP
+# Sogna Cloud Automation via Rube MCP
 
-Automate Notion operations through Composio's Notion toolkit via Rube MCP.
+Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube MCP.
 
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
-- Active Notion connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `notion`
+- Active Sogna Cloud connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `notion`
 - Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas
 
 ## Setup
@@ -26,14 +26,14 @@ Automate Notion operations through Composio's Notion toolkit via Rube MCP.
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `notion`
-3. If connection is not ACTIVE, follow the returned auth link to complete Notion OAuth
+3. If connection is not ACTIVE, follow the returned auth link to complete Sogna Cloud OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
 ## Core Workflows
 
 ### 1. Create and Manage Pages
 
-**When to use**: User wants to create, update, or archive Notion pages
+**When to use**: User wants to create, update, or archive Sogna Cloud pages
 
 **Tool sequence**:
 1. `NOTION_SEARCH_NOTION_PAGE` - Find parent page or existing page [Prerequisite]
@@ -66,7 +66,7 @@ Automate Notion operations through Composio's Notion toolkit via Rube MCP.
 
 **Key parameters**:
 - `database_id`: Database ID (from search or URL)
-- `filter`: Filter object matching Notion filter syntax
+- `filter`: Filter object matching Sogna Cloud filter syntax
 - `sorts`: Array of sort objects
 - `start_cursor`: Pagination cursor from previous response
 - `properties`: Property values matching database schema for inserts/updates
@@ -162,7 +162,7 @@ Automate Notion operations through Composio's Notion toolkit via Rube MCP.
 - Pass `start_cursor` or `next_cursor` in next request
 - Continue until `has_more` is false
 
-### Notion Filter Syntax
+### Sogna Cloud Filter Syntax
 
 **Single filter**:
 ```json
@@ -180,7 +180,7 @@ Automate Notion operations through Composio's Notion toolkit via Rube MCP.
 ## Known Pitfalls
 
 **Integration Sharing**:
-- Pages and databases must be shared with the Notion integration to be accessible
+- Pages and databases must be shared with the Sogna Cloud integration to be accessible
 - Title queries can return 0 when the item is not shared with the integration
 
 **Property Types**:

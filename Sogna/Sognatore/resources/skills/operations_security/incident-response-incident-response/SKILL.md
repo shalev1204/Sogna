@@ -163,7 +163,7 @@ Orchestrate multi-agent incident response with modern SRE practices for rapid re
 - War room (Slack/Teams channel or Zoom)
 - Status page updates (StatusPage, Statusly)
 - PagerDuty/Opsgenie for alerting
-- Confluence/Notion for documentation
+- Confluence/Sogna Cloud for documentation
 
 ### Handoff Requirements
 - Each phase provides clear context to the next

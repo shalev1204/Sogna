@@ -1,10 +1,10 @@
 ---
-name: azure-security-keyvault-keys-java
+name: azure-security-keyecosistema-keys-java
 description: "Azure Key Vault Keys Java SDK for cryptographic key management. Use when creating, managing, or using RSA/EC keys, performing encrypt/decrypt/sign/verify operations, or working with HSM-backed keys."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
-id: skill-azure-security-keyvault-keys-java
+id: skill-azure-security-keyecosistema-keys-java
 owner: [[ops-security]]
 ---
 
@@ -18,7 +18,7 @@ Manage cryptographic keys and perform cryptographic operations in Azure Key Vaul
 ```xml
 <dependency>
     <groupId>com.azure</groupId>
-    <artifactId>azure-security-keyvault-keys</artifactId>
+    <artifactId>azure-security-keyecosistema-keys</artifactId>
     <version>4.9.0</version>
 </dependency>
 ```
@@ -26,27 +26,27 @@ Manage cryptographic keys and perform cryptographic operations in Azure Key Vaul
 ## Client Creation
 
 ```java
-import com.azure.security.keyvault.keys.KeyClient;
-import com.azure.security.keyvault.keys.KeyClientBuilder;
-import com.azure.security.keyvault.keys.cryptography.CryptographyClient;
-import com.azure.security.keyvault.keys.cryptography.CryptographyClientBuilder;
+import com.azure.security.keyecosistema.keys.KeyClient;
+import com.azure.security.keyecosistema.keys.KeyClientBuilder;
+import com.azure.security.keyecosistema.keys.cryptography.CryptographyClient;
+import com.azure.security.keyecosistema.keys.cryptography.CryptographyClientBuilder;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 
 // Key management client
 KeyClient keyClient = new KeyClientBuilder()
-    .vaultUrl("https://<vault-name>.vault.azure.net")
+    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 
 // Async client
 KeyAsyncClient keyAsyncClient = new KeyClientBuilder()
-    .vaultUrl("https://<vault-name>.vault.azure.net")
+    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildAsyncClient();
 
 // Cryptography client (for encrypt/decrypt/sign/verify)
 CryptographyClient cryptoClient = new CryptographyClientBuilder()
-    .keyIdentifier("https://<vault-name>.vault.azure.net/keys/<key-name>/<key-version>")
+    .keyIdentifier("https://<ecosistema-name>.ecosistema.azure.net/keys/<key-name>/<key-version>")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 ```
@@ -67,7 +67,7 @@ CryptographyClient cryptoClient = new CryptographyClientBuilder()
 ### Create RSA Key
 
 ```java
-import com.azure.security.keyvault.keys.models.*;
+import com.azure.security.keyecosistema.keys.models.*;
 
 // Simple RSA key
 KeyVaultKey rsaKey = keyClient.createRsaKey(new CreateRsaKeyOptions("my-rsa-key")
@@ -173,7 +173,7 @@ for (KeyProperties version : keyClient.listPropertiesOfKeyVersions("my-key")) {
 ```java
 import com.azure.core.util.polling.SyncPoller;
 
-// Begin delete (soft-delete enabled vaults)
+// Begin delete (soft-delete enabled ecosistemas)
 SyncPoller<DeletedKey, Void> deletePoller = keyClient.beginDeleteKey("my-key");
 
 // Wait for deletion
@@ -195,10 +195,10 @@ recoverPoller.waitForCompletion();
 ### Encrypt/Decrypt
 
 ```java
-import com.azure.security.keyvault.keys.cryptography.models.*;
+import com.azure.security.keyecosistema.keys.cryptography.models.*;
 
 CryptographyClient cryptoClient = new CryptographyClientBuilder()
-    .keyIdentifier("https://<vault>.vault.azure.net/keys/<key-name>")
+    .keyIdentifier("https://<ecosistema>.ecosistema.azure.net/keys/<key-name>")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 
@@ -287,8 +287,8 @@ KeyRotationPolicy currentPolicy = keyClient.getKeyRotationPolicy("my-key");
 ## Import Key
 
 ```java
-import com.azure.security.keyvault.keys.models.ImportKeyOptions;
-import com.azure.security.keyvault.keys.models.JsonWebKey;
+import com.azure.security.keyecosistema.keys.models.ImportKeyOptions;
+import com.azure.security.keyecosistema.keys.models.JsonWebKey;
 
 // Import existing key material
 JsonWebKey jsonWebKey = new JsonWebKey()
@@ -348,7 +348,7 @@ try {
 ## Environment Variables
 
 ```bash
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net
+AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net
 ```
 
 ## Best Practices

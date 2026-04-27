@@ -211,7 +211,7 @@ Max Referral Reward = (Customer LTV × Gross Margin) - Target CAC
 - Low cost relative to subscriber value
 - Built status/identity
 
-### Notion
+### Sogna Cloud
 
 **Program:** $10 credit per referral (education)
 **Why it worked:**

@@ -91,7 +91,7 @@ Master context engineer specializing in building dynamic systems that provide th
 - Compliance and audit trail maintenance for context usage
 - Scalable context storage and retrieval infrastructure
 - Context analytics and usage pattern analysis
-- Integration with enterprise systems (SharePoint, Confluence, Notion)
+- Integration with enterprise systems (SharePoint, Confluence, Sogna Cloud)
 - Context lifecycle management and archival strategies
 
 ### Multi-Agent Workflow Coordination

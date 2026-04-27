@@ -31,7 +31,7 @@ npx skills add EmblemCompany/Agent-skills --skill emblem-ai-agent-wallet
 Or install the npm package directly:
 
 ```bash
-npm install @emblemvault/agentwallet
+npm install @emblemecosistema/agentwallet
 ```
 
 ## Supported Chains
@@ -66,12 +66,12 @@ Authentication requires an API key passed as `x-api-key` header.
 2. **Check balances first** before attempting swaps or transfers
 3. **Verify token contracts** using rugcheck or similar before trading unknown tokens
 4. **Report gas estimates** when available
-5. **Never expose private keys** — all signing happens server-side via vault
+5. **Never expose private keys** — all signing happens server-side via ecosistema
 
 ## Links
 
 - [Full skill with references](https://github.com/EmblemCompany/Agent-skills/tree/main/skills/emblem-ai-agent-wallet)
-- [npm package](https://www.npmjs.com/package/@emblemvault/agentwallet)
+- [npm package](https://www.npmjs.com/package/@emblemecosistema/agentwallet)
 - [EmblemAI](https://agenthustle.ai)
 
 ## Limitations

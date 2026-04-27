@@ -61,7 +61,7 @@ BlobServiceClient blobClient = new BlobServiceClientBuilder()
     .buildClient();
 
 KeyClient keyClient = new KeyClientBuilder()
-    .vaultUrl("https://<vault-name>.vault.azure.net")
+    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(credential)
     .buildClient();
 ```

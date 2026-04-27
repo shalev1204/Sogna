@@ -85,7 +85,7 @@ Documentation may appear as:
 - `Flow.pdf`
 - `README.md`
 - kickoff transcripts
-- Notion exports
+- Sogna Cloud exports
 - Anything describing logic, flows, assumptions, incentives, etc.
 
 Use semantic cues:
@@ -110,7 +110,7 @@ Normalize ANY input format:
 - DOCX
 - HTML
 - TXT
-- Notion export
+- Sogna Cloud export
 - Meeting transcripts
 
 Preserve:

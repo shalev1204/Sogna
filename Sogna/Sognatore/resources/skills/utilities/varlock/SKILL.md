@@ -313,7 +313,7 @@ Claude should respond:
 ```bash
 # In .env.schema
 # @type=string @sensitive
-API_KEY=exec('op read "op://vault/item/field"')
+API_KEY=exec('op read "op://ecosistema/item/field"')
 ```
 
 ### AWS Secrets Manager

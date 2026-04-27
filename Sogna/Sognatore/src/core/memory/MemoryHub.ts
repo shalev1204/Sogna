@@ -27,6 +27,11 @@ export class MemoryHub {
   private cache: Map<string, { content: string, mtime: number }> = new Map();
   private immuneSystem: ImmuneSystem;
   private neuralLearning: NeuralLearning;
+  private graphCache: { nodes: any[], edges: any[] } | null = null;
+  private lastGraphUpdate: number = 0;
+  private readonly GRAPH_CACHE_TTL = 30000; // 30 seconds
+  private semanticCache: Map<string, { results: any[], timestamp: number }> = new Map();
+  private readonly SEMANTIC_CACHE_TTL = 180000; // 3 minutes
 
   public constructor(rootMemory?: string, chronicler?: Chronicler) {
     this.rootMemory = rootMemory ? path.resolve(rootMemory) : path.resolve(process.cwd(), 'memory');
@@ -52,6 +57,14 @@ export class MemoryHub {
    * Performs a cross-layer memory search with weighted relevance.
    */
   async unifiedRecall(query: string): Promise<MemoryResult[]> {
+    const cacheKey = `unified:${query.toLowerCase().trim()}`;
+    const now = Date.now();
+    const cached = this.semanticCache.get(cacheKey);
+
+    if (cached && (now - cached.timestamp < this.SEMANTIC_CACHE_TTL)) {
+      return cached.results;
+    }
+
     await this.ensureRegistry();
     const results: MemoryResult[] = [];
 
@@ -59,7 +72,16 @@ export class MemoryHub {
     const identityHits = await this.recallIdentity(query);
     results.push(...identityHits);
 
-    // 2. Recall Immunological Memory (Priority 0.9)
+    // 2. PROACTIVE NEURAL DECOYS: Check for "Trap Concepts"
+    const trapConcepts = ['password', 'secret', 'bypass', 'root', 'admin', 'auth_token', 'private_key'];
+    const lowerQuery = query.toLowerCase();
+    if (trapConcepts.some(trap => lowerQuery.includes(trap))) {
+      const hub = (await import('../../Sentinel-Sognatore/Hub.js')).Hub.getInstance();
+      hub.reportIntel('WARNING', `INTENTO DE PESCA SEMÁNTICA DETECTADO: Búsqueda de concepto prohibido "${query}"`, 'MemoryHub');
+      // We still return results to avoid breaking the UI, but the attempt is flagged.
+    }
+
+    // 3. Recall Immunological Memory (Priority 0.9)
     const threatHits = await this.recallThreats(query);
     results.push(...threatHits);
 
@@ -75,7 +97,9 @@ export class MemoryHub {
       metadata: { tags: f.tags, timestamp: f.timestamp }
     }));
 
-    return results.sort((a, b) => b.relevance - a.relevance);
+    const finalResults = results.sort((a, b) => b.relevance - a.relevance);
+    this.semanticCache.set(cacheKey, { results: finalResults, timestamp: now });
+    return finalResults;
   }
 
   private async ensureRegistry() {
@@ -189,7 +213,16 @@ export class MemoryHub {
   /**
    * Generates a neural graph of connections between fragments (agents/knowledge).
    */
+  /**
+   * Generates a neural graph of connections between fragments (agents/knowledge).
+   * Optimized with a 30-second cache to prevent redundant index processing.
+   */
   public async getNeuralGraph(): Promise<{ nodes: any[], edges: any[] }> {
+    const now = Date.now();
+    if (this.graphCache && (now - this.lastGraphUpdate < this.GRAPH_CACHE_TTL)) {
+      return this.graphCache;
+    }
+
     const index = await this.chronicler.getIndex();
     const nodes: any[] = [];
     const edges: any[] = [];
@@ -197,7 +230,6 @@ export class MemoryHub {
     index.fragments.forEach((f: any) => {
       nodes.push({ id: f.key, tags: f.tags, type: f.properties?.type || 'fragment' });
       
-      // Look for connections in content or metadata
       // 1. Process explicit raw_links from Frontmatter
       if (f.properties?.raw_links) {
         const links = Array.isArray(f.properties.raw_links) ? f.properties.raw_links : [f.properties.raw_links];
@@ -228,7 +260,9 @@ export class MemoryHub {
       }
     });
 
-    return { nodes, edges };
+    this.graphCache = { nodes, edges };
+    this.lastGraphUpdate = now;
+    return this.graphCache;
   }
 
   /**
@@ -256,5 +290,50 @@ export class MemoryHub {
       relevance: weight,
       metadata: { ...f.properties, tags: f.tags, timestamp: f.timestamp }
     }));
+  }
+
+  /**
+   * Performs a conceptual semantic search using the neural graph.
+   * This is the foundation for "Infinite Memory".
+   */
+  public async semanticRecall(concept: string): Promise<MemoryResult[]> {
+    const graph = await this.getNeuralGraph();
+    const index = await this.chronicler.getIndex();
+    
+    // 1. Find the "Anchor" nodes (nodes matching or related to the concept)
+    const anchors = graph.nodes.filter(n => {
+      const id = n.id.toLowerCase();
+      const search = concept.toLowerCase();
+      
+      // Fuzzy matching: includes, startsWith, or common abbreviations
+      const isMatch = id.includes(search) || 
+                      search.includes(id) || 
+                      (search === 'infrastructure' && id.includes('infra')) ||
+                      (search === 'security' && id.includes('sec')) ||
+                      n.tags.some((t: string) => t.toLowerCase().includes(search));
+      
+      return isMatch;
+    });
+
+    // 2. Expand the search to neighbors (1st and 2nd degree)
+    const neighborIds = new Set<string>(anchors.map(a => a.id));
+    graph.edges.forEach(e => {
+      if (neighborIds.has(e.source)) neighborIds.add(e.target);
+      if (neighborIds.has(e.target)) neighborIds.add(e.source);
+    });
+
+    // 3. Retrieve fragments for all identified nodes
+    const results: MemoryResult[] = [];
+    index.fragments.filter(f => neighborIds.has(f.key)).forEach(f => {
+      results.push({
+        source: 'operational',
+        key: f.key,
+        content: f.content,
+        relevance: neighborIds.has(f.key) ? 0.9 : 0.5,
+        metadata: { ...f.properties, tags: f.tags, conceptual_match: true }
+      });
+    });
+
+    return results.sort((a, b) => b.relevance - a.relevance);
   }
 }

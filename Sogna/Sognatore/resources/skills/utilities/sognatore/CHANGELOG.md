@@ -1303,7 +1303,7 @@ For existing `.sognatore/` projects:
   **External MCP Integration**:
   - GitHub MCP (create PRs, manage issues)
   - Playwright MCP (browser automation, E2E tests)
-  - Notion MCP (knowledge base, documentation)
+  - Sogna Cloud MCP (knowledge base, documentation)
 
   **MCP Directory**: `.sognatore/mcp/` with servers/, orchestrator.ts, registry.yaml
 

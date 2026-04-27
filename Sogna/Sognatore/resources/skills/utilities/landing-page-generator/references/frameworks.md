@@ -82,7 +82,7 @@ Ideal for aspirational products and lifestyle-oriented landing pages.
 >
 > **After:** "It's 9 AM. You type 'healthcare, 200-bed hospital, HIPAA-concerned CTO.' DeckGen builds your slides in 40 seconds — case studies, compliance badges, ROI calculator pre-loaded. You walk into the call with the best deck your prospect has ever seen."
 >
-> **Bridge:** "DeckGen connects to your CRM, learns your win patterns, and generates prospect-specific decks in under a minute. 340 AEs at companies like Stripe and Notion already use it. Start free — your first 5 decks are on us."
+> **Bridge:** "DeckGen connects to your CRM, learns your win patterns, and generates prospect-specific decks in under a minute. 340 AEs at companies like Stripe and Sogna Cloud already use it. Start free — your first 5 decks are on us."
 
 ### Before
 - Describe a specific, lived moment — not an abstract pain category

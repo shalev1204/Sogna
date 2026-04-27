@@ -55,7 +55,7 @@ Before writing any code, check the existing project files to determine the frame
 | React / Vite                   | `@splinetool/react-spline`                               |
 | Next.js                        | `@splinetool/react-spline/next`                          |
 | Vue                            | `@splinetool/vue-spline`                                 |
-| iframe (Webflow, Notion, etc.) | Public URL iframe                                        |
+| iframe (Webflow, Sogna Cloud, etc.) | Public URL iframe                                        |
 
 ---
 
