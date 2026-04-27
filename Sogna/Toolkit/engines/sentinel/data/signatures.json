@@ -31465,8 +31465,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/MemoryHub.ts": {
-    "hash": "1018264667dda9a37ad845ab9aa8550fd0ea2b6e780efd37d3c377b4ca8a1291",
-    "timestamp": "2026-04-27T20:38:24.767Z",
+    "hash": "187ddd2afd285f03ff25d878d2cffef4d72047766acde2977cb2953aaddfe709",
+    "timestamp": "2026-04-27T21:43:48.961Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/tasks/BackgroundTaskManager.ts": {
@@ -33305,8 +33305,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/Engine.ts": {
-    "hash": "05e5f2ebb7ca5b566d688bf9d13276662fdf72608ce18a32bb146667241378ab",
-    "timestamp": "2026-04-21T21:35:28.290Z",
+    "hash": "366fdafdc3e0e6b244aaa6eb9b0a212a718f9e3f3783f3a326de7ab30afa6fc2",
+    "timestamp": "2026-04-27T21:43:48.961Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/PolicyTypes.ts": {
@@ -33320,8 +33320,8 @@
     "signedBy": "Antigravity-Restoration"
   },
   "Sognatore/src/Sentinel-Sognatore/Hub.ts": {
-    "hash": "cc95b5d70b0b57660d8a3d1fcf3ec743287942033f28ed9737904f5d7bbf81af",
-    "timestamp": "2026-04-21T21:35:28.290Z",
+    "hash": "9c50723a3e4d6324acfae01349b5e4ad69b3c537dd8ca4b159ba05ee99ca82a3",
+    "timestamp": "2026-04-27T21:43:48.961Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/toolkit/engines/Sentinel/bin/sentinel-veto.js": {
@@ -37105,8 +37105,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/Treasurer.ts": {
-    "hash": "70812a2c3bf2a94572dc54047a1d757b78cad64920be584a9315cd7563181d0e",
-    "timestamp": "2026-04-20T21:16:49.013Z",
+    "hash": "9cca991efbdef43521780ecf705cd27995b1cd6fc9027addadab3ee844feb128",
+    "timestamp": "2026-04-27T21:43:48.961Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/plugins/schemas/agent.json": {
@@ -37172,6 +37172,46 @@
   "Sognatore/src/core/orchestration/SwarmCommander.ts": {
     "hash": "72febae8aab403c63eed5663a9078ed25ee09c38df5da23690d8c672185e7c8a",
     "timestamp": "2026-04-27T20:38:24.767Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/Sentinel-Sognatore/ActivityProfile.ts": {
+    "hash": "762fd3302af76c068e56eb559103b1e495a45a651d84f80c03ec24c7de0b080e",
+    "timestamp": "2026-04-27T21:43:48.961Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/Sentinel-Sognatore/CodeScanner.ts": {
+    "hash": "f4d8ce2e83f73c5bec77b516e80d87547da295fa9b3dd4943b6300da36daf796",
+    "timestamp": "2026-04-27T21:43:48.961Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/Sentinel-Sognatore/SecurityAudit.ts": {
+    "hash": "348539cd38f34bd5a9d450a6fdbc9bfd4f7c8a462dc00018a43cb2cb7d711f8f",
+    "timestamp": "2026-04-27T21:43:48.961Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/storage/AssetHub.ts": {
+    "hash": "34bd7ae07e3aecffea6db92e2b25907cb0aaf904f8e148bd3007ef8d40543919",
+    "timestamp": "2026-04-27T21:43:48.961Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/system/CommandCenter.ts": {
+    "hash": "3adc741a4d18f02347de3cbf7287f8174a887d1202676ed93e0e46d1e91bb4ed",
+    "timestamp": "2026-04-27T21:43:48.961Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/system/HealthGuard.ts": {
+    "hash": "fbad65498e73b90d6bcab9d2795083f160dbf509be79a29c08bd9e378fa7e115",
+    "timestamp": "2026-04-27T21:43:48.961Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/system/PluginManager.ts": {
+    "hash": "9a0e5ede040b499a77ab8b496369a3da883dbb943f1e3194d8cf05694d7fb068",
+    "timestamp": "2026-04-27T21:43:48.961Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sognatore/src/core/viz/CanvasEngine.ts": {
+    "hash": "280188f5be63e3cb6ab21dce6186f197f43299a7edff53b6188cf26f9f3aab41",
+    "timestamp": "2026-04-27T21:43:48.961Z",
     "signedBy": "Sentinel-Apex"
   }
 }
