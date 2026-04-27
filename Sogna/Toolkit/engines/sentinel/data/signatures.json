@@ -31330,8 +31330,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/Orchestrator.ts": {
-    "hash": "f949d54424765672d019ff68d670d73c1ac5851a0c362511a30c241243850473",
-    "timestamp": "2026-04-21T21:35:28.290Z",
+    "hash": "c648f9c7d5f49752e6b9501f7eeca8dcd364e39fb38cd3f1244da8f4176c2ed8",
+    "timestamp": "2026-04-27T22:05:15.160Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/ProjectManager.ts": {
@@ -31465,8 +31465,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/MemoryHub.ts": {
-    "hash": "187ddd2afd285f03ff25d878d2cffef4d72047766acde2977cb2953aaddfe709",
-    "timestamp": "2026-04-27T21:43:48.961Z",
+    "hash": "3b5259e71faf5338938e0f74578ee152a873f85a35157c3049f9140dc1aaf46c",
+    "timestamp": "2026-04-27T22:05:15.160Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/tasks/BackgroundTaskManager.ts": {
@@ -32805,8 +32805,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/engines/predatore/apps/worker/src/scripts/generate-totp.ts": {
-    "hash": "efa4584dd6889e377000316eb046522cc4f99528316aa88e2cc9797b6cc14666",
-    "timestamp": "2026-04-19T15:15:14.470Z",
+    "hash": "c343cdfdfd4264d987291babb127c35b58680349f7825452a56ce3bf17ecee7b",
+    "timestamp": "2026-04-27T22:05:15.160Z",
     "signedBy": "Sentinel-Apex"
   },
   "Toolkit/engines/predatore/apps/worker/src/scripts/save-deliverable.ts": {
@@ -33320,8 +33320,8 @@
     "signedBy": "Antigravity-Restoration"
   },
   "Sognatore/src/Sentinel-Sognatore/Hub.ts": {
-    "hash": "9c50723a3e4d6324acfae01349b5e4ad69b3c537dd8ca4b159ba05ee99ca82a3",
-    "timestamp": "2026-04-27T21:43:48.961Z",
+    "hash": "ff9bc8badafcd8b72b9c5c91362065d9abfc8d523011fe068a5bf012081ddbec",
+    "timestamp": "2026-04-27T22:05:15.160Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/toolkit/engines/Sentinel/bin/sentinel-veto.js": {
@@ -37225,8 +37225,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/diagnose.ts": {
-    "hash": "952e31b5fc645edfa9d53f0e081fbbca6e9b652ec5ce982ec1d4156c0ff9eae9",
-    "timestamp": "2026-04-27T21:49:57.455Z",
+    "hash": "0275f7f7f97c42bcf30e174b0bc8398164c0661f21400d0c38c977db28a15289",
+    "timestamp": "2026-04-27T22:05:15.160Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/memory/intelligence/test_de_bloques_1777320605127.md": {
