@@ -3,7 +3,10 @@ name: hugging-face-community-evals
 description: Run local evaluations for Hugging Face Hub models with inspect-ai or lighteval.
 risk: safe
 version: 1.0.0
+id: skill-hugging-face-community-evals
+owner: [[orchestrator]]
 ---
+
 
 # Overview
 

@@ -3,7 +3,10 @@ name: n8n-validation-expert
 description: "Expert guide for interpreting and fixing n8n validation errors."
 risk: critical
 version: 1.0.0
+id: skill-n8n-validation-expert
+owner: [[orchestrator]]
 ---
+
 
 # n8n Validation Expert
 

@@ -4,7 +4,10 @@ description: Azure AI Projects SDK for .NET. High-level client for Azure AI Foun
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-projects-dotnet
+owner: [[orchestrator]]
 ---
+
 
 # Azure.AI.Projects (.NET)
 

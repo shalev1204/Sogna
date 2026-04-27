@@ -4,7 +4,10 @@ description: "Run autonomous research tasks that plan, search, read, and synthes
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-deep-research
+owner: [[orchestrator]]
 ---
+
 
 # Gemini Deep Research Skill
 

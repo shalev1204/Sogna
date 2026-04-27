@@ -4,7 +4,10 @@ description: Azure Blob Storage SDK for Python. Use for uploading, downloading, 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-storage-blob-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Blob Storage SDK for Python
 

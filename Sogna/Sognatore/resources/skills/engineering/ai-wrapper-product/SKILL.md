@@ -6,7 +6,10 @@ description: Expert in building products that wrap AI APIs (OpenAI, Anthropic,
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-ai-wrapper-product
+owner: [[prod-pm]]
 ---
+
 
 # AI Wrapper Product
 

@@ -4,7 +4,10 @@ description: Master Java 21+ with modern features like virtual threads, pattern 
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-java-pro
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

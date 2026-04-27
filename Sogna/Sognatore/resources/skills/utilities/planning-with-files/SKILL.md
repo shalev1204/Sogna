@@ -4,7 +4,10 @@ description: "Work like Manus: Use persistent markdown files as your \"working m
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-planning-with-files
+owner: [[orchestrator]]
 ---
+
 
 # Planning with Files
 

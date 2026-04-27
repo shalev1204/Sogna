@@ -4,7 +4,10 @@ description: "Build content moderation applications using the Azure AI Content S
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-contentsafety-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Content Safety SDK for Java
 

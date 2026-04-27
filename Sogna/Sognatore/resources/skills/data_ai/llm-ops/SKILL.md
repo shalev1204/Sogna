@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-llm-ops
+owner: [[orchestrator]]
 ---
+
 
 # LLM-OPS -- IA de Producao
 

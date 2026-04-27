@@ -4,7 +4,10 @@ description: "Use when debugging any bug. Enforces a 5-phase protocol where code
 risk: safe
 date_added: "2026-03-28"
 version: 1.0.0
+id: skill-phase-gated-debugging
+owner: [[debugger]]
 ---
+
 
 # Phase-Gated Debugging
 

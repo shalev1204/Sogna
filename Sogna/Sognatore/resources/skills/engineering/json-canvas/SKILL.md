@@ -4,7 +4,10 @@ description: Create and edit JSON Canvas files (.canvas) with nodes, edges, grou
 risk: critical
 date_added: "2026-03-21"
 version: 1.0.0
+id: skill-json-canvas
+owner: [[orchestrator]]
 ---
+
 
 # JSON Canvas Skill
 

@@ -4,7 +4,10 @@ description: Forensic root cause analyzer for Sognatore sessions. Classifies sco
 risk: critical
 version: "1.0"
 tags: [analysis, diagnostics, meta, root-cause, project-health, session-review]
+id: skill-analyze-project
+owner: [[orchestrator]]
 ---
+
 
 # /analyze-project — Root Cause Analyst Workflow
 

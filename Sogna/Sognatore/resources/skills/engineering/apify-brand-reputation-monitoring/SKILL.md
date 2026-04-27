@@ -3,7 +3,10 @@ name: apify-brand-reputation-monitoring
 description: "Scrape reviews, ratings, and brand mentions from multiple platforms using Apify Actors."
 risk: critical
 version: 1.0.0
+id: skill-apify-brand-reputation-monitoring
+owner: [[eng-api]]
 ---
+
 
 # Brand Reputation Monitoring
 

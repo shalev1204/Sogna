@@ -7,7 +7,10 @@ date_added: "2026-03-29"
 tags: [matching, psychology, compatibility, networking, collaboration]
 tools: [claude, cursor, codex, gemini, windsurf]
 version: 1.0.0
+id: skill-viboscope
+owner: [[orchestrator]]
 ---
+
 
 # Viboscope
 

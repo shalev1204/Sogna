@@ -3,7 +3,10 @@ name: makepad-widgets
 description: "Version: makepad-widgets (dev branch) | Last Updated: 2026-01-19 > > Check for updates: https://crates.io/crates/makepad-widgets"
 risk: safe
 version: 1.0.0
+id: skill-makepad-widgets
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Widgets Skill
 

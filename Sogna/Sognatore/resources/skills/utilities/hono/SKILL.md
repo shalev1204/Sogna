@@ -7,7 +7,10 @@ date_added: "2026-03-18"
 tags: [hono, edge, cloudflare-workers, bun, deno, api, typescript, web-standards]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-hono
+owner: [[orchestrator]]
 ---
+
 
 # Hono Web Framework
 

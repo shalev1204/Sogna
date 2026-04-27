@@ -4,7 +4,10 @@ description: "Use when completing tasks, implementing major features, or before 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-requesting-code-review
+owner: [[orchestrator]]
 ---
+
 
 # Requesting Code Review
 

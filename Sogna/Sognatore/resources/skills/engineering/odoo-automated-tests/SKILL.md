@@ -3,7 +3,10 @@ name: odoo-automated-tests
 description: "Write and run Odoo automated tests using TransactionCase, HttpCase, and browser tour tests. Covers test data setup, mocking, and CI integration."
 risk: critical
 version: 1.0.0
+id: skill-odoo-automated-tests
+owner: [[eng-qa]]
 ---
+
 
 # Odoo Automated Tests
 

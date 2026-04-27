@@ -4,7 +4,10 @@ description: "Automate BambooHR tasks via Rube MCP (Composio): employees, time-o
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bamboohr-automation
+owner: [[prod-pm]], [[biz-hr]]
 ---
+
 
 # BambooHR Automation via Rube MCP
 

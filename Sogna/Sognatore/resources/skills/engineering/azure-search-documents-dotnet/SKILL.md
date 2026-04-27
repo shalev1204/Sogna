@@ -4,7 +4,10 @@ description: Azure AI Search SDK for .NET (Azure.Search.Documents). Use for buil
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-search-documents-dotnet
+owner: [[orchestrator]]
 ---
+
 
 # Azure.Search.Documents (.NET)
 

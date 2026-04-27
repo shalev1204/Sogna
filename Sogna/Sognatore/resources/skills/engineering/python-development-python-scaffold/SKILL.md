@@ -4,7 +4,10 @@ description: "You are a Python project architecture expert specializing in scaff
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-python-development-python-scaffold
+owner: [[prod-pm]]
 ---
+
 
 # Python Project Scaffolding
 

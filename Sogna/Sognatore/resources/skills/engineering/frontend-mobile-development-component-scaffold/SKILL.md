@@ -4,7 +4,10 @@ description: "You are a React component architecture expert specializing in scaf
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-frontend-mobile-development-component-scaffold
+owner: [[eng-frontend]], [[prod-pm]], [[eng-mobile]]
 ---
+
 
 # React/React Native Component Scaffolding
 

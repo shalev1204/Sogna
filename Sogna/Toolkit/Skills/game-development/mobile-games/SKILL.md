@@ -2,7 +2,10 @@
 name: mobile-games
 description: Mobile game development principles. Touch input, battery, performance, app stores.
 allowed-tools: Read, Write, Edit, Glob, Grep
+id: skill-mobile-games
+owner: [[game-developer]], [[prod-pm]], [[eng-mobile]]
 ---
+
 
 # Mobile Game Development
 

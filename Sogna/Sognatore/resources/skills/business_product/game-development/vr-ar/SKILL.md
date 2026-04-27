@@ -4,7 +4,10 @@ description: "VR/AR development principles. Comfort, interaction, performance re
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-vr-ar
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # VR/AR Development
 

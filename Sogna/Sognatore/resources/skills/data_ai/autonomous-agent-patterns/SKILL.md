@@ -4,7 +4,10 @@ description: "Design patterns for building autonomous coding agents, inspired by
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-autonomous-agent-patterns
+owner: [[orchestrator]]
 ---
+
 
 # 🕹️ Autonomous Agent Patterns
 

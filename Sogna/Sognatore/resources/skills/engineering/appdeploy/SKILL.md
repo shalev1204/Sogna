@@ -4,7 +4,10 @@ description: "Deploy web apps with backend APIs, database, and file storage. Use
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-appdeploy
+owner: [[orchestrator]]
 ---
+
 
 # AppDeploy Skill
 

@@ -64,7 +64,10 @@ Every document should be richly illustrated. Generate figures liberally - when i
 | Document Type | Minimum | Recommended |
 |
 version: 1.0.0
---------------|---------|-------------|
+id: skill-scientific-writing
+owner: [[ops-security]]
+---
+-----------|---------|-------------|
 | Research Papers | 5 | 6-8 |
 | Literature Reviews | 4 | 5-7 |
 | Market Research | 20 | 25-30 |

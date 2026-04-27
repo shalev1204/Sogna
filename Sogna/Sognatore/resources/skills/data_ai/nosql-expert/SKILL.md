@@ -4,7 +4,10 @@ description: "Expert guidance for distributed NoSQL databases (Cassandra, Dynamo
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-nosql-expert
+owner: [[eng-database]]
 ---
+
 
 # NoSQL Expert Patterns (Cassandra & DynamoDB)
 

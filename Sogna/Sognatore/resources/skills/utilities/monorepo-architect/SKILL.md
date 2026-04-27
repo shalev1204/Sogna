@@ -4,7 +4,10 @@ description: "Expert in monorepo architecture, build systems, and dependency man
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-monorepo-architect
+owner: [[orchestrator]]
 ---
+
 
 # Monorepo Architect
 

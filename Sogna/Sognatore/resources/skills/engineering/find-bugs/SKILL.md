@@ -3,7 +3,10 @@ name: find-bugs
 description: Find bugs, security vulnerabilities, and code quality issues in local branch changes. Use when asked to review changes, find bugs, security review, or audit code on the current branch.
 risk: offensive
 version: 1.0.0
+id: skill-find-bugs
+owner: [[orchestrator]]
 ---
+
 
 # Find Bugs
 

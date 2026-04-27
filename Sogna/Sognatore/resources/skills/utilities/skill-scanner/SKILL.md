@@ -3,7 +3,10 @@ name: skill-scanner
 description: "Scan agent skills for security issues before adoption. Detects prompt injection, malicious code, excessive permissions, secret exposure, and supply chain risks."
 risk: offensive
 version: 1.0.0
+id: skill-skill-scanner
+owner: [[orchestrator]]
 ---
+
 
 # Skill Security Scanner
 

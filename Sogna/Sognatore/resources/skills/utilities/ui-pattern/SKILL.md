@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [ui, patterns, design-system, reuse, styleseed]
 tools: [claude, cursor, codex, gemini]
 version: 1.0.0
+id: skill-ui-pattern
+owner: [[orchestrator]]
 ---
+
 
 # UI Pattern
 

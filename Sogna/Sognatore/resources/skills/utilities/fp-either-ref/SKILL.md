@@ -4,7 +4,10 @@ description: Quick reference for Either type. Use when user needs error handling
 risk: safe
 version: 1.0.0
 tags: [fp-ts, either, error-handling, validation, quick-reference]
+id: skill-fp-either-ref
+owner: [[orchestrator]]
 ---
+
 
 # Either Quick Reference
 

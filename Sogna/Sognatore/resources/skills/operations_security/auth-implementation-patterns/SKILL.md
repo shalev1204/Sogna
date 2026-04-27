@@ -4,7 +4,10 @@ description: "Build secure, scalable authentication and authorization systems us
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-auth-implementation-patterns
+owner: [[ops-security]]
 ---
+
 
 # Authentication & Authorization Implementation Patterns
 

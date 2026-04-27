@@ -4,7 +4,10 @@ description: "Build search applications with vector, hybrid, and semantic search
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-search-documents-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Search SDK for TypeScript
 

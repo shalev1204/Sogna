@@ -4,7 +4,10 @@ description: "Common AWS CDK patterns and constructs for building cloud infrastr
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cdk-patterns
+owner: [[ops-security]]
 ---
+
 You are an expert in AWS Cloud Development Kit (CDK) specializing in reusable patterns, L2/L3 constructs, and production-grade infrastructure stacks.
 
 ## Use this skill when

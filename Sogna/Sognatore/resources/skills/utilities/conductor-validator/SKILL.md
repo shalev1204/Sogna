@@ -10,7 +10,10 @@ description: 'Validates Conductor project artifacts for completeness,
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-conductor-validator
+owner: [[orchestrator]]
 ---
+
 
 # Check if conductor directory exists
 ls -la conductor/

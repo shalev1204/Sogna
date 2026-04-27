@@ -8,7 +8,10 @@ risk: critical
 metadata:
   version: "1.0"
 version: 1.0.0
+id: skill-favicon
+owner: [[orchestrator]]
 ---
+
 
 Generate a complete set of favicons from the source image at `$1` and update the project's HTML with the appropriate link tags.
 

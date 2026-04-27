@@ -4,7 +4,10 @@ description: "This skill guides you through creating custom external web service
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-moodle-external-api-development
+owner: [[eng-api]], [[prod-pm]]
 ---
+
 
 # Moodle External API Development
 

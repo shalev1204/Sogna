@@ -4,7 +4,10 @@ description: "Master React version upgrades, class to hooks migration, concurren
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-react-modernization
+owner: [[orchestrator]]
 ---
+
 
 # React Modernization
 

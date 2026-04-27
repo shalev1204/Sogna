@@ -4,7 +4,10 @@ description: "Production-ready patterns for dbt (data build tool) including mode
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-dbt-transformation-patterns
+owner: [[orchestrator]]
 ---
+
 
 # dbt Transformation Patterns
 

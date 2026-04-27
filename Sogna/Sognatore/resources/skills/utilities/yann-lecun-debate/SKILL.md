@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-yann-lecun-debate
+owner: [[orchestrator]]
 ---
+
 
 # YANN LECUN — MÓDULO DE DEBATES E POSIÇÕES v3.0
 

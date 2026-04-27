@@ -5,7 +5,10 @@ description: "Presentation creation, format conversion (ODP/PPTX/PDF), slide aut
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-impress
+owner: [[orchestrator]]
 ---
+
 
 # LibreOffice Impress
 

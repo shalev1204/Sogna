@@ -4,7 +4,10 @@ description: "Guide for continuous improvement, error proofing, and standardizat
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-kaizen
+owner: [[orchestrator]]
 ---
+
 
 # Kaizen: Continuous Improvement
 

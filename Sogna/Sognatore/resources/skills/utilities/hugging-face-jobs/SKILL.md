@@ -4,7 +4,10 @@ description: Run workloads on Hugging Face Jobs with managed CPUs, GPUs, TPUs, s
 license: Complete terms in LICENSE.txt
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-jobs
+owner: [[orchestrator]]
 ---
+
 
 # Running Workloads on Hugging Face Jobs
 

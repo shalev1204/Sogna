@@ -4,7 +4,10 @@ description: "You are a workflow automation expert specializing in creating effi
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cicd-automation-workflow-automate
+owner: [[ops-security]]
 ---
+
 
 # Workflow Automation
 

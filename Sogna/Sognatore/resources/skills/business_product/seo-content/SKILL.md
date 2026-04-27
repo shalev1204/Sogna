@@ -15,7 +15,10 @@ allowed-tools:
   - Bash
   - WebFetch
 version: 1.0.0
+id: skill-seo-content
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Content Quality & E-E-A-T Analysis
 

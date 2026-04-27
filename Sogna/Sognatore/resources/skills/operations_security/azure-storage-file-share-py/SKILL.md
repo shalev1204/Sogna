@@ -4,7 +4,10 @@ description: Azure Storage File Share SDK for Python. Use for SMB file shares, d
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-storage-file-share-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Storage File Share SDK for Python
 

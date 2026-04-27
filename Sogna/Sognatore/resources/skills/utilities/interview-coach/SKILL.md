@@ -7,7 +7,10 @@ date_added: "2026-03-11"
 tags: [interview, job-search, coaching, career, storybank, negotiation]
 tools: [claude]
 version: 1.0.0
+id: skill-interview-coach
+owner: [[orchestrator]]
 ---
+
 
 # Interview Coach
 

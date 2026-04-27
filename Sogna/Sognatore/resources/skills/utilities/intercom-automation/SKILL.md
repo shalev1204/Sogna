@@ -4,7 +4,10 @@ description: "Automate Intercom tasks via Rube MCP (Composio): conversations, co
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-intercom-automation
+owner: [[orchestrator]]
 ---
+
 
 # Intercom Automation via Rube MCP
 

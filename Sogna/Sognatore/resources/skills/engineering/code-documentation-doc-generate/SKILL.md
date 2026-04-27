@@ -4,7 +4,10 @@ description: "You are a documentation expert specializing in creating comprehens
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-code-documentation-doc-generate
+owner: [[orchestrator]]
 ---
+
 
 # Automated Documentation Generation
 

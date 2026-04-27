@@ -4,7 +4,10 @@ description: "Autonomous DevSecOps & FinOps Guardrails. Orchestrates Gemini 3 Fl
 risk: offensive
 date_added: "2026-03-24"
 version: 1.0.0
+id: skill-aegisops-ai
+owner: [[orchestrator]]
 ---
+
 
 # /aegisops-ai — Autonomous Governance Orchestrator
 

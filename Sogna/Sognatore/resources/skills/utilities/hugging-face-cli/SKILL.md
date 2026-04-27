@@ -3,7 +3,10 @@ name: hugging-face-cli
 description: "Use the Hugging Face Hub CLI (`hf`) to download, upload, and manage models, datasets, and Spaces."
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-cli
+owner: [[orchestrator]]
 ---
+
 
 Install by downloading the installer script first, reviewing it, and then running it locally. Example:
 `curl -LsSf https://hf.co/cli/install.sh -o /tmp/hf-install.sh && less /tmp/hf-install.sh && bash /tmp/hf-install.sh`

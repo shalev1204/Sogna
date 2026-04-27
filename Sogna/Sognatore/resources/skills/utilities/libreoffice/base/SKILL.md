@@ -5,7 +5,10 @@ description: "Database management, forms, reports, and data operations with Libr
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-base
+owner: [[orchestrator]]
 ---
+
 
 # LibreOffice Base
 

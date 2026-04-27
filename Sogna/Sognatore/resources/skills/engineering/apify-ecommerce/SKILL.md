@@ -3,7 +3,10 @@ name: apify-ecommerce
 description: "Extract product data, prices, reviews, and seller information from any e-commerce platform using Apify's E-commerce Scraping Tool."
 risk: critical
 version: 1.0.0
+id: skill-apify-ecommerce
+owner: [[eng-api]]
 ---
+
 
 # E-commerce Data Extraction
 

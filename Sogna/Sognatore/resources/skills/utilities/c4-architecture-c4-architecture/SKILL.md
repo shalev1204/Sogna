@@ -4,7 +4,10 @@ description: "Generate comprehensive C4 architecture documentation for an existi
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-c4-architecture-c4-architecture
+owner: [[system-architect]]
 ---
+
 
 # C4 Architecture Documentation Workflow
 

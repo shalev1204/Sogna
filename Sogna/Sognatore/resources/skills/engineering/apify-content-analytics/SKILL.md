@@ -3,7 +3,10 @@ name: apify-content-analytics
 description: Track engagement metrics, measure campaign ROI, and analyze content performance across Instagram, Facebook, YouTube, and TikTok.
 risk: critical
 version: 1.0.0
+id: skill-apify-content-analytics
+owner: [[eng-api]]
 ---
+
 
 # Content Analytics
 

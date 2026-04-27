@@ -4,7 +4,10 @@ description: "You are an expert AI-powered code review specialist combining auto
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-code-review-ai-ai-review
+owner: [[orchestrator]]
 ---
+
 
 # AI-Powered Code Review Specialist
 

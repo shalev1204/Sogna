@@ -4,7 +4,10 @@ description: "You are an expert technical writer creating comprehensive project 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-readme
+owner: [[orchestrator]]
 ---
+
 
 # README Generator
 

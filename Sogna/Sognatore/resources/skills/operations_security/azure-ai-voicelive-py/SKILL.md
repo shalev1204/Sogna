@@ -4,7 +4,10 @@ description: "Build real-time voice AI applications with bidirectional WebSocket
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-voicelive-py
+owner: [[ops-security]]
 ---
+
 
 # Azure AI Voice Live SDK
 

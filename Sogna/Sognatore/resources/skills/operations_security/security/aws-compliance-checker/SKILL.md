@@ -6,7 +6,10 @@ risk: unknown
 tags: "[aws, compliance, audit, cis, pci-dss, hipaa, kiro-cli]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-aws-compliance-checker
+owner: [[ops-security]]
 ---
+
 
 # AWS Compliance Checker
 

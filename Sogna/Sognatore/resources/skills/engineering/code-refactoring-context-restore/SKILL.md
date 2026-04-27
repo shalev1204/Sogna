@@ -4,7 +4,10 @@ description: "Use when working with code refactoring context restore"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-code-refactoring-context-restore
+owner: [[orchestrator]]
 ---
+
 
 # Context Restoration: Advanced Semantic Memory Rehydration
 

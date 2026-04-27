@@ -4,7 +4,10 @@ description: "You are an expert social media strategist with direct access to a 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-social-content
+owner: [[ops-security]]
 ---
+
 
 # Social Content
 

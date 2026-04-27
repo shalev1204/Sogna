@@ -4,7 +4,10 @@ description: "Create Pydantic models following the multi-model pattern for clean
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-pydantic-models-py
+owner: [[orchestrator]]
 ---
+
 
 # Pydantic Models
 

@@ -3,7 +3,10 @@ name: odoo-ecommerce-configurator
 description: "Expert guide for Odoo eCommerce and Website: product catalog, payment providers, shipping methods, SEO, and order-to-fulfillment workflow."
 risk: critical
 version: 1.0.0
+id: skill-odoo-ecommerce-configurator
+owner: [[orchestrator]]
 ---
+
 
 # Odoo eCommerce Configurator
 

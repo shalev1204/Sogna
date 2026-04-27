@@ -4,7 +4,10 @@ description: "Automate TikTok tasks via Rube MCP (Composio): upload/publish vide
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-tiktok-automation
+owner: [[orchestrator]]
 ---
+
 
 # TikTok Automation via Rube MCP
 

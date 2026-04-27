@@ -4,7 +4,10 @@ description: Azure Monitor Query SDK for Java. Execute Kusto queries against Log
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-monitor-query-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Monitor Query SDK for Java
 

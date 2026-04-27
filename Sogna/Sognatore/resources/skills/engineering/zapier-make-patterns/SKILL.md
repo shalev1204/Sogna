@@ -7,7 +7,10 @@ description: No-code automation democratizes workflow building. Zapier and Make
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-zapier-make-patterns
+owner: [[eng-api]]
 ---
+
 
 # Zapier & Make Patterns
 

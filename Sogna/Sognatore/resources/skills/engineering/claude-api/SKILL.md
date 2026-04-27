@@ -5,7 +5,10 @@ risk: critical
 date_added: "2026-03-21"
 license: Complete terms in LICENSE.txt
 version: 1.0.0
+id: skill-claude-api
+owner: [[eng-api]]
 ---
+
 
 # Building LLM-Powered Applications with Claude
 

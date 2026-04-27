@@ -5,7 +5,10 @@ description: "Automatically fetch latest library/framework documentation for Cla
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-context7-auto-research
+owner: [[orchestrator]]
 ---
+
 
 # context7-auto-research
 

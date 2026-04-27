@@ -2,7 +2,10 @@
 name: code-review-checklist
 description: Code review guidelines covering code quality, security, and best practices.
 allowed-tools: Read, Glob, Grep
+id: skill-code-review-checklist
+owner: [[orchestrator]]
 ---
+
 
 # Code Review Checklist
 

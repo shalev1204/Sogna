@@ -4,7 +4,10 @@ description: Azure Event Hubs SDK for Rust. Use for sending and receiving events
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-eventhub-rust
+owner: [[orchestrator]]
 ---
+
 
 # Azure Event Hubs SDK for Rust
 

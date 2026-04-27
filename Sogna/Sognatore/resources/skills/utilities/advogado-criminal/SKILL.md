@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-advogado-criminal
+owner: [[orchestrator]]
 ---
+
 
 # ADVOGADO CRIMINALISTA SENIOR — ESPECIALISTA EM DIREITO PENAL E MARIA DA PENHA
 

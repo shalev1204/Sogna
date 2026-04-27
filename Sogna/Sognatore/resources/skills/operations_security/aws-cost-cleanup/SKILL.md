@@ -4,7 +4,10 @@ description: "Automated cleanup of unused AWS resources to reduce costs"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-aws-cost-cleanup
+owner: [[ops-security]]
 ---
+
 
 # AWS Cost Cleanup
 

@@ -3,7 +3,10 @@ name: ffuf-web-fuzzing
 description: Expert guidance for ffuf web fuzzing during penetration testing, including authenticated fuzzing with raw requests, auto-calibration, and result analysis
 risk: offensive
 version: 1.0.0
+id: skill-ffuf-web-fuzzing
+owner: [[orchestrator]]
 ---
+
 
 # FFUF (Fuzz Faster U Fool) Skill
 

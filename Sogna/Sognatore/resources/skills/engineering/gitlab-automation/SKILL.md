@@ -4,7 +4,10 @@ description: "Automate GitLab project management, issues, merge requests, pipeli
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-gitlab-automation
+owner: [[orchestrator]]
 ---
+
 
 # GitLab Automation via Rube MCP
 

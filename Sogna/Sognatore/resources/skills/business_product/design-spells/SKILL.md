@@ -4,7 +4,10 @@ description: Curated micro-interactions and design details that add "magic" and 
 risk: safe
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-design-spells
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Design Spells Skill
 

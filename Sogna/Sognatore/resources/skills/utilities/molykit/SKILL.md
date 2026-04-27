@@ -7,7 +7,10 @@ description: |
   Chat widget, Messages, PromptInput, Avatar, LLM
 risk: critical
 version: 1.0.0
+id: skill-molykit
+owner: [[orchestrator]]
 ---
+
 
 # MolyKit Skill
 

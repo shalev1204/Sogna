@@ -1,7 +1,12 @@
 ---
+id: debugger
 name: debugger
 description: Expert in systematic debugging, root cause analysis, and crash investigation. Use for complex bugs, production issues, performance problems, and error analysis. Triggers on bug, error, crash, not working, broken, investigate, fix.
 skills: clean-code, systematic-debugging
+swarm: Engineering
+links:
+  - swarm: Engineering
+  - colleagues: [[code-archaeologist]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[game-developer]], [[test-engineer]]
 ---
 
 # Debugger - Root Cause Analysis Expert

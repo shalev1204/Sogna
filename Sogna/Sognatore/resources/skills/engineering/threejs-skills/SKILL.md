@@ -4,7 +4,10 @@ description: "Create 3D scenes, interactive experiences, and visual effects usin
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-threejs-skills
+owner: [[biz-hr]]
 ---
+
 
 # Three.js Skills
 

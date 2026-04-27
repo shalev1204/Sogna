@@ -4,7 +4,10 @@ description: "Expert guidance for crafting effective prompts in Google Stitch, t
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-stitch-ui-design
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Stitch UI Design Prompting
 

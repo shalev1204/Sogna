@@ -6,7 +6,10 @@ description: Email has the highest ROI of any marketing channel. $36 for every
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-email-systems
+owner: [[orchestrator]]
 ---
+
 
 # Email Systems
 

@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-ilya-sutskever
+owner: [[orchestrator]]
 ---
+
 
 # SKILL: Ilya Sutskever — O Místico do Deep Learning (v2.0)
 

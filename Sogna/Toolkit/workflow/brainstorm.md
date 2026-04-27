@@ -1,3 +1,7 @@
+---\nid: workflow-brainstorm
+owner: [[prod-pm]], [[brain]]
+---
+
 ---
 description: Structured brainstorming for projects and features. Explores multiple options before implementation.
 ---
@@ -111,3 +115,4 @@ What direction would you like to explore?
 - **Visual when helpful** - use diagrams for architecture
 - **Honest tradeoffs** - don't hide complexity
 - **Defer to user** - present options, let them decide
+

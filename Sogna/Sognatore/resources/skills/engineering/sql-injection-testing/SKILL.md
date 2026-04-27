@@ -4,7 +4,10 @@ description: "Execute comprehensive SQL injection vulnerability assessments on w
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-sql-injection-testing
+owner: [[eng-database]], [[eng-qa]]
 ---
+
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 

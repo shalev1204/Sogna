@@ -4,7 +4,10 @@ description: Master modern JavaScript with ES6+, async patterns, and Node.js API
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-javascript-pro
+owner: [[orchestrator]]
 ---
+
 You are a JavaScript expert specializing in modern JS and async programming.
 
 ## Use this skill when

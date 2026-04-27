@@ -4,7 +4,10 @@ description: Microsoft 365 Agents SDK for Python. Build multichannel agents for 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-m365-agents-py
+owner: [[orchestrator]]
 ---
+
 
 # Microsoft 365 Agents SDK (Python)
 

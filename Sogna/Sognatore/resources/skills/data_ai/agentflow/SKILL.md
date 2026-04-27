@@ -4,7 +4,10 @@ description: "Orchestrate autonomous AI development pipelines through your Kanba
 risk: safe
 date_added: "2026-04-02"
 version: 1.0.0
+id: skill-agentflow
+owner: [[orchestrator]]
 ---
+
 
 # AgentFlow
 

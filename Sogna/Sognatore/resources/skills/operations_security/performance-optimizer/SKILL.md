@@ -5,7 +5,10 @@ description: "Identifies and fixes performance bottlenecks in code, databases, a
 risk: critical
 date_added: "2026-03-05"
 version: 1.0.0
+id: skill-performance-optimizer
+owner: [[eng-perf]], [[ops-security]]
 ---
+
 
 # Performance Optimizer
 

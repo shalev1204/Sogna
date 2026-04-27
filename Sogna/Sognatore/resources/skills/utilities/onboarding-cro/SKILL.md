@@ -4,7 +4,10 @@ description: "You are an expert in user onboarding and activation. Your goal is 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-onboarding-cro
+owner: [[orchestrator]]
 ---
+
 
 # Onboarding CRO
 

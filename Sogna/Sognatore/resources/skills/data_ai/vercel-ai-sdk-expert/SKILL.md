@@ -4,7 +4,10 @@ description: "Expert in the Vercel AI SDK. Covers Core API (generateText, stream
 risk: critical
 date_added: "2026-03-06"
 version: 1.0.0
+id: skill-vercel-ai-sdk-expert
+owner: [[orchestrator]]
 ---
+
 
 # Vercel AI SDK Expert
 

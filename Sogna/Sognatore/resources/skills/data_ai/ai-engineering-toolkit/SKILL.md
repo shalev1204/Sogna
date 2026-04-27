@@ -7,7 +7,10 @@ date_added: "2026-03-15"
 tags: [prompt-engineering, rag, security, evaluation, ai-engineering, llm]
 tools: [claude, cursor, gemini, copilot]
 version: 1.0.0
+id: skill-ai-engineering-toolkit
+owner: [[orchestrator]]
 ---
+
 
 # AI Engineering Toolkit
 

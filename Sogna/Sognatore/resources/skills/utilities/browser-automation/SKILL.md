@@ -7,7 +7,10 @@ description: Browser automation powers web testing, scraping, and AI agent
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-browser-automation
+owner: [[orchestrator]]
 ---
+
 
 # Browser Automation
 

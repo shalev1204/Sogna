@@ -4,7 +4,10 @@ description: "Manage track lifecycle: archive, restore, delete, rename, and clea
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-conductor-manage
+owner: [[orchestrator]]
 ---
+
 
 # Track Manager
 

@@ -4,7 +4,10 @@ description: Diagnose and audit SEO issues affecting crawlability, indexation, r
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-seo-audit
+owner: [[biz-marketing]], [[ops-security]]
 ---
+
 
 # SEO Audit
 

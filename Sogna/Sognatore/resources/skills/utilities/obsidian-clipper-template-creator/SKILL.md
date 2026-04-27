@@ -4,7 +4,10 @@ description: Guide for creating templates for the Obsidian Web Clipper. Use when
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-obsidian-clipper-template-creator
+owner: [[orchestrator]]
 ---
+
 
 # Obsidian Web Clipper Template Creator
 

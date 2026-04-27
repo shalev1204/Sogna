@@ -5,7 +5,10 @@ description: "Modern React UI patterns for loading states, error handling, and d
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-react-ui-patterns
+owner: [[orchestrator]]
 ---
+
 
 # React UI Patterns
 

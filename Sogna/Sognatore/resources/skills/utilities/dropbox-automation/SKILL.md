@@ -4,7 +4,10 @@ description: "Automate Dropbox file management, sharing, search, uploads, downlo
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-dropbox-automation
+owner: [[orchestrator]]
 ---
+
 
 # Dropbox Automation via Rube MCP
 

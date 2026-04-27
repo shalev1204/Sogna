@@ -5,7 +5,10 @@ risk: critical
 tags: [solana, crypto, marketplace, ai-agents, mcp, defi, usdc, web3, a2a]
 version: 1.0.0
 homepage: https://maxiaworld.app
+id: skill-maxia
+owner: [[orchestrator]]
 ---
+
 
 # MAXIA — AI-to-AI Marketplace on Solana
 

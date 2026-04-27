@@ -4,7 +4,10 @@ description: Azure AI Document Intelligence SDK for .NET. Extract text, tables, 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-document-intelligence-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.AI.DocumentIntelligence (.NET)
 

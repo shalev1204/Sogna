@@ -5,7 +5,10 @@ description: "Deep audit before GitHub push: removes junk files, dead code, secu
 risk: offensive
 date_added: "2026-03-05"
 version: 1.0.0
+id: skill-codebase-audit-pre-push
+owner: [[orchestrator]]
 ---
+
 
 # Pre-Push Codebase Audit
 

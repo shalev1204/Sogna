@@ -4,7 +4,10 @@ description: "Master Stripe payment processing integration for robust, PCI-compl
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-stripe-integration
+owner: [[prod-pm]]
 ---
+
 
 # Stripe Integration
 

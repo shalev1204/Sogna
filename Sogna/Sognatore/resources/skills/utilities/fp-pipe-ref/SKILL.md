@@ -4,7 +4,10 @@ description: Quick reference for pipe and flow. Use when user needs to chain fun
 risk: safe
 version: 1.0.0
 tags: [fp-ts, pipe, flow, composition, quick-reference]
+id: skill-fp-pipe-ref
+owner: [[orchestrator]]
 ---
+
 
 # pipe & flow Quick Reference
 

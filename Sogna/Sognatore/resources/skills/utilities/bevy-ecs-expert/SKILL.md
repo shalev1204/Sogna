@@ -4,7 +4,10 @@ description: "Master Bevy's Entity Component System (ECS) in Rust, covering Syst
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bevy-ecs-expert
+owner: [[orchestrator]]
 ---
+
 
 # Bevy ECS Expert
 

@@ -12,7 +12,10 @@ tags:
   - style-transfer
 date_added: "2026-04-03"
 version: 1.0.0
+id: skill-humanize-chinese
+owner: [[orchestrator]]
 ---
+
 
 # Humanize Chinese
 

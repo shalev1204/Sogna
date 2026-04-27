@@ -4,7 +4,10 @@ description: Azure API Center SDK for .NET. Centralized API inventory management
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-mgmt-apicenter-dotnet
+owner: [[eng-api]]
 ---
+
 
 # Azure.ResourceManager.ApiCenter (.NET)
 

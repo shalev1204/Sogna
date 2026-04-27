@@ -4,7 +4,10 @@ description: "Static Application Security Testing (SAST) tool setup, configurati
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-sast-configuration
+owner: [[orchestrator]]
 ---
+
 
 # SAST Configuration
 

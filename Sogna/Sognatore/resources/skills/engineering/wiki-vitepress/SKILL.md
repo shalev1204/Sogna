@@ -4,7 +4,10 @@ description: "Transform generated wiki Markdown files into a polished VitePress 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-wiki-vitepress
+owner: [[orchestrator]]
 ---
+
 
 # Wiki VitePress Packager
 

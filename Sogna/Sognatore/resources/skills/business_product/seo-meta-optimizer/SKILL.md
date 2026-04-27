@@ -4,7 +4,10 @@ description: Creates optimized meta titles, descriptions, and URL suggestions ba
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-seo-meta-optimizer
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 ## Use this skill when
 

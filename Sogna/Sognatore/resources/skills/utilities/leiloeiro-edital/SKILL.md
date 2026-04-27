@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-leiloeiro-edital
+owner: [[orchestrator]]
 ---
+
 
 # SKILL DE EDITAL — ANÁLISE PERICIAL DE EDITAIS DE LEILÃO
 

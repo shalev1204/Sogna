@@ -4,7 +4,10 @@ description: "Comprehensive guide for implementing NetworkPolicy, PodSecurityPol
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-k8s-security-policies
+owner: [[ops-security]]
 ---
+
 
 # Kubernetes Security Policies
 

@@ -4,7 +4,10 @@ description: "Review a diff for clarity and safe simplifications, then optionall
 risk: safe
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-simplify-code
+owner: [[orchestrator]]
 ---
+
 
 # Simplify Code
 

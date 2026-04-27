@@ -5,7 +5,10 @@ description: Expert patterns for Algolia search implementation, indexing
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-algolia-search
+owner: [[orchestrator]]
 ---
+
 
 # Algolia Search Integration
 

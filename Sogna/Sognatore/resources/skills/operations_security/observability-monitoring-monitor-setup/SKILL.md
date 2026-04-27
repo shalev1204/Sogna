@@ -4,7 +4,10 @@ description: "You are a monitoring and observability expert specializing in impl
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-observability-monitoring-monitor-setup
+owner: [[ops-security]]
 ---
+
 
 # Monitoring and Observability Setup
 

@@ -4,7 +4,10 @@ description: "Structured guide for setting up A/B tests with mandatory gates for
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-ab-test-setup
+owner: [[eng-qa]]
 ---
+
 
 # A/B Test Setup
 

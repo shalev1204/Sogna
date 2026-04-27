@@ -12,7 +12,10 @@ description: >
 risk: offensive
 date_added: 2026-03-18
 version: 1.0.0
+id: skill-agentic-actions-auditor
+owner: [[ops-security]]
 ---
+
 
 # Agentic Actions Auditor
 

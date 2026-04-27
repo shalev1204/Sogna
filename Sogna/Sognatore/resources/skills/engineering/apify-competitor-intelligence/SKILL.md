@@ -3,7 +3,10 @@ name: apify-competitor-intelligence
 description: Analyze competitor strategies, content, pricing, ads, and market positioning across Google Maps, Booking.com, Facebook, Instagram, YouTube, and TikTok.
 risk: critical
 version: 1.0.0
+id: skill-apify-competitor-intelligence
+owner: [[eng-api]]
 ---
+
 
 # Competitor Intelligence
 

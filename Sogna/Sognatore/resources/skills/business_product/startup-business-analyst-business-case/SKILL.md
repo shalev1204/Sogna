@@ -8,7 +8,10 @@ description: 'Generate comprehensive investor-ready business case document with
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-startup-business-analyst-business-case
+owner: [[prod-pm]]
 ---
+
 
 # Business Case Generator
 

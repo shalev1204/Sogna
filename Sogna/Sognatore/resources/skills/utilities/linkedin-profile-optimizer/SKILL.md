@@ -8,7 +8,10 @@ date_added: "2026-04-13"
 tags: [linkedin, branding, career, growth, personal-brand]
 tools: [claude, cursor, gemini, Sognatore]
 version: 1.0.0
+id: skill-linkedin-profile-optimizer
+owner: [[orchestrator]]
 ---
+
 
 # LinkedIn Profile Optimizer & Authority Builder
 

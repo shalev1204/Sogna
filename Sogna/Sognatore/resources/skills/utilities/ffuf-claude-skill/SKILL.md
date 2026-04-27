@@ -4,7 +4,10 @@ description: "Web fuzzing with ffuf"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-ffuf-claude-skill
+owner: [[orchestrator]]
 ---
+
 
 # Ffuf Claude Skill
 

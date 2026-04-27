@@ -4,7 +4,10 @@ description: "You are an expert LangChain agent developer specializing in produc
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-llm-application-dev-langchain-agent
+owner: [[orchestrator]]
 ---
+
 
 # LangChain/LangGraph Agent Development Expert
 

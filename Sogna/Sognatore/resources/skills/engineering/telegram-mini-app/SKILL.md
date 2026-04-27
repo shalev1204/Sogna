@@ -7,7 +7,10 @@ description: Expert in building Telegram Mini Apps (TWA) - web apps that run
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-telegram-mini-app
+owner: [[orchestrator]]
 ---
+
 
 # Telegram Mini App
 

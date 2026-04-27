@@ -4,7 +4,10 @@ description: Microsoft 365 Agents SDK for .NET. Build multichannel agents for Te
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-m365-agents-dotnet
+owner: [[orchestrator]]
 ---
+
 
 # Microsoft 365 Agents SDK (.NET)
 

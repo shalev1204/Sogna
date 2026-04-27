@@ -13,7 +13,10 @@ tags:
   - grouping
   - aggregation
   - null-safety
+id: skill-fp-data-transforms
+owner: [[orchestrator]]
 ---
+
 
 # Practical Data Transformations
 

@@ -4,7 +4,10 @@ description: Apple Human Interface Guidelines for content display components.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-components-content
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Content Components
 

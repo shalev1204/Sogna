@@ -4,7 +4,10 @@ description: Refactor legacy codebases, migrate outdated frameworks, and impleme
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-legacy-modernizer
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

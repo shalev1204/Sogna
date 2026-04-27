@@ -7,7 +7,10 @@ date_added: "2026-03-20"
 tags: [ai, testing, behavioral-analysis, model-evaluation, red-team, compliance, mcp]
 tools: [claude, cursor, codex, copilot]
 version: 1.0.0
+id: skill-bdistill-behavioral-xray
+owner: [[orchestrator]]
 ---
+
 
 # Behavioral X-Ray
 

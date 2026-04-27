@@ -4,7 +4,10 @@ description: Azure API Management SDK for Python. Use for managing APIM services
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-mgmt-apimanagement-py
+owner: [[eng-api]]
 ---
+
 
 # Azure API Management SDK for Python
 

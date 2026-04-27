@@ -6,7 +6,10 @@ description: |
   makepad dynamic, makepad AI, splash 语言, makepad 脚本
 risk: critical
 version: 1.0.0
+id: skill-makepad-splash
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Splash Skill
 

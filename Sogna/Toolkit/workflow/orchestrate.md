@@ -1,3 +1,7 @@
+---\nid: workflow-orchestrate
+owner: [[orchestrator]]
+---
+
 ---
 description: Coordinate 3+ agents for complex multi-domain tasks.
 ---
@@ -29,3 +33,4 @@ Unified report:
 - Deliverables & Final Summary.
 
 > 🛑 **EXIT GATE**: Verify agent count >= 3, security scripts ran, and unified report generated.
+

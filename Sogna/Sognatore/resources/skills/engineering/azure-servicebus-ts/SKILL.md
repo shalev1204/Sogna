@@ -4,7 +4,10 @@ description: "Enterprise messaging with queues, topics, and subscriptions."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-servicebus-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Service Bus SDK for TypeScript
 

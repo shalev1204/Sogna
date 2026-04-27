@@ -4,7 +4,10 @@ description: "Create FastAPI routers following established patterns with proper 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fastapi-router-py
+owner: [[eng-api]]
 ---
+
 
 # FastAPI Router
 

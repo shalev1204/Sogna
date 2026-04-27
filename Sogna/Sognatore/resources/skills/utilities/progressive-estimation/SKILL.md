@@ -13,7 +13,10 @@ tags:
 tools:
   - claude
 version: 1.0.0
+id: skill-progressive-estimation
+owner: [[orchestrator]]
 ---
+
 
 # Progressive Estimation
 

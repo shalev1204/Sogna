@@ -4,7 +4,10 @@ description: Audit a project and recommend the highest-value skills to add or up
 risk: critical
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-project-skill-audit
+owner: [[ops-security]]
 ---
+
 
 # Project Skill Audit
 

@@ -16,7 +16,10 @@ allowed-tools:
   - Bash
   - WebFetch
 version: 1.0.0
+id: skill-seo-hreflang
+owner: [[prod-pm]], [[biz-marketing]], [[biz-hr]]
 ---
+
 
 # Hreflang & International SEO
 

@@ -4,7 +4,10 @@ description: Creates devcontainers with Claude Code, language-specific tooling (
 risk: critical
 date_added: 2026-03-06
 version: 1.0.0
+id: skill-devcontainer-setup
+owner: [[orchestrator]]
 ---
+
 
 # Devcontainer Setup Skill
 

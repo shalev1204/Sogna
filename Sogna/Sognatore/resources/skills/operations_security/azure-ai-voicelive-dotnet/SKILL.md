@@ -4,7 +4,10 @@ description: Azure AI Voice Live SDK for .NET. Build real-time voice AI applicat
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-voicelive-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.AI.VoiceLive (.NET)
 

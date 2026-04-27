@@ -4,7 +4,10 @@ description: "You are a debugging expert specializing in setting up comprehensiv
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-distributed-debugging-debug-trace
+owner: [[debugger]]
 ---
+
 
 # Debug and Trace Configuration
 

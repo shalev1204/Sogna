@@ -4,7 +4,10 @@ description: Azure AI Content Understanding SDK for Python. Use for multimodal c
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-contentunderstanding-py
+owner: [[ops-security]]
 ---
+
 
 # Azure AI Content Understanding SDK for Python
 

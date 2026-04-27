@@ -1,3 +1,7 @@
+---\nid: workflow-create
+owner: [[eng-backend]], [[eng-frontend]]
+---
+
 ---
 description: Create new application command. Triggers App Builder skill and starts interactive dialogue with user.
 ---
@@ -57,3 +61,4 @@ If request is unclear, ask these questions:
 - Who will use it?
 
 Use defaults, add details later.
+

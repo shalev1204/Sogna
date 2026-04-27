@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [ui, page-design, mobile, layout, styleseed]
 tools: [claude, cursor, codex, gemini]
 version: 1.0.0
+id: skill-ui-page
+owner: [[orchestrator]]
 ---
+
 
 # UI Page
 

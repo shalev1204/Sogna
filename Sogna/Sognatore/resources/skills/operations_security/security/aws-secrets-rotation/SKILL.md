@@ -6,7 +6,10 @@ risk: unknown
 tags: "[aws, secrets-manager, security, automation, kiro-cli, credentials]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-aws-secrets-rotation
+owner: [[ops-security]]
 ---
+
 
 # AWS Secrets Rotation
 

@@ -4,7 +4,10 @@ description: "Execute systematic privilege escalation assessments on Linux syste
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-linux-privilege-escalation
+owner: [[ops-security]]
 ---
+
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 

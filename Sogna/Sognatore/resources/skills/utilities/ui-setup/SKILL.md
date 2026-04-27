@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [ui, design-system, setup, frontend, styleseed]
 tools: [claude, cursor, codex, gemini]
 version: 1.0.0
+id: skill-ui-setup
+owner: [[orchestrator]]
 ---
+
 
 # UI Setup
 

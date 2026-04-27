@@ -4,7 +4,10 @@ description: Azure Resource Manager SDK for Azure SQL in .NET.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-resource-manager-sql-dotnet
+owner: [[eng-database]], [[ops-security]]
 ---
+
 
 # Azure.ResourceManager.Sql (.NET)
 

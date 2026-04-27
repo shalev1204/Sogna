@@ -4,7 +4,10 @@ description: "Create Zustand stores following established patterns with proper T
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-zustand-store-ts
+owner: [[orchestrator]]
 ---
+
 
 # Zustand Store
 

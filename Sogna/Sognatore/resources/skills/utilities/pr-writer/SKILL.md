@@ -3,7 +3,10 @@ name: pr-writer
 description: "Create pull requests following Sentry's engineering practices."
 risk: critical
 version: 1.0.0
+id: skill-pr-writer
+owner: [[orchestrator]]
 ---
+
 
 # PR Writer
 

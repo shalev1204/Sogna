@@ -4,7 +4,10 @@ description: "Expert in Zod — TypeScript-first schema validation. Covers parsi
 risk: critical
 date_added: "2026-03-05"
 version: 1.0.0
+id: skill-zod-validation-expert
+owner: [[orchestrator]]
 ---
+
 
 # Zod Validation Expert
 

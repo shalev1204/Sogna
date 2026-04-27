@@ -5,7 +5,10 @@ description: Expert in designing and building autonomous AI agents. Masters tool
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-ai-agents-architect
+owner: [[orchestrator]]
 ---
+
 
 # AI Agents Architect
 

@@ -4,7 +4,10 @@ description: "Create and manage production-ready Grafana dashboards for comprehe
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-grafana-dashboards
+owner: [[orchestrator]]
 ---
+
 
 # Grafana Dashboards
 

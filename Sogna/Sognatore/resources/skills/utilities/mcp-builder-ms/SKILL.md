@@ -4,7 +4,10 @@ description: "Use this skill when building MCP servers to integrate external API
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-mcp-builder-ms
+owner: [[orchestrator]]
 ---
+
 
 # MCP Server Development Guide
 

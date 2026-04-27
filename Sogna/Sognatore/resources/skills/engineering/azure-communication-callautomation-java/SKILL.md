@@ -4,7 +4,10 @@ description: "Build server-side call automation workflows including IVR systems,
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-communication-callautomation-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Communication Call Automation (Java)
 

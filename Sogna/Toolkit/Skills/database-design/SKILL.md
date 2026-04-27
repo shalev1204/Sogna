@@ -1,8 +1,12 @@
 ---
 name: database-design
+
 description: Database design principles and decision-making. Schema design, indexing strategy, ORM selection, serverless databases.
 allowed-tools: Read, Write, Edit, Glob, Grep
+id: skill-database-design
+owner: [[eng-database]], [[prod-design]]
 ---
+
 
 # Database Design
 

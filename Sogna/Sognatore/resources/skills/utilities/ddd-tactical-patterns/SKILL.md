@@ -5,7 +5,10 @@ risk: safe
 tags: "[ddd, tactical, aggregates, value-objects, domain-events]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-ddd-tactical-patterns
+owner: [[orchestrator]]
 ---
+
 
 # DDD Tactical Patterns
 

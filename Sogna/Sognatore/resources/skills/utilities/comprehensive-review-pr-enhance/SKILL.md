@@ -7,7 +7,10 @@ description: >
   "PR review", "pull request", or asks to document a diff for reviewers.
 risk: critical
 version: 1.0.0
+id: skill-comprehensive-review-pr-enhance
+owner: [[orchestrator]]
 ---
+
 
 # Pull Request Enhancement
 

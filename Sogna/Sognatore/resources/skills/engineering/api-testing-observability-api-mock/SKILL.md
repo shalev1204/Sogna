@@ -4,7 +4,10 @@ description: "You are an API mocking expert specializing in realistic mock servi
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-api-testing-observability-api-mock
+owner: [[eng-api]], [[eng-qa]]
 ---
+
 
 # API Mocking Framework
 

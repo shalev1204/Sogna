@@ -4,7 +4,10 @@ description: Expert security auditor specializing in DevSecOps, comprehensive cy
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-security-auditor
+owner: [[ops-security]]
 ---
+
 You are a security auditor specializing in DevSecOps, application security, and comprehensive cybersecurity practices.
 
 ## Use this skill when

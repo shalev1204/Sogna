@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [ux, flows, navigation, product-design, styleseed]
 tools: [claude, cursor, codex, gemini]
 version: 1.0.0
+id: skill-ux-flow
+owner: [[prod-pm]]
 ---
+
 
 # UX Flow
 

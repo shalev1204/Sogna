@@ -4,7 +4,10 @@ description: "Automate Webflow CMS collections, site publishing, page management
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-webflow-automation
+owner: [[orchestrator]]
 ---
+
 
 # Webflow Automation via Rube MCP
 

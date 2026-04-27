@@ -7,7 +7,10 @@ date_added: "2026-03-10"
 tags: [pipecat, voice, gemini, openai, python]
 tools: [pipecat]
 version: 1.0.0
+id: skill-pipecat-friday-agent
+owner: [[orchestrator]]
 ---
+
 
 # Pipecat Friday Agent
 

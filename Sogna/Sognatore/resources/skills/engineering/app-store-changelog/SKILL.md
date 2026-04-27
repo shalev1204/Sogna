@@ -4,7 +4,10 @@ description: Generate user-facing App Store release notes from git history since
 risk: critical
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-app-store-changelog
+owner: [[orchestrator]]
 ---
+
 
 # App Store Changelog
 

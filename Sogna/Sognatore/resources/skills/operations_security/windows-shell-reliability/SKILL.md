@@ -4,7 +4,10 @@ description: "Reliable command execution on Windows: paths, encoding, and common
 risk: critical
 date_added: "2026-03-19"
 version: 1.0.0
+id: skill-windows-shell-reliability
+owner: [[ops-security]]
 ---
+
 
 # Windows Shell Reliability Patterns
 

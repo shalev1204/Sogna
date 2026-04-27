@@ -7,7 +7,10 @@ description: Expert in building voice AI applications - from real-time voice
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-voice-ai-development
+owner: [[prod-pm]]
 ---
+
 
 # Voice AI Development
 

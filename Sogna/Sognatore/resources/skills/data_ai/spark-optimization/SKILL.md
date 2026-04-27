@@ -4,7 +4,10 @@ description: "Optimize Apache Spark jobs with partitioning, caching, shuffle opt
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-spark-optimization
+owner: [[orchestrator]]
 ---
+
 
 # Apache Spark Optimization
 

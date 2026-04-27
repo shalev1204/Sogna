@@ -5,7 +5,10 @@ risk: safe
 tags: "[ddd, domain, bounded-context, architecture]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-domain-driven-design
+owner: [[prod-design]]
 ---
+
 
 # Domain-Driven Design
 

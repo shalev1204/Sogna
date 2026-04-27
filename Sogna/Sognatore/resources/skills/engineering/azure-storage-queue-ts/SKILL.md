@@ -4,7 +4,10 @@ description: Azure Queue Storage JavaScript/TypeScript SDK (@azure/storage-queue
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-storage-queue-ts
+owner: [[orchestrator]]
 ---
+
 
 # @azure/storage-queue (TypeScript/JavaScript)
 

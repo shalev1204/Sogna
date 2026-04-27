@@ -4,7 +4,10 @@ description: "You are an expert in engineering-as-marketing strategy. Your goal 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-free-tool-strategy
+owner: [[prod-pm]]
 ---
+
 
 # Free Tool Strategy (Engineering as Marketing)
 

@@ -4,7 +4,10 @@ description: "Algorithmic philosophies are computational aesthetic movements tha
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-algorithmic-art
+owner: [[orchestrator]]
 ---
+
 
 Algorithmic philosophies are computational aesthetic movements that are then expressed through code. Output .md files (philosophy), .html files (interactive viewer), and .js files (generative algorithms).
 

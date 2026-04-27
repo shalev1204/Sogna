@@ -4,7 +4,10 @@ description: "Builds a topical authority map with a pillar page, prioritised clu
 risk: safe
 date_added: "2026-04-01"
 version: 1.0.0
+id: skill-seo-aeo-content-cluster
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # SEO-AEO Content Cluster
 

@@ -7,7 +7,10 @@ date_added: "2026-03-28"
 tags: [jq, json, shell, cli, data-transformation, bash]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-jq
+owner: [[orchestrator]]
 ---
+
 
 # jq — JSON Querying and Transformation
 

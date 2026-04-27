@@ -4,7 +4,10 @@ description: "Automate ActiveCampaign tasks via Rube MCP (Composio): manage cont
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-activecampaign-automation
+owner: [[orchestrator]]
 ---
+
 
 # ActiveCampaign Automation via Rube MCP
 

@@ -6,7 +6,10 @@ risk: critical
 tags: "[video, editing, transcription, subtitles, search, streaming, ai-generation, media]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-videodb-skills
+owner: [[orchestrator]]
 ---
+
 
 # VideoDB Skills
 

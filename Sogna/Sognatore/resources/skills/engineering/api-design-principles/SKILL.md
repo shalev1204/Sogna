@@ -4,7 +4,10 @@ description: "Master REST and GraphQL API design principles to build intuitive, 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-api-design-principles
+owner: [[eng-api]], [[prod-design]]
 ---
+
 
 # API Design Principles
 

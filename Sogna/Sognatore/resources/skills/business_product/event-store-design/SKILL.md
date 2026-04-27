@@ -4,7 +4,10 @@ description: "Design and implement event stores for event-sourced systems. Use w
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-event-store-design
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Event Store Design
 

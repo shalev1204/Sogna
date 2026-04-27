@@ -4,7 +4,10 @@ description: "Build tools that agents can use effectively, including architectur
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-tool-design
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 ## When to Use This Skill
 

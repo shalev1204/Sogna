@@ -4,7 +4,10 @@ description: Build production ML systems with PyTorch 2.x, TensorFlow, and moder
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-ml-engineer
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

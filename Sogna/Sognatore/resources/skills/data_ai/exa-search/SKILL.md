@@ -4,7 +4,10 @@ description: "Semantic search, similar content discovery, and structured researc
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-exa-search
+owner: [[orchestrator]]
 ---
+
 
 # exa-search
 

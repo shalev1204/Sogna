@@ -5,7 +5,10 @@ description: "Terraform infrastructure as code workflow for provisioning cloud r
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-terraform-infrastructure
+owner: [[eng-infra]], [[ops-security]]
 ---
+
 
 # Terraform Infrastructure Workflow
 

@@ -2,7 +2,10 @@
 name: game-development
 description: Game development orchestrator. Routes to platform-specific skills based on project needs.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+id: skill-game-development
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # Game Development
 

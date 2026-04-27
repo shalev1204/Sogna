@@ -4,7 +4,10 @@ description: "Skill for discovering and researching autonomous AI agents, tools,
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-agentfolio
+owner: [[orchestrator]]
 ---
+
 
 # AgentFolio
 

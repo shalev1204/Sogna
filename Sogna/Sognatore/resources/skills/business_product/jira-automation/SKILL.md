@@ -4,7 +4,10 @@ description: "Automate Jira tasks via Rube MCP (Composio): issues, projects, spr
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-jira-automation
+owner: [[prod-pm]]
 ---
+
 
 # Jira Automation via Rube MCP
 

@@ -3,7 +3,10 @@ name: odoo-project-timesheet
 description: "Expert guide for Odoo Project and Timesheets: task stages, billable time tracking, timesheet approval, budget alerts, and invoicing from timesheets."
 risk: safe
 version: 1.0.0
+id: skill-odoo-project-timesheet
+owner: [[orchestrator]]
 ---
+
 
 # Odoo Project & Timesheet
 

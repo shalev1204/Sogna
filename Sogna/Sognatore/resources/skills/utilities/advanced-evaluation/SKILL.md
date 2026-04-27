@@ -4,7 +4,10 @@ description: This skill should be used when the user asks to "implement LLM-as-j
 risk: critical
 date_added: 2026-03-18
 version: 1.0.0
+id: skill-advanced-evaluation
+owner: [[orchestrator]]
 ---
+
 
 # Advanced Evaluation
 

@@ -4,7 +4,10 @@ description: Set up Tailwind CSS v4 in Expo with react-native-css and NativeWind
 risk: critical
 version: 1.0.0
 license: MIT
+id: skill-expo-tailwind-setup
+owner: [[orchestrator]]
 ---
+
 
 # Tailwind CSS Setup for Expo with react-native-css
 

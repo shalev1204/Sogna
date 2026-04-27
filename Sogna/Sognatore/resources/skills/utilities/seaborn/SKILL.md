@@ -6,7 +6,10 @@ metadata:
     skill-author: K-Dense Inc.
 risk: safe
 version: 1.0.0
+id: skill-seaborn
+owner: [[orchestrator]]
 ---
+
 
 # Seaborn Statistical Visualization
 

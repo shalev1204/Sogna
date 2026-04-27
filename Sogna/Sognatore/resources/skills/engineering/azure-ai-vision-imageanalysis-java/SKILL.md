@@ -4,7 +4,10 @@ description: "Build image analysis applications with Azure AI Vision SDK for Jav
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-vision-imageanalysis-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Vision Image Analysis SDK for Java
 

@@ -4,7 +4,10 @@ description: Apple Human Interface Guidelines design foundations.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-foundations
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Design Foundations
 

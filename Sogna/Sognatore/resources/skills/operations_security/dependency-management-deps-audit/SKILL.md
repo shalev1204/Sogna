@@ -4,7 +4,10 @@ description: "You are a dependency security expert specializing in vulnerability
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-dependency-management-deps-audit
+owner: [[ops-security]]
 ---
+
 
 # Dependency Audit and Security Analysis
 

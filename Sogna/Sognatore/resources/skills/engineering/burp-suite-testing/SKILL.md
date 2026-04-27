@@ -4,7 +4,10 @@ description: "Execute comprehensive web application security testing using Burp 
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-burp-suite-testing
+owner: [[eng-qa]]
 ---
+
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 

@@ -4,7 +4,10 @@ description: "Terraform infrastructure as code best practices"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-terraform-skill
+owner: [[ops-security]]
 ---
+
 # Terraform Skill for Claude
 
 Comprehensive Terraform and OpenTofu guidance covering testing, modules, CI/CD, and production patterns. Based on terraform-best-practices.com and enterprise experience.

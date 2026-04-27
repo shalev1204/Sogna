@@ -5,7 +5,10 @@ description: "Comprehensive Snowflake development assistant covering SQL best pr
 risk: critical
 date_added: "2026-03-24"
 version: 1.0.0
+id: skill-snowflake-development
+owner: [[prod-pm]]
 ---
+
 
 # Snowflake Development
 

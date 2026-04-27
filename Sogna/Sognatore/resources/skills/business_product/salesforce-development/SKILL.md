@@ -7,7 +7,10 @@ description: Expert patterns for Salesforce platform development including
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-salesforce-development
+owner: [[prod-pm]]
 ---
+
 
 # Salesforce Development
 

@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-leiloeiro-avaliacao
+owner: [[orchestrator]]
 ---
+
 
 # SKILL DE AVALIAÇÃO DE IMÓVEL — PERITO AVALIADOR
 

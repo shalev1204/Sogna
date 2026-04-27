@@ -12,7 +12,10 @@ allowed-tools:
   - Bash
   - WebFetch
 version: 1.0.0
+id: skill-seo-technical
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Technical SEO Audit
 

@@ -4,7 +4,10 @@ description: "Automate Instagram tasks via Rube MCP (Composio): create posts, ca
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-instagram-automation
+owner: [[orchestrator]]
 ---
+
 
 # Instagram Automation via Rube MCP
 

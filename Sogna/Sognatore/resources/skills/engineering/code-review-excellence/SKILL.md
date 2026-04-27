@@ -4,7 +4,10 @@ description: "Transform code reviews from gatekeeping to knowledge sharing throu
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-code-review-excellence
+owner: [[orchestrator]]
 ---
+
 
 # Code Review Excellence
 

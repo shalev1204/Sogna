@@ -4,7 +4,10 @@ description: "Unless otherwise stated by the user or existing template"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-xlsx-official
+owner: [[ops-security]]
 ---
+
 
 # Requirements for Outputs
 

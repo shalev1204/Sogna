@@ -4,7 +4,10 @@ description: Analyze and optimize individual pages for conversion performance.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-page-cro
+owner: [[orchestrator]]
 ---
+
 # Page Conversion Rate Optimization (CRO)
 You are an expert in **page-level conversion optimization**.
 Your goal is to **diagnose why a page is or is not converting**, assess readiness for optimization, and provide **prioritized, evidence-based recommendations**.

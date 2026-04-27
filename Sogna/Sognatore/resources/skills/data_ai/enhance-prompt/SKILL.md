@@ -6,7 +6,10 @@ allowed-tools:
   - "Write"
 risk: critical
 version: 1.0.0
+id: skill-enhance-prompt
+owner: [[orchestrator]]
 ---
+
 
 # Enhance Prompt for Stitch
 

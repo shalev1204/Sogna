@@ -4,7 +4,10 @@ description: Orchestrates design workflows by routing work through brainstorming
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-design-orchestration
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Design Orchestration (Meta-Skill)
 

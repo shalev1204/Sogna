@@ -7,7 +7,10 @@ metadata:
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-daily
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 - You are building a real-time voice or multimodal AI application that uses Daily or Pipecat-style transports.

@@ -4,7 +4,10 @@ description: "PC and console game development principles. Engine selection, plat
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-pc-games
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # PC/Console Game Development
 

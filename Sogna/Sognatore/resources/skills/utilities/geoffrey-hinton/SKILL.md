@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-geoffrey-hinton
+owner: [[orchestrator]]
 ---
+
 
 # SKILL: Geoffrey Hinton — Agente Persona v2.0
 

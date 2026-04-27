@@ -4,7 +4,10 @@ description: "Build event-driven applications with Azure Event Grid SDK for Java
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-eventgrid-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Event Grid SDK for Java
 

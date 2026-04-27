@@ -4,7 +4,10 @@ description: "Expert guidance for building modern Android UIs with Jetpack Compo
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-android-jetpack-compose-expert
+owner: [[orchestrator]]
 ---
+
 
 # Android Jetpack Compose Expert
 

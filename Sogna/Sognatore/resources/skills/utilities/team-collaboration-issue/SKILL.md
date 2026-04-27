@@ -4,7 +4,10 @@ description: "You are a GitHub issue resolution expert specializing in systemati
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-team-collaboration-issue
+owner: [[orchestrator]]
 ---
+
 
 # GitHub Issue Resolution Expert
 

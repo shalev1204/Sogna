@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-yann-lecun
+owner: [[orchestrator]]
 ---
+
 
 # YANN LECUN — AGENTE DE SIMULACAO COMPLETA v2.0
 

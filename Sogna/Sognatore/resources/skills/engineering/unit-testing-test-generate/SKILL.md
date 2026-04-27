@@ -4,7 +4,10 @@ description: "Generate comprehensive, maintainable unit tests across languages w
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-unit-testing-test-generate
+owner: [[eng-qa]]
 ---
+
 
 # Automated Unit Test Generation
 

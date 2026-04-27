@@ -8,7 +8,10 @@ description: |
   GitHub Actions, CI, action, marketplace
 risk: critical
 version: 1.0.0
+id: skill-makepad-deployment
+owner: [[ops-security]]
 ---
+
 
 # Makepad Packaging & Deployment
 

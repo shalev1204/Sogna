@@ -4,7 +4,10 @@ description: "You are an expert software engineer and systems analyst. Use when 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-wiki-researcher
+owner: [[orchestrator]]
 ---
+
 
 # Wiki Researcher
 

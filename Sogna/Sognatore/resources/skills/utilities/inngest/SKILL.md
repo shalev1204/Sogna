@@ -5,7 +5,10 @@ description: Inngest expert for serverless-first background jobs, event-driven
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-inngest
+owner: [[orchestrator]]
 ---
+
 
 # Inngest Integration
 

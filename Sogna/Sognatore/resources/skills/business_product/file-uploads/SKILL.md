@@ -6,7 +6,10 @@ description: Expert at handling file uploads and cloud storage. Covers S3,
 risk: offensive
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-file-uploads
+owner: [[prod-pm]]
 ---
+
 
 # File Uploads & Storage
 

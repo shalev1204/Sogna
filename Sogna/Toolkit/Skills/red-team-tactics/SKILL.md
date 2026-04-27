@@ -2,7 +2,10 @@
 name: red-team-tactics
 description: Red team tactics principles based on MITRE ATT&CK. Attack phases, detection evasion, reporting.
 allowed-tools: Read, Glob, Grep
+id: skill-red-team-tactics
+owner: [[orchestrator]]
 ---
+
 
 # Red Team Tactics
 

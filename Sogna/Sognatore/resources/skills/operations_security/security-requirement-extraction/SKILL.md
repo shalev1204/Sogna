@@ -4,7 +4,10 @@ description: "Derive security requirements from threat models and business conte
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-security-requirement-extraction
+owner: [[ops-security]]
 ---
+
 
 # Security Requirement Extraction
 

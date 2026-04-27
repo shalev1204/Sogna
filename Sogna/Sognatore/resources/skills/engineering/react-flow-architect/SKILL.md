@@ -4,7 +4,10 @@ description: "Build production-ready ReactFlow applications with hierarchical na
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-react-flow-architect
+owner: [[orchestrator]]
 ---
+
 
 # ReactFlow Architect
 

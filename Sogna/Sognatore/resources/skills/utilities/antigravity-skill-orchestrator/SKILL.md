@@ -6,7 +6,10 @@ risk: safe
 tags: "[orchestration, meta-skill, agent-memory, task-evaluation]"
 date_added: "2026-03-13"
 version: 1.0.0
+id: skill-antigravity-skill-orchestrator
+owner: [[orchestrator]]
 ---
+
 
 # Sognatore-skill-orchestrator
 

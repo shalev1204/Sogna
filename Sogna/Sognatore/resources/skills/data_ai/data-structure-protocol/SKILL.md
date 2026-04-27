@@ -4,7 +4,10 @@ description: "Give agents persistent structural memory of a codebase — navigat
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-data-structure-protocol
+owner: [[orchestrator]]
 ---
+
 
 # Data Structure Protocol (DSP)
 

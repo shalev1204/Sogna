@@ -3,7 +3,10 @@ name: build
 description: build
 risk: critical
 version: 1.0.0
+id: skill-build
+owner: [[orchestrator]]
 ---
+
 
 ---
 name: build

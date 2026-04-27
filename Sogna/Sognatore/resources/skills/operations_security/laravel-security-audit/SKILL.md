@@ -4,7 +4,10 @@ description: "Security auditor for Laravel applications. Analyzes code for vulne
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-laravel-security-audit
+owner: [[ops-security]]
 ---
+
 
 # Laravel Security Audit
 

@@ -4,7 +4,10 @@ description: "Database design principles and decision-making. Schema design, ind
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-database-design
+owner: [[eng-database]], [[prod-design]]
 ---
+
 
 # Database Design
 

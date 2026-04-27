@@ -7,7 +7,10 @@ date_added: "2026-03-13"
 tags: [k6, load-testing, performance, api-testing, ci-cd]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-k6-load-testing
+owner: [[eng-qa]]
 ---
+
 
 # k6 Load Testing
 

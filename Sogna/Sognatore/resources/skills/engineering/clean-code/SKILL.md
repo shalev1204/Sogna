@@ -4,7 +4,10 @@ description: "This skill embodies the principles of \"Clean Code\" by Robert C. 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-clean-code
+owner: [[review-code]]
 ---
+
 
 # Clean Code Skill
 

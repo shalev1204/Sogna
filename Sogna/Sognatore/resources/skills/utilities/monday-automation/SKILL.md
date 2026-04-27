@@ -4,7 +4,10 @@ description: "Automate Monday.com work management including boards, items, colum
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-monday-automation
+owner: [[orchestrator]]
 ---
+
 
 # Monday.com Automation via Rube MCP
 

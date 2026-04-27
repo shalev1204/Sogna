@@ -3,7 +3,10 @@ name: hugging-face-gradio
 description: Build or edit Gradio apps, layouts, components, and chat interfaces in Python.
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-gradio
+owner: [[orchestrator]]
 ---
+
 
 # Gradio
 

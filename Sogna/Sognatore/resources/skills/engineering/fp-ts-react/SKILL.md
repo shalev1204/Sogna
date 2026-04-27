@@ -5,7 +5,10 @@ description: "Practical patterns for using fp-ts with React - hooks, state, form
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fp-ts-react
+owner: [[orchestrator]]
 ---
+
 
 # Functional Programming in React
 

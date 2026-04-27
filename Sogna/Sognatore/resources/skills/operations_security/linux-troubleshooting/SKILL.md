@@ -5,7 +5,10 @@ description: "Linux system troubleshooting workflow for diagnosing and resolving
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-linux-troubleshooting
+owner: [[ops-security]]
 ---
+
 
 # Linux Troubleshooting Workflow
 

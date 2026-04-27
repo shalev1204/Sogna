@@ -4,7 +4,10 @@ description: "Auto-instrument Node.js applications with distributed tracing, met
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-monitor-opentelemetry-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Monitor OpenTelemetry SDK for TypeScript
 

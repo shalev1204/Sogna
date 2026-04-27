@@ -4,7 +4,10 @@ description: "Game design principles. GDD structure, balancing, player psycholog
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-game-design
+owner: [[prod-design]], [[game-developer]], [[prod-pm]]
 ---
+
 
 # Game Design Principles
 

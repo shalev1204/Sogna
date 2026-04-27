@@ -4,7 +4,10 @@ description: "Automate Slack workspace operations including messaging, search, c
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-slack-automation
+owner: [[prod-pm]]
 ---
+
 
 # Slack Automation via Rube MCP
 

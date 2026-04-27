@@ -4,7 +4,10 @@ description: "2D game development principles. Sprites, tilemaps, physics, camera
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-2d-games
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # 2D Game Development
 

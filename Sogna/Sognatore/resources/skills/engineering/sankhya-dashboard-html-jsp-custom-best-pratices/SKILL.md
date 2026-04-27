@@ -6,7 +6,10 @@ risk: critical
 tags: [sankhya, dashboard, jsp, html, sql, best-practices]
 date_added: "2026-03-10"
 version: 1.0.0
+id: skill-sankhya-dashboard-html-jsp-custom-best-pratices
+owner: [[orchestrator]]
 ---
+
 
 # sankhya-dashboard-html-jsp-custom-best-pratices
 

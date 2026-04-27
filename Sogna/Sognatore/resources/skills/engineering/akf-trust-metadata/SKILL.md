@@ -11,7 +11,10 @@ tags:
 - file-format
 - ai-native
 version: 1.0.0
+id: skill-akf-trust-metadata
+owner: [[orchestrator]]
 ---
+
 
 # AKF — The AI Native File Format
 

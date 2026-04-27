@@ -4,7 +4,10 @@ description: Master AI-powered test automation with modern frameworks, self-heal
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-test-automator
+owner: [[eng-qa]]
 ---
+
 
 ## Use this skill when
 

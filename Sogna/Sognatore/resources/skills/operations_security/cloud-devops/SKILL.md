@@ -5,7 +5,10 @@ description: "Cloud infrastructure and DevOps workflow covering AWS, Azure, GCP,
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cloud-devops
+owner: [[ops-devops]], [[ops-security]]
 ---
+
 
 # Cloud/DevOps Workflow Bundle
 

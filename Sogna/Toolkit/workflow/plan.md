@@ -1,3 +1,7 @@
+---\nid: workflow-plan
+owner: [[prod-pm]], [[system-architect]]
+---
+
 ---
 description: Create project plan using project-planner agent. No code writing - only plan file generation.
 ---
@@ -87,3 +91,4 @@ Next steps:
 /plan mobile app for fitness tracking
 /plan SaaS dashboard with analytics
 ```
+

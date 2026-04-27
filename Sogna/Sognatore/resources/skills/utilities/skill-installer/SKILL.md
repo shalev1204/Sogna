@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-skill-installer
+owner: [[orchestrator]]
 ---
+
 
 # Skill Installer v3.0
 

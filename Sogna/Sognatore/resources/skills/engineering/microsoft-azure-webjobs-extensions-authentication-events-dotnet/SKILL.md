@@ -4,7 +4,10 @@ description: Microsoft Entra Authentication Events SDK for .NET. Azure Functions
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-microsoft-azure-webjobs-extensions-authentication-events-dotnet
+owner: [[orchestrator]]
 ---
+
 
 # Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents (.NET)
 

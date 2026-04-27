@@ -6,7 +6,10 @@ risk: unknown
 tags: "[aws, security, audit, compliance, kiro-cli, security-assessment]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-aws-security-audit
+owner: [[ops-security]]
 ---
+
 
 # AWS Security Audit
 

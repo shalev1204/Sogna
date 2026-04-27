@@ -4,7 +4,10 @@ description: "Comprehensive guide to writing effective, blameless postmortems th
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-postmortem-writing
+owner: [[orchestrator]]
 ---
+
 
 # Postmortem Writing
 

@@ -7,7 +7,10 @@ date_added: "2026-03-13"
 tags: [memory, context, rag, summarization, compression, long-context, agent-infrastructure]
 tools: [claude, cursor, codex, gemini, copilot, windsurf, Sognatore, grok]
 version: 1.0.0
+id: skill-recallmax
+owner: [[orchestrator]]
 ---
+
 
 # RecallMax — God-Tier Long-Context Memory
 

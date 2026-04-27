@@ -4,7 +4,10 @@ description: Azure Event Grid SDK for .NET. Client library for publishing and co
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-eventgrid-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.Messaging.EventGrid (.NET)
 

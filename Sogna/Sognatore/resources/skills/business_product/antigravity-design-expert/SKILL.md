@@ -4,7 +4,10 @@ description: Core UI/UX engineering skill for building highly interactive, spati
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-antigravity-design-expert
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Sognatore UI & Motion Design Expert
 

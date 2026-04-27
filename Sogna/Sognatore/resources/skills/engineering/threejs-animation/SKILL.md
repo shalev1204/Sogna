@@ -3,7 +3,10 @@ name: threejs-animation
 description: Three.js animation - keyframe animation, skeletal animation, morph targets, animation mixing. Use when animating objects, playing GLTF animations, creating procedural motion, or blending animations.
 risk: critical
 version: 1.0.0
+id: skill-threejs-animation
+owner: [[biz-hr]]
 ---
+
 
 # Three.js Animation
 

@@ -5,7 +5,10 @@ description: "You are an advanced Docker containerization expert with comprehens
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-docker-expert
+owner: [[ops-security]]
 ---
+
 
 # Docker Expert
 

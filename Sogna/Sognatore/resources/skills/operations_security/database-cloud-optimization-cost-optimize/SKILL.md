@@ -4,7 +4,10 @@ description: "You are a cloud cost optimization expert specializing in reducing 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-database-cloud-optimization-cost-optimize
+owner: [[eng-database]], [[ops-security]]
 ---
+
 
 # Cloud Cost Optimization
 

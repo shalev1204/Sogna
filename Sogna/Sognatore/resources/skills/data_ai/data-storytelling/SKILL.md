@@ -4,7 +4,10 @@ description: "Transform raw data into compelling narratives that drive decisions
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-data-storytelling
+owner: [[orchestrator]]
 ---
+
 
 # Data Storytelling
 

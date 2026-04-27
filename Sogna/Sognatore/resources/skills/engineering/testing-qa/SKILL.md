@@ -5,7 +5,10 @@ description: "Comprehensive testing and QA workflow covering unit testing, integ
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-testing-qa
+owner: [[eng-qa]]
 ---
+
 
 # Testing/QA Workflow Bundle
 

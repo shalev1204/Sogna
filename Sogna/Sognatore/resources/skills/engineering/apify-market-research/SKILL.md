@@ -3,7 +3,10 @@ name: apify-market-research
 description: Analyze market conditions, geographic opportunities, pricing, consumer behavior, and product validation across Google Maps, Facebook, Instagram, Booking.com, and TripAdvisor.
 risk: safe
 version: 1.0.0
+id: skill-apify-market-research
+owner: [[eng-api]]
 ---
+
 
 # Market Research
 

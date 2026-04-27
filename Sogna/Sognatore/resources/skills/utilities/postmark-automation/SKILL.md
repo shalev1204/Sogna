@@ -4,7 +4,10 @@ description: "Automate Postmark email delivery tasks via Rube MCP (Composio): se
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-postmark-automation
+owner: [[orchestrator]]
 ---
+
 
 # Postmark Automation via Rube MCP
 

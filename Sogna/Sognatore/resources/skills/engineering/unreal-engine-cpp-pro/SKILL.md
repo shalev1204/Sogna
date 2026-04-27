@@ -4,7 +4,10 @@ description: "Expert guide for Unreal Engine 5.x C++ development, covering UObje
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-unreal-engine-cpp-pro
+owner: [[orchestrator]]
 ---
+
 
 # Unreal Engine C++ Pro
 

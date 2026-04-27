@@ -4,7 +4,10 @@ description: "Comprehensive guide to Istio traffic management for production ser
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-istio-traffic-management
+owner: [[orchestrator]]
 ---
+
 
 # Istio Traffic Management
 

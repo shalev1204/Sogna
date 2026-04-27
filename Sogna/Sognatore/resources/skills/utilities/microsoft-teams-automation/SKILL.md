@@ -4,7 +4,10 @@ description: "Automate Microsoft Teams tasks via Rube MCP (Composio): send messa
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-microsoft-teams-automation
+owner: [[orchestrator]]
 ---
+
 
 # Microsoft Teams Automation via Rube MCP
 

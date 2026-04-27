@@ -11,7 +11,10 @@ tools: [claude, cursor, gemini, copilot]
 license: "MIT"
 license_source: "https://github.com/LambdaTest/agent-skills/blob/main/LICENSE"
 version: 1.0.0
+id: skill-lambdatest-agent-skills
+owner: [[eng-qa]]
 ---
+
 
 # LambdaTest Agent Skills — Test Automation Registry (46 Skills)
 

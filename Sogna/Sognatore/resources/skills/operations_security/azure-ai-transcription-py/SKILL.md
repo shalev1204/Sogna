@@ -4,7 +4,10 @@ description: Azure AI Transcription SDK for Python. Use for real-time and batch 
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-transcription-py
+owner: [[ops-security]]
 ---
+
 
 # Azure AI Transcription SDK for Python
 

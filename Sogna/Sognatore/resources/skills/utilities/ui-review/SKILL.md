@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [ui, review, design-system, accessibility, styleseed]
 tools: [claude, cursor, codex, gemini]
 version: 1.0.0
+id: skill-ui-review
+owner: [[orchestrator]]
 ---
+
 
 # UI Review
 

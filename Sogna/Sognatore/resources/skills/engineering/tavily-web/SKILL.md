@@ -4,7 +4,10 @@ description: "Web search, content extraction, crawling, and research capabilitie
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-tavily-web
+owner: [[orchestrator]]
 ---
+
 
 # tavily-web
 

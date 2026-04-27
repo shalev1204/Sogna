@@ -7,7 +7,10 @@ description: Expert in building browser extensions that solve real problems -
 risk: safe
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-browser-extension-builder
+owner: [[orchestrator]]
 ---
+
 
 # Browser Extension Builder
 

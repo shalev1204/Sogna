@@ -4,7 +4,10 @@ description: "How to use a Win32 build of BusyBox to run many of the standard UN
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-busybox-on-windows
+owner: [[ops-security]]
 ---
+
 
 BusyBox is a single binary that implements many common Unix tools.
 

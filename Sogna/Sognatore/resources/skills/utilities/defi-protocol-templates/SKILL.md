@@ -4,7 +4,10 @@ description: "Implement DeFi protocols with production-ready templates for staki
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-defi-protocol-templates
+owner: [[orchestrator]]
 ---
+
 
 # DeFi Protocol Templates
 

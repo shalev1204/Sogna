@@ -4,7 +4,10 @@ description: "Comprehensive guide to creating, structuring, and distributing Pyt
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-python-packaging
+owner: [[orchestrator]]
 ---
+
 
 # Python Packaging
 

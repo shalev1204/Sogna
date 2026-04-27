@@ -4,7 +4,10 @@ description: "These are instructions for creating design philosophies - aestheti
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-canvas-design
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 These are instructions for creating design philosophies - aesthetic movements that are then EXPRESSED VISUALLY. Output only .md files, .pdf files, and .png files.
 

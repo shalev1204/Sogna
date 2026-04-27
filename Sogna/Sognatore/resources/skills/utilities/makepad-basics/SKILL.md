@@ -7,7 +7,10 @@ description: |
   makepad 入门, 创建 makepad 应用, makepad 教程, makepad 项目结构
 risk: safe
 version: 1.0.0
+id: skill-makepad-basics
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Basics Skill
 

@@ -4,7 +4,10 @@ description: "Decision framework and patterns for architecting applications acro
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-multi-cloud-architecture
+owner: [[ops-security]], [[system-architect]]
 ---
+
 
 # Multi-Cloud Architecture
 

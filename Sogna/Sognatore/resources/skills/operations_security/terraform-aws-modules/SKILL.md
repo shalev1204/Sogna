@@ -4,7 +4,10 @@ description: "Terraform module creation for AWS — reusable modules, state mana
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-terraform-aws-modules
+owner: [[ops-security]]
 ---
+
 You are an expert in Terraform for AWS specializing in reusable module design, state management, and production-grade HCL patterns.
 
 ## Use this skill when

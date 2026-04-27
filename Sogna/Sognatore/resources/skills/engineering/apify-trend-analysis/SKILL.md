@@ -3,7 +3,10 @@ name: apify-trend-analysis
 description: Discover and track emerging trends across Google Trends, Instagram, Facebook, YouTube, and TikTok to inform content strategy.
 risk: critical
 version: 1.0.0
+id: skill-apify-trend-analysis
+owner: [[eng-api]]
 ---
+
 
 # Trend Analysis
 

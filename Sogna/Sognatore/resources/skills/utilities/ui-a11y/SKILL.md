@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [ui, accessibility, wcag, audit, styleseed]
 tools: [claude, cursor, codex, gemini]
 version: 1.0.0
+id: skill-ui-a11y
+owner: [[orchestrator]]
 ---
+
 
 # UI Accessibility Audit
 

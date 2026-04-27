@@ -4,7 +4,10 @@ description: "Claiming work is complete without verification is dishonesty, not 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-verification-before-completion
+owner: [[orchestrator]]
 ---
+
 
 # Verification Before Completion
 

@@ -4,7 +4,10 @@ description: 分析健康目标数据、识别目标模式、评估目标进度,
 allowed-tools: Read, Grep, Glob, Write
 risk: safe
 version: 1.0.0
+id: skill-goal-analyzer
+owner: [[orchestrator]]
 ---
+
 
 # 健康目标分析器技能
 

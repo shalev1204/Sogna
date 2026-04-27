@@ -4,7 +4,10 @@ description: Scaffold, build, sign, and package SwiftPM macOS apps without Xcode
 risk: critical
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-macos-spm-app-packaging
+owner: [[prod-pm]]
 ---
+
 
 # macOS SwiftPM App Packaging (No Xcode)
 

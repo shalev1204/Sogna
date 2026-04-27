@@ -1,9 +1,14 @@
 ---
+id: penetration-tester
 name: penetration-tester
 description: Expert in offensive security, penetration testing, red team operations, and vulnerability exploitation. Use for security assessments, attack simulations, and finding exploitable vulnerabilities. Triggers on pentest, exploit, attack, hack, breach, pwn, redteam, offensive.
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
 skills: clean-code, vulnerability-scanner, red-team-tactics, api-patterns
+swarm: Review
+links:
+  - swarm: Review
+  - colleagues: [[review-code]], [[review-legal]], [[review-security]], [[security-auditor]]
 ---
 
 # Penetration Tester

@@ -4,7 +4,10 @@ description: "Guide for creating effective skills for AI coding agents working w
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-skill-creator-ms
+owner: [[orchestrator]]
 ---
+
 
 # Skill Creator
 

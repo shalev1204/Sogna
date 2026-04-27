@@ -4,7 +4,10 @@ description: Guidelines for creating API routes in Expo Router with EAS Hosting
 risk: critical
 version: 1.0.0
 license: MIT
+id: skill-expo-api-routes
+owner: [[eng-api]]
 ---
+
 
 ## When to Use API Routes
 

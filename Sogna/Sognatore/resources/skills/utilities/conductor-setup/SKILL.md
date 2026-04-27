@@ -7,7 +7,10 @@ risk: critical
 metadata:
   version: "1.0"
 version: 1.0.0
+id: skill-conductor-setup
+owner: [[orchestrator]]
 ---
+
 
 Set up this Rails project for Conductor, the Mac app for parallel coding agents.
 

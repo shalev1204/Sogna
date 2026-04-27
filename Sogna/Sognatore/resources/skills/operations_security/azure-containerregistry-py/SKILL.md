@@ -4,7 +4,10 @@ description: Azure Container Registry SDK for Python. Use for managing container
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-containerregistry-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Container Registry SDK for Python
 

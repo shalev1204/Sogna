@@ -5,7 +5,10 @@ risk: offensive
 tags: null
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-crypto-bd-agent
+owner: [[ops-security]]
 ---
+
 
 # Crypto BD Agent — Autonomous Business Development for Exchanges
 

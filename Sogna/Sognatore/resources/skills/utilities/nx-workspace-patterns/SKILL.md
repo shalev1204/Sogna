@@ -4,7 +4,10 @@ description: "Configure and optimize Nx monorepo workspaces. Use when setting up
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-nx-workspace-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Nx Workspace Patterns
 

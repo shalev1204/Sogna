@@ -4,7 +4,10 @@ description: Azure Service Bus SDK for Python messaging. Use for queues, topics,
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-servicebus-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Service Bus SDK for Python
 

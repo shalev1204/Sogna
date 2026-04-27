@@ -4,7 +4,10 @@ description: Write idiomatic C++ code with modern features, RAII, smart pointers
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-cpp-pro
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

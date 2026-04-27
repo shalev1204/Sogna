@@ -4,7 +4,10 @@ description: Azure App Configuration SDK for Java. Centralized application confi
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-appconfiguration-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure App Configuration SDK for Java
 

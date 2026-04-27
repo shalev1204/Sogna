@@ -4,7 +4,10 @@ description: "First-principles assumption auditor. Classifies each hidden assump
 risk: safe
 date_added: "2026-04-13"
 version: 1.0.0
+id: skill-axiom
+owner: [[orchestrator]]
 ---
+
 
 # Axiom — First-Principles Assumption Auditor / 第一性原理拆解器
 

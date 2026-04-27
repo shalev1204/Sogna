@@ -13,7 +13,10 @@ allowed-tools:
   - WebFetch
   - Write
 version: 1.0.0
+id: skill-seo-dataforseo
+owner: [[biz-marketing]]
 ---
+
 
 # DataForSEO: Live SEO Data (Extension)
 

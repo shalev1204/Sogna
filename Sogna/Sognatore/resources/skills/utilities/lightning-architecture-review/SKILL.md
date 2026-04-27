@@ -4,7 +4,10 @@ description: Review Bitcoin Lightning Network protocol designs, compare channel 
 risk: safe
 date_added: '2026-03-03'
 version: 1.0.0
+id: skill-lightning-architecture-review
+owner: [[system-architect]]
 ---
+
 
 ## Use this skill when
 

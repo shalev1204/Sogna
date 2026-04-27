@@ -4,7 +4,10 @@ description: "Expert skill for converting any codebase (React/HTML/Next.js) into
 risk: critical
 date_added: "2026-04-12"
 version: 1.0.0
+id: skill-codebase-to-wordpress-converter
+owner: [[orchestrator]]
 ---
+
 
 # Codebase to WordPress Converter
 

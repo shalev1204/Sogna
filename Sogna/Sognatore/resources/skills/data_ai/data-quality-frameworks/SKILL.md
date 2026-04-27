@@ -4,7 +4,10 @@ description: "Implement data quality validation with Great Expectations, dbt tes
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-data-quality-frameworks
+owner: [[orchestrator]]
 ---
+
 
 # Data Quality Frameworks
 

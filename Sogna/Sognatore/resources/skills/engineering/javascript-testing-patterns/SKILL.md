@@ -4,7 +4,10 @@ description: "Comprehensive guide for implementing robust testing strategies in 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-javascript-testing-patterns
+owner: [[eng-qa]]
 ---
+
 
 # JavaScript Testing Patterns
 

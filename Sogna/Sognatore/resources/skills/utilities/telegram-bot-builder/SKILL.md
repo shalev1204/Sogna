@@ -7,7 +7,10 @@ description: Expert in building Telegram bots that solve real problems - from
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-telegram-bot-builder
+owner: [[orchestrator]]
 ---
+
 
 # Telegram Bot Builder
 

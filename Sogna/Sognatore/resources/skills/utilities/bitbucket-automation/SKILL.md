@@ -4,7 +4,10 @@ description: "Automate Bitbucket repositories, pull requests, branches, issues, 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bitbucket-automation
+owner: [[orchestrator]]
 ---
+
 
 # Bitbucket Automation via Rube MCP
 

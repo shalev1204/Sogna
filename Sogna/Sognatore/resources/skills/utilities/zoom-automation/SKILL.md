@@ -4,7 +4,10 @@ description: "Automate Zoom meeting creation, management, recordings, webinars, 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-zoom-automation
+owner: [[orchestrator]]
 ---
+
 
 # Zoom Automation via Rube MCP
 

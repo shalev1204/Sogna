@@ -7,7 +7,10 @@ description: |
   状态持久化, 主题切换
 risk: safe
 version: 1.0.0
+id: skill-robius-state-management
+owner: [[orchestrator]]
 ---
+
 
 # Robius State Management Skill
 

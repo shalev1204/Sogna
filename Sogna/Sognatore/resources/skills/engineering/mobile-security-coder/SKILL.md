@@ -4,7 +4,10 @@ description: Expert in secure mobile coding practices specializing in input vali
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-mobile-security-coder
+owner: [[eng-mobile]], [[ops-security]]
 ---
+
 
 ## Use this skill when
 

@@ -5,7 +5,10 @@ description: "Use when automating LinkedIn via CLI: fetch profiles, search peopl
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-linkedin-cli
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex

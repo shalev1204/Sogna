@@ -4,7 +4,10 @@ description: "Build and deploy the same feature consistently across web, mobile,
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-multi-platform-apps-multi-platform
+owner: [[orchestrator]]
 ---
+
 
 # Multi-Platform Feature Development Workflow
 

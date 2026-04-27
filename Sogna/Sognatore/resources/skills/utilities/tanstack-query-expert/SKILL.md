@@ -5,7 +5,10 @@ description: "Expert in TanStack Query (React Query) — asynchronous state mana
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-tanstack-query-expert
+owner: [[orchestrator]]
 ---
+
 
 # TanStack Query Expert
 

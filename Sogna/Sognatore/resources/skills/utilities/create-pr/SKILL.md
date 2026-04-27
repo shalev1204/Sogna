@@ -3,7 +3,10 @@ name: create-pr
 description: Alias for sentry-skills:pr-writer. Use when users explicitly ask for "create-pr" or reference the legacy skill name. Redirects to the canonical PR writing workflow.
 risk: critical
 version: 1.0.0
+id: skill-create-pr
+owner: [[orchestrator]]
 ---
+
 
 # Alias: create-pr
 

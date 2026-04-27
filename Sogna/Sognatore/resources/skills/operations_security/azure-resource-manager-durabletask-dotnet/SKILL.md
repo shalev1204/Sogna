@@ -4,7 +4,10 @@ description: Azure Resource Manager SDK for Durable Task Scheduler in .NET.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-resource-manager-durabletask-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.ResourceManager.DurableTask (.NET)
 

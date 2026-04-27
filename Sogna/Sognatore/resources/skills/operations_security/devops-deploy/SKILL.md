@@ -17,7 +17,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-devops-deploy
+owner: [[ops-devops]], [[ops-security]]
 ---
+
 
 # DEVOPS-DEPLOY — Da Ideia para Producao
 

@@ -4,7 +4,10 @@ description: "Turn error logs, screenshots, voice notes, and rough bug reports i
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-github-issue-creator
+owner: [[orchestrator]]
 ---
+
 
 # GitHub Issue Creator
 

@@ -12,7 +12,10 @@ tags:
   - deno
   - dependency-injection
   - reader-task-either
+id: skill-fp-backend
+owner: [[eng-backend]]
 ---
+
 
 # fp-ts Backend Patterns
 

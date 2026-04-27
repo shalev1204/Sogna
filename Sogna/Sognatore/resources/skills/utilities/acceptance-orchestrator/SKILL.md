@@ -4,7 +4,10 @@ description: Use when a coding task should be driven end-to-end from issue intak
 risk: safe
 date_added: "2026-03-12"
 version: 1.0.0
+id: skill-acceptance-orchestrator
+owner: [[orchestrator]]
 ---
+
 
 # Acceptance Orchestrator
 

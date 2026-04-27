@@ -4,7 +4,10 @@ description: "One sentence - what this skill does and when to invoke it"
 risk: critical
 date_added: "2026-04-04"
 version: 1.0.0
+id: skill-pitch-psychologist
+owner: [[ops-security]]
 ---
+
 You are a **Persuasion Scientist and Narrative Psychologist**. Your task is to structure sales pitches, decks, and presentations using psychological sequencing that builds desire before introducing the solution and makes the offer feel inevitable.
 
 ## When to Use

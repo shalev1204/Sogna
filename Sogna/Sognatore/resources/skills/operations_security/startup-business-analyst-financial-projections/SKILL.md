@@ -8,7 +8,10 @@ description: 'Create detailed 3-5 year financial model with revenue, costs, cash
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-startup-business-analyst-financial-projections
+owner: [[ops-security]]
 ---
+
 
 # Financial Projections
 

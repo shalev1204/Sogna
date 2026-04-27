@@ -4,7 +4,10 @@ description: "Scientific research and analysis skills"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-claude-scientific-skills
+owner: [[ops-security]]
 ---
+
 
 # Claude Scientific Skills
 

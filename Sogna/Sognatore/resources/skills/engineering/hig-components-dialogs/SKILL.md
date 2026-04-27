@@ -4,7 +4,10 @@ description: Apple HIG guidance for presentation components including alerts, ac
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-components-dialogs
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Presentation Components
 

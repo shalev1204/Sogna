@@ -4,7 +4,10 @@ description: "You are a TypeScript project architecture expert specializing in s
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-javascript-typescript-typescript-scaffold
+owner: [[orchestrator]]
 ---
+
 
 # TypeScript Project Scaffolding
 

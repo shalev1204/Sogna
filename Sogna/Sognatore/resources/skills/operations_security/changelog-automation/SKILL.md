@@ -4,7 +4,10 @@ description: "Automate changelog generation from commits, PRs, and releases foll
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-changelog-automation
+owner: [[ops-security]]
 ---
+
 
 # Changelog Automation
 

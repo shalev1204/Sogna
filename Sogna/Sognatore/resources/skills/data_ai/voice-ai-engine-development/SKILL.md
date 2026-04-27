@@ -4,7 +4,10 @@ description: "Build real-time conversational AI voice engines using async worker
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-voice-ai-engine-development
+owner: [[prod-pm]]
 ---
+
 
 # Voice AI Engine Development
 

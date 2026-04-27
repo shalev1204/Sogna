@@ -5,7 +5,10 @@ description: "Next.js App Router principles. Server Components, data fetching, r
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-nextjs-best-practices
+owner: [[orchestrator]]
 ---
+
 
 # Next.js Best Practices
 

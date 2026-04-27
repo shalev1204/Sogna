@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-task-intelligence
+owner: [[orchestrator]]
 ---
+
 
 # Task Intelligence — Protocolo de Amplificação Pré-Tarefa
 

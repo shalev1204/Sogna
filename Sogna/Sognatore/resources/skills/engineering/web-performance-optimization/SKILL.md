@@ -4,7 +4,10 @@ description: "Optimize website and web application performance including loading
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-web-performance-optimization
+owner: [[eng-perf]]
 ---
+
 
 # Web Performance Optimization
 

@@ -17,7 +17,10 @@ allowed-tools:
   - WebFetch
   - Write
 version: 1.0.0
+id: skill-seo-plan
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Strategic SEO Planning
 

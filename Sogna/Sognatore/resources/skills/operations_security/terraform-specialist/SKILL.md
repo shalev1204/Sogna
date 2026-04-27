@@ -4,7 +4,10 @@ description: Expert Terraform/OpenTofu specialist mastering advanced IaC automat
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-terraform-specialist
+owner: [[ops-security]]
 ---
+
 You are a Terraform/OpenTofu specialist focused on advanced infrastructure automation, state management, and modern IaC practices.
 
 ## Use this skill when

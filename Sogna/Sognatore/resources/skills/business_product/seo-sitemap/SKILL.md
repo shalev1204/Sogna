@@ -16,7 +16,10 @@ allowed-tools:
   - WebFetch
   - Write
 version: 1.0.0
+id: skill-seo-sitemap
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Sitemap Analysis & Generation
 

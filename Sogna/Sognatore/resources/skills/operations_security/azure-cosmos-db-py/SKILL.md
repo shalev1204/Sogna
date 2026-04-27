@@ -4,7 +4,10 @@ description: "Build production-grade Azure Cosmos DB NoSQL services following cl
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-cosmos-db-py
+owner: [[ops-security]]
 ---
+
 
 # Cosmos DB Service Implementation
 

@@ -7,7 +7,10 @@ description: |
   makepad 字体, makepad 文字, makepad 排版, makepad 字形
 risk: safe
 version: 1.0.0
+id: skill-makepad-font
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Font Skill
 

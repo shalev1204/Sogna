@@ -4,7 +4,10 @@ description: "Automate LinkedIn tasks via Rube MCP (Composio): create posts, man
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-linkedin-automation
+owner: [[orchestrator]]
 ---
+
 
 # LinkedIn Automation via Rube MCP
 

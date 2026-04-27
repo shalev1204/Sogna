@@ -4,7 +4,10 @@ description: "Comprehensive frameworks for analyzing competition, identifying di
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-competitive-landscape
+owner: [[orchestrator]]
 ---
+
 
 # Competitive Landscape Analysis
 

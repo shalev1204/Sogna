@@ -4,7 +4,10 @@ description: "Automate SendGrid email delivery workflows including marketing cam
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-sendgrid-automation
+owner: [[orchestrator]]
 ---
+
 
 # SendGrid Automation via Rube MCP
 

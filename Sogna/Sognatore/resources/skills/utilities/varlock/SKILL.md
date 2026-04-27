@@ -3,7 +3,10 @@ name: varlock
 description: "Secure-by-default environment variable management for Claude Code sessions."
 risk: critical
 version: 1.0.0
+id: skill-varlock
+owner: [[orchestrator]]
 ---
+
 
 <!-- security-allowlist: curl-pipe-bash -->
 

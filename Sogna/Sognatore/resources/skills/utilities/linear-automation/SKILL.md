@@ -4,7 +4,10 @@ description: "Automate Linear tasks via Rube MCP (Composio): issues, projects, c
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-linear-automation
+owner: [[orchestrator]]
 ---
+
 
 # Linear Automation via Rube MCP
 

@@ -5,7 +5,10 @@ description: "WordPress theme development workflow covering theme architecture, 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-wordpress-theme-development
+owner: [[prod-pm]]
 ---
+
 
 # WordPress Theme Development Workflow
 

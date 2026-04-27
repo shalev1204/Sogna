@@ -4,7 +4,10 @@ description: Codified expertise for returns authorisation, receipt and inspectio
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-returns-reverse-logistics
+owner: [[ops-security]]
 ---
+
 
 ## When to Use
 Use this skill when managing the product return lifecycle, including authorization, physical inspection, making disposition decisions (e.g., restock vs. liquidator), detecting return fraud, or processing warranty claims.

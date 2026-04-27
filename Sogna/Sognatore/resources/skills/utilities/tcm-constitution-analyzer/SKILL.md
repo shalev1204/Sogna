@@ -4,7 +4,10 @@ description: 分析中医体质数据、识别体质类型、评估体质特征,
 allowed-tools: Read, Grep, Glob, Write
 risk: safe
 version: 1.0.0
+id: skill-tcm-constitution-analyzer
+owner: [[orchestrator]]
 ---
+
 
 # 中医体质辨识分析器技能
 

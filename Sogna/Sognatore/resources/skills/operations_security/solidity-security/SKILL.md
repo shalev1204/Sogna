@@ -4,7 +4,10 @@ description: "Master smart contract security best practices, vulnerability preve
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-solidity-security
+owner: [[ops-security]]
 ---
+
 
 # Solidity Security
 

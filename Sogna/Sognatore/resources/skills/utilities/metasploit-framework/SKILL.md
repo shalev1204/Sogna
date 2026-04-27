@@ -4,7 +4,10 @@ description: "⚠️ AUTHORIZED USE ONLY > This skill is for educational purpose
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-metasploit-framework
+owner: [[orchestrator]]
 ---
+
 
 # Metasploit Framework
 

@@ -4,7 +4,10 @@ description: "Automate Outlook Calendar tasks via Rube MCP (Composio): create ev
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-outlook-calendar-automation
+owner: [[orchestrator]]
 ---
+
 
 # Outlook Calendar Automation via Rube MCP
 

@@ -6,7 +6,10 @@ description: Expert patterns for Segment Customer Data Platform including
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-segment-cdp
+owner: [[ops-security]]
 ---
+
 
 # Segment CDP
 

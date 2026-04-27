@@ -4,7 +4,10 @@ description: Codified expertise for demand forecasting, safety stock optimisatio
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-inventory-demand-planning
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skill when forecasting product demand, calculating optimal safety stock levels, planning inventory replenishment cycles, estimating the impact of retail promotions, or conducting ABC/XYZ inventory segmentation.

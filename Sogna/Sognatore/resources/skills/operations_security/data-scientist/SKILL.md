@@ -4,7 +4,10 @@ description: Expert data scientist for advanced analytics, machine learning, and
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-data-scientist
+owner: [[ops-security]]
 ---
+
 
 ## Use this skill when
 

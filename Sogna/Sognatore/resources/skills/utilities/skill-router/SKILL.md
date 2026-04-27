@@ -3,7 +3,10 @@ name: skill-router
 description: "Use when the user is unsure which skill to use or where to start. Interviews the user with targeted questions and recommends the best skill(s) from the installed library for their goal."
 risk: offensive
 version: 1.0.0
+id: skill-skill-router
+owner: [[orchestrator]]
 ---
+
 
 # Skill Router
 

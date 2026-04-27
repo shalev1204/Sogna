@@ -11,7 +11,10 @@ tools: [openclaw]
 license: "MIT-0"
 license_source: "https://clawhub.ai/jiawei248/daily-gift"
 version: 1.0.0
+id: skill-daily-gift
+owner: [[orchestrator]]
 ---
+
 
 # Daily Gift
 

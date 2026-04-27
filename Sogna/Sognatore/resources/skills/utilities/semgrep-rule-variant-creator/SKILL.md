@@ -5,7 +5,10 @@ allowed-tools:
  ...
 risk: critical
 version: 1.0.0
+id: skill-semgrep-rule-variant-creator
+owner: [[orchestrator]]
 ---
+
 
 # Semgrep Rule Variant Creator
 

@@ -4,7 +4,10 @@ description: "AI-powered image editing with style transfer and object removal"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fal-image-edit
+owner: [[orchestrator]]
 ---
+
 
 # Fal Image Edit
 

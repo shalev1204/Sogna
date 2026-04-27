@@ -3,7 +3,10 @@ name: odoo-qweb-templates
 description: "Expert in Odoo QWeb templating for PDF reports, email templates, and website pages. Covers t-if, t-foreach, t-field, and report actions."
 risk: safe
 version: 1.0.0
+id: skill-odoo-qweb-templates
+owner: [[orchestrator]]
 ---
+
 
 # Odoo QWeb Templates
 

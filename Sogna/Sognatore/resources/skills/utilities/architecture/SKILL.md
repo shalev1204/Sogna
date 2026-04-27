@@ -4,7 +4,10 @@ description: "Architectural decision-making framework. Requirements analysis, tr
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-architecture
+owner: [[system-architect]]
 ---
+
 
 # Architecture Decision Framework
 

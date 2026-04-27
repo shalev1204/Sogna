@@ -4,7 +4,10 @@ description: "Build document analysis applications using the Azure AI Document I
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-formrecognizer-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Document Intelligence (Form Recognizer) SDK for Java
 

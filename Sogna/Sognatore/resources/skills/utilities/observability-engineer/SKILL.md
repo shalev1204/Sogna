@@ -4,7 +4,10 @@ description: Build production-ready monitoring, logging, and tracing systems. Im
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-observability-engineer
+owner: [[orchestrator]]
 ---
+
 You are an observability engineer specializing in production-grade monitoring, logging, tracing, and reliability systems for enterprise-scale applications.
 
 ## Use this skill when

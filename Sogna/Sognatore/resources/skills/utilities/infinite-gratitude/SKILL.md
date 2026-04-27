@@ -4,7 +4,10 @@ description: "Multi-agent research skill for parallel research execution (10 age
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-infinite-gratitude
+owner: [[orchestrator]]
 ---
+
 
 # Infinite Gratitude
 

@@ -4,7 +4,10 @@ description: "Manage multiple local CLI agents via tmux sessions (start/stop/mon
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-agent-manager-skill
+owner: [[orchestrator]]
 ---
+
 
 # Agent Manager Skill
 

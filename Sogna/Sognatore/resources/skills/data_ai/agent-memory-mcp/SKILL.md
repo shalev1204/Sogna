@@ -4,7 +4,10 @@ description: "A hybrid memory system that provides persistent, searchable knowle
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-agent-memory-mcp
+owner: [[orchestrator]]
 ---
+
 
 # Agent Memory Skill
 

@@ -5,7 +5,10 @@ risk: critical
 metadata:
     skill-author: K-Dense Inc.
 version: 1.0.0
+id: skill-alpha-vantage
+owner: [[orchestrator]]
 ---
+
 
 # Alpha Vantage — Financial Market Data
 

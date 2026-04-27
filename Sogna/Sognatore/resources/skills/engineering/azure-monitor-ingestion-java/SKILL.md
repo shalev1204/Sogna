@@ -4,7 +4,10 @@ description: Azure Monitor Ingestion SDK for Java. Send custom logs to Azure Mon
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-monitor-ingestion-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Monitor Ingestion SDK for Java
 

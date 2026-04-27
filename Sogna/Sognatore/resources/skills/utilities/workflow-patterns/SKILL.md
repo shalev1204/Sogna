@@ -4,7 +4,10 @@ description: Use this skill when implementing tasks according to Conductor's TDD
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-workflow-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Workflow Patterns
 

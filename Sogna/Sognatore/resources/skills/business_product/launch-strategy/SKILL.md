@@ -4,7 +4,10 @@ description: "You are an expert in SaaS product launches and feature announcemen
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-launch-strategy
+owner: [[prod-pm]]
 ---
+
 
 # Launch Strategy
 

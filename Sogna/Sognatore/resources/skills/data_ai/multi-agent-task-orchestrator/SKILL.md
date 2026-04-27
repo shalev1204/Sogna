@@ -9,7 +9,10 @@ date_added: "2026-04-09"
 tags: [multi-agent, orchestration, task-routing, quality-gates, anti-duplication]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-multi-agent-task-orchestrator
+owner: [[orchestrator]]
 ---
+
 
 # Multi-Agent Task Orchestrator
 

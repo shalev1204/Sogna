@@ -4,7 +4,10 @@ description: "Apply STRIDE methodology to systematically identify threats. Use w
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-stride-analysis-patterns
+owner: [[orchestrator]]
 ---
+
 
 # STRIDE Analysis Patterns
 

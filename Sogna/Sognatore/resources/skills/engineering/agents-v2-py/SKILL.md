@@ -4,7 +4,10 @@ description: "Build container-based Foundry Agents with Azure AI Projects SDK (I
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-agents-v2-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Hosted Agents (Python)
 

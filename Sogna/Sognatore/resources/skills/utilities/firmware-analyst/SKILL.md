@@ -4,7 +4,10 @@ description: Expert firmware analyst specializing in embedded systems, IoT secur
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-firmware-analyst
+owner: [[orchestrator]]
 ---
+
 
 # Download from vendor
 wget http://vendor.com/firmware/update.bin

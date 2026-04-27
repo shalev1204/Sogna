@@ -5,7 +5,10 @@ description: Expert patterns for Clerk auth implementation, middleware,
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-clerk-auth
+owner: [[ops-security]]
 ---
+
 
 # Clerk Authentication
 

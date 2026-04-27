@@ -9,7 +9,10 @@ date_added: "2026-04-12"
 tags: [vscode, extension, ide, typescript, marketplace]
 tools: [claude, cursor, copilot, codex, gemini]
 version: 1.0.0
+id: skill-vscode-extension-guide-en
+owner: [[orchestrator]]
 ---
+
 
 # VS Code Extension Guide (English)
 

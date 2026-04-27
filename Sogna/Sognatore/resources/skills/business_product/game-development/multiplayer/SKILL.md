@@ -4,7 +4,10 @@ description: "Multiplayer game development principles. Architecture, networking,
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-multiplayer
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # Multiplayer Game Development
 

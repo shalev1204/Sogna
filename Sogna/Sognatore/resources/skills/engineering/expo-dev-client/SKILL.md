@@ -4,7 +4,10 @@ description: Build and distribute Expo development clients locally or via TestFl
 risk: critical
 version: 1.0.0
 license: MIT
+id: skill-expo-dev-client
+owner: [[orchestrator]]
 ---
+
 
 Use EAS Build to create development clients for testing native code changes on physical devices. Use this for creating custom Expo Go clients for testing branches of your app.
 

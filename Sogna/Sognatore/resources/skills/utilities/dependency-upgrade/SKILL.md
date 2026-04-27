@@ -4,7 +4,10 @@ description: "Master major dependency version upgrades, compatibility analysis, 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-dependency-upgrade
+owner: [[orchestrator]]
 ---
+
 
 # Dependency Upgrade
 

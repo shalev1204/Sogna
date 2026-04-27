@@ -4,7 +4,10 @@ description: "This skill provides a curated collection of professional font and 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-theme-factory
+owner: [[orchestrator]]
 ---
+
 
 
 # Theme Factory Skill

@@ -15,7 +15,10 @@ allowed-tools:
   - Bash
   - WebFetch
 version: 1.0.0
+id: skill-seo-page
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Single Page Analysis
 

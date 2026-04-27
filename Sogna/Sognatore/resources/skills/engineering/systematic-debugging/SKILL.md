@@ -4,7 +4,10 @@ description: "Use when encountering any bug, test failure, or unexpected behavio
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-systematic-debugging
+owner: [[debugger]]
 ---
+
 
 # Systematic Debugging
 

@@ -4,7 +4,10 @@ description: "Automate Sentry tasks via Rube MCP (Composio): manage issues/event
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-sentry-automation
+owner: [[orchestrator]]
 ---
+
 
 # Sentry Automation via Rube MCP
 

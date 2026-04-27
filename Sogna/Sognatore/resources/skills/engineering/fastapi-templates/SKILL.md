@@ -4,7 +4,10 @@ description: "Create production-ready FastAPI projects with async patterns, depe
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fastapi-templates
+owner: [[eng-api]]
 ---
+
 
 # FastAPI Project Templates
 

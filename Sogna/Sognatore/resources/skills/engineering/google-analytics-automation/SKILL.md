@@ -4,7 +4,10 @@ description: "Automate Google Analytics tasks via Rube MCP (Composio): run repor
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-google-analytics-automation
+owner: [[orchestrator]]
 ---
+
 
 # Google Analytics Automation via Rube MCP
 

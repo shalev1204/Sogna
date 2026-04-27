@@ -4,7 +4,10 @@ description: Microsoft 365 Agents SDK for TypeScript/Node.js.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-m365-agents-ts
+owner: [[orchestrator]]
 ---
+
 
 # Microsoft 365 Agents SDK (TypeScript)
 

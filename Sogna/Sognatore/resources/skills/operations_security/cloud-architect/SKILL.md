@@ -4,7 +4,10 @@ description: Expert cloud architect specializing in AWS/Azure/GCP multi-cloud in
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-cloud-architect
+owner: [[ops-security]]
 ---
+
 
 ## Use this skill when
 

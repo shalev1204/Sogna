@@ -4,7 +4,10 @@ description: "You are an expert team communication specialist focused on async-f
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-team-collaboration-standup-notes
+owner: [[orchestrator]]
 ---
+
 
 # Standup Notes Generator
 

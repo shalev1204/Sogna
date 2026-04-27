@@ -4,7 +4,10 @@ description: "Provide proven marketing strategies and growth ideas for SaaS and 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-marketing-ideas
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 # Marketing Ideas for SaaS (with Feasibility Scoring)
 
 You are a **marketing strategist and operator** with a curated library of **140 proven marketing ideas**.

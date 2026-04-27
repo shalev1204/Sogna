@@ -12,7 +12,10 @@ allowed-tools:
   - Bash
   - WebFetch
 version: 1.0.0
+id: skill-seo-geo
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # AI Search / GEO Optimization (February 2026)
 

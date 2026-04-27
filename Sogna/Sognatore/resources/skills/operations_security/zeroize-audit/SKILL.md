@@ -15,7 +15,10 @@ allowed-tools:
   - mcp__serena__get_symbols_overview
 risk: critical
 version: 1.0.0
+id: skill-zeroize-audit
+owner: [[ops-security]]
 ---
+
 
 # zeroize-audit — Claude Skill
 

@@ -4,7 +4,10 @@ description: "Master AngularJS to Angular migration, including hybrid apps, comp
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-angular-migration
+owner: [[orchestrator]]
 ---
+
 
 # Angular Migration
 

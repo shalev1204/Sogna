@@ -4,7 +4,10 @@ description: Azure Cosmos DB SDK for Python (NoSQL API). Use for document CRUD, 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-cosmos-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Cosmos DB SDK for Python
 

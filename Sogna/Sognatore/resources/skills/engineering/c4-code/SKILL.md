@@ -4,7 +4,10 @@ description: Expert C4 Code-level documentation specialist. Analyzes code direct
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-c4-code
+owner: [[orchestrator]]
 ---
+
 
 # C4 Code Level: [Directory Name]
 

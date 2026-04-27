@@ -11,7 +11,10 @@ tags:
   - typescript
   - validation
   - practical
+id: skill-fp-errors
+owner: [[orchestrator]]
 ---
+
 
 # Practical Error Handling with fp-ts
 

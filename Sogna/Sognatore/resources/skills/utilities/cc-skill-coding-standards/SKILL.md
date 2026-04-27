@@ -4,7 +4,10 @@ description: "Universal coding standards, best practices, and patterns for TypeS
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cc-skill-coding-standards
+owner: [[orchestrator]]
 ---
+
 
 # Coding Standards & Best Practices
 

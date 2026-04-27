@@ -4,7 +4,10 @@ description: "Design optimal team structures, hiring plans, compensation strateg
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-team-composition-analysis
+owner: [[orchestrator]]
 ---
+
 
 # Team Composition Analysis
 

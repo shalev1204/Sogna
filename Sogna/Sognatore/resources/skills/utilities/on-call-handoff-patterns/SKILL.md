@@ -4,7 +4,10 @@ description: "Effective patterns for on-call shift transitions, ensuring continu
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-on-call-handoff-patterns
+owner: [[orchestrator]]
 ---
+
 
 # On-Call Handoff Patterns
 

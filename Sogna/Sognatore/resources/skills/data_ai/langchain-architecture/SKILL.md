@@ -4,7 +4,10 @@ description: "Master the LangChain framework for building sophisticated LLM appl
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-langchain-architecture
+owner: [[system-architect]]
 ---
+
 
 # LangChain Architecture
 

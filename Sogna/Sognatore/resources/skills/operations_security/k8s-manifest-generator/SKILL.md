@@ -4,7 +4,10 @@ description: "Step-by-step guidance for creating production-ready Kubernetes man
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-k8s-manifest-generator
+owner: [[ops-security]]
 ---
+
 
 # Kubernetes Manifest Generator
 

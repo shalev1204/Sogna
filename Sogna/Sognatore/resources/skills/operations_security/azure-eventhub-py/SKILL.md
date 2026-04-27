@@ -4,7 +4,10 @@ description: Azure Event Hubs SDK for Python streaming. Use for high-throughput 
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-eventhub-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Event Hubs SDK for Python
 

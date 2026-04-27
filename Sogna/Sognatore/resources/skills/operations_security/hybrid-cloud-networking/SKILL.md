@@ -4,7 +4,10 @@ description: "Configure secure, high-performance connectivity between on-premise
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-hybrid-cloud-networking
+owner: [[ops-security]]
 ---
+
 
 # Hybrid Cloud Networking
 

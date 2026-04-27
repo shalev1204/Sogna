@@ -4,7 +4,10 @@ description: "Combine vector and keyword search for improved retrieval. Use when
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-hybrid-search-implementation
+owner: [[orchestrator]]
 ---
+
 
 # Hybrid Search Implementation
 

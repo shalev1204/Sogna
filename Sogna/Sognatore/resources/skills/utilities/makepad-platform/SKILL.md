@@ -8,7 +8,10 @@ description: |
   makepad 跨平台, makepad 平台支持
 risk: critical
 version: 1.0.0
+id: skill-makepad-platform
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Platform Skill
 

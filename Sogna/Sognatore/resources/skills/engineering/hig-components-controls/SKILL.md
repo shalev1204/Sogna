@@ -4,7 +4,10 @@ description: "Check for .claude/apple-design-context.md before asking questions.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-components-controls
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Selection and Input Controls
 

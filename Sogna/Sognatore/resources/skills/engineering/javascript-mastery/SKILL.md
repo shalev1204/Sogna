@@ -4,7 +4,10 @@ description: "33+ essential JavaScript concepts every developer should know, ins
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-javascript-mastery
+owner: [[orchestrator]]
 ---
+
 
 # 🧠 JavaScript Mastery
 

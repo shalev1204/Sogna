@@ -5,7 +5,10 @@ description: "Database development and operations workflow covering SQL, NoSQL, 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-database
+owner: [[eng-database]]
 ---
+
 
 # Database Workflow Bundle
 

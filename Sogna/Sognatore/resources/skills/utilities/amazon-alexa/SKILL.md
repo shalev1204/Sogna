@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-amazon-alexa
+owner: [[orchestrator]]
 ---
+
 
 # AMAZON ALEXA — Voz Inteligente com Claude
 

@@ -4,7 +4,10 @@ description: "Build production-ready gRPC services in Go with mTLS, streaming, a
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-grpc-golang
+owner: [[orchestrator]]
 ---
+
 
 # gRPC Golang (gRPC-Go)
 

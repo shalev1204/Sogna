@@ -6,7 +6,10 @@ date_added: "2026-03-21"
 user-invokable: true
 argument-hint: "[command] [url]"
 version: 1.0.0
+id: skill-seo
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # SEO: Universal SEO Analysis Skill
 

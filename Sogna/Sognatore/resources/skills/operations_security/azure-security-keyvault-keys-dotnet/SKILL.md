@@ -4,7 +4,10 @@ description: Azure Key Vault Keys SDK for .NET. Client library for managing cryp
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-security-keyvault-keys-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.Security.KeyVault.Keys (.NET)
 

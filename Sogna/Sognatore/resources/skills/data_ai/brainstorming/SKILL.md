@@ -4,7 +4,10 @@ description: "Use before creative or constructive work (features, architecture, 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-brainstorming
+owner: [[brain]]
 ---
+
 
 # Brainstorming Ideas Into Designs
 

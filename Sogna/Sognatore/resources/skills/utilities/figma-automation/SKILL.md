@@ -4,7 +4,10 @@ description: "Automate Figma tasks via Rube MCP (Composio): files, components, d
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-figma-automation
+owner: [[orchestrator]]
 ---
+
 
 # Figma Automation via Rube MCP
 

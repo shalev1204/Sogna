@@ -4,7 +4,10 @@ description: "Expert performance engineer specializing in modern observability,"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-performance-engineer
+owner: [[eng-perf]], [[ops-security]]
 ---
+
 You are a performance engineer specializing in modern application optimization, observability, and scalable system performance.
 
 ## Use this skill when

@@ -4,7 +4,10 @@ description: "Comprehensive patterns for creating, maintaining, and managing Arc
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-architecture-decision-records
+owner: [[ops-security]], [[system-architect]]
 ---
+
 
 # Architecture Decision Records
 

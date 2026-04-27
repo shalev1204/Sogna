@@ -1,7 +1,10 @@
 ---
 name: omniscience
 description: Real-time search and delegated execution capabilities. Use when the project requires information beyond the local knowledge base (Perplexity) or when long-running tasks should be delegated to specialized external agents (Manus).
+id: skill-omniscience
+owner: [[orchestrator]]
 ---
+
 
 # 👁️ Habilidad: Omnisciencia Sogna
 

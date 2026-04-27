@@ -4,7 +4,10 @@ description: Azure Speech to Text REST API for short audio (Python). Use for sim
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-speech-to-text-rest-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure Speech to Text REST API for Short Audio
 

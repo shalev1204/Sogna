@@ -5,7 +5,10 @@ description: "Use when creating, updating, or improving agent skills."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-writing-skills
+owner: [[orchestrator]]
 ---
+
 
 # Writing Skills (Excellence)
 

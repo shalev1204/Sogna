@@ -4,7 +4,10 @@ version: "11.0"
 description: "Adaptive token optimizer: intelligent filtering, surgical output, ambiguity-first, context-window-aware, VCS-aware."
 
 risk: critical
+id: skill-zipai-optimizer
+owner: [[orchestrator]]
 ---
+
 
 # ZipAI: Context & Token Optimizer
 

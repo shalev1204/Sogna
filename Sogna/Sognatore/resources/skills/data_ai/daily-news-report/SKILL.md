@@ -4,7 +4,10 @@ description: "Scrapes content based on a preset URL list, filters high-quality t
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-daily-news-report
+owner: [[orchestrator]]
 ---
+
 
 # Daily News Report v3.0
 

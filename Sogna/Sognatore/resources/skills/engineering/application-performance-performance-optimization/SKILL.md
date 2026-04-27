@@ -4,7 +4,10 @@ description: "Optimize end-to-end application performance with profiling, observ
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-application-performance-performance-optimization
+owner: [[eng-perf]]
 ---
+
 
 Optimize application performance end-to-end using specialized performance and optimization agents:
 

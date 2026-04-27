@@ -4,7 +4,10 @@ description: "Guide for building reliable, fault-tolerant TypeScript application
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-dbos-typescript
+owner: [[orchestrator]]
 ---
+
 
 # DBOS TypeScript Best Practices
 

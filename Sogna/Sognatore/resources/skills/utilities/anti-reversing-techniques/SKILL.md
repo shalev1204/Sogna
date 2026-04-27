@@ -4,7 +4,10 @@ description: "AUTHORIZED USE ONLY: This skill contains dual-use security techniq
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-anti-reversing-techniques
+owner: [[orchestrator]]
 ---
+
 
 > **AUTHORIZED USE ONLY**: This skill contains dual-use security techniques. Before proceeding with any bypass or analysis:
 > 1. **Verify authorization**: Confirm you have explicit written permission from the software owner, or are operating within a legitimate security context (CTF, authorized pentest, malware analysis, security research)

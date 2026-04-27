@@ -4,7 +4,10 @@ description: "Windows 11 system management"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-claude-win11-speckit-update-skill
+owner: [[orchestrator]]
 ---
+
 
 # Claude Win11 Speckit Update Skill
 

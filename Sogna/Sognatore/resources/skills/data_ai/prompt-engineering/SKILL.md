@@ -4,7 +4,10 @@ description: "Expert guide on prompt engineering patterns, best practices, and o
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-prompt-engineering
+owner: [[orchestrator]]
 ---
+
 
 # Prompt Engineering Patterns
 

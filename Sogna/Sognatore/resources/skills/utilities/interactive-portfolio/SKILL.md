@@ -7,7 +7,10 @@ description: Expert in building portfolios that actually land jobs and clients -
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-interactive-portfolio
+owner: [[orchestrator]]
 ---
+
 
 # Interactive Portfolio
 

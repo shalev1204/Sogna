@@ -6,7 +6,10 @@ description: Specialized skill for building production-ready serverless
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-aws-serverless
+owner: [[ops-security]]
 ---
+
 
 # AWS Serverless
 

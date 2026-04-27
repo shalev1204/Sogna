@@ -4,7 +4,10 @@ description: Senior embedded software engineer specializing in firmware and driv
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-arm-cortex-expert
+owner: [[orchestrator]]
 ---
+
 
 # @arm-cortex-expert
 

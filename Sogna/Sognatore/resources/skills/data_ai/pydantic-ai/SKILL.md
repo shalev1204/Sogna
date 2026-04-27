@@ -7,7 +7,10 @@ date_added: "2026-03-18"
 tags: [pydantic-ai, ai-agents, llm, openai, anthropic, gemini, tool-use, structured-output, python]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-pydantic-ai
+owner: [[orchestrator]]
 ---
+
 
 # PydanticAI — Typed AI Agents in Python
 

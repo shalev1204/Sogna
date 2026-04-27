@@ -4,7 +4,10 @@ description: "You are an expert error analysis specialist with deep expertise in
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-error-diagnostics-error-analysis
+owner: [[orchestrator]]
 ---
+
 
 # Error Analysis and Resolution
 

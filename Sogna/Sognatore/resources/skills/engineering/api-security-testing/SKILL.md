@@ -5,7 +5,10 @@ description: "API security testing workflow for REST and GraphQL APIs covering a
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-api-security-testing
+owner: [[eng-api]], [[ops-security]], [[eng-qa]]
 ---
+
 
 # API Security Testing Workflow
 

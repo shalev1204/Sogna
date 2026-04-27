@@ -4,7 +4,10 @@ description: Azure Monitor Ingestion SDK for Python. Use for sending custom logs
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-monitor-ingestion-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Monitor Ingestion SDK for Python
 

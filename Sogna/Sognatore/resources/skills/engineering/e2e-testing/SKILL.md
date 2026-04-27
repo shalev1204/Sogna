@@ -5,7 +5,10 @@ description: "End-to-end testing workflow with Playwright for browser automation
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-e2e-testing
+owner: [[eng-qa]]
 ---
+
 
 # E2E Testing Workflow
 

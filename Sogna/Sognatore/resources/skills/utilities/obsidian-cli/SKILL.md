@@ -4,7 +4,10 @@ description: "Use the Obsidian CLI to read, create, search, and manage vault con
 risk: critical
 date_added: "2026-03-21"
 version: 1.0.0
+id: skill-obsidian-cli
+owner: [[orchestrator]]
 ---
+
 
 # Obsidian CLI
 

@@ -5,7 +5,10 @@ description: "You are an expert in Nest.js with deep knowledge of enterprise-gra
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-nestjs-expert
+owner: [[orchestrator]]
 ---
+
 
 # Nest.js Expert
 

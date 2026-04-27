@@ -4,7 +4,10 @@ description: "Extract text, tables, and structured data from documents using pre
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-document-intelligence-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Document Intelligence REST SDK for TypeScript
 

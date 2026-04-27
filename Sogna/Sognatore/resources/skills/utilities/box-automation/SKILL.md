@@ -4,7 +4,10 @@ description: "Automate Box operations including file upload/download, content se
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-box-automation
+owner: [[orchestrator]]
 ---
+
 
 # Box Automation via Rube MCP
 

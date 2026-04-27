@@ -4,7 +4,10 @@ description: Azure App Configuration SDK for Python. Use for centralized configu
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-appconfiguration-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure App Configuration SDK for Python
 

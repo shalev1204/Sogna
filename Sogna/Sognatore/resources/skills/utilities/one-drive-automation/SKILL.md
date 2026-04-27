@@ -4,7 +4,10 @@ description: "Automate OneDrive file management, search, uploads, downloads, sha
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-one-drive-automation
+owner: [[orchestrator]]
 ---
+
 
 # OneDrive Automation via Rube MCP
 

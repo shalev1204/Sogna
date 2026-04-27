@@ -4,7 +4,10 @@ description: "Development skill from everything-claude-code"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cc-skill-continuous-learning
+owner: [[orchestrator]]
 ---
+
 
 # cc-skill-continuous-learning
 

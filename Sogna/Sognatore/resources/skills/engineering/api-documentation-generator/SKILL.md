@@ -4,7 +4,10 @@ description: "Generate comprehensive, developer-friendly API documentation from 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-api-documentation-generator
+owner: [[eng-api]]
 ---
+
 
 # API Documentation Generator
 

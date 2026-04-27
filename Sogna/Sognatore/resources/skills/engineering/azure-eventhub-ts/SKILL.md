@@ -4,7 +4,10 @@ description: "High-throughput event streaming and real-time data ingestion."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-eventhub-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Event Hubs SDK for TypeScript
 

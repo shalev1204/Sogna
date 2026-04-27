@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-warren-buffett
+owner: [[orchestrator]]
 ---
+
 
 # WARREN BUFFETT — AGENTE DE SIMULACAO PROFUNDA v2.0
 

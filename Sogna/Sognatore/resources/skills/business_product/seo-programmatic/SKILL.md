@@ -13,7 +13,10 @@ allowed-tools:
   - WebFetch
   - Write
 version: 1.0.0
+id: skill-seo-programmatic
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Programmatic SEO Analysis & Planning
 

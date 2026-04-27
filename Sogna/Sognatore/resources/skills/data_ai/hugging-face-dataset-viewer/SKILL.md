@@ -3,7 +3,10 @@ name: hugging-face-dataset-viewer
 description: Query Hugging Face datasets through the Dataset Viewer API for splits, rows, search, filters, and parquet links.
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-dataset-viewer
+owner: [[orchestrator]]
 ---
+
 
 # Hugging Face Dataset Viewer
 

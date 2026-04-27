@@ -4,7 +4,10 @@ description: "Implement distributed tracing with Jaeger and Tempo for request fl
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-distributed-tracing
+owner: [[ops-security]]
 ---
+
 
 # Distributed Tracing
 

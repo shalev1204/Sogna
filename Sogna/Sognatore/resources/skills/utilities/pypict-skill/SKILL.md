@@ -4,7 +4,10 @@ description: "Pairwise test generation"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-pypict-skill
+owner: [[orchestrator]]
 ---
+
 
 # Pypict Skill
 

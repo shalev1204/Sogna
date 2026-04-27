@@ -3,7 +3,10 @@ name: hugging-face-trackio
 description: Track ML experiments with Trackio using Python logging, alerts, and CLI metric retrieval.
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-trackio
+owner: [[orchestrator]]
 ---
+
 
 # Trackio - Experiment Tracking for ML Training
 

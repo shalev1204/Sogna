@@ -4,7 +4,10 @@ description: "Comprehensive design guide for web and mobile applications. Use wh
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-ui-ux-pro-max
+owner: [[prod-pm]]
 ---
+
 
 # UI/UX Pro Max - Design Intelligence
 

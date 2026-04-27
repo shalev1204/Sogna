@@ -3,7 +3,10 @@ name: hugging-face-papers
 description: Read and analyze Hugging Face paper pages or arXiv papers with markdown and papers API metadata.
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-papers
+owner: [[orchestrator]]
 ---
+
 
 # Hugging Face Paper Pages
 

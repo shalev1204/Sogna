@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-growth-engine
+owner: [[prod-pm]]
 ---
+
 
 # GROWTH-ENGINE -- Crescimento Exponencial
 

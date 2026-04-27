@@ -6,7 +6,10 @@ description: Specialized skill for building production-ready Discord bots.
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-discord-bot-architect
+owner: [[prod-pm]]
 ---
+
 
 # Discord Bot Architect
 

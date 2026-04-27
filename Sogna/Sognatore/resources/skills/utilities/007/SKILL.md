@@ -17,7 +17,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-007
+owner: [[orchestrator]]
 ---
+
 
 # 007 — Licenca para Auditar
 

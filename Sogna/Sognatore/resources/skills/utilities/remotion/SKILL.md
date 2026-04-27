@@ -11,7 +11,10 @@ allowed-tools:
   - "web_fetch"
 risk: critical
 version: 1.0.0
+id: skill-remotion
+owner: [[orchestrator]]
 ---
+
 
 # Stitch to Remotion Walkthrough Videos
 

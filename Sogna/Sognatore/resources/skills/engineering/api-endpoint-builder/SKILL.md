@@ -5,7 +5,10 @@ description: "Builds production-ready REST API endpoints with validation, error 
 risk: offensive
 date_added: "2026-03-05"
 version: 1.0.0
+id: skill-api-endpoint-builder
+owner: [[eng-api]]
 ---
+
 
 # API Endpoint Builder
 

@@ -4,7 +4,10 @@ description: Writes SEO-optimized content based on provided keywords and topic b
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-seo-content-writer
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 ## Use this skill when
 

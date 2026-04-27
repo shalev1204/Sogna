@@ -4,7 +4,10 @@ description: "Guide for implementing and maintaining context as a managed artifa
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-context-driven-development
+owner: [[prod-pm]]
 ---
+
 
 # Context-Driven Development
 

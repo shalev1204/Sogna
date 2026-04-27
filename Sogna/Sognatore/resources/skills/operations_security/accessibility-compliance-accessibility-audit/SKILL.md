@@ -4,7 +4,10 @@ description: "You are an accessibility expert specializing in WCAG compliance, i
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-accessibility-compliance-accessibility-audit
+owner: [[ops-security]]
 ---
+
 
 # Accessibility Audit and Testing
 

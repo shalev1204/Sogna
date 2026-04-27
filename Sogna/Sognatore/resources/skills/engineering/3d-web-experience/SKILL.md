@@ -7,7 +7,10 @@ description: Expert in building 3D experiences for the web - Three.js, React
 risk: safe
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-3d-web-experience
+owner: [[orchestrator]]
 ---
+
 
 # 3D Web Experience
 

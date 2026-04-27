@@ -7,7 +7,10 @@ date_added: "2026-03-18"
 tags: [github, git, repository, audit, cleanup, workflow, devtools, automation, code-review, security]
 tools: [claude, cursor]
 version: 1.0.0
+id: skill-openclaw-github-repo-commander
+owner: [[orchestrator]]
 ---
+
 # OpenClaw GitHub Repo Commander
 
 ## Overview

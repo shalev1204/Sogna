@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-multi-advisor
+owner: [[orchestrator]]
 ---
+
 
 # MULTI-ADVISOR: Board de Especialistas em Paralelo
 

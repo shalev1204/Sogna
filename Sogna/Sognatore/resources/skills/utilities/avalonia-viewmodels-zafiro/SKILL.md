@@ -4,7 +4,10 @@ description: "Optimal ViewModel and Wizard creation patterns for Avalonia using 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-avalonia-viewmodels-zafiro
+owner: [[orchestrator]]
 ---
+
 
 # Avalonia ViewModels with Zafiro
 

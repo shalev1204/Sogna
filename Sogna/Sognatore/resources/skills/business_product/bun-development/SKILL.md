@@ -4,7 +4,10 @@ description: "Fast, modern JavaScript/TypeScript development with the Bun runtim
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bun-development
+owner: [[prod-pm]]
 ---
+
 <!-- @sentinel-ignore: GLOBAL -->
 
 <!-- security-allowlist: curl-pipe-bash, irm-pipe-iex -->

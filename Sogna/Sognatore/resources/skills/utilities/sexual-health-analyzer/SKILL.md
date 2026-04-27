@@ -3,7 +3,10 @@ name: sexual-health-analyzer
 description: Sexual Health Analyzer
 risk: safe
 version: 1.0.0
+id: skill-sexual-health-analyzer
+owner: [[orchestrator]]
 ---
+
 
 # 性健康分析技能
 

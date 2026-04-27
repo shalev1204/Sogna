@@ -4,7 +4,10 @@ description: "Create MCP (Model Context Protocol) servers that enable LLMs to in
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-mcp-builder
+owner: [[orchestrator]]
 ---
+
 
 # MCP Server Development Guide
 

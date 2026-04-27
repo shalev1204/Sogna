@@ -4,7 +4,10 @@ description: "A modern dark-themed React UI system using Tailwind CSS and Framer
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-frontend-ui-dark-ts
+owner: [[eng-frontend]]
 ---
+
 
 # Frontend UI Dark Theme (TypeScript)
 

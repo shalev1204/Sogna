@@ -4,7 +4,10 @@ description: Integrate Stripe, PayPal, and payment processors. Handles checkout 
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-payment-integration
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

@@ -4,7 +4,10 @@ description: "Real-time messaging with WebSocket connections and pub/sub pattern
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-web-pubsub-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Web PubSub SDKs for TypeScript
 

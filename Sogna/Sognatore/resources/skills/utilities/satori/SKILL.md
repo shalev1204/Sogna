@@ -9,7 +9,10 @@ date_added: "2026-04-06"
 tags: [mental-health, psychology, wisdom, philosophy, ifs, stoicism, jungian, conversation]
 tools: [claude]
 version: 1.0.0
+id: skill-satori
+owner: [[orchestrator]]
 ---
+
 
 # Satori
 

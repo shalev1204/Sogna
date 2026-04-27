@@ -8,7 +8,10 @@ date_added: 2026-04-10
 tags: figma, design-system, ui, components, mcp, rayden, rayna-ui
 tools: mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__whoami, Read
 version: 1.0.0
+id: skill-rayden-use
+owner: [[orchestrator]]
 ---
+
 
 # Rayden UI Design Skill
 

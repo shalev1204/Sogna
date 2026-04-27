@@ -5,7 +5,10 @@ description: >
 risk: critical
 date_added: "2026-03-04"
 version: 1.0.0
+id: skill-professional-proofreader
+owner: [[orchestrator]]
 ---
+
 
 # Professional Proofreader
 

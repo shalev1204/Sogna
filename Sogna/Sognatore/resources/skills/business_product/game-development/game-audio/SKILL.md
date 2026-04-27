@@ -4,7 +4,10 @@ description: "Game audio principles. Sound design, music integration, adaptive a
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-game-audio
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # Game Audio Principles
 

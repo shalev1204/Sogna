@@ -4,7 +4,10 @@ description: Azure Web PubSub Service SDK for Python. Use for real-time messagin
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-messaging-webpubsubservice-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure Web PubSub Service SDK for Python
 

@@ -4,7 +4,10 @@ description: "Provide a comprehensive, structured reference for the 100 most cri
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-top-web-vulnerabilities
+owner: [[orchestrator]]
 ---
+
 
 # Top 100 Web Vulnerabilities Reference
 

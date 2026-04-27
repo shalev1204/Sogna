@@ -3,7 +3,10 @@ name: wellally-tech
 description: "Integrate multiple digital health data sources, connect to [WellAlly.tech](https://www.wellally.tech/) knowledge base, providing data import and knowledge reference for personal health management systems."
 risk: critical
 version: 1.0.0
+id: skill-wellally-tech
+owner: [[orchestrator]]
 ---
+
 
 # WellAlly Digital Health Integration
 

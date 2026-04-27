@@ -4,7 +4,10 @@ description: "Server management principles and decision-making. Process manageme
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-server-management
+owner: [[ops-security]]
 ---
+
 
 # Server Management
 

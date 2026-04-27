@@ -4,7 +4,10 @@ description: Azure Identity SDK for .NET. Authentication library for Azure SDK c
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-identity-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.Identity (.NET)
 

@@ -4,7 +4,10 @@ description: Azure AI Agents Persistent SDK for .NET. Low-level SDK for creating
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-agents-persistent-dotnet
+owner: [[orchestrator]]
 ---
+
 
 # Azure.AI.Agents.Persistent (.NET)
 

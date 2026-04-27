@@ -3,7 +3,10 @@ name: django-access-review
 description: django-access-review
 risk: critical
 version: 1.0.0
+id: skill-django-access-review
+owner: [[orchestrator]]
 ---
+
 
 ---
 name: django-access-review

@@ -4,7 +4,10 @@ description: "You are an error tracking and observability expert specializing in
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-error-debugging-error-trace
+owner: [[debugger]]
 ---
+
 
 # Error Tracking and Monitoring
 

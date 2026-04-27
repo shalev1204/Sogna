@@ -4,7 +4,10 @@ description: Azure AI Text Analytics SDK for sentiment analysis, entity recognit
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-textanalytics-py
+owner: [[ops-security]]
 ---
+
 
 # Azure AI Text Analytics SDK for Python
 

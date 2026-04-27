@@ -6,7 +6,10 @@ risk: critical
 version: 2.0.0
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 tags: [fp-ts, react, typescript, hooks, state-management, forms, data-fetching, remote-data, react-19, next-js]
+id: skill-fp-react
+owner: [[orchestrator]]
 ---
+
 
 # Functional Programming in React
 

@@ -9,7 +9,10 @@ allowed-tools:
   - Grep
 risk: offensive
 version: 1.0.0
+id: skill-supply-chain-risk-auditor
+owner: [[ops-security]]
 ---
+
 
 # Supply Chain Risk Auditor
 

@@ -4,7 +4,10 @@ description: "Production patterns for Unity's Data-Oriented Technology Stack (DO
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-unity-ecs-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Unity ECS Patterns
 

@@ -6,7 +6,10 @@ date_added: "2026-02-28"
 metadata:
   version: 2.0.0
 version: 1.0.0
+id: skill-vibe-code-auditor
+owner: [[orchestrator]]
 ---
+
 
 # Vibe Code Auditor
 

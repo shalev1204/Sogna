@@ -4,7 +4,10 @@ description: "[Extended thinking: This workflow implements a sophisticated debug
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-incident-response-smart-fix
+owner: [[ops-security]]
 ---
+
 
 # Intelligent Issue Resolution with Multi-Agent Orchestration
 

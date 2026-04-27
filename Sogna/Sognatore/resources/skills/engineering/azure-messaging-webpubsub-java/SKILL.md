@@ -4,7 +4,10 @@ description: "Build real-time web applications with Azure Web PubSub SDK for Jav
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-messaging-webpubsub-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Web PubSub SDK for Java
 

@@ -4,7 +4,10 @@ description: Azure OpenAI SDK for .NET. Client library for Azure OpenAI and Open
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-openai-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.AI.OpenAI (.NET)
 

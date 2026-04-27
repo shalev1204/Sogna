@@ -4,7 +4,10 @@ description: "You are a code migration expert specializing in transitioning code
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-framework-migration-code-migrate
+owner: [[orchestrator]]
 ---
+
 
 # Code Migration Assistant
 

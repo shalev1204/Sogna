@@ -5,7 +5,10 @@ description: "You are a senior frontend engineer operating under strict architec
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-frontend-dev-guidelines
+owner: [[eng-frontend]]
 ---
+
 
 
 # Frontend Development Guidelines

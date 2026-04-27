@@ -4,7 +4,10 @@ description: "6-layer AI governance: safety gates, evidence-based debugging, ant
 risk: critical
 date_added: "2026-03-11"
 version: 1.0.0
+id: skill-yes-md
+owner: [[orchestrator]]
 ---
+
 
 # YES.md — AI Governance Engine
 

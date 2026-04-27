@@ -4,7 +4,10 @@ description: "Master database schema and data migrations across ORMs (Sequelize,
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-database-migration
+owner: [[eng-database]]
 ---
+
 
 # Database Migration
 

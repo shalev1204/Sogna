@@ -4,7 +4,10 @@ description: Azure Tables SDK for Python (Storage and Cosmos DB). Use for NoSQL 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-data-tables-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Tables SDK for Python
 

@@ -1,3 +1,7 @@
+---\nid: workflow-deploy
+owner: [[ops-release]], [[devops-engineer]]
+---
+
 ---
 description: Deployment command for production releases. Pre-flight checks and deployment execution.
 ---
@@ -174,3 +178,4 @@ Run `/deploy rollback` if needed.
 /deploy production --skip-tests
 /deploy rollback
 ```
+

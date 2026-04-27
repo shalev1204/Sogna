@@ -7,7 +7,10 @@ description: |
   pageflip, 组件设计, 组件模式
 risk: critical
 version: 1.0.0
+id: skill-robius-widget-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Robius Widget Patterns Skill
 

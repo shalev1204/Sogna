@@ -7,7 +7,10 @@ date_added: "2026-03-17"
 tags: [typescript, trpc, api, fullstack, nextjs, react, type-safety]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-trpc-fullstack
+owner: [[orchestrator]]
 ---
+
 
 # tRPC Full-Stack
 

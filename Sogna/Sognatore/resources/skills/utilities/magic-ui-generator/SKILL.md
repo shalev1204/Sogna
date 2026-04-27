@@ -4,7 +4,10 @@ description: Utilizes Magic by 21st.dev to generate, compare, and integrate mult
 risk: safe
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-magic-ui-generator
+owner: [[orchestrator]]
 ---
+
 
 # Magic UI Generator
 

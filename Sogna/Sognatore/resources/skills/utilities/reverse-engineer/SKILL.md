@@ -4,7 +4,10 @@ description: Expert reverse engineer specializing in binary analysis, disassembl
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-reverse-engineer
+owner: [[orchestrator]]
 ---
+
 
 # Common RE scripting environments
 - IDAPython (IDA Pro scripting)

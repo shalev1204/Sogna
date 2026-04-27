@@ -6,7 +6,10 @@ date_added: "2026-03-17"
 tags: [pwa, web-dev, service-worker, frontend, offline, caching]
 tools: [gemini, cursor, claude]
 version: 1.0.0
+id: skill-progressive-web-app
+owner: [[orchestrator]]
 ---
+
 
 # Progressive Web Apps (PWAs)
 

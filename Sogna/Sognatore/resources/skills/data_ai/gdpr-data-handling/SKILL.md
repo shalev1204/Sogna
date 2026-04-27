@@ -4,7 +4,10 @@ description: "Practical implementation guide for GDPR-compliant data processing,
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-gdpr-data-handling
+owner: [[orchestrator]]
 ---
+
 
 # GDPR Data Handling
 

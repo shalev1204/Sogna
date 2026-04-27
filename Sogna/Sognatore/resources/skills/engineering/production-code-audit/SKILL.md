@@ -4,7 +4,10 @@ description: "Autonomously deep-scan entire codebase line-by-line, understand ar
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-production-code-audit
+owner: [[prod-pm]]
 ---
+
 
 # Production Code Audit
 

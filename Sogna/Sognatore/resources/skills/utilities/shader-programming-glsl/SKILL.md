@@ -4,7 +4,10 @@ description: "Expert guide for writing efficient GLSL shaders (Vertex/Fragment) 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-shader-programming-glsl
+owner: [[orchestrator]]
 ---
+
 
 # Shader Programming GLSL
 

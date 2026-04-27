@@ -4,7 +4,10 @@ description: "Bash/Linux terminal patterns. Critical commands, piping, error han
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bash-linux
+owner: [[ops-security]]
 ---
+
 
 # Bash Linux Patterns
 

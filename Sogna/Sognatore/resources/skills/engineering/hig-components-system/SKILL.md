@@ -4,7 +4,10 @@ description: 'Apple HIG guidance for system experience components: widgets, live
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-components-system
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: System Experiences
 

@@ -4,7 +4,10 @@ description: "Templates and patterns for creating legally sound employment docum
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-employment-contract-templates
+owner: [[prod-pm]]
 ---
+
 
 # Employment Contract Templates
 

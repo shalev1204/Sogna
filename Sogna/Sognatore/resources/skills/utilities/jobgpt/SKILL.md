@@ -4,7 +4,10 @@ description: "Job search automation, auto apply, resume generation, application 
 risk: critical
 date_added: "2026-03-23"
 version: 1.0.0
+id: skill-jobgpt
+owner: [[orchestrator]]
 ---
+
 
 # JobGPT - Job Search Automation
 

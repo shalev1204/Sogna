@@ -4,7 +4,10 @@ description: "Master Bash Automated Testing System (Bats) for comprehensive shel
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bats-testing-patterns
+owner: [[eng-qa]]
 ---
+
 
 # Bats Testing Patterns
 

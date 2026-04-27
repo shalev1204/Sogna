@@ -5,7 +5,10 @@ description: "Web application security testing workflow for OWASP Top 10 vulnera
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-web-security-testing
+owner: [[ops-security]], [[eng-qa]]
 ---
+
 
 # Web Security Testing Workflow
 

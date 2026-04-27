@@ -4,7 +4,10 @@ description: "Use when working with error debugging multi agent review"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-error-debugging-multi-agent-review
+owner: [[debugger]]
 ---
+
 
 # Multi-Agent Code Review Orchestration Tool
 

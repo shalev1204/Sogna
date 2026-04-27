@@ -4,7 +4,10 @@ description: "You are an expert in creating competitor comparison and alternativ
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-competitor-alternatives
+owner: [[orchestrator]]
 ---
+
 
 # Competitor & Alternative Pages
 

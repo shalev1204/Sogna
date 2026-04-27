@@ -4,7 +4,10 @@ description: Azure MySQL Flexible Server SDK for .NET. Database management for M
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-resource-manager-mysql-dotnet
+owner: [[eng-database]], [[ops-security]]
 ---
+
 
 # Azure.ResourceManager.MySql (.NET)
 

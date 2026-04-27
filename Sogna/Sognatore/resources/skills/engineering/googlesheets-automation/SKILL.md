@@ -4,7 +4,10 @@ description: "Automate Google Sheets operations (read, write, format, filter, ma
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-googlesheets-automation
+owner: [[orchestrator]]
 ---
+
 
 # Google Sheets Automation via Rube MCP
 

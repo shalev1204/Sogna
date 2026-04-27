@@ -4,7 +4,10 @@ description: Azure Fabric Management SDK for Python. Use for managing Microsoft 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-mgmt-fabric-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Fabric Management SDK for Python
 

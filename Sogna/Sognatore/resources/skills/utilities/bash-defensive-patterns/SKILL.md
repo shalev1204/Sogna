@@ -4,7 +4,10 @@ description: "Master defensive Bash programming techniques for production-grade 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bash-defensive-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Bash Defensive Patterns
 

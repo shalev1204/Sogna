@@ -4,7 +4,10 @@ description: "Execute comprehensive client-side injection vulnerability assessme
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-xss-html-injection
+owner: [[orchestrator]]
 ---
+
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 

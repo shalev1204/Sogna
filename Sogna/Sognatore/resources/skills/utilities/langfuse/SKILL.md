@@ -7,7 +7,10 @@ description: Expert in Langfuse - the open-source LLM observability platform.
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-langfuse
+owner: [[orchestrator]]
 ---
+
 
 # Langfuse
 

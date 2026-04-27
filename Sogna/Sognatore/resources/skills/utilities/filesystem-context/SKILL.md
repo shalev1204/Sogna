@@ -3,7 +3,10 @@ name: filesystem-context
 description: Use for file-based context management, dynamic context discovery, and reducing context window bloat. Offload context to files for just-in-time loading.
 risk: critical
 version: 1.0.0
+id: skill-filesystem-context
+owner: [[orchestrator]]
 ---
+
 
 # Filesystem-Based Context Engineering
 

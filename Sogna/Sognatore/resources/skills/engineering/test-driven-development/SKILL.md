@@ -4,7 +4,10 @@ description: "Use when implementing any feature or bugfix, before writing implem
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-test-driven-development
+owner: [[prod-pm]], [[eng-qa]]
 ---
+
 
 # Test-Driven Development (TDD)
 

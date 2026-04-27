@@ -4,7 +4,10 @@ description: "Build persistent agents on Azure AI Foundry using the Microsoft Ag
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-agent-framework-azure-ai-py
+owner: [[ops-security]]
 ---
+
 
 # Agent Framework Azure Hosted Agents
 

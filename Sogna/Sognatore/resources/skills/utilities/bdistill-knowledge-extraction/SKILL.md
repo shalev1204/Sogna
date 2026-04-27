@@ -7,7 +7,10 @@ date_added: "2026-03-20"
 tags: [ai, knowledge-extraction, domain-specific, data-moat, mcp, reference-data]
 tools: [claude, cursor, codex, copilot]
 version: 1.0.0
+id: skill-bdistill-knowledge-extraction
+owner: [[orchestrator]]
 ---
+
 
 # Knowledge Extraction
 

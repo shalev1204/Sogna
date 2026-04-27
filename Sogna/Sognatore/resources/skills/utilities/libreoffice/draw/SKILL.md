@@ -5,7 +5,10 @@ description: "Vector graphics and diagram creation, format conversion (ODG/SVG/P
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-draw
+owner: [[orchestrator]]
 ---
+
 
 # LibreOffice Draw
 

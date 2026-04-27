@@ -4,7 +4,10 @@ description: "Secure environment variable management ensuring secrets are never 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-varlock-claude-skill
+owner: [[orchestrator]]
 ---
+
 
 # Varlock Claude Skill
 

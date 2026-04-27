@@ -4,7 +4,10 @@ description: "Production patterns for Linkerd service mesh - the lightweight, se
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-linkerd-patterns
+owner: [[orchestrator]]
 ---
+
 
 <!-- security-allowlist: curl-pipe-bash -->
 

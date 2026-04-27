@@ -10,7 +10,10 @@ description: 'Write idiomatic PHP code with generators, iterators, SPL data
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-php-pro
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

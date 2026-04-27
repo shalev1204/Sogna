@@ -8,7 +8,10 @@ date_added: "2026-04-13"
 tags: [seo, architecture, indexing, crawler, sitemap]
 tools: [claude, cursor, gemini, Sognatore]
 version: 1.0.0
+id: skill-indexing-issue-auditor
+owner: [[ops-security]]
 ---
+
 
 # Indexing Issue Auditor & Technical SEO Architect
 

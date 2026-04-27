@@ -4,7 +4,10 @@ description: "Build applications that programmatically interact with GitHub Copi
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-copilot-sdk
+owner: [[orchestrator]]
 ---
+
 
 # GitHub Copilot SDK
 

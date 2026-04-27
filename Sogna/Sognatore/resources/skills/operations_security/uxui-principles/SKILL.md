@@ -7,7 +7,10 @@ date_added: "2026-04-03"
 tags: [ux, ui, design, evaluation, principles, antipatterns, accessibility]
 tools: [claude, cursor, windsurf]
 version: 1.0.0
+id: skill-uxui-principles
+owner: [[ops-security]]
 ---
+
 
 # UX/UI Principles
 

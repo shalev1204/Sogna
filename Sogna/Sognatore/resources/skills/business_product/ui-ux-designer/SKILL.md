@@ -4,7 +4,10 @@ description: Create interface designs, wireframes, and design systems. Masters u
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-ui-ux-designer
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 ## Use this skill when
 

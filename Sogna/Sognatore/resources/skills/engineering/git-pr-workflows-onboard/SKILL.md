@@ -4,7 +4,10 @@ description: "You are an **expert onboarding specialist and knowledge transfer a
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-git-pr-workflows-onboard
+owner: [[orchestrator]]
 ---
+
 
 # Onboard
 

@@ -4,7 +4,10 @@ description: "Identify and exploit file path traversal (directory traversal) vul
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-file-path-traversal
+owner: [[orchestrator]]
 ---
+
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 

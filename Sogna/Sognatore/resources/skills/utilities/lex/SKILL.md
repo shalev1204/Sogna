@@ -7,7 +7,10 @@ date_added: "2026-03-10"
 tags: [legal, context, cross-jurisdictional, compliance, scaffolding]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-lex
+owner: [[orchestrator]]
 ---
+
 
 # LEX: Legal-Entity-X-ref
 

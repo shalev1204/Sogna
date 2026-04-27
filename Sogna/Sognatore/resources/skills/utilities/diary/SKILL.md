@@ -3,7 +3,10 @@ name: diary
 description: "Unified Diary System: A context-preserving automated logger for multi-project development."
 risk: critical
 version: 1.0.0
+id: skill-diary
+owner: [[orchestrator]]
 ---
+
 
 # 📔 Unified Diary System
 

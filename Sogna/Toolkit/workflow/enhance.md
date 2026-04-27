@@ -1,3 +1,7 @@
+---\nid: workflow-enhance
+owner: [[review-code]], [[eng-perf]]
+---
+
 ---
 description: Add or update features in existing application. Used for iterative development.
 ---
@@ -61,3 +65,4 @@ This command adds features or makes updates to existing application.
 - Get approval for major changes
 - Warn on conflicting requests (e.g., "use Firebase" when project uses PostgreSQL)
 - Commit each change with git
+

@@ -4,7 +4,10 @@ description: "Audits content for SEO and AEO performance with scored reports, se
 risk: critical
 date_added: "2026-04-01"
 version: 1.0.0
+id: skill-seo-aeo-content-quality-auditor
+owner: [[biz-marketing]], [[ops-security]]
 ---
+
 
 # SEO-AEO Content Quality Auditor
 

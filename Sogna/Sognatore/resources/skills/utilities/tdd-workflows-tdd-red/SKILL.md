@@ -4,7 +4,10 @@ description: "Generate failing tests for the TDD red phase to define expected be
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-tdd-workflows-tdd-red
+owner: [[orchestrator]]
 ---
+
 
 Write comprehensive failing tests following TDD red phase principles.
 

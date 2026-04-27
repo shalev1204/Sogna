@@ -4,7 +4,10 @@ description: "To access Anthropic's official brand identity and style resources,
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-brand-guidelines-anthropic
+owner: [[prod-pm]], [[biz-hr]]
 ---
+
 
 # Anthropic Brand Styling
 

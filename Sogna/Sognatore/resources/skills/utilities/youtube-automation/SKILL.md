@@ -4,7 +4,10 @@ description: "Automate YouTube tasks via Rube MCP (Composio): upload videos, man
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-youtube-automation
+owner: [[orchestrator]]
 ---
+
 
 # YouTube Automation via Rube MCP
 

@@ -7,7 +7,10 @@ description: Autonomous agents are AI systems that can independently decompose
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-autonomous-agents
+owner: [[orchestrator]]
 ---
+
 
 # Autonomous Agents
 

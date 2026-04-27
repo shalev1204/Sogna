@@ -4,7 +4,10 @@ description: "Use when working with incident response incident response"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-incident-response-incident-response
+owner: [[ops-security]]
 ---
+
 
 ## Use this skill when
 

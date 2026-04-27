@@ -6,7 +6,10 @@ allowed-tools:
   - Read
 risk: offensive
 version: 1.0.0
+id: skill-burpsuite-project-parser
+owner: [[orchestrator]]
 ---
+
 
 # Burp Project Parser
 

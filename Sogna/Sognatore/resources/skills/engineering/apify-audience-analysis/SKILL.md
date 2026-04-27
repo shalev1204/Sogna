@@ -3,7 +3,10 @@ name: apify-audience-analysis
 description: Understand audience demographics, preferences, behavior patterns, and engagement quality across Facebook, Instagram, YouTube, and TikTok.
 risk: critical
 version: 1.0.0
+id: skill-apify-audience-analysis
+owner: [[eng-api]]
 ---
+
 
 # Audience Analysis
 

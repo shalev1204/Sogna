@@ -4,7 +4,10 @@ description: "SQL database migrations with zero-downtime strategies for PostgreS
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-database-migrations-sql-migrations
+owner: [[eng-database]]
 ---
+
 
 # SQL Database Migration Strategy and Implementation
 

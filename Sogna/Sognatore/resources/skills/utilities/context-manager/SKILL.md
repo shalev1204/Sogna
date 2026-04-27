@@ -4,7 +4,10 @@ description: Elite AI context engineering specialist mastering dynamic context m
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-context-manager
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

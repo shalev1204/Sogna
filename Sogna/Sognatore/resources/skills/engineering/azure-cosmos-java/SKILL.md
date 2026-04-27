@@ -4,7 +4,10 @@ description: Azure Cosmos DB SDK for Java. NoSQL database operations with global
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-cosmos-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Cosmos DB SDK for Java
 

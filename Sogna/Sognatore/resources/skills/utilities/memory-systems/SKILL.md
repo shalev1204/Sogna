@@ -4,7 +4,10 @@ description: "Design short-term, long-term, and graph-based memory architectures
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-memory-systems
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use This Skill
 

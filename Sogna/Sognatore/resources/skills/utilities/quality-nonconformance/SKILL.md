@@ -4,7 +4,10 @@ description: Codified expertise for quality control, non-conformance investigati
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-quality-nonconformance
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skill when investigating product defects or process deviations, performing root cause analysis (RCA), managing Corrective and Preventive Actions (CAPA), interpreting Statistical Process Control (SPC) data, or auditing supplier quality.

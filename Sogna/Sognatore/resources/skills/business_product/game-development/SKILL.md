@@ -4,7 +4,10 @@ description: "Game development orchestrator. Routes to platform-specific skills 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-game-development
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # Game Development
 

@@ -4,7 +4,10 @@ description: Azure Event Hubs SDK for .NET.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-eventhub-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.Messaging.EventHubs (.NET)
 

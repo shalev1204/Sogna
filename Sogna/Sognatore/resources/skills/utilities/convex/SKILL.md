@@ -4,7 +4,10 @@ description: "Convex reactive backend expert: schema design, TypeScript function
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-convex
+owner: [[orchestrator]]
 ---
+
 
 # Convex
 

@@ -4,7 +4,10 @@ description: "Design and implement a complete ML pipeline for: $ARGUMENTS"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-machine-learning-ops-ml-pipeline
+owner: [[orchestrator]]
 ---
+
 
 # Machine Learning Pipeline - Multi-Agent MLOps Orchestration
 

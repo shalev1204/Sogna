@@ -4,7 +4,10 @@ description: Azure AI Text Translation SDK for real-time text translation, trans
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-translation-text-py
+owner: [[ops-security]]
 ---
+
 
 # Azure AI Text Translation SDK for Python
 

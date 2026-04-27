@@ -4,7 +4,10 @@ description: "Use the `gh` CLI for issues, pull requests, Actions runs, and GitH
 risk: safe
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-github
+owner: [[orchestrator]]
 ---
+
 
 # GitHub Skill
 

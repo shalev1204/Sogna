@@ -4,7 +4,10 @@ description: Expert C4 Context-level documentation specialist. Creates high-leve
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-c4-context
+owner: [[orchestrator]]
 ---
+
 
 # C4 Context Level: System Context
 

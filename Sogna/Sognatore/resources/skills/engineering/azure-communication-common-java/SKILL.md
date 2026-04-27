@@ -4,7 +4,10 @@ description: "Azure Communication Services common utilities for Java. Use when w
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-communication-common-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Communication Common (Java)
 

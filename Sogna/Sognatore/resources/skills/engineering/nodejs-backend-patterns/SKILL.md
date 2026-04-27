@@ -4,7 +4,10 @@ description: "Comprehensive guidance for building scalable, maintainable, and pr
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-nodejs-backend-patterns
+owner: [[eng-backend]]
 ---
+
 
 # Node.js Backend Patterns
 

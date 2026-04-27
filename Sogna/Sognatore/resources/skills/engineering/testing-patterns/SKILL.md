@@ -4,7 +4,10 @@ description: "Jest testing patterns, factory functions, mocking strategies, and 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-testing-patterns
+owner: [[eng-qa]]
 ---
+
 
 # Testing Patterns and Utilities
 

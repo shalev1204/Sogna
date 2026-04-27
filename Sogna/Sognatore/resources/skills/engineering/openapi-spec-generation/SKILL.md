@@ -4,7 +4,10 @@ description: "Generate and maintain OpenAPI 3.1 specifications from code, design
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-openapi-spec-generation
+owner: [[eng-api]]
 ---
+
 
 # OpenAPI Spec Generation
 

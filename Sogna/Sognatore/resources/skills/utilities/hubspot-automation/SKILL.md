@@ -4,7 +4,10 @@ description: "Automate HubSpot CRM operations (contacts, companies, deals, ticke
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-hubspot-automation
+owner: [[orchestrator]]
 ---
+
 
 # HubSpot CRM Automation via Rube MCP
 

@@ -4,7 +4,10 @@ description: Azure Resource Manager SDK for Arize AI Observability and Evaluatio
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-mgmt-arizeaiobservabilityeval-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.ResourceManager.ArizeAIObservabilityEval
 

@@ -4,7 +4,10 @@ description: "Coordinate multi-layer security scanning and hardening across appl
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-security-scanning-security-hardening
+owner: [[ops-security]]
 ---
+
 
 Implement comprehensive security hardening with defense-in-depth strategy through coordinated multi-agent orchestration:
 

@@ -4,7 +4,10 @@ description: "Create a new track with specification and phased implementation pl
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-conductor-new-track
+owner: [[orchestrator]]
 ---
+
 
 # New Track
 

@@ -4,7 +4,10 @@ description: "6. Reduces Clutter: Identifies old files you probably don't need a
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-file-organizer
+owner: [[orchestrator]]
 ---
+
 
 # File Organizer
 

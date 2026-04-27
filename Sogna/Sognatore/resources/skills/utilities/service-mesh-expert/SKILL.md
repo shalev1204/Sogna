@@ -4,7 +4,10 @@ description: "Expert service mesh architect specializing in Istio, Linkerd, and 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-service-mesh-expert
+owner: [[orchestrator]]
 ---
+
 
 # Service Mesh Expert
 

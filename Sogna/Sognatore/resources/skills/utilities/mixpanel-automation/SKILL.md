@@ -4,7 +4,10 @@ description: "Automate Mixpanel tasks via Rube MCP (Composio): events, segmentat
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-mixpanel-automation
+owner: [[orchestrator]]
 ---
+
 
 # Mixpanel Automation via Rube MCP
 

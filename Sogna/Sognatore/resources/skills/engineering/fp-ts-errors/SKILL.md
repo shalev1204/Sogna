@@ -4,7 +4,10 @@ description: "Handle errors as values using fp-ts Either and TaskEither for clea
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fp-ts-errors
+owner: [[orchestrator]]
 ---
+
 
 # Practical Error Handling with fp-ts
 

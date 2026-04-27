@@ -6,7 +6,10 @@ description: Expert in building Retrieval-Augmented Generation systems. Masters
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-rag-engineer
+owner: [[orchestrator]]
 ---
+
 
 # RAG Engineer
 

@@ -4,7 +4,10 @@ description: "Performance profiling principles. Measurement, analysis, and optim
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-performance-profiling
+owner: [[eng-perf]], [[ops-security]]
 ---
+
 
 # Performance Profiling
 

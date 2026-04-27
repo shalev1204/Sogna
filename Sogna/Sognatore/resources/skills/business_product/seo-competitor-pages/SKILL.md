@@ -16,7 +16,10 @@ allowed-tools:
   - Bash
   - WebFetch
 version: 1.0.0
+id: skill-seo-competitor-pages
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Competitor Comparison & Alternatives Pages
 

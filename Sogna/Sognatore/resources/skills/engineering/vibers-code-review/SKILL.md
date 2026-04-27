@@ -4,7 +4,10 @@ description: Human review workflow for AI-generated GitHub projects with spec-ba
 risk: critical
 date_added: "2026-03-17"
 version: 1.0.0
+id: skill-vibers-code-review
+owner: [[orchestrator]]
 ---
+
 
 # Vibers — Human Code Review for AI-Generated Projects
 

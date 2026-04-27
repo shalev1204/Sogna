@@ -4,7 +4,10 @@ description: "Comprehensive guide to tracking, calculating, and optimizing key p
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-startup-metrics-framework
+owner: [[prod-pm]]
 ---
+
 
 # Startup Metrics Framework
 

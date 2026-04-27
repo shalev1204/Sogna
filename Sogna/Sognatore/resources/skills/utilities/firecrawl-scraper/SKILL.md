@@ -4,7 +4,10 @@ description: "Deep web scraping, screenshots, PDF parsing, and website crawling 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-firecrawl-scraper
+owner: [[orchestrator]]
 ---
+
 
 # firecrawl-scraper
 

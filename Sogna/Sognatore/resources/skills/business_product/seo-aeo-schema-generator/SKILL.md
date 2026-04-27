@@ -4,7 +4,10 @@ description: "Generates valid JSON-LD structured data for 10 schema types with r
 risk: critical
 date_added: "2026-04-01"
 version: 1.0.0
+id: skill-seo-aeo-schema-generator
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # SEO-AEO Schema Generator
 

@@ -6,7 +6,10 @@ risk: critical
 tags: "[twitter, x-api, scraping, mcp, social-media, data-extraction, giveaway, monitoring, webhooks]"
 date_added: "2026-02-28"
 version: 1.0.0
+id: skill-x-twitter-scraper
+owner: [[orchestrator]]
 ---
+
 
 # X (Twitter) Scraper — Xquik
 

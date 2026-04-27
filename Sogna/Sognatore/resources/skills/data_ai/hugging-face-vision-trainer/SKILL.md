@@ -3,7 +3,10 @@ name: hugging-face-vision-trainer
 description: Train or fine-tune vision models on Hugging Face Jobs for detection, classification, and SAM or SAM2 segmentation.
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-vision-trainer
+owner: [[orchestrator]]
 ---
+
 
 # Vision Model Training on Hugging Face Jobs
 

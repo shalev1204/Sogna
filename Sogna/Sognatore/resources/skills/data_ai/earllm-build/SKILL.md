@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-earllm-build
+owner: [[orchestrator]]
 ---
+
 
 # EarLLM One — Build & Maintain
 

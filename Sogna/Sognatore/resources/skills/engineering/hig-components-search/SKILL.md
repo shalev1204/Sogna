@@ -4,7 +4,10 @@ description: Apple HIG guidance for navigation-related components including sear
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-components-search
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Navigation Components
 

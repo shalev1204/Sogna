@@ -7,7 +7,10 @@ description: |
   makepad 事件, makepad action, 事件处理
 risk: safe
 version: 1.0.0
+id: skill-makepad-event-action
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Event/Action Skill
 

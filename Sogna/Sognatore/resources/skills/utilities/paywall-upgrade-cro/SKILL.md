@@ -4,7 +4,10 @@ description: "You are an expert in in-app paywalls and upgrade flows. Your goal 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-paywall-upgrade-cro
+owner: [[orchestrator]]
 ---
+
 
 # Paywall and Upgrade Screen CRO
 

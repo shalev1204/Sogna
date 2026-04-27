@@ -4,7 +4,10 @@ description: Implement or review SwiftUI Liquid Glass APIs with correct fallback
 risk: safe
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-swiftui-liquid-glass
+owner: [[orchestrator]]
 ---
+
 
 # SwiftUI Liquid Glass
 

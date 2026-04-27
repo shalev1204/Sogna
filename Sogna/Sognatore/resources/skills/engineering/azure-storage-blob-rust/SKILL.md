@@ -4,7 +4,10 @@ description: Azure Blob Storage SDK for Rust. Use for uploading, downloading, an
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-storage-blob-rust
+owner: [[orchestrator]]
 ---
+
 
 # Azure Blob Storage SDK for Rust
 

@@ -10,7 +10,10 @@ license: MIT
 allowed-tools: Read Glob
 compatibility: claude-code
 version: 1.0.0
+id: skill-skill-check
+owner: [[orchestrator]]
 ---
+
 
 # SkillCheck
 

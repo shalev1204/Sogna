@@ -4,7 +4,10 @@ description: "A health assistant skill for medical information analysis, symptom
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-claude-ally-health
+owner: [[orchestrator]]
 ---
+
 
 # Claude Ally Health
 

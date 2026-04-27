@@ -13,7 +13,10 @@ tags:
   - api
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   - fetch
+id: skill-fp-async
+owner: [[orchestrator]]
 ---
+
 
 # Practical Async Patterns with fp-ts
 

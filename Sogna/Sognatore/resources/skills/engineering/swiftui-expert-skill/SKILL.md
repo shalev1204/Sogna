@@ -3,7 +3,10 @@ name: swiftui-expert-skill
 description: Write, review, or improve SwiftUI code following best practices for state management, view composition, performance, and iOS 26+ Liquid Glass adoption. Use when building new SwiftUI features, refactoring existing views, reviewing code quality, or adopting modern SwiftUI patterns.
 risk: critical
 version: 1.0.0
+id: skill-swiftui-expert-skill
+owner: [[orchestrator]]
 ---
+
 
 # SwiftUI Expert Skill
 

@@ -6,7 +6,10 @@ date_added: "2026-03-21"
 metadata:
   version: 1.1.0
 version: 1.0.0
+id: skill-product-marketing-context
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Product Marketing Context
 

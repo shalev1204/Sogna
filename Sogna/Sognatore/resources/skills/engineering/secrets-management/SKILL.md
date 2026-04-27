@@ -4,7 +4,10 @@ description: "Secure secrets management practices for CI/CD pipelines using Vaul
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-secrets-management
+owner: [[orchestrator]]
 ---
+
 
 # Secrets Management
 

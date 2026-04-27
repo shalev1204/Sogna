@@ -13,7 +13,10 @@ allowed-tools:
   - WebFetch
   - Write
 version: 1.0.0
+id: skill-seo-image-gen
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # SEO Image Gen: AI Image Generation for SEO Assets (Extension)
 

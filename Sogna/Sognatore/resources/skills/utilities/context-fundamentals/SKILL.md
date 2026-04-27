@@ -3,7 +3,10 @@ name: context-fundamentals
 description: "Context is the complete state available to a language model at inference time. It includes everything the model can attend to when generating responses: system instructions, tool definitions, retrieved documents, message history, and tool outputs."
 risk: critical
 version: 1.0.0
+id: skill-context-fundamentals
+owner: [[orchestrator]]
 ---
+
 
 # Context Engineering Fundamentals
 

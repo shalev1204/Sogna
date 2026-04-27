@@ -3,7 +3,10 @@ name: sharp-edges
 description: sharp-edges
 risk: critical
 version: 1.0.0
+id: skill-sharp-edges
+owner: [[orchestrator]]
 ---
+
 
 ---
 name: sharp-edges

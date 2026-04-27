@@ -4,7 +4,10 @@ description: Extract clean markdown content from web pages using Defuddle CLI, r
 risk: critical
 date_added: "2026-03-21"
 version: 1.0.0
+id: skill-defuddle
+owner: [[orchestrator]]
 ---
+
 
 # Defuddle
 

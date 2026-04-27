@@ -5,7 +5,10 @@ description: "Ingeniero de Sistemas de Sognatore. Diseña, redacta y despliega n
 risk: safe
 date_added: "2026-02-25"
 version: 1.0.0
+id: skill-10-andruia-skill-smith
+owner: [[orchestrator]]
 ---
+
 
 # 🔨 Sognatore Skill-Smith (The Forge)
 

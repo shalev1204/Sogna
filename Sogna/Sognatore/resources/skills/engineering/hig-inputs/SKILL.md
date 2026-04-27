@@ -4,7 +4,10 @@ description: "Check for .claude/apple-design-context.md before asking questions.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-inputs
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Inputs
 

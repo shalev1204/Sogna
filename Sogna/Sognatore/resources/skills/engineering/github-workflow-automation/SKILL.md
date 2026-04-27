@@ -4,7 +4,10 @@ description: "Patterns for automating GitHub workflows with AI assistance, inspi
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-github-workflow-automation
+owner: [[orchestrator]]
 ---
+
 
 # 🔧 GitHub Workflow Automation
 

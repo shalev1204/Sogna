@@ -4,7 +4,10 @@ description: Master TDD orchestrator specializing in red-green-refactor discipli
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-tdd-orchestrator
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

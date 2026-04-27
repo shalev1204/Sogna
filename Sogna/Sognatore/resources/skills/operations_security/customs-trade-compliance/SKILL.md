@@ -4,7 +4,10 @@ description: Codified expertise for customs documentation, tariff classification
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-customs-trade-compliance
+owner: [[ops-security]]
 ---
+
 
 ## When to Use
 Use this skill when navigating international trade regulations, classifying goods under HS codes, determining appropriate Incoterms, managing import/export documentation, or optimizing customs duty payments through Free Trade Agreements.

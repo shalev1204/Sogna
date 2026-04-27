@@ -10,7 +10,10 @@ tags:
   - pragmatic
   - beginner-friendly
   - best-practices
+id: skill-fp-pragmatic
+owner: [[orchestrator]]
 ---
+
 
 # Pragmatic Functional Programming
 

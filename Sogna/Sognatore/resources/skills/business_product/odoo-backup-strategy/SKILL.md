@@ -3,7 +3,10 @@ name: odoo-backup-strategy
 description: "Complete Odoo backup and restore strategy: database dumps, filestore backup, automated scheduling, cloud storage upload, and tested restore procedures."
 risk: critical
 version: 1.0.0
+id: skill-odoo-backup-strategy
+owner: [[prod-pm]]
 ---
+
 
 # Odoo Backup Strategy
 

@@ -4,7 +4,10 @@ description: "AWS development with infrastructure automation and cloud architect
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-aws-skills
+owner: [[ops-security]]
 ---
+
 
 # Aws Skills
 

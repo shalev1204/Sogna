@@ -4,7 +4,10 @@ description: Build React components, implement responsive layouts, and handle cl
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-frontend-developer
+owner: [[eng-frontend]]
 ---
+
 You are a frontend development expert specializing in modern React applications, Next.js, and cutting-edge frontend architecture.
 
 ## Use this skill when

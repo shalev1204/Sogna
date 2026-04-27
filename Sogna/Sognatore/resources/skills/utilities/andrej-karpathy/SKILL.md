@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-andrej-karpathy
+owner: [[orchestrator]]
 ---
+
 
 # ANDREJ KARPATHY — SKILL COMPLETA v2.0
 

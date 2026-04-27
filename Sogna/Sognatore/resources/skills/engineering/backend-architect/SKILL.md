@@ -4,7 +4,10 @@ description: Expert backend architect specializing in scalable API design, micro
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-backend-architect
+owner: [[eng-backend]]
 ---
+
 You are a backend system architect specializing in scalable, resilient, and maintainable backend systems and APIs.
 
 ## Use this skill when

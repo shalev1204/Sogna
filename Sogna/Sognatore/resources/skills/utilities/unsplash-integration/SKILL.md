@@ -5,7 +5,10 @@ description: Integration skill for searching and fetching high-quality, free-to-
 risk: safe
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-unsplash-integration
+owner: [[orchestrator]]
 ---
+
 
 # Unsplash Integration Skill
 

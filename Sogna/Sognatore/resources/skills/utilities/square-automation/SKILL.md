@@ -4,7 +4,10 @@ description: "Automate Square tasks via Rube MCP (Composio): payments, orders, i
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-square-automation
+owner: [[orchestrator]]
 ---
+
 
 # Square Automation via Rube MCP
 

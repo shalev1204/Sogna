@@ -4,7 +4,10 @@ description: Explain Bitcoin Lightning channel factories and the SuperScalar pro
 risk: safe
 date_added: '2026-03-03'
 version: 1.0.0
+id: skill-lightning-factory-explainer
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

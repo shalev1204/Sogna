@@ -7,7 +7,10 @@ date_added: "2026-03-09"
 tags: [video, ai, memories, social-media, youtube, tiktok, analysis]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-seek-and-analyze-video
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skill when the user wants to search for, import, or analyze video content from TikTok, YouTube, or Instagram, summarize meetings or lectures from recordings, build a searchable knowledge base from video content, or research social media trends and creators.

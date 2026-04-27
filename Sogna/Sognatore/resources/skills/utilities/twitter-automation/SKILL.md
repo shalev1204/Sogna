@@ -4,7 +4,10 @@ description: "Automate Twitter/X tasks via Rube MCP (Composio): posts, search, u
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-twitter-automation
+owner: [[orchestrator]]
 ---
+
 
 # Twitter/X Automation via Rube MCP
 

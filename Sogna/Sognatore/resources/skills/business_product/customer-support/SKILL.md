@@ -4,7 +4,10 @@ description: Elite AI-powered customer support specialist mastering conversation
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-customer-support
+owner: [[prod-pm]]
 ---
+
 
 ## Use this skill when
 

@@ -5,7 +5,10 @@ trigger: command
 risk: safe
 tools: Write, Bash, Read
 version: 1.0.0
+id: skill-speed
+owner: [[orchestrator]]
 ---
+
 
 # Speed Reader
 

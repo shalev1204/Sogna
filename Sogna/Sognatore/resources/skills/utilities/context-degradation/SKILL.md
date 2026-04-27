@@ -3,7 +3,10 @@ name: context-degradation
 description: "Language models exhibit predictable degradation patterns as context length increases. Understanding these patterns is essential for diagnosing failures and designing resilient systems."
 risk: critical
 version: 1.0.0
+id: skill-context-degradation
+owner: [[orchestrator]]
 ---
+
 
 # Context Degradation Patterns
 

@@ -8,7 +8,10 @@ risk: safe
 metadata:
   version: "1.0"
 version: 1.0.0
+id: skill-new-rails-project
+owner: [[orchestrator]]
 ---
+
 
 Generate a new Rails project named $1 in the current directory. You may reference @CLAUDE.md for general guidance, though the guidance here takes precedence.
 

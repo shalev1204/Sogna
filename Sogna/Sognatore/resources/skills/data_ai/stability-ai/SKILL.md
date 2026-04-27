@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-stability-ai
+owner: [[orchestrator]]
 ---
+
 
 # Stability AI — Gerador de Imagens Profissional
 

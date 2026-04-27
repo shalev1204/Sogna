@@ -2,7 +2,10 @@
 name: vr-ar
 description: VR/AR development principles. Comfort, interaction, performance requirements.
 allowed-tools: Read, Write, Edit, Glob, Grep
+id: skill-vr-ar
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # VR/AR Development
 

@@ -6,7 +6,10 @@ risk: critical
 homepage: https://agentphone.to
 docs: https://docs.agentphone.to
 metadata: {"api_base": "https://api.agentphone.to/v1"}
+id: skill-agentphone
+owner: [[orchestrator]]
 ---
+
 
 # AgentPhone
 

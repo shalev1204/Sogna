@@ -7,7 +7,10 @@ date_added: "2026-03-07"
 tags: [security, audit, skills, bundles, cross-platform]
 tools: [claude, gemini, gpt, llama, mistral, etc]
 version: 1.0.0
+id: skill-audit-skills
+owner: [[ops-security]]
 ---
+
 
 <!-- security-allowlist: curl-pipe-bash -->
 

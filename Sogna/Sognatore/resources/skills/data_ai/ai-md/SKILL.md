@@ -4,7 +4,10 @@ description: "Convert human-written CLAUDE.md into AI-native structured-label fo
 risk: critical
 date_added: "2026-03-11"
 version: 1.0.0
+id: skill-ai-md
+owner: [[orchestrator]]
 ---
+
 
 # AI.MD v4 — The Complete AI-Native Conversion System
 

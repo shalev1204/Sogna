@@ -4,7 +4,10 @@ description: Azure AI Document Translation SDK for batch translation of document
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-translation-document-py
+owner: [[ops-security]]
 ---
+
 
 # Azure AI Document Translation SDK for Python
 

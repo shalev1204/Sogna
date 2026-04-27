@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-leiloeiro-juridico
+owner: [[orchestrator]]
 ---
+
 
 # SKILL JURÍDICA — LEILÕES DE IMÓVEIS
 

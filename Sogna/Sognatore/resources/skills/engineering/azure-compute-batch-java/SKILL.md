@@ -4,7 +4,10 @@ description: Azure Batch SDK for Java. Run large-scale parallel and HPC batch jo
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-compute-batch-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Batch SDK for Java
 

@@ -4,7 +4,10 @@ description: "You are a configuration management expert specializing in validati
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-deployment-validation-config-validate
+owner: [[ops-security]]
 ---
+
 
 # Configuration Validation
 

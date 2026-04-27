@@ -4,7 +4,10 @@ description: "Build table storage applications using the Azure Tables SDK for Ja
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-data-tables-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Tables SDK for Java
 

@@ -18,7 +18,10 @@ tools:
 - codex-cli
 - Sognatore
 version: 1.0.0
+id: skill-gdb-cli
+owner: [[orchestrator]]
 ---
+
 
 # GDB Debugging Assistant
 

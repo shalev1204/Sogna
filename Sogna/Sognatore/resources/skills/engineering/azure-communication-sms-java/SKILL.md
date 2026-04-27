@@ -4,7 +4,10 @@ description: "Send SMS messages with Azure Communication Services SMS Java SDK. 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-communication-sms-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Communication SMS (Java)
 

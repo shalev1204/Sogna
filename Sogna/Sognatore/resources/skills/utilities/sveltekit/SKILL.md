@@ -7,7 +7,10 @@ date_added: "2026-03-18"
 tags: [svelte, sveltekit, fullstack, ssr, ssg, typescript]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-sveltekit
+owner: [[orchestrator]]
 ---
+
 
 # SvelteKit Full-Stack Development
 

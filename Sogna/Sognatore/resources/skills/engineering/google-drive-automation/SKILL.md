@@ -6,7 +6,10 @@ risk: critical
 metadata:
   version: "1.0"
 version: 1.0.0
+id: skill-google-drive-automation
+owner: [[orchestrator]]
 ---
+
 
 # Google Drive
 

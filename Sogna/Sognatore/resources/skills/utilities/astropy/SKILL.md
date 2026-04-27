@@ -6,7 +6,10 @@ metadata:
     skill-author: K-Dense Inc.
 risk: critical
 version: 1.0.0
+id: skill-astropy
+owner: [[orchestrator]]
 ---
+
 
 # Astropy
 

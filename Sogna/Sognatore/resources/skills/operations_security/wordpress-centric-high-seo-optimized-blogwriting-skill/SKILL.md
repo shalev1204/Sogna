@@ -6,7 +6,10 @@ version: 1.0.0
 created: 2026-04-12
 
 tags: [writing, blog, seo, content, wordpress]
+id: skill-wordpress-centric-high-seo-optimized-blogwriting-skill
+owner: [[biz-marketing]], [[ops-security]]
 ---
+
 
 # wordpress-centric-high-seo-optimized-blogwriting-skill
 

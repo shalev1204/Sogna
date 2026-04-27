@@ -4,7 +4,10 @@ description: "Main application building orchestrator. Creates full-stack applica
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-app-builder
+owner: [[orchestrator]]
 ---
+
 
 # App Builder - Application Building Orchestrator
 

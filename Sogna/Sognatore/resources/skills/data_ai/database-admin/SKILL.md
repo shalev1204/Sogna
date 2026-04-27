@@ -4,7 +4,10 @@ description: Expert database administrator specializing in modern cloud database
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-database-admin
+owner: [[eng-database]]
 ---
+
 
 ## Use this skill when
 

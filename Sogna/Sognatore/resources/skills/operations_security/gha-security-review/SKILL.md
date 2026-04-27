@@ -4,7 +4,10 @@ description: "Find exploitable vulnerabilities in GitHub Actions workflows. Ever
 risk: offensive
 date_added: 2026-03-16
 version: 1.0.0
+id: skill-gha-security-review
+owner: [[ops-security]]
 ---
+
 
 <!--
 Attack patterns and real-world examples sourced from the HackerBot Claw campaign analysis

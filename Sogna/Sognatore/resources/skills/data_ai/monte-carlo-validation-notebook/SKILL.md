@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [data-observability, validation, dbt, monte-carlo, sql-notebook]
 tools: [claude, cursor, codex]
 version: 1.0.0
+id: skill-monte-carlo-validation-notebook
+owner: [[orchestrator]]
 ---
+
 
 > **Tip:** This skill works well with Sonnet. Run `/model sonnet` before invoking for faster generation.
 

@@ -4,7 +4,10 @@ description: Azure AI Search SDK for Python. Use for vector search, hybrid searc
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-search-documents-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Search SDK for Python
 

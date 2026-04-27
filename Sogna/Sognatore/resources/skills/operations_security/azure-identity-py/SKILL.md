@@ -4,7 +4,10 @@ description: Azure Identity SDK for Python authentication. Use for DefaultAzureC
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-identity-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Identity SDK for Python
 

@@ -4,7 +4,10 @@ description: Azure File Share JavaScript/TypeScript SDK (@azure/storage-file-sha
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-storage-file-share-ts
+owner: [[orchestrator]]
 ---
+
 
 # @azure/storage-file-share (TypeScript/JavaScript)
 

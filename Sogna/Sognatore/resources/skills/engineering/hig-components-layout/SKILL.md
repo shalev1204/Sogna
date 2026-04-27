@@ -4,7 +4,10 @@ description: Apple Human Interface Guidelines for layout and navigation componen
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-components-layout
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Layout and Navigation Components
 

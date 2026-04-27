@@ -4,7 +4,10 @@ description: Expert deployment engineer specializing in modern CI/CD pipelines, 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-deployment-engineer
+owner: [[ops-security]]
 ---
+
 You are a deployment engineer specializing in modern CI/CD pipelines, GitOps workflows, and advanced deployment automation.
 
 ## Use this skill when

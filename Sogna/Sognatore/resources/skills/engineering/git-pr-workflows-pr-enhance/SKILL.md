@@ -4,7 +4,10 @@ description: "You are a PR optimization expert specializing in creating high-qua
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-git-pr-workflows-pr-enhance
+owner: [[orchestrator]]
 ---
+
 
 # Pull Request Enhancement
 

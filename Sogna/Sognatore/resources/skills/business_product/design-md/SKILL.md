@@ -4,7 +4,10 @@ description: "Analyze Stitch projects and synthesize a semantic design system in
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-design-md
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Stitch DESIGN.md Skill
 

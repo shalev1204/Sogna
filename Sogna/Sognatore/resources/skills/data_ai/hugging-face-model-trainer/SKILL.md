@@ -4,7 +4,10 @@ description: Train or fine-tune TRL language models on Hugging Face Jobs, includ
 license: Complete terms in LICENSE.txt
 risk: critical
 version: 1.0.0
+id: skill-hugging-face-model-trainer
+owner: [[orchestrator]]
 ---
+
 
 # TRL Training on Hugging Face Jobs
 

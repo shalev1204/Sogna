@@ -5,7 +5,10 @@ description: >
 risk: safe
 date_added: "2026-03-11"
 version: 1.0.0
+id: skill-explain-like-socrates
+owner: [[orchestrator]]
 ---
+
 
 # EXPLAIN LIKE SOCRATES
 

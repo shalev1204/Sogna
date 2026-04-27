@@ -4,7 +4,10 @@ description: "Automate Coda tasks via Rube MCP (Composio): manage docs, pages, t
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-coda-automation
+owner: [[orchestrator]]
 ---
+
 
 # Coda Automation via Rube MCP
 

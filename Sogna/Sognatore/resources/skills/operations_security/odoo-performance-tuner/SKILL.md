@@ -3,7 +3,10 @@ name: odoo-performance-tuner
 description: "Expert guide for diagnosing and fixing Odoo performance issues: slow queries, worker configuration, memory limits, PostgreSQL tuning, and profiling tools."
 risk: critical
 version: 1.0.0
+id: skill-odoo-performance-tuner
+owner: [[eng-perf]], [[ops-security]]
 ---
+
 
 # Odoo Performance Tuner
 

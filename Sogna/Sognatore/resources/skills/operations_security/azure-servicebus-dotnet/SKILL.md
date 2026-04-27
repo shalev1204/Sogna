@@ -4,7 +4,10 @@ description: Azure Service Bus SDK for .NET. Enterprise messaging with queues, t
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-servicebus-dotnet
+owner: [[ops-security]]
 ---
+
 
 # Azure.Messaging.ServiceBus (.NET)
 

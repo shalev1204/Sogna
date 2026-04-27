@@ -4,7 +4,10 @@ description: "You are a compliance expert specializing in regulatory requirement
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-security-compliance-compliance-check
+owner: [[ops-security]]
 ---
+
 
 # Regulatory Compliance Check
 

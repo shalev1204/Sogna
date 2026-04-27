@@ -6,7 +6,10 @@ risk: safe
 tags: "[audio, transcription, whisper, meeting-minutes, speech-to-text]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-audio-transcriber
+owner: [[orchestrator]]
 ---
+
 
 ## Purpose
 

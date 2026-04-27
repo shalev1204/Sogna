@@ -4,7 +4,10 @@ description: "MANDATORY: Run appropriate validation tools after EVERY code chang
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-lint-and-validate
+owner: [[orchestrator]]
 ---
+
 
 # Lint and Validate Skill
 

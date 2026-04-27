@@ -1,3 +1,10 @@
+---
+name: mcp-guard
+id: skill-mcp-guard
+owner: [[orchestrator]]
+---
+
+
 # Skill: MCP Guard (Security Protocol)
 
 Protocol for securing and auditing Model Context Protocol (MCP) server integrations within the Sognatore Ecosystem.

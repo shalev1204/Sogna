@@ -4,7 +4,10 @@ description: Design and evaluate programmatic SEO strategies for creating SEO-dr
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-programmatic-seo
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 ---
 

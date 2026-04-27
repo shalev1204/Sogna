@@ -5,7 +5,10 @@ description: "Documentation generation workflow covering API docs, architecture 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-documentation
+owner: [[orchestrator]]
 ---
+
 
 # Documentation Workflow Bundle
 

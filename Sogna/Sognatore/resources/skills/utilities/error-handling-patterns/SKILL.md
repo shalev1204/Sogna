@@ -4,7 +4,10 @@ description: "Build resilient applications with robust error handling strategies
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-error-handling-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Error Handling Patterns
 

@@ -4,7 +4,10 @@ description: "Platform APIs for model management, pricing, and usage tracking"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fal-platform
+owner: [[orchestrator]]
 ---
+
 
 # Fal Platform
 

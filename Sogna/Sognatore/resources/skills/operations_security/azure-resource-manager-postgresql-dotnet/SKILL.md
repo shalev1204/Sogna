@@ -4,7 +4,10 @@ description: Azure PostgreSQL Flexible Server SDK for .NET. Database management 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-resource-manager-postgresql-dotnet
+owner: [[eng-database]], [[ops-security]]
 ---
+
 
 # Azure.ResourceManager.PostgreSql (.NET)
 

@@ -4,7 +4,10 @@ description: "Automate Shopify tasks via Rube MCP (Composio): products, orders, 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-shopify-automation
+owner: [[prod-pm]]
 ---
+
 
 # Shopify Automation via Rube MCP
 

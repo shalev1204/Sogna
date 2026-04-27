@@ -4,7 +4,10 @@ description: "Use when working with context management context save"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-context-management-context-save
+owner: [[orchestrator]]
 ---
+
 
 # Context Save Tool: Intelligent Context Management Specialist
 

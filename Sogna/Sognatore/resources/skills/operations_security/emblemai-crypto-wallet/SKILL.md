@@ -4,7 +4,10 @@ description: "Crypto wallet management across 7 blockchains via EmblemAI Agent H
 risk: critical
 date_added: "2026-03-06"
 version: 1.0.0
+id: skill-emblemai-crypto-wallet
+owner: [[ops-security]]
 ---
+
 
 # EmblemAI Crypto Wallet
 

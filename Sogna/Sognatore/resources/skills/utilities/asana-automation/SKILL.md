@@ -4,7 +4,10 @@ description: "Automate Asana tasks via Rube MCP (Composio): tasks, projects, sec
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-asana-automation
+owner: [[orchestrator]]
 ---
+
 
 # Asana Automation via Rube MCP
 

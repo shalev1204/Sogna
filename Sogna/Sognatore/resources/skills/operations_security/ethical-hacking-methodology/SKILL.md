@@ -4,7 +4,10 @@ description: "Master the complete penetration testing lifecycle from reconnaissa
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-ethical-hacking-methodology
+owner: [[ops-security]]
 ---
+
 
 # Ethical Hacking Methodology
 

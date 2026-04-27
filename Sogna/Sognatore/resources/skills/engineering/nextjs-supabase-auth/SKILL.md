@@ -4,7 +4,10 @@ description: Expert integration of Supabase Auth with Next.js App Router
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-nextjs-supabase-auth
+owner: [[orchestrator]]
 ---
+
 
 # Next.js + Supabase Auth
 

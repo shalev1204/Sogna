@@ -4,7 +4,10 @@ description: "Complete App Store Optimization (ASO) toolkit for researching, opt
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-app-store-optimization
+owner: [[orchestrator]]
 ---
+
 
 # App Store Optimization (ASO) Skill
 

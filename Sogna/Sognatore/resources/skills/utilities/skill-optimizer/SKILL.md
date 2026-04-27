@@ -4,7 +4,10 @@ description: "Diagnose and optimize Agent Skills (SKILL.md) with real session da
 risk: critical
 date_added: "2026-04-11"
 version: 1.0.0
+id: skill-skill-optimizer
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use This Skill
 

@@ -4,7 +4,10 @@ description: "Upscale and enhance image and video resolution using AI"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fal-upscale
+owner: [[orchestrator]]
 ---
+
 
 # Fal Upscale
 

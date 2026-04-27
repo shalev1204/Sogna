@@ -4,7 +4,10 @@ description: "To write internal communications, use this skill for:"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-internal-comms-community
+owner: [[orchestrator]]
 ---
+
 
 ## When to use this skill
 To write internal communications, use this skill for:

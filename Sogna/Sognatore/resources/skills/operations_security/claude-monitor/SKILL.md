@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-claude-monitor
+owner: [[ops-security]]
 ---
+
 
 # Claude Monitor — Diagnóstico de Performance
 

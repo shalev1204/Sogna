@@ -4,7 +4,10 @@ description: "Master essential security scanning tools for network discovery, vu
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-scanning-tools
+owner: [[orchestrator]]
 ---
+
 
 # Security Scanning Tools
 

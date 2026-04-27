@@ -4,7 +4,10 @@ description: "Comprehensive GitLab CI/CD pipeline patterns for automated testing
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-gitlab-ci-patterns
+owner: [[orchestrator]]
 ---
+
 
 # GitLab CI Patterns
 

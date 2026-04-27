@@ -3,7 +3,10 @@ name: manage-skills
 risk: critical
 description: Discover, list, create, edit, toggle, copy, move, and delete AI agent skills across 11 tools (Cursor, Claude, Agents, Windsurf, Copilot, Codex, Cline, Aider, Continue, Roo Code, Augment)
 version: 1.0.0
+id: skill-manage-skills
+owner: [[orchestrator]]
 ---
+
 
 # Manage AI Agent Skills
 

@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-product-design
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # PRODUCT DESIGN — Nivel Apple
 

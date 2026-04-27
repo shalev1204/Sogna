@@ -4,7 +4,10 @@ description: "Complete toolkit for senior fullstack with modern tools and best p
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-senior-fullstack
+owner: [[orchestrator]]
 ---
+
 
 # Senior Fullstack
 

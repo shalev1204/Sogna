@@ -4,7 +4,10 @@ description: Use when a coding task must be completed against explicit acceptanc
 risk: critical
 date_added: "2026-03-12"
 version: 1.0.0
+id: skill-closed-loop-delivery
+owner: [[orchestrator]]
 ---
+
 
 # Closed-Loop Delivery
 

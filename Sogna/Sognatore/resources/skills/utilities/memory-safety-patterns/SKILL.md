@@ -4,7 +4,10 @@ description: "Cross-language patterns for memory-safe programming including RAII
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-memory-safety-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Memory Safety Patterns
 

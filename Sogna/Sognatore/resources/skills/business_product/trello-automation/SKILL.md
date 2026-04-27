@@ -4,7 +4,10 @@ description: "Automate Trello boards, cards, and workflows via Rube MCP (Composi
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-trello-automation
+owner: [[prod-pm]]
 ---
+
 
 # Trello Automation via Rube MCP
 

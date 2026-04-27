@@ -5,7 +5,10 @@ risk: safe
 tags: "[ddd, context-map, anti-corruption-layer, integration]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-ddd-context-mapping
+owner: [[orchestrator]]
 ---
+
 
 # DDD Context Mapping
 

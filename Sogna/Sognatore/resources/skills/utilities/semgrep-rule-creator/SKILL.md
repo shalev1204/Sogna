@@ -11,7 +11,10 @@ allowed-tools:
   - WebFetch
 risk: critical
 version: 1.0.0
+id: skill-semgrep-rule-creator
+owner: [[orchestrator]]
 ---
+
 
 # Semgrep Rule Creator
 

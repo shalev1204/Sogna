@@ -3,7 +3,10 @@ name: sred-work-summary
 description: Go back through the previous year of work and create a Notion doc that groups relevant links into projects that can then be documented as SRED projects.
 risk: critical
 version: 1.0.0
+id: skill-sred-work-summary
+owner: [[ops-security]]
 ---
+
 
 # SRED Work Summary
 

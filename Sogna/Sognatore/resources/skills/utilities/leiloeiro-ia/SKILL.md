@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-leiloeiro-ia
+owner: [[orchestrator]]
 ---
+
 
 # LEILOEIRO JURÍDICO, PERICIAL E DE MERCADO — IA
 

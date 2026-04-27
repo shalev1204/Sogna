@@ -3,7 +3,10 @@ name: ask-questions-if-underspecified
 description: Clarify requirements before implementing. Use when serious doubts arise.
 risk: critical
 version: 1.0.0
+id: skill-ask-questions-if-underspecified
+owner: [[ops-security]]
 ---
+
 
 # Ask Questions If Underspecified
 

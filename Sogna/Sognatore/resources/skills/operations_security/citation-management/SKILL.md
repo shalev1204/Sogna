@@ -54,7 +54,10 @@ The AI will automatically:
 
 For detailed guidance on creating schematics, refer to the scientific-schematics skill documentation.
 version: 1.0.0
+id: skill-citation-management
+owner: [[ops-security]]
 ---
+
 
 ## Core Workflow
 

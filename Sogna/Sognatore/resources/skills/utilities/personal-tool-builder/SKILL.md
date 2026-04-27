@@ -6,7 +6,10 @@ description: Expert in building custom tools that solve your own problems first.
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-personal-tool-builder
+owner: [[orchestrator]]
 ---
+
 
 # Personal Tool Builder
 

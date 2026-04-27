@@ -4,7 +4,10 @@ description: Codified expertise for production scheduling, job sequencing, line 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-production-scheduling
+owner: [[prod-pm]]
 ---
+
 
 ## When to Use
 Use this skill when planning manufacturing operations, sequencing jobs to minimize changeover times, balancing production lines, resolving factory bottlenecks, or responding to unexpected equipment downtime and supply disruptions.

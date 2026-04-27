@@ -4,7 +4,10 @@ description: "Automate Segment tasks via Rube MCP (Composio): track events, iden
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-segment-automation
+owner: [[orchestrator]]
 ---
+
 
 # Segment Automation via Rube MCP
 

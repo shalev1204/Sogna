@@ -4,7 +4,10 @@ description: "Automate Make (Integromat) tasks via Rube MCP (Composio): operatio
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-make-automation
+owner: [[orchestrator]]
 ---
+
 
 # Make Automation via Rube MCP
 

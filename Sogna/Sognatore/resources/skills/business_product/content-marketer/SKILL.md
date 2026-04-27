@@ -4,7 +4,10 @@ description: Elite content marketing strategist specializing in AI-powered conte
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-content-marketer
+owner: [[prod-pm]]
 ---
+
 
 ## Use this skill when
 

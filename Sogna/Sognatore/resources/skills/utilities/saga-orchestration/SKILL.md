@@ -4,7 +4,10 @@ description: "Patterns for managing distributed transactions and long-running bu
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-saga-orchestration
+owner: [[orchestrator]]
 ---
+
 
 # Saga Orchestration
 

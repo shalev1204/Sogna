@@ -4,7 +4,10 @@ description: "Thesis-driven equity analysis from public SEC EDGAR and market dat
 risk: safe
 date_added: "2026-03-23"
 version: 1.0.0
+id: skill-xvary-stock-research
+owner: [[orchestrator]]
 ---
+
 
 # XVARY Stock Research Skill
 

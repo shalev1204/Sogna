@@ -4,7 +4,10 @@ description: Audit SwiftUI performance issues from code review and profiling evi
 risk: safe
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-swiftui-performance-audit
+owner: [[eng-perf]]
 ---
+
 
 # SwiftUI Performance Audit
 

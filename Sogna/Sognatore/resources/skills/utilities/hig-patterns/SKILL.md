@@ -4,7 +4,10 @@ description: Apple Human Interface Guidelines interaction and UX patterns.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hig-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Apple HIG: Interaction Patterns
 

@@ -4,7 +4,10 @@ description: "Comprehensive guide for creating and managing skills in Claude Cod
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-skill-developer
+owner: [[orchestrator]]
 ---
+
 
 # Skill Developer Guide
 

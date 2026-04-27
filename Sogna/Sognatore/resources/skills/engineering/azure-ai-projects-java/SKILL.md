@@ -4,7 +4,10 @@ description: Azure AI Projects SDK for Java. High-level SDK for Azure AI Foundry
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-projects-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Projects SDK for Java
 

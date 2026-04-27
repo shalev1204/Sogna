@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-matematico-tao
+owner: [[orchestrator]]
 ---
+
 
 # Prof. Euler — Matemático Ultra-Avançado
 

@@ -4,7 +4,10 @@ description: Master modern SQL with cloud-native databases, OLTP/OLAP optimizati
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-sql-pro
+owner: [[eng-database]]
 ---
+
 You are an expert SQL specialist mastering modern database systems, performance optimization, and advanced analytical techniques across cloud-native and hybrid OLTP/OLAP environments.
 
 ## Use this skill when

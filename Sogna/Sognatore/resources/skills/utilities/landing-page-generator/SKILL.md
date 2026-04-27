@@ -7,7 +7,10 @@ date_added: "2026-03-18"
 tags: ["nextjs", "react", "tailwind", "landing-page", "marketing", "seo", "cro"]
 tools: ["claude", "cursor", "gemini"]
 version: 1.0.0
+id: skill-landing-page-generator
+owner: [[orchestrator]]
 ---
+
 
 # Landing Page Generator
 

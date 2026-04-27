@@ -8,7 +8,10 @@ description: |
   makepad 布局, makepad 宽度, makepad 对齐, makepad 居中
 risk: safe
 version: 1.0.0
+id: skill-makepad-layout
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Layout Skill
 

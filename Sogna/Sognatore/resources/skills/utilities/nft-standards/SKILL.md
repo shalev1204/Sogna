@@ -4,7 +4,10 @@ description: "Master ERC-721 and ERC-1155 NFT standards, metadata best practices
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-nft-standards
+owner: [[orchestrator]]
 ---
+
 
 # NFT Standards
 

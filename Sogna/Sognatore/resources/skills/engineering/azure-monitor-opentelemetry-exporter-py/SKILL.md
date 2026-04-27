@@ -4,7 +4,10 @@ description: Azure Monitor OpenTelemetry Exporter for Python. Use for low-level 
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-monitor-opentelemetry-exporter-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure Monitor OpenTelemetry Exporter for Python
 

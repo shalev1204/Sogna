@@ -3,7 +3,10 @@ name: odoo-docker-deployment
 description: "Production-ready Docker and docker-compose setup for Odoo with PostgreSQL, persistent volumes, environment-based configuration, and Nginx reverse proxy."
 risk: critical
 version: 1.0.0
+id: skill-odoo-docker-deployment
+owner: [[ops-security]]
 ---
+
 
 # Odoo Docker Deployment
 

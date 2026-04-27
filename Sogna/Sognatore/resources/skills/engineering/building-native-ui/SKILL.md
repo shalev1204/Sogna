@@ -4,7 +4,10 @@ description: Complete guide for building beautiful apps with Expo Router. Covers
 risk: critical
 version: 1.0.1
 license: MIT
+id: skill-building-native-ui
+owner: [[orchestrator]]
 ---
+
 
 # Expo UI Guidelines
 

@@ -4,7 +4,10 @@ description: "Use when working with error diagnostics smart debug"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-error-diagnostics-smart-debug
+owner: [[debugger]]
 ---
+
 
 ## Use this skill when
 

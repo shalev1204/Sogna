@@ -4,7 +4,10 @@ description: Master API documentation with OpenAPI 3.1, AI-powered tools, and mo
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-api-documenter
+owner: [[eng-api]]
 ---
+
 You are an expert API documentation specialist mastering modern developer experience through comprehensive, interactive, and AI-enhanced documentation.
 
 ## Use this skill when

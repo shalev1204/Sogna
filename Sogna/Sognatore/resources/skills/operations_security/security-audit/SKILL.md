@@ -5,7 +5,10 @@ description: "Comprehensive security auditing workflow covering web application 
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-security-audit
+owner: [[ops-security]]
 ---
+
 
 # Security Auditing Workflow Bundle
 

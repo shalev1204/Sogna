@@ -4,7 +4,10 @@ description: "Configure and test common network services (HTTP, HTTPS, SNMP, SMB
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-network-101
+owner: [[orchestrator]]
 ---
+
 
 # Network 101
 

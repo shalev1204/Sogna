@@ -4,7 +4,10 @@ description: Azure Key Vault Certificates SDK for Rust. Use for creating, import
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-keyvault-certificates-rust
+owner: [[orchestrator]]
 ---
+
 
 # Azure Key Vault Certificates SDK for Rust
 

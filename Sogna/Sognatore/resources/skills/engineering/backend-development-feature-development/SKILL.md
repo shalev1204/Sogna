@@ -4,7 +4,10 @@ description: "Orchestrate end-to-end backend feature development from requiremen
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-backend-development-feature-development
+owner: [[prod-pm]], [[eng-backend]]
 ---
+
 
 Orchestrate end-to-end feature development from requirements to production deployment:
 

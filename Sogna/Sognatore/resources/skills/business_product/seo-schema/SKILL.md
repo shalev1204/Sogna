@@ -16,7 +16,10 @@ allowed-tools:
   - WebFetch
   - Write
 version: 1.0.0
+id: skill-seo-schema
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # Schema Markup Analysis & Generation
 

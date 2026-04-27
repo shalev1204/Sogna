@@ -4,7 +4,10 @@ description: "Automate Freshservice ITSM tasks via Rube MCP (Composio): create/u
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-freshservice-automation
+owner: [[orchestrator]]
 ---
+
 
 # Freshservice Automation via Rube MCP
 

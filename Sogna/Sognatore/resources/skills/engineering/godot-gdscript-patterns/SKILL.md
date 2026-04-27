@@ -4,7 +4,10 @@ description: "Master Godot 4 GDScript patterns including signals, scenes, state 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-godot-gdscript-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Godot GDScript Patterns
 

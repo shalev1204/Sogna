@@ -7,7 +7,10 @@ date_added: "2025-03-08"
 tags: [playwright, java, e2e-testing, junit5, page-object-model, allure, selenium-alternative]
 tools: [claude, cursor,Sognatore]
 version: 1.0.0
+id: skill-playwright-java
+owner: [[orchestrator]]
 ---
+
 
 # Playwright Java – Advanced Test Automation
 

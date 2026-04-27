@@ -4,7 +4,10 @@ description: "Automate Amplitude tasks via Rube MCP (Composio): events, user act
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-amplitude-automation
+owner: [[orchestrator]]
 ---
+
 
 # Amplitude Automation via Rube MCP
 

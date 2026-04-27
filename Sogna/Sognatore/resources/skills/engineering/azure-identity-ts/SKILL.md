@@ -4,7 +4,10 @@ description: "Authenticate to Azure services with various credential types."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-identity-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Identity SDK for TypeScript
 

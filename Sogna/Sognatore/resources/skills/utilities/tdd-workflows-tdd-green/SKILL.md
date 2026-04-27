@@ -4,7 +4,10 @@ description: "Implement the minimal code needed to make failing tests pass in th
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-tdd-workflows-tdd-green
+owner: [[orchestrator]]
 ---
+
 
 # Green Phase: Simple function
 def product_list(request):

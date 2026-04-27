@@ -4,7 +4,10 @@ description: Design, validate, and optimize schema.org structured data for eligi
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-schema-markup
+owner: [[orchestrator]]
 ---
+
 
 ---
 

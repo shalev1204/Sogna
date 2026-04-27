@@ -3,7 +3,10 @@ name: odoo-sales-crm-expert
 description: "Expert guide for Odoo Sales and CRM: pipeline stages, quotation templates, pricelists, sales teams, lead scoring, and forecasting."
 risk: safe
 version: 1.0.0
+id: skill-odoo-sales-crm-expert
+owner: [[prod-pm]]
 ---
+
 
 # Odoo Sales & CRM Expert
 

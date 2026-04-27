@@ -4,7 +4,10 @@ description: "Azure Key Vault Secrets Java SDK for secret management. Use when s
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-security-keyvault-secrets-java
+owner: [[ops-security]]
 ---
+
 
 # Azure Key Vault Secrets (Java)
 

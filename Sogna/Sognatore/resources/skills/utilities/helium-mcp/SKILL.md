@@ -8,7 +8,10 @@ date_added: "2026-04-13"
 tags: [mcp, news, media-bias, stocks, options, finance, research]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-helium-mcp
+owner: [[orchestrator]]
 ---
+
 
 # Helium MCP
 

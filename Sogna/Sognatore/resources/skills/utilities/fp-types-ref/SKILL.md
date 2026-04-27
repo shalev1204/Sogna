@@ -4,7 +4,10 @@ description: Quick reference for fp-ts types. Use when user asks which type to u
 risk: safe
 version: 1.0.0
 tags: [fp-ts, typescript, quick-reference, option, either, task]
+id: skill-fp-types-ref
+owner: [[orchestrator]]
 ---
+
 
 # fp-ts Quick Reference
 

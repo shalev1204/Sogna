@@ -4,7 +4,10 @@ description: Azure Data Lake Storage Gen2 SDK for Python. Use for hierarchical f
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-storage-file-datalake-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Data Lake Storage Gen2 SDK for Python
 

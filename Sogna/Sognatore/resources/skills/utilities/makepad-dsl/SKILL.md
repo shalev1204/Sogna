@@ -7,7 +7,10 @@ description: |
   makepad DSL 语法, makepad 继承, makepad 原型, 如何定义 makepad 组件
 risk: safe
 version: 1.0.0
+id: skill-makepad-dsl
+owner: [[orchestrator]]
 ---
+
 
 # Makepad DSL Skill
 

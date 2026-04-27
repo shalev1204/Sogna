@@ -3,7 +3,10 @@ name: agentmail
 description: Email infrastructure for AI agents. Create accounts, send/receive emails, manage webhooks, and check karma balance via the AgentMail API.
 risk: critical
 version: 1.0.0
+id: skill-agentmail
+owner: [[orchestrator]]
 ---
+
 
 # AgentMail — Email for AI Agents
 

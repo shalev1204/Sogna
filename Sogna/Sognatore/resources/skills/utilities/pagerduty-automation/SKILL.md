@@ -4,7 +4,10 @@ description: "Automate PagerDuty tasks via Rube MCP (Composio): manage incidents
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-pagerduty-automation
+owner: [[orchestrator]]
 ---
+
 
 # PagerDuty Automation via Rube MCP
 

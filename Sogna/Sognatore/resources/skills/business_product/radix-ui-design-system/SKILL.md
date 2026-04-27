@@ -4,7 +4,10 @@ description: "Build accessible design systems with Radix UI primitives. Headless
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-radix-ui-design-system
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Radix UI Design System
 

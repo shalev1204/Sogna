@@ -4,7 +4,10 @@ description: "(Mobile-First · Touch-First · Platform-Respectful)"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-mobile-design
+owner: [[prod-design]], [[eng-mobile]]
 ---
+
 # Mobile Design System
 
 **(Mobile-First · Touch-First · Platform-Respectful)**

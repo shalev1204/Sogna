@@ -4,7 +4,10 @@ description: "Automate Zendesk tasks via Rube MCP (Composio): tickets, users, or
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-zendesk-automation
+owner: [[orchestrator]]
 ---
+
 
 # Zendesk Automation via Rube MCP
 

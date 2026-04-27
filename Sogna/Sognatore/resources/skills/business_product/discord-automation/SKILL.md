@@ -4,7 +4,10 @@ description: "Automate Discord tasks via Rube MCP (Composio): messages, channels
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-discord-automation
+owner: [[prod-pm]]
 ---
+
 
 # Discord Automation via Rube MCP
 

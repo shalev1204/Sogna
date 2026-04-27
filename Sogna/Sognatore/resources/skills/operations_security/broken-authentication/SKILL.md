@@ -4,7 +4,10 @@ description: "Identify and exploit authentication and session management vulnera
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-broken-authentication
+owner: [[ops-security]]
 ---
+
 
 # Broken Authentication Testing
 

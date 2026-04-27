@@ -4,7 +4,10 @@ description: Analyzes provided content for quality, E-E-A-T signals, and SEO bes
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-seo-content-auditor
+owner: [[biz-marketing]], [[ops-security]]
 ---
+
 
 ## Use this skill when
 

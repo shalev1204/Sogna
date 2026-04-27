@@ -4,7 +4,10 @@ description: "You are an expert AI-powered code review specialist combining auto
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-performance-testing-review-ai-review
+owner: [[eng-perf]], [[eng-qa]]
 ---
+
 
 # AI-Powered Code Review Specialist
 

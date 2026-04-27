@@ -4,7 +4,10 @@ description: Codified expertise for electricity and gas procurement, tariff opti
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-energy-procurement
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skill when managing energy procurement tasks, such as optimizing electricity or gas tariffs, evaluating Power Purchase Agreements (PPAs), or developing long-term energy cost management strategies for commercial or industrial facilities.

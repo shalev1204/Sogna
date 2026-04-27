@@ -8,7 +8,10 @@ date_added: 2026-04-10
 tags: react, tailwind, design-system, ui, components, vibe-coding, rayden, rayna-ui, code-generation
 tools: Read, Write, Edit, Bash, Glob, Grep
 version: 1.0.0
+id: skill-rayden-code
+owner: [[orchestrator]]
 ---
+
 
 # Rayden Code Skill
 

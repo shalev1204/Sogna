@@ -4,7 +4,10 @@ description: Expert in secure backend coding practices specializing in input val
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-backend-security-coder
+owner: [[eng-backend]], [[ops-security]]
 ---
+
 
 ## Use this skill when
 

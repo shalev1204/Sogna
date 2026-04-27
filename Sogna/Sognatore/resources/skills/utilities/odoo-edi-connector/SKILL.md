@@ -3,7 +3,10 @@ name: odoo-edi-connector
 description: "Guide for implementing EDI (Electronic Data Interchange) with Odoo: X12, EDIFACT document mapping, partner onboarding, and automated order processing."
 risk: safe
 version: 1.0.0
+id: skill-odoo-edi-connector
+owner: [[orchestrator]]
 ---
+
 
 # Odoo EDI Connector
 

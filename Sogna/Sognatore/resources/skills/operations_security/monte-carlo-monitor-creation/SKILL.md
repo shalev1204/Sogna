@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [data-observability, monitoring, monte-carlo, monitors-as-code]
 tools: [claude, cursor, codex]
 version: 1.0.0
+id: skill-monte-carlo-monitor-creation
+owner: [[ops-security]]
 ---
+
 
 # Monte Carlo Monitor Creation Skill
 

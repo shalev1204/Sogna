@@ -4,7 +4,10 @@ description: "You are a Rust project architecture expert specializing in scaffol
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-systems-programming-rust-project
+owner: [[orchestrator]]
 ---
+
 
 # Rust Project Scaffolding
 

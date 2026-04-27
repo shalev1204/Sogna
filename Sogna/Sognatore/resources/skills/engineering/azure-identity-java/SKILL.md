@@ -4,7 +4,10 @@ description: "Authenticate Java applications with Azure services using Microsoft
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-identity-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Identity (Java)
 

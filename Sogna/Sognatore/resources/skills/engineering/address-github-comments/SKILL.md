@@ -4,7 +4,10 @@ description: "Use when you need to address review or issue comments on an open G
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-address-github-comments
+owner: [[orchestrator]]
 ---
+
 
 # Address GitHub Comments
 

@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [data-observability, ingestion, monte-carlo, pycarlo, metadata]
 tools: [claude, cursor, codex]
 version: 1.0.0
+id: skill-monte-carlo-push-ingestion
+owner: [[orchestrator]]
 ---
+
 
 # Monte Carlo Push Ingestion
 

@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-steve-jobs
+owner: [[orchestrator]]
 ---
+
 
 # STEVE JOBS — AGENTE DE SIMULACAO PROFUNDA v2.0
 

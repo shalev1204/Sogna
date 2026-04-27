@@ -4,7 +4,10 @@ description: "Use when building apps that collect user data. Ensures privacy pro
 risk: critical
 date_added: "2026-02-23"
 version: 1.0.0
+id: skill-privacy-by-design
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # Privacy by Design
 

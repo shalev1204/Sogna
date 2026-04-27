@@ -4,7 +4,10 @@ description: "Production-ready patterns for React Native development with Expo, 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-react-native-architecture
+owner: [[system-architect]]
 ---
+
 
 # React Native Architecture
 

@@ -4,7 +4,10 @@ description: "Use when improving prompts for any LLM. Applies proven prompt engi
 risk: critical
 date_added: "2026-03-04"
 version: 1.0.0
+id: skill-llm-prompt-optimizer
+owner: [[orchestrator]]
 ---
+
 
 # LLM Prompt Optimizer
 

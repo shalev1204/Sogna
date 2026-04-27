@@ -4,7 +4,10 @@ description: "Automate Klaviyo tasks via Rube MCP (Composio): manage email/SMS c
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-klaviyo-automation
+owner: [[orchestrator]]
 ---
+
 
 # Klaviyo Automation via Rube MCP
 

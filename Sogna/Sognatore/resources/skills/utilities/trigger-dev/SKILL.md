@@ -6,7 +6,10 @@ description: Trigger.dev expert for background jobs, AI workflows, and reliable
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-trigger-dev
+owner: [[orchestrator]]
 ---
+
 
 # Trigger.dev Integration
 

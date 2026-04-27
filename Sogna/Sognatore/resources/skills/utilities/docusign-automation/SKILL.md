@@ -4,7 +4,10 @@ description: "Automate DocuSign tasks via Rube MCP (Composio): templates, envelo
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-docusign-automation
+owner: [[orchestrator]]
 ---
+
 
 # DocuSign Automation via Rube MCP
 

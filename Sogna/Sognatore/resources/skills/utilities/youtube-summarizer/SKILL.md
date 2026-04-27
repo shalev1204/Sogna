@@ -6,7 +6,10 @@ risk: safe
 tags: "[video, summarization, transcription, youtube, content-analysis]"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-youtube-summarizer
+owner: [[orchestrator]]
 ---
+
 
 # youtube-summarizer
 

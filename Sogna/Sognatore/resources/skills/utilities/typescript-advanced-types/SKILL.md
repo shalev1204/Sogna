@@ -4,7 +4,10 @@ description: "Comprehensive guidance for mastering TypeScript's advanced type sy
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-typescript-advanced-types
+owner: [[orchestrator]]
 ---
+
 
 # TypeScript Advanced Types
 

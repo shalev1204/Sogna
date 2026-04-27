@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [ux, copywriting, microcopy, frontend, styleseed]
 tools: [claude, cursor, codex, gemini]
 version: 1.0.0
+id: skill-ux-copy
+owner: [[prod-pm]]
 ---
+
 
 # UX Copy
 

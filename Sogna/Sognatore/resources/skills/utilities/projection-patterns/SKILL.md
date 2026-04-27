@@ -4,7 +4,10 @@ description: "Build read models and projections from event streams. Use when imp
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-projection-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Projection Patterns
 

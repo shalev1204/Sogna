@@ -4,7 +4,10 @@ description: "Execute tasks from a track's implementation plan following TDD wor
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-conductor-implement
+owner: [[orchestrator]]
 ---
+
 
 # Implement Track
 

@@ -4,7 +4,10 @@ description: "Use when facing 2+ independent tasks that can be worked on without
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-dispatching-parallel-agents
+owner: [[orchestrator]]
 ---
+
 
 # Dispatching Parallel Agents
 

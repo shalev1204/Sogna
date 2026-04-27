@@ -4,7 +4,10 @@ description: "Answer repository questions grounded entirely in source code evide
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-wiki-qa
+owner: [[eng-qa]]
 ---
+
 
 # Wiki Q&A
 

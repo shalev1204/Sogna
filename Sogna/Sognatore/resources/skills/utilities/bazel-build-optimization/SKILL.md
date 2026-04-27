@@ -4,7 +4,10 @@ description: "Optimize Bazel builds for large-scale monorepos. Use when configur
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bazel-build-optimization
+owner: [[orchestrator]]
 ---
+
 
 # Bazel Build Optimization
 

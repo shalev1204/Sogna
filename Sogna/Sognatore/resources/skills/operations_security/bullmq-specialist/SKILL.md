@@ -5,7 +5,10 @@ description: BullMQ expert for Redis-backed job queues, background processing,
 risk: safe
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-bullmq-specialist
+owner: [[ops-security]]
 ---
+
 
 # BullMQ Specialist
 

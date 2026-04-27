@@ -4,7 +4,10 @@ description: "Use mmx to generate text, images, video, speech, and music via the
 risk: critical
 date_added: "2026-04-14"
 version: 1.0.0
+id: skill-mmx-cli
+owner: [[orchestrator]]
 ---
+
 
 # MiniMax CLI — Agent Skill Guide
 

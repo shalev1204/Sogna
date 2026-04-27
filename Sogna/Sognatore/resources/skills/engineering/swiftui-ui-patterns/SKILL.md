@@ -4,7 +4,10 @@ description: Apply proven SwiftUI UI patterns for navigation, sheets, async stat
 risk: critical
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-swiftui-ui-patterns
+owner: [[orchestrator]]
 ---
+
 
 # SwiftUI UI Patterns
 

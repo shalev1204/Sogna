@@ -7,7 +7,10 @@ description: |
   事件处理, 自定义动作
 risk: critical
 version: 1.0.0
+id: skill-robius-event-action
+owner: [[orchestrator]]
 ---
+
 
 # Robius Event and Action Patterns Skill
 

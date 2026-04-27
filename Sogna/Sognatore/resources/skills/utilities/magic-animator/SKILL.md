@@ -4,7 +4,10 @@ description: AI-powered animation tool for creating motion in logos, UI, icons, 
 risk: safe
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-magic-animator
+owner: [[orchestrator]]
 ---
+
 
 # Magic Animator Skill
 

@@ -8,7 +8,10 @@ date_added: "2026-02-27"
 allowed-tools: Read Grep Glob Bash(python:*)
 argument-hint: "[task description]"
 version: 1.0.0
+id: skill-videodb
+owner: [[orchestrator]]
 ---
+
 
 # VideoDB Skill
 

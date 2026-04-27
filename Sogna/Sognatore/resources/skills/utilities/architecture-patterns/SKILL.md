@@ -4,7 +4,10 @@ description: "Master proven backend architecture patterns including Clean Archit
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-architecture-patterns
+owner: [[system-architect]]
 ---
+
 
 # Architecture Patterns
 

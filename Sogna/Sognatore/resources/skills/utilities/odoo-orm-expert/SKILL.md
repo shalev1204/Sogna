@@ -3,7 +3,10 @@ name: odoo-orm-expert
 description: "Master Odoo ORM patterns: search, browse, create, write, domain filters, computed fields, and performance-safe query techniques."
 risk: critical
 version: 1.0.0
+id: skill-odoo-orm-expert
+owner: [[orchestrator]]
 ---
+
 
 # Odoo ORM Expert
 

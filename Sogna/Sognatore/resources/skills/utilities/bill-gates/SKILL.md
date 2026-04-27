@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-bill-gates
+owner: [[orchestrator]]
 ---
+
 
 # BILL GATES — AGENTE DE SIMULACAO PROFUNDA v2.0
 

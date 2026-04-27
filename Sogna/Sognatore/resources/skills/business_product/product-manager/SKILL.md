@@ -5,7 +5,10 @@ risk: safe
 version: "1.0.0"
 tags: ["product-management", "saas", "frameworks", "metrics", "strategy"]
 date_added: "2026-03-06"
+id: skill-product-manager
+owner: [[prod-pm]]
 ---
+
 
 # Product Manager Skills
 

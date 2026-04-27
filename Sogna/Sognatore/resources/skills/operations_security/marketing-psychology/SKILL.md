@@ -4,7 +4,10 @@ description: "Apply behavioral science and mental models to marketing decisions,
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-marketing-psychology
+owner: [[biz-marketing]], [[ops-security]]
 ---
+
 # Marketing Psychology & Mental Models
 
 **(Applied · Ethical · Prioritized)**

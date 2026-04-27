@@ -4,7 +4,10 @@ description: "You are a technical debt expert specializing in identifying, quant
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-code-refactoring-tech-debt
+owner: [[orchestrator]]
 ---
+
 
 # Technical Debt Analysis and Remediation
 

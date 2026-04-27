@@ -3,7 +3,10 @@ name: plotly
 description: Sognatore objective capability
 risk: safe
 version: 1.0.0
+id: skill-plotly
+owner: [[orchestrator]]
 ---
+
 
 ---
 name: plotly

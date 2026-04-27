@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-yann-lecun-tecnico
+owner: [[orchestrator]]
 ---
+
 
 # YANN LECUN — MÓDULO TÉCNICO v3.0
 

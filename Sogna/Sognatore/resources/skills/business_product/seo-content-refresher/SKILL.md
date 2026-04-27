@@ -4,7 +4,10 @@ description: Identifies outdated elements in provided content and suggests updat
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-seo-content-refresher
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 ## Use this skill when
 

@@ -3,7 +3,10 @@ name: food-database-query
 description: Food Database Query
 risk: safe
 version: 1.0.0
+id: skill-food-database-query
+owner: [[eng-database]]
 ---
+
 
 # 食物数据库查询技能
 

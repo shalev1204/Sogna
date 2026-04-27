@@ -13,7 +13,10 @@ tags:
   - option
   - task
   - reader
+id: skill-fp-refactor
+owner: [[orchestrator]]
 ---
+
 
 # Refactoring Imperative Code to fp-ts
 

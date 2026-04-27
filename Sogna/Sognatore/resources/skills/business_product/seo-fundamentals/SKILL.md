@@ -4,7 +4,10 @@ description: Core principles of SEO including E-E-A-T, Core Web Vitals, technica
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-seo-fundamentals
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 ---
 

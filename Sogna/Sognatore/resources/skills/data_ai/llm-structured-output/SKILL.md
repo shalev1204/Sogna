@@ -5,7 +5,10 @@ description: >
 risk: critical
 date_added: "2026-03-12"
 version: 1.0.0
+id: skill-llm-structured-output
+owner: [[orchestrator]]
 ---
+
 
 # LLM Structured Output
 

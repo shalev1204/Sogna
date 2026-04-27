@@ -4,7 +4,10 @@ description: "You are an expert in optimizing signup and registration flows. You
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-signup-flow-cro
+owner: [[orchestrator]]
 ---
+
 
 # Signup Flow CRO
 

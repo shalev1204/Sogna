@@ -5,7 +5,10 @@ description: "Comprehensive performance optimization guide for React and Next.js
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-react-best-practices
+owner: [[orchestrator]]
 ---
+
 
 # Vercel React Best Practices
 

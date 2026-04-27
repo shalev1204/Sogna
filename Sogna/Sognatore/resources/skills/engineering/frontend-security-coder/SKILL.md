@@ -4,7 +4,10 @@ description: Expert in secure frontend coding practices specializing in XSS prev
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-frontend-security-coder
+owner: [[eng-frontend]], [[ops-security]]
 ---
+
 
 ## Use this skill when
 

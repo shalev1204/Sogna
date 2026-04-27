@@ -4,7 +4,10 @@ description: Monitor portfolio risk, R-multiples, and position limits. Creates h
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-risk-manager
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

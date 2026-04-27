@@ -4,7 +4,10 @@ description: Build Shopify apps, extensions, themes using GraphQL Admin API, Sho
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-shopify-development
+owner: [[prod-pm]]
 ---
+
 
 # Shopify Development Skill
 

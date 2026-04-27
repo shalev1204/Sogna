@@ -4,7 +4,10 @@ description: "Makepad UI development skills for Rust apps: setup, patterns, shad
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-makepad-skills
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Skills
 

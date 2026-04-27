@@ -4,7 +4,10 @@ description: "Systematically identify and fix all failing tests using smart grou
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-test-fixing
+owner: [[eng-qa]]
 ---
+
 
 # Test Fixing
 

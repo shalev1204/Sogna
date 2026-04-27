@@ -4,7 +4,10 @@ description: "Complete guide to implementing GitOps workflows with ArgoCD and Fl
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-gitops-workflow
+owner: [[orchestrator]]
 ---
+
 
 # GitOps Workflow
 

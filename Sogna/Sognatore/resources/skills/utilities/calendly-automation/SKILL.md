@@ -4,7 +4,10 @@ description: "Automate Calendly scheduling, event management, invitee tracking, 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-calendly-automation
+owner: [[orchestrator]]
 ---
+
 
 # Calendly Automation via Rube MCP
 

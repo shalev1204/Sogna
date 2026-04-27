@@ -4,7 +4,10 @@ description: "You are an expert copy editor specializing in marketing and conver
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-copy-editing
+owner: [[prod-pm]]
 ---
+
 
 # Copy Editing
 

@@ -4,7 +4,10 @@ description: "Manage cryptographic keys using Azure Key Vault Keys SDK for JavaS
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-keyvault-keys-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Key Vault Keys SDK for TypeScript
 

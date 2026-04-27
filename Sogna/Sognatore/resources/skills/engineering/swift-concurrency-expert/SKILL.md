@@ -4,7 +4,10 @@ description: Review and fix Swift concurrency issues such as actor isolation and
 risk: safe
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-swift-concurrency-expert
+owner: [[orchestrator]]
 ---
+
 
 # Swift Concurrency Expert
 

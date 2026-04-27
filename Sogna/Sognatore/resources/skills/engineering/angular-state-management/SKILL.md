@@ -4,7 +4,10 @@ description: "Master modern Angular state management with Signals, NgRx, and RxJ
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-angular-state-management
+owner: [[orchestrator]]
 ---
+
 
 # Angular State Management
 

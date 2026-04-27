@@ -5,7 +5,10 @@ risk: critical
 tags: "database, cdc, debezium, kafka, prometheus, grafana, monitoring"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-database-migrations-migration-observability
+owner: [[eng-database]]
 ---
+
 
 # Migration Observability and Real-time Monitoring
 

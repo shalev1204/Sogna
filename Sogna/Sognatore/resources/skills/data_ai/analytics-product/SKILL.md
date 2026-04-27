@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-analytics-product
+owner: [[prod-pm]]
 ---
+
 
 # ANALYTICS-PRODUCT — Decida com Dados
 

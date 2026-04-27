@@ -4,7 +4,10 @@ description: "Generate structured changelogs from git history. Use when user ask
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-wiki-changelog
+owner: [[ops-security]]
 ---
+
 
 # Wiki Changelog
 

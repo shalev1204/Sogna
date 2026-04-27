@@ -2,7 +2,10 @@
 name: 3d-games
 description: 3D game development principles. Rendering, shaders, physics, cameras.
 allowed-tools: Read, Write, Edit, Glob, Grep
+id: skill-3d-games
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # 3D Game Development
 

@@ -5,7 +5,10 @@ description: "Bash scripting workflow for creating production-ready shell script
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-bash-scripting
+owner: [[orchestrator]]
 ---
+
 
 # Bash Scripting Workflow
 

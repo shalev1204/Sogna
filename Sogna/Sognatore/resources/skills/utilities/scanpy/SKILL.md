@@ -6,7 +6,10 @@ metadata:
     skill-author: K-Dense Inc.
 risk: safe
 version: 1.0.0
+id: skill-scanpy
+owner: [[orchestrator]]
 ---
+
 
 # Scanpy: Single-Cell Analysis
 

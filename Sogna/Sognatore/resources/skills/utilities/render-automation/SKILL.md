@@ -4,7 +4,10 @@ description: "Automate Render tasks via Rube MCP (Composio): services, deploymen
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-render-automation
+owner: [[orchestrator]]
 ---
+
 
 # Render Automation via Rube MCP
 

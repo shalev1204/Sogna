@@ -4,7 +4,10 @@ description: Azure Resource Manager SDK for API Management in .NET.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-mgmt-apimanagement-dotnet
+owner: [[eng-api]]
 ---
+
 
 # Azure.ResourceManager.ApiManagement (.NET)
 

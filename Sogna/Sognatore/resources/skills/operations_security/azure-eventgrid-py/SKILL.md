@@ -4,7 +4,10 @@ description: Azure Event Grid SDK for Python. Use for publishing events, handlin
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-eventgrid-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Event Grid SDK for Python
 

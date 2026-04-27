@@ -4,7 +4,10 @@ description: "Profile and optimize Python code using cProfile, memory profilers,
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-python-performance-optimization
+owner: [[eng-perf]]
 ---
+
 
 # Python Performance Optimization
 

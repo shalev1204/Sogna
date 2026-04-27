@@ -4,7 +4,10 @@ description: "Practical guide to testing web applications with screen readers fo
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-screen-reader-testing
+owner: [[eng-qa]]
 ---
+
 
 # Screen Reader Testing
 

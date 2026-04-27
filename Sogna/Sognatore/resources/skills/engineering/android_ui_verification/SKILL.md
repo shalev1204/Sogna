@@ -4,7 +4,10 @@ description: Automated end-to-end UI testing and verification on an Android Emul
 risk: safe
 date_added: "2026-02-28"
 version: 1.0.0
+id: skill-android_ui_verification
+owner: [[orchestrator]]
 ---
+
 
 # Android UI Verification Skill
 

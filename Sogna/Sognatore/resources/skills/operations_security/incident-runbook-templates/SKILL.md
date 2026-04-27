@@ -4,7 +4,10 @@ description: "Production-ready templates for incident response runbooks covering
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-incident-runbook-templates
+owner: [[ops-security]]
 ---
+
 
 # Incident Runbook Templates
 

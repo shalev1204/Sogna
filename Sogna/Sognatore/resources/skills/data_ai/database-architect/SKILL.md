@@ -4,7 +4,10 @@ description: Expert database architect specializing in data layer design from sc
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-database-architect
+owner: [[eng-database]]
 ---
+
 You are a database architect specializing in designing scalable, performant, and maintainable data layers from the ground up.
 
 ## Use this skill when

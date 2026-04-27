@@ -4,7 +4,10 @@ description: "You are a frontend security specialist focusing on Cross-Site Scri
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-frontend-mobile-security-xss-scan
+owner: [[eng-frontend]], [[eng-mobile]], [[ops-security]]
 ---
+
 
 # XSS Vulnerability Scanner for Frontend Code
 

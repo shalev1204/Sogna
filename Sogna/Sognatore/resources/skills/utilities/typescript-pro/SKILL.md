@@ -4,7 +4,10 @@ description: Master TypeScript with advanced types, generics, and strict type sa
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-typescript-pro
+owner: [[orchestrator]]
 ---
+
 You are a TypeScript expert specializing in advanced typing and enterprise-grade development.
 
 ## Use this skill when

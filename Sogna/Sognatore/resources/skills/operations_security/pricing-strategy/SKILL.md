@@ -4,7 +4,10 @@ description: "Design pricing, packaging, and monetization strategies based on va
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-pricing-strategy
+owner: [[ops-security]]
 ---
+
 
 # Pricing Strategy
 

@@ -9,7 +9,10 @@ date_added: "2026-04-07"
 tags: [faf, automation, project-setup, ai-context, productivity]
 tools: [claude, cursor, gemini, windsurf, any-ai]
 version: 1.0.0
+id: skill-faf-wizard
+owner: [[orchestrator]]
 ---
+
 
 # FAF Wizard - One-Click AI Intelligence
 

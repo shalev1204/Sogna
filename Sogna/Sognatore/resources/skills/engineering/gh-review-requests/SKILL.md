@@ -5,7 +5,10 @@ description: Fetch unread GitHub notifications for open PRs where review is requ
 allowed-tools: Bash
 risk: safe
 version: 1.0.0
+id: skill-gh-review-requests
+owner: [[orchestrator]]
 ---
+
 
 # GitHub Review Requests
 

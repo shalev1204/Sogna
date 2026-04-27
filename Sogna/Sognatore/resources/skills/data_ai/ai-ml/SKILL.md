@@ -5,7 +5,10 @@ description: "AI and machine learning workflow covering LLM application developm
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-ai-ml
+owner: [[orchestrator]]
 ---
+
 
 # AI/ML Workflow Bundle
 

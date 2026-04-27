@@ -3,7 +3,10 @@ name: expo-ui-swift-ui
 description: expo-ui-swift-ui
 risk: safe
 version: 1.0.0
+id: skill-expo-ui-swift-ui
+owner: [[orchestrator]]
 ---
+
 
 ---
 name: expo-ui-swift-ui

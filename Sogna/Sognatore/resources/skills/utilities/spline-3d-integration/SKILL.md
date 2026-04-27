@@ -4,7 +4,10 @@ description: "Use when adding interactive 3D scenes from Spline.design to web pr
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-spline-3d-integration
+owner: [[orchestrator]]
 ---
+
 
 # Spline 3D Integration Skill
 

@@ -4,7 +4,10 @@ description: "High-level SDK for Azure AI Foundry projects with agents, connecti
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-projects-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Projects SDK for TypeScript
 

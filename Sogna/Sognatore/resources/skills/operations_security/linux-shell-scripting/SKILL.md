@@ -4,7 +4,10 @@ description: "Provide production-ready shell script templates for common Linux s
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-linux-shell-scripting
+owner: [[ops-security]]
 ---
+
 
 # Linux Production Shell Scripts
 

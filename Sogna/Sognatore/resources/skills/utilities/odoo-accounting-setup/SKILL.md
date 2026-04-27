@@ -3,7 +3,10 @@ name: odoo-accounting-setup
 description: "Expert guide for configuring Odoo Accounting: chart of accounts, journals, fiscal positions, taxes, payment terms, and bank reconciliation."
 risk: critical
 version: 1.0.0
+id: skill-odoo-accounting-setup
+owner: [[orchestrator]]
 ---
+
 
 # Odoo Accounting Setup
 

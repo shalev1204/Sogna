@@ -5,7 +5,10 @@ description: "WooCommerce store development workflow covering store setup, payme
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-wordpress-woocommerce-development
+owner: [[prod-pm]]
 ---
+
 
 # WordPress WooCommerce Development Workflow
 

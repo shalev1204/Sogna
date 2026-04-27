@@ -4,7 +4,10 @@ description: "Scoped CLAUDE.md memory system that reduces context token spend. C
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-hierarchical-agent-memory
+owner: [[orchestrator]]
 ---
+
 
 # Hierarchical Agent Memory (HAM)
 

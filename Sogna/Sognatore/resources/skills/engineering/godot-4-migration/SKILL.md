@@ -4,7 +4,10 @@ description: "Specialized guide for migrating Godot 3.x projects to Godot 4 (GDS
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-godot-4-migration
+owner: [[orchestrator]]
 ---
+
 
 # Godot 4 Migration Guide
 

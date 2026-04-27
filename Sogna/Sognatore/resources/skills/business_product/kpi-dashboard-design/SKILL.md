@@ -4,7 +4,10 @@ description: "Comprehensive patterns for designing effective Key Performance Ind
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-kpi-dashboard-design
+owner: [[prod-design]], [[prod-pm]]
 ---
+
 
 # KPI Dashboard Design
 

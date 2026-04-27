@@ -4,7 +4,10 @@ description: "Use when building durable distributed systems with Temporal Go SDK
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-temporal-golang-pro
+owner: [[orchestrator]]
 ---
+
 
 # Temporal Go SDK (temporal-golang-pro)
 

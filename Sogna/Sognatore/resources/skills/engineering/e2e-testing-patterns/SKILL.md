@@ -4,7 +4,10 @@ description: "Build reliable, fast, and maintainable end-to-end test suites that
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-e2e-testing-patterns
+owner: [[eng-qa]]
 ---
+
 
 # E2E Testing Patterns
 

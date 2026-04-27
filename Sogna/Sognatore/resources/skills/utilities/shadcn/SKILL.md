@@ -5,7 +5,10 @@ user-invocable: false
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-shadcn
+owner: [[orchestrator]]
 ---
+
 
 # shadcn/ui
 

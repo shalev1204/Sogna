@@ -4,7 +4,10 @@ description: Technical reference on Lightning Network channel factories, multi-p
 risk: safe
 date_added: '2026-03-03'
 version: 1.0.0
+id: skill-lightning-channel-factories
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

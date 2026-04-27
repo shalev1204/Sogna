@@ -4,7 +4,10 @@ description: "Audit and improve local SEO for law firms, attorneys, forensic exp
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-local-legal-seo-audit
+owner: [[biz-legal]], [[biz-marketing]], [[ops-security]]
 ---
+
 
 # Local Legal SEO Audit
 

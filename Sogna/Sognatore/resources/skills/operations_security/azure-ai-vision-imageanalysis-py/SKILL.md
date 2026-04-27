@@ -4,7 +4,10 @@ description: Azure AI Vision Image Analysis SDK for captions, tags, objects, OCR
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-vision-imageanalysis-py
+owner: [[ops-security]]
 ---
+
 
 # Azure AI Vision Image Analysis SDK for Python
 

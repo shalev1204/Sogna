@@ -4,7 +4,10 @@ description: "Stage all changes, create a conventional commit, and push to the r
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-git-pushing
+owner: [[orchestrator]]
 ---
+
 
 # Git Push Workflow
 

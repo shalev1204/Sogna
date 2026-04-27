@@ -4,7 +4,10 @@ description: "Neon is a serverless Postgres platform that separates compute and 
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-using-neon
+owner: [[orchestrator]]
 ---
+
 
 # Neon Serverless Postgres
 

@@ -4,7 +4,10 @@ description: "Maps internal link opportunities between pages with anchor text, p
 risk: safe
 date_added: "2026-04-01"
 version: 1.0.0
+id: skill-seo-aeo-internal-linking
+owner: [[prod-pm]], [[biz-marketing]]
 ---
+
 
 # SEO-AEO Internal Linking
 

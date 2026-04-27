@@ -7,7 +7,10 @@ date_added: "2026-03-28"
 tags: [tmux, terminal, multiplexer, sessions, shell, remote, automation]
 tools: [claude, cursor, gemini]
 version: 1.0.0
+id: skill-tmux
+owner: [[prod-pm]]
 ---
+
 
 # tmux — Terminal Multiplexer
 

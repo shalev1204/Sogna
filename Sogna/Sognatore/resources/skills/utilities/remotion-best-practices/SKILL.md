@@ -5,7 +5,10 @@ risk: safe
 tags: "remotion, video, react, animation, composition"
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-remotion-best-practices
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skills whenever you are dealing with Remotion code to obtain the domain-specific knowledge.

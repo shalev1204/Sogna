@@ -4,7 +4,10 @@ description: Debug the current iOS project on a booted simulator with XcodeBuild
 risk: safe
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-ios-debugger-agent
+owner: [[debugger]]
 ---
+
 
 # iOS Debugger Agent
 

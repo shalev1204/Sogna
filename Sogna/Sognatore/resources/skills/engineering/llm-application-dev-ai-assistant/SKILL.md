@@ -4,7 +4,10 @@ description: "You are an AI assistant development expert specializing in creatin
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-llm-application-dev-ai-assistant
+owner: [[orchestrator]]
 ---
+
 
 # AI Assistant Development
 

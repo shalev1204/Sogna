@@ -4,7 +4,10 @@ description: Build high-performance async APIs with FastAPI, SQLAlchemy 2.0, and
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-fastapi-pro
+owner: [[eng-api]]
 ---
+
 
 ## Use this skill when
 

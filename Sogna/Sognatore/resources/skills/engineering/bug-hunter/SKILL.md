@@ -5,7 +5,10 @@ description: "Systematically finds and fixes bugs using proven debugging techniq
 risk: critical
 date_added: "2026-03-05"
 version: 1.0.0
+id: skill-bug-hunter
+owner: [[orchestrator]]
 ---
+
 
 # Bug Hunter
 

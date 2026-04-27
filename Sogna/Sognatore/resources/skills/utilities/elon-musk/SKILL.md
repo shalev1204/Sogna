@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-elon-musk
+owner: [[orchestrator]]
 ---
+
 
 # ELON MUSK — AGENTE DE SIMULACAO PROFUNDA v3.0
 

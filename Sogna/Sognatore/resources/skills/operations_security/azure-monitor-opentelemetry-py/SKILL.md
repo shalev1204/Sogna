@@ -4,7 +4,10 @@ description: Azure Monitor OpenTelemetry Distro for Python. Use for one-line App
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-monitor-opentelemetry-py
+owner: [[ops-security]]
 ---
+
 
 # Azure Monitor OpenTelemetry Distro for Python
 

@@ -4,7 +4,10 @@ description: "Mobile game development principles. Touch input, battery, performa
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-mobile-games
+owner: [[game-developer]], [[prod-pm]], [[eng-mobile]]
 ---
+
 
 # Mobile Game Development
 

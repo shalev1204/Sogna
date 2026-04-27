@@ -4,7 +4,10 @@ description: "Git worktrees create isolated workspaces sharing the same reposito
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-using-git-worktrees
+owner: [[orchestrator]]
 ---
+
 
 # Using Git Worktrees
 

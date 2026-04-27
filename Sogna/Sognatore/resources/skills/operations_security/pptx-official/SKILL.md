@@ -4,7 +4,10 @@ description: "A user may ask you to create, edit, or analyze the contents of a .
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-pptx-official
+owner: [[ops-security]]
 ---
+
 
 # PPTX creation, editing, and analysis
 

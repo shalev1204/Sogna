@@ -4,7 +4,10 @@ description: "Use when integrating Google Gemini API into projects. Covers model
 risk: critical
 date_added: "2026-03-04"
 version: 1.0.0
+id: skill-gemini-api-integration
+owner: [[eng-api]]
 ---
+
 
 # Gemini API Integration
 

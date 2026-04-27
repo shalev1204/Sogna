@@ -4,7 +4,10 @@ description: Azure Bot Service Management SDK for Python. Use for creating, mana
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-mgmt-botservice-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure Bot Service Management SDK for Python
 

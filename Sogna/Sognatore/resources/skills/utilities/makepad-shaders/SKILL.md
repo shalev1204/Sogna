@@ -7,7 +7,10 @@ description: |
   makepad 着色器, makepad shader 语法, makepad 绘制
 risk: safe
 version: 1.0.0
+id: skill-makepad-shaders
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Shaders Skill
 

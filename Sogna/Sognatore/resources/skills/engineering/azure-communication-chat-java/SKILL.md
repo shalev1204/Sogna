@@ -4,7 +4,10 @@ description: "Build real-time chat applications with thread management, messagin
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-communication-chat-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Communication Chat (Java)
 

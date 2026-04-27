@@ -4,7 +4,10 @@ description: Develop native iOS applications with Swift/SwiftUI. Masters iOS 18,
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-ios-developer
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

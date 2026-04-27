@@ -4,7 +4,10 @@ description: "Fetch any X/Twitter post as clean LLM-friendly JSON. Converts x.co
 risk: critical
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-adhx
+owner: [[orchestrator]]
 ---
+
 
 # ADHX - X/Twitter Post Reader
 

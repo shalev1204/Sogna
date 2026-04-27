@@ -3,7 +3,10 @@ name: apify-lead-generation
 description: "Scrape leads from multiple platforms using Apify Actors."
 risk: safe
 version: 1.0.0
+id: skill-apify-lead-generation
+owner: [[eng-api]]
 ---
+
 
 # Lead Generation
 

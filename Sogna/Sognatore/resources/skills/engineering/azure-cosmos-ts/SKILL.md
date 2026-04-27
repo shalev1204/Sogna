@@ -4,7 +4,10 @@ description: Azure Cosmos DB JavaScript/TypeScript SDK (@azure/cosmos) for data 
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-cosmos-ts
+owner: [[orchestrator]]
 ---
+
 
 # @azure/cosmos (TypeScript/JavaScript)
 

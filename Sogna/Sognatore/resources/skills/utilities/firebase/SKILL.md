@@ -6,7 +6,10 @@ description: Firebase gives you a complete backend in minutes - auth, database,
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-firebase
+owner: [[orchestrator]]
 ---
+
 
 # Firebase
 

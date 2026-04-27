@@ -4,7 +4,10 @@ description: "Multi-agent orchestration patterns. Use when multiple independent 
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-parallel-agents
+owner: [[orchestrator]]
 ---
+
 
 # Native Parallel Agents
 

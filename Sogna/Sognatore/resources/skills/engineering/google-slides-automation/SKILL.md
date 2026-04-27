@@ -6,7 +6,10 @@ risk: critical
 metadata:
   version: "1.0"
 version: 1.0.0
+id: skill-google-slides-automation
+owner: [[orchestrator]]
 ---
+
 
 # Google Slides
 

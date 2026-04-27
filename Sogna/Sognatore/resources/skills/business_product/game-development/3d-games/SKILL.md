@@ -4,7 +4,10 @@ description: "3D game development principles. Rendering, shaders, physics, camer
 risk: unknown
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-3d-games
+owner: [[prod-pm]], [[game-developer]]
 ---
+
 
 # 3D Game Development
 

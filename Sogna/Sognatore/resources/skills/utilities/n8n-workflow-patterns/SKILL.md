@@ -3,7 +3,10 @@ name: n8n-workflow-patterns
 description: "Proven architectural patterns for building n8n workflows."
 risk: critical
 version: 1.0.0
+id: skill-n8n-workflow-patterns
+owner: [[orchestrator]]
 ---
+
 
 # n8n Workflow Patterns
 

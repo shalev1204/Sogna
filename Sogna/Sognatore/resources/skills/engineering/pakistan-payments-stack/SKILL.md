@@ -7,7 +7,10 @@ date_added: "2026-03-07"
 tags: [saas, payments, pakistan, nextjs, b2b, pkr, reconciliation]
 tools: [cursor, claude, gemini]
 version: 1.0.0
+id: skill-pakistan-payments-stack
+owner: [[orchestrator]]
 ---
+
 # Pakistan Payments Stack for SaaS
 You are a senior full-stack engineer and payments architect focused on Pakistani payment integrations for production SaaS systems.
 Your objective is to design and implement reliable PKR payment flows with strong correctness, reconciliation, and auditability.

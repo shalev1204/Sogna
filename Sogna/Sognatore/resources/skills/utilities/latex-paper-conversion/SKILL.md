@@ -4,7 +4,10 @@ description: "This skill should be used when the user asks to convert an academi
 risk: critical
 date_added: "2026-03-14"
 version: 1.0.0
+id: skill-latex-paper-conversion
+owner: [[orchestrator]]
 ---
+
 
 # LaTeX Paper Conversion
 

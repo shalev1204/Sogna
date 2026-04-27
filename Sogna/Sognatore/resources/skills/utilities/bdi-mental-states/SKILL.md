@@ -3,7 +3,10 @@ name: bdi-mental-states
 description: This skill should be used when the user asks to "model agent mental states", "implement BDI architecture", "create belief-desire-intention models", "transform RDF to beliefs", "build cognitive agent", or mentions BDI ontology, mental state modeling, rational agency, or neuro-symbolic AI integration.
 risk: critical
 version: 1.0.0
+id: skill-bdi-mental-states
+owner: [[orchestrator]]
 ---
+
 
 # BDI Mental State Modeling
 

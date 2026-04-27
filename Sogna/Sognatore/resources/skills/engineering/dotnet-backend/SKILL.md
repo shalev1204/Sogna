@@ -4,7 +4,10 @@ description: "Build ASP.NET Core 8+ backend services with EF Core, auth, backgro
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-dotnet-backend
+owner: [[eng-backend]]
 ---
+
 
 # .NET Backend Agent - ASP.NET Core & Enterprise API Expert
 

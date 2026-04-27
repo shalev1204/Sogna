@@ -7,7 +7,10 @@ description: |
   app structure, MatchEvent, handle_startup
 risk: critical
 version: 1.0.0
+id: skill-robius-app-architecture
+owner: [[system-architect]]
 ---
+
 
 # Robius App Architecture Skill
 

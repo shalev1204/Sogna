@@ -4,7 +4,10 @@ description: "To test local web applications, write native Python Playwright scr
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-webapp-testing
+owner: [[eng-qa]]
 ---
+
 
 # Web Application Testing
 

@@ -4,7 +4,10 @@ description: "Automate Supabase database queries, table management, project admi
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-supabase-automation
+owner: [[orchestrator]]
 ---
+
 
 # Supabase Automation via Rube MCP
 

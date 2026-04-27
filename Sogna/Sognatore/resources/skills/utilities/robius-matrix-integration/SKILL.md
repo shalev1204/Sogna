@@ -7,7 +7,10 @@ description: |
   Matrix 集成, 聊天客户端
 risk: critical
 version: 1.0.0
+id: skill-robius-matrix-integration
+owner: [[orchestrator]]
 ---
+
 
 # Robius Matrix SDK Integration Skill
 

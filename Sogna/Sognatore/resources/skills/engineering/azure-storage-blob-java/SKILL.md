@@ -4,7 +4,10 @@ description: "Build blob storage applications using the Azure Storage Blob SDK f
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-storage-blob-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure Storage Blob SDK for Java
 

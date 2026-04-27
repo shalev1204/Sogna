@@ -4,7 +4,10 @@ description: "Manage secrets using Azure Key Vault Secrets SDK for JavaScript (@
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-keyvault-secrets-ts
+owner: [[orchestrator]]
 ---
+
 
 # Azure Key Vault Secrets SDK for TypeScript
 

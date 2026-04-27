@@ -4,7 +4,10 @@ description: "Production-ready Terraform module patterns for AWS, Azure, and GCP
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-terraform-module-library
+owner: [[ops-security]]
 ---
+
 
 # Terraform Module Library
 

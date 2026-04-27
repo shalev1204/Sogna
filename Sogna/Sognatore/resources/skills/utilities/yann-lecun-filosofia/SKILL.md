@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-yann-lecun-filosofia
+owner: [[orchestrator]]
 ---
+
 
 # YANN LECUN — MÓDULO FILOSÓFICO E PEDAGÓGICO v3.0
 

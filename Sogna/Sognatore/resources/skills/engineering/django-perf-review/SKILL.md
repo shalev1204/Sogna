@@ -5,7 +5,10 @@ allowed-tools: Read, Grep, Glob, Bash, Task
 license: LICENSE
 risk: critical
 version: 1.0.0
+id: skill-django-perf-review
+owner: [[eng-perf]]
 ---
+
 
 # Django Performance Review
 

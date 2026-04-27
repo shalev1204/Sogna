@@ -4,7 +4,10 @@ description: "Comprehensive guide for browser automation and web scraping with g
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-go-rod-master
+owner: [[orchestrator]]
 ---
+
 
 # Go-Rod Browser Automation Master
 

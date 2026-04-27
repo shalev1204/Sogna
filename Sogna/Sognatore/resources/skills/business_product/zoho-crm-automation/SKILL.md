@@ -4,7 +4,10 @@ description: "Automate Zoho CRM tasks via Rube MCP (Composio): create/update rec
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-zoho-crm-automation
+owner: [[prod-pm]]
 ---
+
 
 # Zoho CRM Automation via Rube MCP
 

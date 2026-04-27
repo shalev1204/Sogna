@@ -4,7 +4,10 @@ description: "Build AI applications on Microsoft Foundry using the azure-ai-proj
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-projects-py
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Projects Python SDK (Foundry SDK)
 

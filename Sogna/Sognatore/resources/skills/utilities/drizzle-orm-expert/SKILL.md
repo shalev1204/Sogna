@@ -4,7 +4,10 @@ description: "Expert in Drizzle ORM for TypeScript — schema design, relational
 risk: critical
 date_added: "2026-03-04"
 version: 1.0.0
+id: skill-drizzle-orm-expert
+owner: [[orchestrator]]
 ---
+
 
 # Drizzle ORM Expert
 

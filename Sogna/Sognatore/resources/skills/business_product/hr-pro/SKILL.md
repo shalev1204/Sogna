@@ -4,7 +4,10 @@ description: Professional, ethical HR partner for hiring, onboarding/offboarding
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-hr-pro
+owner: [[prod-pm]], [[biz-hr]]
 ---
+
 
 ## Use this skill when
 

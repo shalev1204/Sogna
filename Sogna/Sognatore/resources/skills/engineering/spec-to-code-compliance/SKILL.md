@@ -3,7 +3,10 @@ name: spec-to-code-compliance
 description: Verifies code implements exactly what documentation specifies for blockchain audits. Use when comparing code against whitepapers, finding gaps between specs and implementation, or performing compliance checks for protocol implementations.
 risk: offensive
 version: 1.0.0
+id: skill-spec-to-code-compliance
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skill when you need to:

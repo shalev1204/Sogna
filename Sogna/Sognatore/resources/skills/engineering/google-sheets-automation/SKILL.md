@@ -6,7 +6,10 @@ license: Apache-2.0
 metadata:
   version: "1.0"
 version: 1.0.0
+id: skill-google-sheets-automation
+owner: [[orchestrator]]
 ---
+
 
 # Google Sheets
 

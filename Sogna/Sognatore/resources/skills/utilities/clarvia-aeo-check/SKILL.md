@@ -7,7 +7,10 @@ date_added: "2026-03-27"
 tags: [mcp, aeo, tool-quality, agent-readiness, api-scoring, clarvia]
 tools: [claude, cursor, windsurf, cline]
 version: 1.0.0
+id: skill-clarvia-aeo-check
+owner: [[orchestrator]]
 ---
+
 
 # Clarvia AEO Check
 

@@ -4,7 +4,10 @@ description: Build, refactor, or review SwiftUI macOS menubar apps that use Tuis
 risk: critical
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-macos-menubar-tuist-app
+owner: [[orchestrator]]
 ---
+
 
 # macos-menubar-tuist-app
 

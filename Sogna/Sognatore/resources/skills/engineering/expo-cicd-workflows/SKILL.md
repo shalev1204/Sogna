@@ -3,7 +3,10 @@ name: expo-cicd-workflows
 description: Sognatore objective capability
 risk: critical
 version: 1.0.0
+id: skill-expo-cicd-workflows
+owner: [[orchestrator]]
 ---
+
 
 ---
 name: expo-cicd-workflows

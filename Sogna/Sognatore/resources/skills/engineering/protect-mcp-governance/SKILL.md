@@ -6,7 +6,10 @@ source_repo: scopeblind/scopeblind-gateway
 source_type: official
 date_added: "2026-04-05"
 version: 1.0.0
+id: skill-protect-mcp-governance
+owner: [[orchestrator]]
 ---
+
 
 # MCP Agent Governance with protect-mcp
 

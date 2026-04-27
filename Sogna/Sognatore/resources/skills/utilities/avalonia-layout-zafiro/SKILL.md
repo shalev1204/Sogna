@@ -4,7 +4,10 @@ description: "Guidelines for modern Avalonia UI layout using Zafiro.Avalonia, em
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-avalonia-layout-zafiro
+owner: [[orchestrator]]
 ---
+
 
 # Avalonia Layout with Zafiro.Avalonia
 

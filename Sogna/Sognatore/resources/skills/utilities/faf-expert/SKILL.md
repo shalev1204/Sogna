@@ -9,7 +9,10 @@ date_added: "2026-04-07"
 tags: [faf, ai-context, project-management, mcp, iana]
 tools: [claude, cursor, gemini, windsurf]
 version: 1.0.0
+id: skill-faf-expert
+owner: [[orchestrator]]
 ---
+
 
 # FAF Expert - Advanced AI Context Architecture
 

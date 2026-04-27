@@ -1,3 +1,7 @@
+---\nid: workflow-status
+owner: [[agent-manager]]
+---
+
 ---
 description: Display agent and project status. Progress tracking and status board.
 ---
@@ -84,3 +88,4 @@ Show current project and agent status.
 Status uses these scripts:
 - `python .agent/scripts/session_manager.py status`
 - `python .agent/scripts/auto_preview.py status`
+

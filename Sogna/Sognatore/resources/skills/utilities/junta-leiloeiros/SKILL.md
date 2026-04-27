@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-junta-leiloeiros
+owner: [[orchestrator]]
 ---
+
 
 # Skill: Leiloeiros das Juntas Comerciais do Brasil
 

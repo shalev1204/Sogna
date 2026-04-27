@@ -4,7 +4,10 @@ description: "ClickHouse database patterns, query optimization, analytics, and d
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cc-skill-clickhouse-io
+owner: [[orchestrator]]
 ---
+
 
 # ClickHouse Analytics Patterns
 

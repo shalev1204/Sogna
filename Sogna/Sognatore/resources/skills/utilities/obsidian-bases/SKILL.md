@@ -4,7 +4,10 @@ description: Create and edit Obsidian Bases (.base files) with views, filters, f
 risk: critical
 date_added: "2026-03-21"
 version: 1.0.0
+id: skill-obsidian-bases
+owner: [[orchestrator]]
 ---
+
 
 # Obsidian Bases Skill
 

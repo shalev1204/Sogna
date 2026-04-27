@@ -4,7 +4,10 @@ description: Create stunning, animation-rich HTML presentations from scratch or 
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-frontend-slides
+owner: [[eng-frontend]]
 ---
+
 
 # Frontend Slides
 

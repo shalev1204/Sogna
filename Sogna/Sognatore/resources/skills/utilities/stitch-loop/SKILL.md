@@ -9,7 +9,10 @@ allowed-tools:
   - "Bash"
 risk: critical
 version: 1.0.0
+id: skill-stitch-loop
+owner: [[orchestrator]]
 ---
+
 
 # Stitch Build Loop
 

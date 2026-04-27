@@ -3,7 +3,10 @@ name: differential-review
 description: "Security-focused code review for PRs, commits, and diffs."
 risk: offensive
 version: 1.0.0
+id: skill-differential-review
+owner: [[orchestrator]]
 ---
+
 
 # Differential Security Review
 

@@ -4,7 +4,10 @@ description: Quick reference for Option type. Use when user needs to handle null
 risk: safe
 version: 1.0.0
 tags: [fp-ts, option, nullable, maybe, quick-reference]
+id: skill-fp-option-ref
+owner: [[orchestrator]]
 ---
+
 
 # Option Quick Reference
 

@@ -4,7 +4,10 @@ description: "Automate Telegram tasks via Rube MCP (Composio): send messages, ma
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-telegram-automation
+owner: [[orchestrator]]
 ---
+
 
 # Telegram Automation via Rube MCP
 

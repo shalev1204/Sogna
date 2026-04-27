@@ -4,7 +4,10 @@ description: Advanced JavaScript animation library skill for creating complex, h
 risk: safe
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-animejs-animation
+owner: [[orchestrator]]
 ---
+
 
 # Anime.js Animation Skill
 

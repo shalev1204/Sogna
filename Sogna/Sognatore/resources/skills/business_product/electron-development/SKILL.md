@@ -4,7 +4,10 @@ description: "Master Electron desktop app development with secure IPC, contextIs
 risk: offensive
 date_added: "2026-03-12"
 version: 1.0.0
+id: skill-electron-development
+owner: [[prod-pm]]
 ---
+
 
 # Electron Development
 

@@ -4,7 +4,10 @@ description: "Comprehensive market sizing methodologies for calculating Total Ad
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-market-sizing-analysis
+owner: [[orchestrator]]
 ---
+
 
 # Market Sizing Analysis
 

@@ -4,7 +4,10 @@ description: "Automate Pipedrive CRM operations including deals, contacts, organ
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-pipedrive-automation
+owner: [[orchestrator]]
 ---
+
 
 # Pipedrive Automation via Rube MCP
 

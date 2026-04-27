@@ -7,7 +7,10 @@ description: |
   makepad 动画, makepad 状态, makepad 过渡, makepad 悬停效果
 risk: safe
 version: 1.0.0
+id: skill-makepad-animation
+owner: [[orchestrator]]
 ---
+
 
 # Makepad Animation Skill
 

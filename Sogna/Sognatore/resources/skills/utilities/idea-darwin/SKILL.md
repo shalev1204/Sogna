@@ -4,7 +4,10 @@ description: "Darwinian idea evolution engine — toss rough ideas onto an evolu
 risk: critical
 date_added: "2026-04-07"
 version: 1.0.0
+id: skill-idea-darwin
+owner: [[orchestrator]]
 ---
+
 
 # Idea Darwin Engine
 

@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-sam-altman
+owner: [[orchestrator]]
 ---
+
 
 # SKILL: Sam Altman — Agente Persona v2
 

@@ -15,7 +15,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-product-inventor
+owner: [[prod-pm]]
 ---
+
 
 # PRODUCT INVENTOR — DESIGN ALCHEMIST v1.0
 

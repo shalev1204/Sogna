@@ -4,7 +4,10 @@ description: Use this skill when creating, managing, or working with Conductor t
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-track-management
+owner: [[orchestrator]]
 ---
+
 
 # Track Management
 

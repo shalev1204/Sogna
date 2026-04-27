@@ -5,7 +5,10 @@ description: "Turn a one-line objective into a step-by-step construction plan an
 risk: safe
 date_added: "2026-03-10"
 version: 1.0.0
+id: skill-blueprint
+owner: [[orchestrator]]
 ---
+
 
 # Blueprint — Construction Plan Generator
 

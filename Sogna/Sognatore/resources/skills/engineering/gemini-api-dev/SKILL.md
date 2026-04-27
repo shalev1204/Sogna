@@ -4,7 +4,10 @@ description: "The Gemini API provides access to Google's most advanced AI models
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-gemini-api-dev
+owner: [[eng-api]]
 ---
+
 
 # Gemini API Development Skill
 

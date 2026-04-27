@@ -4,7 +4,10 @@ description: Develop React Native, Flutter, or native mobile apps with modern ar
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-mobile-developer
+owner: [[eng-mobile]]
 ---
+
 
 ## Use this skill when
 

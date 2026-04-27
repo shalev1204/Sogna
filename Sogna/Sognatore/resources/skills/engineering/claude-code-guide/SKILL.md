@@ -4,7 +4,10 @@ description: "To provide a comprehensive reference for configuring and using Cla
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-claude-code-guide
+owner: [[orchestrator]]
 ---
+
 
 # Claude Code Guide
 

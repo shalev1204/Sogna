@@ -4,7 +4,10 @@ description: "Writes long-form blog posts with TL;DR block, definition sentence,
 risk: critical
 date_added: "2026-04-01"
 version: 1.0.0
+id: skill-seo-aeo-blog-writer
+owner: [[biz-marketing]], [[ops-security]]
 ---
+
 
 # SEO-AEO Blog Writer
 

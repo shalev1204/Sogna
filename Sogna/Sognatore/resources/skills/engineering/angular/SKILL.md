@@ -4,7 +4,10 @@ description: Modern Angular (v20+) expert with deep knowledge of Signals, Standa
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-angular
+owner: [[orchestrator]]
 ---
+
 
 # Angular Expert
 

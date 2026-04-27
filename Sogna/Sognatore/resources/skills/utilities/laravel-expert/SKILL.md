@@ -4,7 +4,10 @@ description: "Senior Laravel Engineer role for production-grade, maintainable, a
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-laravel-expert
+owner: [[orchestrator]]
 ---
+
 
 # Laravel Expert
 

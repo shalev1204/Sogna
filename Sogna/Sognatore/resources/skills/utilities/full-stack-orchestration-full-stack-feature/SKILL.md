@@ -4,7 +4,10 @@ description: "Use when working with full stack orchestration full stack feature"
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-full-stack-orchestration-full-stack-feature
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

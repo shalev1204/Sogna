@@ -7,7 +7,10 @@ description: Expert in building shareable generator tools that go viral - name
 risk: safe
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-viral-generator-builder
+owner: [[orchestrator]]
 ---
+
 
 # Viral Generator Builder
 

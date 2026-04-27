@@ -4,7 +4,10 @@ description: Codified expertise for managing carrier portfolios, negotiating fre
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-carrier-relationship-management
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skill when building and managing a carrier network, conducting freight RFPs, negotiating linehaul and accessorial rates, tracking carrier KPIs via scorecards, or ensuring regulatory compliance of transportation partners.

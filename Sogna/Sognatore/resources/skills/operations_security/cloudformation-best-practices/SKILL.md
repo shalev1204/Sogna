@@ -4,7 +4,10 @@ description: "CloudFormation template optimization, nested stacks, drift detecti
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cloudformation-best-practices
+owner: [[ops-security]]
 ---
+
 You are an expert in AWS CloudFormation specializing in template optimization, stack architecture, and production-grade infrastructure deployment.
 
 ## Use this skill when

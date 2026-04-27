@@ -4,7 +4,10 @@ description: "Build production Apache Airflow DAGs with best practices for opera
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-airflow-dag-patterns
+owner: [[orchestrator]]
 ---
+
 
 # Apache Airflow DAG Patterns
 

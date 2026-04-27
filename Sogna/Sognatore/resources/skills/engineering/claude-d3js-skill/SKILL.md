@@ -4,7 +4,10 @@ description: "This skill provides guidance for creating sophisticated, interacti
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-claude-d3js-skill
+owner: [[orchestrator]]
 ---
+
 
 # D3.js Visualisation
 

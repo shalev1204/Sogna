@@ -4,7 +4,10 @@ description: 'Draft cold emails, follow-ups, and proposal templates. Creates pri
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-sales-automator
+owner: [[prod-pm]]
 ---
+
 
 ## Use this skill when
 

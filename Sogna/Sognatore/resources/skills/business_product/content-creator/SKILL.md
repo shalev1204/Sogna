@@ -5,7 +5,10 @@ description: "Professional-grade brand voice analysis, SEO optimization, and pla
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-content-creator
+owner: [[prod-pm]]
 ---
+
 
 # Content Creator
 

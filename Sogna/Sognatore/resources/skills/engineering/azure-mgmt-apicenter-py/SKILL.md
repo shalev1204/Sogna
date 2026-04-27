@@ -4,7 +4,10 @@ description: Azure API Center Management SDK for Python. Use for managing API in
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-mgmt-apicenter-py
+owner: [[eng-api]]
 ---
+
 
 # Azure API Center Management SDK for Python
 

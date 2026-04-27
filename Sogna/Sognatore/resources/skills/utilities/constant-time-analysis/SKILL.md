@@ -3,7 +3,10 @@ name: constant-time-analysis
 description: "Analyze cryptographic code to detect operations that leak secret data through execution timing variations."
 risk: critical
 version: 1.0.0
+id: skill-constant-time-analysis
+owner: [[orchestrator]]
 ---
+
 
 # Constant-Time Analysis
 

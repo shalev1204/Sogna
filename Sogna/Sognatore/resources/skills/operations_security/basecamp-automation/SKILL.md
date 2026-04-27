@@ -4,7 +4,10 @@ description: "Automate Basecamp project management, to-dos, messages, people, an
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-basecamp-automation
+owner: [[ops-security]]
 ---
+
 
 # Basecamp Automation via Rube MCP
 

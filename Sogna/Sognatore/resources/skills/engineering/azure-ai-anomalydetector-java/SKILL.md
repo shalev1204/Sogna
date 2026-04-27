@@ -4,7 +4,10 @@ description: "Build anomaly detection applications with Azure AI Anomaly Detecto
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-ai-anomalydetector-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI Anomaly Detector SDK for Java
 

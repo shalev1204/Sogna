@@ -3,7 +3,10 @@ name: speckit-updater
 description: SpecKit Safe Update
 risk: critical
 version: 1.0.0
+id: skill-speckit-updater
+owner: [[orchestrator]]
 ---
+
 
 # SpecKit Safe Update
 

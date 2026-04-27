@@ -3,7 +3,10 @@ name: apify-influencer-discovery
 description: Find and evaluate influencers for brand partnerships, verify authenticity, and track collaboration performance across Instagram, Facebook, YouTube, and TikTok.
 risk: critical
 version: 1.0.0
+id: skill-apify-influencer-discovery
+owner: [[eng-api]]
 ---
+
 
 # Influencer Discovery
 

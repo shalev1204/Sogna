@@ -5,7 +5,10 @@ risk: critical
 date_added: "2026-03-21"
 license: Complete terms in LICENSE.txt
 version: 1.0.0
+id: skill-internal-comms
+owner: [[orchestrator]]
 ---
+
 
 ## When to use this skill
 To write internal communications, use this skill for:

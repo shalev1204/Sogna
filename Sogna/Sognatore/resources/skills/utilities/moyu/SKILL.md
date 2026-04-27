@@ -7,7 +7,10 @@ risk: critical
 date_added: "2026-03-23"
 license: MIT
 version: 1.0.0
+id: skill-moyu
+owner: [[orchestrator]]
 ---
+
 
 # Moyu
 

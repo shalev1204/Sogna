@@ -4,7 +4,10 @@ description: "Strategies and patterns for optimizing cloud costs across AWS, Azu
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cost-optimization
+owner: [[orchestrator]]
 ---
+
 
 # Cloud Cost Optimization
 

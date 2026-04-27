@@ -4,7 +4,10 @@ description: "Simulate a structured peer-review process using multiple specializ
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-multi-agent-brainstorming
+owner: [[brain]]
 ---
+
 
 # Multi-Agent Brainstorming (Structured Design Review)
 

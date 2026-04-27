@@ -4,7 +4,10 @@ description: "Design spec with 98 rules for building CLI tools that AI agents ca
 risk: critical
 date_added: "2026-03-15"
 version: 1.0.0
+id: skill-ai-native-cli
+owner: [[orchestrator]]
 ---
+
 
 # Agent-Friendly CLI Spec v0.1
 

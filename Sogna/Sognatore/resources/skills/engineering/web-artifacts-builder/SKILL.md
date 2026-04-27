@@ -4,7 +4,10 @@ description: "To build powerful frontend claude.ai artifacts, follow these steps
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-web-artifacts-builder
+owner: [[orchestrator]]
 ---
+
 
 # Web Artifacts Builder
 

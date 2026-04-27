@@ -8,7 +8,10 @@ date_added: "2026-04-06"
 tags: [python, powerpoint, python-pptx, presentations, slide-decks]
 tools: [claude, cursor, gemini, codex]
 version: 1.0.0
+id: skill-python-pptx-generator
+owner: [[orchestrator]]
 ---
+
 
 # Python PPTX Generator
 

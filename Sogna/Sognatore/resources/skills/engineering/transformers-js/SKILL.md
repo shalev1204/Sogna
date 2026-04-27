@@ -9,7 +9,10 @@ metadata:
   repository: https://github.com/huggingface/transformers.js
 compatibility: Requires Node.js 18+ or modern browser with ES modules support. WebGPU support requires compatible browser/environment. Internet access needed for downloading models from Hugging Face Hub (optional if using local models).
 version: 1.0.0
+id: skill-transformers-js
+owner: [[orchestrator]]
 ---
+
 
 # Transformers.js - Machine Learning for JavaScript
 

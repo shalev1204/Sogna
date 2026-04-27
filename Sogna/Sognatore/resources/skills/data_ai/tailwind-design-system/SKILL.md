@@ -4,7 +4,10 @@ description: "Build production-ready design systems with Tailwind CSS, including
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-tailwind-design-system
+owner: [[prod-design]]
 ---
+
 
 # Tailwind Design System
 

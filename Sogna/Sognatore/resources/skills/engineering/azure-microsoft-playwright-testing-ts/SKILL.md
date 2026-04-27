@@ -4,7 +4,10 @@ description: "Run Playwright tests at scale with cloud-hosted browsers and integ
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-microsoft-playwright-testing-ts
+owner: [[eng-qa]]
 ---
+
 
 # Azure Playwright Workspaces SDK for TypeScript
 

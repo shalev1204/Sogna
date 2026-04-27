@@ -5,7 +5,10 @@ description: "RAG (Retrieval-Augmented Generation) implementation workflow cover
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-rag-implementation
+owner: [[orchestrator]]
 ---
+
 
 # RAG Implementation Workflow
 

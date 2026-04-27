@@ -4,7 +4,10 @@ description: Frontend development skill for React, Next.js, TypeScript, and Tail
 risk: safe
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-senior-frontend
+owner: [[eng-frontend]]
 ---
+
 
 # Senior Frontend
 

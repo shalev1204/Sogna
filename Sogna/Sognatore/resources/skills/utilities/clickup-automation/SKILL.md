@@ -4,7 +4,10 @@ description: "Automate ClickUp project management including tasks, spaces, folde
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-clickup-automation
+owner: [[orchestrator]]
 ---
+
 
 # ClickUp Automation via Rube MCP
 

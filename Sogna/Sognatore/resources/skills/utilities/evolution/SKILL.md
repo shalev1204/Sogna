@@ -3,7 +3,10 @@ name: evolution
 description: "This skill enables makepad-skills to self-improve continuously during development."
 risk: critical
 version: 1.0.0
+id: skill-evolution
+owner: [[orchestrator]]
 ---
+
 
 <!-- security-allowlist: curl-pipe-bash -->
 

@@ -4,7 +4,10 @@ description: "Automate Brevo (formerly Sendinblue) email marketing operations th
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-brevo-automation
+owner: [[orchestrator]]
 ---
+
 
 # Brevo Automation via Rube MCP
 

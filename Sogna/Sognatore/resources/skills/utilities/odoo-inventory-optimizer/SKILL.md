@@ -3,7 +3,10 @@ name: odoo-inventory-optimizer
 description: "Expert guide for Odoo Inventory: stock valuation (FIFO/AVCO), reordering rules, putaway strategies, routes, and multi-warehouse configuration."
 risk: critical
 version: 1.0.0
+id: skill-odoo-inventory-optimizer
+owner: [[orchestrator]]
 ---
+
 
 # Odoo Inventory Optimizer
 

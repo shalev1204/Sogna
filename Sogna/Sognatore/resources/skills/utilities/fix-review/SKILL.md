@@ -4,7 +4,10 @@ description: "Verify fix commits address audit findings without new bugs"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-fix-review
+owner: [[orchestrator]]
 ---
+
 
 # Fix Review
 

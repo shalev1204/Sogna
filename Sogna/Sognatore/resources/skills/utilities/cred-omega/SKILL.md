@@ -16,7 +16,10 @@ tools:
 - gemini-cli
 - codex-cli
 version: 1.0.0
+id: skill-cred-omega
+owner: [[orchestrator]]
 ---
+
 
 # CRED-OMEGA: Security Engine for All API Keys (Enterprise)
 

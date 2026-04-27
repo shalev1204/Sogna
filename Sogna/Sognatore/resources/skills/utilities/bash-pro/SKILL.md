@@ -10,7 +10,10 @@ description: 'Master of defensive Bash scripting for production automation, CI/C
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-bash-pro
+owner: [[orchestrator]]
 ---
+
 ## Use this skill when
 
 - Writing or reviewing Bash scripts for automation, CI/CD, or ops

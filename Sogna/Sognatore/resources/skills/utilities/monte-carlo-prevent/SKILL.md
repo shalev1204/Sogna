@@ -9,7 +9,10 @@ date_added: "2026-04-08"
 tags: [data-observability, dbt, schema, monte-carlo, lineage]
 tools: [claude, cursor, codex]
 version: 1.0.0
+id: skill-monte-carlo-prevent
+owner: [[orchestrator]]
 ---
+
 
 # Monte Carlo Prevent Skill
 

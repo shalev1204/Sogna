@@ -4,7 +4,10 @@ description: Create Mermaid diagrams for flowcharts, sequences, ERDs, and archit
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-mermaid-expert
+owner: [[orchestrator]]
 ---
+
 
 ## Use this skill when
 

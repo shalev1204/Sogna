@@ -7,7 +7,10 @@ description: Tools are how AI agents interact with the world. A well-designed
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-agent-tool-builder
+owner: [[orchestrator]]
 ---
+
 
 # Agent Tool Builder
 

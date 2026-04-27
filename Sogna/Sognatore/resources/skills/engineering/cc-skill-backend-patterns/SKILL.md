@@ -4,7 +4,10 @@ description: "Backend architecture patterns, API design, database optimization, 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-cc-skill-backend-patterns
+owner: [[eng-backend]]
 ---
+
 
 # Backend Development Patterns
 

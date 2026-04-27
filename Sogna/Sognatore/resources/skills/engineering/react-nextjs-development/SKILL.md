@@ -5,7 +5,10 @@ description: "React and Next.js 14+ application development with App Router, Ser
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-react-nextjs-development
+owner: [[prod-pm]]
 ---
+
 
 # React/Next.js Development Workflow
 

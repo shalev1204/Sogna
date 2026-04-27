@@ -6,7 +6,10 @@ description: Expert patterns for Plaid API integration including Link token
 risk: critical
 date_added: 2026-02-27
 version: 1.0.0
+id: skill-plaid-fintech
+owner: [[orchestrator]]
 ---
+
 
 # Plaid Fintech
 

@@ -4,7 +4,10 @@ description: "Automate Close CRM tasks via Rube MCP (Composio): create leads, ma
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-close-automation
+owner: [[orchestrator]]
 ---
+
 
 # Close CRM Automation via Rube MCP
 

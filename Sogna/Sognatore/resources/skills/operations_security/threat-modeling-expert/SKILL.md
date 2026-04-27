@@ -4,7 +4,10 @@ description: "Expert in threat modeling methodologies, security architecture rev
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-threat-modeling-expert
+owner: [[biz-hr]], [[ops-security]]
 ---
+
 
 # Threat Modeling Expert
 

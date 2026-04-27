@@ -4,7 +4,10 @@ description: Azure AI VoiceLive SDK for Java. Real-time bidirectional voice conv
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-azure-ai-voicelive-java
+owner: [[orchestrator]]
 ---
+
 
 # Azure AI VoiceLive SDK for Java
 

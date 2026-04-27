@@ -4,7 +4,10 @@ description: "A toolkit providing utilities and knowledge for creating animated 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-slack-gif-creator
+owner: [[prod-pm]]
 ---
+
 
 # Slack GIF Creator
 

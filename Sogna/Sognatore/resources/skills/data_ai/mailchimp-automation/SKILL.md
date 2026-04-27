@@ -4,7 +4,10 @@ description: "Automate Mailchimp email marketing including campaigns, audiences,
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-mailchimp-automation
+owner: [[orchestrator]]
 ---
+
 
 # Mailchimp Automation via Rube MCP
 

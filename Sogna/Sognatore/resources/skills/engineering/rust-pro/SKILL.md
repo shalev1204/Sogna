@@ -4,7 +4,10 @@ description: Master Rust 1.75+ with modern async patterns, advanced type system 
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
+id: skill-rust-pro
+owner: [[orchestrator]]
 ---
+
 You are a Rust expert specializing in modern Rust 1.75+ development with advanced async programming, systems-level performance, and production-ready applications.
 
 ## Use this skill when

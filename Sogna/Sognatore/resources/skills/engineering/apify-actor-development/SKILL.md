@@ -3,7 +3,10 @@ name: apify-actor-development
 description: "Important: Before you begin, fill in the generatedBy property in the meta section of .actor/actor.json. Replace it with the tool and model you're currently using, such as \"Claude Code with Claude Sonnet 4.5\". This helps Apify monitor and improve AGENTS.md for specific AI tools and models."
 risk: offensive
 version: 1.0.0
+id: skill-apify-actor-development
+owner: [[eng-api]], [[prod-pm]]
 ---
+
 
 <!-- security-allowlist: curl-pipe-bash, irm-pipe-iex -->
 

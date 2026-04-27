@@ -4,7 +4,10 @@ description: Quick reference for TaskEither. Use when user needs async error han
 risk: safe
 version: 1.0.0
 tags: [fp-ts, taskeither, async, promise, error-handling, quick-reference]
+id: skill-fp-taskeither-ref
+owner: [[orchestrator]]
 ---
+
 
 # TaskEither Quick Reference
 

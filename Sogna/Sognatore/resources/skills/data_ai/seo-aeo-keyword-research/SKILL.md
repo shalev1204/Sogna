@@ -4,7 +4,10 @@ description: "Researches and prioritises SEO keywords with AEO question queries,
 risk: safe
 date_added: "2026-04-01"
 version: 1.0.0
+id: skill-seo-aeo-keyword-research
+owner: [[biz-marketing]]
 ---
+
 
 # SEO-AEO Keyword Research
 

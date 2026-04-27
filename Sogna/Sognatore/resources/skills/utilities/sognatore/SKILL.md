@@ -4,7 +4,10 @@ description: "Version 2.35.0 | PRD to Production | Zero Human Intervention > Res
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-sognatore
+owner: [[orchestrator]]
 ---
+
 
 # Sognatore - Multi-Agent Autonomous Startup System
 

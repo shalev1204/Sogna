@@ -5,7 +5,10 @@ description: "Estratega de Inteligencia de Dominio de Sognatore. Analiza el nich
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-20-andruia-niche-intelligence
+owner: [[orchestrator]]
 ---
+
 
 ## When to Use
 Use this skill once the project's niche or industry has been identified. It is essential for injecting domain-specific intelligence, regulatory requirements, and industry-standard UX patterns into the project.

@@ -4,7 +4,10 @@ description: "Use when you have a spec or requirements for a multi-step task, be
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-writing-plans
+owner: [[orchestrator]]
 ---
+
 
 # Writing Plans
 

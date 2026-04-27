@@ -4,7 +4,10 @@ description: "Master Git hooks setup with Husky, lint-staged, pre-commit framewo
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
+id: skill-git-hooks-automation
+owner: [[orchestrator]]
 ---
+
 
 # Git Hooks Automation
 

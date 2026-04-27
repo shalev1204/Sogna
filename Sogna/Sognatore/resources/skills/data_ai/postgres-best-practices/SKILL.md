@@ -4,7 +4,10 @@ description: "Postgres performance optimization and best practices from Supabase
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-postgres-best-practices
+owner: [[orchestrator]]
 ---
+
 
 # Supabase Postgres Best Practices
 

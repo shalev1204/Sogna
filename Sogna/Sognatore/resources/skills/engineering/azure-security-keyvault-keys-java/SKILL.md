@@ -4,7 +4,10 @@ description: "Azure Key Vault Keys Java SDK for cryptographic key management. Us
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-azure-security-keyvault-keys-java
+owner: [[ops-security]]
 ---
+
 
 # Azure Key Vault Keys (Java)
 

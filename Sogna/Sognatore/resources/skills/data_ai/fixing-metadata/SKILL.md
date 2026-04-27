@@ -4,7 +4,10 @@ description: "Audit and fix HTML metadata including page titles, meta descriptio
 risk: safe
 version: 1.0.1
 license: MIT
+id: skill-fixing-metadata
+owner: [[orchestrator]]
 ---
+
 
 ## Workflow
 

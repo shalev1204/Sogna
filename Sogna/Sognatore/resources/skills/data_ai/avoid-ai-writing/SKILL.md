@@ -4,7 +4,10 @@ description: "Audit and rewrite content to remove 21 categories of AI writing pa
 risk: safe
 date_added: "2026-03-06"
 version: 1.0.0
+id: skill-avoid-ai-writing
+owner: [[orchestrator]]
 ---
+
 
 # Avoid AI Writing — Audit & Rewrite
 

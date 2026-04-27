@@ -3,7 +3,10 @@ name: expo-ui-jetpack-compose
 description: expo-ui-jetpack-compose
 risk: safe
 version: 1.0.0
+id: skill-expo-ui-jetpack-compose
+owner: [[orchestrator]]
 ---
+
 
 ---
 name: expo-ui-jetpack-compose

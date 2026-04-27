@@ -4,7 +4,10 @@ description: "Use when implementation is complete, all tests pass, and you need 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-finishing-a-development-branch
+owner: [[prod-pm]]
 ---
+
 
 # Finishing a Development Branch
 

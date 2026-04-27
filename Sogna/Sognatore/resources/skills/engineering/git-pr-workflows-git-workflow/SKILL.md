@@ -4,7 +4,10 @@ description: "Orchestrate a comprehensive git workflow from code review through 
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-git-pr-workflows-git-workflow
+owner: [[orchestrator]]
 ---
+
 
 # Complete Git Workflow with Multi-Agent Orchestration
 

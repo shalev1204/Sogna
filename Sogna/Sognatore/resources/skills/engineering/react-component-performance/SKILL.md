@@ -4,7 +4,10 @@ description: Diagnose slow React components and suggest targeted performance fix
 risk: safe
 date_added: "2026-03-25"
 version: 1.0.0
+id: skill-react-component-performance
+owner: [[eng-perf]]
 ---
+
 
 # React Component Performance
 

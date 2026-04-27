@@ -4,7 +4,10 @@ description: "Modo Elite Coder + UX Pixel-Perfect otimizado especificamente para
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-nerdzao-elite-gemini-high
+owner: [[orchestrator]]
 ---
+
 
 # @nerdzao-elite-gemini-high
 

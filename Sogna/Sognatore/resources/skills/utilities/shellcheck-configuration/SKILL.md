@@ -4,7 +4,10 @@ description: "Master ShellCheck static analysis configuration and usage for shel
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
+id: skill-shellcheck-configuration
+owner: [[orchestrator]]
 ---
+
 
 # ShellCheck Configuration and Static Analysis
 
