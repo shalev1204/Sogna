@@ -4,10 +4,10 @@ Standards for creating premium user interfaces.
 
 ## Design Principles
 
-1.  **Vibrancy**: Use sophisticated color palettes. Avoid default HTML colors.
-2.  **Depth**: Use subtle shadows, glassmorphism, and layering.
-3.  **Typography**: Use modern sans-serif fonts (Inter, Montserrat, etc.).
-4.  **Motion**: Implement smooth transitions and micro-animations.
+1. **Vibrancy**: Use sophisticated color palettes. Avoid default HTML colors.
+2. **Depth**: Use subtle shadows, glassmorphism, and layering.
+3. **Typography**: Use modern sans-serif fonts (Inter, Montserrat, etc.).
+4. **Motion**: Implement smooth transitions and micro-animations.
 
 ## Implementation Standards
 

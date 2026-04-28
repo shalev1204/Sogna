@@ -20,9 +20,9 @@ Para que el sistema trabaje como un solo organismo, los agentes del Toolkit y el
 ## 3. Protocolo de Sincronización
 Cada vez que un agente del Toolkit adquiere una nueva **Skill**, esta se registra automáticamente en el `SkillRegistry.ts` de Sognatore para que el sistema sepa que ha evolucionado.
 
-## 4. Evolución Obsidian (Próximos Pasos)
-Para alcanzar el nivel de Obsidian y superarlo, implementaremos:
-- **Semantic Sync**: Migración de `MemoryHub.ts` de búsqueda literal a búsqueda vectorial (inspirado en Obsidian Smart Connections).
+## 4. Próximos Pasos de Evolución
+Para maximizar las capacidades del sistema, implementaremos:
+- **Semantic Sync**: Migración de `MemoryHub.ts` de búsqueda literal a búsqueda vectorial (búsqueda semántica avanzada).
 - **Reactive UI**: Evolución de `TerminalSubscriber.ts` hacia un Dashboard dinámico con **Framer Motion**, permitiendo visualizaciones de grafos en tiempo real.
 
 ---

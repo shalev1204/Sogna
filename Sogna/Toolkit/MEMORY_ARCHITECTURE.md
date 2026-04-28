@@ -1,8 +1,8 @@
-# 🧠 Arquitectura de Memoria Neuronal (Sogna vs Obsidian)
+# 🧠 Arquitectura de Memoria Neuronal
 
 ## 1. El Salto Evolutivo: De la Búsqueda a la Comprensión
 
-| Característica | Obsidian (Estándar) | Sognatore (Neural) |
+| Característica | Tradicional (Estándar) | Sognatore (Neural) |
 |---|-|---|
 | **Motor Base** | Texto Plano / Regex | Búsqueda Híbrida (Vectorial + BM25) |
 | **Contexto** | Ninguno (Coincidencia exacta) | Semántico (Entiende conceptos relacionados) |
@@ -29,7 +29,7 @@
 
 Los agentes del Toolkit no solo leen archivos; **consultan a la Red Neuronal**:
 - `/find [concepto]`: No busca el archivo, busca la *idea* en todo el ecosistema.
-- `brain agent`: Actúa como el indexador constante, asegurando que cada nueva nota en `obsidian/` sea vectorizada instantáneamente.
+- `brain agent`: Actúa como el indexador constante, asegurando que cada nueva nota en el Knowledge Hub sea vectorizada instantáneamente.
 
 ---
 > [!IMPORTANT]

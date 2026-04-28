@@ -15,8 +15,20 @@ export class AuditLog {
   public _chainCorrupted: boolean = false;
 
   constructor(opts?: { projectDir?: string; logDir?: string }) {
-    const projectDir = opts?.projectDir || process.cwd();
-    this._logDir = opts?.logDir || path.join(projectDir, '.sognatore', 'audit');
+    const findSognatoreRoot = (start: string): string => {
+      let curr = start;
+      const root = path.parse(curr).root;
+      while (curr !== root) {
+        if (fs.existsSync(path.join(curr, 'resources')) && fs.existsSync(path.join(curr, 'package.json'))) {
+          return curr;
+        }
+        curr = path.join(curr, '..');
+      }
+      return process.cwd();
+    };
+
+    const sognatoreRoot = opts?.projectDir || findSognatoreRoot(__dirname);
+    this._logDir = opts?.logDir || path.join(sognatoreRoot, '.sognatore', 'audit');
     this._logFile = path.join(this._logDir, 'audit.jsonl');
     this._loadChainTip();
   }

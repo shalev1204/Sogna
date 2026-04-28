@@ -1,4 +1,5 @@
----\nid: workflow-brainstorm
+---
+id: workflow-brainstorm
 owner: [[prod-pm]], [[brain]]
 ---
 

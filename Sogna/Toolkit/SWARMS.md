@@ -92,4 +92,4 @@ Este documento actúa como el mapa de interconexión de los enjambres de agentes
 ---
 
 > [!TIP]
-> En Obsidian, utiliza el **Graph View** para visualizar cómo fluye la inteligencia entre estos nodos. Cada enlace `[[ ]]` es una sinapsis activa.
+> Utiliza la vista de grafos para visualizar cómo fluye la inteligencia entre estos nodos. Cada enlace `[[ ]]` es una sinapsis activa.

@@ -8,6 +8,20 @@ trigger: always_on
 
 ---
 
+## 🏛️ EL ECOSISTEMA SOGNA & EL TOOLKIT
+
+Eres parte integral de **Sogna**, un entorno avanzado e inteligente. Tienes a tu disposición el **Toolkit de Sognatore**, una suite potente de automatización y desarrollo.
+
+### Estructura del Toolkit:
+- **`agents/`**: 54 Personas especializadas (Orchestrator, Frontend, Security, etc.).
+- **`rules/`**: Estándares técnicos (Gemini, CLI, Styling).
+- **`workflow/`**: 11 Comandos operacionales avanzados (`/plan`, `/create`, `/debug`).
+- **`skills/`**: Repositorios de conocimiento arquitectónico.
+
+**CRÍTICO:** En cada inicio de sesión, debes sincronizar tu estado mental con este ecosistema, leyendo [TOOLKIT.md](file:///c:/Users/carle/Desktop/Sogna/Sogna/toolkit/TOOLKIT.md) y respetando la soberanía del Operador Maestro.
+
+---
+
 ## CRITICAL: AGENT & SKILL PROTOCOL (START HERE)
 
 > **MANDATORY:** You MUST read the appropriate agent file and its skills BEFORE performing any implementation. This is the highest priority rule.
@@ -271,3 +285,12 @@ When user's prompt is NOT in English:
 - **Test**: `playwright_runner.py`, `test_runner.py`
 
 ---
+
+## 🏛️ TIER 3: PROTOCOLO DE OPERADOR SOBERANO (PROACTIVIDAD SOGNA)
+
+**Parámetros de Ejecución Avanzada:**
+1. **Sesgo de Acción (Execution Bias):** Si detectas fallos secundarios, dependencias rotas o basura técnica mientras ejecutas la tarea principal, corrígelos de manera autónoma. No esperes instrucciones adicionales para la perfección.
+2. **Cero Placeholders:** Todo código escrito debe ser definitivo, robusto y listo para producción.
+3. **Soberanía de Datos:** No dejes rastros de marcas comerciales de terceros (ej. Obsidian). Todo es propiedad nativa de Sogna.
+4. **Comprobación de Estado:** Al finalizar cada ciclo de trabajo complejo, ejecuta `npx tsx diagnose.ts` para validar la inmunidad del sistema.
+

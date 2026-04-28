@@ -20,7 +20,21 @@ export class AuditVault {
   private auditFile: string;
 
   private constructor() {
-    this.auditDir = path.join(process.cwd(), '.sognare', 'audit');
+    // Robust discovery of the Sognatore engine root to store state
+    const findSognatoreRoot = (start: string): string => {
+      let curr = start;
+      const root = path.parse(curr).root;
+      while (curr !== root) {
+        if (fs.existsSync(path.join(curr, 'resources')) && fs.existsSync(path.join(curr, 'package.json'))) {
+          return curr;
+        }
+        curr = path.join(curr, '..');
+      }
+      return process.cwd();
+    };
+
+    const sognatoreRoot = findSognatoreRoot(__dirname);
+    this.auditDir = path.join(sognatoreRoot, '.sognatore', 'audit');
     this.auditFile = path.join(this.auditDir, 'audit.jsonl');
     
     if (!fs.existsSync(this.auditDir)) {

@@ -25,6 +25,17 @@ async function runInstitutionalDiagnostic() {
     console.log(chalk.red(`❌ Problemas de salud detectados: ${health.details.join(', ')}`));
   }
 
+  // Auto-Healer Engine
+  const { AutoHealer } = await import('./src/core/system/AutoHealer.js');
+  const healer = AutoHealer.getInstance();
+  const healResult = await healer.healBuildErrors();
+  if (healResult.fixed) {
+    console.log(chalk.green(`✅ Auto-Healer: ${healResult.status}`));
+  } else {
+    console.log(chalk.cyan(`ℹ️ Auto-Healer: ${healResult.status}`));
+  }
+
+
   // 2. SOVEREIGNTY CHECK (No external residues)
   console.log(chalk.yellow('\n--- [PLANE 2: SOBERANÍA E IDENTIDAD] ---'));
   const findings = await scanner.scanDirectory('src');
@@ -41,7 +52,19 @@ async function runInstitutionalDiagnostic() {
   console.log(isChainValid ? chalk.green('✅ Integridad de auditoría: Verificada.') : chalk.red('❌ Cadena de auditoría CORRUPTA.'));
   
   await hub.performProactiveAudit();
+  
+  // Auditoría dinámica de dependencias
+  const { DependencyAuditor } = await import('./src/Sentinel-Sognatore/DependencyAuditor.js');
+  const depAuditor = DependencyAuditor.getInstance();
+  const depHealth = await depAuditor.auditDependencies();
+  if (depHealth.status === 'CRITICAL') {
+    console.log(chalk.red(`❌ Vulnerabilidades en dependencias: ${depHealth.details}`));
+  } else {
+    console.log(chalk.green(`✅ Dependencias seguras: ${depHealth.details}`));
+  }
+
   console.log(chalk.green('✅ Auditoría proactiva completada.'));
+
 
   // 4. NEURAL INTEGRITY
   console.log(chalk.yellow('\n--- [PLANE 4: INTEGRIDAD NEURONAL] ---'));

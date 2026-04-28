@@ -25,7 +25,7 @@ export class ContextManager {
    * recursively up the directory tree.
    */
   async discoverInstructions(): Promise<string> {
-    const instructionFiles = ['.sognare/instructions.md', 'SOGNARE.md', 'CLAUDE.md'];
+    const instructionFiles = ['.sognatore/instructions.md', 'SOGNARE.md', 'CLAUDE.md'];
     const rootInstructions: string[] = [];
     const localInstructions: string[] = [];
 

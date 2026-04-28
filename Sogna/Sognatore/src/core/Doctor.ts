@@ -334,7 +334,7 @@ export class Doctor {
     }
 
     // 4. Institutional Audit Vault (Lightweight)
-    const auditDir = path.join(process.cwd(), '.sognare', 'audit');
+    const auditDir = path.join(Hub.getInstance().getSognatoreRoot(), '.sognatore', 'audit');
     const auditExists = fs.existsSync(auditDir);
     results.push({
       name: 'Institutional Audit Vault',
