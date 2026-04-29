@@ -182,7 +182,8 @@ export class SwarmOrchestrator extends EventEmitter {
           key: `Task result: ${task.type} - ${task.id}`,
           content: result,
           tags: [task.type, 'task-result'],
-          project: process.env.PROJECT_NAME || 'Sognatore'
+          project: process.env.PROJECT_NAME || 'Sognatore',
+          timestamp: new Date().toISOString()
         });
       }
       

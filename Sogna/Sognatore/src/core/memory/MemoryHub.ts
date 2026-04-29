@@ -82,7 +82,7 @@ export class MemoryHub {
       const criticality = this.evaluateSemanticCriticality(query);
       if (criticality > 0.8) {
           hub.reportIntel('CRITICAL', `BLOQUEO NEURONAL: Intento de pesca semántica crítica detectado "${query}"`, 'MemoryHub');
-          await hub.triggerPanic(`Semantic exfiltration attempt detected: ${query}`);
+          await hub.triggerPanic(`Semantic exfiltration attempt detected: ${query}`, 'MemoryHub');
           return []; // Return empty results on panic
       }
       
@@ -212,7 +212,8 @@ export class MemoryHub {
       key,
       content,
       tags,
-      project: 'Sogna'
+      project: 'Sogna',
+      timestamp: new Date().toISOString()
     });
   }
 
@@ -358,15 +359,23 @@ export class MemoryHub {
 
     // 3. Retrieve fragments for all identified nodes
     const results: MemoryResult[] = [];
-    index.fragments.filter(f => neighborIds.has(f.key)).forEach(f => {
+    for (const f of index.fragments.filter(f => neighborIds.has(f.key))) {
+      let content = '';
+      try {
+        if (await fs.pathExists(f.fileName)) {
+          const raw = await fs.readFile(f.fileName, 'utf-8');
+          content = raw.replace(/^---\r?\n[\s\S]+?\r?\n---/, '').trim();
+        }
+      } catch (e) {}
+
       results.push({
         source: 'operational',
         key: f.key,
-        content: f.content,
+        content: content || `Reference to ${f.key}`,
         relevance: neighborIds.has(f.key) ? 0.9 : 0.5,
         metadata: { ...f.properties, tags: f.tags, conceptual_match: true }
       });
-    });
+    }
 
     return results.sort((a, b) => b.relevance - a.relevance);
   }

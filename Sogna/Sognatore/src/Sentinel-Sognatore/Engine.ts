@@ -19,8 +19,6 @@ import { Honeypots } from './Honeypots.js';
 import { MemoryHub } from '../core/memory/MemoryHub.js';
 import { SecurityAudit } from './SecurityAudit.js';
 import { ActivityProfile } from './ActivityProfile.js';
-import { SecurityAudit } from './SecurityAudit.js';
-import { ActivityProfile } from './ActivityProfile.js';
 
 /**
  * Sognatore Policy Engine - Core Evaluation Engine

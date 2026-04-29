@@ -1,5 +1,5 @@
-import { MemoryHub, MemoryResult } from '../memory/MemoryHub';
-import { Chronicler } from '../memory/Chronicler';
+import { MemoryHub, MemoryResult } from '../memory/MemoryHub.js';
+import { Chronicler } from '../memory/Chronicler.js';
 
 export interface SwarmAssignment {
   targetAgent: string;
@@ -27,10 +27,10 @@ export class SwarmCommander {
     const candidates = await this.hub.query(filters);
     
     return candidates.map(c => ({
-      targetAgent: c.key === 'unknown' ? (c.properties?.id || 'unknown') : c.key,
-      specialty: c.properties?.specialty || c.properties?.swarm || 'generalist',
+      targetAgent: c.key === 'unknown' ? (c.metadata?.id || 'unknown') : c.key,
+      specialty: c.metadata?.specialty || c.metadata?.swarm || 'generalist',
       reason: `Matched criteria: ${JSON.stringify(filters)}`,
-      metadata: c.properties
+      metadata: c.metadata
     }));
   }
 
