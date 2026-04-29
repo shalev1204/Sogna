@@ -14,7 +14,7 @@ const { spawnSync } = require('child_process');
 const crypto = require('crypto');
 const uma = require('../../../shared/uma_bridge.cjs');
 
-const ROOT_DIR = process.cwd();
+const ROOT_DIR = path.resolve(__dirname, '../../../../..');
 // ROOT_DIR is now dynamically resolved to the execution context (Sogna root)
 const INTEL_REPORT = path.join(__dirname, '../reports/THREAD_INTEL.md');
 const CONFIG_FEED = path.join(__dirname, '../data/risk_dna_feed.json');
@@ -95,7 +95,7 @@ if (scanAll) {
     console.log('[SENTINEL] Escaneando todo el proyecto Sogna...');
     try {
         const { execSync } = require('child_process');
-        const output = execSync('git ls-files "Sognatore/**" "toolkit/**" "memory/**"', { encoding: 'utf-8' });
+        const output = execSync('git ls-files "Sogna/Sognatore/**" "Sogna/toolkit/**" "Sogna/memory/**"', { encoding: 'utf-8', cwd: ROOT_DIR });
         const allFiles = output.split('\n')
             .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json') || f === 'memory/security/id_rsa'))
             .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini'));

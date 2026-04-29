@@ -1,6 +1,7 @@
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 import { spawnSync } from 'child_process';
 import path from 'path';
+import * as fs from 'fs';
 import { ToolHook, HookDecision, HookResult } from '../actions/ToolRegistry.js';
 
 /**
@@ -9,8 +10,10 @@ import { ToolHook, HookDecision, HookResult } from '../actions/ToolRegistry.js';
 export class ExecutiveHook implements ToolHook {
   public name = 'Executive Autonomy Protocol';
   private binaryPath: string;
+  private projectRoot: string;
 
   constructor(projectRoot: string) {
+    this.projectRoot = projectRoot;
     this.binaryPath = path.resolve(
       projectRoot, 
       'toolkit/executive-core/target/release/executive-core.exe'
@@ -22,10 +25,20 @@ export class ExecutiveHook implements ToolHook {
     // Tier 'gold' gets higher trust than 'silver'
     const trustScore = tier === 'gold' ? 0.9 : 0.4;
 
+    let dynamicRules = null;
+    try {
+      const policyPath = path.resolve(this.projectRoot, 'toolkit/engines/Sentinel/data/soberania.json');
+      const content = await fs.promises.readFile(policyPath, 'utf8');
+      dynamicRules = JSON.parse(content);
+    } catch (e) {
+      // Silence is golden in security hooks fallbacks
+    }
+
     const context = {
       tool_name: name,
       arguments: args,
       trust_score: trustScore,
+      dynamic_rules: dynamicRules,
     };
 
     try {

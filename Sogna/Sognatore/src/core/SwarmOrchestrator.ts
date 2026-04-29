@@ -97,7 +97,12 @@ export class SwarmOrchestrator extends EventEmitter {
    */
   async dispatchTask(task: SwarmTask): Promise<string> {
     this.taskQueue.push(task);
-    this.saveQueue();
+    
+    if (this.taskQueue.length > 50) {
+      this.taskQueue = this.taskQueue.filter(t => t.status === 'pending' || t.status === 'active');
+    }
+    
+    await this.saveQueue();
 
     // High-Assurance Gap Detection (Skills & Agents)
     if (this.detectAgentGap(task)) {
@@ -174,7 +179,7 @@ export class SwarmOrchestrator extends EventEmitter {
       const result = await agent.runTask(contextualPrompt);
       task.status = 'completed';
       task.result = result;
-      this.saveQueue();
+      await this.saveQueue();
 
       // Step B: Memorize completion (if successful and relevant)
       if (result.length > 100) {
@@ -191,7 +196,7 @@ export class SwarmOrchestrator extends EventEmitter {
       return result;
     } catch (error) {
       task.status = 'failed';
-      this.saveQueue();
+      await this.saveQueue();
       throw error;
     }
   }
@@ -263,14 +268,14 @@ export class SwarmOrchestrator extends EventEmitter {
       context,
       sender: 'orchestrator'
     };
-    fs.writeFileSync(broadcastPath, JSON.stringify(message, null, 2));
+    await fs.writeFile(broadcastPath, JSON.stringify(message, null, 2));
     console.log(`[BROADCAST] ${action}: ${context}`);
   }
 
-  private saveQueue() {
+  private async saveQueue() {
     const sognatoreDir = path.join(process.cwd(), 'Sognatore', '.sognatore');
     const queuePath = path.join(sognatoreDir, 'queue', 'pending.json');
-    fs.writeFileSync(queuePath, JSON.stringify(this.taskQueue, null, 2));
+    await fs.writeFile(queuePath, JSON.stringify(this.taskQueue, null, 2));
   }
 
   /**

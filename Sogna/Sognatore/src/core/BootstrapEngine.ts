@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { Guardian } from './Guardian.js';
 import { AgentFactory } from './agents/AgentFactory.js';
 import { ProviderFactory } from './ProviderFactory.js';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import { ToolResolver } from './ToolResolver.js';
 import { BlueprintAuditor } from '@sogna/toolkit/shared/BlueprintAuditor.js';
 import { getBlueprint } from '@sogna/toolkit/shared/BlueprintRegistry.js';
@@ -65,7 +66,7 @@ export class BootstrapEngine {
     const blueprint = getBlueprint('sognatore-core');
     
     if (blueprint) {
-      const report = await auditor.audit(process.cwd(), blueprint);
+      const report = await auditor.audit(Hub.getInstance().getSognatoreRoot(), blueprint);
       if (report.integrityScore < 100) {
         console.log(auditor.renderReport(report));
         if (report.integrityScore < 50) {
@@ -121,7 +122,7 @@ export class BootstrapEngine {
     await Promise.all([
       ProviderFactory.getAvailableProviders(),
       AgentFactory.getInstance(),
-      new ToolResolver(process.cwd()) // Conceptual parallel loading
+      new ToolResolver(Hub.getInstance().getSognatoreRoot()) // Conceptual parallel loading
     ]);
 
     this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers and Swarm Catalog synchronized.');

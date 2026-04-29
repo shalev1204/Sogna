@@ -45,16 +45,19 @@ class MemoryLoom:
             print("! Intelligence directory not found.")
             return
 
-        fragments = list(self.intelligence_dir.glob("*.md"))
+        fragments = [f for f in self.intelligence_dir.glob("*.md") if f.name != "thread_intel.md"]
         if not fragments:
             print("! No fragments found to synthesize.")
             return
 
-        print(f"Found {len(fragments)} fragments. Processing...")
+        # Sort by modification time descending (newest first)
+        fragments.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+        target_fragments = fragments[:20]
+
+        print(f"Found {len(fragments)} fragments. Synthesizing the {len(target_fragments)} newest...")
         
         insights = []
-        for frag_path in fragments:
-            if frag_path.name == "thread_intel.md": continue
+        for frag_path in target_fragments:
             
             with open(frag_path, 'r', encoding='utf-8') as f:
                 content = f.read()

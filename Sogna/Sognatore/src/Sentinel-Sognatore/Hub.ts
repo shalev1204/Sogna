@@ -24,6 +24,7 @@ export class Hub {
   private shieldTimer: NodeJS.Timeout | null = null;
   
   private readonly sognatoreRoot: string;
+  private readonly baseRoot: string;
   private readonly SENTINEL_PATH: string;
   private readonly SIGNATURES_PATH: string;
   private readonly INTEL_REPORT_PATH: string;
@@ -46,6 +47,19 @@ export class Hub {
 
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
     this.sognatoreRoot = findRoot(__dirname);
+
+    const findGitRoot = (start: string): string => {
+      let curr = start;
+      const root = path.parse(curr).root;
+      while (curr !== root) {
+        if (fs.existsSync(path.join(curr, '.git'))) {
+          return curr;
+        }
+        curr = path.join(curr, '..');
+      }
+      return path.join(this.sognatoreRoot, '..', '..');
+    };
+    this.baseRoot = findGitRoot(this.sognatoreRoot);
 
     // Use monorepo-safe paths
     const toolkitRoot = path.join(this.sognatoreRoot, '..', 'toolkit');
@@ -92,7 +106,7 @@ export class Hub {
 
       // 1. Prune non-existent files
       for (const relPath of keys) {
-        if (!fs.existsSync(path.resolve(process.cwd(), relPath))) {
+        if (!fs.existsSync(path.resolve(this.baseRoot, relPath))) {
           delete this.signaturesCache[relPath];
           delete this.mtimeCache[relPath];
           changed = true;
@@ -258,7 +272,7 @@ export class Hub {
 
     try {
       const absPath = path.resolve(filePath);
-      const relativePath = path.relative(process.cwd(), absPath).replace(/\\/g, '/');
+      const relativePath = path.relative(this.baseRoot, absPath).replace(/\\/g, '/');
       
       const sig = this.signaturesCache[relativePath];
       if (!sig) return false;
@@ -292,7 +306,7 @@ export class Hub {
     try {
       const sentinelDir = path.dirname(this.SENTINEL_PATH);
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-      spawnSync('git', ['checkout', 'HEAD', '--', sentinelDir], { cwd: process.cwd() });
+      spawnSync('git', ['checkout', 'HEAD', '--', sentinelDir], { cwd: this.baseRoot });
       
       this.checkSentinelPulse();
       if (this.state === SecurityState.ALIVE) {

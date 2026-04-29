@@ -3,6 +3,7 @@ import { AgentFactory } from './AgentFactory.js';
 import fs from 'fs';
 import path from 'path';
 import { Guardian } from '../Guardian.js';
+import { Hub } from '../../Sentinel-Sognatore/Hub.js';
 
 export class AgentRegistry {
   private static instance: AgentRegistry;
@@ -73,7 +74,8 @@ export class AgentRegistry {
    * Centralizes the mapping logic for institutional consistency.
    */
   resolveSpecialist(taskType: string): string {
-    const catalogPath = path.join(process.cwd(), 'resources', 'config', 'swarm_catalog.json');
+    const sognatoreRoot = Hub.getInstance().getSognatoreRoot();
+    const catalogPath = path.join(sognatoreRoot, 'resources', 'config', 'swarm_catalog.json');
     if (fs.existsSync(catalogPath)) {
       try {
         const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));

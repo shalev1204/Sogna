@@ -3,7 +3,7 @@
  * WARNING: Access to this file is strictly monitored by Sentinel.
  */
 
-const VAULT_MASTER_KEY = "pk_live_f4k3_m4st3r_k3y_s0gn4_2026";
+const VAULT_MASTER_KEY = process.env.SOGNATORE_MASTER_KEY || "pk_live_f4k3_m4st3r_k3y_s0gn4_2026";
 
 export class AuthVault {
   static async getAccessKey(provider: string): Promise<string> {

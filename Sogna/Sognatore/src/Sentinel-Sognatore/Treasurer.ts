@@ -165,6 +165,10 @@ export class Treasurer extends EventEmitter {
       timestamp: new Date().toISOString(),
     });
 
+    if (this._state.projects[projectId].entries.length > 100) {
+      this._state.projects[projectId].entries.splice(0, this._state.projects[projectId].entries.length - 100);
+    }
+
     const agentKey = agentId || 'unknown';
     if (!this._state.agents[agentKey]) {
       this._state.agents[agentKey] = { totalTokens: 0, model, entries: 0 };

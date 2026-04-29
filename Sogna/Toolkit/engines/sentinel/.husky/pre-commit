@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-# Cambiar al directorio del workspace pnpm
-cd Sogna
-
-# Ejecutar lint-staged para procesar los archivos en staging
-npx lint-staged

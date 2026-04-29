@@ -53,7 +53,7 @@ HEURISTIC_CRITICAL = [
 ]
 
 # Paths to ignore entirely
-IGNORE_DIRS = {'.git', 'node_modules', '.turbo', '.next', 'dist', 'build', 'out', '.sognatore'}
+IGNORE_DIRS = {'.git', 'node_modules', '.turbo', '.next', 'dist', 'build', 'out', '.sognatore', 'tests', 'brain', 'docs', 'knowledge', 'artifacts', '.gemini'}
 IGNORE_EXTS = {'.png', '.jpg', '.jpeg', '.gif', '.ico', '.exe', '.dll', '.so', '.bin', '.pdf', '.zip', '.tar', '.gz'}
 
 def shannon_entropy(data: str) -> float:

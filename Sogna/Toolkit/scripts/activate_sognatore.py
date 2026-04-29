@@ -1,4 +1,4 @@
-﻿import subprocess
+import subprocess
 import os
 import sys
 import time
@@ -18,7 +18,7 @@ def log_event(message):
 def activate_swarm(prd_path):
     # Path configuration
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    sognatore_bin = os.path.join(base_dir, "Sognatore", "dist", "bin", "sognatore.js")
+    sognatore_bin = os.path.join(base_dir, "Sognatore", "dist", "Sognatore", "src", "bin", "sognatore.js")
     
     if not os.path.exists(sognatore_bin):
         log_event("FATAL: Sognatore binary not found. Build required.")

@@ -233,7 +233,12 @@ export class MemoryHub {
       return this.graphCache;
     }
 
-    const index = await this.chronicler.getIndex();
+    let index = await this.chronicler.getIndex();
+    if (index.fragments.length === 0) {
+      await this.chronicler.init();
+      await this.chronicler.rebuildIndex();
+      index = await this.chronicler.getIndex();
+    }
     const nodes: any[] = [];
     const edges: any[] = [];
     

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SIGNATURE_FILE = path.join(__dirname, '../toolkit/engines/Sentinel/data/signatures.json');
+const SIGNATURE_FILE = path.join(__dirname, '../../engines/Sentinel/data/signatures.json');
 const ROOT_DIR = path.join(__dirname, '../');
 
 async function vacuum() {

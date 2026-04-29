@@ -33,10 +33,12 @@ export class Supervisor {
 
     this.activeProcesses.set(processId, childProcess);
 
+    let logStream: any;
+
     // Stream output to log file if provided
     if (options.logFile) {
       await fs.ensureDir(path.dirname(options.logFile));
-      const logStream = fs.createWriteStream(options.logFile, { flags: 'a' });
+      logStream = fs.createWriteStream(options.logFile, { flags: 'a' });
       childProcess.all?.pipe(logStream);
     }
 
@@ -48,6 +50,10 @@ export class Supervisor {
       this.activeProcesses.delete(processId);
       const message = error instanceof Error ? error.message : String(error);
       throw new Error(`Agent ${agentName} failed: ${message}`, { cause: error });
+    } finally {
+      if (logStream) {
+        logStream.end();
+      }
     }
   }
 

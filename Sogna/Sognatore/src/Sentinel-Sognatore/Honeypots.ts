@@ -47,7 +47,28 @@ export class Honeypots {
       try {
         const data = fs.readJsonSync(centralPath);
         if (data && data.decoys) {
-          // Merge central decoys into local configs if they are not already there
+          data.decoys.forEach((p: string) => {
+            if (!this.decoys.find(d => d.path === p)) {
+              this.decoys.push({
+                path: p,
+                content: `SENTINEL_DECOY_${Buffer.from(p).toString('hex').substring(0, 8)}`,
+                type: 'config'
+              });
+            }
+          });
+        }
+      } catch (e) {
+        console.warn('[SENTINEL] Error cargando decoys centralizados:', e);
+      }
+    }
+  }
+
+  async loadCentralDecoysAsync(): Promise<void> {
+    const centralPath = path.join(this.baseDir, 'toolkit/engines/Sentinel/data/honeypots.json');
+    if (await fs.pathExists(centralPath)) {
+      try {
+        const data = await fs.readJson(centralPath);
+        if (data && data.decoys) {
           data.decoys.forEach((p: string) => {
             if (!this.decoys.find(d => d.path === p)) {
               this.decoys.push({
@@ -68,6 +89,7 @@ export class Honeypots {
    * Deploys all decoys to their respective paths.
    */
   async deploy(): Promise<void> {
+    await this.loadCentralDecoysAsync();
     for (const decoy of this.decoys) {
       const fullPath = path.join(this.baseDir, decoy.path);
       await fs.ensureDir(path.dirname(fullPath));

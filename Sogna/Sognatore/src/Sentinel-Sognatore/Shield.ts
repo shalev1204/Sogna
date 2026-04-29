@@ -45,20 +45,23 @@ export class Shield {
 
     // 1. Path Traversal & Out-of-Workspace (Balanced/ReadOnly)
     if (effectiveMode !== PermissionMode.Full) {
-      if (command.includes('../')) {
+      const args = command.split(/\s+/);
+      
+      const isPathTraversal = args.some(arg => arg.includes('../') && (arg.includes('/') || arg.includes('\\')));
+      if (isPathTraversal) {
         hub.reportIntel('WARNING', `Intento de Path Traversal bloqueado: ${command}`, 'Shield');
         return { allow: false, reason: 'Directory traversal (../) is restricted in this mode.' };
       }
       
-      const absolutePathPattern = /[\s'"](\/[a-z]*|\\|[a-z]:\\|~)/i;
-      const match = command.match(absolutePathPattern);
-      if (match) {
-        const pathStr = match[0].trim().replace(/['"]/g, '');
-        const systemDirs = ['/etc', '/usr', '/var', '/bin', '/sbin', '/sys', '/proc', '/dev', 'C:\\Windows', 'C:\\Users'];
-        if (systemDirs.some(dir => pathStr.toLowerCase().startsWith(dir.toLowerCase())) || pathStr === '/' || pathStr === '\\') {
-          hub.reportIntel('CRITICAL', `Intento de acceso a ruta de sistema bloqueado: ${pathStr}`, 'Shield');
-          return { allow: false, reason: `System path "${pathStr}" targets are restricted in this mode.` };
-        }
+      const systemDirs = ['/etc', '/usr', '/var', '/bin', '/sbin', '/sys', '/proc', '/dev', 'c:\\windows', 'c:\\users'];
+      const cleanArgs = args.map(arg => arg.replace(/['"]/g, ''));
+      const targetsSystem = cleanArgs.some(arg => 
+        systemDirs.some(dir => arg.toLowerCase().startsWith(dir.toLowerCase())) || arg === '/' || arg === '\\'
+      );
+      
+      if (targetsSystem) {
+        hub.reportIntel('CRITICAL', `Intento de acceso a ruta de sistema bloqueado`, 'Shield');
+        return { allow: false, reason: `System path targets are restricted in this mode.` };
       }
     }
 

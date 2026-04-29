@@ -1,23 +1,27 @@
-$filePath = "Sogna/Toolkit/engines/sentinel/reports/THREAD_INTEL.md"
-$lines = Get-Content $filePath
+$filePath = "toolkit/engines/Sentinel/reports/THREAD_INTEL.md"
+$content = Get-Content $filePath
 
-$headerFound = $false
 $cleanedLines = New-Object System.Collections.Generic.List[string]
+$headerAdded = $false
 
-foreach ($line in $lines) {
-    # If it's the specific header we're looking for
-    if ($line -match "^# 🛡️  SENTINEL THREAD INTEL \(Apex Feed\)") {
-        if (-not $headerFound) {
-            $cleanedLines.Add($line)
-            $headerFound = $true
+foreach ($line in $content) {
+    if ($line -match "^# 🛡️") {
+        if (-not $headerAdded) {
+            $cleanedLines.Add("# 🛡️  SENTINEL THREAD INTEL (Apex Feed)")
+            $headerAdded = $true
         }
-        # Otherwise skip it
-    } elseif ($line -match "^<<<<<<< HEAD" -or $line -match "^=======" -or $line -match "^>>>>>>> wn-main") {
-        # Skip conflict markers, we'll just merge the content implicitly by keeping everything else
-        continue
+        # skip duplicates
     } else {
-        $cleanedLines.Add($line)
+        # Only add if it's not a conflict marker (just in case some were missed)
+        if ($line -notmatch "^<<<<<<<" -and $line -notmatch "^=======" -and $line -notmatch "^>>>>>>>") {
+             $cleanedLines.Add($line)
+        }
     }
+}
+
+# Remove leading empty lines
+while ($cleanedLines.Count -gt 1 -and [string]::IsNullOrWhiteSpace($cleanedLines[1])) {
+    $cleanedLines.RemoveAt(1)
 }
 
 $cleanedLines | Set-Content $filePath

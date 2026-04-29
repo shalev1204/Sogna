@@ -1,30 +1,77 @@
 $filePath = "Sogna/Toolkit/engines/sentinel/reports/THREAD_INTEL.md"
-$content = Get-Content $filePath
+$content = Get-Content $filePath -Encoding UTF8
 
-$newContent = New-Object System.Collections.Generic.List[string]
+$headersSeen = @{}
+$newLines = New-Object System.Collections.Generic.List[string]
 
-for ($i = 0; $i -lt $content.Count; $i++) {
-    $line = $content[$i]
+foreach ($line in $content) {
+    # Replace tabs
+    $line = $line -replace "`t", "    "
     
-    # Replace tabs with 4 spaces
-    $line = $line -replace "\t", "    "
+    # Check if heading
+    if ($line -match "^(#+)\s+(.*)$") {
+        $level = $matches[1]
+        $title = $matches[2].Trim().TrimEnd('.')
+        
+        # Standardize EVENTO/INTRUSIÓN level
+        if ($title -match "^(EVENTO|INTRUSI.N DETECTADA):") {
+            $level = "##"
+        }
+        
+        # De-duplicate
+        if ($headersSeen.ContainsKey($title)) {
+            $headersSeen[$title]++
+            $title = "$title ($($headersSeen[$title]))"
+        } else {
+            $headersSeen[$title] = 1
+        }
+        
+        $line = "$level $title"
+    }
     
-    if ($i -eq 0 -and $line -match "^# ") {
-        $newContent.Add($line)
-        $newContent.Add("") # Add blank line after H1
+    $newLines.Add($line)
+}
+
+# Second pass for structure and blank lines
+$finalLines = New-Object System.Collections.Generic.List[string]
+$lastWasBlank = $false
+
+for ($i = 0; $i -lt $newLines.Count; $i++) {
+    $line = $newLines[$i]
+    $isHeader = $line -match "^#+\s"
+    $isHR = $line -eq "---"
+    $isBlank = [string]::IsNullOrWhiteSpace($line)
+
+    if ($isBlank) {
+        if ($lastWasBlank) { continue }
+        $lastWasBlank = $true
+        $finalLines.Add("")
         continue
     }
     
-    if ($line -match "^### EVENTO:") {
-        $line = $line -replace "^### EVENTO:", "## EVENTO:"
+    if ($isHeader -or $isHR) {
+        if ($finalLines.Count -gt 0 -and -not [string]::IsNullOrWhiteSpace($finalLines[$finalLines.Count-1])) {
+            $finalLines.Add("")
+        }
     }
+
+    $finalLines.Add($line)
     
-    # Avoid quadruple empty lines if my logic adds too many
-    if ([string]::IsNullOrWhiteSpace($line) -and $newContent.Count -gt 0 -and [string]::IsNullOrWhiteSpace($newContent[$newContent.Count-1])) {
-        # skip consecutive empty lines if needed, but MD022 just wants ONE
+    if ($isHeader -or $isHR) {
+        if ($i + 1 -lt $newLines.Count -and -not [string]::IsNullOrWhiteSpace($newLines[$i+1])) {
+            $finalLines.Add("")
+            $lastWasBlank = $true
+        } else {
+            $lastWasBlank = $false
+        }
+    } else {
+        $lastWasBlank = $false
     }
-    
-    $newContent.Add($line)
 }
 
-$newContent | Set-Content $filePath
+# Final trim of multiple blanks at the end
+while ($finalLines.Count -gt 0 -and [string]::IsNullOrWhiteSpace($finalLines[$finalLines.Count-1])) {
+    $finalLines.RemoveAt($finalLines.Count - 1)
+}
+
+$finalLines | Set-Content $filePath -Encoding UTF8

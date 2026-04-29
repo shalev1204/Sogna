@@ -71,8 +71,10 @@ export class SecurityAudit {
     entry.hash = hash;
     this.lastHash = hash;
 
-    // Append to file (Synchronous for integrity guarantee)
-    fs.appendFileSync(this.logPath, JSON.stringify(entry) + '\n');
+    // Asynchronous append for high-performance non-blocking architecture
+    fs.promises.appendFile(this.logPath, JSON.stringify(entry) + '\n').catch(err => {
+      console.error('[AUDIT] Failed to write decision log:', err);
+    });
   }
 
   public verifyChain(): boolean {

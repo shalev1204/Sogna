@@ -3,6 +3,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs-extra';
 import chalk from 'chalk';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
 
 /**
  * High-Assurance Docker Sandbox
@@ -25,8 +26,12 @@ export class DockerSandbox {
   };
 
   private readonly DOCKERFILES = {
-    standard: path.join(process.cwd(), 'Sognatore', 'resources', 'docker', 'Sogna.Dockerfile'),
-    security: path.join(process.cwd(), 'Sognatore', 'resources', 'docker', 'Security.Dockerfile')
+    standard: fs.existsSync(path.join(Hub.getInstance().getSognatoreRoot(), 'resources', 'docker', 'Sogna.Dockerfile'))
+      ? path.join(Hub.getInstance().getSognatoreRoot(), 'resources', 'docker', 'Sogna.Dockerfile')
+      : path.join(Hub.getInstance().getSognatoreRoot(), 'Sognatore', 'resources', 'docker', 'Sogna.Dockerfile'),
+    security: fs.existsSync(path.join(Hub.getInstance().getSognatoreRoot(), 'resources', 'docker', 'Security.Dockerfile'))
+      ? path.join(Hub.getInstance().getSognatoreRoot(), 'resources', 'docker', 'Security.Dockerfile')
+      : path.join(Hub.getInstance().getSognatoreRoot(), 'Sognatore', 'resources', 'docker', 'Security.Dockerfile')
   };
 
   private constructor() {

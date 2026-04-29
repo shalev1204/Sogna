@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Auto Preview - Antigravity Kit
 ==============================
@@ -19,7 +19,7 @@ import argparse
 import subprocess
 from pathlib import Path
 
-AGENT_DIR = Path(".agent")
+AGENT_DIR = Path("toolkit/data")
 PID_FILE = AGENT_DIR / "preview.pid"
 LOG_FILE = AGENT_DIR / "preview.log"
 

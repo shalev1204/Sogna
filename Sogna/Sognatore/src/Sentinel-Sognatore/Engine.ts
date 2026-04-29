@@ -232,9 +232,14 @@ export class Engine {
     } else if (fs.existsSync(yamlPath)) {
       this._policyPath = yamlPath;
     } else {
-      this._policies = null;
-      this._loaded = true;
-      return;
+      const fallbackPath = path.resolve(this._projectDir, 'toolkit/engines/Sentinel/data/soberania.json');
+      if (fs.existsSync(fallbackPath)) {
+        this._policyPath = fallbackPath;
+      } else {
+        this._policies = null;
+        this._loaded = true;
+        return;
+      }
     }
 
     this._loadPolicies();
@@ -309,6 +314,13 @@ export class Engine {
       this._loadPolicies();
     });
     this._watcher = true;
+  }
+
+  public dispose(): void {
+    if (this._policyPath && this._watcher) {
+      fs.unwatchFile(this._policyPath);
+      this._watcher = false;
+    }
   }
 
   private async _evaluateMemoryPatterns(context: any, violations: any[]): Promise<void> {
@@ -518,6 +530,7 @@ export class Engine {
       tool_name: context.tool_name || 'policy_eval',
       arguments: context.arguments || {},
       trust_score: context.trust_score || 0.5,
+      dynamic_rules: this._policies,
     };
 
     try {

@@ -15,6 +15,6 @@
     "forceConsistentCasingInFileNames": true,
     "composite": true
   },
-  "include": ["shared/**/*.ts", "engines/**/*.ts"],
+  "include": ["shared/**/*.ts", "engines/**/*.ts", "index.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Master Checklist Runner - Antigravity Kit
 ==========================================
@@ -56,17 +56,17 @@ def print_error(text: str):
 
 # Define priority-ordered checks
 CORE_CHECKS = [
-    ("Security Scan", ".agent/skills/vulnerability-scanner/scripts/security_scan.py", True),
-    ("Lint Check", ".agent/skills/lint-and-validate/scripts/lint_runner.py", True),
-    ("Schema Validation", ".agent/skills/database-design/scripts/schema_validator.py", False),
-    ("Test Runner", ".agent/skills/testing-patterns/scripts/test_runner.py", False),
-    ("UX Audit", ".agent/skills/frontend-design/scripts/ux_audit.py", False),
-    ("SEO Check", ".agent/skills/seo-fundamentals/scripts/seo_checker.py", False),
+    ("Security Scan", "toolkit/skills/vulnerability-scanner/scripts/security_scan.py", True),
+    ("Lint Check", "toolkit/skills/lint-and-validate/scripts/lint_runner.py", True),
+    ("Schema Validation", "toolkit/skills/database-design/scripts/schema_validator.py", False),
+    ("Test Runner", "toolkit/skills/testing-patterns/scripts/test_runner.py", False),
+    ("UX Audit", "toolkit/skills/frontend-design/scripts/ux_audit.py", False),
+    ("SEO Check", "toolkit/skills/seo-fundamentals/scripts/seo_checker.py", False),
 ]
 
 PERFORMANCE_CHECKS = [
-    ("Lighthouse Audit", ".agent/skills/performance-profiling/scripts/lighthouse_audit.py", True),
-    ("Playwright E2E", ".agent/skills/webapp-testing/scripts/playwright_runner.py", False),
+    ("Lighthouse Audit", "toolkit/skills/performance-profiling/scripts/lighthouse_audit.py", True),
+    ("Playwright E2E", "toolkit/skills/webapp-testing/scripts/playwright_runner.py", False),
 ]
 
 def check_script_exists(script_path: Path) -> bool:

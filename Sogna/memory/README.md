@@ -30,7 +30,7 @@ The memory is organized into four distinct cognitive layers, defined in `registr
 - **Registry Path**: `intelligence/`
 - **Key Files**:
   - `thread_intel.md`: Accumulated intelligence from multiple sessions.
-  - `fragments/*.md`: Granular data points waiting for synthesis.
+  - `*.md`: Puntos de datos granulares en espera de síntesis.
 
 ### 4. Operational Layer (Session)
 

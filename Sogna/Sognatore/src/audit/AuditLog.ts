@@ -65,13 +65,20 @@ export class AuditLog {
   public flush(): void {
     if (this._entries.length === 0) return;
 
-    if (!fs.existsSync(this._logDir)) {
-      fs.mkdirSync(this._logDir, { recursive: true });
-    }
-
-    const lines = this._entries.map((e) => JSON.stringify(e)).join('\n') + '\n';
-    fs.appendFileSync(this._logFile, lines, 'utf8');
+    const entriesToFlush = [...this._entries];
     this._entries = [];
+
+    (async () => {
+      try {
+        if (!fs.existsSync(this._logDir)) {
+          await fs.promises.mkdir(this._logDir, { recursive: true });
+        }
+        const lines = entriesToFlush.map((e) => JSON.stringify(e)).join('\n') + '\n';
+        await fs.promises.appendFile(this._logFile, lines, 'utf8');
+      } catch (e) {
+        console.error('[audit] Failed to flush entries asynchronously:', e);
+      }
+    })();
   }
 
   public verifyChain(): { valid: boolean; entries: number; brokenAt: number | null; error: string | null } {

@@ -33,6 +33,7 @@ pub struct ToolContext {
     pub tool_name: String,
     pub arguments: serde_json::Value,
     pub trust_score: f64,
+    pub dynamic_rules: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -66,9 +67,24 @@ impl PolicyEngine {
         }
     }
 
-    pub fn classify_command(&self, command: &str) -> CommandIntent {
+    pub fn classify_command(&self, command: &str, dynamic_rules: &Option<serde_json::Value>) -> CommandIntent {
         let first = command.trim().split_whitespace().next().unwrap_or("");
         
+        if let Some(rules) = dynamic_rules {
+            if let Some(shield) = rules.get("apex_sovereignty").and_then(|v| v.get("bash_shield")) {
+                if let Some(destructive) = shield.get("write_commands").and_then(|v| v.as_array()) {
+                    if destructive.iter().any(|v| v.as_str() == Some(first)) {
+                        return CommandIntent::Write;
+                    }
+                }
+                if let Some(read_only) = shield.get("read_only_commands").and_then(|v| v.as_array()) {
+                    if read_only.iter().any(|v| v.as_str() == Some(first)) {
+                        return CommandIntent::ReadOnly;
+                    }
+                }
+            }
+        }
+
         match first {
             "ls" | "cat" | "grep" | "find" | "head" | "tail" | "diff" | "stat" => CommandIntent::ReadOnly,
             "cp" | "mv" | "touch" | "mkdir" | "chmod" | "chown" => CommandIntent::Write,
@@ -101,8 +117,30 @@ impl PolicyEngine {
         // 2. Shell Command Policy & Auto-Fixing
         if context.tool_name == "run_command" || context.tool_name == "shell_exec" {
             if let Some(command) = context.arguments.get("CommandLine").and_then(|v| v.as_str()) {
-                let intent = self.classify_command(command);
+                let mut intent = self.classify_command(command, &context.dynamic_rules);
                 
+                let mut is_destructive_pattern = false;
+                if let Some(rules) = &context.dynamic_rules {
+                    if let Some(shield) = rules.get("apex_sovereignty").and_then(|v| v.get("bash_shield")) {
+                        if let Some(patterns) = shield.get("destructive_patterns").and_then(|v| v.as_array()) {
+                            for p in patterns {
+                                if let Some(arr) = p.as_array() {
+                                    if let Some(pattern) = arr.first().and_then(|v| v.as_str()) {
+                                        if command.contains(pattern) {
+                                            is_destructive_pattern = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if is_destructive_pattern {
+                    intent = CommandIntent::Destructive;
+                }
+
                 // Auto-Fix: Inject -y for package managers if missing and trust is high
                 if intent == CommandIntent::PackageManagement && context.trust_score > 0.7 {
                     if (command.contains("install") || command.contains("upgrade")) && !command.contains("-y") {

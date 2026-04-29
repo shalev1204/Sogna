@@ -25,6 +25,7 @@ export class AgentFactory {
   private agentsMDPath: string;
   private evolvedAgentsMDPath: string;
   private swarmCatalogPath: string;
+  private swarmCatalogCache: any = null;
   private availableProviders: Provider[] = [];
 
   private sognatoreRoot: string;
@@ -138,15 +139,18 @@ export class AgentFactory {
   private getSwarmForAgent(type: string): AgentSwarm {
     if (!fs.existsSync(this.swarmCatalogPath)) return 'orchestration';
     
-    const catalog = JSON.parse(fs.readFileSync(this.swarmCatalogPath, 'utf8'));
+    if (!this.swarmCatalogCache) {
+      this.swarmCatalogCache = JSON.parse(fs.readFileSync(this.swarmCatalogPath, 'utf8'));
+    }
+    const catalog = this.swarmCatalogCache;
     
     // Check main swarms
-    for (const [swarm, config] of Object.entries(catalog.swarms)) {
+    for (const [swarm, config] of Object.entries(catalog.swarms || {})) {
       if ((config as any).agents.includes(type)) return swarm as AgentSwarm;
     }
     
     // Check evolved swarms
-    for (const [swarm, config] of Object.entries(catalog.evolved_swarms)) {
+    for (const [swarm, config] of Object.entries(catalog.evolved_swarms || {})) {
       if ((config as any).agents.includes(type)) return swarm as AgentSwarm;
     }
     
@@ -201,5 +205,6 @@ ${role.qualityChecks.map(q => `- ${q}`).join('\n')}
     }
 
     fs.writeFileSync(this.swarmCatalogPath, JSON.stringify(catalog, null, 2));
+    this.swarmCatalogCache = catalog; // Actualizar caché
   }
 }

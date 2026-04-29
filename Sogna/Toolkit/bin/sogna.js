@@ -10,9 +10,9 @@ const SOGNATORE_PATH = path.join(__dirname, '..', '..', 'Sognatore');
 const NODE_MODULES = path.join(SOGNATORE_PATH, 'node_modules');
 
 // Importar directamente desde los entry points de los módulos ESM
-import chalk from '../../Sognatore/node_modules/chalk/source/index.js';
-import { program } from '../../Sognatore/node_modules/commander/esm.mjs';
-const fs = require(path.join(SOGNATORE_PATH, 'node_modules', 'fs-extra'));
+import chalk from 'chalk';
+import { program } from 'commander';
+import fs from 'fs-extra';
 const uma = require('../shared/uma_bridge.cjs');
 
 program

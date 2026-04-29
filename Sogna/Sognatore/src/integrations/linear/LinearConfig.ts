@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { LinearClientConfig, DEFAULT_STATUS_MAPPING } from './LinearTypes.js';
+import { Hub } from '../../Sentinel-Sognatore/Hub.js';
 
 /**
  * Minimal YAML parser for flat and one-level-nested key-value pairs.
@@ -75,7 +76,7 @@ function setNested(obj: any, keys: string[], value: any) {
  * Load Linear integration configuration.
  */
 export function loadConfig(configDir?: string): LinearClientConfig | null {
-  const dir = configDir || path.join(process.cwd(), '.sognatore');
+  const dir = configDir || path.join(Hub.getInstance().getSognatoreRoot(), '.sognatore');
   const yamlPath = path.join(dir, 'config.yaml');
   const jsonPath = path.join(dir, 'config.json');
 
