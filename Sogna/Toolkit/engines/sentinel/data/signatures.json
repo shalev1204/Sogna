@@ -31375,8 +31375,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/SwarmOrchestrator.ts": {
-    "hash": "5d4be0ed6c40827713ba71b03416d4ce068b8956e28bcbd616834b524c531df4",
-    "timestamp": "2026-04-20T21:16:49.016Z",
+    "hash": "b0d2c8edee9e48c68e3631426ad18037201f7710bd6d38dfa74dd42d27b84dfb",
+    "timestamp": "2026-04-29T17:06:34.812Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/ToolResolver.ts": {
@@ -31465,8 +31465,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/MemoryHub.ts": {
-    "hash": "3b5259e71faf5338938e0f74578ee152a873f85a35157c3049f9140dc1aaf46c",
-    "timestamp": "2026-04-27T22:05:15.160Z",
+    "hash": "cdefa01a729da3f7b0ab105c05a55a70b397a54aea5b8d893f71bd82f417c279",
+    "timestamp": "2026-04-29T17:06:34.812Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/tasks/BackgroundTaskManager.ts": {
@@ -33305,8 +33305,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/Engine.ts": {
-    "hash": "366fdafdc3e0e6b244aaa6eb9b0a212a718f9e3f3783f3a326de7ab30afa6fc2",
-    "timestamp": "2026-04-27T21:43:48.961Z",
+    "hash": "8e49e3e6fab79e4fb52b44f5379b640d7a37caf19e969259b9fb7b1662b16952",
+    "timestamp": "2026-04-29T17:06:34.812Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/PolicyTypes.ts": {
@@ -37160,18 +37160,18 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/ImmuneSystem.ts": {
-    "hash": "c8635fa2d5f46f52148a687ca657a86d6f016c7ec3892213d72e2f1fc1bda0b2",
-    "timestamp": "2026-04-27T21:49:57.489Z",
+    "hash": "8c92d3c85dae6f47efd3a7dd8d885f07b2b0bc7ab2b0cd94de553688a9399a36",
+    "timestamp": "2026-04-29T17:06:34.812Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/memory/NeuralLearning.ts": {
-    "hash": "e326525b82487a8a6cb4429635758189f768ee7fc557bf37e9292a25a52b3465",
-    "timestamp": "2026-04-27T21:49:57.489Z",
+    "hash": "e29084f2ea57597faec1d6ceee3dd20714d9dd513c85ecd52f185d7b20e81cf5",
+    "timestamp": "2026-04-29T17:06:34.812Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/core/orchestration/SwarmCommander.ts": {
-    "hash": "dfd6977550cb198ddc5e778f52d67ae84268b63333e383d4d0e8847ad5457367",
-    "timestamp": "2026-04-27T21:49:57.489Z",
+    "hash": "4eef7f007ed9a53fb6300660869196b0ed49ca04fc4f69a2f25ff58a50bc2c29",
+    "timestamp": "2026-04-29T17:06:34.812Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sognatore/src/Sentinel-Sognatore/ActivityProfile.ts": {
