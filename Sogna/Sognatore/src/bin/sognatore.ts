@@ -88,6 +88,10 @@ program
       process.exit(1);
     }
 
+    // Start Sovereign Immune System (Swarm Concurrency)
+    const { ImmuneSystem } = await import('../core/ImmuneSystem.js');
+    await ImmuneSystem.start();
+
     await runner.start(prd);
   });
 

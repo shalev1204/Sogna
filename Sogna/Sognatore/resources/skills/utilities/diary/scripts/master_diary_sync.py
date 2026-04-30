@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Master Diary Sync Script v2
 Two-mode operation:
@@ -186,23 +186,23 @@ def sync_to_notion(global_path):
 
 def backup_to_sogna(global_path):
     # Copy global diary to Sogna ecosistema.
-    print("ðŸ“‚ Backing up to Sogna...")
+    print("📁 Backing up to Sogna...")
     
     # Safety Check: If path is empty, it shouldn't backup
-    if not str(OBSIDIAN_DAILY_NOTES).strip():
-        print("â„¹ï¸  Sogna path is not set (empty). Skipping backup.")
+    if not str(SOGNA_JOURNAL_PATH).strip():
+        print("ℹ️   Sogna path is not set (empty). Skipping backup.")
         return False
         
-    if not OBSIDIAN_DAILY_NOTES.exists():
-        print(f"âš ï¸  Sogna path not found: {OBSIDIAN_DAILY_NOTES}. Skipping backup.")
+    if not SOGNA_JOURNAL_PATH.exists():
+        print(f"⚠️   Sogna path not found: {SOGNA_JOURNAL_PATH}. Skipping backup.")
         return False
     try:
-        dest = OBSIDIAN_DAILY_NOTES / global_path.name
+        dest = SOGNA_JOURNAL_PATH / global_path.name
         shutil.copy2(global_path, dest)
-        print(f"âœ… Backed up to: {dest}")
+        print(f"✅ Backed up to: {dest}")
         return True
     except Exception as e:
-        print(f"âŒ Sogna backup failed: {e}")
+        print(f"❌ Sogna backup failed: {e}")
         return False
 
 

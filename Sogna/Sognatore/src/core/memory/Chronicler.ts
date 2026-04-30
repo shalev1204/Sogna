@@ -62,8 +62,7 @@ export class Chronicler {
    * Returns the current memory index.
    */
   public async getIndex(): Promise<MemoryIndex> {
-    if (!(await fs.pathExists(this.indexFile))) return { fragments: [], lastUpdated: '' };
-    return await fs.readJson(this.indexFile);
+    return await this.readIndex();
   }
 
   /**
@@ -111,7 +110,7 @@ export class Chronicler {
       });
     }
 
-    await fs.writeJson(this.indexFile, index, { spaces: 2 });
+    await this.writeIndex(index);
   }
 
   private extractBlocks(content: string): string[] {
@@ -155,7 +154,7 @@ export class Chronicler {
     await fs.writeFile(filePath, markdown, 'utf-8');
     
     // Incrementally update index
-    const index: MemoryIndex = await fs.readJson(this.indexFile);
+    const index: MemoryIndex = await this.readIndex();
     const newFragment = {
       key: fragment.key,
       tags: fragment.tags,
@@ -166,7 +165,7 @@ export class Chronicler {
     };
     index.fragments.push(newFragment);
     index.lastUpdated = timestamp;
-    await fs.writeJson(this.indexFile, index, { spaces: 2 });
+    await this.writeIndex(index);
   }
 
   /**
@@ -175,7 +174,7 @@ export class Chronicler {
   async recall(query: string): Promise<KnowledgeFragment[]> {
     if (!(await fs.pathExists(this.indexFile))) return [];
 
-    const index: MemoryIndex = await fs.readJson(this.indexFile);
+    const index: MemoryIndex = await this.readIndex();
     const isRegex = query.startsWith('/') && query.endsWith('/');
     const isBlock = query.startsWith('^');
     let regex: RegExp | null = null;
@@ -252,7 +251,7 @@ export class Chronicler {
   async query(filters: Record<string, any>): Promise<KnowledgeFragment[]> {
     if (!(await fs.pathExists(this.indexFile))) return [];
     
-    const index: MemoryIndex = await fs.readJson(this.indexFile);
+    const index: MemoryIndex = await this.readIndex();
     const matches = index.fragments.filter(f => {
       const props = f.properties || {};
       return Object.entries(filters).every(([key, val]) => {
@@ -276,13 +275,21 @@ export class Chronicler {
   }
 
   private parseFragment(markdown: string, filePath?: string): KnowledgeFragment {
-    const frontmatterMatch = markdown.match(/^---\r?\n([\s\S]+?)\r?\n---/);
+    // Extract frontmatter safely (only at the very beginning, max 2000 chars)
+    const fmRegex = /^---\r?\n([\s\S]+?)\r?\n---/;
+
+    const frontmatterMatch = markdown.slice(0, 2000).match(fmRegex);
     const metadata: any = {};
     const properties: Record<string, any> = {};
     
     if (frontmatterMatch) {
       const fmContent = frontmatterMatch[1];
-      const lines = fmContent.split(/\r?\n/);
+      // Safety: If FM looks like real content (too long or no colons), skip it
+      if (fmContent.length > 1500) {
+        console.warn(`[Chronicler] Metadata explosion protected in ${filePath || 'unknown'}`);
+      } else {
+        const lines = fmContent.split(/\r?\n/);
+
       
       lines.forEach(line => {
         // Handle standard key: value or list item - key: value
@@ -296,8 +303,9 @@ export class Chronicler {
           properties[key] = value;
         }
       });
-      
+      }
     }
+
 
     // Implicit Swarm/Project Inference from Path
     if (filePath) {
@@ -322,7 +330,11 @@ export class Chronicler {
       properties.raw_links = Array.from(new Set(allLinks));
     }
 
-    const content = markdown.replace(/^---\r?\n[\s\S]+?\r?\n---/, '').trim();
+    let bodyContent = markdown;
+    if (frontmatterMatch && frontmatterMatch[1].length <= 1500) {
+      bodyContent = markdown.replace(/^---\r?\n[\s\S]+?\r?\n---/, '').trim();
+    }
+
     const titleMatch = markdown.match(/^#\s+(.+)$/m);
     
     // Fallback order: FM Key -> FM ID -> H1 Title -> Filename
@@ -342,9 +354,63 @@ export class Chronicler {
       project: metadata.project || 'global',
       tags: (metadata.tags || '').split(',').map((t: string) => t.trim()).filter(Boolean),
       timestamp: metadata.timestamp || new Date().toISOString(),
-      content: content.split(/\r?\n/).filter(l => !l.startsWith('#')).join('\n').trim(),
+      content: bodyContent.split(/\r?\n/).filter(l => !l.startsWith('#')).join('\n').trim(),
       properties
     };
+
+  }
+
+  private async readIndex(): Promise<MemoryIndex> {
+    if (!(await fs.pathExists(this.indexFile))) return { fragments: [], lastUpdated: '' };
+    
+    try {
+      const dataStr = await fs.readFile(this.indexFile, 'utf8');
+      
+      // Auto-Detect Encryption: Encrypted strings don't start with JSON braces
+      if (dataStr.length > 50 && !dataStr.trim().startsWith('{')) {
+        const { Guardian } = await import('../Guardian.js');
+        const decrypted = Guardian.getInstance().unsealData<MemoryIndex>(dataStr);
+        if (decrypted) return decrypted;
+        console.error('[CHRONICLER] Decryption failed. Returning empty index.');
+        return { fragments: [], lastUpdated: '' };
+      }
+      
+      return JSON.parse(dataStr);
+    } catch (e) {
+      console.error(`[CHRONICLER] Error reading index: ${e}`);
+      return { fragments: [], lastUpdated: '' };
+    }
+  }
+
+  private async writeIndex(index: MemoryIndex): Promise<void> {
+    // 1. Institutional Pruning (Entropy Control)
+    if (index.fragments.length > 1000) {
+      const { PruningService } = await import('./PruningService.js');
+      await PruningService.getInstance().prune(this.indexFile, {
+        minWeight: 0.2,
+        maxAgeDays: 60,
+        preserveTags: ['institutional', 'sovereign', 'sentinel']
+      });
+      // Re-read after pruning to ensure we encrypt the clean version
+      const data = await fs.readFile(this.indexFile, 'utf8');
+      try {
+        index = JSON.parse(data);
+      } catch (e) {
+        // Fallback to memory index if file was corrupted during prune (unlikely)
+      }
+    }
+
+    let output: string;
+    
+    if (process.env.SOGNA_ENCRYPT_MEMORY === 'true') {
+      const { Guardian } = await import('../Guardian.js');
+      output = Guardian.getInstance().sealData(index);
+      console.log('[CHRONICLER] Neural Index sealed with Guardian AES-256.');
+    } else {
+      output = JSON.stringify(index, null, 2);
+    }
+    
+    await fs.writeFile(this.indexFile, output, 'utf8');
   }
 
   private async getFilesRecursively(dir: string): Promise<string[]> {

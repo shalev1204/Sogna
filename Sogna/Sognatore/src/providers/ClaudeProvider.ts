@@ -46,8 +46,18 @@ export class ClaudeProvider extends Provider {
     const resolvedTier = this.resolveTier(tier);
     const model = this.resolveModelForTier(resolvedTier);
     
-    // Build arguments - using '-' for stdin input
+    // Decision Sovereignty: Before calling the external provider, we check our own Permission Proxy
+    const { PermissionProxy } = await import('../Sentinel-Sognatore/PermissionProxy.js');
+    const proxy = PermissionProxy.getInstance();
+    const isAuthorized = await proxy.requestCapability('claude-provider', 'process:execute', `Invoke model ${model} with prompt length ${prompt.length}`);
+    
+    if (!isAuthorized && process.env.SOGNA_STRICT_MODE === 'true') {
+      throw new Error('[SECURITY] Execution blocked by Sentinel Permission Proxy. Capability: process:execute');
+    }
+
+    // Build arguments
     const args = ['--dangerously-skip-permissions', '--model', model, '-p', '-'];
+
     
     if (options.extraArgs) {
       args.push(...(options.extraArgs as string[]));

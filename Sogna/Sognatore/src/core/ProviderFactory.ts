@@ -6,15 +6,18 @@ import { MoonshotProvider } from '../providers/MoonshotProvider.js';
 import { DeepSeekProvider } from '../providers/DeepSeekProvider.js';
 import { OpenRouterProvider } from '../providers/OpenRouterProvider.js';
 import { AiderProvider } from '../providers/AiderProvider.js';
+import { OllamaProvider } from '../providers/OllamaProvider.js';
 
 export class ProviderFactory {
   static getProvider(name?: string, model?: string): Provider {
-    let providerName = name || process.env.SOGNATORE_PROVIDER || 'gemini';
+    // Sovereignty Mode: Prioritize local models if envar is set
+    const sovereigntyMode = process.env.SOGNA_SOVEREIGNTY_MODE === 'true';
+    let providerName = name || process.env.SOGNATORE_PROVIDER || (sovereigntyMode ? 'ollama' : 'gemini');
 
     // Model-based Prefix Routing (Claw-inspired)
     if (model && model.includes('/')) {
       const prefix = model.split('/')[0].toLowerCase();
-      const validPrefixes = ['gemini', 'claude', 'openai', 'kimi', 'moonshot', 'deepseek', 'openrouter', 'aider'];
+      const validPrefixes = ['gemini', 'claude', 'openai', 'kimi', 'moonshot', 'deepseek', 'openrouter', 'aider', 'ollama'];
       if (validPrefixes.includes(prefix)) {
         providerName = prefix;
       }
@@ -36,6 +39,8 @@ export class ProviderFactory {
         return new OpenRouterProvider();
       case 'aider':
         return new AiderProvider();
+      case 'ollama':
+        return new OllamaProvider();
       default:
         throw new Error(`Unknown provider: ${providerName}`);
     }
@@ -49,7 +54,8 @@ export class ProviderFactory {
       new MoonshotProvider(),
       new DeepSeekProvider(),
       new OpenRouterProvider(),
-      new AiderProvider()
+      new AiderProvider(),
+      new OllamaProvider()
     ];
 
     const availability = await Promise.all(

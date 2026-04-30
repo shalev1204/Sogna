@@ -5,6 +5,7 @@ import { AntiSycophancyGate } from './gates/AntiSycophancyGate.js';
 import { CompatibilityGate } from './gates/CompatibilityGate.js';
 import { ConsensusGate } from './gates/ConsensusGate.js';
 import { VitalsGate } from './gates/VitalsGate.js';
+import { AdversarialGate } from './gates/AdversarialGate.js';
 import { CouncilEvidence, GateResult } from './gates/types.js';
 import { AgentRegistry } from './agents/AgentRegistry.js';
 import chalk from 'chalk';
@@ -18,6 +19,7 @@ export class QualityCouncil {
       new CompatibilityGate(cwd),    // GATE 10 (High Priority)
       new ConsensusGate(cwd),        // SBP Bridge
       new StaticAnalysisGate(cwd),
+      new AdversarialGate(cwd),      // PREDATORE STRESS TEST
       new BlindReviewGate(cwd),
       new AntiSycophancyGate(cwd)    // GATE 7
     ];

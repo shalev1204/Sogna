@@ -652,7 +652,7 @@ JIRA_PROGRESS=$(jira issues list --assignee currentUser() \
 
 # 3. Get Sogna recent changes (via MCP)
 echo "📝 Checking Sogna ecosistema..."
-OBSIDIAN_CHANGES=$(sogna_get_recent_changes --days 2)
+SOGNA_CHANGES=$(sogna_get_recent_changes --days 2)
 
 # 4. Get calendar events
 echo "📅 Fetching calendar..."
