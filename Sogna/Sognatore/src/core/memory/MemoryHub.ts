@@ -34,17 +34,40 @@ export class MemoryHub {
   private readonly SEMANTIC_CACHE_TTL = 180000; // 3 minutes
 
   public constructor(rootMemory?: string, chronicler?: Chronicler) {
-    this.rootMemory = rootMemory ? path.resolve(rootMemory) : path.resolve(process.cwd(), 'memory');
+    const findRoot = (start: string): string => {
+      let curr = start;
+      const root = path.parse(curr).root;
+      while (curr !== root) {
+        if (fs.existsSync(path.join(curr, 'package.json')) && (fs.existsSync(path.join(curr, '.git')) || fs.existsSync(path.join(curr, 'Sognatore')))) {
+          return curr;
+        }
+        curr = path.join(curr, '..');
+      }
+      return process.cwd();
+    };
+
+    const projectRoot = findRoot(process.cwd());
+    this.rootMemory = rootMemory ? path.resolve(rootMemory) : path.resolve(projectRoot, 'memory');
     this.securityDir = path.join(this.rootMemory, 'security');
-    this.agencyDir = path.resolve(this.rootMemory, '../../toolkit/agents'); 
-    const skillsDir = path.resolve(this.rootMemory, '../../toolkit/skills'); 
+    this.agencyDir = path.resolve(projectRoot, 'toolkit/agents'); 
+    const skillsDir = path.resolve(projectRoot, 'toolkit/skills'); 
+    const sentinelDir = path.resolve(projectRoot, 'toolkit/engines/Sentinel');
+    const predatorDir = path.resolve(projectRoot, 'toolkit/engines/Predatore');
+    
     this.registryPath = path.join(this.rootMemory, 'registry.json');
-    this.chronicler = chronicler || Chronicler.getInstance(rootMemory ? path.dirname(rootMemory) : '.');
-    this.chronicler.addSource(this.agencyDir); // Register Agency Source
-    this.chronicler.addSource(skillsDir); // Register Skills Source
+    this.chronicler = chronicler || Chronicler.getInstance(projectRoot);
+    
+    // Global Neural Sources
+    this.chronicler.addSource(this.agencyDir); 
+    this.chronicler.addSource(skillsDir); 
+    this.chronicler.addSource(sentinelDir);
+    this.chronicler.addSource(predatorDir);
+    this.chronicler.addSource(projectRoot); 
+
     this.immuneSystem = new ImmuneSystem(this);
     this.neuralLearning = new NeuralLearning(this.chronicler);
   }
+
 
   public static getInstance(): MemoryHub {
     if (!MemoryHub.instance) {
@@ -243,7 +266,13 @@ export class MemoryHub {
     const edges: any[] = [];
     
     index.fragments.forEach((f: any) => {
-      nodes.push({ id: f.key, tags: f.tags, type: f.properties?.type || 'fragment' });
+      nodes.push({ 
+        id: f.key, 
+        tags: f.tags, 
+        type: f.properties?.type || 'fragment',
+        swarm: f.properties?.swarm 
+      });
+
       
       // 1. Process explicit raw_links from Frontmatter
       if (f.properties?.raw_links) {
@@ -273,9 +302,78 @@ export class MemoryHub {
           edges.push({ source: f.key, target: match[1] });
         }
       }
+
+      // 4. Implicit Hub Connections (Cohesion)
+      if (f.properties?.swarm) {
+        // Bi-directional Swarm connection
+        edges.push({ source: f.key, target: f.properties.swarm });
+        edges.push({ source: f.properties.swarm, target: f.key });
+        
+        // Bi-directional Core connection
+        edges.push({ source: f.key, target: 'Sogna' });
+        edges.push({ source: 'Sogna', target: f.key });
+      }
     });
 
-    this.graphCache = { nodes, edges };
+    // 5. Global Bidirectionality Loop (Ensuring every A->B has B->A)
+    const existingEdges = new Set(edges.map(e => `${e.source}->${e.target}`));
+    const reverseEdges: any[] = [];
+    
+    edges.forEach(e => {
+      const rev = `${e.target}->${e.source}`;
+      if (!existingEdges.has(rev)) {
+        reverseEdges.push({ source: e.target, target: e.source, type: 'virtual' });
+        existingEdges.add(rev);
+      }
+    });
+    
+    edges.push(...reverseEdges);
+
+    // Ensure Swarm Anchors exist in nodes list if not already there
+    const swarms = ['Skills', 'Agents', 'Core', 'Orchestration', 'Business', 'Engineering', 'Data', 'Product', 'Security', 'Offensive', 'Engines', 'Monitor'];
+
+    swarms.forEach(s => {
+      if (!nodes.some(n => n.id === s)) {
+        nodes.push({ id: s, tags: ['swarm', 'anchor'], type: 'anchor' });
+        edges.push({ source: s, target: 'Sogna' });
+        edges.push({ source: 'Sogna', target: s });
+      }
+    });
+
+    // 6. Fuzzy Linking (Optimized Regex-based implicit mentions)
+    const validNodeIds = nodes.filter(n => n.id.length > 5).map(n => n.id);
+    if (validNodeIds.length > 0) {
+      // Create a combined regex: \b(Concept1|Concept2|...)\b
+      const pattern = new RegExp(`\\b(${validNodeIds.map(id => id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})\\b`, 'gi');
+      
+      index.fragments.forEach((f: any) => {
+        const content = f.content;
+        let match;
+        while ((match = pattern.exec(content)) !== null) {
+          const matchedId = match[0];
+          // Find original case-sensitive ID from the nodes list if needed, 
+          // or just find the first match in validNodeIds that case-insensitively matches
+          const targetId = validNodeIds.find(id => id.toLowerCase() === matchedId.toLowerCase());
+          
+          if (targetId && targetId !== f.key) {
+            const edgeId = `${f.key}->${targetId}`;
+            if (!existingEdges.has(edgeId)) {
+              edges.push({ source: f.key, target: targetId, type: 'fuzzy' });
+              edges.push({ source: targetId, target: f.key, type: 'fuzzy-virtual' });
+              existingEdges.add(edgeId);
+              existingEdges.add(`${targetId}->${f.key}`);
+            }
+          }
+        }
+        pattern.lastIndex = 0; // Reset for next fragment
+      });
+    }
+
+    // 7. Final Integrity Check (Purge Dead Links)
+    const validNodeIdsSet = new Set(nodes.map(n => n.id));
+    const cleanEdges = edges.filter(e => validNodeIdsSet.has(e.source) && validNodeIdsSet.has(e.target));
+
+    this.graphCache = { nodes, edges: cleanEdges };
     this.lastGraphUpdate = now;
     return this.graphCache;
   }

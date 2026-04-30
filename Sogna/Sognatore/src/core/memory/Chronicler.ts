@@ -89,26 +89,26 @@ export class Chronicler {
   async rebuildIndex(): Promise<void> {
     const index: MemoryIndex = { fragments: [], lastUpdated: new Date().toISOString() };
     
+    const allFiles = new Set<string>();
     for (const sourceDir of this.sources) {
       if (!(await fs.pathExists(sourceDir))) continue;
-      
-      const files = (await fs.readdir(sourceDir)).filter(f => f.endsWith('.md'));
+      const files = await this.getFilesRecursively(sourceDir);
+      files.forEach(f => allFiles.add(f));
+    }
 
-      for (const file of files) {
-        const filePath = path.join(sourceDir, file);
-        const content = await fs.readFile(filePath, 'utf-8');
-        const fragment = this.parseFragment(content);
-        const blocks = this.extractBlocks(fragment.content);
+    for (const filePath of allFiles) {
+      const content = await fs.readFile(filePath, 'utf-8');
+      const fragment = this.parseFragment(content, filePath);
+      const blocks = this.extractBlocks(fragment.content);
 
-        index.fragments.push({
-          key: fragment.key,
-          tags: fragment.tags,
-          fileName: filePath, // Using absolute path now for multi-source
-          timestamp: fragment.timestamp,
-          blocks,
-          properties: fragment.properties
-        });
-      }
+      index.fragments.push({
+        key: fragment.key,
+        tags: fragment.tags,
+        fileName: filePath,
+        timestamp: fragment.timestamp,
+        blocks,
+        properties: fragment.properties
+      });
     }
 
     await fs.writeJson(this.indexFile, index, { spaces: 2 });
@@ -275,7 +275,7 @@ export class Chronicler {
     return results.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
   }
 
-  private parseFragment(markdown: string): KnowledgeFragment {
+  private parseFragment(markdown: string, filePath?: string): KnowledgeFragment {
     const frontmatterMatch = markdown.match(/^---\r?\n([\s\S]+?)\r?\n---/);
     const metadata: any = {};
     const properties: Record<string, any> = {};
@@ -297,15 +297,45 @@ export class Chronicler {
         }
       });
       
-      // Special extraction: Always look for ANY [[link]] in the entire Frontmatter
-      const fmLinks = fmContent.match(/\[\[(.*?)\]\]/g);
-      if (fmLinks) {
-        properties.raw_links = fmLinks; // Keep for the graph engine
+    }
+
+    // Implicit Swarm/Project Inference from Path
+    if (filePath) {
+      if (!properties.swarm) {
+        if (filePath.includes('skills')) properties.swarm = 'Skills';
+        else if (filePath.includes('agents')) properties.swarm = 'Agents';
+        else if (filePath.includes('Sentinel')) properties.swarm = 'Security';
+        else if (filePath.includes('Predatore')) properties.swarm = 'Offensive';
+        else if (filePath.includes('engines')) properties.swarm = 'Engines';
+        else if (filePath.includes('observability')) properties.swarm = 'Monitor';
+        else if (filePath.includes('intelligence')) properties.swarm = 'Core';
+        else properties.swarm = 'Core'; 
       }
+
+
+      if (!properties.project) properties.project = 'Sogna';
+    }
+
+    // Special extraction: Look for ANY [[link]] in the ENTIRE document (FM + Body)
+    const allLinks = markdown.match(/\[\[(.*?)\]\]/g);
+    if (allLinks) {
+      properties.raw_links = Array.from(new Set(allLinks));
     }
 
     const content = markdown.replace(/^---\r?\n[\s\S]+?\r?\n---/, '').trim();
-    const fragmentKey = metadata.key || metadata.id || 'unknown';
+    const titleMatch = markdown.match(/^#\s+(.+)$/m);
+    
+    // Fallback order: FM Key -> FM ID -> H1 Title -> Filename
+    let fragmentKey = metadata.key || metadata.id;
+    if (!fragmentKey) {
+      if (titleMatch) {
+        fragmentKey = titleMatch[1].trim();
+      } else if (filePath) {
+        fragmentKey = path.basename(filePath, '.md');
+      } else {
+        fragmentKey = 'unknown';
+      }
+    }
     
     return {
       key: fragmentKey,
@@ -316,4 +346,26 @@ export class Chronicler {
       properties
     };
   }
+
+  private async getFilesRecursively(dir: string): Promise<string[]> {
+    const skipDirs = ['node_modules', '.git', '.turbo', 'dist', 'assets', 'out', 'build', '.sognatore'];
+    let results: string[] = [];
+    try {
+      const list = await fs.readdir(dir);
+      for (const file of list) {
+        if (skipDirs.includes(file)) continue;
+        const filePath = path.resolve(dir, file);
+        const stat = await fs.stat(filePath);
+        if (stat && stat.isDirectory()) {
+          results = results.concat(await this.getFilesRecursively(filePath));
+        } else if (file.endsWith('.md')) {
+          results.push(filePath);
+        }
+      }
+    } catch (e) {
+      // Skip directories that can't be read
+    }
+    return results;
+  }
 }
+
