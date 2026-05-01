@@ -12,6 +12,7 @@ class StylistGuardian:
             
         self.ux_rules = self._load_rules("ux_guidelines.csv")
         self.perf_rules = self._load_rules("react_performance.csv")
+        self._compiled_patterns = self._compile_all_rules()
         
     def _load_rules(self, filename):
         rules = []
@@ -24,6 +25,21 @@ class StylistGuardian:
                 rules.append(row)
         return rules
 
+    def _compile_all_rules(self):
+        compiled = []
+        for rule in self.ux_rules + self.perf_rules:
+            keywords = rule.get("Keywords", rule.get("Issue", "")).split(",")
+            patterns = [k.strip() for k in keywords if k.strip()]
+            for p in patterns:
+                try:
+                    compiled.append({
+                        "regex": re.compile(r'\b' + re.escape(p) + r'\b', re.IGNORECASE),
+                        "rule": rule
+                    })
+                except:
+                    continue
+        return compiled
+
     def audit_code(self, code, filename="unknown.js"):
         results = {
             "file": filename,
@@ -31,21 +47,13 @@ class StylistGuardian:
             "violations": []
         }
         
-        # Merge rules for total audit
-        all_rules = self.ux_rules + self.perf_rules
-        
-        for rule in all_rules:
-            # Simple keyword/pattern check for demonstration
-            # In a real scenario, this would use AST or more complex regex
-            keywords = rule.get("Keywords", rule.get("Issue", "")).split(",")
-            patterns = [k.strip() for k in keywords if k.strip()]
-            
-            for pattern in patterns:
-                if re.search(r'\b' + re.escape(pattern) + r'\b', code, re.IGNORECASE):
-                    # Found a potential violation of the "Don't" part
-                    # We check if the 'Code Example Bad' exists in the code
-                    bad_example = rule.get("Code Example Bad", "")
-                    if bad_example and bad_example in code:
+        for item in self._compiled_patterns:
+            if item["regex"].search(code):
+                rule = item["rule"]
+                bad_example = rule.get("Code Example Bad", "")
+                if not bad_example or bad_example in code:
+                    # Avoid duplicate violations for the same rule
+                    if not any(v["issue"] == rule.get("Issue") for v in results["violations"]):
                         results["violations"].append({
                             "category": rule.get("Category"),
                             "issue": rule.get("Issue"),
@@ -54,7 +62,6 @@ class StylistGuardian:
                             "suggestion": rule.get("Do")
                         })
                         
-                        # Deduct from score based on severity
                         severity = rule.get("Severity", "Medium").lower()
                         if severity == "critical": results["score"] -= 20
                         elif severity == "high": results["score"] -= 10

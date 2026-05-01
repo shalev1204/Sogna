@@ -1122,6 +1122,56 @@ def _extract_generic(path: Path, config: LanguageConfig) -> dict:
                         "source_location": f"L{node.start_point[0] + 1}",
                     })
 
+            # Capture Variable Access (Read/Write)
+            if node.type == "identifier":
+                var_name = _read_text(node, source)
+                # Avoid capturing calls twice or capturing class/function names as simple identifiers
+                if node.parent and node.parent.type not in ("call", "function_definition", "class_definition"):
+                    tgt_nid = label_to_nid.get(var_name.lower())
+                    if tgt_nid and tgt_nid != caller_nid:
+                        edges.append({
+                            "source": caller_nid,
+                            "target": tgt_nid,
+                            "relation": "references",
+                            "confidence": "EXTRACTED",
+                            "confidence_score": 0.9,
+                            "audit_reason": "Identifier reference",
+                            "source_file": str_path,
+                            "source_location": f"L{node.start_point[0] + 1}",
+                            "weight": 0.5,
+                        })
+
+            # Capture Constant Definitions (UPPER_CASE variables)
+            if node.type == "assignment":
+                left = node.child_by_field_name("left")
+                if left and left.type == "identifier":
+                    name = _read_text(left, source)
+                    if name.isupper() and len(name) > 2:
+                        add_node(label_to_nid.get(name.lower()) or _make_id(stem, "constant", name), name, node.start_point[0] + 1)
+
+            # Capture Environment Variables
+            if node.type == "call" and callee_name in ("getenv", "environ.get"):
+                args = node.child_by_field_name("arguments")
+                if args:
+                    for arg in args.children:
+                        if arg.type == "string":
+                            env_name = _read_text(arg, source).strip("'\"")
+                            env_nid = _make_id("env", env_name)
+                            if env_nid not in seen_ids:
+                                nodes.append({"id": env_nid, "label": f"ENV:{env_name}", "file_type": "env", "confidence_score": 1.0})
+                                seen_ids.add(env_nid)
+                            edges.append({
+                                "source": caller_nid,
+                                "target": env_nid,
+                                "relation": "uses_env",
+                                "confidence": "EXTRACTED",
+                                "confidence_score": 1.0,
+                                "audit_reason": "Env var access",
+                                "source_file": str_path,
+                                "source_location": f"L{node.start_point[0] + 1}",
+                                "weight": 1.0,
+                            })
+
             # Helper function calls: config('foo.bar') → uses_config edge to "foo"
             if (callee_name and callee_name in config.helper_fn_names):
                 args_node = node.child_by_field_name("arguments")

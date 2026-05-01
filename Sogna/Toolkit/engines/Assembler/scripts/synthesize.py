@@ -41,8 +41,27 @@ def run_guardian(target_path):
     except Exception as e:
         print(f"[Guardian Failed] Error al ejecutar: {e}")
 
+def process_template(template_name, template_dir, output_dir, tokens_re, tokens):
+    template_path = os.path.join(template_dir, template_name)
+    output_path = os.path.join(output_dir, template_name)
+
+    try:
+        with open(template_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        # Efficient regex-based token replacement
+        content = tokens_re.sub(lambda m: tokens.get(m.group(1), m.group(0)), content)
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return f"[OK] Sintetizado: {template_name}"
+    except Exception as e:
+        return f"[ERROR] {template_name}: {e}"
+
 def synthesize():
-    """Ejecuta la síntesis de componentes."""
+    """Ejecuta la síntesis de componentes con optimización paralela."""
+    from concurrent.futures import ThreadPoolExecutor
+    
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
     master_path = os.path.join(base_dir, "memory/designs/MASTER.md")
     template_dir = os.path.join(base_dir, "toolkit/engines/Assembler/templates")
@@ -51,30 +70,26 @@ def synthesize():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    print(f"--- Iniciando Síntesis Sogna (Assembler) ---")
+    print(f"--- [OPTIMIZED] Iniciando Síntesis Sogna (Assembler) ---")
     tokens = extract_tokens(master_path)
-    print(f"Tokens detectados: {len(tokens)}")
+    
+    # Pre-compile regex for tokens
+    if tokens:
+        pattern = '|'.join([r'\{\{(' + re.escape(key) + r')\}\}' for key in tokens.keys()])
+        tokens_re = re.compile(pattern)
+    else:
+        tokens_re = re.compile(r'\{\{(.*?)\}\}')
 
-    for template_name in os.listdir(template_dir):
-        if not template_name.endswith('.tsx') and not template_name.endswith('.ts'):
-            continue
-
-        template_path = os.path.join(template_dir, template_name)
-        output_path = os.path.join(output_dir, template_name)
-
-        with open(template_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            
-            # Reemplazar tokens
-            for key, val in tokens.items():
-                content = content.replace(f"{{{{{key}}}}}", val)
-            
-            # Limpieza final de placeholders no encontrados (opcional)
-            # content = re.sub(r'\{\{SOGNA_.*?\}\}', 'inherit', content)
-
-        with open(output_path, 'w', encoding='utf-8') as f:
-            f.write(content)
-            print(f"[OK] Sintetizado: {template_name}")
+    templates = [t for t in os.listdir(template_dir) if t.endswith(('.tsx', '.ts'))]
+    
+    with ThreadPoolExecutor() as executor:
+        results = list(executor.map(
+            lambda t: process_template(t, template_dir, output_dir, tokens_re, tokens), 
+            templates
+        ))
+    
+    for res in results:
+        print(res)
 
     # Ejecutar validación soberana
     run_guardian(output_dir)
