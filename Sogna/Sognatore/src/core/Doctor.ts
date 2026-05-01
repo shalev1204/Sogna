@@ -15,7 +15,7 @@ import { Shield as BashShield } from '../Sentinel-Sognatore/Shield.js';
 import { PermissionMode } from '../Sentinel-Sognatore/SecurityTypes.js';
 import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import { fileURLToPath } from 'url';
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica
 import { execSync } from 'child_process';
 
 export interface DoctorResult {
@@ -72,7 +72,7 @@ export class Doctor {
     // Disk Space (rough check)
     results.push(this.checkDiskSpace());
 
-    // Institutional Lifecycle Check
+    // Core Lifecycle Check
     await this.checkBootstrapLifecycle(results);
 
     // Blueprints Audit
@@ -85,7 +85,7 @@ export class Doctor {
     const engine = BootstrapEngine.getInstance();
     // We don't run it fully here, just report its importance
     results.push({
-      name: 'Professional Bootstrap Graph',
+      name: 'Bootstrap Graph',
       status: 'PASS',
       message: 'Lifecycle manager integrated and ready.',
       required: true
@@ -192,7 +192,7 @@ export class Doctor {
     try {
       const gKey = process.env['GOOGLE_API_KEY'] || process.env['GEMINI_API_KEY'];
       if (gKey) {
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica
         const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${gKey}`);
         results.push({ name: 'Gemini Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false });
       } else results.push({ name: 'Gemini Connectivity', status: 'WARN', message: 'No Key', required: false });
@@ -202,7 +202,7 @@ export class Doctor {
     try {
       const cKey = process.env['ANTHROPIC_API_KEY'];
       if (cKey) {
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica
         const resp = await fetch("https://api.anthropic.com/v1/messages", {
           method: 'POST',
           headers: { 'x-api-key': cKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
@@ -216,7 +216,7 @@ export class Doctor {
     try {
       const oKey = process.env['OPENAI_API_KEY'];
       if (oKey) {
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica
         const resp = await fetch("https://api.openai.com/v1/models", { headers: { 'Authorization': `Bearer ${oKey}` } });
         results.push({ name: 'OpenAI Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false });
       } else results.push({ name: 'OpenAI Connectivity', status: 'WARN', message: 'No Key', required: false });
@@ -333,11 +333,11 @@ export class Doctor {
       results.push({ name: 'Prefix Routing Engine', status: 'FAIL', message: 'Routing engine error.', required: true });
     }
 
-    // 4. Institutional Audit Vault (Lightweight)
+    // 4. Audit Vault (Lightweight)
     const auditDir = path.join(Hub.getInstance().getSognatoreRoot(), '.sognatore', 'audit');
     const auditExists = fs.existsSync(auditDir);
     results.push({
-      name: 'Institutional Audit Vault',
+      name: 'Audit Vault',
       status: auditExists ? 'PASS' : 'WARN',
       message: auditExists ? undefined : 'Audit directory missing. Will be created on first agent interaction.',
       required: false
@@ -356,7 +356,7 @@ export class Doctor {
         fix: async () => {
           console.log(chalk.blue(`  - Installing ${server}...`));
           const cmd = server.includes('pyright') ? 'npm install -g pyright' : 'npm install -g typescript-language-server typescript';
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica
           await execSync(cmd, { stdio: 'inherit' });
         }
       });

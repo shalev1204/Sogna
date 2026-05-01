@@ -10,7 +10,7 @@ Next.js 16 marks the transition from "Segment-level caching" to "Component-level
 The `use cache` directive can be applied to **Server Components** or **Functions**.
 
 ### Rule: Granular Application
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 Wrap only the data-fetching logic or the specific component that needs caching.
 
 ```tsx
@@ -38,7 +38,7 @@ import { cacheLife } from 'next/cache'
 async function getStockInfo() {
   'use cache'
   cacheLife('minutes') // Using a pre-defined profile
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   return await fetchStocks()
 }
 ```

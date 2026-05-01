@@ -65,7 +65,7 @@ export function scanContent(content: string, type: string): string[] {
   return findings;
 }
 
-// Institutional Validators
+// Core Validators
 export function validatePreExecution(entry: any): PolicyResult {
   const errors: string[] = [];
   if (!entry || !entry.rule) errors.push('Rule definition missing');

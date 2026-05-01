@@ -1,14 +1,14 @@
 {
   "project": "Sogna",
-  "version": "Apex-1.0.0",
-  "securityTier": "apex",
-  "institutionalMode": true,
+  "version": "1.0.0",
+  "securityTier": "max",
+  "strictMode": true,
   "anonymizeLogs": true,
   "maxReadSize": 2097152,
   "maxOutputSize": 16384,
   "swarmTimeout": 300000,
   "customRedactions": {
-    "carle": "[OFFICER_NAME]",
+    "carle": "[OFFICER_REDACTED]",
     "Sognatore": "[CORE_ENGINE]",
     "Sogna": "[PROJECT_ALPHA]",
     "Antigravity": "[TOOLKIT_OMEGA]",

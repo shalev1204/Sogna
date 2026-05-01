@@ -9,14 +9,14 @@ export interface PermissionPolicy {
 }
 
 /**
- * Sentinel Permission Proxy - Institutional-Grade Access Control
+ * Sentinel Permission Proxy - Production-Grade Access Control
  */
 export class PermissionProxy {
   private static instance: PermissionProxy;
   private policies: Map<string, PermissionPolicy> = new Map();
 
   private constructor() {
-    // Default Institutional Policy
+    // Default System Policy
     this.policies.set('default', {
       allowedCapabilities: ['filesystem:read', 'identity:access'],
       autoApprove: false

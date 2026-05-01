@@ -118,7 +118,7 @@ export class TeamsAdapter extends IntegrationAdapter {
       throw new Error('SOGNATORE_TEAMS_WEBHOOK_URL is not configured');
     }
 
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const response = await fetch(this._webhookUrl, {
       method: 'POST',
       headers: {

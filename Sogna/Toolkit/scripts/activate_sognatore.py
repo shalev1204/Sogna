@@ -73,7 +73,7 @@ def activate_swarm(prd_path):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python activate_sognatore.py <prd_path>")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
     activate_swarm(sys.argv[1])
 

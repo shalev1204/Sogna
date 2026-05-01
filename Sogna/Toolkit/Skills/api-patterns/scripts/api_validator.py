@@ -172,7 +172,7 @@ def main():
     if not api_files:
         print("[!] No API files found.")
         print("   Looking for: routes/, controllers/, api/, openapi.json/yaml")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(0)
     
     results = []
@@ -203,11 +203,11 @@ def main():
     
     if total_issues == 0:
         print("[OK] API validation passed")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(0)
     else:
         print("[X] Fix critical issues before deployment")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
 
 if __name__ == "__main__":

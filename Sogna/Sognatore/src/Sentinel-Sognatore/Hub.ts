@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import * as path from 'path';
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
@@ -15,7 +15,7 @@ export enum SecurityState {
 
 /**
  * Sentinel Hub - The base operative of security in Sognatore.
- * Part of the Sentinel Sovereignty block. Coordinates with Sentinel HQ (Toolkit).
+ * Part of the Sentinel security block. Coordinates with Sentinel HQ (Toolkit).
  */
 export class Hub {
   private static instance: Hub;
@@ -85,7 +85,7 @@ export class Hub {
     try {
       if (fs.existsSync(this.SIGNATURES_PATH)) {
         this.signaturesCache = fs.readJsonSync(this.SIGNATURES_PATH);
-        this.maintenance(); // Apex Performance Check
+        this.maintenance(); // Performance Check
       }
     } catch (e) {
       console.error(chalk.red('[SENTINEL_HUB] Failed to load signature cache.'));
@@ -178,7 +178,7 @@ export class Hub {
     }
 
     // 2. AUTO-HEALING CYCLE
-    console.log(chalk.yellow.bold('[AUTO-HEALER] Iniciando ciclo prioritario de reconstrucción institucional...'));
+    console.log(chalk.yellow.bold('[AUTO-HEALER] Iniciando ciclo prioritario de reconstrucción...'));
     await this.recoverSentinel();
     
     // Refinement: Memory-specific stabilization
@@ -259,7 +259,7 @@ export class Hub {
       fs.appendFileSync(this.INTEL_REPORT_PATH, event);
       console.log(chalk.cyan(`[SENTINEL_HUB] Telemetría enviada a la central: ${reason}`));
     } catch (e) {
-      console.error(chalk.red('[SENTINEL_HUB] Fallo en el envío de telemetría institucional.'));
+      console.error(chalk.red('[SENTINEL_HUB] Fallo en el envío de telemetría.'));
     }
   }
 
@@ -277,7 +277,7 @@ export class Hub {
       const sig = this.signaturesCache[relativePath];
       if (!sig) return false;
 
-      // APEX INTELLIGENT VALIDATION: Use mtime to skip hash calculation
+      // INTELLIGENT VALIDATION: Use mtime to skip hash calculation
       const stats = fs.statSync(absPath);
       const currentMtime = stats.mtimeMs;
       
@@ -305,7 +305,7 @@ export class Hub {
     console.log(chalk.yellow('[RECOVERY] Attempting to restore Sentinel via Git...'));
     try {
       const sentinelDir = path.dirname(this.SENTINEL_PATH);
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       spawnSync('git', ['checkout', 'HEAD', '--', sentinelDir], { cwd: this.baseRoot });
       
       this.checkSentinelPulse();

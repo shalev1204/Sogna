@@ -7,12 +7,14 @@ import { DeepSeekProvider } from '../providers/DeepSeekProvider.js';
 import { OpenRouterProvider } from '../providers/OpenRouterProvider.js';
 import { AiderProvider } from '../providers/AiderProvider.js';
 import { OllamaProvider } from '../providers/OllamaProvider.js';
+import { HybridProvider } from '../providers/HybridProvider.js';
+import { ModelRouter, SognaTaskType } from './ModelRouter.js';
 
 export class ProviderFactory {
   static getProvider(name?: string, model?: string): Provider {
-    // Sovereignty Mode: Prioritize local models if envar is set
-    const sovereigntyMode = process.env.SOGNA_SOVEREIGNTY_MODE === 'true';
-    let providerName = name || process.env.SOGNATORE_PROVIDER || (sovereigntyMode ? 'ollama' : 'gemini');
+    // Local Mode: Prioritize local models if envar is set
+    const localMode = process.env.SOGNA_LOCAL_MODE === 'true';
+    let providerName = name || process.env.SOGNATORE_PROVIDER || (localMode ? 'ollama' : 'gemini');
 
     // Model-based Prefix Routing (Claw-inspired)
     if (model && model.includes('/')) {
@@ -44,6 +46,29 @@ export class ProviderFactory {
       default:
         throw new Error(`Unknown provider: ${providerName}`);
     }
+  }
+
+  /**
+   * Retorna el mejor proveedor para un objetivo específico.
+   * Si el modo local está activo, siempre devolverá Ollama configurado con el modelo especialista.
+   */
+  static getProviderForTask(objective: string): Provider {
+    const taskType = ModelRouter.detectTaskType(objective);
+    const localMode = process.env.SOGNA_LOCAL_MODE === 'true';
+    const hybridMode = process.env.SOGNA_HYBRID_MODE === 'true';
+
+    if (localMode) {
+      return new OllamaProvider();
+    }
+
+    if (hybridMode) {
+      // Create local + cloud pair
+      const local = new OllamaProvider();
+      const cloud = this.getProvider(); // Default cloud provider
+      return new HybridProvider(local, cloud);
+    }
+
+    return this.getProvider();
   }
 
   static async getAvailableProviders(): Promise<Provider[]> {

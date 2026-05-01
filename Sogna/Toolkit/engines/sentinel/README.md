@@ -8,7 +8,7 @@ The security of Sogna is distributed across four distinct planes of operation, a
 
 ### 1. Execution Plane (Active Defense)
 The primary line of defense that intervenes during the development lifecycle.
-- **Hook**: `bin/sentinel-veto.js` (The Apex Veto Hook).
+- **Hook**: `bin/sentinel-veto.js` (The System Veto Hook).
 - **Core Capabilities**:
   - **DLP (Data Loss Prevention)**: Scans for secrets, keys, and forbidden patterns.
   - **AST Shielding**: Analyzes syntax trees to detect logic bombs and prototype pollution.
@@ -48,7 +48,7 @@ Internal system monitoring and operational regulation.
 
 ---
 
-## 📜 Primary Directives (Soberanía Apex)
+## 📜 Primary Directives (System Security)
 
 1. **Veto Authority**: Stop any process exhibiting "Prompt Hijacking" or malicious syntax immediately.
 2. **Zero-Persistence**: Radical purging of forbidden files (keys, secrets, unverified `.env`).

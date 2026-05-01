@@ -101,7 +101,7 @@ export class MemoryHub {
     if (trapConcepts.some(trap => lowerQuery.includes(trap))) {
       const hub = (await import('../../Sentinel-Sognatore/Hub.js')).Hub.getInstance();
       
-      // Apex Hardening: Trigger Auto-Panic if the attempt is highly critical
+      // Security Hardening: Trigger Auto-Panic if the attempt is highly critical
       const criticality = this.evaluateSemanticCriticality(query);
       if (criticality > 0.8) {
           hub.reportIntel('CRITICAL', `BLOQUEO NEURONAL: Intento de pesca semántica crítica detectado "${query}"`, 'MemoryHub');

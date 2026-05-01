@@ -16,6 +16,6 @@ const child = spawn('node', [enginePath, ...args], {
 });
 
 child.on('exit', (code) => {
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(code || 0);
 });

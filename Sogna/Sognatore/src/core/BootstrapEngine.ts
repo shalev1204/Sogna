@@ -50,7 +50,7 @@ export class BootstrapEngine {
       await this.runSync();
       await this.runReady();
       
-      console.log(chalk.bold.green('\n✓ Institutional Lifecycle Ready. Handoff to RARV Loop.\n'));
+      console.log(chalk.bold.green('\n✓ Core Lifecycle Ready. Handoff to RARV Loop.\n'));
       return true;
     } catch (error) {
       console.error(chalk.bold.red(`\n✘ Bootstrap Failed at stage ${this.getActiveStage()}`));

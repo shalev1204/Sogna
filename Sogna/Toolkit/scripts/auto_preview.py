@@ -63,7 +63,7 @@ def start_server(port=3000):
     
     if not cmd:
         print("âŒ No 'dev' or 'start' script found in package.json")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
     
     # Add port env var if needed (simple heuristic)

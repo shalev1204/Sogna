@@ -28,9 +28,9 @@ export class ClaudeProvider extends Provider {
 
   async version(): Promise<string> {
     try {
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const { execSync } = await import('child_process');
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       return execSync('claude --version', { encoding: 'utf8' }).split('\n')[0];
     } catch {
       return 'unknown';
@@ -46,7 +46,7 @@ export class ClaudeProvider extends Provider {
     const resolvedTier = this.resolveTier(tier);
     const model = this.resolveModelForTier(resolvedTier);
     
-    // Decision Sovereignty: Before calling the external provider, we check our own Permission Proxy
+    // Security Enforcement: Before calling the external provider, we check our own Permission Proxy
     const { PermissionProxy } = await import('../Sentinel-Sognatore/PermissionProxy.js');
     const proxy = PermissionProxy.getInstance();
     const isAuthorized = await proxy.requestCapability('claude-provider', 'process:execute', `Invoke model ${model} with prompt length ${prompt.length}`);

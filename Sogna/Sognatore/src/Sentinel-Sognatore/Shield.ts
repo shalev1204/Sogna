@@ -65,7 +65,7 @@ export class Shield {
       }
     }
 
-    // 2. Rule-based blocking (Institutional Parity)
+    // 2. Rule-based blocking (System Parity)
     if (!result.isSafe) {
         const violations = result.violations.join('; ');
         if (effectiveMode === PermissionMode.ReadOnly || result.category === 'DANGER_ZONE') {

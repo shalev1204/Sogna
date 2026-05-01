@@ -2,7 +2,7 @@ import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import chalk from 'chalk';
 import { SognaEventBus, SognaEventType } from '@sogna/toolkit';
 
-export interface SovereignService {
+export interface SwarmService {
   name: string;
   intervalMs: number;
   task: () => Promise<void>;
@@ -17,7 +17,7 @@ export interface SwarmTask {
 }
 
 /**
- * Swarm Orchestrator - Institutional Concurrent Sovereignty
+ * Swarm Orchestrator - Swarm Orchestration
  */
 export class SwarmOrchestrator {
   private static instance: SwarmOrchestrator;
@@ -46,13 +46,13 @@ export class SwarmOrchestrator {
     this.tasks.push({ ...task, status: 'in_progress' });
     
     // In a full implementation, this would trigger agent processes.
-    // For now, we simulate the sovereign handoff.
+    // For now, we simulate the swarm handoff.
     await new Promise(resolve => setTimeout(resolve, 500)); 
     
     console.log(chalk.green(`[SWARM] Task ${task.id} accepted by Cluster. Processing in background.`));
   }
 
-  public registerService(service: SovereignService): void {
+  public registerService(service: SwarmService): void {
     if (this.services.has(service.name)) {
       this.stopService(service.name);
     }

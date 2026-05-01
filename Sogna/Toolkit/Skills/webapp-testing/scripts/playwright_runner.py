@@ -159,7 +159,7 @@ if __name__ == "__main__":
                 "python playwright_runner.py https://example.com --a11y"
             ]
         }, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
     
     url = sys.argv[1]

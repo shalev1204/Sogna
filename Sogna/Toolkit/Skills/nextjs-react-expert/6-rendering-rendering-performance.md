@@ -376,7 +376,7 @@ function SearchResults() {
   const handleSearch = async (value: string) => {
     setIsLoading(true)
     setQuery(value)
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const data = await fetchResults(value)
     setResults(data)
     setIsLoading(false)
@@ -407,7 +407,7 @@ function SearchResults() {
     
     startTransition(async () => {
       // Fetch and update results
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const data = await fetchResults(value)
       setResults(data)
     })

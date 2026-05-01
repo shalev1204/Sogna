@@ -12,7 +12,7 @@ export async function stop(clean: boolean): Promise<void> {
     });
     if (p.isCancel(confirmed) || !confirmed) {
       p.cancel('Aborted.');
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(0);
     }
   }

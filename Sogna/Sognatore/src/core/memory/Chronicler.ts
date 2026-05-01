@@ -383,7 +383,7 @@ export class Chronicler {
   }
 
   private async writeIndex(index: MemoryIndex): Promise<void> {
-    // 1. Institutional Pruning (Entropy Control)
+    // 1. Data Pruning (Entropy Control)
     if (index.fragments.length > 1000) {
       const { PruningService } = await import('./PruningService.js');
       await PruningService.getInstance().prune(this.indexFile, {

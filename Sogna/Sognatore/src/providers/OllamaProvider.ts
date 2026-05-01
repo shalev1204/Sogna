@@ -44,10 +44,14 @@ export class OllamaProvider extends Provider {
   }
 
   async invokeWithTier(tier: CapabilityTier, prompt: string, options: InvokeOptions = {}): Promise<string> {
-    // Map tiers to local models if available
-    let model = 'llama3';
-    if (tier === 'planning') model = 'command-r';
-    if (tier === 'fast') model = 'phi3';
+    // Swarm Pulse Mapping
+    let model = process.env.SOGNA_MODEL_GUARD || 'llama3.1:latest';
+    
+    if (tier === 'best' || tier === 'planning') {
+      model = process.env.SOGNA_MODEL_ARCHITECT || 'deepseek-coder-v2:lite';
+    } else if (tier === 'fast') {
+      model = process.env.SOGNA_MODEL_AUDITOR || 'qwen2.5-coder:7b';
+    }
 
     return this.invoke(prompt, { ...options, model });
   }

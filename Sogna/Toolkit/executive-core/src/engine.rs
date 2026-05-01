@@ -71,7 +71,7 @@ impl PolicyEngine {
         let first = command.trim().split_whitespace().next().unwrap_or("");
         
         if let Some(rules) = dynamic_rules {
-            if let Some(shield) = rules.get("apex_sovereignty").and_then(|v| v.get("bash_shield")) {
+            if let Some(shield) = rules.get("strict_security").and_then(|v| v.get("bash_shield")) {
                 if let Some(destructive) = shield.get("write_commands").and_then(|v| v.as_array()) {
                     if destructive.iter().any(|v| v.as_str() == Some(first)) {
                         return CommandIntent::Write;
@@ -121,7 +121,7 @@ impl PolicyEngine {
                 
                 let mut is_destructive_pattern = false;
                 if let Some(rules) = &context.dynamic_rules {
-                    if let Some(shield) = rules.get("apex_sovereignty").and_then(|v| v.get("bash_shield")) {
+                    if let Some(shield) = rules.get("strict_security").and_then(|v| v.get("bash_shield")) {
                         if let Some(patterns) = shield.get("destructive_patterns").and_then(|v| v.as_array()) {
                             for p in patterns {
                                 if let Some(arr) = p.as_array() {

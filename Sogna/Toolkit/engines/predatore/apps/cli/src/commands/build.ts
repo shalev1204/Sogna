@@ -12,7 +12,7 @@ export function build(noCache: boolean): void {
     console.error('  (Dockerfile not found in current directory)');
     console.error('');
     console.error('For npx usage, run: Predatore update');
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 

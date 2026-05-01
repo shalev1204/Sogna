@@ -29,25 +29,25 @@ export class Guardian {
     const config = ConfigDiscovery.getInstance().getConfig();
     this.SECRET_KEY = process.env.GUARDIAN_SECRET || config.guardianSecret || '';
     
-    // Strict Validation: No more hardcoded fallbacks in Apex Mode
+    // Strict Validation: No more hardcoded fallbacks
     if (!this.SECRET_KEY || this.SECRET_KEY.length < 32) {
       console.error(chalk.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing or insufficient!'));
       
-      if (config.securityTier === 'apex') {
-        throw new Error('Apex Security Breach: Insufficient Guardian Secret.');
+      if (config.securityTier === 'max') {
+        throw new Error('Security Breach: Insufficient Guardian Secret.');
       }
       
       this.SECRET_KEY = crypto.randomBytes(32).toString('hex');
     }
 
-    // MANDATORY APEX BOOT GATE: Validate Sentinel Pulse and Signatures
-    this.enforceSovereignty();
+    // MANDATORY BOOT GATE: Validate Sentinel Pulse and Signatures
+    this.enforceSecurity();
   }
 
   /**
-   * Enforces Sentinel sovereignty by checking pulse and signatures.
+   * Enforces Sentinel security by checking pulse and signatures.
    */
-  private async enforceSovereignty(): Promise<void> {
+  private async enforceSecurity(): Promise<void> {
     const hub = Hub.getInstance();
     
     // 1. Pulse Check
@@ -55,7 +55,7 @@ export class Guardian {
         console.log(chalk.red.bold('🚨 [GUARDIAN] Sentinel is unresponsive! Entering Panic Mode.'));
         await hub.recoverSentinel();
         if (hub.getState() === SecurityState.PANIC) {
-            throw new Error('Sentinel Sovereign Crisis: Automatic curation failed. Boot aborted.');
+            throw new Error('Sentinel Security Crisis: Automatic curation failed. Boot aborted.');
         }
     }
 
@@ -75,7 +75,7 @@ export class Guardian {
         }
     }
 
-    console.log(chalk.green('🛡️ [GUARDIAN] Sentinel Sovereign validation passed. Project is secure.'));
+    console.log(chalk.green('🛡️ [GUARDIAN] Sentinel security validation passed. Project is secure.'));
   }
 
   public static getInstance(): Guardian {
@@ -184,7 +184,7 @@ export class Guardian {
       redacted = redacted.replace(regex, placeholder);
     }
 
-    // 2. Redact OS Username for Institutional Anonymity
+    // 2. Redact OS Username for privacy
     try {
       const username = os.userInfo().username;
       if (username) {

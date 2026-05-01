@@ -105,7 +105,7 @@ if (scanAll) {
     }
 }
 
-// --- Carga de Soberanía Apex ---
+// --- Carga de System Security ---
 let SOBERANIA = { 
     apex_sovereignty: { 
         trusted_scopes: [], trusted_paths: [], domain_whitelist: [], 
@@ -119,7 +119,7 @@ try {
         SOBERANIA = JSON.parse(fs.readFileSync(SOBERANIA_DB, 'utf-8'));
     }
 } catch (e) {
-    console.warn(`[SENTINEL] Error crítico cargando Soberanía Apex: ${e.message}`);
+    console.warn(`[SENTINEL] Error crítico cargando System Security: ${e.message}`);
 }
 
 const APEX = SOBERANIA.apex_sovereignty;
@@ -168,7 +168,7 @@ function addReport(level, reason, location, solution) {
     const isSecretExposure = reason.includes('EXPOSICIÓN DE SECRETO') || reason.includes('ARCHIVO PROHIBIDO');
     if (level === 'CRITICAL' && !isSecretExposure && TRUSTED_PATHS.some(p => normalizedLocation.toLowerCase().includes(p.toLowerCase()))) {
         level = 'WARNING';
-        reason = `[Soberanía Apex] ${reason}`;
+        reason = `[System Security] ${reason}`;
         console.log(`🛡️  [SOBERANÍA] Autorizando excepcionalmente: ${normalizedLocation}`);
     }
 
@@ -574,7 +574,7 @@ function applyFixes(filePath, originalContent) {
         // Justificar llamadas de red y comandos sensibles automáticamente si no lo están
         const isSensitive = /spawnSync|execSync|https\.request|fetch|axios\.get|\.exit\(/.test(line);
         if (isSensitive && !lines[i-1]?.includes('@sentinel-ignore')) {
-            newLines.push(`// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex`);
+            newLines.push(`// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad`);
             fixApplied = true;
         }
         
@@ -745,7 +745,7 @@ async function scanSupplyChain(filePath) {
         let logStream = "";
         
         if (!headerExists) {
-            logStream += "# 🛡️  SENTINEL THREAD INTEL (Apex Feed)\n\n";
+            logStream += "# 🛡️  SENTINEL THREAD INTEL (System Feed)\n\n";
         }
 
         pendingEvents.forEach(ev => {
@@ -763,7 +763,7 @@ async function scanSupplyChain(filePath) {
             const stats = fs.statSync(INTEL_REPORT);
             if (stats.size > 1024 * 1024) { // 1MB Limit
                 const content = fs.readFileSync(INTEL_REPORT, 'utf-8');
-                const truncated = "# 🛡️  SENTINEL THREAD INTEL (Apex Feed)\n\n" + 
+                const truncated = "# 🛡️  SENTINEL THREAD INTEL (System Feed)\n\n" + 
                                   content.split('---\n').slice(0, 50).join('---\n') + "\n";
                 fs.writeFileSync(INTEL_REPORT, truncated);
             }

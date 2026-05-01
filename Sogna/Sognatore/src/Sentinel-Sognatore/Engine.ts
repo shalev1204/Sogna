@@ -12,7 +12,7 @@ import {
   RULE_EVALUATORS 
 } from './PolicyTypes.js';
 import { PermissionMode } from './SecurityTypes.js';
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica
 import { spawnSync } from 'child_process';
 import { Hub, SecurityState } from './Hub.js';
 import { Honeypots } from './Honeypots.js';
@@ -232,7 +232,7 @@ export class Engine {
     } else if (fs.existsSync(yamlPath)) {
       this._policyPath = yamlPath;
     } else {
-      const fallbackPath = path.resolve(this._projectDir, 'toolkit/engines/Sentinel/data/soberania.json');
+      const fallbackPath = path.resolve(this._projectDir, 'toolkit/engines/Sentinel/data/security.json');
       if (fs.existsSync(fallbackPath)) {
         this._policyPath = fallbackPath;
       } else {
@@ -340,7 +340,7 @@ export class Engine {
 
       if (threatMatches.length > 0) {
         violations.push({
-          name: 'InstitutionalMemoryGate',
+          name: 'MemoryGate',
           action: 'deny',
           reason: `Task intent resembles a previously blocked attack pattern: ${threatMatches[0].key}`,
           metadata: { matches: threatMatches.length }
@@ -368,7 +368,7 @@ export class Engine {
       };
     }
 
-    // PROACTIVE APEX GATE: Check Sentinel Pulse and Unified Memory
+    // PROACTIVE SECURITY GATE: Check Sentinel Pulse and Unified Memory
     // This allows Sentinel to learn from experience without manual rule updates.
     const hub = Hub.getInstance();
     if (hub.getState() === SecurityState.PANIC) {
@@ -534,7 +534,7 @@ export class Engine {
     };
 
     try {
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica
       const result = spawnSync(this._executiveBinaryPath, [], {
         input: JSON.stringify(cargoContext),
         encoding: 'utf8',
@@ -582,7 +582,7 @@ export class Engine {
   public validateCommand(command: string): { isSafe: boolean; category: string; violations: string[] } {
     const evaluation = this.evaluate('pre_execution', { command });
     
-    // INSTITUTIONAL CATEGORIZATION (SBP Alignment)
+    // CORE CATEGORIZATION (SBP Alignment)
     let category = 'READ_ONLY';
     const cmdLower = command.toLowerCase();
     

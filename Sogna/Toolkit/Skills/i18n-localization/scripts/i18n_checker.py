@@ -232,11 +232,11 @@ def main():
     print("\n" + "=" * 60)
     if critical_issues == 0:
         print("[OK] i18n CHECK: PASSED")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(0)
     else:
         print(f"[X] i18n CHECK: {critical_issues} issues found")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
 
 if __name__ == "__main__":

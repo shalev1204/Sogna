@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
 
 export class ToolResolver {
@@ -61,7 +61,7 @@ export class ToolResolver {
 
     try {
       // On Windows, 'where' is equivalent to 'which'
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       execSync(`where ${toolName}`, { stdio: 'ignore' });
       return true;
     } catch {
@@ -76,7 +76,7 @@ export class ToolResolver {
     const resolved = this.resolve(toolName);
     const command = [resolved, ...args].join(' ');
     
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     return execSync(command, {
       cwd: this.cwd,
       encoding: 'utf8'

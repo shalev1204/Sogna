@@ -24,6 +24,6 @@ async function bootstrapSentinel() {
 
 bootstrapSentinel().catch((err) => {
     console.error("[SENTINEL ENGINE FATAL ERROR]", err);
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
 });

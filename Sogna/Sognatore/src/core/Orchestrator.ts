@@ -1,5 +1,6 @@
 import { ToolDefinition, ToolRegistry } from './actions/ToolRegistry.js';
-import { AuditVault, SummaryCompressor } from '@sogna/toolkit';
+import { AuditVault, SummaryCompressor, SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/toolkit';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import chalk from 'chalk';
 
 export interface Turn {
@@ -8,11 +9,30 @@ export interface Turn {
   isSummary?: boolean;
 }
 
+export interface SwarmService {
+  name: string;
+  intervalMs: number;
+  task: () => Promise<void>;
+}
+
+/**
+ * Orchestrator - Unified Brain of Sogna
+ * Centralizes sequential reasoning and concurrent swarm pulses.
+ */
 export class Orchestrator {
   private static instance: Orchestrator;
-  private readonly MAX_TURNS = 12; // Adjusted for aggressive compression
-  private readonly TAIL_SIZE = 6;  
-  private constructor() {}
+  
+  // Sequential State
+  private readonly MAX_TURNS = 12;
+  private readonly TAIL_SIZE = 6;
+  
+  // Swarm State
+  private services: Map<string, NodeJS.Timeout> = new Map();
+  private bus = SognaEventBus.getInstance();
+
+  private constructor() {
+    console.log(chalk.bold.blue('[Orchestrator] Core intelligence centralized.'));
+  }
 
   static getInstance(): Orchestrator {
     if (!Orchestrator.instance) {
@@ -21,29 +41,18 @@ export class Orchestrator {
     return Orchestrator.instance;
   }
 
-  /**
-   * Selects the most relevant tools for a given prompt using a heuristic scoring system.
-   * Inspired by Claude-Code's search-based routing.
-   */
+  // --- SEQUENTIAL ORCHESTRATION ---
+
   public async routeTools(prompt: string, limit: number = 5): Promise<ToolDefinition[]> {
     const registry = ToolRegistry.getInstance();
-    // @ts-expect-error - Accessing private tools for routing purposes
+    // @ts-expect-error - Accessing private tools for routing
     const allTools: ToolDefinition[] = Array.from(registry.tools.values());
     
     const tokens = prompt.toLowerCase().split(/\s+/).filter(t => t.length > 2);
     const scoredTools = allTools.map(tool => {
       let score = 0;
-      const haystack = [
-        tool.name.toLowerCase(),
-        tool.responsibility.toLowerCase(),
-        ...tool.hints.map(h => h.toLowerCase())
-      ].join(' ');
-
-      for (const token of tokens) {
-        if (haystack.includes(token)) {
-          score += 1;
-        }
-      }
+      const haystack = [tool.name, tool.responsibility, ...tool.hints].join(' ').toLowerCase();
+      for (const token of tokens) { if (haystack.includes(token)) score += 1; }
       return { tool, score };
     });
 
@@ -53,121 +62,37 @@ export class Orchestrator {
       .slice(0, limit)
       .map(st => st.tool);
 
-    // Always include essential tools if the prompt is generic or few matches found
     const essentials = ['fs_read', 'fs_list'];
     for (const name of essentials) {
         const tool = allTools.find(t => t.name === name);
-        if (tool && !selected.includes(tool)) {
-            selected.push(tool);
-        }
+        if (tool && !selected.includes(tool)) selected.push(tool);
     }
 
-    // Log orchestration decision to AuditVault
-    AuditVault.getInstance().record({
-        type: 'ORCHESTRATION',
-        action: 'tool_routing',
-        summary: `Routed ${selected.length} tools for prompt: ${prompt.substring(0, 30)}...`,
-        metadata: {
-            prompt_snippet: prompt.substring(0, 50),
-            selected_tools: selected.map(t => t.name)
-        }
+    this.bus.publish({
+      type: SognaEventType.LOG,
+      emitter: 'Orchestrator',
+      provenance: EventProvenance.LIVE,
+      failureClass: FailureClass.NONE,
+      data: { message: `Routed ${selected.length} tools for the current prompt.` }
     });
 
-    console.log(chalk.cyan(`[Orchestrator] Routed ${selected.length} tools for the current prompt.`));
     return selected;
   }
 
-  /**
-// [SENTINEL POLICY COMPLIANT]
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-   * Institutional Predictive Prefetching: Anticipates file needs based on prompt.
-   * Extracts potential file paths and prepares "Intelligence Signatures".
-   */
-// [SENTINEL POLICY COMPLIANT]
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-  public async predictivePrefetch(prompt: string): Promise<string> {
-    const fs = (await import('fs-extra')).default;
-    const path = (await import('path')).default;
-    
-    // Heuristic: Search for strings that look like relative or absolute paths within the workspace
-    const pathRegex = /([a-zA-Z0-9_\-.]+\/)*[a-zA-Z0-9_\-.]+\.(ts|js|py|json|md|txt)/g;
-    const matches = prompt.match(pathRegex) || [];
-    
-    if (matches.length === 0) return '';
-
-// [SENTINEL POLICY COMPLIANT]
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-    console.log(chalk.cyan(`[Orchestrator] Predictive prefetch identified ${matches.length} potential file targets.`));
-    
-// [SENTINEL POLICY COMPLIANT]
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-    let prefetchContext = "\n--- PREDICTIVE CONTEXT PREFETCH ---\n";
-    const uniqueMatches = Array.from(new Set(matches)).slice(0, 3); // Cap at 3 for efficiency
-
-    for (const match of uniqueMatches) {
-      const fullPath = path.resolve(process.cwd(), match);
-      if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
-        const signature = await this.getFileSignature(fullPath);
-// [SENTINEL POLICY COMPLIANT]
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-        prefetchContext += `File: ${match}\nSignature:\n${signature}\n\n`;
-      }
-    }
-
-// [SENTINEL POLICY COMPLIANT]
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-    return prefetchContext;
-  }
-
-  /**
-   * Generates a technical signature of a file (Exports, Types, Class signatures).
-   */
-  private async getFileSignature(filePath: string): Promise<string> {
-    const fs = (await import('fs-extra')).default;
-    const content = await fs.readFile(filePath, 'utf8');
-    
-    // Simplified signature extraction: First 50 lines or specific export patterns
-    const lines = content.split('\n');
-    const signatureLines = lines.filter(l => 
-      l.startsWith('export ') || 
-      l.includes('class ') || 
-      l.includes('interface ') || 
-      l.includes('type ')
-    ).slice(0, 15);
-
-    if (signatureLines.length === 0) {
-      return lines.slice(0, 10).join('\n') + "\n... (truncated)";
-    }
-
-    return signatureLines.join('\n') + "\n... (technical metadata pre-loaded)";
-  }
-
-  /**
-   * Neuro-Compression: Summarizes history recursively while preserving the tail.
-   * Includes 'Orphan-Guard' logic to ensure tool call/result integrity.
-   */
   public async compact(history: Turn[], agent: any): Promise<Turn[]> {
     if (history.length < this.MAX_TURNS) return history;
 
-    console.log(chalk.yellow(`[Neuro-Compression] History pressure detected (${history.length}). Initiating recursive summarization...`));
+    console.log(chalk.yellow(`[Neuro-Compression] Initiating recursive summarization...`));
 
-    // 1. Identify Tail
     const tailStartIndex = history.length - this.TAIL_SIZE;
     let cutIndex = tailStartIndex;
 
-    // 2. Orphan-Guard: Ensure we don't split between a tool_call and its observation
     while (cutIndex > 0) {
       const current = history[cutIndex];
       const previous = history[cutIndex - 1];
-
-      const isObservation = current.role === 'tool' || current.content.includes('Observation from');
-      const wasToolCall = previous.role === 'assistant' && previous.content.includes('<tool_call>');
-
-      if (isObservation || wasToolCall) {
+      if (current.role === 'tool' || (previous.role === 'assistant' && previous.content.includes('<tool_call>'))) {
         cutIndex--; 
-      } else {
-        break;
-      }
+      } else break;
     }
 
     if (cutIndex <= 0) return history;
@@ -175,61 +100,72 @@ export class Orchestrator {
     const segmentsToSummarize = history.slice(0, cutIndex);
     const tailSegment = history.slice(cutIndex);
 
-    // 3. Layer 1: Passive Heuristic Pruning (Pattern-based noise reduction)
-    const rawContext = segmentsToSummarize
-      .map(h => `${h.role.toUpperCase()}: ${h.content}`)
-      .join('\n\n');
-    
-    const cleanedContext = rawContext
-      .replace(/\[RARV: (REASON|ACT|REFLECT|VERIFY)\]/g, '')
-      .replace(/Observation from [\w_]+: /g, 'Result: ')
-      .trim();
-
-    const prunedContext = SummaryCompressor.compress(cleanedContext, 'Orchestrator').content;
-
-    // 4. Layer 2: Strategic Synthesis (Preserves technical intelligence)
-    const summaryPrompt = `
-    Generate a high-fidelity RECURSIVE summary of this conversation history.
-    
-    CRITICAL INSTRUCTIONS:
-    - Capture key findings, code modifications, and architectural decisions.
-    - Preserve current goal state and success results.
-    - Maintain technical details of resolved errors.
-    - Be dense and technical. This feeds the agent's active memory.
-
-    HISTORY TO SUMMARIZE:
-    ${prunedContext}
-    `.trim();
+    const rawContext = segmentsToSummarize.map(h => `${h.role.toUpperCase()}: ${h.content}`).join('\n\n');
+    const prunedContext = SummaryCompressor.compress(rawContext, 'Orchestrator').content;
 
     try {
-      const summaryContent = await agent.provider.invoke(summaryPrompt, {
+      const summaryContent = await agent.provider.invoke(`Summarize key technical decisions and findings:\n${prunedContext}`, {
         tier: 'balanced',
-        model: agent.model,
-        system: "SOGNARE COMPRESSION CORE: Synthesize intelligence without losing operational detail."
+        system: "SOGNARE COMPRESSION CORE: Synthesize intelligence."
       });
 
-      const summaryTurn: Turn = {
-        role: 'assistant',
-        content: `[SOGNARE COMPRESSED MEMORY]\n${summaryContent}`,
-        isSummary: true
-      };
-
-      console.log(chalk.green(`[Neuro-Compression] Compressed ${segmentsToSummarize.length} turns into active memory.`));
-      return [summaryTurn, ...tailSegment];
+      return [{ role: 'assistant', content: `[SOGNARE COMPRESSED MEMORY]\n${summaryContent}`, isSummary: true }, ...tailSegment];
     } catch (error) {
-      console.error(chalk.red(`[Neuro-Compression] Summarization failed: ${error}`));
       return history;
     }
   }
 
-  /**
-   * Legacy method for compatibility during transition
-   * @deprecated Use compact instead
-   */
-  public compactHistory(history: Turn[]): Turn[] {
-    // Basic synchronous fallback
-    const limit = 12;
-    if (history.length <= limit) return history;
-    return [...history.slice(0, 2), { role: 'assistant', content: '[Legacy Pruning Applied]' }, ...history.slice(-8)];
+  public async predictivePrefetch(prompt: string): Promise<string> {
+    try {
+      const memory = (await import('./memory/MemoryHub.js')).MemoryHub.getInstance();
+      const fragments = await memory.unifiedRecall(prompt);
+      
+      if (fragments.length === 0) return '';
+
+      return "\n### PREDICTIVE CONTEXT (Intelligence Warming):\n" + 
+             fragments.slice(0, 3).map(f => `[${f.source}] ${f.key}: ${f.content.substring(0, 300)}`).join('\n---\n');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  // --- CONCURRENT SWARM ORCHESTRATION ---
+
+  public registerService(service: SwarmService): void {
+    if (this.services.has(service.name)) this.stopService(service.name);
+
+    const timer = setInterval(async () => {
+      try {
+        this.bus.publish({
+          type: SognaEventType.LOG,
+          emitter: `BackgroundTask:${service.name}`,
+          provenance: EventProvenance.HEALTH,
+          failureClass: FailureClass.NONE,
+          data: { message: `Executing pulse...` }
+        });
+        await service.task();
+      } catch (error) {
+        this.bus.publish({
+          type: SognaEventType.ERROR,
+          emitter: `BackgroundTask:${service.name}`,
+          provenance: EventProvenance.HEALTH,
+          failureClass: FailureClass.INFRA,
+          data: { message: error instanceof Error ? error.message : String(error) }
+        });
+        Hub.getInstance().reportIntel('WARNING', `Fallo en servicio: ${service.name}`, 'Orchestrator');
+      }
+    }, service.intervalMs);
+
+    this.services.set(service.name, timer);
+    console.log(chalk.cyan(`[SWARM] Service ${service.name} started.`));
+  }
+
+  public stopService(name: string): void {
+    const timer = this.services.get(name);
+    if (timer) { clearInterval(timer); this.services.delete(name); }
+  }
+
+  public stopAll(): void {
+    for (const name of this.services.keys()) this.stopService(name);
   }
 }

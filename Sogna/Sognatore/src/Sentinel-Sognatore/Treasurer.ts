@@ -146,7 +146,7 @@ export class Treasurer extends EventEmitter {
         
         hub.reportIntel('CRITICAL', reason, `Treasurer:${agentId || 'unknown'}`);
         
-        // Trigger Institutional Panic (SIGKILL process if PID is available)
+        // Trigger System Panic (SIGKILL process if PID is available)
         // Note: Usage data usually doesn't carry PID directly, but the Hub can infer it if the agent is registered.
         hub.triggerPanic(reason, 'Wallet Shield');
         return; // Stop processing this usage to avoid further state corruption

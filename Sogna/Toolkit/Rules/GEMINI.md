@@ -286,7 +286,7 @@ When user's prompt is NOT in English:
 
 ---
 
-## 🏛️ TIER 3: PROTOCOLO DE OPERADOR SOBERANO (PROACTIVIDAD SOGNA)
+## 🏛️ TIER 3: PROTOCOLO DE OPERADOR LOCAL (PROACTIVIDAD SOGNA)
 
 **Parámetros de Ejecución Avanzada:**
 1. **Sesgo de Acción (Execution Bias):** Si detectas fallos secundarios, dependencias rotas o basura técnica mientras ejecutas la tarea principal, corrígelos de manera autónoma. No esperes instrucciones adicionales para la perfección.

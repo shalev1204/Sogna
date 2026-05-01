@@ -110,7 +110,7 @@ export async function ensureInfra(useRouter: boolean): Promise<void> {
       }
       if (i === 29) {
         console.error('Timeout waiting for Temporal');
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         process.exit(1);
       }
       await sleep(2000);
@@ -128,7 +128,7 @@ export async function ensureInfra(useRouter: boolean): Promise<void> {
       await sleep(2000);
     }
     console.error('Timeout waiting for router');
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }
@@ -165,7 +165,7 @@ export function ensureImage(version: string): void {
       console.error(`\nERROR: Failed to pull ${image}`);
       console.error('The image may not be available for your platform yet.');
       console.error('Check https://hub.docker.com/r/Sogna/Predatore for available tags.');
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
     pruneOldImages(version);

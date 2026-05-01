@@ -147,7 +147,7 @@ def main():
     
     if not results:
         print("[!] No TypeScript or Python files found.")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(0)
     
     # Print results
@@ -165,11 +165,11 @@ def main():
     print("\n" + "=" * 60)
     if critical_issues == 0:
         print("[OK] TYPE COVERAGE: ACCEPTABLE")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(0)
     else:
         print(f"[X] TYPE COVERAGE: {critical_issues} critical issues")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
 
 if __name__ == "__main__":

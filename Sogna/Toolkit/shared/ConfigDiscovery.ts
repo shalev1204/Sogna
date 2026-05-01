@@ -4,10 +4,10 @@ import os from 'os';
 import dotenv from 'dotenv';
 
 export interface SognaConfig {
-    securityTier: 'standard' | 'high' | 'apex';
+    securityTier: 'standard' | 'high' | 'max';
     maxReadSize: number;
     maxOutputSize: number;
-    institutionalMode: boolean;
+    strictMode: boolean;
     anonymizeLogs: boolean;
     swarmTimeout: number;
     [key: string]: any;
@@ -17,7 +17,7 @@ const DEFAULT_CONFIG: SognaConfig = {
     securityTier: 'high',
     maxReadSize: 2 * 1024 * 1024, // 2MB
     maxOutputSize: 16384, // 16KB
-    institutionalMode: true,
+    strictMode: true,
     anonymizeLogs: true,
     swarmTimeout: 300000 // 5m
 };
@@ -65,7 +65,7 @@ export class ConfigDiscovery {
         // 3. Local env (.env overlaps/overrides)
         dotenv.config();
         if (process.env.SOGNA_SECURITY_TIER) config.securityTier = process.env.SOGNA_SECURITY_TIER as any;
-        if (process.env.SOGNARE_QUALITY_TIER === 'apex') config.securityTier = 'apex';
+        if (process.env.SOGNARE_QUALITY_TIER === 'apex') config.securityTier = 'max';
 
         return config;
     }

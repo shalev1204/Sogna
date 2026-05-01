@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "apex_sovereignty": {
+  "strict_security": {
     "trusted_scopes": [
       "@sogna",
       "@predatore",

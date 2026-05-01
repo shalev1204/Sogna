@@ -238,7 +238,7 @@ def main():
         print("    Skipping: docs, tests, config files, node_modules")
         output = {"script": "geo_checker", "pages_found": 0, "passed": True}
         print("\n" + json.dumps(output, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(0)
     
     print(f"Found {len(pages)} public pages to analyze\n")
@@ -283,7 +283,7 @@ def main():
     }
     print("\n" + json.dumps(output, indent=2))
     
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     sys.exit(0 if avg_score >= 60 else 1)
 
 

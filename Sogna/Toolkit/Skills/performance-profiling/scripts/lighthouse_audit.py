@@ -70,7 +70,7 @@ def get_summary(categories: dict) -> str:
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(json.dumps({"error": "Usage: python lighthouse_audit.py <url>"}))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
     
     result = run_lighthouse(sys.argv[1])

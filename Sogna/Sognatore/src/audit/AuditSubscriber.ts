@@ -83,7 +83,7 @@ if (isMain) {
   const shutdown = () => {
     clearInterval(pollInterval);
     audit.flush();
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   };
   process.on('SIGTERM', shutdown);

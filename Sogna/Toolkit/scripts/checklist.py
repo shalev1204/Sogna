@@ -179,7 +179,7 @@ Examples:
     
     if not project_path.exists():
         print_error(f"Project path does not exist: {project_path}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         sys.exit(1)
     
     print_header("ðŸš€ ANTIGRAVITY KIT - MASTER CHECKLIST")
@@ -199,7 +199,7 @@ Examples:
         if required and not result["passed"] and not result.get("skipped"):
             print_error(f"CRITICAL: {name} failed. Stopping checklist.")
             print_summary(results)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
             sys.exit(1)
     
     # Run performance checks if URL provided
@@ -213,7 +213,7 @@ Examples:
     # Print summary
     all_passed = print_summary(results)
     
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     sys.exit(0 if all_passed else 1)
 
 if __name__ == "__main__":

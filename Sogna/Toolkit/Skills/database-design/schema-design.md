@@ -14,7 +14,7 @@ When to normalize (separate tables):
 When to denormalize (embed/duplicate):
 ├── Read performance critical
 ├── Data rarely changes
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 ├── Always fetched together
 └── Simpler queries needed
 ```
