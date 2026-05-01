@@ -12094,82 +12094,82 @@
     "timestamp": "2026-04-29T21:11:52.252Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-bases/SKILL.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-bases/SKILL.md": {
     "hash": "582c6531c8b525a6bd81363bdd0c8ea31d6b755d32d0b10d1f6d1b99befe7465",
     "timestamp": "2026-04-19T13:49:10.841Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-bases/references/FUNCTIONS_REFERENCE.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-bases/references/FUNCTIONS_REFERENCE.md": {
     "hash": "e308055a1f44d0a2b5f67e50a51ba1cddec394ef78728122da8fb7a418bdfedd",
     "timestamp": "2026-04-19T13:49:10.841Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-cli/SKILL.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-cli/SKILL.md": {
     "hash": "ababe7d7e67a52da45e24aa055d6d120969cc9d895b6213c960461cbb356d7b8",
     "timestamp": "2026-04-19T13:49:10.841Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/SKILL.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/SKILL.md": {
     "hash": "f640fba90eaa302077960441611a0af4d6edf2395a5a4b9ae3a5ae8bd8c353ab",
     "timestamp": "2026-04-19T13:49:10.841Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/assets/clipping-template.json": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/assets/clipping-template.json": {
     "hash": "00695e6b8a273890a2493b46ce85d53414084ccb3eed8af6191d8b267ce119b2",
     "timestamp": "2026-04-19T13:49:10.841Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/assets/recipe-template.json": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/assets/recipe-template.json": {
     "hash": "d6e842f1db34516592585b0a18e62c5a4f7657ebb033e6a1bb03160259b79d38",
     "timestamp": "2026-04-19T13:49:10.841Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/analysis-workflow.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/analysis-workflow.md": {
     "hash": "42a1935bd369e85595e1537a36076a6a6c76aa4868f0a5c937f85b6e51c22766",
     "timestamp": "2026-04-19T13:49:10.841Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/bases-workflow.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/bases-workflow.md": {
     "hash": "120be4151e74a46857c4f7a02321ea66e339ef99875b66f094f1fc379977ca4e",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/filters.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/filters.md": {
     "hash": "af41df0b3fb2b84657f1f3ee300bc2d9cc68eac15cb33415cc4a3c9db75604b7",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/json-schema.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/json-schema.md": {
     "hash": "b57aebb8cb27aeee252b5e0de1a5561f5374101109582fcccf54bfbd8e4d0276",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/logic.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/logic.md": {
     "hash": "0c3b04a6c88c5fb7cc37c45df8cf519711ad9e0b8d7dbdf1acf6612d3d4d071d",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/variables.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/variables.md": {
     "hash": "bc0c4449b01ade7c066a5c2afb83647aa6930951d3935495e7f477f6a28993c6",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-markdown/SKILL.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-markdown/SKILL.md": {
     "hash": "6ff32adf4c4d9e6e33ae959457edecaab0997a6ae53bed883b0eaadb2e08ff40",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-markdown/references/CALLOUTS.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-markdown/references/CALLOUTS.md": {
     "hash": "98cce8046bfd76600941f702c8a704211235e0dfdd6048f467fc074e04de31d4",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-markdown/references/EMBEDS.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-markdown/references/EMBEDS.md": {
     "hash": "2bf4ea2059b89f556f5203bf1b876ee1f003c708fcf243c6c46db493e7a1fd0b",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/resources/skills/utilities/obsidian-markdown/references/PROPERTIES.md": {
+  "Sogna/Sognatore/resources/skills/utilities/native_workspace-markdown/references/PROPERTIES.md": {
     "hash": "8d0821cf0689a1aa198f81e96379f46fd64aaa67c685d4a0c921ba111356b230",
     "timestamp": "2026-04-19T13:49:10.842Z",
     "signedBy": "Sentinel-Apex"
@@ -29104,72 +29104,72 @@
     "timestamp": "2026-04-27T21:49:57.481Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-bases/SKILL.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-bases/SKILL.md": {
     "hash": "582c6531c8b525a6bd81363bdd0c8ea31d6b755d32d0b10d1f6d1b99befe7465",
     "timestamp": "2026-04-20T21:16:48.904Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-bases/references/FUNCTIONS_REFERENCE.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-bases/references/FUNCTIONS_REFERENCE.md": {
     "hash": "e308055a1f44d0a2b5f67e50a51ba1cddec394ef78728122da8fb7a418bdfedd",
     "timestamp": "2026-04-20T21:16:48.904Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-cli/SKILL.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-cli/SKILL.md": {
     "hash": "ababe7d7e67a52da45e24aa055d6d120969cc9d895b6213c960461cbb356d7b8",
     "timestamp": "2026-04-20T21:16:48.904Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/SKILL.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/SKILL.md": {
     "hash": "2e27df0964a5b13fe2613ebfae9719ab6bd022c17822c28ec35051dd7d64b8e0",
     "timestamp": "2026-04-20T21:16:48.904Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/analysis-workflow.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/analysis-workflow.md": {
     "hash": "77122dc66058177d9af3acdd70ada2647e1d6197f561362083124d3d32c07405",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/bases-workflow.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/bases-workflow.md": {
     "hash": "120be4151e74a46857c4f7a02321ea66e339ef99875b66f094f1fc379977ca4e",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/filters.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/filters.md": {
     "hash": "af41df0b3fb2b84657f1f3ee300bc2d9cc68eac15cb33415cc4a3c9db75604b7",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/json-schema.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/json-schema.md": {
     "hash": "b57aebb8cb27aeee252b5e0de1a5561f5374101109582fcccf54bfbd8e4d0276",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/logic.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/logic.md": {
     "hash": "0c3b04a6c88c5fb7cc37c45df8cf519711ad9e0b8d7dbdf1acf6612d3d4d071d",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/references/variables.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/references/variables.md": {
     "hash": "bc0c4449b01ade7c066a5c2afb83647aa6930951d3935495e7f477f6a28993c6",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-markdown/SKILL.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-markdown/SKILL.md": {
     "hash": "6ff32adf4c4d9e6e33ae959457edecaab0997a6ae53bed883b0eaadb2e08ff40",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-markdown/references/CALLOUTS.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-markdown/references/CALLOUTS.md": {
     "hash": "98cce8046bfd76600941f702c8a704211235e0dfdd6048f467fc074e04de31d4",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-markdown/references/EMBEDS.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-markdown/references/EMBEDS.md": {
     "hash": "2bf4ea2059b89f556f5203bf1b876ee1f003c708fcf243c6c46db493e7a1fd0b",
     "timestamp": "2026-04-20T21:16:48.906Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-markdown/references/PROPERTIES.md": {
+  "Sognatore/resources/skills/utilities/native_workspace-markdown/references/PROPERTIES.md": {
     "hash": "8d0821cf0689a1aa198f81e96379f46fd64aaa67c685d4a0c921ba111356b230",
     "timestamp": "2026-04-20T21:16:48.906Z",
     "signedBy": "Sentinel-Apex"
@@ -35069,12 +35069,12 @@
     "timestamp": "2026-04-20T21:16:48.902Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/assets/clipping-template.json": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/assets/clipping-template.json": {
     "hash": "00695e6b8a273890a2493b46ce85d53414084ccb3eed8af6191d8b267ce119b2",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sognatore/resources/skills/utilities/obsidian-clipper-template-creator/assets/recipe-template.json": {
+  "Sognatore/resources/skills/utilities/native_workspace-clipper-template-creator/assets/recipe-template.json": {
     "hash": "d6e842f1db34516592585b0a18e62c5a4f7657ebb033e6a1bb03160259b79d38",
     "timestamp": "2026-04-20T21:16:48.905Z",
     "signedBy": "Sentinel-Apex"

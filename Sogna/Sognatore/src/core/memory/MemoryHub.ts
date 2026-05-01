@@ -91,11 +91,7 @@ export class MemoryHub {
     await this.ensureRegistry();
     const results: MemoryResult[] = [];
 
-    // 1. Recall Identity Memory (Priority 1.0)
-    const identityHits = await this.recallIdentity(query);
-    results.push(...identityHits);
-
-    // 2. PROACTIVE NEURAL DECOYS: Check for "Trap Concepts"
+    // 1. PROACTIVE NEURAL DECOYS: Check for "Trap Concepts"
     const trapConcepts = ['password', 'secret', 'bypass', 'root', 'admin', 'auth_token', 'private_key'];
     const lowerQuery = query.toLowerCase();
     if (trapConcepts.some(trap => lowerQuery.includes(trap))) {
@@ -110,17 +106,19 @@ export class MemoryHub {
       }
       
       hub.reportIntel('WARNING', `INTENTO DE PESCA SEMÁNTICA DETECTADO: Búsqueda de concepto prohibido "${query}"`, 'MemoryHub');
-      // We still return results to avoid breaking the UI, but the attempt is flagged.
     }
 
-    // 3. Recall Immunological Memory (Priority 0.9)
-    const threatHits = await this.recallThreats(query);
+    // 2. Parallelized Memory Recall
+    const [identityHits, threatHits, episodes] = await Promise.all([
+      this.recallIdentity(query),
+      this.recallThreats(query),
+      this.chronicler.recall(query)
+    ]);
+
+    results.push(...identityHits);
     results.push(...threatHits);
 
-    // 3. Recall Episodic Memory (Priority 0.6)
-    const episodes = await this.chronicler.recall(query);
     const episodicWeight = this.registry?.layers?.episodic?.weight || 0.6;
-    
     episodes.forEach(f => results.push({
       source: 'episodic',
       key: f.key,
@@ -170,10 +168,10 @@ export class MemoryHub {
       try { regex = new RegExp(query.slice(1, -1), 'i'); } catch (e) {}
     }
 
-    for (const fileName of identityFiles) {
+    await Promise.all(identityFiles.map(async (fileName: string) => {
       const filePath = path.join(this.rootMemory, fileName);
       const content = await this.getCachedContent(filePath);
-      if (!content) continue;
+      if (!content) return;
 
       const match = regex ? regex.test(content) : content.toLowerCase().includes(query.toLowerCase());
       
@@ -185,7 +183,7 @@ export class MemoryHub {
           relevance: weight
         });
       }
-    }
+    }));
     return hits;
   }
 
@@ -203,7 +201,7 @@ export class MemoryHub {
 
     if (await fs.pathExists(vaccineDir)) {
       const logs = await fs.readdir(vaccineDir);
-      for (const log of logs) {
+      await Promise.all(logs.map(async (log: string) => {
         const match = regex ? regex.test(log) : log.toLowerCase().includes(query.toLowerCase());
         if (match) {
           hits.push({
@@ -213,7 +211,7 @@ export class MemoryHub {
             relevance: weight + 0.3 // Dynamic boost for security
           });
         }
-      }
+      }));
     }
     return hits;
   }

@@ -39,11 +39,11 @@ async function runInstitutionalDiagnostic() {
   // 2. INTEGRITY CHECK (No external residues)
   console.log(chalk.yellow('\n--- [PLANE 2: SOBERANÍA E IDENTIDAD] ---'));
   const findings = await scanner.scanDirectory('src');
-  const externalTraces = findings.filter(f => f.snippet.toLowerCase().includes('obsidian'));
+  const externalTraces = findings.filter(f => f.snippet.toLowerCase().includes('native_workspace'));
   if (externalTraces.length === 0) {
     console.log(chalk.green('✅ Soberanía confirmada. No se detectaron rastros externos en el núcleo.'));
   } else {
-    console.log(chalk.red(`❌ Residuos externos detectados: ${externalTraces.length} menciones de Obsidian.`));
+    console.log(chalk.red(`❌ Residuos externos detectados: ${externalTraces.length} menciones de NativeWorkspace.`));
   }
 
   // 3. SECURITY & AUDIT

@@ -667,7 +667,7 @@ cat << EOF > /tmp/standup-context.json
   "commits": $(echo "$COMMITS" | jq -R -s -c 'split("\n")'),
   "jira_completed": $JIRA_DONE,
   "jira_in_progress": $JIRA_PROGRESS,
-  "sogna_changes": $OBSIDIAN_CHANGES,
+  "sogna_changes": $NATIVE_CHANGES,
   "meetings": $MEETINGS
 }
 EOF

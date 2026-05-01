@@ -65,7 +65,9 @@ class LanguageConfig:
 
 # ── Generic helpers ───────────────────────────────────────────────────────────
 
-def _read_text(node, source: bytes) -> str:
+def _read_text(node, source: bytes | memoryview) -> str:
+    if isinstance(source, memoryview):
+        return str(source[node.start_byte:node.end_byte], "utf-8", errors="replace")
     return source[node.start_byte:node.end_byte].decode("utf-8", errors="replace")
 
 
@@ -688,7 +690,7 @@ def _extract_generic(path: Path, config: LanguageConfig) -> dict:
 
     try:
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -780,6 +782,20 @@ def _extract_generic(path: Path, config: LanguageConfig) -> dict:
             line = node.start_point[0] + 1
             add_node(class_nid, class_name, line)
             add_edge(file_nid, class_nid, "contains", line)
+
+            # Python-specific: decorators
+            if config.ts_module == "tree_sitter_python":
+                parent = node.parent
+                if parent and parent.type == "decorated_definition":
+                    for child in parent.children:
+                        if child.type == "decorator":
+                            # The name is usually the child after '@'
+                            dec_name_node = next((c for c in child.children if c.type in ("identifier", "call", "attribute")), None)
+                            if dec_name_node:
+                                dec_name = _read_text(dec_name_node, source)
+                                dec_nid = _make_id(stem, "decorator", dec_name)
+                                add_node(dec_nid, f"@{dec_name}", line)
+                                add_edge(class_nid, dec_nid, "decorated_by", line)
 
             # Python-specific: inheritance
             if config.ts_module == "tree_sitter_python":
@@ -944,6 +960,46 @@ def _extract_generic(path: Path, config: LanguageConfig) -> dict:
             body = _find_body(node, config)
             if body:
                 function_bodies.append((func_nid, body))
+            
+            # Python-specific: decorators and type hints
+            if config.ts_module == "tree_sitter_python":
+                # Handle Decorators
+                parent = node.parent
+                if parent and parent.type == "decorated_definition":
+                    for child in parent.children:
+                        if child.type == "decorator":
+                            # The name is usually the child after '@'
+                            dec_name_node = next((c for c in child.children if c.type in ("identifier", "call", "attribute")), None)
+                            if dec_name_node:
+                                dec_name = _read_text(dec_name_node, source)
+                                dec_nid = _make_id(stem, "decorator", dec_name)
+                                add_node(dec_nid, f"@{dec_name}", line)
+                                add_edge(func_nid, dec_nid, "decorated_by", line)
+                
+                # Handle Type Hints in parameters and return type
+                def walk_types(n):
+                    if n.type == "type":
+                        type_name = _read_text(n, source)
+                        if len(type_name) > 3 and type_name[0].isupper():
+                            type_nid = _make_id("type", type_name)
+                            # Add node if not exists (using confidence 0.8 for inferred types)
+                            if type_nid not in seen_ids:
+                                nodes.append({
+                                    "id": type_nid,
+                                    "label": f"Type:{type_name}",
+                                    "file_type": "code",
+                                    "source_file": "",
+                                    "source_location": "",
+                                    "confidence_score": 0.8
+                                })
+                                seen_ids.add(type_nid)
+                            add_edge(func_nid, type_nid, "annotated_with", line, confidence_score=0.8)
+                    for c in n.children:
+                        # Don't recurse into body, only parameters/return_type
+                        if c.type != "block":
+                            walk_types(c)
+                
+                walk_types(node)
             return
 
         # JS/TS arrow functions and C# namespaces — language-specific extra handling
@@ -1354,7 +1410,7 @@ def _extract_python_rationale(path: Path, result: dict) -> None:
         from tree_sitter import Language, Parser
         language = Language(tspython.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception:
@@ -1616,7 +1672,7 @@ def extract_verilog(path: Path) -> dict:
     try:
         language = Language(tsverilog.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -1741,7 +1797,7 @@ def extract_julia(path: Path) -> dict:
     try:
         language = Language(tsjulia.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -1957,7 +2013,7 @@ def extract_go(path: Path) -> dict:
     try:
         language = Language(tsgo.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -2161,7 +2217,7 @@ def extract_rust(path: Path) -> dict:
     try:
         language = Language(tsrust.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -2343,7 +2399,7 @@ def extract_zig(path: Path) -> dict:
     try:
         language = Language(tszig.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(memoryview(path.read_bytes()))
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -2509,7 +2565,7 @@ def extract_powershell(path: Path) -> dict:
     try:
         language = Language(tsps.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -2727,7 +2783,7 @@ def _resolve_cross_file_imports(
 
         # Parse imports from this file
         try:
-            source = path.read_bytes()
+            source = memoryview(path.read_bytes())
             tree = parser.parse(source)
         except Exception:
             continue
@@ -2811,7 +2867,7 @@ def extract_objc(path: Path) -> dict:
     try:
         language = Language(tsobjc.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:
@@ -3012,7 +3068,7 @@ def extract_elixir(path: Path) -> dict:
     try:
         language = Language(tselixir.language())
         parser = Parser(language)
-        source = path.read_bytes()
+        source = memoryview(path.read_bytes())
         tree = parser.parse(source)
         root = tree.root_node
     except Exception as e:

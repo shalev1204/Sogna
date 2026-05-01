@@ -23,7 +23,7 @@ from pathlib import Path
 DESKTOP = Path(os.environ.get("DESKTOP_PATH", str(Path(os.environ.get("USERPROFILE", "")) / "OneDrive" / "Desktop")))
 DESKTOP_FALLBACK = Path(os.environ.get("USERPROFILE", "")) / "Desktop"
 GLOBAL_DIARY_ROOT = Path(os.environ.get("GLOBAL_DIARY_ROOT", str(Path(__file__).resolve().parent.parent / "diary")))
-OBSIDIAN_DAILY_NOTES = Path(os.environ.get("OBSIDIAN_DAILY_NOTES", ""))
+NATIVE_DAILY_NOTES = Path(os.environ.get("NATIVE_DAILY_NOTES", ""))
 NOTION_SYNC_SCRIPT = Path(__file__).resolve().parent / "sync_to_notion.py"
 
 

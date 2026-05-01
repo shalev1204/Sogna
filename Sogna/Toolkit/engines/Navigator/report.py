@@ -62,7 +62,7 @@ def generate(
         f"- Token cost: {token_cost.get('input', 0):,} input · {token_cost.get('output', 0):,} output",
     ]
 
-    # Community hub navigation - links to _COMMUNITY_*.md files in the Obsidian vault.
+    # Community hub navigation - links to _COMMUNITY_*.md files in the Native Vault.
     # Without these, GRAPH_REPORT.md is a dead-end and the vault splits into disconnected components.
     if non_empty:
         lines += ["", "## Community Hubs (Navigation)"]

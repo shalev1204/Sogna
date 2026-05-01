@@ -52,31 +52,34 @@ export class Doctor {
   async checkAll(): Promise<DoctorResult[]> {
     const results: DoctorResult[] = [];
 
-    // Basic Tools
-    results.push(await this.checkCommand('Node.js', 'node', true, '>=18.0.0'));
-    results.push(await this.checkCommand('Python 3', 'python', true, '>=3.8.0'));
-    results.push(await this.checkCommand('Git', 'git', true));
+    // Basic Tools (Parallelized)
+    const basicChecks = await Promise.all([
+      this.checkCommand('Node.js', 'node', true, '>=18.0.0'),
+      this.checkCommand('Python 3', 'python', true, '>=3.8.0'),
+      this.checkCommand('Git', 'git', true)
+    ]);
+    results.push(...basicChecks);
     
-    //  Swarm Audit
-    await this.checkAudit(results);
-
-    // Connectivity Cert (Live Pings)
-    await this.checkConnectivity(results);
-
-    // Defensive Posture & Sanitization
-    await this.checkDefensivePosture(results);
-    
-    // Core Systems Logic (Security + Env)
-    await this.checkCoreSystems(results);
-
-    // Disk Space (rough check)
+    // Core Lifecycle & Disk Space (Synchronous/Fast)
     results.push(this.checkDiskSpace());
-
-    // Core Lifecycle Check
     await this.checkBootstrapLifecycle(results);
 
-    // Blueprints Audit
-    await this.checkBlueprints(results);
+    // Heavy Audits (Parallelized)
+    const auditRes: DoctorResult[] = [];
+    const connRes: DoctorResult[] = [];
+    const defRes: DoctorResult[] = [];
+    const coreRes: DoctorResult[] = [];
+    const bpRes: DoctorResult[] = [];
+
+    await Promise.all([
+      this.checkAudit(auditRes),
+      this.checkConnectivity(connRes),
+      this.checkDefensivePosture(defRes),
+      this.checkCoreSystems(coreRes),
+      this.checkBlueprints(bpRes)
+    ]);
+
+    results.push(...auditRes, ...connRes, ...defRes, ...coreRes, ...bpRes);
 
     return results;
   }
@@ -188,39 +191,45 @@ export class Doctor {
   private async checkConnectivity(results: DoctorResult[]) {
     EnvOracle.pushToProcessEnv(); // Ensure keys are available
     
-    // Gemini
-    try {
-      const gKey = process.env['GOOGLE_API_KEY'] || process.env['GEMINI_API_KEY'];
-      if (gKey) {
+    const [geminiRes, claudeRes, openaiRes] = await Promise.all([
+      (async (): Promise<DoctorResult> => {
+        try {
+          const gKey = process.env['GOOGLE_API_KEY'] || process.env['GEMINI_API_KEY'];
+          if (gKey) {
 // @sentinel-ignore: Justificación técnica
-        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${gKey}`);
-        results.push({ name: 'Gemini Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false });
-      } else results.push({ name: 'Gemini Connectivity', status: 'WARN', message: 'No Key', required: false });
-    } catch (e) { results.push({ name: 'Gemini Connectivity', status: 'WARN', required: false }); }
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${gKey}`, { signal: AbortSignal.timeout(5000) });
+            return { name: 'Gemini Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false };
+          } else return { name: 'Gemini Connectivity', status: 'WARN', message: 'No Key', required: false };
+        } catch (e) { return { name: 'Gemini Connectivity', status: 'WARN', required: false }; }
+      })(),
+      (async (): Promise<DoctorResult> => {
+        try {
+          const cKey = process.env['ANTHROPIC_API_KEY'];
+          if (cKey) {
+// @sentinel-ignore: Justificación técnica
+            const resp = await fetch("https://api.anthropic.com/v1/messages", {
+              method: 'POST',
+              headers: { 'x-api-key': cKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+              body: JSON.stringify({ model: 'claude-3-haiku-20240307', max_tokens: 1, messages: [{ role: 'user', content: 'ping' }] }),
+              signal: AbortSignal.timeout(5000)
+            });
+            return { name: 'Claude Connectivity', status: (resp.status === 200 || resp.status === 400) ? 'PASS' : 'WARN', required: false };
+          } else return { name: 'Claude Connectivity', status: 'WARN', message: 'No Key', required: false };
+        } catch (e) { return { name: 'Claude Connectivity', status: 'WARN', required: false }; }
+      })(),
+      (async (): Promise<DoctorResult> => {
+        try {
+          const oKey = process.env['OPENAI_API_KEY'];
+          if (oKey) {
+// @sentinel-ignore: Justificación técnica
+            const resp = await fetch("https://api.openai.com/v1/models", { headers: { 'Authorization': `Bearer ${oKey}` }, signal: AbortSignal.timeout(5000) });
+            return { name: 'OpenAI Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false };
+          } else return { name: 'OpenAI Connectivity', status: 'WARN', message: 'No Key', required: false };
+        } catch (e) { return { name: 'OpenAI Connectivity', status: 'WARN', required: false }; }
+      })()
+    ]);
 
-    // Claude
-    try {
-      const cKey = process.env['ANTHROPIC_API_KEY'];
-      if (cKey) {
-// @sentinel-ignore: Justificación técnica
-        const resp = await fetch("https://api.anthropic.com/v1/messages", {
-          method: 'POST',
-          headers: { 'x-api-key': cKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-          body: JSON.stringify({ model: 'claude-3-haiku-20240307', max_tokens: 1, messages: [{ role: 'user', content: 'ping' }] })
-        });
-        results.push({ name: 'Claude Connectivity', status: (resp.status === 200 || resp.status === 400) ? 'PASS' : 'WARN', required: false });
-      } else results.push({ name: 'Claude Connectivity', status: 'WARN', message: 'No Key', required: false });
-    } catch (e) { results.push({ name: 'Claude Connectivity', status: 'WARN', required: false }); }
-
-    // OpenAI
-    try {
-      const oKey = process.env['OPENAI_API_KEY'];
-      if (oKey) {
-// @sentinel-ignore: Justificación técnica
-        const resp = await fetch("https://api.openai.com/v1/models", { headers: { 'Authorization': `Bearer ${oKey}` } });
-        results.push({ name: 'OpenAI Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false });
-      } else results.push({ name: 'OpenAI Connectivity', status: 'WARN', message: 'No Key', required: false });
-    } catch (e) { results.push({ name: 'OpenAI Connectivity', status: 'WARN', required: false }); }
+    results.push(geminiRes, claudeRes, openaiRes);
   }
 
   private async checkDefensivePosture(results: DoctorResult[]) {

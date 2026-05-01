@@ -29,6 +29,9 @@ export class Runner {
   
   private stagnationCount: number = 0;
   private lastEvidenceHash: string = '';
+  
+  private logListener: ((event: any) => void) | null = null;
+  private errorListener: ((event: any) => void) | null = null;
 
   constructor(baseDir: string = '.') {
     this.stateStore = new StateStore(baseDir);
@@ -47,17 +50,30 @@ export class Runner {
 
   private setupBackgroundMonitor() {
     const bus = SognaEventBus.getInstance();
-    bus.on(SognaEventType.LOG, (event) => {
+    
+    this.logListener = (event: any) => {
       if (event.emitter.startsWith('BackgroundTask:')) {
         console.log(chalk.dim(`  [${event.emitter.split(':')[1]}] `) + chalk.gray(event.data.message));
       }
-    });
-
-    bus.on(SognaEventType.ERROR, (event) => {
+    };
+    
+    this.errorListener = (event: any) => {
       if (event.emitter.startsWith('BackgroundTask:')) {
         console.log(chalk.red(`  [${event.emitter.split(':')[1]}] ERROR: ${event.data.message}`));
       }
-    });
+    };
+
+    bus.on(SognaEventType.LOG, this.logListener);
+    bus.on(SognaEventType.ERROR, this.errorListener);
+  }
+
+  public shutdown() {
+    const bus = SognaEventBus.getInstance();
+    if (this.logListener) bus.off(SognaEventType.LOG, this.logListener);
+    if (this.errorListener) bus.off(SognaEventType.ERROR, this.errorListener);
+    
+    this.logListener = null;
+    this.errorListener = null;
   }
 
   async start(prdPath?: string) {
@@ -131,6 +147,7 @@ export class Runner {
           // SBP: Auto-persist achievements
           await this.gitManager.commitLog();
           
+          this.shutdown();
           return;
         }
 
@@ -154,6 +171,7 @@ export class Runner {
     } catch (e: any) {
       console.warn(chalk.yellow(`[POST-MISSION] Purification warning: ${e.message}`));
     }
+    this.shutdown();
   }
 
   private async runReasoning(state: SognatoreState, prd: string, codeMap: string, instructions: string): Promise<string> {

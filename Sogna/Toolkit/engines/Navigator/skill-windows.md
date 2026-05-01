@@ -11,7 +11,7 @@ Turn any folder of files into a navigable knowledge graph with community detecti
 ## Usage
 
 ```
-/navigator                                             # full pipeline on current directory → Obsidian vault
+/navigator                                             # full pipeline on current directory → Native Vault
 /navigator <path>                                      # full pipeline on specific path
 /navigator <path> --mode deep                          # thorough extraction, richer INFERRED edges
 /navigator <path> --update                             # incremental - re-extract only new/changed files
@@ -24,7 +24,7 @@ Turn any folder of files into a navigable knowledge graph with community detecti
 /navigator <path> --neo4j                              # generate navigator-out/cypher.txt for Neo4j
 /navigator <path> --neo4j-push bolt://localhost:7687   # push directly to Neo4j
 /navigator <path> --wiki                               # build agent-crawlable wiki (index.md + one article per community)
-/navigator <path> --obsidian --obsidian-dir ~/vaults/my-project  # write vault to custom path (e.g. existing vault)
+/navigator <path> --native --native-dir ~/vaults/my-project  # write vault to custom path (e.g. existing vault)
 /navigator <path> --mcp                                # start MCP stdio server for agent access
 /navigator <path> --watch                              # watch folder, auto-rebuild on code changes (no LLM needed)
 /navigator add <url>                                   # fetch URL, save to ./raw, update graph
@@ -467,19 +467,19 @@ print('Report updated with community labels')
 Replace `LABELS_DICT` with the actual dict you constructed (e.g. `{0: "Attention Mechanism", 1: "Training Pipeline"}`).
 Replace INPUT_PATH with the actual path.
 
-### Step 6 - Generate Obsidian vault (opt-in) + HTML
+### Step 6 - Generate Native Vault (opt-in) + HTML
 
-**Generate HTML always** (unless `--no-viz`). **Obsidian vault only if `--obsidian` was explicitly given** — skip it otherwise, it generates one file per node.
+**Generate HTML always** (unless `--no-viz`). **Native Vault only if `--native` was explicitly given** — skip it otherwise, it generates one file per node.
 
-If `--obsidian` was given:
+If `--native` was given:
 
-- If `--obsidian-dir <path>` was also given, use that path as the vault directory. Otherwise default to `navigator-out/obsidian`.
+- If `--native-dir <path>` was also given, use that path as the vault directory. Otherwise default to `navigator-out/native`.
 
 ```powershell
 python -c "
 import sys, json
 from navigator.build import build_from_json
-from navigator.export import to_obsidian, to_canvas
+from navigator.export import to_native_vault, to_canvas
 from pathlib import Path
 
 extraction = json.loads(Path('.navigator_extract.json').read_text())
@@ -491,15 +491,15 @@ communities = {int(k): v for k, v in analysis['communities'].items()}
 cohesion = {int(k): v for k, v in analysis['cohesion'].items()}
 labels = {int(k): v for k, v in labels_raw.items()}
 
-obsidian_dir = 'OBSIDIAN_DIR'  # replace with --obsidian-dir value, or 'navigator-out/obsidian' if not given
+native_dir = 'NATIVE_DIR'  # replace with --native-dir value, or 'navigator-out/native' if not given
 
-n = to_obsidian(G, communities, obsidian_dir, community_labels=labels or None, cohesion=cohesion)
-print(f'Obsidian vault: {n} notes in {obsidian_dir}/')
+n = to_native_vault(G, communities, native_dir, community_labels=labels or None, cohesion=cohesion)
+print(f'Native Vault: {n} notes in {native_dir}/')
 
-to_canvas(G, communities, f'{obsidian_dir}/graph.canvas', community_labels=labels or None)
-print(f'Canvas: {obsidian_dir}/graph.canvas - open in Obsidian for structured community layout')
+to_canvas(G, communities, f'{native_dir}/graph.canvas', community_labels=labels or None)
+print(f'Canvas: {native_dir}/graph.canvas - open natively for structured community layout')
 print()
-print(f'Open {obsidian_dir}/ as a vault in Obsidian.')
+print(f'Open {native_dir}/ as a vault natively.')
 print('  Graph view   - nodes colored by community (set automatically)')
 print('  graph.canvas - structured layout with communities as groups')
 print('  _COMMUNITY_* - overview notes with cohesion scores and dataview queries')
@@ -524,7 +524,7 @@ communities = {int(k): v for k, v in analysis['communities'].items()}
 labels = {int(k): v for k, v in labels_raw.items()}
 
 if G.number_of_nodes() > 5000:
-    print(f'Graph has {G.number_of_nodes()} nodes - too large for HTML viz. Use Obsidian vault instead.')
+    print(f'Graph has {G.number_of_nodes()} nodes - too large for HTML viz. Use Native Vault instead.')
 else:
     to_html(G, communities, 'navigator-out/graph.html', community_labels=labels or None)
     print('graph.html written - open in any browser, no server needed')
@@ -588,7 +588,7 @@ communities = {int(k): v for k, v in analysis['communities'].items()}
 labels = {int(k): v for k, v in labels_raw.items()}
 
 to_svg(G, communities, 'navigator-out/graph.svg', community_labels=labels or None)
-print('graph.svg written - embeds in Obsidian, Notion, GitHub READMEs')
+print('graph.svg written - embeds natively, Notion, GitHub READMEs')
 "
 ```
 
@@ -693,14 +693,14 @@ Remove-Item -ErrorAction SilentlyContinue .navigator_detect.json, .navigator_ext
 Remove-Item -ErrorAction SilentlyContinue navigator-out/.needs_update
 ```
 
-Tell the user (omit the obsidian line unless --obsidian was given):
+Tell the user (omit the native line unless --native was given):
 ```
 Graph complete. Outputs in PATH_TO_DIR/navigator-out/
 
   graph.html            - interactive graph, open in browser
   GRAPH_REPORT.md       - audit report
   graph.json            - raw graph data
-  obsidian/             - Obsidian vault (only if --obsidian was given)
+  native/             - Native Vault (only if --native was given)
 ```
 
 If navigator saved you time, consider supporting it: https://github.com/sponsors/safishamsi

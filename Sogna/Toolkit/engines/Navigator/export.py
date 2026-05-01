@@ -1,4 +1,4 @@
-# write graph to HTML, JSON, SVG, GraphML, Obsidian vault, and Neo4j Cypher
+# write graph to HTML, JSON, SVG, GraphML, Native Vault, and Neo4j Cypher
 from __future__ import annotations
 import html as _html
 import json
@@ -457,17 +457,17 @@ def to_html(
 generate_html = to_html
 
 
-def to_obsidian(
+def to_native_vault(
     G: nx.Graph,
     communities: dict[int, list[str]],
     output_dir: str,
     community_labels: dict[int, str] | None = None,
     cohesion: dict[int, float] | None = None,
 ) -> int:
-    """Export graph as an Obsidian vault - one .md file per node with [[wikilinks]],
+    """Export graph as a Sogna Native Vault - one .md file per node with [[wikilinks]],
     plus one _COMMUNITY_name.md overview note per community (sorted to top by underscore prefix).
 
-    Open the output directory as a vault in Obsidian to get an interactive
+    Open the output directory as a vault to get an interactive
     graph view with community colors and full-text search over node metadata.
 
     Returns the number of node notes + community notes written.
@@ -533,7 +533,7 @@ def to_obsidian(
 
         lines: list[str] = []
 
-        # YAML frontmatter - readable in Obsidian's properties panel
+        # YAML frontmatter - readable in native vault properties panel
         lines += [
             "---",
             f'source_file: "{data.get("source_file", "")}"',
@@ -560,7 +560,7 @@ def to_obsidian(
                 lines.append(f"- [[{neighbor_label}]] - `{relation}` [{confidence}]")
             lines.append("")
 
-        # Inline tags at bottom of note body (for Obsidian tag panel)
+        # Inline tags at bottom of note body (for native tag panels)
         inline_tags = " ".join(f"#{t}" for t in node_tags)
         lines.append(inline_tags)
 
@@ -639,7 +639,7 @@ def to_obsidian(
             lines.append(entry)
         lines.append("")
 
-        # Dataview live query (improvement 2)
+        # Live query compatible block
         comm_tag_name = community_name.replace(" ", "_")
         lines.append("## Live Query (requires Dataview plugin)")
         lines.append("")
@@ -685,9 +685,9 @@ def to_obsidian(
         (out / fname).write_text("\n".join(lines), encoding="utf-8")
         community_notes_written += 1
 
-    # Improvement 4: write .obsidian/graph.json to color nodes by community in graph view
-    obsidian_dir = out / ".obsidian"
-    obsidian_dir.mkdir(exist_ok=True)
+    # Improvement 4: write .sogna/graph.json to color nodes by community in graph view
+    native_dir = out / ".sogna"
+    native_dir.mkdir(exist_ok=True)
     graph_config = {
         "colorGroups": [
             {
@@ -697,7 +697,7 @@ def to_obsidian(
             for cid, label in sorted((community_labels or {}).items())
         ]
     }
-    (obsidian_dir / "graph.json").write_text(json.dumps(graph_config, indent=2), encoding="utf-8")
+    (native_dir / "graph.json").write_text(json.dumps(graph_config, indent=2), encoding="utf-8")
 
     return G.number_of_nodes() + community_notes_written
 
@@ -709,13 +709,13 @@ def to_canvas(
     community_labels: dict[int, str] | None = None,
     node_filenames: dict[str, str] | None = None,
 ) -> None:
-    """Export graph as an Obsidian Canvas file - communities as groups, nodes as cards.
+    """Export graph as a Sogna Native Canvas file - communities as groups, nodes as cards.
 
     Generates a structured layout: communities arranged in a grid, nodes within
     each community arranged in rows. Edges shown between connected nodes.
-    Opens in Obsidian as an infinite canvas with community groupings visible.
+    Opens natively as an infinite canvas with community groupings visible.
     """
-    # Obsidian canvas color codes (cycle through for communities)
+    # Native canvas color codes (cycle through for communities)
     CANVAS_COLORS = ["1", "2", "3", "4", "5", "6"]  # red, orange, yellow, green, cyan, purple
 
     def safe_name(label: str) -> str:
@@ -723,7 +723,7 @@ def to_canvas(
         cleaned = re.sub(r"\.(md|mdx|markdown)$", "", cleaned, flags=re.IGNORECASE)
         return cleaned or "unnamed"
 
-    # Build node_filenames if not provided (same dedup logic as to_obsidian)
+    # Build node_filenames if not provided (same dedup logic as to_native_vault)
     if node_filenames is None:
         node_filenames = {}
         seen_names: dict[str, int] = {}
@@ -831,7 +831,7 @@ def to_canvas(
             canvas_nodes.append({
                 "id": f"n_{node_id}",
                 "type": "file",
-                "file": f"Navigator/obsidian/{fname}.md",
+                "file": f"Navigator/native/{fname}.md",
                 "x": nx_x,
                 "y": nx_y,
                 "width": 180,
@@ -953,7 +953,7 @@ def to_svg(
 ) -> None:
     """Export graph as an SVG file using matplotlib + spring layout.
 
-    Lightweight and embeddable - works in Obsidian notes, Notion, GitHub READMEs,
+    Lightweight and embeddable - works natively notes, Notion, GitHub READMEs,
     and any markdown renderer. No JavaScript required.
 
     Node size scales with degree. Community colors match the HTML output.
