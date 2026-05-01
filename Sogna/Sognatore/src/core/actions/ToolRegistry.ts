@@ -5,6 +5,10 @@ import path from 'path';
 import chalk from 'chalk';
 import { ExecutiveHook } from '../executive/ExecutiveHook.js';
 import { ConfigDiscovery } from '@sogna/toolkit/shared/ConfigDiscovery.js';
+import { StudioEngine } from '../studio/StudioEngine.js';
+import { ArsenalRunner } from '../studio/ArsenalRunner.js';
+import { EnvOracle } from '../utils/EnvOracle.js';
+import * as ModelRegistry from '../studio/ModelRegistry.js';
 
 export interface ToolDefinition {
   name: string;
@@ -234,6 +238,284 @@ export class ToolRegistry {
           return stdout.substring(0, config.maxReadSize); // Limit output
         } catch (e: any) {
           return `No matches found or grep error.`;
+        }
+      }
+    });
+
+    // 6. studio_generate (Sogna Studio Generative AI)
+    this.register({
+      name: 'studio_generate',
+      description: 'Generación universal de contenido audiovisual (Imagen, Vídeo, LipSync, I2V, V2V) usando Sogna Studio.',
+      responsibility: 'Generar contenido crudo a partir de prompts o referencias.',
+      hints: ['generate', 'video', 'image', 'lipsync', 'flux', 'kling', 'minimax', 'generar'],
+      parameters: { 
+        model: 'ID del modelo (ver ModelRegistry o Model Catalog)',
+        prompt: 'Prompt de texto (opcional si hay referencia)',
+        image_url: 'URL de imagen de referencia (opcional)',
+        video_url: 'URL de vídeo de referencia (opcional)',
+        audio_url: 'URL de audio (requerido para LipSync)',
+        aspect_ratio: 'Relación de aspecto (16:9, 9:16, 1:1, etc.)',
+        num_images: 'Número de imágenes (por defecto 1)',
+        duration: 'Duración deseada (ej. 5, 10 segundos)',
+        seed: 'Semilla para determinismo (-1 para aleatorio)',
+        strength: 'Fuerza de transformación (0.1 a 1.0)',
+        playbook: 'ID del Playbook de estilo (ej. cinematic, modern)',
+        quality: 'Tier de calidad (draft, presentable, broadcast)'
+      },
+      execute: async (args, tier) => {
+        try {
+          const engine = new StudioEngine();
+          const result = await engine.generate(args);
+          return `SUCCESS: Generación completada.\nURL: ${result.url}\nID: ${result.request_id}`;
+        } catch (e: any) {
+          return `STUDIO GENERATION ERROR: ${e.message}`;
+        }
+      }
+    });
+
+    // 7. studio_compose (Advanced Video Composition)
+    this.register({
+      name: 'studio_compose',
+      description: 'Ensamblado profesional de vídeo con soporte para Remotion, FFmpeg y HyperFrames.',
+      responsibility: 'Ensamblado final: aplicar transiciones, quemar subtítulos, capas y overlays.',
+      hints: ['compose', 'stitch', 'render', 'remotion', 'subtitles', 'subtítulos'],
+      parameters: { 
+        operation: 'compose, render, burn_subtitles, overlay, encode',
+        edit_decisions: 'JSON de decisiones de edición (recortes, fuentes, tiempos)',
+        asset_manifest: 'JSON de mapeo de IDs a rutas locales',
+        output_path: 'Ruta del archivo de salida',
+        audio_path: 'Ruta de audio para el mix final',
+        subtitle_path: 'Ruta de archivo SRT/ASS'
+      },
+      execute: async (args, tier) => {
+        try {
+          const runner = new ArsenalRunner();
+          const inputs = {
+            operation: args.operation || 'render',
+            output_path: args.output_path,
+            audio_path: args.audio_path,
+            subtitle_path: args.subtitle_path,
+            edit_decisions: typeof args.edit_decisions === 'string' ? JSON.parse(args.edit_decisions) : args.edit_decisions,
+            asset_manifest: typeof args.asset_manifest === 'string' ? JSON.parse(args.asset_manifest) : args.asset_manifest
+          };
+          const result = await runner.runSecure('video_compose', inputs);
+          if (!result.success) return `STUDIO COMPOSE ERROR: ${result.error}`;
+          return `SUCCESS: Vídeo compuesto en ${result.data.output}. Duración: ${result.duration}s`;
+        } catch (e: any) {
+          return `STUDIO COMPOSE ERROR: ${e.message}`;
+        }
+      }
+    });
+
+    // 8. studio_process (Video Post-Processing Arsenal)
+    this.register({
+      name: 'studio_process',
+      description: 'Acceso al arsenal de post-procesamiento: Reframe, Silence Cutter, Chroma Key.',
+      responsibility: 'Mejora y limpieza de activos de vídeo.',
+      hints: ['process', 'reframe', 'silence', 'green screen', 'chroma', 'croma'],
+      parameters: { 
+        tool: 'Nombre de la herramienta: "auto_reframe", "silence_cutter", "green_screen_processor"',
+        inputs: 'Objeto JSON con los parámetros específicos de la herramienta'
+      },
+      execute: async (args, tier) => {
+        try {
+          const runner = new ArsenalRunner();
+          const inputs = typeof args.inputs === 'string' ? JSON.parse(args.inputs) : args.inputs;
+          const result = await runner.runSecure(args.tool, inputs);
+          if (!result.success) return `STUDIO PROCESS ERROR: ${result.error}`;
+          return `SUCCESS: Procesamiento completado. Resultado en data: ${JSON.stringify(result.data)}`;
+        } catch (e: any) {
+          return `STUDIO PROCESS ERROR: ${e.message}`;
+        }
+      }
+    });
+
+    // 8.5 studio_status
+    this.register({
+      name: 'studio_status',
+      description: 'Report the health and configuration status of all audiovisual providers.',
+      responsibility: 'Reporting del estado del ecosistema audiovisual.',
+      hints: ['status', 'config', 'health', 'providers'],
+      parameters: {},
+      execute: async () => {
+        EnvOracle.load();
+        const muapi = !!process.env.MUAPI_KEY;
+        const fal = !!process.env.FAL_KEY;
+        const heygen = !!process.env.HEYGEN_API_KEY;
+
+        const models = ModelRegistry.getAllModels();
+        return JSON.stringify({
+          system: 'Sogna Studio',
+          status: 'Optimal',
+          providers: {
+            muapi: muapi ? 'Configured' : 'Missing',
+            fal: fal ? 'Configured' : 'Missing',
+            heygen: heygen ? 'Configured' : 'Missing'
+          },
+          model_count: models.length,
+          capabilities: [
+            'Text-to-Image',
+            'Text-to-Video',
+            'Image-to-Video',
+            'LipSync',
+            'Scoring-Engine',
+            'Shot-Prompt-Builder',
+            'Playbook-Manager',
+            'Structural-Validator-SQA',
+            'Delivery-Promises'
+          ]
+        }, null, 2);
+      }
+    });
+
+    // 8.6 studio_validate_scenes
+    this.register({
+      name: 'studio_validate_scenes',
+      description: 'Valida un plan de escenas para asegurar variedad visual y ritmo cinematográfico (SQA).',
+      responsibility: 'Garantizar la calidad estructural antes de la generación.',
+      hints: ['validate', 'check', 'scenes', 'sqa', 'variedad', 'ritmo'],
+      parameters: { 
+        scenes: 'JSON array de escenas con descripción y shot_language'
+      },
+      execute: async (args) => {
+        try {
+          const engine = new StudioEngine();
+          const scenes = JSON.parse(args.scenes);
+          const report = await engine.validateScenePlan(scenes);
+          return JSON.stringify(report, null, 2);
+        } catch (e: any) {
+          return `SQA VALIDATION ERROR: ${e.message}`;
+        }
+      }
+    });
+
+    // 8.7 studio_playbook_info
+    this.register({
+      name: 'studio_playbook_info',
+      description: 'Obtiene información detallada sobre un Playbook de estilo.',
+      responsibility: 'Consulta de identidad visual.',
+      hints: ['playbook', 'style', 'estilo', 'info'],
+      parameters: { playbook: 'ID del playbook' },
+      execute: async (args) => {
+          const { PlaybookManager } = await import('../studio/PlaybookManager.js');
+          const playbook = PlaybookManager.getPlaybook(args.playbook);
+          if (!playbook) return `ERROR: Playbook "${args.playbook}" no encontrado.`;
+          return JSON.stringify(playbook, null, 2);
+      }
+    });
+
+    // 8.8 studio_playbook_generate
+    this.register({
+      name: 'studio_playbook_generate',
+      description: 'Genera un Playbook de estilo personalizado a partir de un mood y tono.',
+      responsibility: 'Generación de identidad visual inteligente.',
+      hints: ['playbook', 'style', 'generate', 'mood', 'tone', 'estilo', 'generar'],
+      parameters: { 
+        name: 'Nombre del playbook',
+        mood: 'Mood (ej. dark, warm, neon, noir)',
+        tone: 'Tono (ej. cinematic, minimalist, corporate, raw)',
+        pace: 'Pace (ej. slow, moderate, fast)'
+      },
+      execute: async (args) => {
+          const { PlaybookManager } = await import('../studio/PlaybookManager.js');
+          const playbook = PlaybookManager.generateFromBrief(args.name, {
+              mood: args.mood,
+              tone: args.tone,
+              pace: args.pace
+          });
+          const designDoc = PlaybookManager.generateDesignDoc(playbook);
+          return `SUCCESS: Playbook "${args.name}" generado.\n\n${designDoc}`;
+      }
+    });
+
+    // 8.9 studio_project_start
+    this.register({
+      name: 'studio_project_start',
+      description: 'Inicia un nuevo proyecto audiovisual basado en un Blueprint de producción.',
+      responsibility: 'Orquestación de proyectos de alto nivel.',
+      hints: ['project', 'start', 'iniciar', 'blueprint', 'pipeline'],
+      parameters: { 
+        id: 'ID único del proyecto',
+        blueprint: 'Nombre del blueprint (ej. cinematic, social_express)'
+      },
+      execute: async (args) => {
+          const { ProjectManager } = await import('../studio/ProjectManager.js');
+          const { BlueprintRegistry } = await import('../studio/BlueprintRegistry.js');
+          
+          if (!BlueprintRegistry.getBlueprint(args.blueprint)) {
+              return `ERROR: Blueprint "${args.blueprint}" no encontrado. Disponibles: ${BlueprintRegistry.listBlueprints().join(', ')}`;
+          }
+
+          const project = ProjectManager.initializeProject(args.id, args.blueprint);
+          return `SUCCESS: Proyecto "${args.id}" iniciado con blueprint "${args.blueprint}".\nEstado: ${JSON.stringify(project, null, 2)}`;
+      }
+    });
+
+    // 8.10 studio_project_status
+    this.register({
+      name: 'studio_project_status',
+      description: 'Obtiene el estado actual, etapa y artefactos de un proyecto activo.',
+      responsibility: 'Seguimiento de producción.',
+      hints: ['project', 'status', 'estado', 'artefactos', 'artifacts'],
+      parameters: { id: 'ID del proyecto' },
+      execute: async (args) => {
+          const { ProjectManager } = await import('../studio/ProjectManager.js');
+          const project = ProjectManager.getProject(args.id);
+          if (!project) return `ERROR: Proyecto "${args.id}" no encontrado.`;
+          return JSON.stringify(project, null, 2);
+      }
+    });
+
+    // 9. studio_upload (Asset Ingestion)
+    this.register({
+      name: 'studio_upload',
+      description: 'Sube un archivo local al almacenamiento de Sogna Studio para usarlo como referencia.',
+      responsibility: 'Ingesta de activos locales.',
+      hints: ['upload', 'asset', 'subir', 'archivo'],
+      parameters: { 
+        file_path: 'Ruta absoluta al archivo local'
+      },
+      execute: async (args, tier) => {
+        try {
+          const engine = new StudioEngine();
+          const url = await engine.uploadFile(args.file_path);
+          return `SUCCESS: Archivo subido.\nURL: ${url}`;
+        } catch (e: any) {
+          return `STUDIO UPLOAD ERROR: ${e.message}`;
+        }
+      }
+    });
+
+    // 10. studio_media_review
+    this.register({
+      name: 'studio_media_review',
+      description: 'Analiza una carpeta o archivo multimedia local para determinar su usabilidad en la producción.',
+      responsibility: 'Auditoría de activos locales (Híbrido).',
+      hints: ['review', 'media', 'ffprobe', 'analizar', 'auditoría'],
+      parameters: { 
+        path: 'Ruta relativa a la carpeta o archivo de medios'
+      },
+      execute: async (args) => {
+        try {
+          const { SourceMediaReviewer } = await import('../studio/SourceMediaReviewer.js');
+          const fullPath = path.resolve(process.cwd(), args.path);
+          
+          if (fs.statSync(fullPath).isDirectory()) {
+            const reviews = SourceMediaReviewer.reviewFolder(fullPath);
+            return JSON.stringify(reviews, null, 2);
+          } else {
+            const ext = path.extname(fullPath).toLowerCase();
+            let type: 'video' | 'audio' | 'image' | undefined;
+            if (['.mp4', '.mov', '.webm'].includes(ext)) type = 'video';
+            else if (['.mp3', '.wav'].includes(ext)) type = 'audio';
+            else if (['.jpg', '.jpeg', '.png'].includes(ext)) type = 'image';
+            
+            if (!type) return `ERROR: Tipo de archivo no soportado: ${ext}`;
+            const review = SourceMediaReviewer.reviewFile(fullPath, type);
+            return JSON.stringify(review, null, 2);
+          }
+        } catch (e: any) {
+          return `MEDIA REVIEW ERROR: ${e.message}`;
         }
       }
     });
