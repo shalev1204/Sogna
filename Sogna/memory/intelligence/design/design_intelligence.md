@@ -1,4 +1,4 @@
-# Sogna Design Intelligence: The Sovereign Bible
+# Sogna Design Intelligence: The Master Bible
 
 This document consolidates the industrial-grade UI/UX, motion kinetic, and architectural intelligence absorbed from the global ecosystem. It serves as the primary reasoning base for Sognatore and the Stylist motor.
 
@@ -30,8 +30,8 @@ Animations must be categorized by their intent:
 - **Interaction**: Elements reacting to user input (`subtleHover`, `activePress`).
 - **Focus**: Drawing attention to critical errors or CTAs (`jigglePulse`).
 
-## 5. Architectural Sovereignty
-- **Data Sovereignty**: Design decisions are made locally using `ui-reasoning.csv`.
+## 5. Architectural Integrity
+- **Data Integrity**: Design decisions are made locally using `ui-reasoning.csv`.
 - **Structural Integrity**: Every project must have an `ARCHITECTURE_REPORT.md` (Navigator) documenting its god nodes and topology.
 - **Component Evolution**: Components in `toolkit/Assembler` must inherit tokens from the Stylist's `:root` system.
 
@@ -41,14 +41,14 @@ The Guardian engine (Stylist) enforces 99 UX guidelines and 46 performance rules
 ### UX Critical Standards
 - **Wait Time Visibility**: For any operation > 1s, a progress indicator is mandatory.
 - **Error Recovery**: Every error message must provide an actionable next step, not just a failure code.
-- **Touch Targets**: All interactive elements must have a minimum hit area of 44x44px for mobile sovereignty.
+- **Touch Targets**: All interactive elements must have a minimum hit area of 44x44px for mobile integrity.
 - **Hierarchy of Action**: Primary actions must be visually distinct from secondary ones through weight and elevation.
 
 ### Performance Optimization (React/Next.js)
 - **Render Purging**: Avoid anonymous functions in props; use `useCallback` for event handlers.
 - **Layout Thrashing**: Prefer `transform` and `opacity` for animations; avoid animating `width`, `height`, or `top`.
 - **Dynamic Ingestion**: Large assets must be lazy-loaded with skeleton placeholders.
-- **State Sovereignty**: Keep state as local as possible to avoid unnecessary tree re-renders.
+- **State Isolation**: Keep state as local as possible to avoid unnecessary tree re-renders.
 
 ---
 *End of Sogna Design Intelligence - Master Record*

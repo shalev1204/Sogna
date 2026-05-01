@@ -36,7 +36,7 @@ async function runInstitutionalDiagnostic() {
   }
 
 
-  // 2. SOVEREIGNTY CHECK (No external residues)
+  // 2. INTEGRITY CHECK (No external residues)
   console.log(chalk.yellow('\n--- [PLANE 2: SOBERANÍA E IDENTIDAD] ---'));
   const findings = await scanner.scanDirectory('src');
   const externalTraces = findings.filter(f => f.snippet.toLowerCase().includes('obsidian'));

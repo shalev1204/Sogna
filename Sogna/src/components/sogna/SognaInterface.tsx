@@ -39,7 +39,7 @@ export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ childr
           <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)' }} />
         </div>
         <div style={{ flex: 1, textAlign: 'center', opacity: 0.3, fontSize: '10px', letterSpacing: '0.1em' }}>
-          SOGNA SOVEREIGN CORE v1.1.0
+          SOGNA CORE v1.1.0
         </div>
       </div>
 
