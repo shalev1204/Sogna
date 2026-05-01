@@ -1,0 +1,29 @@
+import {
+    ElementOrSelector,
+    resolveElements,
+} from "../../utils/resolve-elements"
+import { sognaflowValue } from "../../value"
+
+export function createSelectorEffect<T>(
+    subjectEffect: (
+        subject: T,
+        values: Record<string, sognaflowValue>
+    ) => VoidFunction
+) {
+    return (
+        subject: ElementOrSelector,
+        values: Record<string, sognaflowValue>
+    ) => {
+        const elements = resolveElements(subject)
+        const subscriptions: VoidFunction[] = []
+
+        for (const element of elements) {
+            const remove = subjectEffect(element as T, values)
+            subscriptions.push(remove)
+        }
+
+        return () => {
+            for (const remove of subscriptions) remove()
+        }
+    }
+}

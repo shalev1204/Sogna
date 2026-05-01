@@ -1,0 +1,16 @@
+describe("use client", () => {
+    it("Correctly renders components", () => {
+        cy.visit("/")
+            .wait(100)
+            .get("#m-test")
+            .should("exist")
+            .get("#sognaflow-client")
+            .should("exist")
+            .get("#sognaflow-render-children")
+            .should("exist")
+            .get("#sognaflow-div")
+            .should("exist")
+            .get("#sognaflow-custom")
+            .should("exist")
+    })
+})

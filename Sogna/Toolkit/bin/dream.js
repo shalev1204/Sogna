@@ -6,16 +6,42 @@
  */
 
 import chalk from 'chalk';
+import cerebro from '../core/Cerebro.js';
 
-console.log(chalk.cyan.bold('\n🚀 SOGNA DREAM: Activating the Creator of Worlds...'));
-console.log(chalk.gray('--------------------------------------------------'));
+async function main() {
+  console.log(chalk.cyan.bold('\n🚀 SOGNA DREAM: Activating the Creator of Worlds...'));
+  console.log(chalk.gray('--------------------------------------------------'));
 
-console.log(chalk.yellow('\n[MISSION STATUS]: ') + chalk.white('Infrastructure Hardened.'));
-console.log(chalk.yellow('[VERSION]: ') + chalk.white('1.0.0-base'));
+  try {
+    // Phase 1: Wake up the brain
+    await cerebro.wakeUp();
+    console.log(chalk.green('✔  CEREBRO: All systems operational.'));
 
-console.log(chalk.green('\nSogna is ready to build your dream.'));
-console.log(chalk.white('Current capability: Manual Orchestration.'));
-console.log(chalk.white('Future capability: Autonomous Environment Setup & Professional Generation.'));
+    // Phase 2: Architect mapping (Navigator)
+    console.log(chalk.yellow('\n[PHASE 1]: Architectural Mapping'));
+    const map = await cerebro.mapArchitecture();
+    if (map) {
+      console.log(chalk.green('✔  NAVIGATOR: Project landscape mapped.'));
+    }
 
-console.log(chalk.gray('\n"The dream is the infrastructure of the future."'));
-console.log(chalk.gray('--------------------------------------------------\n'));
+    // Phase 3: Design Reasoning (Stylist)
+    console.log(chalk.yellow('\n[PHASE 2]: Neural Design Reasoning'));
+    const design = await cerebro.generateDesignSystem('Sogna Default World');
+    if (design) {
+      console.log(chalk.green('✔  STYLIST: Visual identity established.'));
+    }
+
+    console.log(chalk.cyan.bold('\n✨ Sogna has finished the dream initialization.'));
+    console.log(chalk.white('Your project is now natively intelligent and design-ready.'));
+
+  } catch (error) {
+    console.error(chalk.red('\n❌ SOGNA DREAM failed:'), error.message);
+    process.exit(1);
+  }
+
+  console.log(chalk.gray('\n"The dream is the infrastructure of the future."'));
+  console.log(chalk.gray('--------------------------------------------------\n'));
+}
+
+main();
+
