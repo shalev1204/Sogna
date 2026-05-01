@@ -11,6 +11,7 @@
     "clean": "turbo run clean",
     "prepare": "cd .. && husky Sogna/toolkit/engines/Sentinel/.husky",
     "sogna": "node toolkit/bin/sogna.js",
+    "dream": "node toolkit/bin/dream.js",
     "sognatore": "node toolkit/bin/sognatore.js"
   },
   "packageManager": "pnpm@10.33.0",

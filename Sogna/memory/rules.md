@@ -15,6 +15,7 @@ These agents MUST adhere to the following consolidated protocol:
 3. **Memory Protocol (SMS)**: Before starting ANY task, you MUST read `memory/SOGNA_CONTEXT.md` to synchronize with current preferences and decisions. @tag: memory
 4. **Socratic Gate**: Do not implement until you have 100% clarity. Use `ask_question` if requirements are underspecified.
 5. **Plan-First Approach**: Every non-trivial task MUST have a written `implementation_plan.md` artifact approved by the USER.
+6. **Communication (SBP)**: All cross-agent communication MUST follow the `memory/SBP_PROTOCOL.md`. @tag: sbp
 
 ## Technical Source of Truth (Zero-Error Policy)
 
