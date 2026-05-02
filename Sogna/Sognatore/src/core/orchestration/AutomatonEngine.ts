@@ -17,7 +17,7 @@ export class AutomatonEngine {
 
     private initializeListeners() {
         // Reactive Operations: When a deal is won, start a project
-        this.bus.subscribe(SognaEventType.LOG, async (event) => {
+        this.bus.on(SognaEventType.LOG, async (event: any) => {
             if (event.data.message?.includes('Deal Won')) {
                 console.log(`[AutomatonEngine] Deal won detected. Triggering project initialization...`);
                 // Autonomous logic here

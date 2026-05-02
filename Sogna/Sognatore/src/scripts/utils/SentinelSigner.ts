@@ -12,7 +12,7 @@ async function signFiles() {
   const filesToSign = [
     'Sognatore/src/core/memory/MemoryHub.ts',
     'Sognatore/src/core/memory/Chronicler.ts',
-    'Sognatore/diagnose.ts'
+    'toolkit/bin/sogna.js'
   ];
 
   const signatures = await fs.readJson(SENTINEL_DATA);

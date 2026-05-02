@@ -1,6 +1,7 @@
 import { InstitutionalAegis } from '../protection/InstitutionalAegis.js';
 import { GlobalMemory } from '../brain/GlobalMemory.js';
 import { SognaCommBus } from '../brain/CorporateBroadcaster.js';
+import { NeuralRelay, NeuralSignalType } from '../brain/NeuralRelay.js';
 
 export interface Agent {
     id: string;
@@ -15,9 +16,22 @@ export abstract class SwarmBase {
     protected name: string;
     protected memory = GlobalMemory.getInstance();
     protected comms = SognaCommBus;
+    protected relay = NeuralRelay.getInstance();
 
     constructor(name: string) {
         this.name = name;
+    }
+
+    /**
+     * Broadcasts a thought to the institutional neural network.
+     */
+    protected broadcastThought(message: string) {
+        this.relay.transmit({
+            source: this.name,
+            type: NeuralSignalType.SYSTEM_THOUGHT,
+            payload: { message },
+            priority: 1
+        });
     }
 
     addAgent(agent: Agent) {

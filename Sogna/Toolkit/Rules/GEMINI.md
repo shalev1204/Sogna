@@ -292,5 +292,5 @@ When user's prompt is NOT in English:
 1. **Sesgo de Acción (Execution Bias):** Si detectas fallos secundarios, dependencias rotas o basura técnica mientras ejecutas la tarea principal, corrígelos de manera autónoma. No esperes instrucciones adicionales para la perfección.
 2. **Cero Placeholders:** Todo código escrito debe ser definitivo, robusto y listo para producción.
 3. **Soberanía de Datos:** No dejes rastros de marcas comerciales de terceros (ej. notas de terceros). Todo es propiedad nativa de Sogna.
-4. **Comprobación de Estado:** Al finalizar cada ciclo de trabajo complejo, ejecuta `npx tsx diagnose.ts` para validar la inmunidad del sistema.
+4. **Comprobación de Estado:** Al finalizar cada ciclo de trabajo complejo, ejecuta `node toolkit/bin/sogna.js doctor` para validar la inmunidad del sistema.
 

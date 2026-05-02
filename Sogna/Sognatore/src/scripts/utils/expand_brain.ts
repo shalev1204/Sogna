@@ -1,5 +1,5 @@
-import { MemoryHub } from './src/core/memory/MemoryHub.js';
-import { Chronicler } from './src/core/memory/Chronicler.js';
+import { MemoryHub } from '../../core/memory/MemoryHub.js';
+import { Chronicler } from '../../core/memory/Chronicler.js';
 import chalk from 'chalk';
 
 async function expandConsciousness() {

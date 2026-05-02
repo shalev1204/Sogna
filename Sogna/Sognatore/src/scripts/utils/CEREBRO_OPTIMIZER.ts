@@ -1,5 +1,5 @@
-import { MemoryHub } from './src/core/memory/MemoryHub.js';
-import { Chronicler } from './src/core/memory/Chronicler.js';
+import { MemoryHub } from '../../core/memory/MemoryHub.js';
+import { Chronicler } from '../../core/memory/Chronicler.js';
 import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
@@ -63,7 +63,7 @@ async function performDeepAudit() {
     const signedFiles = Object.keys(signatures).length;
     console.log(`- Archivos Firmados por Sentinel: ${signedFiles}`);
     // Check if critical core files are signed
-    const criticalFiles = ['Sognatore/src/core/memory/MemoryHub.ts', 'Sognatore/src/core/memory/Chronicler.ts', 'Sognatore/diagnose.ts'];
+    const criticalFiles = ['Sognatore/src/core/memory/MemoryHub.ts', 'Sognatore/src/core/memory/Chronicler.ts', 'toolkit/bin/sogna.js'];
     const corrupted = [];
 
     for (const relPath of criticalFiles) {

@@ -13,7 +13,7 @@ En tu primer turno, DEBES ejecutar los siguientes pasos:
 
 1. **Diagnóstico de Integridad:**
    ```powershell
-   npx tsx diagnose.ts
+   node toolkit/bin/sogna.js doctor
    ```
 2. **Adquisición de Conocimiento:**
    Instancia el `MemoryHub` (el Cerebro) y realiza una búsqueda semántica de los conceptos centrales: `Sogna`, `orchestrator`, `Sentinel`.

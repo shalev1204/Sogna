@@ -1,5 +1,5 @@
-import { SwarmOrchestrator } from './src/core/SwarmOrchestrator.js';
-import { QualityCouncil } from './src/core/QualityCouncil.js';
+import { SwarmOrchestrator } from '../../core/SwarmOrchestrator.js';
+import { QualityCouncil } from '../../core/QualityCouncil.js';
 import { SognaEventBus, SognaEventType } from '@sogna/toolkit';
 import chalk from 'chalk';
 

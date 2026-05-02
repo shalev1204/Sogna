@@ -36,7 +36,7 @@ El ecosistema Sogna ha completado su transición hacia una arquitectura totalmen
 
 ### 5. Verificación Final
 
-- **Diagnóstico**: Ejecutado con éxito (`npx tsx diagnose.ts`). Todos los Hubs (Sentinel, Neural, Orchestrator) están operativos al 100%.
+- **Diagnóstico**: Ejecutado con éxito (`node toolkit/bin/sogna.js doctor`). Todos los Hubs (Sentinel, Neural, Orchestrator) están operativos al 100%.
 
 ---
 

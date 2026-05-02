@@ -25,6 +25,11 @@
 - **Security Latency**: Near-zero (Pre-dispatch vetting eliminates unsafe execution paths early).
 - **Resource Footprint**: Optimized (16KB output truncation prevents context overflow).
 
+## 🛠️ Operational Execution
+To verify the ecosystem's state, run the following commands:
+- **Standard Audit**: `node toolkit/bin/sogna.js doctor`
+- **Security Audit (Sentinel)**: `node toolkit/bin/sogna.js doctor --secure`
+
 ## ✅ Final Certification
 The Sogna ecosystem has been audited, diagnosed, and confirmed to be in a state of **Terminal Stability**. All external expansion-era dependencies (Claude-Code) have been purged. The system is functionally 100% independent and superior in its dialectic coordination.
 
