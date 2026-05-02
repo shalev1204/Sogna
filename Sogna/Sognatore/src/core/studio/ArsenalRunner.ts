@@ -18,27 +18,14 @@ export class ArsenalRunner {
     }
 
     const inputJson = JSON.stringify(inputs);
-    // Escape double quotes for Windows shell if necessary, but execSync with array might be safer if supported, 
-    // however usually we use a string for execSync on windows.
-    // Let's use a temporary file for inputs to avoid shell escaping hell.
-    const tmpInputFile = path.join(this.arsenalPath, `tmp_input_${Date.now()}.json`);
-    fs.writeFileSync(tmpInputFile, inputJson);
-
+    
     try {
-        const cmd = `python "${this.runnerPath}" ${moduleName} "$(cat "${tmpInputFile}")"`;
-        // Wait, 'cat' is not on windows usually unless using busybox. 
-        // Let's just pass the file path to runner.py instead.
-        
-        const cmdWindows = `python "${this.runnerPath}" ${moduleName} "${inputJson.replace(/"/g, '\\"')}"`;
-        // If input is huge, this might fail. Let's update runner.py to accept a file.
-        
-        const output = execSync(cmdWindows, { encoding: 'utf-8', cwd: this.arsenalPath });
-        return JSON.parse(output);
+        // Use the runSecure logic (file-based) for standard runs too, 
+        // as it avoids command line length limits and shell escaping issues.
+        return this.runSecure(moduleName, inputs);
     } catch (error: any) {
         console.error(`[ArsenalRunner] Error executing ${moduleName}:`, error.message);
         throw error;
-    } finally {
-        if (fs.existsSync(tmpInputFile)) fs.unlinkSync(tmpInputFile);
     }
   }
 

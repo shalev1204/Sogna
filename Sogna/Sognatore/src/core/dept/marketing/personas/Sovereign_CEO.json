@@ -1,0 +1,12 @@
+{
+    "id": "persona_001_sovereign_ceo",
+    "name": "The Sovereign Tech CEO",
+    "description": "Founder of high-growth AI startup looking for local sovereignty and efficiency.",
+    "pain_points": [
+        "High cost of cloud GPU",
+        "Data privacy concerns in public LLMs",
+        "Need for faster development cycles"
+    ],
+    "language": "Highly technical, results-oriented, avoids buzzwords.",
+    "preferred_channels": ["LinkedIn", "Technical Forums", "Internal Reports"]
+}

@@ -466,6 +466,36 @@ export class ToolRegistry {
       }
     });
 
+    // 12. biz_dream
+    this.register({
+      name: 'biz_dream',
+      description: 'Inicializa un nuevo Mundo (Proyecto de Negocio) orquestado por el NexusBrain y los Enjambres Departamentales.',
+      responsibility: 'Visión estratégica y ejecución de enjambres.',
+      hints: ['dream', 'mundo', 'negocio', 'startup', 'swarm'],
+      parameters: { objective: 'Objetivo o sueño empresarial' },
+      execute: async (args) => {
+          const { NexusBrain } = await import('../brain/NexusBrain.js');
+          const brain = NexusBrain.getInstance();
+          const result = await brain.dream(args.objective);
+          return `SUCCESS: El NexusBrain ha delegado el sueño "${result.objective}" a los enjambres departamentales.`;
+      }
+    });
+
+    // 13. biz_status
+    this.register({
+      name: 'biz_status',
+      description: 'Consulta el estado de consciencia y progreso de los enjambres vía NeuralRelay.',
+      responsibility: 'Monitorización del enjambre.',
+      hints: ['status', 'hitos', 'progreso', 'neural'],
+      parameters: {},
+      execute: async () => {
+          const { NeuralRelay } = await import('../brain/NeuralRelay.js');
+          const relay = NeuralRelay.getInstance();
+          const history = relay.getHistory();
+          return `NEURAL PULSE STATUS:\n${history.map(s => `[${s.source}] -> ${s.type}: ${JSON.stringify(s.payload)}`).join('\n')}`;
+      }
+    });
+
     // 9. studio_upload (Asset Ingestion)
     this.register({
       name: 'studio_upload',
@@ -517,6 +547,113 @@ export class ToolRegistry {
         } catch (e: any) {
           return `MEDIA REVIEW ERROR: ${e.message}`;
         }
+      }
+    });
+
+    // 11. biz_dream (Strategic Business Orchestration)
+    this.register({
+      name: 'biz_dream',
+      description: 'Inicia la orquestación de un nuevo modelo de negocio (Mundo).',
+      responsibility: 'Liderar la creación estratégica de una empresa.',
+      hints: ['dream', 'negocio', 'startup', 'agency', 'business', 'mundo'],
+      parameters: { 
+        name: 'Nombre de la empresa/mundo',
+        blueprint: 'ID del Business Blueprint (ej. startup_mvp, agency_fast_track)'
+      },
+      execute: async (args) => {
+          const { BusinessOrchestrator } = await import('../business/BusinessOrchestrator.js');
+          return await BusinessOrchestrator.startWorld(args.name, args.blueprint);
+      }
+    });
+
+    // 12. biz_status
+    this.register({
+      name: 'biz_status',
+      description: 'Consulta el estado de avance de un proyecto de negocio.',
+      responsibility: 'Seguimiento de hitos empresariales.',
+      hints: ['status', 'biz', 'negocio', 'avance'],
+      parameters: { id: 'ID del proyecto de negocio' },
+      execute: async (args) => {
+          const { BusinessOrchestrator } = await import('../business/BusinessOrchestrator.js');
+          return await BusinessOrchestrator.executeStage(args.id);
+      }
+    });
+
+    // 13. finance_report
+    this.register({
+      name: 'finance_report',
+      description: 'Genera un informe detallado de salud financiera y KPIs.',
+      responsibility: 'Control de soberanía económica y rentabilidad.',
+      hints: ['finance', 'kpi', 'roi', 'money', 'dinero', 'informe'],
+      parameters: {},
+      execute: async () => {
+          const { KpiEngine } = await import('../finance/KpiEngine.js');
+          const report = await KpiEngine.generateReport();
+          return JSON.stringify(report, null, 2);
+      }
+    });
+
+    // 14. biz_lead
+    this.register({
+      name: 'biz_lead',
+      description: 'Añade un nuevo lead al CRM institucional.',
+      responsibility: 'Gestión de la base de clientes potencial.',
+      hints: ['lead', 'customer', 'cliente', 'crm'],
+      parameters: { name: 'Nombre', email: 'Email', source: 'Fuente' },
+      execute: async (args) => {
+          const { SalesHub } = await import('../business/SalesHub.js');
+          const lead = await SalesHub.addLead({ 
+              name: args.name, 
+              email: args.email, 
+              source: args.source, 
+              status: 'new' 
+          });
+          return `SUCCESS: Lead registrado con ID: ${lead.id}`;
+      }
+    });
+
+    // 15. biz_campaign
+    this.register({
+      name: 'biz_campaign',
+      description: 'Ejecuta una campaña de marketing automatizada con activos de Sognatore Studio.',
+      responsibility: 'Generación de crecimiento (Growth).',
+      hints: ['campaign', 'marketing', 'ads', 'lanzamiento'],
+      parameters: { name: 'Nombre de la campaña', platform: 'instagram | twitter | linkedin' },
+      execute: async (args) => {
+          const { CampaignManager } = await import('../business/CampaignManager.js');
+          const campaign = await CampaignManager.executeCampaign(args.name, args.platform as any);
+          return `SUCCESS: Campaña "${campaign.name}" iniciada en ${campaign.platform}.\nActivos: ${campaign.assets.join(', ')}`;
+      }
+    });
+
+    // 16. finance_invoice
+    this.register({
+      name: 'finance_invoice',
+      description: 'Genera una factura formal para un cliente.',
+      responsibility: 'Gestión de cobros.',
+      hints: ['invoice', 'factura', 'billing', 'cobro'],
+      parameters: { client_id: 'ID del cliente', items: 'JSON array de items [{description, amount}]' },
+      execute: async (args) => {
+          const { BillingEngine } = await import('../finance/BillingEngine.js');
+          const items = JSON.parse(args.items);
+          const invoice = await BillingEngine.createInvoice(args.client_id, items);
+          const doc = await BillingEngine.generateMarkdown(invoice);
+          return `SUCCESS: Factura generada.\n\n${doc}`;
+      }
+    });
+
+    // 17. legal_gen
+    this.register({
+      name: 'legal_gen',
+      description: 'Genera y firma documentos legales institucionales.',
+      responsibility: 'Soberanía jurídica.',
+      hints: ['legal', 'contrato', 'contract', 'nda', 'privacy'],
+      parameters: { type: 'NDA | SERVICE | PRIVACY', party: 'Nombre de la contraparte' },
+      execute: async (args) => {
+          const { LegalHub } = await import('../legal/LegalHub.js');
+          const template = await LegalHub.getTemplate(args.type as any);
+          const signed = await LegalHub.signDocument(template, args.party);
+          return `SUCCESS: Documento legal generado y firmado digitalmente.\n\n${signed}`;
       }
     });
   }
