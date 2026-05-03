@@ -1,0 +1,1 @@
+{"version":3,"file":"add-dom-event.js","sourceRoot":"","sources":["../../src/events/add-dom-event.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,WAAW,CACvB,MAAmB,EACnB,SAAiB,EACjB,OAAsB,EACtB,UAAmC,EAAE,OAAO,EAAE,IAAI,EAAE;IAEpD,MAAM,CAAC,gBAAgB,CAAC,SAAS,EAAE,OAAO,EAAE,OAAO,CAAC,CAAA;IAEpD,OAAO,GAAG,EAAE,CAAC,MAAM,CAAC,mBAAmB,CAAC,SAAS,EAAE,OAAO,CAAC,CAAA;AAC/D,CAAC"}

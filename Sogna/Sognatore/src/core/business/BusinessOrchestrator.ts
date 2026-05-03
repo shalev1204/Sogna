@@ -1,6 +1,6 @@
-import { BusinessBlueprintRegistry, BusinessBlueprint } from './BusinessBlueprintRegistry.js';
-import { ProjectManager } from '../studio/ProjectManager.js';
-import { FinanceHub } from '../finance/FinanceHub.js';
+import { BusinessBlueprintRegistry, BusinessBlueprint } from './businessblueprintregistry.js';
+import { ProjectManager } from '../studio/projectmanager.js';
+import { FinanceHub } from '../finance/financehub.js';
 
 export class BusinessOrchestrator {
     static async startWorld(id: string, blueprintId: string): Promise<string> {

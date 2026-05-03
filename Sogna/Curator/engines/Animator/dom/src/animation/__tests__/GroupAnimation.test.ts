@@ -1,5 +1,5 @@
-import { GroupAnimation } from "../GroupAnimation"
-import { GroupAnimationWithThen } from "../GroupAnimationWithThen"
+import { GroupAnimation } from "../groupanimation"
+import { GroupAnimationWithThen } from "../groupanimationwiththen"
 import { AnimationPlaybackControlsWithThen } from "../types"
 
 function createTestAnimationControls(

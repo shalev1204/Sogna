@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { ThemeProvider, useTheme, SwarmType } from './ThemeContext';
+import { ThemeProvider, useTheme, SwarmType } from './themecontext';
 import './App.css';
 
 function AppContent() {

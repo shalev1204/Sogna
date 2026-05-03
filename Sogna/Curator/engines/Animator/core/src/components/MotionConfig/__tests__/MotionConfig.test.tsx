@@ -2,7 +2,7 @@ import { render } from "@testing-library/react"
 import { AnimationGeneratorName, Transition } from "sognaflow-dom"
 import { useContext } from "react"
 import { sognaflowConfig } from ".."
-import { sognaflowConfigContext } from "../../../context/sognaflowConfigContext"
+import { sognaflowConfigContext } from "../../../context/sognaflowconfigcontext"
 
 const consumerId = "consumer"
 

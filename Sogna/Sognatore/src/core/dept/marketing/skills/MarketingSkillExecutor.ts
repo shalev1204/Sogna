@@ -1,4 +1,4 @@
-import { MarketingSkillRegistry, MarketingSkillCategory } from '../skills/MarketingSkillRegistry.js';
+import { MarketingSkillRegistry, MarketingSkillCategory } from '../skills/marketingskillregistry.js';
 
 /**
  * Motor de Ejecución de Habilidades (Skills)

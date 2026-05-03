@@ -7,7 +7,7 @@ import {
     useWillChange,
 } from "../../../"
 import { pointerDown, pointerMove, render } from "../../../jest.setup"
-import { WillChangesognaflowValue } from "../../../value/use-will-change/WillChangesognaflowValue"
+import { WillChangesognaflowValue } from "../../../value/use-will-change/willchangesognaflowvalue"
 import { nextFrame } from "../../__tests__/utils"
 import { deferred, drag, dragFrame, MockDrag, Point, sleep } from "./utils"
 

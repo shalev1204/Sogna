@@ -1,4 +1,4 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
+import { Agent } from '../../../swarms/swarmbase.js';
 
 export class ContentStrateger implements Agent {
     id = 'marketing_content_strat';

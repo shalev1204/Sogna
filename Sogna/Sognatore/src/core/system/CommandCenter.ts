@@ -1,4 +1,4 @@
-import { MemoryHub } from '../memory/MemoryHub.js';
+import { MemoryHub } from '../memory/memoryhub.js';
 
 export interface CommandAction {
   id: string;

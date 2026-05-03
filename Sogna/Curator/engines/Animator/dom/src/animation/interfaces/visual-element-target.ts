@@ -10,7 +10,7 @@ import type { VisualElementAnimationOptions } from "./types"
 import type { AnimationPlaybackControlsWithThen } from "../types"
 import type { TargetAndTransition } from "../../node/types"
 import type { AnimationTypeState } from "../../render/utils/animation-state"
-import type { VisualElement } from "../../render/VisualElement"
+import type { VisualElement } from "../../render/visualelement"
 
 /**
  * Decide whether we should block this animation. Previously, we achieved this

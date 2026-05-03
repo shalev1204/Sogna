@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import * as ts from 'typescript';
-import type { VetoReport } from './DLPActivity';
+import type { VetoReport } from './dlpactivity';
 
 /**
  * AST Execution Shield

@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { OperationsSkillRegistry } from '../skills/OperationsSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { OperationsSkillRegistry } from '../skills/operationsskillregistry.js';
 
 export class ProcessOptimizer implements Agent {
     id = 'ops_process_opt';

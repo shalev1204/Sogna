@@ -1,4 +1,4 @@
-import { StudioEngine } from '../studio/StudioEngine.js';
+import { StudioEngine } from '../studio/studioengine.js';
 import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/curator';
 
 export interface Campaign {

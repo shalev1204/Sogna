@@ -1,5 +1,5 @@
 import type { Box } from "sognaflow-utils"
-import { GroupAnimation } from "../animation/GroupAnimation"
+import { GroupAnimation } from "../animation/groupanimation"
 import type {
     AnimationOptions,
     AnimationPlaybackControls,
@@ -8,11 +8,11 @@ import type {
 import { frame } from "../frameloop"
 import { copyBoxInto } from "../projection/geometry/copy"
 import { createBox } from "../projection/geometry/models"
-import { HTMLProjectionNode } from "../projection/node/HTMLProjectionNode"
+import { HTMLProjectionNode } from "../projection/node/htmlprojectionnode"
 import type { IProjectionNode } from "../projection/node/types"
-import { HTMLVisualElement } from "../render/html/HTMLVisualElement"
+import { HTMLVisualElement } from "../render/html/htmlvisualelement"
 import { visualElementStore } from "../render/store"
-import type { VisualElement } from "../render/VisualElement"
+import type { VisualElement } from "../render/visualelement"
 import { resolveElements, type ElementOrSelector } from "../utils/resolve-elements"
 
 type LayoutAnimationScope = Element | Document

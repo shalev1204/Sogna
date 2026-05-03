@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { AutoHealer } from '../../core/system/AutoHealer.js';
-import { HealthGuard } from '../../core/system/HealthGuard.js';
+import { AutoHealer } from '../../core/system/autohealer.js';
+import { HealthGuard } from '../../core/system/healthguard.js';
 import chalk from 'chalk';
 
 const ROOT = 'c:/Users/carle/Desktop/Sogna/Sogna/Sognatore';

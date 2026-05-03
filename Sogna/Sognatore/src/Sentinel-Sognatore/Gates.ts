@@ -2,8 +2,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
-import { ApprovalGatePolicy } from './PolicyTypes.js';
-import { Hub } from './Hub.js';
+import { ApprovalGatePolicy } from './policytypes.js';
+import { Hub } from './hub.js';
 
 /**
  * Sentinel Gates - Human-in-the-loop approval system part of the Sentinel-Sognatore block.

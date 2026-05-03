@@ -1,5 +1,5 @@
-import { AgentFactory } from '../src/core/agents/AgentFactory.js';
-import { AGENT_SWARM_MAPPING } from '../src/core/agents/AgentTypes.js';
+import { AgentFactory } from '../src/core/agents/agentfactory.js';
+import { AGENT_SWARM_MAPPING } from '../src/core/agents/agenttypes.js';
 import chalk from 'chalk';
 
 async function verifyAllAgents() {

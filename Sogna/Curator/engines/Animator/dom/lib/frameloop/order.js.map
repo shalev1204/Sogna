@@ -1,0 +1,1 @@
+{"version":3,"file":"order.js","sourceRoot":"","sources":["../../src/frameloop/order.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,UAAU,GAAa;IAChC,OAAO,EAAE,UAAU;IACnB,MAAM,EAAE,OAAO;IACf,kBAAkB,EAAE,wBAAwB;IAC5C,WAAW,EAAE,UAAU;IACvB,QAAQ,EAAE,UAAU;IACpB,WAAW,EAAE,UAAU;IACvB,QAAQ,EAAE,QAAQ;IAClB,YAAY,EAAE,UAAU;CAClB,CAAA"}

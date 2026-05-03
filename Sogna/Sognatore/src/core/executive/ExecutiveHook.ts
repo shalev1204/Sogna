@@ -2,7 +2,7 @@
 import { spawnSync } from 'child_process';
 import path from 'path';
 import * as fs from 'fs';
-import { ToolHook, HookDecision, HookResult } from '../actions/ToolRegistry.js';
+import { ToolHook, HookDecision, HookResult } from '../actions/toolregistry.js';
 
 /**
  * ExecutiveHook - High-security internal plugin powered by the Rust Executive Core.

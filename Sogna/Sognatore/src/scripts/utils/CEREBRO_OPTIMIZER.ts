@@ -1,5 +1,5 @@
-import { MemoryHub } from '../../core/memory/MemoryHub.js';
-import { Chronicler } from '../../core/memory/Chronicler.js';
+import { MemoryHub } from '../../core/memory/memoryhub.js';
+import { Chronicler } from '../../core/memory/chronicler.js';
 import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';

@@ -4,7 +4,7 @@ import { isHTMLElement } from "sognaflow-dom"
 import * as React from "react"
 import { useContext, useId, useInsertionEffect, useRef } from "react"
 
-import { sognaflowConfigContext } from "../../context/sognaflowConfigContext"
+import { sognaflowConfigContext } from "../../context/sognaflowconfigcontext"
 import { useComposedRefs } from "../../utils/use-composed-ref"
 
 interface Size {

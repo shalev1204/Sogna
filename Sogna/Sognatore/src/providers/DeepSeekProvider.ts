@@ -1,4 +1,4 @@
-import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/provider.js';
 
 export class DeepSeekProvider extends Provider {
   readonly metadata: ProviderMetadata = {

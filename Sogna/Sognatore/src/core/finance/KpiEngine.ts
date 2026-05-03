@@ -1,4 +1,4 @@
-import { FinanceHub, FinanceState } from './FinanceHub.js';
+import { FinanceHub, FinanceState } from './financehub.js';
 
 export interface BusinessHealthReport {
     status: 'HEALTHY' | 'CRITICAL' | 'STABLE';

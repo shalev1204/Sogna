@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { NeuralLogisticsHub } from '../dept/operations/logistics/NeuralLogisticsHub.js';
+import { NeuralLogisticsHub } from '../dept/operations/logistics/neurallogisticshub.js';
 
 export enum NeuralSignalType {
     FINANCE_QUERY = 'FINANCE_QUERY',

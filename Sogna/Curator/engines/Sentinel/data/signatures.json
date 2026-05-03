@@ -18264,7 +18264,7 @@
     "timestamp": "2026-04-19T13:49:11.069Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/Hub.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/Hub.ts": {
     "hash": "4f74617eae64ab322570b000fdf3fdf9382b46806ec65cfd54d3e215a9b8f445",
     "timestamp": "2026-05-02T08:21:32.645Z",
     "signedBy": "Sentinel-Apex"
@@ -18474,57 +18474,57 @@
     "timestamp": "2026-04-29T21:11:52.339Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/ActivityProfile.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/ActivityProfile.ts": {
     "hash": "90dcbb22eb8548973218e016d94abedc5a4283cbc4210ef0d9a9c3de7df725ef",
     "timestamp": "2026-04-29T21:11:52.346Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/CodeScanner.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/CodeScanner.ts": {
     "hash": "9847867007438a9eee59f232752462f638e0ed954b2cf5df41979226ccbb7985",
     "timestamp": "2026-04-29T21:11:52.346Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/DependencyAuditor.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/DependencyAuditor.ts": {
     "hash": "a16bfeed8f0e54f6be0b499747500afaed10ae33a764336848e81582561a11a1",
     "timestamp": "2026-04-29T21:11:52.346Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/Engine.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/Engine.ts": {
     "hash": "019a9f6504f3341a7a394dfc0b308ae24142041d2c6f7244761c831fee59e06c",
     "timestamp": "2026-05-02T08:21:32.644Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/Gates.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/Gates.ts": {
     "hash": "840ce0160a39e197ff9d13549954ee40418205e3f816160faf560579d4d55085",
     "timestamp": "2026-05-02T08:21:32.645Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/Honeypots.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/Honeypots.ts": {
     "hash": "061a2f6d35898140c2e094cd805011af42255e4a8690c09eb690fed1816f57f0",
     "timestamp": "2026-04-29T21:11:52.346Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/PolicyTypes.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/PolicyTypes.ts": {
     "hash": "43c6980bb8c48814633ae73e3b83c92b071f023699c1e9da4868c49bda4f2f1f",
     "timestamp": "2026-05-02T08:21:32.645Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/SecurityAudit.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/SecurityAudit.ts": {
     "hash": "1b0dfaa19bd438a18d8e97f1c3cd32919c65c400b5a620b592531466cecc55d9",
     "timestamp": "2026-04-29T21:11:52.347Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/SecurityTypes.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/SecurityTypes.ts": {
     "hash": "ed45c4d8b43164fe6f97f8f77e3ce7a6b0baf2f00dfd24da7aea1389f4d68c3a",
     "timestamp": "2026-04-29T21:11:52.347Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/Shield.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/Shield.ts": {
     "hash": "79fff6b499739888566057dfdde77f25504854266c53fdd3ea8ffe77e2e273f8",
     "timestamp": "2026-05-02T08:21:32.645Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/Treasurer.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/Treasurer.ts": {
     "hash": "f7dcd707a1fdee9a4c6a2273a280c2376e09e52f29e6adb93b738f9185df943e",
     "timestamp": "2026-05-02T08:21:32.645Z",
     "signedBy": "Sentinel-Apex"
@@ -18684,7 +18684,7 @@
     "timestamp": "2026-05-02T08:21:32.477Z",
     "signedBy": "Sentinel-Apex"
   },
-  "Sogna/Sognatore/src/Sentinel-Sognatore/PermissionProxy.ts": {
+  "Sogna/Sognatore/src/sentinel-sognatore/PermissionProxy.ts": {
     "hash": "2d91e9e02c2cb55ac88e40e04b8965a9bc927eed9088028b5a20480e3553fed9",
     "timestamp": "2026-05-02T08:21:32.645Z",
     "signedBy": "Sentinel-Apex"

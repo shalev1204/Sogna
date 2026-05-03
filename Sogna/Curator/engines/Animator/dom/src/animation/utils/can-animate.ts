@@ -1,6 +1,6 @@
 import { warning } from "sognaflow-utils"
 import { isGenerator } from "../generators/utils/is-generator"
-import { ResolvedKeyframes } from "../keyframes/KeyframesResolver"
+import { ResolvedKeyframes } from "../keyframes/keyframesresolver"
 import { AnimationGeneratorType } from "../types"
 import { isAnimatable } from "./is-animatable"
 
@@ -41,7 +41,7 @@ export function canAnimate(
 
     warning(
         isOriginAnimatable === isTargetAnimatable,
-        `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${
+        `You are trying to animate ${name} from "${originkeyframe}" to "${targetKeyframe}". "${
             isOriginAnimatable ? targetKeyframe : originKeyframe
         }" is not an animatable value.`,
         "value-not-animatable"

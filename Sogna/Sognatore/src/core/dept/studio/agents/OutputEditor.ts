@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { StudioSkillRegistry } from '../skills/StudioSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { StudioSkillRegistry } from '../skills/studioskillregistry.js';
 
 export class OutputEditor implements Agent {
     id = 'studio_output_editor';

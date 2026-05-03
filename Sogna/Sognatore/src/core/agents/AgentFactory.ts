@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { Provider } from '../Provider.js';
-import { ProviderFactory } from '../ProviderFactory.js';
-import { AgentRole, AgentSwarm } from './AgentTypes.js';
+import { Provider } from '../provider.js';
+import { ProviderFactory } from '../providerfactory.js';
+import { AgentRole, AgentSwarm } from './agenttypes.js';
 
 import { fileURLToPath } from 'url';
 

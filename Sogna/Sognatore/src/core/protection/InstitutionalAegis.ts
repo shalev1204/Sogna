@@ -1,4 +1,4 @@
-import { ProtectionKPITracker } from '../dept/protection/metrics/ProtectionKPITracker.js';
+import { ProtectionKPITracker } from '../dept/protection/metrics/protectionkpitracker.js';
 
 export class InstitutionalAegis {
     /**

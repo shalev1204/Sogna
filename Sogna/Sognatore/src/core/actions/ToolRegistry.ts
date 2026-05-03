@@ -3,12 +3,12 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
-import { ExecutiveHook } from '../executive/ExecutiveHook.js';
-import { ConfigDiscovery } from '@sogna/curator/shared/ConfigDiscovery.js';
-import { StudioEngine } from '../studio/StudioEngine.js';
-import { ArsenalRunner } from '../studio/ArsenalRunner.js';
-import { EnvOracle } from '../utils/EnvOracle.js';
-import * as ModelRegistry from '../studio/ModelRegistry.js';
+import { ExecutiveHook } from '../executive/executivehook.js';
+import { ConfigDiscovery } from '@sogna/curator/shared/configdiscovery.js';
+import { StudioEngine } from '../studio/studioengine.js';
+import { ArsenalRunner } from '../studio/arsenalrunner.js';
+import { EnvOracle } from '../utils/envoracle.js';
+import * as ModelRegistry from '../studio/modelregistry.js';
 
 export interface ToolDefinition {
   name: string;
@@ -167,8 +167,8 @@ export class ToolRegistry {
         taskId: 'Unique ID for background task (required if background=true)'
       },
       execute: async (args, tier) => {
-        const { Shield: BashShield } = await import('../../Sentinel-Sognatore/Shield.js');
-        const { PermissionMode } = await import('../../Sentinel-Sognatore/SecurityTypes.js');
+        const { Shield: BashShield } = await import('../../sentinel-sognatore/shield.js');
+        const { PermissionMode } = await import('../../sentinel-sognatore/securitytypes.js');
         
         // 1. Safety Audit with institutional heuristics
         const mode = tier === 'gold' ? PermissionMode.Full : PermissionMode.Balanced;
@@ -397,7 +397,7 @@ export class ToolRegistry {
       hints: ['playbook', 'style', 'estilo', 'info'],
       parameters: { playbook: 'ID del playbook' },
       execute: async (args) => {
-          const { PlaybookManager } = await import('../studio/PlaybookManager.js');
+          const { PlaybookManager } = await import('../studio/playbookmanager.js');
           const playbook = PlaybookManager.getPlaybook(args.playbook);
           if (!playbook) return `ERROR: Playbook "${args.playbook}" no encontrado.`;
           return JSON.stringify(playbook, null, 2);
@@ -417,7 +417,7 @@ export class ToolRegistry {
         pace: 'Pace (ej. slow, moderate, fast)'
       },
       execute: async (args) => {
-          const { PlaybookManager } = await import('../studio/PlaybookManager.js');
+          const { PlaybookManager } = await import('../studio/playbookmanager.js');
           const playbook = PlaybookManager.generateFromBrief(args.name, {
               mood: args.mood,
               tone: args.tone,
@@ -439,8 +439,8 @@ export class ToolRegistry {
         blueprint: 'Nombre del blueprint (ej. cinematic, social_express)'
       },
       execute: async (args) => {
-          const { ProjectManager } = await import('../studio/ProjectManager.js');
-          const { BlueprintRegistry } = await import('../studio/BlueprintRegistry.js');
+          const { ProjectManager } = await import('../studio/projectmanager.js');
+          const { BlueprintRegistry } = await import('../studio/blueprintregistry.js');
           
           if (!BlueprintRegistry.getBlueprint(args.blueprint)) {
               return `ERROR: Blueprint "${args.blueprint}" no encontrado. Disponibles: ${BlueprintRegistry.listBlueprints().join(', ')}`;
@@ -459,7 +459,7 @@ export class ToolRegistry {
       hints: ['project', 'status', 'estado', 'artefactos', 'artifacts'],
       parameters: { id: 'ID del proyecto' },
       execute: async (args) => {
-          const { ProjectManager } = await import('../studio/ProjectManager.js');
+          const { ProjectManager } = await import('../studio/projectmanager.js');
           const project = ProjectManager.getProject(args.id);
           if (!project) return `ERROR: Proyecto "${args.id}" no encontrado.`;
           return JSON.stringify(project, null, 2);
@@ -474,7 +474,7 @@ export class ToolRegistry {
       hints: ['dream', 'mundo', 'negocio', 'startup', 'swarm'],
       parameters: { objective: 'Objetivo o sueño empresarial' },
       execute: async (args) => {
-          const { NexusBrain } = await import('../brain/NexusBrain.js');
+          const { NexusBrain } = await import('../brain/nexusbrain.js');
           const brain = NexusBrain.getInstance();
           const result = await brain.dream(args.objective);
           return `SUCCESS: El NexusBrain ha delegado el sueño "${result.objective}" a los enjambres departamentales.`;
@@ -489,7 +489,7 @@ export class ToolRegistry {
       hints: ['status', 'hitos', 'progreso', 'neural'],
       parameters: {},
       execute: async () => {
-          const { NeuralRelay } = await import('../brain/NeuralRelay.js');
+          const { NeuralRelay } = await import('../brain/neuralrelay.js');
           const relay = NeuralRelay.getInstance();
           const history = relay.getHistory();
           return `NEURAL PULSE STATUS:\n${history.map(s => `[${s.source}] -> ${s.type}: ${JSON.stringify(s.payload)}`).join('\n')}`;
@@ -527,7 +527,7 @@ export class ToolRegistry {
       },
       execute: async (args) => {
         try {
-          const { SourceMediaReviewer } = await import('../studio/SourceMediaReviewer.js');
+          const { SourceMediaReviewer } = await import('../studio/sourcemediareviewer.js');
           const fullPath = path.resolve(process.cwd(), args.path);
           
           if (fs.statSync(fullPath).isDirectory()) {
@@ -561,7 +561,7 @@ export class ToolRegistry {
         blueprint: 'ID del Business Blueprint (ej. startup_mvp, agency_fast_track)'
       },
       execute: async (args) => {
-          const { BusinessOrchestrator } = await import('../business/BusinessOrchestrator.js');
+          const { BusinessOrchestrator } = await import('../business/businessorchestrator.js');
           return await BusinessOrchestrator.startWorld(args.name, args.blueprint);
       }
     });
@@ -574,7 +574,7 @@ export class ToolRegistry {
       hints: ['status', 'biz', 'negocio', 'avance'],
       parameters: { id: 'ID del proyecto de negocio' },
       execute: async (args) => {
-          const { BusinessOrchestrator } = await import('../business/BusinessOrchestrator.js');
+          const { BusinessOrchestrator } = await import('../business/businessorchestrator.js');
           return await BusinessOrchestrator.executeStage(args.id);
       }
     });
@@ -587,7 +587,7 @@ export class ToolRegistry {
       hints: ['finance', 'kpi', 'roi', 'money', 'dinero', 'informe'],
       parameters: {},
       execute: async () => {
-          const { KpiEngine } = await import('../finance/KpiEngine.js');
+          const { KpiEngine } = await import('../finance/kpiengine.js');
           const report = await KpiEngine.generateReport();
           return JSON.stringify(report, null, 2);
       }
@@ -601,7 +601,7 @@ export class ToolRegistry {
       hints: ['lead', 'customer', 'cliente', 'crm'],
       parameters: { name: 'Nombre', email: 'Email', source: 'Fuente' },
       execute: async (args) => {
-          const { SalesHub } = await import('../business/SalesHub.js');
+          const { SalesHub } = await import('../business/saleshub.js');
           const lead = await SalesHub.addLead({ 
               name: args.name, 
               email: args.email, 
@@ -620,7 +620,7 @@ export class ToolRegistry {
       hints: ['campaign', 'marketing', 'ads', 'lanzamiento'],
       parameters: { name: 'Nombre de la campaña', platform: 'instagram | twitter | linkedin' },
       execute: async (args) => {
-          const { CampaignManager } = await import('../business/CampaignManager.js');
+          const { CampaignManager } = await import('../business/campaignmanager.js');
           const campaign = await CampaignManager.executeCampaign(args.name, args.platform as any);
           return `SUCCESS: Campaña "${campaign.name}" iniciada en ${campaign.platform}.\nActivos: ${campaign.assets.join(', ')}`;
       }
@@ -634,7 +634,7 @@ export class ToolRegistry {
       hints: ['invoice', 'factura', 'billing', 'cobro'],
       parameters: { client_id: 'ID del cliente', items: 'JSON array de items [{description, amount}]' },
       execute: async (args) => {
-          const { BillingEngine } = await import('../finance/BillingEngine.js');
+          const { BillingEngine } = await import('../finance/billingengine.js');
           const items = JSON.parse(args.items);
           const invoice = await BillingEngine.createInvoice(args.client_id, items);
           const doc = await BillingEngine.generateMarkdown(invoice);
@@ -650,7 +650,7 @@ export class ToolRegistry {
       hints: ['legal', 'contrato', 'contract', 'nda', 'privacy'],
       parameters: { type: 'NDA | SERVICE | PRIVACY', party: 'Nombre de la contraparte' },
       execute: async (args) => {
-          const { LegalHub } = await import('../legal/LegalHub.js');
+          const { LegalHub } = await import('../legal/legalhub.js');
           const template = await LegalHub.getTemplate(args.type as any);
           const signed = await LegalHub.signDocument(template, args.party);
           return `SUCCESS: Documento legal generado y firmado digitalmente.\n\n${signed}`;

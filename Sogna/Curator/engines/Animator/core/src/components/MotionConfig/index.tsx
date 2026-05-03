@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useContext, useMemo } from "react"
 import { resolveTransition } from "sognaflow-dom"
-import { sognaflowConfigContext } from "../../context/sognaflowConfigContext"
+import { sognaflowConfigContext } from "../../context/sognaflowconfigcontext"
 import {
     loadExternalIsValidProp,
     IsValidProp,

@@ -1,10 +1,10 @@
-import { SwarmBase } from '../../swarms/SwarmBase.js';
-import { SuccessManager } from './agents/SuccessManager.js';
-import { SupportLead } from './agents/SupportLead.js';
-import { LoyaltyArchitect } from './agents/LoyaltyArchitect.js';
-import { DataEnricher } from './agents/DataEnricher.js';
-import { CRMSpecialist } from './agents/CRMSpecialist.js';
-import { CRMKPITracker } from './metrics/CRMKPITracker.js';
+import { SwarmBase } from '../../swarms/swarmbase.js';
+import { SuccessManager } from './agents/successmanager.js';
+import { SupportLead } from './agents/supportlead.js';
+import { LoyaltyArchitect } from './agents/loyaltyarchitect.js';
+import { DataEnricher } from './agents/dataenricher.js';
+import { CRMSpecialist } from './agents/crmspecialist.js';
+import { CRMKPITracker } from './metrics/crmkpitracker.js';
 
 export class CRMSwarm extends SwarmBase {
     private success = new SuccessManager();

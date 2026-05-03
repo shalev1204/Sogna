@@ -4,7 +4,7 @@ import {
   ALLOWED_PROVIDERS, 
   LABEL_CONFIG_MAP,
   LabelConfig
-} from './GitHubTypes.js';
+} from './githubtypes.js';
 
 export function mapLabelsToConfig(labels: string[]): LabelConfig {
   const config: LabelConfig = {};

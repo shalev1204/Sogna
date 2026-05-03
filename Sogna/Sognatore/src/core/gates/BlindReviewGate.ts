@@ -1,6 +1,6 @@
-import { BaseGate } from './BaseGate.js';
+import { BaseGate } from './basegate.js';
 import { GateResult, CouncilEvidence } from './types.js';
-import { ProviderFactory } from '../ProviderFactory.js';
+import { ProviderFactory } from '../providerfactory.js';
 
 export class BlindReviewGate extends BaseGate {
   get id() { return 'QG-003'; }

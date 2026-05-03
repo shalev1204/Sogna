@@ -1,4 +1,4 @@
-import { SlackBlock } from './SlackTypes.js';
+import { SlackBlock } from './slacktypes.js';
 
 export function buildStatusBlocks(projectId: string, status: string, details?: any): SlackBlock[] {
   const blocks: SlackBlock[] = [

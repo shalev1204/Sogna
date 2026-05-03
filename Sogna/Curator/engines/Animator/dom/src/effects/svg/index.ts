@@ -1,7 +1,7 @@
 import { frame } from "../../frameloop"
 import { SognaflowValue } from "../../value"
 import { addAttrValue } from "../attr"
-import { SognaflowValueState } from "../SognaflowValueState"
+import { SognaflowValueState } from "../sognaflowvaluestate"
 import { addStyleValue } from "../style"
 import { createSelectorEffect } from "../utils/create-dom-effect"
 import { createEffect } from "../utils/create-effect"

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { AuditLog } from './AuditLog.js';
+import { AuditLog } from './auditlog.js';
 
 const sognatoreDir = process.env.SOGNATORE_DIR || '.sognatore';
 let pendingDir = path.join(process.cwd(), sognatoreDir, 'events', 'pending');

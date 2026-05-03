@@ -1,7 +1,7 @@
 import { sognaflowValue, stagger, globalProjectionState } from "sognaflow-dom"
 import { useEffect } from "react"
 import { sognaflow, usesognaflowValue } from "../.."
-import { sognaflowConfig } from "../../components/sognaflowConfig"
+import { sognaflowConfig } from "../../components/sognaflowconfig"
 import { render } from "../../jest.setup"
 
 describe("isStatic prop", () => {

@@ -1,4 +1,4 @@
-import type { SognaflowStyle } from "../../VisualElement"
+import type { SognaflowStyle } from "../../visualelement"
 import { camelToDash } from "../../dom/utils/camel-to-dash"
 import { renderHTML } from "../../html/utils/render"
 import { SVGRenderState } from "../types"

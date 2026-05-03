@@ -1,5 +1,5 @@
 import { isWillChangesognaflowValue, sognaflowValue } from "sognaflow-dom"
-import { WillChangesognaflowValue } from "../WillChangesognaflowValue"
+import { WillChangesognaflowValue } from "../willchangesognaflowvalue"
 
 describe("isWillChangesognaflowValue", () => {
     test("Correctly detects WillChangesognaflowValue", () => {

@@ -1,10 +1,10 @@
-import { SwarmBase } from '../../swarms/SwarmBase.js';
-import { OutreachSpecialist } from './agents/OutreachSpecialist.js';
-import { LeadQualifier } from './agents/LeadQualifier.js';
-import { DealArchitect } from './agents/DealArchitect.js';
-import { SalesNegotiator } from './agents/SalesNegotiator.js';
-import { SalesOrchestrator } from './agents/SalesOrchestrator.js';
-import { SalesKPITracker } from './metrics/SalesKPITracker.js';
+import { SwarmBase } from '../../swarms/swarmbase.js';
+import { OutreachSpecialist } from './agents/outreachspecialist.js';
+import { LeadQualifier } from './agents/leadqualifier.js';
+import { DealArchitect } from './agents/dealarchitect.js';
+import { SalesNegotiator } from './agents/salesnegotiator.js';
+import { SalesOrchestrator } from './agents/salesorchestrator.js';
+import { SalesKPITracker } from './metrics/saleskpitracker.js';
 
 export class SalesSwarm extends SwarmBase {
     private outreach = new OutreachSpecialist();

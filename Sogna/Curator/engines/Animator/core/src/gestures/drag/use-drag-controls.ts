@@ -3,7 +3,7 @@ import { useConstant } from "../../utils/use-constant"
 import {
     DragControlOptions,
     VisualElementDragControls,
-} from "./VisualElementDragControls"
+} from "./visualelementdragcontrols"
 
 /**
  * Can manually trigger a drag gesture on one or more `drag`-enabled `sognaflow` components.

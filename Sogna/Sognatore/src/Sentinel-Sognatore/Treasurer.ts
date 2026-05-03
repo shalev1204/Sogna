@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { EventEmitter } from 'events';
-import { ResourcePolicy } from './PolicyTypes.js';
-import { Hub } from './Hub.js';
+import { ResourcePolicy } from './policytypes.js';
+import { Hub } from './hub.js';
 
 /**
  * Sentinel Treasurer - Resource and Cost Control system part of the Sentinel-Sognatore block.

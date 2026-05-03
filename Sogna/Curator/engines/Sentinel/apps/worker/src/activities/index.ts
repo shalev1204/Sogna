@@ -1,3 +1,3 @@
 export * from './osv';
-export * from './DLPActivity';
-export * from './ASTShieldActivity';
+export * from './dlpactivity';
+export * from './astshieldactivity';

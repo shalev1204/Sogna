@@ -1,11 +1,11 @@
-import { SwarmBase } from '../../swarms/SwarmBase.js';
-import { CreativeDirector } from './agents/CreativeDirector.js';
-import { VisualArchitect } from './agents/VisualArchitect.js';
-import { MotionDesigner } from './agents/MotionDesigner.js';
-import { AcousticEngineer } from './agents/AcousticEngineer.js';
-import { OutputEditor } from './agents/OutputEditor.js';
-import { StudioKPITracker } from './metrics/StudioKPITracker.js';
-import { StudioBridge } from './StudioBridge.js';
+import { SwarmBase } from '../../swarms/swarmbase.js';
+import { CreativeDirector } from './agents/creativedirector.js';
+import { VisualArchitect } from './agents/visualarchitect.js';
+import { MotionDesigner } from './agents/motiondesigner.js';
+import { AcousticEngineer } from './agents/acousticengineer.js';
+import { OutputEditor } from './agents/outputeditor.js';
+import { StudioKPITracker } from './metrics/studiokpitracker.js';
+import { StudioBridge } from './studiobridge.js';
 
 export class StudioSwarm extends SwarmBase {
     private bridge = StudioBridge.getInstance();

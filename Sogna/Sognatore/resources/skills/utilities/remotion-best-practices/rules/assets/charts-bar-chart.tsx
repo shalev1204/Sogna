@@ -1,4 +1,4 @@
-import {loadFont} from '@remotion/google-fonts/Inter';
+import {loadFont} from '@remotion/google-fonts/inter';
 import {AbsoluteFill, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 
 const {fontFamily} = loadFont();

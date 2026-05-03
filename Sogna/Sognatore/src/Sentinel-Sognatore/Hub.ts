@@ -5,8 +5,8 @@ import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 import crypto from 'crypto';
-import { SecurityAudit } from './SecurityAudit.js';
-import { CodeScanner } from './CodeScanner.js';
+import { SecurityAudit } from './securityaudit.js';
+import { CodeScanner } from './codescanner.js';
 
 export enum SecurityState {
   ALIVE = 'ALIVE',
@@ -185,7 +185,7 @@ export class Hub {
     if (location === 'MemoryHub') {
       console.log(chalk.red.bold('[NEURAL_GUARD] Pánico de Memoria detectado. Iniciando purga semántica preventiva...'));
       try {
-        const { MemoryHub } = await import('../core/memory/MemoryHub.js');
+        const { MemoryHub } = await import('../core/memory/memoryhub.js');
         await MemoryHub.getInstance().checkHealth();
       } catch (e) { /* silent */ }
     }
@@ -193,7 +193,7 @@ export class Hub {
     // Deep Scan via AutoHealer (Toolkit module)
     try {
       // Lazy import to avoid circular dependencies and ensure toolkit access
-      const { AutoHealer } = await import('@sogna/curator/shared/AutoHealer.js');
+      const { AutoHealer } = await import('@sogna/curator/shared/autohealer.js');
       const healer = AutoHealer.getInstance();
       
       // Focus on Infra and Permissions since that's where binaries live
@@ -329,7 +329,7 @@ export class Hub {
    */
   public async reportNeuralIntegrity(): Promise<void> {
     try {
-      const { MemoryHub } = await import('../core/memory/MemoryHub.js');
+      const { MemoryHub } = await import('../core/memory/memoryhub.js');
       const memory = MemoryHub.getInstance();
       const graph = await memory.getNeuralGraph();
       const health = await memory.checkHealth();

@@ -1,7 +1,7 @@
-import { Hub } from '../Sentinel-Sognatore/Hub.js';
-import { Orchestrator } from './Orchestrator.js';
-import { Guardian } from './Guardian.js';
-import { PruningService } from './memory/PruningService.js';
+import { Hub } from '../sentinel-sognatore/hub.js';
+import { Orchestrator } from './orchestrator.js';
+import { Guardian } from './guardian.js';
+import { PruningService } from './memory/pruningservice.js';
 import path from 'path';
 import chalk from 'chalk';
 /**

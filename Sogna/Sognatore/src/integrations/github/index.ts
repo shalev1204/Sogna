@@ -1,3 +1,3 @@
-export * from './GitHubTypes.js';
-export * from './ActionHandler.js';
-export * from './GitHubReporter.js';
+export * from './githubtypes.js';
+export * from './actionhandler.js';
+export * from './githubreporter.js';

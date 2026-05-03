@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { SalesSkillRegistry } from '../skills/SalesSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { SalesSkillRegistry } from '../skills/salesskillregistry.js';
 
 export class SalesOrchestrator implements Agent {
     id = 'sales_orchestrator';

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-import { EnvOracle } from '../core/utils/EnvOracle.js';
+import { EnvOracle } from '../core/utils/envoracle.js';
 EnvOracle.load();
 import { Command } from 'commander';
-import { Doctor } from '../core/Doctor.js';
-import { Runner } from '../core/Runner.js';
-import { Engine as PolicyEngine } from '../Sentinel-Sognatore/Engine.js';
-import { SetupWizard } from '../core/utils/SetupWizard.js';
-import { ProjectManager } from '../core/ProjectManager.js';
-import { BootstrapEngine } from '../core/BootstrapEngine.js';
+import { Doctor } from '../core/doctor.js';
+import { Runner } from '../core/runner.js';
+import { Engine as PolicyEngine } from '../sentinel-sognatore/engine.js';
+import { SetupWizard } from '../core/utils/setupwizard.js';
+import { ProjectManager } from '../core/projectmanager.js';
+import { BootstrapEngine } from '../core/bootstrapengine.js';
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -89,7 +89,7 @@ program
     }
 
     // Start Sovereign Immune System (Swarm Concurrency)
-    const { ImmuneSystem } = await import('../core/ImmuneSystem.js');
+    const { ImmuneSystem } = await import('../core/immunesystem.js');
     await ImmuneSystem.start();
 
     await runner.start(prd);

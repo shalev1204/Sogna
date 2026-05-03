@@ -1,7 +1,7 @@
 import { hasReducedsognaflowListener } from "sognaflow-dom"
 import { render } from "../../../jest.setup"
 import { sognaflow } from "../../../render/components/sognaflow"
-import { sognaflowConfig } from "../../../components/sognaflowConfig"
+import { sognaflowConfig } from "../../../components/sognaflowconfig"
 
 describe("reduced sognaflow listener initialization", () => {
     beforeEach(() => {

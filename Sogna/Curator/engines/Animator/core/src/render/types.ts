@@ -7,8 +7,8 @@ import {
     type LayoutLifecycles,
     type UseRenderState,
 } from "sognaflow-dom"
-import { ReducedsognaflowConfig } from "../context/sognaflowConfigContext"
-import type { PresenceContextProps } from "../context/PresenceContext"
+import { ReducedsognaflowConfig } from "../context/sognaflowconfigcontext"
+import type { PresenceContextProps } from "../context/presencecontext"
 import { sognaflowProps } from "../sognaflow/types"
 import { VisualState } from "../sognaflow/utils/use-visual-state"
 import { DOMsognaflowComponents } from "./dom/types"

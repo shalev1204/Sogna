@@ -1,5 +1,5 @@
 import { sognaflowValue } from "../../value"
-import { NativeAnimationExtended } from "../NativeAnimationExtended"
+import { NativeAnimationExtended } from "../nativeanimationextended"
 
 /**
  * Tests for the Firefox opacity bug (issue #3552) where the WAAPI animation's

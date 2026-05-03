@@ -1,5 +1,5 @@
-import { MemoryHub } from './MemoryHub.js';
-import { Chronicler } from './Chronicler.js';
+import { MemoryHub } from './memoryhub.js';
+import { Chronicler } from './chronicler.js';
 import chalk from 'chalk';
 
 /**

@@ -2,7 +2,7 @@ import { Easing } from "sognaflow-utils"
 import { SVGAttributes } from "../render/svg/types"
 import { SognaflowValue } from "../value"
 import { Driver } from "./drivers/types"
-import { KeyframeResolver } from "./keyframes/KeyframesResolver"
+import { KeyframeResolver } from "./keyframes/keyframesresolver"
 import { WithRender } from "./keyframes/types"
 
 export type AnyResolvedKeyframe = string | number

@@ -1,7 +1,7 @@
-import { InstitutionalAegis } from '../protection/InstitutionalAegis.js';
-import { GlobalMemory } from '../brain/GlobalMemory.js';
-import { SognaCommBus } from '../brain/CorporateBroadcaster.js';
-import { NeuralRelay, NeuralSignalType } from '../brain/NeuralRelay.js';
+import { InstitutionalAegis } from '../protection/institutionalaegis.js';
+import { GlobalMemory } from '../brain/globalmemory.js';
+import { SognaCommBus } from '../brain/corporatebroadcaster.js';
+import { NeuralRelay, NeuralSignalType } from '../brain/neuralrelay.js';
 
 export interface Agent {
     id: string;

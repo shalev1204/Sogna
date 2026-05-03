@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { CRMSkillRegistry } from '../skills/CRMSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { CRMSkillRegistry } from '../skills/crmskillregistry.js';
 
 export class SuccessManager implements Agent {
     id = 'crm_success_manager';

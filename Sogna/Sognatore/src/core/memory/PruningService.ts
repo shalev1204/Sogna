@@ -71,16 +71,22 @@ export class PruningService {
   }
 
   /**
-   * Prunes a physical directory by removing files older than X days.
-   * Useful for cleaning up memory/navigator/cache.
+   * Archives a physical directory by moving files older than X days to cold storage.
+   * Ensures the "Unlimited Memory" requirement: Nothing is ever deleted.
    */
   public async pruneDirectory(dirPath: string, maxAgeDays: number, pattern: RegExp = /.*/): Promise<number> {
     if (!(await fs.pathExists(dirPath))) return 0;
 
-    let removedCount = 0;
+    let archivedCount = 0;
     const now = Date.now();
     const ageLimit = maxAgeDays * 24 * 60 * 60 * 1000;
     const files = await fs.readdir(dirPath);
+    
+    // Determine archive path (relative to memory root)
+    // We assume dirPath is inside memory/
+    const memoryRoot = path.resolve(dirPath, '..', '..');
+    const archiveRoot = path.join(memoryRoot, 'archive', path.basename(dirPath));
+    await fs.ensureDir(archiveRoot);
 
     for (const file of files) {
       if (!pattern.test(file)) continue;
@@ -88,15 +94,16 @@ export class PruningService {
       const stats = await fs.stat(filePath);
       
       if (stats.isFile() && (now - stats.mtimeMs > ageLimit)) {
-        await fs.remove(filePath);
-        removedCount++;
+        const destPath = path.join(archiveRoot, file);
+        await fs.move(filePath, destPath, { overwrite: true });
+        archivedCount++;
       }
     }
 
-    if (removedCount > 0) {
-      console.log(chalk.yellow(`[PRUNING] Evicted ${removedCount} stale files from ${path.basename(dirPath)}.`));
+    if (archivedCount > 0) {
+      console.log(chalk.cyan(`[UNLIMITED_MEMORY] Archived ${archivedCount} fragments to cold storage: ${path.basename(dirPath)}.`));
     }
 
-    return removedCount;
+    return archivedCount;
   }
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext } from "react"
-import { sognaflowConfigContext } from "../../context/sognaflowConfigContext"
+import { sognaflowConfigContext } from "../../context/sognaflowconfigcontext"
 import { useReducedsognaflow } from "./use-reduced-sognaflow"
 
 export function useReducedsognaflowConfig() {

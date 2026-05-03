@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { MarketingSkillRegistry } from '../skills/MarketingSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { MarketingSkillRegistry } from '../skills/marketingskillregistry.js';
 import fs from 'fs';
 import path from 'path';
 

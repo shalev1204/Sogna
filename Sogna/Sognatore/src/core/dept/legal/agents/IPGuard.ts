@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { LegalSkillRegistry } from '../skills/LegalSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { LegalSkillRegistry } from '../skills/legalskillregistry.js';
 
 export class IPGuard implements Agent {
     id = 'legal_ip_guard';

@@ -1,4 +1,4 @@
-import {loadFont} from '@remotion/google-fonts/Inter';
+import {loadFont} from '@remotion/google-fonts/inter';
 import React from 'react';
 import {
 	AbsoluteFill,

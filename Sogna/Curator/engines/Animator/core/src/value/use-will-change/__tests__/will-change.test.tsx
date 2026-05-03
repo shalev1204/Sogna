@@ -7,7 +7,7 @@ import {
 } from "../../.."
 import { nextFrame } from "../../../gestures/__tests__/utils"
 import { render } from "../../../jest.setup"
-import { WillChangesognaflowValue } from "../WillChangesognaflowValue"
+import { WillChangesognaflowValue } from "../willchangesognaflowvalue"
 
 describe("WillChangesognaflowValue", () => {
     test("Can manage transform alongside independent transforms", async () => {

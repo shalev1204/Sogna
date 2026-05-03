@@ -1,4 +1,4 @@
-import { Hub } from '../Sentinel-Sognatore/Hub.js';
+import { Hub } from '../sentinel-sognatore/hub.js';
 import chalk from 'chalk';
 import { SognaEventBus, SognaEventType } from '@sogna/curator';
 

@@ -1,10 +1,10 @@
-import { SwarmBase } from '../../swarms/SwarmBase.js';
-import { BillingAutomator } from './agents/BillingAutomator.js';
-import { CostOptimizer } from './agents/CostOptimizer.js';
-import { TreasuryLead } from './agents/TreasuryLead.js';
-import { AuditController } from './agents/AuditController.js';
-import { FinanceOrchestrator } from './agents/FinanceOrchestrator.js';
-import { FinanceKPITracker } from './metrics/FinanceKPITracker.js';
+import { SwarmBase } from '../../swarms/swarmbase.js';
+import { BillingAutomator } from './agents/billingautomator.js';
+import { CostOptimizer } from './agents/costoptimizer.js';
+import { TreasuryLead } from './agents/treasurylead.js';
+import { AuditController } from './agents/auditcontroller.js';
+import { FinanceOrchestrator } from './agents/financeorchestrator.js';
+import { FinanceKPITracker } from './metrics/financekpitracker.js';
 
 export class FinanceSwarm extends SwarmBase {
     private billing = new BillingAutomator();

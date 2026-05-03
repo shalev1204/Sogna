@@ -1,9 +1,9 @@
-import { Agent, type AgentState } from './Agent.js';
-import { AgentFactory } from './AgentFactory.js';
+import { Agent, type AgentState } from './agent.js';
+import { AgentFactory } from './agentfactory.js';
 import fs from 'fs';
 import path from 'path';
-import { Guardian } from '../Guardian.js';
-import { Hub } from '../../Sentinel-Sognatore/Hub.js';
+import { Guardian } from '../guardian.js';
+import { Hub } from '../../sentinel-sognatore/hub.js';
 
 export class AgentRegistry {
   private static instance: AgentRegistry;

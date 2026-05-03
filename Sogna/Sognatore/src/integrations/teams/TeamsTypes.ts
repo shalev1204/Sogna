@@ -1,4 +1,4 @@
-import { IntegrationOptions } from '../Adapter.js';
+import { IntegrationOptions } from '../adapter.js';
 
 export interface TeamsFact {
   title: string;

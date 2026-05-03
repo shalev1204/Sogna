@@ -1,0 +1,1 @@
+{"version":3,"file":"microtask.js","sourceRoot":"","sources":["../../src/frameloop/microtask.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,mBAAmB,EAAE,MAAM,WAAW,CAAA;AAE/C,MAAM,CAAC,MAAM,EAAE,QAAQ,EAAE,SAAS,EAAE,MAAM,EAAE,eAAe,EAAE;AACzD,eAAe,CAAC,mBAAmB,CAAC,cAAc,EAAE,KAAK,CAAC,CAAA"}

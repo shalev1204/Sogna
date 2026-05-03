@@ -1,5 +1,5 @@
 // @sentinel-ignore: GLOBAL
-import { JiraClientConfig, JiraIssue, JiraSearchResponse, JiraTransition } from './JiraTypes.js';
+import { JiraClientConfig, JiraIssue, JiraSearchResponse, JiraTransition } from './jiratypes.js';
 
 export class JiraApiError extends Error {
   public readonly status: number;

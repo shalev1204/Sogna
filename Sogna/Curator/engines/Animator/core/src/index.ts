@@ -2,13 +2,13 @@
  * Components
  */
 export type * from "./animation/types"
-export { AnimatePresence } from "./components/AnimatePresence"
-export { PopChild } from "./components/AnimatePresence/PopChild"
-export { PresenceChild } from "./components/AnimatePresence/PresenceChild"
-export { LayoutGroup } from "./components/LayoutGroup"
-export { Lazysognaflow } from "./components/Lazysognaflow"
-export { sognaflowConfig } from "./components/sognaflowConfig"
-export { Reorder } from "./components/Reorder"
+export { AnimatePresence } from "./components/animatepresence"
+export { PopChild } from "./components/animatepresence/popchild"
+export { PresenceChild } from "./components/animatepresence/presencechild"
+export { LayoutGroup } from "./components/layoutgroup"
+export { Lazysognaflow } from "./components/lazysognaflow"
+export { sognaflowConfig } from "./components/sognaflowconfig"
+export { Reorder } from "./components/reorder"
 export * from "./dom"
 export { m } from "./render/components/m/proxy"
 export { sognaflow } from "./render/components/sognaflow/proxy"
@@ -56,7 +56,7 @@ export { useTime } from "./value/use-time"
 export { useTransform } from "./value/use-transform"
 export { useVelocity } from "./value/use-velocity"
 export { useWillChange } from "./value/use-will-change"
-export { WillChangesognaflowValue } from "./value/use-will-change/WillChangesognaflowValue"
+export { WillChangesognaflowValue } from "./value/use-will-change/willchangesognaflowvalue"
 export { resolvesognaflowValue } from "sognaflow-dom"
 
 /**
@@ -80,8 +80,8 @@ export { animateVisualElement } from "sognaflow-dom"
 export {
     useIsPresent,
     usePresence,
-} from "./components/AnimatePresence/use-presence"
-export { usePresenceData } from "./components/AnimatePresence/use-presence-data"
+} from "./components/animatepresence/use-presence"
+export { usePresenceData } from "./components/animatepresence/use-presence-data"
 export { useDomEvent } from "./events/use-dom-event"
 export {
     DragControls,
@@ -114,18 +114,18 @@ export { startOptimizedAppearAnimation } from "./animation/optimized-appear/star
 /**
  * Contexts
  */
-export { LayoutGroupContext } from "./context/LayoutGroupContext"
-export { sognaflowConfigContext } from "./context/sognaflowConfigContext"
-export { sognaflowContext } from "./context/sognaflowContext"
-export { PresenceContext } from "./context/PresenceContext"
-export { SwitchLayoutGroupContext } from "./context/SwitchLayoutGroupContext"
+export { LayoutGroupContext } from "./context/layoutgroupcontext"
+export { sognaflowConfigContext } from "./context/sognaflowconfigcontext"
+export { sognaflowContext } from "./context/sognaflowcontext"
+export { PresenceContext } from "./context/presencecontext"
+export { SwitchLayoutGroupContext } from "./context/switchlayoutgroupcontext"
 
 /**
  * Types
  */
-export type { AnimatePresenceProps } from "./components/AnimatePresence/types"
-export type { LazyProps } from "./components/Lazysognaflow/types"
-export type { sognaflowConfigProps } from "./components/sognaflowConfig"
+export type { AnimatePresenceProps } from "./components/animatepresence/types"
+export type { LazyProps } from "./components/lazysognaflow/types"
+export type { sognaflowConfigProps } from "./components/sognaflowconfig"
 export type {
     HydratedFeatureDefinition,
     HydratedFeatureDefinitions,
@@ -157,8 +157,8 @@ export type { ScrollsognaflowValues } from "./value/scroll/utils"
  * Deprecated
  */
 export { useAnimatedState as useDeprecatedAnimatedState } from "./animation/hooks/use-animated-state"
-export { AnimateSharedLayout } from "./components/AnimateSharedLayout"
-export { DeprecatedLayoutGroupContext } from "./context/DeprecatedLayoutGroupContext"
+export { AnimateSharedLayout } from "./components/animatesharedlayout"
+export { DeprecatedLayoutGroupContext } from "./context/deprecatedlayoutgroupcontext"
 export { useInvertedScale as useDeprecatedInvertedScale } from "./value/use-inverted-scale"
 
 // Keep explicit delay in milliseconds export for BC with Framer

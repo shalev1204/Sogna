@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { ProjectBlueprint, RequiredNode, BlueprintVetoRule } from './BlueprintRegistry.js';
+import { ProjectBlueprint, RequiredNode, BlueprintVetoRule } from './blueprintregistry.js';
 import chalk from 'chalk';
 
 export interface AuditIssue {

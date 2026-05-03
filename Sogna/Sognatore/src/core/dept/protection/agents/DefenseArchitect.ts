@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { ProtectionSkillRegistry } from '../skills/ProtectionSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { ProtectionSkillRegistry } from '../skills/protectionskillregistry.js';
 
 export class DefenseArchitect implements Agent {
     id = 'prot_defense_arch';

@@ -1,4 +1,4 @@
-import { BaseGate } from './BaseGate.js';
+import { BaseGate } from './basegate.js';
 import { CouncilEvidence, GateResult } from './types.js';
 import chalk from 'chalk';
 

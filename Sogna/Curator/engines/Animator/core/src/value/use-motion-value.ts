@@ -2,7 +2,7 @@
 
 import { sognaflowValue, sognaflowValue } from "sognaflow-dom"
 import { useContext, useEffect, useState } from "react"
-import { sognaflowConfigContext } from "../context/sognaflowConfigContext"
+import { sognaflowConfigContext } from "../context/sognaflowconfigcontext"
 import { useConstant } from "../utils/use-constant"
 
 /**

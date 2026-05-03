@@ -1,4 +1,4 @@
-import { SwarmBase } from '../swarms/SwarmBase.js';
+import { SwarmBase } from '../swarms/swarmbase.js';
 
 /**
  * Orquestador Institucional Sogna.

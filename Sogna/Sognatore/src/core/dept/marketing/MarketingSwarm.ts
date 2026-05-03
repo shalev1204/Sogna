@@ -1,10 +1,10 @@
-import { SwarmBase } from '../../swarms/SwarmBase.js';
-import { NeuralSignalType } from '../../brain/NeuralRelay.js';
-import { BrandArchitect } from './agents/BrandArchitect.js';
-import { ContentStrateger } from './agents/ContentStrateger.js';
-import { SocialMediaLead } from './agents/SocialMediaLead.js';
-import { MarketAnalyst } from './agents/MarketAnalyst.js';
-import { CopyMaster } from './agents/CopyMaster.js';
+import { SwarmBase } from '../../swarms/swarmbase.js';
+import { NeuralSignalType } from '../../brain/neuralrelay.js';
+import { BrandArchitect } from './agents/brandarchitect.js';
+import { ContentStrateger } from './agents/contentstrateger.js';
+import { SocialMediaLead } from './agents/socialmedialead.js';
+import { MarketAnalyst } from './agents/marketanalyst.js';
+import { CopyMaster } from './agents/copymaster.js';
 
 export class MarketingSwarm extends SwarmBase {
     private brandArch = new BrandArchitect();

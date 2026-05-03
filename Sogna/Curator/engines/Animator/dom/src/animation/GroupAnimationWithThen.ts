@@ -1,4 +1,4 @@
-import { GroupAnimation } from "./GroupAnimation"
+import { GroupAnimation } from "./groupanimation"
 import { AnimationPlaybackControlsWithThen } from "./types"
 
 export class GroupAnimationWithThen

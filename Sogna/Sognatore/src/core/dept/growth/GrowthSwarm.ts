@@ -1,10 +1,10 @@
-import { SwarmBase } from '../../swarms/SwarmBase.js';
-import { GrowthHacker } from './agents/GrowthHacker.js';
-import { ConversionOptimist } from './agents/ConversionOptimist.js';
-import { RetentionLead } from './agents/RetentionLead.js';
-import { ViralArchitect } from './agents/ViralArchitect.js';
-import { ExperimentLead } from './agents/ExperimentLead.js';
-import { GrowthKPITracker } from './metrics/GrowthKPITracker.js';
+import { SwarmBase } from '../../swarms/swarmbase.js';
+import { GrowthHacker } from './agents/growthhacker.js';
+import { ConversionOptimist } from './agents/conversionoptimist.js';
+import { RetentionLead } from './agents/retentionlead.js';
+import { ViralArchitect } from './agents/viralarchitect.js';
+import { ExperimentLead } from './agents/experimentlead.js';
+import { GrowthKPITracker } from './metrics/growthkpitracker.js';
 
 export class GrowthSwarm extends SwarmBase {
     private hacker = new GrowthHacker();

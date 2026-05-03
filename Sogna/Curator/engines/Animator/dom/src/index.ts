@@ -1,10 +1,10 @@
-export * from "./animation/AsyncSognaflowValueAnimation"
-export * from "./animation/GroupAnimation"
-export * from "./animation/GroupAnimationWithThen"
-export * from "./animation/JSAnimation"
-export * from "./animation/NativeAnimation"
-export * from "./animation/NativeAnimationExtended"
-export * from "./animation/NativeAnimationWrapper"
+export * from "./animation/asyncsognaflowvalueanimation"
+export * from "./animation/groupanimation"
+export * from "./animation/groupanimationwiththen"
+export * from "./animation/jsanimation"
+export * from "./animation/nativeanimation"
+export * from "./animation/nativeanimationextended"
+export * from "./animation/nativeanimationwrapper"
 export * from "./animation/types"
 export * from "./animation/utils/active-animations"
 export { calcChildStagger } from "./animation/utils/calc-child-stagger"
@@ -42,8 +42,8 @@ export * from "./animation/generators/utils/calc-duration"
 export * from "./animation/generators/utils/create-generator-easing"
 export * from "./animation/generators/utils/is-generator"
 
-export * from "./animation/keyframes/DOMKeyframesResolver"
-export * from "./animation/keyframes/KeyframesResolver"
+export * from "./animation/keyframes/domkeyframesresolver"
+export * from "./animation/keyframes/keyframesresolver"
 export * from "./animation/keyframes/offsets/default"
 export * from "./animation/keyframes/offsets/fill"
 export * from "./animation/keyframes/offsets/time"
@@ -155,14 +155,14 @@ export * from "./view/utils/get-layer-info"
 export * from "./view/utils/get-view-animations"
 
 // Visual Element
-export { DOMVisualElement } from "./render/dom/DOMVisualElement"
+export { DOMVisualElement } from "./render/dom/domvisualelement"
 export * from "./render/dom/types"
-export { Feature } from "./render/Feature"
-export { HTMLVisualElement } from "./render/html/HTMLVisualElement"
+export { Feature } from "./render/feature"
+export { HTMLVisualElement } from "./render/html/htmlvisualelement"
 export * from "./render/html/types"
-export { ObjectVisualElement } from "./render/object/ObjectVisualElement"
+export { ObjectVisualElement } from "./render/object/objectvisualelement"
 export { visualElementStore } from "./render/store"
-export { SVGVisualElement } from "./render/svg/SVGVisualElement"
+export { SVGVisualElement } from "./render/svg/svgvisualelement"
 export type {
     AnimationType,
     FeatureClass,
@@ -181,8 +181,8 @@ export {
     getFeatureDefinitions,
     setFeatureDefinitions,
     VisualElement,
-} from "./render/VisualElement"
-export type { SognaflowStyle } from "./render/VisualElement"
+} from "./render/visualelement"
+export type { SognaflowStyle } from "./render/visualelement"
 
 // Animation State
 export {
@@ -268,13 +268,13 @@ export {
     CreateProjectionNode,
     propagateDirtyNodes,
 } from "./projection/node/create-projection-node"
-export { DocumentProjectionNode } from "./projection/node/DocumentProjectionNode"
+export { DocumentProjectionNode } from "./projection/node/documentprojectionnode"
 export { nodeGroup } from "./projection/node/group"
 export type { NodeGroup } from "./projection/node/group"
 export {
     HTMLProjectionNode,
     rootProjectionNode,
-} from "./projection/node/HTMLProjectionNode"
+} from "./projection/node/htmlprojectionnode"
 export { globalProjectionState } from "./projection/node/state"
 export type {
     InitialProSognaflowConfig,
@@ -310,7 +310,7 @@ export { ScrapeSognaflowValuesFromProps as ScrapeSVGSognaflowValuesFromProps } f
 export {
     LayoutAnimationBuilder,
     parseAnimateLayoutArgs,
-} from "./layout/LayoutAnimationBuilder"
+} from "./layout/layoutanimationbuilder"
 
 /**
  * Deprecated

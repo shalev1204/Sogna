@@ -1,5 +1,5 @@
 import { createProjectionNode } from "./create-projection-node"
-import { DocumentProjectionNode } from "./DocumentProjectionNode"
+import { DocumentProjectionNode } from "./documentprojectionnode"
 import { IProjectionNode } from "./types"
 
 export const rootProjectionNode: { current: IProjectionNode | undefined } = {

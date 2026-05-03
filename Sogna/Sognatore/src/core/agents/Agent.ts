@@ -1,15 +1,15 @@
-import { Provider } from '../Provider.js';
-import { AgentRole } from './AgentTypes.js';
-import { StateStore } from '../StateStore.js';
+import { Provider } from '../provider.js';
+import { AgentRole } from './agenttypes.js';
+import { StateStore } from '../statestore.js';
 import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
-import { ToolRegistry } from '../actions/ToolRegistry.js';
-import { AgentFactory } from './AgentFactory.js';
-import { Guardian } from '../Guardian.js';
-import { AutoHealer } from '@sogna/curator/shared/AutoHealer.js';
-import { AuditVault } from '@sogna/curator/shared/AuditVault.js';
-import { Orchestrator, Turn } from '../Orchestrator.js';
+import { ToolRegistry } from '../actions/toolregistry.js';
+import { AgentFactory } from './agentfactory.js';
+import { Guardian } from '../guardian.js';
+import { AutoHealer } from '@sogna/curator/shared/autohealer.js';
+import { AuditVault } from '@sogna/curator/shared/auditvault.js';
+import { Orchestrator, Turn } from '../orchestrator.js';
 import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@sogna/curator';
 
 export interface AgentState {
@@ -245,7 +245,7 @@ export class Agent {
     const outputTokens = Math.ceil(outputLen / 4);
     
     // High-Fidelity cost tracking
-    import('../utils/CostTracker.js').then(m => {
+    import('../utils/costtracker.js').then(m => {
       m.CostTracker.getInstance().calculateAndReport(this.model, inputTokens, outputTokens, cacheWrite, cacheRead);
     });
 

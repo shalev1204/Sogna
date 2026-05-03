@@ -1,4 +1,4 @@
-import { FailureClass } from './events/SognaEventBus.js';
+import { FailureClass } from './events/sognaeventbus.js';
 import fs from 'fs';
 import path from 'path';
 

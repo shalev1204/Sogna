@@ -1,5 +1,5 @@
-import { SwarmOrchestrator } from '../../core/SwarmOrchestrator.js';
-import { QualityCouncil } from '../../core/QualityCouncil.js';
+import { SwarmOrchestrator } from '../../core/swarmorchestrator.js';
+import { QualityCouncil } from '../../core/qualitycouncil.js';
 import { SognaEventBus, SognaEventType } from '@sogna/curator';
 import chalk from 'chalk';
 
@@ -61,7 +61,7 @@ async function verifyInstitutionalPolish() {
   const safeEvidence: any = {
     iterationCount: 2,
     gitDiff: `
-+ import { PermissionProxy } from './PermissionProxy.js';
++ import { PermissionProxy } from './permissionproxy.js';
 + 
 + async function getVersion() {
 +   await PermissionProxy.requestCapability('filesystem:read');

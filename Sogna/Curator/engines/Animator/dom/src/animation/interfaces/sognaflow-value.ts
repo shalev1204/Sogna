@@ -1,12 +1,12 @@
 import { sognaflowGlobalConfig, secondsToMilliseconds } from "sognaflow-utils"
-import { AsyncSognaflowValueAnimation } from "../AsyncSognaflowValueAnimation"
-import { JSAnimation } from "../JSAnimation"
+import { AsyncSognaflowValueAnimation } from "../asyncsognaflowvalueanimation"
+import { JSAnimation } from "../jsanimation"
 import type {
     AnyResolvedKeyframe,
     ValueAnimationOptions,
     ValueTransition,
 } from "../types"
-import type { UnresolvedKeyframes } from "../keyframes/KeyframesResolver"
+import type { UnresolvedKeyframes } from "../keyframes/keyframesresolver"
 import { GetValueTransition } from "../utils/get-value-transition"
 import { MakeAnimationInstant } from "../utils/make-animation-instant"
 import { GetDefaultTransition } from "../utils/default-transitions"
@@ -14,7 +14,7 @@ import { GetFinalKeyframe } from "../keyframes/get-final"
 import { IsTransitionDefined } from "../utils/is-transition-defined"
 import { frame } from "../../frameloop"
 import type { SognaflowValue, StartAnimation } from "../../value"
-import type { VisualElement } from "../../render/VisualElement"
+import type { VisualElement } from "../../render/visualelement"
 
 export const AnimateSognaflowValue =
     <V extends AnyResolvedKeyframe>(

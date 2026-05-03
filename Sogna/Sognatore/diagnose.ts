@@ -1,7 +1,7 @@
-import { Hub } from './src/Sentinel-Sognatore/Hub.js';
-import { SecurityAudit } from './src/Sentinel-Sognatore/SecurityAudit.js';
-import { CodeScanner } from './src/Sentinel-Sognatore/CodeScanner.js';
-import { HealthGuard } from './src/core/system/HealthGuard.js';
+import { Hub } from './src/sentinel-sognatore/hub.js';
+import { SecurityAudit } from './src/sentinel-sognatore/securityaudit.js';
+import { CodeScanner } from './src/sentinel-sognatore/codescanner.js';
+import { HealthGuard } from './src/core/system/healthguard.js';
 import chalk from 'chalk';
 
 /**
@@ -26,7 +26,7 @@ async function runInstitutionalDiagnostic() {
   }
 
   // Auto-Healer Engine
-  const { AutoHealer } = await import('./src/core/system/AutoHealer.js');
+  const { AutoHealer } = await import('./src/core/system/autohealer.js');
   const healer = AutoHealer.getInstance();
   const healResult = await healer.healBuildErrors();
   if (healResult.fixed) {
@@ -54,7 +54,7 @@ async function runInstitutionalDiagnostic() {
   await hub.performProactiveAudit();
   
   // Auditoría dinámica de dependencias
-  const { DependencyAuditor } = await import('./src/Sentinel-Sognatore/DependencyAuditor.js');
+  const { DependencyAuditor } = await import('./src/sentinel-sognatore/dependencyauditor.js');
   const depAuditor = DependencyAuditor.getInstance();
   const depHealth = await depAuditor.auditDependencies();
   if (depHealth.status === 'CRITICAL') {

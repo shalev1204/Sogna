@@ -2,12 +2,12 @@
 
 import { frame, microtask, globalProjectionState, type VisualElement } from "sognaflow-dom"
 import { Component, useContext } from "react"
-import { usePresence } from "../../../components/AnimatePresence/use-presence"
+import { usePresence } from "../../../components/animatepresence/use-presence"
 import {
     LayoutGroupContext,
     LayoutGroupContextProps,
-} from "../../../context/LayoutGroupContext"
-import { SwitchLayoutGroupContext } from "../../../context/SwitchLayoutGroupContext"
+} from "../../../context/layoutgroupcontext"
+import { SwitchLayoutGroupContext } from "../../../context/switchlayoutgroupcontext"
 import { sognaflowProps } from "../../types"
 
 interface MeasureContextProps {

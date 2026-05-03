@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { ResidencyConfig } from './AuditTypes.js';
+import { ResidencyConfig } from './audittypes.js';
 
 const DEFAULT_ALLOWED_PROVIDERS: string[] = [];
 

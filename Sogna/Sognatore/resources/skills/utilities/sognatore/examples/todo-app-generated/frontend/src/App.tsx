@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useTodos } from './hooks/useTodos';
-import { TodoForm } from './components/TodoForm';
-import { TodoList } from './components/TodoList';
-import { EmptyState } from './components/EmptyState';
-import { ConfirmDialog } from './components/ConfirmDialog';
+import { useTodos } from './hooks/usetodos';
+import { TodoForm } from './components/todoform';
+import { TodoList } from './components/todolist';
+import { EmptyState } from './components/emptystate';
+import { ConfirmDialog } from './components/confirmdialog';
 import './App.css';
 
 function App() {

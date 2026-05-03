@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { FinanceSkillRegistry } from '../skills/FinanceSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { FinanceSkillRegistry } from '../skills/financeskillregistry.js';
 
 export class AuditController implements Agent {
     id = 'finance_audit_ctrl';

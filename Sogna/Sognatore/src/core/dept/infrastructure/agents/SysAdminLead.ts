@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { InfrastructureSkillRegistry } from '../skills/InfrastructureSkillRegistry.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { InfrastructureSkillRegistry } from '../skills/infrastructureskillregistry.js';
 
 export class SysAdminLead implements Agent {
     id = 'infra_sysadmin';

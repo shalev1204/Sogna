@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { LazyContext } from "../../context/LazyContext"
+import { LazyContext } from "../../context/lazycontext"
 import { loadFeatures } from "../../sognaflow/features/load-features"
 import { FeatureBundle, LazyFeatureBundle } from "../../sognaflow/features/types"
 import { CreateVisualElement } from "../../render/types"
@@ -33,7 +33,7 @@ import { LazyProps } from "./types"
  *
  * function App() {
  *   return (
- *     <Lazysognaflow features={() => import('./path/to/domAnimation')}>
+ *     <Lazysognaflow features={() => import('./path/to/domanimation')}>
  *       <m.div animate={{ scale: 2 }} />
  *     </Lazysognaflow>
  *   )

@@ -6,8 +6,8 @@ import {
     SubscriptionManager,
     warnOnce,
 } from "sognaflow-utils"
-import { KeyframeResolver } from "../animation/keyframes/KeyframesResolver"
-import { NativeAnimation } from "../animation/NativeAnimation"
+import { KeyframeResolver } from "../animation/keyframes/keyframesresolver"
+import { NativeAnimation } from "../animation/nativeanimation"
 import type { AnyResolvedKeyframe } from "../animation/types"
 import { acceleratedValues } from "../animation/waapi/utils/accelerated-values"
 import { cancelFrame, frame } from "../frameloop"
@@ -20,7 +20,7 @@ import { complex } from "../value/types/complex"
 import { GetAnimatableNone } from "../value/types/utils/animatable-none"
 import { FindValueType } from "../value/types/utils/find"
 import { IsSognaflowValue } from "../value/utils/is-sognaflow-value"
-import { Feature } from "./Feature"
+import { Feature } from "./feature"
 import { visualElementStore } from "./store"
 import {
     FeatureDefinitions,

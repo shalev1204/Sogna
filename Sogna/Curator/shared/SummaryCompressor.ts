@@ -1,4 +1,4 @@
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from './events/SognaEventBus.js';
+import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from './events/sognaeventbus.js';
 
 export enum SummaryPriority {
   RETAIN = 0,    // High stakes: Scope, Goal, Current Task

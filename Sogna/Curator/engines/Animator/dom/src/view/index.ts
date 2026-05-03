@@ -1,5 +1,5 @@
 import { noop } from "sognaflow-utils"
-import type { GroupAnimation } from "../animation/GroupAnimation"
+import type { GroupAnimation } from "../animation/groupanimation"
 import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types"
 import { AddToQueue } from "./queue"
 import {

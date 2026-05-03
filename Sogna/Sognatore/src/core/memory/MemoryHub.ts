@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
-import { Chronicler, KnowledgeFragment } from './Chronicler.js';
-import { ImmuneSystem, HealthReport } from './ImmuneSystem.js';
-import { NeuralLearning } from './NeuralLearning.js';
+import { Chronicler, KnowledgeFragment } from './chronicler.js';
+import { ImmuneSystem, HealthReport } from './immunesystem.js';
+import { NeuralLearning } from './neurallearning.js';
 
 export interface MemoryResult {
-  source: 'identity' | 'episodic' | 'immunological' | 'audit' | 'operational';
+  source: 'identity' | 'episodic' | 'immunological' | 'audit' | 'operational' | 'archival' | 'synapse';
   key: string;
   content: string;
   relevance: number;
@@ -122,7 +122,7 @@ export class MemoryHub {
     const trapConcepts = ['password', 'secret', 'bypass', 'root', 'admin', 'auth_token', 'private_key'];
     const lowerQuery = query.toLowerCase();
     if (trapConcepts.some(trap => lowerQuery.includes(trap))) {
-      const hub = (await import('../../Sentinel-Sognatore/Hub.js')).Hub.getInstance();
+      const hub = (await import('../../sentinel-sognatore/hub.js')).Hub.getInstance();
       
       // Security Hardening: Trigger Auto-Panic if the attempt is highly critical
       const criticality = this.evaluateSemanticCriticality(query);
@@ -154,9 +154,52 @@ export class MemoryHub {
       metadata: { tags: f.tags, timestamp: f.timestamp }
     }));
 
-    const finalResults = results.sort((a, b) => b.relevance - a.relevance);
+    // 3. UNLIMITED MEMORY FALLBACK: Check archival tier if no strong hits
+    let finalResults = results.sort((a, b) => b.relevance - a.relevance);
+    
+    if (finalResults.length === 0 || finalResults[0].relevance < 0.5) {
+      const archiveHits = await this.recallArchive(query);
+      if (archiveHits.length > 0) {
+        results.push(...archiveHits);
+        finalResults = results.sort((a, b) => b.relevance - a.relevance);
+      }
+    }
+
     this.semanticCache.set(cacheKey, { results: finalResults, timestamp: now });
     return finalResults;
+  }
+
+  /**
+   * Recalls information from the archival tier (Cold Storage).
+   * Part of the "Unlimited Memory" architecture.
+   */
+  private async recallArchive(query: string): Promise<MemoryResult[]> {
+    const archiveDir = path.join(this.rootMemory, 'archive');
+    if (!(await fs.pathExists(archiveDir))) return [];
+
+    const hits: MemoryResult[] = [];
+    const weight = this.registry?.layers?.archival?.weight || 0.2;
+    
+    // Recursive search in archive subdirectories
+    const searchArchive = async (dir: string) => {
+      const entries = await fs.readdir(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          await searchArchive(fullPath);
+        } else if (entry.isFile() && entry.name.toLowerCase().includes(query.toLowerCase())) {
+          hits.push({
+            source: 'archival',
+            key: entry.name,
+            content: `Historical record found in archive: ${entry.name}`,
+            relevance: weight
+          });
+        }
+      }
+    };
+
+    await searchArchive(archiveDir);
+    return hits;
   }
 
   private async ensureRegistry() {
@@ -244,17 +287,56 @@ export class MemoryHub {
   }
 
   /**
+   * Fires a synapse (behavioral event) from an engine into the memory layers.
+   * Ensures the system is "connected to everything".
+   */
+  async fireSynapse(engine: string, type: string, data: any): Promise<void> {
+    const synapseDir = path.join(this.rootMemory, 'synapses', engine.toLowerCase());
+    await fs.ensureDir(synapseDir);
+    
+    const synapseFile = path.join(synapseDir, `${type.toLowerCase()}.jsonl`);
+    const entry = {
+      timestamp: new Date().toISOString(),
+      type,
+      data,
+      context: 'Sogna'
+    };
+    
+    await fs.appendFile(synapseFile, JSON.stringify(entry) + '\n');
+    console.log(chalk.blue(`🧠 [SYNAPSE] Learned behavior captured from ${engine}: ${type}`));
+  }
+
+  /**
+   * Recalls behavioral synapses for a specific engine.
+   */
+  async recallSynapses(engine: string, type?: string): Promise<any[]> {
+    const synapseDir = path.join(this.rootMemory, 'synapses', engine.toLowerCase());
+    if (!(await fs.pathExists(synapseDir))) return [];
+
+    let files = await fs.readdir(synapseDir);
+    if (type) {
+      files = files.filter(f => f.startsWith(type.toLowerCase()));
+    }
+
+    const allEntries: any[] = [];
+    for (const file of files) {
+      const content = await fs.readFile(path.join(synapseDir, file), 'utf-8');
+      allEntries.push(...content.trim().split('\n').map(line => JSON.parse(line)));
+    }
+
+    return allEntries.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  }
+
+  /**
    * Stores a new insight into the appropriate memory layer.
    */
   async storeInsight(key: string, content: string, tags: string[] = []): Promise<void> {
     if (tags.includes('#threat') || tags.includes('#sentinel_veto')) {
-       // Log to security layer
        const auditLog = path.join(this.securityDir, 'threat_learning.jsonl');
        const entry = { timestamp: new Date().toISOString(), key, tags, content };
        await fs.appendFile(auditLog, JSON.stringify(entry) + '\n');
     }
     
-    // Always store as episodic knowledge for agent recall
     await this.chronicler.init();
     await this.chronicler.memorize({
       key,
@@ -265,12 +347,6 @@ export class MemoryHub {
     });
   }
 
-  /**
-   * Performs a structured metadata query across episodic memory.
-   */
-  /**
-   * Generates a neural graph of connections between fragments (agents/knowledge).
-   */
   /**
    * Generates a neural graph of connections between fragments (agents/knowledge).
    * Optimized with a 30-second cache to prevent redundant index processing.
@@ -513,22 +589,33 @@ export class MemoryHub {
    * Cleans caches, prunes neural entropy, and validates registry.
    */
   public async maintenance(): Promise<void> {
-    console.log(chalk.bold.magenta('🧹 [MEMORY_HUB] Iniciando mantenimiento profundo...'));
+    console.log(chalk.bold.magenta('🧹 [MEMORY_HUB] Iniciando mantenimiento profundo (Modo Unlimited)...'));
     
-    const { PruningService } = await import('./PruningService.js');
+    const { PruningService } = await import('./pruningservice.js');
     const pruning = PruningService.getInstance();
     
-    // 1. Prune Navigator Cache (Files older than 7 days)
+    await this.ensureRegistry();
+    const archiveAfter = this.registry?.synthesis?.archive_after_days || 30;
+
+    // 1. Archive Navigator Cache (Non-destructive)
     const navCache = path.join(this.rootMemory, 'navigator/cache');
     await pruning.pruneDirectory(navCache, 7);
     
-    // 2. Prune Neural Index
+    // 2. Archive Operational Session Data
+    const agentDir = path.join(this.rootMemory, 'agent');
+    await pruning.pruneDirectory(agentDir, archiveAfter);
+
+    // 3. Archive Synapse Logs
+    const synapsesDir = path.join(this.rootMemory, 'synapses');
+    await pruning.pruneDirectory(synapsesDir, archiveAfter);
+    
+    // 4. Entropy Control for Neural Index
     await pruning.prune(this.chronicler.getIndexFile(), {
       minWeight: 0.1,
-      maxAgeDays: 30,
-      preserveTags: ['institutional', 'sovereign']
+      maxAgeDays: archiveAfter * 2, // Keep index entries longer than physical files
+      preserveTags: ['institutional', 'sovereign', 'core']
     });
 
-    console.log(chalk.bold.green('✨ [MEMORY_HUB] Mantenimiento completado. Ecosistema optimizado.'));
+    console.log(chalk.bold.green('✨ [MEMORY_HUB] Mantenimiento completado. Memoria archivada y optimizada.'));
   }
 }

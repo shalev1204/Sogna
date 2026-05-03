@@ -1,7 +1,7 @@
 import { createAnimationState, type AnimationState, type VisualElement } from "sognaflow-dom"
 import { sognaflowProps } from "../../../sognaflow/types"
 import { createHtmlRenderState } from "../../html/utils/create-render-state"
-import { StateVisualElement } from "./StateVisualElement"
+import { StateVisualElement } from "./statevisualelement"
 
 function createTest(
     props: sognaflowProps = {},

@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs-extra';
 import chalk from 'chalk';
-import { Hub } from '../Sentinel-Sognatore/Hub.js';
+import { Hub } from '../sentinel-sognatore/hub.js';
 
 /**
  * High-Assurance Docker Sandbox

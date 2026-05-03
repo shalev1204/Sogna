@@ -7,7 +7,7 @@ import type {
     UnresolvedValueKeyframe,
     ValueKeyframesDefinition,
 } from "../../animation/types"
-import type { VisualElement } from "../VisualElement"
+import type { VisualElement } from "../visualelement"
 
 /**
  * Set VisualElement's sognaflowValue, creating a new sognaflowValue for it if

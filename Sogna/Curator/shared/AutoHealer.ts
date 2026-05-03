@@ -1,7 +1,7 @@
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from './events/SognaEventBus.js';
-import { PolicyEngine, EscalationLevel } from './PolicyEngine.js';
+import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from './events/sognaeventbus.js';
+import { PolicyEngine, EscalationLevel } from './policyengine.js';
 
 export class AutoHealer {
   private static instance: AutoHealer;

@@ -1,5 +1,5 @@
-import { BUILTIN_AGENT_NAMES } from './Validator.js';
-import { AgentPluginConfig } from './PluginTypes.js';
+import { BUILTIN_AGENT_NAMES } from './validator.js';
+import { AgentPluginConfig } from './plugintypes.js';
 
 // In-memory registry for custom agent plugins
 const _registeredAgents = new Map<string, any>();

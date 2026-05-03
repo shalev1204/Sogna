@@ -10,15 +10,15 @@ import {
   validateData,
   validateApprovalGate,
   RULE_EVALUATORS 
-} from './PolicyTypes.js';
-import { PermissionMode } from './SecurityTypes.js';
+} from './policytypes.js';
+import { PermissionMode } from './securitytypes.js';
 // @sentinel-ignore: Justificación técnica
 import { spawnSync } from 'child_process';
-import { Hub, SecurityState } from './Hub.js';
-import { Honeypots } from './Honeypots.js';
-import { MemoryHub } from '../core/memory/MemoryHub.js';
-import { SecurityAudit } from './SecurityAudit.js';
-import { ActivityProfile } from './ActivityProfile.js';
+import { Hub, SecurityState } from './hub.js';
+import { Honeypots } from './honeypots.js';
+import { MemoryHub } from '../core/memory/memoryhub.js';
+import { SecurityAudit } from './securityaudit.js';
+import { ActivityProfile } from './activityprofile.js';
 
 /**
  * Sognatore Policy Engine - Core Evaluation Engine

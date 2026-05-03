@@ -2,7 +2,7 @@
 import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs-extra';
-import { ToolResolver } from './ToolResolver.js';
+import { ToolResolver } from './toolresolver.js';
 
 interface FileTree {
   [key: string]: FileTree;

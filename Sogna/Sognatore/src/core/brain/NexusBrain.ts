@@ -1,4 +1,4 @@
-import { NeuralRelay, NeuralSignalType } from './NeuralRelay.js';
+import { NeuralRelay, NeuralSignalType } from './neuralrelay.js';
 
 export class NexusBrain {
     private static instance: NexusBrain;

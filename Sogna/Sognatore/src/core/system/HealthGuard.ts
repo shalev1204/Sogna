@@ -1,7 +1,7 @@
-import { MemoryHub } from '../memory/MemoryHub.js';
-import { AssetHub } from '../storage/AssetHub.js';
-import { Hub, SecurityState } from '../../Sentinel-Sognatore/Hub.js';
-import { Engine } from '../../Sentinel-Sognatore/Engine.js';
+import { MemoryHub } from '../memory/memoryhub.js';
+import { AssetHub } from '../storage/assethub.js';
+import { Hub, SecurityState } from '../../sentinel-sognatore/hub.js';
+import { Engine } from '../../sentinel-sognatore/engine.js';
 
 export interface HealthStatus {
   status: 'HEALTHY' | 'DEGRADED' | 'CRITICAL';

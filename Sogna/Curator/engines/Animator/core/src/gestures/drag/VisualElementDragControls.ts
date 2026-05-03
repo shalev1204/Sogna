@@ -25,7 +25,7 @@ import { extractEventInfo } from "../../events/event-info"
 import { sognaflowProps } from "../../sognaflow/types"
 import { getContextWindow } from "../../utils/get-context-window"
 import { isRefObject } from "../../utils/is-ref-object"
-import { PanSession } from "../pan/PanSession"
+import { PanSession } from "../pan/pansession"
 import {
     applyConstraints,
     calcOrigin,

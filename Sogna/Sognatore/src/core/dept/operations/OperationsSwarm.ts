@@ -1,11 +1,11 @@
-import { SwarmBase } from '../../swarms/SwarmBase.js';
-import { ProcessOptimizer } from './agents/ProcessOptimizer.js';
-import { ResourceManager } from './agents/ResourceManager.js';
-import { AutomationEngineer } from './agents/AutomationEngineer.js';
-import { QualityController } from './agents/QualityController.js';
-import { OperationsDirector } from './agents/OperationsDirector.js';
-import { OperationsKPITracker } from './metrics/OperationsKPITracker.js';
-import { NeuralLogisticsHub } from './logistics/NeuralLogisticsHub.js';
+import { SwarmBase } from '../../swarms/swarmbase.js';
+import { ProcessOptimizer } from './agents/processoptimizer.js';
+import { ResourceManager } from './agents/resourcemanager.js';
+import { AutomationEngineer } from './agents/automationengineer.js';
+import { QualityController } from './agents/qualitycontroller.js';
+import { OperationsDirector } from './agents/operationsdirector.js';
+import { OperationsKPITracker } from './metrics/operationskpitracker.js';
+import { NeuralLogisticsHub } from './logistics/neurallogisticshub.js';
 
 export class OperationsSwarm extends SwarmBase {
     private optimizer = new ProcessOptimizer();

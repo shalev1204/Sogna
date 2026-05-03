@@ -1,8 +1,8 @@
 // @sentinel-ignore: GLOBAL - Core Teams integration with authorized webhook capabilities.
 import crypto from 'crypto';
-import { IntegrationAdapter } from '../Adapter.js';
-import { TeamsAdapterOptions, TeamsAdaptiveCard } from './TeamsTypes.js';
-import * as cards from './TeamsCards.js';
+import { IntegrationAdapter } from '../adapter.js';
+import { TeamsAdapterOptions, TeamsAdaptiveCard } from './teamstypes.js';
+import * as cards from './teamscards.js';
 
 export class TeamsAdapter extends IntegrationAdapter {
   private readonly _webhookUrl: string;

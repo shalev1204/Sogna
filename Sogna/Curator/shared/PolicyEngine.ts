@@ -1,4 +1,4 @@
-import { FailureClass } from './events/SognaEventBus.js';
+import { FailureClass } from './events/sognaeventbus.js';
 
 export enum EscalationLevel {
   NONE = 'NONE',

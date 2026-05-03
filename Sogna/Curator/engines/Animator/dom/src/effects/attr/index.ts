@@ -1,6 +1,6 @@
 import { camelToDash } from "../../render/dom/utils/camel-to-dash"
 import { SognaflowValue } from "../../value"
-import { SognaflowValueState } from "../SognaflowValueState"
+import { SognaflowValueState } from "../sognaflowvaluestate"
 import { createSelectorEffect } from "../utils/create-dom-effect"
 import { createEffect } from "../utils/create-effect"
 

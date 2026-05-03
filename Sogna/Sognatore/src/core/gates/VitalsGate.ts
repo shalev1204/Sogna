@@ -1,6 +1,6 @@
-import { BaseGate } from './BaseGate.js';
+import { BaseGate } from './basegate.js';
 import { GateResult, CouncilEvidence } from './types.js';
-import { Doctor } from '../Doctor.js';
+import { Doctor } from '../doctor.js';
 import chalk from 'chalk';
 
 /**

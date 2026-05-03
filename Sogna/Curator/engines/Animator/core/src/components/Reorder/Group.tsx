@@ -3,7 +3,7 @@
 import { invariant } from "sognaflow-utils"
 import * as React from "react"
 import { forwardRef, FunctionComponent, JSX, useEffect, useRef } from "react"
-import { ReorderContext } from "../../context/ReorderContext"
+import { ReorderContext } from "../../context/reordercontext"
 import { sognaflow } from "../../render/components/sognaflow/proxy"
 import { HTMLsognaflowProps } from "../../render/html/types"
 import { useConstant } from "../../utils/use-constant"

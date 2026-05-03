@@ -1,0 +1,10 @@
+import { Axis, AxisDelta, Box, Delta, Point } from "sognaflow-utils";
+import { ResolvedValues } from "../../render/types";
+export declare function calcLength(axis: Axis): number;
+export declare function isNear(value: number, target: number, maxDistance: number): boolean;
+export declare function calcAxisDelta(delta: AxisDelta, source: Axis, target: Axis, origin?: number): void;
+export declare function calcBoxDelta(delta: Delta, source: Box, target: Box, origin?: ResolvedValues): void;
+export declare function calcRelativeAxis(target: Axis, relative: Axis, parent: Axis, anchor?: number): void;
+export declare function calcRelativeBox(target: Box, relative: Box, parent: Box, anchor?: Point): void;
+export declare function calcRelativeAxisPosition(target: Axis, layout: Axis, parent: Axis, anchor?: number): void;
+export declare function calcRelativePosition(target: Box, layout: Box, parent: Box, anchor?: Point): void;

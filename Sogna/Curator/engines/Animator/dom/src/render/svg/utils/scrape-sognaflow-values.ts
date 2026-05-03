@@ -2,7 +2,7 @@ import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value"
 import type { SognaflowNodeOptions } from "../../../node/types"
 import { transformPropOrder } from "../../utils/keys-transform"
 import { ScrapeSognaflowValuesFromProps as ScrapeHTMLSognaflowValuesFromProps } from "../../html/utils/scrape-sognaflow-values"
-import type { VisualElement } from "../../VisualElement"
+import type { VisualElement } from "../../visualelement"
 
 export function ScrapeSognaflowValuesFromProps(
     props: SognaflowNodeOptions,

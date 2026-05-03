@@ -1,8 +1,8 @@
 import React from 'react';
-import { SognaInterface } from './sogna/SognaInterface';
-import { SognaTimeline } from './sogna/SognaTimeline';
-import { SognaToolRow } from './sogna/SognaToolRow';
-import { useTelemetry } from './hooks/useTelemetry';
+import { SognaInterface } from './sogna/sognainterface';
+import { SognaTimeline } from './sogna/sognatimeline';
+import { SognaToolRow } from './sogna/sognatoolrow';
+import { useTelemetry } from './hooks/usetelemetry';
 
 export const App: React.FC = () => {
   const { events, status, sendPanic } = useTelemetry();

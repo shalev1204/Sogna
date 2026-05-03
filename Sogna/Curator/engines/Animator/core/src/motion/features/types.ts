@@ -1,7 +1,7 @@
 import type { Feature } from "sognaflow-dom"
 import { CreateVisualElement } from "../../render/types"
 import { sognaflowProps } from "../types"
-import { MeasureLayout } from "./layout/MeasureLayout"
+import { MeasureLayout } from "./layout/measurelayout"
 
 interface FeatureClass<Props = unknown> {
     new (props: Props): Feature<Props>

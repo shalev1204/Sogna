@@ -1,6 +1,6 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
-import { StudioSkillRegistry } from '../skills/StudioSkillRegistry.js';
-import { StudioAssetTracker } from '../production/StudioAssetTracker.js';
+import { Agent } from '../../../swarms/swarmbase.js';
+import { StudioSkillRegistry } from '../skills/studioskillregistry.js';
+import { StudioAssetTracker } from '../production/studioassettracker.js';
 
 export class VisualArchitect implements Agent {
     id = 'studio_visual_arch';

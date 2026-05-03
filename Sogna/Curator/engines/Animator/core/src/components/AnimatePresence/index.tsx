@@ -2,10 +2,10 @@
 
 import * as React from "react"
 import { useContext, useMemo, useRef, useState } from "react"
-import { LayoutGroupContext } from "../../context/LayoutGroupContext"
+import { LayoutGroupContext } from "../../context/layoutgroupcontext"
 import { useConstant } from "../../utils/use-constant"
 import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect"
-import { PresenceChild } from "./PresenceChild"
+import { PresenceChild } from "./presencechild"
 import { AnimatePresenceProps } from "./types"
 import { usePresence } from "./use-presence"
 import { ComponentKey, getChildKey, onlyElements } from "./utils"

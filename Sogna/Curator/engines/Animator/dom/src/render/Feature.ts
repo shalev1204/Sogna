@@ -1,4 +1,4 @@
-import type { VisualElement } from "./VisualElement"
+import type { VisualElement } from "./visualelement"
 
 /**
  * Feature base class for extending VisualElement functionality.

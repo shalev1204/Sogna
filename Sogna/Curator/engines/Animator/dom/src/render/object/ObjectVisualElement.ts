@@ -1,6 +1,6 @@
 import { createBox } from "../../projection/geometry/models"
 import { ResolvedValues } from "../types"
-import { VisualElement } from "../VisualElement"
+import { VisualElement } from "../visualelement"
 
 interface ObjectRenderState {
     output: ResolvedValues

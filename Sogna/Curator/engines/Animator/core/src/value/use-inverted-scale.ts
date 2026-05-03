@@ -3,7 +3,7 @@
 import { sognaflowValue } from "sognaflow-dom"
 import { invariant, warning } from "sognaflow-utils"
 import { useContext } from "react"
-import { sognaflowContext } from "../context/sognaflowContext"
+import { sognaflowContext } from "../context/sognaflowcontext"
 import { usesognaflowValue } from "./use-sognaflow-value"
 import { useTransform } from "./use-transform"
 

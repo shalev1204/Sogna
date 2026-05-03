@@ -107,4 +107,11 @@ export class SognaEventBus extends EventEmitter {
   signalTaskEnd() {
     this.emit('system.task_end');
   }
+
+  /**
+   * Subscribe to all events (wildcard)
+   */
+  subscribe(callback: (event: SognaEvent) => void) {
+    this.on('*', callback);
+  }
 }

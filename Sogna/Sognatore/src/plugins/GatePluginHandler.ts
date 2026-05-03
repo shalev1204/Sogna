@@ -1,5 +1,5 @@
 import { execFile } from 'child_process';
-import { QualityGatePluginConfig } from './PluginTypes.js';
+import { QualityGatePluginConfig } from './plugintypes.js';
 
 // In-memory registry for custom gate plugins
 const _registeredGates = new Map<string, any>();

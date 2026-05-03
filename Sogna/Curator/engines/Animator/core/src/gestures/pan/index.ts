@@ -2,7 +2,7 @@ import { Feature, frame, type PanInfo } from "sognaflow-dom"
 import { noop } from "sognaflow-utils"
 import { addPointerEvent } from "../../events/add-pointer-event"
 import { getContextWindow } from "../../utils/get-context-window"
-import { PanSession } from "./PanSession"
+import { PanSession } from "./pansession"
 
 type PanEventHandler = (event: PointerEvent, info: PanInfo) => void
 const asyncHandler =

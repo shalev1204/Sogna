@@ -25,7 +25,7 @@ import {
     ValueAnimationOptions,
 } from "./types"
 import { replaceTransitionType } from "./utils/replace-transition-type"
-import { WithPromise } from "./utils/WithPromise"
+import { WithPromise } from "./utils/withpromise"
 
 const percentToProgress = (percent: number) => percent / 100
 

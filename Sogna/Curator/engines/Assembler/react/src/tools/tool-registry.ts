@@ -71,7 +71,7 @@ export const toolRegistry: Record<string, ToolMeta> = {
     },
     variant: "simple",
   },
-  // Agent tool — renamed from "Task" in claude-agent-sdk 0.2.63+
+  // Agent tool — renamed from "task" in claude-agent-sdk 0.2.63+
   "tool-Agent": {
     icon: Sparkles,
     title: (part) => {

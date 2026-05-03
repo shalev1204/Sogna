@@ -1,4 +1,4 @@
-import { createTestNode } from "./TestProjectionNode"
+import { createTestNode } from "./testprojectionnode"
 import { nodeGroup } from "../group"
 
 describe("nodeGroup", () => {

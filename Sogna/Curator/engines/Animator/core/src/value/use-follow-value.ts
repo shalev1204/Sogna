@@ -8,7 +8,7 @@ import {
     sognaflowValue,
 } from "sognaflow-dom"
 import { useContext, useInsertionEffect } from "react"
-import { sognaflowConfigContext } from "../context/sognaflowConfigContext"
+import { sognaflowConfigContext } from "../context/sognaflowconfigcontext"
 import { usesognaflowValue } from "./use-sognaflow-value"
 import { useTransform } from "./use-transform"
 

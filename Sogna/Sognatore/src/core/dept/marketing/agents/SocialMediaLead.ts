@@ -1,4 +1,4 @@
-import { Agent } from '../../../swarms/SwarmBase.js';
+import { Agent } from '../../../swarms/swarmbase.js';
 
 export class SocialMediaLead implements Agent {
     id = 'marketing_social_lead';

@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react"
 import { useContext } from "react";
 import { LayoutGroup } from "../index"
-import { LayoutGroupContext } from "../../../context/LayoutGroupContext"
+import { LayoutGroupContext } from "../../../context/layoutgroupcontext"
 
 const Consumer = ({ id = "1" }: any) => {
     const value = useContext(LayoutGroupContext)

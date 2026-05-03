@@ -1,5 +1,5 @@
 import { transformPropOrder } from "../../render/utils/keys-transform"
-import { SognaflowValueState } from "../SognaflowValueState"
+import { SognaflowValueState } from "../sognaflowvaluestate"
 
 const translateAlias = {
     x: "translateX",

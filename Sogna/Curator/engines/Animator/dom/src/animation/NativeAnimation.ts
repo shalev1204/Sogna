@@ -13,7 +13,7 @@ import {
     DOMValueAnimationOptions,
     TimelineWithFallback,
 } from "./types"
-import { WithPromise } from "./utils/WithPromise"
+import { WithPromise } from "./utils/withpromise"
 import { startWaapiAnimation } from "./waapi/start-waapi-animation"
 import { applyGeneratorOptions } from "./waapi/utils/apply-generator"
 
