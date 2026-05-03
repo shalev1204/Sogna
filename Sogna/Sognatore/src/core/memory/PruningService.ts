@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import chalk from 'chalk';
+import path from 'path';
 
 export interface PruningOptions {
   minWeight: number;
@@ -67,5 +68,35 @@ export class PruningService {
     }
 
     return { removedNodes, removedConnections };
+  }
+
+  /**
+   * Prunes a physical directory by removing files older than X days.
+   * Useful for cleaning up memory/navigator/cache.
+   */
+  public async pruneDirectory(dirPath: string, maxAgeDays: number, pattern: RegExp = /.*/): Promise<number> {
+    if (!(await fs.pathExists(dirPath))) return 0;
+
+    let removedCount = 0;
+    const now = Date.now();
+    const ageLimit = maxAgeDays * 24 * 60 * 60 * 1000;
+    const files = await fs.readdir(dirPath);
+
+    for (const file of files) {
+      if (!pattern.test(file)) continue;
+      const filePath = path.join(dirPath, file);
+      const stats = await fs.stat(filePath);
+      
+      if (stats.isFile() && (now - stats.mtimeMs > ageLimit)) {
+        await fs.remove(filePath);
+        removedCount++;
+      }
+    }
+
+    if (removedCount > 0) {
+      console.log(chalk.yellow(`[PRUNING] Evicted ${removedCount} stale files from ${path.basename(dirPath)}.`));
+    }
+
+    return removedCount;
   }
 }

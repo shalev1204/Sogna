@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
+import chalk from 'chalk';
 import { Chronicler, KnowledgeFragment } from './Chronicler.js';
 import { ImmuneSystem, HealthReport } from './ImmuneSystem.js';
 import { NeuralLearning } from './NeuralLearning.js';
@@ -25,8 +26,9 @@ export class MemoryHub {
   private registryPath: string;
   private registry: any = null;
   private cache: Map<string, { content: string, mtime: number }> = new Map();
-  private immuneSystem: ImmuneSystem;
-  private neuralLearning: NeuralLearning;
+  private _immuneSystem: ImmuneSystem | null = null;
+  private _neuralLearning: NeuralLearning | null = null;
+  private projectRoot: string;
   private graphCache: { nodes: any[], edges: any[] } | null = null;
   private lastGraphUpdate: number = 0;
   private readonly GRAPH_CACHE_TTL = 30000; // 30 seconds
@@ -46,26 +48,51 @@ export class MemoryHub {
       return process.cwd();
     };
 
-    const projectRoot = findRoot(process.cwd());
-    this.rootMemory = rootMemory ? path.resolve(rootMemory) : path.resolve(projectRoot, 'memory');
+    this.projectRoot = findRoot(process.cwd());
+    this.rootMemory = rootMemory ? path.resolve(rootMemory) : path.resolve(this.projectRoot, 'memory');
     this.securityDir = path.join(this.rootMemory, 'security');
-    this.agencyDir = path.resolve(projectRoot, 'toolkit/agents'); 
-    const skillsDir = path.resolve(projectRoot, 'toolkit/skills'); 
-    const sentinelDir = path.resolve(projectRoot, 'toolkit/engines/Sentinel');
-    const predatorDir = path.resolve(projectRoot, 'toolkit/engines/Predatore');
+    this.agencyDir = path.resolve(this.projectRoot, 'toolkit/agents'); 
     
     this.registryPath = path.join(this.rootMemory, 'registry.json');
-    this.chronicler = chronicler || Chronicler.getInstance(projectRoot);
+    this.chronicler = chronicler || Chronicler.getInstance(this.projectRoot);
     
-    // Global Neural Sources
+    // Add default sources
     this.chronicler.addSource(this.agencyDir); 
-    this.chronicler.addSource(skillsDir); 
-    this.chronicler.addSource(sentinelDir);
-    this.chronicler.addSource(predatorDir);
-    this.chronicler.addSource(projectRoot); 
+    this.chronicler.addSource(path.resolve(this.projectRoot, 'toolkit/skills')); 
+    this.chronicler.addSource(this.projectRoot); 
 
-    this.immuneSystem = new ImmuneSystem(this);
-    this.neuralLearning = new NeuralLearning(this.chronicler);
+    // Engines will be loaded from registry in initialize()
+  }
+
+  /**
+   * Initializes dynamic components and registry-based sources.
+   */
+  public async initialize(): Promise<void> {
+    await this.ensureRegistry();
+    if (this.registry?.engines) {
+      const enginesRoot = path.resolve(this.projectRoot, this.registry.engines.root);
+      const definitions = this.registry.engines.definitions;
+      for (const [name, def] of Object.entries(definitions)) {
+        const enginePath = path.join(enginesRoot, (def as any).path);
+        if (await fs.pathExists(enginePath)) {
+          this.chronicler.addSource(enginePath);
+        }
+      }
+    }
+  }
+
+  private get immuneSystem(): ImmuneSystem {
+    if (!this._immuneSystem) {
+      this._immuneSystem = new ImmuneSystem(this);
+    }
+    return this._immuneSystem;
+  }
+
+  private get neuralLearning(): NeuralLearning {
+    if (!this._neuralLearning) {
+      this._neuralLearning = new NeuralLearning(this.chronicler);
+    }
+    return this._neuralLearning;
   }
 
 
@@ -479,5 +506,29 @@ export class MemoryHub {
     }
 
     return results.sort((a, b) => b.relevance - a.relevance);
+  }
+
+  /**
+   * Performs deep ecosystem maintenance.
+   * Cleans caches, prunes neural entropy, and validates registry.
+   */
+  public async maintenance(): Promise<void> {
+    console.log(chalk.bold.magenta('🧹 [MEMORY_HUB] Iniciando mantenimiento profundo...'));
+    
+    const { PruningService } = await import('./PruningService.js');
+    const pruning = PruningService.getInstance();
+    
+    // 1. Prune Navigator Cache (Files older than 7 days)
+    const navCache = path.join(this.rootMemory, 'navigator/cache');
+    await pruning.pruneDirectory(navCache, 7);
+    
+    // 2. Prune Neural Index
+    await pruning.prune(this.chronicler.getIndexFile(), {
+      minWeight: 0.1,
+      maxAgeDays: 30,
+      preserveTags: ['institutional', 'sovereign']
+    });
+
+    console.log(chalk.bold.green('✨ [MEMORY_HUB] Mantenimiento completado. Ecosistema optimizado.'));
   }
 }

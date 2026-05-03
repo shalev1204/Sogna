@@ -8,6 +8,7 @@ import { BlueprintAuditor } from '@sogna/toolkit/shared/BlueprintAuditor.js';
 import { getBlueprint } from '@sogna/toolkit/shared/BlueprintRegistry.js';
 import fs from 'fs-extra';
 import path from 'path';
+import { MemoryHub } from './memory/MemoryHub.js';
 
 export enum BootstrapStage {
   DISCOVERY = 'DISCOVERY',
@@ -122,6 +123,7 @@ export class BootstrapEngine {
     await Promise.all([
       ProviderFactory.getAvailableProviders(),
       AgentFactory.getInstance(),
+      MemoryHub.getInstance().initialize().then(() => MemoryHub.getInstance().maintenance()),
       new ToolResolver(Hub.getInstance().getSognatoreRoot()) // Conceptual parallel loading
     ]);
 

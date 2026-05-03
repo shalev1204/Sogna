@@ -5,8 +5,10 @@ import { MotionDesigner } from './agents/MotionDesigner.js';
 import { AcousticEngineer } from './agents/AcousticEngineer.js';
 import { OutputEditor } from './agents/OutputEditor.js';
 import { StudioKPITracker } from './metrics/StudioKPITracker.js';
+import { StudioBridge } from './StudioBridge.js';
 
 export class StudioSwarm extends SwarmBase {
+    private bridge = StudioBridge.getInstance();
     private director = new CreativeDirector();
     private visual = new VisualArchitect();
     private motion = new MotionDesigner();
