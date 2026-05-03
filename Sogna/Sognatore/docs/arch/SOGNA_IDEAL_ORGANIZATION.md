@@ -1,6 +1,6 @@
-# Sogna Corporate Ideal v4.0: El Enjambre Soberano
+# Organización Corporativa de Sogna v4.0
 
-Este documento define la arquitectura organizacional definitiva de **Sognatore**. Evolucionamos hacia un sistema de **10 departamentos soberanos**, con una fuerza de **50 agentes inteligentes** interconectados a través del **BrainHub** y supervisados por el **High Executive Council**.
+Este documento define la arquitectura organizacional de **Sognatore**. El sistema se organiza en **10 departamentos autónomos**, con agentes especializados interconectados a través del **BrainHub** y supervisados por el **Comité Ejecutivo**.
 
 ---
 

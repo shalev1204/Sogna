@@ -193,7 +193,7 @@ export class Hub {
     // Deep Scan via AutoHealer (Toolkit module)
     try {
       // Lazy import to avoid circular dependencies and ensure toolkit access
-      const { AutoHealer } = await import('@sogna/toolkit/shared/AutoHealer.js');
+      const { AutoHealer } = await import('@sogna/curator/shared/AutoHealer.js');
       const healer = AutoHealer.getInstance();
       
       // Focus on Infra and Permissions since that's where binaries live

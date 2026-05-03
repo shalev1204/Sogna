@@ -1,6 +1,6 @@
 import { SwarmOrchestrator } from '../../core/SwarmOrchestrator.js';
 import { QualityCouncil } from '../../core/QualityCouncil.js';
-import { SognaEventBus, SognaEventType } from '@sogna/toolkit';
+import { SognaEventBus, SognaEventType } from '@sogna/curator';
 import chalk from 'chalk';
 
 async function verifyInstitutionalPolish() {

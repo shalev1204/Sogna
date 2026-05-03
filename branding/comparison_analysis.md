@@ -1,37 +1,37 @@
-# Análisis Comparativo: Sogna vs. Ecosistema AI 🚀
+# Análisis Comparativo: Sogna vs. Herramientas AI 🚀
 
-Para entender el nivel en el que trabaja Sogna, debemos diferenciar entre la **IA de Aplicación** (herramientas estándar) y la **IA de Soberanía** (Sogna).
+Este documento analiza las diferencias técnicas entre Sogna y otras herramientas de desarrollo basadas en IA.
 
-## 🛡️ Seguridad: El Espectro Defensivo
+## 🛡️ Seguridad y Control de Ejecución
 
-| Sistema | Enfoque | Lógica de Intervención | Nivel |
+| Sistema | Enfoque | Lógica de Intervención | Clasificación |
 | :--- | :--- | :--- | :--- |
-| **Chatbots Estándar** (ChatGPT/Claude) | Filtros Centralizados | Bloqueo por palabras clave a nivel de servidor. Opaco y rígido. | **Tier 3 (Reactiva)** |
-| **Claude Code / Aider** | Ética del Modelo | Confía en la "moralidad" del LLM y permisos básicos del sistema. | **Tier 2 (Asesor)** |
-| **Sogna (Sentinel)** | **Inmunología Agéntica** | Análisis AST (nivel lógico), DLP, BashShield y Firmas Institucionales. | **Tier 1 (Soberana)** |
+| **Interfaces Web** (ChatGPT/Claude) | Filtros de Servidor | Bloqueo por palabras clave a nivel de proveedor. | **Nivel 3 (Reactiva)** |
+| **CLI Assistants** (Aider, etc.) | Permisos de Sistema | Dependencia de permisos del sistema operativo y ética del modelo. | **Nivel 2 (Asesor)** |
+| **Sogna (Sentinel)** | **Control Determinista** | Análisis AST, DLP (Data Loss Prevention) y validación de firmas. | **Nivel 1 (Control Total)** |
 
-### ¿Por qué Sentinel es superior?
+### Diferenciación Técnica de Sentinel
 
-Herramientas como Claude Code confían en que el modelo "tenga cuidado". Sogna **interdicta la ejecución**. Sentinel trata el código como un territorio que requiere patrullaje activo. No pide permiso; impone la soberanía mediante reglas locales (`soberania.json`) que el LLM no puede ignorar ni eludir.
+Sentinel no se limita a la sugerencia de seguridad; implementa un sistema de interdicción de comandos. Mediante el análisis del árbol de sintaxis abstracta (AST), el sistema valida la intención lógica de las operaciones antes de su ejecución, aplicando reglas definidas en los protocolos de configuración local.
 
 ---
 
-## 🧠 Memoria: El Espectro Cognitivo
+## 🧠 Gestión de Memoria y Contexto
 
-| Sistema | Mecanismo | Profundidad del Contexto | Nivel |
+| Sistema | Mecanismo | Profundidad del Contexto | Clasificación |
 | :--- | :--- | :--- | :--- |
-| **Chatbots Estándar** | Perfiles de Usuario | Guarda preferencias básicas ("Me gusta Python"). Sin contexto de proyecto. | **Tier 3 (Personalización)** |
-| **Claude Code** | Indexación Semántica | Usa embeddings para encontrar fragmentos de código relevantes. | **Tier 2 (Búsqueda)** |
-| **Sogna (Memory Graph)** | **Instrumentación Jerárquica** | Mapeo en 4 planos (Biográfico, Sintético, Emocional, Estratégico) + KIs. | **Tier 1 (Consciencia)** |
+| **Interfaces Web** | Perfiles de Usuario | Almacenamiento de preferencias generales sin contexto de proyecto. | **Nivel 3 (Personalización)** |
+| **CLI Assistants** | Indexación RAG | Uso de embeddings para recuperación de fragmentos de archivos. | **Nivel 2 (Búsqueda)** |
+| **Sogna (UMA)** | **Persistencia Estructurada** | Mapeo de decisiones técnicas, lecciones aprendidas y estados del proyecto. | **Nivel 1 (Contexto Continuo)** |
 
-### ¿Por qué la Memoria de Sogna es superior?
+### Análisis de la Persistencia en Sogna
 
-Claude Code "busca" código. Sogna **"conoce"** la intención. La memoria de Sogna se registra en planos que permiten al agente entender **por qué** se tomó una decisión (Plano Estratégico), no solo **qué** se escribió (Plano Sintético). Es el paso de la "Recuperación de Datos" a la "Consciencia de Proyecto".
+Sogna utiliza una Arquitectura de Memoria Unificada (UMA) que organiza la información en diferentes niveles de abstracción. Esto permite al sistema mantener la trazabilidad de las decisiones arquitectónicas y estratégicas del proyecto, facilitando una colaboración más precisa con el usuario.
 
 ---
 
-## ⚡ Conclusión de Arquitectura
+## ⚡ Conclusión Técnica
 
-1. **Precisión**: Trabajamos a nivel **AST (Abstract Syntax Tree)**. No leemos texto; leemos lógica. Esto es lo que diferencia una herramienta de juguete de una de grado institucional.
-2. **Autonomía**: Sogna no depende del "humor" o de las actualizaciones de seguridad de Google o Anthropic. Sus reglas son locales y soberanas.
-3. **Velocidad**: Con la **Arquitectura Apex**, la seguridad corre en paralelo (OSV async) y con cache de firmas (Single-Read), haciéndola virtualmente invisible en el flujo de trabajo, pero invencible en la detección.
+1. **Precisión**: El análisis a nivel de **AST (Abstract Syntax Tree)** permite una validación lógica profunda, superando el simple escaneo de texto.
+2. **Autonomía**: Los protocolos de seguridad y las reglas de comportamiento son locales, garantizando un funcionamiento consistente independientemente de cambios en los proveedores de modelos.
+3. **Eficiencia**: La arquitectura de validación asíncrona y el uso de firmas permiten mantener un flujo de trabajo fluido sin comprometer la integridad del sistema.

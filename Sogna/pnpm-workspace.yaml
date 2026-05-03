@@ -1,7 +1,10 @@
 packages:
   - "Sognatore"
-  - "toolkit"
-  - "toolkit/engines/*/apps/*"
+  - "Curator"
+  - "Curator/engines/Animator/*"
+  - "Curator/engines/Predatore/apps/*"
+  - "Curator/engines/Assembler/react"
+  - "Curator/engines/Sentinel/apps/*"
 
 catalog:
   "@anthropic-ai/claude-agent-sdk": ^0.2.38

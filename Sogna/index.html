@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sogna Dashboard</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', 'Roboto', sans-serif;
+        background-color: #050510;
+        color: #E0E0FF;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      /* Custom Scrollbar for SognaTheme */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050510;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333344;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #00FFFF;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Vite entry point -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

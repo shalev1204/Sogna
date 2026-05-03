@@ -14,7 +14,7 @@ import { SwarmOrchestrator } from './SwarmOrchestrator.js';
 import { SkillRegistry } from './SkillRegistry.js';
 import { CouncilEvidence } from './gates/types.js';
 import { GitManager } from './GitManager.js';
-import { SognaEventBus, SognaEventType } from '@sogna/toolkit';
+import { SognaEventBus, SognaEventType } from '@sogna/curator';
 
 export class Runner {
   private stateStore: StateStore;

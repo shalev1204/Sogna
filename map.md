@@ -1,34 +1,33 @@
-# 🗺️ Mapa Técnico Supremo del Ecosistema Sogna (Legendary 1000+ Line Edition)
+# Mapa Técnico del Ecosistema Sogna
 
-Este documento es la **autoridad técnica suprema** y la fuente única de verdad (Source of Truth) de la arquitectura de Sogna. Ha sido diseñado bajo el estándar de **máxima densidad informativa**, garantizando la preservación total de los datos acumulados durante las **32 rondas de auditoría global** y expandiendo el detalle operativo a nivel de cada archivo, protocolo y neurona sistémica.
+Este documento es la referencia técnica y la fuente única de verdad (Source of Truth) de la arquitectura de Sogna. Contiene el detalle operativo de cada archivo y protocolo del sistema.
 
 ---
 
-## 🏛️ 1. Filosofía de Arquitectura y Soberanía Sistémica
+## 1. Arquitectura del Ecosistema
 
-Sogna no es simplemente un repositorio; es un ecosistema agéntico vivo, diseñado bajo el principio de **Soberanía Operativa**. Cada línea de código, cada gate de seguridad y cada pulso de comunicación ha sido auditado para garantizar que la inteligencia artificial opere dentro de los límites de la ética, la seguridad y el rendimiento óptimo.
+Sogna es un entorno agéntico diseñado para la automatización de procesos y gestión de tareas.
 
-### 🌌 Capa 0: El Monorepo Asimétrico (Topología Global)
+### Capa 0: Estructura del Monorepo
 
-| Componente | Path Físico Relativo | Rol en el Ecosistema | Criticidad Operativa | Estado de Auditoría |
-| :--- | :--- | :--- | :--- | :--- |
-| **Sognatore** | `Sogna/Sognatore/` | El Cerebro: Inteligencia, orquestación, lógica de negocio y gestión de departamentos. | CRÍTICA | 🟢 100% |
-| **Toolkit** | `Sogna/toolkit/` | El Arsenal: Motores técnicos de alto rendimiento (Rust, Python, TypeScript). | ALTA | 🟢 100% |
-| **Memory** | `Sogna/memory/` | Persistencia UMA: Identidad, Episodios, Inteligencia y Cache de Navegación. | CRÍTICA | 🟢 100% |
-| **Presence** | `Sogna/src/` | Interfaz y Síntesis: Capa visual, branding y componentes de interacción global. | MEDIA | 🟢 100% |
-| **Lab** | `Sogna/scratch/` | Purgatorio: Entorno para scripts de diagnóstico, purga neural y experimentos rápidos. | BAJA | 🟢 100% |
-| **Branding** | `branding/` | Identidad: Análisis comparativo, whitepapers y estándares institucionales. | MEDIA | 🟢 100% |
+| Componente | Path Físico Relativo | Función | Estado |
+| :--- | :--- | :--- | :--- |
+| **Sognatore** | `Sogna/Sognatore/` | Orquestador central y lógica de negocio. | 🟢 100% |
+| **Curator** | `Sogna/Curator/` | El equipo de especialistas. Motores técnicos. | 🟢 100% |
+| **Memory** | `Sogna/memory/` | Persistencia: Identidad y Cache. | 🟢 100% |
+| **Presence** | `Sogna/src/` | Interfaz visual y componentes. | 🟢 100% |
+| **Lab** | `Sogna/scratch/` | Scripts de diagnóstico y pruebas. | 🟢 100% |
+| **Branding** | `branding/` | Identidad corporativa y manuales. | 🟢 100% |
 
 #### 📁 Detalle de Archivos Raíz (System Anchors)
 - **`.sognarc.json`**: Define los "Tokens per Mission", "Memory Pressure Thresholds" y "Gate Strictness".
-- **`package.json`**: Orquestador de scripts (wake-up, sleep, purify, shield).
-- **`pnpm-workspace.yaml`**: Define las fronteras del monorepo asimétrico.
-- **`turbo.json`**: Configuración del pipeline de TurboRepo para builds ultrarrápidas.
-- **`.env`**: El corazón de los secretos (API Keys, GitHub Tokens). Protegido por Sentinel.
+- **pnpm-workspace.yaml**: Define las fronteras del monorepo asimétrico.
+- **turbo.json**: Orquestador maestro del pipeline de ejecución (Builds, Lints, Checks).
+- **package.json**: Punto de entrada global. Ejecuta `npm run build/check` vía Turborepo.
+- **.env**: El corazón de los secretos (API Keys, GitHub Tokens). Protegido por Sentinel.
+- **`sogna.md`**: Índice técnico maestro, directivas y estado del sistema (Reemplaza a README y CONTROL_LOG).
+- **`model_routing.json`**: Configuración de ruteo de modelos y modos de operación.
 - **`map.md`**: Este documento. El mapa de navegación definitivo.
-- **`README.md`**: Guía de inicio rápido para operadores humanos.
-- **`LICENSE`**: Acuerdo de uso y soberanía tecnológica.
-- **`.gitignore`**: Definición de fronteras de exfiltración de Git.
 - **`.editorconfig`**: Estándares de codificación para el enjambre.
 
 ---
@@ -74,6 +73,7 @@ Sogna no es simplemente un repositorio; es un ecosistema agéntico vivo, diseña
 - **Ronda 30: Adaptive Wallet**. Economía dinámica de misiones. Cambio automático de GPT-4 a GPT-3.5 si el saldo es bajo.
 - **Ronda 31: Graph Intel Pro**. Detección de deriva arquitectónica. Alerta de "Spaghetti Code" en departamentos.
 - **Ronda 32: Ecosystem Lock**. Gran consolidación y certificación final. Generación de este Mapa Supremo.
+- **Ronda 33: Standardized Pipeline**. Integración de Turborepo. Estandarización de "Scripts-First" (build, check, lint) en todas las capas. Purga de terminología redundante (F1/SafetyCar).
 
 ---
 
@@ -189,7 +189,7 @@ Sogna no es simplemente un repositorio; es un ecosistema agéntico vivo, diseña
 
 ---
 
-### 🛠️ Bloque 4: Toolkit - Motores Técnicos (The Arsenal)
+### 🛠️ Bloque 4: Curator - Motores Técnicos
 
 - **Navigator**:
   - `analyze.py`: Analizador de grafos de dependencia.
@@ -223,6 +223,8 @@ Sogna no es simplemente un repositorio; es un ecosistema agéntico vivo, diseña
 - `Sogna/.env`
 - `Sogna/.gitignore`
 - `Sogna/.sognarc.json`
+- `Sogna/sogna.md`
+- `Sogna/Sogna/Sognatore/config/model_routing.json`
 - `Sogna/map.md`
 - `Sogna/package.json`
 - `Sogna/pnpm-lock.yaml`
@@ -371,25 +373,25 @@ Sogna no es simplemente un repositorio; es un ecosistema agéntico vivo, diseña
 - `Sognatore/src/core/dept/studio/agents/OutputEditor.ts`
 - `Sognatore/src/core/dept/studio/agents/VisualArchitect.ts`
 
-#### 🎭 Toolkit: Motores y Herramientas (Detalle 100%)
-- `Sogna/toolkit/engines/Navigator/analyze.py`
-- `Sogna/toolkit/engines/Navigator/audit.py`
-- `Sogna/toolkit/engines/Navigator/graph_utils.py`
-- `Sogna/toolkit/engines/Navigator/visualizer/index.html`
-- `Sogna/toolkit/engines/Studio/composer.py`
-- `Sogna/toolkit/engines/Studio/video_utils.py`
-- `Sogna/toolkit/engines/Studio/audio_injector.py`
-- `Sogna/toolkit/engines/Studio/presets/4k_prores.json`
-- `Sogna/toolkit/engines/Predatore/scanner.py`
-- `Sogna/toolkit/engines/Predatore/exploit_gen.py`
-- `Sogna/toolkit/engines/Predatore/intel/CVE_DB.json`
-- `Sogna/toolkit/executive-core/Cargo.toml`
-- `Sogna/toolkit/executive-core/src/main.rs`
-- `Sogna/toolkit/executive-core/src/engine.rs`
-- `Sogna/toolkit/executive-core/src/classifier.rs`
-- `Sogna/toolkit/executive-core/src/trust_score.rs`
-- `Sogna/toolkit/executive-core/src/file_guard.rs`
-- `Sogna/toolkit/executive-core/src/network_blocker.rs`
+#### 🎭 Curator: Motores y Herramientas (Detalle 100%)
+- `Sogna/Curator/engines/Navigator/analyze.py`
+- `Sogna/Curator/engines/Navigator/audit.py`
+- `Sogna/Curator/engines/Navigator/graph_utils.py`
+- `Sogna/Curator/engines/Navigator/visualizer/index.html`
+- `Sogna/Curator/engines/Studio/composer.py`
+- `Sogna/Curator/engines/Studio/video_utils.py`
+- `Sogna/Curator/engines/Studio/audio_injector.py`
+- `Sogna/Curator/engines/Studio/presets/4k_prores.json`
+- `Sogna/Curator/engines/Predatore/scanner.py`
+- `Sogna/Curator/engines/Predatore/exploit_gen.py`
+- `Sogna/Curator/engines/Predatore/intel/CVE_DB.json`
+- `Sogna/Curator/executive-core/Cargo.toml`
+- `Sogna/Curator/executive-core/src/main.rs`
+- `Sogna/Curator/executive-core/src/engine.rs`
+- `Sogna/Curator/executive-core/src/classifier.rs`
+- `Sogna/Curator/executive-core/src/trust_score.rs`
+- `Sogna/Curator/executive-core/src/file_guard.rs`
+- `Sogna/Curator/executive-core/src/network_blocker.rs`
 
 #### 💾 Memory: Persistencia UMA (Caché Neural Completa)
 - `Sogna/memory/identity.json`
@@ -637,12 +639,14 @@ Esta sección define el lenguaje único utilizado en el ecosistema Sogna.
 - **Studio**: Suite de herramientas multimedia para la generación de reportes visuales.
 - **Predatore**: Motor de auditoría ofensiva para la detección proactiva de vulnerabilidades.
 - **Animator**: Motor de diseño kinético y validación visual reactiva.
+- **Turborepo Pipeline**: El sistema de orquestación maestro que garantiza que todos los módulos cumplan con el estándar de ejecución.
+- **Scripts-First Protocol**: Mandato arquitectónico: Ningún módulo existe sin sus scripts `build`, `check` y `lint`.
 - **Veto Proactivo**: Acción de Sentinel de cancelar un comando antes de que toque el sistema operativo.
 - **Poda de Entropía**: Proceso de limpieza de memoria para mantener la densidad de información útil.
 - **God Node**: Archivo o componente con excesivas dependencias, identificado como punto crítico de fallo.
 - **RARV Protocol**: Metodología Sogna: Research, Analysis, Review, Verification.
 - **Dream Logic**: Proceso de razonamiento heurístico que ocurre en el Nexus Brain durante la fase de "sueño".
-- **Soberanía Operativa**: El estado en el que el ecosistema es autosuficiente y seguro.
+- **Autonomía Operativa**: El estado en el que el ecosistema es funcional y seguro.
 - **Monorepo Asimétrico**: Estructura de archivos diseñada para aislar motores de lógica de negocio.
 - **Trazabilidad Forense**: Capacidad de reconstruir cada micro-acción del sistema mediante logs firmados.
 - **Sandboxing Virtual**: Técnica de aislamiento de FileSystem aplicada por el Permission Proxy.
@@ -700,7 +704,7 @@ Esta sección define el lenguaje único utilizado en el ecosistema Sogna.
 - **Departmental Ledger**: Registro de actividades y consumos de un departamento específico.
 - **Mission Bundle**: Paquete autocontenido de recursos necesarios para una tarea.
 - **Neural Pruning**: Proceso de simplificación de redes de decisión agénticas.
-- **Sovereign Operator**: El usuario humano certificado para interactuar con Sogna.
+- **Operador Certificado**: El usuario humano autorizado para interactuar con Sogna.
 - **Gate Protocol**: Secuencia de validación en cada Decision Gate.
 - **Anomaly Detection**: Motor heurístico que identifica comportamientos fuera de norma.
 - **Pulse Velocity**: Velocidad de intercambio de mensajes en el Neural Relay.
@@ -720,7 +724,7 @@ Esta sección define el lenguaje único utilizado en el ecosistema Sogna.
 | **Sognatore (Core)** | 125 | 🟢 Óptimo | ALTO | 100% |
 | **Departamentos** | 2,450 | 🟢 Activo | MEDIO (Gated) | 100% |
 | **Sentinel (Defense)** | 480 | 🟢 Blindado | CRÍTICO | 100% |
-| **Toolkit (Engines)** | 1,120 | 🟢 Activo | SEGURO | 100% |
+| **Curator (Engines)** | 1,120 | 🟢 Activo | SEGURO | 100% |
 | **Memory (UMA)** | 5,200 | 🟢 Persistente | MÁXIMO | 100% |
 | **Presence (UI)** | 750 | 🟢 Estético | ESTÁNDAR | 100% |
 
@@ -742,8 +746,8 @@ Tras la culminación de la **Ronda 32 de Auditoría Global**, se certifica que e
 *(Este documento es inmutable. Cualquier modificación no autorizada disparará un protocolo de seguridad de Nivel 5.)*
 
 > [!IMPORTANT]
-> **AUTORIDAD TÉCNICA SUPREMA**
-> Este archivo es el ancla de realidad del sistema. Si Navigator detecta que este archivo no coincide con la realidad física, el sistema entrará en modo "Safe Boot" inmediatamente.
+> **REFERENCIA TÉCNICA CENTRAL**
+> Este archivo es el ancla de realidad del sistema. Si Navigator detecta discrepancias con el estado físico, el sistema entrará en modo "Safe Boot" inmediatamente.
 
 ---
 

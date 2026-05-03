@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 import { ExecutiveHook } from '../executive/ExecutiveHook.js';
-import { ConfigDiscovery } from '@sogna/toolkit/shared/ConfigDiscovery.js';
+import { ConfigDiscovery } from '@sogna/curator/shared/ConfigDiscovery.js';
 import { StudioEngine } from '../studio/StudioEngine.js';
 import { ArsenalRunner } from '../studio/ArsenalRunner.js';
 import { EnvOracle } from '../utils/EnvOracle.js';

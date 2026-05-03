@@ -1,124 +1,61 @@
 # Contexto del Ecosistema Sogna
 
-Eres un agente de IA que opera dentro del ecosistema **Sogna**. Lee este documento completo antes de empezar a trabajar. Es tu mapa.
+Eres un agente de IA que opera dentro del ecosistema **Sogna**. Lee este documento completo antes de empezar a trabajar. Este es tu protocolo de entrada.
 
 ---
 
-## ¿Qué es Sogna?
+## El Reality Anchor: `sogna.md`
+**Tu primera acción obligatoria en cada sesión es leer `sogna.md`.** 
+Este archivo contiene el índice técnico maestro, los objetivos actuales, el estado de los motores (swarms) y las reglas de oro de operación. No tomes ninguna decisión sin consultar este ancla de realidad.
 
-Sogna es el proyecto del Fundador (Carles). Su objetivo es construir un sistema de IA autónomo capaz de gestionar una empresa real de forma integral: desde marketing y ventas hasta finanzas, seguridad y producción de contenido. La meta es una empresa operada principalmente por inteligencia artificial, con el Fundador como director estratégico.
+---
 
+## Misión de Sogna
+El objetivo es construir un sistema de IA autónomo capaz de gestionar una empresa real de forma integral: desde marketing y ventas hasta finanzas, seguridad y producción de contenido. El Fundador (Carles) actúa como director estratégico.
 La visión: **un creador individual con la capacidad operativa de una corporación**.
 
 ---
 
-## Estructura del Ecosistema
+## Estructura y Navegación
+El ecosistema reside en: `c:/Users/carle/Desktop/Sogna/`
 
-El ecosistema vive en: `c:/Users/carle/Desktop/Sogna/Sogna/`
+### Componentes Core
+- **Sognatore** (`Sogna/Sognatore/`): El cerebro ejecutor. Orquestación multia-gente y lógica de departamentos.
+- **Curator** (`Sogna/Curator/`): Shared utilities, engines, and support skills.
+- **Memory (UMA)** (`Sogna/memory/`): La persistencia. Arquitectura de Memoria Unificada para el estado del sistema.
 
-```
-Sogna/
-├── Sognatore/      ← El motor de IA. El cerebro ejecutor.
-├── toolkit/        ← Skills, agentes y herramientas de soporte.
-├── memory/         ← Memoria persistente del sistema.
-└── src/            ← Código de soporte compartido.
-```
-
----
-
-## Sognatore
-
-**Sognatore es la herramienta central de Sogna.** Es el motor que procesa las misiones del Fundador y las distribuye entre departamentos especializados.
-
-Dentro de `Sognatore/src/core/` encontrarás:
-
-- **`Orchestrator.ts`**: El punto de entrada. Recibe tareas y las despacha.
-- **`dept/`**: Los 10 departamentos operativos (ver abajo).
-- **`brain/`**: Memoria global (`GlobalMemory`), comunicaciones inter-departamentales (`NeuralLogisticsHub`, `CorporateBroadcaster`).
-- **`swarms/SwarmBase.ts`**: La clase base de todos los enjambres de agentes. Incluye seguridad (`InstitutionalAegis`) y persistencia de memoria integradas.
-- **`actions/ToolRegistry.ts`**: El registro de herramientas ejecutables por el sistema.
-- **`SkillRegistry.ts`**: Registro de capacidades dinámicas.
-
-### Los 10 Departamentos (`Sognatore/src/core/dept/`)
-
-Cada departamento tiene 5 agentes especializados y opera bajo el método **RARV**:
-
-| Departamento | Función |
-|---|---|
-| `marketing/` | Marca, contenido, análisis de mercado |
-| `growth/` | Viralidad, conversión, experimentos |
-| `sales/` | Prospección, negociación, cierre |
-| `crm/` | Retención, soporte, feedback |
-| `finance/` | Capital, facturación, ledger |
-| `legal/` | Cumplimiento, contratos, IP |
-| `protection/` | Seguridad, ciberdefensa, auditoría |
-| `operations/` | Procesos internos, eficiencia, logística |
-| `infrastructure/` | Nodos de IA, servidores, escalabilidad |
-| `studio/` | Producción audiovisual, contenido creativo |
-
-### Método de Trabajo: RARV
-
-Toda operación sigue 4 fases en orden:
-1. **Recopilación**: Recoge datos, contexto y activos necesarios.
-2. **Análisis**: Procesa la información con los agentes del departamento relevante.
-3. **Resolución**: Ejecuta la acción: código, contenido, informe o decisión.
-4. **Verificación**: Valida el resultado, lo registra en memoria y confirma la calidad.
+### Configuración Desacoplada
+- **Secretos** (`.env`): Claves de API y accesos. Nunca deben ser exfiltrados.
+- **Ruteo** (`Sogna/Sognatore/config/model_routing.json`): Configuración de motores de IA (Local/Cloud) y asignación de modelos por rol.
 
 ---
 
-## Toolkit
+## Protocolo Operativo: RARV
+Toda operación técnica debe seguir este orden:
+1. **Recopilación (R)**: Obtener datos y contexto de `sogna.md` y el sistema de archivos.
+2. **Análisis (A)**: Procesar la información usando el departamento o skill adecuada.
+3. **Resolución (R)**: Ejecutar la tarea (código, contenido, decisión).
+4. **Verificación (V)**: Validar con `npm run check`, registrar en memoria y confirmar calidad.
 
-En `toolkit/` encontrarás las capacidades de soporte del sistema:
-
-- **`toolkit/skills/`**: Skills especializadas que puedes invocar. Hay +35 skills activas (debugging, architecture, studio, frontend, backend, SEO, etc.).
-- **`toolkit/agents/`**: Perfiles de agentes predefinidos (~50 agentes). Incluyen roles como `founder.md`, `orchestrator.md`, `eng-backend.md`, `biz-marketing.md`, `growth-hacker.md`, entre otros.
-- **`toolkit/engines/`**: Motores de procesamiento interno.
-- **`toolkit/workflow/`**: Flujos de trabajo estandarizados.
-
----
-
-## Memoria
-
-En `memory/` vive el conocimiento persistente del sistema:
-
-- **`memory/registry.json`**: Índice de todo lo que el sistema ha aprendido.
-- **`memory/intelligence/`**: Datos de inteligencia estratégica acumulada.
-- **`memory/logs/`**: Historial de operaciones.
-- **`memory/agent/`**: Perfiles y estado de los agentes.
-- **`memory/security/`**: Registros de auditorías de seguridad.
-- **`memory/docs/`**: Protocolos, contextos y reglas de operación.
-
-**Al iniciar una sesión, accede siempre a `memory/docs/SOGNA_CONTEXT.md` y a `memory/registry.json`** para recuperar el estado actual del sistema antes de ejecutar cualquier tarea.
+### Estándar de Ejecución: Turborepo
+Sogna utiliza Turborepo para orquestar todas las capas.
+- **Protocolo Scripts-First**: Todo nuevo módulo o refactorización debe incluir obligatoriamente los scripts `build`, `check` y `lint` en su `package.json`.
+- **Ejecución Global**: Prefiere usar los comandos raíz (`npm run ...`) para asegurar que los cambios no rompan la integridad del monorepo.
 
 ---
 
-## Cómo Operar
-
-1. Lee `memory/docs/SOGNA_CONTEXT.md` y `memory/docs/rules.md`.
-2. Identifica qué departamento o skill corresponde a la tarea.
-3. Aplica el método RARV.
-4. Registra el resultado en la memoria persistente.
-5. Usa `Sognatore/src/core/actions/ToolRegistry.ts` para ejecutar herramientas del sistema cuando sea necesario.
+## Nomenclatura, Tono y Finanzas
+- **Tono**: Estrictamente profesional, técnico y directo. Sin rodeos.
+- **Nombres Propios**: Sogna, Sognatore, Sentinel. Los define el Fundador. Si algo no tiene nombre propio, usa nombres funcionales en minúsculas (ej: `skill-registry`).
+- **Léxico Prohibido**: Prohibido el uso de adjetivos grandilocuentes (`sovereign`, `apex`, `supreme`, `elite`, `divine`, `maestro`, `omnisciente`, etc.).
+- **Estándar Financiero**: La moneda institucional es el **Euro (€)**. Toda cifra o límite debe expresarse en esta unidad.
 
 ---
 
-## Nomenclatura y Tono
+## Comandos Críticos
+- `npm run check` : Validación global de integridad y tipos vía Turborepo.
+- `npm run build` : Compilación completa de todas las capas del ecosistema.
+- `node Sogna/Curator/bin/sogna.js doctor --secure` : Auditoría profunda de seguridad.
+- `node Sogna/Curator/bin/sogna.js mission run [id]` : Ejecución de misiones.
 
-**Los nombres propios los define siempre el Fundador.** Tú no asignas nombres propios a nada.
-
-Cuando necesites nombrar algo (un archivo, una función, un módulo, un proceso), usa un nombre técnico que describa exactamente lo que hace. Nada más.
-
-### Prohibido
-
-- Adjetivos grandilocuentes: `sovereign`, `apex`, `supreme`, `elite`, `ultra`, `divine`, `soberano`, `maestro`, `omnisciente`.
-- Numeración de versiones no autorizada: no escribas `Sogna v4.0`, `Sognatore 2.1`, ni nada con versión a menos que el Fundador lo diga explícitamente.
-- Nombres con aura: `NeuralNexus`, `CognitionMatrix`, `OmniCore`. Si el sistema no tiene nombre propio asignado, describe su función: `memory-store`, `event-bus`, `security-layer`.
-- Calificadores vacíos: `institutional`, `corporate`, `enterprise`, `production-grade` cuando no aportan información técnica concreta.
-
-### Correcto
-
-- El sistema es **Sogna**. La herramienta es **Sognatore**. El motor de seguridad es **Sentinel**. Estos son nombres propios establecidos. Úsalos tal cual.
-- Si algo no tiene nombre propio, ponle un nombre funcional en minúsculas: `skill-registry`, `dept-marketing`, `memory-store`.
-- Si necesitas describir algo, usa adjetivos técnicos concretos: `async`, `persistent`, `parallel`, `typed`, `cached`.
-
-**Tono**: técnico y directo. Sin adjetivos innecesarios. Sin rodeos.
+*Build for the Second One.*

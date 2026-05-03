@@ -7,10 +7,10 @@ import chalk from 'chalk';
 import { ToolRegistry } from '../actions/ToolRegistry.js';
 import { AgentFactory } from './AgentFactory.js';
 import { Guardian } from '../Guardian.js';
-import { AutoHealer } from '@sogna/toolkit/shared/AutoHealer.js';
-import { AuditVault } from '@sogna/toolkit/shared/AuditVault.js';
+import { AutoHealer } from '@sogna/curator/shared/AutoHealer.js';
+import { AuditVault } from '@sogna/curator/shared/AuditVault.js';
 import { Orchestrator, Turn } from '../Orchestrator.js';
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@sogna/toolkit';
+import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@sogna/curator';
 
 export interface AgentState {
   id: string;

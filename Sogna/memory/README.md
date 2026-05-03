@@ -1,77 +1,77 @@
-# Sovereign Unified Memory Architecture (UMA) 🧠
+# Unified Memory Architecture (UMA) 🧠
 
-Welcome to the heart of the Sogna Ecosystem. This directory constitutes the **Unified Memory Architecture (UMA)**, an institutional-grade intelligence synthesis system designed for persistent identity state, cross-engine synchronization, and radical security enforcement.
+Welcome to the memory management center of the Sogna Ecosystem. This directory constitutes the **Unified Memory Architecture (UMA)**, a technical system designed for persistent identity state, cross-engine synchronization, and security enforcement.
 
 ## 🏗️ Architecture Layers
 
-The memory is organized into four distinct cognitive layers, defined in `registry.json`:
+The memory is organized into four cognitive layers, defined in `registry.json`:
 
 ### 1. Identity Layer (Core)
 
-- **Purpose**: Defines the system's fundamental behaviors, personality, and strategic intent.
+- **Purpose**: Defines the system's behaviors, configuration, and strategic objectives.
 - **Key Files**:
   - `rules.md`: Operational constraints and protocols.
   - `user_profile.md`: Contextual data about the system operator.
-  - `strategic_intent.md`: High-level objectives and mission.
-  - `SOGNA_CONTEXT.md`: The "active consciousness" synthesized from recent experiences.
+  - `strategic_intent.md`: Objectives and mission status.
+  - `SOGNA_CONTEXT.md`: Synthesized intelligence from project history.
 
-### 2. Immunological Layer (The Shield)
+### 2. Security Layer
 
-- **Purpose**: Tracks threat patterns, history of compromises, and enforced security policies.
+- **Purpose**: Tracks threat patterns, security incidents, and enforced policies.
 - **Registry Path**: `security/`
 - **Key Artifacts**:
-  - `blacklist.json`: SHA-256 signatures of neutralized secrets.
-  - `INCIDENT_LOG.md`: Permanent audit trail of security violations.
+  - `blacklist.json`: SHA-256 signatures of prohibited data patterns.
+  - `INCIDENT_LOG.md`: Audit trail of security events.
   - `learned_threats.json`: Signatures for AST and DLP analysis.
 
-### 3. Episodic Layer (History)
+### 3. Intelligence Layer (History)
 
-- **Purpose**: Stores historical task fragments and raw interaction data.
+- **Purpose**: Stores historical task data and interaction logs.
 - **Registry Path**: `intelligence/`
 - **Key Files**:
   - `thread_intel.md`: Accumulated intelligence from multiple sessions.
-  - `*.md`: Puntos de datos granulares en espera de síntesis.
+  - `*.md`: Granular data points awaiting synthesis.
 
 ### 4. Operational Layer (Session)
 
-- **Purpose**: Holds active session context and volatile identity states.
+- **Purpose**: Holds active session context and volatile states.
 - **Registry Path**: `agent/`
 
 ---
 
 ## 🕹️ Control Plane (The Engine)
 
-The UMA is orchestrated by three specialized components working in synergy:
+The UMA is managed by three specialized components:
 
 ### 🚀 The Memory Hub (`MemoryHub.ts`)
 
-The primary TypeScript orchestrator. It manages the lifecycle of identity files and provides a high-performance **Identity Cache**.
+The primary TypeScript orchestrator. It manages the lifecycle of identity files and provides an **Identity Cache**.
 
-- **Caching**: Uses an in-memory `Map` with `mtime` validation to ensure sub-millisecond retrieval of core identity states without redundant I/O.
+- **Caching**: Uses an in-memory `Map` with `mtime` validation to ensure efficient retrieval of core identity states.
 
 ### 🌉 The UMA Bridge (`uma_bridge.cjs`)
 
-A cross-engine synchronization layer written in CommonJS for maximum monorepo compatibility.
+A cross-engine synchronization layer for monorepo compatibility.
 
-- **Role**: Synchronizes state between the `Sognatore` core (TS) and the `Toolkit` engines (Sentinel, Predatore, Loom).
+- **Role**: Synchronizes state between the `Sognatore` core (TS) and the `Toolkit` engines.
 - **Functionality**: Standardized reporting of security incidents and registry updates.
 
 ### 🧵 The Memory Loom (`memory_loom.py`)
 
-The intelligence synthesis engine.
+The data synthesis engine.
 
-- **Role**: Periodically "weaves" granular fragments from the Episodic Layer into the `SOGNA_CONTEXT.md` in the Identity Layer.
-- **Optimization**: Prevents context window saturation by distilling long-term history into concise, actionable insights.
+- **Role**: Periodically processes granular fragments from the Intelligence Layer into the `SOGNA_CONTEXT.md`.
+- **Optimization**: Prevents context saturation by distilling long-term history into concise entries.
 
 ---
 
 ## 🔐 Security Protocols
 
-The UMA enforces a **Zero-Persistence Policy** for sensitive information:
+The UMA enforces data integrity through the following protocols:
 
-1. **Radical Purge**: Sentinel autonomously scans all memory directories. Upon detecting a secret (id_rsa, .env, keys), it triggers an immediate `fs.unlinkSync()` to prevent data exfiltration.
-2. **Hash-Based Enforcement**: Neutralized secrets are hashed and stored in `blacklist.json`. Any future re-introduction of the same signature triggers an immediate VETO.
-3. **Institutional Auditing**: Every security intervention is recorded in `INCIDENT_LOG.md` with timestamp, type, and source, ensuring a complete forensic trail.
+1. **Automated Validation**: Sentinel scans memory directories to detect and neutralize sensitive information (e.g., plain-text keys).
+2. **Signature Enforcement**: Neutralized patterns are hashed and stored in `blacklist.json` to prevent re-introduction.
+3. **Audit Trails**: Security interventions are recorded in `INCIDENT_LOG.md` for forensic analysis.
 
 ---
 
@@ -80,15 +80,11 @@ The UMA enforces a **Zero-Persistence Policy** for sensitive information:
 ```text
 memory/
 ├── agent/              # Volatile session context
-├── intelligence/       # Historical fragments & thread intelligence
+├── intelligence/       # Historical fragments & intelligence
 ├── logs/               # Operational logs for memory operations
-├── security/           # Immunological defenses & incident logs
+├── security/           # Security defenses & incident logs
 ├── registry.json       # Structural metadata & layer weights
 ├── SOGNA_CONTEXT.md    # Active synthesized intelligence
 ├── rules.md            # Behavioral protocols
 └── user_profile.md     # Primary operator context
 ```
-
----
-
-*This architecture is self-healing and self-organizing. It is designed to ensure that Sognatore remains both highly intelligent and radically secure.*

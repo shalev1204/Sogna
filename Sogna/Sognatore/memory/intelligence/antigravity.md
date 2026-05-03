@@ -8,4 +8,4 @@ timestamp: 2026-04-29T23:20:18Z
 
 # Antigravity
 
-El Agente de IA Soberano, copiloto de desarrollo adaptativo y persistencia neuronal.
+El Agente de IA Autónomo, copiloto de desarrollo adaptativo y persistencia neuronal.

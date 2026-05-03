@@ -1,6 +1,8 @@
-# --- SOGNA MASTER GITIGNORE ---
+# ==============================================================================
+# SOGNA GIT CONFIGURATION
+# ==============================================================================
 
-# OS / IDE
+# --- OS / IDE ---
 .DS_Store
 *.DS_Store
 Thumbs.db
@@ -9,35 +11,29 @@ Thumbs.db
 *.swp
 *.swo
 
-# Node.js
+# --- NODE.JS ---
 node_modules/
-**/node_modules/
 dist/
-**/dist/
 build/
-**/build/
 .next/
-**/.next/
 .turbo/
-**/.turbo/
+.vercel/
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 *.log
 *.tgz
-package-lock.json
 
-# Rust
+# --- RUST ---
 target/
-**/target/
 **/*.pdb
 **/*.exe
 **/*.rlib
 **/*.rmeta
 
-# Python
+# --- PYTHON ---
 __pycache__/
-**/__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -45,49 +41,45 @@ __pycache__/
 env/
 venv/
 .venv/
-**/env/
-**/venv/
-**/.venv/
 pip-log.txt
 .pytest_cache/
-**/.pytest_cache/
 
-# Operational State (Sognatore)
-.sognatore/
-**/.sognatore/
-intelligence/index.json
-**/intelligence/index.json
-
-# Sensitive
+# --- SENSITIVE / SECRETS ---
 .env
+.env.*
 .env.local
 .env.*.local
 *.pem
 *.key
-**/.env*
 
-# Sogna Specific Patterns
+# --- SOGNA OPERATIONAL STATE ---
+.sognatore/
+intelligence/index.json
 *.sognatore_active
 temp/
-**/temp/
 the_app/
 wiki-repo/
 
-# Consolidated Scratch (toolkit/tests/scratch)
-# We ignore the folder except for specific tracked diagnostic tools
-Sogna/toolkit/tests/scratch/*
-!Sogna/toolkit/tests/scratch/memory_diag.ts
-!Sogna/toolkit/tests/scratch/test_executive.ts
-!Sogna/toolkit/tests/scratch/test_policy_executive.ts
+# --- CURATOR SCRATCH & DIAGNOSTICS ---
+# Ignore scratch directory contents except tracked tools
+Sogna/Curator/tests/scratch/*
+!Sogna/Curator/tests/scratch/memory_diag.ts
+!Sogna/Curator/tests/scratch/test_executive.ts
+!Sogna/Curator/tests/scratch/test_policy_executive.ts
 
-# Legacy Scratch cleanup rules (for transition)
+# Legacy cleanup
 scratch/
 Sogna/scratch/
 
-# Agent & Test artifacts
-**/test-results/
+# --- AGENT & TEST ARTIFACTS ---
+test-results/
 .aider*
 .claude/
+.gemini/
 
-# Sentinel Reports
-Sogna/Toolkit/engines/sentinel/reports/THREAD_INTEL.md
+# --- SENTINEL REPORTS ---
+Sogna/Curator/engines/sentinel/reports/THREAD_INTEL.md
+
+# ==============================================================================
+# EOF
+# ==============================================================================

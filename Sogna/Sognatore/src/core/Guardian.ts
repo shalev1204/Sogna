@@ -12,7 +12,7 @@ import os from 'os';
  */
 import { EnvOracle } from './utils/EnvOracle.js';
 import { MemoryHub } from './memory/MemoryHub.js';
-import { ConfigDiscovery } from '@sogna/toolkit/shared/ConfigDiscovery.js';
+import { ConfigDiscovery } from '@sogna/curator/shared/ConfigDiscovery.js';
 import { Hub, SecurityState } from '../Sentinel-Sognatore/Hub.js';
 
 /**

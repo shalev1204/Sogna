@@ -16,7 +16,7 @@ Este documento establece los términos oficiales para la infraestructura y jerar
 
 ## 3. Estructura Departamental
 
-Cada departamento es un **Enjambre (Swarm)** soberano operando bajo el flujo **RARV**.
+Cada departamento es un **Enjambre (Swarm)** autónomo operando bajo el flujo **RARV**.
 
 | Departamento | Nombre del Enjambre | Orquestador |
 | :--- | :--- | :--- |

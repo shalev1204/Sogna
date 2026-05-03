@@ -16,7 +16,7 @@ owner: [[orchestrator]]
 
 # FAF Wizard - One-Click AI Intelligence
 
-**The pit crew for your projects.** Point it at any codebase and get scored, AI-ready context in 60 seconds.
+**The specialized engine for your projects.** Point it at any codebase and get scored, AI-ready context in 60 seconds.
 
 Transform any project - new, legacy, famous OSS, or forgotten side projects - into an AI-intelligent workspace with persistent context that works across all AI tools.
 

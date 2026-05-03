@@ -1,6 +1,6 @@
 import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import chalk from 'chalk';
-import { SognaEventBus, SognaEventType } from '@sogna/toolkit';
+import { SognaEventBus, SognaEventType } from '@sogna/curator';
 
 export interface SwarmService {
   name: string;

@@ -1,0 +1,14 @@
+{
+  "routing": {
+    "local_mode": false,
+    "hybrid_mode": true,
+    "engine": "ollama",
+    "default_model": "deepseek-coder-v2:lite"
+  },
+  "roles": {
+    "architect": "deepseek-coder-v2:lite",
+    "auditor": "qwen2.5-coder:7b",
+    "philosopher": "gemma2:9b",
+    "guard": "llama3.1:latest"
+  }
+}

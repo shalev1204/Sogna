@@ -1,5 +1,5 @@
 import { ToolDefinition, ToolRegistry } from './actions/ToolRegistry.js';
-import { AuditVault, SummaryCompressor, SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/toolkit';
+import { AuditVault, SummaryCompressor, SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/curator';
 import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import chalk from 'chalk';
 
@@ -32,6 +32,15 @@ export class Orchestrator {
 
   private constructor() {
     console.log(chalk.bold.blue('[Orchestrator] Core intelligence centralized.'));
+    
+    // Escuchar el botón de pánico de la telemetría (Dashboard)
+    this.bus.subscribe((event) => {
+      if (event.type === ('SYSTEM_PAUSE' as any)) {
+        console.log(chalk.bgRed.white.bold(`[Orchestrator] SYSTEM HALTED: ${event.data?.reason || 'Panic Button Pressed'}`));
+        this.stopAll();
+        // Podríamos invocar Hub.getInstance().reportIntel aquí también
+      }
+    });
   }
 
   static getInstance(): Orchestrator {

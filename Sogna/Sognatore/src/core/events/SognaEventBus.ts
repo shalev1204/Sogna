@@ -1,1 +1,1 @@
-export * from '@sogna/toolkit';
+export * from '@sogna/curator';

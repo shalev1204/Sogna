@@ -1,25 +1,25 @@
-# Sogna Security Architecture: Sentinel (Operational Status: APEX)
+# Sogna Security Architecture: Sentinel System
 
 ## 🏗️ Execution Plane (Enforcement)
-- **Engine (Sentinel)**: Centralized policy evaluation with L1 Threat Cache.
-- **Shield (Sentinel)**: Real-time terminal interception and command categorization.
-- **Audit Vault (SecurityAudit)**: Immutable, hash-chained log of every security decision.
-- **Activity Profiler (ActivityProfile)**: Behavioral analysis to detect hijacked sessions or rogue bursts.
+- **Sentinel Engine**: Centralized policy evaluation with L1 threat caching.
+- **Sentinel Shield**: Real-time terminal interception and command categorization.
+- **Audit Vault**: Secure logging of all security decisions and interventions.
+- **Activity Profiler**: Behavioral analysis to detect unauthorized sessions or irregular patterns.
 
 ## 🧠 Intelligence Plane (Detection)
-- **Neural Decoys**: Semantic traps in MemoryHub for prohibited concept fishing.
-- **Honeypot Network**: High-fidelity decoys (`.env`, `secrets.json`, `id_rsa`) with SIGKILL reaction.
-- **Code Scanner (CodeScanner)**: Proactive source code auditing for secrets and unsafe patterns.
+- **Concept Monitors**: Traps in MemoryHub to detect access to restricted semantic nodes.
+- **Security Honeypots**: High-fidelity decoy files (`.env`, `secrets.json`) with automated reaction protocols.
+- **Code Scanner**: Proactive source code auditing for secrets and insecure patterns.
 
-## 🛡️ Immunological Plane (Recovery)
-- **AutoHealer**: Automated reconstruction of core binaries and configurations.
-- **Git Hard-Gate**: One-command restoration of Sentinel components via HEAD checkout.
-- **Panic Protocol**: Automated PID neutralization (SIGKILL) and immediate lock-down.
+## 🛡️ Recovery Plane
+- **System Restoration**: Automated reconstruction of core configurations and binaries.
+- **Integrity Enforcement**: Automated restoration of security components via version control checks.
+- **Security Lockdown**: Automated process neutralization and system locking protocols.
 
 ## 📜 Compliance Plane (Institutional)
-- **Sovereignty Rules (`policies.json`)**: Base rules for destructive operations and budget management.
-- **Intel Feed (`THREAD_INTEL.md`)**: Centralized, real-time telemetry from all Sognatore bases.
+- **Security Policies (`security.json`)**: Definitive rules for system operations and resource management.
+- **Intel Feed (`THREAD_INTEL.md`)**: Centralized telemetry from all Sogna components.
 
 ---
-**Security Level: INSTITUTIONAL / IMPENETRABLE**
-**Last Audit: PASSED (100% Integrity)**
+**Security Status: INSTITUTIONAL / VERIFIED**
+**Last Audit: PASSED (Integrity Confirmed)**

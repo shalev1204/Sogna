@@ -1,7 +1,7 @@
 # Sognatore Corporate Ecosystem v4.0 - Diagnóstico Global
 
-## 1. Arquitectura de Soberanía Neural
-Sognatore ha sido transformado en una corporación autónoma compuesta por **10 Departamentos Soberanos**, cada uno operando con un enjambre (*Swarm*) de 5 agentes especializados y bajo el estándar metodológico **RARV**.
+## 1. Arquitectura de Autonomía Neural
+Sognatore ha sido transformado en una organización autónoma compuesta por **10 Departamentos Autónomos**, cada uno operando con un enjambre (*Swarm*) de 5 agentes especializados y bajo el estándar metodológico **RARV**.
 
 ## 2. Red Inter-departamental (Neural Weaving)
 La infraestructura neural ha sido optimizada para eliminar cuellos de botella:

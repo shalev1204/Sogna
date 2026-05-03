@@ -9,8 +9,8 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@sogna/toolkit": ["../toolkit/index.ts"],
-      "@sogna/toolkit/*": ["../toolkit/*"]
+      "@sogna/curator": ["../Curator/index.ts"],
+      "@sogna/curator/*": ["../Curator/*"]
     }
   },
   "include": [

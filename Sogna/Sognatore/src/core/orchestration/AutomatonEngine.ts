@@ -1,4 +1,4 @@
-import { SognaEventBus, SognaEventType } from '@sogna/toolkit';
+import { SognaEventBus, SognaEventType } from '@sogna/curator';
 
 export class AutomatonEngine {
     private static instance: AutomatonEngine;

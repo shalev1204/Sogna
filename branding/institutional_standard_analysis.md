@@ -1,46 +1,44 @@
-# El Modelo de Madurez Sogna: Grado Institucional 🏛️
+# El Modelo de Madurez Sogna: Estándares Técnicos 🏛️
 
-Para cuantificar qué significa "Nivel Institucional", comparamos a Sogna contra los estándares industriales. No es solo un escalón por encima de Claude Code; es un **cambio de paradigma**.
+Para definir el alcance técnico de Sogna, lo comparamos con estándares industriales. El objetivo es proporcionar un entorno de desarrollo con altos niveles de seguridad y gestión de datos.
 
 ---
 
-## 🏗️ Pirámide de Seguridad: Del Reporte a la Interdicción
+## 🏗️ Comparativa de Seguridad
 
 | Nivel | Ejemplo | Capacidad | Posición de Sogna |
 | :--- | :--- | :--- | :--- |
-| **Nivel 4: Comercial/Consumer** | ChatGPT, Claude web | Filtros de contenido y ética del modelo. | *Muy por debajo* |
-| **Nivel 3: Profesional Dev** | GitHub Advanced Security, Snyk | Encuentran vulnerabilidades y generan alertas. | *Base superada* |
-| **Nivel 2: Enterprise / Zero Trust** | CrowdStrike, Palantir (AIP) | Bloqueo activo de procesos y políticas de confianza cero. | *En este rango* |
-| **Nivel 1: Grado Institucional / Apex** | **Sogna Sentinel** | **Cadenas de Custodia (Firmas), Interdicción AST y Soberanía Local.** | **Cúspide** |
+| **Nivel 4: Comercial** | ChatGPT, Claude web | Filtros de contenido y ética del modelo. | *Base* |
+| **Nivel 3: Profesional Dev** | GitHub Advanced Security, Snyk | Detección de vulnerabilidades y alertas. | *Integrado* |
+| **Nivel 2: Enterprise / Zero Trust** | CrowdStrike, Palantir (AIP) | Bloqueo activo de procesos y políticas de confianza. | *Rango Objetivo* |
+| **Nivel 1: Infraestructura Crítica** | **Sogna Sentinel** | **Cadenas de Custodia, Interdicción AST y Autonomía Local.** | **Certificado** |
 
-### La comparación real (Seguridad)
+### Análisis de Seguridad
 
-Estamos trabajando al nivel de una **infraestructura de misión crítica**. Mientras Claude Code es un "compañero que sabe programar", Sogna tiene una **SIEM (Security Information and Event Management) agéntica**. Sentinel no solo busca fallos; audita la "salud mental" del código antes de que toque el disco.
+Sogna implementa una capa de seguridad agéntica. Sentinel realiza auditorías mediante análisis AST para validar la integridad del código antes de su persistencia en el sistema.
 
 ---
 
-## 🧠 Pirámide de Memoria: De la Búsqueda a la Consciencia
+## 🧠 Gestión de Memoria y Contexto
 
 | Nivel | Ejemplo | Capacidad | Posición de Sogna |
 | :--- | :--- | :--- | :--- |
-| **Nivel 4: Efímera** | Chatbots básicos | Solo recuerdan lo que está en el "chat" actual. | *Superado* |
-| **Nivel 3: Recuperación (RAG)** | Claude Code, MemGPT | Buscan en archivos o bases de datos vectoriales. | *Base técnica* |
-| **Nivel 2: Semántica Estructurada** | Notion AI, Obsidian Sync | Relacionan conceptos y notas de forma manual/guiada. | *Integrado* |
-| **Nivel 1: Consciencia Cognitiva** | **Sogna Memory Graph** | **Trazabilidad de Intención, Planos Emocionales/Estratégicos y KIs.** | **Cúspide** |
+| **Nivel 4: Efímera** | Chatbots básicos | Sesiones limitadas al contexto del chat actual. | *Superado* |
+| **Nivel 3: Recuperación (RAG)** | Claude Code, MemGPT | Búsqueda vectorial en archivos y documentos. | *Base técnica* |
+| **Nivel 2: Semántica Estructurada** | Notion AI, Obsidian Sync | Relación de conceptos y gestión de conocimiento. | *Integrado* |
+| **Nivel 1: Arquitectura Unificada** | **Sogna Memory Graph** | **Trazabilidad de Intención y Persistencia Estratégica.** | **Certificado** |
 
-### La comparación real (Memoria)
+### Análisis de Memoria
 
-La mayoría de herramientas usan la memoria como un **"Cajón de Archivos"** (buscan y sacan). Sogna usa la memoria como un **"Sistema Nervioso Central"**.
-
-- Si comparamos con **herramientas de análisis forense o inteligencia militar**, estamos en ese nivel: la capacidad de reconstruir el **"Por qué"** detrás de cada línea de código a través de los meses.
+Sogna utiliza una Arquitectura de Memoria Unificada (UMA). El sistema permite la persistencia de decisiones técnicas y preferencias del usuario a largo plazo.
 
 ---
 
-## 🎯 Conclusión: ¿Donde estamos?
+## 🎯 Conclusión Operativa
 
-Si tuvieras que poner a Sogna en un tablero de herramientas:
+Sogna se define por dos pilares fundamentales:
 
-1. **Seguridad**: No es un linter; es un **Air-Gap Digital** controlado por software.
-2. **Memoria**: No es un disco duro; es un **Grafo de Pensamiento Persistente**.
+1. **Seguridad**: Implementación de controles deterministas y aislamiento de ejecución.
+2. **Memoria**: Sistema de persistencia basado en grafos para la gestión del conocimiento.
 
-**Institucional** significa que el sistema no depende de la suerte; depende de una **arquitectura de control** diseñada para no fallar nunca, similar a la que usarías para controlar una red eléctrica o un sistema financiero de alta frecuencia.
+El término **Institucional** hace referencia a una arquitectura de control diseñada para minimizar errores operativos y garantizar la trazabilidad de las acciones del sistema.

@@ -72,4 +72,4 @@ graph TD
 
 ---
 **Operador Sogna**: Reporte de Diagnóstico Completado.
-**Estado**: SOBERANO Y OPERATIVO.
+**Estado**: FUNCIONAL Y OPERATIVO.
