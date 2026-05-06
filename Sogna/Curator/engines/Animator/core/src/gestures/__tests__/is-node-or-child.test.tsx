@@ -1,5 +1,5 @@
 import { isNodeOrChild } from "sognaflow-dom"
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("isNodeOrChild", () => {
     test("tap event listeners fire", () => {

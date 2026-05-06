@@ -1,6 +1,6 @@
 import React, { memo } from "react"
-import { PaperclipIcon } from "../../icons/shared-icons"
-import { useThemeConfig } from "../../theme-config"
+import { PaperclipIcon } from "../../icons/shared-icons.js"
+import { useThemeConfig } from "../../theme-config.js"
 
 interface AttachmentButtonProps {
   style?: "plus-circle" | "paperclip" | "hidden"

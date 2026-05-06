@@ -1,4 +1,4 @@
-import { MutableRefObject } from "./safe-react-types"
+import { MutableRefObject } from "./safe-react-types.js"
 
 export function isRefObject<E = any>(ref: any): ref is MutableRefObject<E> {
     return (

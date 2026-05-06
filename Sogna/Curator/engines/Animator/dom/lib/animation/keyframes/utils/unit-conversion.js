@@ -1,7 +1,7 @@
-import { ParseValueFromTransform as parseValueFromTransform } from "../../../render/dom/parse-transform";
-import { TransformPropOrder } from "../../../render/utils/keys-transform";
+import { ParseValueFromTransform as parseValueFromTransform } from "../../../render/dom/parse-transform.js";
+import { TransformPropOrder } from "../../../render/utils/keys-transform.js";
 import { NumberType } from "../../../value/types/numbers";
-import { Px } from "../../../value/types/numbers/units";
+import { Px } from "../../../value/types/numbers/units.js";
 export const IsNumOrPxType = (v) => v === NumberType || v === Px;
 const transformKeys = new Set(["x", "y", "z"]);
 const nonTranslationalTransformKeys = TransformPropOrder.filter((key) => !transformKeys.has(key));

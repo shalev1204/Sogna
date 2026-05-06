@@ -1,7 +1,7 @@
 import { Color } from "../color";
-import { colorRegex } from "../utils/color-regex";
-import { floatRegex } from "../utils/float-regex";
-import { sanitize } from "../utils/sanitize";
+import { colorRegex } from "../utils/color-regex.js";
+import { floatRegex } from "../utils/float-regex.js";
+import { sanitize } from "../utils/sanitize.js";
 function test(v) {
     return (isNaN(v) &&
         typeof v === "string" &&

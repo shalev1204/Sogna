@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { InfrastructureSkillRegistry } from '../skills/infrastructureskillregistry.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { InfrastructureSkillRegistry } from '../skills/InfrastructureSkillRegistry.js';
 
 export class DevOpsMaster implements Agent {
     id = 'infra_devops_master';

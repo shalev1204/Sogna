@@ -1,16 +1,16 @@
-import { resolveVariant } from "../../render/utils/resolve-dynamic-variants"
-import { calcChildStagger } from "../utils/calc-child-stagger"
-import type { VisualElementAnimationOptions } from "./types"
-import { animateTarget } from "./visual-element-target"
-import type { DynamicOption } from "../types"
-import type { VisualElement } from "../../render/visualelement"
+import { ResolveVariant } from "../../render/utils/resolve-dynamic-variants.js"
+import { CalcChildStagger } from "../utils/calc-child-stagger.js"
+import type { VisualElementAnimationOptions } from "./types.js"
+import { AnimateTarget } from "./visual-element-target.js"
+import type { DynamicOption } from "../types.js"
+import type { VisualElement } from "../../render/VisualElement.js"
 
 export function AnimateVariant(
     visualElement: VisualElement,
     variant: string,
     options: VisualElementAnimationOptions = {}
 ): Promise<any> {
-    const resolved = resolveVariant(
+    const resolved = ResolveVariant(
         visualElement,
         variant,
         options.type === "exit"
@@ -30,7 +30,7 @@ export function AnimateVariant(
      * Otherwise, we resolve a Promise immediately for a composable no-op.
      */
     const getAnimation: () => Promise<any> = resolved
-        ? () => Promise.all(animateTarget(visualElement, resolved, options))
+        ? () => Promise.all(AnimateTarget(visualElement, resolved, options))
         : () => Promise.resolve()
 
     /**
@@ -89,12 +89,12 @@ function animateChildren(
     for (const child of visualElement.variantChildren!) {
         child.notify("AnimationStart", variant)
         animations.push(
-            animateVariant(child, variant, {
+            AnimateVariant(child, variant, {
                 ...options,
                 delay:
                     delay +
                     (typeof delayChildren === "function" ? 0 : delayChildren) +
-                    calcChildStagger(
+                    CalcChildStagger(
                         visualElement.variantChildren!,
                         child,
                         delayChildren,

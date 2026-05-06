@@ -8,9 +8,9 @@ import {
     AnimationPlaybackControlsWithThen,
     AnyResolvedKeyframe,
     TransformProperties,
-} from "../animation/types"
-import { frame } from "../frameloop"
-import { time } from "../frameloop/sync-time"
+} from "../animation/types.js"
+import { Frame } from "../frameloop"
+import { Time } from "../frameloop/sync-time.js"
 
 /**
  * @public
@@ -35,7 +35,7 @@ export interface SognaflowValueEventCallbacks<V> {
 }
 
 /**
- * Maximum time between the value of two frames, beyond which we
+ * Maximum Time between the value of two frames, beyond which we
  * assume the velocity has since been 0.
  */
 const MAX_VELOCITY_DELTA = 30
@@ -99,17 +99,17 @@ export class SognaflowValue<V = any> {
     private prev: V | undefined
 
     /**
-     * The previous state of the `sognaflowValue` at the end of the previous frame.
+     * The previous state of the `sognaflowValue` at the end of the previous Frame.
      */
     private prevFrameValue: V | undefined
 
     /**
-     * The last time the `sognaflowValue` was updated.
+     * The last Time the `sognaflowValue` was updated.
      */
     updatedAt: number
 
     /**
-     * The time `prevFrameValue` was updated.
+     * The Time `prevFrameValue` was updated.
      */
     prevUpdatedAt: number | undefined
 
@@ -175,7 +175,7 @@ export class SognaflowValue<V = any> {
 
     setCurrent(current: V) {
         this.current = current
-        this.updatedAt = time.now()
+        this.updatedAt = Time.now()
 
         if (this.canTrackVelocity === null && current !== undefined) {
             this.canTrackVelocity = isFloat(this.current)
@@ -260,9 +260,9 @@ export class SognaflowValue<V = any> {
 
                 /**
                  * If we have no more change listeners by the start
-                 * of the next frame, stop active animations.
+                 * of the next Frame, stop active animations.
                  */
-                frame.read(() => {
+                Frame.read(() => {
                     if (!this.events.change.getSize()) {
                         this.stop()
                     }
@@ -347,11 +347,11 @@ export class SognaflowValue<V = any> {
     }
 
     updateAndNotify = (v: V) => {
-        const currentTime = time.now()
+        const currentTime = Time.now()
 
         /**
-         * If we're updating the value during another frame or eventloop
-         * than the previous frame, then the we set the previous frame value
+         * If we're updating the value during another Frame or eventloop
+         * than the previous Frame, then the we set the previous Frame value
          * to current.
          */
         if (this.updatedAt !== currentTime) {
@@ -404,7 +404,7 @@ export class SognaflowValue<V = any> {
      * @public
      */
     getVelocity() {
-        const currentTime = time.now()
+        const currentTime = Time.now()
 
         if (
             !this.canTrackVelocity ||
@@ -431,7 +431,7 @@ export class SognaflowValue<V = any> {
 
     /**
      * Registers a new animation to control this `sognaflowValue`. Only one
-     * animation can drive a `sognaflowValue` at one time.
+     * animation can drive a `sognaflowValue` at one Time.
      *
      * ```jsx
      * value.start()

@@ -23,7 +23,7 @@ export interface PipelineInput {
   configData?: DistributedConfig; // Pre-parsed config (bypasses file loading)
   apiKey?: string; // API key override (avoids process.env mutation)
   deliverablesSubdir?: string; // Override deliverables path (default: '.Predatore/deliverables')
-  auditDir?: string; // Override audit log directory (default: './workspaces')
+  auditDir?: string; // Override audit log directory (default: './workspaces.js')
   promptDir?: string; // Override prompt template directory
   sastSarifPath?: string; // Path to SARIF file (gates SAST-enhanced mode)
   checkpointsEnabled?: boolean; // Enable checkpoint activities (default: false)

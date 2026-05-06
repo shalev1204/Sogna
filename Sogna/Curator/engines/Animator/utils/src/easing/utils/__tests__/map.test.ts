@@ -1,5 +1,5 @@
 import { backIn, cubicBezier, easeInOut, noop } from "../../../"
-import { easingDefinitionToFunction } from "../map"
+import { easingDefinitionToFunction } from "../map.js"
 
 describe("easingDefinitionToFunction", () => {
     test("Maps easing to lookup", () => {

@@ -1,4 +1,4 @@
-import { containsCSSVariable, isCSSVariableToken } from "../is-css-variable"
+import { containsCSSVariable, isCSSVariableToken } from "../is-css-variable.js"
 
 describe("isCSSVariableToken", () => {
     test("returns true for a CSS variable", () => {

@@ -1,7 +1,7 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils"
 import { CreateSognaflowValue } from "../"
 import { frameData } from "../../frameloop"
-import { time } from "../../frameloop/sync-time"
+import { time } from "../../frameloop/sync-time.js"
 
 describe("SognaflowValue", () => {
     test("change event is type-inferred", () => {

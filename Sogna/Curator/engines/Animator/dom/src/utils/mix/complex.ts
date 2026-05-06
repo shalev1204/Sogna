@@ -1,6 +1,6 @@
 import { pipe, warning } from "sognaflow-utils"
-import { AnyResolvedKeyframe } from "../../animation/types"
-import { IsCSSVariableToken } from "../../animation/utils/is-css-variable"
+import { AnyResolvedKeyframe } from "../../animation/types.js"
+import { IsCSSVariableToken } from "../../animation/utils/is-css-variable.js"
 import { Color } from "../../value/types/color"
 import {
     AnalyseComplexValue,
@@ -8,11 +8,11 @@ import {
     ComplexValueInfo,
     ComplexValues,
 } from "../../value/types/complex"
-import { HSLA, RGBA } from "../../value/types/types"
-import { MixColor } from "./color"
-import { MixImmediate } from "./immediate"
-import { MixNumber as MixNumberImmediate } from "./number"
-import { invisibleValues, MixVisibility } from "./visibility"
+import { HSLA, RGBA } from "../../value/types/types.js"
+import { MixColor } from "./color.js"
+import { MixImmediate } from "./immediate.js"
+import { MixNumber as MixNumberImmediate } from "./number.js"
+import { invisibleValues, MixVisibility } from "./visibility.js"
 
 type MixableArray = Array<number | RGBA | HSLA | string>
 interface MixableObject {

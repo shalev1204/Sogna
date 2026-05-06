@@ -1,7 +1,7 @@
-import { activeAnimations } from "../../stats/animation-count"
-import { statsBuffer } from "../../stats/buffer"
-import { ValueKeyframesDefinition, ValueTransition } from "../types"
-import { mapEasingToNativeEasing } from "./easing/map-easing"
+import { activeAnimations } from "../../stats/animation-count.js"
+import { StatsBuffer } from "../../stats/buffer.js"
+import { ValueKeyframesDefinition, ValueTransition } from "../types.js"
+import { mapEasingToNativeEasing } from "./easing/map-easing.js"
 
 export function startWaapiAnimation(
     element: Element,
@@ -29,7 +29,7 @@ export function startWaapiAnimation(
      */
     if (Array.isArray(easing)) keyframeOptions.easing = easing
 
-    if (statsBuffer.value) {
+    if (StatsBuffer.value) {
         activeAnimations.waapi++
     }
 
@@ -46,7 +46,7 @@ export function startWaapiAnimation(
 
     const animation = element.animate(keyframeOptions, options)
 
-    if (statsBuffer.value) {
+    if (StatsBuffer.value) {
         animation.finished.finally(() => {
             activeAnimations.waapi--
         })

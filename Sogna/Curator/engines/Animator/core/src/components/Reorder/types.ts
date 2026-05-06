@@ -1,6 +1,6 @@
 import { Axis, Box } from "sognaflow-utils"
 import { RefObject } from "react"
-import { HTMLElements } from "../../render/html/supported-elements"
+import { HTMLElements } from "../../render/html/supported-elements.js"
 
 export interface ReorderContextProps<T> {
     axis: "x" | "y"

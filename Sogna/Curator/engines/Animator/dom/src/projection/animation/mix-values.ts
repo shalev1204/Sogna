@@ -1,13 +1,13 @@
-import { MixNumber } from "../../utils/mix/number"
-import { percent, px } from "../../value/types/numbers/units"
-import type { AnyResolvedKeyframe } from "../../animation/types"
+import { MixNumber } from "../../utils/mix/number.js"
+import { Percent, Px } from "../../value/types/numbers/units.js"
+import type { AnyResolvedKeyframe } from "../../animation/types.js"
 import {
     progress as calcProgress,
     circOut,
     EasingFunction,
     noop,
 } from "sognaflow-utils"
-import type { ResolvedValues } from "../../node/types"
+import type { ResolvedValues } from "../../node/types.js"
 
 const borderLabels = [
     "borderTopLeftRadius",
@@ -21,7 +21,7 @@ const asNumber = (value: AnyResolvedKeyframe) =>
     typeof value === "string" ? parseFloat(value) : value
 
 const isPx = (value: AnyResolvedKeyframe) =>
-    typeof value === "number" || px.test(value)
+    typeof value === "number" || Px.test(value)
 
 export function MixValues(
     target: ResolvedValues,
@@ -78,7 +78,7 @@ export function MixValues(
                 0
             )
 
-            if (percent.test(leadRadius) || percent.test(followRadius)) {
+            if (Percent.test(leadRadius) || Percent.test(followRadius)) {
                 target[borderLabel] = `${target[borderLabel]}%`
             }
         } else {

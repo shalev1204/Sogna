@@ -1,12 +1,12 @@
 import { readFileSync, readdirSync, existsSync, statSync, watch, FSWatcher } from 'fs';
 import { join, extname } from 'path';
-import { PluginValidator } from './validator.js';
+import { PluginValidator } from './Validator.js';
 import { 
   PluginConfig, 
   PluginLoaderReport, 
   LoadedPlugin, 
   FailedPlugin 
-} from './plugintypes.js';
+} from './PluginTypes.js';
 
 /**
  * Single YAML value parsing (string, number, boolean, null).

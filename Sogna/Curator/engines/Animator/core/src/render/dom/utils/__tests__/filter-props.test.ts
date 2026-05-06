@@ -1,11 +1,11 @@
-import "../../../../jest.setup"
+import "../../../../jest.setup.js"
 import * as fs from "fs"
 import * as path from "path"
 
 describe("filter-props", () => {
     it("should not use statically-analyzable require for @esognaflow/is-prop-valid", () => {
         const source = fs.readFileSync(
-            path.resolve(__dirname, "../filter-props.ts"),
+            path.resolve(__dirname, "../filter-props.js"),
             "utf8"
         )
         // Webpack and other bundlers (e.g. Storybook) statically analyze

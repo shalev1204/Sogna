@@ -1,6 +1,6 @@
-export { agent } from "./agent"
-export { tool } from "./tool"
-export { Sandbox } from "./sandbox"
+export { agent } from "./agent.js"
+export { tool } from "./tool.js"
+export { Sandbox } from "./sandbox.js"
 export type {
   AgentConfig,
   AgentOptions,
@@ -18,4 +18,4 @@ export type {
   OnStepFinishPayload,
   OnFinishPayload,
   OnErrorPayload,
-} from "./types"
+} from "./types.js"

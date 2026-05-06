@@ -1,9 +1,9 @@
 import * as React from "react"
-import { useConstant } from "../../utils/use-constant"
+import { useConstant } from "../../utils/use-constant.js"
 import {
     DragControlOptions,
     VisualElementDragControls,
-} from "./visualelementdragcontrols"
+} from "./VisualElementDragControls.js"
 
 /**
  * Can manually trigger a drag gesture on one or more `drag`-enabled `sognaflow` components.

@@ -1,6 +1,6 @@
 import { SubscriptionManager, velocityPerSecond, warnOnce, } from "sognaflow-utils";
 import { Frame } from "../frameloop";
-import { Time } from "../frameloop/sync-time";
+import { Time } from "../frameloop/sync-time.js";
 /**
  * Maximum time between the value of two frames, beyond which we
  * assume the velocity has since been 0.

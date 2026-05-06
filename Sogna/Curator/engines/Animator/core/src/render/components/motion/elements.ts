@@ -1,6 +1,6 @@
 "use client"
 
-import { createsognaflowComponentWithFeatures as createsognaflowComponent } from "./create"
+import { createsognaflowComponentWithFeatures as createsognaflowComponent } from "./create.js"
 
 /**
  * HTML components

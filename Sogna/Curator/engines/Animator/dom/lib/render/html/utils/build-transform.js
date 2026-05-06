@@ -1,6 +1,6 @@
-import { GetValueAsType as getValueAsType } from "../../../value/types/utils/get-as-type";
-import { NumberValueTypes as numberValueTypes } from "../../../value/types/maps/number";
-import { TransformPropOrder as transformPropOrder } from "../../utils/keys-transform";
+import { GetValueAsType as getValueAsType } from "../../../value/types/utils/get-as-type.js";
+import { NumberValueTypes as numberValueTypes } from "../../../value/types/maps/number.js";
+import { TransformPropOrder as transformPropOrder } from "../../utils/keys-transform.js";
 const translateAlias = {
     x: "translateX",
     y: "translateY",

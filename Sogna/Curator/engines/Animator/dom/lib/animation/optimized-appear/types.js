@@ -1,2 +1,2 @@
-import { OptimizedAppearDataAttribute } from "./data-id";
+import { OptimizedAppearDataAttribute } from "./data-id.js";
 //# sourceMappingURL=types.js.map

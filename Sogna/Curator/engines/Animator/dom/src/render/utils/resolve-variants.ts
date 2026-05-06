@@ -3,8 +3,8 @@ import type {
     SognaflowNodeOptions,
     TargetAndTransition,
     TargetResolver,
-} from "../../node/types"
-import type { ResolvedValues } from "../types"
+} from "../../node/types.js"
+import type { ResolvedValues } from "../types.js"
 
 function getValueState(visualElement?: any): [ResolvedValues, ResolvedValues] {
     const state: [ResolvedValues, ResolvedValues] = [{}, {}]

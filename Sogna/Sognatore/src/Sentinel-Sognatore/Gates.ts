@@ -1,9 +1,9 @@
-// @sentinel-ignore: GLOBAL - Policy engine module with authorized dynamic timeout logic.
+// @Sentinel-ignore: GLOBAL - Policy engine module with authorized dynamic timeout logic.
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
-import { ApprovalGatePolicy } from './policytypes.js';
-import { Hub } from './hub.js';
+import { ApprovalGatePolicy } from './PolicyTypes.js';
+import { Hub } from './Hub.js';
 
 /**
  * Sentinel Gates - Human-in-the-loop approval system part of the Sentinel-Sognatore block.
@@ -198,7 +198,7 @@ export class Gates {
         createdAt: request.createdAt,
       };
 
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

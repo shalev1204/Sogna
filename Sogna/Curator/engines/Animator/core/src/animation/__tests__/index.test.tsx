@@ -1,9 +1,9 @@
 import * as React from "react"
 import { useEffect } from "react"
 import { sognaflow } from "../.."
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 import { usesognaflowValue } from "../../value/use-sognaflow-value"
-import { useAnimation } from "../hooks/use-animation"
+import { useAnimation } from "../hooks/use-animation.js"
 
 describe("useAnimation", () => {
     test("animates on mount", async () => {

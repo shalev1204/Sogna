@@ -1,1 +1,1 @@
-export * from './shield';
+export * from './shield.js';

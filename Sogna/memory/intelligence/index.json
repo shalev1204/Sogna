@@ -8556,7 +8556,7 @@
       "blocks": [],
       "properties": {
         "name": "context7-auto-research",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"Automatically fetch latest library/framework documentation for Claude Code via Context7 API. Use when you need up-to-date documentation for libraries and frameworks or asking about React, Next.js, Prisma, or any other popular library.\"",
         "risk": "critical",
         "date_added": "\"2026-02-27\"",
@@ -11941,7 +11941,7 @@
         "name": "rules",
         "title": "Use Covering Indexes to Avoid Table Lookups",
         "impact": "MEDIUM-HIGH",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "impactDescription": "2-5x faster queries by eliminating heap fetches",
         "tags": "indexes, covering-index, include, index-only-scan",
         "version": "1.0.0",
@@ -21134,7 +21134,7 @@
       "blocks": [],
       "properties": {
         "name": "fp-react",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "Practical patterns for using fp-ts with React - hooks, state, forms, data fetching. Works with React 18/19, Next.js 14/15.",
         "risk": "critical",
         "version": "2.0.0",
@@ -21198,7 +21198,7 @@
       "blocks": [],
       "properties": {
         "name": "fp-ts-react",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"Practical patterns for using fp-ts with React - hooks, state, forms, data fetching. Use when building React apps with functional programming patterns. Works with React 18/19, Next.js 14/15.\"",
         "risk": "critical",
         "date_added": "\"2026-02-27\"",
@@ -21278,7 +21278,7 @@
       "blocks": [],
       "properties": {
         "name": "frontend-dev-guidelines",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"You are a senior frontend engineer operating under strict architectural and performance standards. Use when creating components or pages, adding new features, or fetching or mutating data.\"",
         "risk": "safe",
         "date_added": "\"2026-02-27\"",
@@ -21668,7 +21668,7 @@
       "blocks": [],
       "properties": {
         "name": "gh-review-requests",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "Fetch unread GitHub notifications for open PRs where review is requested from a specified team or opened by a team member. Use when asked to \"find PRs I need to review\", \"show my review requests\", \"what needs my review\", \"fetch GitHub review requests\", or \"check team review queue\".",
         "allowed-tools": "Bash",
         "risk": "safe",
@@ -24791,7 +24791,7 @@
       "timestamp": "2026-04-30T17:56:33.781Z",
       "blocks": [],
       "properties": {
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "name": "native-data-fetching",
         "description": "Use when implementing or debugging ANY network request, API call, or data fetching. Covers fetch API, React Query, SWR, error handling, caching, offline support, and Expo Router data loaders (useLoaderData).",
         "risk": "critical",
@@ -24871,7 +24871,7 @@
       "blocks": [],
       "properties": {
         "name": "nextjs-best-practices",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"Next.js App Router principles. Server Components, data fetching, routing patterns.\"",
         "risk": "critical",
         "date_added": "\"2026-02-27\"",
@@ -25740,7 +25740,7 @@
       "blocks": [],
       "properties": {
         "name": "react-best-practices",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Use when writing new React components or Next.js pages, implementing data fetching (client or server-side), or reviewing code for performance issues.\"",
         "risk": "safe",
         "date_added": "\"2026-02-27\"",
@@ -26123,7 +26123,7 @@
         "title": "Use SWR for Automatic Deduplication",
         "impact": "MEDIUM-HIGH",
         "impactDescription": "automatic deduplication",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "tags": "client, swr, deduplication, data-fetching",
         "version": "1.0.0",
         "swarm": "Skills",
@@ -26858,7 +26858,7 @@
         "title": "Parallel Data Fetching with Component Composition",
         "impact": "CRITICAL",
         "impactDescription": "eliminates server-side waterfalls",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "tags": "server, rsc, parallel-fetching, composition",
         "version": "1.0.0",
         "swarm": "Skills",
@@ -27110,7 +27110,7 @@
       "blocks": [],
       "properties": {
         "name": "react-ui-patterns",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"Modern React UI patterns for loading states, error handling, and data fetching. Use when building UI components, handling async data, or managing UI states.\"",
         "risk": "safe",
         "date_added": "\"2026-02-27\"",
@@ -39577,7 +39577,7 @@
         "risk": "critical",
         "version": "1.0.0",
         "tags": "",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "id": "skill-fp-async",
         "owner": "[[orchestrator]]",
         "swarm": "Skills",
@@ -42880,7 +42880,7 @@
       "blocks": [],
       "properties": {
         "name": "linkedin-cli",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"Use when automating LinkedIn via CLI: fetch profiles, search people/companies, send messages, manage connections, create posts, and Sales Navigator.\"",
         "risk": "critical",
         "date_added": "\"2026-02-27\"",
@@ -46182,7 +46182,7 @@
         "allowed-tools": "",
         "- \"stitch*": "*\"",
         "- \"remotion*": "*\"",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "risk": "critical",
         "version": "1.0.0",
         "id": "skill-remotion",
@@ -48757,7 +48757,7 @@
       "timestamp": "2026-04-30T17:56:34.046Z",
       "blocks": [],
       "properties": {
-        "name": "sognatore",
+        "name": "Sognatore",
         "description": "Sognatore objective capability",
         "risk": "critical",
         "version": "1.0.0",
@@ -48772,7 +48772,7 @@
       "timestamp": "2026-04-30T17:56:34.046Z",
       "blocks": [],
       "properties": {
-        "name": "sognatore",
+        "name": "Sognatore",
         "description": "Sognatore objective capability",
         "risk": "critical",
         "version": "1.0.0",
@@ -48787,7 +48787,7 @@
       "timestamp": "2026-04-30T17:56:34.046Z",
       "blocks": [],
       "properties": {
-        "name": "sognatore",
+        "name": "Sognatore",
         "risk": "critical",
         "description": "autonomous capability",
         "version": "1.0.0",
@@ -48802,7 +48802,7 @@
       "timestamp": "2026-04-30T17:56:34.047Z",
       "blocks": [],
       "properties": {
-        "name": "sognatore",
+        "name": "Sognatore",
         "description": "Sognatore objective capability",
         "risk": "critical",
         "version": "1.0.0",
@@ -48817,7 +48817,7 @@
       "timestamp": "2026-04-30T17:56:34.047Z",
       "blocks": [],
       "properties": {
-        "name": "sognatore",
+        "name": "Sognatore",
         "description": "Sognatore objective capability",
         "risk": "critical",
         "version": "1.0.0",
@@ -48832,7 +48832,7 @@
       "timestamp": "2026-04-30T17:56:34.047Z",
       "blocks": [],
       "properties": {
-        "name": "sognatore",
+        "name": "Sognatore",
         "description": "Sognatore objective capability",
         "risk": "critical",
         "version": "1.0.0",
@@ -48847,7 +48847,7 @@
       "timestamp": "2026-04-30T17:56:34.047Z",
       "blocks": [],
       "properties": {
-        "name": "sognatore",
+        "name": "Sognatore",
         "description": "\"Version 2.35.0 | PRD to Production | Zero Human Intervention > Research-enhanced: OpenAI SDK, DeepMind, Anthropic, AWS Bedrock, Agent SDK, HN Production (2025)\"",
         "risk": "critical",
         "date_added": "\"2026-02-27\"",
@@ -49747,7 +49747,7 @@
       "blocks": [],
       "properties": {
         "name": "tanstack-query-expert",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "\"Expert in TanStack Query (React Query) — asynchronous state management. Covers data fetching, stale time configuration, mutations, optimistic updates, and Next.js App Router (SSR) integration.\"",
         "risk": "critical",
         "date_added": "\"2026-03-07\"",
@@ -51134,7 +51134,7 @@
       "blocks": [],
       "properties": {
         "name": "unsplash-integration",
-        "// @sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
+        "// @Sentinel-ignore": "Justificación institucional inyectada por Auto-Remediador Apex",
         "description": "Integration skill for searching and fetching high-quality, free-to-use professional photography from Unsplash.",
         "risk": "safe",
         "date_added": "\"2026-03-07\"",

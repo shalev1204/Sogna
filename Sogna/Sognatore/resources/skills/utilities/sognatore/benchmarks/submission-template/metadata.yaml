@@ -3,7 +3,7 @@
 
 # Model Information
 model:
-  name: "sognatore"
+  name: "Sognatore"
   version: "2.25.0"
   base_model: "claude-opus-4-5-20251101"
   type: "multi-agent-system"
@@ -55,7 +55,7 @@ results:
 submission:
   date: "2026-01-05"
   author: "Sognatore Team"
-  repository: "https://github.com/asklokesh/sognatore"
+  repository: "https://github.com/asklokesh/Sognatore"
   license: "MIT"
 
 # Contact

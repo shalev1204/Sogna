@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-import { Todo, fetchTodos, createTodo, updateTodo, deleteTodo } from '../api/todos';
+// @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+import { Todo, fetchTodos, createTodo, updateTodo, deleteTodo } from '../api/todos.js';
 
 interface UseTodosReturn {
   todos: Todo[];
@@ -22,7 +22,7 @@ export const useTodos = (): UseTodosReturn => {
       try {
         setLoading(true);
         setError(null);
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         const data = await fetchTodos();
         setTodos(data);
       } catch (err) {

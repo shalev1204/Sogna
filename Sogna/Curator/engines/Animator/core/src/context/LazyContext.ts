@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext } from "react"
-import { CreateVisualElement } from "../render/types"
+import { CreateVisualElement } from "../render/types.js"
 
 export interface LazyContextProps {
     renderer?: CreateVisualElement

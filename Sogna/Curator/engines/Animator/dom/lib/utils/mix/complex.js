@@ -1,11 +1,11 @@
 import { pipe, warning } from "sognaflow-utils";
-import { IsCSSVariableToken } from "../../animation/utils/is-css-variable";
+import { IsCSSVariableToken } from "../../animation/utils/is-css-variable.js";
 import { Color } from "../../value/types/color";
 import { AnalyseComplexValue, Complex, } from "../../value/types/complex";
-import { MixColor } from "./color";
-import { MixImmediate } from "./immediate";
-import { MixNumber as MixNumberImmediate } from "./number";
-import { invisibleValues, MixVisibility } from "./visibility";
+import { MixColor } from "./color.js";
+import { MixImmediate } from "./immediate.js";
+import { MixNumber as MixNumberImmediate } from "./number.js";
+import { invisibleValues, MixVisibility } from "./visibility.js";
 function MixNumber(a, b) {
     return (p) => MixNumberImmediate(a, b, p);
 }

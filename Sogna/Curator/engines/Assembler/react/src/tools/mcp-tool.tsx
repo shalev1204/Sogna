@@ -1,9 +1,9 @@
 import React, { memo, useState, useMemo } from "react"
 import { ChevronRight } from "lucide-react"
-import { TextShimmer } from "../components/text-shimmer"
-import { getToolStatus, areToolPropsEqual } from "../utils/format-tool"
-import type { McpToolInfo } from "./tool-registry"
-import { cn } from "../utils/cn"
+import { TextShimmer } from "../components/text-shimmer.js"
+import { getToolStatus, areToolPropsEqual } from "../utils/format-tool.js"
+import type { McpToolInfo } from "./tool-registry.js"
+import { cn } from "../utils/cn.js"
 
 interface McpToolProps {
   part: any

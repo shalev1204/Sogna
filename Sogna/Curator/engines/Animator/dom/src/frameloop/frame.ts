@@ -1,5 +1,5 @@
 import { noop } from "sognaflow-utils"
-import { CreateRenderBatcher } from "./batcher"
+import { CreateRenderBatcher } from "./batcher.js"
 
 export const {
     schedule: Frame,

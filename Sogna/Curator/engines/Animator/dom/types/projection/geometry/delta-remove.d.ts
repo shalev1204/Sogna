@@ -1,5 +1,5 @@
 import { Axis, Box } from "sognaflow-utils";
-import { ResolvedValues } from "../../render/types";
+import { ResolvedValues } from "../../render/types.js";
 /**
  * Remove a delta from a point. This is essentially the steps of applyPointDelta in reverse
  */

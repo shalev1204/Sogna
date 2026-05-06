@@ -1,6 +1,6 @@
 import { sognaflowValue, spring, stagger } from "sognaflow-dom"
 import { Easing } from "sognaflow-utils"
-import { createAnimationsFromSequence } from "../create"
+import { createAnimationsFromSequence } from "../create.js"
 
 describe("createAnimationsFromSequence", () => {
     const a = document.createElement("div")

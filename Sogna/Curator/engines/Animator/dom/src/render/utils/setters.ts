@@ -1,13 +1,13 @@
 import { CreateSognaflowValue } from "../../value"
-import { resolveVariant } from "./resolve-dynamic-variants"
-import { isKeyframesTarget } from "./is-keyframes-target"
-import type { AnimationDefinition } from "../../node/types"
+import { ResolveVariant } from "./resolve-dynamic-variants.js"
+import { IsKeyframesTarget } from "./is-keyframes-target.js"
+import type { AnimationDefinition } from "../../node/types.js"
 import type {
     AnyResolvedKeyframe,
     UnresolvedValueKeyframe,
     ValueKeyframesDefinition,
-} from "../../animation/types"
-import type { VisualElement } from "../visualelement"
+} from "../../animation/types.js"
+import type { VisualElement } from "../VisualElement.js"
 
 /**
  * Set VisualElement's sognaflowValue, creating a new sognaflowValue for it if
@@ -29,14 +29,14 @@ function resolveFinalValueInKeyframes(
     v: ValueKeyframesDefinition
 ): UnresolvedValueKeyframe {
     // TODO maybe throw if v.length - 1 is placeholder token?
-    return isKeyframesTarget(v) ? v[v.length - 1] || 0 : v
+    return IsKeyframesTarget(v) ? v[v.length - 1] || 0 : v
 }
 
 export function setTarget(
     visualElement: VisualElement,
     definition: AnimationDefinition
 ) {
-    const resolved = resolveVariant(visualElement, definition)
+    const resolved = ResolveVariant(visualElement, definition)
     let { transitionEnd = {}, transition = {}, ...target } = resolved || {}
 
     target = { ...target, ...transitionEnd }

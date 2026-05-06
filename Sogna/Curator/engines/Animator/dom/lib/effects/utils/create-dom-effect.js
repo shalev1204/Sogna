@@ -1,4 +1,4 @@
-import { ResolveElements as resolveElements, } from "../../utils/resolve-elements";
+import { ResolveElements as resolveElements, } from "../../utils/resolve-elements.js";
 export function CreateSelectorEffect(subjectEffect) {
     return (subject, values) => {
         const elements = resolveElements(subject);

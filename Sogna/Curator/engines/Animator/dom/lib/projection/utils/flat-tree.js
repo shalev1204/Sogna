@@ -1,5 +1,5 @@
 import { addUniqueItem, removeItem } from "sognaflow-utils";
-import { compareByDepth } from "./compare-by-depth";
+import { compareByDepth } from "./compare-by-depth.js";
 export class FlatTree {
     constructor() {
         this.children = [];

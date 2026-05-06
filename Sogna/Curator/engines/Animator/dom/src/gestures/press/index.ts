@@ -1,14 +1,14 @@
-import { isHTMLElement } from "../../utils/is-html-element"
-import { ElementOrSelector } from "../../utils/resolve-elements"
-import { isDragActive } from "../drag/state/is-active"
-import { EventOptions } from "../types"
-import { isNodeOrChild } from "../utils/is-node-or-child"
-import { isPrimaryPointer } from "../utils/is-primary-pointer"
-import { setupGesture } from "../utils/setup"
-import { OnPressStartEvent } from "./types"
-import { isElementKeyboardAccessible } from "./utils/is-keyboard-accessible"
-import { enableKeyboardPress } from "./utils/keyboard"
-import { isPressing } from "./utils/state"
+import { IsHTMLElement } from "../../utils/is-html-element.js"
+import { ElementOrSelector } from "../../utils/resolve-elements.js"
+import { isDragActive } from "../drag/state/is-active.js"
+import { EventOptions } from "../types.js"
+import { isNodeOrChild } from "../utils/is-node-or-child.js"
+import { isPrimaryPointer } from "../utils/is-primary-pointer.js"
+import { setupGesture } from "../utils/setup.js"
+import { OnPressStartEvent } from "./types.js"
+import { isElementKeyboardAccessible } from "./utils/is-keyboard-accessible.js"
+import { enableKeyboardPress } from "./utils/keyboard.js"
+import { isPressing } from "./utils/state.js"
 
 /**
  * Filter out events that are not primary pointer events, or are triggering
@@ -111,7 +111,7 @@ export function press(
             eventOptions
         )
 
-        if (isHTMLElement(target)) {
+        if (IsHTMLElement(target)) {
             target.addEventListener("focus", (event) =>
                 enableKeyboardPress(event as FocusEvent, eventOptions)
             )

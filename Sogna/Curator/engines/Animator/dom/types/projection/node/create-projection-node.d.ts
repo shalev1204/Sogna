@@ -1,13 +1,13 @@
 import { Axis, AxisDelta, Box, Delta, Point, SubscriptionManager } from "sognaflow-utils";
-import { JSAnimation } from "../../animation/jsanimation";
-import { Transition, ValueAnimationOptions } from "../../animation/types";
-import type { Process } from "../../frameloop/types";
-import type { ResolvedValues } from "../../render/types";
-import type { SognaflowStyle } from "../../render/visualelement";
+import { JSAnimation } from "../../animation/jsanimation.js";
+import { Transition, ValueAnimationOptions } from "../../animation/types.js";
+import type { Process } from "../../frameloop/types.js";
+import type { ResolvedValues } from "../../render/types.js";
+import type { SognaflowStyle } from "../../render/visualelement.js";
 import { SognaflowValue } from "../../value";
-import { NodeStack } from "../shared/stack";
-import { FlatTree } from "../utils/flat-tree";
-import { IProjectionNode, LayoutEvents, Measurements, Phase, ProjectionNodeConfig, ProjectionNodeOptions, ScrollMeasurements } from "./types";
+import { NodeStack } from "../shared/stack.js";
+import { FlatTree } from "../utils/flat-tree.js";
+import { IProjectionNode, LayoutEvents, Measurements, Phase, ProjectionNodeConfig, ProjectionNodeOptions, ScrollMeasurements } from "./types.js";
 export declare function CreateProjectionNode<I>({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform, }: ProjectionNodeConfig<I>): {
     new (latestValues?: ResolvedValues, parent?: IProjectionNode | undefined): {
         /**

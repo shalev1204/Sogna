@@ -1,6 +1,6 @@
 import { getFeatureDefinitions, setFeatureDefinitions } from "sognaflow-dom"
-import { sognaflowProps } from "../types"
-import { FeatureDefinitions } from "./types"
+import { sognaflowProps } from "../types.js"
+import { FeatureDefinitions } from "./types.js"
 
 const featureProps = {
     animation: [

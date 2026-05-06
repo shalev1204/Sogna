@@ -1,5 +1,5 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils"
-import { FrameData } from "./frame"
+import { FrameDataInstance } from "./frame.js"
 
 let now: number | undefined
 
@@ -19,8 +19,8 @@ export const Time = {
     now: (): number => {
         if (now === undefined) {
             Time.set(
-                FrameData.isProcessing || sognaflowGlobalConfig.useManualTiming
-                    ? FrameData.timestamp
+                FrameDataInstance.isProcessing || sognaflowGlobalConfig.useManualTiming
+                    ? FrameDataInstance.timestamp
                     : performance.now()
             )
         }

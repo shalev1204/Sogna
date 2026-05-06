@@ -1,6 +1,6 @@
-import { createProjectionNode } from "./create-projection-node"
-import { DocumentProjectionNode } from "./documentprojectionnode"
-import { IProjectionNode } from "./types"
+import { createProjectionNode } from "./create-projection-node.js"
+import { DocumentProjectionNode } from "./DocumentProjectionNode.js"
+import { IProjectionNode } from "./types.js"
 
 export const rootProjectionNode: { current: IProjectionNode | undefined } = {
     current: undefined,

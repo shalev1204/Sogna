@@ -1,12 +1,12 @@
 import { clamp } from "sognaflow-utils"
-import { alpha as alphaType, number } from "../numbers"
-import { RGBA } from "../types"
-import { sanitize } from "../utils/sanitize"
-import { isColorString, splitColor } from "./utils"
+import { Alpha as alphaType, NumberType } from "../numbers"
+import { RGBA } from "../types.js"
+import { sanitize } from "../utils/sanitize.js"
+import { isColorString, splitColor } from "./utils.js"
 
 const clampRgbUnit = (v: number) => clamp(0, 255, v)
 export const RgbUnit = {
-    ...number,
+    ...NumberType,
     transform: (v: number) => Math.round(clampRgbUnit(v)),
 }
 

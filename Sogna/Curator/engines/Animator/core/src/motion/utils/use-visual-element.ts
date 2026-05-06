@@ -8,21 +8,21 @@ import {
 } from "sognaflow-dom"
 import * as React from "react"
 import { useContext, useEffect, useInsertionEffect, useRef } from "react"
-import { LazyContext } from "../../context/lazycontext"
+import { LazyContext } from "../../context/LazyContext.js"
 import { sognaflowConfigContext } from "../../context/sognaflowconfigcontext"
 import { sognaflowContext } from "../../context/sognaflowcontext"
-import { PresenceContext } from "../../context/presencecontext"
+import { PresenceContext } from "../../context/PresenceContext.js"
 import {
     InitialProsognaflowConfig,
     SwitchLayoutGroupContext,
-} from "../../context/switchlayoutgroupcontext"
+} from "../../context/SwitchLayoutGroupContext.js"
 import { sognaflowProps } from "../../sognaflow/types"
 import type { IProjectionNode } from "sognaflow-dom"
-import { DOMsognaflowComponents } from "../../render/dom/types"
-import { CreateVisualElement } from "../../render/types"
-import { isRefObject } from "../../utils/is-ref-object"
-import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect"
-import { VisualState } from "./use-visual-state"
+import { DOMsognaflowComponents } from "../../render/dom/types.js"
+import { CreateVisualElement } from "../../render/types.js"
+import { isRefObject } from "../../utils/is-ref-object.js"
+import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect.js"
+import { VisualState } from "./use-visual-state.js"
 
 export function useVisualElement<
     Props,

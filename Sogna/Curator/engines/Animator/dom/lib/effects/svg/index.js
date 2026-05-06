@@ -2,8 +2,8 @@ import { Frame as frame } from "../../frameloop";
 import { SognaflowValue } from "../../value";
 import { AddAttrValue as addAttrValue } from "../attr";
 import { AddStyleValue as addStyleValue } from "../style";
-import { CreateSelectorEffect as createSelectorEffect } from "../utils/create-dom-effect";
-import { CreateEffect as createEffect } from "../utils/create-effect";
+import { CreateSelectorEffect as createSelectorEffect } from "../utils/create-dom-effect.js";
+import { CreateEffect as createEffect } from "../utils/create-effect.js";
 function AddSVGPathValue(element, state, key, value) {
     frame.render(() => element.setAttribute("pathLength", "1"));
     if (key === "pathOffset") {

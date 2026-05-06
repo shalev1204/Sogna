@@ -1,4 +1,4 @@
-import { DockerSandbox } from '../src/core/dockersandbox.js';
+import { DockerSandbox } from '../src/core/DockerSandbox.js';
 import chalk from 'chalk';
 
 async function testSandbox() {

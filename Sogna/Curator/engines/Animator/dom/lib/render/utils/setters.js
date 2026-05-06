@@ -1,6 +1,6 @@
 import { CreateSognaflowValue } from "../../value";
-import { ResolveVariant } from "./resolve-dynamic-variants";
-import { IsKeyframesTarget } from "./is-keyframes-target";
+import { ResolveVariant } from "./resolve-dynamic-variants.js";
+import { IsKeyframesTarget } from "./is-keyframes-target.js";
 /**
  * Set VisualElement's sognaflowValue, creating a new sognaflowValue for it if
  * it doesn't exist.

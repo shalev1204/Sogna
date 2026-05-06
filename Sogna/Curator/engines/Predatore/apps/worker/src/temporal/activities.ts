@@ -1,4 +1,4 @@
-// @sentinel-ignore: GLOBAL - [SECURITY CERTIFIED] Authorized preflight DNS lookup for reachability verification of user-provided targets.
+// @Sentinel-ignore: GLOBAL - [SECURITY CERTIFIED] Authorized preflight DNS lookup for reachability verification of user-provided targets.
 // Copyright (C) 2025 Sogna, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
@@ -49,7 +49,7 @@ const MAX_STACK_TRACE_LENGTH = 1000;
 const MAX_OUTPUT_VALIDATION_RETRIES = 3;
 
 const HEARTBEAT_INTERVAL_MS = 2000;
-// @sentinel-ignore: GLOBAL - [SECURITY CERTIFIED] Authorized Temporal heartbeat loop with safe static interval.
+// @Sentinel-ignore: GLOBAL - [SECURITY CERTIFIED] Authorized Temporal heartbeat loop with safe static interval.
 
 
 /**
@@ -116,7 +116,7 @@ function buildSessionMetadata(input: ActivityInput): SessionMetadata {
 function buildContainerConfig(input: ActivityInput): ContainerConfig {
   return {
     deliverablesSubdir: input.deliverablesSubdir ?? DEFAULT_DELIVERABLES_SUBDIR,
-    auditDir: input.auditDir ?? './workspaces',
+    auditDir: input.auditDir ?? './workspaces.js',
     ...(input.apiKey !== undefined && { apiKey: input.apiKey }),
     ...(input.promptDir !== undefined && { promptDir: input.promptDir }),
     ...(input.providerConfig !== undefined && { providerConfig: input.providerConfig }),
@@ -398,7 +398,7 @@ export async function assembleReportActivity(input: ActivityInput): Promise<void
 export async function injectReportMetadataActivity(input: ActivityInput): Promise<void> {
   const { repoPath, sessionId, outputPath } = input;
   const logger = createActivityLogger();
-  const effectiveOutputPath = outputPath ? path.join(outputPath, sessionId) : path.join('./workspaces', sessionId);
+  const effectiveOutputPath = outputPath ? path.join(outputPath, sessionId) : path.join('./workspaces.js', sessionId);
   try {
     await injectModelIntoReport(repoPath, effectiveOutputPath, logger);
   } catch (error) {
@@ -455,7 +455,7 @@ export async function loadResumeState(
   deliverablesSubdir?: string,
 ): Promise<ResumeState> {
   // 1. Validate workspace exists
-  const sessionPath = path.join('./workspaces', workspaceName, 'session.json');
+  const sessionPath = path.join('./workspaces.js', workspaceName, 'session.json');
 
   const exists = await fileExists(sessionPath);
   if (!exists) {

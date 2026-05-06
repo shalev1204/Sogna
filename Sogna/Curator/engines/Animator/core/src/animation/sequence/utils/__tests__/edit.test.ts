@@ -1,5 +1,5 @@
-import { ValueSequence } from "../../types"
-import { addKeyframes, eraseKeyframes } from "../edit"
+import { ValueSequence } from "../../types.js"
+import { addKeyframes, eraseKeyframes } from "../edit.js"
 
 describe("eraseKeyframes", () => {
     test("Erase keyframes between the specified time range", () => {

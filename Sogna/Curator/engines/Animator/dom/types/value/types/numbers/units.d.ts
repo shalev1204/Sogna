@@ -1,4 +1,4 @@
-import { AnyResolvedKeyframe } from "../../../animation/types";
+import { AnyResolvedKeyframe } from "../../../animation/types.js";
 export declare const Degrees: {
     test: (v: AnyResolvedKeyframe) => boolean;
     parse: typeof parseFloat;

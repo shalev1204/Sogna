@@ -1,6 +1,6 @@
-import { RGBA } from "../types"
-import { Rgba } from "./rgba"
-import { isColorString } from "./utils"
+import { RGBA } from "../types.js"
+import { Rgba } from "./rgba.js"
+import { isColorString } from "./utils.js"
 
 function ParseHex(v: string): RGBA {
     let r = ""

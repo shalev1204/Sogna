@@ -1,8 +1,8 @@
-import { AnyResolvedKeyframe } from "../animation/types"
-import { cancelFrame, frame } from "../frameloop/frame"
+import { AnyResolvedKeyframe } from "../animation/types.js"
+import { CancelFrame, Frame } from "../frameloop/frame.js"
 import { SognaflowValue } from "../value"
-import { numberValueTypes } from "../value/types/maps/number"
-import { getValueAsType } from "../value/types/utils/get-as-type"
+import { NumberValueTypes } from "../value/types/maps/number.js"
+import { getValueAsType } from "../value/types/utils/get-as-type.js"
 
 export class SognaflowValueState {
     latest: { [name: string]: AnyResolvedKeyframe } = {}
@@ -29,12 +29,12 @@ export class SognaflowValueState {
             const v = value.get()
 
             if (useDefaultValueType) {
-                this.latest[name] = getValueAsType(v, numberValueTypes[name])
+                this.latest[name] = getValueAsType(v, NumberValueTypes[name])
             } else {
                 this.latest[name] = v
             }
 
-            render && frame.render(render)
+            render && Frame.render(render)
         }
 
         onChange()
@@ -45,7 +45,7 @@ export class SognaflowValueState {
 
         const remove = () => {
             cancelOnChange()
-            render && cancelFrame(render)
+            render && CancelFrame(render)
             this.values.delete(name)
             computed && value.removeDependent(computed)
         }

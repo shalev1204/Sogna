@@ -1,6 +1,6 @@
-import { wrap } from "../../wrap"
-import { Easing } from "../types"
-import { isEasingArray } from "./is-easing-array"
+import { wrap } from "../../wrap.js"
+import { Easing } from "../types.js"
+import { isEasingArray } from "./is-easing-array.js"
 
 export function getEasingForSegment(
     easing: Easing | Easing[],

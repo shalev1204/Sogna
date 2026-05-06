@@ -1,5 +1,5 @@
 import { SognaflowValue } from ".";
-import { AnyResolvedKeyframe, SpringOptions } from "../animation/types";
+import { AnyResolvedKeyframe, SpringOptions } from "../animation/types.js";
 /**
  * Create a `SognaflowValue` that animates to its latest value using a spring.
  * Can either be a value or track another `SognaflowValue`.

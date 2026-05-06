@@ -2,8 +2,8 @@ import { warnOnce } from "sognaflow-utils"
 import { createsognaflowComponent, sognaflowComponentOptions } from "../../sognaflow"
 import { FeaturePackages } from "../../sognaflow/features/types"
 import { sognaflowProps } from "../../sognaflow/types"
-import { DOMsognaflowComponents } from "../dom/types"
-import { CreateVisualElement } from "../types"
+import { DOMsognaflowComponents } from "../dom/types.js"
+import { CreateVisualElement } from "../types.js"
 
 /**
  * I'd rather the return type of `custom` to be implicit but this throws

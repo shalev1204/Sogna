@@ -1,8 +1,8 @@
 import { renderHook } from "@testing-library/react"
 import { act, useEffect, useState } from "react"
 import { sognaflow, sognaflowGlobalConfig, sognaflowValue } from "../.."
-import { render } from "../../jest.setup"
-import { useInstantTransition } from "../use-instant-transition"
+import { render } from "../../jest.setup.js"
+import { useInstantTransition } from "../use-instant-transition.js"
 
 describe("useInstantTransition", () => {
     test("Disables animations for a single render", async () => {

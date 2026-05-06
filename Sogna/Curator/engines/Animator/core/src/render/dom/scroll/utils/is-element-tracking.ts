@@ -1,4 +1,4 @@
-import { ScrollOptionsWithDefaults } from "../types"
+import { ScrollOptionsWithDefaults } from "../types.js"
 
 /**
  * Currently, we only support element tracking with `scrollInfo`, though in

@@ -1,5 +1,5 @@
-import { inertia } from "../inertia"
-import { pregenerateKeyframes } from "../utils/pregenerate"
+import { inertia } from "../inertia.js"
+import { pregenerateKeyframes } from "../utils/pregenerate.js"
 
 describe("inertia", () => {
     test("Runs animations with default values ", () => {

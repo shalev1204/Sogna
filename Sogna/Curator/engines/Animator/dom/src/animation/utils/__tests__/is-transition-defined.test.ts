@@ -1,4 +1,4 @@
-import { isTransitionDefined } from "../is-transition-defined"
+import { isTransitionDefined } from "../is-transition-defined.js"
 
 describe("isTransitionDefined", () => {
     test("Detects a transition", () => {

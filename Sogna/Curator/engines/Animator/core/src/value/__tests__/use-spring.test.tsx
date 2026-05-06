@@ -1,10 +1,10 @@
 import { sognaflowValue, sognaflowValue } from "sognaflow-dom"
 import { useEffect } from "react"
 import { sognaflow, usesognaflowValueEvent } from "../../"
-import { syncDriver } from "../../animation/animators/__tests__/utils"
-import { render } from "../../jest.setup"
+import { syncDriver } from "../../animation/animators/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 import { usesognaflowValue } from "../use-sognaflow-value"
-import { useSpring } from "../use-spring"
+import { useSpring } from "../use-spring.js"
 
 describe("useSpring types", () => {
     test("can create a sognaflow value from a number", async () => {

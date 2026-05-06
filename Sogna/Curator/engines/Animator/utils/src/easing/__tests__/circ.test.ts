@@ -1,4 +1,4 @@
-import { circIn, circOut, circInOut } from "../circ"
+import { circIn, circOut, circInOut } from "../circ.js"
 
 describe("circ easing", () => {
     test("circInOut is correct", () => {

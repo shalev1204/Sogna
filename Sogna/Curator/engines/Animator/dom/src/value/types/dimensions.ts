@@ -1,7 +1,7 @@
-import { Auto } from "./auto"
+import { Auto } from "./auto.js"
 import { NumberType } from "./numbers"
-import { Degrees, Percent, Px, Vh, Vw } from "./numbers/units"
-import { TestValueType } from "./test"
+import { Degrees, Percent, Px, Vh, Vw } from "./numbers/units.js"
+import { TestValueType } from "./test.js"
 
 /**
  * A list of value types commonly used for dimensions

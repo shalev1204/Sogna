@@ -1,4 +1,4 @@
-import { AttachFollow, FollowValue } from "./follow-value";
+import { AttachFollow, FollowValue } from "./follow-value.js";
 /**
  * Create a `SognaflowValue` that animates to its latest value using a spring.
  * Can either be a value or track another `SognaflowValue`.

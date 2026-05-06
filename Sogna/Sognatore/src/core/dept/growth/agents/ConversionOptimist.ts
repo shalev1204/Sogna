@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { GrowthSkillRegistry } from '../skills/growthskillregistry.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { GrowthSkillRegistry } from '../skills/GrowthSkillRegistry.js';
 import path from 'path';
 
 export class ConversionOptimist implements Agent {

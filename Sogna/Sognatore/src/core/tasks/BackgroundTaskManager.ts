@@ -1,5 +1,5 @@
 import { execa, ExecaChildProcess } from 'execa';
-import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/curator';
+import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
 import chalk from 'chalk';
 
 export interface TaskPacket {

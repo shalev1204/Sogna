@@ -1,6 +1,6 @@
 import { CreateSognaflowValue } from "../../"
 import { frame } from "../../frameloop"
-import { TransformValue } from "../transform-value"
+import { TransformValue } from "../transform-value.js"
 
 async function nextFrame() {
     return new Promise<void>((resolve) => {

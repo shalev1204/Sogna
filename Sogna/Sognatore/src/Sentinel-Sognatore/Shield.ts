@@ -1,6 +1,6 @@
-import { Engine } from './engine.js';
-import { Hub, SecurityState } from './hub.js';
-import { PermissionMode, ValidationResult } from './securitytypes.js';
+import { Engine } from './Engine.js';
+import { Hub, SecurityState } from './Hub.js';
+import { PermissionMode, ValidationResult } from './SecurityTypes.js';
 
 /**
  * Sentinel Shield - Terminal enforcement part of the Sentinel-Sognatore block.

@@ -1,10 +1,10 @@
-import { SwarmBase } from '../../swarms/swarmbase.js';
-import { SecuritySentinel } from './agents/securitysentinel.js';
-import { DefenseArchitect } from './agents/defensearchitect.js';
-import { InfectionController } from './agents/infectioncontroller.js';
-import { PrivacyGuardian } from './agents/privacyguardian.js';
-import { ProtectionOrchestrator } from './agents/protectionorchestrator.js';
-import { ProtectionKPITracker } from './metrics/protectionkpitracker.js';
+import { SwarmBase } from '../../swarms/SwarmBase.js';
+import { SecuritySentinel } from './agents/SecuritySentinel.js';
+import { DefenseArchitect } from './agents/DefenseArchitect.js';
+import { InfectionController } from './agents/InfectionController.js';
+import { PrivacyGuardian } from './agents/PrivacyGuardian.js';
+import { ProtectionOrchestrator } from './agents/ProtectionOrchestrator.js';
+import { ProtectionKPITracker } from './metrics/ProtectionKPITracker.js';
 
 export class ProtectionSwarm extends SwarmBase {
     private sentinel = new SecuritySentinel();

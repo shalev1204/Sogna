@@ -1,5 +1,5 @@
-import { createHtmlRenderState } from "../../html/utils/create-render-state"
-import { SVGRenderState } from "../types"
+import { createHtmlRenderState } from "../../html/utils/create-render-state.js"
+import { SVGRenderState } from "../types.js"
 
 export const createSvgRenderState = (): SVGRenderState => ({
     ...createHtmlRenderState(),

@@ -1,4 +1,4 @@
-import { AbsoluteKeyframe } from "../types"
+import { AbsoluteKeyframe } from "../types.js"
 
 export function compareByTime(
     a: AbsoluteKeyframe,

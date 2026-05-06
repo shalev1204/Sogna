@@ -1,4 +1,4 @@
-import { Todo } from '../api/todos';
+import { Todo } from '../api/todos.js';
 
 interface TodoItemProps {
   todo: Todo;

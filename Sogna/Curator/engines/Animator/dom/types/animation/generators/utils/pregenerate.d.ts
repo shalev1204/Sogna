@@ -1,4 +1,4 @@
-import { AnyResolvedKeyframe, KeyframeGenerator } from "../../types";
+import { AnyResolvedKeyframe, KeyframeGenerator } from "../../types.js";
 export interface KeyframesMetadata {
     keyframes: Array<AnyResolvedKeyframe>;
     duration: number;

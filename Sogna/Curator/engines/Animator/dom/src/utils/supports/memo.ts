@@ -1,5 +1,5 @@
 import { memo } from "sognaflow-utils"
-import { supportsFlags } from "./flags"
+import { supportsFlags } from "./flags.js"
 
 export function memoSupports<T extends any>(
     callback: () => T,

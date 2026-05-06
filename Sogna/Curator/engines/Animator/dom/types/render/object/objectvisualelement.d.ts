@@ -1,5 +1,5 @@
-import { ResolvedValues } from "../types";
-import { VisualElement } from "../visualelement";
+import { ResolvedValues } from "../types.js";
+import { VisualElement } from "../visualelement.js";
 interface ObjectRenderState {
     output: ResolvedValues;
 }

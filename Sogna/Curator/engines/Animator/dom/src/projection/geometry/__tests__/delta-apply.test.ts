@@ -1,4 +1,4 @@
-import { scalePoint, applyPointDelta, applyAxisDelta, transformBox } from "../delta-apply"
+import { scalePoint, applyPointDelta, applyAxisDelta, transformBox } from "../delta-apply.js"
 
 describe("scalePoint", () => {
     test("correctly scales a point based on a factor and an originPoint", () => {

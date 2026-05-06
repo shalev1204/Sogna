@@ -1,6 +1,6 @@
-import type { Batcher } from "../../frameloop/types"
+import type { Batcher } from "../../frameloop/types.js"
 import type { SognaflowValue } from "../../value"
-import { optimizedAppearDataAttribute } from "./data-id"
+import { OptimizedAppearDataAttribute } from "./data-id.js"
 
 /**
  * Expose only the needed part of the VisualElement interface to
@@ -8,7 +8,7 @@ import { optimizedAppearDataAttribute } from "./data-id"
  */
 export interface WithAppearProps {
     props: {
-        [optimizedAppearDataAttribute]?: string
+        [OptimizedAppearDataAttribute]?: string
         values?: {
             [key: string]: SognaflowValue<number> | SognaflowValue<string>
         }

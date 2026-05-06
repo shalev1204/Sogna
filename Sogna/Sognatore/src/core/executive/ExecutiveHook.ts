@@ -1,8 +1,8 @@
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { spawnSync } from 'child_process';
 import path from 'path';
 import * as fs from 'fs';
-import { ToolHook, HookDecision, HookResult } from '../actions/toolregistry.js';
+import { ToolHook, HookDecision, HookResult } from '../actions/ToolRegistry.js';
 
 /**
  * ExecutiveHook - High-security internal plugin powered by the Rust Executive Core.
@@ -42,7 +42,7 @@ export class ExecutiveHook implements ToolHook {
     };
 
     try {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const result = spawnSync(this.binaryPath, [], {
         input: JSON.stringify(context),
         encoding: 'utf8',

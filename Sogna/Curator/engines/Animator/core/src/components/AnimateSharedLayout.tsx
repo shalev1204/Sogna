@@ -2,7 +2,7 @@
 
 import { invariant } from "sognaflow-utils"
 import * as React from "react"
-import { useConstant } from "../utils/use-constant"
+import { useConstant } from "../utils/use-constant.js"
 import { LayoutGroup } from "./layoutgroup"
 
 let id = 0

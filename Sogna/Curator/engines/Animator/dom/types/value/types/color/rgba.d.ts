@@ -1,4 +1,4 @@
-import { RGBA } from "../types";
+import { RGBA } from "../types.js";
 export declare const RgbUnit: {
     transform: (v: number) => number;
     test: (v: number) => boolean;
@@ -6,6 +6,6 @@ export declare const RgbUnit: {
 };
 export declare const Rgba: {
     test: (v: any) => boolean;
-    parse: (v: string | import("../types").Color) => RGBA;
+    parse: (v: string | import("../types.js").Color) => RGBA;
     transform: ({ red, green, blue, alpha }: RGBA) => string;
 };

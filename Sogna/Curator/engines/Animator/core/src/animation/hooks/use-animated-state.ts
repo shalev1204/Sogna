@@ -9,7 +9,7 @@ import {
 } from "sognaflow-dom"
 import { useLayoutEffect, useState } from "react"
 import { makeUseVisualState } from "../../sognaflow/utils/use-visual-state"
-import { useConstant } from "../../utils/use-constant"
+import { useConstant } from "../../utils/use-constant.js"
 
 interface AnimatedStateOptions {
     initialState: ResolvedValues

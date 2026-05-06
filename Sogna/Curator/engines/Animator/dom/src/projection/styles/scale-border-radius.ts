@@ -1,6 +1,6 @@
-import { px } from "../../value/types/numbers/units"
+import { Px } from "../../value/types/numbers/units.js"
 import type { Axis } from "sognaflow-utils"
-import type { ScaleCorrectorDefinition } from "./types"
+import type { ScaleCorrectorDefinition } from "./types.js"
 
 export function pixelsToPercent(pixels: number, axis: Axis): number {
     if (axis.max === axis.min) return 0
@@ -23,7 +23,7 @@ export const correctBorderRadius: ScaleCorrectorDefinition = {
          * going to be stretched appropriately. Otherwise, if it's a pixel, convert it to a number.
          */
         if (typeof latest === "string") {
-            if (px.test(latest)) {
+            if (Px.test(latest)) {
                 latest = parseFloat(latest)
             } else {
                 return latest

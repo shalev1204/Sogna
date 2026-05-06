@@ -1,4 +1,4 @@
-import { StepId } from "./types"
+import { StepId } from "./types.js"
 
 export const StepsOrder: StepId[] = [
     "setup", // Compute

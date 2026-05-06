@@ -1,4 +1,4 @@
-import { mixArray } from "../complex"
+import { mixArray } from "../complex.js"
 
 test("mixArray", () => {
     const a = [0, "100px 0px", "#fff"]

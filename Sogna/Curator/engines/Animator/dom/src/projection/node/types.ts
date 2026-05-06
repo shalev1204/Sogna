@@ -1,10 +1,10 @@
-import type { JSAnimation } from "../../animation/jsanimation"
-import type { Transition, ValueTransition } from "../../animation/types"
-import type { ResolvedValues } from "../../render/types"
-import type { VisualElement, SognaflowStyle } from "../../render/visualelement"
+import type { JSAnimation } from "../../animation/JSAnimation.js"
+import type { Transition, ValueTransition } from "../../animation/types.js"
+import type { ResolvedValues } from "../../render/types.js"
+import type { VisualElement, SognaflowStyle } from "../../render/VisualElement.js"
 import { Box, Delta, Point } from "sognaflow-utils"
-import { FlatTree } from "../utils/flat-tree"
-import { NodeStack } from "../shared/stack"
+import { FlatTree } from "../utils/flat-tree.js"
+import { NodeStack } from "../shared/stack.js"
 
 export interface Measurements {
     animationId: number

@@ -1,6 +1,6 @@
 "use client"
 
-import { createMinimalsognaflowComponent } from "./create"
+import { createMinimalsognaflowComponent } from "./create.js"
 
 /**
  * HTML components

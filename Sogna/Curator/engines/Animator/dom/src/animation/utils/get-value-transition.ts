@@ -1,4 +1,4 @@
-import { ResolveTransition } from "./resolve-transition"
+import { ResolveTransition } from "./resolve-transition.js"
 
 export function GetValueTransition(transition: any, key: string) {
     const valueTransition =

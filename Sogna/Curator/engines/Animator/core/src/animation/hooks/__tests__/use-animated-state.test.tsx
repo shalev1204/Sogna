@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import { render } from "../../../jest.setup"
-import { useAnimatedState } from "../use-animated-state"
+import { render } from "../../../jest.setup.js"
+import { useAnimatedState } from "../use-animated-state.js"
 
 describe("useAnimatedState", () => {
     test("animates values", async () => {

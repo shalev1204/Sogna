@@ -1,8 +1,8 @@
-import type { SognaflowStyle } from "../../visualelement"
-import { camelToDash } from "../../dom/utils/camel-to-dash"
-import { renderHTML } from "../../html/utils/render"
-import { SVGRenderState } from "../types"
-import { camelCaseAttributes } from "./camel-case-attrs"
+import type { SognaflowStyle } from "../../VisualElement.js"
+import { camelToDash } from "../../dom/utils/camel-to-dash.js"
+import { renderHTML } from "../../html/utils/render.js"
+import { SVGRenderState } from "../types.js"
+import { camelCaseAttributes } from "./camel-case-attrs.js"
 
 export function renderSVG(
     element: SVGElement,

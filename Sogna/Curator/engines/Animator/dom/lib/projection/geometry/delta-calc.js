@@ -1,4 +1,4 @@
-import { MixNumber as mixNumber } from "../../utils/mix/number";
+import { MixNumber as mixNumber } from "../../utils/mix/number.js";
 const SCALE_PRECISION = 0.0001;
 const SCALE_MIN = 1 - SCALE_PRECISION;
 const SCALE_MAX = 1 + SCALE_PRECISION;

@@ -1,5 +1,5 @@
-import { MemoryHub, MemoryResult } from '../memory/memoryhub.js';
-import { Chronicler } from '../memory/chronicler.js';
+import { MemoryHub, MemoryResult } from '../memory/MemoryHub.js';
+import { Chronicler } from '../memory/Chronicler.js';
 
 export interface SwarmAssignment {
   targetAgent: string;

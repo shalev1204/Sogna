@@ -1,4 +1,4 @@
-import { AnimationPlaybackControls, TimelineWithFallback } from "./types";
+import { AnimationPlaybackControls, TimelineWithFallback } from "./types.js";
 export type AcceptedAnimations = AnimationPlaybackControls;
 export type GroupedAnimations = AcceptedAnimations[];
 export declare class GroupAnimation implements AnimationPlaybackControls {

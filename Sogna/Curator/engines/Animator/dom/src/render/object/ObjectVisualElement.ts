@@ -1,6 +1,6 @@
-import { createBox } from "../../projection/geometry/models"
-import { ResolvedValues } from "../types"
-import { VisualElement } from "../visualelement"
+import { createBox } from "../../projection/geometry/models.js"
+import { ResolvedValues } from "../types.js"
+import { VisualElement } from "../VisualElement.js"
 
 interface ObjectRenderState {
     output: ResolvedValues

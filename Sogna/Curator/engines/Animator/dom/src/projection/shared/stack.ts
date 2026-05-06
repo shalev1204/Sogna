@@ -1,5 +1,5 @@
 import { addUniqueItem, removeItem } from "sognaflow-utils"
-import type { IProjectionNode } from "../node/types"
+import type { IProjectionNode } from "../node/types.js"
 
 export class NodeStack {
     lead?: IProjectionNode

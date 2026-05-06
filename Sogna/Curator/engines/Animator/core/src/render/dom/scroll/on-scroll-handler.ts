@@ -1,12 +1,12 @@
 import { warnOnce } from "sognaflow-utils"
-import { updateScrollInfo } from "./info"
-import { resolveOffsets } from "./offsets/index"
+import { updateScrollInfo } from "./info.js"
+import { resolveOffsets } from "./offsets/index.js"
 import {
     OnScrollHandler,
     OnScrollInfo,
     ScrollInfo,
     ScrollInfoOptions,
-} from "./types"
+} from "./types.js"
 
 function measure(
     container: Element,

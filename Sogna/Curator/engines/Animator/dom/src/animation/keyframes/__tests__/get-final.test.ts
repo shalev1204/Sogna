@@ -1,4 +1,4 @@
-import { getFinalKeyframe } from "../get-final"
+import { getFinalKeyframe } from "../get-final.js"
 
 describe("getFinalKeyframe", () => {
     test("returns final keyframe", () => {

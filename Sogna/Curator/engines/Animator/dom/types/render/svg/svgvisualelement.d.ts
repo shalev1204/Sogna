@@ -1,11 +1,11 @@
-import type { AnyResolvedKeyframe } from "../../animation/types";
+import type { AnyResolvedKeyframe } from "../../animation/types.js";
 import type { SognaflowValue } from "../../value";
-import type { SognaflowNodeOptions } from "../../node/types";
-import { DOMVisualElement } from "../dom/domvisualelement";
-import type { DOMVisualElementOptions } from "../dom/types";
-import type { ResolvedValues } from "../types";
-import type { VisualElement, SognaflowStyle } from "../visualelement";
-import { SVGRenderState } from "./types";
+import type { SognaflowNodeOptions } from "../../node/types.js";
+import { DOMVisualElement } from "../dom/domvisualelement.js";
+import type { DOMVisualElementOptions } from "../dom/types.js";
+import type { ResolvedValues } from "../types.js";
+import type { VisualElement, SognaflowStyle } from "../visualelement.js";
+import { SVGRenderState } from "./types.js";
 export declare class SVGVisualElement extends DOMVisualElement<SVGElement, SVGRenderState, DOMVisualElementOptions> {
     type: string;
     isSVGTag: boolean;

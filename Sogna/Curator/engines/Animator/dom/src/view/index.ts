@@ -1,13 +1,13 @@
 import { noop } from "sognaflow-utils"
-import type { GroupAnimation } from "../animation/groupanimation"
-import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types"
-import { AddToQueue } from "./queue"
+import type { GroupAnimation } from "../animation/GroupAnimation.js"
+import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types.js"
+import { AddToQueue } from "./queue.js"
 import {
     ViewTransitionOptions,
     ViewTransitionTarget,
     ViewTransitionTargetDefinition,
-} from "./types"
-import "./types.global"
+} from "./types.js"
+import "./types.global.js"
 
 export class ViewTransitionBuilder {
     private currentSubject: ViewTransitionTargetDefinition = "root"

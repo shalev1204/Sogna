@@ -1,4 +1,4 @@
-import type { StatsRecording } from "./types";
+import type { StatsRecording } from "./types.js";
 export type InactiveStatsBuffer = {
     value: null;
     addProjectionMetrics: null;

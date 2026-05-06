@@ -1,10 +1,10 @@
-import { frame } from "../../frameloop"
+import { Frame } from "../../frameloop"
 import { SognaflowValue } from "../../value"
-import { addAttrValue } from "../attr"
-import { SognaflowValueState } from "../sognaflowvaluestate"
-import { addStyleValue } from "../style"
-import { createSelectorEffect } from "../utils/create-dom-effect"
-import { createEffect } from "../utils/create-effect"
+import { AddAttrValue } from "../attr"
+import { SognaflowValueState } from "../SognaflowValueState.js"
+import { AddStyleValue } from "../style"
+import { createSelectorEffect } from "../utils/create-dom-effect.js"
+import { createEffect } from "../utils/create-effect.js"
 
 function AddSVGPathValue(
     element: SVGElement,
@@ -12,7 +12,7 @@ function AddSVGPathValue(
     key: string,
     value: SognaflowValue
 ) {
-    frame.render(() => element.setAttribute("pathLength", "1"))
+    Frame.render(() => element.setAttribute("pathLength", "1"))
 
     if (key === "pathOffset") {
         return state.set(key, value, () => {
@@ -46,10 +46,10 @@ const AddSVGValue = (
     if (key.startsWith("path")) {
         return AddSVGPathValue(element, state, key, value)
     } else if (key.startsWith("attr")) {
-        return addAttrValue(element, state, convertAttrKey(key), value)
+        return AddAttrValue(element, state, convertAttrKey(key), value)
     }
 
-    const handler = key in element.style ? addStyleValue : addAttrValue
+    const handler = key in element.style ? AddStyleValue : AddAttrValue
     return handler(element, state, key, value)
 }
 

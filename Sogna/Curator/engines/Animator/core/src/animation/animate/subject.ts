@@ -14,13 +14,13 @@ import {
     visualElementStore,
 } from "sognaflow-dom"
 import { invariant } from "sognaflow-utils"
-import { ObjectTarget } from "../sequence/types"
+import { ObjectTarget } from "../sequence/types.js"
 import {
     createDOMVisualElement,
     createObjectVisualElement,
-} from "../utils/create-visual-element"
-import { isDOMKeyframes } from "../utils/is-dom-keyframes"
-import { resolveSubjects } from "./resolve-subjects"
+} from "../utils/create-visual-element.js"
+import { isDOMKeyframes } from "../utils/is-dom-keyframes.js"
+import { resolveSubjects } from "./resolve-subjects.js"
 import { animateSingleValue } from "sognaflow-dom"
 
 export type AnimationSubject = Element | sognaflowValue<any> | any

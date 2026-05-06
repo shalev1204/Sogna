@@ -1,6 +1,6 @@
 import { CancelFrame, Frame } from "../frameloop"
-import { Time } from "../frameloop/sync-time"
-import type { FrameData } from "../frameloop/types"
+import { Time } from "../frameloop/sync-time.js"
+import type { FrameData } from "../frameloop/types.js"
 import { secondsToMilliseconds } from "sognaflow-utils"
 
 export type DelayedFunction = (overshoot: number) => void

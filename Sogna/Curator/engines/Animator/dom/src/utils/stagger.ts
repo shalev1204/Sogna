@@ -1,5 +1,5 @@
 import { Easing, easingDefinitionToFunction } from "sognaflow-utils"
-import { DynamicOption } from "../animation/types"
+import { DynamicOption } from "../animation/types.js"
 
 export type StaggerOrigin = "first" | "last" | "center" | number
 

@@ -1,5 +1,5 @@
 import { frameData, time } from "../../"
-import { KeyframeGenerator } from "../types"
+import { KeyframeGenerator } from "../types.js"
 
 export const syncDriver = (interval = 10) => {
     time.set(0)

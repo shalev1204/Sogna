@@ -1,6 +1,6 @@
-import { AnyResolvedKeyframe } from "../../animation/types";
-import { ResolvedValues } from "../types";
-import { HTMLRenderState } from "../html/types";
+import { AnyResolvedKeyframe } from "../../animation/types.js";
+import { ResolvedValues } from "../types.js";
+import { HTMLRenderState } from "../html/types.js";
 export interface SVGRenderState extends HTMLRenderState {
     /**
      * A mutable record of attributes we want to apply directly to the rendered Element

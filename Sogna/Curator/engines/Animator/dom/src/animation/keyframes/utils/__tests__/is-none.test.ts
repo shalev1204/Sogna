@@ -1,4 +1,4 @@
-import { isNone } from "../is-none"
+import { isNone } from "../is-none.js"
 
 describe("isNone", () => {
     test("Detects zero/none values", () => {

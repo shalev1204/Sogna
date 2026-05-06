@@ -1,4 +1,4 @@
-import { RGBA } from "../types";
+import { RGBA } from "../types.js";
 declare function ParseHex(v: string): RGBA;
 export declare const Hex: {
     test: (v: any) => boolean;

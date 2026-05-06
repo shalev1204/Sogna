@@ -1,11 +1,11 @@
-import { transformPropOrder } from "../utils/keys-transform"
+import { TransformPropOrder } from "../utils/keys-transform.js"
 
 const radToDeg = (rad: number) => (rad * 180) / Math.PI
 
 type MatrixParser = (values: number[]) => number
 
 type MatrixParsers = Record<
-    (typeof transformPropOrder)[number],
+    (typeof TransformPropOrder)[number],
     number | MatrixParser
 >
 

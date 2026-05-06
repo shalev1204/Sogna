@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { AuditEntry, AuditFilter, AuditSummary } from './audittypes.js';
+import { AuditEntry, AuditFilter, AuditSummary } from './AuditTypes.js';
 
 const MAX_MEMORY_ENTRIES = 1000;
 const HASH_ALGO = 'sha256';

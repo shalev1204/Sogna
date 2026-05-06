@@ -1,5 +1,5 @@
 import { CreateSognaflowValue } from "../../value";
-import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value";
+import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value.js";
 /**
  * Updates sognaflow values from props changes.
  * Uses `any` type for element to avoid circular dependencies with VisualElement.

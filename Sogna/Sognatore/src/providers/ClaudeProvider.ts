@@ -1,4 +1,4 @@
-import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/provider.js';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
 import { execa } from 'execa';
 import path from 'path';
 import os from 'os';
@@ -28,9 +28,9 @@ export class ClaudeProvider extends Provider {
 
   async version(): Promise<string> {
     try {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const { execSync } = await import('child_process');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       return execSync('claude --version', { encoding: 'utf8' }).split('\n')[0];
     } catch {
       return 'unknown';
@@ -47,7 +47,7 @@ export class ClaudeProvider extends Provider {
     const model = this.resolveModelForTier(resolvedTier);
     
     // Security Enforcement: Before calling the external provider, we check our own Permission Proxy
-    const { PermissionProxy } = await import('../sentinel-sognatore/permissionproxy.js');
+    const { PermissionProxy } = await import('../Sentinel-Sognatore/PermissionProxy.js');
     const proxy = PermissionProxy.getInstance();
     const isAuthorized = await proxy.requestCapability('claude-provider', 'process:execute', `Invoke model ${model} with prompt length ${prompt.length}`);
     

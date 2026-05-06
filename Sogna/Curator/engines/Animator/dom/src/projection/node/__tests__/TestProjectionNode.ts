@@ -1,6 +1,6 @@
 import { Box } from "sognaflow-utils"
-import { createProjectionNode } from "../create-projection-node"
-import type { IProjectionNode, ProjectionNodeOptions } from "../types"
+import { createProjectionNode } from "../create-projection-node.js"
+import type { IProjectionNode, ProjectionNodeOptions } from "../types.js"
 
 let rootNode: IProjectionNode
 

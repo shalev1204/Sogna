@@ -31,7 +31,7 @@ export function resolveRepo(repoArg: string): MountPair {
       console.error('');
       console.error('Place your target repository under the ./repos/ directory,');
       console.error('or pass an absolute/relative path: -r /path/to/repo');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
   } else {
@@ -40,13 +40,13 @@ export function resolveRepo(repoArg: string): MountPair {
 
   if (!fs.existsSync(hostPath)) {
     console.error(`ERROR: Repository not found: ${hostPath}`);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   if (!fs.statSync(hostPath).isDirectory()) {
     console.error(`ERROR: Not a directory: ${hostPath}`);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -65,13 +65,13 @@ export function resolveConfig(configArg: string): MountPair {
 
   if (!fs.existsSync(hostPath)) {
     console.error(`ERROR: Config file not found: ${hostPath}`);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   if (!fs.statSync(hostPath).isFile()) {
     console.error(`ERROR: Not a file: ${hostPath}`);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 

@@ -6,8 +6,8 @@ import {
     pointerLeave,
     pointerUp,
     render,
-} from "../../jest.setup"
-import { nextFrame } from "./utils"
+} from "../../jest.setup.js"
+import { nextFrame } from "./utils.js"
 
 describe("hover", () => {
     test("hover event listeners fire", async () => {

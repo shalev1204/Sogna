@@ -1,5 +1,5 @@
 import { CancelFrame, Frame } from "../frameloop";
-import { Time } from "../frameloop/sync-time";
+import { Time } from "../frameloop/sync-time.js";
 import { secondsToMilliseconds } from "sognaflow-utils";
 /**
  * Timeout defined in ms

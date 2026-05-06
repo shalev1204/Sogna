@@ -1,4 +1,4 @@
-import { addUniqueItem, removeItem } from "../array"
+import { addUniqueItem, removeItem } from "../array.js"
 
 describe("addUniqueItem", () => {
     test("Only adds a new item if it isn't already in the array", () => {

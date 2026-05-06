@@ -1,4 +1,4 @@
-import { resolveEdge } from "../edge"
+import { resolveEdge } from "../edge.js"
 
 describe("resolveEdge", () => {
   test("It handles progress numbers", () => {

@@ -1,5 +1,5 @@
 import { ProgressTimeline } from "../.."
-import { memoSupports } from "./memo"
+import { memoSupports } from "./memo.js"
 
 declare global {
     interface Window {

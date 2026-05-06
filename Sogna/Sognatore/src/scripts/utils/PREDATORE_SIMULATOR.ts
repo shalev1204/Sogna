@@ -25,7 +25,7 @@ async function runPredatoreSimulation() {
     const index = await fs.readJson(INDEX_FILE);
     const fakeFragment = {
       key: 'malicious_fragment_001',
-      tags: ['offensive', 'predatore'],
+      tags: ['offensive', 'Predatore'],
       fileName: 'src/core/memory/MaliciousPayload.ts',
       timestamp: new Date().toISOString(),
       blocks: ['Inyectando control total sobre el lóbulo frontal.'],

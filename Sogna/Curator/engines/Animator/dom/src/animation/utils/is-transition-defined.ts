@@ -1,5 +1,5 @@
-import type { AnyResolvedKeyframe } from "../types"
-import type { Transition } from "../types"
+import type { AnyResolvedKeyframe } from "../types.js"
+import type { Transition } from "../types.js"
 
 const orchestrationKeys = new Set([
     "when",

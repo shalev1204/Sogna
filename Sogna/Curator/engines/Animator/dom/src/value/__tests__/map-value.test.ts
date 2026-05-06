@@ -1,6 +1,6 @@
 import { CreateSognaflowValue } from "../../"
 import { frame } from "../../frameloop"
-import { MapValue } from "../map-value"
+import { MapValue } from "../map-value.js"
 
 async function nextFrame() {
     return new Promise<void>((resolve) => {

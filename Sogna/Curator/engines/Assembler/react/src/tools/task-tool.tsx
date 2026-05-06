@@ -1,9 +1,9 @@
 import React, { memo, useState, useEffect, useRef } from "react"
 import { ChevronRight } from "lucide-react"
-import { toolRegistry } from "./tool-registry"
-import { GenericTool } from "./generic-tool"
-import { getToolStatus } from "../utils/format-tool"
-import { cn } from "../utils/cn"
+import { toolRegistry } from "./tool-registry.js"
+import { GenericTool } from "./generic-tool.js"
+import { getToolStatus } from "../utils/format-tool.js"
+import { cn } from "../utils/cn.js"
 
 interface TaskToolProps {
   part: any

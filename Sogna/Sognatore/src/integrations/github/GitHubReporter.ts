@@ -125,7 +125,7 @@ export class GitHubReporter {
         state,
         target_url: targetUrl,
         description,
-        context: 'sognatore/enterprise',
+        context: 'Sognatore/enterprise',
       },
     });
 
@@ -304,13 +304,13 @@ export class GitHubReporter {
 
   private async githubApiRequest(opts: { method: string; path: string; body?: any }): Promise<any> {
     const url = `https://api.github.com${opts.path}`;
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const response = await fetch(url, {
       method: opts.method,
       headers: {
         'Authorization': `token ${this.options.token}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'sognatore-enterprise',
+        'User-Agent': 'Sognatore-enterprise',
         'Content-Type': 'application/json',
       },
       body: opts.body ? JSON.stringify(opts.body) : undefined,

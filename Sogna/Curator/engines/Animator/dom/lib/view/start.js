@@ -1,15 +1,15 @@
 import { secondsToMilliseconds } from "sognaflow-utils";
-import { GroupAnimation } from "../animation/groupanimation";
-import { NativeAnimation } from "../animation/nativeanimation";
-import { NativeAnimationWrapper } from "../animation/nativeanimationwrapper";
-import { GetValueTransition } from "../animation/utils/get-value-transition";
-import { mapEasingToNativeEasing } from "../animation/waapi/easing/map-easing";
-import { applyGeneratorOptions } from "../animation/waapi/utils/apply-generator";
-import { ChooseLayerType } from "./utils/choose-layer-type";
-import { ViewCSS } from "./utils/css";
-import { GetViewAnimationLayerInfo } from "./utils/get-layer-info";
-import { GetViewAnimations } from "./utils/get-view-animations";
-import { HasTarget } from "./utils/has-target";
+import { GroupAnimation } from "../animation/groupanimation.js";
+import { NativeAnimation } from "../animation/nativeanimation.js";
+import { NativeAnimationWrapper } from "../animation/nativeanimationwrapper.js";
+import { GetValueTransition } from "../animation/utils/get-value-transition.js";
+import { mapEasingToNativeEasing } from "../animation/waapi/easing/map-easing.js";
+import { applyGeneratorOptions } from "../animation/waapi/utils/apply-generator.js";
+import { ChooseLayerType } from "./utils/choose-layer-type.js";
+import { ViewCSS } from "./utils/css.js";
+import { GetViewAnimationLayerInfo } from "./utils/get-layer-info.js";
+import { GetViewAnimations } from "./utils/get-view-animations.js";
+import { HasTarget } from "./utils/has-target.js";
 const definitionNames = ["layout", "enter", "exit", "new", "old"];
 export function StartViewAnimation(builder) {
     const { update, targets, options: defaultOptions } = builder;

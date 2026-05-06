@@ -4,8 +4,8 @@ import {
     SelectorCache,
     resolveElements,
 } from "sognaflow-dom"
-import { ObjectTarget } from "../sequence/types"
-import { isDOMKeyframes } from "../utils/is-dom-keyframes"
+import { ObjectTarget } from "../sequence/types.js"
+import { isDOMKeyframes } from "../utils/is-dom-keyframes.js"
 
 export function resolveSubjects<O extends {}>(
     subject:

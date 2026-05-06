@@ -1,7 +1,7 @@
-import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value"
-import type { SognaflowNodeOptions } from "../../../node/types"
-import { IsForcedSognaflowValue } from "../../utils/is-forced-sognaflow-value"
-import type { VisualElement } from "../../visualelement"
+import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value.js"
+import type { SognaflowNodeOptions } from "../../../node/types.js"
+import { IsForcedSognaflowValue } from "../../utils/is-forced-sognaflow-value.js"
+import type { VisualElement } from "../../VisualElement.js"
 
 export function ScrapeSognaflowValuesFromProps(
     props: SognaflowNodeOptions,

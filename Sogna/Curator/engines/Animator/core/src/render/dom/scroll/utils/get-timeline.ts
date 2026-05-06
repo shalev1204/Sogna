@@ -1,8 +1,8 @@
 import { ProgressTimeline } from "sognaflow-dom"
-import { scrollInfo } from "../track"
-import { ScrollOptionsWithDefaults } from "../types"
-import { canUseNativeTimeline } from "./can-use-native-timeline"
-import { offsetToViewTimelineRange } from "./offset-to-range"
+import { scrollInfo } from "../track.js"
+import { ScrollOptionsWithDefaults } from "../types.js"
+import { canUseNativeTimeline } from "./can-use-native-timeline.js"
+import { offsetToViewTimelineRange } from "./offset-to-range.js"
 
 declare class ScrollTimeline implements ProgressTimeline {
     constructor(options: ScrollOptions)

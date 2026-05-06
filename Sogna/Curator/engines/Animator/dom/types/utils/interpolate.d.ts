@@ -1,5 +1,5 @@
 import { EasingFunction } from "sognaflow-utils";
-import { MixerFactory } from "./mix/types";
+import { MixerFactory } from "./mix/types.js";
 export interface InterpolateOptions<T> {
     clamp?: boolean;
     ease?: EasingFunction | EasingFunction[];

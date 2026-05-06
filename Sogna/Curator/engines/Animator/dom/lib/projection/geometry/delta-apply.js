@@ -1,5 +1,5 @@
-import { MixNumber as mixNumber } from "../../utils/mix/number";
-import { hasTransform } from "../utils/has-transform";
+import { MixNumber as mixNumber } from "../../utils/mix/number.js";
+import { hasTransform } from "../utils/has-transform.js";
 /**
  * Scales a point based on a factor and an originPoint
  */

@@ -1,4 +1,4 @@
-import { isSVGSVGElement } from "../is-svg-svg-element"
+import { isSVGSVGElement } from "../is-svg-svg-element.js"
 
 describe("isSVGSVGElement", () => {
     it("should return true for an SVGSVGElement", () => {

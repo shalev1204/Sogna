@@ -1,3 +1,3 @@
-import type { VisualElement } from "./visualelement"
+import type { VisualElement } from "./VisualElement.js"
 
 export const visualElementStore = new WeakMap<any, VisualElement>()

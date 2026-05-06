@@ -15,7 +15,7 @@
     const easeOut = cubicBezier(.17,.67,.83,.67);
     const x = easeOut(0.5); // returns 0.627...
 */
-import { noop } from "../noop";
+import { noop } from "../noop.js";
 // Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
 const calcBezier = (t, a1, a2) => (((1.0 - 3.0 * a2 + 3.0 * a1) * t + (3.0 * a2 - 6.0 * a1)) * t + 3.0 * a1) *
     t;

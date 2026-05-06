@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { IntegrationAdapter } from '../adapter.js';
+import { IntegrationAdapter } from '../Adapter.js';
 import { 
   LinearClientConfig, 
   PRIORITY_MAP, 
@@ -7,8 +7,8 @@ import {
   DEFAULT_STATUS_MAPPING,
   LinearIssue,
   LinearProject
-} from './lineartypes.js';
-import { LinearApiClient, LinearApiError } from './linearapiclient.js';
+} from './LinearTypes.js';
+import { LinearApiClient, LinearApiError } from './LinearApiClient.js';
 
 const MAX_WEBHOOK_BODY_BYTES = 1 * 1024 * 1024; // 1MB
 

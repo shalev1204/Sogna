@@ -1,4 +1,4 @@
-import { clamp } from "../clamp";
+import { clamp } from "../clamp.js";
 export function steps(numSteps, direction = "end") {
     return (progress) => {
         progress =

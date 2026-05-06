@@ -1,4 +1,4 @@
-import { HSLA, RGBA } from "../types";
+import { HSLA, RGBA } from "../types.js";
 export declare const Color: {
     test: (v: any) => boolean;
     parse: (v: any) => RGBA | HSLA;

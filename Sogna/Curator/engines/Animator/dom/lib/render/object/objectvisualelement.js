@@ -1,5 +1,5 @@
-import { createBox } from "../../projection/geometry/models";
-import { VisualElement } from "../visualelement";
+import { createBox } from "../../projection/geometry/models.js";
+import { VisualElement } from "../visualelement.js";
 function isObjectKey(key, object) {
     return key in object;
 }

@@ -1,4 +1,4 @@
 import { noop } from "sognaflow-utils";
-import { CreateRenderBatcher } from "./batcher";
+import { CreateRenderBatcher } from "./batcher.js";
 export const { schedule: Frame, cancel: CancelFrame, state: FrameData, steps: FrameSteps, } = /* @__PURE__ */ CreateRenderBatcher(typeof requestAnimationFrame !== "undefined" ? requestAnimationFrame : noop, true);
 //# sourceMappingURL=frame.js.map

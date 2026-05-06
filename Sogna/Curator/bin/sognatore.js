@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SOGNATORE_CORE = path.join(__dirname, '..', '..', 'Sognatore');
-const enginePath = path.join(SOGNATORE_CORE, 'dist', 'Sognatore', 'src', 'bin', 'sognatore.js');
+const enginePath = path.join(SOGNATORE_CORE, 'dist', 'Sognatore', 'src', 'bin', 'Sognatore.js');
 const args = process.argv.slice(2);
 
 const child = spawn('node', [enginePath, ...args], {
@@ -16,6 +16,6 @@ const child = spawn('node', [enginePath, ...args], {
 });
 
 child.on('exit', (code) => {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(code || 0);
 });

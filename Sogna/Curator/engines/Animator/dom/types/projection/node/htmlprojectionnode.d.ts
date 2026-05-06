@@ -1,4 +1,4 @@
-import { IProjectionNode } from "./types";
+import { IProjectionNode } from "./types.js";
 export declare const rootProjectionNode: {
     current: IProjectionNode | undefined;
 };
@@ -12,9 +12,9 @@ export declare const HTMLProjectionNode: {
         parent?: IProjectionNode;
         path: IProjectionNode[];
         children: Set<IProjectionNode<unknown>>;
-        options: import("./types").ProjectionNodeOptions;
-        snapshot: import("./types").Measurements | undefined;
-        layout: import("./types").Measurements | undefined;
+        options: import("./types.js").ProjectionNodeOptions;
+        snapshot: import("./types.js").Measurements | undefined;
+        layout: import("./types.js").Measurements | undefined;
         targetLayout?: import("sognaflow-utils").Box;
         layoutCorrected: import("sognaflow-utils").Box;
         targetDelta?: import("sognaflow-utils").Delta;
@@ -29,7 +29,7 @@ export declare const HTMLProjectionNode: {
         prevProjectionDelta?: import("sognaflow-utils").Delta;
         projectionDelta?: import("sognaflow-utils").Delta;
         projectionDeltaWithTransform?: import("sognaflow-utils").Delta;
-        scroll?: import("./types").ScrollMeasurements;
+        scroll?: import("./types.js").ScrollMeasurements;
         isLayoutDirty: boolean;
         isProjectionDirty: boolean;
         isSharedProjectionDirty: boolean;
@@ -45,16 +45,16 @@ export declare const HTMLProjectionNode: {
         resumeFrom?: IProjectionNode;
         resumingFrom?: IProjectionNode;
         latestValues: import("../..").ResolvedValues;
-        eventHandlers: Map<import("./types").LayoutEvents, import("sognaflow-utils").SubscriptionManager<any>>;
+        eventHandlers: Map<import("./types.js").LayoutEvents, import("sognaflow-utils").SubscriptionManager<any>>;
         nodes?: import("../..").FlatTree;
         depth: number;
         prevTransformTemplateValue: string | undefined;
         preserveOpacity?: boolean;
         hasTreeAnimated: boolean;
         layoutVersion: number;
-        addEventListener(name: import("./types").LayoutEvents, handler: any): VoidFunction;
-        notifyListeners(name: import("./types").LayoutEvents, ...args: any): void;
-        hasListeners(name: import("./types").LayoutEvents): boolean;
+        addEventListener(name: import("./types.js").LayoutEvents, handler: any): VoidFunction;
+        notifyListeners(name: import("./types.js").LayoutEvents, ...args: any): void;
+        hasListeners(name: import("./types.js").LayoutEvents): boolean;
         mount(instance: HTMLElement): void;
         unmount(): void;
         blockUpdate(): void;
@@ -76,7 +76,7 @@ export declare const HTMLProjectionNode: {
         updateProjection: () => void;
         updateSnapshot(): void;
         updateLayout(): void;
-        updateScroll(phase?: import("./types").Phase): void;
+        updateScroll(phase?: import("./types.js").Phase): void;
         resetTransform(): void;
         measure(removeTransform?: boolean): {
             animationId: number;
@@ -90,7 +90,7 @@ export declare const HTMLProjectionNode: {
         applyTransform(box: import("sognaflow-utils").Box, transformOnly?: boolean, output?: import("sognaflow-utils").Box): import("sognaflow-utils").Box;
         removeTransform(box: import("sognaflow-utils").Box): import("sognaflow-utils").Box;
         setTargetDelta(delta: import("sognaflow-utils").Delta): void;
-        setOptions(options: import("./types").ProjectionNodeOptions): void;
+        setOptions(options: import("./types.js").ProjectionNodeOptions): void;
         clearMeasurements(): void;
         forceRelativeParentToResolveTarget(): void;
         resolvedRelativeTargetAt: number;

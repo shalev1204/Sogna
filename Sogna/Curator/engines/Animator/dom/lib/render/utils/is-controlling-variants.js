@@ -1,6 +1,6 @@
-import { IsAnimationControls } from "./is-animation-controls";
-import { IsVariantLabel } from "./is-variant-label";
-import { VariantProps } from "./variant-props";
+import { IsAnimationControls } from "./is-animation-controls.js";
+import { IsVariantLabel } from "./is-variant-label.js";
+import { VariantProps } from "./variant-props.js";
 export function IsControllingVariants(props) {
     return (IsAnimationControls(props.animate) ||
         VariantProps.some((name) => IsVariantLabel(props[name])));

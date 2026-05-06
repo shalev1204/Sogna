@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
 import * as path from 'path';
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 import crypto from 'crypto';
-import { SecurityAudit } from './securityaudit.js';
-import { CodeScanner } from './codescanner.js';
+import { SecurityAudit } from './SecurityAudit.js';
+import { CodeScanner } from './CodeScanner.js';
 
 export enum SecurityState {
   ALIVE = 'ALIVE',
@@ -63,7 +63,7 @@ export class Hub {
 
     // Use monorepo-safe paths
     const toolkitRoot = path.join(this.sognatoreRoot, '..', 'toolkit');
-    this.SENTINEL_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'sentinel-veto.js');
+    this.SENTINEL_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js');
     this.SIGNATURES_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'data', 'signatures.json');
     this.INTEL_REPORT_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'reports', 'THREAD_INTEL.md');
     
@@ -185,7 +185,7 @@ export class Hub {
     if (location === 'MemoryHub') {
       console.log(chalk.red.bold('[NEURAL_GUARD] Pánico de Memoria detectado. Iniciando purga semántica preventiva...'));
       try {
-        const { MemoryHub } = await import('../core/memory/memoryhub.js');
+        const { MemoryHub } = await import('../core/memory/MemoryHub.js');
         await MemoryHub.getInstance().checkHealth();
       } catch (e) { /* silent */ }
     }
@@ -193,7 +193,7 @@ export class Hub {
     // Deep Scan via AutoHealer (Toolkit module)
     try {
       // Lazy import to avoid circular dependencies and ensure toolkit access
-      const { AutoHealer } = await import('@sogna/curator/shared/autohealer.js');
+      const { AutoHealer } = await import('@Sogna/Curator/shared/AutoHealer.js');
       const healer = AutoHealer.getInstance();
       
       // Focus on Infra and Permissions since that's where binaries live
@@ -305,7 +305,7 @@ export class Hub {
     console.log(chalk.yellow('[RECOVERY] Attempting to restore Sentinel via Git...'));
     try {
       const sentinelDir = path.dirname(this.SENTINEL_PATH);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       spawnSync('git', ['checkout', 'HEAD', '--', sentinelDir], { cwd: this.baseRoot });
       
       this.checkSentinelPulse();
@@ -329,7 +329,7 @@ export class Hub {
    */
   public async reportNeuralIntegrity(): Promise<void> {
     try {
-      const { MemoryHub } = await import('../core/memory/memoryhub.js');
+      const { MemoryHub } = await import('../core/memory/MemoryHub.js');
       const memory = MemoryHub.getInstance();
       const graph = await memory.getNeuralGraph();
       const health = await memory.checkHealth();

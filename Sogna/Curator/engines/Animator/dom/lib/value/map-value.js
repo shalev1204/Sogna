@@ -1,5 +1,5 @@
-import { transform } from "../utils/transform";
-import { TransformValue } from "./transform-value";
+import { transform } from "../utils/transform.js";
+import { TransformValue } from "./transform-value.js";
 /**
  * Create a `sognaflowValue` that maps the output of another `sognaflowValue` by
  * mapping it from one range of values into another.

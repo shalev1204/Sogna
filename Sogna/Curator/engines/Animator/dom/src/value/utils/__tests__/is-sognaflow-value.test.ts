@@ -1,5 +1,5 @@
 import { CreateSognaflowValue } from "../../"
-import { IsSognaflowValue } from "../is-sognaflow-value"
+import { IsSognaflowValue } from "../is-sognaflow-value.js"
 
 describe("IsSognaflowValue", () => {
     test("correctly detects sognaflow values", () => {

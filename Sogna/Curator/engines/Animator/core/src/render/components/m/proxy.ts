@@ -1,3 +1,3 @@
-import { createsognaflowProxy } from "../create-proxy"
+import { createsognaflowProxy } from "../create-proxy.js"
 
 export const m = /*@__PURE__*/ createsognaflowProxy()

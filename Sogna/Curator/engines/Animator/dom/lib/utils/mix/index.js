@@ -1,5 +1,5 @@
-import { GetMixer } from "./complex";
-import { MixNumber as MixNumberImmediate } from "./number";
+import { GetMixer } from "./complex.js";
+import { MixNumber as MixNumberImmediate } from "./number.js";
 export function Mix(from, to, p) {
     if (typeof from === "number" &&
         typeof to === "number" &&

@@ -1,4 +1,4 @@
-import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/provider.js';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
 
 export class OpenRouterProvider extends Provider {
   readonly metadata: ProviderMetadata = {
@@ -49,13 +49,13 @@ export class OpenRouterProvider extends Provider {
       body.response_format = { type: 'json_object' };
     }
 
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const response = await fetch(`${this.baseUrl}/chat/completions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
-        'HTTP-Referer': 'https://github.com/shalev1204/sognatore', // Sognatore source
+        'HTTP-Referer': 'https://github.com/shalev1204/Sognatore', // Sognatore source
         'X-Title': 'Sognatore Ecosystem'
       },
       body: JSON.stringify(body)

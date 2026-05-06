@@ -1,4 +1,4 @@
-import { isPrimaryPointer } from "../is-primary-pointer"
+import { isPrimaryPointer } from "../is-primary-pointer.js"
 
 describe("isPrimaryPointer", () => {
     test("Identifies primary pointer", () => {

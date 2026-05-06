@@ -1,7 +1,7 @@
-import { Color, HSLA, RGBA } from "../types"
-import { floatRegex } from "../utils/float-regex"
-import { isNullish } from "../utils/is-nullish"
-import { singleColorRegex } from "../utils/single-color-regex"
+import { Color, HSLA, RGBA } from "../types.js"
+import { floatRegex } from "../utils/float-regex.js"
+import { isNullish } from "../utils/is-nullish.js"
+import { singleColorRegex } from "../utils/single-color-regex.js"
 
 /**
  * Returns true if the provided string is a color, ie rgba(0,0,0,0) or #000,

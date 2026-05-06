@@ -11,7 +11,7 @@ export interface StudioAsset {
 }
 
 export class StudioAssetTracker {
-    private static ASSET_PATH = path.join(process.cwd(), '.sognatore', 'studio', 'assets.json');
+    private static ASSET_PATH = path.join(process.cwd(), '.sognatore', 'Studio', 'assets.json');
 
     static registerAsset(asset: Omit<StudioAsset, 'id' | 'timestamp'>) {
         const assets = this.load();

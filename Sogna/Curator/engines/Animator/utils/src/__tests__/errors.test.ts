@@ -1,4 +1,4 @@
-import { warning, invariant } from "../errors"
+import { warning, invariant } from "../errors.js"
 
 describe("errors", () => {
     describe("warning", () => {

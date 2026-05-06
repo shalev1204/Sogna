@@ -1,4 +1,4 @@
-import { AnyResolvedKeyframe } from "../types";
-import { CSSVariableToken } from "./is-css-variable";
+import { AnyResolvedKeyframe } from "../types.js";
+import { CSSVariableToken } from "./is-css-variable.js";
 export declare function ParseCSSVariable(current: string): string[] | undefined[];
 export declare function GetVariableValue(current: CSSVariableToken, element: Element, depth?: number): AnyResolvedKeyframe | undefined;

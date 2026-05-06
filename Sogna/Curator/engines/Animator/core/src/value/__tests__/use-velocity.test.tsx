@@ -2,10 +2,10 @@ import { frame, frameData, frameSteps, time } from "sognaflow-dom"
 import { mirrorEasing, sognaflowGlobalConfig } from "sognaflow-utils"
 import { useEffect } from "react"
 import { animate } from "../../animation/animate"
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 import { usesognaflowValueEvent } from "../../utils/use-sognaflow-value-event"
 import { usesognaflowValue } from "../use-sognaflow-value"
-import { useVelocity } from "../use-velocity"
+import { useVelocity } from "../use-velocity.js"
 
 sognaflowGlobalConfig.useManualTiming = true
 

@@ -1,5 +1,5 @@
-// @sentinel-ignore: GLOBAL
-import { JiraClientConfig, JiraIssue, JiraSearchResponse, JiraTransition } from './jiratypes.js';
+// @Sentinel-ignore: GLOBAL
+import { JiraClientConfig, JiraIssue, JiraSearchResponse, JiraTransition } from './JiraTypes.js';
 
 export class JiraApiError extends Error {
   public readonly status: number;
@@ -86,7 +86,7 @@ export class JiraApiClient {
     const delay = Math.max(0, this._rateDelayMs - (now - this._lastRequestTime));
 
     if (delay > 0) {
-      await new Promise(resolve => setTimeout(resolve, Math.min(delay, 60000))); // @sentinel: Capped for institutional performance
+      await new Promise(resolve => setTimeout(resolve, Math.min(delay, 60000))); // @Sentinel: Capped for institutional performance
     }
 
     this._lastRequestTime = Date.now();
@@ -97,20 +97,20 @@ export class JiraApiClient {
       'Accept': 'application/json',
     };
 
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     let fetchBody: string | undefined;
     if (body) {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       fetchBody = JSON.stringify(body);
       headers['Content-Type'] = 'application/json';
     }
 
     try {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const response = await fetch(url, {
         method,
         headers,
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         body: fetchBody,
         signal: AbortSignal.timeout(30000)
       });

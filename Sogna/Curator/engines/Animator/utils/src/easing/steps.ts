@@ -1,5 +1,5 @@
-import { clamp } from "../clamp"
-import type { EasingFunction } from "./types"
+import { clamp } from "../clamp.js"
+import type { EasingFunction } from "./types.js"
 
 /*
   Create stepped version of 0-1 progress

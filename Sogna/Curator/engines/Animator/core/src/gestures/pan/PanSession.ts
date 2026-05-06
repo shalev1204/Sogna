@@ -7,9 +7,9 @@ import {
     secondsToMilliseconds,
     TransformPoint,
 } from "sognaflow-utils"
-import { addPointerEvent } from "../../events/add-pointer-event"
-import { extractEventInfo } from "../../events/event-info"
-import { distance2D } from "../../utils/distance"
+import { addPointerEvent } from "../../events/add-pointer-event.js"
+import { extractEventInfo } from "../../events/event-info.js"
+import { distance2D } from "../../utils/distance.js"
 
 interface PanSessionHandlers {
     onSessionStart: PanHandler

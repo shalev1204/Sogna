@@ -1,5 +1,5 @@
-import { CreateProjectionNode } from "./create-projection-node";
-import { DocumentProjectionNode } from "./documentprojectionnode";
+import { CreateProjectionNode } from "./create-projection-node.js";
+import { DocumentProjectionNode } from "./documentprojectionnode.js";
 export const rootProjectionNode = {
     current: undefined,
 };

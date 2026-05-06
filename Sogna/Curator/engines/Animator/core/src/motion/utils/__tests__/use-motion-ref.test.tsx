@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useRef } from "react"
 import { sognaflow } from "../../.."
-import { render } from "../../../jest.setup"
+import { render } from "../../../jest.setup.js"
 
 describe("usesognaflowRef", () => {
     it("should call external ref callback with element on mount", () => {

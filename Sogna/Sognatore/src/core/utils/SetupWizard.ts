@@ -31,7 +31,7 @@ export class SetupWizard {
     
     console.log(chalk.yellow('\n--- Configurar Sistema de Actualizaciones ---'));
     const masterPath = await this.ask('Ruta local del "Sognatore Maestro" (ej: C:\\Users\\...\\sognatore)', process.cwd());
-    const githubOrigin = await this.ask('URL del Repositorio en GitHub (opcional)', 'https://github.com/shalev1204/sognatore.git');
+    const githubOrigin = await this.ask('URL del Repositorio en GitHub (opcional)', 'https://github.com/shalev1204/Sognatore.git');
 
     this.rl.close();
 

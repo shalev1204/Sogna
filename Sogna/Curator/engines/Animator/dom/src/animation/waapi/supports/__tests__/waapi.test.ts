@@ -1,4 +1,4 @@
-import { supportsBrowserAnimation } from "../waapi"
+import { supportsBrowserAnimation } from "../waapi.js"
 
 // Mock Element.prototype.animate for supportsWaapi()
 beforeAll(() => {

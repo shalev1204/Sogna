@@ -1,5 +1,5 @@
-import { Todo } from '../api/todos';
-import { TodoItem } from './todoitem';
+import { Todo } from '../api/todos.js';
+import { TodoItem } from './TodoItem.js';
 
 interface TodoListProps {
   todos: Todo[];

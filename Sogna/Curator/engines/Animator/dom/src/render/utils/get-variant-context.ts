@@ -1,5 +1,5 @@
-import { IsVariantLabel } from "./is-variant-label"
-import { variantProps } from "./variant-props"
+import { IsVariantLabel } from "./is-variant-label.js"
+import { variantProps } from "./variant-props.js"
 
 const numVariantProps = variantProps.length
 

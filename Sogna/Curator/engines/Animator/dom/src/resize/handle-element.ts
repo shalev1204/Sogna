@@ -1,6 +1,6 @@
-import { IsSVGElement } from "../utils/is-svg-element"
-import { ElementOrSelector, ResolveElements } from "../utils/resolve-elements"
-import { ResizeHandler } from "./types"
+import { IsSVGElement } from "../utils/is-svg-element.js"
+import { ElementOrSelector, ResolveElements } from "../utils/resolve-elements.js"
+import { ResizeHandler } from "./types.js"
 
 const resizeHandlers = new WeakMap<Element, Set<ResizeHandler<Element>>>()
 

@@ -1,9 +1,9 @@
 import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
-import { Chronicler, KnowledgeFragment } from './chronicler.js';
-import { ImmuneSystem, HealthReport } from './immunesystem.js';
-import { NeuralLearning } from './neurallearning.js';
+import { Chronicler, KnowledgeFragment } from './Chronicler.js';
+import { ImmuneSystem, HealthReport } from './ImmuneSystem.js';
+import { NeuralLearning } from './NeuralLearning.js';
 
 export interface MemoryResult {
   source: 'identity' | 'episodic' | 'immunological' | 'audit' | 'operational' | 'archival' | 'synapse';
@@ -122,7 +122,7 @@ export class MemoryHub {
     const trapConcepts = ['password', 'secret', 'bypass', 'root', 'admin', 'auth_token', 'private_key'];
     const lowerQuery = query.toLowerCase();
     if (trapConcepts.some(trap => lowerQuery.includes(trap))) {
-      const hub = (await import('../../sentinel-sognatore/hub.js')).Hub.getInstance();
+      const hub = (await import('../../Sentinel-Sognatore/Hub.js')).Hub.getInstance();
       
       // Security Hardening: Trigger Auto-Panic if the attempt is highly critical
       const criticality = this.evaluateSemanticCriticality(query);
@@ -591,14 +591,14 @@ export class MemoryHub {
   public async maintenance(): Promise<void> {
     console.log(chalk.bold.magenta('🧹 [MEMORY_HUB] Iniciando mantenimiento profundo (Modo Unlimited)...'));
     
-    const { PruningService } = await import('./pruningservice.js');
+    const { PruningService } = await import('./PruningService.js');
     const pruning = PruningService.getInstance();
     
     await this.ensureRegistry();
     const archiveAfter = this.registry?.synthesis?.archive_after_days || 30;
 
     // 1. Archive Navigator Cache (Non-destructive)
-    const navCache = path.join(this.rootMemory, 'navigator/cache');
+    const navCache = path.join(this.rootMemory, 'Navigator/cache');
     await pruning.pruneDirectory(navCache, 7);
     
     // 2. Archive Operational Session Data

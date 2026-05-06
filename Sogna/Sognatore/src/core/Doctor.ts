@@ -1,21 +1,21 @@
 import { execa } from 'execa';
 import chalk from 'chalk';
 import os from 'os';
-import { AgentFactory } from './agents/agentfactory.js';
-import { ProviderFactory } from './providerfactory.js';
-import { ToolResolver } from './toolresolver.js';
-import { BootstrapEngine } from './bootstrapengine.js';
-import { BlueprintAuditor } from '@sogna/curator/shared/blueprintauditor.js';
-import { getBlueprint } from '@sogna/curator/shared/blueprintregistry.js';
+import { AgentFactory } from './agents/AgentFactory.js';
+import { ProviderFactory } from './ProviderFactory.js';
+import { ToolResolver } from './ToolResolver.js';
+import { BootstrapEngine } from './BootstrapEngine.js';
+import { BlueprintAuditor } from '@Sogna/Curator/shared/BlueprintAuditor.js';
+import { getBlueprint } from '@Sogna/Curator/shared/BlueprintRegistry.js';
 import fs from 'fs-extra';
 import path from 'path';
-import { Guardian } from './guardian.js';
-import { EnvOracle } from './utils/envoracle.js';
-import { Shield as BashShield } from '../sentinel-sognatore/shield.js';
-import { PermissionMode } from '../sentinel-sognatore/securitytypes.js';
-import { Hub } from '../sentinel-sognatore/hub.js';
+import { Guardian } from './Guardian.js';
+import { EnvOracle } from './utils/EnvOracle.js';
+import { Shield as BashShield } from '../Sentinel-Sognatore/Shield.js';
+import { PermissionMode } from '../Sentinel-Sognatore/SecurityTypes.js';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import { fileURLToPath } from 'url';
-// @sentinel-ignore: Justificación técnica
+// @Sentinel-ignore: Justificación técnica
 import { execSync } from 'child_process';
 
 export interface DoctorResult {
@@ -99,7 +99,7 @@ export class Doctor {
     const hub = Hub.getInstance();
     const sognatoreRoot = hub.getSognatoreRoot();
     const auditor = new BlueprintAuditor();
-    const blueprint = getBlueprint('sognatore-core');
+    const blueprint = getBlueprint('Sognatore-core');
     
     if (blueprint) {
       const report = await auditor.audit(sognatoreRoot, blueprint);
@@ -158,8 +158,8 @@ export class Doctor {
 
     // 3. Docker Sandbox Images (Profiles)
     const images = [
-      { id: 'standard', name: 'sognatore:latest', file: '.Dockerfile' },
-      { id: 'security', name: 'sognatore-security:latest', file: 'Security.Dockerfile' }
+      { id: 'standard', name: 'Sognatore:latest', file: '.Dockerfile' },
+      { id: 'security', name: 'Sognatore-security:latest', file: 'Security.Dockerfile' }
     ];
 
     for (const img of images) {
@@ -196,7 +196,7 @@ export class Doctor {
         try {
           const gKey = process.env['GOOGLE_API_KEY'] || process.env['GEMINI_API_KEY'];
           if (gKey) {
-// @sentinel-ignore: Justificación técnica
+// @Sentinel-ignore: Justificación técnica
             const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${gKey}`, { signal: AbortSignal.timeout(5000) });
             return { name: 'Gemini Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false };
           } else return { name: 'Gemini Connectivity', status: 'WARN', message: 'No Key', required: false };
@@ -206,7 +206,7 @@ export class Doctor {
         try {
           const cKey = process.env['ANTHROPIC_API_KEY'];
           if (cKey) {
-// @sentinel-ignore: Justificación técnica
+// @Sentinel-ignore: Justificación técnica
             const resp = await fetch("https://api.anthropic.com/v1/messages", {
               method: 'POST',
               headers: { 'x-api-key': cKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
@@ -221,7 +221,7 @@ export class Doctor {
         try {
           const oKey = process.env['OPENAI_API_KEY'];
           if (oKey) {
-// @sentinel-ignore: Justificación técnica
+// @Sentinel-ignore: Justificación técnica
             const resp = await fetch("https://api.openai.com/v1/models", { headers: { 'Authorization': `Bearer ${oKey}` }, signal: AbortSignal.timeout(5000) });
             return { name: 'OpenAI Connectivity', status: resp.status === 200 ? 'PASS' : 'WARN', required: false };
           } else return { name: 'OpenAI Connectivity', status: 'WARN', message: 'No Key', required: false };
@@ -242,7 +242,7 @@ export class Doctor {
       ? process.cwd() 
       : path.join(process.cwd(), '..');
     
-    const sentinelPath = path.join(projectRoot, 'toolkit', 'engines', 'sentinel', 'bin', 'sentinel-veto.js');
+    const sentinelPath = path.join(projectRoot, 'toolkit', 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js');
     const sentinelExists = fs.existsSync(sentinelPath);
 
     results.push({
@@ -365,7 +365,7 @@ export class Doctor {
         fix: async () => {
           console.log(chalk.blue(`  - Installing ${server}...`));
           const cmd = server.includes('pyright') ? 'npm install -g pyright' : 'npm install -g typescript-language-server typescript';
-// @sentinel-ignore: Justificación técnica
+// @Sentinel-ignore: Justificación técnica
           await execSync(cmd, { stdio: 'inherit' });
         }
       });

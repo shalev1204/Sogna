@@ -1,4 +1,4 @@
-import type { SourceType } from "../icons/source-icons"
+import type { SourceType } from "../icons/source-icons.js"
 
 export type SearchResult = { source: SourceType; title: string; date: string }
 export type SearchResultSet = { results: SearchResult[]; tabs: { source: SourceType; label: string; count: number }[] }

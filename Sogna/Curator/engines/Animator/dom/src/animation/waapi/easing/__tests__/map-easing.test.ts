@@ -1,6 +1,6 @@
 import { BezierDefinition, Easing } from "sognaflow-utils"
-import { cubicBezierAsString } from "../cubic-bezier"
-import { mapEasingToNativeEasing } from "../map-easing"
+import { cubicBezierAsString } from "../cubic-bezier.js"
+import { mapEasingToNativeEasing } from "../map-easing.js"
 
 describe("mapEasingToNativeEasing", () => {
     test("should return undefined for undefined easing", () => {

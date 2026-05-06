@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react"
 import { sognaflowValue } from "sognaflow-dom"
-import { useHTMLProps } from "../use-props"
+import { useHTMLProps } from "../use-props.js"
 
 describe("HTML useProps", () => {
     test("should return correct styles for element", () => {

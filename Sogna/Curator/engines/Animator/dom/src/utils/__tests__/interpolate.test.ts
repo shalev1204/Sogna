@@ -1,4 +1,4 @@
-import { interpolate } from "../interpolate"
+import { interpolate } from "../interpolate.js"
 
 const invert = (v: number) => -v
 

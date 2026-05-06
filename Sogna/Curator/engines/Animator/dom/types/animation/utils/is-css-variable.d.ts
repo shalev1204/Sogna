@@ -1,4 +1,4 @@
-import { AnyResolvedKeyframe } from "../types";
+import { AnyResolvedKeyframe } from "../types.js";
 export type CSSVariableName = `--${string}`;
 export type CSSVariableToken = `var(${CSSVariableName})`;
 export declare const IsCSSVariableName: (key?: AnyResolvedKeyframe | null) => key is `--${string}`;

@@ -1,20 +1,20 @@
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
 import chalk from 'chalk';
 import fs from 'fs-extra';
 import path from 'path';
-import { StateStore, type SognatoreState } from './statestore.js';
-import { Supervisor } from './supervisor.js';
-import { Provider } from './provider.js';
-import { ProviderFactory } from './providerfactory.js';
-import { DockerSandbox } from './dockersandbox.js';
-import { QualityCouncil } from './qualitycouncil.js';
-import { ContextManager } from './contextmanager.js';
-import { SwarmOrchestrator } from './swarmorchestrator.js';
-import { SkillRegistry } from './skillregistry.js';
+import { StateStore, type SognatoreState } from './StateStore.js';
+import { Supervisor } from './Supervisor.js';
+import { Provider } from './Provider.js';
+import { ProviderFactory } from './ProviderFactory.js';
+import { DockerSandbox } from './DockerSandbox.js';
+import { QualityCouncil } from './QualityCouncil.js';
+import { ContextManager } from './ContextManager.js';
+import { SwarmOrchestrator } from './SwarmOrchestrator.js';
+import { SkillRegistry } from './SkillRegistry.js';
 import { CouncilEvidence } from './gates/types.js';
-import { GitManager } from './gitmanager.js';
-import { SognaEventBus, SognaEventType } from '@sogna/curator';
+import { GitManager } from './GitManager.js';
+import { SognaEventBus, SognaEventType } from '@Sogna/Curator';
 
 export class Runner {
   private stateStore: StateStore;
@@ -165,7 +165,7 @@ export class Runner {
     try {
       const purifyPath = path.resolve(process.cwd(), 'Toolkit', 'bin', 'purify.js');
       if (fs.existsSync(purifyPath)) {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         execSync(`node "${purifyPath}"`, { stdio: 'inherit' });
       }
     } catch (e: any) {
@@ -215,7 +215,7 @@ export class Runner {
   }
 
   private async collectEvidence(state: SognatoreState, prdPath?: string): Promise<CouncilEvidence> {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const gitDiff = execSync('git diff HEAD').toString();
     const testLogs: string[] = []; // In future, we'll pull these from the message bus
     

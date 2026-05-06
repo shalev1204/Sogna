@@ -1,5 +1,5 @@
-import { type AnyResolvedKeyframe } from "../../animation/types"
-import { ResolvedValues } from "../../render/types"
+import { type AnyResolvedKeyframe } from "../../animation/types.js"
+import { ResolvedValues } from "../../render/types.js"
 
 function isIdentityScale(scale: AnyResolvedKeyframe | undefined) {
     return scale === undefined || scale === 1

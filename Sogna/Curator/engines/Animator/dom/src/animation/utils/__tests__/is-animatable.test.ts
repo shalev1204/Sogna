@@ -1,4 +1,4 @@
-import { isAnimatable } from "../is-animatable"
+import { isAnimatable } from "../is-animatable.js"
 
 describe("isAnimatable", () => {
     it("returns true for valid filter blur values", () => {

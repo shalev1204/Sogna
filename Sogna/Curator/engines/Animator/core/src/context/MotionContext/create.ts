@@ -3,7 +3,7 @@
 import { useContext, useMemo } from "react"
 import { sognaflowContext, type sognaflowContextProps } from "."
 import { sognaflowProps } from "../../sognaflow/types"
-import { getCurrentTreeVariants } from "./utils"
+import { getCurrentTreeVariants } from "./utils.js"
 
 export function useCreatesognaflowContext<Instance>(
     props: sognaflowProps

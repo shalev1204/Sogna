@@ -1,4 +1,4 @@
-import { ValueAnimationOptions } from "../types"
+import { ValueAnimationOptions } from "../types.js"
 
 export function MakeAnimationInstant(
     options: Partial<{

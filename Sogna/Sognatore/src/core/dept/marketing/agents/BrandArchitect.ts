@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { MarketingSkillRegistry } from '../skills/marketingskillregistry.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { MarketingSkillRegistry } from '../skills/MarketingSkillRegistry.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -11,7 +11,7 @@ export class BrandArchitect implements Agent {
     
     // Conexión explícita con el Vault
     private skills = MarketingSkillRegistry.BRANDING;
-    private manualPath = path.join(__dirname, '../knowledge/BrandArchitect_Manual.md');
+    private manualPath = path.join(__dirname, '../knowledge/BrandArchitect_Manual.md.js');
 
     async think(task: string): Promise<string> {
         const manual = this.loadManual();

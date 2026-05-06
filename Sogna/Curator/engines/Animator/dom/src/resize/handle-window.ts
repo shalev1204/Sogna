@@ -1,4 +1,4 @@
-import { WindowResizeHandler } from "./types"
+import { WindowResizeHandler } from "./types.js"
 
 const windowCallbacks = new Set<WindowResizeHandler>()
 

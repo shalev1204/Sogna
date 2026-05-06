@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import type { ModelOption } from "../../types"
-import { ChevronDown } from "../../icons/tool-icons"
-import { PopoverShell } from "./popover-shell"
+import type { ModelOption } from "../../types.js"
+import { ChevronDown } from "../../icons/tool-icons.js"
+import { PopoverShell } from "./popover-shell.js"
 
 export function ModelPopover({
   models,

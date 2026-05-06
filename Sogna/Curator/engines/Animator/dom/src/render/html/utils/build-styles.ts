@@ -1,11 +1,11 @@
-import { getValueAsType } from "../../../value/types/utils/get-as-type"
-import { numberValueTypes } from "../../../value/types/maps/number"
-import { transformProps } from "../../utils/keys-transform"
-import { isCSSVariableName } from "../../../animation/utils/is-css-variable"
-import { ResolvedValues } from "../../types"
-import { HTMLRenderState } from "../types"
-import { buildTransform } from "./build-transform"
-import type { SognaflowNodeOptions } from "../../../node/types"
+import { getValueAsType } from "../../../value/types/utils/get-as-type.js"
+import { NumberValueTypes } from "../../../value/types/maps/number.js"
+import { TransformProps } from "../../utils/keys-transform.js"
+import { IsCSSVariableName } from "../../../animation/utils/is-css-variable.js"
+import { ResolvedValues } from "../../types.js"
+import { HTMLRenderState } from "../types.js"
+import { buildTransform } from "./build-transform.js"
+import type { SognaflowNodeOptions } from "../../../node/types.js"
 
 export function buildHTMLStyles(
     state: HTMLRenderState,
@@ -27,16 +27,16 @@ export function buildHTMLStyles(
     for (const key in latestValues) {
         const value = latestValues[key]
 
-        if (transformProps.has(key)) {
+        if (TransformProps.has(key)) {
             // If this is a transform, flag to enable further transform processing
             hasTransform = true
             continue
-        } else if (isCSSVariableName(key)) {
+        } else if (IsCSSVariableName(key)) {
             vars[key] = value
             continue
         } else {
             // Convert the value to its default value type, ie 0 -> "0px"
-            const valueAsType = getValueAsType(value, numberValueTypes[key])
+            const valueAsType = getValueAsType(value, NumberValueTypes[key])
 
             if (key.startsWith("origin")) {
                 // If this is a transform origin, flag and enable further transform-origin processing

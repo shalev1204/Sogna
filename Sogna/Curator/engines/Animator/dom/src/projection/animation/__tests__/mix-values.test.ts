@@ -1,4 +1,4 @@
-import { mixValues } from "../mix-values"
+import { mixValues } from "../mix-values.js"
 
 describe("mixValues", () => {
     test("mixes borderRadius numbers", () => {

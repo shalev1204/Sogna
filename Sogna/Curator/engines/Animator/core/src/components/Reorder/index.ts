@@ -1,1 +1,1 @@
-export * as Reorder from "./namespace"
+export * as Reorder from "./namespace.js"

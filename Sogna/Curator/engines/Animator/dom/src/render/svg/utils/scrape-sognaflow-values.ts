@@ -1,8 +1,8 @@
-import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value"
-import type { SognaflowNodeOptions } from "../../../node/types"
-import { transformPropOrder } from "../../utils/keys-transform"
-import { ScrapeSognaflowValuesFromProps as ScrapeHTMLSognaflowValuesFromProps } from "../../html/utils/scrape-sognaflow-values"
-import type { VisualElement } from "../../visualelement"
+import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value.js"
+import type { SognaflowNodeOptions } from "../../../node/types.js"
+import { TransformPropOrder } from "../../utils/keys-transform.js"
+import { ScrapeSognaflowValuesFromProps as ScrapeHTMLSognaflowValuesFromProps } from "../../html/utils/scrape-sognaflow-values.js"
+import type { VisualElement } from "../../VisualElement.js"
 
 export function ScrapeSognaflowValuesFromProps(
     props: SognaflowNodeOptions,
@@ -21,7 +21,7 @@ export function ScrapeSognaflowValuesFromProps(
             IsSognaflowValue(prevProps[key as keyof typeof prevProps])
         ) {
             const targetKey =
-                transformPropOrder.indexOf(key) !== -1
+                TransformPropOrder.indexOf(key) !== -1
                     ? "attr" + key.charAt(0).toUpperCase() + key.substring(1)
                     : key
 

@@ -1,21 +1,21 @@
 import type { Box } from "sognaflow-utils"
-import type { AnyResolvedKeyframe } from "../../animation/types"
-import { isCSSVariableName } from "../../animation/utils/is-css-variable"
-import type { SognaflowNodeOptions } from "../../node/types"
-import { transformProps } from "../utils/keys-transform"
+import type { AnyResolvedKeyframe } from "../../animation/types.js"
+import { IsCSSVariableName } from "../../animation/utils/is-css-variable.js"
+import type { SognaflowNodeOptions } from "../../node/types.js"
+import { TransformProps } from "../utils/keys-transform.js"
 import {
     defaultTransformValue,
     readTransformValue,
-} from "../dom/parse-transform"
-import { measureViewportBox } from "../../projection/utils/measure"
-import { DOMVisualElement } from "../dom/domvisualelement"
-import type { DOMVisualElementOptions } from "../dom/types"
-import type { ResolvedValues, SognaflowConfigContextProps } from "../types"
-import type { VisualElement } from "../visualelement"
-import { HTMLRenderState } from "./types"
-import { buildHTMLStyles } from "./utils/build-styles"
-import { renderHTML } from "./utils/render"
-import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values"
+} from "../dom/parse-transform.js"
+import { measureViewportBox } from "../../projection/utils/measure.js"
+import { DOMVisualElement } from "../dom/DOMVisualElement.js"
+import type { DOMVisualElementOptions } from "../dom/types.js"
+import type { ResolvedValues, SognaflowConfigContextProps } from "../types.js"
+import type { VisualElement } from "../VisualElement.js"
+import { HTMLRenderState } from "./types.js"
+import { buildHTMLStyles } from "./utils/build-styles.js"
+import { renderHTML } from "./utils/render.js"
+import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values.js"
 
 export function getComputedStyle(element: HTMLElement) {
     return window.getComputedStyle(element)
@@ -32,14 +32,14 @@ export class HTMLVisualElement extends DOMVisualElement<
         instance: HTMLElement,
         key: string
     ): AnyResolvedKeyframe | null | undefined {
-        if (transformProps.has(key)) {
+        if (TransformProps.has(key)) {
             return this.projection?.isProjecting
                 ? defaultTransformValue(key)
                 : readTransformValue(instance, key)
         } else {
             const computedStyle = getComputedStyle(instance)
             const value =
-                (isCSSVariableName(key)
+                (IsCSSVariableName(key)
                     ? computedStyle.getPropertyValue(key)
                     : computedStyle[key as keyof typeof computedStyle]) || 0
 

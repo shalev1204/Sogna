@@ -1,4 +1,4 @@
-import { SearchIcon } from "./tool-icons"
+import { SearchIcon } from "./tool-icons.js"
 
 export type SourceType = "google" | "booking" | "tripadvisor" | "expedia" | "airbnb" | "github" | "stackoverflow" | "arxiv" | "scholar" | "stripe" | "zendesk" | "web"
 

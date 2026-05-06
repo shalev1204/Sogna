@@ -1,8 +1,8 @@
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs-extra';
-import { ToolResolver } from './toolresolver.js';
+import { ToolResolver } from './ToolResolver.js';
 
 interface FileTree {
   [key: string]: FileTree;
@@ -81,7 +81,7 @@ export class ContextManager {
   async getCodeMap(): Promise<string> {
     try {
       // Use git to list tracked files (fastest and cleanest)
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const files = execSync('git ls-files', { cwd: this.cwd }).toString().split('\n');
       
       const tree: FileTree = {};

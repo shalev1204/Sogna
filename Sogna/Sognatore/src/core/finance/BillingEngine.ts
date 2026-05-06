@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { FinanceHub } from './financehub.js';
+import { FinanceHub } from './FinanceHub.js';
 
 export interface Invoice {
     number: string;

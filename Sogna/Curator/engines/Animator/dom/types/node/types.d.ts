@@ -1,7 +1,7 @@
 import type { BoundingBox, Box, Point } from "sognaflow-utils";
-import type { AnyResolvedKeyframe, InertiaOptions, Target, TransformProperties, Transition } from "../animation/types";
-import type { DragElastic } from "../gestures/drag/types";
-import { PanInfo } from "../gestures/pan/types";
+import type { AnyResolvedKeyframe, InertiaOptions, Target, TransformProperties, Transition } from "../animation/types.js";
+import type { DragElastic } from "../gestures/drag/types.js";
+import { PanInfo } from "../gestures/pan/types.js";
 import type { SognaflowValue } from "../value";
 export interface EventInfo {
     point: Point;

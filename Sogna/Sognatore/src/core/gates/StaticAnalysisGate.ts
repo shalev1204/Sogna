@@ -1,4 +1,4 @@
-import { BaseGate } from './basegate.js';
+import { BaseGate } from './BaseGate.js';
 import { GateResult, CouncilEvidence, type GateFinding } from './types.js';
 import { execa, type ExecaError } from 'execa';
 

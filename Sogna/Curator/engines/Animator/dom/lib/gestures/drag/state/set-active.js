@@ -1,4 +1,4 @@
-import { isDragging } from "./is-active";
+import { isDragging } from "./is-active.js";
 export function setDragLock(axis) {
     if (axis === "x" || axis === "y") {
         if (isDragging[axis]) {

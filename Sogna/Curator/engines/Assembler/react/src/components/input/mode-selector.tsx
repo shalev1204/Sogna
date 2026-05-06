@@ -1,7 +1,7 @@
 import React, { useState } from "react"
-import { ChevronDown } from "../../icons/tool-icons"
-import { PopoverShell } from "./popover-shell"
-import { ToggleSwitch } from "./toggle-switch"
+import { ChevronDown } from "../../icons/tool-icons.js"
+import { PopoverShell } from "./popover-shell.js"
+import { ToggleSwitch } from "./toggle-switch.js"
 
 function AgentModeIcon({ className }: { className?: string }) {
   return (

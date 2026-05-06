@@ -1,5 +1,5 @@
-import { AnyResolvedKeyframe } from "../../animation/types";
-import { HSLA, RGBA } from "../../value/types/types";
+import { AnyResolvedKeyframe } from "../../animation/types.js";
+import { HSLA, RGBA } from "../../value/types/types.js";
 type MixableArray = Array<number | RGBA | HSLA | string>;
 interface MixableObject {
     [key: string]: AnyResolvedKeyframe | RGBA | HSLA;

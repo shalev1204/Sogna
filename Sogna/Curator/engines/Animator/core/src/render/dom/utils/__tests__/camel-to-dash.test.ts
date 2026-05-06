@@ -1,4 +1,4 @@
-import "../../../../jest.setup"
+import "../../../../jest.setup.js"
 import { camelToDash } from "sognaflow-dom"
 
 describe("camelToDash", () => {

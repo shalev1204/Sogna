@@ -46,9 +46,9 @@ export function handleStop(params: CommandParams) {
 }
 
 export const COMMAND_HANDLERS: Record<string, (params: CommandParams) => any> = {
-  '/sognatore-status': handleStatus,
-  '/sognatore-approve': handleApprove,
-  '/sognatore-stop': handleStop,
+  '/Sognatore-status': handleStatus,
+  '/Sognatore-approve': handleApprove,
+  '/Sognatore-stop': handleStop,
 };
 
 export function routeCommand(command: string, params: CommandParams = {}) {

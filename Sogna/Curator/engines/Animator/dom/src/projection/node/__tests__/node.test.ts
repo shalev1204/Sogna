@@ -1,7 +1,7 @@
-import { createTestNode } from "./testprojectionnode"
-import { propagateDirtyNodes, cleanDirtyNodes } from "../create-projection-node"
-import type { IProjectionNode } from "../types"
-import { nextFrame, nextMicrotask } from "./utils"
+import { createTestNode } from "./TestProjectionNode.js"
+import { propagateDirtyNodes, cleanDirtyNodes } from "../create-projection-node.js"
+import type { IProjectionNode } from "../types.js"
+import { nextFrame, nextMicrotask } from "./utils.js"
 
 describe("node", () => {
     test("If a child updates layout, and parent has scale, parent resetsTransform during measurement", async () => {

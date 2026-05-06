@@ -10,13 +10,13 @@ import {
     SpringOptions,
     Transition,
     ValueAnimationOptions,
-} from "../types"
-import { generateLinearEasing } from "../waapi/utils/linear"
+} from "../types.js"
+import { generateLinearEasing } from "../waapi/utils/linear.js"
 import {
     calcGeneratorDuration,
     maxGeneratorDuration,
-} from "./utils/calc-duration"
-import { createGeneratorEasing } from "./utils/create-generator-easing"
+} from "./utils/calc-duration.js"
+import { createGeneratorEasing } from "./utils/create-generator-easing.js"
 
 const springDefaults = {
     // Default spring physics

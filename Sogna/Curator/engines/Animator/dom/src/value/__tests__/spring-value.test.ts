@@ -1,7 +1,7 @@
-import { syncDriver } from "../../animation/__tests__/utils"
-import { FollowValue } from "../follow-value"
-import { CreateSognaflowValue } from "../index"
-import { AttachSpring, SpringValue } from "../spring-value"
+import { syncDriver } from "../../animation/__tests__/utils.js"
+import { FollowValue } from "../follow-value.js"
+import { CreateSognaflowValue } from "../index.js"
+import { AttachSpring, SpringValue } from "../spring-value.js"
 
 describe("SpringValue types", () => {
     test("can create a sognaflow value from a number", () => {

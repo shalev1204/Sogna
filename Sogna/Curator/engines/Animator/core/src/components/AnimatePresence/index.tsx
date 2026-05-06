@@ -2,13 +2,13 @@
 
 import * as React from "react"
 import { useContext, useMemo, useRef, useState } from "react"
-import { LayoutGroupContext } from "../../context/layoutgroupcontext"
-import { useConstant } from "../../utils/use-constant"
-import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect"
-import { PresenceChild } from "./presencechild"
-import { AnimatePresenceProps } from "./types"
-import { usePresence } from "./use-presence"
-import { ComponentKey, getChildKey, onlyElements } from "./utils"
+import { LayoutGroupContext } from "../../context/LayoutGroupContext.js"
+import { useConstant } from "../../utils/use-constant.js"
+import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect.js"
+import { PresenceChild } from "./PresenceChild.js"
+import { AnimatePresenceProps } from "./types.js"
+import { usePresence } from "./use-presence.js"
+import { ComponentKey, getChildKey, onlyElements } from "./utils.js"
 
 /**
  * `AnimatePresence` enables the animation of components that have been removed from the tree.

@@ -1,5 +1,5 @@
-import { Rgba } from "./rgba";
-import { isColorString } from "./utils";
+import { Rgba } from "./rgba.js";
+import { isColorString } from "./utils.js";
 function ParseHex(v) {
     let r = "";
     let g = "";

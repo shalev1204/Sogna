@@ -1,20 +1,20 @@
-import type { AnyResolvedKeyframe } from "../../animation/types"
+import type { AnyResolvedKeyframe } from "../../animation/types.js"
 import type { SognaflowValue } from "../../value"
-import type { SognaflowNodeOptions } from "../../node/types"
-import { transformProps } from "../utils/keys-transform"
-import { getDefaultValueType } from "../../value/types/maps/defaults"
-import { createBox } from "../../projection/geometry/models"
-import { DOMVisualElement } from "../dom/domvisualelement"
-import type { DOMVisualElementOptions } from "../dom/types"
-import { camelToDash } from "../dom/utils/camel-to-dash"
-import type { ResolvedValues } from "../types"
-import type { VisualElement, SognaflowStyle } from "../visualelement"
-import { SVGRenderState } from "./types"
-import { buildSVGAttrs } from "./utils/build-attrs"
-import { camelCaseAttributes } from "./utils/camel-case-attrs"
-import { isSVGTag } from "./utils/is-svg-tag"
-import { renderSVG } from "./utils/render"
-import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values"
+import type { SognaflowNodeOptions } from "../../node/types.js"
+import { TransformProps } from "../utils/keys-transform.js"
+import { GetDefaultValueType } from "../../value/types/maps/defaults.js"
+import { createBox } from "../../projection/geometry/models.js"
+import { DOMVisualElement } from "../dom/DOMVisualElement.js"
+import type { DOMVisualElementOptions } from "../dom/types.js"
+import { camelToDash } from "../dom/utils/camel-to-dash.js"
+import type { ResolvedValues } from "../types.js"
+import type { VisualElement, SognaflowStyle } from "../VisualElement.js"
+import { SVGRenderState } from "./types.js"
+import { buildSVGAttrs } from "./utils/build-attrs.js"
+import { camelCaseAttributes } from "./utils/camel-case-attrs.js"
+import { isSVGTag } from "./utils/is-svg-tag.js"
+import { renderSVG } from "./utils/render.js"
+import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values.js"
 export class SVGVisualElement extends DOMVisualElement<
     SVGElement,
     SVGRenderState,
@@ -32,8 +32,8 @@ export class SVGVisualElement extends DOMVisualElement<
     }
 
     readValueFromInstance(instance: SVGElement, key: string) {
-        if (transformProps.has(key)) {
-            const defaultType = getDefaultValueType(key)
+        if (TransformProps.has(key)) {
+            const defaultType = GetDefaultValueType(key)
             return defaultType ? defaultType.default || 0 : 0
         }
         key = !camelCaseAttributes.has(key) ? camelToDash(key) : key

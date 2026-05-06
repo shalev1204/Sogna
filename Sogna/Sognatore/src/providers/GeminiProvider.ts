@@ -1,5 +1,5 @@
 import { execa } from 'execa';
-import { Provider, type ProviderMetadata, type CapabilityTier, type InvokeOptions } from '../core/provider.js';
+import { Provider, type ProviderMetadata, type CapabilityTier, type InvokeOptions } from '../core/Provider.js';
 
 export class GeminiProvider extends Provider {
   readonly metadata: ProviderMetadata = {

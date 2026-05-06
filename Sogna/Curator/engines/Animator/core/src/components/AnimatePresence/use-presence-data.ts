@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext } from "react"
-import { PresenceContext } from "../../context/presencecontext"
+import { PresenceContext } from "../../context/PresenceContext.js"
 
 export function usePresenceData() {
     const context = useContext(PresenceContext)

@@ -1,8 +1,8 @@
 import { AnimationPlaybackControls, observeTimeline } from "sognaflow-dom"
-import { ScrollOptionsWithDefaults } from "./types"
-import { canUseNativeTimeline } from "./utils/can-use-native-timeline"
-import { getTimeline } from "./utils/get-timeline"
-import { offsetToViewTimelineRange } from "./utils/offset-to-range"
+import { ScrollOptionsWithDefaults } from "./types.js"
+import { canUseNativeTimeline } from "./utils/can-use-native-timeline.js"
+import { getTimeline } from "./utils/get-timeline.js"
+import { offsetToViewTimelineRange } from "./utils/offset-to-range.js"
 
 export function attachToAnimation(
     animation: AnimationPlaybackControls,

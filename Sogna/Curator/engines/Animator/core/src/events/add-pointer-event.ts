@@ -1,5 +1,5 @@
 import { addDomEvent } from "sognaflow-dom"
-import { addPointerInfo, EventListenerWithPointInfo } from "./event-info"
+import { addPointerInfo, EventListenerWithPointInfo } from "./event-info.js"
 
 export function addPointerEvent(
     target: EventTarget,

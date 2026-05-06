@@ -1,15 +1,15 @@
 import { supportsFlags } from "sognaflow-dom"
 import { act, createRef, useState } from "react"
 import { sognaflow, usesognaflowValue } from "../../"
-import "../../animation/animators/waapi/__tests__/setup"
-import { nextFrame } from "../../gestures/__tests__/utils"
+import "../../animation/animators/waapi/__tests__/setup.js"
+import { nextFrame } from "../../gestures/__tests__/utils.js"
 import {
     pointerDown,
     pointerEnter,
     pointerLeave,
     pointerUp,
     render,
-} from "../../jest.setup"
+} from "../../jest.setup.js"
 
 describe("WAAPI animations", () => {
     test("opacity animates with WAAPI at default settings", async () => {

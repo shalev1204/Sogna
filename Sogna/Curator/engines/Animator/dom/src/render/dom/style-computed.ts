@@ -1,4 +1,4 @@
-import { isCSSVar } from "./is-css-var"
+import { isCSSVar } from "./is-css-var.js"
 
 export function getComputedStyle(
     element: HTMLElement | SVGElement,

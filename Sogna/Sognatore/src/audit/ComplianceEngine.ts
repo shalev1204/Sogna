@@ -3,7 +3,7 @@ import {
   ComplianceReport, 
   ComplianceControl, 
   ComplianceEvidence 
-} from './audittypes.js';
+} from './AuditTypes.js';
 
 /**
  * SOC 2 Type II control mappings.

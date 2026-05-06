@@ -1,4 +1,4 @@
-import { ValueType } from "../types";
+import { ValueType } from "../types.js";
 /**
  * Provided a value and a ValueType, returns the value as that value type.
  */

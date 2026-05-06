@@ -1,4 +1,4 @@
-import { BaseGate } from './basegate.js';
+import { BaseGate } from './BaseGate.js';
 import { CouncilEvidence, GateResult } from './types.js';
 import chalk from 'chalk';
 
@@ -7,7 +7,7 @@ import chalk from 'chalk';
  * Simulates offensive attacks against generated code.
  */
 export class AdversarialGate extends BaseGate {
-  get id() { return 'predatore-stress'; }
+  get id() { return 'Predatore-stress'; }
   get name() { return 'Adversarial Stress (Predatore)'; }
 
   async run(evidence: CouncilEvidence): Promise<GateResult> {

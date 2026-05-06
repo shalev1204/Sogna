@@ -1,5 +1,5 @@
 import { CollectSognaflowValues, CreateSognaflowValue } from ".";
-import { SubscribeValue } from "./subscribe-value";
+import { SubscribeValue } from "./subscribe-value.js";
 /**
  * Create a `sognaflowValue` that transforms the output of other `sognaflowValue`s by
  * passing their latest values through a transform function.

@@ -10,15 +10,15 @@ import {
   validateData,
   validateApprovalGate,
   RULE_EVALUATORS 
-} from './policytypes.js';
-import { PermissionMode } from './securitytypes.js';
-// @sentinel-ignore: Justificación técnica
+} from './PolicyTypes.js';
+import { PermissionMode } from './SecurityTypes.js';
+// @Sentinel-ignore: Justificación técnica
 import { spawnSync } from 'child_process';
-import { Hub, SecurityState } from './hub.js';
-import { Honeypots } from './honeypots.js';
-import { MemoryHub } from '../core/memory/memoryhub.js';
-import { SecurityAudit } from './securityaudit.js';
-import { ActivityProfile } from './activityprofile.js';
+import { Hub, SecurityState } from './Hub.js';
+import { Honeypots } from './Honeypots.js';
+import { MemoryHub } from '../core/memory/MemoryHub.js';
+import { SecurityAudit } from './SecurityAudit.js';
+import { ActivityProfile } from './ActivityProfile.js';
 
 /**
  * Sognatore Policy Engine - Core Evaluation Engine
@@ -534,7 +534,7 @@ export class Engine {
     };
 
     try {
-// @sentinel-ignore: Justificación técnica
+// @Sentinel-ignore: Justificación técnica
       const result = spawnSync(this._executiveBinaryPath, [], {
         input: JSON.stringify(cargoContext),
         encoding: 'utf8',

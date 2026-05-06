@@ -1,7 +1,7 @@
 import { Color } from "../color";
-import { Filter } from "../complex/filter";
-import { Mask } from "../complex/mask";
-import { NumberValueTypes } from "./number";
+import { Filter } from "../complex/filter.js";
+import { Mask } from "../complex/mask.js";
+import { NumberValueTypes } from "./number.js";
 /**
  * A map of default value types for common values
  */

@@ -1,4 +1,4 @@
-import { sognaflowComponentSymbol } from "./symbol"
+import { sognaflowComponentSymbol } from "./symbol.js"
 
 /**
  * Checks if a component is a `sognaflow` component.

@@ -1,6 +1,6 @@
-import { ImageThumbInput } from "./image-thumb-input"
-import { FileChip } from "./file-chip"
-import type { ChatThemeConfig } from "../../theme-config"
+import { ImageThumbInput } from "./image-thumb-input.js"
+import { FileChip } from "./file-chip.js"
+import type { ChatThemeConfig } from "../../theme-config.js"
 
 export interface AttachedImage {
   id: string

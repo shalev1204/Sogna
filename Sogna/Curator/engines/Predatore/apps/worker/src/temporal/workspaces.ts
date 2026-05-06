@@ -170,7 +170,7 @@ async function listWorkspaces(): Promise<void> {
 
 listWorkspaces().catch((err) => {
   console.error('Error listing workspaces:', err);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(1);
 });
 

@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import * as ts from 'typescript';
-import type { VetoReport } from './dlpactivity';
+import type { VetoReport } from './DLPActivity.js';
 
 /**
  * AST Execution Shield
@@ -43,7 +43,7 @@ export async function scanASTForBackdoors(filePath: string): Promise<VetoReport>
                 }
                 if (ts.isPropertyAccessExpression(expression)) {
                     const propName = expression.name.text;
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
                     if (propName === 'exec' || propName === 'execSync') {
                         // TODO: Refinar para asegurar que proviene de 'child_process'
                         const { line } = sourceFile.getLineAndCharacterOfPosition(node.getStart());

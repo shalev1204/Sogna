@@ -1,4 +1,4 @@
-import { SognaflowValueState } from "../sognaflowvaluestate";
+import { SognaflowValueState } from "../sognaflowvaluestate.js";
 export function CreateEffect(addValue) {
     const stateCache = new WeakMap();
     return (subject, values) => {

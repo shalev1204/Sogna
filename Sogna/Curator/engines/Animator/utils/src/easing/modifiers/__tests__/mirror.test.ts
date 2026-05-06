@@ -1,4 +1,4 @@
-import { mirrorEasing } from "../mirror"
+import { mirrorEasing } from "../mirror.js"
 
 const testEase = (p: number) => p * p
 

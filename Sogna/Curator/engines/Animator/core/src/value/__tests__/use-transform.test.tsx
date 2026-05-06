@@ -1,10 +1,10 @@
 import { sognaflowValue, sognaflowValue } from "sognaflow-dom"
 import { useEffect } from "react"
 import { cancelFrame, frame, sognaflow } from "../../"
-import { nextFrame, nextMicrotask } from "../../gestures/__tests__/utils"
-import { render } from "../../jest.setup"
+import { nextFrame, nextMicrotask } from "../../gestures/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 import { usesognaflowValue } from "../use-sognaflow-value"
-import { useTransform } from "../use-transform"
+import { useTransform } from "../use-transform.js"
 
 describe("as function", () => {
     test("sets initial value", async () => {

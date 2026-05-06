@@ -1,7 +1,7 @@
 import { Axis, Box, Delta, Point } from "sognaflow-utils"
-import { mixNumber } from "../../utils/mix/number"
-import { ResolvedValues } from "../../render/types"
-import { hasTransform } from "../utils/has-transform"
+import { MixNumber } from "../../utils/mix/number.js"
+import { ResolvedValues } from "../../render/types.js"
+import { hasTransform } from "../utils/has-transform.js"
 
 /**
  * Scales a point based on a factor and an originPoint
@@ -164,7 +164,7 @@ export function transformAxis(
     boxScale?: number,
     axisOrigin: number = 0.5
 ): void {
-    const originPoint = mixNumber(axis.min, axis.max, axisOrigin)
+    const originPoint = MixNumber(axis.min, axis.max, axisOrigin)
 
     // Apply the axis delta to the final axis
     applyAxisDelta(axis, axisTranslate, axisScale, originPoint, boxScale)

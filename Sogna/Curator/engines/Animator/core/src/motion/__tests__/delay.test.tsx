@@ -1,6 +1,6 @@
 import { sognaflowValue, stagger, Variants } from "sognaflow-dom"
 import { sognaflow } from "../.."
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("delay attr", () => {
     test("in transition prop", async () => {

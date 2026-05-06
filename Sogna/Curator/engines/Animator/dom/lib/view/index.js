@@ -1,6 +1,6 @@
 import { noop } from "sognaflow-utils";
-import { AddToQueue } from "./queue";
-import "./types.global";
+import { AddToQueue } from "./queue.js";
+import "./types.global.js";
 export class ViewTransitionBuilder {
     constructor(update, options = {}) {
         this.currentSubject = "root";

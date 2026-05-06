@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback } from "react"
-import { cn } from "../utils/cn"
+import { cn } from "../utils/cn.js"
 import { Check, Copy } from "lucide-react"
 
 interface MessageActionsProps {

@@ -2,9 +2,9 @@ import {
     AnimationState,
     KeyframeGenerator,
     ValueAnimationOptions,
-} from "../types"
-import { spring as createSpring } from "./spring"
-import { getGeneratorVelocity } from "./utils/velocity"
+} from "../types.js"
+import { spring as createSpring } from "./spring.js"
+import { getGeneratorVelocity } from "./utils/velocity.js"
 
 export function inertia({
     keyframes,

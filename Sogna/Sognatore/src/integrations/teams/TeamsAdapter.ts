@@ -1,8 +1,8 @@
-// @sentinel-ignore: GLOBAL - Core Teams integration with authorized webhook capabilities.
+// @Sentinel-ignore: GLOBAL - Core Teams integration with authorized webhook capabilities.
 import crypto from 'crypto';
-import { IntegrationAdapter } from '../adapter.js';
-import { TeamsAdapterOptions, TeamsAdaptiveCard } from './teamstypes.js';
-import * as cards from './teamscards.js';
+import { IntegrationAdapter } from '../Adapter.js';
+import { TeamsAdapterOptions, TeamsAdaptiveCard } from './TeamsTypes.js';
+import * as cards from './TeamsCards.js';
 
 export class TeamsAdapter extends IntegrationAdapter {
   private readonly _webhookUrl: string;
@@ -118,7 +118,7 @@ export class TeamsAdapter extends IntegrationAdapter {
       throw new Error('SOGNATORE_TEAMS_WEBHOOK_URL is not configured');
     }
 
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const response = await fetch(this._webhookUrl, {
       method: 'POST',
       headers: {

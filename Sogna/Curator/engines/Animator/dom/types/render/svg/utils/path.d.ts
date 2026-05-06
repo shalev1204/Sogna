@@ -1,4 +1,4 @@
-import { ResolvedValues } from "../../types";
+import { ResolvedValues } from "../../types.js";
 /**
  * Build SVG path properties. Uses the path's measured length to convert
  * our custom pathLength, pathSpacing and pathOffset into stroke-dashoffset

@@ -5,9 +5,9 @@ import type {
     Target,
     TransformProperties,
     Transition,
-} from "../animation/types"
-import type { DragElastic } from "../gestures/drag/types"
-import { PanInfo } from "../gestures/pan/types"
+} from "../animation/types.js"
+import type { DragElastic } from "../gestures/drag/types.js"
+import { PanInfo } from "../gestures/pan/types.js"
 import type { SognaflowValue } from "../value"
 
 export interface EventInfo {

@@ -1,4 +1,4 @@
-import type { AnimationType } from "../types"
+import type { AnimationType } from "../types.js"
 
 export const variantPriorityOrder: AnimationType[] = [
     "animate",

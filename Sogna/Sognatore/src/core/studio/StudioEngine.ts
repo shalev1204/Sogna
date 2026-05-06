@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import { EnvOracle } from '../utils/envoracle.js';
-import * as ModelRegistry from './modelregistry.js';
-import { ScoringEngine, TaskContext, ProviderInfo } from './scoringengine.js';
-import { PlaybookManager, Playbook } from './playbookmanager.js';
-import { StructuralValidator, Scene, ValidationReport } from './structuralvalidator.js';
-import { DeliveryPromise, PromiseType, QualityTier } from './deliverypromise.js';
+import { EnvOracle } from '../utils/EnvOracle.js';
+import * as ModelRegistry from './ModelRegistry.js';
+import { ScoringEngine, TaskContext, ProviderInfo } from './ScoringEngine.js';
+import { PlaybookManager, Playbook } from './PlaybookManager.js';
+import { StructuralValidator, Scene, ValidationReport } from './StructuralValidator.js';
+import { DeliveryPromise, PromiseType, QualityTier } from './DeliveryPromise.js';
 
 export enum ToolStatus {
   AVAILABLE = 'available',
@@ -183,7 +183,7 @@ export class StudioEngine {
    * Uploads a local file to Muapi storage with deduplication.
    */
   async uploadFile(filePath: string): Promise<string> {
-    const { AssetCache } = await import('./assetcache.js');
+    const { AssetCache } = await import('./AssetCache.js');
     AssetCache.load();
     
     const cachedUrl = AssetCache.getUrl(filePath);

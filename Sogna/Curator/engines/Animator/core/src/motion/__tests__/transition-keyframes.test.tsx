@@ -1,6 +1,6 @@
 import { checkVariantsDidChange } from "sognaflow-dom"
 import { sognaflow, sognaflowValue } from "../.."
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("keyframes transition", () => {
     test("keyframes as target", async () => {

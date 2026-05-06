@@ -1,7 +1,7 @@
-import { ElementOrSelector } from "../utils/resolve-elements"
-import { ResizeElement } from "./handle-element"
-import { ResizeWindow } from "./handle-window"
-import { ResizeHandler, WindowResizeHandler } from "./types"
+import { ElementOrSelector } from "../utils/resolve-elements.js"
+import { ResizeElement } from "./handle-element.js"
+import { ResizeWindow } from "./handle-window.js"
+import { ResizeHandler, WindowResizeHandler } from "./types.js"
 
 export function Resize(onResize: WindowResizeHandler): VoidFunction
 export function Resize(

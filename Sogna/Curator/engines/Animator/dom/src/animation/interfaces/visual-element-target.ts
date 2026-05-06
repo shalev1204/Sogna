@@ -1,16 +1,16 @@
-import { frame } from "../../frameloop"
-import { getValueTransition } from "../utils/get-value-transition"
-import { resolveTransition } from "../utils/resolve-transition"
-import { positionalKeys } from "../../render/utils/keys-position"
-import { setTarget } from "../../render/utils/setters"
-import { addValueToWillChange } from "../../value/will-change/add-will-change"
-import { getOptimisedAppearId } from "../optimized-appear/get-appear-id"
-import { animateSognaflowValue } from "./sognaflow-value"
-import type { VisualElementAnimationOptions } from "./types"
-import type { AnimationPlaybackControlsWithThen } from "../types"
-import type { TargetAndTransition } from "../../node/types"
-import type { AnimationTypeState } from "../../render/utils/animation-state"
-import type { VisualElement } from "../../render/visualelement"
+import { Frame } from "../../frameloop"
+import { GetValueTransition } from "../utils/get-value-transition.js"
+import { ResolveTransition } from "../utils/resolve-transition.js"
+import { PositionalKeys } from "../../render/utils/keys-position.js"
+import { setTarget } from "../../render/utils/setters.js"
+import { AddValueToWillChange } from "../../value/will-change/add-will-change.js"
+import { GetOptimisedAppearId } from "../optimized-appear/get-appear-id.js"
+import { AnimateSognaflowValue } from "./sognaflow-value.js"
+import type { VisualElementAnimationOptions } from "./types.js"
+import type { AnimationPlaybackControlsWithThen } from "../types.js"
+import type { TargetAndTransition } from "../../node/types.js"
+import type { AnimationTypeState } from "../../render/utils/animation-state.js"
+import type { VisualElement } from "../../render/VisualElement.js"
 
 /**
  * Decide whether we should block this animation. Previously, we achieved this
@@ -42,7 +42,7 @@ export function AnimateTarget(
 
     const defaultTransition = visualElement.getDefaultTransition()
     transition = transition
-        ? resolveTransition(transition, defaultTransition)
+        ? ResolveTransition(transition, defaultTransition)
         : defaultTransition
 
     const reduceSognaflow = (transition as { reduceSognaflow?: boolean })?.reduceSognaflow
@@ -73,12 +73,12 @@ export function AnimateTarget(
 
         const valueTransition = {
             delay,
-            ...getValueTransition(transition || {}, key),
+            ...GetValueTransition(transition || {}, key),
         }
 
         /**
          * If the value is already at the defined target, skip the animation.
-         * We still re-assert the value via frame.update to take precedence
+         * We still re-assert the value via Frame.update to take precedence
          * over any stale transitionEnd callbacks from previous animations.
          */
         const currentValue = value.get()
@@ -89,7 +89,7 @@ export function AnimateTarget(
             valueTarget === currentValue &&
             !valueTransition.velocity
         ) {
-            frame.update(() => value.set(valueTarget as any))
+            Frame.update(() => value.set(valueTarget as any))
             continue
         }
 
@@ -99,13 +99,13 @@ export function AnimateTarget(
          */
         let isHandoff = false
         if (window.sognaflowHandoffAnimation) {
-            const appearId = getOptimisedAppearId(visualElement)
+            const appearId = GetOptimisedAppearId(visualElement)
 
             if (appearId) {
                 const startTime = window.sognaflowHandoffAnimation(
                     appearId,
                     key,
-                    frame
+                    Frame
                 )
 
                 if (startTime !== null) {
@@ -115,17 +115,17 @@ export function AnimateTarget(
             }
         }
 
-        addValueToWillChange(visualElement, key)
+        AddValueToWillChange(visualElement, key)
 
         const shouldReduceSognaflow =
             reduceSognaflow ?? visualElement.shouldReduceSognaflow
 
         value.start(
-            animateSognaflowValue(
+            AnimateSognaflowValue(
                 key,
                 value,
                 valueTarget,
-                shouldReduceSognaflow && positionalKeys.has(key)
+                shouldReduceSognaflow && PositionalKeys.has(key)
                     ? { type: false }
                     : valueTransition,
                 visualElement,
@@ -142,7 +142,7 @@ export function AnimateTarget(
 
     if (transitionEnd) {
         const applyTransitionEnd = () =>
-            frame.update(() => {
+            Frame.update(() => {
                 transitionEnd && setTarget(visualElement, transitionEnd)
             })
 

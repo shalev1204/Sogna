@@ -1,5 +1,5 @@
-import { NativeAnimation, NativeAnimationOptions } from "./nativeanimation";
-import { AnyResolvedKeyframe, ValueAnimationOptions } from "./types";
+import { NativeAnimation, NativeAnimationOptions } from "./nativeanimation.js";
+import { AnyResolvedKeyframe, ValueAnimationOptions } from "./types.js";
 export type NativeAnimationOptionsExtended<T extends AnyResolvedKeyframe> = NativeAnimationOptions & ValueAnimationOptions<T> & NativeAnimationOptions;
 export declare class NativeAnimationExtended<T extends AnyResolvedKeyframe> extends NativeAnimation<T> {
     options: NativeAnimationOptionsExtended<T>;

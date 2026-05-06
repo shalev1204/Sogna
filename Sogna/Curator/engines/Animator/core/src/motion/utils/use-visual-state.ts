@@ -13,11 +13,11 @@ import { sognaflowContext, sognaflowContextProps } from "../../context/sognaflow
 import {
     PresenceContext,
     type PresenceContextProps,
-} from "../../context/presencecontext"
-import { ScrapesognaflowValuesFromProps } from "../../render/types"
-import { useConstant } from "../../utils/use-constant"
+} from "../../context/PresenceContext.js"
+import { ScrapesognaflowValuesFromProps } from "../../render/types.js"
+import { useConstant } from "../../utils/use-constant.js"
 import { resolvesognaflowValue } from "sognaflow-dom"
-import { sognaflowProps } from "../types"
+import { sognaflowProps } from "../types.js"
 
 export interface VisualState<Instance, RenderState> {
     renderState: RenderState

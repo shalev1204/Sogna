@@ -5,8 +5,8 @@ import {
     deferred,
     drag,
     dragFrame,
-} from "../../gestures/drag/__tests__/utils"
-import { render } from "../../jest.setup"
+} from "../drag/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 
 describe("pan", () => {
     test("pan handlers aren't frozen at pan session start", async () => {

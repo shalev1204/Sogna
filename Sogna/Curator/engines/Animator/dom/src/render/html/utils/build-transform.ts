@@ -1,9 +1,9 @@
-import { getValueAsType } from "../../../value/types/utils/get-as-type"
-import { numberValueTypes } from "../../../value/types/maps/number"
-import { transformPropOrder } from "../../utils/keys-transform"
-import { ResolvedValues } from "../../types"
-import { HTMLRenderState } from "../types"
-import type { SognaflowNodeOptions } from "../../../node/types"
+import { getValueAsType } from "../../../value/types/utils/get-as-type.js"
+import { NumberValueTypes } from "../../../value/types/maps/number.js"
+import { TransformPropOrder } from "../../utils/keys-transform.js"
+import { ResolvedValues } from "../../types.js"
+import { HTMLRenderState } from "../types.js"
+import type { SognaflowNodeOptions } from "../../../node/types.js"
 
 const translateAlias = {
     x: "translateX",
@@ -12,7 +12,7 @@ const translateAlias = {
     transformPerspective: "perspective",
 }
 
-const numTransforms = transformPropOrder.length
+const numTransforms = TransformPropOrder.length
 
 /**
  * Build a CSS transform style from individual x/y/scale etc properties.
@@ -34,7 +34,7 @@ export function buildTransform(
      * are present to the transform string.
      */
     for (let i = 0; i < numTransforms; i++) {
-        const key = transformPropOrder[i] as keyof typeof translateAlias
+        const key = TransformPropOrder[i] as keyof typeof translateAlias
         const value = latestValues[key]
 
         if (value === undefined) continue
@@ -48,7 +48,7 @@ export function buildTransform(
         }
 
         if (!valueIsDefault || transformTemplate) {
-            const valueAsType = getValueAsType(value, numberValueTypes[key])
+            const valueAsType = getValueAsType(value, NumberValueTypes[key])
 
             if (!valueIsDefault) {
                 transformIsDefault = false

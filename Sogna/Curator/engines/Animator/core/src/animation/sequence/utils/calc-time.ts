@@ -1,4 +1,4 @@
-import { SequenceTime } from "../types"
+import { SequenceTime } from "../types.js"
 
 /**
  * Given a absolute or relative time definition and current/prev time state of the sequence,

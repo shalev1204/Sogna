@@ -6,7 +6,7 @@
  */
 
 import chalk from 'chalk';
-import cerebro from '../core/cerebro.js';
+import cerebro from '../core/Cerebro.js';
 
 async function main() {
   console.log(chalk.cyan.bold('\n🚀 SOGNA DREAM: Activating the Creator of Worlds...'));

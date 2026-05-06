@@ -1,4 +1,4 @@
-import { resolveOffset } from "../offset"
+import { resolveOffset } from "../offset.js"
 
 describe("resolveOffset", () => {
   test("Can resolve single-value numerical edge", () => {

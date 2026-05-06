@@ -1,7 +1,7 @@
 "use client"
 
 import { sognaflowValue, type VisualElement } from "sognaflow-dom"
-import { useConstant } from "../../utils/use-constant"
+import { useConstant } from "../../utils/use-constant.js"
 import { usesognaflowValueEvent } from "../../utils/use-sognaflow-value-event"
 
 export function usesognaflowValueChild(

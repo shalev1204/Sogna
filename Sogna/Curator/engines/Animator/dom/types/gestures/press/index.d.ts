@@ -1,6 +1,6 @@
-import { ElementOrSelector } from "../../utils/resolve-elements";
-import { EventOptions } from "../types";
-import { OnPressStartEvent } from "./types";
+import { ElementOrSelector } from "../../utils/resolve-elements.js";
+import { EventOptions } from "../types.js";
+import { OnPressStartEvent } from "./types.js";
 export interface PointerEventOptions extends EventOptions {
     useGlobalTarget?: boolean;
     stopPropagation?: boolean;

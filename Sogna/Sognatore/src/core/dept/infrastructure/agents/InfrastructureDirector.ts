@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { InfrastructureInventory } from '../inventory/infrastructureinventory.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { InfrastructureInventory } from '../inventory/InfrastructureInventory.js';
 
 export class InfrastructureDirector implements Agent {
     id = 'infra_director';

@@ -1,4 +1,4 @@
-import { CreateEffect as createEffect } from "../utils/create-effect";
+import { CreateEffect as createEffect } from "../utils/create-effect.js";
 export const PropEffect = /*@__PURE__*/ createEffect((subject, state, key, value) => {
     return state.set(key, value, () => {
         subject[key] = state.latest[key];

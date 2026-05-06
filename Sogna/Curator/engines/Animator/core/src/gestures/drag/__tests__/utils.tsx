@@ -1,7 +1,7 @@
 import { frame } from "sognaflow-dom"
 import * as React from "react"
 import { sognaflowConfig } from "../../../components/sognaflowconfig"
-import { pointerDown, pointerMove, pointerUp } from "../../../jest.setup"
+import { pointerDown, pointerMove, pointerUp } from "../../../jest.setup.js"
 
 export type Point = {
     x: number

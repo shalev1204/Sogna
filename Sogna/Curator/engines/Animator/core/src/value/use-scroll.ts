@@ -9,10 +9,10 @@ import {
 import { invariant } from "sognaflow-utils"
 import { RefObject, useCallback, useEffect, useRef } from "react"
 import { scroll } from "../render/dom/scroll"
-import { ScrollInfoOptions } from "../render/dom/scroll/types"
-import { offsetToViewTimelineRange } from "../render/dom/scroll/utils/offset-to-range"
-import { useConstant } from "../utils/use-constant"
-import { useIsomorphicLayoutEffect } from "../utils/use-isomorphic-effect"
+import { ScrollInfoOptions } from "../render/dom/scroll/types.js"
+import { offsetToViewTimelineRange } from "../render/dom/scroll/utils/offset-to-range.js"
+import { useConstant } from "../utils/use-constant.js"
+import { useIsomorphicLayoutEffect } from "../utils/use-isomorphic-effect.js"
 
 export interface UseScrollOptions
     extends Omit<ScrollInfoOptions, "container" | "target"> {

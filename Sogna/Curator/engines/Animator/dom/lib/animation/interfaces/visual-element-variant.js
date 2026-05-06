@@ -1,6 +1,6 @@
-import { ResolveVariant as resolveVariant } from "../../render/utils/resolve-dynamic-variants";
-import { CalcChildStagger as calcChildStagger } from "../utils/calc-child-stagger";
-import { AnimateTarget as animateTarget } from "./visual-element-target";
+import { ResolveVariant as resolveVariant } from "../../render/utils/resolve-dynamic-variants.js";
+import { CalcChildStagger as calcChildStagger } from "../utils/calc-child-stagger.js";
+import { AnimateTarget as animateTarget } from "./visual-element-target.js";
 export function AnimateVariant(visualElement, variant, options = {}) {
     const resolved = resolveVariant(visualElement, variant, options.type === "exit"
         ? visualElement.presenceContext?.custom

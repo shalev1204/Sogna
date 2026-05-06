@@ -1,16 +1,16 @@
-import { Provider } from '../provider.js';
-import { AgentRole } from './agenttypes.js';
-import { StateStore } from '../statestore.js';
+import { Provider } from '../Provider.js';
+import { AgentRole } from './AgentTypes.js';
+import { StateStore } from '../StateStore.js';
 import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
-import { ToolRegistry } from '../actions/toolregistry.js';
-import { AgentFactory } from './agentfactory.js';
-import { Guardian } from '../guardian.js';
-import { AutoHealer } from '@sogna/curator/shared/autohealer.js';
-import { AuditVault } from '@sogna/curator/shared/auditvault.js';
-import { Orchestrator, Turn } from '../orchestrator.js';
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@sogna/curator';
+import { ToolRegistry } from '../actions/ToolRegistry.js';
+import { AgentFactory } from './AgentFactory.js';
+import { Guardian } from '../Guardian.js';
+import { AutoHealer } from '@Sogna/Curator/shared/AutoHealer.js';
+import { AuditVault } from '@Sogna/Curator/shared/AuditVault.js';
+import { Orchestrator, Turn } from '../Orchestrator.js';
+import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@Sogna/Curator';
 
 export interface AgentState {
   id: string;
@@ -103,10 +103,10 @@ export class Agent {
                        relevantTools.map(t => `- ${t.name}: ${t.description}`).join('\n');
 
       // [PHASE 5: PREDICTIVE PREFETCH] - Intelligence Warming
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const prefetchContext = await orchestrator.predictivePrefetch(currentPrompt);
 
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const systemPrompt = this.buildSystemPrompt() + "\n\n" + toolDefs + (prefetchContext ? `\n\n${prefetchContext}` : "");
 
       // [CONTEXT COMPACTION] - Automatic pruning with Recursive Summarization
@@ -245,7 +245,7 @@ export class Agent {
     const outputTokens = Math.ceil(outputLen / 4);
     
     // High-Fidelity cost tracking
-    import('../utils/costtracker.js').then(m => {
+    import('../utils/CostTracker.js').then(m => {
       m.CostTracker.getInstance().calculateAndReport(this.model, inputTokens, outputTokens, cacheWrite, cacheRead);
     });
 

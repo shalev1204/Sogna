@@ -1,7 +1,7 @@
-import { IntegrationAdapter } from '../adapter.js';
-import { buildStatusBlocks } from './slackblocks.js';
-import { verifySlackSignature } from './slackwebhookhandler.js';
-import { SlackAdapterOptions } from './slacktypes.js';
+import { IntegrationAdapter } from '../Adapter.js';
+import { buildStatusBlocks } from './SlackBlocks.js';
+import { verifySlackSignature } from './SlackWebhookHandler.js';
+import { SlackAdapterOptions } from './SlackTypes.js';
 
 export class SlackAdapter extends IntegrationAdapter {
   private readonly _token: string;

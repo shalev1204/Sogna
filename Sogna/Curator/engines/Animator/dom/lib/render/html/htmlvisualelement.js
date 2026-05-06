@@ -1,11 +1,11 @@
-import { IsCSSVariableName as isCSSVariableName } from "../../animation/utils/is-css-variable";
-import { TransformProps as transformProps } from "../utils/keys-transform";
-import { DefaultTransformValue as defaultTransformValue, ReadTransformValue as readTransformValue, } from "../dom/parse-transform";
-import { measureViewportBox } from "../../projection/utils/measure";
-import { DOMVisualElement } from "../dom/domvisualelement";
-import { BuildHTMLStyles as buildHTMLStyles } from "./utils/build-styles";
-import { RenderHTML as renderHTML } from "./utils/render";
-import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values";
+import { IsCSSVariableName as isCSSVariableName } from "../../animation/utils/is-css-variable.js";
+import { TransformProps as transformProps } from "../utils/keys-transform.js";
+import { DefaultTransformValue as defaultTransformValue, ReadTransformValue as readTransformValue, } from "../dom/parse-transform.js";
+import { measureViewportBox } from "../../projection/utils/measure.js";
+import { DOMVisualElement } from "../dom/domvisualelement.js";
+import { BuildHTMLStyles as buildHTMLStyles } from "./utils/build-styles.js";
+import { RenderHTML as renderHTML } from "./utils/render.js";
+import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values.js";
 export function GetComputedStyle(element) {
     return window.getComputedStyle(element);
 }

@@ -7,8 +7,8 @@ import { sognaflowConfigContext } from "../../context/sognaflowconfigcontext"
 import {
     loadExternalIsValidProp,
     IsValidProp,
-} from "../../render/dom/utils/filter-props"
-import { useConstant } from "../../utils/use-constant"
+} from "../../render/dom/utils/filter-props.js"
+import { useConstant } from "../../utils/use-constant.js"
 
 export interface sognaflowConfigProps extends Partial<sognaflowConfigContext> {
     children?: React.ReactNode

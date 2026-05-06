@@ -44,7 +44,7 @@ class Cerebro {
         stdio: 'inherit', 
         env: { ...process.env, PYTHONPATH: pythonPath } 
       });
-      return { status: 'mapped', graphPath: 'memory/navigator/graph.json' };
+      return { status: 'mapped', graphPath: 'memory/Navigator/graph.json' };
     } catch (error) {
       console.error('❌ Navigator failed:', error.message);
       return null;

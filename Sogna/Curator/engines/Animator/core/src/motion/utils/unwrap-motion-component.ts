@@ -1,5 +1,5 @@
 import { issognaflowComponent } from "./is-sognaflow-component"
-import { sognaflowComponentSymbol } from "./symbol"
+import { sognaflowComponentSymbol } from "./symbol.js"
 
 /**
  * Unwraps a `sognaflow` component and returns either a string for `sognaflow.div` or

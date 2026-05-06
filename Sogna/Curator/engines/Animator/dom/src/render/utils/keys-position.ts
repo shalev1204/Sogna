@@ -1,4 +1,4 @@
-import { TransformPropOrder } from "./keys-transform"
+import { TransformPropOrder } from "./keys-transform.js"
 
 export const PositionalKeys = new Set([
     "width",

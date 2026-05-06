@@ -20,12 +20,12 @@ import {
 } from "sognaflow-dom"
 import { Axis, Point, invariant } from "sognaflow-utils"
 import { addDomEvent, type LayoutUpdateData } from "sognaflow-dom"
-import { addPointerEvent } from "../../events/add-pointer-event"
-import { extractEventInfo } from "../../events/event-info"
+import { addPointerEvent } from "../../events/add-pointer-event.js"
+import { extractEventInfo } from "../../events/event-info.js"
 import { sognaflowProps } from "../../sognaflow/types"
-import { getContextWindow } from "../../utils/get-context-window"
-import { isRefObject } from "../../utils/is-ref-object"
-import { PanSession } from "../pan/pansession"
+import { getContextWindow } from "../../utils/get-context-window.js"
+import { isRefObject } from "../../utils/is-ref-object.js"
+import { PanSession } from "../pan/PanSession.js"
 import {
     applyConstraints,
     calcOrigin,
@@ -34,7 +34,7 @@ import {
     defaultElastic,
     rebaseAxisConstraints,
     resolveDragElastic,
-} from "./utils/constraints"
+} from "./utils/constraints.js"
 
 export const elementDragControls = new WeakMap<
     VisualElement,

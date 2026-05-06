@@ -4,18 +4,18 @@ import {
     noop,
     secondsToMilliseconds,
 } from "sognaflow-utils"
-import { setStyle } from "../render/dom/style-set"
-import { supportsScrollTimeline } from "../utils/supports/scroll-timeline"
-import { getFinalKeyframe } from "./keyframes/get-final"
+import { setStyle } from "../render/dom/style-set.js"
+import { supportsScrollTimeline } from "../utils/supports/scroll-timeline.js"
+import { GetFinalKeyframe } from "./keyframes/get-final.js"
 import {
     AnimationPlaybackControlsWithThen,
     AnyResolvedKeyframe,
     DOMValueAnimationOptions,
     TimelineWithFallback,
-} from "./types"
-import { WithPromise } from "./utils/withpromise"
-import { startWaapiAnimation } from "./waapi/start-waapi-animation"
-import { applyGeneratorOptions } from "./waapi/utils/apply-generator"
+} from "./types.js"
+import { WithPromise } from "./utils/WithPromise.js"
+import { startWaapiAnimation } from "./waapi/start-waapi-animation.js"
+import { applyGeneratorOptions } from "./waapi/utils/apply-generator.js"
 
 export interface NativeAnimationOptions<V extends AnyResolvedKeyframe = number>
     extends DOMValueAnimationOptions<V> {
@@ -96,7 +96,7 @@ export class NativeAnimation<T extends AnyResolvedKeyframe>
             this.finishedTime = this.time
 
             if (!pseudoElement) {
-                const keyframe = getFinalKeyframe(
+                const keyframe = GetFinalKeyframe(
                     keyframes as any,
                     this.options as any,
                     finalKeyframe,

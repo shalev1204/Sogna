@@ -1,4 +1,4 @@
-import { anticipate } from "../anticipate"
+import { anticipate } from "../anticipate.js"
 
 describe("anticipate easing", () => {
     test("anticipate(0) returns 0", () => {

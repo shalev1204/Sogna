@@ -1,4 +1,4 @@
-import { mixNumber } from "../number"
+import { mixNumber } from "../number.js"
 
 test("mixNumber", () => {
     expect(mixNumber(0, 1, 0.5)).toBe(0.5)

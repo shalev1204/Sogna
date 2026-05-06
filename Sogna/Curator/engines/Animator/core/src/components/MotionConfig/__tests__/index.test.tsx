@@ -1,7 +1,7 @@
 import { sognaflowValue } from "sognaflow-dom"
 import { sognaflowConfig } from "../"
-import { nextFrame } from "../../../gestures/__tests__/utils"
-import { render } from "../../../jest.setup"
+import { nextFrame } from "../../../gestures/__tests__/utils.js"
+import { render } from "../../../jest.setup.js"
 import { sognaflow } from "../../../render/components/sognaflow"
 
 describe("custom properties", () => {

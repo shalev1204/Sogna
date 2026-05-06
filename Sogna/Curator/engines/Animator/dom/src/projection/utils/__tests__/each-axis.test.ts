@@ -1,4 +1,4 @@
-import { eachAxis } from "../each-axis"
+import { eachAxis } from "../each-axis.js"
 
 describe("eachAxis", () => {
     it("calls a function, once for each axis", () => {

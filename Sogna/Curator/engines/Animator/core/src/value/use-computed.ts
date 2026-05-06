@@ -1,7 +1,7 @@
 "use client"
 
 import { collectsognaflowValues, type sognaflowValue } from "sognaflow-dom"
-import { useCombinesognaflowValues } from "./use-combine-values"
+import { useCombinesognaflowValues } from "./use-combine-values.js"
 
 export function useComputed<O>(compute: () => O): sognaflowValue<O> {
     /**

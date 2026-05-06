@@ -1,4 +1,4 @@
-import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/provider.js';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
 import { spawn } from 'child_process';
 
 export class AiderProvider extends Provider {
@@ -14,9 +14,9 @@ export class AiderProvider extends Provider {
 
   async detect(): Promise<boolean> {
     try {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const { execSync } = await import('child_process');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       execSync('aider --version', { stdio: 'ignore' });
       return true;
     } catch {
@@ -26,9 +26,9 @@ export class AiderProvider extends Provider {
 
   async version(): Promise<string> {
     try {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       const { execSync } = await import('child_process');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       return execSync('aider --version', { encoding: 'utf8' }).trim();
     } catch {
       return 'unknown';

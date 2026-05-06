@@ -1,5 +1,5 @@
 import { GateResult, CouncilEvidence } from './types.js';
-import { ToolResolver } from '../toolresolver.js';
+import { ToolResolver } from '../ToolResolver.js';
 
 export abstract class BaseGate {
   protected toolResolver: ToolResolver;

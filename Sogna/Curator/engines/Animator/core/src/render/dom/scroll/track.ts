@@ -1,8 +1,8 @@
 import { cancelFrame, frame, frameData, resize, Process } from "sognaflow-dom"
 import { noop } from "sognaflow-utils"
-import { createScrollInfo } from "./info"
-import { createOnScrollHandler } from "./on-scroll-handler"
-import { OnScrollHandler, OnScrollInfo, ScrollInfoOptions } from "./types"
+import { createScrollInfo } from "./info.js"
+import { createOnScrollHandler } from "./on-scroll-handler.js"
+import { OnScrollHandler, OnScrollInfo, ScrollInfoOptions } from "./types.js"
 
 const scrollListeners = new WeakMap<Element, VoidFunction>()
 const resizeListeners = new WeakMap<Element, VoidFunction>()

@@ -24,14 +24,14 @@ let configSchema: object;
 let validateSchema: ValidateFunction;
 
 try {
-  const schemaPath = new URL('../configs/config-schema.json', import.meta.url);
+  const schemaPath = new URL('../configs/config-schema.json.js', import.meta.url);
   const schemaContent = await fs.readFile(schemaPath, 'utf8');
   configSchema = JSON.parse(schemaContent) as object;
   validateSchema = ajv.compile(configSchema);
 } catch (error) {
   const errMsg = error instanceof Error ? error.message : String(error);
   throw new PentestError(`Failed to load configuration schema: ${errMsg}`, 'config', false, {
-    schemaPath: '../configs/config-schema.json',
+    schemaPath: '../configs/config-schema.json.js',
     originalError: errMsg,
   });
 }

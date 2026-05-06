@@ -1,5 +1,5 @@
 import { Axis, Box, Delta, Point } from "sognaflow-utils";
-import { ResolvedValues } from "../../render/types";
+import { ResolvedValues } from "../../render/types.js";
 /**
  * Scales a point based on a factor and an originPoint
  */

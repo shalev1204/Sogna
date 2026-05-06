@@ -4,18 +4,18 @@ import { issognaflowValue } from "sognaflow-dom"
 import { invariant } from "sognaflow-utils"
 import * as React from "react"
 import { forwardRef, FunctionComponent, useContext } from "react"
-import { ReorderContext } from "../../context/reordercontext"
+import { ReorderContext } from "../../context/ReorderContext.js"
 import { sognaflow } from "../../render/components/sognaflow/proxy"
-import { HTMLsognaflowProps } from "../../render/html/types"
-import { useConstant } from "../../utils/use-constant"
+import { HTMLsognaflowProps } from "../../render/html/types.js"
+import { useConstant } from "../../utils/use-constant.js"
 import { usesognaflowValue } from "../../value/use-sognaflow-value"
-import { useTransform } from "../../value/use-transform"
+import { useTransform } from "../../value/use-transform.js"
 
-import { DefaultItemElement, ReorderElementTag } from "./types"
+import { DefaultItemElement, ReorderElementTag } from "./types.js"
 import {
     autoScrollIfNeeded,
     resetAutoScrollState,
-} from "./utils/auto-scroll"
+} from "./utils/auto-scroll.js"
 
 export interface Props<
     V,

@@ -1,5 +1,5 @@
-import { TransformProps } from "./keys-transform";
-import { ScaleCorrectors, AddScaleCorrector, } from "../../projection/styles/scale-correction";
+import { TransformProps } from "./keys-transform.js";
+import { ScaleCorrectors, AddScaleCorrector, } from "../../projection/styles/scale-correction.js";
 export { ScaleCorrectors, AddScaleCorrector };
 export function IsForcedSognaflowValue(key, { layout, layoutId }) {
     return (TransformProps.has(key) ||

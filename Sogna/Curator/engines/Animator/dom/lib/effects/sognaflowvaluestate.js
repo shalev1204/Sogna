@@ -1,6 +1,6 @@
-import { CancelFrame as cancelFrame, Frame as frame } from "../frameloop/frame";
-import { NumberValueTypes as numberValueTypes } from "../value/types/maps/number";
-import { GetValueAsType as getValueAsType } from "../value/types/utils/get-as-type";
+import { CancelFrame as cancelFrame, Frame as frame } from "../frameloop/frame.js";
+import { NumberValueTypes as numberValueTypes } from "../value/types/maps/number.js";
+import { GetValueAsType as getValueAsType } from "../value/types/utils/get-as-type.js";
 export class SognaflowValueState {
     constructor() {
         this.latest = {};

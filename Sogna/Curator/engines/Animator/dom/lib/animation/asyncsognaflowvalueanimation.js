@@ -1,13 +1,13 @@
 import { sognaflowGlobalConfig, noop } from "sognaflow-utils";
-import { Time as time } from "../frameloop/sync-time";
-import { JSAnimation } from "./jsanimation";
-import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final";
-import { KeyframeResolver as DefaultKeyframeResolver, flushKeyframeResolvers, } from "./keyframes/keyframesresolver";
-import { NativeAnimationExtended } from "./nativeanimationextended";
-import { CanAnimate as canAnimate } from "./utils/can-animate";
-import { MakeAnimationInstant as makeAnimationInstant } from "./utils/make-animation-instant";
-import { WithPromise } from "./utils/withpromise";
-import { supportsBrowserAnimation } from "./waapi/supports/waapi";
+import { Time as time } from "../frameloop/sync-time.js";
+import { JSAnimation } from "./jsanimation.js";
+import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final.js";
+import { KeyframeResolver as DefaultKeyframeResolver, flushKeyframeResolvers, } from "./keyframes/keyframesresolver.js";
+import { NativeAnimationExtended } from "./nativeanimationextended.js";
+import { CanAnimate as canAnimate } from "./utils/can-animate.js";
+import { MakeAnimationInstant as makeAnimationInstant } from "./utils/make-animation-instant.js";
+import { WithPromise } from "./utils/withpromise.js";
+import { supportsBrowserAnimation } from "./waapi/supports/waapi.js";
 /**
  * Maximum time allowed between an animation being created and it being
  * resolved for us to use the latter as the start time.

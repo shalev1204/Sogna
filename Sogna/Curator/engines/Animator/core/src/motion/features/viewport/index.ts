@@ -1,6 +1,6 @@
 import { Feature } from "sognaflow-dom"
-import { sognaflowProps } from "../../types"
-import { observeIntersection } from "./observers"
+import { sognaflowProps } from "../../types.js"
+import { observeIntersection } from "./observers.js"
 
 const thresholdNames = {
     some: 0,

@@ -1,8 +1,8 @@
-import type { TimelineStep, StepState } from "../types/timeline"
-import type { ToolSize } from "../types/tool-styles"
-import { useToolComplete } from "../hooks/use-tool-complete"
-import { SpinnerIcon16, CheckIcon16 } from "../icons/tool-icons"
-import { ToolRowBase } from "./tool-row-base"
+import type { TimelineStep, StepState } from "../types/timeline.js"
+import type { ToolSize } from "../types/tool-styles.js"
+import { useToolComplete } from "../hooks/use-tool-complete.js"
+import { SpinnerIcon16, CheckIcon16 } from "../icons/tool-icons.js"
+import { ToolRowBase } from "./tool-row-base.js"
 
 const ACTION_LABELS = ["Brewing...", "Crafting...", "Working...", "Preparing..."]
 

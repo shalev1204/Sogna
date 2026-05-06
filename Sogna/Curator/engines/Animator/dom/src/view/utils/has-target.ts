@@ -1,4 +1,4 @@
-import { ViewTransitionTarget, ViewTransitionTargetDefinition } from "../types"
+import { ViewTransitionTarget, ViewTransitionTargetDefinition } from "../types.js"
 
 export function HasTarget(
     target: ViewTransitionTargetDefinition,

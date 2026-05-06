@@ -1,6 +1,6 @@
-import { mirrorEasing } from "./modifiers/mirror"
-import { reverseEasing } from "./modifiers/reverse"
-import { EasingFunction } from "./types"
+import { mirrorEasing } from "./modifiers/mirror.js"
+import { reverseEasing } from "./modifiers/reverse.js"
+import { EasingFunction } from "./types.js"
 
 export const circIn: EasingFunction = (p) => 1 - Math.sin(Math.acos(p))
 export const circOut = reverseEasing(circIn)

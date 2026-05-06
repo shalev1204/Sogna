@@ -1,10 +1,10 @@
-import { IsCSSVar as isCSSVar } from "../../render/dom/is-css-var";
-import { TransformProps as transformProps } from "../../render/utils/keys-transform";
-import { IsHTMLElement as isHTMLElement } from "../../utils/is-html-element";
+import { IsCSSVar as isCSSVar } from "../../render/dom/is-css-var.js";
+import { TransformProps as transformProps } from "../../render/utils/keys-transform.js";
+import { IsHTMLElement as isHTMLElement } from "../../utils/is-html-element.js";
 import { SognaflowValue } from "../../value";
-import { CreateSelectorEffect as createSelectorEffect } from "../utils/create-dom-effect";
-import { CreateEffect as createEffect } from "../utils/create-effect";
-import { BuildTransform as buildTransform } from "./transform";
+import { CreateSelectorEffect as createSelectorEffect } from "../utils/create-dom-effect.js";
+import { CreateEffect as createEffect } from "../utils/create-effect.js";
+import { BuildTransform as buildTransform } from "./transform.js";
 const originProps = new Set(["originX", "originY", "originZ"]);
 export const AddStyleValue = (element, state, key, value) => {
     let render = undefined;

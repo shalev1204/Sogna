@@ -1,8 +1,8 @@
 import { noop, reverseEasing } from "sognaflow-utils"
 import { frame } from "../../frameloop"
-import { JSAnimation, animateValue } from "../jsanimation"
-import { AnyResolvedKeyframe, ValueAnimationOptions } from "../types"
-import { syncDriver } from "./utils"
+import { JSAnimation, animateValue } from "../JSAnimation.js"
+import { AnyResolvedKeyframe, ValueAnimationOptions } from "../types.js"
+import { syncDriver } from "./utils.js"
 
 async function nextFrame() {
     return new Promise<void>((resolve) => {

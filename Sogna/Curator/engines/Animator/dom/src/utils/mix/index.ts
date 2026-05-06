@@ -1,6 +1,6 @@
-import { GetMixer } from "./complex"
-import { MixNumber as MixNumberImmediate } from "./number"
-import { Mixer } from "./types"
+import { GetMixer } from "./complex.js"
+import { MixNumber as MixNumberImmediate } from "./number.js"
+import { Mixer } from "./types.js"
 
 export function Mix<T>(from: T, to: T): Mixer<T>
 export function Mix(from: number, to: number, p: number): number

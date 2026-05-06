@@ -1,4 +1,4 @@
-export { createMinimalsognaflowComponent as create } from "./create"
+export { createMinimalsognaflowComponent as create } from "./create.js"
 
 export {
     sognaflowA as a,
@@ -165,4 +165,4 @@ export {
     sognaflowLinearGradient as linearGradient,
     sognaflowRadialGradient as radialGradient,
     sognaflowTextPath as textPath,
-} from "./elements"
+} from "./elements.js"

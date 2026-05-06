@@ -1,4 +1,4 @@
-import { StatsBuffer } from "../stats/buffer";
+import { StatsBuffer } from "../stats/buffer.js";
 export function CreateRenderStep(runNextFrame, stepName) {
     /**
      * We create and reuse two queues, one to queue jobs for the current frame

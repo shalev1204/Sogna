@@ -1,14 +1,14 @@
 import chalk from 'chalk';
-import { Guardian } from './guardian.js';
-import { AgentFactory } from './agents/agentfactory.js';
-import { ProviderFactory } from './providerfactory.js';
-import { Hub } from '../sentinel-sognatore/hub.js';
-import { ToolResolver } from './toolresolver.js';
-import { BlueprintAuditor } from '@sogna/curator/shared/blueprintauditor.js';
-import { getBlueprint } from '@sogna/curator/shared/blueprintregistry.js';
+import { Guardian } from './Guardian.js';
+import { AgentFactory } from './agents/AgentFactory.js';
+import { ProviderFactory } from './ProviderFactory.js';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
+import { ToolResolver } from './ToolResolver.js';
+import { BlueprintAuditor } from '@Sogna/Curator/shared/BlueprintAuditor.js';
+import { getBlueprint } from '@Sogna/Curator/shared/BlueprintRegistry.js';
 import fs from 'fs-extra';
 import path from 'path';
-import { MemoryHub } from './memory/memoryhub.js';
+import { MemoryHub } from './memory/MemoryHub.js';
 
 export enum BootstrapStage {
   DISCOVERY = 'DISCOVERY',
@@ -64,7 +64,7 @@ export class BootstrapEngine {
     this.updateStage(BootstrapStage.DISCOVERY, 'IN_PROGRESS', 'Scanning workspace and blueprints...');
     
     const auditor = new BlueprintAuditor();
-    const blueprint = getBlueprint('sognatore-core');
+    const blueprint = getBlueprint('Sognatore-core');
     
     if (blueprint) {
       const report = await auditor.audit(Hub.getInstance().getSognatoreRoot(), blueprint);
@@ -83,7 +83,7 @@ export class BootstrapEngine {
     this.updateStage(BootstrapStage.HEALTH, 'IN_PROGRESS', 'Performing Proactive Health Check (Safe Handshake)...');
     
     // Lazy import to avoid circular dep if any, though AutoHealer is in toolkit
-    const { AutoHealer } = await import('@sogna/curator/shared/autohealer.js');
+    const { AutoHealer } = await import('@Sogna/Curator/shared/AutoHealer.js');
     const healer = AutoHealer.getInstance();
     
     const issues = await healer.performProactiveHealthCheck();
@@ -135,7 +135,7 @@ export class BootstrapEngine {
     
     // Activar Telemetría (Dashboard Connection)
     try {
-      const { TelemetryServer } = await import('../observability/telemetryserver.js');
+      const { TelemetryServer } = await import('../observability/TelemetryServer.js');
       TelemetryServer.getInstance().start(8081);
       this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Telemetry Server Active on :8081');
     } catch (e) {

@@ -1,7 +1,7 @@
 import { stagger } from "sognaflow-dom"
-import { nextFrame } from "../../gestures/__tests__/utils"
+import { nextFrame } from "../../gestures/__tests__/utils.js"
 import { animate } from "../animate"
-import { defaultOptions } from "../animators/waapi/__tests__/setup"
+import { defaultOptions } from "../animators/waapi/__tests__/setup.js"
 
 describe("animate() with WAAPI", () => {
     test("Can override transition options per-value", async () => {

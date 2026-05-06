@@ -1,6 +1,6 @@
 "use client"
 
-import { useAnimationFrame } from "../utils/use-animation-frame"
+import { useAnimationFrame } from "../utils/use-animation-frame.js"
 import { usesognaflowValue } from "./use-sognaflow-value"
 
 export function useTime() {

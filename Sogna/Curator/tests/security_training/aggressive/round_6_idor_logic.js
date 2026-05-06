@@ -1,5 +1,5 @@
 // ✅ SECURE VERSION - ROUND 6 (WHITELISTED & VALIDATED)
-// @sogna: Refactored for training safety.
+// @Sogna: Refactored for training safety.
 
 const db = { users: { update: () => {} } };
 

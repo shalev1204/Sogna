@@ -1,4 +1,4 @@
-import { ResolvedValues } from "../types";
+import { ResolvedValues } from "../types.js";
 export interface TransformOrigin {
     originX?: number | string;
     originY?: number | string;

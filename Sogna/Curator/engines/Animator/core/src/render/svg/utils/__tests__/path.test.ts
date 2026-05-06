@@ -1,5 +1,5 @@
 import { buildSVGPath } from "sognaflow-dom"
-import "../../../../jest.setup"
+import "../../../../jest.setup.js"
 
 describe("buildSVGPath", () => {
     it("correctly generates SVG path props", () => {

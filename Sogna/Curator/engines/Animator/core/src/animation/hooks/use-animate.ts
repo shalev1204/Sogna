@@ -2,8 +2,8 @@
 
 import { useMemo } from "react"
 import { AnimationScope } from "sognaflow-dom"
-import { useConstant } from "../../utils/use-constant"
-import { useUnmountEffect } from "../../utils/use-unmount-effect"
+import { useConstant } from "../../utils/use-constant.js"
+import { useUnmountEffect } from "../../utils/use-unmount-effect.js"
 import { useReducedsognaflowConfig } from "../../utils/reduced-sognaflow/use-reduced-sognaflow-config"
 import { createScopedAnimate } from "../animate"
 

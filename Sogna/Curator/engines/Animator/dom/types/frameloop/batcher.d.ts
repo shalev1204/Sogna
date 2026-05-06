@@ -1,4 +1,4 @@
-import { Batcher, FrameData, Process, Steps } from "./types";
+import { Batcher, FrameData, Process, Steps } from "./types.js";
 export declare function CreateRenderBatcher(scheduleNextBatch: (callback: Function) => void, allowKeepAlive: boolean): {
     schedule: Batcher;
     cancel: (process: Process) => void;

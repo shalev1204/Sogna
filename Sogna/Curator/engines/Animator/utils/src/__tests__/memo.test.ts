@@ -1,4 +1,4 @@
-import { memo } from "../memo"
+import { memo } from "../memo.js"
 
 describe("memo", () => {
     test("Only fires callback once", () => {

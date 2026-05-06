@@ -1,5 +1,5 @@
 import type { Delta, Point } from "sognaflow-utils"
-import type { ResolvedValues } from "../../node/types"
+import type { ResolvedValues } from "../../node/types.js"
 
 export function buildProjectionTransform(
     delta: Delta,

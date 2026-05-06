@@ -1,4 +1,4 @@
-// @sentinel-ignore: GLOBAL - Telemetry module with authorized internal network capabilities.
+// @Sentinel-ignore: GLOBAL - Telemetry module with authorized internal network capabilities.
 import * as crypto from 'crypto';
 import * as path from 'path';
 import * as http from 'http';
@@ -317,7 +317,7 @@ export class Histogram implements IHistogram {
 export class OTLPExporter {
   private _pendingSpans: Span[] = [];
   private _flushTimer: NodeJS.Timeout | null = null;
-  private _serviceName = process.env.SOGNATORE_SERVICE_NAME || 'sognatore';
+  private _serviceName = process.env.SOGNATORE_SERVICE_NAME || 'Sognatore';
   private _endpoint: string;
 
   constructor(endpoint: string) {
@@ -345,7 +345,7 @@ export class OTLPExporter {
     const payload = {
       resourceSpans: [{
         resource: { attributes: [{ key: 'service.name', value: { stringValue: this._serviceName } }] },
-        scopeSpans: [{ scope: { name: 'sognatore-otel', version: _scopeVersion }, spans: spans.map(s => s.toOTLP()) }]
+        scopeSpans: [{ scope: { name: 'Sognatore-otel', version: _scopeVersion }, spans: spans.map(s => s.toOTLP()) }]
       }]
     };
     this._send('/v1/traces', payload);
@@ -355,7 +355,7 @@ export class OTLPExporter {
     const payload = {
       resourceMetrics: [{
         resource: { attributes: [{ key: 'service.name', value: { stringValue: this._serviceName } }] },
-        scopeMetrics: [{ scope: { name: 'sognatore-otel', version: _scopeVersion }, metrics: metricsList.map(m => m.toOTLP()) }]
+        scopeMetrics: [{ scope: { name: 'Sognatore-otel', version: _scopeVersion }, metrics: metricsList.map(m => m.toOTLP()) }]
       }]
     };
     this._send('/v1/metrics', payload);

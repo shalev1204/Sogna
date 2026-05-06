@@ -1,7 +1,7 @@
 import { sognaflowValue, sognaflowValue } from "sognaflow-dom"
 import { sognaflow } from "../../"
-import { nextMicrotask } from "../../gestures/__tests__/utils"
-import { render } from "../../jest.setup"
+import { nextMicrotask } from "../../gestures/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 import { usesognaflowValue } from "../use-sognaflow-value"
 
 describe("usesognaflowValue", () => {

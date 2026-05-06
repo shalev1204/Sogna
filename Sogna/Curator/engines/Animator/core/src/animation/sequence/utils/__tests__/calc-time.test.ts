@@ -1,4 +1,4 @@
-import { calcNextTime } from "../calc-time"
+import { calcNextTime } from "../calc-time.js"
 
 describe("calcNextTime", () => {
     test("Correctly returns a new time based on the past arguments", () => {

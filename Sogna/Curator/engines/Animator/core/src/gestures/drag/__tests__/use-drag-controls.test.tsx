@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { sognaflow, useDragControls, DragControls, sognaflowValue } from "../../../"
-import { render } from "../../../jest.setup"
-import { nextFrame } from "../../__tests__/utils"
-import { MockDrag, drag } from "./utils"
+import { render } from "../../../jest.setup.js"
+import { nextFrame } from "../../__tests__/utils.js"
+import { MockDrag, drag } from "./utils.js"
 
 describe("useDragControls", () => {
     test(".start triggers dragging on a different component", async () => {

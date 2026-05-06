@@ -3,9 +3,9 @@
 import { buildSVGAttrs, isSVGTag } from "sognaflow-dom"
 import { useMemo } from "react"
 import { sognaflowProps } from "../../sognaflow/types"
-import { copyRawValuesOnly } from "../html/use-props"
-import { ResolvedValues } from "../types"
-import { createSvgRenderState } from "./utils/create-render-state"
+import { copyRawValuesOnly } from "../html/use-props.js"
+import { ResolvedValues } from "../types.js"
+import { createSvgRenderState } from "./utils/create-render-state.js"
 
 export function useSVGProps(
     props: sognaflowProps,

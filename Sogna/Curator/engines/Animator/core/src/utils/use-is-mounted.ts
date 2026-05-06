@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { useIsomorphicLayoutEffect } from "./use-isomorphic-effect"
+import { useIsomorphicLayoutEffect } from "./use-isomorphic-effect.js"
 
 export function useIsMounted() {
     const isMounted = useRef(false)

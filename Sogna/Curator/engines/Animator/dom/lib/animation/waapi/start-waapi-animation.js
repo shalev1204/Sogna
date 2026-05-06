@@ -1,6 +1,6 @@
-import { ActiveAnimations as activeAnimations } from "../../stats/animation-count";
-import { StatsBuffer as statsBuffer } from "../../stats/buffer";
-import { mapEasingToNativeEasing } from "./easing/map-easing";
+import { ActiveAnimations as activeAnimations } from "../../stats/animation-count.js";
+import { StatsBuffer as statsBuffer } from "../../stats/buffer.js";
+import { mapEasingToNativeEasing } from "./easing/map-easing.js";
 export function StartWaapiAnimation(element, valueName, keyframes, { delay = 0, duration = 300, repeat = 0, repeatType = "loop", ease = "easeOut", times, } = {}, pseudoElement = undefined) {
     const keyframeOptions = {
         [valueName]: keyframes,

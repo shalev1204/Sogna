@@ -1,4 +1,4 @@
-import { fillOffset } from "./fill"
+import { fillOffset } from "./fill.js"
 
 export function defaultOffset(arr: any[]): number[] {
     const offset = [0]

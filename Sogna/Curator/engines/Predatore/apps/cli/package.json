@@ -1,5 +1,5 @@
 {
-  "name": "@sogna/predatore",
+  "name": "@Sogna/Predatore",
   "version": "0.0.0",
   "description": "Sognatore Predatore -  AI Pentester",
   "type": "module",
@@ -32,7 +32,7 @@
     "owasp",
     "exploitation",
     "appsec",
-    "sogna",
+    "Sogna",
     "predatore"
   ],
   "author": "Sogna",

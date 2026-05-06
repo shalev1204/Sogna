@@ -3,9 +3,9 @@ import { useEffect } from "react"
 import * as THREE from "three"
 import { animate } from ".."
 import { sognaflow, sognaflowGlobalConfig } from "../../.."
-import { render } from "../../../jest.setup"
+import { render } from "../../../jest.setup.js"
 import { usesognaflowValue } from "../../../value/use-sognaflow-value"
-import { syncDriver } from "../../animators/__tests__/utils"
+import { syncDriver } from "../../animators/__tests__/utils.js"
 
 const duration = 0.001
 

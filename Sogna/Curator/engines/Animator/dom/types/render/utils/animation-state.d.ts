@@ -1,6 +1,6 @@
-import type { AnimationDefinition, TargetAndTransition, VariantLabels } from "../../node/types";
-import type { AnimationType } from "../types";
-import type { VisualElementAnimationOptions } from "../../animation/interfaces/types";
+import type { AnimationDefinition, TargetAndTransition, VariantLabels } from "../../node/types.js";
+import type { AnimationType } from "../types.js";
+import type { VisualElementAnimationOptions } from "../../animation/interfaces/types.js";
 export type { VisualElementAnimationOptions };
 export interface AnimationState {
     animateChanges: (type?: AnimationType) => Promise<any>;

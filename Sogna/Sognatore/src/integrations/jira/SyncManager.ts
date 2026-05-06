@@ -1,6 +1,6 @@
-import { JiraApiClient } from './jiraapiclient.js';
-import { convertEpicToPrd, generatePrdMetadata } from './epicconverter.js';
-import { JiraIssue } from './jiratypes.js';
+import { JiraApiClient } from './JiraApiClient.js';
+import { convertEpicToPrd, generatePrdMetadata } from './EpicConverter.js';
+import { JiraIssue } from './JiraTypes.js';
 
 export const STATUS_MAP: Record<string, string> = {
   'planning': 'In Progress',

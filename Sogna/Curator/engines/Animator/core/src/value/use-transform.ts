@@ -6,9 +6,9 @@ import {
     transform,
     TransformOptions,
 } from "sognaflow-dom"
-import { useConstant } from "../utils/use-constant"
-import { useCombinesognaflowValues } from "./use-combine-values"
-import { useComputed } from "./use-computed"
+import { useConstant } from "../utils/use-constant.js"
+import { useCombinesognaflowValues } from "./use-combine-values.js"
+import { useComputed } from "./use-computed.js"
 
 export type InputRange = number[]
 type SingleTransformer<I, O> = (input: I) => O

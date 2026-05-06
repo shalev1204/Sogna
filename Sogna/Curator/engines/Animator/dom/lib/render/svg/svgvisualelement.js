@@ -1,13 +1,13 @@
-import { TransformProps } from "../utils/keys-transform";
-import { GetDefaultValueType } from "../../value/types/maps/defaults";
-import { createBox } from "../../projection/geometry/models";
-import { DOMVisualElement } from "../dom/domvisualelement";
-import { CamelToDash } from "../dom/utils/camel-to-dash";
-import { BuildSVGAttrs as buildSVGAttrs } from "./utils/build-attrs";
-import { CamelCaseAttributes as camelCaseAttributes } from "./utils/camel-case-attrs";
-import { IsSVGTag } from "./utils/is-svg-tag";
-import { RenderSVG } from "./utils/render";
-import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values";
+import { TransformProps } from "../utils/keys-transform.js";
+import { GetDefaultValueType } from "../../value/types/maps/defaults.js";
+import { createBox } from "../../projection/geometry/models.js";
+import { DOMVisualElement } from "../dom/domvisualelement.js";
+import { CamelToDash } from "../dom/utils/camel-to-dash.js";
+import { BuildSVGAttrs as buildSVGAttrs } from "./utils/build-attrs.js";
+import { CamelCaseAttributes as camelCaseAttributes } from "./utils/camel-case-attrs.js";
+import { IsSVGTag } from "./utils/is-svg-tag.js";
+import { RenderSVG } from "./utils/render.js";
+import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values.js";
 export class SVGVisualElement extends DOMVisualElement {
     constructor() {
         super(...arguments);

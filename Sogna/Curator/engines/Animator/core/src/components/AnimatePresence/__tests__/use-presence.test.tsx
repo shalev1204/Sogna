@@ -1,7 +1,7 @@
 import { act, useEffect } from "react"
 import { AnimatePresence } from ".."
-import { render } from "../../../jest.setup"
-import { usePresence } from "../use-presence"
+import { render } from "../../../jest.setup.js"
+import { usePresence } from "../use-presence.js"
 
 type CB = () => void
 

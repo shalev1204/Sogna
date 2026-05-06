@@ -1,12 +1,12 @@
-import { invariant } from "../../errors"
-import { noop } from "../../noop"
-import { anticipate } from "../anticipate"
-import { backIn, backInOut, backOut } from "../back"
-import { circIn, circInOut, circOut } from "../circ"
-import { cubicBezier } from "../cubic-bezier"
-import { easeIn, easeInOut, easeOut } from "../ease"
-import { Easing, EasingFunction } from "../types"
-import { isBezierDefinition } from "./is-bezier-definition"
+import { invariant } from "../../errors.js"
+import { noop } from "../../noop.js"
+import { anticipate } from "../anticipate.js"
+import { backIn, backInOut, backOut } from "../back.js"
+import { circIn, circInOut, circOut } from "../circ.js"
+import { cubicBezier } from "../cubic-bezier.js"
+import { easeIn, easeInOut, easeOut } from "../ease.js"
+import { Easing, EasingFunction } from "../types.js"
+import { isBezierDefinition } from "./is-bezier-definition.js"
 
 const easingLookup = {
     linear: noop,

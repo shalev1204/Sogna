@@ -1,5 +1,5 @@
-import { MemoryHub } from '../../core/memory/memoryhub.js';
-import { Chronicler } from '../../core/memory/chronicler.js';
+import { MemoryHub } from '../../core/memory/MemoryHub.js';
+import { Chronicler } from '../../core/memory/Chronicler.js';
 import chalk from 'chalk';
 
 async function expandConsciousness() {
@@ -18,8 +18,8 @@ async function expandConsciousness() {
   console.log(`- Nodos Totales: ${chalk.bold(graph.nodes.length)}`);
   console.log(`- Conexiones Totales: ${chalk.bold(graph.edges.length)}`);
   
-  const predatorNodes = graph.nodes.filter(n => n.id.toLowerCase().includes('predatore') || n.id.toLowerCase().includes('predator'));
-  const sentinelNodes = graph.nodes.filter(n => n.id.toLowerCase().includes('sentinel'));
+  const predatorNodes = graph.nodes.filter(n => n.id.toLowerCase().includes('Predatore') || n.id.toLowerCase().includes('predator'));
+  const sentinelNodes = graph.nodes.filter(n => n.id.toLowerCase().includes('Sentinel'));
   
   console.log(`- Nodos de Predator detectados: ${predatorNodes.length}`);
   console.log(`- Nodos de Sentinel detectados: ${sentinelNodes.length}`);

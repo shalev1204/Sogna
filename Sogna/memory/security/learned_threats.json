@@ -58,7 +58,7 @@
       "id": "T009",
       "type": "Dependency Confusion",
       "severity": "CRITICAL",
-      "signature": "@sogna/* @ >=90.0.0",
+      "signature": "@Sogna/* @ >=90.0.0",
       "description": "Intento de secuestro de scope interno mediante versiones infladas en public registry."
     },
     {

@@ -1,4 +1,4 @@
-import { AnyResolvedKeyframe } from "../animation/types";
+import { AnyResolvedKeyframe } from "../animation/types.js";
 import { SognaflowValue } from "../value";
 export declare class SognaflowValueState {
     latest: {

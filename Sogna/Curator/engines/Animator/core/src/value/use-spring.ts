@@ -1,7 +1,7 @@
 "use client"
 
 import { FollowValueOptions, sognaflowValue, SpringOptions } from "sognaflow-dom"
-import { useFollowValue } from "./use-follow-value"
+import { useFollowValue } from "./use-follow-value.js"
 
 type UseSpringOptions = SpringOptions &
     Pick<FollowValueOptions, "skipInitialAnimation">

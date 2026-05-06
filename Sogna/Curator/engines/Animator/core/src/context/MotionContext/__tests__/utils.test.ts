@@ -1,5 +1,5 @@
-import { animationControls } from "../../../animation/hooks/animation-controls"
-import { getCurrentTreeVariants } from "../utils"
+import { animationControls } from "../../../animation/hooks/animation-controls.js"
+import { getCurrentTreeVariants } from "../utils.js"
 
 describe("getCurrentTreeVariants", () => {
     test("It returns the correct variant to render currently", () => {

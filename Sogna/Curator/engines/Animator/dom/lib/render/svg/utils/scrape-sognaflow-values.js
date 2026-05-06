@@ -1,6 +1,6 @@
-import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value";
-import { TransformPropOrder as transformPropOrder } from "../../utils/keys-transform";
-import { ScrapeSognaflowValuesFromProps as ScrapeHTMLSognaflowValuesFromProps } from "../../html/utils/scrape-sognaflow-values";
+import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value.js";
+import { TransformPropOrder as transformPropOrder } from "../../utils/keys-transform.js";
+import { ScrapeSognaflowValuesFromProps as ScrapeHTMLSognaflowValuesFromProps } from "../../html/utils/scrape-sognaflow-values.js";
 export function ScrapeSognaflowValuesFromProps(props, prevProps, visualElement) {
     const newValues = ScrapeHTMLSognaflowValuesFromProps(props, prevProps, visualElement);
     for (const key in props) {

@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 async function takeScreenshots() {
-    const dashboardPath = path.resolve(__dirname, '../autonomy/.sognatore/dashboard/index.html');
+    const dashboardPath = path.resolve(__dirname, '../autonomy/.sognatore/dashboard/index.html.js');
     const screenshotsDir = path.resolve(__dirname, '../docs/screenshots');
 
     // Ensure screenshots directory exists

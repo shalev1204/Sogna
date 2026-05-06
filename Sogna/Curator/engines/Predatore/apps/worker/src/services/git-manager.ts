@@ -1,4 +1,4 @@
-// @sentinel-ignore: GLOBAL - Repository manager with authorized dynamic retry delays.
+// @Sentinel-ignore: GLOBAL - Repository manager with authorized dynamic retry delays.
 // Copyright (C) 2025 Sogna, Inc.
 //
 // This program is free software: you can redistribute it and/or modify

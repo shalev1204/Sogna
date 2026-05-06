@@ -1,5 +1,5 @@
 import { Axis, AxisDelta, Box, Delta } from "sognaflow-utils"
-import { calcLength } from "./delta-calc"
+import { calcLength } from "./delta-calc.js"
 
 function isAxisDeltaZero(delta: AxisDelta) {
     return delta.translate === 0 && delta.scale === 1

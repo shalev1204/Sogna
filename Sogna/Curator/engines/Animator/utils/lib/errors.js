@@ -1,4 +1,4 @@
-import { formatErrorMessage } from "./format-error-message";
+import { formatErrorMessage } from "./format-error-message.js";
 let warning = () => { };
 let invariant = () => { };
 if (typeof process !== "undefined" &&

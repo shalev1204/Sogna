@@ -1,5 +1,5 @@
 import { SognaflowValue } from ".";
-import { AnyResolvedKeyframe, ValueAnimationTransition } from "../animation/types";
+import { AnyResolvedKeyframe, ValueAnimationTransition } from "../animation/types.js";
 /**
  * Options for useFollowValue hook, extending ValueAnimationTransition
  * but excluding lifecycle callbacks that don't make sense for the hook pattern.

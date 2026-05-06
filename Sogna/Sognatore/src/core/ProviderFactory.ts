@@ -1,14 +1,14 @@
-import { Provider } from './provider.js';
-import { GeminiProvider } from '../providers/geminiprovider.js';
-import { ClaudeProvider } from '../providers/claudeprovider.js';
-import { OpenAIProvider } from '../providers/openaiprovider.js';
-import { MoonshotProvider } from '../providers/moonshotprovider.js';
-import { DeepSeekProvider } from '../providers/deepseekprovider.js';
-import { OpenRouterProvider } from '../providers/openrouterprovider.js';
-import { AiderProvider } from '../providers/aiderprovider.js';
-import { OllamaProvider } from '../providers/ollamaprovider.js';
-import { HybridProvider } from '../providers/hybridprovider.js';
-import { ModelRouter, SognaTaskType } from './modelrouter.js';
+import { Provider } from './Provider.js';
+import { GeminiProvider } from '../providers/GeminiProvider.js';
+import { ClaudeProvider } from '../providers/ClaudeProvider.js';
+import { OpenAIProvider } from '../providers/OpenAIProvider.js';
+import { MoonshotProvider } from '../providers/MoonshotProvider.js';
+import { DeepSeekProvider } from '../providers/DeepSeekProvider.js';
+import { OpenRouterProvider } from '../providers/OpenRouterProvider.js';
+import { AiderProvider } from '../providers/AiderProvider.js';
+import { OllamaProvider } from '../providers/OllamaProvider.js';
+import { HybridProvider } from '../providers/HybridProvider.js';
+import { ModelRouter, SognaTaskType } from './ModelRouter.js';
 
 export class ProviderFactory {
   static getProvider(name?: string, model?: string): Provider {

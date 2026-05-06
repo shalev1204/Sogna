@@ -1,6 +1,6 @@
 import { mixNumber } from "sognaflow-dom"
 import { moveItem } from "sognaflow-utils"
-import { ItemData } from "../types"
+import { ItemData } from "../types.js"
 
 export function checkReorder<T>(
     order: ItemData<T>[],

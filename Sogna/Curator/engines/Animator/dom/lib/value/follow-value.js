@@ -1,7 +1,7 @@
 import { CreateSognaflowValue } from ".";
-import { JSAnimation } from "../animation/jsanimation";
+import { JSAnimation } from "../animation/jsanimation.js";
 import { Frame } from "../frameloop";
-import { IsSognaflowValue } from "./utils/is-sognaflow-value";
+import { IsSognaflowValue } from "./utils/is-sognaflow-value.js";
 /**
  * Create a `SognaflowValue` that animates to its latest value using any transition type.
  * Can either be a value or track another `SognaflowValue`.

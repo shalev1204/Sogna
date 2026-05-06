@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// @sentinel-ignore: GLOBAL - TOTP utility script with informational example secrets.
+// @Sentinel-ignore: GLOBAL - TOTP utility script with informational example secrets.
 
 // Copyright (C) 2025 Sogna, Inc.
 //
@@ -102,7 +102,7 @@ function main(): void {
 
   if (!secret) {
     console.log(JSON.stringify({ status: 'error', message: 'Missing required --secret argument', retryable: false }));
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -115,7 +115,7 @@ function main(): void {
         retryable: false,
       }),
     );
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -133,7 +133,7 @@ function main(): void {
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     console.log(JSON.stringify({ status: 'error', message: `TOTP generation failed: ${msg}`, retryable: false }));
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }

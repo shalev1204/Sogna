@@ -1,4 +1,4 @@
-import { IsCSSVar as isCSSVar } from "./is-css-var";
+import { IsCSSVar as isCSSVar } from "./is-css-var.js";
 export function SetStyle(element, name, value) {
     isCSSVar(name)
         ? element.style.setProperty(name, value)

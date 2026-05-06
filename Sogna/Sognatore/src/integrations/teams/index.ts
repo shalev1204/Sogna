@@ -1,3 +1,3 @@
-export * from './teamstypes.js';
-export * from './teamsadapter.js';
-export * from './teamscards.js';
+export * from './TeamsTypes.js';
+export * from './TeamsAdapter.js';
+export * from './TeamsCards.js';

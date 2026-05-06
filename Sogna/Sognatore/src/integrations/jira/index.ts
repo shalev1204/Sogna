@@ -1,12 +1,12 @@
-import { JiraApiClient } from './jiraapiclient.js';
-import { SyncManagerOptions, JiraSyncManager } from './syncmanager.js';
-import { WebhookHandlerOptions, WebhookHandler } from './webhookhandler.js';
+import { JiraApiClient } from './JiraApiClient.js';
+import { SyncManagerOptions, JiraSyncManager } from './SyncManager.js';
+import { WebhookHandlerOptions, WebhookHandler } from './WebhookHandler.js';
 import { 
   convertEpicToPrd, 
   extractAcceptanceCriteria, 
   generatePrdMetadata 
-} from './epicconverter.js';
-import { mapSognatoreStatusToJira, STATUS_MAP } from './syncmanager.js';
+} from './EpicConverter.js';
+import { mapSognatoreStatusToJira, STATUS_MAP } from './SyncManager.js';
 
 export {
   JiraApiClient,

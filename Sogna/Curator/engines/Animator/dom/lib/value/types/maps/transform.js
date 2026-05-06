@@ -1,5 +1,5 @@
 import { Alpha, Scale } from "../numbers";
-import { Degrees, ProgressPercentage, Px } from "../numbers/units";
+import { Degrees, ProgressPercentage, Px } from "../numbers/units.js";
 export const TransformValueTypes = {
     rotate: Degrees,
     rotateX: Degrees,

@@ -1,5 +1,5 @@
-import { UnresolvedValueKeyframe, ValueKeyframe } from "../../types"
-import { pxValues } from "../../waapi/utils/px-values"
+import { UnresolvedValueKeyframe, ValueKeyframe } from "../../types.js"
+import { pxValues } from "../../waapi/utils/px-values.js"
 
 export function applyPxDefaults(
     keyframes: ValueKeyframe[] | UnresolvedValueKeyframe[],

@@ -1,5 +1,5 @@
-import { copyBoxInto } from "../copy"
-import { createBox } from "../models"
+import { copyBoxInto } from "../copy.js"
+import { createBox } from "../models.js"
 
 describe("copyBoxInto", () => {
     it("copies one box into an existing box", () => {

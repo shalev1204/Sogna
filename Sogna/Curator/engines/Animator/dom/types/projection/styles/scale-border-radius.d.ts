@@ -1,5 +1,5 @@
 import type { Axis } from "sognaflow-utils";
-import type { ScaleCorrectorDefinition } from "./types";
+import type { ScaleCorrectorDefinition } from "./types.js";
 export declare function PixelsToPercent(pixels: number, axis: Axis): number;
 /**
  * We always correct borderRadius as a percentage rather than pixels to reduce paints.

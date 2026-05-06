@@ -1,8 +1,8 @@
 "use client"
 
-import { useConstant } from "../../utils/use-constant"
-import { useUnmountEffect } from "../../utils/use-unmount-effect"
-import { createScopedWaapiAnimate } from "../animators/waapi/animate-style"
+import { useConstant } from "../../utils/use-constant.js"
+import { useUnmountEffect } from "../../utils/use-unmount-effect.js"
+import { createScopedWaapiAnimate } from "../animators/waapi/animate-style.js"
 import { AnimationScope } from "sognaflow-dom"
 
 export function useAnimateMini<T extends Element = any>() {

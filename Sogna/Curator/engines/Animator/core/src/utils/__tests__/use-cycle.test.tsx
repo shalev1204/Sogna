@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import { useEffect } from "react"
-import { click, render } from "../../jest.setup"
-import { useCycle } from "../use-cycle"
+import { click, render } from "../../jest.setup.js"
+import { useCycle } from "../use-cycle.js"
 
 describe("useCycle", () => {
     test("cycles through given states", () => {

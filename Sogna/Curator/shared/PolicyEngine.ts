@@ -1,4 +1,4 @@
-import { FailureClass } from './events/sognaeventbus.js';
+import { FailureClass } from './events/SognaEventBus.js';
 
 export enum EscalationLevel {
   NONE = 'NONE',
@@ -53,7 +53,7 @@ export class PolicyEngine {
       maxAttempts: 2,
       escalation: EscalationLevel.HUMAN_INPUT,
       steps: [
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         { name: 'Fetch Origin', command: 'git fetch origin', critical: true },
         { name: 'Stash Changes', command: 'git stash', critical: false },
         { name: 'Sync Branch', command: 'git pull --rebase', critical: true },

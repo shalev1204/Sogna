@@ -1,5 +1,5 @@
-import { wrap } from "../../wrap";
-import { isEasingArray } from "./is-easing-array";
+import { wrap } from "../../wrap.js";
+import { isEasingArray } from "./is-easing-array.js";
 export function getEasingForSegment(easing, i) {
     return isEasingArray(easing) ? easing[wrap(0, easing.length, i)] : easing;
 }

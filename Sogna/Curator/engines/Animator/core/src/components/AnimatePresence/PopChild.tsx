@@ -5,7 +5,7 @@ import * as React from "react"
 import { useContext, useId, useInsertionEffect, useRef } from "react"
 
 import { sognaflowConfigContext } from "../../context/sognaflowconfigcontext"
-import { useComposedRefs } from "../../utils/use-composed-ref"
+import { useComposedRefs } from "../../utils/use-composed-ref.js"
 
 interface Size {
     width: number

@@ -1,6 +1,6 @@
 import { sognaflow, usesognaflowValue, ValueTransition } from "framer-sognaflow"
 import * as clientsognaflow from "framer-sognaflow/client"
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("accepts sognaflow values into both sognaflow components from both entry points", () => {
     it("renders", () => {

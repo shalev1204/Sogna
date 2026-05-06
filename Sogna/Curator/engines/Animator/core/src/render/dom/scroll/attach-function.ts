@@ -1,7 +1,7 @@
 import { observeTimeline } from "sognaflow-dom"
-import { scrollInfo } from "./track"
-import { OnScroll, OnScrollWithInfo, ScrollOptionsWithDefaults } from "./types"
-import { getTimeline } from "./utils/get-timeline"
+import { scrollInfo } from "./track.js"
+import { OnScroll, OnScrollWithInfo, ScrollOptionsWithDefaults } from "./types.js"
+import { getTimeline } from "./utils/get-timeline.js"
 
 /**
  * If the onScroll function has two arguments, it's expecting

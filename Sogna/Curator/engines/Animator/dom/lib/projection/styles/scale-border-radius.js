@@ -1,4 +1,4 @@
-import { Px as px } from "../../value/types/numbers/units";
+import { Px as px } from "../../value/types/numbers/units.js";
 export function PixelsToPercent(pixels, axis) {
     if (axis.max === axis.min)
         return 0;

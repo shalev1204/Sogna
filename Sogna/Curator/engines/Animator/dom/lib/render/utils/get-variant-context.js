@@ -1,5 +1,5 @@
-import { IsVariantLabel } from "./is-variant-label";
-import { VariantProps as variantProps } from "./variant-props";
+import { IsVariantLabel } from "./is-variant-label.js";
+import { VariantProps as variantProps } from "./variant-props.js";
 const numVariantProps = variantProps.length;
 /**
  * Get variant context from a visual element's parent chain.

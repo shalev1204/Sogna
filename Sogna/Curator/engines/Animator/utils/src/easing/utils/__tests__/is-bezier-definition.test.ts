@@ -1,4 +1,4 @@
-import { isBezierDefinition } from "../is-bezier-definition"
+import { isBezierDefinition } from "../is-bezier-definition.js"
 
 test("isBezierDefinition", () => {
     expect(isBezierDefinition("linear")).toEqual(false)

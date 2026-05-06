@@ -1,5 +1,5 @@
 import { noop } from "sognaflow-utils"
-import { generateLinearEasing } from "../linear"
+import { generateLinearEasing } from "../linear.js"
 
 describe("generateLinearEasing", () => {
     test("Converts easing function into string of points", () => {

@@ -1,4 +1,4 @@
-import { Agent } from '../../../swarms/swarmbase.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
 
 export class CopyMaster implements Agent {
     id = 'marketing_copy_master';

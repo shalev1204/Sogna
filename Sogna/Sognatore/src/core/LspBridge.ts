@@ -3,8 +3,8 @@ import path from 'path';
 import fs from 'fs';
 import { execa } from 'execa';
 import chalk from 'chalk';
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@sogna/curator';
-import { Guardian } from './guardian.js';
+import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@Sogna/Curator';
+import { Guardian } from './Guardian.js';
 
 interface LspServerConfig {
   command: string;

@@ -10,10 +10,10 @@ import os from 'os';
  * Sognatore Guardian - The Security & Privacy Sentinel
  * Replaces Phoenix security logic with a native, integrated engine.
  */
-import { EnvOracle } from './utils/envoracle.js';
-import { MemoryHub } from './memory/memoryhub.js';
-import { ConfigDiscovery } from '@sogna/curator/shared/configdiscovery.js';
-import { Hub, SecurityState } from '../sentinel-sognatore/hub.js';
+import { EnvOracle } from './utils/EnvOracle.js';
+import { MemoryHub } from './memory/MemoryHub.js';
+import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
+import { Hub, SecurityState } from '../Sentinel-Sognatore/Hub.js';
 
 /**
  * Sognatore Guardian - The Security & Privacy Sentinel
@@ -65,7 +65,7 @@ export class Guardian {
 
     const criticalFiles = [
         path.join(sognatoreRoot, 'src', 'core', 'Guardian.ts'),
-        path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'sentinel-veto.js')
+        path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js')
     ];
 
     for (const file of criticalFiles) {

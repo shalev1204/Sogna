@@ -1,5 +1,5 @@
 import { SognaflowValue } from "."
-import { cancelFrame, frame } from "../frameloop"
+import { CancelFrame, Frame } from "../frameloop"
 
 export function SubscribeValue<O>(
     inputValues: SognaflowValue[],
@@ -7,12 +7,12 @@ export function SubscribeValue<O>(
     getLatest: () => O
 ) {
     const update = () => outputValue.set(getLatest())
-    const scheduleUpdate = () => frame.preRender(update, false, true)
+    const scheduleUpdate = () => Frame.preRender(update, false, true)
 
     const subscriptions = inputValues.map((v) => v.on("change", scheduleUpdate))
 
     outputValue.on("destroy", () => {
         subscriptions.forEach((unsubscribe) => unsubscribe())
-        cancelFrame(update)
+        CancelFrame(update)
     })
 }

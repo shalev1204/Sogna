@@ -1,6 +1,6 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { FinanceSkillRegistry } from '../skills/financeskillregistry.js';
-import { FinanceLedger } from '../ledger/financeledger.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { FinanceSkillRegistry } from '../skills/FinanceSkillRegistry.js';
+import { FinanceLedger } from '../ledger/FinanceLedger.js';
 
 export class BillingAutomator implements Agent {
     id = 'finance_billing_auto';

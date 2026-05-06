@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { ThemeProvider, useTheme, SwarmType } from './themecontext';
-import './App.css';
+import { ThemeProvider, useTheme, SwarmType } from './ThemeContext.js';
+import './App.css.js';
 
 function AppContent() {
   const { swarm, setSwarm, theme } = useTheme();

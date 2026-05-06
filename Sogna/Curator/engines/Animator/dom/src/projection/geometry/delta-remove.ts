@@ -1,8 +1,8 @@
 import { Axis, Box } from "sognaflow-utils"
-import { mixNumber } from "../../utils/mix/number"
-import { percent } from "../../value/types/numbers/units"
-import { ResolvedValues } from "../../render/types"
-import { scalePoint } from "./delta-apply"
+import { MixNumber } from "../../utils/mix/number.js"
+import { Percent } from "../../value/types/numbers/units.js"
+import { ResolvedValues } from "../../render/types.js"
+import { scalePoint } from "./delta-apply.js"
 
 /**
  * Remove a delta from a point. This is essentially the steps of applyPointDelta in reverse
@@ -36,9 +36,9 @@ export function removeAxisDelta(
     originAxis: Axis = axis,
     sourceAxis: Axis = axis
 ): void {
-    if (percent.test(translate)) {
+    if (Percent.test(translate)) {
         translate = parseFloat(translate as string)
-        const relativeProgress = mixNumber(
+        const relativeProgress = MixNumber(
             sourceAxis.min,
             sourceAxis.max,
             translate / 100
@@ -48,7 +48,7 @@ export function removeAxisDelta(
 
     if (typeof translate !== "number") return
 
-    let originPoint = mixNumber(originAxis.min, originAxis.max, origin)
+    let originPoint = MixNumber(originAxis.min, originAxis.max, origin)
     if (axis === originAxis) originPoint -= translate
 
     axis.min = removePointDelta(

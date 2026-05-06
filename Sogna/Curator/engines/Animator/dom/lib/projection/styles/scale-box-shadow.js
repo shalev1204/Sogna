@@ -1,5 +1,5 @@
 import { Complex as complex } from "../../value/types/complex";
-import { MixNumber as mixNumber } from "../../utils/mix/number";
+import { MixNumber as mixNumber } from "../../utils/mix/number.js";
 export const CorrectBoxShadow = {
     correct: (latest, { treeScale, projectionDelta }) => {
         const original = latest;

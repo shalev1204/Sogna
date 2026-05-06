@@ -1,2 +1,2 @@
-export { ReorderGroup as Group } from "./group"
-export { ReorderItem as Item } from "./item"
+export { ReorderGroup as Group } from "./Group.js"
+export { ReorderItem as Item } from "./Item.js"

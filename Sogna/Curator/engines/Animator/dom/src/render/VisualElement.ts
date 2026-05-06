@@ -6,22 +6,22 @@ import {
     SubscriptionManager,
     warnOnce,
 } from "sognaflow-utils"
-import { KeyframeResolver } from "../animation/keyframes/keyframesresolver"
-import { NativeAnimation } from "../animation/nativeanimation"
-import type { AnyResolvedKeyframe } from "../animation/types"
-import { acceleratedValues } from "../animation/waapi/utils/accelerated-values"
-import { cancelFrame, frame } from "../frameloop"
-import { microtask } from "../frameloop/microtask"
-import { time } from "../frameloop/sync-time"
-import type { SognaflowNodeOptions } from "../node/types"
-import { createBox } from "../projection/geometry/models"
+import { KeyframeResolver } from "../animation/keyframes/KeyframesResolver.js"
+import { NativeAnimation } from "../animation/NativeAnimation.js"
+import type { AnyResolvedKeyframe } from "../animation/types.js"
+import { acceleratedValues } from "../animation/waapi/utils/accelerated-values.js"
+import { CancelFrame, Frame } from "../frameloop"
+import { Microtask } from "../frameloop/microtask.js"
+import { Time } from "../frameloop/sync-time.js"
+import type { SognaflowNodeOptions } from "../node/types.js"
+import { createBox } from "../projection/geometry/models.js"
 import { SognaflowValue } from "../value"
-import { complex } from "../value/types/complex"
-import { GetAnimatableNone } from "../value/types/utils/animatable-none"
-import { FindValueType } from "../value/types/utils/find"
-import { IsSognaflowValue } from "../value/utils/is-sognaflow-value"
-import { Feature } from "./feature"
-import { visualElementStore } from "./store"
+import { Complex } from "../value/types/complex"
+import { GetAnimatableNone } from "../value/types/utils/animatable-none.js"
+import { FindValueType } from "../value/types/utils/find.js"
+import { IsSognaflowValue } from "../value/utils/is-sognaflow-value.js"
+import { Feature } from "./Feature.js"
+import { visualElementStore } from "./store.js"
 import {
     FeatureDefinitions,
     SognaflowConfigContextProps,
@@ -30,20 +30,20 @@ import {
     ResolvedValues,
     VisualElementEventCallbacks,
     VisualElementOptions,
-} from "./types"
-import { AnimationState } from "./utils/animation-state"
+} from "./types.js"
+import { AnimationState } from "./utils/animation-state.js"
 import {
     IsControllingVariants as checkIsControllingVariants,
     IsVariantNode as checkIsVariantNode,
-} from "./utils/is-controlling-variants"
-import { transformProps } from "./utils/keys-transform"
-import { UpdateSognaflowValuesFromProps } from "./utils/sognaflow-values"
+} from "./utils/is-controlling-variants.js"
+import { TransformProps } from "./utils/keys-transform.js"
+import { UpdateSognaflowValuesFromProps } from "./utils/sognaflow-values.js"
 import {
     HasReducedSognaflowListener,
     InitPrefersReducedSognaflow,
     PrefersReducedSognaflow,
 } from "./utils/reduced-sognaflow"
-import { ResolveVariantFromProps } from "./utils/resolve-variants"
+import { ResolveVariantFromProps } from "./utils/resolve-variants.js"
 
 const propEventHandlers = [
     "AnimationStart",
@@ -275,7 +275,7 @@ export abstract class VisualElement<
 
     /**
      * This can be set by AnimatePresence to force components that mount
-     * at the same time as it to mount as if they have initial={false} set.
+     * at the same Time as it to mount as if they have initial={false} set.
      */
     blockInitialAnimation: boolean
 
@@ -475,10 +475,10 @@ export abstract class VisualElement<
         } else if (this.reducedSognaflowConfig === "always") {
             this.shouldReduceSognaflow = true
         } else {
-            if (!hasReducedSognaflowListener.current) {
-                initPrefersReducedSognaflow()
+            if (!HasReducedSognaflowListener.current) {
+                InitPrefersReducedSognaflow()
             }
-            this.shouldReduceSognaflow = prefersReducedSognaflow.current
+            this.shouldReduceSognaflow = PrefersReducedSognaflow.current
         }
 
         if (process.env.NODE_ENV !== "production") {
@@ -503,8 +503,8 @@ export abstract class VisualElement<
 
     unmount() {
         this.projection && this.projection.unmount()
-        cancelFrame(this.notifyUpdate)
-        cancelFrame(this.render)
+        CancelFrame(this.notifyUpdate)
+        CancelFrame(this.render)
         this.valueSubscriptions.forEach((remove) => remove())
         this.valueSubscriptions.clear()
         this.removeFromVariantTree && this.removeFromVariantTree()
@@ -566,7 +566,7 @@ export abstract class VisualElement<
             return
         }
 
-        const valueIsTransform = transformProps.has(key)
+        const valueIsTransform = TransformProps.has(key)
 
         if (valueIsTransform && this.onBindTransform) {
             this.onBindTransform()
@@ -577,7 +577,7 @@ export abstract class VisualElement<
             (latestValue: AnyResolvedKeyframe) => {
                 this.latestValues[key] = latestValue
 
-                this.props.onUpdate && frame.preRender(this.notifyUpdate)
+                this.props.onUpdate && Frame.preRender(this.notifyUpdate)
 
                 if (valueIsTransform && this.projection) {
                     this.projection.isTransformDirty = true
@@ -679,10 +679,10 @@ export abstract class VisualElement<
 
     private renderScheduledAt = 0.0
     scheduleRender = () => {
-        const now = time.now()
+        const now = Time.now()
         if (this.renderScheduledAt < now) {
             this.renderScheduledAt = now
-            frame.render(this.render, false, true)
+            Frame.render(this.render, false, true)
         }
     }
 
@@ -875,7 +875,7 @@ export abstract class VisualElement<
             ) {
                 // If this is a number read as a string, ie "0" or "200", convert it to a number
                 value = parseFloat(value)
-            } else if (!FindValueType(value) && complex.test(target)) {
+            } else if (!FindValueType(value) && Complex.test(target)) {
                 value = GetAnimatableNone(key, target as string)
             }
 
@@ -903,7 +903,7 @@ export abstract class VisualElement<
         let valueFromInitial: ResolvedValues[string] | undefined | null
 
         if (typeof initial === "string" || typeof initial === "object") {
-            const variant = resolveVariantFromProps(
+            const variant = ResolveVariantFromProps(
                 this.props,
                 initial as any,
                 this.presenceContext?.custom
@@ -960,6 +960,6 @@ export abstract class VisualElement<
     }
 
     scheduleRenderMicrotask() {
-        microtask.render(this.render)
+        Microtask.render(this.render)
     }
 }

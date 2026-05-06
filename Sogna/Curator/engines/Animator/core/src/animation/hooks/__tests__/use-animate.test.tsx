@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom"
 import { render } from "@testing-library/react"
 import { useEffect } from "react"
-import { useAnimate } from "../use-animate"
+import { useAnimate } from "../use-animate.js"
 
 describe("useAnimate", () => {
     test("Types work as expected", () => {

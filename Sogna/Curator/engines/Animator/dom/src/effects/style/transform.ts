@@ -1,5 +1,5 @@
-import { transformPropOrder } from "../../render/utils/keys-transform"
-import { SognaflowValueState } from "../sognaflowvaluestate"
+import { TransformPropOrder } from "../../render/utils/keys-transform.js"
+import { SognaflowValueState } from "../SognaflowValueState.js"
 
 const translateAlias = {
     x: "translateX",
@@ -16,8 +16,8 @@ export function buildTransform(state: SognaflowValueState) {
      * Loop over all possible transforms in order, adding the ones that
      * are present to the transform string.
      */
-    for (let i = 0; i < transformPropOrder.length; i++) {
-        const key = transformPropOrder[i] as keyof typeof translateAlias
+    for (let i = 0; i < TransformPropOrder.length; i++) {
+        const key = TransformPropOrder[i] as keyof typeof translateAlias
         const value = state.latest[key]
 
         if (value === undefined) continue

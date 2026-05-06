@@ -1,9 +1,9 @@
 "use client"
 
 import { LegacyAnimationControls } from "sognaflow-dom"
-import { useConstant } from "../../utils/use-constant"
-import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect"
-import { animationControls } from "./animation-controls"
+import { useConstant } from "../../utils/use-constant.js"
+import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect.js"
+import { animationControls } from "./animation-controls.js"
 
 /**
  * Creates `LegacyAnimationControls`, which can be used to manually start, stop

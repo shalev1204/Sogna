@@ -1,13 +1,13 @@
 import React, { memo, useState, useEffect, useRef } from "react"
-import type { TimelineStep, StepState } from "../types/timeline"
-import type { ToolSize } from "../types/tool-styles"
-import { TOOL_ROW_STYLES } from "../types/tool-styles"
-import { useToolComplete } from "../hooks/use-tool-complete"
-import { useStreamingText } from "../hooks/use-streaming-text"
-import { LightbulbIcon } from "../icons/tool-icons"
-import { ToolRowBase } from "./tool-row-base"
-import { useThemeConfig } from "../theme-config"
-import { mapToolInvocationToStep, mapToolStateToStepState } from "../utils/tool-adapters"
+import type { TimelineStep, StepState } from "../types/timeline.js"
+import type { ToolSize } from "../types/tool-styles.js"
+import { TOOL_ROW_STYLES } from "../types/tool-styles.js"
+import { useToolComplete } from "../hooks/use-tool-complete.js"
+import { useStreamingText } from "../hooks/use-streaming-text.js"
+import { LightbulbIcon } from "../icons/tool-icons.js"
+import { ToolRowBase } from "./tool-row-base.js"
+import { useThemeConfig } from "../theme-config.js"
+import { mapToolInvocationToStep, mapToolStateToStepState } from "../utils/tool-adapters.js"
 
 const THINKING_PREVIEW_LENGTH = 60
 

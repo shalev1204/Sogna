@@ -1,12 +1,12 @@
 import type { Box } from "sognaflow-utils"
-import { parseValueFromTransform } from "../../../render/dom/parse-transform"
-import { TransformPropOrder } from "../../../render/utils/keys-transform"
+import { parseValueFromTransform } from "../../../render/dom/parse-transform.js"
+import { TransformPropOrder } from "../../../render/utils/keys-transform.js"
 import { SognaflowValue } from "../../../value"
 import { NumberType } from "../../../value/types/numbers"
-import { Px } from "../../../value/types/numbers/units"
-import { ValueType } from "../../../value/types/types"
-import { AnyResolvedKeyframe } from "../../types"
-import { WithRender } from "../types"
+import { Px } from "../../../value/types/numbers/units.js"
+import { ValueType } from "../../../value/types/types.js"
+import { AnyResolvedKeyframe } from "../../types.js"
+import { WithRender } from "../types.js"
 
 export const IsNumOrPxType = (v?: ValueType): v is ValueType =>
     v === NumberType || v === Px

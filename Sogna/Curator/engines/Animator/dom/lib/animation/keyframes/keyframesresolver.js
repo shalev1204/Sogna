@@ -1,6 +1,6 @@
 import { Frame } from "../../frameloop";
-import { FillWildcards } from "./utils/fill-wildcards";
-import { RemoveNonTranslationalTransform } from "./utils/unit-conversion";
+import { FillWildcards } from "./utils/fill-wildcards.js";
+import { RemoveNonTranslationalTransform } from "./utils/unit-conversion.js";
 const toResolve = new Set();
 let isScheduled = false;
 let anyNeedsMeasurement = false;

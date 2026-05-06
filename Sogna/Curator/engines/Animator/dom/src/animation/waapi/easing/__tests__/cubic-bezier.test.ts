@@ -1,5 +1,5 @@
 import { BezierDefinition } from "sognaflow-utils"
-import { cubicBezierAsString } from "../cubic-bezier"
+import { cubicBezierAsString } from "../cubic-bezier.js"
 
 describe("cubicBezierAsString", () => {
     test("should convert a bezier definition to a cubic-bezier string", () => {

@@ -1,4 +1,4 @@
-import { addUniqueItem, removeItem } from "./array";
+import { addUniqueItem, removeItem } from "./array.js";
 export class SubscriptionManager {
     constructor() {
         this.subscriptions = [];

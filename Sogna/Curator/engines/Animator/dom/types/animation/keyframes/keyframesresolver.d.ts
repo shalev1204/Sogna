@@ -1,6 +1,6 @@
 import { SognaflowValue } from "../../value";
-import { AnyResolvedKeyframe } from "../types";
-import { WithRender } from "./types";
+import { AnyResolvedKeyframe } from "../types.js";
+import { WithRender } from "./types.js";
 export type UnresolvedKeyframes<T extends AnyResolvedKeyframe> = Array<T | null>;
 export type ResolvedKeyframes<T extends AnyResolvedKeyframe> = Array<T>;
 export declare function flushKeyframeResolvers(): void;

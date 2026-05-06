@@ -1,6 +1,6 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { StudioSkillRegistry } from '../skills/studioskillregistry.js';
-import { StudioAssetTracker } from '../production/studioassettracker.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { StudioSkillRegistry } from '../skills/StudioSkillRegistry.js';
+import { StudioAssetTracker } from '../production/StudioAssetTracker.js';
 
 export class VisualArchitect implements Agent {
     id = 'studio_visual_arch';
@@ -15,7 +15,7 @@ export class VisualArchitect implements Agent {
         
         const asset = StudioAssetTracker.registerAsset({
             type: 'IMAGE',
-            path: `./exports/studio/${Date.now()}.png`,
+            path: `./exports/Studio/${Date.now()}.png`,
             status: 'RENDERED',
             metadata: { model: 'Flux.1-Pro', prompt: task }
         });

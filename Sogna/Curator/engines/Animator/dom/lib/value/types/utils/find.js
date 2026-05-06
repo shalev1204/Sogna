@@ -1,7 +1,7 @@
 import { Color } from "../color";
 import { Complex } from "../complex";
-import { DimensionValueTypes } from "../dimensions";
-import { TestValueType } from "../test";
+import { DimensionValueTypes } from "../dimensions.js";
+import { TestValueType } from "../test.js";
 /**
  * A list of all ValueTypes
  */

@@ -1,9 +1,9 @@
 import * as React from "react"
 import { ForwardedRef, SVGProps } from "react"
 import { sognaflow, usesognaflowValue } from "../.."
-import { nextFrame } from "../../gestures/__tests__/utils"
-import { render } from "../../jest.setup"
-import { sognaflowProps } from "../types"
+import { nextFrame } from "../../gestures/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
+import { sognaflowProps } from "../types.js"
 
 interface Props {
     foo: boolean

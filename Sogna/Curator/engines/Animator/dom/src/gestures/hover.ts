@@ -1,7 +1,7 @@
-import { ElementOrSelector } from "../utils/resolve-elements"
-import { isDragActive } from "./drag/state/is-active"
-import { EventOptions } from "./types"
-import { setupGesture } from "./utils/setup"
+import { ElementOrSelector } from "../utils/resolve-elements.js"
+import { isDragActive } from "./drag/state/is-active.js"
+import { EventOptions } from "./types.js"
+import { setupGesture } from "./utils/setup.js"
 
 /**
  * A function to be called when a hover gesture starts.

@@ -1,5 +1,5 @@
-import { ElementOrSelector } from "../utils/resolve-elements";
-import { EventOptions } from "./types";
+import { ElementOrSelector } from "../utils/resolve-elements.js";
+import { EventOptions } from "./types.js";
 /**
  * A function to be called when a hover gesture starts.
  *

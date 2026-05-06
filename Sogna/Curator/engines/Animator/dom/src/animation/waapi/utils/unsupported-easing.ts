@@ -1,5 +1,5 @@
 import { anticipate, backInOut, circInOut } from "sognaflow-utils"
-import { ValueAnimationTransition } from "../../types"
+import { ValueAnimationTransition } from "../../types.js"
 
 const unsupportedEasingFunctions = {
     anticipate,

@@ -1,10 +1,10 @@
-import { AnyResolvedKeyframe } from "../../../animation/types"
-import { CSSVariableToken } from "../../../animation/utils/is-css-variable"
+import { AnyResolvedKeyframe } from "../../../animation/types.js"
+import { CSSVariableToken } from "../../../animation/utils/is-css-variable.js"
 import { Color } from "../color"
-import { Color as ColorType } from "../types"
-import { colorRegex } from "../utils/color-regex"
-import { floatRegex } from "../utils/float-regex"
-import { sanitize } from "../utils/sanitize"
+import { Color as ColorType } from "../types.js"
+import { colorRegex } from "../utils/color-regex.js"
+import { floatRegex } from "../utils/float-regex.js"
+import { sanitize } from "../utils/sanitize.js"
 
 function test(v: any) {
     return (

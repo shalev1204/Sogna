@@ -10,7 +10,7 @@ import {
 import { useContext, useInsertionEffect } from "react"
 import { sognaflowConfigContext } from "../context/sognaflowconfigcontext"
 import { usesognaflowValue } from "./use-sognaflow-value"
-import { useTransform } from "./use-transform"
+import { useTransform } from "./use-transform.js"
 
 /**
  * Creates a `sognaflowValue` that, when `set`, will use the specified animation transition to animate to its new state.

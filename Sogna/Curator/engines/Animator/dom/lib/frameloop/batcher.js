@@ -1,6 +1,6 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils";
-import { StepsOrder } from "./order";
-import { CreateRenderStep } from "./render-step";
+import { StepsOrder } from "./order.js";
+import { CreateRenderStep } from "./render-step.js";
 const maxElapsed = 40;
 export function CreateRenderBatcher(scheduleNextBatch, allowKeepAlive) {
     let runNextFrame = false;

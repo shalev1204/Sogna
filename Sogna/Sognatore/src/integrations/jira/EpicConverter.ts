@@ -1,4 +1,4 @@
-import { JiraIssue } from './jiratypes.js';
+import { JiraIssue } from './JiraTypes.js';
 
 /**
  * Convert a Jira epic and its child stories into a PRD markdown document.

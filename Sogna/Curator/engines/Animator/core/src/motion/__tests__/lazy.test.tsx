@@ -1,6 +1,6 @@
 import { sognaflowValue } from "sognaflow-dom"
 import { Lazysognaflow, domAnimation, domMax, m, sognaflow } from "../.."
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("Lazy feature loading", () => {
     test("Doesn't animate without loaded features", async () => {
@@ -148,7 +148,7 @@ describe("Lazy feature loading", () => {
             const Component = () => (
                 <Lazysognaflow
                     features={() =>
-                        import("./lazy-async-endpoint").then(
+                        import("./lazy-async-endpoint.js").then(
                             ({ domAnimation: features }: any) => features
                         )
                     }

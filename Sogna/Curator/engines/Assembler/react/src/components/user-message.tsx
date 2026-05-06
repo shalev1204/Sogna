@@ -1,9 +1,9 @@
 import React, { memo } from "react"
 import { motion } from "motion/react"
 import type { UIMessage } from "ai"
-import { cn } from "../utils/cn"
-import { useThemeConfig } from "../theme-config"
-import { ImageThumb } from "./image-thumb"
+import { cn } from "../utils/cn.js"
+import { useThemeConfig } from "../theme-config.js"
+import { ImageThumb } from "./image-thumb.js"
 
 interface UserMessageProps {
   message: UIMessage

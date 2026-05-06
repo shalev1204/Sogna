@@ -1,4 +1,4 @@
-import { isPressing } from "./state"
+import { isPressing } from "./state.js"
 
 /**
  * Filter out events that are not "Enter" keys.

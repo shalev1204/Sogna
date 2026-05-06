@@ -3,8 +3,8 @@ import type {
     SognaflowNodeOptions,
     ResolvedValues,
     VariantLabels,
-} from "../node/types"
-import type { AnyResolvedKeyframe, Transition } from "../animation/types"
+} from "../node/types.js"
+import type { AnyResolvedKeyframe, Transition } from "../animation/types.js"
 import type { SognaflowValue } from "../value"
 import type { Axis, Box, TransformPoint } from "sognaflow-utils"
 

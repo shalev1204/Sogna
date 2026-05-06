@@ -1,4 +1,4 @@
-import { SubscriptionManager } from "../subscription-manager"
+import { SubscriptionManager } from "../subscription-manager.js"
 
 describe("SubscriptionManager", () => {
     test("Adds a subscription", () => {

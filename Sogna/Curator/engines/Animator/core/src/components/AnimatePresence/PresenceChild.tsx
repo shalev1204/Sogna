@@ -5,10 +5,10 @@ import { useId, useMemo } from "react"
 import {
     PresenceContext,
     type PresenceContextProps,
-} from "../../context/presencecontext"
+} from "../../context/PresenceContext.js"
 import { VariantLabels } from "../../sognaflow/types"
-import { useConstant } from "../../utils/use-constant"
-import { PopChild } from "./popchild"
+import { useConstant } from "../../utils/use-constant.js"
+import { PopChild } from "./PopChild.js"
 
 interface PresenceChildProps {
     children: React.ReactElement

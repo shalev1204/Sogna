@@ -1,8 +1,8 @@
 import { Color } from "../color"
-import { Filter } from "../complex/filter"
-import { Mask } from "../complex/mask"
-import { NumberValueTypes } from "./number"
-import { ValueTypeMap } from "./types"
+import { Filter } from "../complex/filter.js"
+import { Mask } from "../complex/mask.js"
+import { NumberValueTypes } from "./number.js"
+import { ValueTypeMap } from "./types.js"
 
 /**
  * A map of default value types for common values

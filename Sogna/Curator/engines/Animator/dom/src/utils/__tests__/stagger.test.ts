@@ -1,5 +1,5 @@
 import { easingDefinitionToFunction } from "sognaflow-utils"
-import { getOriginIndex, stagger } from "../stagger"
+import { getOriginIndex, stagger } from "../stagger.js"
 
 describe("stagger", () => {
     test("Creates a stagger function", () => {

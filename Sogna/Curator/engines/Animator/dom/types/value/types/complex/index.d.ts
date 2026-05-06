@@ -1,6 +1,6 @@
-import { AnyResolvedKeyframe } from "../../../animation/types";
-import { CSSVariableToken } from "../../../animation/utils/is-css-variable";
-import { Color as ColorType } from "../types";
+import { AnyResolvedKeyframe } from "../../../animation/types.js";
+import { CSSVariableToken } from "../../../animation/utils/is-css-variable.js";
+import { Color as ColorType } from "../types.js";
 declare function test(v: any): boolean;
 export type ComplexValues = Array<CSSVariableToken | AnyResolvedKeyframe | ColorType>;
 export interface ValueIndexes {

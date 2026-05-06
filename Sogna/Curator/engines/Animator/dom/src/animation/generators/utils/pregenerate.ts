@@ -1,5 +1,5 @@
 import { millisecondsToSeconds } from "sognaflow-utils"
-import { AnyResolvedKeyframe, KeyframeGenerator } from "../../types"
+import { AnyResolvedKeyframe, KeyframeGenerator } from "../../types.js"
 
 export interface KeyframesMetadata {
     keyframes: Array<AnyResolvedKeyframe>

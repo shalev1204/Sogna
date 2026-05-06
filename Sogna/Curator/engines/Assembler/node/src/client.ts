@@ -21,7 +21,7 @@ import type {
   ExecResult,
   GitCloneParams,
   GitCloneResult,
-} from "./types"
+} from "./types.js"
 
 const DEFAULT_BASE_URL = "https://relay.an.dev"
 

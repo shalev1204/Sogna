@@ -1,5 +1,5 @@
-import { createAxis } from "../models"
-import { translateAxis } from "../delta-apply"
+import { createAxis } from "../models.js"
+import { translateAxis } from "../delta-apply.js"
 
 describe("translateAxis", () => {
     it("applies a translation to an Axis", () => {

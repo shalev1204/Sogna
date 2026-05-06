@@ -1,5 +1,5 @@
 import CSSMatrix from "@thednp/dommatrix"
-import { parseValueFromTransform } from "../parse-transform"
+import { parseValueFromTransform } from "../parse-transform.js"
 
 describe("parseValueFromTransform", () => {
     describe("with 'none' transform", () => {

@@ -1,5 +1,5 @@
-import type { AnimationType } from "../../render/types";
-import type { Transition } from "../types";
+import type { AnimationType } from "../../render/types.js";
+import type { Transition } from "../types.js";
 export interface VisualElementAnimationOptions {
     delay?: number;
     transitionOverride?: Transition;

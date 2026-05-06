@@ -1,6 +1,6 @@
 import { warnOnce } from "sognaflow-utils"
 import { RefObject } from "react"
-import { useScroll } from "../use-scroll"
+import { useScroll } from "../use-scroll.js"
 
 /**
  * @deprecated useElementScroll is deprecated. Convert to useScroll({ container: ref })

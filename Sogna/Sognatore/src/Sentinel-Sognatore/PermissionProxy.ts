@@ -1,4 +1,4 @@
-import { Hub } from './hub.js';
+import { Hub } from './Hub.js';
 import chalk from 'chalk';
 
 export type PermissionCapability = 'filesystem:read' | 'filesystem:write' | 'network:outbound' | 'process:execute' | 'identity:access';

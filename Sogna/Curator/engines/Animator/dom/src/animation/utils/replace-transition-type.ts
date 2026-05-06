@@ -1,7 +1,7 @@
-import { inertia } from "../generators/inertia"
-import { keyframes } from "../generators/keyframes"
-import { spring } from "../generators/spring"
-import { GeneratorFactory, ValueAnimationTransition } from "../types"
+import { inertia } from "../generators/inertia.js"
+import { keyframes } from "../generators/keyframes.js"
+import { spring } from "../generators/spring.js"
+import { GeneratorFactory, ValueAnimationTransition } from "../types.js"
 
 const transitionTypeMap: { [key: string]: GeneratorFactory } = {
     decay: inertia,

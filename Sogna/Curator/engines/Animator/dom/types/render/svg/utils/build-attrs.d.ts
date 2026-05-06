@@ -1,6 +1,6 @@
-import type { SognaflowNodeOptions } from "../../../node/types";
-import { ResolvedValues } from "../../types";
-import { SVGRenderState } from "../types";
+import type { SognaflowNodeOptions } from "../../../node/types.js";
+import { ResolvedValues } from "../../types.js";
+import { SVGRenderState } from "../types.js";
 /**
  * Build SVG visual attributes, like cx and style.transform
  */

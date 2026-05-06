@@ -1,6 +1,6 @@
 // Accepts an easing function and returns a new one that outputs mirrored values for
 
-import { EasingModifier } from "../types"
+import { EasingModifier } from "../types.js"
 
 // the second half of the animation. Turns easeIn into easeInOut.
 export const mirrorEasing: EasingModifier = (easing) => (p) =>

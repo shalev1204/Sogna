@@ -1,4 +1,4 @@
-import { NativeAnimation } from "./nativeanimation";
+import { NativeAnimation } from "./nativeanimation.js";
 export class NativeAnimationWrapper extends NativeAnimation {
     constructor(animation) {
         super();

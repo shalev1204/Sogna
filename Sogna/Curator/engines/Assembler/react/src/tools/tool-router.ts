@@ -20,12 +20,12 @@ function routeToolCall(
   actionIndex: number,
 ): React.ReactNode {
   // Lazy imports to prevent circular dependency issues
-  const { ThinkingCollapsed, ThinkingStreaming, ThinkingHidden } = require("./thinking-tool")
-  const { EditToolDiffCard, EditToolMinimal } = require("./edit-tool")
-  const { BashToolTerminalCard, BashToolMinimal } = require("./bash-tool")
-  const { ActionRow } = require("./action-row")
-  const { GenericToolRow } = require("./generic-tool")
-  const { ToolTimer } = require("./tool-timer")
+  const { ThinkingCollapsed, ThinkingStreaming, ThinkingHidden } = require("./thinking-tool.js")
+  const { EditToolDiffCard, EditToolMinimal } = require("./edit-tool.js")
+  const { BashToolTerminalCard, BashToolMinimal } = require("./bash-tool.js")
+  const { ActionRow } = require("./action-row.js")
+  const { GenericToolRow } = require("./generic-tool.js")
+  const { ToolTimer } = require("./tool-timer.js")
 
   const showIcon = config.showToolIcons
   const toolSize = resolveToolSize(config)

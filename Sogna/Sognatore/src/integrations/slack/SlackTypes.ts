@@ -1,4 +1,4 @@
-import { IntegrationOptions } from '../adapter.js';
+import { IntegrationOptions } from '../Adapter.js';
 
 export interface SlackBlock {
   type: string;

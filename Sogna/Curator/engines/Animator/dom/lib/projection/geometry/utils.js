@@ -1,4 +1,4 @@
-import { calcLength } from "./delta-calc";
+import { calcLength } from "./delta-calc.js";
 function isAxisDeltaZero(delta) {
     return delta.translate === 0 && delta.scale === 1;
 }

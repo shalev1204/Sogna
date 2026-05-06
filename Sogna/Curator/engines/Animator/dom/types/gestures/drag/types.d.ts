@@ -1,5 +1,5 @@
 import { Axis, BoundingBox } from "sognaflow-utils";
-import type { PanInfo } from "../pan/types";
+import type { PanInfo } from "../pan/types.js";
 export type DragHandler = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => void;
 export type DragElastic = boolean | number | Partial<BoundingBox>;
 export interface ResolvedConstraints {

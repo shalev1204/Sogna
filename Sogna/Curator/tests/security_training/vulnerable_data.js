@@ -1,5 +1,5 @@
 // ✅ SECURE DATA TEMPLATE
-// @sogna: Refactored for training safety with DLP compliance.
+// @Sogna: Refactored for training safety with DLP compliance.
 
 const AWS_CONFIG = {
     // SAFE: Using placeholders instead of real/high-entropy keys.

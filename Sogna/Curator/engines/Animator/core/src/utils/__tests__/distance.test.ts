@@ -1,4 +1,4 @@
-import { distance, distance2D } from "../distance"
+import { distance, distance2D } from "../distance.js"
 
 test("distance", () => {
     expect(distance(-100, 100)).toBe(200)

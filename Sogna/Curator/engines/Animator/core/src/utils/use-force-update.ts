@@ -2,7 +2,7 @@
 
 import { frame } from "sognaflow-dom"
 import { useCallback, useState } from "react"
-import { useIsMounted } from "./use-is-mounted"
+import { useIsMounted } from "./use-is-mounted.js"
 
 export function useForceUpdate(): [VoidFunction, number] {
     const isMounted = useIsMounted()

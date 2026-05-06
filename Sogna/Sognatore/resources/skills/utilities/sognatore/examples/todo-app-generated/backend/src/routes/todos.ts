@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { rateLimit } from 'express-rate-limit';
 import { getDatabase } from '../db';
-import { ApiResponse, Todo } from '../types/index';
+import { ApiResponse, Todo } from '../types/index.js';
 
 const router = Router();
 const WINDOW_MS = 60_000;
@@ -33,7 +33,7 @@ router.use(
 );
 
 // GET /api/todos - Retrieve all todos for current user
-// @sentinel-ignore: IDOR protected via mandatory userId scope in SQL
+// @Sentinel-ignore: IDOR protected via mandatory userId scope in SQL
 router.get('/todos', (req: Request, res: Response): void => {
   try {
     const userId = getUserId(req);
@@ -53,7 +53,7 @@ router.get('/todos', (req: Request, res: Response): void => {
 });
 
 // POST /api/todos - Create new todo
-// @sentinel-ignore: IDOR protected via mandatory userId scope in SQL
+// @Sentinel-ignore: IDOR protected via mandatory userId scope in SQL
 router.post('/todos', (req: Request, res: Response): void => {
   const { title } = req.body;
 
@@ -92,7 +92,7 @@ router.post('/todos', (req: Request, res: Response): void => {
 });
 
 // PATCH /api/todos/:id - Update todo completion status
-// @sentinel-ignore: IDOR protected via mandatory userId scope in SQL
+// @Sentinel-ignore: IDOR protected via mandatory userId scope in SQL
 router.patch('/todos/:id', (req: Request, res: Response): void => {
   const { id } = req.params;
   const { completed } = req.body;
@@ -137,7 +137,7 @@ router.patch('/todos/:id', (req: Request, res: Response): void => {
 });
 
 // DELETE /api/todos/:id - Delete todo by id
-// @sentinel-ignore: IDOR protected via mandatory userId scope in SQL
+// @Sentinel-ignore: IDOR protected via mandatory userId scope in SQL
 router.delete('/todos/:id', (req: Request, res: Response): void => {
   const { id } = req.params;
 

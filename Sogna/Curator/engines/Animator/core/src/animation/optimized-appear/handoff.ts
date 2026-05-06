@@ -1,6 +1,6 @@
 import type { Batcher } from "sognaflow-dom"
-import { appearAnimationStore } from "./store"
-import { appearStoreId } from "./store-id"
+import { appearAnimationStore } from "./store.js"
+import { appearStoreId } from "./store-id.js"
 
 export function handoffOptimizedAppearAnimation(
     elementId: string,

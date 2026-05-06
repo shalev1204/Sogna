@@ -1,6 +1,6 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { OperationsSkillRegistry } from '../skills/operationsskillregistry.js';
-import { NeuralLogisticsHub } from '../logistics/neurallogisticshub.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { OperationsSkillRegistry } from '../skills/OperationsSkillRegistry.js';
+import { NeuralLogisticsHub } from '../logistics/NeuralLogisticsHub.js';
 
 export class AutomationEngineer implements Agent {
     id = 'ops_auto_eng';

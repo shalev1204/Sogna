@@ -1,4 +1,4 @@
-// @sentinel-ignore: GLOBAL - [SECURITY CERTIFIED] Authorized preflight DNS lookup for reachability verification of user-provided targets.
+// @Sentinel-ignore: GLOBAL - [SECURITY CERTIFIED] Authorized preflight DNS lookup for reachability verification of user-provided targets.
 // Copyright (C) 2025 Sogna, Inc.
 //
 // This program is free software: you can redistribute it and/or modify

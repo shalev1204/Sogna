@@ -1,5 +1,5 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils";
-import { FrameData } from "./frame";
+import { FrameData } from "./frame.js";
 let now;
 function clearTime() {
     now = undefined;

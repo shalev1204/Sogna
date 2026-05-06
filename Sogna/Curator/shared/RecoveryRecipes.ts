@@ -1,4 +1,4 @@
-import { FailureClass } from './events/sognaeventbus.js';
+import { FailureClass } from './events/SognaEventBus.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -57,21 +57,21 @@ export const RECOVERY_RECIPES: Record<string, RecoveryRecipe> = {
       }
     },
     steps: [
-      { name: 'Env Verification', command: 'node Sognatore/dist/bin/sognatore.js doctor --auth', description: 'Triggering interactive authentication workflow.' }
+      { name: 'Env Verification', command: 'node Sognatore/dist/bin/Sognatore.js doctor --auth', description: 'Triggering interactive authentication workflow.' }
     ]
   },
   [FailureClass.PERMISSION]: {
     scenario: FailureClass.PERMISSION,
     maxAttempts: 1,
     steps: [
-      { name: 'Permission Audit', command: 'node Sognatore/dist/bin/sognatore.js doctor --fix-perms', description: 'Checking and fixing workspace permissions.' }
+      { name: 'Permission Audit', command: 'node Sognatore/dist/bin/Sognatore.js doctor --fix-perms', description: 'Checking and fixing workspace permissions.' }
     ]
   },
   [FailureClass.API]: {
     scenario: FailureClass.API,
     maxAttempts: 1,
     steps: [
-      { name: 'Credential Refresh', command: 'node Sognatore/dist/bin/sognatore.js doctor --check-api', description: 'Verifying LLM provider credentials.' }
+      { name: 'Credential Refresh', command: 'node Sognatore/dist/bin/Sognatore.js doctor --check-api', description: 'Verifying LLM provider credentials.' }
     ]
   },
   [FailureClass.SANDBOX]: {

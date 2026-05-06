@@ -8,7 +8,7 @@ import {
     progress,
 } from "sognaflow-utils"
 import { Mix } from "./mix"
-import { Mixer, MixerFactory } from "./mix/types"
+import { Mixer, MixerFactory } from "./mix/types.js"
 
 export interface InterpolateOptions<T> {
     clamp?: boolean

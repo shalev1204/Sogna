@@ -1,6 +1,6 @@
 import { removeItem } from "sognaflow-utils";
-import { Microtask } from "../frameloop/microtask";
-import { StartViewAnimation } from "./start";
+import { Microtask } from "../frameloop/microtask.js";
+import { StartViewAnimation } from "./start.js";
 let builders = [];
 let current = null;
 function next() {

@@ -1,8 +1,8 @@
-import { HoverGesture } from "../../gestures/hover"
-import { FocusGesture } from "../../gestures/focus"
-import { PressGesture } from "../../gestures/press"
+import { HoverGesture } from "../../gestures/hover.js"
+import { FocusGesture } from "../../gestures/focus.js"
+import { PressGesture } from "../../gestures/press.js"
 import { InViewFeature } from "./viewport"
-import { FeaturePackages } from "./types"
+import { FeaturePackages } from "./types.js"
 
 export const gestureAnimations: FeaturePackages = {
     inView: {

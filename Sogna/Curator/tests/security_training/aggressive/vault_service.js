@@ -1,5 +1,5 @@
 // ✅ SECURE VAULT
-// @sogna: Refactored for training safety.
+// @Sogna: Refactored for training safety.
 
 const VAULT_KEYS = {
     // SAFE: Using environment variables for secrets.

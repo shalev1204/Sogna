@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect, type JSX } from "react"
 import { motion } from "motion/react"
-import { cn } from "../utils/cn"
+import { cn } from "../utils/cn.js"
 
 interface TextShimmerProps {
   children: React.ReactNode

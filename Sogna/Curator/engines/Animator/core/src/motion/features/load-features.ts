@@ -1,6 +1,6 @@
 import { setFeatureDefinitions } from "sognaflow-dom"
-import { getInitializedFeatureDefinitions } from "./definitions"
-import { FeaturePackages } from "./types"
+import { getInitializedFeatureDefinitions } from "./definitions.js"
+import { FeaturePackages } from "./types.js"
 
 export function loadFeatures(features: FeaturePackages) {
     const featureDefinitions = getInitializedFeatureDefinitions()

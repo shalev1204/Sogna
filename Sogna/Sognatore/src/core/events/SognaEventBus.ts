@@ -1,1 +1,1 @@
-export * from '@sogna/curator';
+export * from '@Sogna/Curator';

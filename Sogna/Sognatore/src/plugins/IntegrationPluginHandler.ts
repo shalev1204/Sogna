@@ -1,6 +1,6 @@
 import { request as httpsRequest } from 'https';
 import { request as httpRequest } from 'http';
-import { IntegrationPluginConfig } from './plugintypes.js';
+import { IntegrationPluginConfig } from './PluginTypes.js';
 
 // In-memory registry for custom integration plugins
 const _registeredIntegrations = new Map<string, any>();

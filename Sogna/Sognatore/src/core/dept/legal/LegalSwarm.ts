@@ -1,10 +1,10 @@
-import { SwarmBase } from '../../swarms/swarmbase.js';
-import { ComplianceLead } from './agents/compliancelead.js';
-import { ContractArchitect } from './agents/contractarchitect.js';
-import { IPGuard } from './agents/ipguard.js';
-import { EthicsOfficer } from './agents/ethicsofficer.js';
-import { LegalOrchestrator } from './agents/legalorchestrator.js';
-import { LegalKPITracker } from './metrics/legalkpitracker.js';
+import { SwarmBase } from '../../swarms/SwarmBase.js';
+import { ComplianceLead } from './agents/ComplianceLead.js';
+import { ContractArchitect } from './agents/ContractArchitect.js';
+import { IPGuard } from './agents/IPGuard.js';
+import { EthicsOfficer } from './agents/EthicsOfficer.js';
+import { LegalOrchestrator } from './agents/LegalOrchestrator.js';
+import { LegalKPITracker } from './metrics/LegalKPITracker.js';
 
 export class LegalSwarm extends SwarmBase {
     private compliance = new ComplianceLead();

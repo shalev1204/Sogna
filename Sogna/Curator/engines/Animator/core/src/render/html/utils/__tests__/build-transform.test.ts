@@ -1,5 +1,5 @@
 import { buildTransform, transformProps } from "sognaflow-dom"
-import "../../../../jest.setup"
+import "../../../../jest.setup.js"
 
 describe("transformProps.has", () => {
     it("Correctly identifies only transformPerspective as a transform prop", () => {

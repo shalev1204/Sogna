@@ -1,8 +1,8 @@
 import { Easing, isBezierDefinition } from "sognaflow-utils"
-import { supportsLinearEasing } from "../../../utils/supports/linear-easing"
-import { generateLinearEasing } from "../utils/linear"
-import { cubicBezierAsString } from "./cubic-bezier"
-import { supportedWaapiEasing } from "./supported"
+import { supportsLinearEasing } from "../../../utils/supports/linear-easing.js"
+import { generateLinearEasing } from "../utils/linear.js"
+import { cubicBezierAsString } from "./cubic-bezier.js"
+import { supportedWaapiEasing } from "./supported.js"
 
 export function mapEasingToNativeEasing(
     easing: Easing | Easing[] | undefined,

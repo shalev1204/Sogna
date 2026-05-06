@@ -1,4 +1,4 @@
-import { canAnimate } from "../can-animate"
+import { canAnimate } from "../can-animate.js"
 
 describe("canAnimate", () => {
     it("returns true for valid filter blur keyframes", () => {

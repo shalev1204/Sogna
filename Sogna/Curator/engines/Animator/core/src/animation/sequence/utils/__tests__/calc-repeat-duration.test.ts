@@ -1,4 +1,4 @@
-import { calculateRepeatDuration } from "../calc-repeat-duration"
+import { calculateRepeatDuration } from "../calc-repeat-duration.js"
 
 describe("calculateRepeatDuration", () => {
     test("It correctly calculates the duration", () => {

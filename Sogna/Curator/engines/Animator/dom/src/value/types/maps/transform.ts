@@ -1,6 +1,6 @@
 import { Alpha, Scale } from "../numbers"
-import { Degrees, ProgressPercentage, Px } from "../numbers/units"
-import { ValueTypeMap } from "./types"
+import { Degrees, ProgressPercentage, Px } from "../numbers/units.js"
+import { ValueTypeMap } from "./types.js"
 
 export const TransformValueTypes: ValueTypeMap = {
     rotate: Degrees,

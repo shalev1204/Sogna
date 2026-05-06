@@ -1,8 +1,8 @@
 import { createsognaflowComponent, sognaflowComponentOptions } from "../../../sognaflow"
-import { createDomVisualElement } from "../../dom/create-visual-element"
-import { DOMsognaflowComponents } from "../../dom/types"
-import { CreateVisualElement } from "../../types"
-import { featureBundle } from "./feature-bundle"
+import { createDomVisualElement } from "../../dom/create-visual-element.js"
+import { DOMsognaflowComponents } from "../../dom/types.js"
+import { CreateVisualElement } from "../../types.js"
+import { featureBundle } from "./feature-bundle.js"
 
 export function createsognaflowComponentWithFeatures<
     Props,

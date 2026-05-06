@@ -1,7 +1,7 @@
 import { removeItem } from "sognaflow-utils"
 import type { ViewTransitionBuilder } from "."
-import { microtask } from "../frameloop/microtask"
-import { StartViewAnimation } from "./start"
+import { Microtask } from "../frameloop/microtask.js"
+import { StartViewAnimation } from "./start.js"
 
 let builders: ViewTransitionBuilder[] = []
 
@@ -56,5 +56,5 @@ function processQueue() {
 
 export function AddToQueue(builder: ViewTransitionBuilder) {
     builders.push(builder)
-    microtask.render(processQueue)
+    Microtask.render(processQueue)
 }

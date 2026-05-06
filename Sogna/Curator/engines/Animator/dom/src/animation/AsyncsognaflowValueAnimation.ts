@@ -1,23 +1,22 @@
 import { sognaflowGlobalConfig, noop } from "sognaflow-utils"
-import { time } from "../frameloop/sync-time"
-import { JSAnimation } from "./jsanimation"
-import { getFinalKeyframe } from "./keyframes/get-final"
+import { JSAnimation } from "./JSAnimation.js"
+import { GetFinalKeyframe } from "./keyframes/get-final.js"
 import {
     KeyframeResolver as DefaultKeyframeResolver,
     flushKeyframeResolvers,
     ResolvedKeyframes,
-} from "./keyframes/keyframesresolver"
-import { NativeAnimationExtended } from "./nativeanimationextended"
+} from "./keyframes/KeyframesResolver.js"
+import { NativeAnimationExtended } from "./NativeAnimationExtended.js"
 import {
     AnimationPlaybackControls,
     AnyResolvedKeyframe,
     TimelineWithFallback,
     ValueAnimationOptions,
-} from "./types"
-import { canAnimate } from "./utils/can-animate"
-import { makeAnimationInstant } from "./utils/make-animation-instant"
-import { WithPromise } from "./utils/withpromise"
-import { supportsBrowserAnimation } from "./waapi/supports/waapi"
+} from "./types.js"
+import { canAnimate } from "./utils/can-animate.js"
+import { MakeAnimationInstant } from "./utils/make-animation-instant.js"
+import { WithPromise } from "./utils/WithPromise.js"
+import { supportsBrowserAnimation } from "./waapi/supports/waapi.js"
 
 /**
  * Maximum time allowed between an animation being created and it being
@@ -65,7 +64,7 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
     }: ValueAnimationOptions<T>) {
         super()
 
-        this.createdAt = time.now()
+        this.createdAt = performance.now()
 
         const optionsWithDefaults: OptionsWithoutKeyframes<T> = {
             autoplay,
@@ -112,7 +111,7 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
         this.keyframeResolver = undefined
 
         const { name, type, velocity, delay, isHandoff, onUpdate } = options
-        this.resolvedAt = time.now()
+        this.resolvedAt = performance.now()
 
         /**
          * If we can't animate this value with the resolved keyframes
@@ -123,12 +122,14 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
             canAnimateValue = false
 
             if (sognaflowGlobalConfig.instantAnimations || !delay) {
-                onUpdate?.(getFinalKeyframe(keyframes, options, finalKeyframe))
+                onUpdate?.(
+                    GetFinalKeyframe(keyframes, options, options.finalKeyframe)
+                )
             }
 
             keyframes[0] = keyframes[keyframes.length - 1]
 
-            makeAnimationInstant(options)
+            MakeAnimationInstant(options)
             options.repeat = 0
         }
 

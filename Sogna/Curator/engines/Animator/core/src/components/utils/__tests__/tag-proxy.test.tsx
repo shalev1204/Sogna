@@ -1,6 +1,6 @@
 import * as React from "react"
-import { render } from "../../../jest.setup"
-import { tagProxy } from "../tag-proxy"
+import { render } from "../../../jest.setup.js"
+import { tagProxy } from "../tag-proxy.js"
 
 describe("tagProxy", () => {
     test("Creates a component with the defined tags", () => {

@@ -12,13 +12,13 @@ const ts = require('typescript');
 const https = require('https');
 const { spawnSync } = require('child_process');
 const crypto = require('crypto');
-const uma = require('../../../shared/uma_bridge.cjs');
+const uma = require('../../../shared/uma_bridge.cjs.js');
 
 const ROOT_DIR = path.resolve(__dirname, '../../../../..');
 // ROOT_DIR is now dynamically resolved to the execution context (Sogna root)
-const INTEL_REPORT = path.join(__dirname, '../reports/THREAD_INTEL.md');
-const CONFIG_FEED = path.join(__dirname, '../data/risk_dna_feed.json');
-const SIGNATURE_DB = path.join(__dirname, '../data/signatures.json');
+const INTEL_REPORT = path.join(__dirname, '../reports/thread_intel.md.js');
+const CONFIG_FEED = path.join(__dirname, '../data/risk_dna_feed.json.js');
+const SIGNATURE_DB = path.join(__dirname, '../data/signatures.json.js');
 const SOBERANIA_DB = path.join(__dirname, '../data/soberania.json');
 const VERSION = '1.5.0-Apex';
 
@@ -143,7 +143,7 @@ function classifyBashCommand(cmdString) {
     return 'Unknown';
 }
 
-const HONEYPOT_DATA_PATH = path.join(__dirname, '../data/honeypots.json');
+const HONEYPOT_DATA_PATH = path.join(__dirname, '../data/honeypots.json.js');
 let HONEYPOTS = [];
 try {
     if (fs.existsSync(HONEYPOT_DATA_PATH)) {
@@ -304,7 +304,7 @@ function scanASTForBackdoors(filePath, content) {
 
             // --- BYPASS TRACKING ---
             const fullText = node.getFullText(sourceFile);
-            if (fullText.includes('@sentinel-ignore') || fullText.includes('@sogna-ignore')) {
+            if (fullText.includes('@Sentinel-ignore') || fullText.includes('@Sogna-ignore')) {
                 // Precision: If the ignore is justified (contains :), reduce severity to silent info unless it's a critical core file
                 const isJustified = fullText.includes(':');
                 const isCoreFile = filePath.includes('Sognatore/src/core/') || filePath.includes('Toolkit/engines/');
@@ -466,7 +466,7 @@ function scanASTForBackdoors(filePath, content) {
                         }
 
                         // Skip if already justified via comment
-                        if (fullText.includes('@sentinel-ignore')) return;
+                        if (fullText.includes('@Sentinel-ignore')) return;
 
                         const isSecuredByWhitelist = DOMAIN_WHITELIST.some(d => urlText.includes(d)) || 
                                                      (urlText.match(/^['"`]\//) && DOMAIN_WHITELIST.some(d => content.includes(d)));
@@ -559,7 +559,7 @@ function applyFixes(filePath, originalContent) {
         if (delay.includes('Math.min')) return match; 
         if (parseInt(delay) > limit || isNaN(parseInt(delay))) {
             fixApplied = true;
-            return `${func}(${cb}, Math.min(${delay}, ${limit})) // @sentinel: Capped for institutional performance`;
+            return `${func}(${cb}, Math.min(${delay}, ${limit})) // @Sentinel: Capped for institutional performance`;
         }
         return match;
     });
@@ -573,8 +573,8 @@ function applyFixes(filePath, originalContent) {
         
         // Justificar llamadas de red y comandos sensibles automáticamente si no lo están
         const isSensitive = /spawnSync|execSync|https\.request|fetch|axios\.get|\.exit\(/.test(line);
-        if (isSensitive && !lines[i-1]?.includes('@sentinel-ignore')) {
-            newLines.push(`// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad`);
+        if (isSensitive && !lines[i-1]?.includes('@Sentinel-ignore')) {
+            newLines.push(`// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad`);
             fixApplied = true;
         }
         
@@ -675,7 +675,7 @@ async function scanSupplyChain(filePath) {
             continue;
         }
 
-        if (filePath.includes('sentinel-veto.js')) continue;
+        if (filePath.includes('Sentinel-veto.js')) continue;
 
         try {
             let content = fs.readFileSync(filePath, 'utf-8');
@@ -690,11 +690,11 @@ async function scanSupplyChain(filePath) {
             // --- MECANISMO DE EXENCIÓN & CONTENCIÓN ---
             const isContainment = fileLine.includes('tests/security_training/');
             
-            if (content.includes('@sentinel-ignore') || content.includes('@sogna-ignore')) {
+            if (content.includes('@Sentinel-ignore') || content.includes('@Sogna-ignore')) {
                 // If the file has a GLOBAL ignore using JS or Markdown comment style, skip it
-                if (content.match(/\/\*[\s\S]*?@sentinel-ignore: GLOBAL[\s\S]*?\*\//) || 
-                    content.match(/\/\/ @sentinel-ignore: GLOBAL/) ||
-                    content.match(/<!--\s*@sentinel-ignore:\s*GLOBAL\s*-->/)) {
+                if (content.match(/\/\*[\s\S]*?@Sentinel-ignore: GLOBAL[\s\S]*?\*\//) || 
+                    content.match(/\/\/ @Sentinel-ignore: GLOBAL/) ||
+                    content.match(/<!--\s*@Sentinel-ignore:\s*GLOBAL\s*-->/)) {
                     console.log(`[SENTINEL] Saltando archivo auditado externamente (GLOBAL): ${fileLine}`);
                     continue;
                 }
@@ -720,7 +720,7 @@ async function scanSupplyChain(filePath) {
             scanDataLeak(fileLine, content);
             
             if (fileLine.includes('Toolkit/engines/Sentinel/.husky/pre-commit')) {
-                if (!content.includes('sentinel-veto.js') && !content.includes('lint-staged')) {
+                if (!content.includes('Sentinel-veto.js') && !content.includes('lint-staged')) {
                     addReport('CRITICAL', `ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Husky centralizado.`, fileLine, "Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.");
                 }
             }

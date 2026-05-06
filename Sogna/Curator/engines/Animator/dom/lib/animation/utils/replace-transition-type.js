@@ -1,6 +1,6 @@
-import { inertia } from "../generators/inertia";
-import { keyframes } from "../generators/keyframes";
-import { spring } from "../generators/spring";
+import { inertia } from "../generators/inertia.js";
+import { keyframes } from "../generators/keyframes.js";
+import { spring } from "../generators/spring.js";
 const transitionTypeMap = {
     decay: inertia,
     inertia,

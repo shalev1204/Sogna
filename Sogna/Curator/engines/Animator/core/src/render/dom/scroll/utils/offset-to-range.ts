@@ -1,5 +1,5 @@
-import { ScrollOffset as ScrollOffsetPresets } from "../offsets/presets"
-import { ProgressIntersection, ScrollOffset } from "../types"
+import { ScrollOffset as ScrollOffsetPresets } from "../offsets/presets.js"
+import { ProgressIntersection, ScrollOffset } from "../types.js"
 
 interface ViewTimelineRange {
     rangeStart: string

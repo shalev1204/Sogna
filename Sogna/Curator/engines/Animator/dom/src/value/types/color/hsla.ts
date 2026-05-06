@@ -1,8 +1,8 @@
-import { alpha as alphaType } from "../numbers"
-import { percent } from "../numbers/units"
-import { HSLA } from "../types"
-import { sanitize } from "../utils/sanitize"
-import { isColorString, splitColor } from "./utils"
+import { Alpha as alphaType } from "../numbers"
+import { Percent } from "../numbers/units.js"
+import { HSLA } from "../types.js"
+import { sanitize } from "../utils/sanitize.js"
+import { isColorString, splitColor } from "./utils.js"
 
 export const Hsla = {
     test: /*@__PURE__*/ isColorString("hsl", "hue"),
@@ -12,9 +12,9 @@ export const Hsla = {
             "hsla(" +
             Math.round(hue) +
             ", " +
-            percent.transform(sanitize(saturation)) +
+            Percent.transform(sanitize(saturation)) +
             ", " +
-            percent.transform(sanitize(lightness)) +
+            Percent.transform(sanitize(lightness)) +
             ", " +
             sanitize(alphaType.transform(alpha)) +
             ")"

@@ -1,4 +1,4 @@
-import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types";
+import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types.js";
 export type ViewTransitionAnimationDefinition = {
     keyframes: DOMKeyframesDefinition;
     options: AnimationOptions;

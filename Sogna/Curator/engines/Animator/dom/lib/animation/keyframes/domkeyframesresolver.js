@@ -1,11 +1,11 @@
-import { PositionalKeys } from "../../render/utils/keys-position";
-import { FindDimensionValueType } from "../../value/types/dimensions";
-import { GetVariableValue } from "../utils/css-variables-conversion";
-import { ContainsCSSVariable, IsCSSVariableToken, } from "../utils/is-css-variable";
-import { KeyframeResolver, } from "./keyframesresolver";
-import { IsNone } from "./utils/is-none";
-import { MakeNoneKeyframesAnimatable } from "./utils/make-none-animatable";
-import { IsNumOrPxType, PositionalValues } from "./utils/unit-conversion";
+import { PositionalKeys } from "../../render/utils/keys-position.js";
+import { FindDimensionValueType } from "../../value/types/dimensions.js";
+import { GetVariableValue } from "../utils/css-variables-conversion.js";
+import { ContainsCSSVariable, IsCSSVariableToken, } from "../utils/is-css-variable.js";
+import { KeyframeResolver, } from "./keyframesresolver.js";
+import { IsNone } from "./utils/is-none.js";
+import { MakeNoneKeyframesAnimatable } from "./utils/make-none-animatable.js";
+import { IsNumOrPxType, PositionalValues } from "./utils/unit-conversion.js";
 export class DOMKeyframesResolver extends KeyframeResolver {
     constructor(unresolvedKeyframes, onComplete, name, sognaflowValue, element) {
         super(unresolvedKeyframes, onComplete, name, sognaflowValue, element, true);

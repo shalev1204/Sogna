@@ -1,4 +1,4 @@
-import { memoSupports } from "./memo";
+import { memoSupports } from "./memo.js";
 export const supportsLinearEasing = /*@__PURE__*/ memoSupports(() => {
     try {
         document

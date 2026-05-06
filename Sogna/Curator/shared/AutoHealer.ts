@@ -1,7 +1,7 @@
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from './events/sognaeventbus.js';
-import { PolicyEngine, EscalationLevel } from './policyengine.js';
+import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from './events/SognaEventBus.js';
+import { PolicyEngine, EscalationLevel } from './PolicyEngine.js';
 
 export class AutoHealer {
   private static instance: AutoHealer;
@@ -97,7 +97,7 @@ export class AutoHealer {
         });
 
         if (step.command) {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
           execSync(step.command, { stdio: 'pipe' });
         }
         if (step.action) {

@@ -8,57 +8,57 @@ import {
     Point,
     SubscriptionManager,
 } from "sognaflow-utils"
-import { AnimateSingleValue } from "../../animation/animate/single-value"
-import { JSAnimation } from "../../animation/jsanimation"
-import { GetOptimisedAppearId } from "../../animation/optimized-appear/get-appear-id"
-import { Transition, ValueAnimationOptions } from "../../animation/types"
-import { GetValueTransition } from "../../animation/utils/get-value-transition"
+import { AnimateSingleValue } from "../../animation/animate/single-value.js"
+import { JSAnimation } from "../../animation/JSAnimation.js"
+import { GetOptimisedAppearId } from "../../animation/optimized-appear/get-appear-id.js"
+import { Transition, ValueAnimationOptions } from "../../animation/types.js"
+import { GetValueTransition } from "../../animation/utils/get-value-transition.js"
 import { CancelFrame, Frame, FrameDataInstance, FrameSteps } from "../../frameloop"
-import { Microtask } from "../../frameloop/microtask"
-import { Time } from "../../frameloop/sync-time"
-import type { Process } from "../../frameloop/types"
-import { HTMLVisualElement } from "../../render/html/htmlvisualelement"
-import type { ResolvedValues } from "../../render/types"
-import { scaleCorrectors } from "../../render/utils/is-forced-sognaflow-value"
-import type { SognaflowStyle, VisualElement } from "../../render/visualelement"
-import { activeAnimations } from "../../stats/animation-count"
-import { StatsBuffer } from "../../stats/buffer"
-import { Delay } from "../../utils/delay"
-import { IsSVGElement } from "../../utils/is-svg-element"
-import { IsSVGSVGElement } from "../../utils/is-svg-svg-element"
-import { MixNumber } from "../../utils/mix/number"
+import { Microtask } from "../../frameloop/microtask.js"
+import { Time } from "../../frameloop/sync-time.js"
+import type { Process } from "../../frameloop/types.js"
+import { HTMLVisualElement } from "../../render/html/HTMLVisualElement.js"
+import type { ResolvedValues } from "../../render/types.js"
+import { scaleCorrectors } from "../../render/utils/is-forced-sognaflow-value.js"
+import type { SognaflowStyle, VisualElement } from "../../render/VisualElement.js"
+import { activeAnimations } from "../../stats/animation-count.js"
+import { StatsBuffer } from "../../stats/buffer.js"
+import { Delay } from "../../utils/delay.js"
+import { IsSVGElement } from "../../utils/is-svg-element.js"
+import { IsSVGSVGElement } from "../../utils/is-svg-svg-element.js"
+import { MixNumber } from "../../utils/mix/number.js"
 import { SognaflowValue, CreateSognaflowValue } from "../../value"
-import { ResolveSognaflowValue } from "../../value/utils/resolve-sognaflow-value"
-import { MixValues } from "../animation/mix-values"
-import { copyAxisDeltaInto, copyAxisInto, copyBoxInto } from "../geometry/copy"
+import { ResolveSognaflowValue } from "../../value/utils/resolve-sognaflow-value.js"
+import { MixValues } from "../animation/mix-values.js"
+import { copyAxisDeltaInto, copyAxisInto, copyBoxInto } from "../geometry/copy.js"
 import {
     applyBoxDelta,
     applyTreeDeltas,
     transformBox,
     translateAxis,
-} from "../geometry/delta-apply"
+} from "../geometry/delta-apply.js"
 import {
     calcBoxDelta,
     calcLength,
     calcRelativeBox,
     calcRelativePosition,
     isNear,
-} from "../geometry/delta-calc"
-import { removeBoxTransforms } from "../geometry/delta-remove"
-import { createBox, createDelta } from "../geometry/models"
+} from "../geometry/delta-calc.js"
+import { removeBoxTransforms } from "../geometry/delta-remove.js"
+import { createBox, createDelta } from "../geometry/models.js"
 import {
     aspectRatio,
     axisDeltaEquals,
     boxEquals,
     boxEqualsRounded,
     isDeltaZero,
-} from "../geometry/utils"
-import { NodeStack } from "../shared/stack"
-import { buildProjectionTransform } from "../styles/transform"
-import { eachAxis } from "../utils/each-axis"
-import { FlatTree } from "../utils/flat-tree"
-import { has2DTranslate, hasScale, hasTransform } from "../utils/has-transform"
-import { globalProjectionState } from "./state"
+} from "../geometry/utils.js"
+import { NodeStack } from "../shared/stack.js"
+import { buildProjectionTransform } from "../styles/transform.js"
+import { eachAxis } from "../utils/each-axis.js"
+import { FlatTree } from "../utils/flat-tree.js"
+import { has2DTranslate, hasScale, hasTransform } from "../utils/has-transform.js"
+import { globalProjectionState } from "./state.js"
 import {
     IProjectionNode,
     LayoutEvents,
@@ -68,7 +68,7 @@ import {
     ProjectionNodeConfig,
     ProjectionNodeOptions,
     ScrollMeasurements,
-} from "./types"
+} from "./types.js"
 
 const metrics = {
     nodes: 0,
@@ -121,7 +121,7 @@ function cancelTreeOptimisedTransformAnimations(
         window.sognaflowCancelOptimisedAnimation!(
             appearId,
             "transform",
-            frame,
+            Frame,
             !(layout || layoutId)
         )
     }

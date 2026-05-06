@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useTodos } from './hooks/usetodos';
-import { TodoForm } from './components/todoform';
-import { TodoList } from './components/todolist';
-import { EmptyState } from './components/emptystate';
-import { ConfirmDialog } from './components/confirmdialog';
-import './App.css';
+import { useTodos } from './hooks/useTodos.js';
+import { TodoForm } from './components/TodoForm.js';
+import { TodoList } from './components/TodoList.js';
+import { EmptyState } from './components/EmptyState.js';
+import { ConfirmDialog } from './components/ConfirmDialog.js';
+import './App.css.js';
 
 function App() {
   const { todos, loading, error, addTodo, toggleTodo, removeTodo } = useTodos();

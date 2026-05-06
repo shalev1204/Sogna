@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { StudioSkillRegistry } from '../skills/studioskillregistry.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { StudioSkillRegistry } from '../skills/StudioSkillRegistry.js';
 
 export class MotionDesigner implements Agent {
     id = 'studio_motion_designer';

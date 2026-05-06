@@ -1,4 +1,4 @@
-import { ValueType } from "./types";
+import { ValueType } from "./types.js";
 /**
  * Tests a provided value against a ValueType
  */

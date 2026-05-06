@@ -1,4 +1,4 @@
-import { TransformProps as transformProps } from "../../render/utils/keys-transform";
+import { TransformProps as transformProps } from "../../render/utils/keys-transform.js";
 const underDampedSpring = {
     type: "spring",
     stiffness: 500,

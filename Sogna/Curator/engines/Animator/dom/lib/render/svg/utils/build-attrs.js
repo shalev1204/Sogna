@@ -1,5 +1,5 @@
-import { BuildHTMLStyles as buildHTMLStyles } from "../../html/utils/build-styles";
-import { BuildSVGPath as buildSVGPath } from "./path";
+import { BuildHTMLStyles as buildHTMLStyles } from "../../html/utils/build-styles.js";
+import { BuildSVGPath as buildSVGPath } from "./path.js";
 /**
  * CSS sognaflow Path properties that should remain as CSS styles on SVG elements.
  */

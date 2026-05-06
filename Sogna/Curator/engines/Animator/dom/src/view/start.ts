@@ -1,18 +1,18 @@
 import { secondsToMilliseconds } from "sognaflow-utils"
-import { GroupAnimation } from "../animation/groupanimation"
-import { NativeAnimation } from "../animation/nativeanimation"
-import { NativeAnimationWrapper } from "../animation/nativeanimationwrapper"
-import { AnimationPlaybackControls } from "../animation/types"
-import { getValueTransition } from "../animation/utils/get-value-transition"
-import { mapEasingToNativeEasing } from "../animation/waapi/easing/map-easing"
-import { applyGeneratorOptions } from "../animation/waapi/utils/apply-generator"
-import type { ViewTransitionBuilder } from "./index"
-import { ViewTransitionTarget } from "./types"
-import { ChooseLayerType } from "./utils/choose-layer-type"
-import { ViewCSS } from "./utils/css"
-import { GetViewAnimationLayerInfo } from "./utils/get-layer-info"
-import { GetViewAnimations } from "./utils/get-view-animations"
-import { HasTarget } from "./utils/has-target"
+import { GroupAnimation } from "../animation/GroupAnimation.js"
+import { NativeAnimation } from "../animation/NativeAnimation.js"
+import { NativeAnimationWrapper } from "../animation/NativeAnimationWrapper.js"
+import { AnimationPlaybackControls } from "../animation/types.js"
+import { GetValueTransition } from "../animation/utils/get-value-transition.js"
+import { mapEasingToNativeEasing } from "../animation/waapi/easing/map-easing.js"
+import { applyGeneratorOptions } from "../animation/waapi/utils/apply-generator.js"
+import type { ViewTransitionBuilder } from "./index.js"
+import { ViewTransitionTarget } from "./types.js"
+import { ChooseLayerType } from "./utils/choose-layer-type.js"
+import { ViewCSS } from "./utils/css.js"
+import { GetViewAnimationLayerInfo } from "./utils/get-layer-info.js"
+import { GetViewAnimations } from "./utils/get-view-animations.js"
+import { HasTarget } from "./utils/has-target.js"
 
 const definitionNames = ["layout", "enter", "exit", "new", "old"] as const
 
@@ -87,11 +87,11 @@ export function StartViewAnimation(
                         if (!valueKeyframes) continue
 
                         const valueOptions = {
-                            ...getValueTransition(
+                            ...GetValueTransition(
                                 defaultOptions as any,
                                 valueName
                             ),
-                            ...getValueTransition(options as any, valueName),
+                            ...GetValueTransition(options as any, valueName),
                         }
 
                         const type = ChooseLayerType(
@@ -163,7 +163,7 @@ export function StartViewAnimation(
                      */
                     const transitionName = name.type === "group" ? "layout" : ""
                     let animationTransition = {
-                        ...getValueTransition(defaultOptions, transitionName),
+                        ...GetValueTransition(defaultOptions, transitionName),
                     }
 
                     animationTransition.duration &&= secondsToMilliseconds(

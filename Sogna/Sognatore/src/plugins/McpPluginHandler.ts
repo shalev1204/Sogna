@@ -1,5 +1,5 @@
 import { execFile } from 'child_process';
-import { McpToolPluginConfig } from './plugintypes.js';
+import { McpToolPluginConfig } from './PluginTypes.js';
 
 // In-memory registry for custom MCP tool plugins
 const _registeredTools = new Map<string, any>();

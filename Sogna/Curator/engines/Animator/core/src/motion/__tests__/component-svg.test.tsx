@@ -6,8 +6,8 @@ import {
     usesognaflowValue,
     useTransform,
 } from "../../"
-import { nextFrame } from "../../gestures/__tests__/utils"
-import { render } from "../../jest.setup"
+import { nextFrame } from "../../gestures/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 
 describe("SVG", () => {
     test("doesn't add translateZ", () => {

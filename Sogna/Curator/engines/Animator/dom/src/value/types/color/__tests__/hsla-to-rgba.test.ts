@@ -1,4 +1,4 @@
-import { hslaToRgba } from "../hsla-to-rgba"
+import { hslaToRgba } from "../hsla-to-rgba.js"
 
 describe("hslaToRgba", () => {
     test("Correctly converts hsla to rgba", () => {

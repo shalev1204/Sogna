@@ -3,7 +3,7 @@
 import type { VisualElement } from "sognaflow-dom"
 import * as React from "react"
 import { useCallback, useInsertionEffect, useRef } from "react"
-import { VisualState } from "./use-visual-state"
+import { VisualState } from "./use-visual-state.js"
 
 /**
  * Creates a ref function that, when called, hydrates the provided

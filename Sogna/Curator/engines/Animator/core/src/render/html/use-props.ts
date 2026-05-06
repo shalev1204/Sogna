@@ -3,8 +3,8 @@
 import { AnyResolvedKeyframe, buildHTMLStyles, isForcedsognaflowValue, issognaflowValue, sognaflowValue } from "sognaflow-dom"
 import { HTMLProps, useMemo } from "react"
 import { sognaflowProps } from "../../sognaflow/types"
-import { ResolvedValues } from "../types"
-import { createHtmlRenderState } from "./utils/create-render-state"
+import { ResolvedValues } from "../types.js"
+import { createHtmlRenderState } from "./utils/create-render-state.js"
 
 export function copyRawValuesOnly(
     target: ResolvedValues,

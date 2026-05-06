@@ -51,7 +51,7 @@ ${content}`;
             }
         }
 
-        console.log(chalk.cyan(`\n[UMA] 🧠 Memoria episódica actualizada. Ejecuta 'sogna doctor --secure' para re-indexar.`));
+        console.log(chalk.cyan(`\n[UMA] 🧠 Memoria episódica actualizada. Ejecuta 'Sogna doctor --secure' para re-indexar.`));
 
     } catch (err) {
         console.error(chalk.red(`\n✘ Error en la sincronización: ${err.message}`));

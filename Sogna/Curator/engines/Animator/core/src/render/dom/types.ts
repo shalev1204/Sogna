@@ -1,5 +1,5 @@
-import { HTMLsognaflowComponents } from "../html/types"
-import { SVGsognaflowComponents } from "../svg/types"
+import { HTMLsognaflowComponents } from "../html/types.js"
+import { SVGsognaflowComponents } from "../svg/types.js"
 
 export interface DOMVisualElementOptions {
     /**

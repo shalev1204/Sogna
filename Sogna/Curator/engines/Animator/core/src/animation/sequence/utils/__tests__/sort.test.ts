@@ -1,5 +1,5 @@
-import { ValueSequence } from "../../types"
-import { compareByTime } from "../sort"
+import { ValueSequence } from "../../types.js"
+import { compareByTime } from "../sort.js"
 
 describe("compareByTime", () => {
     test("Can be used to sort values by at time", () => {

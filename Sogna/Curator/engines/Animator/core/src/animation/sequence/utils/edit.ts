@@ -1,6 +1,6 @@
 import { mixNumber, UnresolvedValueKeyframe } from "sognaflow-dom"
 import { Easing, getEasingForSegment, removeItem } from "sognaflow-utils"
-import type { ValueSequence } from "../types"
+import type { ValueSequence } from "../types.js"
 
 export function eraseKeyframes(
     sequence: ValueSequence,

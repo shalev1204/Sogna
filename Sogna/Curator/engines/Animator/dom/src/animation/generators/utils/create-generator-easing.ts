@@ -1,6 +1,6 @@
 import { millisecondsToSeconds } from "sognaflow-utils"
-import { GeneratorFactory, Transition } from "../../types"
-import { calcGeneratorDuration, maxGeneratorDuration } from "./calc-duration"
+import { GeneratorFactory, Transition } from "../../types.js"
+import { calcGeneratorDuration, maxGeneratorDuration } from "./calc-duration.js"
 
 /**
  * Create a progress => progress easing function from a generator.

@@ -3,7 +3,7 @@ Cypress.config({
 })
 
 describe("animateLayout API", () => {
-    const tests = require("../fixtures/animate-layout-tests.json")
+    const tests = require("../fixtures/animate-layout-tests.json.js")
 
     tests.forEach((test) => {
         it(test, () => {

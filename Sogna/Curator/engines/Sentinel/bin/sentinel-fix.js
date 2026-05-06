@@ -11,12 +11,12 @@ const path = require('path');
 const args = process.argv.slice(2);
 const action = args[0]; // whitelist, ignore, refactor
 const target = args[1]; // dominio o ruta de archivo
-const sentinelVetoPath = path.join(__dirname, 'sentinel-veto.js');
+const sentinelVetoPath = path.join(__dirname, 'Sentinel-veto.js');
 
 if (!action || !target) {
     console.log("Usage: node sentinel-fix.js <action> <target>");
     console.log("Actions: whitelist | ignore");
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
 }
 
@@ -44,7 +44,7 @@ function handleWhitelist(domain) {
     }
 }
 
-// @sentinel-ignore: GLOBAL - Sentinel core fixing utility with authorized administrative capabilities.
+// @Sentinel-ignore: GLOBAL - Sentinel core fixing utility with authorized administrative capabilities.
 function handleIgnore(filePath) {
     console.log(`[FIXER] Inmunizando archivo: ${filePath}...`);
     if (!fs.existsSync(filePath)) {
@@ -52,11 +52,11 @@ function handleIgnore(filePath) {
         return;
     }
     let content = fs.readFileSync(filePath, 'utf-8');
-    if (content.includes('// @sentinel-ignore')) {
+    if (content.includes('// @Sentinel-ignore')) {
         console.log(`[FIXER] El archivo ya está inmunizado.`);
         return;
     }
-    const updatedContent = `// @sentinel-ignore: GLOBAL - Authorized via Sentinel Fixer\n${content}`;
+    const updatedContent = `// @Sentinel-ignore: GLOBAL - Authorized via Sentinel Fixer\n${content}`;
     fs.writeFileSync(filePath, updatedContent);
     console.log(`âœ… [FIXER] Archivo ${filePath} inmunizado con éxito.`);
 }

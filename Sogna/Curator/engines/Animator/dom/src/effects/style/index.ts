@@ -1,11 +1,11 @@
-import { isCSSVar } from "../../render/dom/is-css-var"
-import { transformProps } from "../../render/utils/keys-transform"
-import { isHTMLElement } from "../../utils/is-html-element"
+import { isCSSVar } from "../../render/dom/is-css-var.js"
+import { TransformProps } from "../../render/utils/keys-transform.js"
+import { IsHTMLElement } from "../../utils/is-html-element.js"
 import { SognaflowValue } from "../../value"
-import { SognaflowValueState } from "../sognaflowvaluestate"
-import { createSelectorEffect } from "../utils/create-dom-effect"
-import { createEffect } from "../utils/create-effect"
-import { buildTransform } from "./transform"
+import { SognaflowValueState } from "../SognaflowValueState.js"
+import { createSelectorEffect } from "../utils/create-dom-effect.js"
+import { createEffect } from "../utils/create-effect.js"
+import { buildTransform } from "./transform.js"
 
 const originProps = new Set(["originX", "originY", "originZ"])
 
@@ -18,11 +18,11 @@ export const AddStyleValue = (
     let render: VoidFunction | undefined = undefined
     let computed: SognaflowValue | undefined = undefined
 
-    if (transformProps.has(key)) {
+    if (TransformProps.has(key)) {
         if (!state.get("transform")) {
             // If this is an HTML element, we need to set the transform-box to fill-box
             // to normalise the transform relative to the element's bounding box
-            if (!isHTMLElement(element) && !state.get("transformBox")) {
+            if (!IsHTMLElement(element) && !state.get("transformBox")) {
                 AddStyleValue(
                     element,
                     state,

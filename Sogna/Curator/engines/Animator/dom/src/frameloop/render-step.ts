@@ -1,6 +1,6 @@
-import { StatsBuffer } from "../stats/buffer"
-import { StepNames } from "./order"
-import { FrameData, Process, Step } from "./types"
+import { StatsBuffer } from "../stats/buffer.js"
+import { StepNames } from "./order.js"
+import { FrameData, Process, Step } from "./types.js"
 
 export function CreateRenderStep(
     runNextFrame: () => void,

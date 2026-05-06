@@ -1,4 +1,4 @@
-import { AnimationGeneratorType, GeneratorFactory } from "../../types"
+import { AnimationGeneratorType, GeneratorFactory } from "../../types.js"
 
 export function isGenerator(
     type?: AnimationGeneratorType

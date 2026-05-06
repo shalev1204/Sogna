@@ -1,7 +1,7 @@
 "use client"
 
 import { cancelFrame, frame, sognaflowValue } from "sognaflow-dom"
-import { useIsomorphicLayoutEffect } from "../utils/use-isomorphic-effect"
+import { useIsomorphicLayoutEffect } from "../utils/use-isomorphic-effect.js"
 import { usesognaflowValue } from "./use-sognaflow-value"
 
 export function useCombinesognaflowValues<R>(

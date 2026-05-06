@@ -21,7 +21,7 @@ let _metrics: Metrics | null = null;
 export function initMetrics(): Metrics {
   if (_metrics) return _metrics;
 
-  const meter = otel.meterProvider().getMeter('sognatore');
+  const meter = otel.meterProvider().getMeter('Sognatore');
 
   _metrics = {
     taskDuration: meter.createHistogram(

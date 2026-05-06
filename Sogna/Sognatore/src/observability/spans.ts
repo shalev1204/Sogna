@@ -18,8 +18,8 @@ function _createSpan(name: string, parentSpan?: otel.Span, attributes?: otel.Spa
  */
 export function startProjectSpan(projectId: string): otel.Span {
   return _createSpan('project', undefined, {
-    'sognatore.project.id': projectId,
-    'sognatore.span.type': 'project',
+    'Sognatore.project.id': projectId,
+    'Sognatore.span.type': 'project',
   });
 }
 
@@ -28,8 +28,8 @@ export function startProjectSpan(projectId: string): otel.Span {
  */
 export function startTaskSpan(parentSpan: otel.Span, taskId: string): otel.Span {
   return _createSpan('task', parentSpan, {
-    'sognatore.task.id': taskId,
-    'sognatore.span.type': 'task',
+    'Sognatore.task.id': taskId,
+    'Sognatore.span.type': 'task',
   });
 }
 
@@ -46,8 +46,8 @@ export function startRARVSpan(parentSpan: otel.Span, phase: string): otel.Span {
   }
 
   return _createSpan(`rarv.${normalizedPhase.toLowerCase()}`, parentSpan, {
-    'sognatore.rarv.phase': normalizedPhase,
-    'sognatore.span.type': 'rarv',
+    'Sognatore.rarv.phase': normalizedPhase,
+    'Sognatore.span.type': 'rarv',
   });
 }
 
@@ -59,10 +59,10 @@ export function startQualityGateSpan(parentSpan: otel.Span, gateName: string, re
   const passed = normalizedResult === 'pass';
 
   const span = _createSpan(`quality_gate.${gateName}`, parentSpan, {
-    'sognatore.quality_gate.name': gateName,
-    'sognatore.quality_gate.result': normalizedResult,
-    'sognatore.quality_gate.passed': passed,
-    'sognatore.span.type': 'quality_gate',
+    'Sognatore.quality_gate.name': gateName,
+    'Sognatore.quality_gate.result': normalizedResult,
+    'Sognatore.quality_gate.passed': passed,
+    'Sognatore.span.type': 'quality_gate',
   });
 
   if (!passed) {
@@ -87,9 +87,9 @@ export function startAgentSpan(parentSpan: otel.Span, agentType: string, action:
   }
 
   const span = _createSpan(`agent.${agentType}.${normalizedAction}`, parentSpan, {
-    'sognatore.agent.type': agentType,
-    'sognatore.agent.action': normalizedAction,
-    'sognatore.span.type': 'agent',
+    'Sognatore.agent.type': agentType,
+    'Sognatore.agent.action': normalizedAction,
+    'Sognatore.span.type': 'agent',
   });
 
   if (normalizedAction === 'fail') {
@@ -107,10 +107,10 @@ export function startCouncilSpan(parentSpan: otel.Span, reviewerType: string, ve
   const approved = normalizedVerdict === 'approve';
 
   const span = _createSpan(`council.${reviewerType}`, parentSpan, {
-    'sognatore.council.reviewer': reviewerType,
-    'sognatore.council.verdict': normalizedVerdict,
-    'sognatore.council.approved': approved,
-    'sognatore.span.type': 'council',
+    'Sognatore.council.reviewer': reviewerType,
+    'Sognatore.council.verdict': normalizedVerdict,
+    'Sognatore.council.approved': approved,
+    'Sognatore.span.type': 'council',
   });
 
   if (normalizedVerdict === 'reject') {

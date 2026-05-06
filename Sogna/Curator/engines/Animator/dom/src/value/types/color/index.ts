@@ -1,7 +1,7 @@
-import { HSLA, RGBA } from "../types"
-import { Hex } from "./hex"
-import { Hsla } from "./hsla"
-import { Rgba } from "./rgba"
+import { HSLA, RGBA } from "../types.js"
+import { Hex } from "./hex.js"
+import { Hsla } from "./hsla.js"
+import { Rgba } from "./rgba.js"
 
 export const Color = {
     test: (v: any) => Rgba.test(v) || Hex.test(v) || Hsla.test(v),

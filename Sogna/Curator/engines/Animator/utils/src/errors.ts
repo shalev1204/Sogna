@@ -1,4 +1,4 @@
-import { formatErrorMessage } from "./format-error-message"
+import { formatErrorMessage } from "./format-error-message.js"
 
 export type DevMessage = (
     check: boolean,

@@ -1,4 +1,4 @@
-import { cubicBezierAsString } from "./cubic-bezier"
+import { cubicBezierAsString } from "./cubic-bezier.js"
 
 export const supportedWaapiEasing = {
     linear: "linear",

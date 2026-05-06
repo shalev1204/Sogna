@@ -1,4 +1,4 @@
-import { HasReducedSognaflowListener, PrefersReducedSognaflow } from "./state"
+import { HasReducedSognaflowListener, PrefersReducedSognaflow } from "./state.js"
 
 const isBrowser = typeof window !== "undefined"
 

@@ -1,5 +1,5 @@
-import { convertBoundingBoxToBox, transformBoxPoints, } from "../geometry/conversion";
-import { translateAxis } from "../geometry/delta-apply";
+import { convertBoundingBoxToBox, transformBoxPoints, } from "../geometry/conversion.js";
+import { translateAxis } from "../geometry/delta-apply.js";
 export function measureViewportBox(instance, transformPoint) {
     return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint));
 }

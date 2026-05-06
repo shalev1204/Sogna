@@ -27,10 +27,10 @@ export interface LabelConfig {
 export const ALLOWED_PROVIDERS = ['claude', 'codex', 'gemini'] as const;
 
 export const LABEL_CONFIG_MAP: Record<string, LabelConfig> = {
-  'sognatore': { enabled: true },
-  'sognatore-priority-high': { priority: 'high' },
-  'sognatore-priority-low': { priority: 'low' },
-  'sognatore-provider-codex': { provider: 'codex' },
-  'sognatore-provider-gemini': { provider: 'gemini' },
-  'sognatore-dry-run': { dryRun: true },
+  'Sognatore': { enabled: true },
+  'Sognatore-priority-high': { priority: 'high' },
+  'Sognatore-priority-low': { priority: 'low' },
+  'Sognatore-provider-codex': { provider: 'codex' },
+  'Sognatore-provider-gemini': { provider: 'gemini' },
+  'Sognatore-dry-run': { dryRun: true },
 };

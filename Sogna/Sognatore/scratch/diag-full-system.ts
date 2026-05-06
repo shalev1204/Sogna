@@ -1,8 +1,8 @@
-import { SkillRegistry } from '../src/core/skillregistry.js';
-import { SwarmOrchestrator } from '../src/core/swarmorchestrator.js';
-import { AgentFactory } from '../src/core/agents/agentfactory.js';
-import { StateStore } from '../src/core/statestore.js';
-import { AGENT_SWARM_MAPPING } from '../src/core/agents/agenttypes.js';
+import { SkillRegistry } from '../src/core/SkillRegistry.js';
+import { SwarmOrchestrator } from '../src/core/SwarmOrchestrator.js';
+import { AgentFactory } from '../src/core/agents/AgentFactory.js';
+import { StateStore } from '../src/core/StateStore.js';
+import { AGENT_SWARM_MAPPING } from '../src/core/agents/AgentTypes.js';
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
@@ -95,7 +95,7 @@ async function deepDiagnostic() {
     console.log(chalk.green('The Sognatore Ecosystem is purified and mission-ready.'));
   } else {
     console.log(chalk.bold.red('\n[DIAGNOSTIC STATUS: SYSTEM DEGRADED]'));
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     process.exit(1);
   }
 }

@@ -1,5 +1,5 @@
-import { ProgressTimeline } from "../animation/types"
-import { cancelFrame, frame } from "../frameloop"
+import { ProgressTimeline } from "../animation/types.js"
+import { CancelFrame, Frame } from "../frameloop"
 
 type Update = (progress: number) => void
 
@@ -18,7 +18,7 @@ export function observeTimeline(update: Update, timeline: ProgressTimeline) {
         prevProgress = progress
     }
 
-    frame.preUpdate(onFrame, true)
+    Frame.preUpdate(onFrame, true)
 
-    return () => cancelFrame(onFrame)
+    return () => CancelFrame(onFrame)
 }

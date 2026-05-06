@@ -10,9 +10,9 @@ import {
     sognaflowConfig,
     useAnimation,
 } from "../../.."
-import { nextFrame } from "../../../gestures/__tests__/utils"
-import { render } from "../../../jest.setup"
-import { ResolvedValues } from "../../../render/types"
+import { nextFrame } from "../../../gestures/__tests__/utils.js"
+import { render } from "../../../jest.setup.js"
+import { ResolvedValues } from "../../../render/types.js"
 
 describe("AnimatePresence", () => {
     test("Allows initial animation if no `initial` prop defined", async () => {

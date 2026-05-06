@@ -7,7 +7,7 @@
     "Sognatore/src/core/auth_vault.ts",
     "toolkit/scripts/db_backup.sh",
     "memory/security/master_key.bak",
-    "Sognatore/src/core/sentinel-sognatore/access_keys.json",
+    "Sognatore/src/core/Sentinel-sognatore/access_keys.json",
     "toolkit/engines/Predatore/credentials/root_db_pass"
   ],
   "monitoring": {

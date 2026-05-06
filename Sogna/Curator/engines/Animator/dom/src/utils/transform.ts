@@ -1,5 +1,5 @@
 import { EasingFunction } from "sognaflow-utils"
-import { interpolate } from "./interpolate"
+import { Interpolate } from "./interpolate.js"
 
 /**
  * @public
@@ -22,7 +22,7 @@ export interface TransformOptions<T> {
     ease?: EasingFunction | EasingFunction[]
 
     /**
-     * Provide a function that can interpolate between any two values in the provided range.
+     * Provide a function that can Interpolate between any two values in the provided range.
      *
      * @public
      */
@@ -111,7 +111,7 @@ export function transform<T>(
     const outputRange = args[2 + argOffset] as T[]
     const options = args[3 + argOffset] as TransformOptions<T>
 
-    const interpolator = interpolate(inputRange, outputRange, options)
+    const interpolator = Interpolate(inputRange, outputRange, options)
 
     return useImmediate ? interpolator(inputValue) : interpolator
 }

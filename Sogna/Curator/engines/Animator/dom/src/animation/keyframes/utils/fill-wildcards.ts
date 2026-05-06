@@ -1,4 +1,4 @@
-import { UnresolvedValueKeyframe, ValueKeyframe } from "../../types"
+import { UnresolvedValueKeyframe, ValueKeyframe } from "../../types.js"
 
 export function FillWildcards(
     keyframes: ValueKeyframe[] | UnresolvedValueKeyframe[]

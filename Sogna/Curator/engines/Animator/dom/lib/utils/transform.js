@@ -1,4 +1,4 @@
-import { Interpolate } from "./interpolate";
+import { Interpolate } from "./interpolate.js";
 export function transform(...args) {
     const useImmediate = !Array.isArray(args[0]);
     const argOffset = useImmediate ? 0 : -1;

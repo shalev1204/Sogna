@@ -1,4 +1,4 @@
-import { pxValues } from "../../waapi/utils/px-values";
+import { pxValues } from "../../waapi/utils/px-values.js";
 export function applyPxDefaults(keyframes, name) {
     for (let i = 0; i < keyframes.length; i++) {
         if (typeof keyframes[i] === "number" && pxValues.has(name)) {

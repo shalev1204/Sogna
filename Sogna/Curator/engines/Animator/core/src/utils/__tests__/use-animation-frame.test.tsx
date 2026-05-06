@@ -1,5 +1,5 @@
-import { render } from "../../jest.setup"
-import { useAnimationFrame } from "../use-animation-frame"
+import { render } from "../../jest.setup.js"
+import { useAnimationFrame } from "../use-animation-frame.js"
 
 describe("useAnimationFrame", () => {
     test("Fires every animation frame", async () => {

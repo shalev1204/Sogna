@@ -7,8 +7,8 @@ import {
     usesognaflowValue,
     usesognaflowValueEvent,
 } from "../../"
-import { nextFrame } from "../../gestures/__tests__/utils"
-import { render } from "../../jest.setup"
+import { nextFrame } from "../../gestures/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 import { act } from "react"
 
 describe("animate prop as object", () => {

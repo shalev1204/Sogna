@@ -1,4 +1,4 @@
-import { AnimationPlaybackOptions } from "../types"
+import { AnimationPlaybackOptions } from "../types.js"
 
 const isNotNull = (value: unknown) => value !== null
 

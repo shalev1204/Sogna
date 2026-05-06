@@ -1,9 +1,9 @@
 import { Frame } from "../../frameloop"
 import { SognaflowValue } from "../../value"
-import { AnyResolvedKeyframe } from "../types"
-import { WithRender } from "./types"
-import { FillWildcards } from "./utils/fill-wildcards"
-import { RemoveNonTranslationalTransform } from "./utils/unit-conversion"
+import { AnyResolvedKeyframe } from "../types.js"
+import { WithRender } from "./types.js"
+import { FillWildcards } from "./utils/fill-wildcards.js"
+import { RemoveNonTranslationalTransform } from "./utils/unit-conversion.js"
 
 export type UnresolvedKeyframes<T extends AnyResolvedKeyframe> = Array<T | null>
 

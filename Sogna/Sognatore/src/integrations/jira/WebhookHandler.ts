@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { JiraIssue } from './jiratypes.js';
+import { JiraIssue } from './JiraTypes.js';
 
 export const SUPPORTED_EVENTS = ['jira:issue_created', 'jira:issue_updated', 'sprint_started'];
 

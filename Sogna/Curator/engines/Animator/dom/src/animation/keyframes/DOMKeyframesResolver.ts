@@ -1,21 +1,21 @@
-import { PositionalKeys } from "../../render/utils/keys-position"
+import { PositionalKeys } from "../../render/utils/keys-position.js"
 import { SognaflowValue } from "../../value"
-import { FindDimensionValueType } from "../../value/types/dimensions"
-import { AnyResolvedKeyframe } from "../types"
-import { GetVariableValue } from "../utils/css-variables-conversion"
+import { FindDimensionValueType } from "../../value/types/dimensions.js"
+import { AnyResolvedKeyframe } from "../types.js"
+import { GetVariableValue } from "../utils/css-variables-conversion.js"
 import {
     ContainsCSSVariable,
     IsCSSVariableToken,
-} from "../utils/is-css-variable"
+} from "../utils/is-css-variable.js"
 import {
     KeyframeResolver,
     OnKeyframesResolved,
     UnresolvedKeyframes,
-} from "./keyframesresolver"
-import { WithRender } from "./types"
-import { IsNone } from "./utils/is-none"
-import { MakeNoneKeyframesAnimatable } from "./utils/make-none-animatable"
-import { IsNumOrPxType, PositionalValues } from "./utils/unit-conversion"
+} from "./KeyframesResolver.js"
+import { WithRender } from "./types.js"
+import { IsNone } from "./utils/is-none.js"
+import { MakeNoneKeyframesAnimatable } from "./utils/make-none-animatable.js"
+import { IsNumOrPxType, PositionalValues } from "./utils/unit-conversion.js"
 
 export class DOMKeyframesResolver<
     T extends AnyResolvedKeyframe

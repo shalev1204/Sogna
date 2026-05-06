@@ -1,5 +1,5 @@
 import { EasingFunction } from "sognaflow-utils";
-import { AnimationPlaybackControlsWithThen, AnyResolvedKeyframe, TransformProperties } from "../animation/types";
+import { AnimationPlaybackControlsWithThen, AnyResolvedKeyframe, TransformProperties } from "../animation/types.js";
 /**
  * @public
  */

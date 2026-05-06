@@ -1,12 +1,12 @@
-import { AnimateVisualElement } from "../../animation/interfaces/visual-element";
-import { CalcChildStagger } from "../../animation/utils/calc-child-stagger";
-import { GetVariantContext } from "./get-variant-context";
-import { IsAnimationControls } from "./is-animation-controls";
-import { IsKeyframesTarget } from "./is-keyframes-target";
-import { IsVariantLabel } from "./is-variant-label";
-import { ResolveVariant } from "./resolve-dynamic-variants";
-import { ShallowCompare } from "./shallow-compare";
-import { VariantPriorityOrder, } from "./variant-props";
+import { AnimateVisualElement } from "../../animation/interfaces/visual-element.js";
+import { CalcChildStagger } from "../../animation/utils/calc-child-stagger.js";
+import { GetVariantContext } from "./get-variant-context.js";
+import { IsAnimationControls } from "./is-animation-controls.js";
+import { IsKeyframesTarget } from "./is-keyframes-target.js";
+import { IsVariantLabel } from "./is-variant-label.js";
+import { ResolveVariant } from "./resolve-dynamic-variants.js";
+import { ShallowCompare } from "./shallow-compare.js";
+import { VariantPriorityOrder, } from "./variant-props.js";
 const reversePriorityOrder = [...VariantPriorityOrder].reverse();
 const numAnimationTypes = VariantPriorityOrder.length;
 function createAnimateFunction(visualElement) {

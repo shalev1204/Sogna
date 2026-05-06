@@ -1,6 +1,6 @@
 import { BezierDefinition } from "sognaflow-utils"
-import { cubicBezierAsString } from "../cubic-bezier"
-import { supportedWaapiEasing } from "../supported"
+import { cubicBezierAsString } from "../cubic-bezier.js"
+import { supportedWaapiEasing } from "../supported.js"
 
 describe("supportedWaapiEasing", () => {
     test("should include CSS keyword easings", () => {

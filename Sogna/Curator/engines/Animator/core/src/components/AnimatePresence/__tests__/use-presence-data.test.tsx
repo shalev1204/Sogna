@@ -1,7 +1,7 @@
 import { AnimatePresence } from ".."
-import { render } from "../../../jest.setup"
-import { usePresence } from "../use-presence"
-import { usePresenceData } from "../use-presence-data"
+import { render } from "../../../jest.setup.js"
+import { usePresence } from "../use-presence.js"
+import { usePresenceData } from "../use-presence-data.js"
 
 describe("usePresenceCustomData", () => {
     test("returns custom data passed to AnimatePresence", () => {

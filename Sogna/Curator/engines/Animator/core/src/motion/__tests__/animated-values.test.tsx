@@ -6,7 +6,7 @@ import {
     usesognaflowValue,
     useTransform,
 } from "../.."
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180
 

@@ -1,6 +1,6 @@
 import { CancelFrame, Frame, FrameData } from "../frameloop";
-import { ActiveAnimations as activeAnimations } from "./animation-count";
-import { StatsBuffer } from "./buffer";
+import { ActiveAnimations as activeAnimations } from "./animation-count.js";
+import { StatsBuffer } from "./buffer.js";
 function Record() {
     const { value } = StatsBuffer;
     if (value === null) {

@@ -1,6 +1,6 @@
 import { SognaflowValue } from "."
-import { transform, TransformOptions } from "../utils/transform"
-import { TransformValue } from "./transform-value"
+import { transform, TransformOptions } from "../utils/transform.js"
+import { TransformValue } from "./transform-value.js"
 
 export type MapInputRange = number[]
 

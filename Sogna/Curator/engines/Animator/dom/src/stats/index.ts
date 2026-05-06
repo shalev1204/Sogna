@@ -1,17 +1,17 @@
-import { cancelFrame, frame, frameData } from "../frameloop"
-import { activeAnimations } from "./animation-count"
-import { ActiveStatsBuffer, StatsBuffer } from "./buffer"
-import { StatsSummary, Summary } from "./types"
+import { CancelFrame, Frame, FrameDataInstance } from "../frameloop"
+import { activeAnimations } from "./animation-count.js"
+import { ActiveStatsBuffer, StatsBuffer } from "./buffer.js"
+import { StatsSummary, Summary } from "./types.js"
 
 function Record() {
     const { value } = StatsBuffer
 
     if (value === null) {
-        cancelFrame(Record)
+        CancelFrame(Record)
         return
     }
 
-    value.frameloop.rate.push(frameData.delta)
+    value.frameloop.rate.push(FrameDataInstance.delta)
     value.animations.mainThread.push(activeAnimations.mainThread)
     value.animations.waapi.push(activeAnimations.waapi)
     value.animations.layout.push(activeAnimations.layout)
@@ -55,7 +55,7 @@ function ReportStats(): StatsSummary {
     }
 
     ClearStatsBuffer()
-    cancelFrame(Record)
+    CancelFrame(Record)
 
     const summary = {
         frameloop: {
@@ -141,7 +141,7 @@ export function RecordStats() {
         )
     }
 
-    frame.postRender(Record, true)
+    Frame.postRender(Record, true)
 
     return ReportStats
 }

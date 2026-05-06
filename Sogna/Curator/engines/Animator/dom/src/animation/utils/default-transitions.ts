@@ -1,5 +1,5 @@
-import { transformProps } from "../../render/utils/keys-transform"
-import type { ValueAnimationOptions } from "../types"
+import { TransformProps } from "../../render/utils/keys-transform.js"
+import type { ValueAnimationOptions } from "../types.js"
 
 const underDampedSpring: Partial<ValueAnimationOptions> = {
     type: "spring",
@@ -38,7 +38,7 @@ export const GetDefaultTransition = (
 ): Partial<ValueAnimationOptions> => {
     if (keyframes.length > 2) {
         return keyframesTransition
-    } else if (transformProps.has(valueKey)) {
+    } else if (TransformProps.has(valueKey)) {
         return valueKey.startsWith("scale")
             ? criticallyDampedSpring(keyframes[1])
             : underDampedSpring

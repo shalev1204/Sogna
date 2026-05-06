@@ -1,5 +1,5 @@
 import { addUniqueItem, removeItem } from "sognaflow-utils"
-import { compareByDepth, WithDepth } from "./compare-by-depth"
+import { compareByDepth, WithDepth } from "./compare-by-depth.js"
 
 export class FlatTree {
     private children: WithDepth[] = []

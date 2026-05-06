@@ -1,4 +1,4 @@
-import { HTMLRenderState } from "../types"
+import { HTMLRenderState } from "../types.js"
 
 export const createHtmlRenderState = (): HTMLRenderState => ({
     style: {},

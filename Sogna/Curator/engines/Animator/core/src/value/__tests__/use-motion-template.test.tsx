@@ -1,8 +1,8 @@
 import { sognaflowValue, sognaflowValue } from "sognaflow-dom"
 import { useEffect } from "react"
 import { sognaflow } from "../../"
-import { nextMicrotask } from "../../gestures/__tests__/utils"
-import { render } from "../../jest.setup"
+import { nextMicrotask } from "../../gestures/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 import { usesognaflowTemplate } from "../use-sognaflow-template"
 import { usesognaflowValue } from "../use-sognaflow-value"
 

@@ -9,9 +9,9 @@ import {
     type WithAppearProps,
 } from "sognaflow-dom"
 import { noop } from "sognaflow-utils"
-import { handoffOptimizedAppearAnimation } from "./handoff"
-import { appearAnimationStore, appearComplete, AppearStoreEntry } from "./store"
-import { appearStoreId } from "./store-id"
+import { handoffOptimizedAppearAnimation } from "./handoff.js"
+import { appearAnimationStore, appearComplete, AppearStoreEntry } from "./store.js"
+import { appearStoreId } from "./store-id.js"
 
 /**
  * A single time to use across all animations to manually set startTime

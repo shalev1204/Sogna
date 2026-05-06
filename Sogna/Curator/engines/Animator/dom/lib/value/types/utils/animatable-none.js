@@ -1,7 +1,7 @@
 import { Complex } from "../complex";
-import { Filter } from "../complex/filter";
-import { Mask } from "../complex/mask";
-import { GetDefaultValueType } from "../maps/defaults";
+import { Filter } from "../complex/filter.js";
+import { Mask } from "../complex/mask.js";
+import { GetDefaultValueType } from "../maps/defaults.js";
 const customTypes = /*@__PURE__*/ new Set([Filter, Mask]);
 export function GetAnimatableNone(key, value) {
     let defaultValueType = GetDefaultValueType(key);

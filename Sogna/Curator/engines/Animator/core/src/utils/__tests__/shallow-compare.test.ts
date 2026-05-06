@@ -1,5 +1,5 @@
-import "../../jest.setup"
-import { shallowCompare } from "../shallow-compare"
+import "../../jest.setup.js"
+import { shallowCompare } from "../shallow-compare.js"
 
 describe("shallowCompare", () => {
     test("returns false if args are different", () => {

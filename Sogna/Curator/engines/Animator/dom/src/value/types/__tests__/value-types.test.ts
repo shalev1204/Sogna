@@ -1,11 +1,11 @@
-import { auto } from "../auto"
+import { auto } from "../auto.js"
 import { color } from "../color"
 import { complex } from "../complex"
-import { findDimensionValueType } from "../dimensions"
+import { findDimensionValueType } from "../dimensions.js"
 import { number } from "../numbers"
-import { degrees, percent, px, vh, vw } from "../numbers/units"
-import { findValueType } from "../utils/find"
-import { getValueAsType } from "../utils/get-as-type"
+import { degrees, percent, px, vh, vw } from "../numbers/units.js"
+import { findValueType } from "../utils/find.js"
+import { getValueAsType } from "../utils/get-as-type.js"
 
 describe("auto ValueType", () => {
     it("Correctly tests for auto", () => {

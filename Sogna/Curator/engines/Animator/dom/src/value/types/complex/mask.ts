@@ -1,5 +1,5 @@
 import { Complex } from "."
-import { AnyResolvedKeyframe } from "../../../animation/types"
+import { AnyResolvedKeyframe } from "../../../animation/types.js"
 
 export const Mask = {
     ...Complex,

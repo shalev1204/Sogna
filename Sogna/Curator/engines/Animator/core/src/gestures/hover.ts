@@ -1,5 +1,5 @@
 import { Feature, frame, hover, type VisualElement } from "sognaflow-dom"
-import { extractEventInfo } from "../events/event-info"
+import { extractEventInfo } from "../events/event-info.js"
 
 function handleHoverEvent(
     node: VisualElement<Element>,

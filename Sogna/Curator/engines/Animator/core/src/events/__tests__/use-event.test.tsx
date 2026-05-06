@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import { useEffect, useRef } from "react"
-import { render } from "../../jest.setup"
-import { useDomEvent } from "../use-dom-event"
+import { render } from "../../jest.setup.js"
+import { useDomEvent } from "../use-dom-event.js"
 
 describe("useDomEvent", () => {
     it("should handle the ref not being set correctly", () => {

@@ -1,4 +1,4 @@
-import { hasBrowserOnlyColors } from "../is-browser-color"
+import { hasBrowserOnlyColors } from "../is-browser-color.js"
 
 describe("hasBrowserOnlyColors", () => {
     it("returns true for oklch values", () => {

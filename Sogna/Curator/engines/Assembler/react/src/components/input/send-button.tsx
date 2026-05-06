@@ -1,4 +1,4 @@
-import { useThemeConfig } from "../../theme-config"
+import { useThemeConfig } from "../../theme-config.js"
 
 export function SendButtonUnified({
   style,

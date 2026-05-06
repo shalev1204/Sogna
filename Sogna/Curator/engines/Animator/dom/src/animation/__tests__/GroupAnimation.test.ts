@@ -1,6 +1,6 @@
-import { GroupAnimation } from "../groupanimation"
-import { GroupAnimationWithThen } from "../groupanimationwiththen"
-import { AnimationPlaybackControlsWithThen } from "../types"
+import { GroupAnimation } from "../GroupAnimation.js"
+import { GroupAnimationWithThen } from "../GroupAnimationWithThen.js"
+import { AnimationPlaybackControlsWithThen } from "../types.js"
 
 function createTestAnimationControls(
     partialControls?: Partial<AnimationPlaybackControlsWithThen>

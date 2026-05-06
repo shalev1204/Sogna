@@ -1,5 +1,5 @@
 import * as React from "react"
-import { lowercaseSVGElements } from "../../svg/lowercase-elements"
+import { lowercaseSVGElements } from "../../svg/lowercase-elements.js"
 
 export function isSVGComponent(Component: string | React.ComponentType<any>) {
     if (

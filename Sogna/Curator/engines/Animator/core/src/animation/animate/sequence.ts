@@ -4,9 +4,9 @@ import {
     sognaflowValue,
     spring,
 } from "sognaflow-dom"
-import { createAnimationsFromSequence } from "../sequence/create"
-import { AnimationSequence, SequenceOptions } from "../sequence/types"
-import { animateSubject } from "./subject"
+import { createAnimationsFromSequence } from "../sequence/create.js"
+import { AnimationSequence, SequenceOptions } from "../sequence/types.js"
+import { animateSubject } from "./subject.js"
 
 export function animateSequence(
     sequence: AnimationSequence,

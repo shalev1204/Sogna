@@ -1,8 +1,8 @@
 import { frame } from "sognaflow-dom"
 import { scroll } from "../"
-import { ScrollOffset } from "../offsets/presets"
-import { scrollInfo } from "../track"
-import { ScrollInfo } from "../types"
+import { ScrollOffset } from "../offsets/presets.js"
+import { scrollInfo } from "../track.js"
+import { ScrollInfo } from "../types.js"
 
 type Measurements = {
     [key: string]: number

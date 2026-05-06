@@ -1,5 +1,5 @@
 import { CreateSognaflowValue } from "../../value"
-import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value"
+import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value.js"
 
 type SognaflowStyleLike = Record<string, any>
 

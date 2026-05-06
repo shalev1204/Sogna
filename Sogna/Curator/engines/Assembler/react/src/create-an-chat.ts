@@ -1,6 +1,6 @@
 import { Chat } from "@ai-sdk/react"
 import { DefaultChatTransport, type UIMessage } from "ai"
-import type { CreateAgentChatOptions } from "./types"
+import type { CreateAgentChatOptions } from "./types.js"
 
 const DEFAULT_API_URL = "https://relay.an.dev"
 

@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { FinanceSkillRegistry } from '../skills/financeskillregistry.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { FinanceSkillRegistry } from '../skills/FinanceSkillRegistry.js';
 
 export class CostOptimizer implements Agent {
     id = 'finance_cost_opt';

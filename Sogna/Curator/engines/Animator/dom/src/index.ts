@@ -1,65 +1,65 @@
-export * from "./animation/asyncsognaflowvalueanimation"
-export * from "./animation/groupanimation"
-export * from "./animation/groupanimationwiththen"
-export * from "./animation/jsanimation"
-export * from "./animation/nativeanimation"
-export * from "./animation/nativeanimationextended"
-export * from "./animation/nativeanimationwrapper"
-export * from "./animation/types"
-export * from "./animation/utils/active-animations"
-export { calcChildStagger } from "./animation/utils/calc-child-stagger"
-export * from "./animation/utils/css-variables-conversion"
-export { getDefaultTransition } from "./animation/utils/default-transitions"
-export { getFinalKeyframe } from "./animation/keyframes/get-final"
-export * from "./animation/utils/get-value-transition"
-export * from "./animation/utils/resolve-transition"
-export * from "./animation/utils/is-css-variable"
-export { isTransitionDefined } from "./animation/utils/is-transition-defined"
-export * from "./animation/utils/make-animation-instant"
+export * from "./animation/AsyncsognaflowValueAnimation.js"
+export * from "./animation/GroupAnimation.js"
+export * from "./animation/GroupAnimationWithThen.js"
+export * from "./animation/JSAnimation.js"
+export * from "./animation/NativeAnimation.js"
+export * from "./animation/NativeAnimationExtended.js"
+export * from "./animation/NativeAnimationWrapper.js"
+export * from "./animation/types.js"
+export * from "./animation/utils/active-animations.js"
+export { CalcChildStagger } from "./animation/utils/calc-child-stagger.js"
+export * from "./animation/utils/css-variables-conversion.js"
+export { GetDefaultTransition } from "./animation/utils/default-transitions.js"
+export { GetFinalKeyframe } from "./animation/keyframes/get-final.js"
+export * from "./animation/utils/get-value-transition.js"
+export * from "./animation/utils/resolve-transition.js"
+export * from "./animation/utils/is-css-variable.js"
+export { IsTransitionDefined } from "./animation/utils/is-transition-defined.js"
+export * from "./animation/utils/make-animation-instant.js"
 
 // Animation interfaces
-export { AnimateSognaflowValue } from "./animation/interfaces/sognaflow-value"
-export type { VisualElementAnimationOptions } from "./animation/interfaces/types"
-export { AnimateVisualElement } from "./animation/interfaces/visual-element"
-export { AnimateTarget } from "./animation/interfaces/visual-element-target"
-export { AnimateVariant } from "./animation/interfaces/visual-element-variant"
+export { AnimateSognaflowValue } from "./animation/interfaces/sognaflow-value.js"
+export type { VisualElementAnimationOptions } from "./animation/interfaces/types.js"
+export { AnimateVisualElement } from "./animation/interfaces/visual-element.js"
+export { AnimateTarget } from "./animation/interfaces/visual-element-target.js"
+export { AnimateVariant } from "./animation/interfaces/visual-element-variant.js"
 
 // Optimized appear
 export {
-    optimizedAppearDataAttribute,
-    optimizedAppearDataId,
-} from "./animation/optimized-appear/data-id"
-export { getOptimisedAppearId } from "./animation/optimized-appear/get-appear-id"
+    OptimizedAppearDataAttribute,
+    OptimizedAppearDataId,
+} from "./animation/optimized-appear/data-id.js"
+export { GetOptimisedAppearId } from "./animation/optimized-appear/get-appear-id.js"
 export type {
     HandoffFunction,
     WithAppearProps,
-} from "./animation/optimized-appear/types"
+} from "./animation/optimized-appear/types.js"
 
-export * from "./animation/generators/inertia"
-export * from "./animation/generators/keyframes"
-export * from "./animation/generators/spring"
-export * from "./animation/generators/utils/calc-duration"
-export * from "./animation/generators/utils/create-generator-easing"
-export * from "./animation/generators/utils/is-generator"
+export * from "./animation/generators/inertia.js"
+export * from "./animation/generators/keyframes.js"
+export * from "./animation/generators/spring.js"
+export * from "./animation/generators/utils/calc-duration.js"
+export * from "./animation/generators/utils/create-generator-easing.js"
+export * from "./animation/generators/utils/is-generator.js"
 
-export * from "./animation/keyframes/domkeyframesresolver"
-export * from "./animation/keyframes/keyframesresolver"
-export * from "./animation/keyframes/offsets/default"
-export * from "./animation/keyframes/offsets/fill"
-export * from "./animation/keyframes/offsets/time"
-export * from "./animation/keyframes/utils/apply-px-defaults"
-export * from "./animation/keyframes/utils/fill-wildcards"
+export * from "./animation/keyframes/DOMKeyframesResolver.js"
+export * from "./animation/keyframes/KeyframesResolver.js"
+export * from "./animation/keyframes/offsets/default.js"
+export * from "./animation/keyframes/offsets/fill.js"
+export * from "./animation/keyframes/offsets/time.js"
+export * from "./animation/keyframes/utils/apply-px-defaults.js"
+export * from "./animation/keyframes/utils/fill-wildcards.js"
 
-export * from "./animation/waapi/easing/cubic-bezier"
-export * from "./animation/waapi/easing/is-supported"
-export * from "./animation/waapi/easing/map-easing"
-export * from "./animation/waapi/easing/supported"
-export * from "./animation/waapi/start-waapi-animation"
-export * from "./animation/waapi/supports/partial-keyframes"
-export * from "./animation/waapi/supports/waapi"
-export * from "./animation/waapi/utils/accelerated-values"
-export * from "./animation/waapi/utils/apply-generator"
-export * from "./animation/waapi/utils/linear"
+export * from "./animation/waapi/easing/cubic-bezier.js"
+export * from "./animation/waapi/easing/is-supported.js"
+export * from "./animation/waapi/easing/map-easing.js"
+export * from "./animation/waapi/easing/supported.js"
+export * from "./animation/waapi/start-waapi-animation.js"
+export * from "./animation/waapi/supports/partial-keyframes.js"
+export * from "./animation/waapi/supports/waapi.js"
+export * from "./animation/waapi/utils/accelerated-values.js"
+export * from "./animation/waapi/utils/apply-generator.js"
+export * from "./animation/waapi/utils/linear.js"
 
 export * from "./effects/attr"
 export * from "./effects/prop"
@@ -67,102 +67,103 @@ export * from "./effects/style"
 export * from "./effects/svg"
 
 export * from "./frameloop"
-export * from "./frameloop/batcher"
-export * from "./frameloop/microtask"
-export * from "./frameloop/sync-time"
-export * from "./frameloop/types"
+export * from "./frameloop/batcher.js"
+export * from "./frameloop/microtask.js"
+export * from "./frameloop/sync-time.js"
+export * from "./frameloop/types.js"
 
-export * from "./gestures/drag/state/is-active"
-export * from "./gestures/drag/state/set-active"
-export * from "./gestures/drag/types"
-export * from "./gestures/hover"
-export * from "./gestures/pan/types"
+export * from "./gestures/drag/state/is-active.js"
+export * from "./gestures/drag/state/set-active.js"
+export * from "./gestures/drag/types.js"
+export * from "./gestures/hover.js"
+export * from "./gestures/pan/types.js"
 export * from "./gestures/press"
-export * from "./gestures/press/types"
-export * from "./gestures/press/utils/is-keyboard-accessible"
-export * from "./gestures/types"
-export * from "./gestures/utils/is-node-or-child"
-export * from "./gestures/utils/is-primary-pointer"
+export * from "./gestures/press/types.js"
+export * from "./gestures/press/utils/is-keyboard-accessible.js"
+export * from "./gestures/types.js"
+export * from "./gestures/utils/is-node-or-child.js"
+export * from "./gestures/utils/is-primary-pointer.js"
 
-export * from "./node/types"
+export * from "./node/types.js"
 
-export * from "./render/dom/parse-transform"
-export * from "./render/dom/style-computed"
-export * from "./render/dom/style-set"
-export * from "./render/svg/types"
-export { isKeyframesTarget } from "./render/utils/is-keyframes-target"
-export * from "./render/utils/keys-position"
-export * from "./render/utils/keys-transform"
+export * from "./render/dom/parse-transform.js"
+export * from "./render/dom/style-computed.js"
+export * from "./render/dom/style-set.js"
+export * from "./render/svg/types.js"
+export { IsKeyframesTarget } from "./render/utils/is-keyframes-target.js"
+export * from "./render/utils/keys-position.js"
+export * from "./render/utils/keys-transform.js"
 
 export * from "./resize"
 
-export * from "./scroll/observe"
+export * from "./scroll/observe.js"
 
 export * from "./stats"
-export * from "./stats/animation-count"
-export * from "./stats/buffer"
-export * from "./stats/types"
+export * from "./stats/animation-count.js"
+export * from "./stats/buffer.js"
+export * from "./stats/types.js"
 
-export * from "./utils/interpolate"
-export * from "./utils/is-html-element"
-export * from "./utils/is-svg-element"
-export * from "./utils/is-svg-svg-element"
+export * from "./utils/interpolate.js"
+export * from "./utils/is-html-element.js"
+export * from "./utils/is-svg-element.js"
+export * from "./utils/is-svg-svg-element.js"
 export * from "./utils/mix"
-export * from "./utils/mix/color"
-export * from "./utils/mix/complex"
-export * from "./utils/mix/immediate"
-export * from "./utils/mix/number"
-export * from "./utils/mix/types"
-export * from "./utils/mix/visibility"
-export * from "./utils/resolve-elements"
-export * from "./utils/stagger"
-export * from "./utils/supports/flags"
-export * from "./utils/supports/linear-easing"
-export * from "./utils/supports/scroll-timeline"
-export * from "./utils/transform"
+export * from "./utils/mix/color.js"
+export * from "./utils/mix/complex.js"
+export * from "./utils/mix/immediate.js"
+export * from "./utils/mix/number.js"
+export * from "./utils/mix/types.js"
+export * from "./utils/mix/visibility.js"
+export * from "./utils/resolve-elements.js"
+export * from "./utils/stagger.js"
+export * from "./utils/supports/flags.js"
+export * from "./utils/supports/linear-easing.js"
+export * from "./utils/supports/scroll-timeline.js"
+export * from "./utils/transform.js"
 
 export * from "./value"
-export * from "./value/follow-value"
-export * from "./value/map-value"
-export * from "./value/spring-value"
-export * from "./value/transform-value"
-export * from "./value/types/color"
-export * from "./value/types/color/hex"
-export * from "./value/types/color/hsla"
-export * from "./value/types/color/hsla-to-rgba"
-export * from "./value/types/color/rgba"
-export * from "./value/types/complex"
-export * from "./value/types/dimensions"
-export * from "./value/types/maps/defaults"
-export * from "./value/types/maps/number"
-export * from "./value/types/maps/transform"
-export * from "./value/types/maps/types"
-export * from "./value/types/numbers"
-export * from "./value/types/numbers/units"
-export * from "./value/types/test"
-export * from "./value/types/types"
-export * from "./value/types/utils/animatable-none"
-export * from "./value/types/utils/find"
-export * from "./value/types/utils/get-as-type"
-export * from "./value/utils/is-sognaflow-value"
-export { addValueToWillChange as AddValueToWillChange } from "./value/will-change/add-will-change"
-export { IsWillChangeSognaflowValue } from "./value/will-change/is"
-export type { WillChange } from "./value/will-change/types"
+export * from "./value/follow-value.js"
+export * from "./value/map-value.js"
+export * from "./value/spring-value.js"
+export * from "./value/transform-value.js"
+export * from "./value/types/color/hex.js"
+export * from "./value/types/color/hsla.js"
+export * from "./value/types/color/hsla-to-rgba.js"
+export * from "./value/types/color/rgba.js"
+export { Color } from "./value/types/color/index.js"
+export * from "./value/types/complex/index.js"
+export * from "./value/types/dimensions.js"
+export * from "./value/types/maps/defaults.js"
+export * from "./value/types/maps/number.js"
+export * from "./value/types/maps/transform.js"
+export * from "./value/types/maps/types.js"
+export * from "./value/types/numbers/index.js"
+export * from "./value/types/numbers/units.js"
+export * from "./value/types/test.js"
+export type { Color as ColorType } from "./value/types/types.js"
+export * from "./value/types/types.js"
+export * from "./value/types/utils/animatable-none.js"
+export * from "./value/types/utils/find.js"
+export * from "./value/types/utils/get-as-type.js"
+export * from "./value/utils/is-sognaflow-value.js"
+export { AddValueToWillChange as AddValueToWillChange } from "./value/will-change/add-will-change.js"
+export { IsWillChangeSognaflowValue } from "./value/will-change/is.js"
+export type { WillChange } from "./value/will-change/types.js"
 
 export * from "./view"
-export * from "./view/types"
-export * from "./view/utils/get-layer-info"
-export * from "./view/utils/get-view-animations"
+export * from "./view/types.js"
+export * from "./view/utils/get-layer-info.js"
+export * from "./view/utils/get-view-animations.js"
 
 // Visual Element
-export { DOMVisualElement } from "./render/dom/domvisualelement"
-export * from "./render/dom/types"
-export { Feature } from "./render/feature"
-export { HTMLVisualElement } from "./render/html/htmlvisualelement"
-export * from "./render/html/types"
-export { ObjectVisualElement } from "./render/object/objectvisualelement"
-export { visualElementStore } from "./render/store"
-export { SVGVisualElement } from "./render/svg/svgvisualelement"
+export { DOMVisualElement } from "./render/dom/DOMVisualElement.js"
+export * from "./render/dom/types.js"
+export { Feature } from "./render/Feature.js"
+export { HTMLVisualElement } from "./render/html/HTMLVisualElement.js"
+export * from "./render/html/types.js"
+export { ObjectVisualElement } from "./render/object/ObjectVisualElement.js"
+export { visualElementStore } from "./render/store.js"
+export { SVGVisualElement } from "./render/svg/SVGVisualElement.js"
 export type {
     AnimationType,
     FeatureClass,
@@ -176,106 +177,106 @@ export type {
     VisualElementEventCallbacks,
     VisualElementOptions,
     VisualState,
-} from "./render/types"
+} from "./render/types.js"
 export {
-    getFeatureDefinitions,
-    setFeatureDefinitions,
+    GetFeatureDefinitions,
+    SetFeatureDefinitions,
     VisualElement,
-} from "./render/visualelement"
-export type { SognaflowStyle } from "./render/visualelement"
+} from "./render/VisualElement.js"
+export type { SognaflowStyle } from "./render/VisualElement.js"
 
 // Animation State
 export {
     checkVariantsDidChange,
     createAnimationState,
-} from "./render/utils/animation-state"
+} from "./render/utils/animation-state.js"
 export type {
     AnimationList,
     AnimationState,
     AnimationTypeState,
-} from "./render/utils/animation-state"
+} from "./render/utils/animation-state.js"
 
 // Variant utilities
-export { getVariantContext } from "./render/utils/get-variant-context"
-export { isAnimationControls } from "./render/utils/is-animation-controls"
+export { GetVariantContext } from "./render/utils/get-variant-context.js"
+export { IsAnimationControls } from "./render/utils/is-animation-controls.js"
 export {
-    isControllingVariants,
-    isVariantNode,
-} from "./render/utils/is-controlling-variants"
+    IsControllingVariants,
+    IsVariantNode,
+} from "./render/utils/is-controlling-variants.js"
 export {
     addScaleCorrector,
     IsForcedSognaflowValue,
     scaleCorrectors,
-} from "./render/utils/is-forced-sognaflow-value"
-export { isVariantLabel } from "./render/utils/is-variant-label"
-export { UpdateSognaflowValuesFromProps } from "./render/utils/sognaflow-values"
-export { resolveVariant as ResolveVariant } from "./render/utils/resolve-dynamic-variants"
-export { resolveVariantFromProps as ResolveVariantFromProps } from "./render/utils/resolve-variants"
-export { setTarget } from "./render/utils/setters"
+} from "./render/utils/is-forced-sognaflow-value.js"
+export { IsVariantLabel } from "./render/utils/is-variant-label.js"
+export { UpdateSognaflowValuesFromProps } from "./render/utils/sognaflow-values.js"
+export { ResolveVariant as ResolveVariant } from "./render/utils/resolve-dynamic-variants.js"
+export { ResolveVariantFromProps as ResolveVariantFromProps } from "./render/utils/resolve-variants.js"
+export { setTarget } from "./render/utils/setters.js"
 export {
     variantPriorityOrder,
     variantProps,
-} from "./render/utils/variant-props"
+} from "./render/utils/variant-props.js"
 
 // Reduced sognaflow
 export {
-    hasReducedSognaflowListener,
-    initPrefersReducedSognaflow,
-    prefersReducedSognaflow,
+    HasReducedSognaflowListener,
+    InitPrefersReducedSognaflow,
+    PrefersReducedSognaflow,
 } from "./render/utils/reduced-sognaflow"
 
 // Projection geometry
-export * from "./projection/geometry/conversion"
-export * from "./projection/geometry/copy"
-export * from "./projection/geometry/delta-apply"
-export * from "./projection/geometry/delta-calc"
-export * from "./projection/geometry/delta-remove"
-export * from "./projection/geometry/models"
-export * from "./projection/geometry/utils"
-export { eachAxis } from "./projection/utils/each-axis"
+export * from "./projection/geometry/conversion.js"
+export * from "./projection/geometry/copy.js"
+export * from "./projection/geometry/delta-apply.js"
+export * from "./projection/geometry/delta-calc.js"
+export * from "./projection/geometry/delta-remove.js"
+export * from "./projection/geometry/models.js"
+export * from "./projection/geometry/utils.js"
+export { eachAxis } from "./projection/utils/each-axis.js"
 export {
     has2DTranslate,
     hasScale,
     hasTransform,
-} from "./projection/utils/has-transform"
-export { measurePageBox, measureViewportBox } from "./projection/utils/measure"
+} from "./projection/utils/has-transform.js"
+export { measurePageBox, measureViewportBox } from "./projection/utils/measure.js"
 
 // Projection styles
 export {
     correctBorderRadius,
     pixelsToPercent,
-} from "./projection/styles/scale-border-radius"
-export { correctBoxShadow } from "./projection/styles/scale-box-shadow"
-export { buildProjectionTransform } from "./projection/styles/transform"
-export * from "./projection/styles/types"
+} from "./projection/styles/scale-border-radius.js"
+export { correctBoxShadow } from "./projection/styles/scale-box-shadow.js"
+export { buildProjectionTransform } from "./projection/styles/transform.js"
+export * from "./projection/styles/types.js"
 
 // Projection animation
-export { mixValues } from "./projection/animation/mix-values"
+export { MixValues } from "./projection/animation/mix-values.js"
 
 // Utilities (used by projection system)
-export { AnimateSingleValue } from "./animation/animate/single-value"
-export { addDomEvent } from "./events/add-dom-event"
-export { compareByDepth } from "./projection/utils/compare-by-depth"
-export type { WithDepth } from "./projection/utils/compare-by-depth"
-export { FlatTree } from "./projection/utils/flat-tree"
-export { delay, delayInSeconds } from "./utils/delay"
-export type { DelayedFunction } from "./utils/delay"
-export { ResolveSognaflowValue } from "./value/utils/resolve-sognaflow-value"
+export { AnimateSingleValue } from "./animation/animate/single-value.js"
+export { addDomEvent } from "./events/add-dom-event.js"
+export { compareByDepth } from "./projection/utils/compare-by-depth.js"
+export type { WithDepth } from "./projection/utils/compare-by-depth.js"
+export { FlatTree } from "./projection/utils/flat-tree.js"
+export { Delay, DelayInSeconds } from "./utils/delay.js"
+export type { DelayedFunction } from "./utils/delay.js"
+export { ResolveSognaflowValue } from "./value/utils/resolve-sognaflow-value.js"
 
 // Projection node system
 export {
     cleanDirtyNodes,
-    CreateProjectionNode,
+    createProjectionNode,
     propagateDirtyNodes,
-} from "./projection/node/create-projection-node"
-export { DocumentProjectionNode } from "./projection/node/documentprojectionnode"
-export { nodeGroup } from "./projection/node/group"
-export type { NodeGroup } from "./projection/node/group"
+} from "./projection/node/create-projection-node.js"
+export { DocumentProjectionNode } from "./projection/node/DocumentProjectionNode.js"
+export { nodeGroup } from "./projection/node/group.js"
+export type { NodeGroup } from "./projection/node/group.js"
 export {
     HTMLProjectionNode,
     rootProjectionNode,
-} from "./projection/node/htmlprojectionnode"
-export { globalProjectionState } from "./projection/node/state"
+} from "./projection/node/HTMLProjectionNode.js"
+export { globalProjectionState } from "./projection/node/state.js"
 export type {
     InitialProSognaflowConfig,
     IProjectionNode,
@@ -288,21 +289,21 @@ export type {
     ProjectionNodeConfig,
     ProjectionNodeOptions,
     ScrollMeasurements,
-} from "./projection/node/types"
-export { NodeStack } from "./projection/shared/stack"
+} from "./projection/node/types.js"
+export { NodeStack } from "./projection/shared/stack.js"
 
 // HTML/SVG utilities
-export { camelToDash } from "./render/dom/utils/camel-to-dash"
-export { buildHTMLStyles } from "./render/html/utils/build-styles"
-export { buildTransform } from "./render/html/utils/build-transform"
-export { renderHTML } from "./render/html/utils/render"
-export { ScrapeSognaflowValuesFromProps as ScrapeHTMLSognaflowValuesFromProps } from "./render/html/utils/scrape-sognaflow-values"
-export { buildSVGAttrs } from "./render/svg/utils/build-attrs"
-export { camelCaseAttributes } from "./render/svg/utils/camel-case-attrs"
-export { isSVGTag } from "./render/svg/utils/is-svg-tag"
-export { buildSVGPath } from "./render/svg/utils/path"
-export { renderSVG } from "./render/svg/utils/render"
-export { ScrapeSognaflowValuesFromProps as ScrapeSVGSognaflowValuesFromProps } from "./render/svg/utils/scrape-sognaflow-values"
+export { camelToDash } from "./render/dom/utils/camel-to-dash.js"
+export { buildHTMLStyles } from "./render/html/utils/build-styles.js"
+export { buildTransform } from "./render/html/utils/build-transform.js"
+export { renderHTML } from "./render/html/utils/render.js"
+export { ScrapeSognaflowValuesFromProps as ScrapeHTMLSognaflowValuesFromProps } from "./render/html/utils/scrape-sognaflow-values.js"
+export { buildSVGAttrs } from "./render/svg/utils/build-attrs.js"
+export { camelCaseAttributes } from "./render/svg/utils/camel-case-attrs.js"
+export { isSVGTag } from "./render/svg/utils/is-svg-tag.js"
+export { buildSVGPath } from "./render/svg/utils/path.js"
+export { renderSVG } from "./render/svg/utils/render.js"
+export { ScrapeSognaflowValuesFromProps as ScrapeSVGSognaflowValuesFromProps } from "./render/svg/utils/scrape-sognaflow-values.js"
 
 /**
  * Layout animations
@@ -310,9 +311,9 @@ export { ScrapeSognaflowValuesFromProps as ScrapeSVGSognaflowValuesFromProps } f
 export {
     LayoutAnimationBuilder,
     parseAnimateLayoutArgs,
-} from "./layout/layoutanimationbuilder"
+} from "./layout/LayoutAnimationBuilder.js"
 
 /**
  * Deprecated
  */
-export { cancelSync, sync } from "./frameloop/index-legacy"
+export { CancelSync, Sync } from "./frameloop/index-legacy.js"

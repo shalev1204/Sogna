@@ -1,4 +1,4 @@
-import { GeneratorFactory, Transition } from "../../types";
+import { GeneratorFactory, Transition } from "../../types.js";
 /**
  * Create a progress => progress easing function from a generator.
  */

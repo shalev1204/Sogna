@@ -1,1 +1,1 @@
-export { EditTool as WriteTool } from "./edit-tool"
+export { EditTool as WriteTool } from "./edit-tool.js"

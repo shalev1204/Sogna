@@ -20,7 +20,7 @@ import {
     progress,
     secondsToMilliseconds,
 } from "sognaflow-utils"
-import { resolveSubjects } from "../animate/resolve-subjects"
+import { resolveSubjects } from "../animate/resolve-subjects.js"
 import {
     AnimationSequence,
     At,
@@ -28,12 +28,12 @@ import {
     SequenceMap,
     SequenceOptions,
     ValueSequence,
-} from "./types"
-import { calculateRepeatDuration } from "./utils/calc-repeat-duration"
-import { calcNextTime } from "./utils/calc-time"
-import { addKeyframes } from "./utils/edit"
-import { normalizeTimes } from "./utils/normalize-times"
-import { compareByTime } from "./utils/sort"
+} from "./types.js"
+import { calculateRepeatDuration } from "./utils/calc-repeat-duration.js"
+import { calcNextTime } from "./utils/calc-time.js"
+import { addKeyframes } from "./utils/edit.js"
+import { normalizeTimes } from "./utils/normalize-times.js"
+import { compareByTime } from "./utils/sort.js"
 
 const defaultSegmentEasing = "easeInOut"
 

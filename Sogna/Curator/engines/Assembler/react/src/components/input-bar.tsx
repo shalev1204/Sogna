@@ -1,14 +1,14 @@
 import React, { memo, useState, useCallback, useRef, useEffect } from "react"
 import type { ChatStatus } from "ai"
-import type { ModelOption } from "../types"
-import { cn } from "../utils/cn"
-import { useThemeConfig } from "../theme-config"
-import { SendButtonUnified } from "./input/send-button"
-import { AttachmentButton } from "./input/attachment-button"
-import { ModelPopover, ModelBadge } from "./input/model-selector"
-import { ModeSelector } from "./input/mode-selector"
-import { ContextItems, type AttachedImage, type AttachedFile } from "./input/context-items"
-import { useInputTyping } from "./input/input-typing"
+import type { ModelOption } from "../types.js"
+import { cn } from "../utils/cn.js"
+import { useThemeConfig } from "../theme-config.js"
+import { SendButtonUnified } from "./input/send-button.js"
+import { AttachmentButton } from "./input/attachment-button.js"
+import { ModelPopover, ModelBadge } from "./input/model-selector.js"
+import { ModeSelector } from "./input/mode-selector.js"
+import { ContextItems, type AttachedImage, type AttachedFile } from "./input/context-items.js"
+import { useInputTyping } from "./input/input-typing.js"
 
 export type { AttachedImage, AttachedFile }
 

@@ -22,8 +22,8 @@ export interface ProjectBlueprint {
 }
 
 export const BLUEPRINT_REGISTRY: Record<string, ProjectBlueprint> = {
-  'sognatore-core': {
-    id: 'sognatore-core',
+  'Sognatore-core': {
+    id: 'Sognatore-core',
     name: 'Sognatore Core Engine',
     description: 'Institutional standard for the Sognatore agentic core.',
     requiredNodes: [
@@ -42,8 +42,8 @@ export const BLUEPRINT_REGISTRY: Record<string, ProjectBlueprint> = {
       }
     ]
   },
-  'sogna-unicorn': {
-    id: 'sogna-unicorn',
+  'Sogna-unicorn': {
+    id: 'Sogna-unicorn',
     name: 'Sogna Unicorn (Fullstack)',
     description: 'High-performance standard for Next.js/TypeScript unicorn projects.',
     requiredNodes: [

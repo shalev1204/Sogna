@@ -1,6 +1,6 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { MarketingMemory } from '../memory/marketingmemory.js';
-import { MarketingSkillRegistry } from '../skills/marketingskillregistry.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { MarketingMemory } from '../memory/MarketingMemory.js';
+import { MarketingSkillRegistry } from '../skills/MarketingSkillRegistry.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -12,7 +12,7 @@ export class MarketAnalyst implements Agent {
     
     // Conexión con el Skill-Vault
     private skills = MarketingSkillRegistry.STRATEGY;
-    private manualPath = path.join(__dirname, '../knowledge/MarketAnalyst_Manual.md');
+    private manualPath = path.join(__dirname, '../knowledge/MarketAnalyst_Manual.md.js');
 
     async think(task: string): Promise<string> {
         const manual = this.loadManual();

@@ -1,7 +1,7 @@
 import { HTMLVisualElement, SVGVisualElement } from "sognaflow-dom"
 import { ComponentType, Fragment } from "react"
-import { CreateVisualElement, VisualElementOptions } from "../types"
-import { isSVGComponent } from "./utils/is-svg-component"
+import { CreateVisualElement, VisualElementOptions } from "../types.js"
+import { isSVGComponent } from "./utils/is-svg-component.js"
 
 export const createDomVisualElement: CreateVisualElement = (
     Component: string | ComponentType<React.PropsWithChildren<unknown>>,

@@ -1,4 +1,4 @@
-import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/provider.js';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
 
 export class MoonshotProvider extends Provider {
   readonly metadata: ProviderMetadata = {
@@ -49,7 +49,7 @@ export class MoonshotProvider extends Provider {
       body.response_format = { type: 'json_object' };
     }
 
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const response = await fetch(`${this.baseUrl}/chat/completions`, {
       method: 'POST',
       headers: {

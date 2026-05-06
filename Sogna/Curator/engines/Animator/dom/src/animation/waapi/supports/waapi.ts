@@ -2,9 +2,9 @@ import { memo } from "sognaflow-utils"
 import {
     AnyResolvedKeyframe,
     ValueAnimationOptionsWithRenderContext,
-} from "../../types"
-import { acceleratedValues } from "../utils/accelerated-values"
-import { hasBrowserOnlyColors } from "../utils/is-browser-color"
+} from "../../types.js"
+import { acceleratedValues } from "../utils/accelerated-values.js"
+import { hasBrowserOnlyColors } from "../utils/is-browser-color.js"
 
 const colorProperties = new Set([
     "color",

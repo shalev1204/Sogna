@@ -1,5 +1,5 @@
 // ✅ SECURE VERSION - ROUND 10 (MAINTENANCE)
-// @sogna: Refactored for training safety.
+// @Sogna: Refactored for training safety.
 
 function maintenanceTask() {
     console.log("[SYSTEM] Running cleanup... (Safe)");

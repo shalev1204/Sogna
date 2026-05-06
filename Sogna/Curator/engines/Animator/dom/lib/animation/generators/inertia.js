@@ -1,5 +1,5 @@
-import { spring as createSpring } from "./spring";
-import { getGeneratorVelocity } from "./utils/velocity";
+import { spring as createSpring } from "./spring.js";
+import { getGeneratorVelocity } from "./utils/velocity.js";
 export function inertia({ keyframes, velocity = 0.0, power = 0.8, timeConstant = 325, bounceDamping = 10, bounceStiffness = 500, modifyTarget, min, max, restDelta = 0.5, restSpeed, }) {
     const origin = keyframes[0];
     const state = {

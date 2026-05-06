@@ -1,22 +1,22 @@
 import { isNumericalString, isZeroValueString, secondsToMilliseconds, SubscriptionManager, warnOnce, } from "sognaflow-utils";
-import { KeyframeResolver } from "../animation/keyframes/keyframesresolver";
-import { NativeAnimation } from "../animation/nativeanimation";
-import { acceleratedValues } from "../animation/waapi/utils/accelerated-values";
+import { KeyframeResolver } from "../animation/keyframes/keyframesresolver.js";
+import { NativeAnimation } from "../animation/nativeanimation.js";
+import { acceleratedValues } from "../animation/waapi/utils/accelerated-values.js";
 import { CancelFrame, Frame } from "../frameloop";
-import { Microtask } from "../frameloop/microtask";
-import { Time } from "../frameloop/sync-time";
-import { createBox } from "../projection/geometry/models";
+import { Microtask } from "../frameloop/microtask.js";
+import { Time } from "../frameloop/sync-time.js";
+import { createBox } from "../projection/geometry/models.js";
 import { SognaflowValue } from "../value";
 import { Complex } from "../value/types/complex";
-import { GetAnimatableNone } from "../value/types/utils/animatable-none";
-import { FindValueType } from "../value/types/utils/find";
-import { IsSognaflowValue } from "../value/utils/is-sognaflow-value";
-import { visualElementStore } from "./store";
-import { IsControllingVariants as checkIsControllingVariants, IsVariantNode as checkIsVariantNode, } from "./utils/is-controlling-variants";
-import { TransformProps } from "./utils/keys-transform";
-import { UpdateSognaflowValuesFromProps } from "./utils/sognaflow-values";
+import { GetAnimatableNone } from "../value/types/utils/animatable-none.js";
+import { FindValueType } from "../value/types/utils/find.js";
+import { IsSognaflowValue } from "../value/utils/is-sognaflow-value.js";
+import { visualElementStore } from "./store.js";
+import { IsControllingVariants as checkIsControllingVariants, IsVariantNode as checkIsVariantNode, } from "./utils/is-controlling-variants.js";
+import { TransformProps } from "./utils/keys-transform.js";
+import { UpdateSognaflowValuesFromProps } from "./utils/sognaflow-values.js";
 import { HasReducedSognaflowListener, InitPrefersReducedSognaflow, PrefersReducedSognaflow, } from "./utils/reduced-sognaflow";
-import { ResolveVariantFromProps } from "./utils/resolve-variants";
+import { ResolveVariantFromProps } from "./utils/resolve-variants.js";
 const propEventHandlers = [
     "AnimationStart",
     "AnimationComplete",

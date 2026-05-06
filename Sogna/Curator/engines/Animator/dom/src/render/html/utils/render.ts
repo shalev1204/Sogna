@@ -1,5 +1,5 @@
-import type { SognaflowStyle } from "../../visualelement"
-import { HTMLRenderState } from "../types"
+import type { SognaflowStyle } from "../../VisualElement.js"
+import { HTMLRenderState } from "../types.js"
 
 export function renderHTML(
     element: HTMLElement,

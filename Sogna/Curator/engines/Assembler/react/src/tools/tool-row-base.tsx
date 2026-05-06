@@ -1,10 +1,10 @@
 import type { ReactNode } from "react"
 import React from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { TextShimmer } from "../components/text-shimmer"
-import type { ToolSize } from "../types/tool-styles"
-import { TOOL_ROW_STYLES } from "../types/tool-styles"
-import { ChevronRightIcon } from "../icons/tool-icons"
+import { TextShimmer } from "../components/text-shimmer.js"
+import type { ToolSize } from "../types/tool-styles.js"
+import { TOOL_ROW_STYLES } from "../types/tool-styles.js"
+import { ChevronRightIcon } from "../icons/tool-icons.js"
 
 interface ToolRowBaseProps {
   size?: ToolSize

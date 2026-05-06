@@ -1,8 +1,8 @@
 import { JSX, SVGAttributes } from "react"
 import { Makesognaflow, sognaflowProps } from "../../sognaflow/types"
-import { ForwardRefComponent, HTMLRenderState } from "../html/types"
-import { ResolvedValues } from "../types"
-import { SVGElements } from "./supported-elements"
+import { ForwardRefComponent, HTMLRenderState } from "../html/types.js"
+import { ResolvedValues } from "../types.js"
+import { SVGElements } from "./supported-elements.js"
 
 export interface SVGRenderState extends HTMLRenderState {
     /**

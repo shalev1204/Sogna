@@ -1,4 +1,4 @@
-import { NeuralRelay } from '../brain/neuralrelay.js';
+import { NeuralRelay } from '../brain/NeuralRelay.js';
 
 export class ProcessPredator {
     private relay = NeuralRelay.getInstance();

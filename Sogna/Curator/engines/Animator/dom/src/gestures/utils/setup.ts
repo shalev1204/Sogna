@@ -1,14 +1,14 @@
 import {
     ElementOrSelector,
-    resolveElements,
-} from "../../utils/resolve-elements"
-import { EventOptions } from "../types"
+    ResolveElements,
+} from "../../utils/resolve-elements.js"
+import { EventOptions } from "../types.js"
 
 export function setupGesture(
     elementOrSelector: ElementOrSelector,
     options: EventOptions
 ): [Element[], AddEventListenerOptions, VoidFunction] {
-    const elements = resolveElements(elementOrSelector)
+    const elements = ResolveElements(elementOrSelector)
 
     const gestureAbortController = new AbortController()
 

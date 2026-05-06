@@ -1,5 +1,5 @@
-import { createTestNode } from "./testprojectionnode"
-import { nodeGroup } from "../group"
+import { createTestNode } from "./TestProjectionNode.js"
+import { nodeGroup } from "../group.js"
 
 describe("nodeGroup", () => {
     test.skip("it notifies grouped nodes when any one of them will update", () => {

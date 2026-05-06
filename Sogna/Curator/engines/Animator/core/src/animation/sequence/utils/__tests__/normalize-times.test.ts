@@ -1,4 +1,4 @@
-import { normalizeTimes } from "../normalize-times"
+import { normalizeTimes } from "../normalize-times.js"
 
 describe("normalizeTimes", () => {
     test("It correctly scales times", () => {

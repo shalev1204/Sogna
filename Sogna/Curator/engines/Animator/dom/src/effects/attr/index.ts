@@ -1,8 +1,8 @@
-import { camelToDash } from "../../render/dom/utils/camel-to-dash"
+import { camelToDash } from "../../render/dom/utils/camel-to-dash.js"
 import { SognaflowValue } from "../../value"
-import { SognaflowValueState } from "../sognaflowvaluestate"
-import { createSelectorEffect } from "../utils/create-dom-effect"
-import { createEffect } from "../utils/create-effect"
+import { SognaflowValueState } from "../SognaflowValueState.js"
+import { createSelectorEffect } from "../utils/create-dom-effect.js"
+import { createEffect } from "../utils/create-effect.js"
 
 function canSetAsProperty(element: HTMLElement | SVGElement, name: string) {
     if (!(name in element)) return false

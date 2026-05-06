@@ -1,6 +1,6 @@
-import { MixNumber as mixNumber } from "../../utils/mix/number";
-import { Percent as percent } from "../../value/types/numbers/units";
-import { scalePoint } from "./delta-apply";
+import { MixNumber as mixNumber } from "../../utils/mix/number.js";
+import { Percent as percent } from "../../value/types/numbers/units.js";
+import { scalePoint } from "./delta-apply.js";
 /**
  * Remove a delta from a point. This is essentially the steps of applyPointDelta in reverse
  */

@@ -1,5 +1,5 @@
 import { WebSocketServer, WebSocket } from 'ws';
-import { SognaEventBus, SognaEvent } from '@sogna/curator';
+import { SognaEventBus, SognaEvent } from '@Sogna/Curator';
 import chalk from 'chalk';
 import http from 'http';
 

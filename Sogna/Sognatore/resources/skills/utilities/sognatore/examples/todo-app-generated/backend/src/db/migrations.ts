@@ -1,11 +1,11 @@
-import { getDatabase } from './database';
+import { getDatabase } from './database.js';
 import fs from 'fs';
 import path from 'path';
 
 function resolveSchemaPath(): string {
   const candidates = [
     path.join(__dirname, 'schema.sql'),
-    path.join(__dirname, '../../src/db/schema.sql'),
+    path.join(__dirname, './schema.sql.js'),
   ];
 
   for (const candidate of candidates) {

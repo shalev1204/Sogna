@@ -1,6 +1,6 @@
-import { ResolveVariant } from "../../render/utils/resolve-dynamic-variants";
-import { AnimateTarget } from "./visual-element-target";
-import { AnimateVariant } from "./visual-element-variant";
+import { ResolveVariant } from "../../render/utils/resolve-dynamic-variants.js";
+import { AnimateTarget } from "./visual-element-target.js";
+import { AnimateVariant } from "./visual-element-variant.js";
 export function AnimateVisualElement(visualElement, definition, options = {}) {
     visualElement.notify("AnimationStart", definition);
     let animation;

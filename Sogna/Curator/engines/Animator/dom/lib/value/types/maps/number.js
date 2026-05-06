@@ -1,7 +1,7 @@
-import { Int } from "../int";
+import { Int } from "../int.js";
 import { Alpha } from "../numbers";
-import { Px } from "../numbers/units";
-import { TransformValueTypes } from "./transform";
+import { Px } from "../numbers/units.js";
+import { TransformValueTypes } from "./transform.js";
 export const NumberValueTypes = {
     // Border props
     borderWidth: Px,

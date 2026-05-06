@@ -2,18 +2,18 @@ import type {
     AnimationDefinition,
     TargetAndTransition,
     VariantLabels,
-} from "../../node/types"
-import type { AnimationType } from "../types"
-import type { VisualElementAnimationOptions } from "../../animation/interfaces/types"
-import { animateVisualElement } from "../../animation/interfaces/visual-element"
-import { calcChildStagger } from "../../animation/utils/calc-child-stagger"
-import { getVariantContext } from "./get-variant-context"
-import { isAnimationControls } from "./is-animation-controls"
-import { isKeyframesTarget } from "./is-keyframes-target"
-import { isVariantLabel } from "./is-variant-label"
-import { resolveVariant } from "./resolve-dynamic-variants"
-import { shallowCompare } from "./shallow-compare"
-import { variantPriorityOrder } from "./variant-props"
+} from "../../node/types.js"
+import type { AnimationType } from "../types.js"
+import type { VisualElementAnimationOptions } from "../../animation/interfaces/types.js"
+import { AnimateVisualElement } from "../../animation/interfaces/visual-element.js"
+import { CalcChildStagger } from "../../animation/utils/calc-child-stagger.js"
+import { GetVariantContext } from "./get-variant-context.js"
+import { IsAnimationControls } from "./is-animation-controls.js"
+import { IsKeyframesTarget } from "./is-keyframes-target.js"
+import { IsVariantLabel } from "./is-variant-label.js"
+import { ResolveVariant } from "./resolve-dynamic-variants.js"
+import { ShallowCompare } from "./shallow-compare.js"
+import { variantPriorityOrder } from "./variant-props.js"
 
 export type { VisualElementAnimationOptions }
 
@@ -49,7 +49,7 @@ function createAnimateFunction(visualElement: any): AnimateFunction {
     return (animations: DefinitionAndOptions[]) => {
         return Promise.all(
             animations.map(({ animation, options }) =>
-                animateVisualElement(visualElement, animation, options)
+                AnimateVisualElement(visualElement, animation, options)
             )
         )
     }
@@ -78,7 +78,7 @@ export function createAnimationState(visualElement: any): AnimationState {
             acc: { [key: string]: any },
             definition: string | TargetAndTransition | undefined
         ) => {
-            const resolved = resolveVariant(
+            const resolved = ResolveVariant(
                 visualElement,
                 definition,
                 type === "exit"
@@ -116,7 +116,7 @@ export function createAnimationState(visualElement: any): AnimationState {
      */
     function animateChanges(changedActiveType?: AnimationType) {
         const { props } = visualElement
-        const context = getVariantContext(visualElement.parent) || {}
+        const context = GetVariantContext(visualElement.parent) || {}
 
         /**
          * A list of animations that we'll build into as we iterate through the animation
@@ -156,7 +156,7 @@ export function createAnimationState(visualElement: any): AnimationState {
                 props[type] !== undefined
                     ? props[type]
                     : context[type as keyof typeof context]
-            const propIsVariant = isVariantLabel(prop)
+            const propIsVariant = IsVariantLabel(prop)
 
             /**
              * If this type has *just* changed isActive status, set activeDelta
@@ -199,7 +199,7 @@ export function createAnimationState(visualElement: any): AnimationState {
                 // If we didn't and don't have any defined prop for this animation type
                 (!prop && !typeState.prevProp) ||
                 // Or if the prop doesn't define an animation
-                isAnimationControls(prop) ||
+                IsAnimationControls(prop) ||
                 typeof prop === "boolean"
             ) {
                 continue
@@ -299,8 +299,8 @@ export function createAnimationState(visualElement: any): AnimationState {
                  * If the value has changed, we probably want to animate it.
                  */
                 let valueHasChanged = false
-                if (isKeyframesTarget(next) && isKeyframesTarget(prev)) {
-                    valueHasChanged = !shallowCompare(next, prev)
+                if (IsKeyframesTarget(next) && IsKeyframesTarget(prev)) {
+                    valueHasChanged = !ShallowCompare(next, prev)
                 } else {
                     valueHasChanged = next !== prev
                 }
@@ -370,7 +370,7 @@ export function createAnimationState(visualElement: any): AnimationState {
                             visualElement.parent
                         ) {
                             const { parent } = visualElement
-                            const parentVariant = resolveVariant(
+                            const parentVariant = ResolveVariant(
                                 parent,
                                 animation
                             )
@@ -378,7 +378,7 @@ export function createAnimationState(visualElement: any): AnimationState {
                             if (parent.enteringChildren && parentVariant) {
                                 const { delayChildren } =
                                     parentVariant.transition || {}
-                                options.delay = calcChildStagger(
+                                options.delay = CalcChildStagger(
                                     parent.enteringChildren,
                                     visualElement,
                                     delayChildren
@@ -408,7 +408,7 @@ export function createAnimationState(visualElement: any): AnimationState {
              * allow the animation function to use the visual element's default.
              */
             if (typeof props.initial !== "boolean") {
-                const initialTransition = resolveVariant(
+                const initialTransition = ResolveVariant(
                     visualElement,
                     Array.isArray(props.initial)
                         ? props.initial[0]
@@ -487,7 +487,7 @@ export function checkVariantsDidChange(prev: any, next: any) {
     if (typeof next === "string") {
         return next !== prev
     } else if (Array.isArray(next)) {
-        return !shallowCompare(next, prev)
+        return !ShallowCompare(next, prev)
     }
 
     return false

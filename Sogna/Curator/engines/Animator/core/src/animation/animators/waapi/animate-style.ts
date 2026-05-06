@@ -6,7 +6,7 @@ import {
     ElementOrSelector,
     GroupAnimationWithThen,
 } from "sognaflow-dom"
-import { animateElements } from "./animate-elements"
+import { animateElements } from "./animate-elements.js"
 
 export const createScopedWaapiAnimate = (scope?: AnimationScope) => {
     function scopedAnimate(

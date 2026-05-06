@@ -1,5 +1,5 @@
-import { AnyResolvedKeyframe } from "../../animation/types"
-import { isCSSVar } from "./is-css-var"
+import { AnyResolvedKeyframe } from "../../animation/types.js"
+import { isCSSVar } from "./is-css-var.js"
 
 export function setStyle(
     element: HTMLElement | SVGElement,

@@ -5,17 +5,17 @@ import {
     pipe,
     secondsToMilliseconds,
 } from "sognaflow-utils"
-import { time } from "../frameloop/sync-time"
-import { activeAnimations } from "../stats/animation-count"
+import { Time } from "../frameloop/sync-time.js"
+import { activeAnimations } from "../stats/animation-count.js"
 import { Mix } from "../utils/mix"
-import { Mixer } from "../utils/mix/types"
-import { frameloopDriver } from "./drivers/frame"
-import { DriverControls } from "./drivers/types"
-import { inertia } from "./generators/inertia"
-import { keyframes as keyframesGenerator } from "./generators/keyframes"
-import { calcGeneratorDuration } from "./generators/utils/calc-duration"
-import { getGeneratorVelocity } from "./generators/utils/velocity"
-import { getFinalKeyframe } from "./keyframes/get-final"
+import { Mixer } from "../utils/mix/types.js"
+import { frameloopDriver } from "./drivers/frame.js"
+import { DriverControls } from "./drivers/types.js"
+import { inertia } from "./generators/inertia.js"
+import { keyframes as keyframesGenerator } from "./generators/keyframes.js"
+import { calcGeneratorDuration } from "./generators/utils/calc-duration.js"
+import { getGeneratorVelocity } from "./generators/utils/velocity.js"
+import { GetFinalKeyframe } from "./keyframes/get-final.js"
 import {
     AnimationPlaybackControlsWithThen,
     AnimationState,
@@ -23,9 +23,9 @@ import {
     KeyframeGenerator,
     TimelineWithFallback,
     ValueAnimationOptions,
-} from "./types"
-import { replaceTransitionType } from "./utils/replace-transition-type"
-import { WithPromise } from "./utils/withpromise"
+} from "./types.js"
+import { replaceTransitionType } from "./utils/replace-transition-type.js"
+import { WithPromise } from "./utils/WithPromise.js"
 
 const percentToProgress = (percent: number) => percent / 100
 
@@ -333,7 +333,7 @@ export class JSAnimation<T extends number | string>
 
         // TODO: The exception for inertia could be cleaner here
         if (isAnimationFinished && type !== inertia) {
-            state.value = getFinalKeyframe(
+            state.value = GetFinalKeyframe(
                 keyframes,
                 this.options,
                 finalKeyframe,
@@ -428,7 +428,7 @@ export class JSAnimation<T extends number | string>
         const hasChanged = this.playbackSpeed !== newSpeed
 
         if (hasChanged && this.driver) {
-            this.updateTime(time.now())
+            this.updateTime(Time.now())
         }
 
         this.playbackSpeed = newSpeed
@@ -477,7 +477,7 @@ export class JSAnimation<T extends number | string>
 
     pause() {
         this.state = "paused"
-        this.updateTime(time.now())
+        this.updateTime(Time.now())
         this.holdTime = this.currentTime
     }
 
@@ -487,8 +487,8 @@ export class JSAnimation<T extends number | string>
      */
     stop = () => {
         const { sognaflowValue } = this.options
-        if (sognaflowValue && sognaflowValue.updatedAt !== time.now()) {
-            this.tick(time.now())
+        if (sognaflowValue && sognaflowValue.updatedAt !== Time.now()) {
+            this.tick(Time.now())
         }
 
         this.isStopped = true

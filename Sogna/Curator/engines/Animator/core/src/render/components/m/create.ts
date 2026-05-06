@@ -1,5 +1,5 @@
 import { createsognaflowComponent, sognaflowComponentOptions } from "../../../sognaflow"
-import { DOMsognaflowComponents } from "../../dom/types"
+import { DOMsognaflowComponents } from "../../dom/types.js"
 
 export function createMinimalsognaflowComponent<
     Props,

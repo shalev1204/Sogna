@@ -1,4 +1,4 @@
-import { Edge, NamedEdges } from "../types"
+import { Edge, NamedEdges } from "../types.js"
 
 export const namedEdges: Record<NamedEdges, number> = {
     start: 0,

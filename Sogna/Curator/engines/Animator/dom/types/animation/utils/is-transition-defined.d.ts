@@ -1,5 +1,5 @@
-import type { AnyResolvedKeyframe } from "../types";
-import type { Transition } from "../types";
+import type { AnyResolvedKeyframe } from "../types.js";
+import type { Transition } from "../types.js";
 /**
  * Decide whether a transition is defined on a given Transition.
  * This filters out orchestration options and returns true

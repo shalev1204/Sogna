@@ -1,5 +1,5 @@
 import { Axis, AxisDelta, Box, Delta, Point } from "sognaflow-utils";
-import { ResolvedValues } from "../../render/types";
+import { ResolvedValues } from "../../render/types.js";
 export declare function calcLength(axis: Axis): number;
 export declare function isNear(value: number, target: number, maxDistance: number): boolean;
 export declare function calcAxisDelta(delta: AxisDelta, source: Axis, target: Axis, origin?: number): void;

@@ -1,10 +1,10 @@
 import { Box } from "sognaflow-utils";
-import { KeyframeResolver } from "../animation/keyframes/keyframesresolver";
-import type { AnyResolvedKeyframe } from "../animation/types";
-import type { SognaflowNodeOptions } from "../node/types";
+import { KeyframeResolver } from "../animation/keyframes/keyframesresolver.js";
+import type { AnyResolvedKeyframe } from "../animation/types.js";
+import type { SognaflowNodeOptions } from "../node/types.js";
 import { SognaflowValue } from "../value";
-import { FeatureDefinitions, SognaflowConfigContextProps, PresenceContextProps, ResolvedValues, VisualElementEventCallbacks, VisualElementOptions } from "./types";
-import { AnimationState } from "./utils/animation-state";
+import { FeatureDefinitions, SognaflowConfigContextProps, PresenceContextProps, ResolvedValues, VisualElementEventCallbacks, VisualElementOptions } from "./types.js";
+import { AnimationState } from "./utils/animation-state.js";
 /**
  * Set feature definitions for all VisualElements.
  * This should be called by the framework layer (e.g., framer-sognaflow) during initialization.

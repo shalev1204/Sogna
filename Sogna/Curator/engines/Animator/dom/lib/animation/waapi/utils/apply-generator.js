@@ -1,5 +1,5 @@
-import { supportsLinearEasing } from "../../../utils/supports/linear-easing";
-import { isGenerator } from "../../generators/utils/is-generator";
+import { supportsLinearEasing } from "../../../utils/supports/linear-easing.js";
+import { isGenerator } from "../../generators/utils/is-generator.js";
 export function applyGeneratorOptions({ type, ...options }) {
     if (isGenerator(type) && supportsLinearEasing()) {
         return type.applyToOptions(options);

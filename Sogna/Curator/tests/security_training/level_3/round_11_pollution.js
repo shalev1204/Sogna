@@ -1,5 +1,5 @@
 // ✅ SECURE VERSION - ROUND 11 (STRICT MERGE)
-// @sogna: Refactored for training safety with Prototype Protection.
+// @Sogna: Refactored for training safety with Prototype Protection.
 
 function safeDeepMerge(target, source) {
     for (const key in source) {

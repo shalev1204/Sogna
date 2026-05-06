@@ -1,4 +1,4 @@
-import { ProgressIntersection } from "../types"
+import { ProgressIntersection } from "../types.js"
 
 export const ScrollOffset: Record<string, ProgressIntersection[]> = {
   Enter: [

@@ -1,4 +1,4 @@
-import { fillWildcards } from "../fill-wildcards"
+import { fillWildcards } from "../fill-wildcards.js"
 
 test("fillWildcards fills null values with the previous value", () => {
     const keyframes = [100, null, 300]

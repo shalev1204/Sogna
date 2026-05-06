@@ -1,4 +1,4 @@
-import { addUniqueItem, removeItem } from "./array"
+import { addUniqueItem, removeItem } from "./array.js"
 
 type GenericHandler = (...args: any) => void
 

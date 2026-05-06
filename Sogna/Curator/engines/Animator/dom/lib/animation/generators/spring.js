@@ -1,7 +1,7 @@
 import { clamp, millisecondsToSeconds, secondsToMilliseconds, warning, } from "sognaflow-utils";
-import { generateLinearEasing } from "../waapi/utils/linear";
-import { calcGeneratorDuration, maxGeneratorDuration, } from "./utils/calc-duration";
-import { createGeneratorEasing } from "./utils/create-generator-easing";
+import { generateLinearEasing } from "../waapi/utils/linear.js";
+import { calcGeneratorDuration, maxGeneratorDuration, } from "./utils/calc-duration.js";
+import { createGeneratorEasing } from "./utils/create-generator-easing.js";
 const springDefaults = {
     // Default spring physics
     stiffness: 100,

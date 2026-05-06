@@ -1,4 +1,4 @@
-import { backIn } from "./back"
+import { backIn } from "./back.js"
 
 export const anticipate = (p: number) =>
     p >= 1

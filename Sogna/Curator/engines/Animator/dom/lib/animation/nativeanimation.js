@@ -1,10 +1,10 @@
 import { invariant, millisecondsToSeconds, noop, secondsToMilliseconds, } from "sognaflow-utils";
-import { SetStyle as setStyle } from "../render/dom/style-set";
-import { supportsScrollTimeline } from "../utils/supports/scroll-timeline";
-import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final";
-import { WithPromise } from "./utils/withpromise";
-import { StartWaapiAnimation as startWaapiAnimation } from "./waapi/start-waapi-animation";
-import { applyGeneratorOptions } from "./waapi/utils/apply-generator";
+import { SetStyle as setStyle } from "../render/dom/style-set.js";
+import { supportsScrollTimeline } from "../utils/supports/scroll-timeline.js";
+import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final.js";
+import { WithPromise } from "./utils/withpromise.js";
+import { StartWaapiAnimation as startWaapiAnimation } from "./waapi/start-waapi-animation.js";
+import { applyGeneratorOptions } from "./waapi/utils/apply-generator.js";
 /**
  * NativeAnimation implements AnimationPlaybackControls for the browser's Web Animations API.
  */

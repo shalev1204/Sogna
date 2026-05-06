@@ -5,10 +5,10 @@ import { MutableRefObject, useContext, useMemo, useRef } from "react"
 import {
     LayoutGroupContext,
     LayoutGroupContextProps,
-} from "../../context/layoutgroupcontext"
-import { DeprecatedLayoutGroupContext } from "../../context/deprecatedlayoutgroupcontext"
-import { nodeGroup } from "../../projection"
-import { useForceUpdate } from "../../utils/use-force-update"
+} from "../../context/LayoutGroupContext.js"
+import { DeprecatedLayoutGroupContext } from "../../context/DeprecatedLayoutGroupContext.js"
+import { nodeGroup } from "../../projection.js"
+import { useForceUpdate } from "../../utils/use-force-update.js"
 
 type InheritOption = boolean | "id"
 

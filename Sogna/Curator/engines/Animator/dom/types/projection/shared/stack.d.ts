@@ -1,4 +1,4 @@
-import type { IProjectionNode } from "../node/types";
+import type { IProjectionNode } from "../node/types.js";
 export declare class NodeStack {
     lead?: IProjectionNode;
     prevLead?: IProjectionNode;

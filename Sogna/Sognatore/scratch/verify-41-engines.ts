@@ -1,5 +1,5 @@
-import { AgentFactory } from '../src/core/agents/agentfactory.js';
-import { AGENT_SWARM_MAPPING } from '../src/core/agents/agenttypes.js';
+import { AgentFactory } from '../src/core/agents/AgentFactory.js';
+import { AGENT_SWARM_MAPPING } from '../src/core/agents/AgentTypes.js';
 import chalk from 'chalk';
 
 async function verifyAllAgents() {
@@ -40,13 +40,13 @@ async function verifyAllAgents() {
   } else {
     console.log(chalk.bold.red(`\n[DIAGNOSTIC FAIL] Swarm integrity compromised.`));
     console.log(chalk.red(`Success: ${successCount} | Failures: ${failCount}`));
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     process.exit(1);
   }
 }
 
 verifyAllAgents().catch(err => {
   console.error(err);
-// @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+// @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   process.exit(1);
 });

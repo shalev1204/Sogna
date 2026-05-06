@@ -1,5 +1,5 @@
-import { GroupAnimation } from "./groupanimation"
-import { AnimationPlaybackControlsWithThen } from "./types"
+import { GroupAnimation } from "./GroupAnimation.js"
+import { AnimationPlaybackControlsWithThen } from "./types.js"
 
 export class GroupAnimationWithThen
     extends GroupAnimation

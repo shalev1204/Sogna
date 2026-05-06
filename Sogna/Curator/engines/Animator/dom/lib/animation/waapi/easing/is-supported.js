@@ -1,6 +1,6 @@
 import { isBezierDefinition } from "sognaflow-utils";
-import { supportsLinearEasing } from "../../../utils/supports/linear-easing";
-import { supportedWaapiEasing } from "./supported";
+import { supportsLinearEasing } from "../../../utils/supports/linear-easing.js";
+import { supportedWaapiEasing } from "./supported.js";
 export function isWaapiSupportedEasing(easing) {
     return Boolean((typeof easing === "function" && supportsLinearEasing()) ||
         !easing ||

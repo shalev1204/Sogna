@@ -1,6 +1,6 @@
 import { sognaflow, sognaflowConfig, usesognaflowValue } from "../.."
-import { nextMicrotask } from "../../gestures/__tests__/utils"
-import { render } from "../../jest.setup"
+import { nextMicrotask } from "../../gestures/__tests__/utils.js"
+import { render } from "../../jest.setup.js"
 
 describe("style prop", () => {
     test("should remove non-set styles", () => {

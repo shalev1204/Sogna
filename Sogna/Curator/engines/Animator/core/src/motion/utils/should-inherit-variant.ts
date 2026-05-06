@@ -1,4 +1,4 @@
-import { sognaflowProps } from "../types"
+import { sognaflowProps } from "../types.js"
 
 export function checkShouldInheritVariant({
     animate,

@@ -1,5 +1,5 @@
 import { isZeroValueString } from "sognaflow-utils"
-import { AnyResolvedKeyframe } from "../../types"
+import { AnyResolvedKeyframe } from "../../types.js"
 
 export function IsNone(value: AnyResolvedKeyframe | null) {
     if (typeof value === "number") {

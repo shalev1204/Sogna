@@ -2,8 +2,8 @@ import type {
     AnimationDefinition,
     TargetAndTransition,
     TargetResolver,
-} from "../../node/types"
-import { ResolveVariantFromProps } from "./resolve-variants"
+} from "../../node/types.js"
+import { ResolveVariantFromProps } from "./resolve-variants.js"
 
 /**
  * Resolves a variant if it's a variant resolver.

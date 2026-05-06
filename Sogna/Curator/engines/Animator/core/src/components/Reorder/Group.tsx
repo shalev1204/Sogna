@@ -3,17 +3,17 @@
 import { invariant } from "sognaflow-utils"
 import * as React from "react"
 import { forwardRef, FunctionComponent, JSX, useEffect, useRef } from "react"
-import { ReorderContext } from "../../context/reordercontext"
+import { ReorderContext } from "../../context/ReorderContext.js"
 import { sognaflow } from "../../render/components/sognaflow/proxy"
-import { HTMLsognaflowProps } from "../../render/html/types"
-import { useConstant } from "../../utils/use-constant"
+import { HTMLsognaflowProps } from "../../render/html/types.js"
+import { useConstant } from "../../utils/use-constant.js"
 import {
     DefaultGroupElement,
     ItemData,
     ReorderContextProps,
     ReorderElementTag,
-} from "./types"
-import { checkReorder } from "./utils/check-reorder"
+} from "./types.js"
+import { checkReorder } from "./utils/check-reorder.js"
 
 export interface Props<
     V,

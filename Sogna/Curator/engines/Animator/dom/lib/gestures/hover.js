@@ -1,5 +1,5 @@
-import { isDragActive } from "./drag/state/is-active";
-import { setupGesture } from "./utils/setup";
+import { isDragActive } from "./drag/state/is-active.js";
+import { setupGesture } from "./utils/setup.js";
 function isValidHover(event) {
     return !(event.pointerType === "touch" || isDragActive());
 }

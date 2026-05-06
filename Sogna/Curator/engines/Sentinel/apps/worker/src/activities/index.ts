@@ -1,3 +1,3 @@
-export * from './osv';
-export * from './dlpactivity';
-export * from './astshieldactivity';
+export * from './osv.js';
+export * from './DLPActivity.js';
+export * from './ASTShieldActivity.js';

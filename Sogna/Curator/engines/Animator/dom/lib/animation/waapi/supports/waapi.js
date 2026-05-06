@@ -1,6 +1,6 @@
 import { memo } from "sognaflow-utils";
-import { acceleratedValues } from "../utils/accelerated-values";
-import { hasBrowserOnlyColors } from "../utils/is-browser-color";
+import { acceleratedValues } from "../utils/accelerated-values.js";
+import { hasBrowserOnlyColors } from "../utils/is-browser-color.js";
 const colorProperties = new Set([
     "color",
     "backgroundColor",

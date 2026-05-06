@@ -1,5 +1,5 @@
 import { SognaflowValue } from ".";
-import { TransformOptions } from "../utils/transform";
+import { TransformOptions } from "../utils/transform.js";
 export type MapInputRange = number[];
 /**
  * Create a `sognaflowValue` that maps the output of another `sognaflowValue` by

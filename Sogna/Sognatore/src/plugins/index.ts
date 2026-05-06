@@ -1,9 +1,9 @@
-import { PluginValidator, BUILTIN_AGENT_NAMES, VALID_PLUGIN_TYPES } from './validator.js';
-import { PluginLoader, parseSimpleYAML } from './loader.js';
-import { AgentPluginHandler } from './agentpluginhandler.js';
-import { GatePluginHandler } from './gatepluginhandler.js';
-import { IntegrationPluginHandler } from './integrationpluginhandler.js';
-import { McpPluginHandler } from './mcppluginhandler.js';
+import { PluginValidator, BUILTIN_AGENT_NAMES, VALID_PLUGIN_TYPES } from './Validator.js';
+import { PluginLoader, parseSimpleYAML } from './Loader.js';
+import { AgentPluginHandler } from './AgentPluginHandler.js';
+import { GatePluginHandler } from './GatePluginHandler.js';
+import { IntegrationPluginHandler } from './IntegrationPluginHandler.js';
+import { McpPluginHandler } from './McpPluginHandler.js';
 import { existsSync } from 'fs';
 import { basename, extname } from 'path';
 

@@ -1,8 +1,8 @@
 import { warning } from "sognaflow-utils"
-import { isGenerator } from "../generators/utils/is-generator"
-import { ResolvedKeyframes } from "../keyframes/keyframesresolver"
-import { AnimationGeneratorType } from "../types"
-import { isAnimatable } from "./is-animatable"
+import { isGenerator } from "../generators/utils/is-generator.js"
+import { ResolvedKeyframes } from "../keyframes/KeyframesResolver.js"
+import { AnimationGeneratorType } from "../types.js"
+import { isAnimatable } from "./is-animatable.js"
 
 function hasKeyframesChanged(keyframes: ResolvedKeyframes<any>) {
     const current = keyframes[0]
@@ -41,7 +41,7 @@ export function canAnimate(
 
     warning(
         isOriginAnimatable === isTargetAnimatable,
-        `You are trying to animate ${name} from "${originkeyframe}" to "${targetKeyframe}". "${
+        `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${
             isOriginAnimatable ? targetKeyframe : originKeyframe
         }" is not an animatable value.`,
         "value-not-animatable"

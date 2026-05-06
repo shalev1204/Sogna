@@ -1,4 +1,4 @@
-import { clamp } from "../clamp"
+import { clamp } from "../clamp.js"
 
 test("clamp", () => {
     expect(clamp(100, 200, 99)).toBe(100)

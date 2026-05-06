@@ -1,5 +1,5 @@
-import { SognaflowValue, CollectSognaflowValues } from "."
-import { SubscribeValue } from "./subscribe-value"
+import { CreateSognaflowValue, SognaflowValue, CollectSognaflowValues } from "./index.js"
+import { SubscribeValue } from "./subscribe-value.js"
 
 export type TransformInputRange = number[]
 export type SingleTransformer<I, O> = (input: I) => O

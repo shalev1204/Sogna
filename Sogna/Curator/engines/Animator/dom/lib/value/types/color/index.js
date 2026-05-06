@@ -1,6 +1,6 @@
-import { Hex } from "./hex";
-import { Hsla } from "./hsla";
-import { Rgba } from "./rgba";
+import { Hex } from "./hex.js";
+import { Hsla } from "./hsla.js";
+import { Rgba } from "./rgba.js";
 export const Color = {
     test: (v) => Rgba.test(v) || Hex.test(v) || Hsla.test(v),
     parse: (v) => {

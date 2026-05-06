@@ -1,4 +1,4 @@
-import type { AgentConfig, AgentOptions, ToolSet } from "./types"
+import type { AgentConfig, AgentOptions, ToolSet } from "./types.js"
 
 export function agent<TOOLS extends ToolSet = ToolSet>(
   config: AgentOptions<TOOLS>,

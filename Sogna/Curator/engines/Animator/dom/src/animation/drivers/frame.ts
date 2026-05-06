@@ -1,7 +1,7 @@
 import { CancelFrame, Frame, FrameDataInstance } from "../../frameloop"
-import { Time } from "../../frameloop/sync-time"
-import { FrameData } from "../../frameloop/types"
-import { Driver } from "./types"
+import { Time } from "../../frameloop/sync-time.js"
+import { FrameData } from "../../frameloop/types.js"
+import { Driver } from "./types.js"
 
 export const frameloopDriver: Driver = (update) => {
     const passTimestamp = ({ timestamp }: FrameData) => update(timestamp)

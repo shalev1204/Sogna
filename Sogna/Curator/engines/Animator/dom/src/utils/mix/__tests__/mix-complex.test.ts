@@ -1,4 +1,4 @@
-import { mixComplex } from "../complex"
+import { mixComplex } from "../complex.js"
 
 test("mixComplex", () => {
     expect(mixComplex("20px", "10px")(0.5)).toBe("15px")

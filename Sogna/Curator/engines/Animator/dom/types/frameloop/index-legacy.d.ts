@@ -1,10 +1,10 @@
-import { Process } from "./types";
+import { Process } from "./types.js";
 /**
  * @deprecated
  *
  * Import as `Frame` instead.
  */
-export declare const Sync: import("./types").Batcher;
+export declare const Sync: import("./types.js").Batcher;
 /**
  * @deprecated
  *

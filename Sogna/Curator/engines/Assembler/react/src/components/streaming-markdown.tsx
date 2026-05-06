@@ -2,7 +2,7 @@ import React, { memo, useMemo, useState, useCallback } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { cn } from "../utils/cn"
+import { cn } from "../utils/cn.js"
 import { Check, Copy } from "lucide-react"
 
 function fixNumberedListBreaks(text: string): string {

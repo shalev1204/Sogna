@@ -1,4 +1,4 @@
-import { IsCSSVar as isCSSVar } from "./is-css-var";
+import { IsCSSVar as isCSSVar } from "./is-css-var.js";
 export function GetComputedStyle(element, name) {
     const computedStyle = window.getComputedStyle(element);
     return isCSSVar(name)

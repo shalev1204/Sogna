@@ -1,4 +1,4 @@
-import { Color, HSLA, RGBA } from "../types";
+import { Color, HSLA, RGBA } from "../types.js";
 /**
  * Returns true if the provided string is a color, ie rgba(0,0,0,0) or #000,
  * but false if a number or multiple colors

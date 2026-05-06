@@ -1,7 +1,7 @@
 import { SognaflowValue } from "../../value";
-import { AnyResolvedKeyframe } from "../types";
-import { KeyframeResolver, OnKeyframesResolved, UnresolvedKeyframes } from "./keyframesresolver";
-import { WithRender } from "./types";
+import { AnyResolvedKeyframe } from "../types.js";
+import { KeyframeResolver, OnKeyframesResolved, UnresolvedKeyframes } from "./keyframesresolver.js";
+import { WithRender } from "./types.js";
 export declare class DOMKeyframesResolver<T extends AnyResolvedKeyframe> extends KeyframeResolver<T> {
     name: string;
     element?: WithRender;

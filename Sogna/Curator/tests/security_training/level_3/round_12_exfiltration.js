@@ -1,5 +1,5 @@
 // ✅ SECURE VERSION - ROUND 12 (NETWORK LOCAL)
-// @sogna: Refactored for training safety with Network Firewall compliance.
+// @Sogna: Refactored for training safety with Network Firewall compliance.
 
 const CLOUD_API_KEY = process.env.SOGNA_MOCK_KEY || "MOCK_KEY_TEMPLATE_2026_VERSION";
 

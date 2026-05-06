@@ -1,1 +1,1 @@
-export { domAnimation } from "../../render/dom/features-animation"
+export { domAnimation } from "../../render/dom/features-animation.js"

@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react"
 import { sognaflowValue } from "sognaflow-dom"
-import { useSVGProps } from "../use-props"
+import { useSVGProps } from "../use-props.js"
 
 describe("SVG useProps", () => {
     test("should return correct styles for element", () => {

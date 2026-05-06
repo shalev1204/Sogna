@@ -1,5 +1,5 @@
 import { AnalyseComplexValue } from "../../../value/types/complex";
-import { GetAnimatableNone } from "../../../value/types/utils/animatable-none";
+import { GetAnimatableNone } from "../../../value/types/utils/animatable-none.js";
 /**
  * If we encounter keyframes like "none" or "0" and we also have keyframes like
  * "#fff" or "200px 200px" we want to find a keyframe to serve as a template for

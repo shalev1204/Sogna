@@ -1,9 +1,9 @@
 import { Easing } from "sognaflow-utils";
-import { SVGAttributes } from "../render/svg/types";
+import { SVGAttributes } from "../render/svg/types.js";
 import { SognaflowValue } from "../value";
-import { Driver } from "./drivers/types";
-import { KeyframeResolver } from "./keyframes/keyframesresolver";
-import { WithRender } from "./keyframes/types";
+import { Driver } from "./drivers/types.js";
+import { KeyframeResolver } from "./keyframes/keyframesresolver.js";
+import { WithRender } from "./keyframes/types.js";
 export type AnyResolvedKeyframe = string | number;
 export interface ProgressTimeline {
     currentTime: null | {

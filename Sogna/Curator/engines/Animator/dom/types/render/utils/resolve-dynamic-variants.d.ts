@@ -1,4 +1,4 @@
-import type { AnimationDefinition, TargetAndTransition, TargetResolver } from "../../node/types";
+import type { AnimationDefinition, TargetAndTransition, TargetResolver } from "../../node/types.js";
 /**
  * Resolves a variant if it's a variant resolver.
  * Uses `any` type for visualElement to avoid circular dependencies.

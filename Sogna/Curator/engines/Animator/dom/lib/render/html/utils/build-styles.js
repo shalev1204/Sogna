@@ -1,8 +1,8 @@
-import { GetValueAsType as getValueAsType } from "../../../value/types/utils/get-as-type";
-import { NumberValueTypes as numberValueTypes } from "../../../value/types/maps/number";
-import { TransformProps as transformProps } from "../../utils/keys-transform";
-import { IsCSSVariableName as isCSSVariableName } from "../../../animation/utils/is-css-variable";
-import { BuildTransform as buildTransform } from "./build-transform";
+import { GetValueAsType as getValueAsType } from "../../../value/types/utils/get-as-type.js";
+import { NumberValueTypes as numberValueTypes } from "../../../value/types/maps/number.js";
+import { TransformProps as transformProps } from "../../utils/keys-transform.js";
+import { IsCSSVariableName as isCSSVariableName } from "../../../animation/utils/is-css-variable.js";
+import { BuildTransform as buildTransform } from "./build-transform.js";
 export function BuildHTMLStyles(state, latestValues, transformTemplate) {
     const { style, vars, transformOrigin } = state;
     // Track whether we encounter any transform or transformOrigin values.

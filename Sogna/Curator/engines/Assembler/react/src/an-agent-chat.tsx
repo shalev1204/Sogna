@@ -1,11 +1,11 @@
 import React, { useRef, useEffect, useMemo } from "react"
-import { MessageList } from "./components/message-list"
-import { InputBar } from "./components/input-bar"
-import { WindowChrome } from "./components/window-chrome"
-import { applyTheme } from "./theme"
-import { cn } from "./utils/cn"
-import { ThemeConfigContext, extractThemeConfig } from "./theme-config"
-import type { AgentChatProps } from "./types"
+import { MessageList } from "./components/message-list.js"
+import { InputBar } from "./components/input-bar.js"
+import { WindowChrome } from "./components/window-chrome.js"
+import { applyTheme } from "./theme.js"
+import { cn } from "./utils/cn.js"
+import { ThemeConfigContext, extractThemeConfig } from "./theme-config.js"
+import type { AgentChatProps } from "./types.js"
 
 export function AgentChat({
   messages,

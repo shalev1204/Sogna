@@ -1,5 +1,5 @@
-import { EnvOracle } from '../utils/envoracle.js';
-import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/curator';
+import { EnvOracle } from '../utils/EnvOracle.js';
+import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
 
 export interface FinanceState {
     balance: number;

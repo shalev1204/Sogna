@@ -1,4 +1,4 @@
-import { TransformPropOrder as transformPropOrder } from "../../render/utils/keys-transform";
+import { TransformPropOrder as transformPropOrder } from "../../render/utils/keys-transform.js";
 const translateAlias = {
     x: "translateX",
     y: "translateY",

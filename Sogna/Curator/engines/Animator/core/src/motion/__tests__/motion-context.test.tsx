@@ -1,6 +1,6 @@
 import { sognaflowValue } from "sognaflow-dom"
 import { sognaflow, sognaflowConfig } from "../../"
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("sognaflowConfig.transition", () => {
     test("Can define a default transition for an entire tree", async () => {

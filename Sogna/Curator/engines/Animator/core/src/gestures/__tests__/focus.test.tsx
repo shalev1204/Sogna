@@ -1,7 +1,7 @@
 import { createRef } from "react"
 import { frame, sognaflow, sognaflowValue } from "../../"
-import { blur, focus, render } from "../../jest.setup"
-import { nextFrame } from "./utils"
+import { blur, focus, render } from "../../jest.setup.js"
+import { nextFrame } from "./utils.js"
 
 describe("focus", () => {
     test("whileFocus applied", async () => {

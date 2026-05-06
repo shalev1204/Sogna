@@ -1,4 +1,4 @@
-import { ToolStatus } from './studioengine.js';
+import { ToolStatus } from './StudioEngine.js';
 
 export interface ProviderInfo {
   name: string;

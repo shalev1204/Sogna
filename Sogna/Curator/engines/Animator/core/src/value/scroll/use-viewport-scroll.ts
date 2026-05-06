@@ -1,5 +1,5 @@
 import { warnOnce } from "sognaflow-utils"
-import { useScroll } from "../use-scroll"
+import { useScroll } from "../use-scroll.js"
 
 /**
  * @deprecated useViewportScroll is deprecated. Convert to useScroll()

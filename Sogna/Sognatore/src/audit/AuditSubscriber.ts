@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { AuditLog } from './auditlog.js';
+import { AuditLog } from './AuditLog.js';
 
 const sognatoreDir = process.env.SOGNATORE_DIR || '.sognatore';
 let pendingDir = path.join(process.cwd(), sognatoreDir, 'events', 'pending');
@@ -83,7 +83,7 @@ if (isMain) {
   const shutdown = () => {
     clearInterval(pollInterval);
     audit.flush();
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   };
   process.on('SIGTERM', shutdown);

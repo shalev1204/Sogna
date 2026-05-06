@@ -1,8 +1,8 @@
 import { AnimationPlaybackControls } from "sognaflow-dom"
 import { noop } from "sognaflow-utils"
-import { attachToAnimation } from "./attach-animation"
-import { attachToFunction } from "./attach-function"
-import { OnScroll, ScrollOptions } from "./types"
+import { attachToAnimation } from "./attach-animation.js"
+import { attachToFunction } from "./attach-function.js"
+import { OnScroll, ScrollOptions } from "./types.js"
 
 export function scroll(
     onScroll: OnScroll | AnimationPlaybackControls,

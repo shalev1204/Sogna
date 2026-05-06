@@ -1,1 +1,1 @@
-export * as m from "./namespace"
+export * as m from "./namespace.js"

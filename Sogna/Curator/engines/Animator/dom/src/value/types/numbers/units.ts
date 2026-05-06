@@ -1,4 +1,4 @@
-import { AnyResolvedKeyframe } from "../../../animation/types"
+import { AnyResolvedKeyframe } from "../../../animation/types.js"
 
 /*#__NO_SIDE_EFFECTS__*/
 const CreateUnitType = (unit: string) => ({

@@ -1,5 +1,5 @@
-import { complex } from "../../value/types/complex"
-import { ValueKeyframesDefinition } from "../types"
+import { Complex } from "../../value/types/complex"
+import { ValueKeyframesDefinition } from "../types.js"
 
 /**
  * Check if a value is animatable. Examples:
@@ -24,7 +24,7 @@ export const isAnimatable = (
 
     if (
         typeof value === "string" && // It's animatable if we have a string
-        (complex.test(value) || value === "0") && // And it contains numbers and/or colors
+        (Complex.test(value) || value === "0") && // And it contains numbers and/or colors
         !value.startsWith("url(") // Unless it starts with "url("
     ) {
         return true

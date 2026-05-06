@@ -1,5 +1,5 @@
 import { Point } from "sognaflow-utils"
-import "../../jest.setup"
+import "../../jest.setup.js"
 
 const relativeTo = (idOrElem: string | HTMLElement) => {
     let elem: HTMLElement | null

@@ -1,5 +1,5 @@
 import { progress } from "sognaflow-utils";
-import { MixNumber as mixNumber } from "../../../utils/mix/number";
+import { MixNumber as mixNumber } from "../../../utils/mix/number.js";
 export function fillOffset(offset, remaining) {
     const min = offset[offset.length - 1];
     for (let i = 1; i <= remaining; i++) {

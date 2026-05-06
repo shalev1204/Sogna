@@ -14,9 +14,9 @@ import {
     AnimationSequence,
     ObjectTarget,
     SequenceOptions,
-} from "../sequence/types"
-import { animateSequence } from "./sequence"
-import { animateSubject } from "./subject"
+} from "../sequence/types.js"
+import { animateSequence } from "./sequence.js"
+import { animateSubject } from "./subject.js"
 
 function isSequence(value: unknown): value is AnimationSequence {
     return Array.isArray(value) && value.some(Array.isArray)

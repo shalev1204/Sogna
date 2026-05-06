@@ -1,5 +1,5 @@
 import { invariant, isNumericalString } from "sognaflow-utils";
-import { IsCSSVariableToken } from "./is-css-variable";
+import { IsCSSVariableToken } from "./is-css-variable.js";
 /**
  * Parse Framer's special CSS variable format into a CSS token and a fallback.
  *

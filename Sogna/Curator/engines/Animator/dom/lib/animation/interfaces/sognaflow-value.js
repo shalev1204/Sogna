@@ -1,11 +1,11 @@
 import { sognaflowGlobalConfig, secondsToMilliseconds } from "sognaflow-utils";
-import { AsyncSognaflowValueAnimation } from "../asyncsognaflowvalueanimation";
-import { JSAnimation } from "../jsanimation";
-import { GetValueTransition } from "../utils/get-value-transition";
-import { MakeAnimationInstant } from "../utils/make-animation-instant";
-import { GetDefaultTransition } from "../utils/default-transitions";
-import { GetFinalKeyframe } from "../keyframes/get-final";
-import { IsTransitionDefined } from "../utils/is-transition-defined";
+import { AsyncSognaflowValueAnimation } from "../asyncsognaflowvalueanimation.js";
+import { JSAnimation } from "../jsanimation.js";
+import { GetValueTransition } from "../utils/get-value-transition.js";
+import { MakeAnimationInstant } from "../utils/make-animation-instant.js";
+import { GetDefaultTransition } from "../utils/default-transitions.js";
+import { GetFinalKeyframe } from "../keyframes/get-final.js";
+import { IsTransitionDefined } from "../utils/is-transition-defined.js";
 import { Frame as frame } from "../../frameloop";
 export const AnimateSognaflowValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
     const valueTransition = GetValueTransition(transition, name) || {};

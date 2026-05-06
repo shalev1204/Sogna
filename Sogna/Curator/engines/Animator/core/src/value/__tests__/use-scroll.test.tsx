@@ -1,8 +1,8 @@
 import { supportsFlags } from "sognaflow-dom"
 import { useRef } from "react"
-import { render } from "../../jest.setup"
-import { useScroll } from "../use-scroll"
-import { useTransform } from "../use-transform"
+import { render } from "../../jest.setup.js"
+import { useScroll } from "../use-scroll.js"
+import { useTransform } from "../use-transform.js"
 
 describe("useScroll accelerate", () => {
     afterEach(() => {

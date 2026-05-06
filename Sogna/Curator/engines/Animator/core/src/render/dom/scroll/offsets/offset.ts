@@ -1,5 +1,5 @@
-import { Edge, EdgeString, Intersection, ProgressIntersection } from "../types"
-import { namedEdges, resolveEdge } from "./edge"
+import { Edge, EdgeString, Intersection, ProgressIntersection } from "../types.js"
+import { namedEdges, resolveEdge } from "./edge.js"
 
 const defaultOffset: ProgressIntersection = [0, 0]
 

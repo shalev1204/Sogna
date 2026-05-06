@@ -1,8 +1,8 @@
 import { SognaflowValue, CreateSognaflowValue } from "."
-import { JSAnimation } from "../animation/jsanimation"
-import { AnyResolvedKeyframe, ValueAnimationTransition } from "../animation/types"
-import { frame } from "../frameloop"
-import { IsSognaflowValue } from "./utils/is-sognaflow-value"
+import { JSAnimation } from "../animation/JSAnimation.js"
+import { AnyResolvedKeyframe, ValueAnimationTransition } from "../animation/types.js"
+import { Frame } from "../frameloop"
+import { IsSognaflowValue } from "./utils/is-sognaflow-value.js"
 
 /**
  * Options for useFollowValue hook, extending ValueAnimationTransition
@@ -99,7 +99,7 @@ export function AttachFollow<T extends AnyResolvedKeyframe>(
 
         // Use the running animation's analytical velocity for accuracy,
         // falling back to the sognaflowValue's velocity for the initial animation.
-        // This prevents systematic velocity loss at high frame rates (240hz+).
+        // This prevents systematic velocity loss at high Frame rates (240hz+).
         const velocity = activeAnimation
             ? activeAnimation.getGeneratorVelocity()
             : value.getVelocity()
@@ -118,8 +118,8 @@ export function AttachFollow<T extends AnyResolvedKeyframe>(
         })
     }
 
-    // Use a stable function reference so the frame loop Set deduplicates
-    // multiple calls within the same frame (e.g. rapid mouse events)
+    // Use a stable function reference so the Frame loop Set deduplicates
+    // multiple calls within the same Frame (e.g. rapid mouse events)
     const scheduleAnimation = () => {
         startAnimation()
         value.animation = activeAnimation ?? undefined
@@ -133,7 +133,7 @@ export function AttachFollow<T extends AnyResolvedKeyframe>(
     value.attach((v, set) => {
         latestValue = v
         latestSetter = (latest) => set(parseValue(latest, unit) as T)
-        frame.postRender(scheduleAnimation)
+        Frame.postRender(scheduleAnimation)
     }, stopAnimation)
 
     if (IsSognaflowValue(source)) {

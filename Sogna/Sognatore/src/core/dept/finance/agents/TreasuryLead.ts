@@ -1,5 +1,5 @@
-import { Agent } from '../../../swarms/swarmbase.js';
-import { FinanceLedger } from '../ledger/financeledger.js';
+import { Agent } from '../../../swarms/SwarmBase.js';
+import { FinanceLedger } from '../ledger/FinanceLedger.js';
 
 export class TreasuryLead implements Agent {
     id = 'finance_treasury_lead';

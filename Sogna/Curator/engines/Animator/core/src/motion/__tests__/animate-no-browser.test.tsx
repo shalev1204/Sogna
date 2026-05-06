@@ -8,14 +8,14 @@
  * This caused isBrowser = false, which skipped useVisualElement entirely,
  * leaving all sognaflow components without an animation state.
  */
-jest.mock("../../utils/is-browser", () => ({
+jest.mock("../../utils/is-browser.js", () => ({
     isBrowser: false,
 }))
 
 import { frame } from "sognaflow-dom"
 import { sognaflow } from "../../"
 import { sognaflowValue } from "../../"
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 async function nextFrame() {
     return new Promise<void>((resolve) => {

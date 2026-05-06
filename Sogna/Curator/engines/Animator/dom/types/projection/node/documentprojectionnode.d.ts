@@ -1,23 +1,23 @@
 export declare const DocumentProjectionNode: {
-    new (latestValues?: import("../..").ResolvedValues, parent?: import("./types").IProjectionNode | undefined): {
+    new (latestValues?: import("../..").ResolvedValues, parent?: import("./types.js").IProjectionNode | undefined): {
         id: number;
         animationId: number;
         animationCommitId: number;
         instance: Window | undefined;
-        root: import("./types").IProjectionNode;
-        parent?: import("./types").IProjectionNode;
-        path: import("./types").IProjectionNode[];
-        children: Set<import("./types").IProjectionNode<unknown>>;
-        options: import("./types").ProjectionNodeOptions;
-        snapshot: import("./types").Measurements | undefined;
-        layout: import("./types").Measurements | undefined;
+        root: import("./types.js").IProjectionNode;
+        parent?: import("./types.js").IProjectionNode;
+        path: import("./types.js").IProjectionNode[];
+        children: Set<import("./types.js").IProjectionNode<unknown>>;
+        options: import("./types.js").ProjectionNodeOptions;
+        snapshot: import("./types.js").Measurements | undefined;
+        layout: import("./types.js").Measurements | undefined;
         targetLayout?: import("sognaflow-utils").Box;
         layoutCorrected: import("sognaflow-utils").Box;
         targetDelta?: import("sognaflow-utils").Delta;
         target?: import("sognaflow-utils").Box;
         relativeTarget?: import("sognaflow-utils").Box;
         relativeTargetOrigin?: import("sognaflow-utils").Box;
-        relativeParent?: import("./types").IProjectionNode;
+        relativeParent?: import("./types.js").IProjectionNode;
         isTreeAnimating: boolean;
         isAnimationBlocked: boolean;
         attemptToResolveRelativeTarget?: boolean;
@@ -25,7 +25,7 @@ export declare const DocumentProjectionNode: {
         prevProjectionDelta?: import("sognaflow-utils").Delta;
         projectionDelta?: import("sognaflow-utils").Delta;
         projectionDeltaWithTransform?: import("sognaflow-utils").Delta;
-        scroll?: import("./types").ScrollMeasurements;
+        scroll?: import("./types.js").ScrollMeasurements;
         isLayoutDirty: boolean;
         isProjectionDirty: boolean;
         isSharedProjectionDirty: boolean;
@@ -38,19 +38,19 @@ export declare const DocumentProjectionNode: {
         shouldResetTransform: boolean;
         hasCheckedOptimisedAppear: boolean;
         treeScale: import("sognaflow-utils").Point;
-        resumeFrom?: import("./types").IProjectionNode;
-        resumingFrom?: import("./types").IProjectionNode;
+        resumeFrom?: import("./types.js").IProjectionNode;
+        resumingFrom?: import("./types.js").IProjectionNode;
         latestValues: import("../..").ResolvedValues;
-        eventHandlers: Map<import("./types").LayoutEvents, import("sognaflow-utils").SubscriptionManager<any>>;
+        eventHandlers: Map<import("./types.js").LayoutEvents, import("sognaflow-utils").SubscriptionManager<any>>;
         nodes?: import("../..").FlatTree;
         depth: number;
         prevTransformTemplateValue: string | undefined;
         preserveOpacity?: boolean;
         hasTreeAnimated: boolean;
         layoutVersion: number;
-        addEventListener(name: import("./types").LayoutEvents, handler: any): VoidFunction;
-        notifyListeners(name: import("./types").LayoutEvents, ...args: any): void;
-        hasListeners(name: import("./types").LayoutEvents): boolean;
+        addEventListener(name: import("./types.js").LayoutEvents, handler: any): VoidFunction;
+        notifyListeners(name: import("./types.js").LayoutEvents, ...args: any): void;
+        hasListeners(name: import("./types.js").LayoutEvents): boolean;
         mount(instance: Window): void;
         unmount(): void;
         blockUpdate(): void;
@@ -72,7 +72,7 @@ export declare const DocumentProjectionNode: {
         updateProjection: () => void;
         updateSnapshot(): void;
         updateLayout(): void;
-        updateScroll(phase?: import("./types").Phase): void;
+        updateScroll(phase?: import("./types.js").Phase): void;
         resetTransform(): void;
         measure(removeTransform?: boolean): {
             animationId: number;
@@ -86,15 +86,15 @@ export declare const DocumentProjectionNode: {
         applyTransform(box: import("sognaflow-utils").Box, transformOnly?: boolean, output?: import("sognaflow-utils").Box): import("sognaflow-utils").Box;
         removeTransform(box: import("sognaflow-utils").Box): import("sognaflow-utils").Box;
         setTargetDelta(delta: import("sognaflow-utils").Delta): void;
-        setOptions(options: import("./types").ProjectionNodeOptions): void;
+        setOptions(options: import("./types.js").ProjectionNodeOptions): void;
         clearMeasurements(): void;
         forceRelativeParentToResolveTarget(): void;
         resolvedRelativeTargetAt: number;
         resolveTargetDelta(forceRecalculation?: boolean): void;
-        getClosestProjectingParent(): import("./types").IProjectionNode<unknown> | undefined;
+        getClosestProjectingParent(): import("./types.js").IProjectionNode<unknown> | undefined;
         isProjecting(): boolean;
         linkedParentVersion: number;
-        createRelativeTarget(relativeParent: import("./types").IProjectionNode, layout: import("sognaflow-utils").Box, parentLayout: import("sognaflow-utils").Box): void;
+        createRelativeTarget(relativeParent: import("./types.js").IProjectionNode, layout: import("sognaflow-utils").Box, parentLayout: import("sognaflow-utils").Box): void;
         removeRelativeTarget(): void;
         hasProjected: boolean;
         calcProjection(): void;
@@ -115,10 +115,10 @@ export declare const DocumentProjectionNode: {
         finishAnimation(): void;
         applyTransformsToTarget(): void;
         sharedNodes: Map<string, import("../..").NodeStack>;
-        registerSharedNode(layoutId: string, node: import("./types").IProjectionNode): void;
+        registerSharedNode(layoutId: string, node: import("./types.js").IProjectionNode): void;
         isLead(): boolean;
-        getLead(): import("./types").IProjectionNode<unknown> | /*elided*/ any;
-        getPrevLead(): import("./types").IProjectionNode<unknown> | undefined;
+        getLead(): import("./types.js").IProjectionNode<unknown> | /*elided*/ any;
+        getPrevLead(): import("./types.js").IProjectionNode<unknown> | undefined;
         getStack(): import("../..").NodeStack | undefined;
         promote({ needsReset, transition, preserveFollowOpacity, }?: {
             needsReset?: boolean;

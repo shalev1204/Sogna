@@ -1,8 +1,8 @@
-import type { SognaflowNodeOptions } from "../../../node/types"
-import { buildHTMLStyles } from "../../html/utils/build-styles"
-import { ResolvedValues } from "../../types"
-import { SVGRenderState } from "../types"
-import { buildSVGPath } from "./path"
+import type { SognaflowNodeOptions } from "../../../node/types.js"
+import { buildHTMLStyles } from "../../html/utils/build-styles.js"
+import { ResolvedValues } from "../../types.js"
+import { SVGRenderState } from "../types.js"
+import { buildSVGPath } from "./path.js"
 
 /**
  * CSS sognaflow Path properties that should remain as CSS styles on SVG elements.

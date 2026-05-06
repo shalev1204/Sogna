@@ -1,11 +1,11 @@
-import { IsHTMLElement as isHTMLElement } from "../../utils/is-html-element";
-import { isDragActive } from "../drag/state/is-active";
-import { isNodeOrChild } from "../utils/is-node-or-child";
-import { isPrimaryPointer } from "../utils/is-primary-pointer";
-import { setupGesture } from "../utils/setup";
-import { isElementKeyboardAccessible } from "./utils/is-keyboard-accessible";
-import { enableKeyboardPress } from "./utils/keyboard";
-import { isPressing } from "./utils/state";
+import { IsHTMLElement as isHTMLElement } from "../../utils/is-html-element.js";
+import { isDragActive } from "../drag/state/is-active.js";
+import { isNodeOrChild } from "../utils/is-node-or-child.js";
+import { isPrimaryPointer } from "../utils/is-primary-pointer.js";
+import { setupGesture } from "../utils/setup.js";
+import { isElementKeyboardAccessible } from "./utils/is-keyboard-accessible.js";
+import { enableKeyboardPress } from "./utils/keyboard.js";
+import { isPressing } from "./utils/state.js";
 /**
  * Filter out events that are not primary pointer events, or are triggering
  * while a sognaflow gesture is active.

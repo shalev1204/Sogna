@@ -1,11 +1,11 @@
 import { Frame as frame } from "../../frameloop";
-import { GetValueTransition as getValueTransition } from "../utils/get-value-transition";
-import { ResolveTransition as resolveTransition } from "../utils/resolve-transition";
-import { PositionalKeys as positionalKeys } from "../../render/utils/keys-position";
-import { setTarget } from "../../render/utils/setters";
-import { AddValueToWillChange as addValueToWillChange } from "../../value/will-change/add-will-change";
-import { GetOptimisedAppearId as getOptimisedAppearId } from "../optimized-appear/get-appear-id";
-import { AnimateSognaflowValue as animateSognaflowValue } from "./sognaflow-value";
+import { GetValueTransition as getValueTransition } from "../utils/get-value-transition.js";
+import { ResolveTransition as resolveTransition } from "../utils/resolve-transition.js";
+import { PositionalKeys as positionalKeys } from "../../render/utils/keys-position.js";
+import { setTarget } from "../../render/utils/setters.js";
+import { AddValueToWillChange as addValueToWillChange } from "../../value/will-change/add-will-change.js";
+import { GetOptimisedAppearId as getOptimisedAppearId } from "../optimized-appear/get-appear-id.js";
+import { AnimateSognaflowValue as animateSognaflowValue } from "./sognaflow-value.js";
 /**
  * Decide whether we should block this animation. Previously, we achieved this
  * just by checking whether the key was listed in protectedKeys, but this

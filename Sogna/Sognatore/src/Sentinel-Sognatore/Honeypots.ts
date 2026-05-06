@@ -1,7 +1,7 @@
-/** @sentinel-ignore: GLOBAL - Required for hosting honeypot decoy content */
+/** @Sentinel-ignore: GLOBAL - Required for hosting honeypot decoy content */
 import fs from 'fs-extra';
 import path from 'path';
-import { Hub } from './hub.js';
+import { Hub } from './Hub.js';
 
 export interface HoneypotConfig {
   path: string;

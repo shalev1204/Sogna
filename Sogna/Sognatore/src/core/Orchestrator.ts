@@ -1,6 +1,6 @@
-import { ToolDefinition, ToolRegistry } from './actions/toolregistry.js';
-import { AuditVault, SummaryCompressor, SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/curator';
-import { Hub } from '../sentinel-sognatore/hub.js';
+import { ToolDefinition, ToolRegistry } from './actions/ToolRegistry.js';
+import { AuditVault, SummaryCompressor, SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import chalk from 'chalk';
 
 export interface Turn {
@@ -126,7 +126,7 @@ export class Orchestrator {
 
   public async predictivePrefetch(prompt: string): Promise<string> {
     try {
-      const memory = (await import('./memory/memoryhub.js')).MemoryHub.getInstance();
+      const memory = (await import('./memory/MemoryHub.js')).MemoryHub.getInstance();
       const fragments = await memory.unifiedRecall(prompt);
       
       if (fragments.length === 0) return '';

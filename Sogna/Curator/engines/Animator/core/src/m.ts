@@ -1,1 +1,1 @@
-export * from "./render/components/m/namespace"
+export * from "./render/components/m/namespace.js"

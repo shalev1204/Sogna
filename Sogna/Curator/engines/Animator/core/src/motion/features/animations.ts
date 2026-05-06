@@ -1,6 +1,6 @@
 import { AnimationFeature } from "./animation"
-import { ExitAnimationFeature } from "./animation/exit"
-import { FeaturePackages } from "./types"
+import { ExitAnimationFeature } from "./animation/exit.js"
+import { FeaturePackages } from "./types.js"
 
 export const animations: FeaturePackages = {
     animation: {

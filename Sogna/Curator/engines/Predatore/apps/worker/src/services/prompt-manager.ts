@@ -266,7 +266,7 @@ export async function loadPrompt(
     let result = await interpolateVariables(template, enhancedVariables, config, logger, basePromptsDir);
 
     // 6. Inject  Context if available
-    const ContextPath = path.join(basePromptsDir, 'sogna-context.txt');
+    const ContextPath = path.join(basePromptsDir, 'Sogna-context.txt');
     if (await fs.pathExists(ContextPath)) {
       const Context = await fs.readFile(ContextPath, 'utf8');
       result = `${Context}\n\n${result}`;

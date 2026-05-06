@@ -1,5 +1,5 @@
 import { progress, velocityPerSecond } from "sognaflow-utils"
-import { AxisScrollInfo, ScrollInfo } from "./types"
+import { AxisScrollInfo, ScrollInfo } from "./types.js"
 
 /**
  * A time in milliseconds, beyond which we consider the scroll velocity to be 0.

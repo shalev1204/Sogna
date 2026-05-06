@@ -1,4 +1,4 @@
-import type { AnyResolvedKeyframe } from "../../animation/types";
+import type { AnyResolvedKeyframe } from "../../animation/types.js";
 import type { Box, Delta, Point } from "sognaflow-utils";
 /**
  * Minimal interface for projection node properties used by scale correctors.

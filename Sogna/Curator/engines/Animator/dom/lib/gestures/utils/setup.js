@@ -1,4 +1,4 @@
-import { ResolveElements, } from "../../utils/resolve-elements";
+import { ResolveElements, } from "../../utils/resolve-elements.js";
 export function setupGesture(elementOrSelector, options) {
     const elements = ResolveElements(elementOrSelector);
     const gestureAbortController = new AbortController();

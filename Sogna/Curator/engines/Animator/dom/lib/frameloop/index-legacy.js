@@ -1,5 +1,5 @@
 import { CancelFrame, Frame } from ".";
-import { StepsOrder } from "./order";
+import { StepsOrder } from "./order.js";
 /**
  * @deprecated
  *

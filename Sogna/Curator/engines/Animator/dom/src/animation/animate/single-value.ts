@@ -1,15 +1,15 @@
-import { AnimateSognaflowValue } from "../interfaces/sognaflow-value"
+import { AnimateSognaflowValue } from "../interfaces/sognaflow-value.js"
 import type {
     AnimationPlaybackControlsWithThen,
     AnyResolvedKeyframe,
     UnresolvedValueKeyframe,
     ValueAnimationTransition,
-} from "../types"
+} from "../types.js"
 import {
     CreateSognaflowValue,
     SognaflowValue,
 } from "../../value"
-import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value"
+import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value.js"
 
 export function AnimateSingleValue<V extends AnyResolvedKeyframe>(
     value: SognaflowValue<V> | V,

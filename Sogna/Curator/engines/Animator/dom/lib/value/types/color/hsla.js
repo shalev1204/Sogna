@@ -1,7 +1,7 @@
 import { Alpha as AlphaType } from "../numbers";
-import { Percent } from "../numbers/units";
-import { sanitize } from "../utils/sanitize";
-import { isColorString, splitColor } from "./utils";
+import { Percent } from "../numbers/units.js";
+import { sanitize } from "../utils/sanitize.js";
+import { isColorString, splitColor } from "./utils.js";
 export const Hsla = {
     test: /*@__PURE__*/ isColorString("hsl", "hue"),
     parse: /*@__PURE__*/ splitColor("hue", "saturation", "lightness"),

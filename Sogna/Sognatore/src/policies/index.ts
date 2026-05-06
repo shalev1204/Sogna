@@ -1,7 +1,7 @@
-import { Engine } from '../sentinel-sognatore/engine.js';
-import { Gates } from '../sentinel-sognatore/gates.js';
-import { Treasurer } from '../sentinel-sognatore/treasurer.js';
-import { Decision } from '../sentinel-sognatore/policytypes.js';
+import { Engine } from '../Sentinel-Sognatore/Engine.js';
+import { Gates } from '../Sentinel-Sognatore/Gates.js';
+import { Treasurer } from '../Sentinel-Sognatore/Treasurer.js';
+import { Decision } from '../Sentinel-Sognatore/PolicyTypes.js';
 
 /**
  * Sentinel-Sognatore Policy API - Unified Entry Point

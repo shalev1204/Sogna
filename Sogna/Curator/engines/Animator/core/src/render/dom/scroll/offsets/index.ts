@@ -1,9 +1,9 @@
 import { defaultOffset, interpolate } from "sognaflow-dom"
 import { clamp } from "sognaflow-utils"
-import { ScrollInfo, ScrollInfoOptions } from "../types"
-import { calcInset } from "./inset"
-import { resolveOffset } from "./offset"
-import { ScrollOffset } from "./presets"
+import { ScrollInfo, ScrollInfoOptions } from "../types.js"
+import { calcInset } from "./inset.js"
+import { resolveOffset } from "./offset.js"
+import { ScrollOffset } from "./presets.js"
 
 const point = { x: 0, y: 0 }
 

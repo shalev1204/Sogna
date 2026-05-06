@@ -1,10 +1,10 @@
 import { clamp } from "sognaflow-utils";
-import { Time as time } from "../frameloop/sync-time";
-import { SetStyle as setStyle } from "../render/dom/style-set";
-import { JSAnimation } from "./jsanimation";
-import { NativeAnimation } from "./nativeanimation";
-import { replaceTransitionType } from "./utils/replace-transition-type";
-import { replaceStringEasing } from "./waapi/utils/unsupported-easing";
+import { Time as time } from "../frameloop/sync-time.js";
+import { SetStyle as setStyle } from "../render/dom/style-set.js";
+import { JSAnimation } from "./jsanimation.js";
+import { NativeAnimation } from "./nativeanimation.js";
+import { replaceTransitionType } from "./utils/replace-transition-type.js";
+import { replaceStringEasing } from "./waapi/utils/unsupported-easing.js";
 /**
  * 10ms is chosen here as it strikes a balance between smooth
  * results (more than one keyframe per frame at 60fps) and

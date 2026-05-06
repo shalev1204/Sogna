@@ -1,7 +1,7 @@
 import {
     ElementOrSelector,
-    resolveElements,
-} from "../../utils/resolve-elements"
+    ResolveElements,
+} from "../../utils/resolve-elements.js"
 import { SognaflowValue } from "../../value"
 
 export function createSelectorEffect<T>(
@@ -14,7 +14,7 @@ export function createSelectorEffect<T>(
         subject: ElementOrSelector,
         values: Record<string, SognaflowValue>
     ) => {
-        const elements = resolveElements(subject)
+        const elements = ResolveElements(subject)
         const subscriptions: VoidFunction[] = []
 
         for (const element of elements) {

@@ -1,5 +1,5 @@
 {
-  "name": "sognatore",
+  "name": "Sognatore",
   "version": "6.75.3",
   "type": "module",
   "description": "Sognatore - Personal multi-agent autonomous swarm for high-assurance development",
@@ -23,7 +23,7 @@
     "gemini-cli",
     "gpt",
     "llm",
-    "sognatore",
+    "Sognatore",
     "mcp",
     "multi-agent",
     "openai",
@@ -36,7 +36,7 @@
   "license": "UNLICENSED",
   "author": "Sognatore Engine",
   "bin": {
-    "sognatore": "dist/Sognatore/src/bin/sognatore.js"
+    "Sognatore": "dist/Sognatore/src/bin/Sognatore.js"
   },
   "files": [
     "config/",
@@ -48,7 +48,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "tsc && node --test dist/tests/**/*.test.js",
-    "start": "node dist/Sognatore/src/bin/sognatore.js",
+    "start": "node dist/Sognatore/src/bin/Sognatore.js",
     "lint": "eslint src",
     "check": "tsc --noEmit"
   },
@@ -62,7 +62,7 @@
   ],
   "dependencies": {
     "@slack/web-api": "^7.15.0",
-    "@sogna/curator": "workspace:*",
+    "@Sogna/Curator": "workspace:*",
     "chalk": "^5.3.0",
     "commander": "^12.0.0",
     "dotenv": "^16.4.5",

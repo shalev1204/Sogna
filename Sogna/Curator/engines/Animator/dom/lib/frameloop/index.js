@@ -1,2 +1,2 @@
-export * from "./frame";
+export * from "./frame.js";
 //# sourceMappingURL=index.js.map

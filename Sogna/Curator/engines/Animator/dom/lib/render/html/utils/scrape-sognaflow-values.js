@@ -1,5 +1,5 @@
-import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value";
-import { IsForcedSognaflowValue } from "../../utils/is-forced-sognaflow-value";
+import { IsSognaflowValue } from "../../../value/utils/is-sognaflow-value.js";
+import { IsForcedSognaflowValue } from "../../utils/is-forced-sognaflow-value.js";
 export function ScrapeSognaflowValuesFromProps(props, prevProps, visualElement) {
     const style = props.style;
     const prevStyle = prevProps?.style;

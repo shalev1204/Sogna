@@ -1,19 +1,19 @@
 import type { Box } from "sognaflow-utils"
-import { GroupAnimation } from "../animation/groupanimation"
+import { GroupAnimation } from "../animation/GroupAnimation.js"
 import type {
     AnimationOptions,
     AnimationPlaybackControls,
     Transition,
-} from "../animation/types"
-import { frame } from "../frameloop"
-import { copyBoxInto } from "../projection/geometry/copy"
-import { createBox } from "../projection/geometry/models"
-import { HTMLProjectionNode } from "../projection/node/htmlprojectionnode"
-import type { IProjectionNode } from "../projection/node/types"
-import { HTMLVisualElement } from "../render/html/htmlvisualelement"
-import { visualElementStore } from "../render/store"
-import type { VisualElement } from "../render/visualelement"
-import { resolveElements, type ElementOrSelector } from "../utils/resolve-elements"
+} from "../animation/types.js"
+import { Frame } from "../frameloop"
+import { copyBoxInto } from "../projection/geometry/copy.js"
+import { createBox } from "../projection/geometry/models.js"
+import { HTMLProjectionNode } from "../projection/node/HTMLProjectionNode.js"
+import type { IProjectionNode } from "../projection/node/types.js"
+import { HTMLVisualElement } from "../render/html/HTMLVisualElement.js"
+import { visualElementStore } from "../render/store.js"
+import type { VisualElement } from "../render/VisualElement.js"
+import { ResolveElements, type ElementOrSelector } from "../utils/resolve-elements.js"
 
 type LayoutAnimationScope = Element | Document
 
@@ -82,7 +82,7 @@ export class LayoutAnimationBuilder {
             this.rejectReady = reject
         })
 
-        frame.postRender(() => {
+        Frame.postRender(() => {
             this.start().then(this.notifyReady).catch(this.rejectReady)
         })
     }
@@ -157,7 +157,7 @@ export class LayoutAnimationBuilder {
         root?.didUpdate()
 
         await new Promise<void>((resolve) => {
-            frame.postRender(() => resolve())
+            Frame.postRender(() => resolve())
         })
 
         const animations = collectAnimations(afterRecords)
@@ -248,7 +248,7 @@ export function parseAnimateLayoutArgs(
     }
 
     // animateLayout(scope, updateDom, options?)
-    const elements = resolveElements(scopeOrUpdateDom)
+    const elements = ResolveElements(scopeOrUpdateDom)
     const scope = elements[0] || document
 
     return {

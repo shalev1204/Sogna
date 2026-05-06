@@ -1,5 +1,5 @@
 import { frame } from "../../../frameloop"
-import { microtask } from "../../../frameloop/microtask"
+import { microtask } from "../../../frameloop/microtask.js"
 
 export async function nextFrame() {
     return new Promise<void>((resolve) => {

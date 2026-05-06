@@ -1,8 +1,8 @@
 import { easeInOut, noop } from "sognaflow-utils"
-import { defaultOffset } from "../../keyframes/offsets/default"
-import { convertOffsetToTimes } from "../../keyframes/offsets/time"
-import { AnyResolvedKeyframe, KeyframeGenerator } from "../../types"
-import { defaultEasing, keyframes } from "../keyframes"
+import { defaultOffset } from "../../keyframes/offsets/default.js"
+import { convertOffsetToTimes } from "../../keyframes/offsets/time.js"
+import { AnyResolvedKeyframe, KeyframeGenerator } from "../../types.js"
+import { defaultEasing, keyframes } from "../keyframes.js"
 
 function animateSync(
     animation: KeyframeGenerator<AnyResolvedKeyframe>,

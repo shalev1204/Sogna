@@ -1,4 +1,4 @@
-import { ResolvedValues } from "../../types"
+import { ResolvedValues } from "../../types.js"
 
 const dashKeys = {
     offset: "stroke-dashoffset",

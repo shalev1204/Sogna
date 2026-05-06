@@ -1,4 +1,4 @@
-import { isHTMLElement } from "../is-html-element"
+import { isHTMLElement } from "../is-html-element.js"
 
 describe("isHTMLElement", () => {
     it("should return true for an HTMLElement", () => {

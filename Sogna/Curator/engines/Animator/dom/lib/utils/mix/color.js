@@ -1,10 +1,10 @@
 import { warning } from "sognaflow-utils";
-import { Hex } from "../../value/types/color/hex";
-import { Hsla } from "../../value/types/color/hsla";
-import { HslaToRgba } from "../../value/types/color/hsla-to-rgba";
-import { Rgba } from "../../value/types/color/rgba";
-import { MixImmediate } from "./immediate";
-import { MixNumber } from "./number";
+import { Hex } from "../../value/types/color/hex.js";
+import { Hsla } from "../../value/types/color/hsla.js";
+import { HslaToRgba } from "../../value/types/color/hsla-to-rgba.js";
+import { Rgba } from "../../value/types/color/rgba.js";
+import { MixImmediate } from "./immediate.js";
+import { MixNumber } from "./number.js";
 // Linear color space blending
 // Explained https://www.youtube.com/watch?v=LKnqECcg6Gw
 // Demonstrated http://codepen.io/osublake/pen/xGVVaN

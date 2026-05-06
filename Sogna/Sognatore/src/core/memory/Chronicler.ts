@@ -368,7 +368,7 @@ export class Chronicler {
       
       // Auto-Detect Encryption: Encrypted strings don't start with JSON braces
       if (dataStr.length > 50 && !dataStr.trim().startsWith('{')) {
-        const { Guardian } = await import('../guardian.js');
+        const { Guardian } = await import('../Guardian.js');
         const decrypted = Guardian.getInstance().unsealData<MemoryIndex>(dataStr);
         if (decrypted) return decrypted;
         console.error('[CHRONICLER] Decryption failed. Returning empty index.');
@@ -385,11 +385,11 @@ export class Chronicler {
   private async writeIndex(index: MemoryIndex): Promise<void> {
     // 1. Data Pruning (Entropy Control)
     if (index.fragments.length > 1000) {
-      const { PruningService } = await import('./pruningservice.js');
+      const { PruningService } = await import('./PruningService.js');
       await PruningService.getInstance().prune(this.indexFile, {
         minWeight: 0.2,
         maxAgeDays: 60,
-        preserveTags: ['institutional', 'sovereign', 'sentinel']
+        preserveTags: ['institutional', 'sovereign', 'Sentinel']
       });
       // Re-read after pruning to ensure we encrypt the clean version
       const data = await fs.readFile(this.indexFile, 'utf8');
@@ -403,7 +403,7 @@ export class Chronicler {
     let output: string;
     
     if (process.env.SOGNA_ENCRYPT_MEMORY === 'true') {
-      const { Guardian } = await import('../guardian.js');
+      const { Guardian } = await import('../Guardian.js');
       output = Guardian.getInstance().sealData(index);
       console.log('[CHRONICLER] Neural Index sealed with Guardian AES-256.');
     } else {

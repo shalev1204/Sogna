@@ -1,7 +1,7 @@
 import { clamp } from "sognaflow-utils";
 import { Alpha as AlphaType, NumberType } from "../numbers";
-import { sanitize } from "../utils/sanitize";
-import { isColorString, splitColor } from "./utils";
+import { sanitize } from "../utils/sanitize.js";
+import { isColorString, splitColor } from "./utils.js";
 const clampRgbUnit = (v) => clamp(0, 255, v);
 export const RgbUnit = {
     ...NumberType,

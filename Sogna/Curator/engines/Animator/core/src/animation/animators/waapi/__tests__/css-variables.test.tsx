@@ -1,7 +1,7 @@
 import { parseCSSVariable } from "sognaflow-dom"
 import { animate, animateMini, sognaflow } from "../../../.."
-import { render } from "../../../../jest.setup"
-import "./polyfill"
+import { render } from "../../../../jest.setup.js"
+import "./polyfill.js"
 
 const fromName = "--from"
 const toName = "--to"

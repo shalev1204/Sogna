@@ -1,5 +1,5 @@
 // ✅ SECURE LEGACY API
-// @sogna: Refactored for training safety.
+// @Sogna: Refactored for training safety.
 
 const db = { find: () => {} };
 

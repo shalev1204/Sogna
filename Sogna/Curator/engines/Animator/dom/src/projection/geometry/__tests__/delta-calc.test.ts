@@ -1,6 +1,6 @@
-import { isNear, calcAxisDelta, calcRelativeBox, calcRelativePosition, calcRelativeAxisPosition, calcRelativeAxis } from "../delta-calc"
-import { applyAxisDelta } from "../delta-apply"
-import { createBox, createDelta } from "../models"
+import { isNear, calcAxisDelta, calcRelativeBox, calcRelativePosition, calcRelativeAxisPosition, calcRelativeAxis } from "../delta-calc.js"
+import { applyAxisDelta } from "../delta-apply.js"
+import { createBox, createDelta } from "../models.js"
 
 describe("isNear", () => {
     test("Correctly indicate when the provided value is within maxDistance of the provided target", () => {

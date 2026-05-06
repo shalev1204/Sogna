@@ -1,6 +1,6 @@
 import { SognaflowValue } from "."
-import { AnyResolvedKeyframe, SpringOptions } from "../animation/types"
-import { AttachFollow, FollowValue } from "./follow-value"
+import { AnyResolvedKeyframe, SpringOptions } from "../animation/types.js"
+import { AttachFollow, FollowValue } from "./follow-value.js"
 
 /**
  * Create a `SognaflowValue` that animates to its latest value using a spring.

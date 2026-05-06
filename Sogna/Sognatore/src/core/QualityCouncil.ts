@@ -1,13 +1,13 @@
-import { BaseGate } from './gates/basegate.js';
-import { StaticAnalysisGate } from './gates/staticanalysisgate.js';
-import { BlindReviewGate } from './gates/blindreviewgate.js';
-import { AntiSycophancyGate } from './gates/antisycophancygate.js';
-import { CompatibilityGate } from './gates/compatibilitygate.js';
-import { ConsensusGate } from './gates/consensusgate.js';
-import { VitalsGate } from './gates/vitalsgate.js';
-import { AdversarialGate } from './gates/adversarialgate.js';
+import { BaseGate } from './gates/BaseGate.js';
+import { StaticAnalysisGate } from './gates/StaticAnalysisGate.js';
+import { BlindReviewGate } from './gates/BlindReviewGate.js';
+import { AntiSycophancyGate } from './gates/AntiSycophancyGate.js';
+import { CompatibilityGate } from './gates/CompatibilityGate.js';
+import { ConsensusGate } from './gates/ConsensusGate.js';
+import { VitalsGate } from './gates/VitalsGate.js';
+import { AdversarialGate } from './gates/AdversarialGate.js';
 import { CouncilEvidence, GateResult } from './gates/types.js';
-import { AgentRegistry } from './agents/agentregistry.js';
+import { AgentRegistry } from './agents/AgentRegistry.js';
 import chalk from 'chalk';
 
 export class QualityCouncil {

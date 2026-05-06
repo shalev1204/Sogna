@@ -1,5 +1,5 @@
 // `AnClient` is a legacy re-export kept for compatibility.
-export { AgentClient, AnClient } from "./client"
+export { AgentClient, AnClient } from "./client.js"
 export type {
   AgentClientConfig,
   CreateSandboxParams,
@@ -27,4 +27,4 @@ export type {
   ApiError,
   AnClientConfig,
   AnApiError,
-} from "./types"
+} from "./types.js"

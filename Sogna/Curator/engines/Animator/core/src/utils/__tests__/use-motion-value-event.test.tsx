@@ -1,4 +1,4 @@
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 import { usesognaflowValue } from "../../value/use-sognaflow-value"
 import { usesognaflowValueEvent } from "../use-sognaflow-value-event"
 

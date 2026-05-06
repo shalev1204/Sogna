@@ -1,4 +1,4 @@
-import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/provider.js';
+import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
 import { execa } from 'execa';
 
 export class OllamaProvider extends Provider {

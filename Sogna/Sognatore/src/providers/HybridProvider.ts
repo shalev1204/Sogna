@@ -1,5 +1,5 @@
-import { Provider, InvokeOptions, CapabilityTier, ProviderMetadata } from '../core/provider.js';
-import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@sogna/curator';
+import { Provider, InvokeOptions, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
+import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
 import chalk from 'chalk';
 
 /**

@@ -13,10 +13,10 @@ const NODE_MODULES = path.join(SOGNATORE_PATH, 'node_modules');
 import chalk from 'chalk';
 import { program } from 'commander';
 import fs from 'fs-extra';
-const uma = require('../shared/uma_bridge.cjs');
+const uma = require('../shared/uma_bridge.cjs.js');
 
 program
-  .name('sogna')
+  .name('Sogna')
   .description('Sognatore Application Forge - Universal Scaffolding and Management')
   .version('1.0.0');
 
@@ -25,7 +25,7 @@ program
   .description('Scaffold a new Sognatore project (Tauri, Supabase, n8n)')
   .argument('<name>', 'Name of the project')
     .action(async (name) => {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const { execSync } = require('child_process');
     const targetDir = path.join(process.cwd(), name);
     const templatesDir = path.join(SOGNATORE_PATH, 'resources', 'templates');
@@ -72,7 +72,7 @@ program
       // 4. Inicializar Repositorio Local (Independencia)
       console.log(chalk.blue(`[SOGNA] 🏁 Inicializando Repositorio Git Independiente...`));
       try {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         execSync('git init', { cwd: targetDir });
         // Asegurar que el .gitignore esté en la raíz del nuevo proyecto
         await fs.copy(path.join(__dirname, '..', '..', '.gitignore'), path.join(targetDir, '.gitignore'));
@@ -114,7 +114,7 @@ program
       // 6. Instalación de Dependencias
       console.log(chalk.yellow(`\n[SOGNA] ⚡ Instalando dependencias en la nueva instancia (npm install)...`));
       console.log(chalk.gray(`Esto puede tardar un momento...`));
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       execSync('npm install', { cwd: targetDir, stdio: 'inherit' });
 
       // 7. Bienvenida y Asistente de Claves (Placeholder para Task 2)
@@ -125,7 +125,7 @@ program
       console.log(chalk.magenta(`\n🚨 PRÓXIMO PASO CRÍTICO:`));
       console.log(chalk.white(`1. Entra en el directorio: `) + chalk.bold(`cd ${name}`));
       console.log(chalk.white(`2. Configura tus API Keys locales (Manus, Perplexity, etc.) en el archivo .env`));
-      console.log(chalk.white(`3. Despierta a los agentes: `) + chalk.bold(`node Sogna/sognatore.js run`));
+      console.log(chalk.white(`3. Despierta a los agentes: `) + chalk.bold(`node Sogna/Sognatore.js run`));
       
     } catch (err) {
       console.error(chalk.red(`\n✘ Error en la forja: ${err.message}`));
@@ -137,7 +137,7 @@ program
   .description('Check health of the Sognatore ecosystem')
   .option('--secure', 'Run deep security and vulnerability scan')
   .action(async (options) => {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const { execSync } = require('child_process');
     console.log(chalk.cyan(`\n[SOGNA] Diagnosticando ecosistema...`));
     
@@ -161,12 +161,12 @@ program
     if (options.secure) {
       console.log(chalk.magenta(`\n[SENTINEL] 🛡️  Iniciando Auditoría de Seguridad Profunda...`));
       try {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
-        execSync(`node "${path.join(__dirname, 'sogna.js')}" Sentinel sweep`, { stdio: 'inherit' });
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+        execSync(`node "${path.join(__dirname, 'Sogna.js')}" Sentinel sweep`, { stdio: 'inherit' });
         console.log(chalk.green(`\n✔ Diagnóstico Secure completado: Ecosistema Blindado.`));
       } catch (e) {
         console.log(chalk.red(`\n✘ VETO DE SEGURIDAD: Se detectaron vulnerabilidades críticas en el ecosistema.`));
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         process.exit(1);
       }
     }
@@ -314,13 +314,13 @@ program
   .description('Skill Refiner: Optimización autónoma de habilidades')
   .argument('<path>', 'Ruta al archivo SKILL.md o directorio de habilidades')
   .action(async (targetPath) => {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const { execSync } = require('child_process');
     console.log(chalk.magenta(`\n[REFINER] 🧪 Iniciando Refinamiento de Habilidades...`));
     
     try {
       const refinerPath = path.join(__dirname, 'refine-skill.js');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       execSync(`node "${refinerPath}" "${targetPath}" --auto-apply`, { stdio: 'inherit' });
     } catch (err) {
       console.error(chalk.red(`\n✘ Error en el refinamiento: ${err.message}`));
@@ -343,9 +343,9 @@ program
     // Asegurar directorio de memoria
     await fs.ensureDir(memoryPath);
 
-    const args = process.argv.slice(3); // Capturar todos los argumentos después de 'predatore'
+    const args = process.argv.slice(3); // Capturar todos los argumentos después de 'Predatore'
     
-    const child = spawn('node', [path.join(predatorePath, 'predatore'), ...args], {
+    const child = spawn('node', [path.join(predatorePath, 'Predatore'), ...args], {
       cwd: predatorePath,
       stdio: 'inherit',
       env: { ...process.env, PREDATORE_LOCAL: '1', SOGNA_ZEN: 'true' }
@@ -383,7 +383,7 @@ program
   .description('Despertar a Sognatore Sentinel para escudo defensivo (The Tribunal)')
   .argument('[command]', 'Comando defensivo (sweep, train, status)', 'sweep')
   .action(async (cmd) => {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     const { execSync } = require('child_process');
     console.log(chalk.blue(`\n[SENTINEL ENGINE] 🛡️  Iniciando protocolo defensivo...`));
     
@@ -393,7 +393,7 @@ program
       
       try {
         const trainerPath = path.join(__dirname, '..', 'engines', 'Sentinel', 'bin', 'sentinel_trainer.py');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         execSync(`python "${trainerPath}"`, { stdio: 'inherit' });
         console.log(chalk.green(`\n✔ [LEARNED] El cerebro de Sentinel ha sido actualizado.`));
       } catch (err) {
@@ -435,13 +435,13 @@ program
       console.log(chalk.gray(`(Buscando inyecciones AST, exposición de secretos, y cadenas de suministro corruptas)`));
       
       try {
-        const vetoPath = path.join(__dirname, '..', 'engines', 'Sentinel', 'bin', 'sentinel-veto.js');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+        const vetoPath = path.join(__dirname, '..', 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js');
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         execSync(`node "${vetoPath}" --all --fix`, { stdio: 'inherit' });
         console.log(chalk.green(`\n✔ [CLEAN] Escaneo exhaustivo completado. El monorepo está blindado.`));
       } catch (err) {
         console.log(chalk.red(`\n✘ [VETO SWEEP] Sentinel detectó vulnerabilidades críticas.`));
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         process.exit(1);
       }
     }

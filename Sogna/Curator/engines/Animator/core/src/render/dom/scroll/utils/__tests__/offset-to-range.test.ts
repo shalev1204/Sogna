@@ -1,4 +1,4 @@
-import { offsetToViewTimelineRange } from "../offset-to-range"
+import { offsetToViewTimelineRange } from "../offset-to-range.js"
 
 describe("offsetToViewTimelineRange", () => {
     it("maps undefined (default) to contain", () => {

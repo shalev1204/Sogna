@@ -1,5 +1,5 @@
 import { CreateSognaflowValue } from "../../../../value"
-import { ScrapeSognaflowValuesFromProps } from "../scrape-sognaflow-values"
+import { ScrapeSognaflowValuesFromProps } from "../scrape-sognaflow-values.js"
 
 describe("SVG ScrapeSognaflowValuesFromProps", () => {
     test("correctly scrapes sognaflow values from props", () => {

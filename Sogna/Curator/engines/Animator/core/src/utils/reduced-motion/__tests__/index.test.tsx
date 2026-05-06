@@ -1,5 +1,5 @@
 import { hasReducedsognaflowListener } from "sognaflow-dom"
-import { render } from "../../../jest.setup"
+import { render } from "../../../jest.setup.js"
 import { sognaflow } from "../../../render/components/sognaflow"
 import { sognaflowConfig } from "../../../components/sognaflowconfig"
 

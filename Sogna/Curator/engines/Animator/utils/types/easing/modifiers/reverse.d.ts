@@ -1,2 +1,2 @@
-import { EasingModifier } from "../types";
+import { EasingModifier } from "../types.js";
 export declare const reverseEasing: EasingModifier;

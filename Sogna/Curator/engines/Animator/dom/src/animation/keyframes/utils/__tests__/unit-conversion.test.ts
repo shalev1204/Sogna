@@ -1,4 +1,4 @@
-import { positionalValues } from "../unit-conversion"
+import { positionalValues } from "../unit-conversion.js"
 
 describe("Unit conversion", () => {
     test("Correctly factors in padding when measuring width/height", () => {

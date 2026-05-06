@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react"
 import { sognaflow } from "framer-sognaflow"
 import * as React from "react"
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("sognaflow component rendering and styles", () => {
     it("renders", () => {

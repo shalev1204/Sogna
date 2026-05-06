@@ -1,7 +1,7 @@
 import { buildHTMLStyles, ResolvedValues } from "sognaflow-dom"
-import "../../../../jest.setup"
-import { DOMVisualElementOptions } from "../../../dom/types"
-import { TransformOrigin } from "../../types"
+import "../../../../jest.setup.js"
+import { DOMVisualElementOptions } from "../../../dom/types.js"
+import { TransformOrigin } from "../../types.js"
 
 describe("buildHTMLStyles", () => {
     test("Builds basic styles", () => {

@@ -1,6 +1,6 @@
 import { warning } from "sognaflow-utils";
-import { isGenerator } from "../generators/utils/is-generator";
-import { IsAnimatable as isAnimatable } from "./is-animatable";
+import { isGenerator } from "../generators/utils/is-generator.js";
+import { IsAnimatable as isAnimatable } from "./is-animatable.js";
 function hasKeyframesChanged(keyframes) {
     const current = keyframes[0];
     if (keyframes.length === 1)

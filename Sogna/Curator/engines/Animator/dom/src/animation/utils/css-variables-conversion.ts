@@ -1,6 +1,6 @@
 import { invariant, isNumericalString } from "sognaflow-utils"
-import { AnyResolvedKeyframe } from "../types"
-import { CSSVariableToken, IsCSSVariableToken } from "./is-css-variable"
+import { AnyResolvedKeyframe } from "../types.js"
+import { CSSVariableToken, IsCSSVariableToken } from "./is-css-variable.js"
 
 /**
  * Parse Framer's special CSS variable format into a CSS token and a fallback.

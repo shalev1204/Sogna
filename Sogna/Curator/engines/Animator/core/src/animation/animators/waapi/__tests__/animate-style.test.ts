@@ -1,6 +1,6 @@
-import "../../../../jest.setup"
-import { animateMini } from "../animate-style"
-import "./polyfill"
+import "../../../../jest.setup.js"
+import { animateMini } from "../animate-style.js"
+import "./polyfill.js"
 
 /**
  * TODO: All tests currently have to define at least two keyframes

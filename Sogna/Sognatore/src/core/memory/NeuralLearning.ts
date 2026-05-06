@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { Chronicler } from './chronicler.js';
+import { Chronicler } from './Chronicler.js';
 
 /**
  * NeuralLearning - Enabling agents to evolve based on activity.

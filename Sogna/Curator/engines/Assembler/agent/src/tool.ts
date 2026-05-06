@@ -1,5 +1,5 @@
 import type { z } from "zod"
-import type { CallToolResult, ToolDefinition } from "./types"
+import type { CallToolResult, ToolDefinition } from "./types.js"
 
 export function tool<TInput extends z.ZodObject<z.ZodRawShape>>(config: {
   description: string

@@ -1,4 +1,4 @@
-import { isSVGComponent } from "../is-svg-component"
+import { isSVGComponent } from "../is-svg-component.js"
 
 describe("isSVGComponent", () => {
     test("Correctly identifies SVG components", () => {

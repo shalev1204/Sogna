@@ -1,4 +1,4 @@
-import { IsSognaflowValue } from "./is-sognaflow-value";
+import { IsSognaflowValue } from "./is-sognaflow-value.js";
 /**
  * If the provided value is a sognaflowValue, this returns the actual value, otherwise just the value itself
  */

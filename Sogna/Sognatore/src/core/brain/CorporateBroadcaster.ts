@@ -1,4 +1,4 @@
-import { NeuralLogisticsHub, NeuralEvent } from '../dept/operations/logistics/neurallogisticshub.js';
+import { NeuralLogisticsHub, NeuralEvent } from '../dept/operations/logistics/NeuralLogisticsHub.js';
 
 export class CorporateBroadcaster {
     private hub = NeuralLogisticsHub.getInstance();

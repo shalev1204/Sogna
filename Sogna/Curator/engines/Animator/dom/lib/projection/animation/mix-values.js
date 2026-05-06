@@ -1,5 +1,5 @@
-import { MixNumber } from "../../utils/mix/number";
-import { Percent as percent, Px as px } from "../../value/types/numbers/units";
+import { MixNumber } from "../../utils/mix/number.js";
+import { Percent as percent, Px as px } from "../../value/types/numbers/units.js";
 import { progress as calcProgress, circOut, noop, } from "sognaflow-utils";
 const borderLabels = [
     "borderTopLeftRadius",

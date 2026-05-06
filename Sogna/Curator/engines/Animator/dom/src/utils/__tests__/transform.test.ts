@@ -1,4 +1,4 @@
-import { transform } from "../transform"
+import { transform } from "../transform.js"
 
 // Functionality of `transform` is thoroughly tested in `interpolate`
 // but here we test the overload functionality and some basic interpolations/typings

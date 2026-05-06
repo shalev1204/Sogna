@@ -1,11 +1,11 @@
-import { SwarmBase } from '../../swarms/swarmbase.js';
-import { CloudArchitect } from './agents/cloudarchitect.js';
-import { SysAdminLead } from './agents/sysadminlead.js';
-import { DatabaseEngineer } from './agents/databaseengineer.js';
-import { DevOpsMaster } from './agents/devopsmaster.js';
-import { InfrastructureDirector } from './agents/infrastructuredirector.js';
-import { InfrastructureHealthMonitor } from './metrics/infrastructurehealthmonitor.js';
-import { InfrastructureInventory } from './inventory/infrastructureinventory.js';
+import { SwarmBase } from '../../swarms/SwarmBase.js';
+import { CloudArchitect } from './agents/CloudArchitect.js';
+import { SysAdminLead } from './agents/SysAdminLead.js';
+import { DatabaseEngineer } from './agents/DatabaseEngineer.js';
+import { DevOpsMaster } from './agents/DevOpsMaster.js';
+import { InfrastructureDirector } from './agents/InfrastructureDirector.js';
+import { InfrastructureHealthMonitor } from './metrics/InfrastructureHealthMonitor.js';
+import { InfrastructureInventory } from './inventory/InfrastructureInventory.js';
 
 export class InfrastructureSwarm extends SwarmBase {
     private cloud = new CloudArchitect();

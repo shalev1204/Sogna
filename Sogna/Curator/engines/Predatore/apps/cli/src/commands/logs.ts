@@ -55,7 +55,7 @@ function resolveLogFile(workspaceId: string): string {
   console.error('  - Workspace ID is incorrect');
   console.error('');
   console.error('Check the Temporal Web UI at http://localhost:8233 for workflow details');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(1);
 }
 
@@ -87,7 +87,7 @@ export function logs(workspaceId: string): void {
 
   // 1. Output existing content
   if (flush()) {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   }
 
@@ -95,10 +95,10 @@ export function logs(workspaceId: string): void {
   const watcher = watch(logFile, { persistent: true });
 
   const shutdown = (): void => {
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     watcher.close().finally(() => process.exit(0));
     // Safety net â€” force exit if watcher.close() stalls
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     setTimeout(() => process.exit(0), 1000).unref();
   };
 

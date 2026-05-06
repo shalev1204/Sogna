@@ -1,4 +1,4 @@
-import { TeamsFact, TeamsAdaptiveCard } from './teamstypes.js';
+import { TeamsFact, TeamsAdaptiveCard } from './TeamsTypes.js';
 
 export const SCHEMA = 'http://adaptivecards.io/schemas/adaptive-card.json';
 export const VERSION = '1.4';

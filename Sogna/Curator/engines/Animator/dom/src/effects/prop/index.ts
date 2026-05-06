@@ -1,6 +1,6 @@
 import { SognaflowValue } from "../../value"
-import { SognaflowValueState } from "../sognaflowvaluestate"
-import { createEffect } from "../utils/create-effect"
+import { SognaflowValueState } from "../SognaflowValueState.js"
+import { createEffect } from "../utils/create-effect.js"
 
 export const PropEffect = /*@__PURE__*/ createEffect(
     (

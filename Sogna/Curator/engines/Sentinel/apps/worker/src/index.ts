@@ -15,7 +15,7 @@ async function bootstrapSentinel() {
     const worker = await Worker.create({
         workflowsPath: require.resolve('./workflows'),
         activities,
-        taskQueue: 'sogna-sentinel-queue',
+        taskQueue: 'Sogna-sentinel-queue',
     });
 
     console.log("[SENTINEL ENGINE] Seguridad Operativa al Máximo. Vigilando la Grid...");
@@ -24,6 +24,6 @@ async function bootstrapSentinel() {
 
 bootstrapSentinel().catch((err) => {
     console.error("[SENTINEL ENGINE FATAL ERROR]", err);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
 });

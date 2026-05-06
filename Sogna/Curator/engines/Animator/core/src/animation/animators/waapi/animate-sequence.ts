@@ -1,7 +1,7 @@
 import { AnimationPlaybackControls, GroupAnimationWithThen } from "sognaflow-dom"
-import { createAnimationsFromSequence } from "../../sequence/create"
-import { AnimationSequence, SequenceOptions } from "../../sequence/types"
-import { animateElements } from "./animate-elements"
+import { createAnimationsFromSequence } from "../../sequence/create.js"
+import { AnimationSequence, SequenceOptions } from "../../sequence/types.js"
+import { animateElements } from "./animate-elements.js"
 
 export function animateSequence(
     definition: AnimationSequence,

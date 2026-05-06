@@ -6,10 +6,10 @@ import {
     sognaflowValue,
     useWillChange,
 } from "../../../"
-import { pointerDown, pointerMove, render } from "../../../jest.setup"
+import { pointerDown, pointerMove, render } from "../../../jest.setup.js"
 import { WillChangesognaflowValue } from "../../../value/use-will-change/willchangesognaflowvalue"
-import { nextFrame } from "../../__tests__/utils"
-import { deferred, drag, dragFrame, MockDrag, Point, sleep } from "./utils"
+import { nextFrame } from "../../__tests__/utils.js"
+import { deferred, drag, dragFrame, MockDrag, Point, sleep } from "./utils.js"
 
 describe("drag", () => {
     test("onDragStart fires", async () => {

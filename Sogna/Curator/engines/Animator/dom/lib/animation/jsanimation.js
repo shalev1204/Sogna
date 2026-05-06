@@ -1,15 +1,15 @@
 import { clamp, invariant, millisecondsToSeconds, pipe, secondsToMilliseconds, } from "sognaflow-utils";
-import { Time as time } from "../frameloop/sync-time";
-import { ActiveAnimations as activeAnimations } from "../stats/animation-count";
+import { Time as time } from "../frameloop/sync-time.js";
+import { ActiveAnimations as activeAnimations } from "../stats/animation-count.js";
 import { Mix } from "../utils/mix";
-import { frameloopDriver } from "./drivers/frame";
-import { inertia } from "./generators/inertia";
-import { keyframes as keyframesGenerator } from "./generators/keyframes";
-import { calcGeneratorDuration } from "./generators/utils/calc-duration";
-import { getGeneratorVelocity } from "./generators/utils/velocity";
-import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final";
-import { replaceTransitionType } from "./utils/replace-transition-type";
-import { WithPromise } from "./utils/withpromise";
+import { frameloopDriver } from "./drivers/frame.js";
+import { inertia } from "./generators/inertia.js";
+import { keyframes as keyframesGenerator } from "./generators/keyframes.js";
+import { calcGeneratorDuration } from "./generators/utils/calc-duration.js";
+import { getGeneratorVelocity } from "./generators/utils/velocity.js";
+import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final.js";
+import { replaceTransitionType } from "./utils/replace-transition-type.js";
+import { WithPromise } from "./utils/withpromise.js";
 const percentToProgress = (percent) => percent / 100;
 export class JSAnimation extends WithPromise {
     constructor(options) {

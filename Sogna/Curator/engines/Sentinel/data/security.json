@@ -2,8 +2,8 @@
   "version": "1.0.0",
   "strict_security": {
     "trusted_scopes": [
-      "@sogna",
-      "@predatore",
+      "@Sogna",
+      "@Predatore",
       "@antigravity"
     ],
     "trusted_paths": [

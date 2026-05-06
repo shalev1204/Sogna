@@ -1,5 +1,5 @@
 import { Feature, frame, press, type VisualElement } from "sognaflow-dom"
-import { extractEventInfo } from "../events/event-info"
+import { extractEventInfo } from "../events/event-info.js"
 
 function handlePressEvent(
     node: VisualElement<Element>,

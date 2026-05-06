@@ -1,8 +1,8 @@
 import { sognaflowValue, stagger, Variants } from "sognaflow-dom"
 import { Fragment, Suspense, act, memo, useEffect, useState } from "react"
 import { frame, sognaflow, sognaflowConfig, usesognaflowValue, visualElementStore } from "../../"
-import { nextFrame } from "../../gestures/__tests__/utils"
-import { pointerDown, pointerEnter, pointerUp, render } from "../../jest.setup"
+import { nextFrame } from "../../gestures/__tests__/utils.js"
+import { pointerDown, pointerEnter, pointerUp, render } from "../../jest.setup.js"
 
 const sognaflowFragment = sognaflow.create(Fragment)
 

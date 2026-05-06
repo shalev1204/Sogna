@@ -1,5 +1,5 @@
 import { execa } from 'execa';
-import { Provider } from './provider.js';
+import { Provider } from './Provider.js';
 import chalk from 'chalk';
 import path from 'path';
 

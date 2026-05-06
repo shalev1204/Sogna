@@ -1,7 +1,7 @@
-import type { GroupAnimation } from "../animation/groupanimation";
-import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types";
-import { ViewTransitionOptions, ViewTransitionTarget, ViewTransitionTargetDefinition } from "./types";
-import "./types.global";
+import type { GroupAnimation } from "../animation/groupanimation.js";
+import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types.js";
+import { ViewTransitionOptions, ViewTransitionTarget, ViewTransitionTargetDefinition } from "./types.js";
+import "./types.global.js";
 export declare class ViewTransitionBuilder {
     private currentSubject;
     targets: Map<ViewTransitionTargetDefinition, ViewTransitionTarget>;

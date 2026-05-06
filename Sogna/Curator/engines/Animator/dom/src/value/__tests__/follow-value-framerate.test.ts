@@ -1,8 +1,8 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils"
-import { CreateSognaflowValue } from "../index"
-import { AttachSpring } from "../spring-value"
+import { CreateSognaflowValue } from "../index.js"
+import { AttachSpring } from "../spring-value.js"
 import { frameSteps, frameData } from "../../frameloop"
-import { time } from "../../frameloop/sync-time"
+import { time } from "../../frameloop/sync-time.js"
 
 /**
  * Process a single frame at the given timestamp, running all frame loop steps.

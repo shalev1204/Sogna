@@ -1,4 +1,4 @@
-import { StepNames } from "../frameloop/order"
+import { StepNames } from "../frameloop/order.js"
 
 export interface Summary {
     min: number

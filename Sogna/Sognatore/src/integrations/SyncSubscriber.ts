@@ -198,7 +198,7 @@ export class SyncSubscriber {
       clearInterval(this.pollInterval);
     }
     console.log('[sync-subscriber] Shutting down');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   }
 }

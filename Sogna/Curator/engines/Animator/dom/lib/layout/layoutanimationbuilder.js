@@ -1,11 +1,11 @@
-import { GroupAnimation } from "../animation/groupanimation";
+import { GroupAnimation } from "../animation/groupanimation.js";
 import { Frame as frame } from "../frameloop";
-import { copyBoxInto } from "../projection/geometry/copy";
-import { createBox } from "../projection/geometry/models";
-import { HTMLProjectionNode } from "../projection/node/htmlprojectionnode";
-import { HTMLVisualElement } from "../render/html/htmlvisualelement";
-import { visualElementStore } from "../render/store";
-import { ResolveElements as resolveElements } from "../utils/resolve-elements";
+import { copyBoxInto } from "../projection/geometry/copy.js";
+import { createBox } from "../projection/geometry/models.js";
+import { HTMLProjectionNode } from "../projection/node/htmlprojectionnode.js";
+import { HTMLVisualElement } from "../render/html/htmlvisualelement.js";
+import { visualElementStore } from "../render/store.js";
+import { ResolveElements as resolveElements } from "../utils/resolve-elements.js";
 const layoutSelector = "[data-layout], [data-layout-id]";
 const noop = () => { };
 function snapshotFromTarget(projection) {

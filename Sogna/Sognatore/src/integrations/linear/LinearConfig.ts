@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { LinearClientConfig, DEFAULT_STATUS_MAPPING } from './lineartypes.js';
-import { Hub } from '../../sentinel-sognatore/hub.js';
+import { LinearClientConfig, DEFAULT_STATUS_MAPPING } from './LinearTypes.js';
+import { Hub } from '../../Sentinel-Sognatore/Hub.js';
 
 /**
  * Minimal YAML parser for flat and one-level-nested key-value pairs.

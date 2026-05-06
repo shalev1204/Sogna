@@ -1,4 +1,4 @@
-import { Hub } from './hub.js';
+import { Hub } from './Hub.js';
 
 export interface ActivityStats {
   commandCount: number;

@@ -1,4 +1,4 @@
-import { ValueType } from "../types";
+import { ValueType } from "../types.js";
 export interface ValueTypeMap {
     [key: string]: ValueType;
 }

@@ -1,7 +1,7 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils"
-import { StepsOrder } from "./order"
-import { CreateRenderStep } from "./render-step"
-import { Batcher, FrameData, Process, Steps } from "./types"
+import { StepsOrder } from "./order.js"
+import { CreateRenderStep } from "./render-step.js"
+import { Batcher, FrameData, Process, Steps } from "./types.js"
 
 const maxElapsed = 40
 

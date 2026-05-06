@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { LazyContext } from "../../context/lazycontext"
+import { LazyContext } from "../../context/LazyContext.js"
 import { loadFeatures } from "../../sognaflow/features/load-features"
 import { FeatureBundle, LazyFeatureBundle } from "../../sognaflow/features/types"
-import { CreateVisualElement } from "../../render/types"
-import { LazyProps } from "./types"
+import { CreateVisualElement } from "../../render/types.js"
+import { LazyProps } from "./types.js"
 
 /**
  * Used in conjunction with the `m` component to reduce bundle size.

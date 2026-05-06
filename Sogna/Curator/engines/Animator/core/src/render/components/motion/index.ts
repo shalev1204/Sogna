@@ -1,1 +1,1 @@
-export * as sognaflow from "./namespace"
+export * as sognaflow from "./namespace.js"

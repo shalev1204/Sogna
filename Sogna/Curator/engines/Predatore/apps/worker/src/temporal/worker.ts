@@ -74,7 +74,7 @@ function showUsage(): void {
 function parseCliArgs(argv: string[]): CliArgs {
   if (argv.includes('--help') || argv.includes('-h') || argv.length === 0) {
     showUsage();
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   }
 
@@ -126,14 +126,14 @@ function parseCliArgs(argv: string[]): CliArgs {
   if (!webUrl || !repoPath) {
     console.error('Error: webUrl and repoPath are required');
     showUsage();
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   if (!taskQueue) {
     console.error('Error: --task-queue is required');
     showUsage();
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -174,7 +174,7 @@ interface WorkspaceResolution {
 }
 
 async function terminateExistingWorkflows(client: Client, workspaceName: string): Promise<string[]> {
-  const sessionPath = path.join('./workspaces', workspaceName, 'session.json');
+  const sessionPath = path.join('./workspaces.js', workspaceName, 'session.json');
 
   if (!(await fileExists(sessionPath))) {
     throw new Error(`Workspace not found: ${workspaceName}\n` + `Expected path: ${sessionPath}`);
@@ -227,7 +227,7 @@ async function resolveWorkspace(client: Client, args: CliArgs): Promise<Workspac
   }
 
   const workspace = args.resumeFromWorkspace;
-  const sessionPath = path.join('./workspaces', workspace, 'session.json');
+  const sessionPath = path.join('./workspaces.js', workspace, 'session.json');
   const workspaceExists = await fileExists(sessionPath);
 
   if (workspaceExists) {
@@ -244,7 +244,7 @@ async function resolveWorkspace(client: Client, args: CliArgs): Promise<Workspac
       console.error('ERROR: URL mismatch with workspace');
       console.error(`  Workspace URL: ${session.session.webUrl}`);
       console.error(`  Provided URL:  ${args.webUrl}`);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
 
@@ -259,7 +259,7 @@ async function resolveWorkspace(client: Client, args: CliArgs): Promise<Workspac
   if (!isValidWorkspaceName(workspace)) {
     console.error(`ERROR: Invalid workspace name: "${workspace}"`);
     console.error('  Must be 1-128 characters, alphanumeric/hyphens/underscores, starting with alphanumeric');
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -349,7 +349,7 @@ async function waitForWorkflowResult(
 
       if (workspace.isResume) {
         try {
-          const session = await readJson<SessionJson>(path.join('./workspaces', workspace.sessionId, 'session.json'));
+          const session = await readJson<SessionJson>(path.join('./workspaces.js', workspace.sessionId, 'session.json'));
           console.log(`Cumulative cost: $${session.metrics.total_cost_usd.toFixed(4)}`);
         } catch {
           // Non-fatal
@@ -359,7 +359,7 @@ async function waitForWorkflowResult(
   } catch (error) {
     clearInterval(progressInterval);
     console.error('\nPipeline failed:', error);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }
@@ -458,7 +458,7 @@ async function run(): Promise<void> {
 
 run().catch((err) => {
   console.error('Worker failed:', err);
-// @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(1);
 });
 

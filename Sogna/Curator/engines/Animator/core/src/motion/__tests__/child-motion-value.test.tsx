@@ -1,5 +1,5 @@
 import { frame, sognaflowValue } from "sognaflow-dom"
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 import { sognaflow } from "../../render/components/sognaflow"
 
 describe("child as sognaflow value", () => {

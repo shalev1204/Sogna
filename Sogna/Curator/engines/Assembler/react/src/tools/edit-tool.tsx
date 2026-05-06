@@ -1,12 +1,12 @@
 import React, { memo } from "react"
 import { motion } from "motion/react"
-import { TextShimmer } from "../components/text-shimmer"
-import type { TimelineStep, StepState } from "../types/timeline"
-import type { ToolSize } from "../types/tool-styles"
-import { useToolComplete } from "../hooks/use-tool-complete"
-import { FileExtIcon } from "../icons/file-ext-icon"
-import { ToolRowBase } from "./tool-row-base"
-import { mapToolInvocationToStep, mapToolStateToStepState } from "../utils/tool-adapters"
+import { TextShimmer } from "../components/text-shimmer.js"
+import type { TimelineStep, StepState } from "../types/timeline.js"
+import type { ToolSize } from "../types/tool-styles.js"
+import { useToolComplete } from "../hooks/use-tool-complete.js"
+import { FileExtIcon } from "../icons/file-ext-icon.js"
+import { ToolRowBase } from "./tool-row-base.js"
+import { mapToolInvocationToStep, mapToolStateToStepState } from "../utils/tool-adapters.js"
 
 export function EditToolDiffCard({
   step,

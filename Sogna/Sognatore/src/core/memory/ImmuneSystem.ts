@@ -1,4 +1,4 @@
-import { MemoryHub } from './memoryhub.js';
+import { MemoryHub } from './MemoryHub.js';
 
 export interface HealthReport {
   status: 'healthy' | 'warning' | 'critical';

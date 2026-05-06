@@ -1,5 +1,5 @@
 // ✅ SECURE VERSION - ROUND 8 (ENCRYPTED STORAGE)
-// @sogna: Refactored for training safety.
+// @Sogna: Refactored for training safety.
 
 const config = {
     // SAFE: High entropy strings are removed from the codebase.

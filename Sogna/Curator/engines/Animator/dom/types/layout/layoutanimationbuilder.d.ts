@@ -1,6 +1,6 @@
-import { GroupAnimation } from "../animation/groupanimation";
-import type { AnimationOptions } from "../animation/types";
-import { type ElementOrSelector } from "../utils/resolve-elements";
+import { GroupAnimation } from "../animation/groupanimation.js";
+import type { AnimationOptions } from "../animation/types.js";
+import { type ElementOrSelector } from "../utils/resolve-elements.js";
 type LayoutAnimationScope = Element | Document;
 type LayoutBuilderResolve = (animation: GroupAnimation) => void;
 type LayoutBuilderReject = (error: unknown) => void;

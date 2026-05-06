@@ -1,6 +1,6 @@
-import type { AnyResolvedKeyframe } from "../../animation/types"
-import { IsSognaflowValue } from "./is-sognaflow-value"
-import type { SognaflowValue } from "../index"
+import type { AnyResolvedKeyframe } from "../../animation/types.js"
+import { IsSognaflowValue } from "./is-sognaflow-value.js"
+import type { SognaflowValue } from "../index.js"
 
 /**
  * If the provided value is a sognaflowValue, this returns the actual value, otherwise just the value itself

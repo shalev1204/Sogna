@@ -1,6 +1,6 @@
 import { CancelFrame, Frame } from "."
-import { StepsOrder } from "./order"
-import { Process } from "./types"
+import { StepsOrder } from "./order.js"
+import { Process } from "./types.js"
 
 /**
  * @deprecated

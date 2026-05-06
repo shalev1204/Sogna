@@ -1,16 +1,16 @@
-import { complex } from "../../value/types/complex"
-import { mixNumber } from "../../utils/mix/number"
-import type { ScaleCorrectorDefinition } from "./types"
+import { Complex } from "../../value/types/complex"
+import { MixNumber } from "../../utils/mix/number.js"
+import type { ScaleCorrectorDefinition } from "./types.js"
 
 export const correctBoxShadow: ScaleCorrectorDefinition = {
     correct: (latest: string, { treeScale, projectionDelta }) => {
         const original = latest
-        const shadow = complex.parse(latest)
+        const shadow = Complex.parse(latest)
 
         // TODO: Doesn't support multiple shadows
         if (shadow.length > 5) return original
 
-        const template = complex.createTransformer(latest)
+        const template = Complex.createTransformer(latest)
         const offset = typeof shadow[0] !== "number" ? 1 : 0
 
         // Calculate the overall context scale
@@ -27,7 +27,7 @@ export const correctBoxShadow: ScaleCorrectorDefinition = {
          * We could potentially improve the outcome of this by incorporating the ratio between
          * the two scales.
          */
-        const averageScale = mixNumber(xScale, yScale, 0.5)
+        const averageScale = MixNumber(xScale, yScale, 0.5)
 
         // Blur
         if (typeof shadow[2 + offset] === "number")

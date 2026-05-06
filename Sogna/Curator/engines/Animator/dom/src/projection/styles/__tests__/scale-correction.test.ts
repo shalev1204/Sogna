@@ -1,5 +1,5 @@
-import { correctBorderRadius, pixelsToPercent } from "../scale-border-radius"
-import { correctBoxShadow } from "../scale-box-shadow"
+import { correctBorderRadius, pixelsToPercent } from "../scale-border-radius.js"
+import { correctBoxShadow } from "../scale-box-shadow.js"
 
 interface TestNode {
     target?: { x: { min: number; max: number }; y: { min: number; max: number } }

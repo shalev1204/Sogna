@@ -1,4 +1,4 @@
-import { AnimationPlaybackControls, TimelineWithFallback } from "./types"
+import { AnimationPlaybackControls, TimelineWithFallback } from "./types.js"
 
 type PropNames =
     | "time"

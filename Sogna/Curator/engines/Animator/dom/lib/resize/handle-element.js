@@ -1,5 +1,5 @@
-import { IsSVGElement } from "../utils/is-svg-element";
-import { ResolveElements } from "../utils/resolve-elements";
+import { IsSVGElement } from "../utils/is-svg-element.js";
+import { ResolveElements } from "../utils/resolve-elements.js";
 const resizeHandlers = new WeakMap();
 let observer;
 const getSize = (borderBoxAxis, svgAxis, htmlAxis) => (target, borderBoxSize) => {

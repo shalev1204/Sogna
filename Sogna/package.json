@@ -12,9 +12,9 @@
     "clean": "turbo run clean",
     "graph": "turbo run build --graph",
     "prepare": "cd .. && husky Sogna/Curator/engines/Sentinel/.husky",
-    "sogna": "node Curator/bin/sogna.js",
+    "Sogna": "node Curator/bin/Sogna.js",
     "dream": "node Curator/bin/dream.js",
-    "sognatore": "node Curator/bin/sognatore.js",
+    "Sognatore": "node Curator/bin/Sognatore.js",
     "sync": "node Curator/bin/memory_sync.js",
     "dev": "vite"
   },
@@ -25,10 +25,10 @@
   },
   "lint-staged": {
     "**/*.{ts,js}": [
-      "node Curator/engines/Sentinel/bin/sentinel-veto.js"
+      "node Curator/engines/Sentinel/bin/Sentinel-veto.js"
     ],
     "Curator/engines/Sentinel/.husky/*": [
-      "node Curator/engines/Sentinel/bin/sentinel-veto.js"
+      "node Curator/engines/Sentinel/bin/Sentinel-veto.js"
     ]
   },
   "devDependencies": {

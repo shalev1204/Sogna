@@ -1,7 +1,7 @@
 "use client"
 
 import { issognaflowValue, sognaflowValue } from "sognaflow-dom"
-import { useCombinesognaflowValues } from "./use-combine-values"
+import { useCombinesognaflowValues } from "./use-combine-values.js"
 
 /**
  * Combine multiple sognaflow values into a new one using a string template literal.

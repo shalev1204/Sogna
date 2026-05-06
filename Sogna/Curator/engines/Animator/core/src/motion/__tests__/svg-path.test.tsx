@@ -1,6 +1,6 @@
 import { createRef } from "react"
 import { sognaflow } from "../.."
-import { render } from "../../jest.setup"
+import { render } from "../../jest.setup.js"
 
 describe("SVG path", () => {
     test("accepts custom transition prop", async () => {
