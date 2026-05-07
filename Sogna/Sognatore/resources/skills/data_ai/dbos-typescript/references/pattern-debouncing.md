@@ -51,6 +51,7 @@ async function onInputChange(userId: string, userInput: string) {
 ```
 
 Key behaviors:
+
 - `debounceKey` groups executions that are debounced together (e.g., per user)
 - `debouncePeriodMs` delays execution by this amount from the last call
 - `debounceTimeoutMs` sets a max wait time since the first trigger
@@ -61,6 +62,7 @@ Key behaviors:
 Reference: [Debouncing Workflows](https://docs.dbos.dev/typescript/tutorials/workflow-tutorial#debouncing-workflows)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,6 +1,6 @@
 import type { Axis } from "sognaflow-utils";
 import type { ScaleCorrectorDefinition } from "./types.js";
-export declare function PixelsToPercent(pixels: number, axis: Axis): number;
+export declare function pixelsToPercent(pixels: number, axis: Axis): number;
 /**
  * We always correct borderRadius as a percentage rather than pixels to reduce paints.
  * For example, if you are projecting a box that is 100px wide with a 10px borderRadius
@@ -8,4 +8,4 @@ export declare function PixelsToPercent(pixels: number, axis: Axis): number;
  * borderRadius in both states. If we animate between the two in pixels that will trigger
  * a paint each time. If we animate between the two in percentage we'll avoid a paint.
  */
-export declare const CorrectBorderRadius: ScaleCorrectorDefinition;
+export declare const correctBorderRadius: ScaleCorrectorDefinition;

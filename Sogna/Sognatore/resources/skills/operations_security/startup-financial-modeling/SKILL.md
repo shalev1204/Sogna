@@ -8,7 +8,6 @@ id: skill-startup-financial-modeling
 owner: [[ops-security]]
 ---
 
-
 # Startup Financial Modeling
 
 Build comprehensive 3-5 year financial models with revenue projections, cost structures, cash flow analysis, and scenario planning for early-stage startups.
@@ -48,6 +47,7 @@ ARR = MRR × 12
 ```
 
 **Key Inputs:**
+
 - Monthly new customer acquisitions
 - Customer retention rates by month
 - Average revenue per user (ARPU)
@@ -85,6 +85,7 @@ ARR = MRR × 12
 ### Cash Flow Analysis
 
 **Components:**
+
 - Beginning cash balance
 - Cash inflows (revenue, fundraising)
 - Cash outflows (operating expenses, CapEx)
@@ -104,11 +105,13 @@ Monthly Burn = Monthly Revenue - Monthly Expenses
 Track headcount by department and role.
 
 **Key Metrics:**
+
 - Fully-loaded cost per employee
 - Revenue per employee
 - Headcount by department (% of total)
 
 **Typical Ratios (Early-Stage SaaS):**
+
 - Engineering: 40-50%
 - Sales & Marketing: 25-35%
 - G&A: 10-15%
@@ -119,6 +122,7 @@ Track headcount by department and role.
 ### Three-Scenario Framework
 
 **Conservative Scenario (P10):**
+
 - Slower customer acquisition
 - Lower pricing or conversion
 - Higher churn rates
@@ -126,12 +130,14 @@ Track headcount by department and role.
 - Used for cash management
 
 **Base Scenario (P50):**
+
 - Most likely outcomes
 - Realistic assumptions
 - Primary planning scenario
 - Used for board reporting
 
 **Optimistic Scenario (P90):**
+
 - Faster growth
 - Better unit economics
 - Lower churn
@@ -140,11 +146,13 @@ Track headcount by department and role.
 ### Time Horizon
 
 **Detailed Projections: 3 Years**
+
 - Monthly detail for Year 1
 - Monthly detail for Year 2
 - Quarterly detail for Year 3
 
 **High-Level Projections: Years 4-5**
+
 - Annual projections
 - Key metrics only
 - Support long-term planning
@@ -156,18 +164,21 @@ Track headcount by department and role.
 Clarify revenue model and pricing.
 
 **SaaS Model:**
+
 - Subscription pricing tiers
 - Annual vs. monthly contracts
 - Free trial or freemium approach
 - Expansion revenue strategy
 
 **Marketplace Model:**
+
 - GMV projections
 - Take rate (% of transactions)
 - Buyer and seller economics
 - Transaction frequency
 
 **Transactional Model:**
+
 - Transaction volume
 - Revenue per transaction
 - Frequency and seasonality
@@ -183,6 +194,7 @@ Define new customers acquired each month.
 Model customer retention over time.
 
 **Typical SaaS Retention:**
+
 - Month 1: 100%
 - Month 3: 90%
 - Month 6: 85%
@@ -197,10 +209,12 @@ For each cohort, calculate retained customers × ARPU for each month.
 Break down costs by category and behavior.
 
 **Fixed vs. Variable:**
+
 - Fixed: Salaries, software, rent
 - Variable: Hosting, payment processing, support
 
 **Scaling Assumptions:**
+
 - COGS as % of revenue
 - S&M as % of revenue (CAC payback)
 - R&D growth rate
@@ -211,6 +225,7 @@ Break down costs by category and behavior.
 Model headcount growth by role and department.
 
 **Inputs:**
+
 - Starting headcount
 - Hiring velocity by role
 - Fully-loaded compensation by role
@@ -229,9 +244,11 @@ Calculate monthly cash position and runway.
 **Monthly Cash Flow:**
 ```
 Beginning Cash
+
 + Revenue Collected (consider payment terms)
 - Operating Expenses Paid
 - CapEx
+
 = Ending Cash
 ```
 
@@ -249,22 +266,26 @@ Else:
 Track metrics that matter for stage.
 
 **Revenue Metrics:**
+
 - MRR / ARR
 - Growth rate (MoM, YoY)
 - Revenue by segment or cohort
 
 **Unit Economics:**
+
 - CAC (Customer Acquisition Cost)
 - LTV (Lifetime Value)
 - CAC Payback Period
 - LTV / CAC Ratio
 
 **Efficiency Metrics:**
+
 - Burn multiple (Net Burn / Net New ARR)
 - Magic number (Net New ARR / S&M Spend)
 - Rule of 40 (Growth % + Profit Margin %)
 
 **Cash Metrics:**
+
 - Monthly burn rate
 - Runway (months)
 - Cash efficiency
@@ -274,12 +295,14 @@ Track metrics that matter for stage.
 Create three scenarios with different assumptions.
 
 **Variable Assumptions:**
+
 - Customer acquisition rate (±30%)
 - Churn rate (±20%)
 - Average contract value (±15%)
 - CAC (±25%)
 
 **Fixed Assumptions:**
+
 - Pricing structure
 - Core operating expenses
 - Hiring plan (adjust timing, not roles)
@@ -289,12 +312,14 @@ Create three scenarios with different assumptions.
 ### SaaS Financial Model
 
 **Revenue Drivers:**
+
 - New MRR (customers × ARPU)
 - Expansion MRR (upsells)
 - Contraction MRR (downgrades)
 - Churned MRR (lost customers)
 
 **Key Ratios:**
+
 - Gross margin: 75-85%
 - S&M as % revenue: 40-60% (early stage)
 - CAC payback: < 12 months
@@ -310,11 +335,13 @@ Year 3: $8M ARR, 600 customers, $667K MRR by Dec
 ### Marketplace Financial Model
 
 **Revenue Drivers:**
+
 - GMV (Gross Merchandise Value)
 - Take rate (% of GMV)
 - Net revenue = GMV × Take rate
 
 **Key Ratios:**
+
 - Take rate: 10-30% depending on category
 - CAC for buyers vs. sellers
 - Contribution margin: 60-70%
@@ -329,12 +356,14 @@ Year 3: $60M GMV, 15% take rate = $9M revenue
 ### E-Commerce Financial Model
 
 **Revenue Drivers:**
+
 - Traffic (visitors)
 - Conversion rate
 - Average order value (AOV)
 - Purchase frequency
 
 **Key Ratios:**
+
 - Gross margin: 40-60%
 - Contribution margin: 20-35%
 - CAC payback: 3-6 months
@@ -342,12 +371,14 @@ Year 3: $60M GMV, 15% take rate = $9M revenue
 ### Services / Agency Financial Model
 
 **Revenue Drivers:**
+
 - Billable hours or projects
 - Hourly rate or project fee
 - Utilization rate
 - Team capacity
 
 **Key Ratios:**
+
 - Gross margin: 50-70%
 - Utilization: 70-85%
 - Revenue per employee
@@ -375,15 +406,18 @@ Post-Money: $25M
 Dilution: 20%
 
 Use of Funds:
+
 - Product Development: $2M (40%)
 - Sales & Marketing: $2M (40%)
 - G&A and Operations: $0.5M (10%)
 - Working Capital: $0.5M (10%)
+
 ```
 
 ### Milestone-Based Planning
 
 **Identify Key Milestones:**
+
 - Product launch
 - First $1M ARR
 - Break-even on CAC
@@ -395,26 +429,31 @@ Ensure runway to achieve next milestone + 6 months buffer.
 ## Common Pitfalls
 
 **Pitfall 1: Overly Optimistic Revenue**
+
 - New startups rarely hit aggressive projections
 - Use conservative customer acquisition assumptions
 - Model realistic churn rates
 
 **Pitfall 2: Underestimating Costs**
+
 - Add 20% buffer to expense estimates
 - Include fully-loaded compensation
 - Account for software and tools
 
 **Pitfall 3: Ignoring Cash Flow Timing**
+
 - Revenue ≠ cash (payment terms)
 - Expenses paid before revenue collected
 - Model cash conversion carefully
 
 **Pitfall 4: Static Headcount**
+
 - Hiring takes time (3-6 months to fill roles)
 - Ramp time for productivity (3-6 months)
 - Account for attrition (10-15% annually)
 
 **Pitfall 5: Not Scenario Planning**
+
 - Single scenario is never accurate
 - Always model conservative case
 - Plan for what you'll do if base case fails
@@ -422,6 +461,7 @@ Ensure runway to achieve next milestone + 6 months buffer.
 ## Model Validation
 
 **Sanity Checks:**
+
 - [ ] Revenue growth rate is achievable (3x in Year 2, 2x in Year 3)
 - [ ] Unit economics are realistic (LTV/CAC > 3, payback < 18 months)
 - [ ] Burn multiple is reasonable (< 2.0 in Year 2-3)
@@ -440,6 +480,7 @@ Share model with advisors or investors for feedback on assumptions.
 ### Reference Files
 
 For detailed model structures and advanced techniques:
+
 - **`references/model-templates.md`** - Complete financial model templates by business model
 - **`references/unit-economics.md`** - Deep dive on CAC, LTV, payback, and efficiency metrics
 - **`references/fundraising-scenarios.md`** - Modeling funding rounds and dilution
@@ -447,6 +488,7 @@ For detailed model structures and advanced techniques:
 ### Example Files
 
 Working financial models with formulas:
+
 - **`examples/saas-financial-model.md`** - Complete 3-year SaaS model with cohort analysis
 - **`examples/marketplace-model.md`** - Marketplace GMV and take rate projections
 - **`examples/scenario-analysis.md`** - Three-scenario framework with sensitivities
@@ -468,11 +510,13 @@ To create a startup financial model:
 For complete templates and formulas, reference the `references/` and `examples/` files.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

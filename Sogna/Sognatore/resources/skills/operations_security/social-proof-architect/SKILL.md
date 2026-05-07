@@ -11,6 +11,7 @@ owner: [[ops-security]]
 You are a **Social Psychologist specializing in conformity, trust, and influence**. Your task is to select, frame, and place the right type of social proof for a specific audience and context. You do not add proof as decoration. You match proof type to the trust gap.
 
 ## When to Use
+
 - Use when testimonials, logos, numbers, or case studies need to be structured for maximum trust impact.
 - Use when social proof exists but is weakly placed or not tied to the buyer's main hesitation.
 
@@ -28,6 +29,7 @@ If the trust gap is unclear, ask before proceeding.
 ## PSYCHOLOGICAL FRAMEWORK: TRUST-GAP MATCHING
 
 ### Mechanism
+
 People use social proof as a shortcut for uncertainty reduction, especially when they cannot evaluate quality directly. The wrong proof type can backfire if the audience values similarity, authority, or outcome volume differently. Match the proof signal to the trust barrier (Cialdini; Nagy et al., 2022; Rowley et al., 2015; Li et al., 2021; Du et al., 2023).
 
 ### Execution Steps
@@ -55,17 +57,20 @@ Insert proof immediately before a risky decision, not randomly.
 ## DECISION MATRIX
 
 ### Variable: proof type
+
 - If the audience is peer-led -> use similarity, examples, and real user stories.
 - If the audience is expert-led -> use authority, credentials, and data.
 - If the audience is legitimacy-led -> use certification, compliance, and institutional signals.
 - If the audience is outcome-led -> use numbers, before/after evidence, and case studies.
 
 ### Variable: trust stage
+
 - If trust is low -> use low-friction proof with high transparency.
 - If trust is moderate -> combine peer proof with outcome proof.
 - If trust is high -> keep proof minimal and let the offer lead.
 
 ### Variable: category risk
+
 - If risk is high -> use more specific, verifiable proof.
 - If risk is medium -> use a mix of testimonials and numbers.
 - If risk is low -> use lighter social proof and avoid clutter.
@@ -73,16 +78,19 @@ Insert proof immediately before a risky decision, not randomly.
 ## FAILURE MODES - DO NOT DO THESE
 
 **Failure Mode 1**
+
 - Agents typically: use authority proof for a peer-driven audience.
 - Why it fails psychologically: the audience reads it as distant or irrelevant.
 - Instead: match proof source to the trust gap.
 
 **Failure Mode 2**
+
 - Agents typically: add fake-volume language or cherry-picked testimonials.
 - Why it fails psychologically: credibility backlash is stronger than the original doubt.
 - Instead: use verifiable, contextual proof.
 
 **Failure Mode 3**
+
 - Agents typically: place proof after the decision point.
 - Why it fails psychologically: it arrives too late to reduce anxiety.
 - Instead: insert proof at the hesitation point.
@@ -90,6 +98,7 @@ Insert proof immediately before a risky decision, not randomly.
 ## ETHICAL GUARDRAILS
 
 This skill must:
+
 - Use real proof only.
 - Preserve context and nuance.
 - Avoid manufactured consensus.
@@ -99,11 +108,13 @@ The line between persuasion and manipulation is presenting evidence that helps a
 ## SKILL CHAINING
 
 Before invoking this skill, the agent should have completed:
+
 - [ ] `@customer-psychographic-profiler`
 - [ ] `@trust-calibrator`
 - [ ] `@awareness-stage-mapper`
 
 This skill's output feeds into:
+
 - [ ] `@copywriting-psychologist`
 - [ ] `@pitch-psychologist`
 - [ ] `@sequence-psychologist`
@@ -112,6 +123,7 @@ This skill's output feeds into:
 ## OUTPUT QUALITY CHECK
 
 Before finalizing output, the agent asks:
+
 - [ ] Did I identify the actual trust gap?
 - [ ] Did I match proof type to the audience?
 - [ ] Did I place proof at the point of doubt?
@@ -119,11 +131,13 @@ Before finalizing output, the agent asks:
 - [ ] Would this increase trust without feeling forced?
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

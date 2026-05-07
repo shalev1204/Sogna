@@ -12,38 +12,50 @@ version: 1.0.0
 Cada arquivo de sessão segue este formato:
 
 ```markdown
+
 # Sessão NNN — YYYY-MM-DD
+
 **Slug:** session-slug | **Duração:** ~Xmin | **Modelo:** claude-opus-4-6
 
 ## Tópicos
+
 - Assunto principal discutido
 - Outro assunto
 
 ## Decisões
+
 - Decisão tomada e por quê
 
 ## Tarefas Concluídas
+
 - [x] Tarefa que foi completada
 
 ## Tarefas Pendentes
+
 - [ ] Tarefa que ficou pendente (prioridade: alta|média|baixa)
 
 ## Arquivos Modificados
+
 - `path/to/file.py` — edit|write
 
 ## Descobertas
+
 - Insight técnico importante
 
 ## Erros Resolvidos
+
 - Descrição do erro encontrado
 
 ## Questões em Aberto
+
 - Pergunta que ficou sem resposta
 
 ## Dívida Técnica
+
 - Item de dívida técnica identificado
 
 ## Métricas
+
 - Input tokens: N
 - Output tokens: N
 - Cache tokens: N
@@ -59,37 +71,51 @@ Cada arquivo de sessão segue este formato:
 Máximo de 150 linhas. Formato:
 
 ```markdown
+
 # Contexto Ativo — Atualizado em YYYY-MM-DD HH:MM
 
 ## Projetos Ativos
+
 | Projeto | Status | Última Sessão | Próxima Ação |
 |---------|--------|---------------|--------------|
 | Nome    | ativo  | session-NNN   | Ação         |
 
 ## Tarefas Pendentes
+
 ### Alta Prioridade
+
 - [ ] Tarefa (desde session-NNN)
+
 ### Média Prioridade
+
 - [ ] Tarefa
+
 ### Baixa Prioridade
+
 - [ ] Tarefa
 
 ## Decisões Recentes
+
 - [session-NNN] Decisão tomada
 
 ## Bloqueadores Ativos
+
 - Bloqueador ou "Nenhum"
 
 ## Convenções Estabelecidas
+
 - Padrão adotado
 
 ## Últimas Sessões
+
 - session-NNN: Tópico 1, Tópico 2
+
 ```
 
 ## PROJECT_REGISTRY.md
 
 ```markdown
+
 # Registro de Projetos — Atualizado em YYYY-MM-DD HH:MM
 
 | Projeto | Status | Última Interação | Próximas Ações |
@@ -123,6 +149,7 @@ CREATE VIRTUAL TABLE session_search USING fts5(
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

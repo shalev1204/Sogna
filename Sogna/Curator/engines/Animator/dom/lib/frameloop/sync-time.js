@@ -1,5 +1,5 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils";
-import { FrameData } from "./frame.js";
+import { FrameDataInstance } from "./frame.js";
 let now;
 function clearTime() {
     now = undefined;
@@ -15,8 +15,8 @@ function clearTime() {
 export const Time = {
     now: () => {
         if (now === undefined) {
-            Time.set(FrameData.isProcessing || sognaflowGlobalConfig.useManualTiming
-                ? FrameData.timestamp
+            Time.set(FrameDataInstance.isProcessing || sognaflowGlobalConfig.useManualTiming
+                ? FrameDataInstance.timestamp
                 : performance.now());
         }
         return now;

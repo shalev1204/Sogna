@@ -8,7 +8,6 @@ id: skill-azure-containerregistry-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Container Registry SDK for Python
 
 Manage container images, artifacts, and repositories in Azure Container Registry.
@@ -105,6 +104,7 @@ for tag in client.list_tag_properties("my-image"):
 from azure.containerregistry import ArtifactTagOrder
 
 # Most recent first
+
 for tag in client.list_tag_properties(
     "my-image",
     order_by=ArtifactTagOrder.LAST_UPDATED_ON_DESCENDING
@@ -155,10 +155,13 @@ client.update_manifest_properties(
 ### Delete Manifest
 
 ```python
+
 # Delete by digest
+
 client.delete_manifest("my-image", "sha256:abc123...")
 
 # Delete by tag
+
 manifest = client.get_manifest_properties("my-image", "old-tag")
 client.delete_manifest("my-image", manifest.digest)
 ```
@@ -187,11 +190,13 @@ from azure.containerregistry import ContainerRegistryClient
 client = ContainerRegistryClient(endpoint, DefaultAzureCredential())
 
 # Download manifest
+
 manifest = client.download_manifest("my-image", "latest")
 print(f"Media type: {manifest.media_type}")
 print(f"Digest: {manifest.digest}")
 
 # Download blob
+
 blob = client.download_blob("my-image", "sha256:abc123...")
 with open("layer.tar.gz", "wb") as f:
     for chunk in blob:
@@ -255,14 +260,17 @@ for manifest in client.list_manifest_properties("my-image"):
 7. **Check manifest.tags** before deleting to avoid removing tagged images
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

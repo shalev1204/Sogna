@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
-import { Chronicler, KnowledgeFragment } from './Chronicler.js';
-import { ImmuneSystem, HealthReport } from './ImmuneSystem.js';
+import { Chronicler, type KnowledgeFragment } from './Chronicler.js';
+import { ImmuneSystem, type HealthReport } from './ImmuneSystem.js';
 import { NeuralLearning } from './NeuralLearning.js';
 
 export interface MemoryResult {
@@ -235,7 +235,7 @@ export class MemoryHub {
     const isRegex = query.startsWith('/') && query.endsWith('/');
     let regex: RegExp | null = null;
     if (isRegex) {
-      try { regex = new RegExp(query.slice(1, -1), 'i'); } catch (e) {}
+      try { regex = new RegExp(query.slice(1, -1), 'i'); } catch (e) { /* Invalid regex fallback */ }
     }
 
     await Promise.all(identityFiles.map(async (fileName: string) => {
@@ -266,7 +266,7 @@ export class MemoryHub {
     const isRegex = query.startsWith('/') && query.endsWith('/');
     let regex: RegExp | null = null;
     if (isRegex) {
-      try { regex = new RegExp(query.slice(1, -1), 'i'); } catch (e) {}
+      try { regex = new RegExp(query.slice(1, -1), 'i'); } catch (e) { /* Invalid regex fallback */ }
     }
 
     if (await fs.pathExists(vaccineDir)) {
@@ -570,7 +570,9 @@ export class MemoryHub {
           const raw = await fs.readFile(f.fileName, 'utf-8');
           content = raw.replace(/^---\r?\n[\s\S]+?\r?\n---/, '').trim();
         }
-      } catch (e) {}
+      } catch (e) {
+        // Silently handle JSON parse errors from non-standard npm audit output
+      }
 
       results.push({
         source: 'operational',

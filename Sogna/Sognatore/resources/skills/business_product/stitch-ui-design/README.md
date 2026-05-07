@@ -16,7 +16,9 @@ This skill provides comprehensive guidance for crafting precise, actionable prom
 ## What's Included
 
 ### SKILL.md
+
 Core prompting principles and techniques:
+
 - Specificity and detail requirements
 - Visual style definition
 - Multi-screen flow structuring
@@ -30,7 +32,9 @@ Core prompting principles and techniques:
 ### References
 
 #### prompt-examples.md
+
 Comprehensive library of effective Stitch prompts organized by category:
+
 - Landing pages
 - Mobile apps
 - Dashboards
@@ -42,7 +46,9 @@ Comprehensive library of effective Stitch prompts organized by category:
 Each example includes detailed component breakdowns, style specifications, and platform requirements.
 
 #### advanced-techniques.md
+
 Advanced strategies for production-ready designs:
+
 - Image-to-UI workflows
 - Design system integration
 - Responsive design strategies
@@ -55,6 +61,7 @@ Advanced strategies for production-ready designs:
 ## When to Use This Skill
 
 Use this skill when:
+
 - Creating UI designs in Google Stitch
 - Generating mobile or web app interfaces
 - Crafting effective Stitch prompts
@@ -81,11 +88,13 @@ Use this skill when:
 [Screen/Component Type] for [User/Context]
 
 Key Features:
+
 - [Feature 1 with specific details]
 - [Feature 2 with specific details]
 - [Feature 3 with specific details]
 
 Visual Style:
+
 - [Color scheme]
 - [Design aesthetic]
 - [Layout approach]
@@ -99,12 +108,14 @@ Platform: [Mobile/Web/Responsive]
 Dashboard for SaaS analytics platform
 
 Key Features:
+
 - Top metrics cards showing MRR, active users, churn rate
 - Line chart for revenue trends (last 30 days)
 - Recent activity feed with user actions
 - Quick action buttons for reports and exports
 
 Visual Style:
+
 - Dark mode with blue/purple gradient accents
 - Modern glassmorphic cards with subtle shadows
 - Clean data visualization with accessible colors
@@ -115,6 +126,7 @@ Platform: Responsive web (desktop-first)
 ## Best Practices
 
 ### Do's ✅
+
 - Provide specific component details
 - Define clear visual direction
 - Specify responsive behavior
@@ -125,6 +137,7 @@ Platform: Responsive web (desktop-first)
 - Consider accessibility from the start
 
 ### Don'ts ❌
+
 - Use vague descriptions ("nice website")
 - Omit visual style guidance
 - Forget platform specifications
@@ -135,12 +148,14 @@ Platform: Responsive web (desktop-first)
 ## Integration with Development
 
 ### Stitch → Figma → Code
+
 1. Generate UI in Stitch with detailed prompts
 2. Export to Figma for design system integration
 3. Hand off to developers with design specs
 4. Implement with production-ready code
 
 ### Stitch → HTML → Framework
+
 1. Generate and refine UI in Stitch
 2. Export HTML/CSS code
 3. Convert to React/Vue/Svelte components
@@ -172,6 +187,7 @@ Google Stitch is an experimental AI UI generator powered by Gemini 2.5 Flash tha
 **Note:** This skill is designed to help you create effective prompts for Stitch. The quality of your output depends on the specificity and clarity of your prompts. Use the templates and examples as starting points, then customize for your unique requirements.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

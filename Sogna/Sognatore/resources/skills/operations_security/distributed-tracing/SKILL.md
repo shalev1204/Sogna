@@ -8,7 +8,6 @@ id: skill-distributed-tracing
 owner: [[ops-security]]
 ---
 
-
 # Distributed Tracing
 
 Implement distributed tracing with Jaeger and Tempo for request flow visibility across microservices.
@@ -40,6 +39,7 @@ Track requests across distributed systems to understand latency, dependencies, a
 ## Distributed Tracing Concepts
 
 ### Trace Structure
+
 ```
 Trace (Request ID: abc123)
   ↓
@@ -52,6 +52,7 @@ Span (api-gateway) [80ms]
 ```
 
 ### Key Components
+
 - **Trace** - End-to-end request journey
 - **Span** - Single operation within a trace
 - **Context** - Metadata propagated between services
@@ -63,11 +64,14 @@ Span (api-gateway) [80ms]
 ### Kubernetes Deployment
 
 ```bash
+
 # Deploy Jaeger Operator
+
 kubectl create namespace observability
 kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.51.0/jaeger-operator.yaml -n observability
 
 # Deploy Jaeger instance
+
 kubectl apply -f - <<EOF
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
@@ -94,6 +98,7 @@ services:
   jaeger:
     image: jaegertracing/all-in-one:latest
     ports:
+
       - "5775:5775/udp"
       - "6831:6831/udp"
       - "6832:6832/udp"
@@ -102,8 +107,11 @@ services:
       - "14268:14268"  # Collector
       - "14250:14250"  # gRPC
       - "9411:9411"    # Zipkin
+
     environment:
+
       - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+
 ```
 
 **Reference:** See `references/jaeger-setup.md`
@@ -113,6 +121,7 @@ services:
 ### OpenTelemetry (Recommended)
 
 #### Python (Flask)
+
 ```python
 from opentelemetry import trace
 from opentelemetry.exporter.jaeger.thrift import JaegerExporter
@@ -123,6 +132,7 @@ from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from flask import Flask
 
 # Initialize tracer
+
 resource = Resource(attributes={SERVICE_NAME: "my-service"})
 provider = TracerProvider(resource=resource)
 processor = BatchSpanProcessor(JaegerExporter(
@@ -133,6 +143,7 @@ provider.add_span_processor(processor)
 trace.set_tracer_provider(provider)
 
 # Instrument Flask
+
 app = Flask(__name__)
 FlaskInstrumentor().instrument_app(app)
 
@@ -157,6 +168,7 @@ def fetch_users_from_db():
 ```
 
 #### Node.js (Express)
+
 ```javascript
 const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
 const { JaegerExporter } = require('@opentelemetry/exporter-jaeger');
@@ -203,6 +215,7 @@ app.get('/api/users', async (req, res) => {
 ```
 
 #### Go
+
 ```go
 package main
 
@@ -258,6 +271,7 @@ func getUsers(ctx context.Context) ([]User, error) {
 ## Context Propagation
 
 ### HTTP Headers
+
 ```
 traceparent: 00-0af7651916cd43dd8448eb211c80319c-b7ad6b7169203331-01
 tracestate: congo=t61rcWkgMzE
@@ -266,6 +280,7 @@ tracestate: congo=t61rcWkgMzE
 ### Propagation in HTTP Requests
 
 #### Python
+
 ```python
 from opentelemetry.propagate import inject
 
@@ -276,6 +291,7 @@ response = requests.get('http://downstream-service/api', headers=headers)
 ```
 
 #### Node.js
+
 ```javascript
 const { propagation } = require('@opentelemetry/api');
 
@@ -330,15 +346,23 @@ spec:
   template:
     spec:
       containers:
+
       - name: tempo
+
         image: grafana/tempo:latest
         args:
+
           - -config.file=/etc/tempo/tempo.yaml
+
         volumeMounts:
+
         - name: config
+
           mountPath: /etc/tempo
       volumes:
+
       - name: config
+
         configMap:
           name: tempo-config
 ```
@@ -348,26 +372,34 @@ spec:
 ## Sampling Strategies
 
 ### Probabilistic Sampling
+
 ```yaml
+
 # Sample 1% of traces
+
 sampler:
   type: probabilistic
   param: 0.01
 ```
 
 ### Rate Limiting Sampling
+
 ```yaml
+
 # Sample max 100 traces per second
+
 sampler:
   type: ratelimiting
   param: 100
 ```
 
 ### Adaptive Sampling
+
 ```python
 from opentelemetry.sdk.trace.sampling import ParentBased, TraceIdRatioBased
 
 # Sample based on trace ID (deterministic)
+
 sampler = ParentBased(root=TraceIdRatioBased(0.01))
 ```
 
@@ -393,6 +425,7 @@ tags.http.status_code >= 500
 ### Service Dependency Graph
 
 Jaeger automatically generates service dependency graphs showing:
+
 - Service relationships
 - Request rates
 - Error rates
@@ -414,6 +447,7 @@ Jaeger automatically generates service dependency graphs showing:
 ## Integration with Logging
 
 ### Correlated Logs
+
 ```python
 import logging
 from opentelemetry import trace
@@ -433,12 +467,14 @@ def process_request():
 ## Troubleshooting
 
 **No traces appearing:**
+
 - Check collector endpoint
 - Verify network connectivity
 - Check sampling configuration
 - Review application logs
 
 **High latency overhead:**
+
 - Reduce sampling rate
 - Use batch span processor
 - Check exporter configuration
@@ -456,11 +492,13 @@ def process_request():
 - `slo-implementation` - For latency SLOs
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -46,6 +46,7 @@ If your experience needs to access motion data from a device, you must provide c
 [![](https://devimages-cdn.apple.com/wwdc-services/images/119/5077B5B0-643B-4E31-9C5E-6E766326D3F3/5225_wide_250x141_1x.jpg) Measure health with motion ](https://developer.apple.com/videos/play/wwdc2021/10287)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

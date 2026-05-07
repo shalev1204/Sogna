@@ -12,12 +12,15 @@ version: 1.0.0
 ### Resource Naming
 
 ```
+
 # Good - Plural nouns
+
 GET /api/users
 GET /api/orders
 GET /api/products
 
 # Bad - Verbs or mixed conventions
+
 GET /api/getUser
 GET /api/user  (inconsistent singular)
 POST /api/createOrder
@@ -26,13 +29,18 @@ POST /api/createOrder
 ### Nested Resources
 
 ```
+
 # Shallow nesting (preferred)
+
 GET /api/users/{id}/orders
 GET /api/orders/{id}
 
 # Deep nesting (avoid)
+
 GET /api/users/{id}/orders/{orderId}/items/{itemId}/reviews
+
 # Better:
+
 GET /api/order-items/{id}/reviews
 ```
 
@@ -69,6 +77,7 @@ PUT /api/users/{id}
   → 404 Not Found (doesn't exist)
 
 # Must include ALL fields
+
 ```
 
 ### PATCH - Partial Update
@@ -94,20 +103,25 @@ DELETE /api/users/{id}
 ### Query Parameters
 
 ```
+
 # Filtering
+
 GET /api/users?status=active
 GET /api/users?role=admin&status=active
 
 # Sorting
+
 GET /api/users?sort=created_at
 GET /api/users?sort=-created_at  (descending)
 GET /api/users?sort=name,created_at
 
 # Searching
+
 GET /api/users?search=john
 GET /api/users?q=john
 
 # Field selection (sparse fieldsets)
+
 GET /api/users?fields=id,name,email
 ```
 
@@ -298,13 +312,17 @@ X-API-Key: your-api-key-here
 ### Cache Headers
 
 ```
+
 # Client caching
+
 Cache-Control: public, max-age=3600
 
 # No caching
+
 Cache-Control: no-cache, no-store, must-revalidate
 
 # Conditional requests
+
 ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 If-None-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 → 304 Not Modified
@@ -384,9 +402,11 @@ async def get_user(
     Retrieve user by ID.
 
     Returns full user profile including:
+
     - Basic information
     - Contact details
     - Account status
+
     """
     pass
 ```
@@ -415,6 +435,7 @@ async def detailed_health():
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

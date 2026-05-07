@@ -7,11 +7,11 @@ id: skill-hugging-face-cli
 owner: [[orchestrator]]
 ---
 
-
 Install by downloading the installer script first, reviewing it, and then running it locally. Example:
 `curl -LsSf https://hf.co/cli/install.sh -o /tmp/hf-install.sh && less /tmp/hf-install.sh && bash /tmp/hf-install.sh`
 
 ## When to Use
+
 Use this skill when you need the `hf` CLI for Hub authentication, downloads, uploads, repo management, or basic compute operations.
 
 The Hugging Face Hub CLI tool `hf` is available. IMPORTANT: The `hf` command replaces the deprecated `huggingface-cli` command.
@@ -189,6 +189,7 @@ Install by downloading the installer locally, reviewing it, and then running it.
 `curl -fsSL https://raw.githubusercontent.com/huggingface/hf-mount/main/install.sh -o /tmp/hf-mount-install.sh && less /tmp/hf-mount-install.sh && sh /tmp/hf-mount-install.sh`
 
 Some command examples:
+
 - `hf-mount start repo openai-community/gpt2 /tmp/gpt2` — mount a repo (read-only)
 - `hf-mount start --hf-token $HF_TOKEN bucket myuser/my-bucket /tmp/data` — mount a bucket (read-write)
 - `hf-mount status` / `hf-mount stop /tmp/data` — list or unmount
@@ -199,11 +200,13 @@ Some command examples:
 - Authenticate with `HF_TOKEN` env var (recommended) or with `--token`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

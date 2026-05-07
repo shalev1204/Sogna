@@ -8,7 +8,6 @@ id: skill-agent-framework-azure-ai-py
 owner: [[ops-security]]
 ---
 
-
 # Agent Framework Azure Hosted Agents
 
 Build persistent agents on Azure AI Foundry using the Microsoft Agent Framework Python SDK.
@@ -28,10 +27,13 @@ User Query → AzureAIAgentsProvider → Azure AI Agent Service (Persistent)
 ## Installation
 
 ```bash
+
 # Full framework (recommended)
+
 pip install agent-framework --pre
 
 # Or Azure-specific package only
+
 pip install agent-framework-azure-ai --pre
 ```
 
@@ -49,9 +51,11 @@ export BING_CONNECTION_ID="your-bing-connection-id"  # For web search
 from azure.identity.aio import AzureCliCredential, DefaultAzureCredential
 
 # Development
+
 credential = AzureCliCredential()
 
 # Production
+
 credential = DefaultAzureCredential()
 ```
 
@@ -258,19 +262,16 @@ from agent_framework import (
 from agent_framework.azure import AzureAIAgentsProvider
 from azure.identity.aio import AzureCliCredential
 
-
 def get_weather(
     location: Annotated[str, Field(description="City name")],
 ) -> str:
     """Get weather for a location."""
     return f"Weather in {location}: 72°F, sunny"
 
-
 class AnalysisResult(BaseModel):
     summary: str
     key_findings: list[str]
     confidence: float
-
 
 async def main():
     async with (
@@ -317,7 +318,6 @@ async def main():
         analysis = AnalysisResult.model_validate_json(result.text)
         print(f"\nConfidence: {analysis.confidence}")
 
-
 if __name__ == "__main__":
     asyncio.run(main())
 ```
@@ -338,14 +338,17 @@ if __name__ == "__main__":
 - references/advanced.md: OpenAPI, citations, structured outputs
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

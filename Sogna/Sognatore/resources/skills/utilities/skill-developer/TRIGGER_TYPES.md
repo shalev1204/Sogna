@@ -76,11 +76,13 @@ Action-based activation where user describes what they want to do rather than th
 ### Examples
 
 **Database Work:**
+
 - User prompt: "add user tracking feature"
 - Matches: `(add).*?(feature)`
 - Activates: `database-verification`, `error-tracking`
 
 **Component Creation:**
+
 - User prompt: "create a dashboard widget"
 - Matches: `(create).*?(component)` (if component in pattern)
 - Activates: `frontend-dev-guidelines`
@@ -97,19 +99,25 @@ Action-based activation where user describes what they want to do rather than th
 ### Common Pattern Examples
 
 ```regex
+
 # Database Work
+
 (add|create|implement).*?(user|login|auth|feature)
 
 # Explanations
+
 (how does|explain|what is|describe).*?
 
 # Frontend Work
+
 (create|add|make|build).*?(component|UI|page|modal|dialog)
 
 # Error Handling
+
 (fix|handle|catch|debug).*?(error|exception|bug)
 
 # Workflow Operations
+
 (create|add|modify).*?(workflow|step|branch|condition)
 ```
 
@@ -166,26 +174,32 @@ Domain/area-specific activation based on file location in the project.
 ### Common Path Patterns
 
 ```glob
+
 # Frontend
+
 frontend/src/**/*.tsx        # All React components
 frontend/src/**/*.ts         # All TypeScript files
 frontend/src/components/**   # Only components directory
 
 # Backend Services
+
 form/src/**/*.ts            # Form service
 email/src/**/*.ts           # Email service
 users/src/**/*.ts           # Users service
 
 # Database
+
 **/schema.prisma            # Prisma schema (anywhere)
 **/migrations/**/*.sql      # Migration files
 database/src/**/*.ts        # Database scripts
 
 # Workflows
+
 form/src/workflow/**/*.ts              # Workflow engine
 form/src/workflow-definitions/**/*.json # Workflow definitions
 
 # Test Exclusions
+
 **/*.test.ts                # TypeScript tests
 **/*.test.tsx               # React component tests
 **/*.spec.ts                # Spec files
@@ -219,11 +233,13 @@ Technology-specific activation based on what the code imports or uses (Prisma, c
 ### Examples
 
 **Prisma Detection:**
+
 - File contains: `import { PrismaService } from '@project/database'`
 - Matches: `import.*[Pp]risma`
 - Activates: `database-verification`
 
 **Controller Detection:**
+
 - File contains: `export class UserController {`
 - Matches: `export class.*Controller`
 - Activates: `error-tracking`
@@ -239,7 +255,9 @@ Technology-specific activation based on what the code imports or uses (Prisma, c
 ### Common Content Patterns
 
 ```regex
+
 # Prisma/Database
+
 import.*[Pp]risma                # Prisma imports
 PrismaService                    # PrismaService usage
 prisma\.                         # prisma.something
@@ -249,16 +267,19 @@ prisma\.                         # prisma.something
 \.delete\(
 
 # Controllers/Routes
+
 export class.*Controller         # Controller classes
 router\.                         # Express router
 app\.(get|post|put|delete|patch) # Express app routes
 
 # Error Handling
+
 try\s*\{                        # Try blocks
 catch\s*\(                      # Catch blocks
 throw new                        # Throw statements
 
 # React/Components
+
 export.*React\.FC               # React functional components
 export default function.*       # Default function exports
 useState|useEffect              # React hooks
@@ -269,6 +290,7 @@ useState|useEffect              # React hooks
 ## Best Practices Summary
 
 ### DO:
+
 ✅ Use specific, unambiguous keywords
 ✅ Test all patterns with real examples
 ✅ Include common variations
@@ -278,6 +300,7 @@ useState|useEffect              # React hooks
 ✅ Make file path patterns narrow and specific
 
 ### DON'T:
+
 ❌ Use overly generic keywords ("system", "work")
 ❌ Make intent patterns too broad (false positives)
 ❌ Make patterns too specific (false negatives)
@@ -307,11 +330,13 @@ EOF
 ---
 
 **Related Files:**
+
 - [SKILL.md](SKILL.md) - Main skill guide
 - [SKILL_RULES_REFERENCE.md](SKILL_RULES_REFERENCE.md) - Complete skill-rules.json schema
 - [PATTERNS_LIBRARY.md](PATTERNS_LIBRARY.md) - Ready-to-use pattern library
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

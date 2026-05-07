@@ -12,17 +12,21 @@ This document contains advanced PDF processing features, detailed examples, and 
 ## pypdfium2 Library (Apache/BSD License)
 
 ### Overview
+
 pypdfium2 is a Python binding for PDFium (Chromium's PDF library). It's excellent for fast PDF rendering, image generation, and serves as a PyMuPDF replacement.
 
 ### Render PDF to Images
+
 ```python
 import pypdfium2 as pdfium
 from PIL import Image
 
 # Load PDF
+
 pdf = pdfium.PdfDocument("document.pdf")
 
 # Render page to image
+
 page = pdf[0]  # First page
 bitmap = page.render(
     scale=2.0,  # Higher resolution
@@ -30,10 +34,12 @@ bitmap = page.render(
 )
 
 # Convert to PIL Image
+
 img = bitmap.to_pil()
 img.save("page_1.png", "PNG")
 
 # Process multiple pages
+
 for i, page in enumerate(pdf):
     bitmap = page.render(scale=1.5)
     img = bitmap.to_pil()
@@ -41,6 +47,7 @@ for i, page in enumerate(pdf):
 ```
 
 ### Extract Text with pypdfium2
+
 ```python
 import pypdfium2 as pdfium
 
@@ -53,6 +60,7 @@ for i, page in enumerate(pdf):
 ## JavaScript Libraries
 
 ### pdf-lib (#### Load and Manipulate Existing PDF
+
 ```javascript
 import { PDFDocument } from 'pdf-lib';
 import fs from 'fs';
@@ -81,6 +89,7 @@ async function manipulatePDF() {
 ```
 
 #### Create Complex PDFs from Scratch
+
 ```javascript
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import fs from 'fs';
@@ -142,6 +151,7 @@ async function createPDF() {
 ```
 
 #### Advanced Merge and Split Operations
+
 ```javascript
 import { PDFDocument } from 'pdf-lib';
 import fs from 'fs';
@@ -175,6 +185,7 @@ async function mergePDFs() {
 PDF.js is Mozilla's JavaScript library for rendering PDFs in the browser.
 
 #### Basic PDF Loading and Rendering
+
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -209,6 +220,7 @@ async function renderPDF() {
 ```
 
 #### Extract Text with Coordinates
+
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -245,6 +257,7 @@ async function extractText() {
 ```
 
 #### Extract Annotations and Forms
+
 ```javascript
 import * as pdfjsLib from 'pdfjs-dist';
 
@@ -270,76 +283,106 @@ async function extractAnnotations() {
 ### poppler-utils Advanced Features
 
 #### Extract Text with Bounding Box Coordinates
+
 ```bash
+
 # Extract text with bounding box coordinates (essential for structured data)
+
 pdftotext -bbox-layout document.pdf output.xml
 
 # The XML output contains precise coordinates for each text element
+
 ```
 
 #### Advanced Image Conversion
+
 ```bash
+
 # Convert to PNG images with specific resolution
+
 pdftoppm -png -r 300 document.pdf output_prefix
 
 # Convert specific page range with high resolution
+
 pdftoppm -png -r 600 -f 1 -l 3 document.pdf high_res_pages
 
 # Convert to JPEG with quality setting
+
 pdftoppm -jpeg -jpegopt quality=85 -r 200 document.pdf jpeg_output
 ```
 
 #### Extract Embedded Images
+
 ```bash
+
 # Extract all embedded images with metadata
+
 pdfimages -j -p document.pdf page_images
 
 # List image info without extracting
+
 pdfimages -list document.pdf
 
 # Extract images in their original format
+
 pdfimages -all document.pdf images/img
 ```
 
 ### qpdf Advanced Features
 
 #### Complex Page Manipulation
+
 ```bash
+
 # Split PDF into groups of pages
+
 qpdf --split-pages=3 input.pdf output_group_%02d.pdf
 
 # Extract specific pages with complex ranges
+
 qpdf input.pdf --pages input.pdf 1,3-5,8,10-end -- extracted.pdf
 
 # Merge specific pages from multiple PDFs
+
 qpdf --empty --pages doc1.pdf 1-3 doc2.pdf 5-7 doc3.pdf 2,4 -- combined.pdf
 ```
 
 #### PDF Optimization and Repair
+
 ```bash
+
 # Optimize PDF for web (linearize for streaming)
+
 qpdf --linearize input.pdf optimized.pdf
 
 # Remove unused objects and compress
+
 qpdf --optimize-level=all input.pdf compressed.pdf
 
 # Attempt to repair corrupted PDF structure
+
 qpdf --check input.pdf
 qpdf --fix-qdf damaged.pdf repaired.pdf
 
 # Show detailed PDF structure for debugging
+
 qpdf --show-all-pages input.pdf > structure.txt
 ```
 
 #### Advanced Encryption
+
 ```bash
+
 # Add password protection with specific permissions
+
 qpdf --encrypt user_pass owner_pass 256 --print=none --modify=none -- input.pdf encrypted.pdf
 
 # Check encryption status
+
 qpdf --show-encryption encrypted.pdf
 
 # Remove password protection (requires password)
+
 qpdf --password=secret123 --decrypt encrypted.pdf decrypted.pdf
 ```
 
@@ -348,6 +391,7 @@ qpdf --password=secret123 --decrypt encrypted.pdf decrypted.pdf
 ### pdfplumber Advanced Features
 
 #### Extract Text with Precise Coordinates
+
 ```python
 import pdfplumber
 
@@ -364,6 +408,7 @@ with pdfplumber.open("document.pdf") as pdf:
 ```
 
 #### Advanced Table Extraction with Custom Settings
+
 ```python
 import pdfplumber
 import pandas as pd
@@ -388,12 +433,14 @@ with pdfplumber.open("complex_table.pdf") as pdf:
 ### reportlab Advanced Features
 
 #### Create Professional Reports with Tables
+
 ```python
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 
 # Sample data
+
 data = [
     ['Product', 'Q1', 'Q2', 'Q3', 'Q4'],
     ['Widgets', '120', '135', '142', '158'],
@@ -401,15 +448,18 @@ data = [
 ]
 
 # Create PDF with table
+
 doc = SimpleDocTemplate("report.pdf")
 elements = []
 
 # Add title
+
 styles = getSampleStyleSheet()
 title = Paragraph("Quarterly Sales Report", styles['Title'])
 elements.append(title)
 
 # Add table with advanced styling
+
 table = Table(data)
 table.setStyle(TableStyle([
     ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
@@ -431,12 +481,16 @@ doc.build(elements)
 ### Extract Figures/Images from PDF
 
 #### Method 1: Using pdfimages (fastest)
+
 ```bash
+
 # Extract all images with original quality
+
 pdfimages -all document.pdf images/img
 ```
 
 #### Method 2: Using pypdfium2 + Image Processing
+
 ```python
 import pypdfium2 as pdfium
 from PIL import Image
@@ -464,6 +518,7 @@ def extract_figures(pdf_path, output_dir):
 ```
 
 ### Batch PDF Processing with Error Handling
+
 ```python
 import os
 import glob
@@ -510,6 +565,7 @@ def batch_process_pdfs(input_dir, operation='merge'):
 ```
 
 ### Advanced PDF Cropping
+
 ```python
 from pypdf import PdfWriter, PdfReader
 
@@ -517,6 +573,7 @@ reader = PdfReader("input.pdf")
 writer = PdfWriter()
 
 # Crop page (left, bottom, right, top in points)
+
 page = reader.pages[0]
 page.mediabox.left = 50
 page.mediabox.bottom = 50
@@ -531,26 +588,33 @@ with open("cropped.pdf", "wb") as output:
 ## Performance Optimization Tips
 
 ### 1. For Large PDFs
+
 - Use streaming approaches instead of loading entire PDF in memory
 - Use `qpdf --split-pages` for splitting large files
 - Process pages individually with pypdfium2
 
 ### 2. For Text Extraction
+
 - `pdftotext -bbox-layout` is fastest for plain text extraction
 - Use pdfplumber for structured data and tables
 - Avoid `pypdf.extract_text()` for very large documents
 
 ### 3. For Image Extraction
+
 - `pdfimages` is much faster than rendering pages
 - Use low resolution for previews, high resolution for final output
 
 ### 4. For Form Filling
+
 - pdf-lib maintains form structure better than most alternatives
 - Pre-validate form fields before processing
 
 ### 5. Memory Management
+
 ```python
+
 # Process PDFs in chunks
+
 def process_large_pdf(pdf_path, chunk_size=10):
     reader = PdfReader(pdf_path)
     total_pages = len(reader.pages)
@@ -570,8 +634,11 @@ def process_large_pdf(pdf_path, chunk_size=10):
 ## Troubleshooting Common Issues
 
 ### Encrypted PDFs
+
 ```python
+
 # Handle password-protected PDFs
+
 from pypdf import PdfReader
 
 try:
@@ -583,15 +650,21 @@ except Exception as e:
 ```
 
 ### Corrupted PDFs
+
 ```bash
+
 # Use qpdf to repair
+
 qpdf --check corrupted.pdf
 qpdf --replace-input corrupted.pdf
 ```
 
 ### Text Extraction Issues
+
 ```python
+
 # Fallback to OCR for scanned PDFs
+
 import pytesseract
 from pdf2image import convert_from_path
 
@@ -604,6 +677,7 @@ def extract_text_with_ocr(pdf_path):
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

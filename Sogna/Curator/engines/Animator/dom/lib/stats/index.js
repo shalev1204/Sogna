@@ -1,5 +1,5 @@
-import { CancelFrame, Frame, FrameData } from "../frameloop";
-import { ActiveAnimations as activeAnimations } from "./animation-count.js";
+import { CancelFrame, Frame, FrameDataInstance } from "../frameloop";
+import { activeAnimations } from "./animation-count.js";
 import { StatsBuffer } from "./buffer.js";
 function Record() {
     const { value } = StatsBuffer;
@@ -7,7 +7,7 @@ function Record() {
         CancelFrame(Record);
         return;
     }
-    value.frameloop.rate.push(FrameData.delta);
+    value.frameloop.rate.push(FrameDataInstance.delta);
     value.animations.mainThread.push(activeAnimations.mainThread);
     value.animations.waapi.push(activeAnimations.waapi);
     value.animations.layout.push(activeAnimations.layout);
@@ -112,4 +112,5 @@ export function RecordStats() {
     Frame.postRender(Record, true);
     return ReportStats;
 }
+export const recordStats = RecordStats;
 //# sourceMappingURL=index.js.map

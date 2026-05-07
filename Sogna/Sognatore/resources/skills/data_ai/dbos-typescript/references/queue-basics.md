@@ -64,6 +64,7 @@ Queues process workflows in FIFO order. All queues should be created before `DBO
 Reference: [DBOS Queues](https://docs.dbos.dev/typescript/tutorials/queue-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

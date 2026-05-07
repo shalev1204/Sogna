@@ -7,7 +7,6 @@ id: skill-odoo-purchase-workflow
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Purchase Workflow
 
 ## Overview
@@ -107,6 +106,7 @@ based on the ordered quantity for this vendor.
 - The **2-level approval** is a binary threshold; more complex approval matrices (department-based, multi-tier) require custom development or the Approvals app.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

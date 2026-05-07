@@ -1,4 +1,4 @@
-import { createsognaflowComponent, sognaflowComponentOptions } from "../../../sognaflow"
+import { createsognaflowComponent, sognaflowComponentOptions } from "../../../motion"
 import { DOMsognaflowComponents } from "../../dom/types.js"
 
 export function createMinimalsognaflowComponent<

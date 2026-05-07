@@ -6,11 +6,13 @@ version: 1.0.0
 ---
 
 <!-- Updated: 2026-02-07 -->
+
 # Schema.org Types: Status & Recommendations (February 2026)
 
 **Schema.org Version:** 29.4 (December 8, 2025)
 
 ## Format Preference
+
 Always use **JSON-LD** (`<script type="application/ld+json">`).
 Google's documentation explicitly recommends JSON-LD over Microdata and RDFa.
 
@@ -125,6 +127,7 @@ For any schema block, verify:
 - [Schema.org Validator](https://validator.schema.org/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

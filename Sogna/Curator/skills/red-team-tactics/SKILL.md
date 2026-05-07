@@ -11,7 +11,6 @@ id: skill-red-team-tactics
 owner: [[orchestrator]]
 ---
 
-
 # Red Team Tactics
 
 > Adversary simulation principles based on MITRE ATT&CK framework.
@@ -161,6 +160,7 @@ LATERAL MOVEMENT → COLLECTION → C2 → EXFILTRATION → IMPACT
 ### Attack Narrative
 
 Document the full attack chain:
+
 1. How initial access was gained
 2. What techniques were used
 3. What objectives were achieved
@@ -169,6 +169,7 @@ Document the full attack chain:
 ### Detection Gaps
 
 For each successful technique:
+
 - What should have detected it?
 - Why didn't detection work?
 - How to improve detection

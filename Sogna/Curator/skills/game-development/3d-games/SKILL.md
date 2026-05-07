@@ -6,7 +6,6 @@ id: skill-3d-games
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # 3D Game Development
 
 > Principles for 3D game systems.
@@ -18,10 +17,12 @@ owner: [[prod-pm]], [[game-developer]]
 ### Stages
 
 ```
+
 1. Vertex Processing → Transform geometry
 2. Rasterization → Convert to pixels
 3. Fragment Processing → Color pixels
 4. Output → To screen
+
 ```
 
 ### Optimization Principles

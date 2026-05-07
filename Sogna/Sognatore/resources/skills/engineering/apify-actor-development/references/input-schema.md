@@ -73,6 +73,7 @@ The input schema defines the input parameters for an Actor. It's a JSON object c
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

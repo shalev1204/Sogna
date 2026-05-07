@@ -11,7 +11,6 @@ id: skill-viboscope
 owner: [[orchestrator]]
 ---
 
-
 # Viboscope
 
 ## Overview
@@ -37,6 +36,7 @@ Save to your platform's skills directory.
 ### Step 2: Build Profile
 
 The skill guides a 5-minute onboarding that builds a psychological profile using:
+
 - AI assistant portrait (fastest — 2 min for 90%+ profile)
 - 5 validated questionnaires (Big Five, Values, Attachment, Conflict, Work Style)
 - Context scan from workspace files
@@ -66,11 +66,13 @@ When someone opens it with their AI agent, both see a compatibility breakdown.
 - API: https://viboscope.com/api/v1
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

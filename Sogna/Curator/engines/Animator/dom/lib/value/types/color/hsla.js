@@ -1,4 +1,4 @@
-import { Alpha as AlphaType } from "../numbers";
+import { Alpha as alphaType } from "../numbers";
 import { Percent } from "../numbers/units.js";
 import { sanitize } from "../utils/sanitize.js";
 import { isColorString, splitColor } from "./utils.js";
@@ -13,7 +13,7 @@ export const Hsla = {
             ", " +
             Percent.transform(sanitize(lightness)) +
             ", " +
-            sanitize(AlphaType.transform(alpha)) +
+            sanitize(alphaType.transform(alpha)) +
             ")");
     },
 };

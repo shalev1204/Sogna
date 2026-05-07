@@ -6,6 +6,7 @@ version: 1.0.0
 ---
 
 # 專案實作紀錄：{專案名稱}
+
 * **📅 日期**：YYYY-MM-DD
 * **🏷️ 標籤**：`#Project` `#DevLog`
 
@@ -15,6 +16,7 @@ version: 1.0.0
 > （簡述本次完成了什麼核心任務，例如：「完成 auto-video-editor 的 Google Colab 環境測試」）
 
 ### 🛠️ 執行細節與變更
+
 * **Git Commits**：(若有請列出)
 * **核心檔案異動**：
   * 📄 `路徑/檔名`：變更說明。
@@ -22,14 +24,17 @@ version: 1.0.0
   * (記錄關鍵邏輯或架構變動)
 
 ### � 問題與解法 (Troubleshooting)
+
 > 🐛 **遇到困難**：(如 API 報錯、套件衝突)
 > 💡 **解決方案**：(最終修復方式，留下關鍵指令)
 
 ### ⏭️ 下一步計畫 (Next Steps)
+
 - [ ] (具體的待辦事項 1)
 - [ ] (具體的待辦事項 2)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

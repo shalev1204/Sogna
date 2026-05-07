@@ -9,7 +9,6 @@ id: skill-writing-skills
 owner: [[orchestrator]]
 ---
 
-
 # Writing Skills (Excellence)
 
 Dispatcher for skill creation excellence. Use the decision tree below to find the right template and standards.
@@ -49,6 +48,7 @@ Dispatcher for skill creation excellence. Use the decision tree below to find th
 - [Pattern Skill](references/templates/pattern.md) (Design Patterns)
 
 ## When to Use
+
 - Creating a NEW skill from scratch
 - Improving an EXISTING skill that agents ignore
 - Debugging why a skill isn't being triggered
@@ -76,8 +76,10 @@ metadata:
 # My Technique
 
 ## When to Use
+
 - [Symptom A]
 - [Error message]
+
 ```
 
 ## Common Mistakes
@@ -124,11 +126,13 @@ touch ~/.config/opencode/skills/my-skill/references/core/README.md
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

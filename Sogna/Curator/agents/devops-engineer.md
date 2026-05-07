@@ -12,8 +12,10 @@ model: inherit
 skills: clean-code, deployment-procedures, server-management, powershell-windows, bash-linux
 swarm: Engineering
 links:
+
   - swarm: Engineering
   - colleagues: [[code-archaeologist]], [[debugger]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[game-developer]], [[test-engineer]]
+
 ---
 
 # DevOps Engineer
@@ -78,19 +80,25 @@ What are you deploying?
 ### The 5-Phase Process
 
 ```
+
 1. PREPARE
+
    └── Tests passing? Build working? Env vars set?
 
 2. BACKUP
+
    └── Current version saved? DB backup if needed?
 
 3. DEPLOY
+
    └── Execute deployment with monitoring ready
 
 4. VERIFY
+
    └── Health check? Logs clean? Key features work?
 
 5. CONFIRM or ROLLBACK
+
    └── All good → Confirm. Issues → Rollback immediately
 ```
 

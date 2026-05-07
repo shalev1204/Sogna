@@ -12,6 +12,7 @@ version: 1.0.0
 Use filters to format variables: `{{variable|filter}}`.
 
 ## Text Formatting
+
 - `markdown`: Convert HTML to Markdown.
 - `strip_tags`: Remove HTML tags.
 - `trim`: Remove whitespace.
@@ -33,21 +34,25 @@ Use filters to format variables: `{{variable|filter}}`.
 - `callout`: Format as callout block.
 
 ## Dates
+
 - `date:"format"`: Format date (e.g., `YYYY-MM-DD`).
 - `date_modify:"+1 day"`: Modify date.
 - `duration`: Format duration.
 
 ## Numbers
+
 - `calc`: Perform calculations.
 - `length`: Get length of string/array.
 - `round`: Round numbers.
 
 ## HTML Processing
+
 - `remove_html`: Remove HTML tags.
 - `remove_attr`: Remove attributes.
 - `strip_attr`: Strip specific attributes.
 
 ## Arrays and Objects
+
 - `map`: Transform array items (e.g., `map:item =>> item.text`).
 - `join:"separator"`: Join array items.
 - `split:"separator"`: Split string into array.
@@ -58,6 +63,7 @@ Use filters to format variables: `{{variable|filter}}`.
 - `template:"format"`: Format items using a template string.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

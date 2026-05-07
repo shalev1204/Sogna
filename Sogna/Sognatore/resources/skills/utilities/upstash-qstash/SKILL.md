@@ -9,7 +9,6 @@ id: skill-upstash-qstash
 owner: [[orchestrator]]
 ---
 
-
 # Upstash QStash
 
 Upstash QStash expert for serverless message queues, scheduled jobs, and
@@ -284,6 +283,7 @@ Situation: Endpoint accepts any POST request. Attacker discovers your callback U
 Fake messages flood your system. Malicious payloads processed as trusted.
 
 Symptoms:
+
 - No Receiver import in webhook handler
 - Missing upstash-signature header check
 - Processing request before verification
@@ -296,6 +296,7 @@ and potential data manipulation.
 Recommended fix:
 
 # Always verify signatures with both keys:
+
 ```typescript
 import { Receiver } from '@upstash/qstash';
 
@@ -323,6 +324,7 @@ export async function POST(req: NextRequest) {
 ```
 
 # Why two keys?
+
 - QStash rotates signing keys
 - nextSigningKey becomes current during rotation
 - Both must be checked for seamless key rotation
@@ -335,6 +337,7 @@ Situation: Webhook handler does heavy processing. Takes 30+ seconds. QStash time
 Marks message as failed. Retries. Double processing begins.
 
 Symptoms:
+
 - Webhook timeouts in QStash dashboard
 - Messages marked failed then retried
 - Duplicate processing of same message
@@ -347,6 +350,7 @@ duplicate message processing and wasted retries.
 Recommended fix:
 
 # Design for fast acknowledgment:
+
 ```typescript
 export async function POST(req: NextRequest) {
   // 1. Verify signature first (fast)
@@ -367,6 +371,7 @@ export async function POST(req: NextRequest) {
 ```
 
 # Alternative: Use QStash for the heavy work
+
 ```typescript
 // Webhook receives trigger
 await qstash.publishJSON({
@@ -386,6 +391,7 @@ Situation: Burst of events triggers mass message publishing. QStash rate limit h
 Messages rejected. Users don't get notifications. Critical tasks delayed.
 
 Symptoms:
+
 - 429 errors from QStash
 - Messages not being delivered
 - Sudden drop in processing during peak times
@@ -398,11 +404,13 @@ you won't know until users complain.
 Recommended fix:
 
 # Check your plan limits:
+
 - Free: 500 messages/day
 - Pay as you go: Check dashboard
 - Pro: Higher limits, check dashboard
 
 # Implement rate limit handling:
+
 ```typescript
 try {
   await qstash.publishJSON({ url, body });
@@ -416,6 +424,7 @@ try {
 ```
 
 # Batch messages when possible:
+
 ```typescript
 // Instead of 100 individual publishes
 await qstash.batchJSON({
@@ -427,6 +436,7 @@ await qstash.batchJSON({
 ```
 
 # Monitor in dashboard:
+
 Upstash Console shows usage and limits
 
 ### Not using deduplication for critical operations
@@ -437,6 +447,7 @@ Situation: Network hiccup during publish. SDK retries. Same message sent twice.
 Customer charged twice. Email sent twice. Data corrupted.
 
 Symptoms:
+
 - Duplicate charges or emails
 - Double processing of same event
 - User complaints about duplicates
@@ -449,6 +460,7 @@ must use it for critical operations.
 Recommended fix:
 
 # Use deduplication for critical messages:
+
 ```typescript
 // Custom ID (best for business operations)
 await qstash.publishJSON({
@@ -466,11 +478,13 @@ await qstash.publishJSON({
 ```
 
 # Deduplication window:
+
 - Default: 60 seconds
 - Messages with same ID in window are deduplicated
 - Plan for this in your retry logic
 
 # Also make endpoints idempotent:
+
 Check if operation already completed before processing
 
 ### Expecting QStash to reach private/localhost endpoints
@@ -481,6 +495,7 @@ Situation: Development works with local server. Deploy to production with intern
 QStash can't reach it. All messages fail silently. No processing happens.
 
 Symptoms:
+
 - Messages show "failed" in QStash dashboard
 - Works locally but fails in "production"
 - Using http:// instead of https://
@@ -493,6 +508,7 @@ a fundamental architecture requirement, not a configuration issue.
 Recommended fix:
 
 # Production requirements:
+
 - URL must be publicly accessible
 - HTTPS required (HTTP will fail)
 - No localhost, 127.0.0.1, or private IPs
@@ -500,12 +516,16 @@ Recommended fix:
 # Local development options:
 
 # Option 1: ngrok/localtunnel
+
 ```bash
 ngrok http 3000
+
 # Use the ngrok URL for QStash testing
+
 ```
 
 # Option 2: QStash local development mode
+
 ```typescript
 // In development, skip QStash and call directly
 if (process.env.NODE_ENV === 'development') {
@@ -520,6 +540,7 @@ if (process.env.NODE_ENV === 'development') {
 ```
 
 # Option 3: Use Vercel preview URLs
+
 Preview deploys give you public URLs for testing
 
 ### Using default retry behavior for all message types
@@ -531,6 +552,7 @@ processor is temporarily down for 15 minutes. Message marked as failed.
 Payment reconciliation manual work required.
 
 Symptoms:
+
 - Critical messages marked failed
 - Manual intervention needed for retries
 - Temporary outages causing permanent failures
@@ -543,6 +565,7 @@ strategies. One size doesn't fit all.
 Recommended fix:
 
 # Configure retries per message:
+
 ```typescript
 // Critical operations: more retries, longer backoff
 await qstash.publishJSON({
@@ -561,11 +584,13 @@ await qstash.publishJSON({
 ```
 
 # Consider your endpoint's recovery time:
+
 - Database down: May need 5+ minutes
 - Third-party API: May need hours
 - Internal service: Usually quick
 
 # Use failure callbacks for dead letter handling:
+
 ```typescript
 await qstash.publishJSON({
   url: 'https://myapp.com/api/critical',
@@ -582,6 +607,7 @@ Situation: Message contains entire document (5MB). QStash rejects - body too lar
 Even if accepted, slow to transmit. Expensive. Wastes bandwidth.
 
 Symptoms:
+
 - Message publish failures
 - Slow message delivery
 - High bandwidth costs
@@ -594,6 +620,7 @@ lightweight triggers, not data carriers.
 Recommended fix:
 
 # Send references, not data:
+
 ```typescript
 // BAD: Large payload
 await qstash.publishJSON({
@@ -609,6 +636,7 @@ await qstash.publishJSON({
 ```
 
 # In your handler:
+
 ```typescript
 export async function POST(req: NextRequest) {
   const { documentId } = await req.json();
@@ -618,6 +646,7 @@ export async function POST(req: NextRequest) {
 ```
 
 # Large data storage options:
+
 - S3/R2/Blob storage for files
 - Database for structured data
 - Redis for temporary data (Upstash Redis pairs well)
@@ -630,6 +659,7 @@ Situation: Important task published. QStash delivers. Endpoint processes. But yo
 system doesn't know it succeeded. User stuck waiting. No feedback loop.
 
 Symptoms:
+
 - No visibility into message delivery
 - Users waiting for actions that completed
 - No alerting on failures
@@ -642,6 +672,7 @@ the feedback loop to update state and handle failures.
 Recommended fix:
 
 # Use callbacks for critical operations:
+
 ```typescript
 await qstash.publishJSON({
   url: 'https://myapp.com/api/send-email',
@@ -652,6 +683,7 @@ await qstash.publishJSON({
 ```
 
 # Handle the callback:
+
 ```typescript
 // app/api/email-callback/route.ts
 export async function POST(req: NextRequest) {
@@ -672,6 +704,7 @@ export async function POST(req: NextRequest) {
 ```
 
 # Failure callback for alerting:
+
 ```typescript
 // app/api/email-failed/route.ts
 export async function POST(req: NextRequest) {
@@ -692,6 +725,7 @@ Situation: Scheduled daily report at "9am". But 9am in which timezone? QStash us
 Report runs at 4am local time. Users confused. Support tickets filed.
 
 Symptoms:
+
 - Schedules running at unexpected times
 - Off-by-one-hour issues during DST
 - User complaints about report timing
@@ -704,6 +738,7 @@ with daylight saving time changes.
 Recommended fix:
 
 # QStash uses UTC:
+
 ```typescript
 // This runs at 9am UTC, not local time
 await qstash.schedules.create({
@@ -713,10 +748,12 @@ await qstash.schedules.create({
 ```
 
 # Convert to UTC:
+
 - 9am EST = 2pm UTC (winter) / 1pm UTC (summer)
 - 9am PST = 5pm UTC (winter) / 4pm UTC (summer)
 
 # Document timezone in schedule name:
+
 ```typescript
 await qstash.schedules.create({
   destination: 'https://myapp.com/api/daily-report',
@@ -729,6 +766,7 @@ await qstash.schedules.create({
 ```
 
 # Handle DST programmatically if needed:
+
 Update schedules when DST changes, or accept UTC timing
 
 ### URL groups with dead or outdated endpoints
@@ -739,6 +777,7 @@ Situation: URL group has 5 endpoints. One service deprecated months ago. Message
 still fan out to it. Failures in dashboard. Wasted attempts. Slower delivery.
 
 Symptoms:
+
 - Failed deliveries in URL groups
 - Messages to deprecated services
 - Slow fan-out due to timeouts
@@ -751,6 +790,7 @@ the failure noise obscures real issues.
 Recommended fix:
 
 # Audit URL groups regularly:
+
 ```typescript
 const groups = await qstash.urlGroups.list();
 for (const group of groups) {
@@ -769,6 +809,7 @@ for (const group of groups) {
 ```
 
 # Update groups when services change:
+
 ```typescript
 // Remove dead endpoint
 await qstash.urlGroups.removeEndpoints({
@@ -778,6 +819,7 @@ await qstash.urlGroups.removeEndpoints({
 ```
 
 # Automate in CI/CD:
+
 Check URL group health as part of deployment
 
 ## Validation Checks
@@ -880,9 +922,11 @@ Skills: upstash-qstash, nextjs-app-router, vercel-deployment
 Workflow:
 
 ```
+
 1. Define API route handlers (nextjs-app-router)
 2. Configure QStash integration (upstash-qstash)
 3. Deploy with environment vars (vercel-deployment)
+
 ```
 
 ### Reliable Webhooks
@@ -892,9 +936,11 @@ Skills: upstash-qstash, stripe-integration, supabase-backend
 Workflow:
 
 ```
+
 1. Receive webhooks from Stripe (stripe-integration)
 2. Queue for reliable processing (upstash-qstash)
 3. Persist state to database (supabase-backend)
+
 ```
 
 ### Scheduled Reports
@@ -904,9 +950,11 @@ Skills: upstash-qstash, email-systems, supabase-backend
 Workflow:
 
 ```
+
 1. Configure cron schedule (upstash-qstash)
 2. Query data for report (supabase-backend)
 3. Send via email system (email-systems)
+
 ```
 
 ### Fan-out Notifications
@@ -916,9 +964,11 @@ Skills: upstash-qstash, email-systems, slack-bot-builder
 Workflow:
 
 ```
+
 1. Publish to URL group (upstash-qstash)
 2. Email handler receives (email-systems)
 3. Slack handler receives (slack-bot-builder)
+
 ```
 
 ### Gradual Migration to Workflows
@@ -928,10 +978,12 @@ Skills: upstash-qstash, inngest
 Workflow:
 
 ```
+
 1. Start with simple QStash messages (upstash-qstash)
 2. Identify multi-step patterns
 3. Migrate complex flows to Inngest (inngest)
 4. Keep simple schedules in QStash
+
 ```
 
 ## Related Skills
@@ -939,6 +991,7 @@ Workflow:
 Works well with: `vercel-deployment`, `nextjs-app-router`, `redis-specialist`, `email-systems`, `supabase-backend`, `cloudflare-workers`
 
 ## When to Use
+
 - User mentions or implies: qstash
 - User mentions or implies: upstash queue
 - User mentions or implies: serverless cron
@@ -948,11 +1001,13 @@ Works well with: `vercel-deployment`, `nextjs-app-router`, `redis-specialist`, `
 - User mentions or implies: delayed message
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

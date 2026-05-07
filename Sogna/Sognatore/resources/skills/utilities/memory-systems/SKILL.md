@@ -8,18 +8,20 @@ id: skill-memory-systems
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use This Skill
 
 Design short-term, long-term, and graph-based memory architectures
 
 Use this skill when working with design short-term, long-term, and graph-based memory architectures.
+
 # Memory System Design
 
 Memory provides the persistence layer that allows agents to maintain continuity across sessions and reason over accumulated knowledge. Simple agents rely entirely on context for memory, losing all state when sessions end. Sophisticated agents implement layered memory architectures that balance immediate context needs with long-term knowledge retention. The evolution from vector stores to knowledge graphs to temporal knowledge graphs represents increasing investment in structured memory for improved retrieval and reasoning.
 
 ## When to Use
+
 Activate this skill when:
+
 - Building agents that must persist across sessions
 - Needing to maintain entity consistency across conversations
 - Implementing reasoning over accumulated knowledge
@@ -153,6 +155,7 @@ Memories must integrate with context systems to be useful. Use just-in-time memo
 ### Memory System Selection
 
 Choose memory architecture based on requirements:
+
 - Simple persistence needs: File-system memory
 - Semantic search needs: Vector RAG with metadata
 - Relationship reasoning needs: Knowledge graph
@@ -162,7 +165,9 @@ Choose memory architecture based on requirements:
 
 **Example 1: Entity Tracking**
 ```python
+
 # Track entity across conversations
+
 def remember_entity(entity_id, properties):
     memory.store({
         "type": "entity",
@@ -177,7 +182,9 @@ def get_entity(entity_id):
 
 **Example 2: Temporal Query**
 ```python
+
 # What was the user's address on January 15, 2024?
+
 def query_address_at_time(user_id, query_time):
     return temporal_graph.query("""
         MATCH (user)-[r:LIVES_AT]->(address)
@@ -210,13 +217,16 @@ This skill builds on context-fundamentals. It connects to:
 ## References
 
 Internal reference:
+
 - Implementation Reference - Detailed implementation patterns
 
 Related skills in this collection:
+
 - context-fundamentals - Context basics
 - multi-agent-patterns - Cross-agent memory
 
 External resources:
+
 - Graph database documentation (Neo4j, etc.)
 - Vector store documentation (Pinecone, Weaviate, etc.)
 - Research on knowledge graphs and reasoning
@@ -231,11 +241,13 @@ External resources:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,8 +1,8 @@
-import { clamp, invariant, sognaflowGlobalConfig, noop, pipe, progress, } from "sognaflow-utils";
+import { clamp, invariant, noop, pipe, progress, } from "sognaflow-utils";
 import { Mix } from "./mix";
 function createMixers(output, ease, customMixer) {
     const mixers = [];
-    const mixerFactory = customMixer || sognaflowGlobalConfig.mix || Mix;
+    const mixerFactory = customMixer || Mix;
     const numMixers = output.length - 1;
     for (let i = 0; i < numMixers; i++) {
         let mixer = mixerFactory(output[i], output[i + 1]);
@@ -13,6 +13,23 @@ function createMixers(output, ease, customMixer) {
         mixers.push(mixer);
     }
     return mixers;
+}
+function createBinaryInterpolator(input, mixer) {
+    return (v) => {
+        const p = progress(input[0], input[1], v);
+        return mixer(p);
+    };
+}
+function createMultiInterpolator(input, mixers) {
+    return (v) => {
+        let i = 0;
+        for (; i < input.length - 2; i++) {
+            if (v < input[i + 1])
+                break;
+        }
+        const p = progress(input[i], input[i + 1], v);
+        return mixers[i](p);
+    };
 }
 /**
  * Create a function that maps from a numerical input array to a generic output array.
@@ -35,7 +52,7 @@ function createMixers(output, ease, customMixer) {
  */
 export function Interpolate(input, output, { clamp: isClamp = true, ease, mixer } = {}) {
     const inputLength = input.length;
-    invariant(inputLength === output.length, "Both input and output ranges must be the same length", "range-length");
+    invariant(inputLength === output.length, "Both input and output ranges must be the same length");
     /**
      * If we're only provided a single input, we can just make a function
      * that returns the output.
@@ -44,29 +61,18 @@ export function Interpolate(input, output, { clamp: isClamp = true, ease, mixer 
         return () => output[0];
     if (inputLength === 2 && output[0] === output[1])
         return () => output[1];
-    const isZeroDeltaRange = input[0] === input[1];
     // If input runs highest -> lowest, reverse both arrays
     if (input[0] > input[inputLength - 1]) {
         input = [...input].reverse();
         output = [...output].reverse();
     }
     const mixers = createMixers(output, ease, mixer);
-    const numMixers = mixers.length;
-    const interpolator = (v) => {
-        if (isZeroDeltaRange && v < input[0])
-            return output[0];
-        let i = 0;
-        if (numMixers > 1) {
-            for (; i < input.length - 2; i++) {
-                if (v < input[i + 1])
-                    break;
-            }
-        }
-        const progressInRange = progress(input[i], input[i + 1], v);
-        return mixers[i](progressInRange);
-    };
+    const interpolator = inputLength === 2
+        ? createBinaryInterpolator(input, mixers[0])
+        : createMultiInterpolator(input, mixers);
     return isClamp
         ? (v) => interpolator(clamp(input[0], input[inputLength - 1], v))
         : interpolator;
 }
+export const interpolate = Interpolate;
 //# sourceMappingURL=interpolate.js.map

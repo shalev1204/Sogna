@@ -10,7 +10,6 @@ id: skill-uniprot-database
 owner: [[eng-database]]
 ---
 
-
 # UniProt Database
 
 ## Overview
@@ -20,6 +19,7 @@ UniProt is the world's leading comprehensive protein sequence and functional inf
 ## When to Use This Skill
 
 This skill should be used when:
+
 - Searching for protein entries by name, gene symbol, accession, or organism
 - Retrieving protein sequences in FASTA or other formats
 - Mapping identifiers between UniProt and external databases (Ensembl, RefSeq, PDB, etc.)
@@ -37,22 +37,29 @@ Search UniProt using natural language queries or structured search syntax.
 
 **Common search patterns:**
 ```python
+
 # Search by protein name
+
 query = "insulin AND organism_name:\"Homo sapiens\""
 
 # Search by gene name
+
 query = "gene:BRCA1 AND reviewed:true"
 
 # Search by accession
+
 query = "accession:P12345"
 
 # Search by sequence length
+
 query = "length:[100 TO 500]"
 
 # Search by taxonomy
+
 query = "taxonomy_id:9606"  # Human proteins
 
 # Search by GO term
+
 query = "go:0005515"  # Protein binding
 ```
 
@@ -65,6 +72,7 @@ Use the API search endpoint: `https://rest.uniprot.org/uniprotkb/search?query={q
 Retrieve specific protein entries by accession number.
 
 **Accession number formats:**
+
 - Classic: P12345, Q1AAA9, O15530 (6 characters: letter + 5 alphanumeric)
 - Extended: A0A022YWF9 (10 characters for newer entries)
 
@@ -77,11 +85,13 @@ Example: `https://rest.uniprot.org/uniprotkb/P12345.fasta`
 Map protein identifiers between different database systems and retrieve multiple entries efficiently.
 
 **ID Mapping workflow:**
+
 1. Submit mapping job to: `https://rest.uniprot.org/idmapping/run`
 2. Check job status: `https://rest.uniprot.org/idmapping/status/{jobId}`
 3. Retrieve results: `https://rest.uniprot.org/idmapping/results/{jobId}`
 
 **Supported databases for mapping:**
+
 - UniProtKB AC/ID
 - Gene names
 - Ensembl, RefSeq, EMBL
@@ -90,6 +100,7 @@ Map protein identifiers between different database systems and retrieve multiple
 - And many more (see `/references/id_mapping_databases.md`)
 
 **Limitations:**
+
 - Maximum 100,000 IDs per job
 - Results stored for 7 days
 
@@ -106,6 +117,7 @@ The stream endpoint returns all results without pagination, suitable for downloa
 Specify exactly which fields to retrieve for efficient data transfer.
 
 **Common fields:**
+
 - `accession` - UniProt accession number
 - `id` - Entry name
 - `gene_names` - Gene name(s)
@@ -132,6 +144,7 @@ For programmatic access, use the provided helper script `scripts/uniprot_client.
 - `stream_results(query, format)` - Stream large result sets
 
 **Alternative Python packages:**
+
 - **Unipressed**: Modern, typed Python client for UniProt REST API
 - **bioservices**: Comprehensive bioinformatics web services client
 
@@ -180,9 +193,11 @@ See `/references/query_syntax.md` for comprehensive syntax documentation.
 ## Resources
 
 ### scripts/
+
 `uniprot_client.py` - Python client with helper functions for common UniProt operations including search, retrieval, ID mapping, and streaming.
 
 ### references/
+
 - `api_fields.md` - Complete list of available fields for customizing queries
 - `id_mapping_databases.md` - Supported databases for ID mapping operations
 - `query_syntax.md` - Comprehensive query syntax with advanced examples
@@ -197,11 +212,13 @@ See `/references/query_syntax.md` for comprehensive syntax documentation.
 - **SPARQL Endpoint**: https://sparql.uniprot.org/ (for advanced graph queries)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

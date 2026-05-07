@@ -8,7 +8,6 @@ id: skill-seo-aeo-keyword-research
 owner: [[biz-marketing]]
 ---
 
-
 # SEO-AEO Keyword Research
 
 ## Overview
@@ -27,26 +26,33 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine) — an 
 ## How It Works
 
 ### Step 1: Extract Seed Keywords
+
 Identify 3–5 core terms that anchor the topic's search territory. Go beyond the obvious head term to include adjacent terms the audience actually uses.
 
 ### Step 2: Expand Into Tiers
+
 Sort all keywords into three tiers:
+
 - **Tier 1** — Low-to-moderate difficulty. Target first.
 - **Tier 2** — Medium difficulty. Build toward after Tier 1 content is live.
 - **Tier 3** — High difficulty. Long-term goals only.
 
 ### Step 3: Generate AEO Keywords
+
 Produce question-based keywords that AI engines surface in direct answers and People Also Ask boxes. For each AEO keyword, specify the answer format to use (definition sentence, numbered steps, comparison table, direct number).
 
 ### Step 4: Run Cannibalization Check
+
 Flag any two keywords similar enough to split traffic if targeted on separate pages. Recommend which page should own which term.
 
 ### Step 5: Build Content Map
+
 Recommend content type and production order for all Tier 1 and Tier 2 keywords.
 
 ## Examples
 
 ### Example 1: SaaS Product
+
 Input: topic = "remote project management software"
 audience = "engineering managers and startup founders"
 goal = "convert"
@@ -69,8 +75,8 @@ Landing page → "remote project management software"
 Pillar blog → "complete guide to remote project management"
 Cluster article → "how to manage remote engineering teams"
 
-
 ### Example 2: Fintech App
+
 Input: topic = "automated budgeting app"
 audience = "millennials managing personal finances"
 goal = "all"
@@ -87,7 +93,6 @@ AEO Keywords:
 "How does automated budgeting work?"
 → Answer format: Numbered steps
 
-
 ## Best Practices
 
 - ✅ **Do:** Target Tier 1 keywords first — build authority before going after competitive terms
@@ -99,9 +104,11 @@ AEO Keywords:
 ## Common Pitfalls
 
 - **Problem:** High-volume keyword chosen but impossible to rank for early on
+
   **Solution:** Always cross-check volume with difficulty. Tier 1 should have difficulty under 45.
 
 - **Problem:** AEO keywords ignored in favour of traditional search terms
+
   **Solution:** AEO keywords drive AI engine citation — include at least 5 in every research run.
 
 ## Related Skills
@@ -116,11 +123,13 @@ AEO Keywords:
 - [Full Keyword Research SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/keyword-research/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

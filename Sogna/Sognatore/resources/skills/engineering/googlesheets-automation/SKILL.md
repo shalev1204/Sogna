@@ -8,7 +8,6 @@ id: skill-googlesheets-automation
 owner: [[orchestrator]]
 ---
 
-
 # Google Sheets Automation via Rube MCP
 
 Automate Google Sheets workflows including reading/writing data, managing spreadsheets and tabs, formatting cells, filtering rows, and upserting records through Composio's Google Sheets toolkit.
@@ -35,6 +34,7 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 **When to use**: User wants to read data from or write data to a Google Sheet
 
 **Tool sequence**:
+
 1. `GOOGLESHEETS_SEARCH_SPREADSHEETS` - Find spreadsheet by name if ID unknown [Prerequisite]
 2. `GOOGLESHEETS_GET_SHEET_NAMES` - Enumerate tab names to target the right sheet [Prerequisite]
 3. `GOOGLESHEETS_BATCH_GET` - Read data from one or more ranges [Required]
@@ -43,6 +43,7 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 6. `GOOGLESHEETS_SPREADSHEETS_VALUES_APPEND` - Append rows to end of table [Alternative]
 
 **Key parameters**:
+
 - `spreadsheet_id`: Alphanumeric ID from the spreadsheet URL (between '/d/' and '/edit')
 - `ranges`: A1 notation array (e.g., 'Sheet1!A1:Z1000'); always use bounded ranges
 - `sheet_name`: Tab name (case-insensitive matching supported)
@@ -51,6 +52,7 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 - `valueInputOption`: 'USER_ENTERED' (parsed) or 'RAW' (literal)
 
 **Pitfalls**:
+
 - Mis-cased or non-existent tab names error "Sheet 'X' not found"
 - Empty ranges may omit `valueRanges[i].values`; treat missing as empty array
 - `GOOGLESHEETS_BATCH_UPDATE` values must be a 2D array (list of lists), even for a single row
@@ -62,6 +64,7 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 **When to use**: User wants to create a new spreadsheet or manage tabs within one
 
 **Tool sequence**:
+
 1. `GOOGLESHEETS_CREATE_GOOGLE_SHEET1` - Create a new spreadsheet [Required]
 2. `GOOGLESHEETS_ADD_SHEET` - Add a new tab/worksheet [Required]
 3. `GOOGLESHEETS_UPDATE_SHEET_PROPERTIES` - Rename, hide, reorder, or color tabs [Optional]
@@ -69,12 +72,14 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 5. `GOOGLESHEETS_FIND_WORKSHEET_BY_TITLE` - Check if a specific tab exists [Optional]
 
 **Key parameters**:
+
 - `title`: Spreadsheet or sheet tab name
 - `spreadsheetId`: Target spreadsheet ID
 - `forceUnique`: Auto-append suffix if tab name exists (default true)
 - `properties.gridProperties`: Set row/column counts, frozen rows
 
 **Pitfalls**:
+
 - Sheet names must be unique within a spreadsheet
 - Default sheet names are locale-dependent ('Sheet1' in English, 'Hoja 1' in Spanish)
 - Don't use `index` when creating multiple sheets in parallel (causes 'index too high' errors)
@@ -85,12 +90,14 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 **When to use**: User wants to find specific rows or apply filters to sheet data
 
 **Tool sequence**:
+
 1. `GOOGLESHEETS_LOOKUP_SPREADSHEET_ROW` - Find first row matching exact cell value [Required]
 2. `GOOGLESHEETS_SET_BASIC_FILTER` - Apply filter/sort to a range [Alternative]
 3. `GOOGLESHEETS_CLEAR_BASIC_FILTER` - Remove existing filter [Optional]
 4. `GOOGLESHEETS_BATCH_GET` - Read filtered results [Optional]
 
 **Key parameters**:
+
 - `query`: Exact text value to match (matches entire cell content)
 - `range`: A1 notation range to search within
 - `case_sensitive`: Boolean for case-sensitive matching (default false)
@@ -99,6 +106,7 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 - `filter.sortSpecs`: Sort specifications
 
 **Pitfalls**:
+
 - `GOOGLESHEETS_LOOKUP_SPREADSHEET_ROW` matches entire cell content, not substrings
 - Sheet names with spaces must be single-quoted in ranges (e.g., "'My Sheet'!A:Z")
 - Bare sheet names without ranges are not supported for lookup; always specify a range
@@ -108,9 +116,11 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 **When to use**: User wants to update existing rows or insert new ones based on a unique key column
 
 **Tool sequence**:
+
 1. `GOOGLESHEETS_UPSERT_ROWS` - Update matching rows or append new ones [Required]
 
 **Key parameters**:
+
 - `spreadsheetId`: Target spreadsheet ID
 - `sheetName`: Tab name
 - `keyColumn`: Column header name used as unique identifier (e.g., 'Email', 'SKU')
@@ -119,6 +129,7 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 - `strictMode`: Error on mismatched column counts (default true)
 
 **Pitfalls**:
+
 - `keyColumn` must be an actual header name, NOT a column letter (e.g., 'Email' not 'A')
 - If `headers` is NOT provided, first row of `rows` is treated as headers
 - With `strictMode=true`, rows with more values than headers cause an error
@@ -129,11 +140,13 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 **When to use**: User wants to apply formatting (bold, colors, font size) to cells
 
 **Tool sequence**:
+
 1. `GOOGLESHEETS_GET_SPREADSHEET_INFO` - Get numeric sheetId for target tab [Prerequisite]
 2. `GOOGLESHEETS_FORMAT_CELL` - Apply formatting to a range [Required]
 3. `GOOGLESHEETS_UPDATE_SHEET_PROPERTIES` - Change frozen rows, column widths [Optional]
 
 **Key parameters**:
+
 - `spreadsheet_id`: Spreadsheet ID
 - `worksheet_id`: Numeric sheetId (NOT tab name); get from GET_SPREADSHEET_INFO
 - `range`: A1 notation (e.g., 'A1:F1') - preferred over index fields
@@ -142,6 +155,7 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 - `fontSize`: Font size in points
 
 **Pitfalls**:
+
 - Requires numeric `worksheet_id`, not tab title; get from spreadsheet metadata
 - Color channels are 0-1 floats (e.g., 1.0 for full red), NOT 0-255 integers
 - Responses may return empty reply objects ([{}]); verify formatting via readback
@@ -150,17 +164,21 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 ## Common Patterns
 
 ### ID Resolution
+
 - **Spreadsheet name -> ID**: `GOOGLESHEETS_SEARCH_SPREADSHEETS` with `query`
 - **Tab name -> sheetId**: `GOOGLESHEETS_GET_SPREADSHEET_INFO`, extract from sheets metadata
 - **Tab existence check**: `GOOGLESHEETS_FIND_WORKSHEET_BY_TITLE`
 
 ### Rate Limits
+
 Google Sheets enforces strict rate limits:
+
 - Max 60 reads/minute and 60 writes/minute
 - Exceeding limits causes errors; batch operations where possible
 - Use `GOOGLESHEETS_BATCH_GET` and `GOOGLESHEETS_BATCH_UPDATE` for efficiency
 
 ### Data Patterns
+
 - Always read before writing to understand existing layout
 - Use `GOOGLESHEETS_UPSERT_ROWS` for CRM syncs, inventory updates, and dedup scenarios
 - Append mode (omit `first_cell_location`) is safest for adding new records
@@ -200,14 +218,17 @@ Google Sheets enforces strict rate limits:
 | Update tab props | `GOOGLESHEETS_UPDATE_SHEET_PROPERTIES` | `spreadsheetId`, properties |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

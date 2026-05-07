@@ -2,19 +2,22 @@
 name: remotion
 description: Generate walkthrough videos from Stitch projects using Remotion with smooth transitions, zooming, and text overlays
 allowed-tools:
+
   - "stitch*:*"
   - "remotion*:*"
   - "Bash"
   - "Read"
   - "Write"
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
   - "web_fetch"
+
 risk: critical
 version: 1.0.0
 id: skill-remotion
 owner: [[orchestrator]]
 ---
-
 
 # Stitch to Remotion Walkthrough Videos
 
@@ -27,12 +30,14 @@ This skill enables you to create walkthrough videos that showcase app screens wi
 ## Prerequisites
 
 **Required:**
+
 - Access to the Stitch MCP Server
 - Access to the Remotion MCP Server (or Remotion CLI)
 - Node.js and npm installed
 - A Stitch project with designed screens
 
 **Recommended:**
+
 - Familiarity with Remotion's video capabilities
 - Understanding of React components (Remotion uses React)
 
@@ -41,6 +46,7 @@ This skill enables you to create walkthrough videos that showcase app screens wi
 ### Step 1: Discover Available MCP Servers
 
 Run `list_tools` to identify available MCP servers and their prefixes:
+
 - **Stitch MCP**: Look for `stitch:` or `mcp_stitch:` prefix
 - **Remotion MCP**: Look for `remotion:` or `mcp_remotion:` prefix
 
@@ -57,8 +63,11 @@ Run `list_tools` to identify available MCP servers and their prefixes:
    - Extract Screen IDs from each screen's `name` field
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 3. **Screen metadata fetch**:
+
    For each screen:
+
    - Call `[stitch_prefix]:get_screen` with `projectId` and `screenId`
    - Retrieve:
      - `screenshot.downloadUrl` — Visual asset for the video
@@ -67,7 +76,9 @@ Run `list_tools` to identify available MCP servers and their prefixes:
      - Screen title and description for text overlays
 
 4. **Asset download**:
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
    - Use `web_fetch` or `Bash` with `curl` to download screenshots
    - Save to a staging directory: `assets/screens/{screen-name}.png`
    - Organize assets in order of the intended walkthrough flow
@@ -79,13 +90,16 @@ Run `list_tools` to identify available MCP servers and their prefixes:
    - If exists, use the existing project structure
 
 2. **Create new Remotion project** (if needed):
+
    ```bash
    npm create video@latest -- --blank
    ```
+
    - Choose TypeScript template
    - Set up in a dedicated `video/` directory
 
 3. **Install dependencies**:
+
    ```bash
    cd video
    npm install @remotion/transitions @remotion/animated-emoji
@@ -117,11 +131,13 @@ Create a modular Remotion composition with these components:
 Use Remotion's `@remotion/transitions` for professional effects:
 
 - **Fade**: Smooth cross-fade between screens
+
   ```tsx
   import {fade} from '@remotion/transitions/fade';
   ```
 
 - **Slide**: Directional slide transitions
+
   ```tsx
   import {slide} from '@remotion/transitions/slide';
   ```
@@ -196,6 +212,7 @@ Create the video components following Remotion best practices:
    - Set frame rate and duration
 
 **Reference Resources:**
+
 - Use `resources/screen-slide-template.tsx` as starting point
 - Follow `resources/composition-checklist.md` for completeness
 - Review examples in `examples/walkthrough/` directory
@@ -203,9 +220,11 @@ Create the video components following Remotion best practices:
 ### Step 3: Preview and Refine
 
 1. **Start Remotion Studio**:
+
    ```bash
    npm run dev
    ```
+
    - Opens browser-based preview
    - Allows real-time editing and refinement
 
@@ -222,6 +241,7 @@ Create the video components following Remotion best practices:
 ### Step 4: Render Video
 
 1. **Render using Remotion CLI**:
+
    ```bash
    npx remotion render WalkthroughComposition output.mp4
    ```
@@ -315,6 +335,7 @@ Remotion maintains its own Agent Skills that define best practices. Review these
 - **Installation**: `npx skills add remotion-dev/skills`
 
 Key Remotion skills to leverage:
+
 - Animation timing and easing
 - Composition architecture patterns
 - Performance optimization
@@ -325,6 +346,7 @@ Key Remotion skills to leverage:
 ### Pattern 1: Simple Slide Show
 
 Basic walkthrough with fade transitions:
+
 - 3-5 seconds per screen
 - Cross-fade transitions
 - Bottom text overlay with screen title
@@ -333,6 +355,7 @@ Basic walkthrough with fade transitions:
 ### Pattern 2: Feature Highlight
 
 Focus on specific UI elements:
+
 - Zoom into specific regions
 - Animated circles/arrows pointing to features
 - Slow-motion emphasis on key interactions
@@ -341,6 +364,7 @@ Focus on specific UI elements:
 ### Pattern 3: User Flow
 
 Show step-by-step user journey:
+
 - Sequential screen flow with directional slides
 - Numbered steps overlay
 - Highlight user actions (clicks, taps)
@@ -374,6 +398,7 @@ that shows a walkthrough of the screens.
 ```
 
 **Agent workflow:**
+
 1. List Stitch projects → Find "Calculator App" → Extract project ID
 2. List screens in project → Identify all screens (Home, History, Settings)
 3. Download screenshots for each screen → Save to `assets/screens/`
@@ -400,16 +425,18 @@ that shows a walkthrough of the screens.
 - **Remotion MCP**: https://www.remotion.dev/docs/ai/mcp
 - **Remotion Transitions**: https://www.remotion.dev/docs/transitions
 
-
 ## When to Use
+
 Use this skill when tackling tasks related to its primary domain or functionality as described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -10,6 +10,7 @@ version: 1.0.0
 ## ArgoCD Sync Policies
 
 ### Automated Sync
+
 ```yaml
 syncPolicy:
   automated:
@@ -19,29 +20,40 @@ syncPolicy:
 ```
 
 ### Manual Sync
+
 ```yaml
 syncPolicy:
   syncOptions:
+
   - PrunePropagationPolicy=foreground
   - CreateNamespace=true
+
 ```
 
 ### Sync Windows
+
 ```yaml
 syncWindows:
+
 - kind: allow
+
   schedule: "0 8 * * *"
   duration: 1h
   applications:
+
   - my-app
 - kind: deny
+
   schedule: "0 22 * * *"
   duration: 8h
   applications:
+
   - '*'
+
 ```
 
 ### Retry Policy
+
 ```yaml
 syncPolicy:
   retry:
@@ -55,6 +67,7 @@ syncPolicy:
 ## Flux Sync Policies
 
 ### Kustomization Sync
+
 ```yaml
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -70,6 +83,7 @@ spec:
 ```
 
 ### Source Sync Interval
+
 ```yaml
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
@@ -83,8 +97,11 @@ spec:
 ## Health Assessment
 
 ### Custom Health Checks
+
 ```yaml
+
 # ArgoCD
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -117,6 +134,7 @@ data:
 ## Sync Options
 
 ### Common Sync Options
+
 - `PrunePropagationPolicy=foreground` - Wait for pruned resources to be deleted
 - `CreateNamespace=true` - Auto-create namespace
 - `Validate=false` - Skip kubectl validation
@@ -138,6 +156,7 @@ data:
 10. Document sync behavior for teams
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

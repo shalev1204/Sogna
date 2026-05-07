@@ -231,10 +231,13 @@ Master validation scripts that orchestrate skill-level scripts.
 ### Usage
 
 ```bash
+
 # Quick validation during development
+
 python .agent/scripts/checklist.py .
 
 # Full verification before deployment
+
 python .agent/scripts/verify_all.py . --url http://localhost:3000
 ```
 

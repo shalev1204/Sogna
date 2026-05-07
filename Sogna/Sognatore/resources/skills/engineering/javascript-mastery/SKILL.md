@@ -8,7 +8,6 @@ id: skill-javascript-mastery
 owner: [[orchestrator]]
 ---
 
-
 # 🧠 JavaScript Mastery
 
 > 33+ essential JavaScript concepts every developer should know, inspired by [33-js-concepts](https://github.com/leonardomso/33-js-concepts).
@@ -659,11 +658,13 @@ const value2 = 0 || "default"; // "default" (0 is falsy)
 - [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

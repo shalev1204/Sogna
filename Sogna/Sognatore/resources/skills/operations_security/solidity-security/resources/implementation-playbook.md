@@ -392,6 +392,7 @@ contract EventStorage {
 // Security Checklist Contract
 contract SecurityChecklist {
     /**
+
      * [ ] Reentrancy protection (ReentrancyGuard or CEI pattern)
      * [ ] Integer overflow/underflow (Solidity 0.8+ or SafeMath)
      * [ ] Access control (Ownable, roles, modifiers)
@@ -407,6 +408,7 @@ contract SecurityChecklist {
      * [ ] Check return values of external calls
      * [ ] No hardcoded addresses
      * [ ] Upgrade mechanism (if proxy pattern)
+
      */
 }
 ```
@@ -465,17 +467,21 @@ describe("Security Tests", function () {
 ```solidity
 contract WellDocumentedContract {
     /**
+
      * @title Well Documented Contract
      * @dev Example of proper documentation for audits
      * @notice This contract handles user deposits and withdrawals
+
      */
 
     /// @notice Mapping of user balances
     mapping(address => uint256) public balances;
 
     /**
+
      * @dev Deposits ETH into the contract
      * @notice Anyone can deposit funds
+
      */
     function deposit() public payable {
         require(msg.value > 0, "Must send ETH");
@@ -483,9 +489,11 @@ contract WellDocumentedContract {
     }
 
     /**
+
      * @dev Withdraws user's balance
      * @notice Follows CEI pattern to prevent reentrancy
      * @param amount Amount to withdraw in wei
+
      */
     function withdraw(uint256 amount) public {
         // CHECKS
@@ -531,6 +539,7 @@ contract WellDocumentedContract {
 7. **No Upgrade Path**: Consider proxy patterns if upgrades needed
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

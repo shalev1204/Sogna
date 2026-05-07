@@ -103,11 +103,13 @@ but caps at Level 5.
 
 ```
 Total Exception Cost (TEC) = Product Loss (PL)
+
                            + Expedite / Re-Ship Cost (ERC)
                            + Customer Penalties (CP)
                            + Administrative Processing Cost (APC)
                            + Relationship Damage Estimate (RDE)
                            + Downstream Ripple Cost (DRC)
+
 ```
 
 ### 2.2 Component Definitions and Assumptions
@@ -119,10 +121,13 @@ invoice value, unless the customer contract specifies retail/resale valuation fo
 chargeback purposes.
 
 - Damaged but salvageable: PL = invoice value × damage percentage. Use 25% for
+
   cosmetic-only damage, 50% for functional-but-impaired, 100% for unsalvageable.
+
 - Shortage: PL = unit cost × units short.
 - Full loss: PL = full invoice value including freight-in if FOB Origin.
 - Temperature excursion: PL = full invoice value if excursion exceeds validated range.
+
   No partial credit on regulated products — it is all or nothing.
 
 #### Expedite / Re-Ship Cost (ERC)
@@ -171,12 +176,17 @@ Internal labor cost to manage the exception from intake to closure:
 This is the hardest component to quantify. Use these heuristics:
 
 - **New customer (< 6 months):** Exception during onboarding carries 3× the
+
   relationship weight. A $2,000 failure can cost a $500K annual account. RDE = 10–20%
   of estimated first-year revenue at risk of churn.
+
 - **Stable customer (> 2 years):** Single exception rarely causes churn. RDE = 0–2%
+
   of annual revenue unless it is a pattern (3+ exceptions in 90 days, in which case
   treat as new-customer risk).
+
 - **Customer under competitive bid:** Any exception during RFP evaluation period
+
   from a competitor. RDE = 25–50% of annual revenue at risk.
 
 #### Downstream Ripple Cost (DRC)
@@ -184,14 +194,21 @@ This is the hardest component to quantify. Use these heuristics:
 Costs that propagate beyond the immediate exception:
 
 - Inventory reorder disruption: If exception causes safety-stock depletion, the
+
   replenishment order will be rushed. Estimate 1.5× standard inbound freight for
   the replenishment cycle.
+
 - Warehouse receiving disruption: Unexpected returns, re-deliveries, or inspection
+
   holds consume dock door time. Estimate $150–$300 per unplanned dock appointment.
+
 - Customer service call volume: Each exception generates 2–5 inbound customer
+
   inquiries. At $8–$12 per call (including agent time and overhead), that is
   $16–$60 per exception.
+
 - Reporting and analytics overhead: Carrier scorecards, root cause analysis
+
   meetings, and corrective action documentation. Estimate 1–3 hours per qualifying
   exception at $45/hr.
 
@@ -228,7 +245,9 @@ PL  = $285,000 (full invoice)                                  = $285,000
 ERC = Air charter for replacement: $48,000                      = $48,000
 CP  = Hospital contract: 2 days production delay at $12,000/day = $24,000
 APC = Tier 4 (theft investigation + legal): ~60 hrs × $45
+
       + external legal ~20 hrs × $350                           = $9,700
+
 RDE = Strategic account in first year: 15% × $1.2M annual rev  = $180,000
 DRC = Safety stock depletion replenishment, expedited inbound   = $8,500
 ---
@@ -389,6 +408,7 @@ quality.
 #### Damage Claim — All Modes
 
 Required:
+
 - [ ] Original BOL (signed, showing clean receipt by carrier at origin)
 - [ ] Delivery receipt / POD (showing exception notation — "damaged," "crushed," specific description)
 - [ ] Photographs: minimum 4 views (overview of shipment, close-up of damage, packaging condition, label/PRO visible)
@@ -399,6 +419,7 @@ Required:
 - [ ] Packaging specifications (demonstrates product was packaged appropriately for the mode)
 
 Strongly recommended:
+
 - [ ] Weight certificate at origin (proves correct weight tendered)
 - [ ] Inspection report from independent surveyor (required for claims > $10,000 or disputed claims)
 - [ ] Temperature recorder data (for any temperature-sensitive product)
@@ -408,6 +429,7 @@ Strongly recommended:
 #### Shortage Claim
 
 Required:
+
 - [ ] Original BOL showing piece count tendered
 - [ ] Delivery receipt showing piece count received (discrepancy noted)
 - [ ] Commercial invoice for shorted product
@@ -415,6 +437,7 @@ Required:
 - [ ] Written description: how many pieces short, which items, value per item
 
 Strongly recommended:
+
 - [ ] Loading photos/video showing correct count at origin
 - [ ] Seal numbers (origin seal vs. delivery seal — different seal = carrier liability strong)
 - [ ] Weight certificate at origin vs. weight at delivery (weight discrepancy corroborates shortage)
@@ -423,6 +446,7 @@ Strongly recommended:
 #### Loss Claim (Full Shipment)
 
 Required:
+
 - [ ] Original BOL (proves tender to carrier)
 - [ ] Carrier pickup confirmation / signed pickup receipt
 - [ ] Commercial invoice (full shipment value)
@@ -431,6 +455,7 @@ Required:
 - [ ] Proof of non-delivery: customer confirmation that product was never received
 
 Strongly recommended:
+
 - [ ] GPS/tracking history showing last known position
 - [ ] Law enforcement report (if theft suspected)
 - [ ] Carrier's insurance certificate (to file directly against insurer if carrier is unresponsive)
@@ -439,12 +464,14 @@ Strongly recommended:
 #### Delay Claim (Service Failure)
 
 Required:
+
 - [ ] Original BOL showing agreed pickup and delivery dates
 - [ ] Service level documentation (rate confirmation, routing guide showing guaranteed service)
 - [ ] Tracking history showing actual delivery date/time
 - [ ] Proof of financial loss caused by delay (penalty invoice, expedite receipt, lost sales documentation)
 
 Strongly recommended:
+
 - [ ] Customer correspondence showing delivery commitment that was based on carrier's service
 - [ ] Evidence that delay was not caused by shipper or consignee (no appointment changes, dock available)
 - [ ] Documentation of mitigation efforts (you tried to minimize the loss)
@@ -498,21 +525,32 @@ terminal or by consignee.
 **Resolution Workflow:**
 
 1. **Consignee documents on POD** — specific notation: "2 of 6 pallets crushed,
+
    product visible through torn packaging." Generic "damaged" is insufficient for
    strong claims.
+
 2. **Photograph at delivery** — minimum 6 photos: overall shipment, each damaged
+
    unit, packaging failure point, freight label/PRO visible in frame, floor of
    trailer showing debris.
+
 3. **Request carrier terminal inspection** — call the delivering terminal directly
+
    (not the 800-number). Ask for the OS&D clerk or terminal manager. Request that
    damaged freight be held for inspection, not sent to salvage.
+
 4. **File claim within 48 hours** — terminal damage claims have highest recovery
+
    rates (80–90%) because the carrier knows their terminal caused it. Do not delay.
+
 5. **If partial damage** — request carrier's salvage bid. Carriers sometimes offer
+
    to sell damaged freight at auction and credit the difference. Evaluate whether the
    salvage value is fair; reject lowball salvage bids (common tactic to reduce claim
    payout).
+
 6. **Settlement expectation** — terminal-caused damage should settle at 85–100%
+
    of invoice value within 60 days. If carrier offers less than 75%, escalate to
    carrier's claims manager with terminal inspection evidence.
 
@@ -527,23 +565,34 @@ pallets damaged in the same direction (forward movement = hard stop).
 **Resolution Workflow:**
 
 1. **Determine if damage is from a known incident** — ask carrier dispatch: "Was
+
    there any reported incident involving this trailer in transit?" Carriers are
    required to log accidents, but minor incidents (hard braking, pothole impact)
    often go unreported.
+
 2. **Document loading condition evidence** — if you have photos from loading dock
+
    showing freight was properly loaded, secured with load bars/straps, and braced
    appropriately, your claim is significantly stronger.
+
 3. **Weigh the shipment** — if you can get a weight ticket from a scale near the
+
    delivery point, compare to the origin weight ticket. Significant discrepancy
    combined with damage suggests freight shifted or fell off a pallet.
+
 4. **File claim within 5 business days** — transit damage is moderately strong for
+
    the shipper (70–85% recovery). Carrier will investigate with the driver and
    potentially dispute if they believe packaging was insufficient.
+
 5. **Common carrier defense** — "Inadequate packaging." Counter with: packaging
+
    specifications from the manufacturer, ISTA or ASTM test results if available,
    and evidence that the same packaging has shipped successfully on this lane before
    without damage.
+
 6. **Settlement expectation** — 60–85% of invoice value within 90 days. Transit
+
    damage claims often involve more back-and-forth than terminal damage.
 
 #### 5.1.3 Loading Damage (Origin)
@@ -559,19 +608,28 @@ in a trailer with protruding floor nails).
 **Resolution Workflow:**
 
 1. **Check for driver exception notations on pickup BOL** — if the driver noted
+
    "shipper load and count" (SL&C), carrier will argue they are not liable for
    how the product was loaded. SL&C is the shipper's enemy on damage claims. If
    your dock loaded the trailer while the driver was in the office, this notation
    is legitimate and weakens your claim.
+
 2. **If carrier's driver loaded** — your claim is strong. Document that your dock
+
    staff witnessed proper product condition before loading and that the carrier's
    driver conducted the loading.
+
 3. **First-terminal inspection** — if damage is discovered at the first terminal,
+
    request photos from the terminal before freight is further handled. This narrows
    the damage window to pickup-to-first-terminal.
+
 4. **File claim within 5 business days** — include the clean-signed BOL from origin
+
    and the exception-noted delivery receipt.
+
 5. **Settlement expectation** — 70–85% if you can prove damage occurred during
+
    carrier loading. Under 50% if SL&C was notated and you cannot prove carrier
    handling caused the damage.
 
@@ -585,20 +643,29 @@ driver no-show.
 **Resolution Workflow:**
 
 1. **Hour 0 (delay identified):** Contact dispatch. Get the driver's current
+
    location, reason for delay, and revised ETA. If driver no-showed at origin:
    demand a replacement driver or tractor within 2 hours, or you are tendering
    to backup carrier.
+
 2. **Hour 2:** If revised ETA is within customer tolerance, monitor. If not:
+
    calculate whether a team driver can recover the schedule. Team driver cost adder
    is typically $0.25–$0.40/mile on top of the base rate.
+
 3. **Hour 4:** If delay will cause a customer miss: authorize the team driver or
+
    arrange backup carrier from the driver's current location. The original carrier
    is responsible for the deadhead to the driver's current location (demand credit
    or refuse to pay for the partial haul).
+
 4. **Hour 8+:** If carrier cannot recover the shipment and you have re-tendered to
+
    a backup carrier: deduct the expedite cost difference from the original carrier's
    open invoices. Document everything for the debit.
+
 5. **Post-resolution:** Record the service failure in the carrier scorecard. If
+
    this is a pattern (2+ HOS-driven delays from same carrier in 60 days), their
    fleet management and driver scheduling practices need review.
 
@@ -609,20 +676,29 @@ Tractor or trailer breakdown in transit.
 **Resolution Workflow:**
 
 1. **Hour 0:** Carrier should notify you proactively per contract terms. If you
+
    discover via tracking: call dispatch immediately.
+
 2. **Assess repair timeline:** If carrier says "truck will be repaired in 2 hours"
+
    — accept and monitor. If > 4 hours or uncertain: demand the carrier power-swap
    (send a replacement tractor to the breakdown location). Major carriers can
    power-swap within 2–4 hours in most metro areas.
+
 3. **Reefer breakdown:** If reefer unit fails on a temperature-sensitive load, this
+
    becomes a product quality issue, not just a delay. Request the carrier download
    the reefer unit data log immediately. If ambient temperature is > 40°F and
    product is cold-chain: begin contingency for product replacement within 2 hours
    of reefer failure confirmation.
+
 4. **Carrier liability for mechanical:** Carrier is generally liable for delays caused
+
    by mechanical failure — it is not "act of God." However, contractual terms may
    exclude or limit delay liability. Check your carrier agreement.
+
 5. **Cost allocation:** Carrier should absorb any power-swap costs and incremental
+
    transit cost. If you had to re-tender to a backup carrier, deduct the cost
    difference from the original carrier.
 
@@ -634,20 +710,29 @@ that prevents safe transit.
 **Resolution Workflow:**
 
 1. **Verify the weather event** — check NOAA and FMCSA road condition reports for
+
    the specific route. Carriers sometimes claim "weather" for a light rain. The
    delay must be proportional to the actual event severity.
+
 2. **Determine if the delay was avoidable** — if the weather was forecasted 48+
+
    hours in advance and the carrier could have routed around it or departed earlier:
    this is a planning failure, not force majeure. Challenge the carrier's defense.
+
 3. **Customer communication** — notify immediately with the weather event details
+
    and revised ETA. Customers generally understand weather delays if communicated
    proactively. Do not wait until the delivery window expires to notify.
+
 4. **Cost allocation** — true force majeure: neither party at fault. Carrier is not
+
    liable for delay. Shipper cannot deduct. Expedite costs after the weather clears
    are negotiable — the carrier should prioritize your shipment for recovery without
    charging a premium. If they try to charge expedite rates for post-weather recovery,
    push back.
+
 5. **Pattern recognition** — if a lane experiences 3+ weather delays per season
+
    (e.g., Denver to Salt Lake City in January), build weather buffers into your
    transit time commitments for that lane rather than treating each as an exception.
 
@@ -659,18 +744,25 @@ peak season and month-end volume spikes.
 **Resolution Workflow:**
 
 1. **Hour 0 (carrier notifies or fails to cover):** Do not wait. Immediately
+
    re-tender to backup carriers. Do not give the primary carrier "until end of day"
    — capacity tightens as the day progresses. Every hour of delay reduces your
    options.
+
 2. **Hour 2:** If primary carrier has not confirmed a driver: they have effectively
+
    rejected the tender. Re-tender to backup or spot market. The primary carrier
    owes you nothing for the delay (they did not pick up the freight), but you should
    record the service failure as a tender acceptance failure.
+
 3. **Spot market premium:** If you must go to the spot market, the premium over
+
    contract rate is your loss. Track this as "tender rejection cost" in carrier
    scorecards. Typical spot premiums: 15–40% in normal market, 50–150% during
    peak events or regional disruptions.
+
 4. **Contractual leverage:** If your carrier contract has tender acceptance minimums
+
    (e.g., 90% acceptance rate), document every failure. Aggregate for quarterly
    review. Carriers who repeatedly accept tenders and then fail to cover are worse
    than carriers who reject upfront — they destroy your ability to plan.
@@ -682,19 +774,30 @@ peak season and month-end volume spikes.
 **Resolution Workflow:**
 
 1. **Day 1 past expected delivery:** Check tracking. If status is "delivered" but
+
    customer says not received: request proof of delivery (signature, GPS stamp, photo).
    If no GPS/photo evidence, the carrier's "delivered" scan is insufficient.
+
 2. **Day 2:** File online tracer through carrier portal. UPS: 1 business day for
+
    tracer investigation. FedEx: 1–2 business days. USPS: mail search request, allow
    5–10 business days.
+
 3. **Day 3–5:** If tracer comes back "unable to locate": file formal claim through
+
    carrier portal.
+
 4. **Day 5–10:** Re-ship replacement to customer. Do not wait for claim resolution
+
    to keep the customer whole.
+
 5. **Claim processing:** UPS and FedEx typically resolve parcel claims within 5–8
+
    business days of filing. USPS: 30–60 days. Ensure declared value was purchased
    at time of shipping — default coverage is $100 (UPS/FedEx) or $50 (USPS Priority).
+
 6. **If claim denied:** Most common denial reason is "insufficient declared value."
+
    If you declared the correct value at shipping, escalate. If you did not declare
    sufficient value, the recovery is capped at the default limit regardless of
    actual product value. This is an expensive lesson — ensure high-value parcel
@@ -703,28 +806,43 @@ peak season and month-end volume spikes.
 #### 5.3.2 Air Parcel Loss (Next-Day/2-Day)
 
 Same workflow as ground with these adjustments:
+
 - Tracer filing is faster: file same day as missed delivery. Guaranteed service
+
   means the carrier prioritizes the investigation.
+
 - Money-back guarantee: for late delivery on guaranteed services, file for full
+
   shipping cost refund regardless of whether the product arrives the next day. This
   is separate from a loss claim.
+
 - UPS and FedEx each have automated money-back guarantee claim portals. For late
+
   NDA (Next Day Air), the refund is the full air shipping cost. These refunds can
   be significant on heavy or multi-package shipments.
 
 #### 5.3.3 International Parcel Loss
 
 - Customs holds are the most common cause of apparent "loss" in international parcel.
+
   Check customs status before filing a tracer.
+
 - International parcel claims involve both the origin country carrier and the
+
   destination country carrier (or postal service). Filing is through the origin
   carrier.
+
 - Liability is governed by the Universal Postal Convention (for postal services)
+
   or the carrier's tariff (for UPS/FedEx/DHL international). UPS international
   declared value cap is $50,000.
+
 - Allow 30–90 days for international claim resolution due to multi-country
+
   investigation requirements.
+
 - For DDP (Delivered Duty Paid) shipments, you are responsible for duties/taxes
+
   as part of the shipment value. Include these in the claim amount.
 
 ### 5.4 Ocean Container Shortage Resolution
@@ -737,24 +855,35 @@ seal being intact (or seal being different from the origin seal).
 **Resolution Workflow:**
 
 1. **At container unload:** Count every piece before signing the delivery receipt.
+
    If the container is being unloaded at a CFS (Container Freight Station), ensure
    the CFS provides a tally sheet.
+
 2. **Check the seal:** Compare the seal number on the container door to the seal
+
    number on the bill of lading. If they match and are intact: the shortage likely
    occurred at the origin (stuffing error). Carrier liability is weak — this is
    a shipper/origin warehouse issue. If the seal is broken or does not match: carrier
    liability is strong. Photograph the seal immediately.
+
 3. **File notice of shortage within 3 days** (COGSA requirement for concealed
+
    shortage). File with the ocean carrier AND the party who delivered the container
    (drayage company or terminal).
+
 4. **Hire a marine surveyor** if the shortage value exceeds $5,000. The surveyor's
+
    report is the gold standard evidence for ocean claims. Cost: $800–$2,500
    depending on the port and survey complexity.
+
 5. **Claim filing:** File against the ocean carrier under the bill of lading terms.
+
    If the BL incorporates COGSA, liability is capped at $500 per package (a "package"
    in FCL is typically interpreted as each carton, not the container). If you declared
    a higher value on the BL, the higher value applies.
+
 6. **Recovery expectation:** FCL shortages with matching intact seals: 20–35%
+
    recovery (carrier argues origin stuffing error). FCL shortages with broken/mismatched
    seals: 65–80% recovery.
 
@@ -767,18 +896,27 @@ destination.
 **Resolution Workflow:**
 
 1. **At CFS pickup/delivery:** Verify piece count against the house bill of lading
+
    (not the master BL, which covers the full container). Annotate any discrepancy
    on the CFS tally sheet and delivery receipt.
+
 2. **Identify the shortage point:** Was the shortage at origin CFS (loaded fewer
+
    pieces), in transit, or at destination CFS (pieces misallocated to another
    consignee's lot)? Request the CFS tally reports from both origin and destination.
+
 3. **Check for cross-allocation:** In LCL, your cargo may have been mistakenly
+
    delivered to another consignee in the same container. Request the destination
    CFS check all lots from the same container for over-shipment.
+
 4. **File claim with the NVOCC or freight forwarder** who issued your house bill
+
    of lading. They are your contracting party. They will subrogate against the ocean
    carrier or CFS operator as appropriate.
+
 5. **Recovery expectation:** LCL shortage claims take longer (90–180 days) and
+
    recover at lower rates (30–50%) due to the difficulty of proving where in the
    multi-handler chain the shortage occurred.
 
@@ -792,25 +930,34 @@ unloading of the aircraft.
 **Resolution Workflow:**
 
 1. **At pickup from airline cargo terminal:** Inspect all pieces before signing the
+
    cargo release. Note any damage on the release form with specific descriptions:
    "carton #3 crushed on north face, contents exposed." Do not accept shipment
    without noting the damage — once you sign clean, your concealed damage notice
    window is only 14 days under Montreal Convention.
+
 2. **File written notice within 14 days** — this is a hard deadline. Miss it and
+
    the claim is barred. Send notice to the airline's cargo claims department and to
    the handling agent at the arrival airport.
+
 3. **Document the chain of custody:** Air freight often moves through multiple
+
    handlers: origin forwarder → origin ground handler → airline → destination ground
    handler → destination forwarder. Identify which handler had custody when the
    damage occurred. The airline's internal damage reporting ("damage noted during
    build-up/breakdown") is helpful — request it from the airline's cargo
    department.
+
 4. **Liability under Montreal Convention:** 22 SDR/kg (approximately $30/kg). For
+
    a 500 kg shipment, the maximum recovery is roughly $15,000 regardless of product
    value. If your product value significantly exceeds the weight-based limit, you
    should have purchased declared-value surcharge at booking (typically 0.50–0.75%
    of the excess value). If you did not, recovery is capped at the Convention limit.
+
 5. **Recovery expectation:** Airline direct claims with proper documentation:
+
    65–80% of the applicable liability limit within 60–90 days.
 
 #### 5.5.2 Ground Handler Damage
@@ -821,18 +968,25 @@ that operates on behalf of the airline at the airport.
 **Resolution Workflow:**
 
 1. **Shipper files against the airline** — under Montreal Convention, the airline
+
    is liable to the shipper regardless of whether the airline or the ground handler
    caused the damage. The shipper does not need to prove which party handled the
    freight at the time of damage.
+
 2. **Provide evidence to the airline** — the airline will conduct its own
+
    investigation and may pursue the ground handler for indemnification. Providing
    the airline with clear evidence (time-stamped photos, handling records, warehouse
    receipt stamps) speeds the process.
+
 3. **If the airline denies** — they may argue the damage was pre-existing or caused
+
    by inadequate packaging. Counter with origin photos, packaging specifications,
    and the air waybill special handling instructions (e.g., "fragile," "this side up")
    that the handler failed to follow.
+
 4. **Direct claim against ground handler:** In some cases, especially when the
+
    airline is uncooperative, filing a direct claim against the ground handler under
    local tort law is viable. Consult with an air cargo attorney — this is a
    specialized area.
@@ -848,40 +1002,52 @@ and a railroad (BNSF, UP, CSX, NS, etc.) that performs the linehaul.
 **Resolution Workflow:**
 
 1. **Obtain the interchange records.** When the container moves from rail to dray
+
    (or dray to rail), an interchange inspection is supposed to occur. The interchange
    report documents the condition of the container and chassis at handoff. This
    document determines liability allocation.
 
 2. **If damage is noted on the interchange report at rail-to-dray handoff:**
+
    Rail is liable. File the claim with the railroad or the intermodal marketing
    company (IMC) that booked the rail leg. Railroad claims are governed by the
    Carmack Amendment for domestic intermodal.
 
 3. **If the interchange report is clean at rail-to-dray handoff, and damage is
+
    found at delivery:** Drayage company is liable. The damage occurred during
    the dray leg (local trucking from rail terminal to consignee). File with the
    dray carrier.
 
 4. **If no interchange report exists** (common — many terminals skip this step):
+
    Liability is disputed. Both the railroad and the dray will point at each other.
    In this situation:
+
    - File claims against both parties simultaneously.
    - Provide the same evidence package to both.
    - The party with the weaker defense will typically settle first.
    - If neither settles: your claim is against the contracting party (whoever is
+
      on your bill of lading), and they can subrogate against the other.
 
 5. **Railroad-specific considerations:**
    - Railroads have their own claims rules and are notoriously slow (90–180 days
+
      for resolution).
+
    - Impact damage (shifting during railcar coupling, hard stops, derailment) is
+
      common. Railroads have internal impact recording devices — request the data.
+
    - Temperature damage on reefer intermodal: the rail carrier is responsible for
+
      maintaining the reefer unit during rail transit if GenSet service was purchased.
      If you provided a self-powered reefer unit, the rail carrier may argue the
      unit failed on its own.
 
 6. **Chassis damage vs. cargo damage:** If the chassis (the wheeled frame the
+
    container sits on) was damaged, causing the container to tilt or drop, this is
    typically a rail terminal or dray carrier issue depending on where the chassis
    was sourced. Chassis pool operators (DCLI, TRAC, Flexi-Van) may also be liable.
@@ -1023,12 +1189,17 @@ When a checkpoint decision is not made or action not taken by the deadline:
 
 1. **Immediate notification** to the next level in the escalation chain.
 2. **Root cause of the miss:** Was it capacity (analyst overwhelmed), information
+
    (waiting on carrier/customer), process (no clear owner), or judgment (analyst
    unsure how to proceed)?
+
 3. **Recovery action:** Assign fresh eyes. A different analyst reviews the exception
+
    and picks up from the current state. Stale exceptions tend to stay stale with
    the same handler.
+
 4. **Process improvement:** If the same checkpoint is repeatedly missed across
+
    multiple exceptions, this is a systemic issue requiring process or staffing
    review.
 
@@ -1053,8 +1224,11 @@ analyst available) who:
 - Stops working individual exceptions.
 - Takes ownership of triage decisions: who works what, in what order.
 - Provides a single point of status aggregation for management and customer-facing
+
   teams.
+
 - Has authority to re-assign analyst workloads, authorize expedites up to a
+
   pre-approved threshold ($10,000 per incident without additional approval), and
   communicate directly with carrier account managers and customer account teams.
 
@@ -1080,29 +1254,42 @@ value, (3) then oldest exception.
 During a triage event:
 
 **Internal:**
+
 - Triage commander sends a status update to management every 2 hours (or more
+
   frequently if Level 5 exceptions are active).
+
 - Status update format: total exceptions active, top 3 by priority with one-line
+
   status each, resource utilization (analysts assigned / available), estimated
   clearance timeline.
+
 - Each analyst provides a 2-sentence status on each assigned exception every 2
+
   hours to the triage commander.
 
 **Customer-facing:**
+
 - For widespread events (weather, carrier outage): issue a single proactive
+
   communication to all affected customers rather than individual reactive updates.
   Template: "We are aware of [event]. [X] shipments are potentially affected.
   We are actively working with carriers to reroute/recover. Your account team
   will provide individual shipment updates within [X] hours."
+
 - For individual high-priority exceptions during triage: customer update cadence
+
   does not change (per severity level). The triage commander ensures high-priority
   customer updates are not missed because the analyst is overwhelmed.
 
 **Carrier:**
+
 - During widespread events, contact the carrier's account manager or VP of
+
   Operations (not dispatch) to get a single point of contact for all affected
   shipments. Working shipment-by-shipment through dispatch during a triage event
   is inefficient.
+
 - Request a carrier-side recovery plan for all affected shipments as a batch.
 
 ### 8.5 Resource Allocation During Triage
@@ -1117,6 +1304,7 @@ During a triage event:
 ### 8.6 Triage Deactivation
 
 Deactivate triage mode when:
+
 - Active exception count drops below 5
 - No Level 3+ exceptions remain unresolved
 - New exception intake rate returns to within 120% of the 30-day rolling average
@@ -1137,6 +1325,7 @@ are considered.
 
 ```
 Net Recovery Value (NRV) = (Claim Amount × Recovery Probability × Time-Value Discount)
+
                          - Processing Cost
                          - Opportunity Cost
                          - Relationship Cost
@@ -1361,17 +1550,26 @@ When multiple seasonal adjustments are active simultaneously (e.g., peak season 
 weather event in December):
 
 1. Apply the **more permissive** adjustment for carrier-facing parameters (response
+
    SLAs, scorecard weighting). Do not stack — use the adjustment that grants the
    carrier the most latitude.
+
 2. Apply the **more conservative** adjustment for customer-facing parameters
+
    (notification thresholds, communication frequency). If peak says "Level 2+
    proactive" and weather says "blanket communication to all affected," use the
    blanket communication.
+
 3. Apply the **lower** eat-the-cost threshold (i.e., absorb more). Overlapping
+
    stress periods mean higher APC and lower recovery probabilities.
+
 4. Internal escalation thresholds remain at the **tighter** of any applicable
+
    adjustment. Overlapping stress events mean higher risk, not lower.
+
 5. Document which adjustments are active and communicate to the team. A triage
+
    event during peak season with active weather is a different operating posture
    than normal operations — everyone must be calibrated to the same adjusted
    thresholds.
@@ -1416,6 +1614,7 @@ IF product is custom/irreplaceable → EXPEDITE the manufacturing queue, not jus
 ### Card 4: "What do I do first when 10 exceptions land at once?"
 
 ```
+
 1. ACTIVATE triage mode
 2. SCORE each exception using rapid triage (§8.3) — takes ~2 min per exception
 3. SORT by score descending
@@ -1423,6 +1622,7 @@ IF product is custom/irreplaceable → EXPEDITE the manufacturing queue, not jus
 5. COMMUNICATE: send blanket status to customer teams, single contact to carrier account managers
 6. UPDATE triage commander every 2 hours
 7. DEACTIVATE when active count < 5 and no Level 3+ remain
+
 ```
 
 ---
@@ -1467,6 +1667,7 @@ IF product is custom/irreplaceable → EXPEDITE the manufacturing queue, not jus
 | WMS | Warehouse Management System — software for managing warehouse operations |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

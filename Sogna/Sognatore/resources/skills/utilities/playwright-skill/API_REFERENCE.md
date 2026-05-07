@@ -39,10 +39,13 @@ This document contains the comprehensive Playwright API reference and advanced p
 Before using this skill, ensure Playwright is available:
 
 ```bash
+
 # Check if Playwright is installed
+
 npm list playwright 2>/dev/null || echo "Playwright not installed"
 
 # Install (if needed)
+
 cd ~/.claude/skills/playwright-skill
 npm run setup
 ```
@@ -420,18 +423,23 @@ await page.route('**/*.{png,jpg,jpeg,gif}', route => route.abort());
 The skill supports automatic header injection via environment variables:
 
 ```bash
+
 # Single header (simple)
+
 PW_HEADER_NAME=X-Automated-By PW_HEADER_VALUE=playwright-skill
 
 # Multiple headers (JSON)
+
 PW_EXTRA_HEADERS='{"X-Automated-By":"playwright-skill","X-Request-ID":"123"}'
 ```
 
 These headers are automatically applied to all requests when using:
+
 - `helpers.createContext(browser)` - headers merged automatically
 - `getContextOptionsWithHeaders(options)` - utility injected by run.js wrapper
 
 **Precedence (highest to lowest):**
+
 1. Headers passed directly in `options.extraHTTPHeaders`
 2. Environment variable headers
 3. Playwright defaults
@@ -478,13 +486,17 @@ const context = await browser.newContext({
 ### Debug Mode
 
 ```bash
+
 # Run with inspector
+
 npx playwright test --debug
 
 # Headed mode
+
 npx playwright test --headed
 
 # Slow motion
+
 npx playwright test --headed --slowmo=1000
 ```
 
@@ -569,13 +581,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - name: Install dependencies
+
         run: npm ci
+
       - name: Install Playwright Browsers
+
         run: npx playwright install --with-deps
+
       - name: Run tests
+
         run: npx playwright test
 ```
 
@@ -637,19 +655,25 @@ async function scrollToBottom(page) {
 ## Quick Reference Commands
 
 ```bash
+
 # Run tests
+
 npx playwright test
 
 # Run in headed mode
+
 npx playwright test --headed
 
 # Debug tests
+
 npx playwright test --debug
 
 # Generate code
+
 npx playwright codegen https://example.com
 
 # Show report
+
 npx playwright show-report
 ```
 
@@ -660,6 +684,7 @@ npx playwright show-report
 - [Best Practices](https://playwright.dev/docs/best-practices)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-parallel-agents
 owner: [[orchestrator]]
 ---
 
-
 # Native Parallel Agents
 
 > Orchestration through Claude Code's built-in Agent Tool
@@ -20,12 +19,14 @@ This skill enables coordinating multiple specialized agents through Claude Code'
 ## When to Use Orchestration
 
 ✅ **Good for:**
+
 - Complex tasks requiring multiple expertise domains
 - Code analysis from security, performance, and quality perspectives
 - Comprehensive reviews (architecture + security + testing)
 - Feature implementation needing backend + frontend + database work
 
 ❌ **Not for:**
+
 - Simple, single-domain tasks
 - Quick fixes or small changes
 - Tasks where one agent suffices
@@ -35,11 +36,13 @@ This skill enables coordinating multiple specialized agents through Claude Code'
 ## Native Agent Invocation
 
 ### Single Agent
+
 ```
 Use the security-auditor agent to review authentication
 ```
 
 ### Sequential Chain
+
 ```
 First, use the explorer-agent to discover project structure.
 Then, use the backend-specialist to review API endpoints.
@@ -47,12 +50,14 @@ Finally, use the test-engineer to identify test gaps.
 ```
 
 ### With Context Passing
+
 ```
 Use the frontend-specialist to analyze React components.
 Based on those findings, have the test-engineer generate component tests.
 ```
 
 ### Resume Previous Work
+
 ```
 Resume agent [agentId] and continue with additional requirements.
 ```
@@ -62,6 +67,7 @@ Resume agent [agentId] and continue with additional requirements.
 ## Orchestration Patterns
 
 ### Pattern 1: Comprehensive Analysis
+
 ```
 Agents: explorer-agent → [domain-agents] → synthesis
 
@@ -71,9 +77,11 @@ Agents: explorer-agent → [domain-agents] → synthesis
 4. frontend-specialist: UI/UX patterns
 5. test-engineer: Test coverage
 6. Synthesize all findings
+
 ```
 
 ### Pattern 2: Feature Review
+
 ```
 Agents: affected-domain-agents → test-engineer
 
@@ -81,15 +89,18 @@ Agents: affected-domain-agents → test-engineer
 2. Invoke relevant domain agents
 3. test-engineer verifies changes
 4. Synthesize recommendations
+
 ```
 
 ### Pattern 3: Security Audit
+
 ```
 Agents: security-auditor → penetration-tester → synthesis
 
 1. security-auditor: Configuration and code review
 2. penetration-tester: Active vulnerability testing
 3. Synthesize with prioritized remediation
+
 ```
 
 ---
@@ -137,26 +148,32 @@ Use **Explore** for quick searches, **custom agents** for domain expertise.
 After all agents complete, synthesize:
 
 ```markdown
+
 ## Orchestration Synthesis
 
 ### Task Summary
+
 [What was accomplished]
 
 ### Agent Contributions
+
 | Agent | Finding |
 |-------|---------|
 | security-auditor | Found X |
 | backend-specialist | Identified Y |
 
 ### Consolidated Recommendations
+
 1. **Critical**: [Issue from Agent A]
 2. **Important**: [Issue from Agent B]
 3. **Nice-to-have**: [Enhancement from Agent C]
 
 ### Action Items
+
 - [ ] Fix critical security issue
 - [ ] Refactor API endpoint
 - [ ] Add missing tests
+
 ```
 
 ---
@@ -180,11 +197,13 @@ After all agents complete, synthesize:
 - ✅ **Context passing** - Findings flow between agents
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

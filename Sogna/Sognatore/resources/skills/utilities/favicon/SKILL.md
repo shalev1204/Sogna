@@ -12,10 +12,10 @@ id: skill-favicon
 owner: [[orchestrator]]
 ---
 
-
 Generate a complete set of favicons from the source image at `$1` and update the project's HTML with the appropriate link tags.
 
 ## When to Use
+
 - You need to generate a complete favicon set from a single source image.
 - The task includes placing the assets in the correct framework-specific static directory and updating HTML link tags.
 - You want one workflow that validates the source image, detects the project type, and writes the right favicon outputs.
@@ -28,6 +28,7 @@ which magick
 ```
 
 If not found, stop and instruct the user to install it:
+
 - **macOS**: `brew install imagemagick`
 - **Linux**: `sudo apt install imagemagick`
 
@@ -87,6 +88,7 @@ Run these ImageMagick commands to generate all favicon files. Replace `[STATIC_D
 **Important**: The `-background none` flag must come BEFORE the input file to properly preserve transparency when rendering SVGs. Placing it after the input will result in a white background.
 
 ### favicon.ico (multi-resolution: 16x16, 32x32, 48x48)
+
 ```bash
 magick -background none "$1" \
   \( -clone 0 -resize 16x16 \) \
@@ -97,26 +99,31 @@ magick -background none "$1" \
 ```
 
 ### favicon-96x96.png
+
 ```bash
 magick -background none "$1" -resize 96x96 -alpha on [STATIC_DIR]/favicon-96x96.png
 ```
 
 ### apple-touch-icon.png (180x180)
+
 ```bash
 magick -background none "$1" -resize 180x180 -alpha on [STATIC_DIR]/apple-touch-icon.png
 ```
 
 ### web-app-manifest-192x192.png
+
 ```bash
 magick -background none "$1" -resize 192x192 -alpha on [STATIC_DIR]/web-app-manifest-192x192.png
 ```
 
 ### web-app-manifest-512x512.png
+
 ```bash
 magick -background none "$1" -resize 512x512 -alpha on [STATIC_DIR]/web-app-manifest-512x512.png
 ```
 
 ### favicon.svg (only if source is SVG)
+
 If the source file has a `.svg` extension, copy it:
 ```bash
 cp "$1" [STATIC_DIR]/favicon.svg
@@ -155,6 +162,7 @@ If `site.webmanifest` already exists in the static directory, preserve the exist
 ## Step 7: Update HTML/Layout Files
 
 Based on the detected project type, update the appropriate file. Adjust the `href` paths based on where the static assets directory is relative to the web root:
+
 - If static files are in `public/` or `static/` and served from root → use `/favicon.ico`
 - If static files are in `src/assets/` → use `/assets/favicon.ico`
 - If static files are in the same directory as HTML → use `./favicon.ico` or just `favicon.ico`
@@ -173,6 +181,7 @@ Edit `app/views/layouts/application.html.erb`. Find the `<head>` section and add
 ```
 
 **Important**:
+
 - If the source was NOT an SVG, omit the `<link rel="icon" type="image/svg+xml" href="/favicon.svg" />` line
 - Remove any existing `<link rel="icon"`, `<link rel="shortcut icon"`, `<link rel="apple-touch-icon"`, or `<link rel="manifest"` tags before adding the new ones
 - Place these tags near the top of the `<head>` section, after `<meta charset>` and `<meta name="viewport">` if present
@@ -201,6 +210,7 @@ export const metadata: Metadata = {
 ```
 
 **Important**:
+
 - If the source was NOT an SVG, omit the `{ url: '/favicon.svg', type: 'image/svg+xml' }` entry from the icon array
 - If metadata export doesn't exist, create it with just the icons-related fields
 - If metadata export exists, merge the icons configuration with existing fields
@@ -225,6 +235,7 @@ Skip HTML updates and inform the user they need to manually add the following to
 ## Step 8: Summary
 
 Report completion with:
+
 - Detected project type and framework
 - Static assets directory used
 - List of files generated
@@ -240,11 +251,13 @@ Report completion with:
 - If the layout file cannot be found for HTML updates, generate files anyway and instruct on manual HTML addition
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

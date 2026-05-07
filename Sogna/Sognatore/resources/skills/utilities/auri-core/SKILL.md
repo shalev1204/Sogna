@@ -4,21 +4,24 @@ description: "Auri: assistente de voz inteligente (Alexa + Claude claude-opus-4-
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - voice-assistant
 - product-vision
 - alexa
 - aws
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-auri-core
 owner: [[orchestrator]]
 ---
-
 
 # Auri - Core Product Skill
 
@@ -95,11 +98,13 @@ DEPOIS: Auri, devo levar guarda-chuva amanha?
 ## Guia De Linguagem
 
 Fazer:
+
 - Falar na primeira pessoa
 - Confirmar entendimento antes de responder
 - Reconhecer incerteza e oferecer alternativa
 
 Evitar:
+
 - Respostas roboticas
 - Formalidade excessiva
 - Evasao sem alternativa
@@ -267,14 +272,17 @@ KPIs Fase 3: WAC > 1.000, MRR > R$ 15.000, Business: 50 clientes, rating > 4.5.
 ## Segmentos Alvo
 
 **Primario: Tech-savvy Brasileiros (25-45 anos)**
+
 - Ja possuem Echo (~2M no Brasil), frustrados com Alexa padrao.
 - Canais: Reddit, Twitter/X tech, YouTube tech BR.
 
 **Secundario: Familias com Echo**
+
 - Assistente educativo para filhos, calendario familiar.
 - Canais: Facebook Groups, Instagram parenting.
 
 **Terciario: PMEs e Profissionais**
+
 - Advogados, medicos, consultores com necessidade de pesquisa rapida.
 - Canais: LinkedIn, eventos de negocios.
 
@@ -297,6 +305,7 @@ A Auri tem a inteligencia real por dentro. Ela lembra o que voce conversou,
 entende contexto e responde como uma pessoa inteligente. Gratis para comecar.
 
 Value Props:
+
 - Para o curioso: IA de voz que realmente entende portugues
 - Para o produtivo: Assistente pessoal que evolui com voce
 - Para a familia: Presenca inteligente em casa para todos
@@ -316,6 +325,7 @@ Numero de usuarios unicos com >= 3 sessoes de >= 2 minutos cada na ultima semana
 Periodo: segunda-domingo, 00:00-23:59 BRT.
 
 **Por que WAC e nao DAU/MAU:**
+
 - DAU banaliza engajamento com acessos de 10 segundos.
 - MAU e muito longa para feedback rapido de produto.
 - WAC captura habito real: voltou 3x e ficou 2min = genuinamente engajado.
@@ -351,6 +361,7 @@ NORTH STAR: WAC
 ## Dashboard Cloudwatch (Exemplo De Estrutura)
 
 Metricas customizadas publicadas:
+
 - SessionStart (Count por Plan: free/pro/business)
 - SessionDuration (None - minutos)
 - MessagesPerSession (Count)
@@ -380,6 +391,7 @@ Eixo X: Integracao com Hardware | Eixo Y: Profundidade de Inteligencia
 
 Quadrante UNICO da Auri: Alta Inteligencia + Alta Integracao Hardware.
 Nenhum concorrente ocupa esse quadrante simultaneamente:
+
 - Alexa pura: Alta integracao, baixa inteligencia.
 - ChatGPT Voice: Alta inteligencia, sem hardware proprio.
 - Google/Siri: Posicionamento intermediario em ambos os eixos.
@@ -420,6 +432,7 @@ Nenhum concorrente ocupa esse quadrante simultaneamente:
 ## Brand Voice Guidelines
 
 Tom:
+
 - Caloroso mas nao piegas.
 - Inteligente mas nao pedante.
 - Direto mas nao grosseiro.
@@ -448,6 +461,7 @@ Estes comandos ativam modos especificos quando mencionados no contexto de uso do
 Exibe status atual: versao, WAC vs meta, MRR, proxima entrega, status componentes.
 
 Campos retornados:
+
 - Versao atual do produto (ex: v1.0.0)
 - WAC atual vs meta da fase atual
 - MRR atual em R$
@@ -507,6 +521,7 @@ Verificar deployment:
 ## Fallback Strategy (Claude Api Indisponivel)
 
 Se a API da Anthropic estiver indisponivel, o sistema retorna respostas pre-configuradas:
+
 - api_down: Estou com instabilidade. Pode tentar em alguns minutinhos?
 - timeout: Preciso de mais tempo nessa pergunta. Me faz de novo daqui a pouco?
 - rate_limit: Muitas conversas simultaneas. Tente em alguns segundos!
@@ -600,11 +615,13 @@ Se a API da Anthropic estiver indisponivel, o sistema retorna respostas pre-conf
 - Not providing enough project context for accurate analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

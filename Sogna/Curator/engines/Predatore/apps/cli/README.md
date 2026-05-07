@@ -20,4 +20,3 @@ It analyzes your source code, identifies attack vectors, and executes real explo
 [https://github.com/SognaHQ/Predatore#readme](https://github.com/SognaHQ/Predatore#readme)
 
 </div>
-

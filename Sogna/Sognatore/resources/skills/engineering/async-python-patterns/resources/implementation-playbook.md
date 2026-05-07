@@ -12,15 +12,18 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ## Core Concepts
 
 ### 1. Event Loop
+
 The event loop is the heart of asyncio, managing and scheduling asynchronous tasks.
 
 **Key characteristics:**
+
 - Single-threaded cooperative multitasking
 - Schedules coroutines for execution
 - Handles I/O operations without blocking
 - Manages callbacks and futures
 
 ### 2. Coroutines
+
 Functions defined with `async def` that can be paused and resumed.
 
 **Syntax:**
@@ -31,15 +34,19 @@ async def my_coroutine():
 ```
 
 ### 3. Tasks
+
 Scheduled coroutines that run concurrently on the event loop.
 
 ### 4. Futures
+
 Low-level objects representing eventual results of async operations.
 
 ### 5. Async Context Managers
+
 Resources that support `async with` for proper cleanup.
 
 ### 6. Async Iterators
+
 Objects that support `async for` for iterating over async data sources.
 
 ## Quick Start
@@ -53,6 +60,7 @@ async def main():
     print("World")
 
 # Python 3.7+
+
 asyncio.run(main())
 ```
 
@@ -444,6 +452,7 @@ import asyncio
 from typing import List, Optional
 
 # Simulated async database client
+
 class AsyncDB:
     """Simulated async database."""
 
@@ -489,6 +498,7 @@ import asyncio
 from typing import Set
 
 # Simulated WebSocket connection
+
 class WebSocket:
     """Simulated WebSocket."""
 
@@ -609,22 +619,28 @@ asyncio.run(main())
 ### 1. Forgetting await
 
 ```python
+
 # Wrong - returns coroutine object, doesn't execute
+
 result = async_function()
 
 # Correct
+
 result = await async_function()
 ```
 
 ### 2. Blocking the Event Loop
 
 ```python
+
 # Wrong - blocks event loop
+
 import time
 async def bad():
     time.sleep(1)  # Blocks!
 
 # Correct
+
 async def good():
     await asyncio.sleep(1)  # Non-blocking
 ```
@@ -647,11 +663,14 @@ async def cancelable_task():
 ### 4. Mixing Sync and Async Code
 
 ```python
+
 # Wrong - can't call async from sync directly
+
 def sync_function():
     result = await async_function()  # SyntaxError!
 
 # Correct
+
 def sync_function():
     result = asyncio.run(async_function())
 ```
@@ -663,6 +682,7 @@ import asyncio
 import pytest
 
 # Using pytest-asyncio
+
 @pytest.mark.asyncio
 async def test_async_function():
     """Test async function."""
@@ -699,6 +719,7 @@ async def test_with_timeout():
 10. **Test async code** with pytest-asyncio
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

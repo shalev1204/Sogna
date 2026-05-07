@@ -1,22 +1,23 @@
 {
-  "name": "sogna-monorepo",
-  "version": "1.0.0",
+  "name": "sogna",
+  "version": "0.1.0",
   "type": "module",
   "private": true,
-  "description": "Sogna  Ecosystem - Orchestrated by Turbo",
+  "sogna_governance": "./.sognarc.json",
   "scripts": {
     "build": "turbo run build",
     "check": "turbo run check",
     "test": "turbo run test",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
-    "graph": "turbo run build --graph",
-    "prepare": "cd .. && husky Sogna/Curator/engines/Sentinel/.husky",
-    "Sogna": "node Curator/bin/Sogna.js",
-    "dream": "node Curator/bin/dream.js",
-    "Sognatore": "node Curator/bin/Sognatore.js",
-    "sync": "node Curator/bin/memory_sync.js",
-    "dev": "vite"
+    "prepare": "husky Curator/engines/Sentinel/.husky",
+    "sogna:dev": "vite",
+    "sogna:start": "node Curator/bin/Sogna.js",
+    "sogna:dream": "node Curator/bin/dream.js",
+    "sognatore:core": "node Curator/bin/Sognatore.js",
+    "sentinel:audit": "python Curator/engines/Sentinel/Sentinel-doctor.py",
+    "sentinel:veto": "node Curator/engines/Sentinel/bin/Sentinel-veto.js",
+    "memory:sync": "node Curator/bin/memory_sync.js"
   },
   "packageManager": "pnpm@10.33.0",
   "engines": {
@@ -25,30 +26,54 @@
   },
   "lint-staged": {
     "**/*.{ts,js}": [
-      "node Curator/engines/Sentinel/bin/Sentinel-veto.js"
+      "npm run sentinel:veto"
     ],
     "Curator/engines/Sentinel/.husky/*": [
-      "node Curator/engines/Sentinel/bin/Sentinel-veto.js"
+      "npm run sentinel:veto"
     ]
   },
+  "pnpm": {
+    "overrides": {
+      "serialize-javascript": "^7.0.3",
+      "@anthropic-ai/sdk": ">=0.91.1",
+      "esbuild@<=0.24.2": ">=0.25.0",
+      "prismjs@<1.30.0": ">=1.30.0",
+      "postcss@<8.5.10": ">=8.5.10",
+      "rollup-plugin-sourcemaps>rollup": ">=4.0.0",
+      "@anthropic-ai/claude-agent-sdk>zod": ">=3.25.76"
+    },
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "rollup"
+      ],
+      "allowedVersions": {
+        "rollup-plugin-sourcemaps": "*"
+      }
+    }
+  },
   "devDependencies": {
-    "@types/node": "^25.2.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-replace": "^6.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^6.0.1",
     "chalk": "catalog:",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "turbo": "^2.4.0",
-    "typescript": "^5.9.3",
-    "vite": "^8.0.10",
-    "rimraf": "^6.0.1",
-    "rollup": "^4.34.8",
-    "concurrently": "^9.1.2",
-    "jest": "^29.7.0",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-replace": "^6.0.2",
-    "@rollup/plugin-terser": "^0.4.4",
+    "concurrently": "catalog:",
+    "framer-motion": "catalog:",
+    "husky": "catalog:",
+    "jest": "catalog:",
+    "lint-staged": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "rimraf": "catalog:",
+    "rollup": "catalog:",
+    "rollup-plugin-dts": "^6.4.1",
+    "rollup-plugin-preserve-directives": "^0.4.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-dts": "^6.1.1",
-    "rollup-plugin-preserve-directives": "^0.4.0"
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
   }
 }

@@ -1,6 +1,6 @@
 import { sognaflowValue } from "sognaflow-dom"
 import { render } from "../../jest.setup.js"
-import { sognaflow as sognaflowProxy } from "../../render/components/sognaflow/proxy"
+import { sognaflow as sognaflowProxy } from "../../render/components/motion/proxy.js"
 
 const sognaflow = { div: sognaflowProxy.create("div") }
 

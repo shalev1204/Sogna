@@ -7,7 +7,6 @@ id: skill-n8n-code-python
 owner: [[orchestrator]]
 ---
 
-
 # Python Code Node (Beta)
 
 Expert guidance for writing Python code in n8n Code nodes.
@@ -17,11 +16,13 @@ Expert guidance for writing Python code in n8n Code nodes.
 ## ⚠️ Important: JavaScript First
 
 **Recommendation**: Use **JavaScript for 95% of use cases**. Only use Python when:
+
 - You need specific Python standard library functions
 - You're significantly more comfortable with Python syntax
 - You're doing data transformations better suited to Python
 
 **Why JavaScript is preferred:**
+
 - Full n8n helper functions ($helpers.httpRequest, etc.)
 - Luxon DateTime library for advanced date/time operations
 - No external library limitations
@@ -32,10 +33,13 @@ Expert guidance for writing Python code in n8n Code nodes.
 ## Quick Start
 
 ```python
+
 # Basic template for Python Code nodes
+
 items = _input.all()
 
 # Process data
+
 processed = []
 for item in items:
     processed.append({
@@ -74,7 +78,9 @@ Same as JavaScript - choose based on your use case:
 - **Performance**: Faster for multiple items (single execution)
 
 ```python
+
 # Example: Calculate total from all items
+
 all_items = _input.all()
 total = sum(item["json"].get("amount", 0) for item in all_items)
 
@@ -97,7 +103,9 @@ return [{
 - **Performance**: Slower for large datasets (multiple executions)
 
 ```python
+
 # Example: Add processing timestamp to each item
+
 item = _input.item
 
 return [{
@@ -116,13 +124,16 @@ return [{
 n8n offers two Python execution modes:
 
 ### Python (Beta) - Recommended
+
 - **Use**: `_input`, `_json`, `_node` helper syntax
 - **Best for**: Most Python use cases
 - **Helpers available**: `_now`, `_today`, `_jmespath()`
 - **Import**: `from datetime import datetime`
 
 ```python
+
 # Python (Beta) example
+
 items = _input.all()
 now = _now  # Built-in datetime object
 
@@ -135,13 +146,16 @@ return [{
 ```
 
 ### Python (Native) (Beta)
+
 - **Use**: `_items`, `_item` variables only
 - **No helpers**: No `_input`, `_now`, etc.
 - **More limited**: Standard Python only
 - **Use when**: Need pure Python without n8n helpers
 
 ```python
+
 # Python (Native) example
+
 processed = []
 
 for item in _items:
@@ -166,10 +180,13 @@ return processed
 **Use when**: Processing arrays, batch operations, aggregations
 
 ```python
+
 # Get all items from previous node
+
 all_items = _input.all()
 
 # Filter, transform as needed
+
 valid = [item for item in all_items if item["json"].get("status") == "active"]
 
 processed = []
@@ -189,7 +206,9 @@ return processed
 **Use when**: Working with single objects, API responses
 
 ```python
+
 # Get first item only
+
 first_item = _input.first()
 data = first_item["json"]
 
@@ -206,7 +225,9 @@ return [{
 **Use when**: In "Run Once for Each Item" mode
 
 ```python
+
 # Current item in loop (Each Item mode only)
+
 current_item = _input.item
 
 return [{
@@ -222,7 +243,9 @@ return [{
 **Use when**: Need data from specific nodes in workflow
 
 ```python
+
 # Get output from specific node
+
 webhook_data = _node["Webhook"]["json"]
 http_data = _node["HTTP Request"]["json"]
 
@@ -245,15 +268,19 @@ return [{
 **MOST COMMON MISTAKE**: Webhook data is nested under `["body"]`
 
 ```python
+
 # ❌ WRONG - Will raise KeyError
+
 name = _json["name"]
 email = _json["email"]
 
 # ✅ CORRECT - Webhook data is under ["body"]
+
 name = _json["body"]["name"]
 email = _json["body"]["email"]
 
 # ✅ SAFER - Use .get() for safe access
+
 webhook_data = _json.get("body", {})
 name = webhook_data.get("name")
 ```
@@ -271,7 +298,9 @@ name = webhook_data.get("name")
 ### Correct Return Formats
 
 ```python
+
 # ✅ Single result
+
 return [{
     "json": {
         "field1": value1,
@@ -280,12 +309,14 @@ return [{
 }]
 
 # ✅ Multiple results
+
 return [
     {"json": {"id": 1, "data": "first"}},
     {"json": {"id": 2, "data": "second"}}
 ]
 
 # ✅ List comprehension
+
 transformed = [
     {"json": {"id": item["json"]["id"], "processed": True}}
     for item in _input.all()
@@ -294,9 +325,11 @@ transformed = [
 return transformed
 
 # ✅ Empty result (when no data to return)
+
 return []
 
 # ✅ Conditional return
+
 if should_process:
     return [{"json": processed_data}]
 else:
@@ -306,18 +339,23 @@ else:
 ### Incorrect Return Formats
 
 ```python
+
 # ❌ WRONG: Dictionary without list wrapper
+
 return {
     "json": {"field": value}
 }
 
 # ❌ WRONG: List without json wrapper
+
 return [{"field": value}]
 
 # ❌ WRONG: Plain string
+
 return "processed"
 
 # ❌ WRONG: Incomplete structure
+
 return [{"data": value}]  # Should be {"json": value}
 ```
 
@@ -334,7 +372,9 @@ return [{"data": value}]  # Should be {"json": value}
 ### What's NOT Available
 
 ```python
+
 # ❌ NOT AVAILABLE - Will raise ModuleNotFoundError
+
 import requests  # ❌ No
 import pandas  # ❌ No
 import numpy  # ❌ No
@@ -346,7 +386,9 @@ import lxml  # ❌ No
 ### What IS Available (Standard Library)
 
 ```python
+
 # ✅ AVAILABLE - Standard library only
+
 import json  # ✅ JSON parsing
 import datetime  # ✅ Date/time operations
 import re  # ✅ Regular expressions
@@ -361,15 +403,18 @@ import statistics  # ✅ Statistical functions
 ### Workarounds
 
 **Need HTTP requests?**
+
 - ✅ Use **HTTP Request node** before Code node
 - ✅ Or switch to **JavaScript** and use `$helpers.httpRequest()`
 
 **Need data analysis (pandas/numpy)?**
+
 - ✅ Use Python **statistics** module for basic stats
 - ✅ Or switch to **JavaScript** for most operations
 - ✅ Manual calculations with lists and dictionaries
 
 **Need web scraping (BeautifulSoup)?**
+
 - ✅ Use **HTTP Request node** + **HTML Extract node**
 - ✅ Or switch to **JavaScript** with regex/string methods
 
@@ -382,6 +427,7 @@ import statistics  # ✅ Statistical functions
 Based on production workflows, here are the most useful Python patterns:
 
 ### 1. Data Transformation
+
 Transform all items with list comprehensions
 
 ```python
@@ -400,6 +446,7 @@ return [
 ```
 
 ### 2. Filtering & Aggregation
+
 Sum, filter, count with built-in functions
 
 ```python
@@ -416,6 +463,7 @@ return [{
 ```
 
 ### 3. String Processing with Regex
+
 Extract patterns from text
 
 ```python
@@ -431,6 +479,7 @@ for item in items:
     all_emails.extend(emails)
 
 # Remove duplicates
+
 unique_emails = list(set(all_emails))
 
 return [{
@@ -442,6 +491,7 @@ return [{
 ```
 
 ### 4. Data Validation
+
 Validate and clean data
 
 ```python
@@ -470,6 +520,7 @@ return validated
 ```
 
 ### 5. Statistical Analysis
+
 Calculate statistics with statistics module
 
 ```python
@@ -502,58 +553,80 @@ else:
 ### #1: Importing External Libraries (Python-Specific!)
 
 ```python
+
 # ❌ WRONG: Trying to import external library
+
 import requests  # ModuleNotFoundError!
 
 # ✅ CORRECT: Use HTTP Request node or JavaScript
+
 # Add HTTP Request node before Code node
+
 # OR switch to JavaScript and use $helpers.httpRequest()
+
 ```
 
 ### #2: Empty Code or Missing Return
 
 ```python
+
 # ❌ WRONG: No return statement
+
 items = _input.all()
+
 # Processing...
+
 # Forgot to return!
 
 # ✅ CORRECT: Always return data
+
 items = _input.all()
+
 # Processing...
+
 return [{"json": item["json"]} for item in items]
 ```
 
 ### #3: Incorrect Return Format
 
 ```python
+
 # ❌ WRONG: Returning dict instead of list
+
 return {"json": {"result": "success"}}
 
 # ✅ CORRECT: List wrapper required
+
 return [{"json": {"result": "success"}}]
 ```
 
 ### #4: KeyError on Dictionary Access
 
 ```python
+
 # ❌ WRONG: Direct access crashes if missing
+
 name = _json["user"]["name"]  # KeyError!
 
 # ✅ CORRECT: Use .get() for safe access
+
 name = _json.get("user", {}).get("name", "Unknown")
 ```
 
 ### #5: Webhook Body Nesting
 
 ```python
+
 # ❌ WRONG: Direct access to webhook data
+
 email = _json["email"]  # KeyError!
 
 # ✅ CORRECT: Webhook data under ["body"]
+
 email = _json["body"]["email"]
 
 # ✅ BETTER: Safe access with .get()
+
 email = _json.get("body", {}).get("email", "no-email")
 ```
 
@@ -566,37 +639,45 @@ email = _json.get("body", {}).get("email", "no-email")
 ### Most Useful Modules
 
 ```python
+
 # JSON operations
+
 import json
 data = json.loads(json_string)
 json_output = json.dumps({"key": "value"})
 
 # Date/time
+
 from datetime import datetime, timedelta
 now = datetime.now()
 tomorrow = now + timedelta(days=1)
 formatted = now.strftime("%Y-%m-%d")
 
 # Regular expressions
+
 import re
 matches = re.findall(r'\d+', text)
 cleaned = re.sub(r'[^\w\s]', '', text)
 
 # Base64 encoding
+
 import base64
 encoded = base64.b64encode(data).decode()
 decoded = base64.b64decode(encoded)
 
 # Hashing
+
 import hashlib
 hash_value = hashlib.sha256(text.encode()).hexdigest()
 
 # URL parsing
+
 import urllib.parse
 params = urllib.parse.urlencode({"key": "value"})
 parsed = urllib.parse.urlparse(url)
 
 # Statistics
+
 from statistics import mean, median, stdev
 average = mean([1, 2, 3, 4, 5])
 ```
@@ -610,20 +691,26 @@ average = mean([1, 2, 3, 4, 5])
 ### 1. Always Use .get() for Dictionary Access
 
 ```python
+
 # ✅ SAFE: Won't crash if field missing
+
 value = item["json"].get("field", "default")
 
 # ❌ RISKY: Crashes if field doesn't exist
+
 value = item["json"]["field"]
 ```
 
 ### 2. Handle None/Null Values Explicitly
 
 ```python
+
 # ✅ GOOD: Default to 0 if None
+
 amount = item["json"].get("amount") or 0
 
 # ✅ GOOD: Check for None explicitly
+
 text = item["json"].get("text")
 if text is None:
     text = ""
@@ -632,10 +719,13 @@ if text is None:
 ### 3. Use List Comprehensions for Filtering
 
 ```python
+
 # ✅ PYTHONIC: List comprehension
+
 valid = [item for item in items if item["json"].get("active")]
 
 # ❌ VERBOSE: Manual loop
+
 valid = []
 for item in items:
     if item["json"].get("active"):
@@ -645,7 +735,9 @@ for item in items:
 ### 4. Return Consistent Structure
 
 ```python
+
 # ✅ CONSISTENT: Always list with "json" key
+
 return [{"json": result}]  # Single result
 return results  # Multiple results (already formatted)
 return []  # No results
@@ -654,7 +746,9 @@ return []  # No results
 ### 5. Debug with print() Statements
 
 ```python
+
 # Debug statements appear in browser console (F12)
+
 items = _input.all()
 print(f"Processing {len(items)} items")
 print(f"First item: {items[0] if items else 'None'}")
@@ -665,18 +759,21 @@ print(f"First item: {items[0] if items else 'None'}")
 ## When to Use Python vs JavaScript
 
 ### Use Python When:
+
 - ✅ You need `statistics` module for statistical operations
 - ✅ You're significantly more comfortable with Python syntax
 - ✅ Your logic maps well to list comprehensions
 - ✅ You need specific standard library functions
 
 ### Use JavaScript When:
+
 - ✅ You need HTTP requests ($helpers.httpRequest())
 - ✅ You need advanced date/time (DateTime/Luxon)
 - ✅ You want better n8n integration
 - ✅ **For 95% of use cases** (recommended)
 
 ### Consider Other Nodes When:
+
 - ❌ Simple field mapping → Use **Set** node
 - ❌ Basic filtering → Use **Filter** node
 - ❌ Simple conditionals → Use **IF** or **Switch** node
@@ -689,30 +786,36 @@ print(f"First item: {items[0] if items else 'None'}")
 ### Works With:
 
 **n8n Expression Syntax**:
+
 - Expressions use `{{ }}` syntax in other nodes
 - Code nodes use Python directly (no `{{ }}`)
 - When to use expressions vs code
 
 **n8n MCP Tools Expert**:
+
 - How to find Code node: `search_nodes({query: "code"})`
 - Get configuration help: `get_node_essentials("nodes-base.code")`
 - Validate code: `validate_node_operation()`
 
 **n8n Node Configuration**:
+
 - Mode selection (All Items vs Each Item)
 - Language selection (Python vs JavaScript)
 - Understanding property dependencies
 
 **n8n Workflow Patterns**:
+
 - Code nodes in transformation step
 - When to use Python vs JavaScript in patterns
 
 **n8n Validation Expert**:
+
 - Validate Code node configuration
 - Handle validation errors
 - Auto-fix common issues
 
 **n8n Code JavaScript**:
+
 - When to use JavaScript instead
 - Comparison of JavaScript vs Python features
 - Migration from Python to JavaScript
@@ -739,12 +842,14 @@ Before deploying Python Code nodes, verify:
 ## Additional Resources
 
 ### Related Files
+
 - DATA_ACCESS.md - Comprehensive Python data access patterns
 - COMMON_PATTERNS.md - 10 Python patterns for n8n
 - ERROR_PATTERNS.md - Top 5 errors and solutions
 - STANDARD_LIBRARY.md - Complete standard library reference
 
 ### n8n Documentation
+
 - Code Node Guide: https://docs.n8n.io/code/code-node/
 - Python in n8n: https://docs.n8n.io/code/builtin/python-modules/
 
@@ -753,11 +858,13 @@ Before deploying Python Code nodes, verify:
 **Ready to write Python in n8n Code nodes - but consider JavaScript first!** Use Python for specific needs, reference the error patterns guide to avoid common mistakes, and leverage the standard library effectively.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

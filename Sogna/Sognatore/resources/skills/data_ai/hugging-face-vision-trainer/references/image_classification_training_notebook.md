@@ -8,6 +8,7 @@ version: 1.0.0
 # Image classification
 
 ## Contents
+
 - Load Food-101 dataset
 - Preprocess (ViT image processor, torchvision transforms)
 - Evaluate (accuracy metric, compute_metrics)
@@ -284,6 +285,7 @@ Get the predicted label with the highest probability, and use the model's `id2la
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

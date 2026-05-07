@@ -1,4 +1,4 @@
-import type { VisualElement } from "./visualelement.js";
+import type { VisualElement } from "./VisualElement.js";
 /**
  * Feature base class for extending VisualElement functionality.
  * Features are plugins that can be mounted/unmounted to add behavior

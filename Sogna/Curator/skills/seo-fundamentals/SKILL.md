@@ -12,7 +12,6 @@ id: skill-seo-fundamentals
 owner: [[biz-marketing]]
 ---
 
-
 # SEO Fundamentals
 
 > Principles for search engine visibility.

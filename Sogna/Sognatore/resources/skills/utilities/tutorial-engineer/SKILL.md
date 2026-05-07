@@ -10,8 +10,8 @@ id: skill-tutorial-engineer
 owner: [[orchestrator]]
 ---
 
-
 ## Use this skill when
+
 - Working on tutorial engineer tasks or workflows
 - Needing guidance, best practices, or checklists for tutorial engineer
 - Transforming code, features, or libraries into learnable content
@@ -132,6 +132,7 @@ owner: [[orchestrator]]
  | Multiple Perspectives | Explain same concept  ways | Analogy + diagram + code |
  
  **Cognitive Load Management:**
+
  - **± Rule:** No more than  new concepts per section
  - **One Screen Rule:** Code examples should fit without scrolling (or use collapsible sections)
  - **No Forward References:** Don't mention concepts before explaining them
@@ -143,6 +144,7 @@ owner: [[orchestrator]]
  
  ### Code Examples
  **Checklist before publishing:**
+
  - [ ] Code runs without modification
  - [ ] All dependencies are listed
  - [ ] Expected output is shown
@@ -200,6 +202,7 @@ owner: [[orchestrator]]
  . **Refactoring**: Improve existing implementations (before/after comparison)
  
  **Exercise Quality Checklist:**
+
  - [ ] Clear success criterion ("Your code should print X when given Y")
  - [ ] Hints available (collapsible or linked)
  - [ ] Solution provided (collapsible or separate file)
@@ -233,18 +236,21 @@ owner: [[orchestrator]]
  **Pre-Publish Audit ( minutes):**
  
  ### Comprehension Checks
+
  - [ ] Can a beginner follow without getting stuck? (Test with target audience member)
  - [ ] Are concepts introduced before they're used? (No forward references)
  - [ ] Is each code example complete and runnable? (Test every snippet)
  - [ ] Are common errors addressed proactively? (Include troubleshooting section)
  
  ### Progression Checks
+
  - [ ] Does difficulty increase gradually? (No sudden complexity spikes)
  - [ ] Are there enough practice opportunities? ( exercise per - concepts minimum)
  - [ ] Is the time estimate accurate? (Within ±% of actual completion time)
  - [ ] Are learning objectives measurable? (Can you test if reader achieved them)
  
  ### Technical Checks
+
  - [ ] All links work
  - [ ] All code runs (tested within last  hours)
  - [ ] Dependencies are pinned or versioned
@@ -315,6 +321,7 @@ owner: [[orchestrator]]
 
  
  **Required Elements:**
+
  - Clear section numbering (, ., ., , ....)
  - Code blocks with expected output (comment: `# Output: ...`)
  - Info boxes for tips and warnings (use `> **Tip:**` or `> **Warning:**`)
@@ -323,6 +330,7 @@ owner: [[orchestrator]]
  - Links to working code repositories (GitHub, CodeSandbox, Replit)
  
  **Accessibility Checklist:**
+
  - [ ] Alt text on all images
  - [ ] Color not sole indicator (use labels + color)
  - [ ] Code has sufficient contrast
@@ -382,6 +390,7 @@ owner: [[orchestrator]]
  . **Distribution**: Where will this be published? (blog, docs, course platform, internal wiki)
  
  **If context is missing, assume:**
+
  - Audience: Intermediate developers (knows basics, new to this topic)
  - Format: Deep dive (- minutes)
  - Distribution: Technical blog or documentation
@@ -399,11 +408,13 @@ owner: [[orchestrator]]
    - **quiz-builder**: For adding knowledge checks and assessments to tutorials.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

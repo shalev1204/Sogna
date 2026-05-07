@@ -13,7 +13,6 @@ id: skill-global-chat-agent-discovery
 owner: [[orchestrator]]
 ---
 
-
 # Global Chat Agent Discovery
 
 ## Overview
@@ -80,9 +79,11 @@ If you maintain an `agents.txt` file, use the free validator:
 ```
 You: "Find MCP servers that can convert PDF files to text"
 Agent (via Global Chat MCP): Searching across 6 registries...
+
   - @anthropic/pdf-tools (mcpservers.org) — PDF parsing and text extraction
   - pdf-converter-mcp (mcp.so) — Convert PDF to text, markdown, or HTML
   - ...
+
 ```
 
 ### Example 2: Discover A2A Agents
@@ -109,9 +110,11 @@ Agent (via Global Chat MCP): 4 registries carry Kubernetes-related agents (23 to
 ## Common Pitfalls
 
 - **Problem:** Search returns too many results
+
   **Solution:** Add protocol or registry filters to narrow the scope
 
 - **Problem:** MCP server not connecting
+
   **Solution:** Ensure `npx` is available and run `npx -y @global-chat/mcp-server` manually first to verify
 
 ## Related Skills
@@ -121,11 +124,13 @@ Agent (via Global Chat MCP): 4 registries carry Kubernetes-related agents (23 to
 - `@agent-memory-mcp` - For persisting discovered agent information across sessions
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

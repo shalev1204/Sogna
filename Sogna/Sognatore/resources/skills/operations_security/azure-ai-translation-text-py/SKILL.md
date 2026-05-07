@@ -8,7 +8,6 @@ id: skill-azure-ai-translation-text-py
 owner: [[ops-security]]
 ---
 
-
 # Azure AI Text Translation SDK for Python
 
 Client library for Azure AI Translator text translation service for real-time text translation, transliteration, and language operations.
@@ -24,7 +23,9 @@ pip install azure-ai-translation-text
 ```bash
 AZURE_TRANSLATOR_KEY=<your-api-key>
 AZURE_TRANSLATOR_REGION=<your-region>  # e.g., eastus, westus2
+
 # Or use custom endpoint
+
 AZURE_TRANSLATOR_ENDPOINT=https://<resource>.cognitiveservices.azure.com
 ```
 
@@ -41,6 +42,7 @@ key = os.environ["AZURE_TRANSLATOR_KEY"]
 region = os.environ["AZURE_TRANSLATOR_REGION"]
 
 # Create credential with region
+
 credential = AzureKeyCredential(key)
 client = TextTranslationClient(credential=credential, region=region)
 ```
@@ -71,7 +73,9 @@ client = TextTranslationClient(
 ## Basic Translation
 
 ```python
+
 # Translate to a single language
+
 result = client.translate(
     body=["Hello, how are you?", "Welcome to Azure!"],
     to=["es"]  # Spanish
@@ -179,15 +183,19 @@ for item in result:
 ## Get Supported Languages
 
 ```python
+
 # Get all supported languages
+
 languages = client.get_supported_languages()
 
 # Translation languages
+
 print("Translation languages:")
 for code, lang in languages.translation.items():
     print(f"  {code}: {lang.name} ({lang.native_name})")
 
 # Transliteration languages
+
 print("\nTransliteration languages:")
 for code, lang in languages.transliteration.items():
     print(f"  {code}: {lang.name}")
@@ -195,6 +203,7 @@ for code, lang in languages.transliteration.items():
         print(f"    {script.code} -> {[t.code for t in script.to_scripts]}")
 
 # Dictionary languages
+
 print("\nDictionary languages:")
 for code, lang in languages.dictionary.items():
     print(f"  {code}: {lang.name}")
@@ -277,14 +286,17 @@ async def translate_text():
 7. **Include alignment** for applications needing word mapping
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

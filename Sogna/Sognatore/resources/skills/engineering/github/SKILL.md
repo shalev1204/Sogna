@@ -8,12 +8,12 @@ id: skill-github
 owner: [[orchestrator]]
 ---
 
-
 # GitHub Skill
 
 Use the `gh` CLI to interact with GitHub. Always specify `--repo owner/repo` when not in a git directory, or use URLs directly.
 
 ## When to Use
+
 - When the user asks about GitHub issues, pull requests, workflow runs, or CI failures.
 - When you need `gh issue`, `gh pr`, `gh run`, or `gh api` from the command line.
 
@@ -44,18 +44,25 @@ gh run view <run-id> --repo owner/repo --log-failed
 Follow this sequence to investigate a failing CI run:
 
 1. **Check PR status** — identify which checks are failing:
+
    ```bash
    gh pr checks 55 --repo owner/repo
    ```
+
 2. **List recent runs** — find the relevant run ID:
+
    ```bash
    gh run list --repo owner/repo --limit 10
    ```
+
 3. **View the failed run** — see which jobs and steps failed:
+
    ```bash
    gh run view <run-id> --repo owner/repo
    ```
+
 4. **Fetch failure logs** — get the detailed output for failed steps:
+
    ```bash
    gh run view <run-id> --repo owner/repo --log-failed
    ```
@@ -78,11 +85,13 @@ gh issue list --repo owner/repo --json number,title --jq '.[] | "\(.number): \(.
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,7 +7,6 @@ id: skill-pr-writer
 owner: [[orchestrator]]
 ---
 
-
 # PR Writer
 
 Create pull requests following Sentry's engineering practices.
@@ -15,6 +14,7 @@ Create pull requests following Sentry's engineering practices.
 **Requires**: GitHub CLI (`gh`) authenticated and available.
 
 ## When to Use
+
 - You are ready to open a pull request and need a structured description based on the committed branch diff.
 - You want the PR body to capture what changed, why it changed, and any reviewer context.
 - You are using GitHub CLI and need a repeatable PR-writing workflow rather than writing the description ad hoc.
@@ -24,7 +24,9 @@ Create pull requests following Sentry's engineering practices.
 Before creating a PR, ensure all changes are committed. If there are uncommitted changes, run the `sentry-skills:commit` skill first to commit them properly.
 
 ```bash
+
 # Check for uncommitted changes
+
 git status --porcelain
 ```
 
@@ -35,17 +37,22 @@ If the output shows any uncommitted changes (modified, added, or untracked files
 ### Step 1: Verify Branch State
 
 ```bash
+
 # Detect the default branch — note the output for use in subsequent commands
+
 gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
 ```
 
 ```bash
+
 # Check current branch and status (substitute the detected branch name above for BASE)
+
 git status
 git log BASE..HEAD --oneline
 ```
 
 Ensure:
+
 - All changes are committed
 - Branch is up to date with remote
 - Changes are rebased on the base branch if needed
@@ -55,10 +62,13 @@ Ensure:
 Review what will be included in the PR:
 
 ```bash
+
 # See all commits that will be in the PR (substitute detected branch name for BASE)
+
 git log BASE..HEAD
 
 # See the full diff
+
 git diff BASE...HEAD
 ```
 
@@ -79,11 +89,13 @@ Use this structure for PR descriptions (ignoring any repository PR templates):
 ```
 
 **Do NOT include:**
+
 - "Test plan" sections
 - Checkbox lists of testing steps
 - Redundant summaries of the diff
 
 **Do include:**
+
 - Clear explanation of what and why
 - Links to relevant issues or tickets
 - Context that isn't obvious from the code
@@ -99,6 +111,7 @@ EOF
 ```
 
 **Title format** follows commit conventions:
+
 - `feat(scope): Add new feature`
 - `fix(scope): Fix the bug`
 - `ref: Refactor something`
@@ -170,16 +183,20 @@ Reference issues in the PR body:
 If you need to update a PR after creation, use `gh api` instead of `gh pr edit`:
 
 ```bash
+
 # Update PR description
+
 gh api -X PATCH repos/{owner}/{repo}/pulls/PR_NUMBER -f body="$(cat <<'EOF'
 Updated description here
 EOF
 )"
 
 # Update PR title
+
 gh api -X PATCH repos/{owner}/{repo}/pulls/PR_NUMBER -f title='new: Title here'
 
 # Update both
+
 gh api -X PATCH repos/{owner}/{repo}/pulls/PR_NUMBER \
   -f title='new: Title' \
   -f body='New description'
@@ -193,11 +210,13 @@ Note: `gh pr edit` is currently broken due to GitHub's Projects (classic) deprec
 - [Sentry Commit Messages](https://develop.sentry.dev/engineering-practices/commit-messages/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

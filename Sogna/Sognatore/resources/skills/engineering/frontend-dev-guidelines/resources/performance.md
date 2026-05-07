@@ -39,12 +39,14 @@ export const DataDisplay: React.FC<{ items: Item[], searchTerm: string }> = ({
 ```
 
 **When to use useMemo:**
+
 - Filtering/sorting large arrays
 - Complex calculations
 - Transforming data structures
 - Expensive computations (loops, recursion)
 
 **When NOT to use useMemo:**
+
 - Simple string concatenation
 - Basic arithmetic
 - Premature optimization (profile first!)
@@ -85,12 +87,14 @@ export const Parent: React.FC = () => {
 ```
 
 **When to use useCallback:**
+
 - Functions passed as props to children
 - Functions used as dependencies in useEffect
 - Functions passed to memoized components
 - Event handlers in lists
 
 **When NOT to use useCallback:**
+
 - Event handlers not passed to children
 - Simple inline handlers: `onClick={() => doSomething()}`
 
@@ -118,6 +122,7 @@ export const ExpensiveComponent = React.memo<ExpensiveComponentProps>(
 ```
 
 **When to use React.memo:**
+
 - Component renders frequently
 - Component has expensive rendering
 - Props don't change often
@@ -125,6 +130,7 @@ export const ExpensiveComponent = React.memo<ExpensiveComponentProps>(
 - DataGrid cells/renderers
 
 **When NOT to use React.memo:**
+
 - Props change frequently anyway
 - Rendering is already fast
 - Premature optimization
@@ -164,6 +170,7 @@ export const SearchComponent: React.FC = () => {
 ```
 
 **Optimal Debounce Timing:**
+
 - **300-500ms**: Search/filtering
 - **1000ms**: Auto-save
 - **100-200ms**: Real-time validation
@@ -398,6 +405,7 @@ const handleExportExcel = async () => {
 ## Summary
 
 **Performance Checklist:**
+
 - ✅ `useMemo` for expensive computations (filter, sort, map)
 - ✅ `useCallback` for functions passed to children
 - ✅ `React.memo` for expensive components
@@ -409,12 +417,16 @@ const handleExportExcel = async () => {
 - ✅ Code splitting with React.lazy
 
 **See Also:**
+
 - [component-patterns.md](component-patterns.md) - Lazy loading
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - [data-fetching.md](data-fetching.md) - TanStack Query optimization
 - [complete-examples.md](complete-examples.md) - Performance patterns in context
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

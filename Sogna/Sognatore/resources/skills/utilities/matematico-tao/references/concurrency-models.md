@@ -10,6 +10,7 @@ version: 1.0.0
 ## 1. Modelo CSP (Communicating Sequential Processes)
 
 ### Definição Formal
+
 Um processo CSP é definido por:
 ```
 P ::= STOP                  -- processo morto (deadlock)
@@ -22,6 +23,7 @@ P ::= STOP                  -- processo morto (deadlock)
 ```
 
 ### Aplicação a Coroutines Kotlin
+
 ```kotlin
 // Cada coroutine é um processo CSP
 // launch { } ≡ processo concorrente
@@ -46,12 +48,15 @@ launch { channelB.send(2); channelA.receive() }  // Q
 ## 2. Modelo de Atores (Actor Model)
 
 ### Definição
+
 Cada ator tem:
+
 - Caixa postal (mailbox) — fila de mensagens
 - Comportamento — função: Mensagem → (Estado', [Atores novos], [Mensagens])
 - Estado local encapsulado — não compartilhado
 
 ### Em Kotlin com Coroutines
+
 ```kotlin
 // Actor via Channel + coroutine
 fun CoroutineScope.counterActor() = actor<CounterMsg> {
@@ -75,17 +80,21 @@ fun CoroutineScope.counterActor() = actor<CounterMsg> {
 ## 3. Modelo de Memória Android (JMM - Java Memory Model)
 
 ### Happens-Before Relations
+
 ```
 Regras do JMM que garantem visibilidade:
+
 1. Program order: a₁ →ₚ a₂ se a₁ vem antes de a₂ no mesmo thread
 2. Monitor lock: unlock(m) → lock(m)
 3. Volatile: write(v) → read(v) para variável volatile
 4. Thread start: start(t) → qualquer ação de t
 5. Thread join: qualquer ação de t → join(t)
 6. Finalizer: fim do construtor → início do finalize()
+
 ```
 
 ### StateFlow e Atomicidade
+
 ```kotlin
 // MutableStateFlow usa CAS (Compare-And-Swap) internamente
 // Garantia: atualização via compareAndSet é lock-free e wait-free
@@ -108,6 +117,7 @@ _state.value = current.copy(...)    // write separado → race condition!
 ### Padrões de Deadlock Comuns
 
 #### Pattern 1: runBlocking em Main Thread
+
 ```kotlin
 // DEADLOCK: runBlocking bloqueia Main, coroutines precisam do Main
 fun onClickButton() {
@@ -126,6 +136,7 @@ fun onClickButton() {
 ```
 
 #### Pattern 2: Mutex lock reentrante (não existe em Kotlin)
+
 ```kotlin
 // Kotlin Mutex é NÃO reentrante — diferente de synchronized(this)
 val mutex = Mutex()
@@ -144,6 +155,7 @@ suspend fun inner() {
 ```
 
 #### Pattern 3: Channel rendezvous sem consumidor
+
 ```kotlin
 val channel = Channel<Result>()  // sem buffer
 
@@ -161,6 +173,7 @@ launch {
 ## 5. Análise de Liveness (Ausência de Starvation)
 
 ### Definição Formal
+
 ```
 Starvation: processo P está em starvation se:
 ∃ sequência infinita de execuções onde P nunca progride,
@@ -172,6 +185,7 @@ Em termos de LTL:
 ```
 
 ### No Contexto Android/Kotlin
+
 ```kotlin
 // Fairness do scheduler de coroutines:
 // - Dispatchers.Default: trabalho processor-bound, round-robin entre coroutines
@@ -193,6 +207,7 @@ Em termos de LTL:
 ## 6. Verificação de Propriedades com TLA+
 
 ### Exemplo para VoicePipeline
+
 ```tla
 VARIABLES state, sttResult, llmResult
 
@@ -227,6 +242,7 @@ EventuallyIdle == <>(state = "IDLE")
 ## 7. Race Conditions — Checklist para Kotlin/Android
 
 ### Variáveis que precisam de proteção
+
 ```kotlin
 // ❌ INSEGURO: var compartilhado entre coroutines sem sincronização
 var isConnected: Boolean = false
@@ -246,6 +262,7 @@ val isConnected = _isConnected.asStateFlow()
 ```
 
 ### Padrões seguros em Kotlin coroutines
+
 ```kotlin
 // Mutex para seções críticas
 val mutex = Mutex()
@@ -266,6 +283,7 @@ state.update { it.copy(...) }  // atômico via CAS
 ## 8. Análise de Memory Leaks em Android
 
 ### Context Leaks (mais comum)
+
 ```kotlin
 // ❌ LEAK: Activity context capturada em objeto de longa vida
 class LlmClient(val context: Context) {  // se context = Activity → leak
@@ -281,6 +299,7 @@ class LlmClient(val context: Context) {
 ```
 
 ### Coroutine Leaks
+
 ```kotlin
 // ❌ LEAK: coroutine lançada sem scope adequado
 fun startRecording() {
@@ -300,6 +319,7 @@ class EarLlmService : Service() {
 ```
 
 ### Listener Leaks (Bluetooth)
+
 ```kotlin
 // ❌ LEAK: listener registrado mas nunca removido
 audioManager.registerAudioDeviceCallback(callback, null)
@@ -311,6 +331,7 @@ override fun onStop() { unregister(callback) }
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

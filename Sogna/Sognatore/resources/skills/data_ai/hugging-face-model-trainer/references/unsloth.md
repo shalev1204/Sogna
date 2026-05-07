@@ -26,12 +26,15 @@ Use Unsloth if instructed to do so, or one of the following use cases applies:
 ## Supported Models
 
 Unsloth supports many popular models including:
+
 - **Text LLMs**: Llama 3/3.1/3.2/3.3, Qwen 2.5/3, Mistral, Phi-4, Gemma 2/3, LFM2/2.5
 - **Vision LLMs**: Qwen3-VL, Gemma 3, Llama 3.2 Vision, Pixtral
 
 Use Unsloth's pre-optimized model variants when available:
 ```python
+
 # Unsloth-optimized models load faster and use less memory
+
 model_id = "unsloth/LFM2.5-1.2B-Instruct"      # 4-bit quantized
 model_id = "unsloth/gemma-3-4b-pt"            # Vision model
 model_id = "unsloth/Qwen3-VL-8B-Instruct"     # Vision model
@@ -40,14 +43,23 @@ model_id = "unsloth/Qwen3-VL-8B-Instruct"     # Vision model
 ## Installation
 
 ```python
+
 # /// script
+
 # dependencies = [
+
 #     "unsloth",
+
 #     "trl",
+
 #     "datasets",
+
 #     "trackio",
+
 # ]
+
 # ///
+
 ```
 
 ## Basic Usage: Text LLM
@@ -58,12 +70,14 @@ from trl import SFTTrainer, SFTConfig
 from datasets import load_dataset
 
 # Load model with Unsloth optimizations
+
 model, tokenizer = FastLanguageModel.from_pretrained(
     model_name="LiquidAI/LFM2.5-1.2B-Instruct",
     max_seq_length=4096,
 )
 
 # Add LoRA adapters
+
 model = FastLanguageModel.get_peft_model(
     model,
     r=16,
@@ -76,9 +90,11 @@ model = FastLanguageModel.get_peft_model(
 )
 
 # Load dataset
+
 dataset = load_dataset("trl-lib/Capybara", split="train")
 
 # Train with TRL
+
 trainer = SFTTrainer(
     model=model,
     tokenizer=tokenizer,
@@ -126,6 +142,7 @@ from trl import SFTTrainer, SFTConfig
 from datasets import load_dataset
 
 # Load VLM with Unsloth
+
 model, processor = FastVisionModel.from_pretrained(
     "unsloth/gemma-3-4b-pt",  # or "unsloth/Qwen3-VL-8B-Instruct"
     load_in_4bit=True,
@@ -133,6 +150,7 @@ model, processor = FastVisionModel.from_pretrained(
 )
 
 # Add LoRA for all modalities
+
 model = FastVisionModel.get_peft_model(
     model,
     finetune_vision_layers=True,      # Train vision encoder
@@ -145,15 +163,19 @@ model = FastVisionModel.get_peft_model(
 )
 
 # Apply chat template (required for base models)
+
 processor = get_chat_template(processor, "gemma-3")
 
 # Load VLM dataset (with images and messages)
+
 dataset = load_dataset("your-vlm-dataset", split="train", streaming=True)
 
 # Enable training mode
+
 FastVisionModel.for_training(model)
 
 # Train with VLM-specific collator
+
 trainer = SFTTrainer(
     model=model,
     train_dataset=dataset,
@@ -190,6 +212,7 @@ trainer.train()
 ## VLM Dataset Format
 
 VLM datasets should have:
+
 - `images`: List of PIL images or image paths
 - `messages`: Conversation format with image references
 
@@ -218,6 +241,7 @@ dataset = load_dataset(
 )
 
 # Must use max_steps with streaming (no epoch-based training)
+
 SFTConfig(max_steps=500, ...)
 ```
 
@@ -230,6 +254,7 @@ model.save_pretrained("./adapter")
 processor.save_pretrained("./adapter")
 
 # Push to Hub
+
 model.push_to_hub("username/my-vlm-adapter")
 processor.push_to_hub("username/my-vlm-adapter")
 ```
@@ -237,10 +262,13 @@ processor.push_to_hub("username/my-vlm-adapter")
 ### Merge and Save Full Model
 
 ```python
+
 # Merge LoRA weights into base model
+
 model = model.merge_and_unload()
 
 # Save merged model
+
 model.save_pretrained("./merged")
 tokenizer.save_pretrained("./merged")
 ```
@@ -250,10 +278,13 @@ tokenizer.save_pretrained("./merged")
 Unsloth models can be converted to GGUF for llama.cpp/Ollama:
 
 ```python
+
 # Save in 16-bit for GGUF conversion
+
 model.save_pretrained_gguf("./gguf", tokenizer, quantization_method="f16")
 
 # Or directly quantize
+
 model.save_pretrained_gguf("./gguf", tokenizer, quantization_method="q4_k_m")
 ```
 
@@ -287,6 +318,7 @@ presence_penalty = 0.0
 ## Example: Full VLM Training Script
 
 See `scripts/unsloth_sft_example.py` for a complete production-ready example that includes:
+
 - Unsloth VLM setup
 - Streaming dataset support
 - Trackio monitoring
@@ -320,6 +352,7 @@ hf_jobs("uv", {
 - [Unsloth GitHub](https://github.com/unslothai/unsloth)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

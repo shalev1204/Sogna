@@ -5,7 +5,7 @@ import { usesognaflowValue } from "../../"
 import { AnimatePresence } from "../../components/animatepresence"
 import { Reorder } from "../../components/reorder"
 import { sognaflow } from "../../render/components/sognaflow"
-import { sognaflow as sognaflowProxy } from "../../render/components/sognaflow/proxy"
+import { sognaflow as sognaflowProxy } from "../../render/components/motion/proxy.js"
 
 const sognaflowFragment = sognaflow.create(Fragment)
 

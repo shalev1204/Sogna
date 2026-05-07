@@ -26,3 +26,5 @@ export const TransformPropOrder = [
  */
 export const TransformProps = /*@__PURE__*/ (() =>
     new Set(TransformPropOrder))()
+
+export { TransformProps as transformProps }

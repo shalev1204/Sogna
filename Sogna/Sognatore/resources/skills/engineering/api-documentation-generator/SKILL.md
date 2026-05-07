@@ -8,7 +8,6 @@ id: skill-api-documentation-generator
 owner: [[eng-api]]
 ---
 
-
 # API Documentation Generator
 
 ## Overview
@@ -31,6 +30,7 @@ Perfect for REST APIs, GraphQL APIs, and WebSocket APIs.
 ### Step 1: Analyze the API Structure
 
 First, I'll examine your API codebase to understand:
+
 - Available endpoints and routes
 - HTTP methods (GET, POST, PUT, DELETE, etc.)
 - Request parameters and body structure
@@ -43,25 +43,31 @@ First, I'll examine your API codebase to understand:
 For each endpoint, I'll create documentation including:
 
 **Endpoint Details:**
+
 - HTTP method and URL path
 - Brief description of what it does
 - Authentication requirements
 - Rate limiting information (if applicable)
 
 **Request Specification:**
+
 - Path parameters
 - Query parameters
 - Request headers
 - Request body schema (with types and validation rules)
 
 **Response Specification:**
+
 - Success response (status code + body structure)
 - Error responses (all possible error codes)
 - Response headers
 
 **Code Examples:**
+
 - cURL command
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - JavaScript/TypeScript (fetch/axios)
 - Python (requests)
 - Other languages as needed
@@ -69,6 +75,7 @@ For each endpoint, I'll create documentation including:
 ### Step 3: Add Usage Guidelines
 
 I'll include:
+
 - Getting started guide
 - Authentication setup
 - Common use cases
@@ -80,6 +87,7 @@ I'll include:
 ### Step 4: Document Error Handling
 
 Clear error documentation including:
+
 - All possible error codes
 - Error message formats
 - Troubleshooting guide
@@ -88,6 +96,7 @@ Clear error documentation including:
 ### Step 5: Create Interactive Examples
 
 Where possible, I'll provide:
+
 - Postman collection
 - OpenAPI/Swagger specification
 - Interactive code examples
@@ -98,6 +107,7 @@ Where possible, I'll provide:
 ### Example 1: REST API Endpoint Documentation
 
 ```markdown
+
 ## Create User
 
 Creates a new user account.
@@ -131,6 +141,7 @@ Creates a new user account.
 **Error Responses:**
 
 - `400 Bad Request` - Invalid input data
+
   \`\`\`json
   {
     "error": "VALIDATION_ERROR",
@@ -140,6 +151,7 @@ Creates a new user account.
   \`\`\`
 
 - `409 Conflict` - Email already exists
+
   \`\`\`json
   {
     "error": "EMAIL_EXISTS",
@@ -206,6 +218,7 @@ print(user)
 ### Example 2: GraphQL API Documentation
 
 ```markdown
+
 ## User Query
 
 Fetch user information by ID.
@@ -276,6 +289,7 @@ query GetUser($id: ID!) {
 ### Example 3: Authentication Documentation
 
 ```markdown
+
 ## Authentication
 
 All API requests require authentication using Bearer tokens.
@@ -400,32 +414,40 @@ Tokens expire after 1 hour. Use the refresh token to get a new access token:
 ## Common Pitfalls
 
 ### Problem: Documentation Gets Out of Sync
+
 **Symptoms:** Examples don't work, parameters are wrong, endpoints return different data
 **Solution:** 
+
 - Generate docs from code comments/annotations
 - Use tools like Swagger/OpenAPI
 - Add API tests that validate documentation
 - Review docs with every API change
 
 ### Problem: Missing Error Documentation
+
 **Symptoms:** Users don't know how to handle errors, support tickets increase
 **Solution:**
+
 - Document every possible error code
 - Provide clear error messages
 - Include troubleshooting steps
 - Show example error responses
 
 ### Problem: Examples Don't Work
+
 **Symptoms:** Users can't get started, frustration increases
 **Solution:**
+
 - Test every code example
 - Use real, working endpoints
 - Include complete examples (not fragments)
 - Provide a sandbox environment
 
 ### Problem: Unclear Parameter Requirements
+
 **Symptoms:** Users send invalid requests, validation errors
 **Solution:**
+
 - Mark required vs optional clearly
 - Document data types and formats
 - Show validation rules
@@ -434,6 +456,7 @@ Tokens expire after 1 hour. Use the refresh token to get a new access token:
 ## Tools and Formats
 
 ### OpenAPI/Swagger
+
 Generate interactive documentation:
 ```yaml
 openapi: 3.0.0
@@ -453,6 +476,7 @@ paths:
 ```
 
 ### Postman Collection
+
 Export collection for easy testing:
 ```json
 {
@@ -492,11 +516,13 @@ Export collection for easy testing:
 **Pro Tip:** Keep your API documentation as close to your code as possible. Use tools that generate docs from code comments to ensure they stay in sync!
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

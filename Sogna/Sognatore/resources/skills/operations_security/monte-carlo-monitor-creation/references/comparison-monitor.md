@@ -60,6 +60,7 @@ When the source and target tables live in different warehouses (e.g., comparing 
 Even when both tables are MCONs, if they belong to different warehouses, pass both warehouse parameters to be safe. Omitting them in cross-warehouse scenarios causes silent failures or incorrect results.
 
 Common cross-warehouse patterns:
+
 - **Dev vs prod:** same warehouse type, different databases or schemas
 - **Migration validation:** source in old warehouse, target in new warehouse
 - **Replication checks:** primary warehouse vs replica or downstream warehouse
@@ -433,6 +434,7 @@ Compare both row counts and field-level metrics in a single monitor.
 Note: the `ROW_COUNT` condition has no fields, while the field-level conditions each specify both `sourceField` and `targetField`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

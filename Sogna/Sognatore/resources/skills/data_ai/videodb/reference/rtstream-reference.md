@@ -107,12 +107,15 @@ for rts in rtstreams:
 ## Starting and Stopping
 
 ```python
+
 # Begin ingestion
+
 rtstream.start()
 
 # ... stream is being recorded ...
 
 # Stop ingestion
+
 rtstream.stop()
 ```
 
@@ -129,12 +132,14 @@ start_ts = time.time()
 rtstream.start()
 
 # Let it record for a while...
+
 time.sleep(60)
 
 end_ts = time.time()
 rtstream.stop()
 
 # Generate a stream URL for the recorded segment
+
 stream_url = rtstream.generate_stream(start=start_ts, end=end_ts)
 print(f"Recorded stream: {stream_url}")
 ```
@@ -276,13 +281,17 @@ Results arrive on the `scene_index` WebSocket channel.
 
 Examples:
 ```python
+
 # Audio: every 50 words
+
 {"type": "word", "value": 50}
 
 # Audio: every 30 seconds
+
 {"type": "time", "value": 30}
 
 # Visual: 5 frames every 2 seconds
+
 {"type": "time", "value": 2, "frame_count": 5}
 ```
 
@@ -293,13 +302,16 @@ Examples:
 Real-time transcription via WebSocket:
 
 ```python
+
 # Start live transcription
+
 rtstream.start_transcript(
     ws_connection_id=ws_id,
     engine=None,  # optional, defaults to "assemblyai"
 )
 
 # Get transcript pages (with optional filters)
+
 transcript = rtstream.get_transcript(
     page=1,
     page_size=100,
@@ -310,6 +322,7 @@ transcript = rtstream.get_transcript(
 )
 
 # Stop transcription
+
 rtstream.stop_transcript(engine=None)
 ```
 
@@ -322,13 +335,16 @@ Transcript results arrive on the `transcript` WebSocket channel.
 When you call `index_audio()` or `index_visuals()`, the method returns an `RTStreamSceneIndex` object. This object represents the running index and provides methods for managing scenes and alerts.
 
 ```python
+
 # index_visuals returns an RTStreamSceneIndex
+
 scene_index = rtstream.index_visuals(
     prompt="Describe what is on screen",
     ws_connection_id=ws_id,
 )
 
 # index_audio also returns an RTStreamSceneIndex
+
 audio_index = rtstream.index_audio(
     prompt="Summarize the discussion",
     ws_connection_id=ws_id,
@@ -383,16 +399,21 @@ if result["next_page"]:
 ### Managing Scene Indexes
 
 ```python
+
 # List all indexes on the stream
+
 indexes = rtstream.list_scene_indexes()
 
 # Get a specific index by ID
+
 scene_index = rtstream.get_scene_index(index_id)
 
 # Stop an index
+
 scene_index.stop()
 
 # Restart an index
+
 scene_index.start()
 ```
 
@@ -435,13 +456,16 @@ Alerts wire events to indexes for real-time notifications. When the AI detects c
 ### Creating an Alert
 
 ```python
+
 # Get the RTStreamSceneIndex from index_visuals
+
 scene_index = rtstream.index_visuals(
     prompt="Describe what application is open on screen",
     ws_connection_id=ws_id,
 )
 
 # Create an alert on the index
+
 alert_id = scene_index.create_alert(
     event_id=event_id,
     callback_url="https://your-backend.com/alerts",  # for webhook delivery
@@ -454,10 +478,13 @@ alert_id = scene_index.create_alert(
 ### Managing Alerts
 
 ```python
+
 # List all alerts on an index
+
 alerts = scene_index.list_alerts()
 
 # Enable/disable alerts
+
 scene_index.disable_alert(alert_id)
 scene_index.enable_alert(alert_id)
 ```
@@ -504,6 +531,7 @@ scene_index.enable_alert(alert_id)
 ## WebSocket Integration
 
 All real-time AI results are delivered via WebSocket. Pass `ws_connection_id` to:
+
 - `rtstream.start_transcript()`
 - `rtstream.index_audio()`
 - `rtstream.index_visuals()`
@@ -532,6 +560,7 @@ conn = videodb.connect()
 coll = conn.get_collection()
 
 # 1. Connect and start recording
+
 rtstream = coll.connect_rtstream(
     url="rtmp://your-stream-server/live/stream-key",
     name="Weekly Standup",
@@ -539,26 +568,31 @@ rtstream = coll.connect_rtstream(
 rtstream.start()
 
 # 2. Record for the duration of the meeting
+
 start_ts = time.time()
 time.sleep(1800)  # 30 minutes
 end_ts = time.time()
 rtstream.stop()
 
 # 3. Export to a permanent video
+
 export_result = rtstream.export(name="Weekly Standup Recording")
 print(f"Exported video: {export_result.video_id}")
 
 # 4. Index the exported video for search
+
 video = coll.get_video(export_result.video_id)
 video.index_spoken_words(force=True)
 
 # 5. Search for action items
+
 results = video.search("action items and next steps")
 stream_url = results.compile()
 print(f"Action items clip: {stream_url}")
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

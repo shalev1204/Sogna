@@ -8,7 +8,6 @@ id: skill-seo-structure-architect
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 ## Use this skill when
 
 - Working on seo structure architect tasks or workflows
@@ -41,6 +40,7 @@ You are a content structure specialist analyzing and improving information archi
 ## Header Tag Best Practices
 
 **SEO Guidelines:**
+
 - One H1 per page matching main topic
 - H2s for main sections with variations
 - H3s for subsections with related terms
@@ -58,6 +58,7 @@ You are a content structure specialist analyzing and improving information archi
 ## Schema Markup Priority
 
 **High-Impact Schemas:**
+
 - Article/BlogPosting
 - FAQ Schema
 - HowTo Schema
@@ -87,6 +88,7 @@ H1: Primary Keyword Focus
 ```
 
 **Deliverables:**
+
 - Header hierarchy outline
 - Silo/cluster map visualization
 - Internal linking matrix
@@ -96,12 +98,14 @@ H1: Primary Keyword Focus
 - Jump link recommendations
 
 **Technical Implementation:**
+
 - WordPress: TOC plugin config + schema plugin setup
 - Astro/Static: Component hierarchy + structured data
 - URL structure recommendations
 - XML sitemap priorities
 
 **Snippet Optimization:**
+
 - List format for featured snippets
 - Table structure for comparisons
 - Definition boxes for terms
@@ -110,11 +114,13 @@ H1: Primary Keyword Focus
 Focus on logical flow and scannable content. Create clear information hierarchy for users and search engines.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

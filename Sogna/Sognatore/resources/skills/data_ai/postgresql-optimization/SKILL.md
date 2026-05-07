@@ -9,7 +9,6 @@ id: skill-postgresql-optimization
 owner: [[eng-database]]
 ---
 
-
 # PostgreSQL Optimization Workflow
 
 ## Overview
@@ -19,6 +18,7 @@ Specialized workflow for PostgreSQL database optimization including query tuning
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Optimizing slow PostgreSQL queries
 - Designing indexing strategies
 - Analyzing database performance
@@ -30,10 +30,12 @@ Use this workflow when:
 ### Phase 1: Performance Assessment
 
 #### Skills to Invoke
+
 - `database-optimizer` - Database optimization
 - `postgres-best-practices` - PostgreSQL best practices
 
 #### Actions
+
 1. Check database version
 2. Review configuration
 3. Analyze slow queries
@@ -41,6 +43,7 @@ Use this workflow when:
 5. Identify bottlenecks
 
 #### Copy-Paste Prompts
+
 ```
 Use @database-optimizer to assess PostgreSQL performance
 ```
@@ -48,10 +51,12 @@ Use @database-optimizer to assess PostgreSQL performance
 ### Phase 2: Query Analysis
 
 #### Skills to Invoke
+
 - `sql-optimization-patterns` - SQL optimization
 - `postgres-best-practices` - PostgreSQL patterns
 
 #### Actions
+
 1. Run EXPLAIN ANALYZE
 2. Identify scan types
 3. Check join strategies
@@ -59,6 +64,7 @@ Use @database-optimizer to assess PostgreSQL performance
 5. Find optimization opportunities
 
 #### Copy-Paste Prompts
+
 ```
 Use @sql-optimization-patterns to analyze and optimize queries
 ```
@@ -66,10 +72,12 @@ Use @sql-optimization-patterns to analyze and optimize queries
 ### Phase 3: Indexing Strategy
 
 #### Skills to Invoke
+
 - `database-design` - Index design
 - `postgresql` - PostgreSQL indexing
 
 #### Actions
+
 1. Identify missing indexes
 2. Create B-tree indexes
 3. Add composite indexes
@@ -77,6 +85,7 @@ Use @sql-optimization-patterns to analyze and optimize queries
 5. Review index usage
 
 #### Copy-Paste Prompts
+
 ```
 Use @database-design to design PostgreSQL indexing strategy
 ```
@@ -84,10 +93,12 @@ Use @database-design to design PostgreSQL indexing strategy
 ### Phase 4: Query Optimization
 
 #### Skills to Invoke
+
 - `sql-optimization-patterns` - Query tuning
 - `sql-pro` - SQL expertise
 
 #### Actions
+
 1. Rewrite inefficient queries
 2. Optimize joins
 3. Add CTEs where helpful
@@ -95,6 +106,7 @@ Use @database-design to design PostgreSQL indexing strategy
 5. Test improvements
 
 #### Copy-Paste Prompts
+
 ```
 Use @sql-optimization-patterns to optimize SQL queries
 ```
@@ -102,10 +114,12 @@ Use @sql-optimization-patterns to optimize SQL queries
 ### Phase 5: Configuration Tuning
 
 #### Skills to Invoke
+
 - `postgres-best-practices` - Configuration
 - `database-admin` - Database administration
 
 #### Actions
+
 1. Tune shared_buffers
 2. Configure work_mem
 3. Set effective_cache_size
@@ -113,6 +127,7 @@ Use @sql-optimization-patterns to optimize SQL queries
 5. Configure autovacuum
 
 #### Copy-Paste Prompts
+
 ```
 Use @postgres-best-practices to tune PostgreSQL configuration
 ```
@@ -120,10 +135,12 @@ Use @postgres-best-practices to tune PostgreSQL configuration
 ### Phase 6: Maintenance
 
 #### Skills to Invoke
+
 - `database-admin` - Database maintenance
 - `postgresql` - PostgreSQL maintenance
 
 #### Actions
+
 1. Schedule VACUUM
 2. Run ANALYZE
 3. Check table bloat
@@ -131,6 +148,7 @@ Use @postgres-best-practices to tune PostgreSQL configuration
 5. Review statistics
 
 #### Copy-Paste Prompts
+
 ```
 Use @database-admin to schedule PostgreSQL maintenance
 ```
@@ -138,10 +156,12 @@ Use @database-admin to schedule PostgreSQL maintenance
 ### Phase 7: Monitoring
 
 #### Skills to Invoke
+
 - `grafana-dashboards` - Monitoring dashboards
 - `prometheus-configuration` - Metrics collection
 
 #### Actions
+
 1. Set up monitoring
 2. Create dashboards
 3. Configure alerts
@@ -149,6 +169,7 @@ Use @database-admin to schedule PostgreSQL maintenance
 5. Review trends
 
 #### Copy-Paste Prompts
+
 ```
 Use @grafana-dashboards to create PostgreSQL monitoring
 ```
@@ -177,11 +198,13 @@ Use @grafana-dashboards to create PostgreSQL monitoring
 - `performance-optimization` - Performance
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

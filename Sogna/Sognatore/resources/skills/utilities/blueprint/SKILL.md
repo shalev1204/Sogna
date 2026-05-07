@@ -9,7 +9,6 @@ id: skill-blueprint
 owner: [[orchestrator]]
 ---
 
-
 # Blueprint — Construction Plan Generator
 
 Turn a one-line objective into a step-by-step plan any coding agent can execute cold.
@@ -36,11 +35,13 @@ Blueprint is for multi-session, multi-agent engineering projects where each step
 ## Examples
 
 ### Example 1: Database migration
+
 ```
 /blueprint myapp "migrate database to PostgreSQL"
 ```
 
 ### Example 2: Plugin extraction
+
 ```
 /blueprint antbot "extract providers into plugins"
 ```
@@ -73,11 +74,13 @@ git clone https://github.com/antbotlab/blueprint.git ~/.claude/skills/blueprint
 - [Examples: large plan](https://github.com/antbotlab/blueprint/blob/main/examples/large-plan.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

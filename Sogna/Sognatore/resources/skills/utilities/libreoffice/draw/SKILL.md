@@ -9,7 +9,6 @@ id: skill-draw
 owner: [[orchestrator]]
 ---
 
-
 # LibreOffice Draw
 
 ## Overview
@@ -19,6 +18,7 @@ LibreOffice Draw skill for creating, editing, converting, and automating vector 
 ## When to Use This Skill
 
 Use this skill when:
+
 - Creating vector graphics and diagrams in ODG format
 - Converting between ODG, SVG, PDF, PNG formats
 - Automating diagram and flowchart generation
@@ -28,29 +28,34 @@ Use this skill when:
 ## Core Capabilities
 
 ### 1. Graphics Creation
+
 - Create new ODG drawings from scratch
 - Generate diagrams from templates
 - Create flowcharts and org charts
 - Design technical drawings
 
 ### 2. Format Conversion
+
 - ODG to other formats: SVG, PDF, PNG, JPG
 - Other formats to ODG: SVG, PDF
 - Batch conversion of multiple files
 
 ### 3. Diagram Automation
+
 - Template-based diagram generation
 - Automated flowchart creation
 - Dynamic shape generation
 - Batch diagram production
 
 ### 4. Graphics Manipulation
+
 - Shape creation and manipulation
 - Path and bezier curve editing
 - Layer management
 - Text and label insertion
 
 ### 5. Integration
+
 - Command-line automation via soffice
 - Python scripting with UNO
 - Integration with workflow tools
@@ -60,11 +65,13 @@ Use this skill when:
 ### Creating a New Drawing
 
 #### Method 1: Command-Line
+
 ```bash
 soffice --draw template.odg
 ```
 
 #### Method 2: Python with UNO
+
 ```python
 import uno
 
@@ -86,19 +93,25 @@ def create_drawing():
 ### Converting Drawings
 
 ```bash
+
 # ODG to SVG
+
 soffice --headless --convert-to svg drawing.odg
 
 # ODG to PDF
+
 soffice --headless --convert-to pdf drawing.odg
 
 # ODG to PNG
+
 soffice --headless --convert-to png:PNG_drawing drawing.odg
 
 # SVG to ODG
+
 soffice --headless --convert-to odg drawing.svg
 
 # Batch convert
+
 for file in *.odg; do
     soffice --headless --convert-to pdf "$file"
 done
@@ -107,9 +120,11 @@ done
 ## Format Conversion Reference
 
 ### Supported Input Formats
+
 - ODG (native), SVG, PDF
 
 ### Supported Output Formats
+
 - ODG, SVG, PDF, PNG, JPG, GIF, BMP, WMF, EMF
 
 ## Command-Line Reference
@@ -141,12 +156,14 @@ pip install svgwrite  # SVG generation
 ## Troubleshooting
 
 ### Cannot open socket
+
 ```bash
 killall soffice.bin
 soffice --headless --accept="socket,host=localhost,port=8100;urp;"
 ```
 
 ### Quality Issues in PNG Export
+
 ```bash
 soffice --headless --convert-to png:PNG_drawing_Export \
   --filterData='{"Width":2048,"Height":2048}' drawing.odg
@@ -167,11 +184,13 @@ soffice --headless --convert-to png:PNG_drawing_Export \
 - workflow-automation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

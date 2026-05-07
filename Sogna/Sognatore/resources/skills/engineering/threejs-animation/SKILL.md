@@ -7,10 +7,10 @@ id: skill-threejs-animation
 owner: [[biz-hr]]
 ---
 
-
 # Three.js Animation
 
 ## When to Use
+
 - You need to animate objects, rigs, morph targets, or imported GLTF animations in Three.js.
 - The task involves mixers, clips, keyframes, procedural motion, or animation blending.
 - You are building motion behavior in a Three.js scene rather than just static rendering.
@@ -567,11 +567,13 @@ function getClip(name) {
 - `threejs-shaders` - Vertex animation in shaders
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

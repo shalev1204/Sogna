@@ -29,8 +29,10 @@ This command adds features or makes updates to existing application.
    - Check dependencies
 
 3. **Present Plan to User** (for major changes)
+
    ```
    "To add admin panel:
+
    - I'll create 15 new files
    - Update 8 files
    - Takes ~10 minutes
@@ -66,4 +68,3 @@ This command adds features or makes updates to existing application.
 - Get approval for major changes
 - Warn on conflicting requests (e.g., "use Firebase" when project uses PostgreSQL)
 - Commit each change with git
-

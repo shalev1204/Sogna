@@ -8,7 +8,6 @@ id: skill-azure-web-pubsub-ts
 owner: [[orchestrator]]
 ---
 
-
 # Azure Web PubSub SDKs for TypeScript
 
 Real-time messaging with WebSocket connections and pub/sub patterns.
@@ -16,13 +15,17 @@ Real-time messaging with WebSocket connections and pub/sub patterns.
 ## Installation
 
 ```bash
+
 # Server-side management
+
 npm install @azure/web-pubsub @azure/identity
 
 # Client-side real-time messaging
+
 npm install @azure/web-pubsub-client
 
 # Express middleware for event handlers
+
 npm install @azure/web-pubsub-express
 ```
 
@@ -316,14 +319,17 @@ import {
 6. **Use noEcho** - Prevent message echo back to sender when needed
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

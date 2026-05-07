@@ -1,4 +1,4 @@
-import { issognaflowComponent } from "./is-sognaflow-component"
+import { isMotionComponent as issognaflowComponent } from "./is-motion-component.js"
 import { sognaflowComponentSymbol } from "./symbol.js"
 
 /**

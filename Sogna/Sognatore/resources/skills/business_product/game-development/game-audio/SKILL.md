@@ -8,7 +8,6 @@ id: skill-game-audio
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # Game Audio Principles
 
 > Sound design and music integration for immersive game experiences.
@@ -37,6 +36,7 @@ When sounds compete for channels:
 3. Enemy SFX (gameplay important)
 4. Music (mood, but duckable)
 5. Ambient (lowest - can drop)
+
 ```
 
 ---
@@ -195,14 +195,17 @@ Game State → Music Response
 > **Remember:** 50% of the game experience is audio. A muted game loses half its soul.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

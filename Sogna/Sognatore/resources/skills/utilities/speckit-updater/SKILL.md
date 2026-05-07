@@ -7,7 +7,6 @@ id: skill-speckit-updater
 owner: [[orchestrator]]
 ---
 
-
 # SpecKit Safe Update
 
 This skill provides safe update capabilities for GitHub SpecKit installations, preserving customizations while applying template updates.
@@ -15,6 +14,7 @@ This skill provides safe update capabilities for GitHub SpecKit installations, p
 **Installation**: Available via plugin (`/plugin marketplace add NotMyself/claude-plugins` then `/plugin install speckit-updater`) or manual Git clone. See README.md for details.
 
 ## When to Use
+
 - You need to update or install SpecKit templates while preserving project customizations.
 - You want a safe approval flow around update, rollback, or version-specific SpecKit operations.
 - The task is to operate the SpecKit updater conversationally instead of running raw commands blindly.
@@ -24,6 +24,7 @@ This skill provides safe update capabilities for GitHub SpecKit installations, p
 When the user invokes `/speckit-updater`, you should:
 
 1. **Run the update orchestrator script** without any flags (conversational mode):
+
    ```powershell
    pwsh -NoProfile -Command "& 'C:\Users\bobby\.claude\skills\speckit-updater\scripts\update-wrapper.ps1'"
    ```
@@ -53,11 +54,13 @@ When the user invokes `/speckit-updater`, you should:
    - **If user declines**, inform them the installation was cancelled
 
 5. **Execute approved action** by re-running with `-Proceed` flag:
+
    ```powershell
    pwsh -NoProfile -Command "& 'C:\Users\bobby\.claude\skills\speckit-updater\scripts\update-wrapper.ps1' -Proceed"
    ```
 
 **Special cases:**
+
 - If user requests `-CheckOnly`: run with that flag and show the report
 - If user requests `-Rollback`: run with that flag and confirm restoration
 - If user requests specific `-Version`: include that parameter
@@ -69,6 +72,7 @@ When the user invokes `/speckit-updater`, you should:
 Updates SpecKit templates, commands, and scripts while preserving customizations.
 
 **Usage:**
+
 - `/speckit-updater` - Interactive update/install with conversational approval workflow (recommended for Claude Code)
 - `/speckit-updater -Proceed` - Proceed with update/install after approval (used by Claude after user confirms)
 - `/speckit-updater -CheckOnly` - Check for updates without applying
@@ -78,6 +82,7 @@ Updates SpecKit templates, commands, and scripts while preserving customizations
 - `/speckit-updater -Auto` - DEPRECATED: Use conversational workflow instead (shows warning, maps to -Proceed)
 
 **Fresh Installation (No .specify/ directory):**
+
 - First invocation shows installation offer with `[PROMPT_FOR_INSTALL]` marker
 - Claude Code presents natural question to user (e.g., "Would you like me to install SpecKit?")
 - User approves via conversational response (e.g., "yes", "proceed", "install it")
@@ -87,6 +92,7 @@ Updates SpecKit templates, commands, and scripts while preserving customizations
 - Consistent with update flow: both use conversational approval workflow
 
 **Process:**
+
 1. Validates prerequisites (Git installed, clean Git state, write permissions)
 2. Loads or creates manifest (.specify/manifest.json)
 3. Fetches target version from GitHub Releases API
@@ -99,6 +105,7 @@ Updates SpecKit templates, commands, and scripts while preserving customizations
 10. Manages backup retention (keeps last 5)
 
 **When you invoke this command, I will:**
+
 1. Execute the update-orchestrator.ps1 script
 2. Parse output for markers (`[PROMPT_FOR_APPROVAL]` for updates, `[PROMPT_FOR_INSTALL]` for fresh installations)
 3. **For updates**: Present Markdown summary of proposed changes
@@ -110,12 +117,16 @@ Updates SpecKit templates, commands, and scripts while preserving customizations
 9. Report results with detailed summary
 
 **Conversational Workflow:** The skill uses a two-step approval process:
+
 - **Step 1**: Outputs summary → script exits → waits for approval
 - **Step 2**: After approval, Claude re-invokes with `-Proceed` → applies updates
 
 **Requirements:**
+
 - Git installed and in PATH
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Internet connection for fetching updates from GitHub
 - Write permissions to .specify/ and .claude/ directories
 - Clean or staged Git working directory
@@ -143,6 +154,7 @@ pwsh -NoProfile -Command "& '{skill_path}/scripts/update-wrapper.ps1' [parameter
 ## Architecture
 
 ### Modules
+
 - **HashUtils**: Normalized hashing (handles line endings, trailing whitespace, BOM)
 - **VSCodeIntegration**: Context detection, Quick Pick, diff/merge editor integration
 - **GitHubApiClient**: GitHub Releases API interaction (unauthenticated, 60 req/hour)
@@ -151,6 +163,7 @@ pwsh -NoProfile -Command "& '{skill_path}/scripts/update-wrapper.ps1' [parameter
 - **ConflictDetector**: File state analysis and conflict detection
 
 ### Workflow
+
 1. Prerequisites validation (critical checks must pass, warnings allow continuation)
 2. Manifest loading/creation (safe default: assume all files customized if no manifest)
 3. GitHub API query for target version
@@ -176,11 +189,13 @@ pwsh -NoProfile -Command "& '{skill_path}/scripts/update-wrapper.ps1' [parameter
 | 6 | Rollback required (automatic) |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

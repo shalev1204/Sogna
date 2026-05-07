@@ -50,6 +50,7 @@ Consider using a column view when you have a deep data hierarchy in which people
 [`NSBrowser`](https://developer.apple.com/documentation/AppKit/NSBrowser) — AppKit
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

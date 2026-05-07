@@ -5,23 +5,26 @@ description: "GDB debugging assistant for AI agents - analyze core dumps, debug 
 risk: safe
 date_added: "2026-03-22"
 tags:
+
 - debugging
 - gdb
 - core-dump
 - crash-analysis
 - c++
 - c
+
 tools:
+
 - claude-code
 - cursor
 - gemini-cli
 - codex-cli
 - Sognatore
+
 version: 1.0.0
 id: skill-gdb-cli
 owner: [[orchestrator]]
 ---
-
 
 # GDB Debugging Assistant
 
@@ -46,17 +49,22 @@ A GDB debugging skill designed for AI agents. Combines **source code analysis** 
 ## Prerequisites
 
 ```bash
+
 # Install gdb-cli
+
 pip install gdb-cli
 
 # Or from GitHub
+
 pip install git+https://github.com/Cerdore/gdb-cli.git
 
 # Verify GDB has Python support
+
 gdb -nx -q -batch -ex "python print('OK')"
 ```
 
 **Requirements:**
+
 - Python 3.6.8+
 - GDB 9.0+ with Python support enabled
 - Linux OS
@@ -83,18 +91,22 @@ gdb-cli attach --pid <pid> [--binary <binary_path>]
 SESSION="<session_id>"
 
 # List all threads
+
 gdb-cli threads -s $SESSION
 
 # Get backtrace (with local variables)
+
 gdb-cli bt -s $SESSION --full
 
 # Get registers
+
 gdb-cli registers -s $SESSION
 ```
 
 ### Step 3: Correlate Source Code (CRITICAL)
 
 For each frame in the backtrace:
+
 1. **Extract frame info**: `{file}:{line} in {function}`
 2. **Read source context**: Get ±20 lines around the crash point
 3. **Get local variables**: `gdb-cli locals-cmd -s $SESSION --frame <N>`
@@ -117,34 +129,44 @@ Analysis: The NULL check on line 86 didn't catch the issue.
 ### Step 4: Deep Investigation
 
 ```bash
+
 # Examine variables
+
 gdb-cli eval-cmd -s $SESSION "variable_name"
 gdb-cli eval-cmd -s $SESSION "ptr->field"
 gdb-cli ptype -s $SESSION "struct_name"
 
 # Memory inspection
+
 gdb-cli memory -s $SESSION "0x7fffffffe000" --size 64
 
 # Disassembly
+
 gdb-cli disasm -s $SESSION --count 20
 
 # Check all threads (for deadlock analysis)
+
 gdb-cli thread-apply -s $SESSION bt --all
 
 # View shared libraries
+
 gdb-cli sharedlibs -s $SESSION
 ```
 
 ### Step 5: Session Management
 
 ```bash
+
 # List active sessions
+
 gdb-cli sessions
 
 # Check session status
+
 gdb-cli status -s $SESSION
 
 # Stop session (cleanup)
+
 gdb-cli stop -s $SESSION
 ```
 
@@ -153,6 +175,7 @@ gdb-cli stop -s $SESSION
 ### Pattern: Null Pointer Dereference
 
 **Indicators:**
+
 - Crash on memory access instruction
 - Pointer variable is 0x0
 
@@ -165,18 +188,22 @@ gdb-cli eval-cmd -s $SESSION "ptr"  # Check pointer value
 ### Pattern: Deadlock
 
 **Indicators:**
+
 - Multiple threads stuck in lock functions
 - `pthread_mutex_lock` in backtrace
 
 **Investigation:**
 ```bash
 gdb-cli thread-apply -s $SESSION bt --all
+
 # Look for circular wait patterns
+
 ```
 
 ### Pattern: Memory Corruption
 
 **Indicators:**
+
 - Crash in malloc/free
 - Garbage values in variables
 
@@ -191,26 +218,34 @@ gdb-cli registers -s $SESSION
 ### Example 1: Core Dump Analysis
 
 ```bash
+
 # Load core dump
+
 gdb-cli load --binary ./myapp --core /tmp/core.1234
 
 # Get crash location
+
 gdb-cli bt -s a1b2c3 --full
 
 # Examine crash frame
+
 gdb-cli locals-cmd -s a1b2c3 --frame 0
 ```
 
 ### Example 2: Live Process Debugging
 
 ```bash
+
 # Attach to stuck server
+
 gdb-cli attach --pid 12345
 
 # Check all threads
+
 gdb-cli threads -s b2c3d4
 
 # Get all backtraces
+
 gdb-cli thread-apply -s b2c3d4 bt --all
 ```
 
@@ -241,11 +276,13 @@ gdb-cli thread-apply -s b2c3d4 bt --all
 - **Documentation**: https://github.com/Cerdore/gdb-cli#readme
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

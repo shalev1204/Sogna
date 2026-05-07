@@ -20,6 +20,7 @@ Use priority to control which workflows run first. Lower numbers = higher priori
 queue = Queue("tasks")
 
 # All tasks treated equally - urgent tasks may wait
+
 for task in tasks:
     queue.enqueue(process_task, task)
 ```
@@ -30,6 +31,7 @@ for task in tasks:
 from dbos import Queue, SetEnqueueOptions
 
 # Must enable priority on the queue
+
 queue = Queue("tasks", priority_enabled=True)
 
 @DBOS.workflow()
@@ -44,6 +46,7 @@ def enqueue_task(task, is_urgent: bool):
 ```
 
 Priority behavior:
+
 - Range: 1 to 2,147,483,647 (lower = higher priority)
 - Workflows without priority have highest priority (run first)
 - Same priority = FIFO order
@@ -67,6 +70,7 @@ def enqueue_job(job, level):
 Reference: [Queue Priority](https://docs.dbos.dev/python/tutorials/queue-tutorial#priority)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

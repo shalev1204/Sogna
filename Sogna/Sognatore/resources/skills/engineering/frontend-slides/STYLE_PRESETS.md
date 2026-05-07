@@ -22,6 +22,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Colored card on dark gradient. Number top-left, navigation top-right, title bottom-left.
 
 **Typography:**
+
 - Display: `Archivo Black` (900)
 - Body: `Space Grotesk` (400/500)
 
@@ -37,6 +38,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Bold colored card as focal point (orange, coral, or vibrant accent)
 - Large section numbers (01, 02, etc.)
 - Navigation breadcrumbs with active/inactive opacity states
@@ -51,6 +53,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Split panel—white top, blue bottom. Brand marks in corners.
 
 **Typography:**
+
 - Display: `Manrope` (800)
 - Body: `Manrope` (400/500)
 
@@ -66,6 +69,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Two-panel vertical split
 - Accent bar on panel edge
 - Quote typography as hero element
@@ -80,6 +84,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Split panels—electric blue left, dark right. Script accents.
 
 **Typography:**
+
 - Display: `Syne` (700/800)
 - Mono: `Space Mono` (400/700)
 
@@ -94,6 +99,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Electric blue + neon yellow contrast
 - Halftone texture patterns
 - Neon badges/callouts
@@ -108,6 +114,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Centered content on dark. Abstract soft shapes in corner.
 
 **Typography:**
+
 - Display: `Cormorant` (400/600) — elegant serif
 - Body: `IBM Plex Sans` (300/400)
 
@@ -124,6 +131,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Abstract soft gradient circles (blurred, overlapping)
 - Warm color accents (pink, gold, terracotta)
 - Thin vertical accent lines
@@ -141,6 +149,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Cream paper card on dark background. Colorful tabs on right edge.
 
 **Typography:**
+
 - Display: `Bodoni Moda` (400/700) — classic editorial
 - Body: `DM Sans` (400/500)
 
@@ -159,6 +168,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Paper container with subtle shadow
 - Colorful section tabs on right edge (vertical text)
 - Binder hole decorations on left
@@ -173,6 +183,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** White card on pastel background. Vertical pills on right edge.
 
 **Typography:**
+
 - Display: `Plus Jakarta Sans` (700/800)
 - Body: `Plus Jakarta Sans` (400/500)
 
@@ -190,6 +201,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Rounded card with soft shadow
 - **Vertical pills on right edge** with varying heights (like tabs)
 - Consistent pill width, heights: short → medium → tall → medium → short
@@ -204,6 +216,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Two-color vertical split (peach left, lavender right).
 
 **Typography:**
+
 - Display: `Outfit` (700/800)
 - Body: `Outfit` (400/500)
 
@@ -220,6 +233,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Split background colors
 - Playful badge pills with icons
 - Grid pattern overlay on right panel
@@ -234,6 +248,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Centered content on cream. Abstract geometric shapes as accent.
 
 **Typography:**
+
 - Display: `Fraunces` (700/900) — distinctive serif
 - Body: `Work Sans` (400/500)
 
@@ -248,6 +263,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 ```
 
 **Signature Elements:**
+
 - Abstract geometric shapes (circle outline + line + dot)
 - Bold bordered CTA boxes
 - Witty, conversational copy style
@@ -353,6 +369,7 @@ margin-left: calc(-1 * min(10vw, 100px));     /* Works */
 CSS does not allow a leading `-` before function names. The browser silently discards the entire declaration — no error, the element just appears in the wrong position. **Always use `calc(-1 * ...)` to negate CSS function values.**
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

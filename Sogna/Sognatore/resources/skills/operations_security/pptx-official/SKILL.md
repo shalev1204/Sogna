@@ -8,7 +8,6 @@ id: skill-pptx-official
 owner: [[ops-security]]
 ---
 
-
 # PPTX creation, editing, and analysis
 
 ## Overview
@@ -18,22 +17,28 @@ A user may ask you to create, edit, or analyze the contents of a .pptx file. A .
 ## Reading and analyzing content
 
 ### Text extraction
+
 If you just need to read the text contents of a presentation, you should convert the document to markdown:
 
 ```bash
+
 # Convert document to markdown
+
 python -m markitdown path-to-file.pptx
 ```
 
 ### Raw XML access
+
 You need raw XML access for: comments, speaker notes, slide layouts, animations, design elements, and complex formatting. For any of these features, you'll need to unpack a presentation and read its raw XML contents.
 
 #### Unpacking a file
+
 `python ooxml/scripts/unpack.py <office_file> <output_dir>`
 
 **Note**: The unpack.py script is located at `skills/pptx/ooxml/scripts/unpack.py` relative to the project root. If the script doesn't exist at this path, use `find . -name "unpack.py"` to locate it.
 
 #### Key file structures
+
 * `ppt/presentation.xml` - Main presentation metadata and slide references
 * `ppt/slides/slide{N}.xml` - Individual slide contents (slide1.xml, slide2.xml, etc.)
 * `ppt/notesSlides/notesSlide{N}.xml` - Speaker notes for each slide
@@ -44,7 +49,9 @@ You need raw XML access for: comments, speaker notes, slide layouts, animations,
 * `ppt/media/` - Images and other media files
 
 #### Typography and color extraction
+
 **When given an example design to emulate**: Always analyze the presentation's typography and colors first using the methods below:
+
 1. **Read theme file**: Check `ppt/theme/theme1.xml` for colors (`<a:clrScheme>`) and fonts (`<a:fontScheme>`)
 2. **Sample slide content**: Examine `ppt/slides/slide1.xml` for actual font usage (`<a:rPr>`) and colors
 3. **Search for patterns**: Use grep to find color (`<a:solidFill>`, `<a:srgbClr>`) and font references across all XML files
@@ -56,12 +63,14 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 ### Design Principles
 
 **CRITICAL**: Before creating any presentation, analyze the content and choose appropriate design elements:
+
 1. **Consider the subject matter**: What is this presentation about? What tone, industry, or mood does it suggest?
 2. **Check for branding**: If the user mentions a company/organization, consider their brand colors and identity
 3. **Match palette to content**: Select colors that reflect the subject
 4. **State your approach**: Explain your design choices before writing code
 
 **Requirements**:
+
 - ✅ State your content-informed design approach BEFORE writing code
 - ✅ Use web-safe fonts only: Arial, Helvetica, Times New Roman, Georgia, Courier New, Verdana, Tahoma, Trebuchet MS, Impact
 - ✅ Create clear visual hierarchy through size, weight, and color
@@ -71,6 +80,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 #### Color Palette Selection
 
 **Choosing colors creatively**:
+
 - **Think beyond defaults**: What colors genuinely match this specific topic? Avoid autopilot choices.
 - **Consider multiple angles**: Topic, industry, mood, energy level, target audience, brand identity (if mentioned)
 - **Be adventurous**: Try unexpected combinations - a healthcare presentation doesn't have to be green, finance doesn't have to be navy
@@ -101,6 +111,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 #### Visual Details Options
 
 **Geometric Patterns**:
+
 - Diagonal section dividers instead of horizontal
 - Asymmetric column widths (30/70, 40/60, 25/75)
 - Rotated text headers at 90° or 270°
@@ -109,6 +120,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 - Overlapping shapes for depth
 
 **Border & Frame Treatments**:
+
 - Thick single-color borders (10-20pt) on one side only
 - Double-line borders with contrasting colors
 - Corner brackets instead of full frames
@@ -116,6 +128,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 - Underline accents beneath headers (3-5pt thick)
 
 **Typography Treatments**:
+
 - Extreme size contrast (72pt headlines vs 11pt body)
 - All-caps headers with wide letter spacing
 - Numbered sections in oversized display type
@@ -124,6 +137,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 - Outlined text for emphasis
 
 **Chart & Data Styling**:
+
 - Monochrome charts with single accent color for key data
 - Horizontal bar charts instead of vertical
 - Dot plots instead of bar charts
@@ -132,6 +146,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 - Oversized numbers for key metrics
 
 **Layout Innovations**:
+
 - Full-bleed images with text overlays
 - Sidebar column (20-30% width) for navigation/context
 - Modular grid systems (3×3, 4×4 blocks)
@@ -140,6 +155,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 - Magazine-style multi-column layouts
 
 **Background Treatments**:
+
 - Solid color blocks occupying 40-60% of slide
 - Gradient fills (vertical or diagonal only)
 - Split backgrounds (two colors, diagonal or vertical)
@@ -147,12 +163,15 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 - Negative space as a design element
 
 ### Layout Tips
+
 **When creating slides with charts or tables:**
+
 - **Two-column layout (PREFERRED)**: Use a header spanning the full width, then two columns below - text/bullets in one column and the featured content in the other. This provides better balance and makes charts/tables more readable. Use flexbox with unequal column widths (e.g., 40%/60% split) to optimize space for each content type.
 - **Full-slide layout**: Let the featured content (chart/table) take up the entire slide for maximum impact and readability
 - **NEVER vertically stack**: Do not place charts/tables below text in a single column - this causes poor readability and layout issues
 
 ### Workflow
+
 1. **MANDATORY - READ ENTIRE FILE**: Read [`html2pptx.md`](html2pptx.md) completely from start to finish. **NEVER set any range limits when reading this file.** Read the full file content for detailed syntax, critical formatting rules, and best practices before proceeding with presentation creation.
 2. Create an HTML file for each slide with proper dimensions (e.g., 720pt × 405pt for 16:9)
    - Use `<p>`, `<h1>`-`<h6>`, `<ul>`, `<ol>` for all text content
@@ -178,6 +197,7 @@ When creating a new PowerPoint presentation from scratch, use the **html2pptx** 
 When edit slides in an existing PowerPoint presentation, you need to work with the raw Office Open XML (OOXML) format. This involves unpacking the .pptx file, editing the XML content, and repacking it.
 
 ### Workflow
+
 1. **MANDATORY - READ ENTIRE FILE**: Read [`ooxml.md`](ooxml.md) (~500 lines) completely from start to finish.  **NEVER set any range limits when reading this file.**  Read the full file content for detailed guidance on OOXML structure and editing workflows before any presentation editing.
 2. Unpack the presentation: `python ooxml/scripts/unpack.py <office_file> <output_dir>`
 3. Edit the XML files (primarily `ppt/slides/slide{N}.xml` and related files)
@@ -189,6 +209,7 @@ When edit slides in an existing PowerPoint presentation, you need to work with t
 When you need to create a presentation that follows an existing template's design, you'll need to duplicate and re-arrange template slides before then replacing placeholder context.
 
 ### Workflow
+
 1. **Extract template text AND create visual thumbnail grid**:
    * Extract text: `python -m markitdown template.pptx > template-content.md`
    * Read `template-content.md`: Read the entire file to understand the contents of the template presentation. **NEVER set any range limits when reading this file.**
@@ -198,17 +219,21 @@ When you need to create a presentation that follows an existing template's desig
 2. **Analyze template and save inventory to a file**:
    * **Visual Analysis**: Review thumbnail grid(s) to understand slide layouts, design patterns, and visual structure
    * Create and save a template inventory file at `template-inventory.md` containing:
+
      ```markdown
      # Template Inventory Analysis
      **Total Slides: [count]**
      **IMPORTANT: Slides are 0-indexed (first slide = 0, last slide = count-1)**
 
      ## [Category Name]
+
      - Slide 0: [Layout code if available] - Description/purpose
      - Slide 1: [Layout code] - Description/purpose
      - Slide 2: [Layout code] - Description/purpose
+
      [... EVERY slide must be listed individually with its index ...]
      ```
+
    * **Using the thumbnail grid**: Reference the visual thumbnails to identify:
      - Layout patterns (title slides, content layouts, section dividers)
      - Image placeholder locations and counts
@@ -234,6 +259,7 @@ When you need to create a presentation that follows an existing template's desig
    * Select one option representing the **best** layout for each content section.
    * Save `outline.md` with content AND template mapping that leverages available designs
    * Example template mapping:
+
       ```
       # Template slides to use (0-based indexing)
       # WARNING: Verify indices are within range! Template with 73 slides has indices 0-72
@@ -249,21 +275,26 @@ When you need to create a presentation that follows an existing template's desig
 
 4. **Duplicate, reorder, and delete slides using `rearrange.py`**:
    * Use the `scripts/rearrange.py` script to create a new presentation with slides in the desired order:
+
      ```bash
      python scripts/rearrange.py template.pptx working.pptx 0,34,34,50,52
      ```
+
    * The script handles duplicating repeated slides, deleting unused slides, and reordering automatically
    * Slide indices are 0-based (first slide is 0, second is 1, etc.)
    * The same slide index can appear multiple times to duplicate that slide
 
 5. **Extract ALL text using the `inventory.py` script**:
    * **Run inventory extraction**:
+
      ```bash
      python scripts/inventory.py working.pptx text-inventory.json
      ```
+
    * **Read text-inventory.json**: Read the entire text-inventory.json file to understand all shapes and their properties. **NEVER set any range limits when reading this file.**
 
    * The inventory JSON structure:
+
       ```json
         {
           "slide-0": {
@@ -308,7 +339,9 @@ When you need to create a presentation that follows an existing template's desig
      - **Properties**: Only non-default values are included in the output
 
 6. **Generate replacement text and save the data to a JSON file**
+
    Based on the text inventory from the previous step:
+
    - **CRITICAL**: First verify which shapes exist in the inventory - only reference shapes that are actually present
    - **VALIDATION**: The replace.py script will validate that all shapes in your replacement JSON exist in the inventory
      - If you reference a non-existent shape, you'll get an error showing available shapes
@@ -378,6 +411,7 @@ When you need to create a presentation that follows an existing template's desig
    ```
 
    **Common formatting patterns for presentations**:
+
    - Title slides: Bold text, sometimes centered
    - Section headers within slides: Bold text
    - Bullet lists: Each item needs `"bullet": true, "level": 0`
@@ -385,11 +419,13 @@ When you need to create a presentation that follows an existing template's desig
    - Quotes: May have special alignment or font properties
 
 7. **Apply replacements using the `replace.py` script**
+
    ```bash
    python scripts/replace.py working.pptx replacement-text.json output.pptx
    ```
 
    The script will:
+
    - First extract the inventory of ALL text shapes using functions from inventory.py
    - Validate that all shapes in the replacement JSON exist in the inventory
    - Clear text from ALL shapes identified in the inventory
@@ -401,13 +437,17 @@ When you need to create a presentation that follows an existing template's desig
    Example validation errors:
    ```
    ERROR: Invalid shapes in replacement JSON:
+
      - Shape 'shape-99' not found on 'slide-0'. Available shapes: shape-0, shape-1, shape-4
      - Slide 'slide-999' not found in inventory
+
    ```
 
    ```
    ERROR: Replacement text made overflow worse in these shapes:
+
      - slide-0/shape-2: overflow worsened by 1.25" (was 0.00", now 1.25")
+
    ```
 
 ## Creating Thumbnail Grids
@@ -419,6 +459,7 @@ python scripts/thumbnail.py template.pptx [output_prefix]
 ```
 
 **Features**:
+
 - Creates: `thumbnails.jpg` (or `thumbnails-1.jpg`, `thumbnails-2.jpg`, etc. for large decks)
 - Default: 5 columns, max 30 slides per grid (5×6)
 - Custom prefix: `python scripts/thumbnail.py template.pptx my-grid`
@@ -428,6 +469,7 @@ python scripts/thumbnail.py template.pptx [output_prefix]
 - Slides are zero-indexed (Slide 0, Slide 1, etc.)
 
 **Use cases**:
+
 - Template analysis: Quickly understand slide layouts and design patterns
 - Content review: Visual overview of entire presentation
 - Navigation reference: Find specific slides by their visual appearance
@@ -435,10 +477,13 @@ python scripts/thumbnail.py template.pptx [output_prefix]
 
 **Examples**:
 ```bash
+
 # Basic usage
+
 python scripts/thumbnail.py presentation.pptx
 
 # Combine options: custom name, columns
+
 python scripts/thumbnail.py template.pptx analysis --cols 4
 ```
 
@@ -447,17 +492,20 @@ python scripts/thumbnail.py template.pptx analysis --cols 4
 To visually analyze PowerPoint slides, convert them to images using a two-step process:
 
 1. **Convert PPTX to PDF**:
+
    ```bash
    soffice --headless --convert-to pdf template.pptx
    ```
 
 2. **Convert PDF pages to JPEG images**:
+
    ```bash
    pdftoppm -jpeg -r 150 template.pdf slide
    ```
    This creates files like `slide-1.jpg`, `slide-2.jpg`, etc.
 
 Options:
+
 - `-r 150`: Sets resolution to 150 DPI (adjust for quality/size balance)
 - `-jpeg`: Output JPEG format (use `-png` for PNG if preferred)
 - `-f N`: First page to convert (e.g., `-f 2` starts from page 2)
@@ -470,7 +518,9 @@ pdftoppm -jpeg -r 150 -f 2 -l 5 template.pdf slide  # Converts only pages 2-5
 ```
 
 ## Code Style Guidelines
+
 **IMPORTANT**: When generating code for PPTX operations:
+
 - Write concise code
 - Avoid verbose variable names and redundant operations
 - Avoid unnecessary print statements
@@ -489,14 +539,17 @@ Required dependencies (should already be installed):
 - **defusedxml**: `pip install defusedxml` (for secure XML parsing)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

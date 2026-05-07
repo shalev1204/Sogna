@@ -8,12 +8,12 @@ id: skill-m365-agents-py
 owner: [[orchestrator]]
 ---
 
-
 # Microsoft 365 Agents SDK (Python)
 
 Build enterprise agents for Microsoft 365, Teams, and Copilot Studio using the Microsoft Agents SDK with aiohttp hosting, AgentApplication routing, streaming responses, and MSAL-based authentication.
 
 ## Before implementation
+
 - Use the microsoft-docs MCP to verify the latest API signatures for AgentApplication, start_agent_process, and authentication options.
 - Confirm package versions on PyPI for the microsoft-agents-* packages you plan to use.
 
@@ -40,14 +40,17 @@ CONNECTIONS__SERVICE_CONNECTION__SETTINGS__CLIENTSECRET=<client-secret>
 CONNECTIONS__SERVICE_CONNECTION__SETTINGS__TENANTID=<tenant-id>
 
 # Optional: OAuth handlers for auto sign-in
+
 AGENTAPPLICATION__USERAUTHORIZATION__HANDLERS__GRAPH__SETTINGS__AZUREBOTOAUTHCONNECTIONNAME=<connection-name>
 
 # Optional: Azure OpenAI for streaming
+
 AZURE_OPENAI_ENDPOINT=<endpoint>
 AZURE_OPENAI_API_VERSION=<version>
 AZURE_OPENAI_API_KEY=<key>
 
 # Optional: Copilot Studio client
+
 COPILOTSTUDIOAGENT__ENVIRONMENTID=<environment-id>
 COPILOTSTUDIOAGENT__SCHEMANAME=<schema-name>
 COPILOTSTUDIOAGENT__TENANTID=<tenant-id>
@@ -79,45 +82,45 @@ from microsoft_agents.hosting.aiohttp import (
 from microsoft_agents.authentication.msal import MsalConnectionManager
 
 # Enable logging
+
 ms_agents_logger = logging.getLogger("microsoft_agents")
 ms_agents_logger.addHandler(logging.StreamHandler())
 ms_agents_logger.setLevel(logging.INFO)
 
 # Load configuration
+
 load_dotenv()
 agents_sdk_config = load_configuration_from_env(environ)
 
 # Create storage and connection manager
+
 STORAGE = MemoryStorage()
 CONNECTION_MANAGER = MsalConnectionManager(**agents_sdk_config)
 ADAPTER = CloudAdapter(connection_manager=CONNECTION_MANAGER)
 AUTHORIZATION = Authorization(STORAGE, CONNECTION_MANAGER, **agents_sdk_config)
 
 # Create AgentApplication
-AGENT_APP = AgentApplicationTurnState
 
+AGENT_APP = AgentApplicationTurnState
 
 @AGENT_APP.conversation_update("membersAdded")
 async def on_members_added(context: TurnContext, _state: TurnState):
     await context.send_activity("Welcome to the agent!")
 
-
 @AGENT_APP.activity("message")
 async def on_message(context: TurnContext, _state: TurnState):
     await context.send_activity(f"You said: {context.activity.text}")
-
 
 @AGENT_APP.error
 async def on_error(context: TurnContext, error: Exception):
     await context.send_activity("The agent encountered an error.")
 
-
 # Server setup
+
 async def entry_point(req: Request) -> Response:
     agent: AgentApplication = req.app["agent_app"]
     adapter: CloudAdapter = req.app["adapter"]
     return await start_agent_process(req, agent, adapter)
-
 
 APP = Application(middlewares=[jwt_authorization_middleware])
 APP.router.add_post("/api/messages", entry_point)
@@ -141,21 +144,25 @@ from microsoft_agents.activity import ActivityTypes
 AGENT_APP = AgentApplicationTurnState
 
 # Welcome handler
+
 @AGENT_APP.conversation_update("membersAdded")
 async def on_members_added(context: TurnContext, _state: TurnState):
     await context.send_activity("Welcome!")
 
 # Regex-based message handler
+
 @AGENT_APP.message(re.compile(r"^hello$", re.IGNORECASE))
 async def on_hello(context: TurnContext, _state: TurnState):
     await context.send_activity("Hello!")
 
 # Simple string message handler
+
 @AGENT_APP.message("/status")
 async def on_status(context: TurnContext, _state: TurnState):
     await context.send_activity("Status: OK")
 
 # Auth-protected message handler
+
 @AGENT_APP.message("/me", auth_handlers=["GRAPH"])
 async def on_profile(context: TurnContext, state: TurnState):
     token_response = await AGENT_APP.auth.get_token(context, "GRAPH")
@@ -164,6 +171,7 @@ async def on_profile(context: TurnContext, state: TurnState):
         await context.send_activity("Profile retrieved")
 
 # Invoke activity handler
+
 @AGENT_APP.activity(ActivityTypes.invoke)
 async def on_invoke(context: TurnContext, _state: TurnState):
     invoke_response = Activity(
@@ -172,11 +180,13 @@ async def on_invoke(context: TurnContext, _state: TurnState):
     await context.send_activity(invoke_response)
 
 # Fallback message handler
+
 @AGENT_APP.activity("message")
 async def on_message(context: TurnContext, _state: TurnState):
     await context.send_activity(f"Echo: {context.activity.text}")
 
 # Error handler
+
 @AGENT_APP.error
 async def on_error(context: TurnContext, error: Exception):
     await context.send_activity("An error occurred.")
@@ -236,7 +246,6 @@ async def logout(context: TurnContext, state: TurnState):
     await AGENT_APP.auth.sign_out(context, "GRAPH")
     await context.send_activity(MessageFactory.text("You have been logged out."))
 
-
 @AGENT_APP.message("/me", auth_handlers=["GRAPH"])
 async def profile_request(context: TurnContext, state: TurnState):
     user_token_response = await AGENT_APP.auth.get_token(context, "GRAPH")
@@ -267,6 +276,7 @@ from microsoft_agents.copilotstudio.client import (
 )
 
 # Token cache (local file for interactive flows)
+
 class LocalTokenCache:
     # See samples for full implementation
     pass
@@ -286,7 +296,6 @@ def acquire_token(settings, app_client_id, tenant_id):
     else:
         response = pca.acquire_token_interactive(**token_request)
         return response.get("access_token")
-
 
 async def main():
     settings = ConnectionSettings(
@@ -313,7 +322,6 @@ async def main():
     async for reply in replies:
         if reply.type == ActivityTypes.message:
             print(reply.text)
-
 
 asyncio.run(main())
 ```
@@ -345,14 +353,17 @@ asyncio.run(main())
 | Integrate with Copilot Studio | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/integrate-with-mcs |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

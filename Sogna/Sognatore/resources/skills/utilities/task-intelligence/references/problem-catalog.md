@@ -65,6 +65,7 @@ version: 1.0.0
 | UnicodeDecodeError | Alta | `encoding='utf-8', errors='replace'` em files |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

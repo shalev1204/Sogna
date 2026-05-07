@@ -460,6 +460,7 @@ export class PostService {
 ```
 
 **Result:**
+
 - Route: 8 lines (was 200+)
 - Controller: 25 lines
 - Service: 40 lines
@@ -639,12 +640,14 @@ Controller formats response
 ---
 
 **Related Files:**
+
 - SKILL.md
 - [routing-and-controllers.md](routing-and-controllers.md)
 - [services-and-repositories.md](services-and-repositories.md)
 - [validation-patterns.md](validation-patterns.md)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

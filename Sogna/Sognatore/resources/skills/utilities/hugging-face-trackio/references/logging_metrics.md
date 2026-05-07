@@ -16,7 +16,9 @@ version: 1.0.0
 
 ```bash
 pip install trackio
+
 # or
+
 uv pip install trackio
 ```
 
@@ -28,17 +30,20 @@ uv pip install trackio
 import trackio
 
 # Initialize a run
+
 trackio.init(
     project="my-project",
     config={"learning_rate": 0.001, "epochs": 10}
 )
 
 # Log metrics during training
+
 for epoch in range(10):
     loss = train_epoch()
     trackio.log({"loss": loss, "epoch": epoch})
 
 # Finalize the run
+
 trackio.finish()
 ```
 
@@ -72,10 +77,13 @@ By default, trackio stores metrics in a local SQLite database and runs the dashb
 
 ```python
 trackio.init(project="my-project")
+
 # ... training ...
+
 trackio.finish()
 
 # Launch local dashboard
+
 trackio.show()
 ```
 
@@ -145,6 +153,7 @@ trackio.finish()
 ## What Gets Logged
 
 With TRL/Transformers integration, trackio automatically captures:
+
 - Training loss
 - Learning rate
 - Eval metrics
@@ -167,11 +176,14 @@ trackio.log({
 Use `group` to organize related experiments in the dashboard sidebar:
 
 ```python
+
 # Group by experiment type
+
 trackio.init(project="my-project", name="baseline-v1", group="baseline")
 trackio.init(project="my-project", name="augmented-v1", group="augmented")
 
 # Group by hyperparameter
+
 trackio.init(project="hyperparam-sweep", name="lr-0.001", group="lr_0.001")
 trackio.init(project="hyperparam-sweep", name="lr-0.01", group="lr_0.01")
 ```
@@ -206,6 +218,7 @@ Embed Space dashboards in websites with query parameters:
 ```
 
 Query parameters:
+
 - `project`: Filter to specific project
 - `metrics`: Comma-separated metric names to show
 - `sidebar`: `hidden` or `collapsed`
@@ -213,6 +226,7 @@ Query parameters:
 - `xmin`, `xmax`: X-axis limits
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

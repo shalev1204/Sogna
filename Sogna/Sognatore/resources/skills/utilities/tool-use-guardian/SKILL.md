@@ -11,7 +11,6 @@ id: skill-tool-use-guardian
 owner: [[orchestrator]]
 ---
 
-
 # Tool Use Guardian
 
 ## Overview
@@ -39,6 +38,7 @@ npx skills add christopherlhammer11-ai/tool-use-guardian
 ### Step 1: Pre-Call Validation
 
 Before every tool call, Guardian validates:
+
 - Required parameters are present and correctly typed
 - The tool is not marked as "unreliable" from previous failures
 - Request size is within known limits
@@ -87,11 +87,13 @@ Guardian tracks failure patterns per tool. After 3+ failures of the same type, i
 - **Browse skills:** https://genesis-marketplace.vercel.app
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

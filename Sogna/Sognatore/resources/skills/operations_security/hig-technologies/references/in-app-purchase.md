@@ -7,7 +7,6 @@ title: "In-app purchase | Apple Developer Documentation"
 source: https://developer.apple.com/design/human-interface-guidelines/in-app-purchase
 ---
 
-
 # In-app purchase
 
 People can use in-app purchase to pay for virtual goods — like premium content, digital goods, and subscriptions — securely within your app.
@@ -255,6 +254,7 @@ September 12, 2023| Updated artwork and guidance for redeeming offer codes.
 November 3, 2022| Added a guideline for displaying the total billing price for every in-app purchase item and consolidated guidance into one page.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

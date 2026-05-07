@@ -122,6 +122,7 @@ export const MyForm: React.FC = () => {
 ### Standard Dialog Structure
 
 From BEST_PRACTICES.md - All dialogs should have:
+
 - Icon in title
 - Close button (X)
 - Action buttons at bottom
@@ -175,11 +176,13 @@ export const MyDialog: React.FC<MyDialogProps> = ({ open, onClose, onConfirm }) 
 From BEST_PRACTICES.md - DataGrid wrappers should accept:
 
 **Required Props:**
+
 - `rows`: Data array
 - `columns`: Column definitions
 - Loading/error states
 
 **Optional Props:**
+
 - Toolbar components
 - Custom actions
 - Initial state
@@ -268,6 +271,7 @@ const handleSave = () => {
 ### TanStack Query for Server State (PRIMARY)
 
 Use TanStack Query for **all server data**:
+
 - Fetching: useSuspenseQuery
 - Mutations: useMutation
 - Caching: Automatic
@@ -284,6 +288,7 @@ const { data: users } = useSuspenseQuery({
 ### useState for UI State
 
 Use `useState` for **local UI state only**:
+
 - Form inputs (uncontrolled)
 - Modal open/closed
 - Selected tab
@@ -298,6 +303,7 @@ const [selectedTab, setSelectedTab] = useState(0);
 ### Zustand for Global Client State (Minimal)
 
 Use Zustand only for **global client state**:
+
 - Theme preference
 - Sidebar collapsed state
 - User preferences (not from server)
@@ -323,6 +329,7 @@ export const useAppState = create<AppState>((set) => ({
 ## Summary
 
 **Common Patterns:**
+
 - ✅ useAuth hook for current user (id, email, roles, username)
 - ✅ React Hook Form + Zod for forms
 - ✅ Dialog with icon + close button
@@ -334,11 +341,13 @@ export const useAppState = create<AppState>((set) => ({
 
 **See Also:**
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - [data-fetching.md](data-fetching.md) - TanStack Query patterns
 - [component-patterns.md](component-patterns.md) - Component structure
 - [loading-and-error-states.md](loading-and-error-states.md) - Error handling
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

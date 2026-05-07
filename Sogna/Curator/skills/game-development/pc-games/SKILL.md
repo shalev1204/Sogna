@@ -6,7 +6,6 @@ id: skill-pc-games
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # PC/Console Game Development
 
 > Engine selection and platform-specific principles.
@@ -75,8 +74,10 @@ What are you building?
 
 ```
 Map ACTIONS, not buttons:
+
 - "confirm" → A (Xbox), Cross (PS), B (Nintendo)
 - "cancel" → B (Xbox), Circle (PS), A (Nintendo)
+
 ```
 
 ### Haptic Feedback

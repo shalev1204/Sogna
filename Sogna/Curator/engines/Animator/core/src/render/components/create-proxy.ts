@@ -1,7 +1,7 @@
 import { warnOnce } from "sognaflow-utils"
-import { createsognaflowComponent, sognaflowComponentOptions } from "../../sognaflow"
-import { FeaturePackages } from "../../sognaflow/features/types"
-import { sognaflowProps } from "../../sognaflow/types"
+import { createsognaflowComponent, sognaflowComponentOptions } from "../../motion"
+import { FeaturePackages } from "../../motion/features/types"
+import { sognaflowProps } from "../../motion/types"
 import { DOMsognaflowComponents } from "../dom/types.js"
 import { CreateVisualElement } from "../types.js"
 

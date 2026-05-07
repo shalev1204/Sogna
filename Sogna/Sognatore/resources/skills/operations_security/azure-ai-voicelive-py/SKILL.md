@@ -8,7 +8,6 @@ id: skill-azure-ai-voicelive-py
 owner: [[ops-security]]
 ---
 
-
 # Azure AI Voice Live SDK
 
 Build real-time voice AI applications with bidirectional WebSocket communication.
@@ -23,7 +22,9 @@ pip install azure-ai-voicelive aiohttp azure-identity
 
 ```bash
 AZURE_COGNITIVE_SERVICES_ENDPOINT=https://<region>.api.cognitive.microsoft.com
+
 # For API key auth (not recommended for production)
+
 AZURE_COGNITIVE_SERVICES_KEY=<api-key>
 ```
 
@@ -146,6 +147,7 @@ await conn.session.update(session=RequestSession(
 import base64
 
 # Read audio chunk (16-bit PCM, 24kHz mono)
+
 audio_chunk = await read_audio_from_microphone()
 b64_audio = base64.b64encode(audio_chunk).decode()
 
@@ -219,6 +221,7 @@ async for event in conn:
 await conn.session.update(session={"turn_detection": None})
 
 # Manually control turns
+
 await conn.input_audio_buffer.append(audio=b64_audio)
 await conn.input_audio_buffer.commit()  # End of user turn
 await conn.response.create()  # Trigger response
@@ -237,7 +240,9 @@ async for event in conn:
 ### Conversation History
 
 ```python
+
 # Add system message
+
 await conn.conversation.item.create(item={
     "type": "message",
     "role": "system",
@@ -245,6 +250,7 @@ await conn.conversation.item.create(item={
 })
 
 # Add user message
+
 await conn.conversation.item.create(item={
     "type": "message",
     "role": "user", 
@@ -282,10 +288,13 @@ Azure voices: Use `AzureStandardVoice`, `AzureCustomVoice`, or `AzurePersonalVoi
 ## Turn Detection Options
 
 ```python
+
 # Server VAD (default)
+
 {"type": "server_vad", "threshold": 0.5, "silence_duration_ms": 500}
 
 # Azure Semantic VAD (smarter detection)
+
 {"type": "azure_semantic_vad"}
 {"type": "azure_semantic_vad_en"}  # English optimized
 {"type": "azure_semantic_vad_multilingual"}
@@ -314,14 +323,17 @@ except ConnectionError as e:
 - **All Models & Types**: See references/models.md
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -43,6 +43,7 @@ def long_workflow():
     return "done"
 
 # Client code to read events
+
 @app.post("/start")
 def start_workflow():
     handle = DBOS.start_workflow(long_workflow)
@@ -58,7 +59,9 @@ Get all events from a workflow:
 
 ```python
 all_events = DBOS.get_all_events(workflow_id)
+
 # Returns: {"status": "finished", "other_key": "value"}
+
 ```
 
 Events can be called from `set_event` from workflows or steps.
@@ -66,6 +69,7 @@ Events can be called from `set_event` from workflows or steps.
 Reference: [Workflow Events](https://docs.dbos.dev/python/tutorials/workflow-communication#workflow-events)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

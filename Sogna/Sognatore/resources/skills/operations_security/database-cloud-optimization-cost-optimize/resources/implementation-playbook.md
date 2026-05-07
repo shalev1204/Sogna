@@ -549,7 +549,9 @@ class SpotInstanceOptimizer:
     def create_spot_configuration(self):
         """Create spot instance configuration"""
         return '''
+
 # Terraform configuration for Spot instances
+
 resource "aws_spot_fleet_request" "processing_fleet" {
   iam_fleet_role = aws_iam_role.spot_fleet.arn
 
@@ -589,6 +591,7 @@ resource "aws_spot_fleet_request" "processing_fleet" {
 }
 
 # Spot interruption handler
+
 resource "aws_lambda_function" "spot_interruption_handler" {
   filename         = "spot-handler.zip"
   function_name    = "spot-interruption-handler"
@@ -1006,7 +1009,9 @@ data:
         updateMode: "Auto"
       resourcePolicy:
         containerPolicies:
+
         - containerName: app
+
           minAllowed:
             cpu: 100m
             memory: 128Mi
@@ -1023,9 +1028,12 @@ data:
       template:
         spec:
           containers:
+
           - image: k8s.gcr.io/autoscaling/cluster-autoscaler:v1.21.0
+
             name: cluster-autoscaler
             command:
+
             - ./cluster-autoscaler
             - --v=4
             - --stderrthreshold=info
@@ -1049,16 +1057,24 @@ data:
       template:
         spec:
           containers:
+
           - name: aws-node-termination-handler
+
             image: amazon/aws-node-termination-handler:v1.13.0
             env:
+
             - name: NODE_NAME
+
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+
             - name: ENABLE_SPOT_INTERRUPTION_DRAINING
+
               value: "true"
+
             - name: ENABLE_SCHEDULED_EVENT_DRAINING
+
               value: "true"
 '''
 ```
@@ -1448,6 +1464,7 @@ class CostMonitoringSystem:
 Focus on delivering immediate cost savings while establishing sustainable cost optimization practices that maintain performance and reliability standards.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

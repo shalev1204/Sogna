@@ -11,10 +11,10 @@ id: skill-conductor-setup
 owner: [[orchestrator]]
 ---
 
-
 Set up this Rails project for Conductor, the Mac app for parallel coding agents.
 
 ## When to Use
+
 - You need to configure a Rails project so it runs correctly inside Conductor workspaces.
 - The project should support parallel coding agents with isolated ports, Redis settings, and shared secrets.
 - You want the standard `conductor.json`, `bin/conductor-setup`, and `script/server` scaffolding for a Rails repo.
@@ -43,12 +43,15 @@ Create `bin/conductor-setup` if it doesn't already exist:
 set -e
 
 # Symlink .env from repo root (where secrets live, outside worktrees)
+
 [ -f "$CONDUCTOR_ROOT_PATH/.env" ] && ln -sf "$CONDUCTOR_ROOT_PATH/.env" .env
 
 # Symlink Rails master key
+
 [ -f "$CONDUCTOR_ROOT_PATH/config/master.key" ] && ln -sf "$CONDUCTOR_ROOT_PATH/config/master.key" config/master.key
 
 # Install dependencies
+
 bundle install
 npm install
 ```
@@ -63,10 +66,12 @@ Create the `script` directory if needed, then create `script/server` if it doesn
 #!/bin/bash
 
 # === Port Configuration ===
+
 export PORT=${CONDUCTOR_PORT:-3000}
 export VITE_RUBY_PORT=$((PORT + 1000))
 
 # === Redis Isolation ===
+
 if [ -n "$CONDUCTOR_WORKSPACE_NAME" ]; then
   HASH=$(printf '%s' "$CONDUCTOR_WORKSPACE_NAME" | cksum | cut -d' ' -f1)
   REDIS_DB=$((HASH % 16))
@@ -84,6 +89,7 @@ Make it executable with `chmod +x script/server`.
 For each of the following files, if they exist and contain Redis configuration, update them to use `ENV.fetch('REDIS_URL', ...)` or `ENV['REDIS_URL']` with a fallback:
 
 ### config/initializers/sidekiq.rb
+
 If this file exists and configures Redis, update it to use:
 ```ruby
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -91,6 +97,7 @@ redis_url = ENV.fetch('REDIS_URL', 'redis://localhost:6379/0')
 ```
 
 ### config/cable.yml
+
 If this file exists, update the development adapter to use:
 ```yaml
 development:
@@ -100,6 +107,7 @@ development:
 ```
 
 ### config/environments/development.rb
+
 If this file configures Redis for caching, update to use:
 ```ruby
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -107,6 +115,7 @@ config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL', 'redis://
 ```
 
 ### config/initializers/rack_attack.rb
+
 If this file exists and configures a Redis cache store, update to use:
 ```ruby
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -122,17 +131,22 @@ Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(url: ENV.fe
 # Verification
 
 After creating the files:
+
 1. Confirm all Conductor files exist and scripts are executable
 2. Run `script/server` to verify it starts without errors
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 3. Check that Rails configs properly reference `ENV['REDIS_URL']` or `ENV.fetch('REDIS_URL', ...)`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

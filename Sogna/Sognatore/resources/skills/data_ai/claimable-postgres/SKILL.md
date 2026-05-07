@@ -7,7 +7,6 @@ id: skill-claimable-postgres
 owner: [[orchestrator]]
 ---
 
-
 # Claimable Postgres
 
 Instant Postgres databases for local development, demos, prototyping, and test environments. No account required. Databases expire after 72 hours unless claimed to a Neon account.
@@ -154,9 +153,11 @@ For Vite projects, `vite-plugin-db` auto-provisions a database on `vite dev` if 
 3. **Parse response:** Extract `connection_string`, `claim_url`, and `expires_at` from the JSON response.
 4. **Write .env:** Write `DATABASE_URL=<connection_string>` to the project's `.env` (or the user's preferred file and key). Do not overwrite an existing key without confirmation.
 5. **Seed (if needed):** If the user has a seed SQL file, run it against the new database:
+
    ```bash
    psql "$DATABASE_URL" -f seed.sql
    ```
+
 6. **Report:** Tell the user where the connection string was written, which key was used, and share the claim URL. Remind them: the database works now; claim within 72 hours to keep it permanently.
 7. **Optional:** Offer a quick connection test (e.g. `SELECT 1`).
 
@@ -166,9 +167,11 @@ For Vite projects, `vite-plugin-db` auto-provisions a database on `vite dev` if 
 2. **Confirm intent:** If the request is ambiguous, confirm the user wants a temporary, no-signup database. Skip this if they explicitly asked for a quick or temporary database.
 3. **Gather options:** Use defaults unless context suggests otherwise (e.g., user mentions a custom env file, seed SQL, or logical replication).
 4. **Run:** Execute with `@latest --yes` plus the confirmed options. Always use `@latest` to avoid stale cached versions. `--yes` skips interactive prompts that would stall the agent.
+
    ```bash
    npx get-db@latest --yes --ref agent-skills --env .env.local --seed ./schema.sql
    ```
+
 5. **Verify:** Confirm the connection string was written to the intended file.
 6. **Report:** Tell the user where the connection string was written, which key was used, and that a claim URL is in the env file. Remind them: the database works now; claim within 72 hours to keep it permanently.
 7. **Optional:** Offer a quick connection test (e.g. `SELECT 1`).
@@ -220,16 +223,18 @@ If the agent needs a database to fulfill a task (e.g. "build me a todo app with 
 - If users need long-term persistence, instruct them to open the claim URL right away.
 - After writing credentials to an .env file, check that it's covered by .gitignore. If not, warn the user. Do not modify `.gitignore` without confirmation.
 
-
 ## When to Use
+
 Use this skill when tackling tasks related to its primary domain or functionality as described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

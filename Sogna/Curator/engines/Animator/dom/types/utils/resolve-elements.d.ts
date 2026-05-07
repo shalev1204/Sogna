@@ -10,3 +10,4 @@ export interface SelectorCache {
     [key: string]: NodeListOf<Element>;
 }
 export declare function ResolveElements(elementOrSelector: ElementOrSelector, scope?: AnimationScope, selectorCache?: SelectorCache): Element[];
+export { ResolveElements as resolveElements };

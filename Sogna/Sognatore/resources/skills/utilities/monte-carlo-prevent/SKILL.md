@@ -13,7 +13,6 @@ id: skill-monte-carlo-prevent
 owner: [[orchestrator]]
 ---
 
-
 # Monte Carlo Prevent Skill
 
 This skill brings Monte Carlo's data observability context directly into your editor. When you're modifying a dbt model or SQL pipeline, use it to surface table health, lineage, active alerts, and to generate monitors-as-code without leaving Claude Code.
@@ -34,8 +33,10 @@ Reference files live next to this skill file. **Use the Read tool** (not MCP res
 - Describes a planned change to a model (new column, join update, filter change, refactor) → **STOP — run Workflow 4 before writing any code**
 -
 - Adds a new column, metric, or output expression to an existing
+
   model → run Workflow 4 first, then ALWAYS offer Workflow 2
   regardless of risk tier — do not skip the monitor offer
+
 - Asks about data quality, freshness, row counts, or anomalies → run Workflow 1
 - Wants to triage or respond to a data quality alert → run Workflow 3
 
@@ -95,6 +96,7 @@ This applies whenever the user expresses intent to modify a model — including 
 - "Rename [column/field] to [new name]"
 - "Add [column]" (short imperative form, e.g. "add a created_at column")
 - Any single-verb imperative command targeting a column, table, or model
+
   (e.g. "drop X", "rename Y", "add Z", "remove W")
 
 Parameter changes (threshold values, date constants, numeric limits) appear
@@ -111,9 +113,12 @@ for impact assessment purposes.
 file, you MUST check:**
 
 1. Has the synthesis step been run for THIS SPECIFIC CHANGE in the
+
    current prompt?
+
 2. **If YES** → proceed with the edit
 3. **If NO** → stop immediately, run Workflow 4, present the full
+
    report with synthesis connected to this specific change.
    **If risk is High or Medium:** ask "Do you want me to proceed
    with the edit?" and wait for explicit confirmation.
@@ -130,9 +135,11 @@ being changed in the current prompt — not just general table health.
 Example:
 
 - ✅ "Given 34 downstream models depend on is_paying_workspace,
+
   adding 'MC Internal' to the exclusion list will exclude these
   workspaces from all downstream health scores and exports.
   Confirm?"
+
 - ❌ "Workflow 4 already ran. Making the edit now."
 
 The only exception: if the user explicitly acknowledges the risk
@@ -256,11 +263,13 @@ marker when the gap is specifically about the columns or logic being changed —
 not for general table-level monitor absence.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

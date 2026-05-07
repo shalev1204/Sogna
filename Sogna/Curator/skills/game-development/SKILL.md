@@ -11,7 +11,6 @@ id: skill-game-development
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # Game Development
 
 > **Orchestrator skill** that provides core principles and routes to specialized sub-skills.
@@ -66,6 +65,7 @@ RENDER → Draw the frame (interpolated)
 ```
 
 **Fixed Timestep Rule:**
+
 - Physics/logic: Fixed rate (e.g., 50Hz)
 - Rendering: As fast as possible
 - Interpolate between states for smooth visuals
@@ -112,6 +112,7 @@ Abstract input into ACTIONS, not raw keys:
 | Buffer | 1.67ms |
 
 **Optimization Priority:**
+
 1. Algorithm (O(n²) → O(n log n))
 2. Batching (reduce draw calls)
 3. Pooling (avoid GC spikes)
@@ -157,15 +158,18 @@ Abstract input into ACTIONS, not raw keys:
 ## Routing Examples
 
 ### Example 1: "I want to make a browser-based 2D platformer"
+
 → Start with `game-development/web-games` for framework selection
 → Then `game-development/2d-games` for sprite/tilemap patterns
 → Reference `game-development/game-design` for level design
 
 ### Example 2: "Mobile puzzle game for iOS and Android"
+
 → Start with `game-development/mobile-games` for touch input and stores
 → Use `game-development/game-design` for puzzle balancing
 
 ### Example 3: "Multiplayer VR shooter"
+
 → `game-development/vr-ar` for comfort and immersion
 → `game-development/3d-games` for rendering
 → `game-development/multiplayer` for networking

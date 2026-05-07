@@ -12,6 +12,7 @@ version: 1.0.0
 Liquid Glass is a dynamic material introduced in iOS that combines the optical properties of glass with a sense of fluidity. It blurs content behind it, reflects color and light from surrounding content, and reacts to touch and pointer interactions in real time. This guide covers how to implement and customize Liquid Glass effects in SwiftUI applications. You should always seek guides on Liquid Glass when asked for help adopting new Apple design.
 
 Key features of Liquid Glass:
+
 - Blurs content behind the material
 - Reflects color and light from surrounding content
 - Reacts to touch and pointer interactions
@@ -45,6 +46,7 @@ Text("Hello, World!")
 ```
 
 Common shape options:
+
 - `.capsule` (default)
 - `.rect(cornerRadius: CGFloat)`
 - `.circle`
@@ -63,6 +65,7 @@ Text("Hello, World!")
 ```
 
 Key customization options:
+
 - `.regular` - Standard glass effect
 - `.tint(Color)` - Add a color tint to suggest prominence
 - `.interactive(Bool)` - Make the glass react to touch and pointer interactions
@@ -110,6 +113,7 @@ GlassEffectContainer(spacing: 40.0) {
 ```
 
 The `spacing` parameter controls how the Liquid Glass effects interact with each other:
+
 - Smaller spacing: Views need to be closer to merge effects
 - Larger spacing: Effects merge at greater distances
 
@@ -287,6 +291,7 @@ GlassEffectContainer(spacing: 20) {
 - [SwiftUI GlassButtonStyle](https://developer.apple.com/documentation/SwiftUI/GlassButtonStyle)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

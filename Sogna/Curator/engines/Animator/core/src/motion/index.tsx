@@ -5,9 +5,9 @@ import * as React from "react"
 import { forwardRef, useContext } from "react"
 import { LayoutGroupContext } from "../context/LayoutGroupContext.js"
 import { LazyContext } from "../context/LazyContext.js"
-import { sognaflowConfigContext } from "../context/sognaflowconfigcontext"
-import { sognaflowContext } from "../context/sognaflowcontext"
-import { useCreatesognaflowContext } from "../context/sognaflowcontext/create"
+import { sognaflowConfigContext } from "../context/MotionConfigContext.js"
+import { sognaflowContext } from "../context/MotionContext/index.js"
+import { useCreatesognaflowContext } from "../context/MotionContext/create.js"
 import { DOMsognaflowComponents } from "../render/dom/types.js"
 import { useRender } from "../render/dom/use-render.js"
 import { isSVGComponent } from "../render/dom/utils/is-svg-component.js"
@@ -21,7 +21,7 @@ import { loadFeatures } from "./features/load-features.js"
 import { FeatureBundle, FeaturePackages } from "./features/types.js"
 import { sognaflowProps } from "./types.js"
 import { sognaflowComponentSymbol } from "./utils/symbol.js"
-import { usesognaflowRef } from "./utils/use-sognaflow-ref"
+import { useMotionRef as usesognaflowRef } from "./utils/use-motion-ref.js"
 import { useVisualElement } from "./utils/use-visual-element.js"
 
 export interface sognaflowComponentConfig<
@@ -98,7 +98,7 @@ export function createsognaflowComponent<
         let MeasureLayout: undefined | React.ComponentType<sognaflowProps>
 
         const configAndProps = {
-            ...useContext(sognaflowConfigContext),
+            ...useContext(sognaflowConfigContext) as any,
             ...props,
             layoutId: useLayoutId(props),
         }

@@ -9,7 +9,7 @@ import {
     resolveVariantFromProps,
 } from "sognaflow-dom"
 import { useContext } from "react"
-import { sognaflowContext, sognaflowContextProps } from "../../context/sognaflowcontext"
+import { sognaflowContext, sognaflowContextProps } from "../../context/MotionContext/index.js"
 import {
     PresenceContext,
     type PresenceContextProps,
@@ -134,7 +134,7 @@ function makeLatestValues(
 export const makeUseVisualState =
     <I, RS>(config: UseVisualStateConfig<RS>): UseVisualState<I, RS> =>
     (props: sognaflowProps, isStatic: boolean): VisualState<I, RS> => {
-        const context = useContext(sognaflowContext)
+        const context = useContext(sognaflowContext) as any
         const presenceContext = useContext(PresenceContext)
         const make = () => makeState(config, props, context, presenceContext)
 

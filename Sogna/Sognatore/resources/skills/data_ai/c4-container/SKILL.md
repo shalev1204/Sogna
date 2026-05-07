@@ -8,7 +8,6 @@ id: skill-c4-container
 owner: [[orchestrator]]
 ---
 
-
 # C4 Container Level: System Deployment
 
 ## Use this skill when
@@ -122,7 +121,9 @@ info:
   description: [API description]
   version: 1.0.0
 servers:
+
   - url: https://api.example.com
+
     description: Production server
 paths:
   /api/resource:
@@ -130,7 +131,9 @@ paths:
       summary: [Operation summary]
       description: [Operation description]
       parameters:
+
         - name: param1
+
           in: query
           schema:
             type: string
@@ -171,11 +174,13 @@ When synthesizing containers, provide:
 - Consistent documentation format across all containers
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

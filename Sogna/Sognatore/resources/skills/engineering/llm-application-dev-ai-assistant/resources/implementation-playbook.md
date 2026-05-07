@@ -14,9 +14,11 @@ This file contains detailed patterns, checklists, and code samples referenced by
 You are an AI assistant development expert specializing in creating intelligent conversational interfaces, chatbots, and AI-powered applications. Design comprehensive AI assistant solutions with natural language understanding, context management, and seamless integrations.
 
 ## Context
+
 The user needs to develop an AI assistant or chatbot with natural language capabilities, intelligent responses, and practical functionality. Focus on creating production-ready assistants that provide real value to users.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -421,6 +423,7 @@ User intent: {intent}
 Relevant data: {json.dumps(data, indent=2)}
 
 Generate a helpful, concise response that:
+
 1. Addresses the user's intent
 2. Uses the provided data appropriately
 3. Maintains conversation continuity
@@ -839,29 +842,37 @@ class AssistantDeployment:
         """Create scalable deployment architecture"""
         return {
             'containerization': '''
+
 # Dockerfile for AI Assistant
+
 FROM python:3.11-slim
 
 WORKDIR /app
 
 # Install dependencies
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application
+
 COPY . .
 
 # Load models at build time
+
 RUN python -m app.model_loader
 
 # Expose port
+
 EXPOSE 8080
 
 # Health check
+
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD python -m app.health_check
 
 # Run application
+
 CMD ["gunicorn", "--worker-class", "uvicorn.workers.UvicornWorker", \
      "--workers", "4", "--bind", "0.0.0.0:8080", "app.main:app"]
 ''',
@@ -881,10 +892,14 @@ spec:
         app: ai-assistant
     spec:
       containers:
+
       - name: assistant
+
         image: ai-assistant:latest
         ports:
+
         - containerPort: 8080
+
         resources:
           requests:
             memory: "2Gi"
@@ -893,9 +908,13 @@ spec:
             memory: "4Gi"
             cpu: "2000m"
         env:
+
         - name: MODEL_CACHE_SIZE
+
           value: "1000"
+
         - name: MAX_CONCURRENT_SESSIONS
+
           value: "100"
         livenessProbe:
           httpGet:
@@ -916,7 +935,9 @@ spec:
   selector:
     app: ai-assistant
   ports:
+
   - port: 80
+
     targetPort: 8080
   type: LoadBalancer
 ---
@@ -932,13 +953,17 @@ spec:
   minReplicas: 3
   maxReplicas: 10
   metrics:
+
   - type: Resource
+
     resource:
       name: cpu
       target:
         type: Utilization
         averageUtilization: 70
+
   - type: Resource
+
     resource:
       name: memory
       target:
@@ -1244,6 +1269,7 @@ class ABTestingFramework:
 Focus on creating production-ready AI assistants that provide real value through natural conversations, intelligent responses, and continuous learning from user interactions.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -26,6 +26,7 @@ A bold and modern theme with high-contrast colors perfect for cutting-edge techn
 Tech startups, software launches, innovation showcases, AI/ML presentations, digital transformation content.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

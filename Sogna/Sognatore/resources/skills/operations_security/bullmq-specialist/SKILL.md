@@ -9,7 +9,6 @@ id: skill-bullmq-specialist
 owner: [[ops-security]]
 ---
 
-
 # BullMQ Specialist
 
 BullMQ expert for Redis-backed job queues, background processing, and
@@ -330,11 +329,13 @@ Skills: bullmq-specialist, email-systems, redis-specialist
 Workflow:
 
 ```
+
 1. Email request received (API)
 2. Job queued with rate limiting (bullmq-specialist)
 3. Worker processes with backoff (bullmq-specialist)
 4. Email sent via provider (email-systems)
 5. Status tracked in Redis (redis-specialist)
+
 ```
 
 ### Background Processing Stack
@@ -344,11 +345,13 @@ Skills: bullmq-specialist, backend, devops
 Workflow:
 
 ```
+
 1. API receives request (backend)
 2. Long task queued for background (bullmq-specialist)
 3. Worker processes async (bullmq-specialist)
 4. Result stored/notified (backend)
 5. Workers scaled per load (devops)
+
 ```
 
 ### AI Processing Pipeline
@@ -358,11 +361,13 @@ Skills: bullmq-specialist, ai-workflow-automation, performance-hunter
 Workflow:
 
 ```
+
 1. AI task submitted (ai-workflow-automation)
 2. Job flow created with dependencies (bullmq-specialist)
 3. Workers process stages (bullmq-specialist)
 4. Performance monitored (performance-hunter)
 5. Results aggregated (ai-workflow-automation)
+
 ```
 
 ### Scheduled Tasks Stack
@@ -372,11 +377,13 @@ Skills: bullmq-specialist, backend, redis-specialist
 Workflow:
 
 ```
+
 1. Repeatable jobs defined (bullmq-specialist)
 2. Cron patterns with timezone (bullmq-specialist)
 3. Jobs execute on schedule (bullmq-specialist)
 4. State managed in Redis (redis-specialist)
 5. Results handled (backend)
+
 ```
 
 ## Related Skills
@@ -384,6 +391,7 @@ Workflow:
 Works well with: `redis-specialist`, `backend`, `nextjs-app-router`, `email-systems`, `ai-workflow-automation`, `performance-hunter`
 
 ## When to Use
+
 - User mentions or implies: bullmq
 - User mentions or implies: bull queue
 - User mentions or implies: redis queue
@@ -396,11 +404,13 @@ Works well with: `redis-specialist`, `backend`, `nextjs-app-router`, `email-syst
 - User mentions or implies: async processing
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

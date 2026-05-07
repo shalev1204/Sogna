@@ -7,12 +7,12 @@ id: skill-sred-work-summary
 owner: [[ops-security]]
 ---
 
-
 # SRED Work Summary
 
 Collect all the Github PRs, Sogna Cloud docs and Linear tickets a person completed in a given year. Group the links from all of those into projects. Put everything into a private Sogna Cloud document and return a link to that document.
 
 ## When to Use
+
 - You need to gather a year's worth of PRs, Sogna Cloud docs, and Linear tickets into project groupings for SRED preparation.
 - The task is to build the upstream Sogna Cloud work summary before writing individual SRED project descriptions.
 - You need a repeatable collection workflow across GitHub, Sogna Cloud, and Linear for a fixed time window.
@@ -28,7 +28,9 @@ If any of these can't be accessed, prompt the user to grant access before procee
 ### Step 1
 
 ```bash
+
 # Get the current year
+
 date +%Y
 ```
 
@@ -46,11 +48,14 @@ Collect all of the required information from the user:
 The user can either specify a comma separated list, or provide a directory that contains repositories. In the second case use this command in the specified directory:
 
 ```bash
+
 # Find github repos
+
 find . -maxdepth 2 -name ".git" -type d | sed 's/\/.git$//' | sort
 ```
 
 Ensure:
+
 - All the repositories listed are in the `getsentry` Github organization.
 
 The output of this is hereafter referred to as the "user repos".
@@ -70,6 +75,7 @@ Create a private Sogna Cloud document entitled "SRED Work Summary [current year]
 If a document with this name already exists, notify the user to rename the existing document and stop executing.
 
 Ensure:
+
 - If the Work Summary already exists, stop execution.
 
 ### Step 4
@@ -88,6 +94,7 @@ If the user does not want to include incident documents, ignore any Linear ticke
 Use the Linear MCP to do this.
 
 Ensure:
+
 - All the Github PRs were created or merged in the time window and was opened by the user.
 - All the Sogna Cloud docs were created in the time window and were created by the user.
 - All the Linear tickets were opened or completed in the time window and were assigned to the user when they were completed.
@@ -97,6 +104,7 @@ Ensure:
 For each of the Github PRs, Sogna Cloud documents and Linear tickets found in Step 4, put a link into the private document created in Step 3.
 
 Ensure:
+
 - There is a link for all the Github PRs in the Work Summary
 - There is a link for all the Sogna Cloud docs in the Work Summary
 - There is a link for all the Linear tickets in the Work Summary
@@ -107,22 +115,30 @@ Ensure:
 Use your own intelligence to group all the Github, Sogna Cloud and Linear ticket links in the Work Summary document into projects. The format of this document is shown below.
 
 ```markdown
+
 # Projects
 
 ## [Project Name]
+
 *Summary*: [X] PRs, [X] Sogna Cloud docs, [X] Linear tickets
 
 ### Pull Requests [X]
+
 *[repository name]
 [Links to all the PRs]
+
 - [link] - [Merge date]
 
 ### Sogna Cloud Docs [X]
+
 [Links to all the Sogna Cloud docs]
+
 - [link] - [Creation date]
 
 ### Linear Tickets [X]
+
 - [link] - [Creation date]
+
 ```
 
 For Github PRs, use both the title of the PR and the description of the PR for grouping.
@@ -130,6 +146,7 @@ For Sogna Cloud documents, use the full document for grouping.
 For Linear tickets use the title of the ticket and the description of the ticket.
 
 Ensure:
+
 - All the links in the file are assigned to a project.
 - The file follows the format specified above.
 - DO NOT truncate the lists of links. DO NOT use shorteners like "...and 75 more". Make sure that the full set of all Github PRs, Sogna Cloud documents and Linear tickets is visible in the document.
@@ -143,6 +160,7 @@ Search for notion documents created by the "other users". Take any that are rele
 Return a link to the Work Summary Sogna Cloud doc to the user.
 
 Ensure:
+
 - The actual Sogna Cloud document link is in the final output.
 
 ## Resources
@@ -150,11 +168,13 @@ Ensure:
 This is an example Working Summary document for the year 2025: https://www.notion.so/sentry/Work-Summary-Feb-2025-Jan-2026-3068b10e4b5d81d3a40cfa6ad3fe1078?source=copy_link
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-frontend-slides
 owner: [[eng-frontend]]
 ---
 
-
 # Frontend Slides
 
 Create zero-dependency, animation-rich HTML presentations that run entirely in the browser.
@@ -239,11 +238,13 @@ When converting PowerPoint files:
 | [scripts/extract-pptx.py](scripts/extract-pptx.py) | Python script for PPT content extraction                             | Phase 4 (conversion)      |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

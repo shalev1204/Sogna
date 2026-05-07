@@ -55,6 +55,7 @@ Reference architecture for generating slide presentations. Every presentation fo
         /* ===========================================
            BASE STYLES
            =========================================== */
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         /* --- PASTE viewport-base.css CONTENTS HERE --- */
@@ -271,6 +272,7 @@ If user chose "No images" in Phase 1, skip this entirely. If images were provide
 from PIL import Image, ImageDraw
 
 # Circular crop (for logos on modern/clean styles)
+
 def crop_circle(input_path, output_path):
     img = Image.open(input_path).convert('RGBA')
     w, h = img.size
@@ -283,6 +285,7 @@ def crop_circle(input_path, output_path):
     img.save(output_path, 'PNG')
 
 # Resize (for oversized images that inflate HTML)
+
 def resize_max(input_path, output_path, max_dim=1200):
     img = Image.open(input_path)
     img.thumbnail((max_dim, max_dim), Image.LANCZOS)
@@ -334,6 +337,7 @@ Save processed images with `_processed` suffix. Never overwrite originals.
 **Comments:** Every section needs clear comments explaining what it does and how to modify it.
 
 **Accessibility:**
+
 - Semantic HTML (`<section>`, `<nav>`, `<main>`)
 - Keyboard navigation works fully
 - ARIA labels where needed
@@ -354,6 +358,7 @@ Multiple presentations in one project:
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,12 +8,12 @@ id: skill-wiki-vitepress
 owner: [[orchestrator]]
 ---
 
-
 # Wiki VitePress Packager
 
 Transform generated wiki Markdown files into a polished VitePress static site with dark theme and interactive Mermaid diagrams.
 
 ## When to Use
+
 - User asks to "build a site" or "package as VitePress"
 - User runs the `/deep-wiki:build` command
 - User wants a browsable HTML output from generated wiki pages
@@ -65,9 +65,11 @@ mermaid: {
 ## Dark-Mode Mermaid: Three-Layer Fix
 
 ### Layer 1: Theme Variables (in config.mts)
+
 Set via `mermaid.themeVariables` as shown above.
 
 ### Layer 2: CSS Overrides (`custom.css`)
+
 Target Mermaid SVG elements with `!important`:
 
 ```css
@@ -80,6 +82,7 @@ Target Mermaid SVG elements with `!important`:
 ```
 
 ### Layer 3: Inline Style Replacement (`theme/index.ts`)
+
 Mermaid inline `style` attributes override everything. Use `onMounted` + polling to replace them:
 
 ```typescript
@@ -133,6 +136,7 @@ Modal CSS:
 ## Post-Processing Rules
 
 Before VitePress build, scan all `.md` files and fix:
+
 - Replace `<br/>` with `<br>` (Vue template compiler compatibility)
 - Wrap bare `<T>` generic parameters in backticks outside code fences
 - Ensure every page has YAML frontmatter with `title` and `description`
@@ -153,14 +157,17 @@ Output goes to `wiki-site/.vitepress/dist/`.
 - `enhanceApp()` runs during SSR where `document` doesn't exist — use `setup()` only
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

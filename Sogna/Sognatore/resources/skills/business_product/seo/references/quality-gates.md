@@ -27,6 +27,7 @@ version: 1.0.0
 ## Location Page Thresholds
 
 ### Warning Level (30+ pages)
+
 - ⚠️ **WARNING** at 30+ location pages
 - Enforce 60%+ unique content per page
 - Content must include:
@@ -36,6 +37,7 @@ version: 1.0.0
   - Genuine customer testimonials from that area
 
 ### Hard Stop (50+ pages)
+
 - 🛑 **HARD STOP** at 50+ location pages
 - Require explicit user justification
 - Must demonstrate:
@@ -44,7 +46,9 @@ version: 1.0.0
   - Local signals (Google Business Profile, local reviews)
 
 ### Why This Matters
+
 Google's doorway page algorithm penalizes programmatic location pages with thin/duplicate content. Signs of doorway pages:
+
 - Only city/state name changed between pages
 - No unique local information
 - No local business signals
@@ -55,6 +59,7 @@ Google's doorway page algorithm penalizes programmatic location pages with thin/
 ## Safe vs. Risky Programmatic Pages
 
 ### Safe at Scale ✅
+
 | Page Type | Why It's Safe |
 |-----------|---------------|
 | Integration pages | Real setup documentation, unique technical content |
@@ -64,6 +69,7 @@ Google's doorway page algorithm penalizes programmatic location pages with thin/
 | User profile pages | User-generated unique content |
 
 ### Penalty Risk ❌
+
 | Page Type | Why It's Risky |
 |-----------|----------------|
 | Location pages with only city swapped | Duplicate content, doorway pages |
@@ -84,11 +90,13 @@ Google's doorway page algorithm penalizes programmatic location pages with thin/
 | Uniqueness | Each page must have unique title |
 
 ### Good Examples
+
 - "Emergency Plumbing Services in Austin | ABC Plumbing"
 - "How to Fix a Leaky Faucet: Step-by-Step Guide"
 - "Enterprise SEO Software | Comprehensive Platform"
 
 ### Bad Examples
+
 - "Home" (too short, not descriptive)
 - "Best Plumbing Services for All Your Plumbing Needs in Austin Texas and Surrounding Areas" (too long)
 - "ABC Plumbing - Plumbing - Plumber - Plumbing Services" (keyword stuffing)
@@ -118,11 +126,13 @@ Google's doorway page algorithm penalizes programmatic location pages with thin/
 | Decorative images | Use `alt=""` or `role="presentation"` |
 
 ### Good Examples
+
 - "Professional plumber repairing kitchen sink faucet"
 - "Red 2024 Toyota Camry sedan front view"
 - "Team meeting in modern office conference room"
 
 ### Bad Examples
+
 - "image.jpg" (filename, not description)
 - "plumber plumbing plumber services" (keyword stuffing)
 - "Click here" (not descriptive)
@@ -139,6 +149,7 @@ Google's doorway page algorithm penalizes programmatic location pages with thin/
 | Product page | 2-4 internal links |
 
 ### Anchor Text Rules
+
 - Use descriptive anchor text (not "click here")
 - Vary anchor text (don't always use exact match keywords)
 - Link to relevant, related content
@@ -157,11 +168,13 @@ Google's doorway page algorithm penalizes programmatic location pages with thin/
 | Company info | When changes occur |
 
 ### Required Elements
+
 - Publication date visible (for articles/blogs)
 - Last updated date (if significantly revised)
 - Changelog for major updates (optional but good)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

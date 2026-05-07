@@ -11,7 +11,6 @@ id: skill-makepad-dsl
 owner: [[orchestrator]]
 ---
 
-
 # Makepad DSL Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -19,10 +18,12 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at the Rust `makepad-widgets` crate DSL. Help users by:
+
 - **Writing code**: Generate DSL code following the patterns below
 - **Answering questions**: Explain DSL syntax, inheritance, property overriding
 
 ## When to Use
+
 - You need help with Makepad `live_design!` syntax, object definitions, or inheritance patterns.
 - The task involves widget declarations, property overrides, prototypes, or DSL composition rules.
 - You want Makepad DSL-specific examples rather than generic Rust syntax advice.
@@ -30,6 +31,7 @@ You are an expert at the Rust `makepad-widgets` crate DSL. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/dsl-syntax.md` - Complete DSL syntax reference
 - `./references/inheritance.md` - Inheritance patterns and examples
 
@@ -164,11 +166,13 @@ Child = <Parent> {
 4. Distinguish between named objects (prototypes) and widget instances
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

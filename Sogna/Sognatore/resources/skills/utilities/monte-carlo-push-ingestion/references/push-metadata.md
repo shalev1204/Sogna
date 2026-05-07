@@ -10,6 +10,7 @@ version: 1.0.0
 ## Overview
 
 Metadata push sends three types of signals per table:
+
 - **Schema** — column names and types
 - **Volume** — row count and byte count
 - **Freshness** — last update timestamp
@@ -76,6 +77,7 @@ are pushing to. Use the same string that appears in the MC UI or the `connection
 from `getUser { account { warehouses { connectionType } } }`.
 
 Common values:
+
 - `"data-lake"` — Hive, EMR, Glue, generic data lake connections
 - `"snowflake"` — Snowflake
 - `"bigquery"` — BigQuery
@@ -85,6 +87,7 @@ Common values:
 ## Asset type
 
 The `type` parameter on `RelationalAsset` must be one of two values (uppercase):
+
 - `"TABLE"` — tables, external tables, dynamic tables, materialized views, etc.
 - `"VIEW"` — views, secure views
 
@@ -160,11 +163,13 @@ with open("metadata_output.json", "w") as f:
 ## Push frequency for anomaly detection
 
 To keep volume and freshness anomaly detectors active:
+
 - Push **at most once per hour** (pushing more frequently produces unpredictable behavior)
 - Push **consistently** — gaps longer than a few days will deactivate detectors
 - See `references/anomaly-detection.md` for minimum sample requirements
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-aws-cost-cleanup
 owner: [[ops-security]]
 ---
 
-
 # AWS Cost Cleanup
 
 Automate the identification and removal of unused AWS resources to eliminate waste.
@@ -20,17 +19,20 @@ Use this skill when you need to automatically clean up unused AWS resources to r
 ## Automated Cleanup Targets
 
 **Storage**
+
 - Unattached EBS volumes
 - Old EBS snapshots (>90 days)
 - Incomplete multipart S3 uploads
 - Old S3 versions in versioned buckets
 
 **Compute**
+
 - Stopped EC2 instances (>30 days)
 - Unused AMIs and associated snapshots
 - Unused Elastic IPs
 
 **Networking**
+
 - Unused Elastic Load Balancers
 - Unused NAT Gateways
 - Orphaned ENIs
@@ -41,6 +43,7 @@ Use this skill when you need to automatically clean up unused AWS resources to r
 
 ```bash
 #!/bin/bash
+
 # cleanup-unused-ebs.sh
 
 echo "Finding unattached EBS volumes..."
@@ -58,6 +61,7 @@ done
 
 ```bash
 #!/bin/bash
+
 # cleanup-old-snapshots.sh
 
 CUTOFF_DATE=$(date -d '90 days ago' --iso-8601)
@@ -74,6 +78,7 @@ done
 
 ```bash
 #!/bin/bash
+
 # release-unused-eips.sh
 
 aws ec2 describe-addresses \
@@ -89,7 +94,9 @@ done
 ### S3 Lifecycle Automation
 
 ```bash
+
 # Apply lifecycle policy to transition old objects to cheaper storage
+
 cat > lifecycle-policy.json <<EOF
 {
   "Rules": [
@@ -126,6 +133,7 @@ aws s3api put-bucket-lifecycle-configuration \
 
 ```python
 #!/usr/bin/env python3
+
 # calculate-savings.py
 
 import boto3
@@ -134,6 +142,7 @@ from datetime import datetime, timedelta
 ec2 = boto3.client('ec2')
 
 # Calculate EBS volume savings
+
 volumes = ec2.describe_volumes(
     Filters=[{'Name': 'status', 'Values': ['available']}]
 )
@@ -146,6 +155,7 @@ print(f"Total Size: {total_size} GB")
 print(f"Monthly Savings: ${monthly_cost:.2f}")
 
 # Calculate Elastic IP savings
+
 addresses = ec2.describe_addresses()
 unused = [a for a in addresses['Addresses'] if 'AssociationId' not in a]
 
@@ -226,16 +236,19 @@ def lambda_handler(event, context):
 ## Example Prompts
 
 **Discovery**
+
 - "Find all unused resources and calculate potential savings"
 - "Generate a cleanup report for my AWS account"
 - "What resources can I safely delete?"
 
 **Execution**
+
 - "Create a script to cleanup unattached EBS volumes"
 - "Delete all snapshots older than 90 days"
 - "Release unused Elastic IPs"
 
 **Automation**
+
 - "Set up automated cleanup for old snapshots"
 - "Create a Lambda function for weekly cleanup"
 - "Schedule monthly resource cleanup"
@@ -243,7 +256,9 @@ def lambda_handler(event, context):
 ## Integration with AWS Organizations
 
 ```bash
+
 # Run cleanup across multiple accounts
+
 for account in $(aws organizations list-accounts \
   --query 'Accounts[*].Id' --output text); do
   
@@ -257,7 +272,9 @@ done
 ## Monitoring and Alerts
 
 ```bash
+
 # Create CloudWatch alarm for cost anomalies
+
 aws cloudwatch put-metric-alarm \
   --alarm-name high-cost-alert \
   --alarm-description "Alert when daily cost exceeds threshold" \
@@ -283,11 +300,13 @@ aws cloudwatch put-metric-alarm \
 ## Risk Mitigation
 
 **Medium Risk Actions:**
+
 - Deleting unattached volumes (ensure no planned reattachment)
 - Removing old snapshots (verify no compliance requirements)
 - Releasing Elastic IPs (check DNS records)
 
 **Always:**
+
 - Maintain 30-day backup retention
 - Use AWS Backup for critical resources
 - Test restore procedures
@@ -296,13 +315,17 @@ aws cloudwatch put-metric-alarm \
 ## Kiro CLI Integration
 
 ```bash
+
 # Analyze and cleanup in one command
+
 kiro-cli chat "Use aws-cost-cleanup to find and remove unused resources"
 
 # Generate cleanup script
+
 kiro-cli chat "Create a safe cleanup script for my AWS account"
 
 # Schedule automated cleanup
+
 kiro-cli chat "Set up weekly automated cleanup using aws-cost-cleanup"
 ```
 
@@ -313,11 +336,13 @@ kiro-cli chat "Set up weekly automated cleanup using aws-cost-cleanup"
 - [AWS Config Rules for Compliance](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

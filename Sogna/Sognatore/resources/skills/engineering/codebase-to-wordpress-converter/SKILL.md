@@ -8,7 +8,6 @@ id: skill-codebase-to-wordpress-converter
 owner: [[orchestrator]]
 ---
 
-
 # Codebase to WordPress Converter
 
 ## Overview
@@ -25,14 +24,18 @@ This skill is designed for the high-fidelity conversion of static or React-based
 ## Core Capabilities
 
 ### Phased Conversion & Audit
+
 The skill follows a strict 4-phase forensic process:
-1.  **Phase 1: Forensic UI Comparison**: Side-by-side table audit of React components vs. WordPress templates to find discrepancies.
-2.  **Phase 2: Full Audit**: Deep dive into UI, SEO, CMS Editability, Navigation, Functionality, and Performance.
-3.  **Phase 3: Action Plan**: Tasks classified as **SAFE**, **RISKY**, or **BLOCKED** to prevent breaking the UI.
-4.  **Phase 4: Iterative Fixing**: Executing one safe task at a time with validation after each step.
+
+1. **Phase 1: Forensic UI Comparison**: Side-by-side table audit of React components vs. WordPress templates to find discrepancies.
+2. **Phase 2: Full Audit**: Deep dive into UI, SEO, CMS Editability, Navigation, Functionality, and Performance.
+3. **Phase 3: Action Plan**: Tasks classified as **SAFE**, **RISKY**, or **BLOCKED** to prevent breaking the UI.
+4. **Phase 4: Iterative Fixing**: Executing one safe task at a time with validation after each step.
 
 ### Absolute UI Lock
+
 Strict enforcement of non-negotiable rules:
+
 - No alterations to layout, spacing, typography, or colors.
 - Exact preservation of Tailwind or CSS class names.
 - Zero changes to DOM structure or HTML nesting.
@@ -40,22 +43,30 @@ Strict enforcement of non-negotiable rules:
 ## Step-by-Step Guide
 
 ### 1. Discovery & Forensic Audit
+
 Start by identifying all components in the source code. Create a UI Comparison table comparing the original source output against the target WordPress output.
+
 - *Rule: No fixes are allowed during this phase; only detection.*
 
 ### 2. Strategic Field Mapping
+
 Map static React/HTML content to dynamic WordPress functions:
+
 - Replace static text with `the_title()`, `get_field()`, or `the_content()`.
 - Replace static paths with `get_template_directory_uri()`.
 
 ### 3. Implementation of Core Hooks
+
 Ensure every theme includes the foundational WordPress hooks correctly:
+
 - **Layout Files (`header.php` / `footer.php`)**: Must include `wp_head()` before `</head>` and `wp_footer()` before `</body>`.
 - **Page Templates**: Must call `get_header()` and `get_footer()`.
 - `register_nav_menus()` for dynamic navigation without breaking original HTML structure.
 
 ### 4. Validation & Live Tracker
+
 Maintain a live tracker of Total Issues, Fixed, and Remaining. Every fix must be followed by a confirmation:
+
 - ✅ No UI change
 - ✅ No DOM change
 - ✅ No class change
@@ -63,6 +74,7 @@ Maintain a live tracker of Total Issues, Fixed, and Remaining. Every fix must be
 ## Examples
 
 ### Example 1: Navigation Conversion
+
 ```php
 // WRONG: Static replacement that adds wrappers
 wp_nav_menu(['theme_location' => 'primary']);
@@ -77,6 +89,7 @@ wp_nav_menu([
 ```
 
 ### Example 2: Asset Pathing
+
 ```php
 // Source: <img src="/images/logo.png" />
 // WP Conversion:
@@ -98,11 +111,13 @@ wp_nav_menu([
 - [WordPress Theme Handbook](https://developer.wordpress.org/themes/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -58,15 +58,21 @@ if (debugFlags == 0) exit(1);  // 0 means being debugged
 
 **Bypass Approaches:**
 ```python
+
 # x64dbg: ScyllaHide plugin
+
 # Patches common anti-debug checks
 
 # Manual patching in debugger:
+
 # - Set IsDebuggerPresent return to 0
+
 # - Patch PEB.BeingDebugged to 0
+
 # - Hook NtQueryInformationProcess
 
 # IDAPython: Patch checks
+
 ida_bytes.patch_byte(check_addr, 0x90)  # NOP
 ```
 
@@ -128,10 +134,12 @@ if (GetTickCount() - start > 1000) exit(1);
 
 **Bypass Approaches:**
 ```
+
 - Use hardware breakpoints instead of software
 - Patch timing checks
 - Use VM with controlled time
 - Hook timing APIs to return consistent values
+
 ```
 
 #### Exception-Based Detection
@@ -185,13 +193,17 @@ if (getppid() != 1 && strcmp(get_process_name(getppid()), "bash") != 0) {
 
 **Bypass Approaches:**
 ```bash
+
 # LD_PRELOAD to hook ptrace
+
 # Compile: gcc -shared -fPIC -o hook.so hook.c
+
 long ptrace(int request, ...) {
     return 0;  // Always succeed
 }
 
 # Usage
+
 LD_PRELOAD=./hook.so ./target
 ```
 
@@ -252,10 +264,12 @@ if ((end - start) > 500) {
 
 **Bypass Approaches:**
 ```
+
 - Use bare-metal analysis environment
 - Harden VM (remove guest tools, change MAC)
 - Patch detection code
 - Use specialized analysis VMs (FLARE-VM)
+
 ```
 
 ## Code Obfuscation
@@ -296,6 +310,7 @@ while (1) {
 ```
 
 **Analysis Approach:**
+
 - Identify state variable
 - Map state transitions
 - Reconstruct original flow
@@ -319,6 +334,7 @@ if ((x * (x + 1)) % 2 == 1) {  // Product of consecutive = even
 ```
 
 **Analysis Approach:**
+
 - Identify constant expressions
 - Symbolic execution to prove predicates
 - Pattern matching for known opaque predicates
@@ -347,10 +363,13 @@ url[4] = ':'; url[5] = '/'; url[6] = '/';
 
 **Analysis Approach:**
 ```python
+
 # FLOSS for automatic string deobfuscation
+
 floss malware.exe
 
 # IDAPython string decryption
+
 def decrypt_xor(ea, length, key):
     result = ""
     for i in range(length):
@@ -382,6 +401,7 @@ DWORD hash_api(char *name) {
 ```
 
 **Analysis Approach:**
+
 - Identify hash algorithm
 - Build hash database of known APIs
 - Use HashDB plugin for IDA
@@ -438,6 +458,7 @@ Enigma       - Commercial protector
 ### Unpacking Methodology
 
 ```
+
 1. Identify packer (DIE, Exeinfo PE, PEiD)
 
 2. Static unpacking (if known packer):
@@ -445,6 +466,7 @@ Enigma       - Commercial protector
    - Use existing unpackers
 
 3. Dynamic unpacking:
+
    a. Find Original Entry Point (OEP)
    b. Set breakpoint on OEP
    c. Dump memory when OEP reached
@@ -454,11 +476,13 @@ Enigma       - Commercial protector
    - Hardware breakpoint on stack (ESP trick)
    - Break on common API calls (GetCommandLineA)
    - Trace and look for typical entry patterns
+
 ```
 
 ### Manual Unpacking Example
 
 ```
+
 1. Load packed binary in x64dbg
 2. Note entry point (packer stub)
 3. Use ESP trick:
@@ -470,6 +494,7 @@ Enigma       - Commercial protector
    - Dump process
    - Find imports (IAT autosearch)
    - Fix dump
+
 ```
 
 ## Virtualization-Based Protection
@@ -490,6 +515,7 @@ add eax, 2    call vm_entry
 ### Analysis Approaches
 
 ```
+
 1. Identify VM components:
    - VM entry (dispatcher)
    - Handler table
@@ -508,6 +534,7 @@ add eax, 2    call vm_entry
 4. Symbolic execution:
    - Analyze VM semantically
    - angr, Triton
+
 ```
 
 ## Bypass Strategies Summary
@@ -534,6 +561,7 @@ Symbolic execution:  angr, Triton
 ### Ethical Considerations
 
 This knowledge should only be used for:
+
 - Authorized security research
 - Malware analysis (defensive)
 - CTF competitions
@@ -541,11 +569,13 @@ This knowledge should only be used for:
 - Educational purposes
 
 Never use to bypass protections for:
+
 - Software piracy
 - Unauthorized access
 - Malicious purposes
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -206,12 +206,15 @@ Convert a video to a different aspect ratio with optional smart object tracking.
 from videodb import ReframeMode
 
 # Always prefer short segments to avoid timeouts:
+
 reframed = video.reframe(start=0, end=60, target="vertical", mode=ReframeMode.smart)
 
 # Async reframe for full-length videos (returns None, result via webhook):
+
 video.reframe(target="vertical", callback_url="https://example.com/webhook")
 
 # Custom dimensions
+
 reframed = video.reframe(start=0, end=60, target={"width": 1080, "height": 1080})
 ```
 
@@ -507,6 +510,7 @@ from videodb import SubtitleAlignment, SubtitleBorderStyle
 
 ```python
 from videodb import TextStyle
+
 # or: from videodb.asset import TextStyle
 
 style = TextStyle(
@@ -555,6 +559,7 @@ from videodb.exceptions import (
 | `VideodbError` | Server errors, network issues, generic failures |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

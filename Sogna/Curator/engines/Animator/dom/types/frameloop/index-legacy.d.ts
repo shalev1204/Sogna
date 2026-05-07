@@ -4,7 +4,7 @@ import { Process } from "./types.js";
  *
  * Import as `Frame` instead.
  */
-export declare const Sync: import("./types.js").Batcher;
+export declare const Sync: any;
 /**
  * @deprecated
  *

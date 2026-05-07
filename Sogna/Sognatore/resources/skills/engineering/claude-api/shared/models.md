@@ -75,6 +75,7 @@ When a user asks for a model by name, use this table to find the correct model I
 | "haiku 3"                                 | Deprecated — suggest `claude-haiku-4-5` |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

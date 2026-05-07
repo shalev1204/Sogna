@@ -364,6 +364,7 @@ VecSum<E1, E2> operator+(const VecExpression<E1>& lhs,
 | Template Specialization | Type-specific impl | Zero overhead |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

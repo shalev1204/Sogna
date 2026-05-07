@@ -8,7 +8,6 @@ id: skill-azure-eventgrid-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Event Grid SDK for Python
 
 Event routing service for building event-driven applications with pub/sub semantics.
@@ -54,6 +53,7 @@ from azure.identity import DefaultAzureCredential
 client = EventGridPublisherClient(endpoint, DefaultAzureCredential())
 
 # Single event
+
 event = CloudEvent(
     type="MyApp.Events.OrderCreated",
     source="/myapp/orders",
@@ -62,6 +62,7 @@ event = CloudEvent(
 client.send(event)
 
 # Multiple events
+
 events = [
     CloudEvent(
         type="MyApp.Events.OrderCreated",
@@ -148,6 +149,7 @@ For Event Grid Namespaces (pull delivery):
 from azure.eventgrid.aio import EventGridPublisherClient
 
 # Namespace endpoint (different from custom topic)
+
 namespace_endpoint = "https://<namespace>.<region>.eventgrid.azure.net"
 topic_name = "my-topic"
 
@@ -171,14 +173,17 @@ async with EventGridPublisherClient(
 6. **Set appropriate event types** for routing and filtering
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

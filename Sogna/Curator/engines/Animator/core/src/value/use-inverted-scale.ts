@@ -3,7 +3,7 @@
 import { sognaflowValue } from "sognaflow-dom"
 import { invariant, warning } from "sognaflow-utils"
 import { useContext } from "react"
-import { sognaflowContext } from "../context/sognaflowcontext"
+import { sognaflowContext } from "../context/MotionContext/index.js"
 import { usesognaflowValue } from "./use-sognaflow-value"
 import { useTransform } from "./use-transform.js"
 
@@ -45,7 +45,7 @@ export function useInvertedScale(
 ): ScalesognaflowValues {
     let parentScaleX = usesognaflowValue(1)
     let parentScaleY = usesognaflowValue(1)
-    const { visualElement } = useContext(sognaflowContext)
+    const { visualElement } = useContext(sognaflowContext) as any
 
     invariant(
         !!(scale || visualElement),

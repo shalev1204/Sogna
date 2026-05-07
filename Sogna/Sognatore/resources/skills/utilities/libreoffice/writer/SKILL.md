@@ -9,7 +9,6 @@ id: skill-writer
 owner: [[orchestrator]]
 ---
 
-
 # LibreOffice Writer
 
 ## Overview
@@ -19,6 +18,7 @@ LibreOffice Writer skill for creating, editing, converting, and automating docum
 ## When to Use This Skill
 
 Use this skill when:
+
 - Creating new documents in ODT format
 - Converting documents between formats (ODT <-> DOCX, PDF, HTML, RTF, TXT)
 - Automating document generation workflows
@@ -28,29 +28,34 @@ Use this skill when:
 ## Core Capabilities
 
 ### 1. Document Creation
+
 - Create new ODT documents from scratch
 - Generate documents from templates
 - Create mail merge documents
 - Build forms with fillable fields
 
 ### 2. Format Conversion
+
 - ODT to other formats: DOCX, PDF, HTML, RTF, TXT, EPUB
 - Other formats to ODT: DOCX, DOC, RTF, HTML, TXT
 - Batch conversion of multiple documents
 
 ### 3. Document Automation
+
 - Template-based document generation
 - Mail merge with data sources (CSV, spreadsheet, database)
 - Batch document processing
 - Automated report generation
 
 ### 4. Content Manipulation
+
 - Text extraction and insertion
 - Style management and application
 - Table creation and manipulation
 - Header/footer management
 
 ### 5. Integration
+
 - Command-line automation via soffice
 - Python scripting with UNO
 - Integration with workflow automation tools
@@ -60,11 +65,13 @@ Use this skill when:
 ### Creating a New Document
 
 #### Method 1: Command-Line
+
 ```bash
 soffice --writer template.odt
 ```
 
 #### Method 2: Python with UNO
+
 ```python
 import uno
 
@@ -86,6 +93,7 @@ def create_document():
 ```
 
 #### Method 3: Using odfpy
+
 ```python
 from odf.opendocument import OpenDocumentText
 from odf.text import P, H
@@ -99,22 +107,28 @@ doc.save("document.odt")
 ### Converting Documents
 
 ```bash
+
 # ODT to DOCX
+
 soffice --headless --convert-to docx document.odt
 
 # ODT to PDF
+
 soffice --headless --convert-to pdf document.odt
 
 # DOCX to ODT
+
 soffice --headless --convert-to odt document.docx
 
 # Batch convert
+
 for file in *.odt; do
     soffice --headless --convert-to pdf "$file"
 done
 ```
 
 ### Template-Based Generation
+
 ```python
 import subprocess
 import tempfile
@@ -135,9 +149,11 @@ def generate_from_template(template_path, variables, output_path):
 ## Format Conversion Reference
 
 ### Supported Input Formats
+
 - ODT (native), DOCX, DOC, RTF, HTML, TXT, EPUB
 
 ### Supported Output Formats
+
 - ODT, DOCX, PDF, PDF/A, HTML, RTF, TXT, EPUB
 
 ## Command-Line Reference
@@ -174,12 +190,14 @@ pip install ezodf     # Easier ODF handling
 ## Troubleshooting
 
 ### Cannot open socket
+
 ```bash
 killall soffice.bin
 soffice --headless --accept="socket,host=localhost,port=8100;urp;"
 ```
 
 ### Conversion Quality Issues
+
 ```bash
 soffice --headless --convert-to pdf:writer_pdf_Export document.odt
 ```
@@ -202,11 +220,13 @@ soffice --headless --convert-to pdf:writer_pdf_Export document.odt
 - workflow-automation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

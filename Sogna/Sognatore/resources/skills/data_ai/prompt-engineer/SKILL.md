@@ -10,7 +10,6 @@ id: skill-prompt-engineer
 owner: [[orchestrator]]
 ---
 
-
 ## Purpose
 
 This skill transforms raw, unstructured user prompts into highly optimized prompts using established prompting frameworks. It analyzes user intent, identifies task complexity, and intelligently selects the most appropriate framework(s) to maximize Claude/ChatGPT output quality.
@@ -20,6 +19,7 @@ The skill operates in "magic mode" - it works silently behind the scenes, only i
 This is a **universal skill** that works in any terminal context, not limited to Sogna ecosistemas or specific project structures.
 
 ## When to Use
+
 Invoke this skill when:
 
 - User provides a vague or generic prompt (e.g., "help me code Python")
@@ -37,6 +37,7 @@ Invoke this skill when:
 **Objective:** Understand what the user truly wants to accomplish.
 
 **Actions:**
+
 1. Read the raw prompt provided by the user
 2. Detect task characteristics:
    - **Type:** coding, writing, analysis, design, learning, planning, decision-making, creative, etc.
@@ -50,11 +51,11 @@ Invoke this skill when:
    - Is this exploratory or execution-focused?
 
 **Detection Patterns:**
+
 - **Simple tasks:** Short prompts (<50 chars), single verb, no context
 - **Complex tasks:** Long prompts (>200 chars), multiple requirements, conditional logic
 - **Ambiguous tasks:** Generic verbs ("help", "improve"), missing object/context
 - **Structured tasks:** Mentions steps, phases, deliverables, stakeholders
-
 
 ### Step 3: Select Framework(s)
 
@@ -77,11 +78,13 @@ Invoke this skill when:
 | **Coaching/development** (mentoring, growth) | **GROW** (Goal, Reality, Options, Will) | Developmental conversation structure |
 
 **Blending Strategy:**
+
 - **Combine 2-3 frameworks** when task spans multiple types
 - Example: Complex technical project → **RODES + Chain of Thought** (structure + reasoning)
 - Example: Leadership decision → **CLEAR + GROW** (goal clarity + development)
 
 **Selection Criteria:**
+
 - Primary framework = best match to core task type
 - Secondary framework(s) = address additional complexity dimensions
 - Avoid over-engineering: simple tasks get simple frameworks
@@ -93,12 +96,14 @@ Role: You are a senior software architect. [RTF - Role]
 Objective: Design a microservices architecture for [system]. [RODES - Objective]
 
 Approach this step-by-step: [Chain of Thought]
+
 1. Analyze current monolithic constraints
 2. Identify service boundaries
 3. Design inter-service communication
 4. Plan data consistency strategy
 
 Details: [RODES - Details]
+
 - Expected traffic: [X]
 - Data volume: [Y]
 - Team size: [Z]
@@ -111,18 +116,19 @@ Validate that services are loosely coupled, independently deployable, and aligne
 ```
 
 **4.5. Language Adaptation**
+
 - If original prompt is in Portuguese, generate prompt in Portuguese
 - If original prompt is in English, generate prompt in English
 - If mixed, default to English (more universal for AI models)
 
 **4.6. Quality Checks**
 Before finalizing, verify:
+
 - [ ] Prompt is self-contained (no external context needed)
 - [ ] Task is specific and measurable
 - [ ] Output format is clear
 - [ ] No ambiguous language
 - [ ] Appropriate level of detail for task complexity
-
 
 ## Critical Rules
 
@@ -150,7 +156,6 @@ Before finalizing, verify:
 - ✅ Use examples in complex prompts to illustrate expected output
 - ✅ Validate prompt completeness before presenting (quality checks in Step 4.6)
 
-
 ### **Example 2: Complex Clear Prompt → RODES + Chain of Thought (No Clarification)**
 
 **User Input:**
@@ -159,6 +164,7 @@ copilot> create prompt for: I need to build a product recommendation system cons
 ```
 
 **Skill Internal Process:**
+
 1. **Analyze:** Clear intent, complex task (ML system design), technical domain
 2. **Clarify:** Skip (sufficient information)
 3. **Select:** RODES (complex design) + Chain of Thought (reasoning needed)
@@ -172,6 +178,7 @@ Role: You are a senior machine learning engineer specializing in recommendation 
 Objective: Design a product recommendation system that combines user purchase history, preferences, and market trends.
 
 Details:
+
 - Input data sources: user transaction logs, preference surveys, market trend APIs
 - Algorithm considerations: collaborative filtering, content-based filtering, hybrid approaches
 - Performance metrics: precision, recall, diversity, novelty
@@ -179,6 +186,7 @@ Details:
 - Real-time constraints: recommendations updated within 500ms
 
 Approach step-by-step:
+
 1. Analyze the three data sources and their relationships
 2. Propose 2-3 algorithm approaches with trade-offs analysis
 3. Design data pipeline architecture (ingestion, processing, serving)
@@ -186,6 +194,7 @@ Approach step-by-step:
 5. Outline implementation roadmap with phases
 
 Examples:
+
 - Show pseudocode for core recommendation logic
 - Illustrate data flow diagram
 - Provide sample API response structure
@@ -196,7 +205,6 @@ Output format: Technical design document with architecture diagrams, algorithm j
 ```
 ````
 
-
 ### **Example 4: Code Debugging → Chain of Thought**
 
 **User Input:**
@@ -205,6 +213,7 @@ copilot> optimize prompt: my Python code isn't working, needs debugging
 ```
 
 **Skill Internal Process:**
+
 1. **Analyze:** Debugging task, needs step-by-step reasoning
 2. **Clarify:** Skip (user will provide code context later)
 3. **Select:** Chain of Thought
@@ -218,6 +227,7 @@ You are an expert Python debugger.
 Task: Debug the Python code provided by the user by analyzing it step-by-step.
 
 Debugging approach:
+
 1. Read and understand the code's intended purpose
 2. Identify the error or unexpected behavior
 3. Trace variable states at each execution step
@@ -226,11 +236,13 @@ Debugging approach:
 6. Suggest preventive measures to avoid similar bugs
 
 For each step, show your reasoning:
+
 - What you're checking
 - What you found
 - Why it matters
 
 Output format:
+
 - **Issue identified:** [Describe the bug]
 - **Root cause:** [Why it's happening]
 - **Fix:** [Corrected code with comments]
@@ -240,10 +252,10 @@ Include a working example to verify the fix.
 ```
 ````
 
-
 ## Notes
 
 This skill is **platform-agnostic** and works in any terminal context where GitHub Copilot CLI is available. It does not depend on:
+
 - Sogna ecosistema structure
 - Specific project configurations
 - External files or templates
@@ -251,11 +263,13 @@ This skill is **platform-agnostic** and works in any terminal context where GitH
 The skill is entirely self-contained, operating purely on user input and framework knowledge.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

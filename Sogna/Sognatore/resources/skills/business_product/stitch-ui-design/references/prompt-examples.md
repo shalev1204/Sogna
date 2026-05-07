@@ -29,6 +29,7 @@ Comprehensive collection of effective Stitch prompts organized by use case and c
 Landing page for AI writing assistant startup
 
 Hero Section:
+
 - Bold headline: "Write Better, Faster with AI"
 - Subheadline explaining value proposition
 - Primary CTA button "Start Free Trial"
@@ -36,16 +37,19 @@ Hero Section:
 - Hero illustration showing product interface
 
 Features Section:
+
 - 3-column grid with icons
 - Feature 1: AI-powered suggestions
 - Feature 2: Multi-language support
 - Feature 3: Team collaboration
 
 Social Proof:
+
 - Customer logos (6 companies)
 - Testimonial cards with photos and quotes
 
 Pricing:
+
 - 3-tier pricing table (Free, Pro, Enterprise)
 - Feature comparison
 - Annual/Monthly toggle
@@ -62,25 +66,30 @@ Platform: Responsive web
 Landing page for boutique yoga studio
 
 Above Fold:
+
 - Full-width hero image of studio space
 - Centered headline: "Find Your Balance"
 - Class schedule CTA button
 - Location and hours overlay
 
 Class Offerings:
+
 - Card grid (2x3) with class types
 - Each card: class name, duration, difficulty level, instructor photo
 - Hover effect reveals class description
 
 Instructor Profiles:
+
 - Horizontal scrolling carousel
 - Circular photos with names and specialties
 
 Testimonials:
+
 - Large quote format with student photos
 - 5-star ratings
 
 Call-to-Action:
+
 - "Book Your First Class Free" banner
 - Contact form with name, email, phone
 
@@ -100,26 +109,31 @@ Platform: Responsive web with mobile-first approach
 Fitness tracking app - Home screen (iOS)
 
 Top Section:
+
 - Greeting with user name and current date
 - Daily goal progress ring (calories, steps, active minutes)
 - Motivational message based on progress
 
 Quick Stats Cards:
+
 - Today's steps with trend arrow
 - Active calories burned
 - Distance covered
 - Active time
 
 Recent Workouts:
+
 - List of last 3 workouts with type, duration, calories
 - Thumbnail icons for workout type
 - Swipe actions for details/delete
 
 Bottom Section:
+
 - "Start Workout" prominent button
 - Quick access to workout types (Run, Cycle, Strength, Yoga)
 
 Bottom Navigation:
+
 - Home (active), Workouts, Progress, Profile
 
 Style: Energetic, motivating, data-focused
@@ -134,24 +148,29 @@ Platform: iOS mobile (375x812px)
 Restaurant detail screen for food delivery app
 
 Header:
+
 - Restaurant cover photo
 - Back button and favorite icon
 - Restaurant name, rating (4.5 stars), delivery time (25-35 min)
 - Cuisine tags (Italian, Pizza, Pasta)
 
 Info Bar:
+
 - Delivery fee, minimum order, distance
 - Promo badge if applicable
 
 Menu Categories:
+
 - Sticky horizontal scroll tabs (Popular, Pizza, Pasta, Salads, Drinks)
 
 Menu Items:
+
 - Card layout with food photo, name, description, price
 - Add button with quantity selector
 - Dietary icons (vegetarian, spicy, etc.)
 
 Floating Cart:
+
 - Bottom sheet showing cart summary
 - Item count and total price
 - "View Cart" button
@@ -172,12 +191,14 @@ Platform: Android mobile (360x800px)
 Web analytics dashboard for marketing team
 
 Top Bar:
+
 - Date range selector (last 7 days, 30 days, custom)
 - Export button
 - Notification bell
 - User profile dropdown
 
 Key Metrics Row:
+
 - 4 metric cards in a row
 - Card 1: Total visitors (with % change)
 - Card 2: Conversion rate (with trend sparkline)
@@ -185,16 +206,19 @@ Key Metrics Row:
 - Card 4: Average session duration
 
 Main Chart:
+
 - Line chart showing traffic over time
 - Multiple lines for different sources (Organic, Paid, Social, Direct)
 - Interactive legend to toggle lines
 - Hover tooltips with exact values
 
 Secondary Panels:
+
 - Left: Top pages table (page, views, avg time, bounce rate)
 - Right: Traffic sources pie chart with percentages
 
 Bottom Section:
+
 - Recent conversions table with user, source, value, timestamp
 
 Style: Clean, data-focused, professional
@@ -209,27 +233,32 @@ Platform: Desktop web (1440px+)
 Project management dashboard - Team view
 
 Sidebar:
+
 - Workspace selector dropdown
 - Navigation: Dashboard, Projects, Tasks, Team, Reports
 - Create new project button
 
 Header:
+
 - Project name and status badge
 - Team member avatars (max 5, then +N)
 - Search bar
 - View options (Board, List, Calendar)
 
 Kanban Board:
+
 - 4 columns: To Do, In Progress, Review, Done
 - Drag-and-drop cards
 - Each card shows: title, assignee avatar, due date, priority label, comment count
 - Add card button at bottom of each column
 
 Right Panel:
+
 - Task details when card is selected
 - Description, attachments, comments, activity log
 
 Quick Stats:
+
 - Progress bar showing completion percentage
 - Tasks by status mini chart
 - Upcoming deadlines list
@@ -250,12 +279,14 @@ Platform: Desktop web (1280px+)
 Product detail page for fashion e-commerce
 
 Image Gallery:
+
 - Main product image (large, zoomable)
 - Thumbnail strip below (5-6 images)
 - 360° view option
 - Video thumbnail if available
 
 Product Info:
+
 - Brand name
 - Product title
 - Star rating (4.8) with review count (234 reviews)
@@ -263,21 +294,25 @@ Product Info:
 - Sale badge if applicable
 
 Options:
+
 - Size selector (XS, S, M, L, XL) with availability indicators
 - Color swatches with product image preview on hover
 - Quantity selector
 
 Actions:
+
 - Add to Cart button (prominent)
 - Add to Wishlist button (outline)
 - Size guide link
 - Shipping calculator
 
 Product Details:
+
 - Tabbed interface (Description, Specifications, Reviews, Shipping)
 - Expandable sections on mobile
 
 Recommendations:
+
 - "You May Also Like" carousel
 - "Complete the Look" suggestions
 
@@ -293,12 +328,14 @@ Platform: Responsive web
 Shopping cart page with checkout flow
 
 Cart Items:
+
 - List of products with thumbnail, name, size/color, price
 - Quantity adjuster (+/- buttons)
 - Remove item link
 - Save for later option
 
 Order Summary:
+
 - Sticky sidebar on desktop, bottom sheet on mobile
 - Subtotal
 - Shipping (calculated or "Free over $50")
@@ -308,15 +345,18 @@ Order Summary:
 - Checkout button (large, primary color)
 
 Trust Signals:
+
 - Secure checkout badge
 - Free returns policy
 - Customer service contact
 
 Recommendations:
+
 - "Frequently Bought Together" section
 - Promotional banner for free shipping threshold
 
 Empty State:
+
 - Illustration
 - "Your cart is empty" message
 - "Continue Shopping" button
@@ -338,11 +378,13 @@ Platform: Responsive web
 B2B SaaS signup flow - 3 steps
 
 Progress Indicator:
+
 - Step 1: Account (active)
 - Step 2: Company
 - Step 3: Team
 
 Step 1 - Account Details:
+
 - Email input with validation
 - Password input with strength indicator
 - Confirm password
@@ -351,6 +393,7 @@ Step 1 - Account Details:
 - "Already have an account? Sign in" link
 
 Step 2 - Company Information:
+
 - Company name
 - Industry dropdown
 - Company size radio buttons (1-10, 11-50, 51-200, 201+)
@@ -358,12 +401,14 @@ Step 2 - Company Information:
 - "Back" and "Continue" buttons
 
 Step 3 - Invite Team:
+
 - Email input fields (dynamic, add more)
 - Role selector for each invite
 - "Skip for now" option
 - "Finish Setup" button
 
 Success State:
+
 - Checkmark animation
 - "Welcome to [Product]!" message
 - "Go to Dashboard" button
@@ -380,12 +425,14 @@ Platform: Responsive web, mobile-optimized
 Login page for enterprise software
 
 Left Panel (Desktop):
+
 - Brand logo
 - Hero image or illustration
 - Value proposition headline
 - Key benefits (3 bullet points)
 
 Right Panel (Form):
+
 - "Welcome back" heading
 - Email input field
 - Password input field with show/hide toggle
@@ -397,6 +444,7 @@ Right Panel (Form):
 - "Don't have an account? Sign up" link at bottom
 
 Security Indicators:
+
 - SSL badge
 - "Your data is secure" message
 
@@ -416,9 +464,11 @@ Platform: Responsive (left panel hidden on mobile)
 Blog article page for tech publication
 
 Header:
+
 - Site navigation (logo, categories, search, subscribe)
 
 Article Header:
+
 - Category tag
 - Article title (large, bold)
 - Subtitle/excerpt
@@ -427,6 +477,7 @@ Article Header:
 - Reading time estimate
 
 Article Body:
+
 - Readable column width (max 680px)
 - Paragraph text with proper line height
 - H2 and H3 subheadings
@@ -437,6 +488,7 @@ Article Body:
 - Table of contents (sticky sidebar on desktop)
 
 Article Footer:
+
 - Tags
 - Share buttons
 - Author card (expanded)
@@ -444,6 +496,7 @@ Article Footer:
 - Comments section
 
 Sidebar (Desktop):
+
 - Newsletter signup
 - Popular posts
 - Ad placement
@@ -460,11 +513,13 @@ Platform: Responsive web
 Video streaming platform - Watch page
 
 Video Player:
+
 - Full-width video player with controls
 - Quality selector, playback speed, captions, fullscreen
 - Progress bar with thumbnail preview on hover
 
 Video Info:
+
 - Video title
 - View count and upload date
 - Like/Dislike buttons
@@ -472,16 +527,19 @@ Video Info:
 - Save to playlist button
 
 Channel Info:
+
 - Channel avatar and name
 - Subscriber count
 - Subscribe button (prominent if not subscribed)
 
 Description:
+
 - Expandable description text
 - Show more/less toggle
 - Hashtags and links
 
 Comments Section:
+
 - Sort options (Top, Newest)
 - Comment input with user avatar
 - Comment cards with avatar, name, timestamp, text
@@ -489,6 +547,7 @@ Comments Section:
 - Nested replies (indented)
 
 Sidebar:
+
 - Up next autoplay preview
 - Recommended videos list (thumbnail, title, channel, views)
 
@@ -508,12 +567,14 @@ Platform: Responsive web
 Email client - Inbox view
 
 Left Sidebar:
+
 - Compose button (prominent)
 - Folder list (Inbox, Sent, Drafts, Spam, Trash)
 - Labels/Tags with color coding
 - Storage usage indicator
 
 Email List (Center):
+
 - Search bar with filters
 - Sort and view options
 - Email rows showing:
@@ -528,6 +589,7 @@ Email List (Center):
 - Pagination or infinite scroll
 
 Email Detail (Right):
+
 - Email header (from, to, cc, timestamp)
 - Subject line
 - Email body with formatting preserved
@@ -536,6 +598,7 @@ Email Detail (Right):
 - Previous emails in thread (collapsed)
 
 Top Bar:
+
 - Refresh button
 - Settings icon
 - User profile dropdown
@@ -552,36 +615,43 @@ Platform: Desktop web (1280px+)
 CRM contact detail page
 
 Header:
+
 - Contact name and company
 - Contact photo/avatar
 - Status badge (Lead, Customer, Inactive)
 - Quick actions (Email, Call, Schedule Meeting, Edit)
 
 Info Tabs:
+
 - Overview (active), Activity, Deals, Notes, Files
 
 Overview Tab:
+
 - Contact information card (email, phone, address, social links)
 - Company information card
 - Tags and custom fields
 - Assigned to (team member)
 
 Activity Timeline:
+
 - Chronological list of interactions
 - Icons for type (email, call, meeting, note)
 - Timestamp and description
 - Filter by activity type
 
 Deals Section:
+
 - Active deals table (deal name, value, stage, close date)
 - Won/Lost deals summary
 
 Notes Section:
+
 - Add note input with rich text editor
 - Note cards with author, timestamp, content
 - Pin important notes
 
 Right Sidebar:
+
 - Next scheduled activity
 - Recent emails
 - Related contacts
@@ -608,6 +678,7 @@ Platform: Desktop web (1440px+)
 Remember: These are starting points. Stitch works best when you provide specific details relevant to your unique project.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

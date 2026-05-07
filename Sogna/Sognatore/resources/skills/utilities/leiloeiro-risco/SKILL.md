@@ -4,21 +4,24 @@ description: Analise de risco em leiloes de imoveis. Score 36 pontos, riscos jur
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - risk-analysis
 - scoring
 - stress-test
 - brazilian
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-leiloeiro-risco
 owner: [[orchestrator]]
 ---
-
 
 # SKILL DE RISCO — AUDITOR DE RISCO EM LEILÕES
 
@@ -65,6 +68,7 @@ a decisão de investimento.
 | Cônjuge sem meação respeitada | Baixo | Alto | 🟡 |
 
 **Como mitigar:**
+
 - Solicitar certidão dos autos (ou pesquisa no e-SAJ/PJE)
 - Verificar se consta intimação do cônjuge
 - Checar presença de embargos via busca no sistema processual
@@ -73,6 +77,7 @@ a decisão de investimento.
 #### 1.2 Risco de Bem de Família
 
 **Checklist de Exposição:**
+
 - [ ] É o único imóvel do devedor? → **Alto risco de bem de família**
 - [ ] Devedor reside no imóvel? → **Alto risco**
 - [ ] Imóvel foi arguido como bem de família nos autos? → **Verificar decisão judicial**
@@ -108,23 +113,27 @@ ou crédito do art. 3º da Lei 8.009/90:
 
 ```
 IPTU:
+
   - Checar na prefeitura do município
   - Calcular débito total (principal + multa 20% + juros 1% a.m.)
   - Prazo prescricional: 5 anos (CTN Art. 174)
   - Impacto: propter rem — arrematante paga
 
 CONDOMÍNIO:
+
   - Solicitar ao síndico/administradora extrato completo
   - Incluir: taxa condominial + multas + correção
   - Impacto: propter rem — arrematante paga (Súmula STJ 478)
   - Atenção: condomínio pode ter ação de cobrança paralela
 
 ÁGUA/ESGOTO:
+
   - Verificar com concessionária (SABESP, CEDAE, Copasa etc.)
   - Pode gerar suspensão do serviço — custo de religação
   - Em geral: dívida pessoal, não propter rem (mas varia por estado)
 
 ENERGIA ELÉTRICA:
+
   - Débito pessoal (não propter rem)
   - Verificar se há suspensão do serviço
 
@@ -178,6 +187,7 @@ Exemplo: R$ 300.000 × 10,5% × 12 meses / 12 = R$ 31.500/ano (custo de oportuni
 #### 3.2 Risco de Fraude ou Manipulação
 
 **Sinais de alerta em leilões:**
+
 - ⚠️ Leiloeiro não cadastrado na Junta Comercial
 - ⚠️ Plataforma online desconhecida sem CNPJ verificável
 - ⚠️ Valor de avaliação muito incompatível com mercado (extremos)
@@ -186,6 +196,7 @@ Exemplo: R$ 300.000 × 10,5% × 12 meses / 12 = R$ 31.500/ano (custo de oportuni
 - ⚠️ Exigência de depósito antes de visualizar documentos
 
 **Como proteger:**
+
 - Verificar leiloeiro no site da Junta Comercial do estado
 - Confirmar o processo judicial no sistema do TJ (e-SAJ, PJE, SEEU)
 - Nunca pagar sem confirmação no processo judicial
@@ -208,6 +219,7 @@ Exemplo: R$ 300.000 × 10,5% × 12 meses / 12 = R$ 31.500/ano (custo de oportuni
 #### 4.2 Risco Ambiental e Geotécnico
 
 **Verificar antes de arrematar:**
+
 - [ ] Imóvel em área de risco de deslizamento (CEMADEN)
 - [ ] Imóvel em área de inundação (plano diretor municipal)
 - [ ] Imóvel em APP (Área de Preservação Permanente — margens de rios)
@@ -216,6 +228,7 @@ Exemplo: R$ 300.000 × 10,5% × 12 meses / 12 = R$ 31.500/ano (custo de oportuni
 - [ ] Histórico de sinistros (chuvas, enchentes) — INMET, prefeitura
 
 **Fontes de consulta:**
+
 - CEMADEN (cemaden.gov.br) — mapas de risco
 - IBGE Malha Digital — zoneamento
 - Prefeitura Municipal — alvará, habite-se, plano diretor
@@ -316,12 +329,14 @@ Muitos municípios cobram ITBI sobre o **valor venal de referência** (VMP), nã
 o valor efetivo da arrematação (lance). Isso aumenta o custo em até 3x.
 
 **Exemplo:**
+
 - Imóvel arrematado por R$ 200.000
 - Valor venal de referência (prefeitura): R$ 400.000
 - ITBI 3% sobre lance: R$ 6.000
 - ITBI 3% sobre venal: R$ 12.000 ← cobrado pela prefeitura
 
 **Base legal para contestar:**
+
 - STJ Tema 1.113: ITBI deve incidir sobre o valor efetivo da transação
 - Em leilão judicial: a carta de arrematação é o título — valor = lance
 - Em leilão extrajudicial: a escritura com valor do lance é o título
@@ -337,6 +352,7 @@ Se conseguir pagar sobre o lance, é economia extra.
 - Isenção: venda até R$ 440.000 do único imóvel a cada 5 anos
 - Isenção: reinvestimento em outro imóvel residencial em até 180 dias
 - **Dica:** documentar TODAS as despesas com notas fiscais (reforma, regularização)
+
   para abater do ganho de capital
 
 ---
@@ -357,8 +373,11 @@ O arrematante de boa-fé é protegido contra alienações fraudulentas anteriore
 | Devedor doou para parente (fraude contra credores) | Baixo | Arrematante em hasta protegido |
 
 **Verificação obrigatória:**
+
 - Certidão de distribuidor cível: verificar se há ação real (usucapião, reivindicatória)
+
   movida por terceiro sobre o imóvel
+
 - Se existir ação de terceiro reivindicando o imóvel: ALTO RISCO — evitar
 
 ---
@@ -367,24 +386,28 @@ O arrematante de boa-fé é protegido contra alienações fraudulentas anteriore
 
 ```
 CENÁRIO OTIMISTA (probabilidade 20%):
+
   - Vende pelo VMP em 3 meses
   - Sem custos extras de desocupação
   - ITBI sobre lance (não sobre VMP)
   - ROI: ___ %
 
 CENÁRIO BASE (probabilidade 50%):
+
   - Vende com 10% desconto sobre VMP em 6 meses
   - Custo de desocupação negociado (R$ 5k)
   - ITBI sobre VMP
   - ROI: ___ %
 
 CENÁRIO PESSIMISTA (probabilidade 25%):
+
   - Vende com 20% desconto sobre VMP em 12 meses
   - Ação de imissão na posse (R$ 15k + 6 meses)
   - Reforma necessária (R$ 30k)
   - ROI: ___ %
 
 CENÁRIO CATASTRÓFICO (probabilidade 5%):
+
   - Arrematação anulada (perda do sinal, mas dinheiro devolvido)
   - OU: não consegue vender em 24 meses (capital travado)
   - OU: débitos ocultos consomem a margem (condomínio alto)
@@ -392,6 +415,7 @@ CENÁRIO CATASTRÓFICO (probabilidade 5%):
 
 ROI PONDERADO (esperança matemática):
 = (ROI otimista × 0,20) + (ROI base × 0,50) + (ROI pessimista × 0,25)
+
   + (ROI catastrófico × 0,05)
 
 Se ROI ponderado > CDI → ARREMATAR
@@ -457,6 +481,7 @@ Esta skill implementa as seguintes políticas de governança:
 - **warning_threshold**: Score >21/36 (ALTO) dispara warning_threshold com alerta ao usuário
 
 Políticas adicionais:
+
 - **Responsável:** Ecossistema Leiloeiro IA
 - **Escopo:** Análise e gestão de risco em leilões de imóveis
 - **Limitações:** Scores e classificações são indicativos. Decisão final é do investidor.
@@ -468,6 +493,7 @@ Políticas adicionais:
 ## Referências
 
 Fontes normativas e referências de risco:
+
 - CEMADEN (cemaden.gov.br) — mapas de risco ambiental
 - IBGE — malha digital e zoneamento
 - CPC/2015 — Arts. 829-925 (Execução e Arrematação)
@@ -497,11 +523,13 @@ Fontes normativas e referências de risco:
 - `leiloeiro-juridico` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

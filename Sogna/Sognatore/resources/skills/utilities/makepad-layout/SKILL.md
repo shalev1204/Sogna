@@ -12,7 +12,6 @@ id: skill-makepad-layout
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Layout Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -20,10 +19,12 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad layout system. Help users by:
+
 - **Writing code**: Generate layout code following the patterns below
 - **Answering questions**: Explain layout concepts, sizing, flow directions
 
 ## When to Use
+
 - You need to size, align, or position widgets in a Makepad UI.
 - The task involves `Walk`, `Align`, `Fit`, `Fill`, padding, spacing, or container flow configuration.
 - You want Makepad-specific layout solutions for centering, responsiveness, or composition.
@@ -31,6 +32,7 @@ You are an expert at Makepad layout system. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/layout-system.md` - Complete layout reference
 - `./references/core-types.md` - Walk, Align, Margin, Padding types
 
@@ -186,11 +188,13 @@ Refer to the local files for detailed documentation:
 4. Alignment applies to children, not the element itself
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

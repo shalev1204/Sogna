@@ -8,7 +8,6 @@ id: skill-linux-shell-scripting
 owner: [[ops-security]]
 ---
 
-
 # Linux Production Shell Scripts
 
 ## Purpose
@@ -18,11 +17,13 @@ Provide production-ready shell script templates for common Linux system administ
 ## Prerequisites
 
 ### Required Environment
+
 - Linux/Unix system (bash shell)
 - Appropriate permissions for tasks
 - Required utilities installed (rsync, openssl, etc.)
 
 ### Required Knowledge
+
 - Basic bash scripting
 - Linux file system structure
 - System administration concepts
@@ -45,6 +46,7 @@ backup_dir="/path/to/backup"
 source_dir="/path/to/source"
 
 # Create a timestamped backup of the source directory
+
 tar -czf "$backup_dir/backup_$(date +%Y%m%d_%H%M%S).tar.gz" "$source_dir"
 echo "Backup completed: backup_$(date +%Y%m%d_%H%M%S).tar.gz"
 ```
@@ -56,6 +58,7 @@ source_dir="/path/to/source"
 remote_server="user@remoteserver:/path/to/backup"
 
 # Backup files/directories to a remote server using rsync
+
 rsync -avz --progress "$source_dir" "$remote_server"
 echo "Files backed up to remote server."
 ```
@@ -67,6 +70,7 @@ backup_dir="/path/to/backups"
 max_backups=5
 
 # Rotate backups by deleting the oldest if more than max_backups
+
 while [ $(ls -1 "$backup_dir" | wc -l) -gt "$max_backups" ]; do
     oldest_backup=$(ls -1t "$backup_dir" | tail -n 1)
     rm -r "$backup_dir/$oldest_backup"
@@ -84,6 +88,7 @@ db_pass="password"
 output_file="database_backup_$(date +%Y%m%d).sql"
 
 # Perform database backup using mysqldump
+
 mysqldump -u "$db_user" -p"$db_pass" "$database_name" > "$output_file"
 gzip "$output_file"
 echo "Database backup created: $output_file.gz"
@@ -97,6 +102,7 @@ echo "Database backup created: $output_file.gz"
 threshold=90
 
 # Monitor CPU usage and trigger alert if threshold exceeded
+
 cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d. -f1)
 
 if [ "$cpu_usage" -gt "$threshold" ]; then
@@ -113,6 +119,7 @@ threshold=90
 partition="/dev/sda1"
 
 # Monitor disk usage and trigger alert if threshold exceeded
+
 disk_usage=$(df -h | grep "$partition" | awk '{print $5}' | cut -d% -f1)
 
 if [ "$disk_usage" -gt "$threshold" ]; then
@@ -127,6 +134,7 @@ fi
 output_file="cpu_usage_log.txt"
 
 # Log current CPU usage to a file with timestamp
+
 timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 cpu_usage=$(top -bn1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d. -f1)
 echo "$timestamp - CPU Usage: $cpu_usage%" >> "$output_file"
@@ -139,6 +147,7 @@ echo "CPU usage logged."
 output_file="system_health_check.txt"
 
 # Perform system health check and save results to a file
+
 {
     echo "System Health Check - $(date)"
     echo "================================"
@@ -170,6 +179,7 @@ echo "System health check saved to $output_file"
 username="newuser"
 
 # Check if user exists; if not, create new user
+
 if id "$username" &>/dev/null; then
     echo "User $username already exists."
 else
@@ -187,6 +197,7 @@ fi
 output_file="password_expiry_report.txt"
 
 # Check password expiry for users with bash shell
+
 echo "Password Expiry Report - $(date)" > "$output_file"
 echo "=================================" >> "$output_file"
 
@@ -208,6 +219,7 @@ echo "Password expiry report saved to $output_file"
 length=${1:-16}
 
 # Generate a random password
+
 password=$(openssl rand -base64 48 | tr -dc 'a-zA-Z0-9!@#$%^&*' | head -c"$length")
 echo "Generated password: $password"
 ```
@@ -244,6 +256,7 @@ logfile="${1:-/var/log/syslog}"
 output_file="error_log_$(date +%Y%m%d).txt"
 
 # Extract lines with "ERROR" from the log file
+
 grep -i "error\|fail\|critical" "$logfile" > "$output_file"
 echo "Error log created: $output_file"
 echo "Total errors found: $(wc -l < "$output_file")"
@@ -344,6 +357,7 @@ scheduled_task="/path/to/your_script.sh"
 schedule_time="0 2 * * *"  # Run at 2 AM daily
 
 # Add task to crontab
+
 (crontab -l 2>/dev/null; echo "$schedule_time $scheduled_task") | crontab -
 echo "Task scheduled: $schedule_time $scheduled_task"
 ```
@@ -354,6 +368,7 @@ echo "Task scheduled: $schedule_time $scheduled_task"
 service_name="${1:-apache2}"
 
 # Restart a specified service
+
 if systemctl is-active --quiet "$service_name"; then
     echo "Restarting $service_name..."
     sudo systemctl restart "$service_name"
@@ -374,6 +389,7 @@ source_dir="/path/to/source"
 destination_dir="/path/to/destination"
 
 # Synchronize directories using rsync
+
 rsync -avz --delete "$source_dir/" "$destination_dir/"
 echo "Directories synchronized successfully."
 ```
@@ -387,6 +403,7 @@ days="${2:-7}"
 echo "Cleaning files older than $days days in $directory"
 
 # Remove files older than specified days
+
 find "$directory" -type f -mtime +"$days" -exec rm -v {} \;
 echo "Cleanup completed."
 ```
@@ -400,6 +417,7 @@ echo "Folder Size Analysis: $folder_path"
 echo "===================================="
 
 # Display sizes of subdirectories sorted by size
+
 du -sh "$folder_path"/* 2>/dev/null | sort -rh | head -20
 echo ""
 echo "Total size:"
@@ -470,6 +488,7 @@ remote_server="${1:-user@remote-server}"
 remote_script="${2:-/path/to/remote/script.sh}"
 
 # Execute a script on a remote server via SSH
+
 ssh "$remote_server" "bash -s" < "$remote_script"
 echo "Remote script executed on $remote_server"
 ```
@@ -497,6 +516,7 @@ echo "Remote script executed on $remote_server"
 | `source script.sh` | Run in current shell |
 
 ### Cron Format
+
 Minute(0-59) Hour(0-23) Day(1-31) Month(1-12) Weekday(0-7, 0/7=Sun)
 
 ## Constraints and Limitations
@@ -508,9 +528,11 @@ Minute(0-59) Hour(0-23) Day(1-31) Month(1-12) Weekday(0-7, 0/7=Sun)
 - Use `bash -x script.sh` for debugging
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,10 +8,10 @@ id: skill-antigravity-design-expert
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # Sognatore UI & Motion Design Expert
 
 ## When to Use
+
 - You are building a highly interactive web interface with spatial depth, glassmorphism, and motion-heavy UI.
 - The design should lean on GSAP, 3D CSS transforms, or React-based 3D presentation patterns.
 - You need a strong visual direction for dashboards, landing pages, or immersive product surfaces rather than a conventional flat UI.
@@ -50,11 +50,13 @@ When asked to build or generate UI components, default to the following stack un
 - Prioritize performance: Use `will-change: transform` for animated elements to offload rendering to the GPU. Do not animate expensive properties like `box-shadow` or `filter` continuously.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

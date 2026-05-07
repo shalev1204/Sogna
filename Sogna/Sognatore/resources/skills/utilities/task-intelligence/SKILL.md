@@ -4,21 +4,24 @@ description: "Protocolo de Inteligência Pré-Tarefa — ativa TODOS os agentes 
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - planning
 - pre-task
 - risk-analysis
 - orchestration
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-task-intelligence
 owner: [[orchestrator]]
 ---
-
 
 # Task Intelligence — Protocolo de Amplificação Pré-Tarefa
 
@@ -129,6 +132,7 @@ Confiança: Alta/Média/Baixa — [justificativa]
 ```
 
 **Regras de estimativa honesta:**
+
 - Nunca subestime para agradar — o usuário precisa saber o tempo real
 - Adicione sempre 20-30% de buffer para problemas típicos
 - Se a confiança for Baixa, explique por quê e o que aumentaria ela
@@ -141,9 +145,11 @@ Confiança: Alta/Média/Baixa — [justificativa]
 Pense em TRÊS camadas de problemas:
 
 #### Problemas Prováveis (80%+ de chance de acontecer)
+
 São os problemas que SEMPRE acontecem. Resolva-os ANTES de começar.
 
 Exemplos por categoria:
+
 - **Skills novas**: YAML inválido → valide com `python -c "import yaml; yaml.safe_load(open('SKILL.md').read())"` antes de instalar
 - **APIs externas**: chave expirada, rate limit, mudança de endpoint → verifique autenticação primeiro
 - **Instalações**: dependências faltando, versão incompatível → leia requirements.txt antes de executar
@@ -151,11 +157,13 @@ Exemplos por categoria:
 - **Git/Versionamento**: branch errada, conflito de merge, uncommitted changes → sempre `git status` antes
 
 #### Problemas Possíveis (30-70% de chance)
+
 Problemas que podem acontecer dependendo do estado atual.
 
 Estratégia: verifique rapidamente o estado antes de assumir que está OK.
 
 #### Problemas Improváveis mas Críticos (< 10% mas alto impacto)
+
 Ações irreversíveis, perda de dados, exposição de credenciais.
 
 Estratégia: backup preventivo, confirmação explícita, rollback plan.
@@ -192,6 +200,7 @@ CONTEXTO COLETADO:
   • [insight do agente 3]
 
 PLANO DE EXECUÇÃO:
+
   1. [etapa] (~Xmin) — [por quê esta ordem]
   2. [etapa] (~Xmin) — [dependência da anterior]
   3. [etapa] (~Xmin) — [verificação de qualidade]
@@ -261,6 +270,7 @@ CONTEXTO COLETADO (3 agentes consultados):
     de arquitetura. Nenhuma conflita com Stripe.
 
 PLANO DE EXECUÇÃO:
+
   1. Criar estrutura de diretórios (~2min) — base para os demais arquivos
   2. Escrever SKILL.md com workflow (~5min) — define comportamento do agente
   3. Criar config.py com variáveis de ambiente (~3min) — sem hardcode de keys
@@ -306,11 +316,13 @@ ROLLBACK PLAN:
 - `multi-advisor` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-github-automation
 owner: [[orchestrator]]
 ---
 
-
 # GitHub Automation via Rube MCP
 
 Automate GitHub repository management, issue tracking, pull request workflows, branch operations, and CI/CD through Composio's GitHub toolkit.
@@ -35,6 +34,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **When to use**: User wants to create, list, or manage GitHub issues
 
 **Tool sequence**:
+
 1. `GITHUB_LIST_REPOSITORIES_FOR_THE_AUTHENTICATED_USER` - Find target repo if unknown [Prerequisite]
 2. `GITHUB_LIST_REPOSITORY_ISSUES` - List existing issues (includes PRs) [Required]
 3. `GITHUB_CREATE_AN_ISSUE` - Create a new issue [Required]
@@ -42,6 +42,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 5. `GITHUB_SEARCH_ISSUES_AND_PULL_REQUESTS` - Search across repos by keyword [Optional]
 
 **Key parameters**:
+
 - `owner`: Repository owner (username or org), case-insensitive
 - `repo`: Repository name without .git extension
 - `title`: Issue title (required for creation)
@@ -51,6 +52,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 - `state`: 'open', 'closed', or 'all' for filtering
 
 **Pitfalls**:
+
 - `GITHUB_LIST_REPOSITORY_ISSUES` returns both issues AND pull requests; check `pull_request` field to distinguish
 - Only users with push access can set assignees, labels, and milestones; they are silently dropped otherwise
 - Pagination: `per_page` max 100; iterate pages until empty
@@ -60,6 +62,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **When to use**: User wants to create, review, or merge pull requests
 
 **Tool sequence**:
+
 1. `GITHUB_FIND_PULL_REQUESTS` - Search and filter PRs [Required]
 2. `GITHUB_GET_A_PULL_REQUEST` - Get detailed PR info including mergeable status [Required]
 3. `GITHUB_LIST_PULL_REQUESTS_FILES` - Review changed files [Optional]
@@ -69,6 +72,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 7. `GITHUB_MERGE_A_PULL_REQUEST` - Merge after explicit user approval [Required]
 
 **Key parameters**:
+
 - `head`: Source branch with changes (must exist; for cross-repo: 'username:branch')
 - `base`: Target branch to merge into (e.g., 'main')
 - `title`: PR title (required unless `issue` number provided)
@@ -76,6 +80,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 - `state`: 'open', 'closed', or 'all'
 
 **Pitfalls**:
+
 - `GITHUB_CREATE_A_PULL_REQUEST` fails with 422 if base/head are invalid, identical, or already merged
 - `GITHUB_MERGE_A_PULL_REQUEST` can be rejected if PR is draft, closed, or branch protection applies
 - Always verify mergeable status with `GITHUB_GET_A_PULL_REQUEST` immediately before merging
@@ -86,6 +91,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **When to use**: User wants to create repos, manage branches, or update repo settings
 
 **Tool sequence**:
+
 1. `GITHUB_LIST_REPOSITORIES_FOR_THE_AUTHENTICATED_USER` - List user's repos [Required]
 2. `GITHUB_GET_A_REPOSITORY` - Get detailed repo info [Optional]
 3. `GITHUB_CREATE_A_REPOSITORY_FOR_THE_AUTHENTICATED_USER` - Create personal repo [Required]
@@ -95,6 +101,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 7. `GITHUB_UPDATE_A_REPOSITORY` - Update repo settings [Optional]
 
 **Key parameters**:
+
 - `name`: Repository name
 - `private`: Boolean for visibility
 - `ref`: Full reference path (e.g., 'refs/heads/new-branch')
@@ -102,6 +109,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 - `default_branch`: Default branch name
 
 **Pitfalls**:
+
 - `GITHUB_CREATE_A_REFERENCE` only creates NEW references; use `GITHUB_UPDATE_A_REFERENCE` for existing ones
 - `ref` must start with 'refs/' and contain at least two slashes
 - `GITHUB_LIST_BRANCHES` paginates via `page`/`per_page`; iterate until empty page
@@ -112,6 +120,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **When to use**: User wants to find code, files, or commits across repositories
 
 **Tool sequence**:
+
 1. `GITHUB_SEARCH_CODE` - Search file contents and paths [Required]
 2. `GITHUB_SEARCH_CODE_ALL_PAGES` - Multi-page code search [Alternative]
 3. `GITHUB_SEARCH_COMMITS_BY_AUTHOR` - Search commits by author/date/org [Required]
@@ -120,12 +129,14 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 6. `GITHUB_GET_REPOSITORY_CONTENT` - Get file content [Optional]
 
 **Key parameters**:
+
 - `q`: Search query with qualifiers (`language:python`, `repo:owner/repo`, `extension:js`)
 - `owner`/`repo`: For repo-specific commit listing
 - `author`: Filter by commit author
 - `since`/`until`: ISO 8601 date range for commits
 
 **Pitfalls**:
+
 - Code search only indexes files under 384KB on default branch
 - Maximum 1000 results returned from code search
 - `GITHUB_SEARCH_COMMITS_BY_AUTHOR` requires keywords in addition to qualifiers; qualifier-only queries are not allowed
@@ -136,6 +147,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **When to use**: User wants to view workflows, check CI status, or manage deployments
 
 **Tool sequence**:
+
 1. `GITHUB_LIST_REPOSITORY_WORKFLOWS` - List GitHub Actions workflows [Required]
 2. `GITHUB_GET_A_WORKFLOW` - Get workflow details by ID or filename [Optional]
 3. `GITHUB_CREATE_A_WORKFLOW_DISPATCH_EVENT` - Manually trigger a workflow [Required]
@@ -144,12 +156,14 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 6. `GITHUB_GET_A_DEPLOYMENT_STATUS` - Get deployment status [Optional]
 
 **Key parameters**:
+
 - `workflow_id`: Numeric ID or filename (e.g., 'ci.yml')
 - `ref`: Git reference (branch/tag) for workflow dispatch
 - `inputs`: JSON string of workflow inputs matching `on.workflow_dispatch.inputs`
 - `environment`: Filter deployments by environment name
 
 **Pitfalls**:
+
 - `GITHUB_CREATE_A_WORKFLOW_DISPATCH_EVENT` requires the workflow to have `workflow_dispatch` trigger configured
 - Full path `.github/workflows/main.yml` is auto-stripped to just `main.yml`
 - Inputs max 10 key-value pairs; must match workflow's `on.workflow_dispatch.inputs` definitions
@@ -159,6 +173,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **When to use**: User wants to check collaborators, permissions, or branch protection
 
 **Tool sequence**:
+
 1. `GITHUB_LIST_REPOSITORY_COLLABORATORS` - List repo collaborators [Required]
 2. `GITHUB_GET_REPOSITORY_PERMISSIONS_FOR_A_USER` - Check specific user's access [Optional]
 3. `GITHUB_GET_BRANCH_PROTECTION` - Inspect branch protection rules [Required]
@@ -166,12 +181,14 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 5. `GITHUB_ADD_A_REPOSITORY_COLLABORATOR` - Add/update collaborator [Optional]
 
 **Key parameters**:
+
 - `affiliation`: 'outside', 'direct', or 'all' for collaborator filtering
 - `permission`: Filter by 'pull', 'triage', 'push', 'maintain', 'admin'
 - `branch`: Branch name for protection rules
 - `enforce_admins`: Whether protection applies to admins
 
 **Pitfalls**:
+
 - `GITHUB_GET_BRANCH_PROTECTION` returns 404 for unprotected branches; treat as no protection rules
 - Determine push ability from `permissions.push` or `role_name`, not display labels
 - `GITHUB_LIST_REPOSITORY_COLLABORATORS` paginates; iterate all pages
@@ -180,18 +197,22 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 ## Common Patterns
 
 ### ID Resolution
+
 - **Repo name -> owner/repo**: `GITHUB_LIST_REPOSITORIES_FOR_THE_AUTHENTICATED_USER`
 - **PR number -> PR details**: `GITHUB_FIND_PULL_REQUESTS` then `GITHUB_GET_A_PULL_REQUEST`
 - **Branch name -> SHA**: `GITHUB_GET_A_BRANCH`
 - **Workflow name -> ID**: `GITHUB_LIST_REPOSITORY_WORKFLOWS`
 
 ### Pagination
+
 All list endpoints use page-based pagination:
+
 - `page`: Page number (starts at 1)
 - `per_page`: Results per page (max 100)
 - Iterate until response returns fewer results than `per_page`
 
 ### Safety
+
 - Always verify PR mergeable status before merge
 - Require explicit user confirmation for destructive operations (merge, delete)
 - Check CI status with `GITHUB_LIST_CHECK_RUNS_FOR_A_REF` before merging
@@ -230,14 +251,17 @@ All list endpoints use page-based pagination:
 | Branch protection | `GITHUB_GET_BRANCH_PROTECTION` | `owner`, `repo`, `branch` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

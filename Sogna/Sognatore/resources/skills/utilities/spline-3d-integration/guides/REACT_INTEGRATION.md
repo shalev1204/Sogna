@@ -219,6 +219,7 @@ export default function HeroSection() {
 See [PERFORMANCE.md](PERFORMANCE.md) and [COMMON_PROBLEMS.md](COMMON_PROBLEMS.md) before finishing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

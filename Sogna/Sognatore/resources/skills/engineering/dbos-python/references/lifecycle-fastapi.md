@@ -23,6 +23,7 @@ from dbos import DBOS, DBOSConfig
 app = FastAPI()
 
 # Don't configure at module level!
+
 config: DBOSConfig = {"name": "my-app"}
 DBOS(config=config)
 
@@ -71,6 +72,7 @@ The workflow decorator can be combined with FastAPI route decorators. The FastAP
 Reference: [DBOS with FastAPI](https://docs.dbos.dev/python/tutorials/workflow-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

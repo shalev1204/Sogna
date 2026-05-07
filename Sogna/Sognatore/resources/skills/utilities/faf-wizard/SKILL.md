@@ -13,7 +13,6 @@ id: skill-faf-wizard
 owner: [[orchestrator]]
 ---
 
-
 # FAF Wizard - One-Click AI Intelligence
 
 **The specialized engine for your projects.** Point it at any codebase and get scored, AI-ready context in 60 seconds.
@@ -46,6 +45,7 @@ Documentation tells humans how to use your code. AI context tells AI how to help
 ## Real Success Stories
 
 ### Before/After: Legacy E-commerce Platform
+
 ```
 Before: "This 50k-line PHP codebase from 2015..."
 AI: "I don't understand this architecture"
@@ -57,6 +57,7 @@ architecture. Here's how I can help..."
 ```
 
 ### Before/After: Modern React App
+
 ```
 Before: Every AI session starts with context explanation
 Time lost: 5-10 minutes per session
@@ -69,15 +70,22 @@ Time saved: 2+ hours per day
 ## The 60-Second Workflow
 
 ### Step 1: Detection (10 seconds)
+
 ```bash
 faf auto
+
 # Scans manifest files, directory structure, dependencies
+
 # Detects: React + TypeScript + Tailwind + Vercel
+
 ```
 
 ### Step 2: Generation (30 seconds)  
+
 ```yaml
+
 # Auto-generated project.faf
+
 project:
   name: my-saas-dashboard  
   goal: Customer analytics platform
@@ -94,6 +102,7 @@ human_context:
 ```
 
 ### Step 3: Scoring & Report (20 seconds)
+
 ```
 ✅ Generated: project.faf
 🏆 AI-Readiness: 87% Bronze - Production ready
@@ -102,20 +111,25 @@ Filled: 9/11 active slots
 Ignored: 22 slots (not applicable)
 
 To reach Silver (95%):
+
   + Add API documentation (+5%)  
   + Define deployment details (+3%)
+
 ```
 
 ## Performance Data (Real Numbers)
 
 **Analyzed 8,400+ Projects:**
+
 - ✅ **99.2% detection accuracy** across 153+ formats
 - ✅ **Average generation time**: 12.3 seconds
 - ✅ **Bronze tier or higher**: 94% of projects
 - ✅ **Zero manual configuration**: Works out of the box
 
 ### Format Support
+
 Automatically detects and configures:
+
 - **JavaScript**: React, Vue, Angular, Svelte, Next.js, Nuxt
 - **Python**: Django, Flask, FastAPI, Jupyter, Poetry
 - **TypeScript**: All JS frameworks + native TS projects  
@@ -127,6 +141,7 @@ Automatically detects and configures:
 ## Universal Compatibility
 
 ### Works With Every AI Tool
+
 - ✅ **Claude Code** - Reads .faf natively
 - ✅ **Cursor** - Auto-syncs to .cursorrules  
 - ✅ **Gemini CLI** - Converts to GEMINI.md
@@ -135,20 +150,25 @@ Automatically detects and configures:
 - ✅ **Any AI** - Universal format support
 
 ### Migration Support
+
 Already have AI context files?
 ```bash
+
 # Migrates existing context
+
 faf migrate --from .cursorrules
 faf migrate --from CLAUDE.md  
 faf migrate --from README.md
 
 # One format, works everywhere
+
 faf sync --target all
 ```
 
 ## Installation Options
 
 ### Option 1: CLI (Recommended)
+
 ```bash
 npm install -g faf-cli
 cd your-project
@@ -156,6 +176,7 @@ faf auto
 ```
 
 ### Option 2: MCP Server (Claude Code)
+
 ```json
 {
   "mcpServers": {
@@ -168,21 +189,25 @@ faf auto
 ```
 
 ### Option 3: Browser Extension
+
 Install from Chrome Web Store - works on any Git repository.
 
 ## Three-Phase Intelligence
 
 ### Phase 1: Stack Detection
+
 - Scans `package.json`, `Cargo.toml`, `pyproject.toml`, etc.
 - Analyzes directory structure and file patterns
 - Identifies frameworks, deployment targets, testing setup
 
 ### Phase 2: Context Mining  
+
 - Extracts project description from README
 - Identifies architecture patterns from code structure
 - Pulls dependency information for AI context
 
 ### Phase 3: Optimization
+
 - Generates focused 33-slot IANA format
 - Validates against format specification
 - Scores AI-readiness with improvement suggestions
@@ -200,12 +225,14 @@ Install from Chrome Web Store - works on any Git repository.
 ## When to Use faf-expert Instead
 
 Use `faf-wizard` for:
+
 - ✅ Quick project onboarding
 - ✅ Automatic everything
 - ✅ "Just make it work"
 - ✅ Time-constrained scenarios
 
 Use `faf-expert` for:
+
 - 🎯 Fine-tuned championship scoring (95%+)
 - 🎯 Complex MCP server configuration
 - 🎯 Multi-platform sync management  
@@ -214,6 +241,7 @@ Use `faf-expert` for:
 ## Validation & Security
 
 **Enterprise-Grade Standards:**
+
 - ✅ **800+ comprehensive tests** across CLI and MCP
 - ✅ **No credentials ever stored** in .faf files
 - ✅ **YAML format validation** prevents malformed files
@@ -221,20 +249,28 @@ Use `faf-expert` for:
 - ✅ **## Getting Started
 
 ### For Your Current Project
+
 ```bash
+
 # One command, done forever
+
 npx faf-cli auto
 
 # Check the results
+
 cat project.faf
 ```
 
 ### For Any GitHub Repository  
+
 Install the browser extension and click "Generate FAF" on any repo.
 
 ### For Teams
+
 ```bash
+
 # Set up team-wide MCP server
+
 faf mcp install --team
 faf sync --target all --watch
 ```
@@ -252,11 +288,13 @@ faf sync --target all --watch
 *Stop explaining your project every session. FAF Wizard - because AI should understand your project as well as you do.*
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

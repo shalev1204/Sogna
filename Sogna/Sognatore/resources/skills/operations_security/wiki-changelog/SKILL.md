@@ -8,12 +8,12 @@ id: skill-wiki-changelog
 owner: [[ops-security]]
 ---
 
-
 # Wiki Changelog
 
 Generate structured changelogs from git history.
 
 ## When to Use
+
 - User asks "what changed recently", "generate a changelog", "summarize commits"
 - User wants to understand recent development activity
 
@@ -32,9 +32,11 @@ Generate structured changelogs from git history.
 - Highlight breaking changes prominently with migration notes
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

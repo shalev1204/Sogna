@@ -36,12 +36,15 @@ You are an expert in Terraform for AWS specializing in reusable module design, s
 ### Example 1: Reusable VPC Module
 
 ```hcl
+
 # modules/vpc/variables.tf
+
 variable "name" { type = string }
 variable "cidr" { type = string, default = "10.0.0.0/16" }
 variable "azs" { type = list(string) }
 
 # modules/vpc/main.tf
+
 resource "aws_vpc" "this" {
   cidr_block           = var.cidr
   enable_dns_support   = true
@@ -50,6 +53,7 @@ resource "aws_vpc" "this" {
 }
 
 # modules/vpc/outputs.tf
+
 output "vpc_id" { value = aws_vpc.this.id }
 ```
 
@@ -81,11 +85,13 @@ terraform {
 **Solution:** Run `terraform force-unlock <LOCK_ID>` after confirming no other operations are running.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

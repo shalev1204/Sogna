@@ -4,6 +4,7 @@ description: Functional programming patterns for Node.js/Deno backend developmen
 risk: critical
 version: 1.0.0
 tags:
+
   - fp-ts
   - typescript
   - backend
@@ -12,16 +13,17 @@ tags:
   - deno
   - dependency-injection
   - reader-task-either
+
 id: skill-fp-backend
 owner: [[eng-backend]]
 ---
-
 
 # fp-ts Backend Patterns
 
 Functional programming patterns for building type-safe, testable backend services using fp-ts.
 
 ## When to Use
+
 - You are building or refactoring a Node.js or Deno backend with fp-ts.
 - The task involves dependency injection, service composition, or typed backend errors with `ReaderTaskEither`.
 - You need functional backend architecture patterns rather than isolated utility snippets.
@@ -31,6 +33,7 @@ Functional programming patterns for building type-safe, testable backend service
 ### ReaderTaskEither (RTE)
 
 The `ReaderTaskEither<R, E, A>` type is the backbone of functional backend development:
+
 - **R** (Reader): Dependencies/environment (database, config, logger)
 - **E** (Either left): Error type
 - **A** (Either right): Success value
@@ -1341,11 +1344,13 @@ export const myOperation = (
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

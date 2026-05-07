@@ -8,7 +8,6 @@ id: skill-cost-optimization
 owner: [[orchestrator]]
 ---
 
-
 # Cloud Cost Optimization
 
 Strategies and patterns for optimizing cloud costs across AWS, Azure, and GCP.
@@ -40,24 +39,28 @@ Implement systematic cost optimization strategies to reduce cloud spending while
 ## Cost Optimization Framework
 
 ### 1. Visibility
+
 - Implement cost allocation tags
 - Use cloud cost management tools
 - Set up budget alerts
 - Create cost dashboards
 
 ### 2. Right-Sizing
+
 - Analyze resource utilization
 - Downsize over-provisioned resources
 - Use auto-scaling
 - Remove idle resources
 
 ### 3. Pricing Models
+
 - Use reserved capacity
 - Leverage spot/preemptible instances
 - Implement savings plans
 - Use committed use discounts
 
 ### 4. Architecture Optimization
+
 - Use managed services
 - Implement caching
 - Optimize data transfer
@@ -66,6 +69,7 @@ Implement systematic cost optimization strategies to reduce cloud spending while
 ## AWS Cost Optimization
 
 ### Reserved Instances
+
 ```
 Savings: 30-72% vs On-Demand
 Term: 1 or 3 years
@@ -74,6 +78,7 @@ Flexibility: Standard or Convertible
 ```
 
 ### Savings Plans
+
 ```
 Compute Savings Plans: 66% savings
 EC2 Instance Savings Plans: 72% savings
@@ -82,6 +87,7 @@ Flexible across: Instance families, regions, OS
 ```
 
 ### Spot Instances
+
 ```
 Savings: Up to 90% vs On-Demand
 Best for: Batch jobs, CI/CD, stateless workloads
@@ -90,6 +96,7 @@ Strategy: Mix with On-Demand for resilience
 ```
 
 ### S3 Cost Optimization
+
 ```hcl
 resource "aws_s3_bucket_lifecycle_configuration" "example" {
   bucket = aws_s3_bucket.example.id
@@ -118,17 +125,20 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 ## Azure Cost Optimization
 
 ### Reserved VM Instances
+
 - 1 or 3 year terms
 - Up to 72% savings
 - Flexible sizing
 - Exchangeable
 
 ### Azure Hybrid Benefit
+
 - Use existing Windows Server licenses
 - Up to 80% savings with RI
 - Available for Windows and SQL Server
 
 ### Azure Advisor Recommendations
+
 - Right-size VMs
 - Delete unused resources
 - Use reserved capacity
@@ -137,18 +147,21 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 ## GCP Cost Optimization
 
 ### Committed Use Discounts
+
 - 1 or 3 year commitment
 - Up to 57% savings
 - Applies to vCPUs and memory
 - Resource-based or spend-based
 
 ### Sustained Use Discounts
+
 - Automatic discounts
 - Up to 30% for running instances
 - No commitment required
 - Applies to Compute Engine, GKE
 
 ### Preemptible VMs
+
 - Up to 80% savings
 - 24-hour maximum runtime
 - Best for batch workloads
@@ -156,6 +169,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "example" {
 ## Tagging Strategy
 
 ### AWS Tagging
+
 ```hcl
 locals {
   common_tags = {
@@ -185,8 +199,11 @@ resource "aws_instance" "example" {
 ## Cost Monitoring
 
 ### Budget Alerts
+
 ```hcl
+
 # AWS Budget
+
 resource "aws_budgets_budget" "monthly" {
   name              = "monthly-budget"
   budget_type       = "COST"
@@ -206,6 +223,7 @@ resource "aws_budgets_budget" "monthly" {
 ```
 
 ### Cost Anomaly Detection
+
 - AWS Cost Anomaly Detection
 - Azure Cost Management alerts
 - GCP Budget alerts
@@ -213,12 +231,14 @@ resource "aws_budgets_budget" "monthly" {
 ## Architecture Patterns
 
 ### Pattern 1: Serverless First
+
 - Use Lambda/Functions for event-driven
 - Pay only for execution time
 - Auto-scaling included
 - No idle costs
 
 ### Pattern 2: Right-Sized Databases
+
 ```
 Development: t3.small RDS
 Staging: t3.large RDS
@@ -226,6 +246,7 @@ Production: r6g.2xlarge RDS with read replicas
 ```
 
 ### Pattern 3: Multi-Tier Storage
+
 ```
 Hot data: S3 Standard
 Warm data: S3 Standard-IA (30 days)
@@ -234,6 +255,7 @@ Archive: S3 Deep Archive (365 days)
 ```
 
 ### Pattern 4: Auto-Scaling
+
 ```hcl
 resource "aws_autoscaling_policy" "scale_up" {
   name                   = "scale-up"
@@ -292,11 +314,13 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
 - `multi-cloud-architecture` - For cloud selection
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

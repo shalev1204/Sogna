@@ -13,6 +13,7 @@ Scientific writing is a process for communicating research with precision and cl
 ## When to Use This Skill
 
 This skill should be used when:
+
 - Writing or revising any section of a scientific manuscript (abstract, introduction, methods, results, discussion)
 - Structuring a research paper using IMRAD or other standard formats
 - Formatting citations and references in specific styles (APA, AMA, Vancouver, Chicago, IEEE)
@@ -29,6 +30,7 @@ This skill should be used when:
 **⚠️ MANDATORY: Every scientific paper MUST include a graphical abstract plus 1-2 additional AI-generated figures using the scientific-schematics skill.**
 
 This is not optional. Scientific papers without visual elements are incomplete. Before finalizing any document:
+
 1. **ALWAYS generate a graphical abstract** as the first visual element
 2. Generate at minimum ONE additional schematic or diagram using scientific-schematics
 3. Prefer 3-4 total figures for comprehensive papers (graphical abstract + methods flowchart + results visualization + conceptual diagram)
@@ -36,6 +38,7 @@ This is not optional. Scientific papers without visual elements are incomplete. 
 ### Graphical Abstract (REQUIRED)
 
 **Every scientific writeup MUST include a graphical abstract.** This is a visual summary of your paper that:
+
 - Appears before or immediately after the text abstract
 - Captures the entire paper's key message in one image
 - Is suitable for journal table of contents display
@@ -47,6 +50,7 @@ python scripts/generate_schematic.py "Graphical abstract for [paper title]: [bri
 ```
 
 **Graphical Abstract Requirements:**
+
 - **Content**: Visual summary showing workflow, key methods, main findings, and conclusions
 - **Style**: Clean, professional, suitable for journal TOC
 - **Elements**: Include 3-5 key steps/concepts with connecting arrows or flow
@@ -107,12 +111,14 @@ python scripts/generate_image.py "your image description" -o figures/output.png
 - Any visual that enhances understanding or engagement
 
 The AI will automatically:
+
 - Create publication-quality images with proper formatting
 - Review and refine through multiple iterations
 - Ensure accessibility (colorblind-friendly, high contrast)
 - Save outputs in the figures/ directory
 
 **When in Doubt, Generate a Figure:**
+
 - Complex concept → generate a schematic
 - Data discussion → generate a visualization
 - Process description → generate a flowchart
@@ -128,6 +134,7 @@ For detailed guidance, refer to the scientific-schematics and generate-image ski
 ### 1. Manuscript Structure and Organization
 
 **IMRAD Format**: Guide papers through the standard Introduction, Methods, Results, And Discussion structure used across most scientific disciplines. This includes:
+
 - **Introduction**: Establish research context, identify gaps, state objectives
 - **Methods**: Detail study design, populations, procedures, and analysis approaches
 - **Results**: Present findings objectively without interpretation
@@ -136,6 +143,7 @@ For detailed guidance, refer to the scientific-schematics and generate-image ski
 For detailed guidance on IMRAD structure, refer to `references/imrad_structure.md`.
 
 **Alternative Structures**: Support discipline-specific formats including:
+
 - Review articles (narrative, systematic, scoping)
 - Case reports and case series
 - Meta-analyses and pooled analyses
@@ -147,6 +155,7 @@ For detailed guidance on IMRAD structure, refer to `references/imrad_structure.m
 **Abstract Composition**: Craft concise, standalone summaries (100-250 words) that capture the paper's purpose, methods, results, and conclusions. Support both structured abstracts (with labeled sections) and unstructured single-paragraph formats.
 
 **Introduction Development**: Build compelling introductions that:
+
 - Establish the research problem's importance
 - Review relevant literature systematically
 - Identify knowledge gaps or controversies
@@ -154,6 +163,7 @@ For detailed guidance on IMRAD structure, refer to `references/imrad_structure.m
 - Explain the study's novelty and significance
 
 **Methods Documentation**: Ensure reproducibility through:
+
 - Detailed participant/sample descriptions
 - Clear procedural documentation
 - Statistical methods with justification
@@ -161,12 +171,14 @@ For detailed guidance on IMRAD structure, refer to `references/imrad_structure.m
 - Ethical approval and consent statements
 
 **Results Presentation**: Present findings with:
+
 - Logical flow from primary to secondary outcomes
 - Integration with figures and tables
 - Statistical significance with effect sizes
 - Objective reporting without interpretation
 
 **Discussion Construction**: Synthesize findings by:
+
 - Relating results to research questions
 - Comparing with existing literature
 - Acknowledging limitations honestly
@@ -178,6 +190,7 @@ For detailed guidance on IMRAD structure, refer to `references/imrad_structure.m
 Apply citation styles correctly across disciplines. For comprehensive style guides, refer to `references/citation_styles.md`.
 
 **Major Citation Styles:**
+
 - **AMA (American Medical Association)**: Numbered superscript citations, common in medicine
 - **Vancouver**: Numbered citations in square brackets, biomedical standard
 - **APA (American Psychological Association)**: Author-date in-text citations, common in social sciences
@@ -185,6 +198,7 @@ Apply citation styles correctly across disciplines. For comprehensive style guid
 - **IEEE**: Numbered square brackets, engineering and computer science
 
 **Best Practices:**
+
 - Cite primary sources when possible
 - Include recent literature (last 5-10 years for active fields)
 - Balance citation distribution across introduction and discussion
@@ -196,10 +210,12 @@ Apply citation styles correctly across disciplines. For comprehensive style guid
 Create effective data visualizations that enhance comprehension. For detailed best practices, refer to `references/figures_tables.md`.
 
 **When to Use Tables vs. Figures:**
+
 - **Tables**: Precise numerical data, complex datasets, multiple variables requiring exact values
 - **Figures**: Trends, patterns, relationships, comparisons best understood visually
 
 **Design Principles:**
+
 - Make each table/figure self-explanatory with complete captions
 - Use consistent formatting and terminology across all display items
 - Label all axes, columns, and rows with units
@@ -208,6 +224,7 @@ Create effective data visualizations that enhance comprehension. For detailed be
 - Avoid duplicating information between text, tables, and figures
 
 **Common Figure Types:**
+
 - Bar graphs: Comparing discrete categories
 - Line graphs: Showing trends over time
 - Scatterplots: Displaying correlations
@@ -219,6 +236,7 @@ Create effective data visualizations that enhance comprehension. For detailed be
 Ensure completeness and transparency by following established reporting standards. For comprehensive guideline details, refer to `references/reporting_guidelines.md`.
 
 **Key Guidelines:**
+
 - **CONSORT**: Randomized controlled trials
 - **STROBE**: Observational studies (cohort, case-control, cross-sectional)
 - **PRISMA**: Systematic reviews and meta-analyses
@@ -237,24 +255,28 @@ Each guideline provides checklists ensuring all critical methodological elements
 Apply fundamental scientific writing principles. For detailed guidance, refer to `references/writing_principles.md`.
 
 **Clarity**:
+
 - Use precise, unambiguous language
 - Define technical terms and abbreviations at first use
 - Maintain logical flow within and between paragraphs
 - Use active voice when appropriate for clarity
 
 **Conciseness**:
+
 - Eliminate redundant words and phrases
 - Favor shorter sentences (15-20 words average)
 - Remove unnecessary qualifiers
 - Respect word limits strictly
 
 **Accuracy**:
+
 - Report exact values with appropriate precision
 - Use consistent terminology throughout
 - Distinguish between observations and interpretations
 - Acknowledge uncertainty appropriately
 
 **Objectivity**:
+
 - Present results without bias
 - Avoid overstating findings or implications
 - Acknowledge conflicting evidence
@@ -269,6 +291,7 @@ Scientific papers must be written in complete, flowing prose. Use this two-stage
 **Stage 1: Create Section Outlines with Key Points**
 
 When starting a new section:
+
 1. Use the research-lookup skill to gather relevant literature and data
 2. Create a structured outline with bullet points marking:
    - Main arguments or findings to present
@@ -279,6 +302,7 @@ When starting a new section:
 
 **Example outline (Introduction section):**
 ```
+
 - Background: AI in drug discovery gaining traction
   * Cite recent reviews (Smith 2023, Jones 2024)
   * Traditional methods are slow and expensive
@@ -288,6 +312,7 @@ When starting a new section:
 - Our approach: Transfer learning from common diseases
   * Novel architecture combining X and Y
 - Study objectives: Validate on 3 rare disease datasets
+
 ```
 
 **Stage 2: Convert Key Points to Full Paragraphs**
@@ -345,11 +370,13 @@ interpretability of the results.
 **When Lists ARE Acceptable (Limited Cases):**
 
 Lists may appear in scientific papers only in specific contexts:
+
 - **Methods**: Inclusion/exclusion criteria, materials and reagents, participant characteristics
 - **Supplementary Materials**: Extended protocols, equipment lists, detailed parameters
 - **Never in**: Abstract, Introduction, Results, Discussion, Conclusions
 
 **Abstract Format Rule:**
+
 - ❌ **NEVER** use labeled sections (Background:, Methods:, Results:, Conclusions:)
 - ✅ **ALWAYS** write as flowing paragraph(s) with natural transitions
 - Exception: Only use structured format if journal explicitly requires it in author guidelines
@@ -357,12 +384,14 @@ Lists may appear in scientific papers only in specific contexts:
 **Integration with Research Lookup:**
 
 The research-lookup skill is essential for Stage 1 (creating outlines):
+
 1. Search for relevant papers using research-lookup
 2. Extract key findings, methods, and data
 3. Organize findings as bullet points in your outline
 4. Then convert the outline to full paragraphs in Stage 2
 
 This two-stage process ensures you:
+
 - Gather and organize information systematically
 - Create logical structure before writing
 - Produce polished, publication-ready prose
@@ -373,6 +402,7 @@ This two-stage process ensures you:
 For research reports, technical reports, white papers, and other professional documents that are NOT journal manuscripts, use the `scientific_report.sty` LaTeX style package for a polished, professional appearance.
 
 **When to Use Professional Report Formatting:**
+
 - Research reports and technical reports
 - White papers and policy briefs
 - Grant reports and progress reports
@@ -381,6 +411,7 @@ For research reports, technical reports, white papers, and other professional do
 - Feasibility studies and project deliverables
 
 **When NOT to Use (Use Venue-Specific Formatting Instead):**
+
 - Journal manuscripts → Use `venue-templates` skill
 - Conference papers → Use `venue-templates` skill
 - Academic theses → Use institutional templates
@@ -479,6 +510,7 @@ xelatex report.tex
 ```
 
 For complete documentation, refer to:
+
 - `assets/scientific_report.sty`: The style package
 - `assets/scientific_report_template.tex`: Complete template example
 - `assets/REPORT_FORMATTING_GUIDE.md`: Quick reference guide
@@ -487,6 +519,7 @@ For complete documentation, refer to:
 ### 9. Journal-Specific Formatting
 
 Adapt manuscripts to journal requirements:
+
 - Follow author guidelines for structure, length, and format
 - Apply journal-specific citation styles
 - Meet figure/table specifications (resolution, file formats, dimensions)
@@ -499,12 +532,14 @@ Adapt manuscripts to journal requirements:
 Adapt language, terminology, and conventions to match the specific scientific discipline. Each field has established vocabulary, preferred phrasings, and domain-specific conventions that signal expertise and ensure clarity for the target audience.
 
 **Identify Field-Specific Linguistic Conventions:**
+
 - Review terminology used in recent high-impact papers in the target journal
 - Note field-specific abbreviations, units, and notation systems
 - Identify preferred terms (e.g., "participants" vs. "subjects," "compound" vs. "drug," "specimens" vs. "samples")
 - Observe how methods, organisms, or techniques are typically described
 
 **Biomedical and Clinical Sciences:**
+
 - Use precise anatomical and clinical terminology (e.g., "myocardial infarction" not "heart attack" in formal writing)
 - Follow standardized disease nomenclature (ICD, DSM, SNOMED-CT)
 - Specify drug names using generic names first, brand names in parentheses if needed
@@ -513,6 +548,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 - Report lab values with standard units (SI units in most international journals)
 
 **Molecular Biology and Genetics:**
+
 - Use italics for gene symbols (e.g., *TP53*), regular font for proteins (e.g., p53)
 - Follow species-specific gene nomenclature (uppercase for human: *BRCA1*; sentence case for mouse: *Brca1*)
 - Specify organism names in full at first mention, then use accepted abbreviations (e.g., *Escherichia coli*, then *E. coli*)
@@ -520,6 +556,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 - Employ established terminology for molecular techniques (e.g., "quantitative PCR" or "qPCR," not "real-time PCR")
 
 **Chemistry and Pharmaceutical Sciences:**
+
 - Follow IUPAC nomenclature for chemical compounds
 - Use systematic names for novel compounds, common names for well-known substances
 - Specify chemical structures using standard notation (e.g., SMILES, InChI for databases)
@@ -528,6 +565,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 - Use terms like "bioavailability," "pharmacokinetics," "IC50" consistently with field definitions
 
 **Ecology and Environmental Sciences:**
+
 - Use binomial nomenclature for species (italicized: *Homo sapiens*)
 - Specify taxonomic authorities at first species mention when relevant
 - Employ standardized habitat and ecosystem classifications
@@ -535,6 +573,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 - Describe sampling methods with field-standard terms (e.g., "transect," "quadrat," "mark-recapture")
 
 **Physics and Engineering:**
+
 - Follow SI units consistently unless field conventions dictate otherwise
 - Use standard notation for physical quantities (scalars vs. vectors, tensors)
 - Employ established terminology for phenomena (e.g., "quantum entanglement," "laminar flow")
@@ -542,6 +581,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 - Use mathematical notation consistent with field standards (e.g., ℏ for reduced Planck constant)
 
 **Neuroscience:**
+
 - Use standardized brain region nomenclature (e.g., refer to atlases like Allen Brain Atlas)
 - Specify coordinates for brain regions using established stereotaxic systems
 - Follow conventions for neural terminology (e.g., "action potential" not "spike" in formal writing)
@@ -549,6 +589,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 - Describe recording techniques with proper specificity (e.g., "whole-cell patch clamp," "extracellular recording")
 
 **Social and Behavioral Sciences:**
+
 - Use person-first language when appropriate (e.g., "people with schizophrenia" not "schizophrenics")
 - Employ standardized psychological constructs and validated assessment names
 - Follow APA guidelines for reducing bias in language
@@ -558,27 +599,32 @@ Adapt language, terminology, and conventions to match the specific scientific di
 **General Principles:**
 
 **Match Audience Expertise:**
+
 - For specialized journals: Use field-specific terminology freely, define only highly specialized or novel terms
 - For broad-impact journals (e.g., *Nature*, *Science*): Define more technical terms, provide context for specialized concepts
 - For interdisciplinary audiences: Balance precision with accessibility, define terms at first use
 
 **Define Technical Terms Strategically:**
+
 - Define abbreviations at first use: "messenger RNA (mRNA)"
 - Provide brief explanations for specialized techniques when writing for broader audiences
 - Avoid over-defining terms well-known to the target audience (signals unfamiliarity with field)
 - Create a glossary if numerous specialized terms are unavoidable
 
 **Maintain Consistency:**
+
 - Use the same term for the same concept throughout (don't alternate between "medication," "drug," and "pharmaceutical")
 - Follow a consistent system for abbreviations (decide on "PCR" or "polymerase chain reaction" after first definition)
 - Apply the same nomenclature system throughout (especially for genes, species, chemicals)
 
 **Avoid Field Mixing Errors:**
+
 - Don't use clinical terminology for basic science (e.g., don't call mice "patients")
 - Avoid colloquialisms or overly general terms in place of precise field terminology
 - Don't import terminology from adjacent fields without ensuring proper usage
 
 **Verify Terminology Usage:**
+
 - Consult field-specific style guides and nomenclature resources
 - Check how terms are used in recent papers from the target journal
 - Use domain-specific databases and ontologies (e.g., Gene Ontology, MeSH terms)
@@ -587,6 +633,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 ### 11. Common Pitfalls to Avoid
 
 **Top Rejection Reasons:**
+
 1. Inappropriate, incomplete, or insufficiently described statistics
 2. Over-interpretation of results or unsupported conclusions
 3. Poorly described methods affecting reproducibility
@@ -597,6 +644,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 8. Failure to follow reporting guidelines
 
 **Writing Quality Issues:**
+
 - Mixing tenses inappropriately (use past tense for methods/results, present for established facts)
 - Excessive jargon or undefined acronyms
 - Paragraph breaks that disrupt logical flow
@@ -606,12 +654,14 @@ Adapt language, terminology, and conventions to match the specific scientific di
 ## Workflow for Manuscript Development
 
 **Stage 1: Planning**
+
 1. Identify target journal and review author guidelines
 2. Determine applicable reporting guideline (CONSORT, STROBE, etc.)
 3. Outline manuscript structure (usually IMRAD)
 4. Plan figures and tables as the backbone of the paper
 
 **Stage 2: Drafting** (Use two-stage writing process for each section)
+
 1. Start with figures and tables (the core data story)
 2. For each section below, follow the two-stage process:
    - **First**: Create outline with bullet points using research-lookup
@@ -626,6 +676,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 **Remember**: Bullet points are for planning only—the final manuscript must be in complete paragraphs.
 
 **Stage 3: Revision**
+
 1. Check logical flow and "red thread" throughout
 2. Verify consistency in terminology and notation
 3. Ensure figures/tables are self-explanatory
@@ -635,6 +686,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 7. Proofread for grammar, spelling, and clarity
 
 **Stage 4: Final Preparation**
+
 1. Format according to journal requirements
 2. Prepare supplementary materials
 3. Write cover letter highlighting significance
@@ -644,6 +696,7 @@ Adapt language, terminology, and conventions to match the specific scientific di
 ## Integration with Other Scientific Skills
 
 This skill works effectively with:
+
 - **Data analysis skills**: For generating results to report
 - **Statistical analysis**: For determining appropriate statistical presentations
 - **Literature review skills**: For contextualizing research
@@ -669,6 +722,7 @@ This skill works effectively with:
 **Before writing for a specific venue, consult the venue-templates skill for writing style guides:**
 
 Different venues have dramatically different writing expectations:
+
 - **Nature/Science**: Accessible, story-driven, broad significance
 - **Cell Press**: Mechanistic depth, graphical abstracts, Highlights
 - **Medical journals (NEJM, Lancet)**: Structured abstracts, evidence language
@@ -676,6 +730,7 @@ Different venues have dramatically different writing expectations:
 - **CS conferences (CHI, ACL)**: Field-specific conventions
 
 The venue-templates skill provides:
+
 - `venue_writing_styles.md`: Master style comparison
 - Venue-specific guides: `nature_science_style.md`, `cell_press_style.md`, `medical_journal_styles.md`, `ml_conference_style.md`, `cs_conference_style.md`
 - `reviewer_expectations.md`: What reviewers look for at each venue
@@ -703,6 +758,7 @@ This skill includes LaTeX style packages and templates for professional report f
 - `assets/REPORT_FORMATTING_GUIDE.md`: Quick reference guide for the style package
 
 **Key Features of `scientific_report.sty`:**
+
 - Helvetica font family for modern, professional appearance
 - Professional color scheme (blues, greens, oranges, purples)
 - Box environments: `keyfindings`, `methodology`, `resultsbox`, `recommendations`, `limitations`, `criticalnotice`, `definition`, `executivesummary`, `hypothesis`
@@ -715,11 +771,13 @@ This skill includes LaTeX style packages and templates for professional report f
 Load these references as needed when working on specific aspects of scientific writing.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

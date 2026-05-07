@@ -23,25 +23,31 @@ This skill provides comprehensive guidance for building voice AI engines that en
 ## Quick Start
 
 ```python
+
 # Use the skill in your AI assistant
+
 @voice-ai-engine-development I need to build a voice assistant that can handle real-time conversations with interrupts
 ```
 
 ## What's Included
 
 ### Main Skill File
+
 - `SKILL.md` - Comprehensive guide to voice AI engine development
 
 ### Examples
+
 - `complete_voice_engine.py` - Full working implementation
 - `gemini_agent_example.py` - LLM agent with proper response buffering
 - `interrupt_system_example.py` - Interrupt handling demonstration
 
 ### Templates
+
 - `base_worker_template.py` - Template for creating new workers
 - `multi_provider_factory_template.py` - Multi-provider factory pattern
 
 ### References
+
 - `common_pitfalls.md` - Common issues and solutions
 - `provider_comparison.md` - Comparison of transcription, LLM, and TTS providers
 
@@ -57,6 +63,7 @@ Audio In → Transcriber → Agent → Synthesizer → Audio Out
 ```
 
 Each worker:
+
 - Runs independently via asyncio
 - Communicates through asyncio.Queue objects
 - Can be stopped mid-stream for interrupts
@@ -72,17 +79,20 @@ Each worker:
 ## Supported Providers
 
 ### Transcription
+
 - Deepgram (fastest, best for real-time)
 - AssemblyAI (highest accuracy)
 - Azure Speech (enterprise-grade)
 - Google Cloud Speech (multi-language)
 
 ### LLM
+
 - OpenAI GPT-4 (highest quality)
 - Google Gemini (cost-effective)
 - Anthropic Claude (safety-focused)
 
 ### TTS
+
 - ElevenLabs (most natural voices)
 - Azure TTS (enterprise-grade)
 - Google Cloud TTS (cost-effective)
@@ -101,6 +111,7 @@ Each worker:
 ## Architecture Highlights
 
 ### Async Worker Pattern
+
 ```python
 class BaseWorker:
     async def _run_loop(self):
@@ -110,14 +121,18 @@ class BaseWorker:
 ```
 
 ### Interrupt System
+
 ```python
+
 # User interrupts bot mid-sentence
+
 if stop_event.is_set():
     partial_message = get_message_up_to(seconds_spoken)
     return partial_message, True  # cut_off = True
 ```
 
 ### Multi-Provider Factory
+
 ```python
 factory = VoiceComponentFactory()
 transcriber = factory.create_transcriber(config)  # Deepgram, AssemblyAI, etc.
@@ -128,6 +143,7 @@ synthesizer = factory.create_synthesizer(config)  # ElevenLabs, Azure, etc.
 ## Testing
 
 The skill includes examples for:
+
 - Unit testing workers in isolation
 - Integration testing the full pipeline
 - Testing interrupt functionality
@@ -147,6 +163,7 @@ The skill includes examples for:
 ## Common Pitfalls
 
 See `references/common_pitfalls.md` for detailed solutions to:
+
 - Audio jumping/cutting off
 - Echo/feedback loops
 - Interrupts not working
@@ -178,6 +195,7 @@ This skill is part of the Sognatore Capabilities repository. Contributions are w
 **Built with ❤️ for the Sognatore community**
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

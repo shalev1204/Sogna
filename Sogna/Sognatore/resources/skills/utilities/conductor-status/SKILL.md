@@ -8,7 +8,6 @@ id: skill-conductor-status
 owner: [[orchestrator]]
 ---
 
-
 # Conductor Status
 
 Display the current status of the Conductor project, including overall progress, active tracks, and next actions.
@@ -129,8 +128,11 @@ Current Phase: Phase 2: Core Components
 Current Task:  [~] Task 2.3: Implement chart rendering
 
 Progress in Phase:
+
   - [x] Task 2.1: Create dashboard layout
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
   - [x] Task 2.2: Add data fetching hooks
   - [~] Task 2.3: Implement chart rendering
   - [ ] Task 2.4: Add filter controls
@@ -177,6 +179,7 @@ Updated:     {date}
 Summary: {brief summary from spec.md}
 
 Acceptance Criteria:
+
   - [x] {Criterion 1}
   - [ ] {Criterion 2}
   - [ ] {Criterion 3}
@@ -189,17 +192,20 @@ Overall:    {completed}/{total} tasks ({percentage}%)
 Progress:   [##########..........] {percentage}%
 
 ## Phase 1: {Phase Name} [COMPLETE]
+
   - [x] Task 1.1: {description}
   - [x] Task 1.2: {description}
   - [x] Verification: {description}
 
 ## Phase 2: {Phase Name} [IN PROGRESS]
+
   - [x] Task 2.1: {description}
   - [~] Task 2.2: {description}  <-- CURRENT
   - [ ] Task 2.3: {description}
   - [ ] Verification: {description}
 
 ## Phase 3: {Phase Name} [PENDING]
+
   - [ ] Task 3.1: {description}
   - [ ] Task 3.2: {description}
   - [ ] Verification: {description}
@@ -271,6 +277,7 @@ Run /conductor:setup to initialize Conductor for this project.
 ERROR: Track not found: {argument}
 
 Available tracks:
+
   - auth_20250115
   - dashboard_20250112
   - nav-fix_20250114
@@ -284,10 +291,12 @@ Usage: /conductor:status [track-id]
 
 ```
 For each plan.md:
+
   - Complete: count lines matching /^- \[x\] Task/
   - In Progress: count lines matching /^- \[~\] Task/
   - Pending: count lines matching /^- \[ \] Task/
   - Total: Complete + In Progress + Pending
+
 ```
 
 ### Phase Detection
@@ -343,11 +352,13 @@ If invoked with `--json`:
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

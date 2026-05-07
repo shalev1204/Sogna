@@ -10,12 +10,12 @@ id: skill-cirq
 owner: [[ops-security]]
 ---
 
-
 # Cirq - Quantum Computing with Python
 
 Cirq is Google Quantum AI's open-source framework for designing, simulating, and running quantum circuits on quantum computers and simulators.
 
 ## When to Use
+
 - You are designing, simulating, or executing quantum circuits with the Cirq ecosystem.
 - You need Google Quantum AI-style primitives, parameterized circuits, or integrations like `cirq-google` and `cirq-ionq`.
 - You are prototyping or teaching quantum workflows in Python and want concrete circuit examples.
@@ -28,19 +28,25 @@ uv pip install cirq
 
 For hardware integration:
 ```bash
+
 # Google Quantum Engine
+
 uv pip install cirq-google
 
 # IonQ
+
 uv pip install cirq-ionq
 
 # AQT (Alpine Quantum Technologies)
+
 uv pip install cirq-aqt
 
 # Pasqal
+
 uv pip install cirq-pasqal
 
 # Azure Quantum
+
 uv pip install azure-quantum cirq
 ```
 
@@ -53,9 +59,11 @@ import cirq
 import numpy as np
 
 # Create qubits
+
 q0, q1 = cirq.LineQubit.range(2)
 
 # Build circuit
+
 circuit = cirq.Circuit(
     cirq.H(q0),              # Hadamard on q0
     cirq.CNOT(q0, q1),       # CNOT with q0 control, q1 target
@@ -65,10 +73,12 @@ circuit = cirq.Circuit(
 print(circuit)
 
 # Simulate
+
 simulator = cirq.Simulator()
 result = simulator.run(circuit, repetitions=1000)
 
 # Display results
+
 print(result.histogram(key='result'))
 ```
 
@@ -78,19 +88,23 @@ print(result.histogram(key='result'))
 import sympy
 
 # Define symbolic parameter
+
 theta = sympy.Symbol('theta')
 
 # Create parameterized circuit
+
 circuit = cirq.Circuit(
     cirq.ry(theta)(q0),
     cirq.measure(q0, key='m')
 )
 
 # Sweep over parameter values
+
 sweep = cirq.Linspace('theta', start=0, stop=2*np.pi, length=20)
 results = simulator.run_sweep(circuit, params=sweep, repetitions=1000)
 
 # Process results
+
 for params, result in zip(sweep, results):
     theta_val = params['theta']
     counts = result.histogram(key='m')
@@ -100,10 +114,13 @@ for params, result in zip(sweep, results):
 ## Core Capabilities
 
 ### Circuit Building
+
 For comprehensive information about building quantum circuits, including qubits, gates, operations, custom gates, and circuit patterns, see:
+
 - **references/building.md** - Complete guide to circuit construction
 
 Common topics:
+
 - Qubit types (GridQubit, LineQubit, NamedQubit)
 - Single and two-qubit gates
 - Parameterized gates and operations
@@ -114,10 +131,13 @@ Common topics:
 - Working with qudits and observables
 
 ### Simulation
+
 For detailed information about simulating quantum circuits, including exact simulation, noisy simulation, parameter sweeps, and the Quantum Virtual Machine, see:
+
 - **references/simulation.md** - Complete guide to quantum simulation
 
 Common topics:
+
 - Exact simulation (state vector, density matrix)
 - Sampling and measurements
 - Parameter sweeps (single and multiple parameters)
@@ -128,10 +148,13 @@ Common topics:
 - Performance optimization
 
 ### Circuit Transformation
+
 For information about optimizing, compiling, and manipulating quantum circuits, see:
+
 - **references/transformation.md** - Complete guide to circuit transformations
 
 Common topics:
+
 - Transformer framework
 - Gate decomposition
 - Circuit optimization (merge gates, eject Z gates, drop negligible operations)
@@ -141,10 +164,13 @@ Common topics:
 - Transformation pipelines
 
 ### Hardware Integration
+
 For information about running circuits on real quantum hardware from various providers, see:
+
 - **references/hardware.md** - Complete guide to hardware integration
 
 Supported providers:
+
 - **Google Quantum AI** (cirq-google) - Sycamore, Weber processors
 - **IonQ** (cirq-ionq) - Trapped ion quantum computers
 - **Azure Quantum** (azure-quantum) - IonQ and Honeywell backends
@@ -154,10 +180,13 @@ Supported providers:
 Topics include device representation, qubit selection, authentication, job management, and circuit optimization for hardware.
 
 ### Noise Modeling
+
 For information about modeling noise, noisy simulation, characterization, and error mitigation, see:
+
 - **references/noise.md** - Complete guide to noise modeling
 
 Common topics:
+
 - Noise channels (depolarizing, amplitude damping, phase damping)
 - Noise models (constant, gate-specific, qubit-specific, thermal)
 - Adding noise to circuits
@@ -167,10 +196,13 @@ Common topics:
 - Error mitigation techniques
 
 ### Quantum Experiments
+
 For information about designing experiments, parameter sweeps, data collection, and using the ReCirq framework, see:
+
 - **references/experiments.md** - Complete guide to quantum experiments
 
 Common topics:
+
 - Experiment design patterns
 - Parameter sweeps and data collection
 - ReCirq framework structure
@@ -205,6 +237,7 @@ def variational_algorithm(ansatz, cost_function, initial_params):
     return result
 
 # Define ansatz
+
 def my_ansatz(params):
     q = cirq.LineQubit(0)
     return cirq.Circuit(
@@ -213,12 +246,14 @@ def my_ansatz(params):
     )
 
 # Define cost function
+
 def my_cost(result):
     state = result.final_state_vector
     # Calculate cost based on state
     return np.real(state[0])
 
 # Run optimization
+
 result = variational_algorithm(my_ansatz, my_cost, [0.0, 0.0])
 ```
 
@@ -280,6 +315,7 @@ def noise_comparison_study(circuit, noise_levels):
     return results
 
 # Run study
+
 noise_levels = [0.0, 0.001, 0.01, 0.05, 0.1]
 results = noise_comparison_study(circuit, noise_levels)
 ```
@@ -335,29 +371,35 @@ results = noise_comparison_study(circuit, noise_levels)
 ## Common Issues
 
 **Circuit too deep for hardware:**
+
 - Use circuit optimization transformers to reduce depth
 - See `transformation.md` for optimization techniques
 
 **Memory issues with simulation:**
+
 - Switch from density matrix to state vector simulator
 - Reduce number of qubits or use stabilizer simulator for Clifford circuits
 
 **Device validation errors:**
+
 - Check qubit connectivity with device.metadata.nx_graph
 - Decompose gates to device-native gateset
 - See `hardware.md` for device-specific compilation
 
 **Noisy simulation too slow:**
+
 - Density matrix simulation is O(2^2n) - consider reducing qubits
 - Use noise models selectively on critical operations only
 - See `simulation.md` for performance optimization
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

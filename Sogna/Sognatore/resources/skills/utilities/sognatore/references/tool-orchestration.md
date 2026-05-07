@@ -14,6 +14,7 @@ Research-backed patterns inspired by NVIDIA ToolOrchestra, OpenAI Agents SDK, an
 ## Overview
 
 Effective tool orchestration requires four key innovations:
+
 1. **Tracing Spans** - Hierarchical event tracking (OpenAI SDK pattern)
 2. **Efficiency Metrics** - Track computational cost per task
 3. **Reward Signals** - Outcome, efficiency, and preference rewards for learning
@@ -190,15 +191,20 @@ Use consistent codes to enable pattern analysis:
 ```yaml
 outcome_reasons:
   success:
+
     - tests_passed_first_try
     - tests_passed_after_fix
     - review_approved
     - spec_validated
+
   partial:
+
     - tests_partial_pass
     - review_concerns_minor
     - timeout_partial_work
+
   failure:
+
     - tests_failed
     - review_blocked
     - dependency_missing
@@ -206,6 +212,7 @@ outcome_reasons:
     - error_unrecoverable
 
 retry_reasons:
+
   - test_failure
   - lint_error
   - type_error
@@ -216,17 +223,21 @@ retry_reasons:
 
 efficiency_factors:
   positive:
+
     - used_haiku_for_simple
     - parallel_execution
     - cached_result
     - first_try_success
     - spec_driven
+
   negative:
+
     - used_opus_for_simple
     - sequential_when_parallel_possible
     - multiple_retries
     - missing_context
     - unclear_requirements
+
 ```
 
 ### Storage Location
@@ -406,8 +417,11 @@ def classify_task_complexity(task):
 ### Agent Allocation by Complexity
 
 ```yaml
+
 # Agent allocation strategy
+
 # Model selection: Opus=planning, Sonnet=development, Haiku=unit tests/monitoring
+
 complexity_allocations:
   trivial:
     max_agents: 1
@@ -671,6 +685,7 @@ Based on [Measurement Imbalance research (arXiv 2506.02064)](https://arxiv.org/a
 ## Sources
 
 **OpenAI Agents SDK:**
+
 - [Agents SDK Documentation](https://openai.github.io/openai-agents-python/) - Core primitives: agents, handoffs, guardrails, tracing
 - [Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) - Orchestration patterns
 - [Building Agents Track](https://developers.openai.com/tracks/building-agents/) - Official developer guide
@@ -678,26 +693,31 @@ Based on [Measurement Imbalance research (arXiv 2506.02064)](https://arxiv.org/a
 - [Tracing Documentation](https://openai.github.io/openai-agents-python/tracing/) - Span types and observability
 
 **Efficiency & Orchestration:**
+
 - [NVIDIA ToolOrchestra](https://github.com/NVlabs/ToolOrchestra) - Multi-turn tool orchestration with RL
 - [ToolScale Dataset](https://huggingface.co/datasets/nvidia/ToolScale) - Training data synthesis
 
 **Evaluation Frameworks:**
+
 - [Assessment Framework for Agentic AI (arXiv 2512.12791)](https://arxiv.org/html/2512.12791v1) - Four-pillar evaluation model
 - [Measurement Imbalance in Agentic AI (arXiv 2506.02064)](https://arxiv.org/abs/2506.02064) - Multi-dimensional evaluation
 - [Adaptive Monitoring for Agentic AI (arXiv 2509.00115)](https://arxiv.org/abs/2509.00115) - AMDM algorithm
 
 **Best Practices:**
+
 - [Anthropic: Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) - Simplicity, transparency, tool engineering
 - [Maxim AI: Production Multi-Agent Systems](https://www.getmaxim.ai/articles/best-practices-for-building-production-ready-multi-agent-systems/) - Orchestration patterns, distributed tracing
 - [UiPath: Agent Builder Best Practices](https://www.uipath.com/blog/ai/agent-builder-best-practices) - Single-responsibility, evaluations
 - [Stanford/Harvard: Demo-to-Deployment Gap](https://www.marktechpost.com/2025/12/24/this-ai-paper-from-stanford-and-harvard-explains-why-most-agentic-ai-systems-feel-impressive-in-demos-and-then-completely-fall-apart-in-real-use/) - Tool reliability as key failure mode
 
 **Safety & Reasoning:**
+
 - [Chain of Thought Monitoring](https://openai.com/index/chain-of-thought-monitoring/) - CoT monitorability for safety
 - [Agent Builder Safety](https://platform.openai.com/docs/guides/agent-builder-safety) - Human-in-loop patterns
 - [Agentic AI Foundation](https://openai.com/index/agentic-ai-foundation/) - Industry standards (MCP, AGENTS.md, goose)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

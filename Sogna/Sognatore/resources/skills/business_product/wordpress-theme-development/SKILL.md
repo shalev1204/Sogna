@@ -9,7 +9,6 @@ id: skill-wordpress-theme-development
 owner: [[prod-pm]]
 ---
 
-
 # WordPress Theme Development Workflow
 
 ## Overview
@@ -49,6 +48,7 @@ Specialized workflow for creating custom WordPress themes from scratch, includin
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Creating custom WordPress themes
 - Converting designs to WordPress themes
 - Adding block editor support
@@ -61,10 +61,12 @@ Use this workflow when:
 ### Phase 1: Theme Setup
 
 #### Skills to Invoke
+
 - `app-builder` - Project scaffolding
 - `frontend-developer` - Frontend development
 
 #### Actions
+
 1. Create theme directory structure
 2. Set up style.css with theme header
 3. Create functions.php
@@ -72,6 +74,7 @@ Use this workflow when:
 5. Set up enqueue scripts/styles
 
 #### WordPress 7.0 Theme Header
+
 ```css
 /*
 Theme Name: My Custom Theme
@@ -90,6 +93,7 @@ Tags: block-patterns, block-styles, editor-style, wide-blocks
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @app-builder to scaffold a new WordPress theme project
 ```
@@ -97,9 +101,11 @@ Use @app-builder to scaffold a new WordPress theme project
 ### Phase 2: Template Hierarchy
 
 #### Skills to Invoke
+
 - `frontend-developer` - Template development
 
 #### Actions
+
 1. Create index.php (fallback template)
 2. Implement header.php and footer.php
 3. Create single.php for posts
@@ -108,11 +114,13 @@ Use @app-builder to scaffold a new WordPress theme project
 6. Implement search.php and 404.php
 
 #### WordPress 7.0 Template Considerations
+
 - Test with iframed editor
 - Verify view transitions work
 - Check new admin color scheme compatibility
 
 #### Copy-Paste Prompts
+
 ```
 Use @frontend-developer to create WordPress template files
 ```
@@ -120,9 +128,11 @@ Use @frontend-developer to create WordPress template files
 ### Phase 3: Theme Functions
 
 #### Skills to Invoke
+
 - `backend-dev-guidelines` - Backend patterns
 
 #### Actions
+
 1. Register navigation menus
 2. Add theme support (thumbnails, RSS, etc.)
 3. Register widget areas
@@ -130,6 +140,7 @@ Use @frontend-developer to create WordPress template files
 5. Implement helper functions
 
 #### WordPress 7.0 theme.json Configuration
+
 ```json
 {
   "$schema": "https://schemas.wp.org/trunk/theme.json",
@@ -190,6 +201,7 @@ Use @frontend-developer to create WordPress template files
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @backend-dev-guidelines to create theme functions
 ```
@@ -197,9 +209,11 @@ Use @backend-dev-guidelines to create theme functions
 ### Phase 4: Custom Post Types
 
 #### Skills to Invoke
+
 - `wordpress-penetration-testing` - WordPress patterns
 
 #### Actions
+
 1. Register custom post types
 2. Create custom taxonomies
 3. Add custom meta boxes
@@ -207,6 +221,7 @@ Use @backend-dev-guidelines to create theme functions
 5. Create archive templates
 
 #### RTC-Compatible CPT Registration
+
 ```php
 register_post_type('portfolio', [
     'labels' => [
@@ -230,6 +245,7 @@ register_post_meta('portfolio', 'client_name', [
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @wordpress-penetration-testing to understand WordPress CPT patterns
 ```
@@ -237,9 +253,11 @@ Use @wordpress-penetration-testing to understand WordPress CPT patterns
 ### Phase 5: Block Editor Support
 
 #### Skills to Invoke
+
 - `frontend-developer` - Block development
 
 #### Actions
+
 1. Enable block editor support
 2. Register custom blocks
 3. Create block styles
@@ -247,12 +265,14 @@ Use @wordpress-penetration-testing to understand WordPress CPT patterns
 5. Configure block templates
 
 #### WordPress 7.0 Block Features
+
 - Block API v3 is reference model
 - PHP-only block registration
 - Per-instance custom CSS
 - Block visibility controls (viewport-based)
 
 #### Block Pattern with ContentOnly (WP 7.0)
+
 ```json
 {
     "name": "my-theme/hero-section",
@@ -289,6 +309,7 @@ Use @wordpress-penetration-testing to understand WordPress CPT patterns
 ```
 
 #### Navigation Overlay Template Part
+
 ```php
 // template-parts/header-overlay.php
 ?>
@@ -313,6 +334,7 @@ Use @wordpress-penetration-testing to understand WordPress CPT patterns
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @frontend-developer to create custom Gutenberg blocks
 ```
@@ -320,10 +342,12 @@ Use @frontend-developer to create custom Gutenberg blocks
 ### Phase 6: Styling and Design
 
 #### Skills to Invoke
+
 - `frontend-design` - UI design
 - `tailwind-patterns` - Tailwind CSS
 
 #### Actions
+
 1. Implement responsive design
 2. Add CSS framework or custom styles
 3. Create design system
@@ -331,6 +355,7 @@ Use @frontend-developer to create custom Gutenberg blocks
 5. Add accessibility features
 
 #### WordPress 7.0 Admin Refresh Considerations
+
 ```css
 /* Support new admin color scheme */
 @media (prefers-color-scheme: dark) {
@@ -350,6 +375,7 @@ body {
 ```
 
 #### CSS Custom Properties (WP 7.0)
+
 ```css
 :root {
     /* New DataViews colors */
@@ -363,6 +389,7 @@ body {
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @frontend-design to create responsive theme design
 ```
@@ -370,6 +397,7 @@ Use @frontend-design to create responsive theme design
 ### Phase 7: WordPress 7.0 Features Integration
 
 #### Breadcrumbs Block Support
+
 ```php
 // Add breadcrumb filters for custom post types
 add_filter('wp_breadcrumb_args', function($args) {
@@ -396,6 +424,7 @@ add_action('breadcrumb_items', function($trail, $crumbs) {
 ```
 
 #### Icon Block Support
+
 ```php
 // Add custom icons for Icon block via pattern category
 add_action('init', function() {
@@ -418,10 +447,12 @@ add_action('init', function() {
 ### Phase 8: Testing
 
 #### Skills to Invoke
+
 - `playwright-skill` - Browser testing
 - `webapp-testing` - Web app testing
 
 #### Actions
+
 1. Test across browsers
 2. Verify responsive breakpoints
 3. Test block editor
@@ -429,6 +460,7 @@ add_action('init', function() {
 5. Performance testing
 
 #### WordPress 7.0 Testing Checklist
+
 - [ ] Test with iframed editor
 - [ ] Verify view transitions
 - [ ] Check admin color scheme
@@ -437,6 +469,7 @@ add_action('init', function() {
 - [ ] Test breadcrumbs on CPT archives
 
 #### Copy-Paste Prompts
+
 ```
 Use @playwright-skill to test WordPress theme
 ```
@@ -504,11 +537,13 @@ theme-name/
 - `wordpress-woocommerce` - WooCommerce
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

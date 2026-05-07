@@ -68,6 +68,7 @@ What would you like to do?
 7. Exit
 
 Quick stats:
+
 - {N} active tracks
 - {M} completed (ready to archive)
 - {P} archived
@@ -190,6 +191,7 @@ Move completed tracks to the archive directory.
   ERROR: Track not found: {track-id}
 
   Available tracks:
+
   - auth_20250110 (completed)
   - dashboard_20250112 (in progress)
 
@@ -222,6 +224,7 @@ Read `conductor/tracks/{track-id}/metadata.json` and `plan.md`:
   Tasks: {completed}/{total} complete
 
   Options:
+
   1. Archive anyway (not recommended)
   2. Cancel and complete the track first
   3. View track status
@@ -261,6 +264,7 @@ Tasks:    {completed}/{total} complete
 Reason:   {reason}
 
 Actions:
+
 - Move conductor/tracks/{track-id}/ to conductor/tracks/_archive/{track-id}/
 - Update conductor/tracks.md (move to Archived Tracks section)
 - Update metadata.json with archive info
@@ -301,6 +305,7 @@ Type 'YES' to proceed, or anything else to cancel:
 4. Update `conductor/tracks.md`:
    - Remove entry from Active Tracks or Completed Tracks section
    - Add entry to Archived Tracks section with format:
+
      ```markdown
      ### {track-id}: {title}
 
@@ -310,6 +315,7 @@ Type 'YES' to proceed, or anything else to cancel:
      ```
 
 5. Git commit:
+
    ```bash
    git add conductor/tracks/_archive/{track-id} conductor/tracks.md
    git commit -m "chore(conductor): Archive track '{title}'"
@@ -381,6 +387,7 @@ Select option:
 No completed tracks available for archiving.
 
 Current tracks:
+
 - [~] nav-fix_20250114 - In progress
 - [ ] api-v2_20250115 - Pending
 
@@ -423,6 +430,7 @@ Tracks to archive:
 Archive reason for all: Completed
 
 Actions:
+
 - Move 2 track directories to conductor/tracks/_archive/
 - Update conductor/tracks.md
 - Create git commit: chore(conductor): Archive 2 completed tracks
@@ -436,6 +444,7 @@ Type 'YES' to proceed, or anything else to cancel:
 
 - Archive each track sequentially
 - Single git commit for all:
+
   ```bash
   git add conductor/tracks/_archive/ conductor/tracks.md
   git commit -m "chore(conductor): Archive {N} completed tracks"
@@ -458,6 +467,7 @@ Restore archived tracks back to active status.
   ERROR: Archived track not found: {track-id}
 
   Available archived tracks:
+
   - old-feature_20241201 (archived 2025-01-05)
 
   Usage: /conductor:manage --restore <track-id>
@@ -474,6 +484,7 @@ Restore archived tracks back to active status.
   Active track: conductor/tracks/{track-id}/
 
   Options:
+
   1. Delete existing track first
   2. Restore with different ID (will prompt for new ID)
   3. Cancel
@@ -496,6 +507,7 @@ Archived: {archived_at}
 Reason:   {archive_reason}
 
 Actions:
+
 - Move conductor/tracks/_archive/{track-id}/ to conductor/tracks/{track-id}/
 - Update conductor/tracks.md (move to Completed Tracks section)
 - Update metadata.json
@@ -532,6 +544,7 @@ Type 'YES' to proceed, or anything else to cancel:
    - Add entry to Completed Tracks section
 
 4. Git commit:
+
    ```bash
    git add conductor/tracks/{track-id} conductor/tracks.md
    git commit -m "chore(conductor): Restore track '{title}'"
@@ -550,6 +563,7 @@ Location:  conductor/tracks/{track-id}/
 Status:    completed
 
 Next steps:
+
 - Run /conductor:status {track-id} to see track details
 - Run /conductor:implement {track-id} to resume work (if needed)
 
@@ -601,9 +615,11 @@ ERROR: Track not found: {track-id}
 
 Available tracks:
 Active:
+
 - dashboard_20250112
 
 Archived:
+
 - old-feature_20241201
 
 Usage: /conductor:manage --delete <track-id>
@@ -626,6 +642,7 @@ Progress:     7/15 tasks (47%)
 Deleting an in-progress track may result in lost work.
 
 Options:
+
 1. Delete anyway (use --force to skip this warning)
 2. Archive instead (recommended)
 3. Cancel
@@ -676,6 +693,7 @@ Type 'DELETE' to permanently remove, or anything else to cancel:
    - Remove entry from appropriate section (Active, Completed, or Archived)
 
 3. Git commit:
+
    ```bash
    git add conductor/tracks.md
    git commit -m "chore(conductor): Delete track '{title}'"
@@ -712,10 +730,12 @@ Display menu of all tracks for selection:
 Select a track to delete:
 
 Active/Completed:
+
 1. [ ] nav-fix_20250114 - Navigation Bug Fix
 2. [x] auth_20250110 - User Authentication
 
 Archived:
+
 3. old-feature_20241201 - Old Feature
 
 --------------------------------------------------------------------------------
@@ -748,6 +768,7 @@ If not found:
 ERROR: Track not found: {old-id}
 
 Available tracks:
+
 - auth_20250110
 - dashboard_20250112
 
@@ -763,9 +784,11 @@ ERROR: Invalid track ID format: {new-id}
 
 Track IDs must follow the pattern: {shortname}_{YYYYMMDD}
 Examples:
+
 - user-auth_20250115
 - fix-login_20250114
 - api-v2_20250110
+
 ```
 
 **Check no conflict:**
@@ -787,6 +810,7 @@ Current:  {old-id} - {title}
 New ID:   {new-id}
 
 Changes:
+
 - Rename conductor/tracks/{old-id}/ to {new-id}/
 - Update tracks.md entry
 - Update metadata.json id field
@@ -830,6 +854,7 @@ Type 'YES' to proceed, or anything else to cancel:
    - Update folder link path
 
 5. Git commit:
+
    ```bash
    git add conductor/tracks/{new-id} conductor/tracks.md
    git commit -m "chore(conductor): Rename track '{old-id}' to '{new-id}'"
@@ -930,16 +955,20 @@ Detect and fix orphaned track artifacts.
 Scanning for issues...
 
 ORPHANED DIRECTORIES (not in tracks.md):
+
   1. conductor/tracks/test-feature_20241201/
   2. conductor/tracks/experiment_20241220/
 
 REGISTRY ORPHANS (no matching folder):
+
   3. broken-track_20250101 (listed in tracks.md)
 
 INCOMPLETE TRACKS (missing files):
+
   4. partial_20250105/ - missing: metadata.json, index.md
 
 STALE IN-PROGRESS (untouched >7 days):
+
   5. old-work_20250101 - last updated: 2025-01-02
 
 ================================================================================
@@ -947,10 +976,12 @@ STALE IN-PROGRESS (untouched >7 days):
 Found {N} issues.
 
 Actions:
+
 1. Add orphaned directories to tracks.md
 2. Remove registry orphans from tracks.md
 3. Create missing files from templates
 4. Archive stale tracks
+
 A. Fix all issues automatically
 S. Skip and review manually
 C. Cancel
@@ -982,6 +1013,7 @@ All tracks are properly registered and complete.
 Adding orphaned directories to tracks.md...
 
 For each directory:
+
 - Read metadata.json if exists for track info
 - If no metadata, prompt for track details:
 
@@ -992,6 +1024,7 @@ For each directory:
 
 - Add entry to appropriate section in tracks.md
 - Create metadata.json if missing
+
 ```
 
 **For Registry Orphans (Action 2):**
@@ -1000,6 +1033,7 @@ For each directory:
 Removing registry orphans from tracks.md...
 
 Removed entries:
+
 - broken-track_20250101
 
 Note: No files were deleted, only tracks.md was updated.
@@ -1011,6 +1045,7 @@ Note: No files were deleted, only tracks.md was updated.
 Creating missing files from templates...
 
 partial_20250105/:
+
 - Created metadata.json from template
 - Created index.md from template
 
@@ -1023,7 +1058,9 @@ Note: You may need to populate these files with actual content.
 Archiving stale tracks...
 
 old-work_20250101:
+
 - Archived with reason: Stale (untouched since 2025-01-02)
+
 ```
 
 **For All Issues (Action A):**
@@ -1043,6 +1080,7 @@ git commit -m "chore(conductor): Clean up {N} orphaned track artifacts"
 ================================================================================
 
 Fixed {N} issues:
+
 - Added {X} orphaned directories to tracks.md
 - Removed {Y} registry orphans
 - Created missing files for {Z} incomplete tracks
@@ -1063,15 +1101,18 @@ Commit: {sha}
 GIT ERROR: {error message}
 
 The operation partially completed:
+
 - Directory moved: Yes/No
 - tracks.md updated: Yes/No
 - Commit created: No
 
 You may need to manually:
+
 1. Complete the git commit
 2. Restore files from their current locations
 
 Current state:
+
 - Track location: {path}
 - tracks.md: {status}
 
@@ -1086,6 +1127,7 @@ To retry the commit:
 ERROR: Failed to {operation}: {error}
 
 Possible causes:
+
 - Permission denied
 - Disk full
 - File in use
@@ -1127,6 +1169,7 @@ Examples:
 8. **OFFER alternatives** - Suggest archive before delete
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

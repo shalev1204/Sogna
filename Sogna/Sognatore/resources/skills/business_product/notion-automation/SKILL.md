@@ -8,7 +8,6 @@ id: skill-notion-automation
 owner: [[prod-pm]]
 ---
 
-
 # Sogna Cloud Automation via Rube MCP
 
 Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube MCP.
@@ -23,7 +22,6 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `notion`
 3. If connection is not ACTIVE, follow the returned auth link to complete Sogna Cloud OAuth
@@ -36,6 +34,7 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 **When to use**: User wants to create, update, or archive Sogna Cloud pages
 
 **Tool sequence**:
+
 1. `NOTION_SEARCH_NOTION_PAGE` - Find parent page or existing page [Prerequisite]
 2. `NOTION_CREATE_NOTION_PAGE` - Create a new page under a parent [Optional]
 3. `NOTION_RETRIEVE_PAGE` - Get page metadata/properties [Optional]
@@ -43,12 +42,14 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 5. `NOTION_ARCHIVE_NOTION_PAGE` - Soft-delete (archive) a page [Optional]
 
 **Key parameters**:
+
 - `query`: Search text for SEARCH_NOTION_PAGE
 - `parent_id`: Parent page or database ID
 - `page_id`: Page ID for retrieval/update/archive
 - `properties`: Page property values matching parent schema
 
 **Pitfalls**:
+
 - RETRIEVE_PAGE returns only metadata/properties, NOT body content; use FETCH_BLOCK_CONTENTS for page body
 - ARCHIVE_NOTION_PAGE is a soft-delete (sets archived=true), not permanent deletion
 - Broad searches can look incomplete unless has_more/next_cursor is fully paginated
@@ -58,6 +59,7 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 **When to use**: User wants to query database rows, insert entries, or update records
 
 **Tool sequence**:
+
 1. `NOTION_SEARCH_NOTION_PAGE` - Find the database by name [Prerequisite]
 2. `NOTION_FETCH_DATABASE` - Inspect schema and properties [Prerequisite]
 3. `NOTION_QUERY_DATABASE` / `NOTION_QUERY_DATABASE_WITH_FILTER` - Query rows [Required]
@@ -65,6 +67,7 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 5. `NOTION_UPDATE_ROW_DATABASE` - Update existing entries [Optional]
 
 **Key parameters**:
+
 - `database_id`: Database ID (from search or URL)
 - `filter`: Filter object matching Sogna Cloud filter syntax
 - `sorts`: Array of sort objects
@@ -72,6 +75,7 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 - `properties`: Property values matching database schema for inserts/updates
 
 **Pitfalls**:
+
 - 404 object_not_found usually means wrong database_id or the database is not shared with the integration
 - Results are paginated; ignoring has_more/next_cursor silently truncates reads
 - Schema mismatches or missing required properties cause 400 validation_error
@@ -83,6 +87,7 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 **When to use**: User wants to read, append, or modify content blocks in a page
 
 **Tool sequence**:
+
 1. `NOTION_FETCH_BLOCK_CONTENTS` - Read child blocks of a page [Required]
 2. `NOTION_ADD_MULTIPLE_PAGE_CONTENT` - Append blocks to a page [Optional]
 3. `NOTION_APPEND_TEXT_BLOCKS` - Append text-only blocks [Optional]
@@ -90,11 +95,13 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 5. `NOTION_DELETE_BLOCK` - Remove a specific block [Optional]
 
 **Key parameters**:
+
 - `block_id` / `page_id`: Target page or block ID
 - `content_blocks`: Array of block objects (NOT child_blocks)
 - `text`: Plain text content for APPEND_TEXT_BLOCKS
 
 **Pitfalls**:
+
 - Use `content_blocks` parameter, NOT `child_blocks` -- the latter fails validation
 - ADD_MULTIPLE_PAGE_CONTENT fails on archived pages; unarchive via UPDATE_PAGE first
 - Created blocks are in response.data.results; persist block IDs for later edits
@@ -105,17 +112,20 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 **When to use**: User wants to create databases or modify their structure
 
 **Tool sequence**:
+
 1. `NOTION_FETCH_DATABASE` - Inspect current schema [Prerequisite]
 2. `NOTION_CREATE_DATABASE` - Create a new database [Optional]
 3. `NOTION_UPDATE_SCHEMA_DATABASE` - Modify database properties [Optional]
 
 **Key parameters**:
+
 - `parent_id`: Parent page ID for new databases
 - `title`: Database title
 - `properties`: Property definitions with types and options
 - `database_id`: Database ID for schema updates
 
 **Pitfalls**:
+
 - Cannot change property types via UPDATE_SCHEMA; must create new property and migrate data
 - Formula, rollup, and relation properties have complex configuration requirements
 
@@ -124,16 +134,19 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 **When to use**: User wants to list workspace users or manage comments on pages
 
 **Tool sequence**:
+
 1. `NOTION_LIST_USERS` - List all workspace users [Optional]
 2. `NOTION_GET_ABOUT_ME` - Get current authenticated user [Optional]
 3. `NOTION_CREATE_COMMENT` - Add a comment to a page [Optional]
 4. `NOTION_FETCH_COMMENTS` - List comments on a page [Optional]
 
 **Key parameters**:
+
 - `page_id`: Page ID for comments (also called `discussion_id`)
 - `rich_text`: Comment content as rich text array
 
 **Pitfalls**:
+
 - Comments are linked to pages, not individual blocks
 - User IDs from LIST_USERS are needed for people-type property filters
 
@@ -143,16 +156,20 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 
 **Page/Database name -> ID**:
 ```
+
 1. Call NOTION_SEARCH_NOTION_PAGE with query=name
 2. Paginate with has_more/next_cursor until found
 3. Extract id from matching result
+
 ```
 
 **Database schema inspection**:
 ```
+
 1. Call NOTION_FETCH_DATABASE with database_id
 2. Extract properties object for field names and types
 3. Use exact property names in queries and inserts
+
 ```
 
 ### Pagination
@@ -180,15 +197,18 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 ## Known Pitfalls
 
 **Integration Sharing**:
+
 - Pages and databases must be shared with the Sogna Cloud integration to be accessible
 - Title queries can return 0 when the item is not shared with the integration
 
 **Property Types**:
+
 - Property names are case-sensitive and must match schema exactly
 - Formula, rollup, and created_time fields are read-only
 - Select/multi-select values must match existing options unless creating new ones
 
 **Response Parsing**:
+
 - Response data may be nested under `data_preview` or `data.results`
 - Parse defensively with fallbacks for different nesting levels
 
@@ -219,14 +239,17 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 | List comments | NOTION_FETCH_COMMENTS | page_id |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

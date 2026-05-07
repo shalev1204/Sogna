@@ -71,6 +71,7 @@ October 24, 2023| Added artwork.
 September 14, 2022| Added a guideline on using a pop-up button in a popover or modal view in iPadOS.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

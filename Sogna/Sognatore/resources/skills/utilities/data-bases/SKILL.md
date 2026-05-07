@@ -8,10 +8,10 @@ id: skill-sogna-bases
 owner: [[orchestrator]]
 ---
 
-
 # Sogna Bases Skill
 
 ## When to Use
+
 - Use when creating or editing `.base` files in Sogna.
 - Use for database-like note views with filters, formulas, summaries, or cards/tables.
 - Use when the user asks about Sogna Bases specifically.
@@ -30,7 +30,9 @@ owner: [[orchestrator]]
 Base files use the `.base` extension and contain valid YAML.
 
 ```yaml
+
 # Global filters apply to ALL views in the base
+
 filters:
   # Can be a single filter string
   # OR a recursive filter object with and/or/not
@@ -39,10 +41,12 @@ filters:
   not: []
 
 # Define formula properties that can be used across all views
+
 formulas:
   formula_name: 'expression'
 
 # Configure display names and settings for properties
+
 properties:
   property_name:
     displayName: "Display Name"
@@ -52,12 +56,16 @@ properties:
     displayName: "Extension"
 
 # Define custom summary formulas
+
 summaries:
   custom_summary_name: 'values.mean().round(3)'
 
 # Define one or more views
+
 views:
+
   - type: table | cards | list | map
+
     name: "View Name"
     limit: 10                    # Optional: limit results
     groupBy:                     # Optional: group results
@@ -66,9 +74,11 @@ views:
     filters:                     # View-specific filters
       and: []
     order:                       # Properties to display in order
+
       - file.name
       - property_name
       - formula.formula_name
+
     summaries:                   # Map properties to summary formulas
       property_name: Average
 ```
@@ -80,29 +90,39 @@ Filters narrow down results. They can be applied globally or per-view.
 ### Filter Structure
 
 ```yaml
+
 # Single filter
+
 filters: 'status == "done"'
 
 # AND - all conditions must be true
+
 filters:
   and:
+
     - 'status == "done"'
     - 'priority > 3'
 
 # OR - any condition can be true
+
 filters:
   or:
+
     - 'file.hasTag("book")'
     - 'file.hasTag("article")'
 
 # NOT - exclude matching items
+
 filters:
   not:
+
     - 'file.hasTag("archived")'
 
 # Nested filters
+
 filters:
   or:
+
     - file.hasTag("tag")
     - and:
         - file.hasTag("book")
@@ -110,6 +130,7 @@ filters:
     - not:
         - file.hasTag("book")
         - file.inFolder("Required Reading")
+
 ```
 
 ### Filter Operators
@@ -206,20 +227,27 @@ When subtracting two dates, the result is a **Duration** type (not a number).
 **IMPORTANT:** Duration does NOT support `.round()`, `.floor()`, `.ceil()` directly. Access a numeric field first (like `.days`), then apply number functions.
 
 ```yaml
+
 # CORRECT: Calculate days between dates
+
 "(date(due_date) - today()).days"                    # Returns number of days
 "(now() - file.ctime).days"                          # Days since created
 "(date(due_date) - today()).days.round(0)"           # Rounded days
 
 # WRONG - will cause error:
+
 # "((date(due) - today()) / 86400000).round(0)"      # Duration doesn't support division then round
+
 ```
 
 ### Date Arithmetic
 
 ```yaml
+
 # Duration units: y/year/years, M/month/months, d/day/days,
+
 #                 w/week/weeks, h/hour/hours, m/minute/minutes, s/second/seconds
+
 "now() + \"1 day\""       # Tomorrow
 "today() + \"7d\""        # A week from today
 "now() - file.ctime"      # Returns Duration
@@ -232,12 +260,16 @@ When subtracting two dates, the result is a **Duration** type (not a number).
 
 ```yaml
 views:
+
   - type: table
+
     name: "My Table"
     order:
+
       - file.name
       - status
       - due_date
+
     summaries:
       price: Sum
       count: Average
@@ -247,23 +279,31 @@ views:
 
 ```yaml
 views:
+
   - type: cards
+
     name: "Gallery"
     order:
+
       - file.name
       - cover_image
       - description
+
 ```
 
 ### List View
 
 ```yaml
 views:
+
   - type: list
+
     name: "Simple List"
     order:
+
       - file.name
       - status
+
 ```
 
 ### Map View
@@ -272,7 +312,9 @@ Requires latitude/longitude properties and the Maps community plugin.
 
 ```yaml
 views:
+
   - type: map
+
     name: "Locations"
     # Map-specific settings for lat/lng properties
 ```
@@ -304,6 +346,7 @@ views:
 ```yaml
 filters:
   and:
+
     - file.hasTag("task")
     - 'file.ext == "md"'
 
@@ -321,17 +364,23 @@ properties:
     displayName: Priority
 
 views:
+
   - type: table
+
     name: "Active Tasks"
     filters:
       and:
+
         - 'status != "done"'
+
     order:
+
       - file.name
       - status
       - formula.priority_label
       - due
       - formula.days_until_due
+
     groupBy:
       property: status
       direction: ASC
@@ -339,13 +388,18 @@ views:
       formula.days_until_due: Average
 
   - type: table
+
     name: "Completed"
     filters:
       and:
+
         - 'status == "done"'
+
     order:
+
       - file.name
       - completed_date
+
 ```
 
 ### Reading List Base
@@ -353,6 +407,7 @@ views:
 ```yaml
 filters:
   or:
+
     - file.hasTag("book")
     - file.hasTag("article")
 
@@ -370,27 +425,37 @@ properties:
     displayName: "Est. Time"
 
 views:
+
   - type: cards
+
     name: "Library"
     order:
+
       - cover
       - file.name
       - author
       - formula.status_icon
+
     filters:
       not:
+
         - 'status == "dropped"'
 
   - type: table
+
     name: "Reading List"
     filters:
       and:
+
         - 'status == "to-read"'
+
     order:
+
       - file.name
       - author
       - pages
       - formula.reading_time
+
 ```
 
 ### Daily Notes Index
@@ -398,6 +463,7 @@ views:
 ```yaml
 filters:
   and:
+
     - file.inFolder("Daily Notes")
     - '/^\d{4}-\d{2}-\d{2}$/.matches(file.basename)'
 
@@ -412,14 +478,18 @@ properties:
     displayName: "~Words"
 
 views:
+
   - type: table
+
     name: "Recent Notes"
     limit: 30
     order:
+
       - file.name
       - formula.day_of_week
       - formula.word_estimate
       - file.mtime
+
 ```
 
 ## Embedding Bases
@@ -446,21 +516,27 @@ Embed in Markdown files:
 **Unquoted special characters**: Strings containing `:`, `{`, `}`, `[`, `]`, `,`, `&`, `*`, `#`, `?`, `|`, `-`, `<`, `>`, `=`, `!`, `%`, `@`, `` ` `` must be quoted.
 
 ```yaml
+
 # WRONG - colon in unquoted string
+
 displayName: Status: Active
 
 # CORRECT
+
 displayName: "Status: Active"
 ```
 
 **Mismatched quotes in formulas**: When a formula contains double quotes, wrap the entire formula in single quotes.
 
 ```yaml
+
 # WRONG - double quotes inside double quotes
+
 formulas:
   label: "if(done, "Yes", "No")"
 
 # CORRECT - single quotes wrapping double quotes
+
 formulas:
   label: 'if(done, "Yes", "No")'
 ```
@@ -470,31 +546,41 @@ formulas:
 **Duration math without field access**: Subtracting dates returns a Duration, not a number. Always access `.days`, `.hours`, etc.
 
 ```yaml
+
 # WRONG - Duration is not a number
+
 "(now() - file.ctime).round(0)"
 
 # CORRECT - access .days first, then round
+
 "(now() - file.ctime).days.round(0)"
 ```
 
 **Missing null checks**: Properties may not exist on all notes. Use `if()` to guard.
 
 ```yaml
+
 # WRONG - crashes if due_date is empty
+
 "(date(due_date) - today()).days"
 
 # CORRECT - guard with if()
+
 'if(due_date, (date(due_date) - today()).days, "")'
 ```
 
 **Referencing undefined formulas**: Ensure every `formula.X` in `order` or `properties` has a matching entry in `formulas`.
 
 ```yaml
+
 # This will fail silently if 'total' is not defined in formulas
+
 order:
+
   - formula.total
 
 # Fix: define it
+
 formulas:
   total: "price * quantity"
 ```
@@ -508,11 +594,13 @@ formulas:
 - [Complete Functions Reference](references/FUNCTIONS_REFERENCE.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-fp-ts-pragmatic
 owner: [[orchestrator]]
 ---
 
-
 # Pragmatic Functional Programming
 
 **Read this first.** This guide cuts through the academic jargon and shows you what actually matters. No category theory. No abstract nonsense. Just patterns that make your code better.
@@ -57,11 +56,13 @@ const result = pipe(
 ```
 
 **When to use pipe:**
+
 - 3+ transformations on the same data
 - You find yourself naming throwaway variables
 - Logic reads better top-to-bottom
 
 **When to skip pipe:**
+
 - Just 1-2 operations (direct call is fine)
 - The operations don't naturally chain
 
@@ -92,6 +93,7 @@ const getUserCity = (user: User | null): string =>
 ```
 
 **Plain language translation:**
+
 - `O.fromNullable(x)` = "wrap this value, treating null/undefined as 'nothing'"
 - `O.flatMap(fn)` = "if we have something, apply this function"
 - `O.getOrElse(() => default)` = "unwrap, or use this default if nothing"
@@ -130,6 +132,7 @@ if (E.isRight(result)) {
 ```
 
 **Plain language translation:**
+
 - `E.right(value)` = "success with this value"
 - `E.left(error)` = "failure with this error"
 - `E.isRight(x)` = "did it succeed?"
@@ -612,11 +615,13 @@ But don't rush. The basics here will handle 80% of real-world scenarios. Get com
 7. **Keep it simple** - if your team can't read it, it's not good code
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

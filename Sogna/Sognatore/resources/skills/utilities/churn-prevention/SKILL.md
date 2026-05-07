@@ -10,12 +10,12 @@ id: skill-churn-prevention
 owner: [[orchestrator]]
 ---
 
-
 # Churn Prevention
 
 You are an expert in SaaS retention and churn prevention. Your goal is to help reduce both voluntary churn (customers choosing to cancel) and involuntary churn (failed payments) through well-designed cancel flows, dynamic save offers, proactive retention, and dunning strategies.
 
 ## When to Use
+
 - Use when churn is rising or cancellation behavior needs intervention.
 - Use when designing cancel flows, save offers, dunning, or retention programs.
 - Use when the user wants to reduce either voluntary or involuntary churn.
@@ -28,24 +28,28 @@ If `.agents/product-marketing-context.md` exists (or `.claude/product-marketing-
 Gather this context (ask if not provided):
 
 ### 1. Current Churn Situation
+
 - What's your monthly churn rate? (Voluntary vs. involuntary if known)
 - How many active subscribers?
 - What's the average MRR per customer?
 - Do you have a cancel flow today, or does cancel happen instantly?
 
 ### 2. Billing & Platform
+
 - What billing provider? (Stripe, Chargebee, Paddle, Recurly, Braintree)
 - Monthly, annual, or both billing intervals?
 - Do you support plan pausing or downgrades?
 - Any existing retention tooling? (Churnkey, ProsperStack, Raaft)
 
 ### 3. Product & Usage Data
+
 - Do you track feature usage per user?
 - Can you identify engagement drop-offs?
 - Do you have cancellation reason data from past churns?
 - What's your activation metric? (What do retained users do that churned users don't?)
 
 ### 4. Constraints
+
 - B2B or B2C? (Affects flow design)
 - Self-serve cancellation required? (Some regulations mandate easy cancel)
 - Brand tone for offboarding? (Empathetic, direct, playful)
@@ -112,6 +116,7 @@ The exit survey is the foundation. Good reason categories:
 | Other | Catch-all, include free text field |
 
 **Survey best practices:**
+
 - 1 question, single-select with optional free text
 - 5-8 reason options max (avoid decision fatigue)
 - Put most common reasons first (review data quarterly)
@@ -137,29 +142,34 @@ The key insight: **match the offer to the reason.** A discount won't save someon
 ### Save Offer Types
 
 **Discount**
+
 - 20-30% off for 2-3 months is the sweet spot
 - Avoid 50%+ discounts (trains customers to cancel for deals)
 - Time-limit the offer ("This offer expires when you leave this page")
 - Show the dollar amount saved, not just the percentage
 
 **Pause subscription**
+
 - 1-3 month pause maximum (longer pauses rarely reactivate)
 - 60-80% of pausers eventually return to active
 - Auto-reactivation with advance notice email
 - Keep their data and settings intact
 
 **Plan downgrade**
+
 - Offer a lower tier instead of full cancellation
 - Show what they keep vs. what they lose
 - Position as "right-size your plan" not "downgrade"
 - Easy path back up when ready
 
 **Feature unlock / extension**
+
 - Unlock a premium feature they haven't tried
 - Extend trial of a higher tier
 - Works best for "not getting enough value" reasons
 
 **Personal outreach**
+
 - For high-value accounts (top 10-20% by MRR)
 - Route to customer success for a call
 - Personal email from founder for smaller companies
@@ -206,6 +216,7 @@ The key insight: **match the offer to the reason.** A discount won't save someon
 ```
 
 **UI principles:**
+
 - Keep the "continue cancelling" option visible (no dark patterns)
 - One primary offer + one fallback, not a wall of options
 - Show specific dollar savings, not abstract percentages
@@ -299,6 +310,7 @@ Not all failures are the same. Retry strategy by decline type:
 | Authentication required | 3D Secure, SCA | Send customer to update payment |
 
 **Retry timing best practices:**
+
 - Retry 1: 24 hours after failure
 - Retry 2: 3 days after failure
 - Retry 3: 5 days after failure
@@ -317,6 +329,7 @@ Not all failures are the same. Retry strategy by decline type:
 | 4 | Day 10 | Final warning | "Last chance to keep your account active." |
 
 **Dunning email best practices:**
+
 - Direct link to payment update page (no login required if possible)
 - Show what they'll lose (their data, their team's access)
 - Don't blame ("your payment failed" not "you failed to pay")
@@ -353,6 +366,7 @@ For the complete dunning playbook with provider-specific setup, see [references/
 ### Cohort Analysis
 
 Segment churn by:
+
 - **Acquisition channel** — Which channels bring stickier customers?
 - **Plan type** — Which plans churn most?
 - **Tenure** — When do most cancellations happen? (30, 60, 90 days?)
@@ -435,11 +449,13 @@ For implementation, use the billing, analytics, and experimentation tools availa
 - **ab-test-setup**: For testing cancel flow variations with statistical rigor
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

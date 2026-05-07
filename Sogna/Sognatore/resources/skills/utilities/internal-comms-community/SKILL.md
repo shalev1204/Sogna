@@ -8,9 +8,10 @@ id: skill-internal-comms-community
 owner: [[orchestrator]]
 ---
 
-
 ## When to use this skill
+
 To write internal communications, use this skill for:
+
 - 3P updates (Progress, Plans, Problems)
 - Company newsletters
 - FAQ responses
@@ -34,14 +35,17 @@ To write any internal communication:
 If the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.
 
 ## Keywords
+
 3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

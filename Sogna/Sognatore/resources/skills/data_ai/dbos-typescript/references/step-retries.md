@@ -68,6 +68,7 @@ async function myWorkflowFn() {
 ```
 
 Retry parameters:
+
 - `retriesAllowed`: Enable automatic retries (default: `false`)
 - `maxAttempts`: Maximum retry attempts (default: `3`)
 - `intervalSeconds`: Initial delay between retries in seconds (default: `1`)
@@ -80,6 +81,7 @@ If all retries are exhausted, a `DBOSMaxStepRetriesError` is thrown to the calli
 Reference: [Configurable Retries](https://docs.dbos.dev/typescript/tutorials/step-tutorial#configurable-retries)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

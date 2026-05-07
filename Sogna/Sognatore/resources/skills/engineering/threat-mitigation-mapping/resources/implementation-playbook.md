@@ -547,9 +547,11 @@ class MitigationAnalyzer:
         layer_coverage = self.defense_in_depth_analysis()
 
         report = f"""
+
 # Threat Mitigation Report
 
 ## Executive Summary
+
 - **Overall Risk Reduction:** {risk_reduction:.1f}%
 - **Total Threats:** {len(self.plan.threats)}
 - **Total Controls:** {len(self.plan.controls)}
@@ -557,15 +559,19 @@ class MitigationAnalyzer:
 - **Critical Gaps:** {len(critical_gaps)}
 
 ## Defense in Depth Coverage
+
 {self._format_layer_coverage(layer_coverage)}
 
 ## Critical Gaps Requiring Immediate Action
+
 {self._format_gaps(critical_gaps)}
 
 ## Recommendations
+
 {self._format_recommendations()}
 
 ## Implementation Roadmap
+
 {self._format_roadmap()}
 """
         return report
@@ -690,15 +696,18 @@ class ControlTester:
         passed = sum(1 for r in self.results if r["passed"])
 
         report = f"""
+
 # Control Effectiveness Test Report
 
 ## Summary
+
 - **Total Tests:** {total}
 - **Passed:** {passed}
 - **Failed:** {total - passed}
 - **Pass Rate:** {(passed/total)*100:.1f}%
 
 ## Results by Control
+
 """
         # Group by control
         controls = {}
@@ -723,6 +732,7 @@ class ControlTester:
 ## Best Practices
 
 ### Do's
+
 - **Map all threats** - No threat should be unmapped
 - **Layer controls** - Defense in depth is essential
 - **Mix control types** - Preventive, detective, corrective
@@ -730,6 +740,7 @@ class ControlTester:
 - **Review regularly** - Controls degrade over time
 
 ### Don'ts
+
 - **Don't rely on single controls** - Single points of failure
 - **Don't ignore cost** - ROI matters
 - **Don't skip testing** - Untested controls may fail
@@ -743,6 +754,7 @@ class ControlTester:
 - [MITRE D3FEND](https://d3fend.mitre.org/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

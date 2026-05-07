@@ -9,21 +9,23 @@ date_added: "2026-03-21"
 user-invokable: true
 argument-hint: "[url]"
 allowed-tools:
+
   - Read
   - Grep
   - Glob
   - Bash
   - WebFetch
   - Write
+
 version: 1.0.0
 id: skill-seo-schema
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # Schema Markup Analysis & Generation
 
 ## When to Use
+
 - Use when detecting, validating, or generating Schema.org structured data.
 - Use when the user asks about JSON-LD, rich results, or markup opportunities.
 - Use when schema validation is the main task, rather than a broader SEO audit.
@@ -53,9 +55,11 @@ owner: [[prod-pm]], [[biz-marketing]]
 Read `references/schema-types.md` for the full list. Key rules:
 
 ### ACTIVE (recommend freely):
+
 Organization, LocalBusiness, SoftwareApplication, WebApplication, Product (with Certification markup as of April 2025), ProductGroup, Offer, Service, Article, BlogPosting, NewsArticle, Review, AggregateRating, BreadcrumbList, WebSite, WebPage, Person, ProfilePage, ContactPage, VideoObject, ImageObject, Event, JobPosting, Course, DiscussionForumPosting
 
 ### VIDEO & SPECIALIZED (recommend freely):
+
 BroadcastEvent, Clip, SeekToAction, SoftwareSourceCode
 
 See `schema/templates.json` for ready-to-use JSON-LD templates for these types.
@@ -63,9 +67,11 @@ See `schema/templates.json` for ready-to-use JSON-LD templates for these types.
 > **JSON-LD and JavaScript rendering:** Per Google's December 2025 JS SEO guidance, structured data injected via JavaScript may face delayed processing. For time-sensitive markup (especially Product, Offer), include JSON-LD in the initial server-rendered HTML.
 
 ### RESTRICTED (only for specific sites):
+
 - **FAQ**: ONLY for government and healthcare authority sites (restricted Aug 2023)
 
 ### DEPRECATED (never recommend):
+
 - **HowTo**: Rich results removed September 2023
 - **SpecialAnnouncement**: Deprecated July 31, 2025
 - **CourseInfo, EstimatedSalary, LearningVideo**: Retired June 2025
@@ -78,6 +84,7 @@ See `schema/templates.json` for ready-to-use JSON-LD templates for these types.
 ## Generation
 
 When generating schema for a page:
+
 1. Identify page type from content analysis
 2. Select appropriate schema type(s)
 3. Generate valid JSON-LD with all required + recommended properties
@@ -87,6 +94,7 @@ When generating schema for a page:
 ## Common Schema Templates
 
 ### Organization
+
 ```json
 {
   "@context": "https://schema.org",
@@ -108,6 +116,7 @@ When generating schema for a page:
 ```
 
 ### LocalBusiness
+
 ```json
 {
   "@context": "https://schema.org",
@@ -132,6 +141,7 @@ When generating schema for a page:
 ```
 
 ### Article/BlogPosting
+
 ```json
 {
   "@context": "https://schema.org",
@@ -161,11 +171,13 @@ When generating schema for a page:
 - `generated-schema.json`: ready-to-use JSON-LD snippets
 
 ### Validation Results
+
 | Schema | Type | Status | Issues |
 |--------|------|--------|--------|
 | ... | ... | ✅/⚠️/❌ | ... |
 
 ### Recommendations
+
 - Missing schema opportunities
 - Validation fixes needed
 - Generated code for implementation
@@ -180,11 +192,13 @@ When generating schema for a page:
 | Deprecated schema type detected | Flag the deprecated type with its retirement date. Recommend the current replacement type or advise removal if no replacement exists. |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

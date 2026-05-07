@@ -4,6 +4,7 @@ description: Comprehensive guide for refactoring imperative TypeScript code to f
 risk: critical
 version: 1.0.0
 tags:
+
   - fp-ts
   - refactoring
   - functional-programming
@@ -13,16 +14,17 @@ tags:
   - option
   - task
   - reader
+
 id: skill-fp-refactor
 owner: [[orchestrator]]
 ---
-
 
 # Refactoring Imperative Code to fp-ts
 
 This skill provides comprehensive patterns and strategies for migrating existing imperative TypeScript code to fp-ts functional programming patterns.
 
 ## When to Use
+
 - You are refactoring an existing imperative TypeScript codebase toward fp-ts patterns.
 - The task involves converting `try/catch`, null checks, callbacks, DI, or loops into functional equivalents.
 - You need migration guidance and tradeoffs, not just isolated fp-ts examples.
@@ -46,6 +48,7 @@ This skill provides comprehensive patterns and strategies for migrating existing
 ### The Problem with try-catch
 
 Traditional try-catch blocks have several issues:
+
 - Error handling is implicit and easy to forget
 - The type system doesn't track which functions can throw
 - Control flow is non-linear and harder to reason about
@@ -1517,6 +1520,7 @@ const processUser = (input: string): User =>
 ### Strategy 1: Start at the Boundaries
 
 Begin by converting functions at the edges of your system:
+
 - API response handlers
 - Database query results
 - File system operations
@@ -1842,11 +1846,13 @@ Migrating to fp-ts is a journey, not a destination. Key principles:
 The goal is more maintainable, type-safe code—not functional programming for its own sake.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -12,7 +12,6 @@ id: skill-makepad-platform
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Platform Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -20,10 +19,12 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad cross-platform development. Help users by:
+
 - **Understanding platforms**: Explain supported platforms and backends
 - **Platform-specific code**: Help with conditional compilation and platform APIs
 
 ## When to Use
+
 - You need to understand or target specific platforms and graphics backends in Makepad.
 - The task involves platform compatibility, conditional compilation, or OS-specific behavior across desktop, mobile, or web.
 - You need guidance on backend differences such as Metal, D3D11, OpenGL, WebGL, or platform modules.
@@ -31,6 +32,7 @@ You are an expert at Makepad cross-platform development. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/platform-support.md` - Platform details and OsType
 
 ## IMPORTANT: Documentation Completeness Check
@@ -120,6 +122,7 @@ fn ios_only() { }
 ## Platform-Specific Features
 
 ### Desktop (macOS/Windows/Linux)
+
 - Window management (resize, minimize, maximize)
 - File dialogs
 - System menu
@@ -127,12 +130,14 @@ fn ios_only() { }
 - Multiple monitors
 
 ### Mobile (iOS/Android)
+
 - Touch input
 - Virtual keyboard
 - Screen orientation
 - App lifecycle (foreground/background)
 
 ### Web (WebGL2)
+
 - DOM integration
 - Browser events
 - Local storage
@@ -172,11 +177,13 @@ impl AppMain for App {
 5. Use `#[cfg(target_os = "...")]` for compile-time platform detection
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

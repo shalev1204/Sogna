@@ -8,7 +8,6 @@ id: skill-basecamp-automation
 owner: [[ops-security]]
 ---
 
-
 # Basecamp Automation via Rube MCP
 
 Automate Basecamp operations including project management, to-do list creation, task management, message board posting, people management, and to-do group organization through Composio's Basecamp toolkit.
@@ -35,6 +34,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 **When to use**: User wants to create to-do lists, add tasks, or organize work within a Basecamp project
 
 **Tool sequence**:
+
 1. `BASECAMP_GET_PROJECTS` - List projects to find the target bucket_id [Prerequisite]
 2. `BASECAMP_GET_BUCKETS_TODOSETS` - Get the to-do set within a project [Prerequisite]
 3. `BASECAMP_GET_BUCKETS_TODOSETS_TODOLISTS` - List existing to-do lists to avoid duplicates [Optional]
@@ -45,12 +45,14 @@ Automate Basecamp operations including project management, to-do list creation, 
 8. `BASECAMP_GET_BUCKETS_TODOLISTS_TODOS` - List to-dos within a to-do list [Optional]
 
 **Key parameters for creating to-do lists**:
+
 - `bucket_id`: Integer project/bucket ID (from GET_PROJECTS)
 - `todoset_id`: Integer to-do set ID (from GET_BUCKETS_TODOSETS)
 - `name`: Title of the to-do list (required)
 - `description`: HTML-formatted description (supports Rich text)
 
 **Key parameters for creating to-dos**:
+
 - `bucket_id`: Integer project/bucket ID
 - `todolist_id`: Integer to-do list ID
 - `content`: What the to-do is for (required)
@@ -62,6 +64,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 - `completion_subscriber_ids`: Person IDs notified upon completion
 
 **Pitfalls**:
+
 - A project (bucket) can contain multiple to-do sets; selecting the wrong `todoset_id` creates lists in the wrong section
 - Always check existing to-do lists before creating to avoid near-duplicate names
 - Success payloads include user-facing URLs (`app_url`, `app_todos_url`); prefer returning these over raw IDs
@@ -73,6 +76,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 **When to use**: User wants to post messages to a project message board or update existing messages
 
 **Tool sequence**:
+
 1. `BASECAMP_GET_PROJECTS` - Find the target project and bucket_id [Prerequisite]
 2. `BASECAMP_GET_MESSAGE_BOARD` - Get the message board ID for the project [Prerequisite]
 3. `BASECAMP_CREATE_MESSAGE` - Create a new message on the board [Required]
@@ -81,6 +85,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 6. `BASECAMP_PUT_BUCKETS_MESSAGES` - Update an existing message [Optional]
 
 **Key parameters**:
+
 - `bucket_id`: Integer project/bucket ID
 - `message_board_id`: Integer message board ID (from GET_MESSAGE_BOARD)
 - `subject`: Message title (required)
@@ -90,6 +95,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 - `subscriptions`: Array of person IDs to notify; omit to notify all project members
 
 **Pitfalls**:
+
 - `status="draft"` can produce HTTP 400; use `status="active"` as the reliable option
 - `bucket_id` and `message_board_id` must belong to the same project; mismatches fail or misroute
 - Message content supports HTML tags only; not Markdown
@@ -102,6 +108,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 **When to use**: User wants to list people, manage project access, or add new users
 
 **Tool sequence**:
+
 1. `BASECAMP_GET_PEOPLE` - List all people visible to the current user [Required]
 2. `BASECAMP_GET_PROJECTS` - Find the target project [Prerequisite]
 3. `BASECAMP_LIST_PROJECT_PEOPLE` - List people on a specific project [Required]
@@ -109,6 +116,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 5. `BASECAMP_PUT_PROJECTS_PEOPLE_USERS` - Grant or revoke project access [Required for access changes]
 
 **Key parameters for PUT_PROJECTS_PEOPLE_USERS**:
+
 - `project_id`: Integer project ID
 - `grant`: Array of integer person IDs to add to the project
 - `revoke`: Array of integer person IDs to remove from the project
@@ -116,6 +124,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 - At least one of `grant`, `revoke`, or `create` must be provided
 
 **Pitfalls**:
+
 - Person IDs are integers; always resolve names to IDs via GET_PEOPLE first
 - `project_id` for people management is the same as `bucket_id` for other operations
 - `LIST_PROJECT_PEOPLE` and `GET_PROJECTS_PEOPLE` are near-identical; use either
@@ -126,6 +135,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 **When to use**: User wants to organize to-dos within a list into color-coded groups
 
 **Tool sequence**:
+
 1. `BASECAMP_GET_PROJECTS` - Find the target project [Prerequisite]
 2. `BASECAMP_GET_BUCKETS_TODOLISTS` - Get the to-do list details [Prerequisite]
 3. `BASECAMP_GET_TODOLIST_GROUPS` - List existing groups in a to-do list [Optional]
@@ -134,6 +144,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 6. `BASECAMP_CREATE_TODOLIST_GROUP` - Alternative group creation tool [Alternative]
 
 **Key parameters**:
+
 - `bucket_id`: Integer project/bucket ID
 - `todolist_id`: Integer to-do list ID
 - `name`: Group title (required)
@@ -141,6 +152,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 - `status`: Filter for listing -- `"archived"` or `"trashed"` (omit for active groups)
 
 **Pitfalls**:
+
 - `POST_BUCKETS_TODOLISTS_GROUPS` and `CREATE_TODOLIST_GROUP` are near-identical; use either
 - Color values must be from the fixed palette; arbitrary hex/rgb values are not supported
 - Groups are sub-sections within a to-do list, not standalone entities
@@ -150,15 +162,18 @@ Automate Basecamp operations including project management, to-do list creation, 
 **When to use**: User wants to list projects, get project details, or explore project structure
 
 **Tool sequence**:
+
 1. `BASECAMP_GET_PROJECTS` - List all active projects [Required]
 2. `BASECAMP_GET_PROJECT` - Get comprehensive details for a specific project [Optional]
 3. `BASECAMP_GET_PROJECTS_BY_PROJECT_ID` - Alternative project detail retrieval [Alternative]
 
 **Key parameters**:
+
 - `status`: Filter by `"archived"` or `"trashed"`; omit for active projects
 - `project_id`: Integer project ID for detailed retrieval
 
 **Pitfalls**:
+
 - Projects are sorted by most recently created first
 - The response includes a `dock` array with tools (todoset, message_board, etc.) and their IDs
 - Use the dock tool IDs to find `todoset_id`, `message_board_id`, etc. for downstream operations
@@ -166,7 +181,9 @@ Automate Basecamp operations including project management, to-do list creation, 
 ## Common Patterns
 
 ### ID Resolution
+
 Basecamp uses a hierarchical ID structure. Always resolve top-down:
+
 - **Project (bucket_id)**: `BASECAMP_GET_PROJECTS` -- find by name, capture the `id`
 - **To-do set (todoset_id)**: Found in project dock or via `BASECAMP_GET_BUCKETS_TODOSETS`
 - **Message board (message_board_id)**: Found in project dock or via `BASECAMP_GET_MESSAGE_BOARD`
@@ -175,13 +192,18 @@ Basecamp uses a hierarchical ID structure. Always resolve top-down:
 - Note: `bucket_id` and `project_id` refer to the same entity in different contexts
 
 ### Pagination
+
 Basecamp uses page-based pagination on list endpoints:
+
 - Response headers or body may indicate more pages available
 - `GET_PROJECTS`, `GET_BUCKETS_TODOSETS_TODOLISTS`, and list endpoints return paginated results
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Continue fetching until no more results are returned
 
 ### Content Formatting
+
 - All rich text fields use HTML, not Markdown
 - Wrap content in `<div>` tags; use `<strong>`, `<em>`, `<ul>`, `<ol>`, `<li>`, `<a>` etc.
 - Example: `<div><strong>Important:</strong> Complete by Friday</div>`
@@ -189,25 +211,30 @@ Basecamp uses page-based pagination on list endpoints:
 ## Known Pitfalls
 
 ### ID Formats
+
 - All Basecamp IDs are integers, not strings or UUIDs
 - `bucket_id` = `project_id` (same entity, different parameter names across tools)
 - To-do set IDs, to-do list IDs, and message board IDs are found in the project's `dock` array
 - Person IDs are integers; resolve names via `GET_PEOPLE` before operations
 
 ### Status Field
+
 - `status="draft"` for messages can cause HTTP 400; always use `status="active"`
 - Project/to-do list status filters: `"archived"`, `"trashed"`, or omit for active
 
 ### Content Format
+
 - HTML only, never Markdown
 - Updates replace the entire body, not a partial diff
 - Invalid HTML tags may be silently stripped
 
 ### Rate Limits
+
 - Basecamp API has rate limits; space out rapid sequential requests
 - Large projects with many to-dos should be paginated carefully
 
 ### URL Handling
+
 - Prefer `app_url` from API responses for user-facing links
 - Do not reconstruct Basecamp URLs manually from IDs
 
@@ -238,14 +265,17 @@ Basecamp uses page-based pagination on list endpoints:
 | Manage access | `BASECAMP_PUT_PROJECTS_PEOPLE_USERS` | `project_id`, `grant`, `revoke`, `create` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

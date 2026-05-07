@@ -1,4 +1,4 @@
-import { MixNumber as mixNumber } from "../../utils/mix/number.js";
+import { MixNumber } from "../../utils/mix/number.js";
 import { hasTransform } from "../utils/has-transform.js";
 /**
  * Scales a point based on a factor and an originPoint
@@ -101,7 +101,7 @@ export function translateAxis(axis, distance) {
  * and applyAxisDelta
  */
 export function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = 0.5) {
-    const originPoint = mixNumber(axis.min, axis.max, axisOrigin);
+    const originPoint = MixNumber(axis.min, axis.max, axisOrigin);
     // Apply the axis delta to the final axis
     applyAxisDelta(axis, axisTranslate, axisScale, originPoint, boxScale);
 }

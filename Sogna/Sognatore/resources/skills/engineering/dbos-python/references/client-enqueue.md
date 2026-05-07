@@ -22,6 +22,7 @@ from dbos import DBOSClient
 client = DBOSClient(system_database_url=db_url)
 
 # Missing workflow_name and queue_name!
+
 handle = client.enqueue({}, task_data)
 ```
 
@@ -59,6 +60,7 @@ Limitation: Cannot enqueue workflows that are methods on Python classes.
 Reference: [DBOSClient.enqueue](https://docs.dbos.dev/python/reference/client#enqueue)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

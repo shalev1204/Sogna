@@ -36,6 +36,7 @@ Context: WWDC session introducing the next-generation SwiftUI Instrument in Inst
 - Replacing a dependency on a global favorites array with per-item view models to reduce update fan-out.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

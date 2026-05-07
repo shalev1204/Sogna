@@ -69,13 +69,16 @@ Common variables used across templates:
 ## 1. Vendor Replenishment Order
 
 ### When to Use
+
 - Standard replenishment order based on forecast and inventory position.
 - No urgency beyond normal lead time expectations.
 
 ### Tone Guidance
+
 Transactional and efficient. The vendor receives dozens of these daily. Be clear, reference the PO, specify quantities, delivery date, and delivery location. No need for pleasantries beyond professional courtesy.
 
 ### What NOT to Say
+
 - Do not include forecast data or inventory levels in routine POs — this is proprietary information.
 - Do not request lead time changes or raise performance issues in a PO communication.
 
@@ -113,14 +116,17 @@ Regards,
 ## 2. Vendor Lead Time Escalation
 
 ### When to Use
+
 - Vendor's actual lead times have exceeded the stated/contracted lead time by >20% for 3+ consecutive orders.
 - Lead time variability is causing stockouts or excessive safety stock costs.
 - You need a formal escalation before involving procurement or vendor management.
 
 ### Tone Guidance
+
 Firm and data-driven. You are not complaining — you are presenting evidence and requesting a corrective action plan. Lead with the impact to your business, not the vendor's failure. Offer collaboration: you want to solve this together, but you need a commitment.
 
 ### What NOT to Say
+
 - Do not threaten to switch vendors in this communication (that's a procurement conversation).
 - Do not speculate on the cause of the lead time issue — let the vendor explain.
 - Do not use vague language like "often late" — provide specific PO numbers, dates, and deviations.
@@ -152,6 +158,7 @@ Over the past {{time_period}}, we have observed the following lead time performa
 **Impact to Our Business:**
 
 This lead time increase has required us to:
+
 - Increase safety stock by {{ss_increase_pct}}%, tying up an additional ${{ss_cost_increase}} in working capital
 - Experience {{stockout_count}} stockout events on {{sku_description}} in the past {{time_period}}, with estimated lost sales of ${{lost_sales}}
 - Expedite {{expedite_count}} orders at an additional cost of ${{expedite_cost}}
@@ -174,14 +181,17 @@ Regards,
 ## 3. Internal Stockout Alert
 
 ### When to Use
+
 - Projected stockout on an A or B-item within 7 days based on current inventory position and demand forecast.
 - Actual stockout occurring at 3+ locations.
 - Any stockout where revenue at risk exceeds $10,000/week.
 
 ### Tone Guidance
+
 Urgent, concise, action-oriented. The audience is internal (planning manager, category merchant, supply chain director). Lead with the impact, follow with the facts, close with the recommended action. This is not a post-mortem — it's a call to action.
 
 ### What NOT to Say
+
 - Do not assign blame in the alert (e.g., "because the buyer didn't order enough"). That's for the post-mortem.
 - Do not present multiple options without a recommendation — decision-makers need a clear ask.
 
@@ -198,6 +208,7 @@ Urgent, concise, action-oriented. The audience is internal (planning manager, ca
 **Current Status:** {{current_status}} (e.g., "Out of stock at 8 locations; projected stockout at 22 additional locations by {{stockout_date}}")
 
 **Inventory Position:**
+
 - DC On-Hand: {{dc_on_hand}} units
 - Store On-Hand (aggregate): {{store_on_hand}} units
 - On-Order: {{on_order}} units (ETA: {{on_order_eta}})
@@ -226,14 +237,17 @@ Please reply or call me directly to confirm action.
 ## 4. Markdown Recommendation to Merchandising
 
 ### When to Use
+
 - SKU or category has excess inventory exceeding 12 weeks of supply with no promotional activity planned.
 - Seasonal product with sell-through below 60% at season midpoint.
 - Slow-mover kill decision has been triggered.
 
 ### Tone Guidance
+
 Data-driven and collaborative. You are presenting a financial analysis, not demanding a price change. Merchandising owns pricing decisions — your job is to provide the inventory data and margin impact analysis to inform their decision. Frame recommendations as margin recovery, not "we bought too much."
 
 ### What NOT to Say
+
 - Do not say "we overbought" or "the forecast was wrong" — frame as "sell-through pace requires price action."
 - Do not propose a specific retail price — propose a markdown depth (% off) and let merchandising set the price.
 
@@ -286,13 +300,16 @@ Happy to discuss the analysis in detail.
 ## 5. Promotional Forecast Submission
 
 ### When to Use
+
 - Submitting the demand forecast for a planned promotion to supply chain, merchandising, and vendor partners.
 - Required 6–8 weeks before promotion start date to allow for procurement.
 
 ### Tone Guidance
+
 Structured and transparent. This document is the "source of truth" for promotional inventory planning. Include all assumptions, the baseline, the lift estimate, and the post-promo dip so that all stakeholders can challenge or validate the numbers before POs are placed.
 
 ### What NOT to Say
+
 - Do not present a single point estimate without a confidence range — this gives false precision.
 - Do not omit the post-promo dip — it's as important as the lift.
 
@@ -365,11 +382,13 @@ Structured and transparent. This document is the "source of truth" for promotion
 ## 6. Safety Stock Adjustment Request
 
 ### When to Use
+
 - Demand variability or lead time variability has changed, requiring a safety stock parameter update.
 - Service level targets have been revised (up or down) for a segment or individual SKU.
 - Post a supply disruption or regime change that permanently alters risk parameters.
 
 ### Tone Guidance
+
 Analytical and justified. Every safety stock change is an inventory investment change. Present the before/after calculation, the reason for the change, and the financial impact (incremental holding cost or reduced stockout risk).
 
 ### Template
@@ -421,10 +440,12 @@ Analytical and justified. Every safety stock change is an inventory investment c
 ## 7. New Product Forecast Assumptions
 
 ### When to Use
+
 - Documenting the forecast basis for a new product launch with < 8 weeks of own-history data.
 - Required at the pre-launch planning meeting and updated at the 4-week and 8-week checkpoints.
 
 ### Tone Guidance
+
 Transparent and falsifiable. The purpose of this document is to make every assumption explicit so that the post-mortem can identify where the forecast diverged from reality. Do not hedge with vague language — state the assumptions clearly so they can be validated or disproved.
 
 ### Template
@@ -502,11 +523,13 @@ Transparent and falsifiable. The purpose of this document is to make every assum
 ## 8. Excess Inventory Liquidation Plan
 
 ### When to Use
+
 - SKU has been classified as dead stock (zero sales for 13+ weeks) or critical excess (>26 weeks of supply).
 - Seasonal product with unsold inventory after the markdown selling window.
 - Discontinued product with remaining inventory after final markdown.
 
 ### Tone Guidance
+
 Pragmatic and action-oriented. The liquidation plan is an acknowledgment that margin recovery is limited and the priority has shifted to cash recovery and warehouse space liberation. Present the options dispassionately — the goal is to make the best of a bad situation, not to relitigate the buying decision.
 
 ### Template
@@ -573,6 +596,7 @@ Root cause analysis for this excess is assigned to {{postmortem_owner}} with a d
 {{our_contact_title}} | {{our_contact_email}} | {{our_contact_phone}}
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

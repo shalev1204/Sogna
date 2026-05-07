@@ -8,7 +8,6 @@ id: skill-azure-ai-ml-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Machine Learning SDK v2 for Python
 
 Client library for managing Azure ML resources: workspaces, jobs, models, data, and compute.
@@ -48,6 +47,7 @@ from azure.ai.ml import MLClient
 from azure.identity import DefaultAzureCredential
 
 # Uses config.json in current directory or parent
+
 ml_client = MLClient.from_config(
     credential=DefaultAzureCredential()
 )
@@ -87,6 +87,7 @@ from azure.ai.ml.entities import Data
 from azure.ai.ml.constants import AssetTypes
 
 # Register a file
+
 my_data = Data(
     name="my-dataset",
     version="1",
@@ -274,14 +275,17 @@ print(f"Default: {default_ds.name}")
 7. **Tag resources** for organization and cost tracking
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -9,7 +9,6 @@ id: skill-gh-review-requests
 owner: [[orchestrator]]
 ---
 
-
 # GitHub Review Requests
 
 Fetch unread `review_requested` notifications for open (unmerged) PRs, filtered by a GitHub team.
@@ -17,6 +16,7 @@ Fetch unread `review_requested` notifications for open (unmerged) PRs, filtered 
 **Requires**: GitHub CLI (`gh`) authenticated.
 
 ## When to Use
+
 - You need to find unread GitHub PR review requests for a specific team.
 - You want to check which open PRs currently need your review or a teammate's review.
 - You need a filtered review queue instead of manually browsing GitHub notifications.
@@ -63,6 +63,7 @@ uv run ${CLAUDE_SKILL_ROOT}/scripts/fetch_review_requests.py --org getsentry --t
 ```
 
 `reasons` will contain one or both of:
+
 - `"review requested from: <Team Name>"` — the team is a requested reviewer
 - `"opened by: <login>"` — the PR author is a team member
 
@@ -85,16 +86,19 @@ gh api notifications --paginate
 ```
 
 Then for each `review_requested` notification, check:
+
 - `gh api repos/{repo}/pulls/{number}` — skip if `state == "closed"` or `merged_at` is set
 - `gh api repos/{repo}/pulls/{number}/requested_reviewers` — check `teams[].name`
 - `gh api orgs/{org}/teams/{slug}/members` — check if author is a member
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

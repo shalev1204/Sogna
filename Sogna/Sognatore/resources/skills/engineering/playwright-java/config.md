@@ -146,7 +146,9 @@ version: 1.0.0
 ## `test.properties`
 
 ```properties
+
 # src/test/resources/test.properties
+
 baseUrl=https://your-app.com
 apiBaseUrl=https://api.your-app.com
 browser=chromium
@@ -200,13 +202,17 @@ public final class ConfigReader {
 ## Browser Installation (First-Time Setup)
 
 ```bash
+
 # Install browsers for current OS
+
 mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
 # Install with system dependencies (needed in CI/Docker)
+
 mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
 # Install specific browser only
+
 mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install chromium"
 ```
 
@@ -215,22 +221,29 @@ mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="inst
 ## Running Tests
 
 ```bash
+
 # All tests, headless Chromium
+
 mvn test
 
 # Specific browser
+
 mvn test -Dbrowser=firefox
 
 # Headed mode (debug)
+
 mvn test -Dheadless=false -DslowMo=500
 
 # Single test class
+
 mvn test -Dtest=LoginTest
 
 # Generate Allure report
+
 mvn allure:serve
 
 # Export report to directory
+
 mvn allure:report
 ```
 
@@ -247,6 +260,7 @@ CMD ["mvn", "test", "-Dheadless=true"]
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

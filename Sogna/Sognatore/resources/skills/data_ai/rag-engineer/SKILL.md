@@ -10,7 +10,6 @@ id: skill-rag-engineer
 owner: [[orchestrator]]
 ---
 
-
 # RAG Engineer
 
 Expert in building Retrieval-Augmented Generation systems. Masters embedding models,
@@ -133,6 +132,7 @@ Severity: HIGH
 Situation: Using fixed token/character limits for chunking
 
 Symptoms:
+
 - Retrieved chunks feel incomplete or cut off
 - Answer quality varies wildly
 - High recall but low precision
@@ -145,6 +145,7 @@ poor retrieval quality. Users search for concepts but get fragments.
 Recommended fix:
 
 Use semantic chunking that respects document structure:
+
 - Split on sentence/paragraph boundaries
 - Use embedding similarity to detect topic shifts
 - Include overlap for context continuity
@@ -157,6 +158,7 @@ Severity: MEDIUM
 Situation: Only using vector similarity, ignoring metadata
 
 Symptoms:
+
 - Returns outdated information
 - Mixes content from wrong sources
 - Users can't scope their searches
@@ -169,6 +171,7 @@ user wants recent, wrong categories, or inapplicable content.
 Recommended fix:
 
 Implement hybrid filtering:
+
 - Pre-filter by metadata (date, source, category) before vector search
 - Post-filter results by relevance criteria
 - Include metadata in the retrieval API
@@ -181,6 +184,7 @@ Severity: MEDIUM
 Situation: One embedding model for code, docs, and structured data
 
 Symptoms:
+
 - Code search returns irrelevant results
 - Domain terms not matched properly
 - Similar concepts not clustered
@@ -193,6 +197,7 @@ content, produces poor similarity matches.
 Recommended fix:
 
 Evaluate embeddings per content type:
+
 - Use code-specific embeddings for code (e.g., CodeBERT)
 - Consider domain-specific or fine-tuned embeddings
 - Benchmark retrieval quality before choosing
@@ -205,6 +210,7 @@ Severity: MEDIUM
 Situation: Taking top-K from vector search without reranking
 
 Symptoms:
+
 - Clearly relevant docs not in top results
 - Results order seems arbitrary
 - Adding more results helps quality
@@ -218,6 +224,7 @@ precision for the final results.
 Recommended fix:
 
 Add reranking step:
+
 - Retrieve larger candidate set (e.g., top 20-50)
 - Rerank with cross-encoder (query-document pairs)
 - Return reranked top-K (e.g., top 5)
@@ -230,6 +237,7 @@ Severity: MEDIUM
 Situation: Using all retrieved context regardless of relevance
 
 Symptoms:
+
 - Answers drift with more context
 - LLM ignores key information
 - High token costs
@@ -242,6 +250,7 @@ most relevant information. Models have attention limits.
 Recommended fix:
 
 Use relevance thresholds:
+
 - Set minimum similarity score cutoff
 - Limit context to truly relevant chunks
 - Summarize or compress if needed
@@ -254,6 +263,7 @@ Severity: HIGH
 Situation: Only evaluating end-to-end RAG quality
 
 Symptoms:
+
 - Can't diagnose poor RAG performance
 - Prompt changes don't help
 - Random quality variations
@@ -266,6 +276,7 @@ failed. This makes debugging impossible and leads to wrong fixes
 Recommended fix:
 
 Separate retrieval evaluation:
+
 - Create retrieval test set with relevant docs labeled
 - Measure MRR, NDCG, Recall@K for retrieval
 - Evaluate generation only on correct retrievals
@@ -278,6 +289,7 @@ Severity: MEDIUM
 Situation: Embeddings generated once, never refreshed
 
 Symptoms:
+
 - Returns outdated information
 - References deleted content
 - Inconsistent with source
@@ -290,6 +302,7 @@ system.
 Recommended fix:
 
 Implement embedding refresh:
+
 - Track document versions/hashes
 - Re-embed on document change
 - Handle deleted documents
@@ -302,6 +315,7 @@ Severity: MEDIUM
 Situation: Using pure semantic search for keyword-heavy queries
 
 Symptoms:
+
 - Exact term searches miss results
 - Concept searches too literal
 - Users frustrated with both
@@ -314,6 +328,7 @@ on exact matches; pure keyword search fails on paraphrases.
 Recommended fix:
 
 Implement hybrid search:
+
 - BM25/TF-IDF for keyword matching
 - Vector similarity for semantic matching
 - Reciprocal Rank Fusion to combine
@@ -324,6 +339,7 @@ Implement hybrid search:
 Works well with: `ai-agents-architect`, `prompt-engineer`, `database-architect`, `backend`
 
 ## When to Use
+
 - User mentions or implies: building RAG
 - User mentions or implies: vector search
 - User mentions or implies: embeddings
@@ -339,11 +355,13 @@ Works well with: `ai-agents-architect`, `prompt-engineer`, `database-architect`,
 - User mentions or implies: pgvector
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

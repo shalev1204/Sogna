@@ -15,18 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.3.0] - 2025-11-21
 
 ### Added
+
 - **Modular Architecture** - Refactored codebase for better maintainability
   - New `config.py` - Centralized configuration (paths, selectors, timeouts)
   - New `browser_utils.py` - BrowserFactory and StealthUtils classes
   - Cleaner separation of concerns across all scripts
 
 ### Changed
+
 - **Timeout increased to 120 seconds** - Long queries no longer timeout prematurely
   - `ask_question.py`: 30s → 120s
   - `browser_session.py`: 30s → 120s
   - Resolves Issue #4
 
 ### Fixed
+
 - **Thinking Message Detection** - Fixed incomplete answers showing placeholder text
   - Now waits for `div.thinking-message` element to disappear before reading answer
   - Answers like "Reviewing the content..." or "Looking for answers..." no longer returned prematurely
@@ -43,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - 2025-10-28
 
 ### Added
+
 - Initial public release
 - NotebookLM integration via browser automation
 - Session-based conversations with Gemini 2.5
@@ -51,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Google authentication with persistent sessions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

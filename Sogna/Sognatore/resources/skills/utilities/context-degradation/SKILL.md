@@ -7,13 +7,14 @@ id: skill-context-degradation
 owner: [[orchestrator]]
 ---
 
-
 # Context Degradation Patterns
 
 Language models exhibit predictable degradation patterns as context length increases. Understanding these patterns is essential for diagnosing failures and designing resilient systems. Context degradation is not a binary state but a continuum of performance degradation that manifests in several distinct ways.
 
 ## When to Use
+
 Activate this skill when:
+
 - Agent performance degrades unexpectedly during long conversations
 - Debugging cases where agents produce incorrect or irrelevant outputs
 - Designing systems that must handle large contexts reliably
@@ -164,7 +165,9 @@ Implement these strategies through specific architectural patterns. Use just-in-
 
 **Example 1: Detecting Degradation**
 ```yaml
+
 # Context grows during long conversation
+
 turn_1: 1000 tokens
 turn_5: 8000 tokens
 turn_10: 25000 tokens
@@ -174,21 +177,26 @@ turn_30: 90000 tokens (significant degradation)
 
 **Example 2: Mitigating Lost-in-Middle**
 ```markdown
+
 # Organize context with critical info at edges
 
 [CURRENT TASK]                      # At start
+
 - Goal: Generate quarterly report
 - Deadline: End of week
 
 [DETAILED CONTEXT]                  # Middle (less attention)
+
 - 50 pages of data
 - Multiple analysis sections
 - Supporting evidence
 
 [KEY FINDINGS]                     # At end
+
 - Revenue up 15%
 - Costs down 8%
 - Growth in Region A
+
 ```
 
 ## Guidelines
@@ -213,14 +221,17 @@ This skill builds on context-fundamentals and should be studied after understand
 ## References
 
 Internal reference:
+
 - Degradation Patterns Reference - Detailed technical reference
 
 Related skills in this collection:
+
 - context-fundamentals - Context basics
 - context-optimization - Mitigation techniques
 - evaluation - Detection and measurement
 
 External resources:
+
 - Research on attention mechanisms and context window limitations
 - Studies on the "lost-in-middle" phenomenon
 - Production engineering guides from AI labs
@@ -235,11 +246,13 @@ External resources:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

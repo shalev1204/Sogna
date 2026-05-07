@@ -66,6 +66,7 @@ def child_workflow(data):
 ```
 
 Key constraints:
+
 - Do NOT call `DBOS.start_workflow` from a step
 - Do NOT call `DBOS.recv` from a step
 - Do NOT call `DBOS.set_event` from outside a workflow
@@ -75,6 +76,7 @@ Key constraints:
 Reference: [DBOS Workflows](https://docs.dbos.dev/python/tutorials/workflow-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

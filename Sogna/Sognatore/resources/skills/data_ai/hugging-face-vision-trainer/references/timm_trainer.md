@@ -17,6 +17,7 @@ The `TimmWrapperForImageClassification` class (in `transformers/src/transformers
 from transformers import AutoModelForImageClassification, AutoImageProcessor, Trainer, TrainingArguments
 
 # Load a timm model for image classification
+
 checkpoint = "timm/resnet50.a1_in1k"
 image_processor = AutoImageProcessor.from_pretrained(checkpoint)
 model = AutoModelForImageClassification.from_pretrained(
@@ -52,10 +53,12 @@ from transformers import AutoModelForImageClassification, AutoImageProcessor, Tr
 from datasets import load_dataset
 
 # Load dataset
+
 dataset = load_dataset("food101", split="train[:5000]")
 dataset = dataset.train_test_split(test_size=0.2)
 
 # Load timm model + processor
+
 checkpoint = "timm/resnet50.a1_in1k"
 image_processor = AutoImageProcessor.from_pretrained(checkpoint)
 model = AutoModelForImageClassification.from_pretrained(
@@ -65,6 +68,7 @@ model = AutoModelForImageClassification.from_pretrained(
 )
 
 # Preprocessing
+
 def transform(batch):
     batch["pixel_values"] = [image_processor(img)["pixel_values"][0] for img in batch["image"]]
     batch["labels"] = batch["label"]
@@ -74,6 +78,7 @@ dataset["train"].set_transform(transform)
 dataset["test"].set_transform(transform)
 
 # Train
+
 training_args = TrainingArguments(
     output_dir="./timm-finetuned",
     num_train_epochs=3,
@@ -98,6 +103,7 @@ trainer.train()
 Any timm checkpoint on the Hub (prefixed with `timm/`) works out of the box (ResNet, EfficientNet, ViT, ConvNeXt, etc). The wrapper handles all the translation between timm's interface and what Trainer expects.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

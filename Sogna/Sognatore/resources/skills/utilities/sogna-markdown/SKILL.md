@@ -8,12 +8,12 @@ id: skill-sogna-markdown
 owner: [[orchestrator]]
 ---
 
-
 # Sogna Flavored Markdown Skill
 
 Create and edit valid Sogna Flavored Markdown. Sogna extends CommonMark and GFM with wikilinks, embeds, callouts, properties, comments, and other syntax. This skill covers only Sogna-specific extensions -- standard Markdown (headings, bold, italic, lists, quotes, code blocks, tables) is assumed knowledge.
 
 ## When to Use
+
 - Use when writing or editing Markdown notes intended for Sogna.
 - Use when the task involves wikilinks, embeds, callouts, frontmatter properties, or Sogna-specific syntax.
 - Use when the user wants notes that render correctly inside an Sogna ecosistema.
@@ -91,12 +91,18 @@ See [CALLOUTS.md](references/CALLOUTS.md) for the full list with aliases, nestin
 title: My Note
 date: 2024-01-15
 tags:
+
   - project
   - active
+
 aliases:
+
   - Alternative Name
+
 cssclasses:
+
   - custom-class
+
 ---
 ```
 
@@ -170,8 +176,10 @@ Inline footnote.^[This is inline.]
 title: Project Alpha
 date: 2024-01-15
 tags:
+
   - project
   - active
+
 status: in-progress
 ---
 
@@ -207,11 +215,13 @@ Reviewed in [[Meeting Notes 2024-01-10#Decisions]].
 - [Properties](https://help.sogna.md/properties)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -10,7 +10,6 @@ id: skill-discord-bot-architect
 owner: [[prod-pm]]
 ---
 
-
 # Discord Bot Architect
 
 Specialized skill for building production-ready Discord bots.
@@ -200,7 +199,9 @@ Discord bot with Pycord (Python) and application commands
 **When to use**: Building Discord bots with Python,Prefer async/await patterns,Need good slash command support
 
 ```python
+
 # main.py
+
 import os
 import discord
 from discord.ext import commands
@@ -209,8 +210,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configure intents - only enable what you need
+
 intents = discord.Intents.default()
+
 # intents.message_content = True  # PRIVILEGED - avoid if possible
+
 # intents.members = True          # PRIVILEGED
 
 bot = commands.Bot(
@@ -225,12 +229,14 @@ async def on_ready():
     # await bot.sync_commands()
 
 # Slash command
+
 @bot.slash_command(name="ping", description="Check bot latency")
 async def ping(ctx: discord.ApplicationContext):
     latency = round(bot.latency * 1000)
     await ctx.respond(f"Pong! Latency: {latency}ms")
 
 # Slash command with options
+
 @bot.slash_command(name="greet", description="Greet a user")
 async def greet(
     ctx: discord.ApplicationContext,
@@ -241,6 +247,7 @@ async def greet(
     await ctx.respond(f"{user.mention}, {msg}")
 
 # Load cogs
+
 for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
         bot.load_extension(f"cogs.{filename[:-3]}")
@@ -249,7 +256,9 @@ bot.run(os.environ["DISCORD_TOKEN"])
 ```
 
 ```python
+
 # cogs/general.py
+
 import discord
 from discord.ext import commands
 
@@ -423,7 +432,9 @@ if (interaction.isModalSubmit()) {
 ```
 
 ```python
+
 # Pycord - Buttons and Views
+
 import discord
 
 class ConfirmView(discord.ui.View):
@@ -453,6 +464,7 @@ async def confirm_cmd(ctx: discord.ApplicationContext):
         await ctx.followup.send("Timed out")
 
 # Select Menu
+
 class RoleSelect(discord.ui.Select):
     def __init__(self):
         options = [
@@ -478,6 +490,7 @@ class RoleView(discord.ui.View):
         self.add_item(RoleSelect())
 
 # Modal
+
 class FeedbackModal(discord.ui.Modal):
     def __init__(self):
         super().__init__(title="Submit Feedback")
@@ -564,7 +577,9 @@ collector.on('collect', async i => {
 ```
 
 ```python
+
 # Pycord - Deferred response
+
 @bot.slash_command(name="slow-task")
 async def slow_task(ctx: discord.ApplicationContext):
     # Defer immediately
@@ -625,7 +640,9 @@ await interaction.reply({ embeds: [embed1, embed2, embed3] });
 ```
 
 ```python
+
 # Pycord
+
 embed = discord.Embed(
     title="Bot Status",
     description="Current status and statistics",
@@ -721,8 +738,11 @@ for (const user of users) {
 ```
 
 ```python
+
 # Pycord/discord.py handles rate limits automatically
+
 # For custom handling:
+
 import asyncio
 from collections import deque
 
@@ -754,6 +774,7 @@ class RateLimitQueue:
 queue = RateLimitQueue()
 
 # Usage
+
 for member in guild.members:
     await queue.add(member.send("Welcome!"))
 ```
@@ -825,11 +846,14 @@ async function broadcastMessage(channelId, message) {
 ```
 
 ```python
+
 # Pycord - AutoShardedBot
+
 import discord
 from discord.ext import commands
 
 # Automatically handles sharding
+
 bot = commands.AutoShardedBot(
     command_prefix="!",
     intents=discord.Intents.default(),
@@ -847,6 +871,7 @@ async def on_shard_ready(shard_id):
     print(f"Shard {shard_id} is ready")
 
 # Get guilds per shard
+
 for shard_id, guilds in bot.guilds_by_shard().items():
     print(f"Shard {shard_id}: {len(guilds)} guilds")
 ```
@@ -873,6 +898,7 @@ Slow operations never complete.
 
 Why this breaks:
 Discord requires ALL interactions to be acknowledged within 3 seconds:
+
 - Slash commands
 - Button clicks
 - Select menu selections
@@ -907,7 +933,9 @@ module.exports = {
 ```
 
 ```python
+
 # Pycord
+
 @bot.slash_command()
 async def slow_command(ctx):
     await ctx.defer()  # Acknowledge immediately
@@ -940,11 +968,13 @@ Message content intent: message.content is empty string
 
 Why this breaks:
 Discord has 3 privileged intents that require manual enablement:
+
 1. **GUILD_MEMBERS** - Member join/leave, member lists
 2. **GUILD_PRESENCES** - Online status, activities
 3. **MESSAGE_CONTENT** - Read message text (deprecated for commands)
 
 These must be:
+
 1. Enabled in Discord Developer Portal > Bot > Privileged Gateway Intents
 2. Requested in your bot code
 
@@ -955,11 +985,13 @@ Recommended fix:
 ## Step 1: Enable in Developer Portal
 
 ```
+
 1. Go to https://discord.com/developers/applications
 2. Select your application
 3. Go to Bot section
 4. Scroll to Privileged Gateway Intents
 5. Toggle ON the intents you need
+
 ```
 
 ## Step 2: Request in code
@@ -979,10 +1011,14 @@ const client = new Client({
 ```
 
 ```python
+
 # Pycord
+
 intents = discord.Intents.default()
 intents.members = True       # PRIVILEGED
+
 # intents.presences = True   # PRIVILEGED
+
 # intents.message_content = True  # PRIVILEGED - avoid!
 
 bot = commands.Bot(intents=intents)
@@ -1006,10 +1042,12 @@ Commands appear for some guilds but not others.
 
 Why this breaks:
 Command registration is rate limited:
+
 - Global commands: 200 creates/day, updates take up to 1 hour to propagate
 - Guild commands: 200 creates/day per guild, instant update
 
 Common mistakes:
+
 - Registering commands on every bot startup
 - Registering in every guild separately
 - Making changes in a loop without delays
@@ -1051,7 +1089,9 @@ deploy();
 ```
 
 ```python
+
 # Pycord - Don't sync on every startup
+
 @bot.event
 async def on_ready():
     # DON'T DO THIS:
@@ -1060,6 +1100,7 @@ async def on_ready():
     print(f"Ready! Commands should already be registered.")
 
 # Instead, sync manually or use a flag
+
 if __name__ == "__main__":
     if "--sync" in sys.argv:
         # Only sync when explicitly requested
@@ -1087,6 +1128,7 @@ Bot sends spam or malicious content.
 
 Why this breaks:
 Your bot token provides FULL control over your bot. Attackers can:
+
 - Send messages as your bot
 - Join servers, create invites
 - Access all data your bot can access
@@ -1094,6 +1136,7 @@ Your bot token provides FULL control over your bot. Attackers can:
 
 Discord actively scans GitHub for exposed tokens and invalidates them.
 Common exposure points:
+
 - Committed to Git
 - Shared in Discord itself
 - In client-side code
@@ -1115,7 +1158,9 @@ client.login(process.env.DISCORD_TOKEN);
 ## Use .gitignore
 
 ```
+
 # .gitignore
+
 .env
 .env.local
 config.json
@@ -1132,7 +1177,9 @@ config.json
 ## Use environment variables properly
 
 ```bash
+
 # .env (never commit)
+
 DISCORD_TOKEN=your_token_here
 CLIENT_ID=your_client_id
 ```
@@ -1156,6 +1203,7 @@ Commands worked in development server but not others.
 
 Why this breaks:
 Discord has two important OAuth scopes:
+
 - `bot` - Traditional bot permissions (messages, reactions, etc.)
 - `applications.commands` - Slash command permissions
 
@@ -1258,6 +1306,7 @@ Reconnection messages in logs.
 
 Why this breaks:
 Discord gateway requires regular heartbeats. Issues:
+
 - Blocking operations prevent heartbeat
 - Network instability
 - Memory pressure causing GC pauses
@@ -1316,6 +1365,7 @@ Works sometimes but not others.
 Why this breaks:
 Modals have a special requirement: showing a modal MUST be the first
 response to an interaction. You cannot:
+
 - defer() then showModal()
 - reply() then showModal()
 - Think for more than 3 seconds then showModal()
@@ -1456,14 +1506,17 @@ Message: Bulk operation without rate limit handling.
 - user needs payment integration -> stripe-specialist (Premium bot features, subscription management)
 
 ## When to Use
+
 Use this skill when the request clearly matches the capabilities and patterns described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

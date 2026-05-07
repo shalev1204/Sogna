@@ -11,11 +11,11 @@ The user maintains "Bases" in `Bases/*.base` which define the schema and propert
 
 ## Workflow
 
-1.  **Identify the Category:** Determine the type of content the user wants to clip (e.g., a Recipe, a News Article, a YouTube video).
-2.  **Find the Base:** Search `Bases/` for a matching `.base` file.
-    *   Example: For a recipe, look for `Bases/Recipes.base`.
-    *   Example: For a generic article, look for `Bases/Clippings.base`.
-3.  **Read the Base:** Read the content of the `.base` file to understand the required properties.
+1. **Identify the Category:** Determine the type of content the user wants to clip (e.g., a Recipe, a News Article, a YouTube video).
+2. **Find the Base:** Search `Bases/` for a matching `.base` file.
+    * Example: For a recipe, look for `Bases/Recipes.base`.
+    * Example: For a generic article, look for `Bases/Clippings.base`.
+3. **Read the Base:** Read the content of the `.base` file to understand the required properties.
 
 ## Interpreting .base Files
 
@@ -33,8 +33,8 @@ properties:
     displayName: ingredients
 ```
 
-*   `note.X` corresponds to a property name `X` in the frontmatter.
-*   `displayName` helps understand the intent, but the property key (e.g., `author`, `type`, `ingredients`) is what matters for the template.
+* `note.X` corresponds to a property name `X` in the frontmatter.
+* `displayName` helps understand the intent, but the property key (e.g., `author`, `type`, `ingredients`) is what matters for the template.
 
 ## Mapping to Clipper Properties
 
@@ -51,6 +51,7 @@ When creating the JSON for the Web Clipper, map the Base properties to the `prop
 **Crucial Step:** Ask the user which properties should be automatically filled, which should be hardcoded (e.g., `type: Recipe`), and which should be left empty for manual entry.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

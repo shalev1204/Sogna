@@ -10,7 +10,6 @@ id: skill-trigger-dev
 owner: [[orchestrator]]
 ---
 
-
 # Trigger.dev Integration
 
 Trigger.dev expert for background jobs, AI workflows, and reliable async
@@ -313,6 +312,7 @@ Situation: Long-running AI task or batch process suddenly stops. No error in log
 Task shows as failed in dashboard but no stack trace. Data partially processed.
 
 Symptoms:
+
 - Task fails with no error message
 - Partial data processing
 - Works locally, fails in production
@@ -326,6 +326,7 @@ where it stopped. This is especially common with AI tasks that can take minutes.
 Recommended fix:
 
 # Configure explicit timeouts:
+
 ```typescript
 export const processDocument = task({
   id: 'process-document',
@@ -352,6 +353,7 @@ export const processDocument = task({
 ```
 
 # For very long tasks, break into subtasks:
+
 - Use triggerAndWait for sequential steps
 - Each subtask has its own timeout
 - Progress is visible in dashboard
@@ -364,6 +366,7 @@ Situation: Passing Date objects, class instances, or circular references in payl
 Task queued but never runs. Or runs with undefined/null values.
 
 Symptoms:
+
 - Payload values are undefined in task
 - Date objects become strings
 - Class methods not available
@@ -377,6 +380,7 @@ data than you sent.
 Recommended fix:
 
 # Always use plain objects:
+
 ```typescript
 // WRONG - Date becomes string
 await myTask.trigger({ createdAt: new Date() });
@@ -397,6 +401,7 @@ await myTask.trigger(obj);  // Throws!
 ```
 
 # In task, reconstitute as needed:
+
 ```typescript
 run: async (payload: { createdAt: string }) => {
   const date = new Date(payload.createdAt);
@@ -412,6 +417,7 @@ Situation: Task works locally but fails in production. Env var that exists in Ve
 is undefined in Trigger.dev. API calls fail, database connections fail.
 
 Symptoms:
+
 - "Environment variable not found"
 - API calls return 401 in production tasks
 - Works in dev, fails in production
@@ -425,22 +431,28 @@ don't automatically sync.
 Recommended fix:
 
 # Sync env vars to Trigger.dev:
+
 1. Go to Trigger.dev dashboard
 2. Project Settings > Environment Variables
 3. Add ALL required env vars
 
 # Or use CLI:
+
 ```bash
+
 # Create .env.trigger file
+
 DATABASE_URL=postgres://...
 OPENAI_API_KEY=sk-...
 STRIPE_SECRET_KEY=sk_live_...
 
 # Push to Trigger.dev
+
 npx trigger.dev@latest env push
 ```
 
 # Common missing vars:
+
 - DATABASE_URL
 - OPENAI_API_KEY / ANTHROPIC_API_KEY
 - STRIPE_SECRET_KEY
@@ -448,6 +460,7 @@ npx trigger.dev@latest env push
 - Internal service URLs
 
 # Test in staging:
+
 Trigger.dev has separate envs - configure staging too
 
 ### SDK version mismatch between CLI and package
@@ -458,6 +471,7 @@ Situation: Updated @trigger.dev/sdk but forgot to update CLI. Or vice versa.
 Tasks fail to register. Weird type errors. Dev server crashes.
 
 Symptoms:
+
 - Tasks not appearing in dashboard
 - Type errors in trigger.config.ts
 - "Failed to register task"
@@ -471,26 +485,34 @@ must match the SDK.
 Recommended fix:
 
 # Always update together:
+
 ```bash
+
 # Update both SDK and CLI
+
 npm install @trigger.dev/sdk@latest
 npx trigger.dev@latest dev
 
 # Or pin to same version
+
 npm install @trigger.dev/sdk@3.3.0
 npx trigger.dev@3.3.0 dev
 ```
 
 # Check versions:
+
 ```bash
 npx trigger.dev@latest --version
 npm list @trigger.dev/sdk
 ```
 
 # In CI/CD:
+
 ```yaml
+
 - run: npm install @trigger.dev/sdk@${{ env.TRIGGER_VERSION }}
 - run: npx trigger.dev@${{ env.TRIGGER_VERSION }} deploy
+
 ```
 
 ### Task retries cause duplicate side effects
@@ -501,6 +523,7 @@ Situation: Task sends email, then fails on next step. Retry sends email again.
 Customer gets 3 identical emails. Or 3 Stripe charges. Or 3 Slack messages.
 
 Symptoms:
+
 - Duplicate emails on retry
 - Multiple charges for same order
 - Duplicate webhook deliveries
@@ -514,6 +537,7 @@ you create duplicates.
 Recommended fix:
 
 # Use idempotency keys:
+
 ```typescript
 import { task, idempotencyKeys } from '@trigger.dev/sdk/v3';
 
@@ -535,6 +559,7 @@ export const sendOrderEmail = task({
 ```
 
 # Alternative: Track in database
+
 ```typescript
 const existing = await db.emailLogs.findUnique({
   where: { orderId_type: { orderId, type: 'order_confirmation' } }
@@ -557,6 +582,7 @@ Situation: Burst of 1000 tasks triggered. All hit OpenAI API simultaneously.
 Rate limited. All fail. Retry. Rate limited again. Vicious cycle.
 
 Symptoms:
+
 - Rate limit errors (429)
 - Database connection pool exhausted
 - API returns "too many requests"
@@ -570,6 +596,7 @@ concurrency control, you overwhelm them.
 Recommended fix:
 
 # Set queue concurrency limits:
+
 ```typescript
 export const callOpenAI = task({
   id: 'call-openai',
@@ -584,6 +611,7 @@ export const callOpenAI = task({
 ```
 
 # For rate-limited APIs:
+
 ```typescript
 export const callRateLimitedAPI = task({
   id: 'call-api',
@@ -604,6 +632,7 @@ export const callRateLimitedAPI = task({
 ```
 
 # Start conservative:
+
 - 5-10 for external APIs
 - 20-50 for databases
 - Increase based on monitoring
@@ -616,6 +645,7 @@ Situation: Running npx trigger.dev dev but CLI can't find config.
 Or config exists but in wrong location (monorepo issue).
 
 Symptoms:
+
 - "Could not find trigger.config.ts"
 - Tasks not discovered
 - Empty task list in dashboard
@@ -629,6 +659,7 @@ Wrong location = tasks not discovered.
 Recommended fix:
 
 # Config must be at package root:
+
 ```
 my-app/
 ├── trigger.config.ts  <- Here
@@ -639,6 +670,7 @@ my-app/
 ```
 
 # In monorepos:
+
 ```
 monorepo/
 ├── apps/
@@ -648,10 +680,12 @@ monorepo/
 │       └── src/trigger/
 
 # Run from package directory
+
 cd apps/web && npx trigger.dev dev
 ```
 
 # Specify config location:
+
 ```bash
 npx trigger.dev dev --config ./apps/web/trigger.config.ts
 ```
@@ -664,6 +698,7 @@ Situation: Processing thousands of items with wait.for between each.
 Task memory grows. Eventually killed for memory.
 
 Symptoms:
+
 - Task killed for memory
 - Slow task execution
 - State blob too large error
@@ -677,6 +712,7 @@ hits memory limits.
 Recommended fix:
 
 # Batch instead of individual waits:
+
 ```typescript
 // WRONG - Wait per item
 for (const item of items) {
@@ -693,6 +729,7 @@ for (const chunk of chunks) {
 ```
 
 # For very large datasets, use subtasks:
+
 ```typescript
 export const processAll = task({
   id: 'process-all',
@@ -717,6 +754,7 @@ Situation: Using OpenAI SDK directly. API call fails. No automatic retry.
 Rate limits not handled. Have to implement all resilience manually.
 
 Symptoms:
+
 - Manual retry logic in tasks
 - Rate limit errors not handled
 - No automatic logging of API calls
@@ -730,6 +768,7 @@ features and have to implement them yourself.
 Recommended fix:
 
 # Use integrations when available:
+
 ```typescript
 // WRONG - Raw SDK
 import OpenAI from 'openai';
@@ -757,6 +796,7 @@ export const generateContent = task({
 ```
 
 # Available integrations:
+
 - @trigger.dev/openai
 - @trigger.dev/anthropic
 - @trigger.dev/resend
@@ -771,6 +811,7 @@ Situation: Called task.trigger() but nothing happens. No errors either.
 Task just disappears into void. Dev server wasn't running.
 
 Symptoms:
+
 - Triggers don't run
 - No task in dashboard
 - No errors, just silence
@@ -784,20 +825,26 @@ configuration. Production works differently.
 Recommended fix:
 
 # Always run dev server during development:
+
 ```bash
+
 # Terminal 1: Your app
+
 npm run dev
 
 # Terminal 2: Trigger.dev dev server
+
 npx trigger.dev dev
 ```
 
 # Check dev server is connected:
+
 - Should show "Connected to Trigger.dev"
 - Tasks should appear in console
 - Dashboard shows task registrations
 
 # In package.json:
+
 ```json
 {
   "scripts": {
@@ -907,10 +954,12 @@ Skills: trigger-dev, llm-architect, nextjs-app-router, supabase-backend
 Workflow:
 
 ```
+
 1. User triggers via UI (nextjs-app-router)
 2. Task queued (trigger-dev)
 3. AI processing (llm-architect)
 4. Results stored (supabase-backend)
+
 ```
 
 ### Webhook Processing Pipeline
@@ -920,10 +969,12 @@ Skills: trigger-dev, stripe-integration, email-systems, supabase-backend
 Workflow:
 
 ```
+
 1. Webhook received (stripe-integration)
 2. Task triggered (trigger-dev)
 3. Database updated (supabase-backend)
 4. Notification sent (email-systems)
+
 ```
 
 ### Batch Data Processing
@@ -933,9 +984,11 @@ Skills: trigger-dev, supabase-backend, backend
 Workflow:
 
 ```
+
 1. Batch job triggered (backend)
 2. Data chunked and processed (trigger-dev)
 3. Results aggregated (supabase-backend)
+
 ```
 
 ### Scheduled Reports
@@ -945,9 +998,11 @@ Skills: trigger-dev, supabase-backend, email-systems
 Workflow:
 
 ```
+
 1. Cron triggers task (trigger-dev)
 2. Data aggregated (supabase-backend)
 3. Report generated and sent (email-systems)
+
 ```
 
 ## Related Skills
@@ -955,6 +1010,7 @@ Workflow:
 Works well with: `nextjs-app-router`, `vercel-deployment`, `ai-agents-architect`, `llm-architect`, `email-systems`, `stripe-integration`
 
 ## When to Use
+
 - User mentions or implies: trigger.dev
 - User mentions or implies: trigger dev
 - User mentions or implies: background task
@@ -964,11 +1020,13 @@ Works well with: `nextjs-app-router`, `vercel-deployment`, `ai-agents-architect`
 - User mentions or implies: scheduled task
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

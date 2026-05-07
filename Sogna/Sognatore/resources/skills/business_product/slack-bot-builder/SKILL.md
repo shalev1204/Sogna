@@ -11,7 +11,6 @@ id: skill-slack-bot-builder
 owner: [[prod-pm]]
 ---
 
-
 # Slack Bot Builder
 
 Build Slack apps using the Bolt framework across Python, JavaScript, and Java.
@@ -28,6 +27,7 @@ It handles authentication, event routing, request verification, and
 HTTP request processing so you can focus on app logic.
 
 Key benefits:
+
 - Event handling in a few lines of code
 - Security checks and payload validation built-in
 - Organized, consistent patterns
@@ -38,17 +38,20 @@ Available in: Python, JavaScript (Node.js), Java
 **When to use**: Starting any new Slack app,Migrating from legacy Slack APIs,Building production Slack integrations
 
 # Python Bolt App
+
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 import os
 
 # Initialize with tokens from environment
+
 app = App(
     token=os.environ["SLACK_BOT_TOKEN"],
     signing_secret=os.environ["SLACK_SIGNING_SECRET"]
 )
 
 # Handle messages containing "hello"
+
 @app.message("hello")
 def handle_hello(message, say):
     """Respond to messages containing 'hello'."""
@@ -56,6 +59,7 @@ def handle_hello(message, say):
     say(f"Hey there <@{user}>!")
 
 # Handle slash command
+
 @app.command("/ticket")
 def handle_ticket_command(ack, body, client):
     """Handle /ticket slash command."""
@@ -109,6 +113,7 @@ def handle_ticket_command(ack, body, client):
     )
 
 # Handle modal submission
+
 @app.view("ticket_modal")
 def handle_ticket_submission(ack, body, client, view):
     """Handle ticket modal submission."""
@@ -131,6 +136,7 @@ def handle_ticket_submission(ack, body, client, view):
     )
 
 # Handle button clicks
+
 @app.action("approve_button")
 def handle_approval(ack, body, client):
     """Handle approval button click."""
@@ -150,6 +156,7 @@ def handle_approval(ack, body, client):
     )
 
 # Listen for app_home_opened events
+
 @app.event("app_home_opened")
 def update_home_tab(client, event):
     """Update the Home tab when user opens it."""
@@ -180,19 +187,29 @@ def update_home_tab(client, event):
     )
 
 # Socket Mode for development (no public URL needed)
+
 if __name__ == "__main__":
     handler = SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"])
     handler.start()
 
 # For production, use HTTP mode with a web server
+
 # from flask import Flask, request
+
 # from slack_bolt.adapter.flask import SlackRequestHandler
+
 #
+
 # flask_app = Flask(__name__)
+
 # handler = SlackRequestHandler(app)
+
 #
+
 # @flask_app.route("/slack/events", methods=["POST"])
+
 # def slack_events():
+
 #     return handler.handle(request)
 
 ### Anti_patterns
@@ -209,6 +226,7 @@ Compose messages using blocks (sections, actions, inputs) and elements
 (buttons, menus, text inputs).
 
 Limits:
+
 - Up to 50 blocks per message
 - Up to 100 blocks in modals/Home tabs
 - Block text limited to 3000 characters
@@ -329,6 +347,7 @@ def send_incident_notification(channel: str, incident: dict):
     )
 
 # Handle button actions
+
 @app.action("acknowledge_incident")
 def handle_acknowledge(ack, body, client):
     """Handle incident acknowledgment."""
@@ -360,6 +379,7 @@ def handle_acknowledge(ack, body, client):
     )
 
 # Interactive select menus
+
 def build_user_selector_blocks():
     """Build blocks with user selector."""
     return [
@@ -375,6 +395,7 @@ def build_user_selector_blocks():
     ]
 
 # Overflow menu for more options
+
 def build_task_blocks(task: dict):
     """Build task blocks with overflow menu."""
     return [
@@ -416,6 +437,7 @@ Bolt handles most of the OAuth flow, but you need to configure it
 and store tokens securely.
 
 Key OAuth concepts:
+
 - Scopes define permissions (request minimum needed)
 - Tokens are workspace-specific
 - Installation data must be stored persistently
@@ -433,6 +455,7 @@ from slack_sdk.oauth.state_store import FileOAuthStateStore
 import os
 
 # For production, use database-backed stores
+
 # For example: PostgreSQL, MongoDB, Redis
 
 class DatabaseInstallationStore:
@@ -465,6 +488,7 @@ class DatabaseInstallationStore:
         return None
 
 # Initialize OAuth-enabled app
+
 app = App(
     signing_secret=os.environ["SLACK_SIGNING_SECRET"],
     oauth_settings=OAuthSettings(
@@ -484,10 +508,13 @@ app = App(
 )
 
 # OAuth routes are handled automatically by Bolt
+
 # /slack/install - Initiates OAuth flow
+
 # /slack/oauth_redirect - Handles callback
 
 # Flask integration
+
 from flask import Flask, request
 from slack_bolt.adapter.flask import SlackRequestHandler
 
@@ -507,6 +534,7 @@ def slack_events():
     return handler.handle(request)
 
 # Handle installation success/failure
+
 @app.oauth_success
 def handle_oauth_success(args):
     """Called when OAuth completes successfully."""
@@ -528,6 +556,7 @@ def handle_oauth_failure(args):
     return f"Installation failed: {error}"
 
 # Scope management - request additional scopes when needed
+
 def request_additional_scopes(team_id: str, new_scopes: list):
     """
     Generate URL for user to add scopes.
@@ -556,6 +585,7 @@ of public HTTP endpoints. Perfect for development and apps behind
 firewalls.
 
 Benefits:
+
 - No public URL needed
 - Works behind corporate firewalls
 - Simpler local development
@@ -570,7 +600,9 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 import os
 
 # Socket Mode requires an app-level token (xapp-...)
+
 # Create in App Settings > Basic Information > App-Level Tokens
+
 # Needs 'connections:write' scope
 
 app = App(token=os.environ["SLACK_BOT_TOKEN"])
@@ -599,6 +631,7 @@ if __name__ == "__main__":
     handler.start()
 
 # For async apps
+
 from slack_bolt.async_app import AsyncApp
 from slack_bolt.adapter.socket_mode.async_handler import AsyncSocketModeHandler
 import asyncio
@@ -629,6 +662,7 @@ Extend Slack's Workflow Builder with custom steps powered by your app.
 Users can include your custom steps in their no-code workflows.
 
 Workflow steps can:
+
 - Collect input from users
 - Execute custom logic
 - Output data for subsequent steps
@@ -645,6 +679,7 @@ app = App(
 )
 
 # Define the workflow step
+
 def edit(ack, step, configure):
     """Called when user adds/edits the step in Workflow Builder."""
     ack()
@@ -749,6 +784,7 @@ def execute(step, complete, fail):
         fail(error={"message": str(e)})
 
 # Register the workflow step
+
 create_ticket_step = WorkflowStep(
     callback_id="create_ticket_step",
     edit=edit,
@@ -780,6 +816,7 @@ Works in development but fails in production.
 
 Why this breaks:
 Slack requires acknowledgment within 3 seconds for ALL interactive requests:
+
 - Slash commands
 - Button/select menu clicks
 - Modal submissions
@@ -826,7 +863,9 @@ def handle_modal(ack, body, client, view):
 ## For Bolt framework - use lazy listeners
 
 ```python
+
 # Bolt handles ack() automatically with lazy listeners
+
 @app.command("/slow-task")
 def handle_slow_task(ack, command, respond):
     ack()  # Still call ack() first!
@@ -850,6 +889,7 @@ Attackers could trick users into installing malicious configurations.
 
 Why this breaks:
 The OAuth state parameter prevents CSRF attacks. Flow:
+
 1. You generate random state, store it, send to Slack
 2. User authorizes in Slack
 3. Slack redirects back with code + state
@@ -872,6 +912,7 @@ app = Flask(__name__)
 app.secret_key = os.environ["SESSION_SECRET"]
 
 # Use Slack SDK's state store (Redis recommended for production)
+
 state_store = FileOAuthStateStore(
     expiration_seconds=300,  # 5 minutes
     base_dir="./oauth_states"
@@ -923,11 +964,13 @@ channels. Token found in logs, git history, or client-side code.
 
 Why this breaks:
 Slack tokens provide FULL access to whatever scopes they have:
+
 - Bot tokens (xoxb-*): Access workspaces where installed
 - User tokens (xoxp-*): Access as that specific user
 - App-level tokens (xapp-*): Socket Mode connections
 
 Common exposure points:
+
 - Hardcoded in source code
 - Logged in error messages
 - Sent to frontend/client
@@ -938,22 +981,29 @@ Recommended fix:
 ## Never hardcode or log tokens
 
 ```python
+
 # BAD - never do this
+
 client = WebClient(token="xoxb-12345-...")
 
 # GOOD - environment variables
+
 client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
 
 # BAD - logging tokens
+
 logger.error(f"API call failed with token {token}")
 
 # GOOD - never log tokens
+
 logger.error(f"API call failed for team {team_id}")
 
 # BAD - sending token to frontend
+
 return {"token": bot_token}
 
 # GOOD - only send what frontend needs
+
 return {"channels": channel_list}
 ```
 
@@ -985,10 +1035,12 @@ class TokenStore:
 ## Rotate tokens if exposed
 
 ```
+
 1. Slack API > Your App > OAuth & Permissions
 2. Click "Rotate" for the exposed token
 3. Update all deployments immediately
 4. Review Slack audit logs for unauthorized access
+
 ```
 
 ### Requesting Unnecessary OAuth Scopes
@@ -1005,12 +1057,14 @@ App rejected from Slack App Directory.
 Why this breaks:
 Each OAuth scope grants specific permissions. Requesting more than
 you need:
+
 - Makes install consent screen scary
 - Increases attack surface if token leaked
 - May violate enterprise security policies
 - Can get your app rejected from App Directory
 
 Common over-requests:
+
 - `admin` when you just need `chat:write`
 - `channels:read` when you only message one channel
 - `users:read.email` when you don't need emails
@@ -1020,24 +1074,31 @@ Recommended fix:
 ## Request minimum required scopes
 
 ```python
+
 # For a simple notification bot
+
 MINIMAL_SCOPES = [
     "chat:write",        # Post messages
     "channels:join",     # Join public channels (if needed)
 ]
 
 # NOT NEEDED for basic notification:
+
 # - channels:read (unless you list channels)
+
 # - users:read (unless you look up users)
+
 # - channels:history (unless you read messages)
 
 # For a slash command bot
+
 SLASH_COMMAND_SCOPES = [
     "commands",          # Register slash commands
     "chat:write",        # Respond to commands
 ]
 
 # For a bot that responds to mentions
+
 MENTION_BOT_SCOPES = [
     "app_mentions:read", # Receive @mentions
     "chat:write",        # Reply to mentions
@@ -1060,10 +1121,13 @@ MENTION_BOT_SCOPES = [
 ## Progressive scope requests
 
 ```python
+
 # Start with minimal scopes
+
 INITIAL_SCOPES = ["chat:write", "commands"]
 
 # Request additional scopes only when needed
+
 @app.command("/enable-reactions")
 def enable_reactions(ack, client, command):
     ack()
@@ -1088,6 +1152,7 @@ Modal won't open. Message truncated unexpectedly.
 
 Why this breaks:
 Block Kit has strict limits that aren't always obvious:
+
 - 50 blocks per message/modal
 - 3000 characters per text block
 - 10 elements per actions block
@@ -1102,7 +1167,9 @@ Recommended fix:
 ## Know and respect the limits
 
 ```python
+
 # Constants for Block Kit limits
+
 BLOCK_KIT_LIMITS = {
     "blocks_per_message": 50,
     "blocks_per_modal": 50,
@@ -1132,6 +1199,7 @@ def validate_blocks(blocks: list) -> tuple[bool, str]:
     return True, "OK"
 
 # Paginate long content
+
 def paginate_blocks(blocks: list, page: int = 0, per_page: int = 45):
     """Paginate blocks with navigation."""
     start = page * per_page
@@ -1166,6 +1234,7 @@ Missed events. Connection drops. Can't scale horizontally.
 
 Why this breaks:
 Socket Mode is designed for development:
+
 - Single WebSocket connection per app
 - Can't scale to multiple instances
 - Connection can drop (needs reconnect logic)
@@ -1179,7 +1248,9 @@ Recommended fix:
 ## Socket Mode: Only for development
 
 ```python
+
 # Development with Socket Mode
+
 if os.environ.get("ENVIRONMENT") == "development":
     from slack_bolt.adapter.socket_mode import SocketModeHandler
     handler = SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"])
@@ -1189,7 +1260,9 @@ if os.environ.get("ENVIRONMENT") == "development":
 ## Production: Use HTTP endpoints
 
 ```python
+
 # Production with HTTP (Flask example)
+
 from slack_bolt.adapter.flask import SlackRequestHandler
 from flask import Flask, request
 
@@ -1257,11 +1330,14 @@ Recommended fix:
 from slack_bolt import App
 
 # Bolt verifies signatures automatically when you provide signing_secret
+
 app = App(
     token=os.environ["SLACK_BOT_TOKEN"],
     signing_secret=os.environ["SLACK_SIGNING_SECRET"]
 )
+
 # All requests to your handlers are verified
+
 ```
 
 ## Manual verification (if not using Bolt)
@@ -1395,6 +1471,7 @@ Message: Requesting users:read.email but may not use email. Verify necessity.
 - user needs high availability -> devops (Scale webhooks, monitoring, alerting)
 
 ## When to Use
+
 - User mentions or implies: slack bot
 - User mentions or implies: slack app
 - User mentions or implies: bolt framework
@@ -1406,11 +1483,13 @@ Message: Requesting users:read.email but may not use email. Verify necessity.
 - User mentions or implies: slack oauth
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

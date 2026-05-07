@@ -1,6 +1,6 @@
 import { warning } from "sognaflow-utils";
 import { isGenerator } from "../generators/utils/is-generator.js";
-import { IsAnimatable as isAnimatable } from "./is-animatable.js";
+import { isAnimatable } from "./is-animatable.js";
 function hasKeyframesChanged(keyframes) {
     const current = keyframes[0];
     if (keyframes.length === 1)
@@ -10,7 +10,7 @@ function hasKeyframesChanged(keyframes) {
             return true;
     }
 }
-export function CanAnimate(keyframes, name, type, velocity) {
+export function canAnimate(keyframes, name, type, velocity) {
     /**
      * Check if we're able to animate between the start and end keyframes,
      * and throw a warning if we're attempting to animate between one that's
@@ -30,7 +30,7 @@ export function CanAnimate(keyframes, name, type, velocity) {
     const targetKeyframe = keyframes[keyframes.length - 1];
     const isOriginAnimatable = isAnimatable(originKeyframe, name);
     const isTargetAnimatable = isAnimatable(targetKeyframe, name);
-    warning(isOriginAnimatable === isTargetAnimatable, `You are trying to animate ${name} from "${originkeyframe}" to "${targetKeyframe}". "${isOriginAnimatable ? targetKeyframe : originKeyframe}" is not an animatable value.`, "value-not-animatable");
+    warning(isOriginAnimatable === isTargetAnimatable, `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${isOriginAnimatable ? targetKeyframe : originKeyframe}" is not an animatable value.`, "value-not-animatable");
     // Always skip if any of these are true
     if (!isOriginAnimatable || !isTargetAnimatable) {
         return false;

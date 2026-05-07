@@ -278,6 +278,7 @@ Some of these language changes are opt-in because they require changes in your p
  Swift 6.2 includes migration tooling to help you make the necessary code changes automatically. You can learn more about migration tooling at swift.org/migration.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

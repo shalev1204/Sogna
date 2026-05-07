@@ -8,7 +8,6 @@ id: skill-deployment-pipeline-design
 owner: [[prod-design]], [[ops-security]]
 ---
 
-
 # Deployment Pipeline Design
 
 Architecture patterns for multi-stage CI/CD pipelines with approval gates and deployment strategies.
@@ -64,7 +63,9 @@ Design robust, secure deployment pipelines that balance speed with safety throug
 ### Pattern 1: Manual Approval
 
 ```yaml
+
 # GitHub Actions
+
 production-deploy:
   needs: staging-deploy
   environment:
@@ -72,7 +73,9 @@ production-deploy:
     url: https://app.example.com
   runs-on: ubuntu-latest
   steps:
+
     - name: Deploy to production
+
       run: |
         # Deployment commands
 ```
@@ -80,28 +83,40 @@ production-deploy:
 ### Pattern 2: Time-Based Approval
 
 ```yaml
+
 # GitLab CI
+
 deploy:production:
   stage: deploy
   script:
+
     - deploy.sh production
+
   environment:
     name: production
   when: delayed
   start_in: 30 minutes
   only:
+
     - main
+
 ```
 
 ### Pattern 3: Multi-Approver
 
 ```yaml
+
 # Azure Pipelines
+
 stages:
+
 - stage: Production
+
   dependsOn: Staging
   jobs:
+
   - deployment: Deploy
+
     environment:
       name: production
       resourceType: Kubernetes
@@ -109,7 +124,9 @@ stages:
       runOnce:
         preDeploy:
           steps:
+
           - task: ManualValidation@0
+
             inputs:
               notifyUsers: 'team-leads@example.com'
               instructions: 'Review staging metrics before approving'
@@ -136,6 +153,7 @@ spec:
 ```
 
 **Characteristics:**
+
 - Gradual rollout
 - Zero downtime
 - Easy rollback
@@ -144,20 +162,27 @@ spec:
 ### 2. Blue-Green Deployment
 
 ```yaml
+
 # Blue (current)
+
 kubectl apply -f blue-deployment.yaml
 kubectl label service my-app version=blue
 
 # Green (new)
+
 kubectl apply -f green-deployment.yaml
+
 # Test green environment
+
 kubectl label service my-app version=green
 
 # Rollback if needed
+
 kubectl label service my-app version=blue
 ```
 
 **Characteristics:**
+
 - Instant switchover
 - Easy rollback
 - Doubles infrastructure cost temporarily
@@ -175,6 +200,7 @@ spec:
   strategy:
     canary:
       steps:
+
       - setWeight: 10
       - pause: {duration: 5m}
       - setWeight: 25
@@ -182,9 +208,11 @@ spec:
       - setWeight: 50
       - pause: {duration: 5m}
       - setWeight: 100
+
 ```
 
 **Characteristics:**
+
 - Gradual traffic shift
 - Risk mitigation
 - Real user testing
@@ -206,6 +234,7 @@ else:
 ```
 
 **Characteristics:**
+
 - Deploy without releasing
 - A/B testing
 - Instant rollback
@@ -226,21 +255,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
       - name: Build application
+
         run: make build
+
       - name: Build Docker image
+
         run: docker build -t myapp:${{ github.sha }} .
+
       - name: Push to registry
+
         run: docker push myapp:${{ github.sha }}
 
   test:
     needs: build
     runs-on: ubuntu-latest
     steps:
+
       - name: Unit tests
+
         run: make test
+
       - name: Security scan
+
         run: trivy image myapp:${{ github.sha }}
 
   deploy-staging:
@@ -249,14 +288,18 @@ jobs:
     environment:
       name: staging
     steps:
+
       - name: Deploy to staging
+
         run: kubectl apply -f k8s/staging/
 
   integration-test:
     needs: deploy-staging
     runs-on: ubuntu-latest
     steps:
+
       - name: Run E2E tests
+
         run: npm run test:e2e
 
   deploy-production:
@@ -265,7 +308,9 @@ jobs:
     environment:
       name: production
     steps:
+
       - name: Canary deployment
+
         run: |
           kubectl apply -f k8s/production/
           kubectl argo rollouts promote my-app
@@ -274,9 +319,13 @@ jobs:
     needs: deploy-production
     runs-on: ubuntu-latest
     steps:
+
       - name: Health check
+
         run: curl -f https://app.example.com/health
+
       - name: Notify team
+
         run: |
           curl -X POST ${{ secrets.SLACK_WEBHOOK }} \
             -d '{"text":"Production deployment successful!"}'
@@ -302,13 +351,17 @@ jobs:
 ```yaml
 deploy-and-verify:
   steps:
+
     - name: Deploy new version
+
       run: kubectl apply -f k8s/
 
     - name: Wait for rollout
+
       run: kubectl rollout status deployment/my-app
 
     - name: Health check
+
       id: health
       run: |
         for i in {1..10}; do
@@ -320,6 +373,7 @@ deploy-and-verify:
         exit 1
 
     - name: Rollback on failure
+
       if: failure()
       run: kubectl rollout undo deployment/my-app
 ```
@@ -327,13 +381,17 @@ deploy-and-verify:
 ### Manual Rollback
 
 ```bash
+
 # List revision history
+
 kubectl rollout history deployment/my-app
 
 # Rollback to previous version
+
 kubectl rollout undo deployment/my-app
 
 # Rollback to specific revision
+
 kubectl rollout undo deployment/my-app --to-revision=3
 ```
 
@@ -351,7 +409,9 @@ kubectl rollout undo deployment/my-app --to-revision=3
 ### Integration with Monitoring
 
 ```yaml
+
 - name: Post-deployment verification
+
   run: |
     # Wait for metrics stabilization
     sleep 60
@@ -377,11 +437,13 @@ kubectl rollout undo deployment/my-app --to-revision=3
 - `secrets-management` - For secrets handling
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

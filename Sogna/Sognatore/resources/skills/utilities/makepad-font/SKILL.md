@@ -11,7 +11,6 @@ id: skill-makepad-font
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Font Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -19,6 +18,7 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad text and font rendering. Help users by:
+
 - **Font configuration**: Font families, sizes, styles
 - **Text layout**: Understanding text layouter and shaping
 - **Text rendering**: GPU-based text rendering with SDF
@@ -26,6 +26,7 @@ You are an expert at Makepad text and font rendering. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/font-system.md` - Font module structure and APIs
 
 ## IMPORTANT: Documentation Completeness Check
@@ -227,16 +228,18 @@ pub struct rasterizer::Settings {
 5. Default font cache size is 4096 glyphs
 6. Atlas sizes: 4096x4096 for grayscale, 2048x2048 for color (emoji)
 
-
 ## When to Use
+
 Use this skill when tackling tasks related to its primary domain or functionality as described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

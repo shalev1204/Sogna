@@ -74,12 +74,14 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 Step type signature: `type Step[R any] func(ctx context.Context) (R, error)`
 
 Step requirements:
+
 - The function must accept a `context.Context` parameter — use the one provided, not the workflow's context
 - Inputs and outputs must be serializable to JSON
 - Cannot start or enqueue workflows from within steps
 - Calling a step from within another step makes the inner call part of the outer step's execution
 
 When to use steps:
+
 - API calls to external services
 - File system operations
 - Random number generation
@@ -89,6 +91,7 @@ When to use steps:
 Reference: [DBOS Steps](https://docs.dbos.dev/golang/tutorials/step-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

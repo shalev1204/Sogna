@@ -8,7 +8,6 @@ id: skill-gitlab-ci-patterns
 owner: [[orchestrator]]
 ---
 
-
 # GitLab CI Patterns
 
 Comprehensive GitLab CI/CD pipeline patterns for automated testing, building, and deployment.
@@ -41,6 +40,7 @@ Create efficient GitLab CI pipelines with proper stage organization, caching, an
 
 ```yaml
 stages:
+
   - build
   - test
   - deploy
@@ -53,24 +53,31 @@ build:
   stage: build
   image: node:20
   script:
+
     - npm ci
     - npm run build
+
   artifacts:
     paths:
+
       - dist/
+
     expire_in: 1 hour
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
+
       - node_modules/
 
 test:
   stage: test
   image: node:20
   script:
+
     - npm ci
     - npm run lint
     - npm test
+
   coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
   artifacts:
     reports:
@@ -82,10 +89,14 @@ deploy:
   stage: deploy
   image: bitnami/kubectl:latest
   script:
+
     - kubectl apply -f k8s/
     - kubectl rollout status deployment/my-app
+
   only:
+
     - main
+
   environment:
     name: production
     url: https://app.example.com
@@ -98,17 +109,25 @@ build-docker:
   stage: build
   image: docker:24
   services:
+
     - docker:24-dind
+
   before_script:
+
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
   script:
+
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
     - docker build -t $CI_REGISTRY_IMAGE:latest .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_IMAGE:latest
+
   only:
+
     - main
     - tags
+
 ```
 
 ## Multi-Environment Deployment
@@ -117,6 +136,7 @@ build-docker:
 .deploy_template: &deploy_template
   image: bitnami/kubectl:latest
   before_script:
+
     - kubectl config set-cluster k8s --server="$KUBE_URL" --insecure-skip-tls-verify=true
     - kubectl config set-credentials admin --token="$KUBE_TOKEN"
     - kubectl config set-context default --cluster=k8s --user=admin
@@ -126,32 +146,40 @@ deploy:staging:
   <<: *deploy_template
   stage: deploy
   script:
+
     - kubectl apply -f k8s/ -n staging
     - kubectl rollout status deployment/my-app -n staging
+
   environment:
     name: staging
     url: https://staging.example.com
   only:
+
     - develop
 
 deploy:production:
   <<: *deploy_template
   stage: deploy
   script:
+
     - kubectl apply -f k8s/ -n production
     - kubectl rollout status deployment/my-app -n production
+
   environment:
     name: production
     url: https://app.example.com
   when: manual
   only:
+
     - main
+
 ```
 
 ## Terraform Pipeline
 
 ```yaml
 stages:
+
   - validate
   - plan
   - apply
@@ -161,6 +189,7 @@ variables:
   TF_VERSION: "1.6.0"
 
 before_script:
+
   - cd ${TF_ROOT}
   - terraform --version
 
@@ -168,6 +197,7 @@ validate:
   stage: validate
   image: hashicorp/terraform:${TF_VERSION}
   script:
+
     - terraform init -backend=false
     - terraform validate
     - terraform fmt -check
@@ -176,30 +206,41 @@ plan:
   stage: plan
   image: hashicorp/terraform:${TF_VERSION}
   script:
+
     - terraform init
     - terraform plan -out=tfplan
+
   artifacts:
     paths:
+
       - ${TF_ROOT}/tfplan
+
     expire_in: 1 day
 
 apply:
   stage: apply
   image: hashicorp/terraform:${TF_VERSION}
   script:
+
     - terraform init
     - terraform apply -auto-approve tfplan
+
   dependencies:
+
     - plan
+
   when: manual
   only:
+
     - main
+
 ```
 
 ## Security Scanning
 
 ```yaml
 include:
+
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/Container-Scanning.gitlab-ci.yml
@@ -208,40 +249,52 @@ trivy-scan:
   stage: test
   image: aquasec/trivy:latest
   script:
+
     - trivy image --exit-code 1 --severity HIGH,CRITICAL $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+
   allow_failure: true
 ```
 
 ## Caching Strategies
 
 ```yaml
+
 # Cache node_modules
+
 build:
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
+
       - node_modules/
+
     policy: pull-push
 
 # Global cache
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
+
     - .cache/
     - vendor/
 
 # Separate cache per job
+
 job1:
   cache:
     key: job1-cache
     paths:
+
       - build/
 
 job2:
   cache:
     key: job2-cache
     paths:
+
       - dist/
+
 ```
 
 ## Dynamic Child Pipelines
@@ -250,16 +303,21 @@ job2:
 generate-pipeline:
   stage: build
   script:
+
     - python generate_pipeline.py > child-pipeline.yml
+
   artifacts:
     paths:
+
       - child-pipeline.yml
 
 trigger-child:
   stage: deploy
   trigger:
     include:
+
       - artifact: child-pipeline.yml
+
         job: generate-pipeline
     strategy: depend
 ```
@@ -289,11 +347,13 @@ trigger-child:
 - `secrets-management` - For secrets handling
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

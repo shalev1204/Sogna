@@ -9,7 +9,6 @@ id: skill-llm-structured-output
 owner: [[orchestrator]]
 ---
 
-
 # LLM Structured Output
 
 ## What This Skill Does
@@ -28,6 +27,7 @@ Extract typed, validated data from LLM API responses instead of parsing free-tex
 - The user asks about `controlled generation`, `constrained decoding`, or `grammar-based sampling` in local models
 
 Do NOT use this skill when:
+
 - The user wants free-form text generation (summaries, essays, chat)
 - The user is asking about Zod for form validation or API input validation (use `zod-validation-expert` instead)
 - The user needs prompt engineering for better text quality (not structure)
@@ -89,9 +89,13 @@ response = client.beta.chat.completions.parse(
     response_format=ReviewAnalysis,
 )
 result = response.choices[0].message.parsed
+
 # result.sentiment == Sentiment.positive
+
 # result.key_topics == ["battery life", "keyboard"]
+
 # result.purchase_intent == True
+
 ```
 
 ### Example 2: Anthropic tool_use for Structured Extraction (Python)
@@ -131,11 +135,16 @@ response = client.messages.create(
     tool_choice={"type": "tool", "name": "extract_invoice"},
     messages=[{"role": "user", "content": "Invoice from Acme Corp: 3x Widget A at $10 each, 1x Widget B at $25. Total: $55."}]
 )
+
 # Find the tool_use block — do NOT parse text blocks
+
 tool_block = next(b for b in response.content if b.type == "tool_use")
 invoice = tool_block.input
+
 # invoice["vendor_name"] == "Acme Corp"
+
 # invoice["total_amount"] == 55.0
+
 ```
 
 ### Example 3: TypeScript with Zod + zodResponseFormat
@@ -210,11 +219,13 @@ const event = completion.choices[0].message.parsed;
 6. **Separate extraction schemas from application schemas.** Your LLM extraction schema should match what the model can reliably produce. Your application database schema may have additional computed fields, foreign keys, or constraints. Map between them in application code — do not force the LLM to understand your database schema.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

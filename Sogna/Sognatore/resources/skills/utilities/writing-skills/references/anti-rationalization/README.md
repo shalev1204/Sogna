@@ -54,6 +54,7 @@ Write code before test? Delete it. Start over.
 - Don't "adapt" it while writing tests
 - Don't look at it
 - Delete means delete
+
 ```
 
 **Why it works**: Agents try specific workarounds. Counter each explicitly.
@@ -88,6 +89,7 @@ Capture excuses from baseline testing. Every rationalization goes in table:
 Make it easy for agents to self-check when rationalizing:
 
 ```markdown
+
 ## Red Flags - STOP and Start Over
 
 - Code before test
@@ -106,10 +108,13 @@ Make it easy for agents to self-check when rationalizing:
 Add to description: symptoms of when you're ABOUT to violate:
 
 ```yaml
+
 # ❌ BAD: Only describes what skill does
+
 description: TDD methodology for writing code
 
 # ✅ GOOD: Includes pre-violation symptoms
+
 description: Use when implementing any feature or bugfix, before writing implementation code
 metadata:
   triggers: new feature, bug fix, code change
@@ -122,6 +127,7 @@ metadata:
 Weak language invites rationalization:
 
 ```markdown
+
 # Weak
 
 You should write tests first.
@@ -161,6 +167,7 @@ Don't redefine TDD to fit what you already did.
 If there ARE valid exceptions, state them explicitly:
 
 ```markdown
+
 ## When NOT to Use TDD
 
 - Spike solutions (throwaway exploratory code)
@@ -226,6 +233,7 @@ For discipline-enforcing skills:
 **Red flags**:
 
 ```markdown
+
 ## Red Flags - STOP
 
 - Code before test
@@ -262,6 +270,7 @@ All mean: Delete code. Start over.
 That's bulletproof.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

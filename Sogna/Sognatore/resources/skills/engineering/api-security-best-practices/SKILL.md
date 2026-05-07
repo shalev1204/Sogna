@@ -8,7 +8,6 @@ id: skill-api-security-best-practices
 owner: [[eng-api]], [[ops-security]]
 ---
 
-
 # API Security Best Practices
 
 ## Overview
@@ -31,6 +30,7 @@ Guide developers in building secure APIs by implementing authentication, authori
 ### Step 1: Authentication & Authorization
 
 I'll help you implement secure authentication:
+
 - Choose authentication method (JWT, OAuth 2.0, API keys)
 - Implement token-based authentication
 - Set up role-based access control (RBAC)
@@ -40,6 +40,7 @@ I'll help you implement secure authentication:
 ### Step 2: Input Validation & Sanitization
 
 Protect against injection attacks:
+
 - Validate all input data
 - Sanitize user inputs
 - Use parameterized queries
@@ -49,6 +50,7 @@ Protect against injection attacks:
 ### Step 3: Rate Limiting & Throttling
 
 Prevent abuse and DDoS attacks:
+
 - Implement rate limiting per user/IP
 - Set up API throttling
 - Configure request quotas
@@ -58,6 +60,7 @@ Prevent abuse and DDoS attacks:
 ### Step 4: Data Protection
 
 Secure sensitive data:
+
 - Encrypt data in transit (HTTPS/TLS)
 - Encrypt sensitive data at rest
 - Implement proper error handling (no data leaks)
@@ -67,18 +70,19 @@ Secure sensitive data:
 ### Step 5: API Security Testing
 
 Verify security implementation:
+
 - Test authentication and authorization
 - Perform penetration testing
 - Check for common vulnerabilities (OWASP API Top 10)
 - Validate input handling
 - Test rate limiting
 
-
 ## Examples
 
 ### Example 1: Implementing JWT Authentication
 
 ```markdown
+
 ## Secure JWT Authentication Implementation
 
 ### Authentication Flow
@@ -325,12 +329,13 @@ app.post('/api/auth/refresh', async (req, res) => {
 - ✅ Don't store sensitive data in JWT payload
 - ✅ Validate token issuer and audience
 - ✅ Implement token blacklisting for logout
-```
 
+```
 
 ### Example 2: Input Validation and SQL Injection Prevention
 
 ```markdown
+
 ## Preventing SQL Injection and Input Validation
 
 ### The Problem
@@ -525,12 +530,13 @@ app.post('/api/comments', authenticateToken, async (req, res) => {
 - [ ] Escape special characters
 - [ ] Validate file uploads (type, size, content)
 - [ ] Use allowlists, not blocklists
-```
 
+```
 
 ### Example 3: Rate Limiting and DDoS Protection
 
 ```markdown
+
 ## Implementing Rate Limiting
 
 ### Why Rate Limiting?
@@ -731,6 +737,7 @@ Retry-After: 900
 ## Common Pitfalls
 
 ### Problem: JWT Secret Exposed in Code
+
 **Symptoms:** JWT secret hardcoded or committed to Git
 **Solution:**
 \`\`\`javascript
@@ -748,6 +755,7 @@ if (!JWT_SECRET) {
 \`\`\`
 
 ### Problem: Weak Password Requirements
+
 **Symptoms:** Users can set weak passwords like "password123"
 **Solution:**
 \`\`\`javascript
@@ -770,6 +778,7 @@ if (result.score < 3) {
 \`\`\`
 
 ### Problem: Missing Authorization Checks
+
 **Symptoms:** Users can access resources they shouldn't
 **Solution:**
 \`\`\`javascript
@@ -802,6 +811,7 @@ app.delete('/api/posts/:id', authenticateToken, async (req, res) => {
 \`\`\`
 
 ### Problem: Verbose Error Messages
+
 **Symptoms:** Error messages reveal system details
 **Solution:**
 \`\`\`javascript
@@ -840,6 +850,7 @@ app.post('/api/users', async (req, res) => {
 ## Security Checklist
 
 ### Authentication & Authorization
+
 - [ ] Implement strong authentication (JWT, OAuth 2.0)
 - [ ] Use HTTPS for all endpoints
 - [ ] Hash passwords with bcrypt (salt rounds >= 10)
@@ -849,6 +860,7 @@ app.post('/api/users', async (req, res) => {
 - [ ] Implement role-based access control (RBAC)
 
 ### Input Validation
+
 - [ ] Validate all user inputs
 - [ ] Use parameterized queries or ORM
 - [ ] Sanitize HTML content
@@ -857,6 +869,7 @@ app.post('/api/users', async (req, res) => {
 - [ ] Use allowlists, not blocklists
 
 ### Rate Limiting & DDoS Protection
+
 - [ ] Implement rate limiting per user/IP
 - [ ] Add stricter limits for auth endpoints
 - [ ] Use Redis for distributed rate limiting
@@ -864,6 +877,7 @@ app.post('/api/users', async (req, res) => {
 - [ ] Implement request throttling
 
 ### Data Protection
+
 - [ ] Use HTTPS/TLS for all traffic
 - [ ] Encrypt sensitive data at rest
 - [ ] Don't store sensitive data in JWT
@@ -872,6 +886,7 @@ app.post('/api/users', async (req, res) => {
 - [ ] Use security headers (Helmet.js)
 
 ### Monitoring & Logging
+
 - [ ] Log security events
 - [ ] Monitor for suspicious activity
 - [ ] Set up alerts for failed auth attempts
@@ -913,11 +928,13 @@ app.post('/api/users', async (req, res) => {
 **Pro Tip:** Security is not a one-time task - regularly audit your APIs, keep dependencies updated, and stay informed about new vulnerabilities!
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -171,7 +171,9 @@ Create comprehensive GitHub Actions workflows:
 
 **Multi-Environment CI/CD Pipeline**
 ```yaml
+
 # .github/workflows/ci-cd.yml
+
 name: CI/CD Pipeline
 
 on:
@@ -193,18 +195,22 @@ jobs:
     name: Code Quality
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0  # Full history for better analysis
 
       - name: Set up Node.js
+
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
       - name: Cache dependencies
+
         uses: actions/cache@v3
         with:
           path: |
@@ -216,22 +222,27 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
+
         run: npm ci
 
       - name: Run linting
+
         run: |
           npm run lint
           npm run lint:styles
 
       - name: Type checking
+
         run: npm run typecheck
 
       - name: Security audit
+
         run: |
           npm audit --production
           npx snyk test
 
       - name: License check
+
         run: npx license-checker --production --onlyAllow 'MIT;Apache-2.0;BSD-3-Clause;BSD-2-Clause;ISC'
 
   # Testing
@@ -243,26 +254,32 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         node: [16, 18, 20]
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Set up Node.js
+
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: 'npm'
 
       - name: Install dependencies
+
         run: npm ci
 
       - name: Run unit tests
+
         run: npm run test:unit -- --coverage
 
       - name: Run integration tests
+
         run: npm run test:integration
         env:
           TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
 
       - name: Upload coverage
+
         if: matrix.os == 'ubuntu-latest' && matrix.node == 18
         uses: codecov/codecov-action@v3
         with:
@@ -279,18 +296,22 @@ jobs:
       matrix:
         environment: [development, staging, production]
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Set up build environment
+
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
       - name: Install dependencies
+
         run: npm ci
 
       - name: Build application
+
         run: npm run build
         env:
           NODE_ENV: ${{ matrix.environment }}
@@ -298,6 +319,7 @@ jobs:
           COMMIT_SHA: ${{ github.sha }}
 
       - name: Build Docker image
+
         run: |
           docker build \
             --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
@@ -308,6 +330,7 @@ jobs:
             .
 
       - name: Scan Docker image
+
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ github.repository }}:${{ matrix.environment }}-${{ github.sha }}
@@ -315,11 +338,13 @@ jobs:
           output: 'trivy-results.sarif'
 
       - name: Upload scan results
+
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
 
       - name: Push to registry
+
         if: github.event_name != 'pull_request'
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
@@ -327,6 +352,7 @@ jobs:
           docker push ${{ github.repository }}:${{ matrix.environment }}-latest
 
       - name: Upload artifacts
+
         uses: actions/upload-artifact@v3
         with:
           name: build-${{ matrix.environment }}
@@ -346,15 +372,19 @@ jobs:
       matrix:
         environment: [staging, production]
         exclude:
+
           - environment: production
+
             branches: [develop]
     environment:
       name: ${{ matrix.environment }}
       url: ${{ steps.deploy.outputs.url }}
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Configure AWS credentials
+
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -362,6 +392,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Deploy to ECS
+
         id: deploy
         run: |
           # Update task definition
@@ -386,6 +417,7 @@ jobs:
           echo "url=https://${{ matrix.environment }}.example.com" >> $GITHUB_OUTPUT
 
       - name: Notify deployment
+
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -402,13 +434,16 @@ jobs:
       matrix:
         environment: [staging, production]
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Run smoke tests
+
         run: |
           npm run test:smoke -- --url https://${{ matrix.environment }}.example.com
 
       - name: Run E2E tests
+
         uses: cypress-io/github-action@v5
         with:
           config: baseUrl=https://${{ matrix.environment }}.example.com
@@ -417,6 +452,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
       - name: Performance test
+
         run: |
           npm install -g @sitespeed.io/sitespeed.io
           sitespeed.io https://${{ matrix.environment }}.example.com \
@@ -424,6 +460,7 @@ jobs:
             --plugins.add=@sitespeed.io/plugin-lighthouse
 
       - name: Security scan
+
         run: |
           npm install -g @zaproxy/action-baseline
           zaproxy/action-baseline -t https://${{ matrix.environment }}.example.com
@@ -435,12 +472,15 @@ Automate release processes:
 
 **Semantic Release Workflow**
 ```yaml
+
 # .github/workflows/release.yml
+
 name: Release
 
 on:
   push:
     branches:
+
       - main
 
 jobs:
@@ -448,33 +488,40 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0
           persist-credentials: false
 
       - name: Set up Node.js
+
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
+
         run: npm ci
 
       - name: Run semantic release
+
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
       - name: Update documentation
+
         if: steps.semantic-release.outputs.new_release_published == 'true'
         run: |
           npm run docs:generate
           npm run docs:publish
 
       - name: Create release notes
+
         if: steps.semantic-release.outputs.new_release_published == 'true'
         uses: actions/github-script@v6
         with:
@@ -528,58 +575,84 @@ Automate common development tasks:
 
 **Pre-commit Hooks**
 ```yaml
+
 # .pre-commit-config.yaml
+
 repos:
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
+
     rev: v4.5.0
     hooks:
+
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
+
         args: ['--maxkb=1000']
+
       - id: check-case-conflict
       - id: check-merge-conflict
       - id: detect-private-key
 
   - repo: https://github.com/psf/black
+
     rev: 23.10.0
     hooks:
+
       - id: black
+
         language_version: python3.11
 
   - repo: https://github.com/pycqa/isort
+
     rev: 5.12.0
     hooks:
+
       - id: isort
+
         args: ["--profile", "black"]
 
   - repo: https://github.com/pycqa/flake8
+
     rev: 6.1.0
     hooks:
+
       - id: flake8
+
         additional_dependencies: [flake8-docstrings]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
+
     rev: v8.52.0
     hooks:
+
       - id: eslint
+
         files: \.[jt]sx?$
         types: [file]
         additional_dependencies:
+
           - eslint@8.52.0
           - eslint-config-prettier@9.0.0
           - eslint-plugin-react@7.33.2
 
   - repo: https://github.com/pre-commit/mirrors-prettier
+
     rev: v3.0.3
     hooks:
+
       - id: prettier
+
         types_or: [css, javascript, jsx, typescript, tsx, json, yaml]
 
   - repo: local
+
     hooks:
+
       - id: unit-tests
+
         name: Run unit tests
         entry: npm run test:unit -- --passWithNoTests
         language: system
@@ -590,6 +663,7 @@ repos:
 **Development Environment Setup**
 ```bash
 #!/bin/bash
+
 # scripts/setup-dev-environment.sh
 
 set -euo pipefail
@@ -597,6 +671,7 @@ set -euo pipefail
 echo "🚀 Setting up development environment..."
 
 # Check prerequisites
+
 check_prerequisites() {
     echo "Checking prerequisites..."
 
@@ -612,6 +687,7 @@ check_prerequisites() {
 }
 
 # Install dependencies
+
 install_dependencies() {
     echo "Installing dependencies..."
     npm ci
@@ -627,6 +703,7 @@ install_dependencies() {
 }
 
 # Setup local services
+
 setup_services() {
     echo "Setting up local services..."
 
@@ -642,6 +719,7 @@ setup_services() {
 }
 
 # Initialize database
+
 initialize_database() {
     echo "Initializing database..."
     npm run db:migrate
@@ -649,6 +727,7 @@ initialize_database() {
 }
 
 # Setup environment variables
+
 setup_environment() {
     echo "Setting up environment variables..."
 
@@ -660,6 +739,7 @@ setup_environment() {
 }
 
 # Main execution
+
 main() {
     check_prerequisites
     install_dependencies
@@ -684,18 +764,25 @@ Automate infrastructure provisioning:
 
 **Terraform Workflow**
 ```yaml
+
 # .github/workflows/terraform.yml
+
 name: Terraform
 
 on:
   pull_request:
     paths:
+
       - 'terraform/**'
       - '.github/workflows/terraform.yml'
+
   push:
     branches:
+
       - main
+
     paths:
+
       - 'terraform/**'
 
 env:
@@ -711,15 +798,18 @@ jobs:
         working-directory: terraform
 
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Setup Terraform
+
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
           terraform_wrapper: false
 
       - name: Configure AWS Credentials
+
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -727,9 +817,11 @@ jobs:
           aws-region: us-east-1
 
       - name: Terraform Format Check
+
         run: terraform fmt -check -recursive
 
       - name: Terraform Init
+
         run: |
           terraform init \
             -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
@@ -737,9 +829,11 @@ jobs:
             -backend-config="region=us-east-1"
 
       - name: Terraform Validate
+
         run: terraform validate
 
       - name: Terraform Plan
+
         id: plan
         run: |
           terraform plan -out=tfplan -no-color | tee plan_output.txt
@@ -750,6 +844,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Comment PR
+
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
@@ -769,6 +864,7 @@ jobs:
             });
 
       - name: Terraform Apply
+
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply tfplan
 ```
@@ -779,15 +875,20 @@ Automate monitoring setup:
 
 **Monitoring Stack Deployment**
 ```yaml
+
 # .github/workflows/monitoring.yml
+
 name: Deploy Monitoring
 
 on:
   push:
     paths:
+
       - 'monitoring/**'
       - '.github/workflows/monitoring.yml'
+
     branches:
+
       - main
 
 jobs:
@@ -796,25 +897,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Setup Helm
+
         uses: azure/setup-helm@v3
         with:
           version: '3.12.0'
 
       - name: Configure Kubernetes
+
         run: |
           echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > kubeconfig
           export KUBECONFIG=kubeconfig
 
       - name: Add Helm repositories
+
         run: |
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo update
 
       - name: Deploy Prometheus
+
         run: |
           helm upgrade --install prometheus prometheus-community/kube-prometheus-stack \
             --namespace monitoring \
@@ -823,14 +929,17 @@ jobs:
             --wait
 
       - name: Deploy Grafana Dashboards
+
         run: |
           kubectl apply -f monitoring/dashboards/
 
       - name: Deploy Alert Rules
+
         run: |
           kubectl apply -f monitoring/alerts/
 
       - name: Setup Alert Routing
+
         run: |
           helm upgrade --install alertmanager prometheus-community/alertmanager \
             --namespace monitoring \
@@ -897,13 +1006,16 @@ Automate documentation generation:
 
 **Documentation Workflow**
 ```yaml
+
 # .github/workflows/docs.yml
+
 name: Documentation
 
 on:
   push:
     branches: [main]
     paths:
+
       - 'src/**'
       - 'docs/**'
       - 'README.md'
@@ -914,31 +1026,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Setup Node.js
+
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
+
         run: npm ci
 
       - name: Generate API docs
+
         run: |
           npm run docs:api
           npm run docs:typescript
 
       - name: Generate architecture diagrams
+
         run: |
           npm install -g @mermaid-js/mermaid-cli
           mmdc -i docs/architecture.mmd -o docs/architecture.png
 
       - name: Build documentation site
+
         run: |
           npm run docs:build
 
       - name: Deploy to GitHub Pages
+
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -1017,7 +1136,9 @@ Automate security scanning and compliance:
 
 **Security Scanning Workflow**
 ```yaml
+
 # .github/workflows/security.yml
+
 name: Security Scan
 
 on:
@@ -1025,6 +1146,7 @@ on:
     branches: [main, develop]
   pull_request:
   schedule:
+
     - cron: '0 0 * * 0'  # Weekly on Sunday
 
 jobs:
@@ -1033,9 +1155,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Run Trivy vulnerability scanner
+
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
@@ -1045,11 +1169,13 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy results
+
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
 
       - name: Run Snyk security scan
+
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -1057,6 +1183,7 @@ jobs:
           args: --severity-threshold=high
 
       - name: Run OWASP Dependency Check
+
         uses: dependency-check/Dependency-Check_Action@main
         with:
           project: ${{ github.repository }}
@@ -1067,12 +1194,14 @@ jobs:
             --enableExperimental
 
       - name: SonarCloud Scan
+
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Run Semgrep
+
         uses: returntocorp/semgrep-action@v1
         with:
           config: >-
@@ -1081,6 +1210,7 @@ jobs:
             p/owasp-top-ten
 
       - name: GitLeaks secret scanning
+
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -1342,6 +1472,7 @@ export const deploymentWorkflow: WorkflowStep = {
 Focus on creating reliable, maintainable automation that reduces manual work while maintaining quality and security standards.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

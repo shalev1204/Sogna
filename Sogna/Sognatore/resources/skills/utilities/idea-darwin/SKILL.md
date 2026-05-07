@@ -8,7 +8,6 @@ id: skill-idea-darwin
 owner: [[orchestrator]]
 ---
 
-
 # Idea Darwin Engine
 
 A round-based idea iteration system that treats ideas as competing organisms — scoring, selecting, crossing, and evolving them through structured rounds to surface the strongest concepts.
@@ -64,10 +63,13 @@ The user always has final say on all life-or-death decisions. The system only re
 Create an `ideas.md` file:
 
 ```markdown
+
 ## Personal knowledge base that learns my style
+
 I want a system that reads everything I write and gradually learns how I think.
 
 ## Commute-to-podcast converter
+
 Record voice memos during my commute, auto-convert them into podcast scripts.
 ```
 
@@ -123,11 +125,13 @@ Append new ideas to `ideas.md`, add environmental variables to `stimuli.md`.
 - ClawHub: `clawhub install idea-darwin`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

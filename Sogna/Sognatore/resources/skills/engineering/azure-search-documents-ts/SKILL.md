@@ -8,7 +8,6 @@ id: skill-azure-search-documents-ts
 owner: [[orchestrator]]
 ---
 
-
 # Azure AI Search SDK for TypeScript
 
 Build search applications with vector, hybrid, and semantic search capabilities.
@@ -271,14 +270,17 @@ import {
 6. **Monitor query performance** - Use `includeTotalCount: true` sparingly in production
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

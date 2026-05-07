@@ -566,6 +566,7 @@ function Extension() {
 - Components: https://shopify.dev/docs/api/checkout-ui-extensions/components
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

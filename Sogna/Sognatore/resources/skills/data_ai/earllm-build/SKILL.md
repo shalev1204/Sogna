@@ -4,22 +4,25 @@ description: "Build, maintain, and extend the EarLLM One Android project — a K
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - android
 - kotlin
 - bluetooth
 - llm
 - voice
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-earllm-build
 owner: [[orchestrator]]
 ---
-
 
 # EarLLM One — Build & Maintain
 
@@ -193,11 +196,13 @@ powershell -Command "Remove-Item 'EarLLM_One_v1.0.zip' -Force -ErrorAction Silen
 - Not providing enough project context for accurate analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

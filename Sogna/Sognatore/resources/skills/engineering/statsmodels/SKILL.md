@@ -10,7 +10,6 @@ id: skill-statsmodels
 owner: [[orchestrator]]
 ---
 
-
 # Statsmodels: Statistical Modeling and Econometrics
 
 ## Overview
@@ -20,6 +19,7 @@ Statsmodels is Python's premier library for statistical modeling, providing tool
 ## When to Use This Skill
 
 This skill should be used when:
+
 - Fitting regression models (OLS, WLS, GLS, quantile regression)
 - Performing generalized linear modeling (logistic, Poisson, Gamma, etc.)
 - Analyzing discrete outcomes (binary, multinomial, count, ordinal)
@@ -41,31 +41,38 @@ import numpy as np
 import pandas as pd
 
 # Prepare data - ALWAYS add constant for intercept
+
 X = sm.add_constant(X_data)
 
 # Fit OLS model
+
 model = sm.OLS(y, X)
 results = model.fit()
 
 # View comprehensive results
+
 print(results.summary())
 
 # Key results
+
 print(f"R-squared: {results.rsquared:.4f}")
 print(f"Coefficients:\\n{results.params}")
 print(f"P-values:\\n{results.pvalues}")
 
 # Predictions with confidence intervals
+
 predictions = results.get_prediction(X_new)
 pred_summary = predictions.summary_frame()
 print(pred_summary)  # includes mean, CI, prediction intervals
 
 # Diagnostics
+
 from statsmodels.stats.diagnostic import het_breuschpagan
 bp_test = het_breuschpagan(results.resid, X)
 print(f"Breusch-Pagan p-value: {bp_test[1]:.4f}")
 
 # Visualize residuals
+
 import matplotlib.pyplot as plt
 plt.scatter(results.fittedvalues, results.resid)
 plt.axhline(y=0, color='r', linestyle='--')
@@ -80,31 +87,38 @@ plt.show()
 from statsmodels.discrete.discrete_model import Logit
 
 # Add constant
+
 X = sm.add_constant(X_data)
 
 # Fit logit model
+
 model = Logit(y_binary, X)
 results = model.fit()
 
 print(results.summary())
 
 # Odds ratios
+
 odds_ratios = np.exp(results.params)
 print("Odds ratios:\\n", odds_ratios)
 
 # Predicted probabilities
+
 probs = results.predict(X)
 
 # Binary predictions (0.5 threshold)
+
 predictions = (probs > 0.5).astype(int)
 
 # Model evaluation
+
 from sklearn.metrics import classification_report, roc_auc_score
 
 print(classification_report(y_binary, predictions))
 print(f"AUC: {roc_auc_score(y_binary, probs):.4f}")
 
 # Marginal effects
+
 marginal = results.get_margeff()
 print(marginal.summary())
 ```
@@ -116,6 +130,7 @@ from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
 # Check stationarity
+
 from statsmodels.tsa.stattools import adfuller
 
 adf_result = adfuller(y_series)
@@ -126,18 +141,21 @@ if adf_result[1] > 0.05:
     y_diff = y_series.diff().dropna()
 
 # Plot ACF/PACF to identify p, q
+
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
 plot_acf(y_diff, lags=40, ax=ax1)
 plot_pacf(y_diff, lags=40, ax=ax2)
 plt.show()
 
 # Fit ARIMA(p,d,q)
+
 model = ARIMA(y_series, order=(1, 1, 1))
 results = model.fit()
 
 print(results.summary())
 
 # Forecast
+
 forecast = results.forecast(steps=10)
 forecast_obj = results.get_forecast(steps=10)
 forecast_df = forecast_obj.summary_frame()
@@ -145,6 +163,7 @@ forecast_df = forecast_obj.summary_frame()
 print(forecast_df)  # includes mean and confidence intervals
 
 # Residual diagnostics
+
 results.plot_diagnostics(figsize=(12, 8))
 plt.show()
 ```
@@ -155,6 +174,7 @@ plt.show()
 import statsmodels.api as sm
 
 # Poisson regression for count data
+
 X = sm.add_constant(X_data)
 model = sm.GLM(y_counts, X, family=sm.families.Poisson())
 results = model.fit()
@@ -162,10 +182,12 @@ results = model.fit()
 print(results.summary())
 
 # Rate ratios (for Poisson with log link)
+
 rate_ratios = np.exp(results.params)
 print("Rate ratios:\\n", rate_ratios)
 
 # Check overdispersion
+
 overdispersion = results.pearson_chi2 / results.df_resid
 print(f"Overdispersion: {overdispersion:.2f}")
 
@@ -184,6 +206,7 @@ if overdispersion > 1.5:
 Comprehensive suite of linear models for continuous outcomes with various error structures.
 
 **Available models:**
+
 - **OLS**: Standard linear regression with i.i.d. errors
 - **WLS**: Weighted least squares for heteroskedastic errors
 - **GLS**: Generalized least squares for arbitrary covariance structure
@@ -193,6 +216,7 @@ Comprehensive suite of linear models for continuous outcomes with various error 
 - **Recursive/Rolling**: Time-varying parameter estimation
 
 **Key features:**
+
 - Comprehensive diagnostic tests
 - Robust standard errors (HC, HAC, cluster-robust)
 - Influence statistics (Cook's distance, leverage, DFFITS)
@@ -209,6 +233,7 @@ Comprehensive suite of linear models for continuous outcomes with various error 
 Flexible framework extending linear models to non-normal distributions.
 
 **Distribution families:**
+
 - **Binomial**: Binary outcomes or proportions (logistic regression)
 - **Poisson**: Count data
 - **Negative Binomial**: Overdispersed counts
@@ -218,10 +243,12 @@ Flexible framework extending linear models to non-normal distributions.
 - **Tweedie**: Flexible family for semi-continuous data
 
 **Link functions:**
+
 - Logit, Probit, Log, Identity, Inverse, Sqrt, CLogLog, Power
 - Choose based on interpretation needs and model fit
 
 **Key features:**
+
 - Maximum likelihood estimation via IRLS
 - Deviance and Pearson residuals
 - Goodness-of-fit statistics
@@ -237,21 +264,25 @@ Flexible framework extending linear models to non-normal distributions.
 Models for categorical and count outcomes.
 
 **Binary models:**
+
 - **Logit**: Logistic regression (odds ratios)
 - **Probit**: Probit regression (normal distribution)
 
 **Multinomial models:**
+
 - **MNLogit**: Unordered categories (3+ levels)
 - **Conditional Logit**: Choice models with alternative-specific variables
 - **Ordered Model**: Ordinal outcomes (ordered categories)
 
 **Count models:**
+
 - **Poisson**: Standard count model
 - **Negative Binomial**: Overdispersed counts
 - **Zero-Inflated**: Excess zeros (ZIP, ZINB)
 - **Hurdle Models**: Two-stage models for zero-heavy data
 
 **Key features:**
+
 - Maximum likelihood estimation
 - Marginal effects at means or average marginal effects
 - Model comparison via AIC/BIC
@@ -267,6 +298,7 @@ Models for categorical and count outcomes.
 Comprehensive time series modeling and forecasting capabilities.
 
 **Univariate models:**
+
 - **AutoReg (AR)**: Autoregressive models
 - **ARIMA**: Autoregressive integrated moving average
 - **SARIMAX**: Seasonal ARIMA with exogenous variables
@@ -274,17 +306,20 @@ Comprehensive time series modeling and forecasting capabilities.
 - **ETS**: Innovations state space models
 
 **Multivariate models:**
+
 - **VAR**: Vector autoregression
 - **VARMAX**: VAR with MA and exogenous variables
 - **Dynamic Factor Models**: Extract common factors
 - **VECM**: Vector error correction models (cointegration)
 
 **Advanced models:**
+
 - **State Space**: Kalman filtering, custom specifications
 - **Regime Switching**: Markov switching models
 - **ARDL**: Autoregressive distributed lag
 
 **Key features:**
+
 - ACF/PACF analysis for model identification
 - Stationarity tests (ADF, KPSS)
 - Forecasting with prediction intervals
@@ -302,12 +337,14 @@ Comprehensive time series modeling and forecasting capabilities.
 Extensive testing and diagnostic capabilities for model validation.
 
 **Residual diagnostics:**
+
 - Autocorrelation tests (Ljung-Box, Durbin-Watson, Breusch-Godfrey)
 - Heteroskedasticity tests (Breusch-Pagan, White, ARCH)
 - Normality tests (Jarque-Bera, Omnibus, Anderson-Darling, Lilliefors)
 - Specification tests (RESET, Harvey-Collier)
 
 **Influence and outliers:**
+
 - Leverage (hat values)
 - Cook's distance
 - DFFITS and DFBETAs
@@ -315,6 +352,7 @@ Extensive testing and diagnostic capabilities for model validation.
 - Influence plots
 
 **Hypothesis testing:**
+
 - t-tests (one-sample, two-sample, paired)
 - Proportion tests
 - Chi-square tests
@@ -322,16 +360,19 @@ Extensive testing and diagnostic capabilities for model validation.
 - ANOVA (one-way, two-way, repeated measures)
 
 **Multiple comparisons:**
+
 - Tukey's HSD
 - Bonferroni correction
 - False Discovery Rate (FDR)
 
 **Effect sizes and power:**
+
 - Cohen's d, eta-squared
 - Power analysis for t-tests, proportions
 - Sample size calculations
 
 **Robust inference:**
+
 - Heteroskedasticity-consistent SEs (HC0-HC3)
 - HAC standard errors (Newey-West)
 - Cluster-robust standard errors
@@ -348,24 +389,31 @@ Statsmodels supports R-style formulas for intuitive model specification:
 import statsmodels.formula.api as smf
 
 # OLS with formula
+
 results = smf.ols('y ~ x1 + x2 + x1:x2', data=df).fit()
 
 # Categorical variables (automatic dummy coding)
+
 results = smf.ols('y ~ x1 + C(category)', data=df).fit()
 
 # Interactions
+
 results = smf.ols('y ~ x1 * x2', data=df).fit()  # x1 + x2 + x1:x2
 
 # Polynomial terms
+
 results = smf.ols('y ~ x + I(x**2)', data=df).fit()
 
 # Logit
+
 results = smf.logit('y ~ x1 + x2 + C(group)', data=df).fit()
 
 # Poisson
+
 results = smf.poisson('count ~ x1 + x2', data=df).fit()
 
 # ARIMA (not available via formula, use regular API)
+
 ```
 
 ## Model Selection and Comparison
@@ -373,7 +421,9 @@ results = smf.poisson('count ~ x1 + x2', data=df).fit()
 ### Information Criteria
 
 ```python
+
 # Compare models using AIC/BIC
+
 models = {
     'Model 1': model1_results,
     'Model 2': model2_results,
@@ -387,13 +437,17 @@ comparison = pd.DataFrame({
 })
 
 print(comparison.sort_values('AIC'))
+
 # Lower AIC/BIC indicates better model
+
 ```
 
 ### Likelihood Ratio Test (Nested Models)
 
 ```python
+
 # For nested models (one is subset of the other)
+
 from scipy import stats
 
 lr_stat = 2 * (full_model.llf - reduced_model.llf)
@@ -524,7 +578,9 @@ print(f"CV RMSE: {np.mean(cv_scores):.4f} ± {np.std(cv_scores):.4f}")
 This skill includes comprehensive reference files for detailed guidance:
 
 ### references/linear_models.md
+
 Detailed coverage of linear regression models including:
+
 - OLS, WLS, GLS, GLSAR, Quantile Regression
 - Mixed effects models
 - Recursive and rolling regression
@@ -534,7 +590,9 @@ Detailed coverage of linear regression models including:
 - Hypothesis testing and model comparison
 
 ### references/glm.md
+
 Complete guide to generalized linear models:
+
 - All distribution families (Binomial, Poisson, Gamma, etc.)
 - Link functions and when to use each
 - Model fitting and interpretation
@@ -543,7 +601,9 @@ Complete guide to generalized linear models:
 - Applications (logistic, Poisson, Gamma regression)
 
 ### references/discrete_choice.md
+
 Comprehensive guide to discrete outcome models:
+
 - Binary models (Logit, Probit)
 - Multinomial models (MNLogit, Conditional Logit)
 - Count models (Poisson, Negative Binomial, Zero-Inflated, Hurdle)
@@ -552,7 +612,9 @@ Comprehensive guide to discrete outcome models:
 - Model diagnostics and comparison
 
 ### references/time_series.md
+
 In-depth time series analysis guidance:
+
 - Univariate models (AR, ARIMA, SARIMAX, Exponential Smoothing)
 - Multivariate models (VAR, VARMAX, Dynamic Factor)
 - State space models
@@ -561,7 +623,9 @@ In-depth time series analysis guidance:
 - Granger causality, IRF, FEVD
 
 ### references/stats_diagnostics.md
+
 Comprehensive statistical testing and diagnostics:
+
 - Residual diagnostics (autocorrelation, heteroskedasticity, normality)
 - Influence and outlier detection
 - Hypothesis tests (parametric and non-parametric)
@@ -571,6 +635,7 @@ Comprehensive statistical testing and diagnostics:
 - Power analysis and effect sizes
 
 **When to reference:**
+
 - Need detailed parameter explanations
 - Choosing between similar models
 - Troubleshooting convergence or diagnostic issues
@@ -579,13 +644,17 @@ Comprehensive statistical testing and diagnostics:
 
 **Search patterns:**
 ```bash
+
 # Find information about specific models
+
 grep -r "Quantile Regression" references/
 
 # Find diagnostic tests
+
 grep -r "Breusch-Pagan" references/stats_diagnostics.md
 
 # Find time series guidance
+
 grep -r "SARIMAX" references/time_series.md
 ```
 
@@ -610,17 +679,20 @@ grep -r "SARIMAX" references/time_series.md
 ## Getting Help
 
 For detailed documentation and examples:
+
 - Official docs: https://www.statsmodels.org/stable/
 - User guide: https://www.statsmodels.org/stable/user-guide.html
 - Examples: https://www.statsmodels.org/stable/examples/index.html
 - API reference: https://www.statsmodels.org/stable/api.html
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

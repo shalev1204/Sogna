@@ -43,6 +43,7 @@
 | **Triadic** | 3 hues EQUIDISTANT on wheel | Vibrant, playful, creative |
 
 ### How to Choose a Scheme:
+
 1. **What's the project mood?** Calm → Analogous. Bold → Complementary.
 2. **How many colors needed?** Minimal → Monochromatic. Complex → Triadic.
 3. **Who's the audience?** Conservative → Monochromatic. Young → Triadic.
@@ -52,6 +53,7 @@
 ## 2. The 60-30-10 Rule
 
 ### Distribution Principle
+
 ```
 ┌─────────────────────────────────────────────────┐
 │                                                 │
@@ -70,6 +72,7 @@
 ```
 
 ### Implementation Pattern
+
 ```css
 :root {
   /* 60% - Pick based on light/dark mode and mood */
@@ -112,6 +115,7 @@
 | **White** | Clean, minimal, open | Can feel sterile |
 
 ### Selection Process:
+
 1. **What industry?** → Narrow to 2-3 hue families
 2. **What emotion?** → Pick primary hue
 3. **What contrast?** → Decide light vs dark mode
@@ -193,23 +197,28 @@ What type of project?
 **Step 2: Select Primary Hue Family**
 ```
 Based on context, pick ONE:
+
 - Blue family (trust)
 - Green family (growth)
 - Warm family (energy)
 - Neutral family (elegant)
 - OR ask user preference
+
 ```
 
 **Step 3: Decide Light/Dark Mode**
 ```
 Consider:
+
 - User preference?
 - Industry standard?
 - Content type? (text-heavy = light preferred)
 - Time of use? (evening app = dark option)
+
 ```
 
 **Step 4: Generate Palette Using Principles**
+
 - Use HSL manipulation
 - Follow 60-30-10 rule
 - Check contrast (WCAG)
@@ -290,6 +299,7 @@ Before finalizing any color choice, verify:
 ## 9. Anti-Patterns to Avoid
 
 ### ❌ DON'T:
+
 - Copy the same hex codes every project
 - Default to purple/violet (AI tendency)
 - Default to dark mode + neon (AI tendency)
@@ -299,6 +309,7 @@ Before finalizing any color choice, verify:
 - Skip asking user preference
 
 ### ✅ DO:
+
 - Generate fresh palette per project
 - Ask user about color preferences
 - Consider industry and audience

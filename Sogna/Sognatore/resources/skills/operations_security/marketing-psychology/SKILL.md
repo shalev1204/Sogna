@@ -150,9 +150,11 @@ When applying psychology, **always use this structure**:
 **PLFS:** `+13` (High-confidence lever)
 
 * **Why it works (psychology)**
+
   Too many options overload cognitive processing and increase avoidance.
 
 * **Behavior targeted**
+
   Pricing decision → plan selection
 
 * **Where to apply**
@@ -173,6 +175,7 @@ When applying psychology, **always use this structure**:
   * Recommended vs neutral presentation
 
 * **Ethical guardrail**
+
   Do not hide critical pricing information or mislead via dark patterns.
 
 ---
@@ -259,16 +262,18 @@ Before responding, confirm:
 
 ---
 
-
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,7 +7,6 @@ id: skill-odoo-project-timesheet
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Project & Timesheet
 
 ## Overview
@@ -74,6 +73,7 @@ Menu: Timesheets → Configuration → Settings
   ☑ Timesheet Approval  (employees submit; managers approve)
 
 Approval flow:
+
   1. Employee submits timesheet at week/month end
   2. Manager reviews: Timesheets → Managers → Timesheets to Approve
   3. Manager clicks "Approve" → entries are locked and billable
@@ -119,6 +119,7 @@ Step 3: Invoice pre-populates with:
 - Timesheet entries logged outside an active project-task pair (e.g., on internal projects) are not assignable to customer invoices without custom configuration.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

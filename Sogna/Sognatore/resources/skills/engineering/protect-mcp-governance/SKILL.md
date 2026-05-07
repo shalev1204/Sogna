@@ -10,7 +10,6 @@ id: skill-protect-mcp-governance
 owner: [[orchestrator]]
 ---
 
-
 # MCP Agent Governance with protect-mcp
 
 ## Overview
@@ -104,10 +103,13 @@ The receipt format follows [IETF Internet-Draft draft-farley-acta-signed-receipt
 ### 1. Initialize Governance for a Project
 
 ```bash
+
 # Install and initialize hooks (Claude Code integration)
+
 npx protect-mcp init-hooks
 
 # Or run as a standalone MCP gateway
+
 npx protect-mcp serve
 ```
 
@@ -129,7 +131,9 @@ permit(
 ### 3. Run in Shadow Mode (Observe First)
 
 ```bash
+
 # Shadow mode is the default — logs decisions without blocking
+
 npx protect-mcp --policy policy.cedar -- node your-mcp-server.js
 ```
 
@@ -176,13 +180,17 @@ npx protect-mcp --policy policy.cedar --enforce -- node your-mcp-server.js
 ### 5. Verify Receipts
 
 ```bash
+
 # Verify a single receipt
+
 npx @veritasacta/verify receipt.json --key <public-key-hex>
 
 # Verify an audit bundle (multiple receipts + keys)
+
 npx @veritasacta/verify bundle.json --bundle
 
 # Self-test the verifier (proves it works offline)
+
 npx @veritasacta/verify --self-test
 ```
 
@@ -193,11 +201,15 @@ Exit codes: `0` = signature valid (proven authentic), `1` = signature invalid (p
 ### Example 1: Governance for a Claude Code Session
 
 ```bash
+
 # Initialize hooks
+
 npx protect-mcp init-hooks
 
 # Claude Code now generates a signed receipt for every tool call.
+
 # Receipts are stored in .protect-mcp/receipts/
+
 ```
 
 **Explanation:** After initialization, every tool call Claude Code makes is logged with a signed receipt. No tool calls are blocked (shadow mode).
@@ -236,17 +248,25 @@ forbid(
 ### Example 3: Verify an Audit Bundle After an Incident
 
 ```bash
+
 # Export the session's audit bundle
+
 npx protect-mcp export-bundle --session sess_abc123 --out audit.json
 
 # Verify every receipt in the bundle
+
 npx @veritasacta/verify audit.json --bundle
 
 # Expected output:
+
 # ✓ Bundle: VALID
+
 #   Total:    47
+
 #   Passed:   47
+
 #   Failed:   0
+
 ```
 
 **Explanation:** After an incident, export the audit bundle and verify that no receipts have been tampered with. The bundle contains all receipts from the session plus the signing keys needed for verification.
@@ -264,14 +284,17 @@ npx @veritasacta/verify audit.json --bundle
 ## Troubleshooting
 
 ### Problem: Receipts fail verification with `no_public_key`
+
 **Symptoms:** `npx @veritasacta/verify receipt.json` returns exit 2 with `no_public_key`
 **Solution:** Provide the public key explicitly: `--key <64 hex chars>`. The receipt does not embed the public key by default. Check `protect-mcp.config.json` for the issuer's public key.
 
 ### Problem: Shadow mode shows unexpected denials
+
 **Symptoms:** Shadow log shows `deny` decisions for tools you expected to be allowed
 **Solution:** Check your Cedar policy ordering. Cedar evaluates `forbid` rules before `permit` rules — a broad `forbid` will override specific `permit` rules.
 
 ### Problem: Enforce mode blocks a legitimate tool call
+
 **Symptoms:** Agent reports a tool call was denied after switching to enforce mode
 **Solution:** Add the tool to your permit policy or switch back to shadow mode: remove `--enforce` flag. Review the receipt's `deny_reason` field for the specific policy violation.
 
@@ -289,6 +312,7 @@ npx @veritasacta/verify audit.json --bundle
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

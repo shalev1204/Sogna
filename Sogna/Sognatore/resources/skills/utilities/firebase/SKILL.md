@@ -10,7 +10,6 @@ id: skill-firebase
 owner: [[orchestrator]]
 ---
 
-
 # Firebase
 
 Firebase gives you a complete backend in minutes - auth, database, storage,
@@ -536,6 +535,7 @@ When to use popup vs redirect for OAuth
 **When to use**: Choosing authentication flow
 
 # Popup: Desktop, SPA (simpler, can be blocked)
+
 # Redirect: Mobile, iOS Safari (always works)
 
 async function signIn(provider) {
@@ -685,6 +685,7 @@ const isAdmin = claims.admin === true;
 Works well with: `nextjs-app-router`, `react-patterns`, `authentication-oauth`, `stripe`
 
 ## When to Use
+
 - User mentions or implies: firebase
 - User mentions or implies: firestore
 - User mentions or implies: firebase auth
@@ -697,11 +698,13 @@ Works well with: `nextjs-app-router`, `react-patterns`, `authentication-oauth`, 
 - User mentions or implies: firebase admin
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

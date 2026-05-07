@@ -62,7 +62,7 @@ export function inView(
         threshold: typeof amount === "number" ? amount : thresholds[amount],
     })
 
-    elements.forEach((element) => observer.observe(element))
+    elements.forEach((element: Element) => observer.observe(element))
 
     return () => observer.disconnect()
 }

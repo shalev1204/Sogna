@@ -1,20 +1,20 @@
-import { GetValueAsType as getValueAsType } from "../../../value/types/utils/get-as-type.js";
-import { NumberValueTypes as numberValueTypes } from "../../../value/types/maps/number.js";
-import { TransformPropOrder as transformPropOrder } from "../../utils/keys-transform.js";
+import { getValueAsType } from "../../../value/types/utils/get-as-type.js";
+import { NumberValueTypes } from "../../../value/types/maps/number.js";
+import { TransformPropOrder } from "../../utils/keys-transform.js";
 const translateAlias = {
     x: "translateX",
     y: "translateY",
     z: "translateZ",
     transformPerspective: "perspective",
 };
-const numTransforms = transformPropOrder.length;
+const numTransforms = TransformPropOrder.length;
 /**
  * Build a CSS transform style from individual x/y/scale etc properties.
  *
  * This outputs with a default order of transforms/scales/rotations, this can be customised by
  * providing a transformTemplate function.
  */
-export function BuildTransform(latestValues, transform, transformTemplate) {
+export function buildTransform(latestValues, transform, transformTemplate) {
     // The transform string we're going to build into.
     let transformString = "";
     let transformIsDefault = true;
@@ -23,7 +23,7 @@ export function BuildTransform(latestValues, transform, transformTemplate) {
      * are present to the transform string.
      */
     for (let i = 0; i < numTransforms; i++) {
-        const key = transformPropOrder[i];
+        const key = TransformPropOrder[i];
         const value = latestValues[key];
         if (value === undefined)
             continue;
@@ -36,7 +36,7 @@ export function BuildTransform(latestValues, transform, transformTemplate) {
             valueIsDefault = key.startsWith("scale") ? parsed === 1 : parsed === 0;
         }
         if (!valueIsDefault || transformTemplate) {
-            const valueAsType = getValueAsType(value, numberValueTypes[key]);
+            const valueAsType = getValueAsType(value, NumberValueTypes[key]);
             if (!valueIsDefault) {
                 transformIsDefault = false;
                 const transformName = translateAlias[key] || key;

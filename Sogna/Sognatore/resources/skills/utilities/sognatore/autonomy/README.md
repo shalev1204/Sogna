@@ -12,14 +12,18 @@ Single script that handles everything: prerequisites, setup, Vibe Kanban monitor
 ## Quick Start
 
 ```bash
+
 # Run with a PRD
+
 ./autonomy/run.sh ./docs/requirements.md
 
 # Run interactively
+
 ./autonomy/run.sh
 ```
 
 That's it! The script will:
+
 1. Check all prerequisites (Claude CLI, Python, Git, etc.)
 2. Verify skill installation
 3. Initialize the `.sognatore/` directory
@@ -65,10 +69,13 @@ Monitor: watch -n 2 cat .sognatore/STATUS.txt
 ### Monitor in Another Terminal
 
 ```bash
+
 # Watch status updates live
+
 watch -n 2 cat .sognatore/STATUS.txt
 
 # Or view once
+
 cat .sognatore/STATUS.txt
 ```
 
@@ -89,15 +96,19 @@ cat .sognatore/STATUS.txt
 Environment variables:
 
 ```bash
+
 # Retry settings
+
 export SOGNATORE_MAX_RETRIES=50      # Max retry attempts (default: 50)
 export SOGNATORE_BASE_WAIT=60        # Base wait time in seconds (default: 60)
 export SOGNATORE_MAX_WAIT=3600       # Max wait time in seconds (default: 3600)
 
 # Skip prerequisite checks (for CI/CD or repeat runs)
+
 export SOGNATORE_SKIP_PREREQS=true
 
 # Run with custom settings
+
 SOGNATORE_MAX_RETRIES=100 SOGNATORE_BASE_WAIT=120 ./autonomy/run.sh ./docs/prd.md
 ```
 
@@ -159,7 +170,9 @@ The autonomy runner creates:
 If you stop the script (Ctrl+C) or it crashes, just run it again:
 
 ```bash
+
 # State is saved, will resume from last checkpoint
+
 ./autonomy/run.sh ./docs/requirements.md
 ```
 
@@ -179,36 +192,49 @@ The script detects the previous state and continues from where it left off.
 ## Troubleshooting
 
 ### "Claude Code CLI not found"
+
 ```bash
 npm install -g @anthropic-ai/claude-code
+
 # or visit https://claude.ai/code
+
 ```
 
 ### "SKILL.md not found"
+
 Make sure you're running from the sognatore directory or have installed the skill:
 ```bash
+
 # Option 1: Run from project directory
+
 cd /path/to/sognatore
 ./autonomy/run.sh
 
 # Option 2: Install skill globally
+
 cp -r . ~/.claude/skills/sognatore/
 ```
 
 ### "Max retries exceeded"
+
 The task is taking too long or repeatedly failing. Check:
 ```bash
+
 # View logs
+
 cat .sognatore/logs/autonomy-*.log | tail -100
 
 # Check orchestrator state
+
 cat .sognatore/state/orchestrator.json
 
 # Increase retries
+
 SOGNATORE_MAX_RETRIES=200 ./autonomy/run.sh ./docs/prd.md
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

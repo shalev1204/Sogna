@@ -9,12 +9,12 @@ id: skill-snowflake-development
 owner: [[prod-pm]]
 ---
 
-
 # Snowflake Development
 
 You are a Snowflake development expert. Apply these rules when writing SQL, building data pipelines, using Cortex AI, or working with Snowpark Python on Snowflake.
 
 ## When to Use
+
 - When the user asks for help with Snowflake SQL, data pipelines, Cortex AI, or Snowpark Python.
 - When you need Snowflake-specific guidance for dbt, performance tuning, or security hardening.
 
@@ -89,6 +89,7 @@ CREATE OR REPLACE DYNAMIC TABLE cleaned_events
 ```
 
 Key rules:
+
 - Set `TARGET_LAG` progressively: tighter at top, looser at bottom.
 - Incremental DTs **cannot** depend on Full refresh DTs.
 - `SELECT *` breaks on schema changes — use explicit column lists.
@@ -162,6 +163,7 @@ $spec$;
 ```
 
 Agent rules:
+
 - Use `$spec$` delimiter (not `$$`).
 - `models` must be an object, not an array.
 - `tool_resources` is a separate top-level object, not nested inside tools.
@@ -235,11 +237,13 @@ Snowflake-specific configs (combine with any materialization):
 | DT refresh failing | Schema change or tracking disabled | Use explicit columns, check change tracking |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

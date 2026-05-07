@@ -8,7 +8,6 @@ id: skill-cc-skill-clickhouse-io
 owner: [[orchestrator]]
 ---
 
-
 # ClickHouse Analytics Patterns
 
 ClickHouse-specific patterns for high-performance analytics and data engineering.
@@ -18,6 +17,7 @@ ClickHouse-specific patterns for high-performance analytics and data engineering
 ClickHouse is a column-oriented database management system (DBMS) for online analytical processing (OLAP). It's optimized for fast analytical queries on large datasets.
 
 **Key Features:**
+
 - Column-oriented storage
 - Data compression
 - Parallel query execution
@@ -406,27 +406,32 @@ pgClient.on('notification', async (msg) => {
 ## Best Practices
 
 ### 1. Partitioning Strategy
+
 - Partition by time (usually month or day)
 - Avoid too many partitions (performance impact)
 - Use DATE type for partition key
 
 ### 2. Ordering Key
+
 - Put most frequently filtered columns first
 - Consider cardinality (high cardinality first)
 - Order impacts compression
 
 ### 3. Data Types
+
 - Use smallest appropriate type (UInt32 vs UInt64)
 - Use LowCardinality for repeated strings
 - Use Enum for categorical data
 
 ### 4. Avoid
+
 - SELECT * (specify columns)
 - FINAL (merge data before query instead)
 - Too many JOINs (denormalize for analytics)
 - Small frequent inserts (batch instead)
 
 ### 5. Monitoring
+
 - Track query performance
 - Monitor disk usage
 - Check merge operations
@@ -435,14 +440,17 @@ pgClient.on('notification', async (msg) => {
 **Remember**: ClickHouse excels at analytical workloads. Design tables for your query patterns, batch inserts, and leverage materialized views for real-time aggregations.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

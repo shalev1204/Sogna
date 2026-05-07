@@ -17,7 +17,9 @@ Use `@DBOS.scheduled` to run workflows on a schedule. Workflows run exactly once
 **Incorrect (manual scheduling):**
 
 ```python
+
 # Don't use external cron or manual timers
+
 import schedule
 schedule.every(1).minute.do(my_task)
 ```
@@ -38,6 +40,7 @@ def periodic_cleanup(scheduled_time, actual_time):
 ```
 
 Scheduled workflow requirements:
+
 - Must have `@DBOS.scheduled` decorator with crontab syntax
 - Must accept two arguments: `scheduled_time` and `actual_time` (both `datetime`)
 - Main thread must stay alive for scheduled workflows
@@ -53,6 +56,7 @@ if __name__ == "__main__":
 ```
 
 Crontab format: `minute hour day month weekday`
+
 - `* * * * *` = every minute
 - `0 * * * *` = every hour
 - `0 0 * * *` = daily at midnight
@@ -61,6 +65,7 @@ Crontab format: `minute hour day month weekday`
 Reference: [Scheduled Workflows](https://docs.dbos.dev/python/tutorials/scheduled-workflows)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

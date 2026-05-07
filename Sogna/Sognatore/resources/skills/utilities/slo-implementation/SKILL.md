@@ -8,7 +8,6 @@ id: skill-slo-implementation
 owner: [[orchestrator]]
 ---
 
-
 # SLO Implementation
 
 Framework for defining and implementing Service Level Indicators (SLIs), Service Level Objectives (SLOs), and error budgets.
@@ -53,24 +52,33 @@ SLI (Service Level Indicator)
 ### Common SLI Types
 
 #### 1. Availability SLI
+
 ```promql
+
 # Successful requests / Total requests
+
 sum(rate(http_requests_total{status!~"5.."}[28d]))
 /
 sum(rate(http_requests_total[28d]))
 ```
 
 #### 2. Latency SLI
+
 ```promql
+
 # Requests below latency threshold / Total requests
+
 sum(rate(http_request_duration_seconds_bucket{le="0.5"}[28d]))
 /
 sum(rate(http_request_duration_seconds_count[28d]))
 ```
 
 #### 3. Durability SLI
+
 ```
+
 # Successful writes / Total writes
+
 sum(storage_writes_successful_total)
 /
 sum(storage_writes_total)
@@ -92,6 +100,7 @@ sum(storage_writes_total)
 ### Choose Appropriate SLOs
 
 **Consider:**
+
 - User expectations
 - Business requirements
 - Current performance
@@ -101,7 +110,9 @@ sum(storage_writes_total)
 **Example SLOs:**
 ```yaml
 slos:
+
   - name: api_availability
+
     target: 99.9
     window: 28d
     sli: |
@@ -110,6 +121,7 @@ slos:
       sum(rate(http_requests_total[28d]))
 
   - name: api_latency_p95
+
     target: 99
     window: 28d
     sli: |
@@ -127,6 +139,7 @@ Error Budget = 1 - SLO Target
 ```
 
 **Example:**
+
 - SLO: 99.9% availability
 - Error Budget: 0.1% = 43.2 minutes/month
 - Current Error: 0.05% = 21.6 minutes/month
@@ -136,13 +149,21 @@ Error Budget = 1 - SLO Target
 
 ```yaml
 error_budget_policy:
+
   - remaining_budget: 100%
+
     action: Normal development velocity
+
   - remaining_budget: 50%
+
     action: Consider postponing risky changes
+
   - remaining_budget: 10%
+
     action: Freeze non-critical changes
+
   - remaining_budget: 0%
+
     action: Feature freeze, focus on reliability
 ```
 
@@ -153,42 +174,58 @@ error_budget_policy:
 ### Prometheus Recording Rules
 
 ```yaml
+
 # SLI Recording Rules
+
 groups:
+
   - name: sli_rules
+
     interval: 30s
     rules:
       # Availability SLI
+
       - record: sli:http_availability:ratio
+
         expr: |
           sum(rate(http_requests_total{status!~"5.."}[28d]))
           /
           sum(rate(http_requests_total[28d]))
 
       # Latency SLI (requests < 500ms)
+
       - record: sli:http_latency:ratio
+
         expr: |
           sum(rate(http_request_duration_seconds_bucket{le="0.5"}[28d]))
           /
           sum(rate(http_request_duration_seconds_count[28d]))
 
   - name: slo_rules
+
     interval: 5m
     rules:
       # SLO compliance (1 = meeting SLO, 0 = violating)
+
       - record: slo:http_availability:compliance
+
         expr: sli:http_availability:ratio >= bool 0.999
 
       - record: slo:http_latency:compliance
+
         expr: sli:http_latency:ratio >= bool 0.99
 
       # Error budget remaining (percentage)
+
       - record: slo:http_availability:error_budget_remaining
+
         expr: |
           (sli:http_availability:ratio - 0.999) / (1 - 0.999) * 100
 
       # Error budget burn rate
+
       - record: slo:http_availability:burn_rate_5m
+
         expr: |
           (1 - (
             sum(rate(http_requests_total{status!~"5.."}[5m]))
@@ -201,12 +238,16 @@ groups:
 
 ```yaml
 groups:
+
   - name: slo_alerts
+
     interval: 1m
     rules:
       # Fast burn: 14.4x rate, 1 hour window
       # Consumes 2% error budget in 1 hour
+
       - alert: SLOErrorBudgetBurnFast
+
         expr: |
           slo:http_availability:burn_rate_1h > 14.4
           and
@@ -220,7 +261,9 @@ groups:
 
       # Slow burn: 6x rate, 6 hour window
       # Consumes 5% error budget in 6 hours
+
       - alert: SLOErrorBudgetBurnSlow
+
         expr: |
           slo:http_availability:burn_rate_6h > 6
           and
@@ -233,7 +276,9 @@ groups:
           description: "Error budget burning at {{ $value }}x rate"
 
       # Error budget exhausted
+
       - alert: SLOErrorBudgetExhausted
+
         expr: slo:http_availability:error_budget_remaining < 0
         for: 5m
         labels:
@@ -266,15 +311,21 @@ groups:
 **Example Queries:**
 
 ```promql
+
 # Current SLO compliance
+
 sli:http_availability:ratio * 100
 
 # Error budget remaining
+
 slo:http_availability:error_budget_remaining
 
 # Days until error budget exhausted (at current burn rate)
+
 (slo:http_availability:error_budget_remaining / 100)
+
 *
+
 28
 /
 (1 - sli:http_availability:ratio) * (1 - 0.999)
@@ -283,9 +334,13 @@ slo:http_availability:error_budget_remaining
 ## Multi-Window Burn Rate Alerts
 
 ```yaml
+
 # Combination of short and long windows reduces false positives
+
 rules:
+
   - alert: SLOBurnRateHigh
+
     expr: |
       (
         slo:http_availability:burn_rate_1h > 14.4
@@ -305,18 +360,21 @@ rules:
 ## SLO Review Process
 
 ### Weekly Review
+
 - Current SLO compliance
 - Error budget status
 - Trend analysis
 - Incident impact
 
 ### Monthly Review
+
 - SLO achievement
 - Error budget usage
 - Incident postmortems
 - SLO adjustments
 
 ### Quarterly Review
+
 - SLO relevance
 - Target adjustments
 - Process improvements
@@ -347,11 +405,13 @@ rules:
 - `grafana-dashboards` - For SLO visualization
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

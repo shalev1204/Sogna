@@ -8,12 +8,12 @@ id: skill-gemini-api-dev
 owner: [[eng-api]]
 ---
 
-
 # Gemini API Development Skill
 
 ## Overview
 
 The Gemini API provides access to Google's most advanced AI models. Key capabilities include:
+
 - **Text generation** - Chat, completion, summarization
 - **Multimodal understanding** - Process images, audio, video, and documents
 - **Function calling** - Let the model invoke your functions
@@ -27,7 +27,6 @@ The Gemini API provides access to Google's most advanced AI models. Key capabili
 - `gemini-3-pro-preview`: 1M tokens, complex reasoning, coding, research
 - `gemini-3-flash-preview`: 1M tokens, fast, balanced performance, multimodal
 - `gemini-3-pro-image-preview`: 65k / 32k tokens, image generation and editing
-
 
 > [!IMPORTANT]
 > Models like `gemini-2.5-*`, `gemini-2.0-*`, `gemini-1.5-*` are legacy and deprecated. Use the new models above. Your knowledge is outdated.
@@ -44,6 +43,7 @@ The Gemini API provides access to Google's most advanced AI models. Key capabili
 ## Quick Start
 
 ### Python
+
 ```python
 from google import genai
 
@@ -56,6 +56,7 @@ print(response.text)
 ```
 
 ### JavaScript/TypeScript
+
 ```typescript
 import { GoogleGenAI } from "@google/genai";
 
@@ -68,6 +69,7 @@ console.log(response.text);
 ```
 
 ### Go
+
 ```go
 package main
 
@@ -99,8 +101,11 @@ func main() {
 **Always use the latest REST API discovery spec as the source of truth for API definitions** (request/response schemas, parameters, methods). Fetch the spec when implementing or debugging API integration:
 
 - **v1beta** (default): `https://generativelanguage.googleapis.com/$discovery/rest?version=v1beta`  
+
   Use this unless the integration is explicitly pinned to v1. The official SDKs (google-genai, @google/genai, google.golang.org/genai) target v1beta.
+
 - **v1**: `https://generativelanguage.googleapis.com/$discovery/rest?version=v1`  
+
   Use only when the integration is specifically set to v1.
 
 When in doubt, use v1beta. Refer to the spec for exact field names, types, and supported operations.
@@ -135,14 +140,17 @@ This index contains links to all documentation pages in `.md.txt` format. Use we
 - [SDK migration guide](https://ai.google.dev/gemini-api/docs/migrate.md.txt)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

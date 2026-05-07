@@ -90,6 +90,7 @@ export function getAuditContext(): AuditContext | null {
 ```
 
 **Benefits:**
+
 - Context propagates through entire request
 - No need to pass context through every function
 - Automatically available in services, repositories
@@ -215,11 +216,13 @@ app.use(Sentry.Handlers.errorHandler());
 ---
 
 **Related Files:**
+
 - SKILL.md
 - [routing-and-controllers.md](routing-and-controllers.md)
 - [async-and-errors.md](async-and-errors.md)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

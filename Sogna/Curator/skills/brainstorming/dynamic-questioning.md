@@ -17,6 +17,7 @@ A good question is not "What color do you want?" but:
 ✅ GOOD: "Should users sign up with email/password or social login?
 
    Impact:
+
    - Email/Pass → Need password reset, hashing, 2FA infrastructure
    - Social → OAuth providers, user profile mapping, less control
 
@@ -145,6 +146,7 @@ Based on your request for [DOMAIN] [FEATURE]:
 **Question:** [Clear, specific question]
 
 **Why This Matters:**
+
 - [Explain architectural consequence]
 - [Affects: cost / complexity / timeline / scale]
 
@@ -161,6 +163,7 @@ Based on your request for [DOMAIN] [FEATURE]:
 ## 🟡 HIGH-LEVERAGE (Affects Implementation)
 
 ### 2. **[DECISION POINT]**
+
 [Same format]
 
 ---
@@ -168,6 +171,7 @@ Based on your request for [DOMAIN] [FEATURE]:
 ## 🟢 NICE-TO-HAVE (Edge Cases)
 
 ### 3. **[DECISION POINT]**
+
 [Same format]
 ```
 
@@ -176,15 +180,20 @@ Based on your request for [DOMAIN] [FEATURE]:
 ## 🔄 Iterative Questioning
 
 ### First Pass (3-5 Questions)
+
 Focus on **blocking decisions**. Don't proceed without answers.
 
 ### Second Pass (After Initial Implementation)
+
 As patterns emerge, ask:
+
 - "This feature implies [X]. Should we handle [edge case] now or defer?"
 - "We're using [Pattern A]. Should [Feature B] follow the same pattern?"
 
 ### Third Pass (Optimization)
+
 When functionality works:
+
 - "Performance bottleneck at [X]. Optimize now or acceptable for now?"
 - "Refactor [Y] for maintainability or ship as-is?"
 
@@ -209,15 +218,18 @@ STEP 2: Decision Points
 STEP 3: Generate Questions (Priority)
 
 P0 (Blocking):
+
 1. Storage Strategy → Affects architecture, cost, speed
 2. Feed Algorithm → Affects database queries, complexity
 3. Auth Method → Affects dev time, UX, security
 
 P1 (High-leverage):
+
 4. Real-time Notifications → WebSocket vs polling
 5. Media Processing → Client-side vs server-side optimization
 
 P2 (Deferable):
+
 6. Story/Reels → Major feature creep, defer to v2
 7. DM/Chat → Separate subsystem, defer to v2
 
@@ -238,6 +250,7 @@ Based on your Instagram clone request:
 **Question:** Where will user photos be stored and served?
 
 **Why This Matters:**
+
 - Affects: Monthly hosting costs, page load speed, CDN complexity
 - High-volume social apps: 1000 users × 10 photos × 2MB = 20GB storage
 
@@ -258,6 +271,7 @@ Based on your Instagram clone request:
 **Question:** How should the main feed work?
 
 **Why This Matters:**
+
 - Affects: Database query complexity, caching strategy, development time
 - Algorithmic feeds require ML infrastructure, ranking signals
 
@@ -277,6 +291,7 @@ Based on your Instagram clone request:
 **Question:** How do users sign up and login?
 
 **Why This Matters:**
+
 - Affects: Development time (2-5 hours), security posture, UX friction
 
 **Options:**
@@ -298,6 +313,7 @@ Based on your Instagram clone request:
 **Question:** Do users need instant notifications for likes/comments?
 
 **Why This Matters:**
+
 - WebSocket adds infrastructure complexity (Redis pub/sub for scaling)
 - Polling is simpler but higher latency
 
@@ -315,10 +331,12 @@ Based on your Instagram clone request:
 ## 🟢 NICE-TO-HAVE (Defer to v2)
 
 ### 5. **Video/Reels Support**
+
 - Major complexity (video processing, streaming infrastructure)
 - Recommendation: Launch with photos only, add video after validation
 
 ### 6. **Direct Messaging**
+
 - Separate subsystem (chat infrastructure different from feed)
 - Recommendation: Use Pusher/Stream for real-time or defer entirely
 

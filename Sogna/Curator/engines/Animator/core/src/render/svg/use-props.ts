@@ -2,7 +2,7 @@
 
 import { buildSVGAttrs, isSVGTag } from "sognaflow-dom"
 import { useMemo } from "react"
-import { sognaflowProps } from "../../sognaflow/types"
+import { sognaflowProps } from "../../motion/types"
 import { copyRawValuesOnly } from "../html/use-props.js"
 import { ResolvedValues } from "../types.js"
 import { createSvgRenderState } from "./utils/create-render-state.js"
@@ -20,7 +20,7 @@ export function useSVGProps(
             state,
             visualState,
             isSVGTag(Component),
-            props.transformTemplate,
+            (props as any).transformTemplate,
             props.style
         )
 

@@ -11,7 +11,6 @@ id: skill-uxui-principles
 owner: [[ops-security]]
 ---
 
-
 # UX/UI Principles
 
 A collection of 5 agent skills for evaluating interfaces against 168 research-backed UX/UI principles, detecting antipatterns, and injecting UX context into AI-assisted design and coding sessions.
@@ -29,6 +28,7 @@ A collection of 5 agent skills for evaluating interfaces against 168 research-ba
 | `vibe-coding-advisor` | Inject UX context into vibe coding sessions before implementation |
 
 ## When to Use
+
 - Auditing an existing interface for UX issues
 - Checking if a UI follows research-backed best practices
 - Detecting antipatterns and UX smells in designs
@@ -49,11 +49,13 @@ npx skills add uxuiprinciples/agent-skills
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

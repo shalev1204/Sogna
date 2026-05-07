@@ -45,3 +45,4 @@ export declare function FollowValue<T extends AnyResolvedKeyframe>(source: T | S
  * @public
  */
 export declare function AttachFollow<T extends AnyResolvedKeyframe>(value: SognaflowValue<T>, source: T | SognaflowValue<T>, options?: FollowValueOptions): VoidFunction;
+export { FollowValue as followValue, AttachFollow as attachFollow };

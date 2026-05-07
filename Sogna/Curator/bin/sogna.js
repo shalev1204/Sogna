@@ -13,7 +13,7 @@ const NODE_MODULES = path.join(SOGNATORE_PATH, 'node_modules');
 import chalk from 'chalk';
 import { program } from 'commander';
 import fs from 'fs-extra';
-const uma = require('../shared/uma_bridge.cjs.js');
+const uma = require('../shared/uma_bridge.cjs');
 
 program
   .name('Sogna')

@@ -42,6 +42,7 @@ Or in Play Settings (Spline editor → Export → Play Settings), **disable "Pag
 **Why:** The background color is set to white by default in Spline's export settings.
 
 **Fix:**
+
 1. In Spline editor → Export → Play Settings → toggle **Hide Background** ON
 2. Click **Generate Draft** or **Promote to Production** — the URL does NOT auto-update with new settings
 3. Copy the new URL
@@ -213,6 +214,7 @@ Note: CSS-based hiding may break with Spline updates. The paid plan is the relia
 **Why:** Browser security blocks cross-origin requests in some environments (especially localhost dev servers with certain configurations).
 
 **Fix — self-host the scene file:**
+
 1. In Spline → Export → Code Export → click the download icon next to the URL
 2. Download the `.splinecode` file
 3. Host it on your own server or CDN (same origin as your site)
@@ -246,6 +248,7 @@ const Spline = dynamic(() => import('@splinetool/react-spline/next'), {
 **Why:** The `prod.spline.design` URL is a snapshot. It does **not** auto-update when you make changes.
 
 **Fix:** Every time you make changes in the Spline editor, you must:
+
 1. Go to Export → Code Export
 2. Click **"Promote to Production"** (or "Generate Draft" for a new draft URL)
 3. The existing prod URL will now serve the updated scene — no need to change the URL in your code
@@ -269,6 +272,7 @@ const Spline = dynamic(() => import('@splinetool/react-spline/next'), {
 | Old scene still showing | Didn't promote to production | Click "Promote to Production" in Spline editor |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

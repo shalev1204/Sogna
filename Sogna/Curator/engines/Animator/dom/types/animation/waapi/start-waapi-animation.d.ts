@@ -1,2 +1,2 @@
 import { ValueKeyframesDefinition, ValueTransition } from "../types.js";
-export declare function StartWaapiAnimation(element: Element, valueName: string, keyframes: ValueKeyframesDefinition, { delay, duration, repeat, repeatType, ease, times, }?: ValueTransition, pseudoElement?: string | undefined): Animation;
+export declare function startWaapiAnimation(element: Element, valueName: string, keyframes: ValueKeyframesDefinition, { delay, duration, repeat, repeatType, ease, times, }?: ValueTransition, pseudoElement?: string | undefined): Animation;

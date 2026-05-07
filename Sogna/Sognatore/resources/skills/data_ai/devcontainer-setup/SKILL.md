@@ -8,12 +8,12 @@ id: skill-devcontainer-setup
 owner: [[orchestrator]]
 ---
 
-
 # Devcontainer Setup Skill
 
 Creates a pre-configured devcontainer with Claude Code and language-specific tooling.
 
 ## When to Use
+
 - User asks to "set up a devcontainer" or "add devcontainer support"
 - User wants a sandboxed Claude Code development environment
 - User needs isolated development environments with persistent configuration
@@ -114,7 +114,9 @@ The base template includes:
 The base Dockerfile already includes Python 3.13 via uv. If a different version is required (detected from `pyproject.toml`), modify the Python installation:
 
 ```dockerfile
+
 # Install Python via uv (fast binary download, not source compilation)
+
 RUN uv python install <version> --default
 ```
 
@@ -170,6 +172,7 @@ Add to `customizations.vscode.settings`:
 
 **postCreateCommand:**
 Detect package manager from lockfile and chain with base command:
+
 - `pnpm-lock.yaml` → `uv run /opt/post_install.py && pnpm install --frozen-lockfile`
 - `yarn.lock` → `uv run /opt/post_install.py && yarn install --frozen-lockfile`
 - `package-lock.json` → `uv run /opt/post_install.py && npm ci`
@@ -251,6 +254,7 @@ uv run /opt/post_install.py && go mod download
 ## Reference Material
 
 For additional guidance, see:
+
 - `references/dockerfile-best-practices.md` - Layer optimization, multi-stage builds, architecture support
 - `references/features-vs-dockerfile.md` - When to use devcontainer features vs custom Dockerfile
 
@@ -267,6 +271,7 @@ Pattern for new mounts in `devcontainer.json`:
 ```
 
 Common additions:
+
 - `source={{PROJECT_SLUG}}-cargo-${devcontainerId},target=/home/vscode/.cargo,type=volume` (Rust)
 - `source={{PROJECT_SLUG}}-go-${devcontainerId},target=/home/vscode/go,type=volume` (Go)
 
@@ -305,11 +310,13 @@ After generating, inform the user:
 3. CLI helper: Run `.devcontainer/install.sh self-install` to add the `devc` command to PATH
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -14,13 +14,17 @@ This document demonstrates common workflows for publishing research papers on Hu
 If you've already published a paper on arXiv and want to make it discoverable on Hugging Face:
 
 ```bash
+
 # Check if paper exists
+
 uv run scripts/paper_manager.py check --arxiv-id "2301.12345"
 
 # Index the paper
+
 uv run scripts/paper_manager.py index --arxiv-id "2301.12345"
 
 # Get paper information
+
 uv run scripts/paper_manager.py info --arxiv-id "2301.12345"
 ```
 
@@ -39,13 +43,16 @@ Expected output:
 After indexing a paper, link it to your model repository:
 
 ```bash
+
 # Link single paper
+
 uv run scripts/paper_manager.py link \
   --repo-id "username/my-awesome-model" \
   --repo-type "model" \
   --arxiv-id "2301.12345"
 
 # Link multiple papers
+
 uv run scripts/paper_manager.py link \
   --repo-id "username/my-awesome-model" \
   --repo-type "model" \
@@ -53,6 +60,7 @@ uv run scripts/paper_manager.py link \
 ```
 
 This will:
+
 1. Download the model's README.md
 2. Add or update YAML frontmatter
 3. Insert paper references with links
@@ -76,7 +84,9 @@ uv run scripts/paper_manager.py link \
 Generate a research paper from template:
 
 ```bash
+
 # Create with standard template
+
 uv run scripts/paper_manager.py create \
   --template "standard" \
   --title "Efficient Fine-Tuning of Large Language Models" \
@@ -85,12 +95,14 @@ uv run scripts/paper_manager.py create \
   --output "paper.md"
 
 # Create with modern template
+
 uv run scripts/paper_manager.py create \
   --template "modern" \
   --title "Vision Transformers for Medical Imaging" \
   --output "medical_vit_paper.md"
 
 # Create ML experiment report
+
 uv run scripts/paper_manager.py create \
   --template "ml-report" \
   --title "BERT Fine-tuning Experiment Results" \
@@ -102,7 +114,9 @@ uv run scripts/paper_manager.py create \
 Get formatted citations for papers:
 
 ```bash
+
 # BibTeX format
+
 uv run scripts/paper_manager.py citation \
   --arxiv-id "2301.12345" \
   --format "bibtex"
@@ -123,7 +137,9 @@ Output:
 Full workflow from paper creation to publication:
 
 ```bash
+
 # Step 1: Create research article
+
 uv run scripts/paper_manager.py create \
   --template "modern" \
   --title "Novel Architecture for Multimodal Learning" \
@@ -131,15 +147,19 @@ uv run scripts/paper_manager.py create \
   --output "multimodal_paper.md"
 
 # Step 2: Edit the paper (use your favorite editor)
+
 # vim multimodal_paper.md
 
 # Step 3: Submit to arXiv (external process)
+
 # Upload to arxiv.org, receive arXiv ID: 2312.99999
 
 # Step 4: Index on Hugging Face
+
 uv run scripts/paper_manager.py index --arxiv-id "2312.99999"
 
 # Step 5: Link to your models/datasets
+
 uv run scripts/paper_manager.py link \
   --repo-id "alice/multimodal-model-v1" \
   --repo-type "model" \
@@ -151,6 +171,7 @@ uv run scripts/paper_manager.py link \
   --arxiv-id "2312.99999"
 
 # Step 6: Generate citation for README
+
 uv run scripts/paper_manager.py citation \
   --arxiv-id "2312.99999" \
   --format "bibtex" > citation.bib
@@ -164,12 +185,15 @@ Link multiple papers to multiple repositories:
 #!/bin/bash
 
 # List of papers
+
 PAPERS=("2301.12345" "2302.67890" "2303.11111")
 
 # List of models
+
 MODELS=("username/model-a" "username/model-b" "username/model-c")
 
 # Link each paper to each model
+
 for paper in "${PAPERS[@]}"; do
   for model in "${MODELS[@]}"; do
     echo "Linking $paper to $model..."
@@ -186,21 +210,27 @@ done
 Get paper info and manually update model card:
 
 ```bash
+
 # Get paper information
+
 uv run scripts/paper_manager.py info \
   --arxiv-id "2301.12345" \
   --format "text" > paper_info.txt
 
 # View the information
+
 cat paper_info.txt
 
 # Manually incorporate into your model card or use the link command
+
 ```
 
 ## Example 9: Search and Discover Papers
 
 ```bash
+
 # Search for papers (opens browser)
+
 uv run scripts/paper_manager.py search \
   --query "transformer attention mechanism"
 ```
@@ -210,7 +240,9 @@ uv run scripts/paper_manager.py search \
 This skill complements [tfrere's research article template](https://huggingface.co/spaces/tfrere/research-article-template):
 
 ```bash
+
 # 1. Use tfrere's Space to create a beautiful web-based paper
+
 # Visit: https://huggingface.co/spaces/tfrere/research-article-template
 
 # 2. Export your paper content to markdown
@@ -218,6 +250,7 @@ This skill complements [tfrere's research article template](https://huggingface.
 # 3. Submit to arXiv
 
 # 4. Use this skill to index and link
+
 uv run scripts/paper_manager.py index --arxiv-id "YOUR_ARXIV_ID"
 uv run scripts/paper_manager.py link \
   --repo-id "your-username/your-model" \
@@ -227,7 +260,9 @@ uv run scripts/paper_manager.py link \
 ## Example 11: Error Handling
 
 ```bash
+
 # Check if paper exists before linking
+
 if uv run scripts/paper_manager.py check --arxiv-id "2301.12345" | grep -q '"exists": true'; then
   echo "Paper exists, proceeding with link..."
   uv run scripts/paper_manager.py link \
@@ -258,17 +293,21 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Set up uv
+
         uses: astral-sh/setup-uv@v5
 
       - name: Set up Python
+
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Link paper to model
+
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
@@ -294,35 +333,45 @@ jobs:
 ### Paper not found after indexing
 
 ```bash
+
 # Visit the URL directly to trigger indexing
+
 open "https://huggingface.co/papers/2301.12345"
 
 # Wait a few seconds, then check again
+
 uv run scripts/paper_manager.py check --arxiv-id "2301.12345"
 ```
 
 ### Permission denied when linking
 
 ```bash
+
 # Verify your token has write access
+
 echo $HF_TOKEN
 
 # Set token if missing
+
 export HF_TOKEN="your_token_here"
 
 # Or use .env file
+
 echo "HF_TOKEN=your_token_here" > .env
 ```
 
 ### arXiv ID format issues
 
 ```bash
+
 # The script handles various formats:
+
 uv run scripts/paper_manager.py check --arxiv-id "2301.12345"
 uv run scripts/paper_manager.py check --arxiv-id "arxiv:2301.12345"
 uv run scripts/paper_manager.py check --arxiv-id "https://arxiv.org/abs/2301.12345"
 
 # All are equivalent and will be normalized
+
 ```
 
 ## Next Steps
@@ -333,6 +382,7 @@ uv run scripts/paper_manager.py check --arxiv-id "https://arxiv.org/abs/2301.123
 - Learn about [model cards](https://huggingface.co/docs/hub/en/model-cards)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

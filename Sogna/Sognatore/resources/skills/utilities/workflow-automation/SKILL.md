@@ -11,7 +11,6 @@ id: skill-workflow-automation
 owner: [[orchestrator]]
 ---
 
-
 # Workflow Automation
 
 Workflow automation is the infrastructure that makes AI agents reliable.
@@ -81,6 +80,7 @@ Step 1 → Step 2 → Step 3 → Output
 """
 
 ## Inngest Example (TypeScript)
+
 """
 import { inngest } from "./client";
 
@@ -114,6 +114,7 @@ export const processOrder = inngest.createFunction(
 """
 
 ## Temporal Example (TypeScript)
+
 """
 import { proxyActivities } from '@temporalio/workflow';
 import type * as activities from './activities';
@@ -136,6 +137,7 @@ export async function processOrderWorkflow(order: Order): Promise<void> {
 """
 
 ## n8n Pattern
+
 """
 [Webhook: order.created]
     ↓
@@ -166,6 +168,7 @@ Input ──┼→ Step B ─┼→ Aggregate → Output
 """
 
 ## Inngest Example
+
 """
 export const analyzeDocument = inngest.createFunction(
   { id: "analyze-document" },
@@ -195,6 +198,7 @@ export const analyzeDocument = inngest.createFunction(
 """
 
 ## AWS Step Functions (Amazon States Language)
+
 """
 {
   "Type": "Parallel",
@@ -250,6 +254,7 @@ Central coordinator dispatches work to specialized workers
 """
 
 ## Temporal Example
+
 """
 export async function orchestratorWorkflow(task: ComplexTask) {
   // Orchestrator decides what work needs to be done
@@ -275,6 +280,7 @@ export async function orchestratorWorkflow(task: ComplexTask) {
 """
 
 ## Inngest with AI Orchestration
+
 """
 export const aiOrchestrator = inngest.createFunction(
   { id: "ai-orchestrator" },
@@ -316,6 +322,7 @@ Workflows triggered by events, not schedules
 # EVENT-DRIVEN TRIGGERS:
 
 ## Inngest Event-Based
+
 """
 // Define events with TypeScript types
 type Events = {
@@ -362,6 +369,7 @@ await inngest.send({
 """
 
 ## n8n Webhook Trigger
+
 """
 [Webhook: POST /api/webhooks/order]
     ↓
@@ -381,6 +389,7 @@ Automatic retry with backoff, dead letter handling
 # RETRY AND RECOVERY:
 
 ## Temporal Retry Configuration
+
 """
 const activities = proxyActivities<typeof activitiesType>({
   startToCloseTimeout: '30 seconds',
@@ -398,6 +407,7 @@ const activities = proxyActivities<typeof activitiesType>({
 """
 
 ## Inngest Retry Configuration
+
 """
 export const processPayment = inngest.createFunction(
   {
@@ -426,6 +436,7 @@ export const processPayment = inngest.createFunction(
 """
 
 ## Dead Letter Handling
+
 """
 // n8n: Use Error Trigger node
 [Error Trigger]
@@ -463,6 +474,7 @@ Time-based triggers for recurring tasks
 # SCHEDULED WORKFLOWS:
 
 ## Inngest Cron
+
 """
 export const dailyReport = inngest.createFunction(
   { id: "daily-report" },
@@ -490,6 +502,7 @@ export const syncInventory = inngest.createFunction(
 """
 
 ## Temporal Cron Workflow
+
 """
 // Schedule workflow to run on cron
 const handle = await client.workflow.start(dailyReportWorkflow, {
@@ -500,6 +513,7 @@ const handle = await client.workflow.start(dailyReportWorkflow, {
 """
 
 ## n8n Schedule Trigger
+
 """
 [Schedule Trigger: Every day at 9:00 AM]
     ↓
@@ -532,6 +546,7 @@ Recommended fix:
 # ALWAYS use idempotency keys for external calls:
 
 ## Stripe example:
+
 await stripe.paymentIntents.create({
   amount: 1000,
   currency: 'usd',
@@ -539,6 +554,7 @@ await stripe.paymentIntents.create({
 });
 
 ## Email example:
+
 await step.run("send-confirmation", async () => {
   const alreadySent = await checkEmailSent(orderId);
   if (alreadySent) return { skipped: true };
@@ -546,6 +562,7 @@ await step.run("send-confirmation", async () => {
 });
 
 ## Database example:
+
 await db.query(`
   INSERT INTO orders (id, ...) VALUES ($1, ...)
   ON CONFLICT (id) DO NOTHING
@@ -573,6 +590,7 @@ Recommended fix:
 # Break long workflows into checkpointed steps:
 
 ## WRONG - one long step:
+
 await step.run("process-all", async () => {
   for (const item of thousandItems) {
     await processItem(item);  // Hours of work, one checkpoint
@@ -580,6 +598,7 @@ await step.run("process-all", async () => {
 });
 
 ## CORRECT - many small steps:
+
 for (const item of thousandItems) {
   await step.run(`process-${item.id}`, async () => {
     return processItem(item);  // Checkpoint after each
@@ -587,10 +606,12 @@ for (const item of thousandItems) {
 }
 
 ## For very long waits, use sleep:
+
 await step.sleep("wait-for-trial", "14 days");
 // Doesn't consume resources while waiting
 
 ## Consider child workflows for long processes:
+
 await step.invoke("process-batch", {
   function: batchProcessor,
   data: { items: batch }
@@ -617,6 +638,7 @@ Recommended fix:
 # ALWAYS set timeouts on activities:
 
 ## Temporal:
+
 const activities = proxyActivities<typeof activitiesType>({
   startToCloseTimeout: '30 seconds',  # Required!
   scheduleToCloseTimeout: '5 minutes',
@@ -628,12 +650,14 @@ const activities = proxyActivities<typeof activitiesType>({
 });
 
 ## Inngest:
+
 await step.run("call-api", { timeout: "30s" }, async () => {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   return fetch(url, { signal: AbortSignal.timeout(25000) });
 });
 
 ## AWS Step Functions:
+
 {
   "Type": "Task",
   "TimeoutSeconds": 30,
@@ -661,6 +685,7 @@ current time, you get a different time. This breaks determinism.
 Recommended fix:
 
 # WRONG - side effects in workflow code:
+
 export async function orderWorkflow(order) {
   const orderId = uuid();  // Different every replay!
   const now = new Date();  // Different every replay!
@@ -668,6 +693,7 @@ export async function orderWorkflow(order) {
 }
 
 # CORRECT - side effects in activities:
+
 export async function orderWorkflow(order) {
   const orderId = await activities.generateOrderId();  # Recorded
   const now = await activities.getCurrentTime();       # Recorded
@@ -675,14 +701,18 @@ export async function orderWorkflow(order) {
 }
 
 # Also CORRECT - Temporal workflow.now() and sideEffect:
+
 import { sideEffect } from '@temporalio/workflow';
 
 const orderId = await sideEffect(() => uuid());
 const now = workflow.now();  # Deterministic replay-safe time
 
 # Side effects that are safe in workflow code:
+
 # - Reading function arguments
+
 # - Simple calculations (no randomness)
+
 # - Logging (usually)
 
 ### Retry Configuration Without Exponential Backoff
@@ -705,6 +735,7 @@ Recommended fix:
 # ALWAYS use exponential backoff:
 
 ## Temporal:
+
 const activities = proxyActivities({
   retry: {
     initialInterval: '1 second',
@@ -715,12 +746,14 @@ const activities = proxyActivities({
 });
 
 ## Inngest (built-in backoff):
+
 {
   id: "my-function",
   retries: 5,  # Uses exponential backoff by default
 }
 
 ## Manual backoff:
+
 const backoff = (attempt) => {
   const base = 1000;
   const max = 60000;
@@ -749,6 +782,7 @@ cost. Some platforms have hard limits (e.g., Step Functions 256KB).
 Recommended fix:
 
 # WRONG - large data in workflow:
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 await step.run("fetch-data", async () => {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -757,6 +791,7 @@ await step.run("fetch-data", async () => {
 });
 
 # CORRECT - store reference, not data:
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 await step.run("fetch-data", async () => {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -772,6 +807,7 @@ const processed = await step.run("process-data", async () => {
 });
 
 # For Step Functions, use S3 for large payloads:
+
 {
   "Type": "Task",
   "Resource": "arn:aws:states:::s3:putObject",
@@ -800,6 +836,7 @@ waits forever, you're unaware, and there's no data to debug.
 Recommended fix:
 
 # Inngest onFailure handler:
+
 export const myFunction = inngest.createFunction(
   {
     id: "process-order",
@@ -828,6 +865,7 @@ export const myFunction = inngest.createFunction(
 );
 
 # n8n Error Trigger:
+
 [Error Trigger]  →  [Log to DB]  →  [Slack Alert]  →  [Create Ticket]
 
 # Temporal: Use workflow.failed or workflow signals
@@ -856,6 +894,7 @@ Recommended fix:
    - Provides error details and context
 
 2. Connected error handling:
+
    [Error Trigger]
        ↓
    [Set: Extract Error Details]
@@ -865,6 +904,7 @@ Recommended fix:
    [Slack/Email: Alert Team]
 
 3. Consider dead letter pattern:
+
    [Error Trigger]
        ↓
    [Redis/Postgres: Store Failed Job]
@@ -872,6 +912,7 @@ Recommended fix:
    [Separate Recovery Workflow]
 
 # Also use:
+
 - Retry on node failures (built-in)
 - Node timeout settings
 - Workflow timeout
@@ -915,6 +956,7 @@ export async function processLargeFile(fileUrl: string): Promise<void> {
 }
 
 # Configure heartbeat timeout:
+
 const activities = proxyActivities({
   startToCloseTimeout: '10 minutes',
   heartbeatTimeout: '30 seconds',  # Must heartbeat every 30s
@@ -1020,6 +1062,7 @@ Message: Retry configured without backoff. Add backoffCoefficient and initialInt
 Works well with: `multi-agent-orchestration`, `agent-tool-builder`, `backend`, `devops`
 
 ## When to Use
+
 - User mentions or implies: workflow
 - User mentions or implies: automation
 - User mentions or implies: n8n
@@ -1035,11 +1078,13 @@ Works well with: `multi-agent-orchestration`, `agent-tool-builder`, `backend`, `
 - User mentions or implies: trigger
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

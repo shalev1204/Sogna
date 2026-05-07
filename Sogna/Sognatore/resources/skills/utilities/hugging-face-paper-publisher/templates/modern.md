@@ -101,7 +101,9 @@ Present your approach with clear visual aids and intuitive explanations.
 Describe your model systematically:
 
 ```python
+
 # Pseudocode example
+
 class YourModel:
     def __init__(self):
         self.encoder = Encoder()
@@ -324,6 +326,7 @@ Detailed information about datasets used.
 </style>
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -11,7 +11,6 @@ id: skill-trpc-fullstack
 owner: [[orchestrator]]
 ---
 
-
 # tRPC Full-Stack
 
 ## Overview
@@ -95,9 +94,13 @@ import { auth } from '@/server/auth'; // Next-Auth v5 / your auth helper
 import { db } from './db';
 
 /**
+
  * Context for the HTTP handler (App Router Route Handler).
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
  * `opts.req` is the fetch Request — auth is resolved server-side via `auth()`.
+
  */
 export async function createTRPCContext(opts: FetchCreateContextFnOptions) {
   const session = await auth(); // server-side auth — no req/res needed
@@ -105,8 +108,10 @@ export async function createTRPCContext(opts: FetchCreateContextFnOptions) {
 }
 
 /**
+
  * Context for direct server-side callers (Server Components, RSC, cron jobs).
  * No HTTP request is involved, so we call auth() directly from the server.
+
  */
 export async function createServerContext() {
   const session = await auth();
@@ -440,23 +445,29 @@ trpc.notification.onNew.useSubscription(undefined, {
 ## Common Pitfalls
 
 - **Problem:** Auth session is `null` in protected procedures even when the user is logged in
+
   **Solution:** Ensure `createTRPCContext` uses the correct server-side auth call (e.g. `auth()` from Next-Auth v5) and is not receiving a Pages Router `req/res` cast via `as any` in an App Router handler
 
 - **Problem:** Server Component caller fails for auth-dependent queries
+
   **Solution:** Use `createServerContext()` (the dedicated server-side factory) instead of passing an empty or synthetic object to `createContext`
 
 - **Problem:** "Type error: AppRouter is not assignable to AnyRouter"
+
   **Solution:** Import `AppRouter` as a `type` import (`import type { AppRouter }`) on the client, not the full module
 
 - **Problem:** Mutations not reflecting in the UI after success
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   **Solution:** Call `utils.<router>.<procedure>.invalidate()` in `onSuccess` to trigger a refetch via React Query
 
 - **Problem:** "Cannot find module '@trpc/server/adapters/next'" with App Router
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   **Solution:** Use `@trpc/server/adapters/fetch` and `fetchRequestHandler` for the App Router; the `nextjs` adapter is for Pages Router only
 
 - **Problem:** Subscriptions not connecting
+
   **Solution:** Subscriptions require `splitLink` — route subscriptions to `wsLink` and queries/mutations to `httpBatchLink`
 
 ---
@@ -476,11 +487,13 @@ trpc.notification.onNew.useSubscription(undefined, {
 - [TanStack Query Docs](https://tanstack.com/query/latest)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

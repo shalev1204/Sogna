@@ -8,6 +8,7 @@ version: 1.0.0
 # Saving Vision Models to Hugging Face Hub
 
 ## Contents
+
 - Why Hub Push is Required
 - Required Configuration (TrainingArguments, job config)
 - Complete Example
@@ -31,6 +32,7 @@ version: 1.0.0
 ## Why Hub Push is Required
 
 When running on Hugging Face Jobs:
+
 - Environment is temporary
 - All files deleted on job completion
 - No local disk persistence
@@ -70,9 +72,13 @@ hf_jobs("uv", {
 ## Complete Example
 
 ```python
+
 # train_detector.py
+
 # /// script
+
 # dependencies = ["transformers", "torch", "torchvision", "datasets"]
+
 # ///
 
 from transformers import (
@@ -86,9 +92,11 @@ import os
 import torch
 
 # Load dataset
+
 dataset = load_dataset("cppe-5", split="train")
 
 # Load model and processor
+
 model_name = "facebook/detr-resnet-50"
 image_processor = AutoImageProcessor.from_pretrained(model_name)
 model = AutoModelForObjectDetection.from_pretrained(
@@ -98,6 +106,7 @@ model = AutoModelForObjectDetection.from_pretrained(
 )
 
 # Configure with Hub push
+
 training_args = TrainingArguments(
     output_dir="my-detector",
     num_train_epochs=10,
@@ -112,6 +121,7 @@ training_args = TrainingArguments(
 )
 
 # ✅ CRITICAL: Authenticate with Hub BEFORE creating Trainer
+
 from huggingface_hub import login
 hf_token = os.environ.get("HF_TOKEN") or os.environ.get("hfjob")
 if hf_token:
@@ -121,6 +131,7 @@ elif training_args.push_to_hub:
     raise ValueError("HF_TOKEN not found! Add secrets={'HF_TOKEN': '$HF_TOKEN'} to job config.")
 
 # Define collate function
+
 def collate_fn(batch):
     pixel_values = [item["pixel_values"] for item in batch]
     labels = [item["labels"] for item in batch]
@@ -140,6 +151,7 @@ trainer = Trainer(
 trainer.train()
 
 # ✅ Push final model and processor
+
 trainer.push_to_hub()
 image_processor.push_to_hub("myusername/cppe5-detector")
 
@@ -176,10 +188,13 @@ When `push_to_hub=True`:
 **Object detection models require the image processor to be saved separately:**
 
 ```python
+
 # After training completes
+
 trainer.push_to_hub()
 
 # ✅ Also push the image processor
+
 image_processor.push_to_hub(
     repo_id="username/model-name",
     commit_message="Upload image processor"
@@ -187,6 +202,7 @@ image_processor.push_to_hub(
 ```
 
 **Why this matters:**
+
 - Models need specific image preprocessing (resizing, normalization)
 - Image processor contains critical configuration
 - Without it, model cannot be used for inference
@@ -210,6 +226,7 @@ TrainingArguments(
 ```
 
 **Benefits:**
+
 - Resume training if job fails
 - Compare checkpoint performance
 - Use intermediate models
@@ -222,7 +239,9 @@ TrainingArguments(
 Add metadata for better discoverability:
 
 ```python
+
 # At the end of training script
+
 model.push_to_hub(
     "username/my-detector",
     commit_message="Upload trained object detection model",
@@ -241,20 +260,25 @@ model.push_to_hub(
 **Critical for object detection:** Save class labels with the model:
 
 ```python
+
 # Define your label mappings
+
 id2label = {0: "Coverall", 1: "Face_Shield", 2: "Gloves", 3: "Goggles", 4: "Mask"}
 label2id = {v: k for k, v in id2label.items()}
 
 # Update model config before training
+
 model.config.id2label = id2label
 model.config.label2id = label2id
 
 # Now train and push
+
 trainer.train()
 trainer.push_to_hub()
 ```
 
 **Without label mappings:**
+
 - Model outputs will be numeric IDs only
 - No human-readable class names
 - Difficult to interpret results
@@ -304,16 +328,19 @@ api.create_repo(
 ### Repository Naming
 
 **Valid names:**
+
 - `username/detr-cppe5`
 - `username/yolos-object-detector`
 - `organization/custom-detector`
 
 **Invalid names:**
+
 - `detector-name` (missing username)
 - `username/detector name` (spaces not allowed)
 - `username/DETECTOR` (uppercase discouraged)
 
 **Recommended naming:**
+
 - Include model architecture: `detr-`, `yolos-`, `deta-`
 - Include dataset: `-cppe5`, `-coco`, `-voc`
 - Be descriptive: `detr-resnet50-cppe5` > `model1`
@@ -325,6 +352,7 @@ api.create_repo(
 **Cause:** HF_TOKEN not provided, invalid, or not authenticated before Trainer init
 
 **Solutions:**
+
 1. Verify `secrets={"HF_TOKEN": "$HF_TOKEN"}` in job config
 2. Verify script calls `login(token=hf_token)` AND sets `training_args.hub_token = hf_token` BEFORE creating the `Trainer`
 3. Check you're logged in locally: `hf auth whoami`
@@ -337,6 +365,7 @@ api.create_repo(
 **Cause:** No write access to repository
 
 **Solutions:**
+
 1. Check repository namespace matches your username
 2. Verify you're a member of organization (if using org namespace)
 3. Check repository isn't private (if accessing org repo)
@@ -346,6 +375,7 @@ api.create_repo(
 **Cause:** Repository doesn't exist and auto-creation failed
 
 **Solutions:**
+
 1. Manually create repository first
 2. Check repository name format
 3. Verify namespace exists
@@ -355,6 +385,7 @@ api.create_repo(
 **Cause:** Network issues or Hub unavailable
 
 **Solutions:**
+
 1. Training continues but final push fails
 2. Checkpoints may be saved
 3. Re-run push manually after job completes
@@ -362,6 +393,7 @@ api.create_repo(
 ### Issue: Model loads but inference fails
 
 **Possible causes:**
+
 1. Image processor not saved—verify it's pushed separately
 2. Label mappings missing—check config.json has id2label
 3. Wrong image size—verify image processor matches training config
@@ -369,6 +401,7 @@ api.create_repo(
 ### Issue: Model saved but not visible
 
 **Possible causes:**
+
 1. Repository is private—check https://huggingface.co/username
 2. Wrong namespace—verify `hub_model_id` matches login
 3. Push still in progress—wait a few minutes
@@ -381,10 +414,12 @@ If training completes but push fails, push manually:
 from transformers import AutoModelForObjectDetection, AutoImageProcessor
 
 # Load from local checkpoint
+
 model = AutoModelForObjectDetection.from_pretrained("./output_dir")
 image_processor = AutoImageProcessor.from_pretrained("./output_dir")
 
 # Push to Hub
+
 model.push_to_hub("username/model-name", token="hf_abc123...")
 image_processor.push_to_hub("username/model-name", token="hf_abc123...")
 ```
@@ -430,15 +465,25 @@ Pushing image processor...
 ## Example: Full Production Setup
 
 ```python
+
 # production_detector.py
+
 # /// script
+
 # dependencies = [
+
 #     "transformers>=4.30.0",
+
 #     "torch>=2.0.0",
+
 #     "torchvision>=0.15.0",
+
 #     "datasets>=2.12.0",
+
 #     "evaluate>=0.4.0"
+
 # ]
+
 # ///
 
 from transformers import (
@@ -452,12 +497,14 @@ import os
 import torch
 
 # Configuration
+
 MODEL_NAME = "facebook/detr-resnet-50"
 DATASET_NAME = "cppe-5"
 HUB_MODEL_ID = "myusername/detr-cppe5-detector"
 NUM_CLASSES = 5
 
 # Class labels
+
 id2label = {0: "Coverall", 1: "Face_Shield", 2: "Gloves", 3: "Goggles", 4: "Mask"}
 label2id = {v: k for k, v in id2label.items()}
 
@@ -477,6 +524,7 @@ model = AutoModelForObjectDetection.from_pretrained(
 print("✅ Model loaded")
 
 # Configure with comprehensive Hub settings
+
 training_args = TrainingArguments(
     output_dir="detr-cppe5",
 
@@ -511,7 +559,9 @@ training_args = TrainingArguments(
 )
 
 # ✅ CRITICAL: Authenticate with Hub BEFORE creating Trainer
+
 # login() saves the token globally so ALL hub operations can find it.
+
 from huggingface_hub import login
 hf_token = os.environ.get("HF_TOKEN") or os.environ.get("hfjob")
 if hf_token:
@@ -521,6 +571,7 @@ elif training_args.push_to_hub:
     raise ValueError("HF_TOKEN not found! Add secrets={'HF_TOKEN': '$HF_TOKEN'} to job config.")
 
 # Data collator
+
 def collate_fn(batch):
     pixel_values = [item["pixel_values"] for item in batch]
     labels = [item["labels"] for item in batch]
@@ -531,6 +582,7 @@ def collate_fn(batch):
     }
 
 # Create trainer
+
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -585,18 +637,22 @@ from PIL import Image
 import torch
 
 # Load model from Hub
+
 processor = AutoImageProcessor.from_pretrained("username/detr-cppe5-detector")
 model = AutoModelForObjectDetection.from_pretrained("username/detr-cppe5-detector")
 
 # Load and process image
+
 image = Image.open("test_image.jpg")
 inputs = processor(images=image, return_tensors="pt")
 
 # Run inference
+
 with torch.no_grad():
     outputs = model(**inputs)
 
 # Post-process results
+
 target_sizes = torch.tensor([image.size[::-1]])
 results = processor.post_process_object_detection(
     outputs,
@@ -605,6 +661,7 @@ results = processor.post_process_object_detection(
 )[0]
 
 # Print detections
+
 for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
     box = [round(i, 2) for i in box.tolist()]
     print(
@@ -618,6 +675,7 @@ for score, label, box in zip(results["scores"], results["labels"], results["boxe
 **Without `push_to_hub=True` and `secrets={"HF_TOKEN": "$HF_TOKEN"}`, all training results are permanently lost.**
 
 **For object detection, also remember to:**
+
 1. Save the image processor separately
 2. Configure label mappings (id2label, label2id)
 3. Include appropriate model card metadata
@@ -625,6 +683,7 @@ for score, label, box in zip(results["scores"], results["labels"], results["boxe
 Always verify all three are configured before submitting any training job.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

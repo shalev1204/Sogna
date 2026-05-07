@@ -13,7 +13,6 @@ id: skill-puzzle-activity-planner
 owner: [[orchestrator]]
 ---
 
-
 # Puzzle Activity Planner
 
 ## Overview
@@ -57,6 +56,7 @@ https://jigsawmake.com/bingo-card-generator?title=Party%20Bingo&items=Dance,Laug
 ## Output Format
 
 Each plan includes:
+
 - Activity header (occasion, audience, duration, difficulty)
 - Objectives (2-3 learning or engagement goals)
 - Puzzle menu table with generator links
@@ -73,11 +73,13 @@ Each plan includes:
 - Always use URL parameters with pre-filled content
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

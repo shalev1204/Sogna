@@ -92,6 +92,7 @@ version: 1.0.0
 June 5, 2023| Updated guidance to reflect changes in watchOS 10.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

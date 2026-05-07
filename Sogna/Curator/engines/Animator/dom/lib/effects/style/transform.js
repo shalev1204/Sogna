@@ -1,19 +1,19 @@
-import { TransformPropOrder as transformPropOrder } from "../../render/utils/keys-transform.js";
+import { TransformPropOrder } from "../../render/utils/keys-transform.js";
 const translateAlias = {
     x: "translateX",
     y: "translateY",
     z: "translateZ",
     transformPerspective: "perspective",
 };
-export function BuildTransform(state) {
+export function buildTransform(state) {
     let transform = "";
     let transformIsDefault = true;
     /**
      * Loop over all possible transforms in order, adding the ones that
      * are present to the transform string.
      */
-    for (let i = 0; i < transformPropOrder.length; i++) {
-        const key = transformPropOrder[i];
+    for (let i = 0; i < TransformPropOrder.length; i++) {
+        const key = TransformPropOrder[i];
         const value = state.latest[key];
         if (value === undefined)
             continue;

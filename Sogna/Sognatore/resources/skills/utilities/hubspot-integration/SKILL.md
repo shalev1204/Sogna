@@ -10,7 +10,6 @@ id: skill-hubspot-integration
 owner: [[orchestrator]]
 ---
 
-
 # HubSpot Integration
 
 Expert patterns for HubSpot CRM integration including OAuth authentication,
@@ -250,6 +249,7 @@ async function getAllContacts() {
 ### Notes
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Use properties param to fetch only needed fields
 - Search API has 10k result limit
 - Always implement pagination for lists
@@ -830,6 +830,7 @@ Message: Using deprecated API key. Migrate to Private App token or OAuth 2.0.
 - user needs analytics dashboard -> analytics-specialist (Custom reporting beyond HubSpot)
 
 ## When to Use
+
 - User mentions or implies: hubspot
 - User mentions or implies: hubspot api
 - User mentions or implies: hubspot crm
@@ -837,11 +838,13 @@ Message: Using deprecated API key. Migrate to Private App token or OAuth 2.0.
 - User mentions or implies: contacts api
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

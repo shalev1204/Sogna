@@ -31,6 +31,7 @@ Complete debugging guide for skill activation problems.
 ####  1. Keywords Don't Match
 
 **Check:**
+
 - Look at `promptTriggers.keywords` in skill-rules.json
 - Are the keywords actually in your prompt?
 - Remember: case-insensitive substring matching
@@ -39,6 +40,7 @@ Complete debugging guide for skill activation problems.
 ```json
 "keywords": ["layout", "grid"]
 ```
+
 - "how does the layout work?" → ✅ Matches "layout"
 - "how does the grid system work?" → ✅ Matches "grid"
 - "how do layouts work?" → ✅ Matches "layout"
@@ -49,6 +51,7 @@ Complete debugging guide for skill activation problems.
 #### 2. Intent Patterns Too Specific
 
 **Check:**
+
 - Look at `promptTriggers.intentPatterns`
 - Test regex at https://regex101.com/
 - May need broader patterns
@@ -59,6 +62,7 @@ Complete debugging guide for skill activation problems.
   "(create|add).*?(database.*?table)"  // Too specific
 ]
 ```
+
 - "create a database table" → ✅ Matches
 - "add new table" → ❌ Doesn't match (missing "database")
 
@@ -72,13 +76,16 @@ Complete debugging guide for skill activation problems.
 #### 3. Typo in Skill Name
 
 **Check:**
+
 - Skill name in SKILL.md frontmatter
 - Skill name in skill-rules.json
 - Must match exactly
 
 **Example:**
 ```yaml
+
 # SKILL.md
+
 name: project-catalog-developer
 risk: critical
 ```
@@ -101,6 +108,7 @@ cat .claude/skills/skill-rules.json | jq .
 If invalid JSON, jq will show the error.
 
 **Common errors:**
+
 - Trailing commas
 - Missing quotes
 - Single quotes instead of double
@@ -130,6 +138,7 @@ Expected: Your skill should appear in the output.
 #### 1. File Path Doesn't Match Patterns
 
 **Check:**
+
 - File path being edited
 - `fileTriggers.pathPatterns` in skill-rules.json
 - Glob pattern syntax
@@ -140,6 +149,7 @@ Expected: Your skill should appear in the output.
   "frontend/src/**/*.tsx"
 ]
 ```
+
 - Editing: `frontend/src/components/Dashboard.tsx` → ✅ Matches
 - Editing: `frontend/tests/Dashboard.test.tsx` → ✅ Matches (add exclusion!)
 - Editing: `backend/src/app.ts` → ❌ Doesn't match
@@ -149,6 +159,7 @@ Expected: Your skill should appear in the output.
 #### 2. Excluded by pathExclusions
 
 **Check:**
+
 - Are you editing a test file?
 - Look at `fileTriggers.pathExclusions`
 
@@ -159,6 +170,7 @@ Expected: Your skill should appear in the output.
   "**/*.spec.ts"
 ]
 ```
+
 - Editing: `services/user.test.ts` → ❌ Excluded
 - Editing: `services/user.ts` → ✅ Not excluded
 
@@ -167,6 +179,7 @@ Expected: Your skill should appear in the output.
 #### 3. Content Pattern Not Found
 
 **Check:**
+
 - Does the file actually contain the pattern?
 - Look at `fileTriggers.contentPatterns`
 - Is the regex correct?
@@ -177,12 +190,15 @@ Expected: Your skill should appear in the output.
   "import.*[Pp]risma"
 ]
 ```
+
 - File has: `import { PrismaService } from './prisma'` → ✅ Matches
 - File has: `import { Database } from './db'` → ❌ Doesn't match
 
 **Debug:**
 ```bash
+
 # Check if pattern exists in file
+
 grep -i "prisma" path/to/file.ts
 ```
 
@@ -253,6 +269,7 @@ echo "Exit code: $?"
 ```
 
 Expected:
+
 - Exit code 2 + stderr message if should block
 - Exit code 0 + no output if should allow
 
@@ -270,6 +287,7 @@ Expected:
 ```json
 "keywords": ["user", "system", "create"]  // Too broad
 ```
+
 - Triggers on: "user manual", "file system", "create directory"
 
 **Solution:** Make keywords more specific
@@ -289,6 +307,7 @@ Expected:
   "(create)"  // Matches everything with "create"
 ]
 ```
+
 - Triggers on: "create file", "create folder", "create account"
 
 **Solution:** Add context to patterns
@@ -311,6 +330,7 @@ Expected:
   "form/**"  // Matches everything in form/
 ]
 ```
+
 - Triggers on: test files, config files, everything
 
 **Solution:** Use narrower patterns
@@ -329,6 +349,7 @@ Expected:
   "Prisma"  // Matches in comments, strings, etc.
 ]
 ```
+
 - Triggers on: `// Don't use Prisma here`
 - Triggers on: `const note = "Prisma is cool"`
 
@@ -452,10 +473,12 @@ Expected: No output (no errors)
 ### 1. Too Many Patterns
 
 **Check:**
+
 - Count patterns in skill-rules.json
 - Each pattern = regex compilation + matching
 
 **Solution:** Reduce patterns
+
 - Combine similar patterns
 - Remove redundant patterns
 - Use more specific patterns (faster matching)
@@ -466,6 +489,7 @@ Expected: No output (no errors)
 ```regex
 (create|add|modify|update|implement|build).*?(feature|endpoint|route|service|controller|component|UI|page)
 ```
+
 - Long alternations = slow
 
 **Solution:** Simplify
@@ -495,33 +519,40 @@ Expected: No output (no errors)
 Content pattern matching reads entire file - slow for large files.
 
 **Solution:**
+
 - Only use content patterns when necessary
 - Consider file size limits (future enhancement)
 
 ### Measure Performance
 
 ```bash
+
 # UserPromptSubmit
+
 time echo '{"prompt":"test"}' | npx tsx .claude/hooks/skill-activation-prompt.ts
 
 # PreToolUse
+
 time cat <<'EOF' | npx tsx .claude/hooks/skill-verification-guard.ts
 {"tool_name":"Edit","tool_input":{"file_path":"test.ts"}}
 EOF
 ```
 
 **Target metrics:**
+
 - UserPromptSubmit: < 100ms
 - PreToolUse: < 200ms
 
 ---
 
 **Related Files:**
+
 - [SKILL.md](SKILL.md) - Main skill guide
 - [HOOK_MECHANISMS.md](HOOK_MECHANISMS.md) - How hooks work
 - [SKILL_RULES_REFERENCE.md](SKILL_RULES_REFERENCE.md) - Configuration reference
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

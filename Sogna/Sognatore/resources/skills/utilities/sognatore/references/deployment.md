@@ -23,62 +23,88 @@ Infrastructure provisioning and deployment instructions for all supported platfo
 ## Quick Start Commands
 
 ### Vercel
+
 ```bash
+
 # Install CLI
+
 npm i -g vercel
 
 # Deploy (auto-detects framework)
+
 vercel --prod
 
 # Environment variables
+
 vercel env add VARIABLE_NAME production
 ```
 
 ### Netlify
+
 ```bash
+
 # Install CLI
+
 npm i -g netlify-cli
 
 # Deploy
+
 netlify deploy --prod
 
 # Environment variables
+
 netlify env:set VARIABLE_NAME value
 ```
 
 ### Railway
+
 ```bash
+
 # Install CLI
+
 npm i -g @railway/cli
 
 # Login and deploy
+
 railway login
 railway init
 railway up
 
 # Environment variables
+
 railway variables set VARIABLE_NAME=value
 ```
 
 ### Render
+
 ```yaml
+
 # render.yaml (Infrastructure as Code)
+
 services:
+
   - type: web
+
     name: api
     env: node
     buildCommand: npm install && npm run build
     startCommand: npm start
     envVars:
+
       - key: NODE_ENV
+
         value: production
+
       - key: DATABASE_URL
+
         fromDatabase:
           name: postgres
           property: connectionString
 
 databases:
+
   - name: postgres
+
     plan: starter
 ```
 
@@ -87,6 +113,7 @@ databases:
 ## AWS Deployment
 
 ### Architecture Template
+
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                        CloudFront                        │
@@ -113,8 +140,11 @@ databases:
 ```
 
 ### Terraform Configuration
+
 ```hcl
+
 # main.tf
+
 terraform {
   required_providers {
     aws = {
@@ -134,6 +164,7 @@ provider "aws" {
 }
 
 # VPC
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.0.0"
@@ -150,6 +181,7 @@ module "vpc" {
 }
 
 # ECS Cluster
+
 resource "aws_ecs_cluster" "main" {
   name = "${var.project_name}-cluster"
 
@@ -160,6 +192,7 @@ resource "aws_ecs_cluster" "main" {
 }
 
 # RDS
+
 module "rds" {
   source  = "terraform-aws-modules/rds/aws"
   version = "6.0.0"
@@ -188,6 +221,7 @@ module "rds" {
 ```
 
 ### ECS Task Definition
+
 ```json
 {
   "family": "app",
@@ -234,6 +268,7 @@ module "rds" {
 ```
 
 ### GitHub Actions CI/CD
+
 ```yaml
 name: Deploy to AWS
 risk: unknown
@@ -252,9 +287,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Configure AWS credentials
+
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -262,10 +299,12 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
+
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build, tag, and push image
+
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -276,6 +315,7 @@ jobs:
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Deploy to ECS
+
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: task-definition.json
@@ -289,8 +329,11 @@ jobs:
 ## GCP Deployment
 
 ### Cloud Run (Recommended for most cases)
+
 ```bash
+
 # Build and deploy
+
 gcloud builds submit --tag gcr.io/PROJECT_ID/app
 gcloud run deploy app \
   --image gcr.io/PROJECT_ID/app \
@@ -302,6 +345,7 @@ gcloud run deploy app \
 ```
 
 ### Terraform for GCP
+
 ```hcl
 provider "google" {
   project = var.project_id
@@ -309,6 +353,7 @@ provider "google" {
 }
 
 # Cloud Run Service
+
 resource "google_cloud_run_service" "app" {
   name     = "app"
   location = var.region
@@ -361,6 +406,7 @@ resource "google_cloud_run_service" "app" {
 }
 
 # Cloud SQL
+
 resource "google_sql_database_instance" "main" {
   name             = "app-db"
   database_version = "POSTGRES_15"
@@ -383,17 +429,22 @@ resource "google_sql_database_instance" "main" {
 ## Azure Deployment
 
 ### Azure Container Apps
+
 ```bash
+
 # Create resource group
+
 az group create --name app-rg --location eastus
 
 # Create Container Apps environment
+
 az containerapp env create \
   --name app-env \
   --resource-group app-rg \
   --location eastus
 
 # Deploy container
+
 az containerapp create \
   --name app \
   --resource-group app-rg \
@@ -411,8 +462,11 @@ az containerapp create \
 ## Kubernetes Deployment
 
 ### Manifests
+
 ```yaml
+
 # deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -430,14 +484,22 @@ spec:
         app: app
     spec:
       containers:
+
         - name: app
+
           image: app:latest
           ports:
+
             - containerPort: 3000
+
           env:
+
             - name: NODE_ENV
+
               value: production
+
             - name: DATABASE_URL
+
               valueFrom:
                 secretKeyRef:
                   name: app-secrets
@@ -462,7 +524,9 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
 ---
+
 # service.yaml
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -471,11 +535,15 @@ spec:
   selector:
     app: app
   ports:
+
     - port: 80
+
       targetPort: 3000
   type: ClusterIP
 ---
+
 # ingress.yaml
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -485,14 +553,20 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
+
     - hosts:
         - app.example.com
+
       secretName: app-tls
   rules:
+
     - host: app.example.com
+
       http:
         paths:
+
           - path: /
+
             pathType: Prefix
             backend:
               service:
@@ -502,6 +576,7 @@ spec:
 ```
 
 ### Helm Chart Structure
+
 ```
 chart/
 ├── Chart.yaml
@@ -522,27 +597,36 @@ chart/
 ## Blue-Green Deployment
 
 ### Strategy
+
 ```
+
 1. Deploy new version to "green" environment
 2. Run smoke tests against green
 3. Switch load balancer to green
 4. Monitor for 15 minutes
 5. If healthy: decommission blue
 6. If errors: switch back to blue (rollback)
+
 ```
 
 ### Implementation (AWS ALB)
+
 ```bash
+
 # Deploy green
+
 aws ecs update-service --cluster app --service app-green --task-definition app:NEW_VERSION
 
 # Wait for stability
+
 aws ecs wait services-stable --cluster app --services app-green
 
 # Run smoke tests
+
 curl -f https://green.app.example.com/health
 
 # Switch traffic (update target group weights)
+
 aws elbv2 modify-listener-rule \
   --rule-arn $RULE_ARN \
   --actions '[{"Type":"forward","TargetGroupArn":"'$GREEN_TG'","Weight":100}]'
@@ -553,19 +637,26 @@ aws elbv2 modify-listener-rule \
 ## Rollback Procedures
 
 ### Immediate Rollback
+
 ```bash
+
 # AWS ECS
+
 aws ecs update-service --cluster app --service app --task-definition app:PREVIOUS_VERSION
 
 # Kubernetes
+
 kubectl rollout undo deployment/app
 
 # Vercel
+
 vercel rollback
 ```
 
 ### Automated Rollback Triggers
+
 Monitor these metrics post-deploy:
+
 - Error rate > 1% for 5 minutes
 - p99 latency > 500ms for 5 minutes
 - Health check failures > 3 consecutive
@@ -578,13 +669,17 @@ If any trigger fires, execute automatic rollback.
 ## Secrets Management
 
 ### AWS Secrets Manager
+
 ```bash
+
 # Create secret
+
 aws secretsmanager create-secret \
   --name app/database-url \
   --secret-string "postgresql://..."
 
 # Reference in ECS task
+
 "secrets": [
   {
     "name": "DATABASE_URL",
@@ -594,15 +689,20 @@ aws secretsmanager create-secret \
 ```
 
 ### HashiCorp Vault
+
 ```bash
+
 # Store secret
+
 ecosistema kv put secret/app database-url="postgresql://..."
 
 # Read in application
+
 ecosistema kv get -field=database-url secret/app
 ```
 
 ### Environment-Specific
+
 ```
 .env.development   # Local development
 .env.staging       # Staging environment
@@ -612,6 +712,7 @@ ecosistema kv get -field=database-url secret/app
 All production secrets must be in a secrets manager, never in code or environment files.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

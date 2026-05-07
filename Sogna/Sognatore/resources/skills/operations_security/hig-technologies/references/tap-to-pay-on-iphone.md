@@ -197,6 +197,7 @@ March 3, 2023| Enhanced guidance for educating merchants and improving their exp
 September 14, 2022| Refined guidance on preparing Tap to Pay on iPhone and helping merchants learn how to use the feature.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

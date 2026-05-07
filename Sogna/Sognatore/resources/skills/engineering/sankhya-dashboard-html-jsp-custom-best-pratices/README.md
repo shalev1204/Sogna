@@ -24,21 +24,25 @@ Sankhya ERP deployments frequently demand the creation of custom visualizations,
 This skill can be installed locally per-repository or globally for use across all your Sankhya development projects.
 
 ### Global Installation (Recommended)
+
 This approach sets up a symlink that makes the skill available no matter which repository you are working in. Run these commands from the root of the cloned `cli-ai-skills` directory:
 
 #### For Claude Code
+
 ```bash
 mkdir -p ~/.claude/skills
 ln -sf $(pwd)/skills/sankhya-dashboard-html-jsp-custom-best-pratices ~/.claude/skills/sankhya-dashboard-html-jsp-custom-best-pratices
 ```
 
 #### For GitHub Copilot CLI
+
 ```bash
 mkdir -p ~/.copilot/skills
 ln -sf $(pwd)/skills/sankhya-dashboard-html-jsp-custom-best-pratices ~/.copilot/skills/sankhya-dashboard-html-jsp-custom-best-pratices
 ```
 
 ### Local Repository Installation
+
 If you prefer to restrict the skill to a specific project workspace, simply move or copy the directory into your project's local AI registry folder (e.g., `.claude/skills/` or `.github/skills/`).
 
 ## Usage Examples
@@ -54,6 +58,7 @@ Once installed, this skill is automatically triggered when discussing Sankhya da
 By referring to this skill, the AI will contextualize its response using the specific technical notes mapped out for Sankhya development.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

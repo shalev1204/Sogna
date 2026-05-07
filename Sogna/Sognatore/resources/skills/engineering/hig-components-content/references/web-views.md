@@ -42,6 +42,7 @@ For example, Mail uses a web view to show HTML content in messages.
 [![](https://devimages-cdn.apple.com/wwdc-services/images/119/8A0A5E12-9D2C-4629-A13C-8EB702A9DA28/4920_wide_250x141_1x.jpg) Explore WKWebView additions ](https://developer.apple.com/videos/play/wwdc2021/10032)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

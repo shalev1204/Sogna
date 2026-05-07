@@ -47,4 +47,4 @@ export function ResolveElements(
     return Array.from(elementOrSelector).filter(
         (element): element is Element => element != null
     )
-}
+}export { ResolveElements as resolveElements }

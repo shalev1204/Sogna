@@ -12,6 +12,7 @@ version: 1.0.0
 ---
 
 ## 1. RAII & Resource Management
+
 Always wrap raw resources in manager objects to ensure cleanup on scope exit.
 ```cpp
 // Good: Scope-bound cleanup
@@ -20,12 +21,15 @@ void process() {
     // memory is freed automatically
 }
 ```
+
 ## 2. Smart Pointer Ownership
+
 - **unique_ptr**: Use for exclusive ownership.
 - **shared_ptr**: Use for shared ownership across components.
 - **weak_ptr**: Use to break circular reference cycles.
 
 ## 3. Concurrency Safety
+
 Always use RAII-style locks like `std::lock_guard` or `std::unique_lock`.
 ```cpp
 void update() {
@@ -33,14 +37,18 @@ void update() {
     // thread-safe logic
 }
 ```
+
 ## 4. Move Semantics & Efficiency
+
 Avoid expensive copies by utilizing move constructors and `std::move`.
 ```cpp
 void processData(std::vector<std::string>&& data) {
     auto internalData = std::move(data); // Transfers ownership, no copy
 }
 ```
+
 ## 5. Modern STL Algorithms
+
 Prefer algorithms over manual loops for readability and optimization.
 
 ```cpp
@@ -50,6 +58,7 @@ void sortData(std::vector<int>& myVector) {
 }
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

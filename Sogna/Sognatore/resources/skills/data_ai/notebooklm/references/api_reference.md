@@ -14,33 +14,43 @@ Complete API documentation for all NotebookLM skill modules.
 **All commands must use the `run.py` wrapper to ensure proper environment:**
 
 ```bash
+
 # ✅ CORRECT:
+
 python scripts/run.py [script_name].py [arguments]
 
 # ❌ WRONG:
+
 python scripts/[script_name].py [arguments]  # Will fail without venv!
 ```
 
 ## Core Scripts
 
 ### ask_question.py
+
 Query NotebookLM with automated browser interaction.
 
 ```bash
+
 # Basic usage
+
 python scripts/run.py ask_question.py --question "Your question"
 
 # With specific notebook
+
 python scripts/run.py ask_question.py --question "..." --notebook-id notebook-id
 
 # With direct URL
+
 python scripts/run.py ask_question.py --question "..." --notebook-url "https://..."
 
 # Show browser (debugging)
+
 python scripts/run.py ask_question.py --question "..." --show-browser
 ```
 
 **Parameters:**
+
 - `--question` (required): Question to ask
 - `--notebook-id`: Use notebook from library
 - `--notebook-url`: Use URL directly
@@ -49,12 +59,17 @@ python scripts/run.py ask_question.py --question "..." --show-browser
 **Returns:** Answer text with follow-up prompt appended
 
 ### notebook_manager.py
+
 Manage notebook library with CRUD operations.
 
 ```bash
+
 # Smart Add (discover content first)
+
 python scripts/run.py ask_question.py --question "What is the content of this notebook? What topics are covered? Provide a complete overview briefly and concisely" --notebook-url "[URL]"
+
 # Then add with discovered info
+
 python scripts/run.py notebook_manager.py add \
   --url "https://notebooklm.google.com/notebook/..." \
   --name "Name" \
@@ -62,6 +77,7 @@ python scripts/run.py notebook_manager.py add \
   --topics "topic1,topic2"
 
 # Direct add (when you know the content)
+
 python scripts/run.py notebook_manager.py add \
   --url "https://notebooklm.google.com/notebook/..." \
   --name "Name" \
@@ -69,22 +85,28 @@ python scripts/run.py notebook_manager.py add \
   --topics "topic1,topic2"
 
 # List notebooks
+
 python scripts/run.py notebook_manager.py list
 
 # Search notebooks
+
 python scripts/run.py notebook_manager.py search --query "keyword"
 
 # Activate notebook
+
 python scripts/run.py notebook_manager.py activate --id notebook-id
 
 # Remove notebook
+
 python scripts/run.py notebook_manager.py remove --id notebook-id
 
 # Show statistics
+
 python scripts/run.py notebook_manager.py stats
 ```
 
 **Commands:**
+
 - `add`: Add notebook (requires --url, --name, --topics)
 - `list`: Show all notebooks
 - `search`: Find notebooks by keyword
@@ -93,63 +115,82 @@ python scripts/run.py notebook_manager.py stats
 - `stats`: Display library statistics
 
 ### auth_manager.py
+
 Handle Google authentication and browser state.
 
 ```bash
+
 # Setup (browser visible for login)
+
 python scripts/run.py auth_manager.py setup
 
 # Check status
+
 python scripts/run.py auth_manager.py status
 
 # Re-authenticate
+
 python scripts/run.py auth_manager.py reauth
 
 # Clear authentication
+
 python scripts/run.py auth_manager.py clear
 ```
 
 **Commands:**
+
 - `setup`: Initial authentication (browser MUST be visible)
 - `status`: Check if authenticated
 - `reauth`: Clear and re-setup
 - `clear`: Remove all auth data
 
 ### cleanup_manager.py
+
 Clean skill data with preservation options.
 
 ```bash
+
 # Preview cleanup
+
 python scripts/run.py cleanup_manager.py
 
 # Execute cleanup
+
 python scripts/run.py cleanup_manager.py --confirm
 
 # Keep library
+
 python scripts/run.py cleanup_manager.py --confirm --preserve-library
 
 # Force without prompt
+
 python scripts/run.py cleanup_manager.py --confirm --force
 ```
 
 **Options:**
+
 - `--confirm`: Actually perform cleanup
 - `--preserve-library`: Keep notebook library
 - `--force`: Skip confirmation prompt
 
 ### run.py
+
 Script wrapper that handles environment setup.
 
 ```bash
+
 # Usage
+
 python scripts/run.py [script_name].py [arguments]
 
 # Examples
+
 python scripts/run.py auth_manager.py status
 python scripts/run.py ask_question.py --question "..."
 ```
 
 **Automatic actions:**
+
 1. Creates `.venv` if missing
 2. Installs dependencies
 3. Activates environment
@@ -164,6 +205,7 @@ import subprocess
 import json
 
 # Always use run.py wrapper
+
 result = subprocess.run([
     "python", "scripts/run.py", "ask_question.py",
     "--question", "Your question",
@@ -176,7 +218,9 @@ answer = result.stdout
 ### Direct imports (after venv exists)
 
 ```python
+
 # Only works if venv is already created and activated
+
 from notebook_manager import NotebookLibrary
 from auth_manager import AuthManager
 
@@ -219,7 +263,9 @@ DEFAULT_NOTEBOOK_ID=     # Default notebook
 Common patterns:
 
 ```python
+
 # Using run.py prevents most errors
+
 result = subprocess.run([
     "python", "scripts/run.py", "ask_question.py",
     "--question", "Question"
@@ -240,6 +286,7 @@ if result.returncode != 0:
 Free Google accounts: 50 queries/day
 
 Solutions:
+
 1. Wait for reset (midnight PST)
 2. Switch accounts with `reauth`
 3. Use multiple Google accounts
@@ -261,6 +308,7 @@ def query(question, notebook_id):
     return result.stdout
 
 # Run multiple queries simultaneously
+
 with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
     futures = [
         executor.submit(query, q, nb)
@@ -288,6 +336,7 @@ def batch_research(questions, notebook_id):
 ## Module Classes
 
 ### NotebookLibrary
+
 - `add_notebook(url, name, topics)`
 - `list_notebooks()`
 - `search_notebooks(query)`
@@ -296,6 +345,7 @@ def batch_research(questions, notebook_id):
 - `remove_notebook(notebook_id)`
 
 ### AuthManager
+
 - `is_authenticated()`
 - `setup_auth(headless=False)`
 - `get_auth_info()`
@@ -303,6 +353,7 @@ def batch_research(questions, notebook_id):
 - `validate_auth()`
 
 ### BrowserSession (internal)
+
 - Handles browser automation
 - Manages stealth behavior
 - Not intended for direct use
@@ -316,6 +367,7 @@ def batch_research(questions, notebook_id):
 5. **Clean sessions** - Use cleanup_manager
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

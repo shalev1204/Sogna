@@ -7,7 +7,6 @@ id: skill-audit-context-building
 owner: [[ops-security]]
 ---
 
-
 # Deep Context Builder Skill (Ultra-Granular Pure Context Mode)
 
 ## 1. Purpose
@@ -15,6 +14,7 @@ owner: [[ops-security]]
 This skill governs **how Claude thinks** during the context-building phase of an audit.
 
 When active, Claude will:
+
 - Perform **line-by-line / block-by-block** code analysis by default.
 - Apply **First Principles**, **5 Whys**, and **5 Hows** at micro scale.
 - Continuously link insights → functions → modules → entire system.
@@ -26,13 +26,16 @@ This skill defines a structured analysis format (see Example: Function Micro-Ana
 ---
 
 ## When to Use
+
 Use when:
+
 - Deep comprehension is needed before bug or vulnerability discovery.
 - You want bottom-up understanding instead of high-level guessing.
 - Reducing hallucinations, contradictions, and context loss is critical.
 - Preparing for security auditing, architecture review, or threat modeling.
 
 Do **not** use for:
+
 - Vulnerability findings
 - Fix recommendations
 - Exploit reasoning
@@ -43,6 +46,7 @@ Do **not** use for:
 ## 3. How This Skill Behaves
 
 When active, Claude will:
+
 - Default to **ultra-granular analysis** of each block and line.
 - Apply micro-level First Principles, 5 Whys, and 5 Hows.
 - Build and refine a persistent global mental model.
@@ -103,7 +107,9 @@ For each function:
    - External interactions.
 
 4. **Block-by-Block / Line-by-Line Analysis**
+
    For each logical block:
+
    - What it does.
    - Why it appears here (ordering logic).
    - What assumptions it relies on.
@@ -111,6 +117,7 @@ For each function:
    - What later logic depends on it.
 
    Apply per-block:
+
    - **First Principles**
    - **5 Whys**
    - **5 Hows**
@@ -118,21 +125,26 @@ For each function:
 ---
 
 ### 5.2 Cross-Function & External Flow Analysis
+
 *(Full Integration of Jump-Into-External-Code Rule)*
 
 When encountering calls, **continue the same micro-first analysis across boundaries.**
 
 #### Internal Calls
+
 - Jump into the callee immediately.
 - Perform block-by-block analysis of relevant code.
 - Track flow of data, assumptions, and invariants:
+
   caller → callee → return → caller.
+
 - Note if callee logic behaves differently in this specific call context.
 
 #### External Calls — Two Cases
 
 **Case A — External Call to a Contract Whose Code Exists in the Codebase**
 Treat as an internal call:
+
 - Jump into the target contract/function.
 - Continue block-by-block micro-analysis.
 - Propagate invariants and assumptions seamlessly.
@@ -140,6 +152,7 @@ Treat as an internal call:
 
 **Case B — External Call Without Available Code (True External / Black Box)**
 Analyze as adversarial:
+
 - Describe payload/value/gas or parameters sent.
 - Identify assumptions about the target.
 - Consider all outcomes:
@@ -150,6 +163,7 @@ Analyze as adversarial:
   - reentrancy (if applicable)
 
 #### Continuity Rule
+
 Treat the entire call chain as **one continuous execution flow**.
 Never reset context.
 All invariants, assumptions, and data dependencies must propagate across calls.
@@ -159,6 +173,7 @@ All invariants, assumptions, and data dependencies must propagate across calls.
 ### 5.3 Complete Analysis Example
 
 See FUNCTION_MICRO_ANALYSIS_EXAMPLE.md for a complete walkthrough demonstrating:
+
 - Full micro-analysis of a DEX swap function
 - Application of First Principles, 5 Whys, and 5 Hows
 - Block-by-block analysis with invariants and assumptions
@@ -174,6 +189,7 @@ This example demonstrates the level of depth and structure required for all anal
 When performing ultra-granular analysis, Claude MUST structure output following the format defined in OUTPUT_REQUIREMENTS.md.
 
 Key requirements:
+
 - **Purpose** (2-3 sentences minimum)
 - **Inputs & Assumptions** (all parameters, preconditions, trust assumptions)
 - **Outputs & Effects** (returns, state writes, external calls, events, postconditions)
@@ -181,6 +197,7 @@ Key requirements:
 - **Cross-Function Dependencies** (internal calls, external calls with risk analysis, shared state)
 
 Quality thresholds:
+
 - Minimum 3 invariants per function
 - Minimum 5 assumptions documented
 - Minimum 3 risk considerations for external interactions
@@ -231,29 +248,39 @@ These clusters help guide the vulnerability-hunting phase.
 ---
 
 ## 7. Stability & Consistency Rules
+
 *(Anti-Hallucination, Anti-Contradiction)*
 
 Claude must:
 
 - **Never reshape evidence to fit earlier assumptions.**
+
   When contradicted:
+
   - Update the model.
   - State the correction explicitly.
 
 - **Periodically anchor key facts**
+
   Summarize core:
+
   - invariants
   - state relationships
   - actor roles
   - workflows
 
 - **Avoid vague guesses**
+
   Use:
+
   - "Unclear; need to inspect X."
+
   instead of:
+
   - "It probably…"
 
 - **Cross-reference constantly**
+
   Connect new insights to previous state, flows, and invariants to maintain global coherence.
 
 ---
@@ -261,6 +288,7 @@ Claude must:
 ## 8. Subagent Usage
 
 Claude may spawn subagents for:
+
 - Dense or complex functions.
 - Long data-flow or control-flow chains.
 - Cryptographic / mathematical logic.
@@ -273,6 +301,7 @@ rules, and quality thresholds defined in this skill, and enforces
 the pure-context-building constraint.
 
 Subagents must:
+
 - Follow the same micro-first rules.
 - Return summaries that Claude integrates into its global model.
 
@@ -281,6 +310,7 @@ Subagents must:
 ## 9. Relationship to Other Phases
 
 This skill runs **before**:
+
 - Vulnerability discovery
 - Classification / triage
 - Report writing
@@ -288,6 +318,7 @@ This skill runs **before**:
 - Exploit reasoning
 
 It exists solely to build:
+
 - Deep understanding
 - Stable context
 - System-level clarity
@@ -297,6 +328,7 @@ It exists solely to build:
 ## 10. Non-Goals
 
 While active, Claude should NOT:
+
 - Identify vulnerabilities
 - Propose fixes
 - Generate proofs-of-concept
@@ -306,11 +338,13 @@ While active, Claude should NOT:
 This is **pure context building** only.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

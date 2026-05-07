@@ -74,6 +74,7 @@ url, _ := dbos.GetEventstring, "paymentURL", 300*time.Second)
 Reference: [Workflow Events](https://docs.dbos.dev/golang/tutorials/workflow-communication#workflow-events)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

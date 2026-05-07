@@ -422,7 +422,9 @@ In Next.js, the `fetch` API is automatically extended with request memoization. 
 - Heavy computations
 - Authentication checks
 - File system operations
+
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+
 - Any non-fetch async work
 
 Use `React.cache()` to deduplicate these operations across your component tree.
@@ -502,4 +504,3 @@ The response is sent immediately while logging happens in the background.
 - Works in Server Actions, Route Handlers, and Server Components
 
 Reference: [https://nextjs.org/docs/app/api-reference/functions/after](https://nextjs.org/docs/app/api-reference/functions/after)
-

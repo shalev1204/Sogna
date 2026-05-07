@@ -334,6 +334,7 @@ class AttackTreeBuilder:
         return self._node_stack[-1]
 
 # Example usage
+
 def build_account_takeover_tree() -> AttackTree:
     """Build attack tree for account takeover scenario."""
     return (
@@ -650,6 +651,7 @@ class AttackPathAnalyzer:
 ## Best Practices
 
 ### Do's
+
 - **Start with clear goals** - Define what attacker wants
 - **Be exhaustive** - Consider all attack vectors
 - **Attribute attacks** - Cost, skill, and detection
@@ -657,6 +659,7 @@ class AttackPathAnalyzer:
 - **Validate with experts** - Red team review
 
 ### Don'ts
+
 - **Don't oversimplify** - Real attacks are complex
 - **Don't ignore dependencies** - AND nodes matter
 - **Don't forget insider threats** - Not all attackers are external
@@ -670,6 +673,7 @@ class AttackPathAnalyzer:
 - [OWASP Attack Surface Analysis](https://owasp.org/www-community/controls/Attack_Surface_Analysis_Cheat_Sheet)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

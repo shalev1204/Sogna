@@ -10,7 +10,6 @@ id: skill-pubmed-database
 owner: [[eng-database]]
 ---
 
-
 # PubMed Database
 
 ## Overview
@@ -20,6 +19,7 @@ PubMed is the U.S. National Library of Medicine's comprehensive database providi
 ## When to Use This Skill
 
 This skill should be used when:
+
 - Searching for biomedical or life sciences research articles
 - Constructing complex search queries with Boolean operators, field tags, or MeSH terms
 - Conducting systematic literature reviews or meta-analyses
@@ -36,6 +36,7 @@ This skill should be used when:
 Construct sophisticated PubMed queries using Boolean operators, field tags, and specialized syntax.
 
 **Basic Search Strategies**:
+
 - Combine concepts with Boolean operators (AND, OR, NOT)
 - Use field tags to limit searches to specific record parts
 - Employ phrase searching with double quotes for exact matches
@@ -44,17 +45,22 @@ Construct sophisticated PubMed queries using Boolean operators, field tags, and 
 
 **Example Queries**:
 ```
+
 # Recent systematic reviews on diabetes treatment
+
 diabetes mellitus[mh] AND treatment[tiab] AND systematic review[pt] AND 2023:2024[dp]
 
 # Clinical trials comparing two drugs
+
 (metformin[nm] OR insulin[nm]) AND diabetes mellitus, type 2[mh] AND randomized controlled trial[pt]
 
 # Author-specific research
+
 smith ja[au] AND cancer[tiab] AND 2023[dp] AND english[la]
 ```
 
 **When to consult search_syntax.md**:
+
 - Need comprehensive list of available field tags
 - Require detailed explanation of search operators
 - Constructing complex proximity searches
@@ -68,11 +74,13 @@ Grep pattern for field tags: `\[au\]|\[ti\]|\[ab\]|\[mh\]|\[pt\]|\[dp\]`
 Use Medical Subject Headings (MeSH) for precise, consistent searching across the biomedical literature.
 
 **MeSH Searching**:
+
 - [mh] tag searches MeSH terms with automatic inclusion of narrower terms
 - [majr] tag limits to articles where the topic is the main focus
 - Combine MeSH terms with subheadings for specificity (e.g., diabetes mellitus/therapy[mh])
 
 **Common MeSH Subheadings**:
+
 - /diagnosis - Diagnostic methods
 - /drug therapy - Pharmaceutical treatment
 - /epidemiology - Disease patterns and prevalence
@@ -82,7 +90,9 @@ Use Medical Subject Headings (MeSH) for precise, consistent searching across the
 
 **Example**:
 ```
+
 # Diabetes therapy with specific focus
+
 diabetes mellitus, type 2[mh]/drug therapy AND cardiovascular diseases[mh]/prevention & control
 ```
 
@@ -91,6 +101,7 @@ diabetes mellitus, type 2[mh]/drug therapy AND cardiovascular diseases[mh]/preve
 Filter results by publication type, date, text availability, and other attributes.
 
 **Publication Types** (use [pt] field tag):
+
 - Clinical Trial
 - Meta-Analysis
 - Randomized Controlled Trial
@@ -100,17 +111,21 @@ Filter results by publication type, date, text availability, and other attribute
 - Guideline
 
 **Date Filtering**:
+
 - Single year: `2024[dp]`
 - Date range: `2020:2024[dp]`
 - Specific date: `2024/03/15[dp]`
 
 **Text Availability**:
+
 - Free full text: Add `AND free full text[sb]` to query
 - Has abstract: Add `AND hasabstract[text]` to query
 
 **Example**:
 ```
+
 # Recent free full-text RCTs on hypertension
+
 hypertension[mh] AND randomized controlled trial[pt] AND 2023:2024[dp] AND free full text[sb]
 ```
 
@@ -119,6 +134,7 @@ hypertension[mh] AND randomized controlled trial[pt] AND 2023:2024[dp] AND free 
 Access PubMed data programmatically using the NCBI E-utilities REST API for automation and bulk operations.
 
 **Core API Endpoints**:
+
 1. **ESearch** - Search database and retrieve PMIDs
 2. **EFetch** - Download full records in various formats
 3. **ESummary** - Get document summaries
@@ -130,6 +146,7 @@ Access PubMed data programmatically using the NCBI E-utilities REST API for auto
 import requests
 
 # Step 1: Search for articles
+
 base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
 search_url = f"{base_url}esearch.fcgi"
 params = {
@@ -143,6 +160,7 @@ response = requests.get(search_url, params=params)
 pmids = response.json()["esearchresult"]["idlist"]
 
 # Step 2: Fetch article details
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 fetch_url = f"{base_url}efetch.fcgi"
 params = {
@@ -158,17 +176,20 @@ abstracts = response.text
 ```
 
 **Rate Limits**:
+
 - Without API key: 3 requests/second
 - With API key: 10 requests/second
 - Always include User-Agent header
 
 **Best Practices**:
+
 - Use history server (usehistory=y) for large result sets
 - Implement batch operations via EPost for multiple UIDs
 - Cache results locally to minimize redundant calls
 - Respect rate limits to avoid service disruption
 
 **When to consult api_reference.md**:
+
 - Need detailed endpoint documentation
 - Require parameter specifications for each E-utility
 - Constructing batch operations or history server workflows
@@ -184,13 +205,17 @@ Find articles using partial citation information or specific identifiers.
 
 **By Identifier**:
 ```
+
 # By PMID
+
 12345678[pmid]
 
 # By DOI
+
 10.1056/NEJMoa123456[doi]
 
 # By PMC ID
+
 PMC123456[pmc]
 ```
 
@@ -203,10 +228,13 @@ Example: Science|2008|320|5880|1185|key1|
 
 **By Author and Metadata**:
 ```
+
 # First author with year and topic
+
 smith ja[1au] AND 2023[dp] AND cancer[tiab]
 
 # Journal, volume, and page
+
 nature[ta] AND 2024[dp] AND 456[vi] AND 123-130[pg]
 ```
 
@@ -217,10 +245,15 @@ Conduct comprehensive literature searches for systematic reviews and meta-analys
 **PICO Framework** (Population, Intervention, Comparison, Outcome):
 Structure clinical research questions systematically:
 ```
+
 # Example: Diabetes treatment effectiveness
+
 # P: diabetes mellitus, type 2[mh]
+
 # I: metformin[nm]
+
 # C: lifestyle modification[tiab]
+
 # O: glycemic control[tiab]
 
 diabetes mellitus, type 2[mh] AND
@@ -231,7 +264,9 @@ randomized controlled trial[pt]
 
 **Comprehensive Search Strategy**:
 ```
+
 # Include multiple synonyms and MeSH terms
+
 (disease name[tiab] OR disease name[mh] OR synonym[tiab]) AND
 (treatment[tiab] OR therapy[tiab] OR intervention[tiab]) AND
 (systematic review[pt] OR meta-analysis[pt] OR randomized controlled trial[pt]) AND
@@ -240,6 +275,7 @@ english[la]
 ```
 
 **Search Refinement**:
+
 1. Start broad, review results
 2. Add specificity with field tags
 3. Apply date and publication type filters
@@ -247,6 +283,7 @@ english[la]
 5. Combine search history for complex queries
 
 **When to consult common_queries.md**:
+
 - Need example queries for specific disease types or research areas
 - Require templates for different study designs
 - Looking for population-specific query patterns (pediatric, geriatric, etc.)
@@ -260,6 +297,7 @@ Grep pattern for query examples: `diabetes|cancer|cardiovascular|clinical trial|
 Use PubMed's search history and My NCBI features for efficient research workflows.
 
 **Search History** (via Advanced Search):
+
 - Maintains up to 100 searches
 - Expires after 8 hours of inactivity
 - Combine previous searches using # references
@@ -273,6 +311,7 @@ Use PubMed's search history and My NCBI features for efficient research workflow
 ```
 
 **My NCBI Features**:
+
 - Save searches indefinitely
 - Set up email alerts for new matching articles
 - Create collections of saved articles
@@ -287,17 +326,21 @@ Find related research and explore citation networks.
 
 **Similar Articles Feature**:
 Every PubMed article includes pre-calculated related articles based on:
+
 - Title and abstract similarity
 - MeSH term overlap
 - Weighted algorithmic matching
 
 **ELink for Related Data**:
 ```
+
 # Find related articles programmatically
+
 elink.fcgi?dbfrom=pubmed&db=pubmed&id=PMID&cmd=neighbor
 ```
 
 **Citation Links**:
+
 - LinkOut to full text from publishers
 - Links to PubMed Central free articles
 - Connections to related NCBI databases (GenBank, ClinicalTrials.gov, etc.)
@@ -307,18 +350,22 @@ elink.fcgi?dbfrom=pubmed&db=pubmed&id=PMID&cmd=neighbor
 Export search results in various formats for citation management and further analysis.
 
 **Export Formats**:
+
 - .nbib files for reference managers (Zotero, Mendeley, EndNote)
 - AMA, MLA, APA, NLM citation styles
 - CSV for data analysis
 - XML for programmatic processing
 
 **Clipboard and Collections**:
+
 - Clipboard: Temporary storage for up to 500 items (8-hour expiration)
 - Collections: Permanent storage via My NCBI account
 
 **Batch Export via API**:
 ```python
+
 # Export citations in MEDLINE format
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 efetch.fcgi?db=pubmed&id=PMID1,PMID2&rettype=medline&retmode=text
 ```
@@ -328,7 +375,9 @@ efetch.fcgi?db=pubmed&id=PMID1,PMID2&rettype=medline&retmode=text
 This skill includes three comprehensive reference files in the `references/` directory:
 
 ### references/api_reference.md
+
 Complete E-utilities API documentation including all nine endpoints, parameters, response formats, and best practices. Consult when:
+
 - Implementing programmatic PubMed access
 - Constructing API requests
 - Understanding rate limits and authentication
@@ -336,7 +385,9 @@ Complete E-utilities API documentation including all nine endpoints, parameters,
 - Troubleshooting API errors
 
 ### references/search_syntax.md
+
 Detailed guide to PubMed search syntax including field tags, Boolean operators, wildcards, and special characters. Consult when:
+
 - Constructing complex search queries
 - Understanding automatic term mapping
 - Using advanced search features (proximity, wildcards)
@@ -344,7 +395,9 @@ Detailed guide to PubMed search syntax including field tags, Boolean operators, 
 - Troubleshooting unexpected search results
 
 ### references/common_queries.md
+
 Extensive collection of example queries for various research scenarios, disease types, and methodologies. Consult when:
+
 - Starting a new literature search
 - Need templates for specific research areas
 - Looking for best practice query patterns
@@ -404,6 +457,7 @@ Load reference files into context as needed based on the specific task. For brie
 ## Tips and Best Practices
 
 ### Search Strategy
+
 - Start broad, then narrow with field tags and filters
 - Include synonyms and MeSH terms for comprehensive coverage
 - Use quotation marks for exact phrases
@@ -411,6 +465,7 @@ Load reference files into context as needed based on the specific task. For brie
 - Combine multiple searches using search history
 
 ### API Usage
+
 - Obtain API key for higher rate limits (10 req/sec vs 3 req/sec)
 - Use history server for result sets > 500 articles
 - Implement exponential backoff for rate limit handling
@@ -418,6 +473,7 @@ Load reference files into context as needed based on the specific task. For brie
 - Always include descriptive User-Agent header
 
 ### Quality Filtering
+
 - Prefer systematic reviews and meta-analyses for synthesized evidence
 - Use publication type filters to find specific study designs
 - Filter by date for most recent research
@@ -425,6 +481,7 @@ Load reference files into context as needed based on the specific task. For brie
 - Use free full text filter for immediate access
 
 ### Citation Management
+
 - Export early and often to avoid losing search results
 - Use .nbib format for compatibility with most reference managers
 - Create My NCBI account for permanent collections
@@ -434,24 +491,28 @@ Load reference files into context as needed based on the specific task. For brie
 ## Limitations and Considerations
 
 ### Database Coverage
+
 - Primarily biomedical and life sciences literature
 - Pre-1975 articles often lack abstracts
 - Full author names available from 2002 forward
 - Non-English abstracts available but may default to English display
 
 ### Search Limitations
+
 - Display limited to 10,000 results maximum
 - Search history expires after 8 hours of inactivity
 - Clipboard holds max 500 items with 8-hour expiration
 - Automatic term mapping may produce unexpected results
 
 ### API Considerations
+
 - Rate limits apply (3-10 requests/second)
 - Large queries may time out (use history server)
 - XML parsing required for detailed data extraction
 - API key recommended for production use
 
 ### Access Limitations
+
 - PubMed provides citations and abstracts (not always full text)
 - Full text access depends on publisher, institutional access, or open access status
 - LinkOut availability varies by journal and institution
@@ -465,8 +526,8 @@ Load reference files into context as needed based on the specific task. For brie
 - **Technical Support**: vog.hin.mln.ibcn@seitilitue
 - **Mailing List**: utilities-announce@ncbi.nlm.nih.gov
 
-
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

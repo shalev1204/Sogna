@@ -9,7 +9,6 @@ id: skill-bug-hunter
 owner: [[orchestrator]]
 ---
 
-
 # Bug Hunter
 
 Systematically hunt down and fix bugs using proven debugging techniques. No guessing—follow the evidence.
@@ -29,14 +28,17 @@ Systematically hunt down and fix bugs using proven debugging techniques. No gues
 First, make it happen consistently:
 
 ```
+
 1. Get exact steps to reproduce
 2. Try to reproduce locally
 3. Note what triggers it
 4. Document the error message/behavior
 5. Check if it happens every time or randomly
+
 ```
 
 If you can't reproduce it, gather more info:
+
 - What environment? (dev, staging, prod)
 - What browser/device?
 - What user actions preceded it?
@@ -48,23 +50,30 @@ Collect all available information:
 
 **Check logs:**
 ```bash
+
 # Application logs
+
 tail -f logs/app.log
 
 # System logs
+
 journalctl -u myapp -f
 
 # Browser console
+
 # Open DevTools → Console tab
+
 ```
 
 **Check error messages:**
+
 - Full stack trace
 - Error type and message
 - Line numbers
 - Timestamp
 
 **Check state:**
+
 - What data was being processed?
 - What was the user trying to do?
 - What's in the database?
@@ -114,6 +123,7 @@ const result = { mock: 'data' }; // Use mock data
 Trace back to the actual problem:
 
 **Common root causes:**
+
 - Null/undefined values
 - Wrong data types
 - Race conditions
@@ -166,12 +176,14 @@ const login = async (credentials) => {
 Verify it actually works:
 
 ```
+
 1. Reproduce the original bug
 2. Apply the fix
 3. Try to reproduce again (should fail)
 4. Test edge cases
 5. Test related functionality
 6. Run existing tests
+
 ```
 
 ### 8. Prevent Regression
@@ -220,6 +232,7 @@ console.log('Result:', result);
 ### Diff Debugging
 
 Compare working vs broken:
+
 - What changed recently?
 - What's different between environments?
 - What's different in the data?
@@ -232,7 +245,9 @@ Use git to find when it broke:
 git bisect start
 git bisect bad  # Current commit is broken
 git bisect good abc123  # This old commit worked
+
 # Git will check out commits for you to test
+
 ```
 
 ## Common Bug Patterns
@@ -352,6 +367,7 @@ node --inspect app.js
 After fixing, document it:
 
 ```markdown
+
 ## Bug: Login timeout after 30 seconds
 
 **Symptom:** Users get logged out immediately after login
@@ -361,6 +377,7 @@ After fixing, document it:
 **Fix:** Increased session timeout from 30s to 3600s in config
 
 **Files Changed:**
+
 - config/session.js (line 12)
 
 **Testing:** Verified login persists for 1 hour
@@ -384,11 +401,13 @@ After fixing, document it:
 - `@codebase-audit-pre-push` - Code review
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

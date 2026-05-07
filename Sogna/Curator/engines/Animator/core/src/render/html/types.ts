@@ -1,6 +1,6 @@
 import { type TransformOrigin, type HTMLRenderState } from "sognaflow-dom"
 import { PropsWithoutRef, RefAttributes, JSX } from "react"
-import { sognaflowProps } from "../../sognaflow/types"
+import { sognaflowProps } from "../../motion/types"
 import { HTMLElements } from "./supported-elements.js"
 
 export type { TransformOrigin, HTMLRenderState }

@@ -7,7 +7,6 @@ id: skill-food-database-query
 owner: [[eng-database]]
 ---
 
-
 # 食物数据库查询技能
 
 **技能名称**: Food Database Query
@@ -18,6 +17,7 @@ owner: [[eng-database]]
 ---
 
 ## When to Use
+
 - 需要查询食物营养成分、比较食物差异或做营养计算时使用。
 - 任务涉及食物数据库检索、食物推荐、份量换算或分类筛选。
 - 需要基于结构化食物数据生成分析结果而不是自由文本建议时使用。
@@ -27,6 +27,7 @@ owner: [[eng-database]]
 本技能提供全面的营养食物数据库查询功能,支持食物营养信息查询、比较、推荐和自动营养计算。
 
 **核心功能**:
+
 - ✅ 食物营养信息查询
 - ✅ 食物比较分析
 - ✅ 智能食物推荐
@@ -39,11 +40,13 @@ owner: [[eng-database]]
 ## 数据源
 
 ### 主数据库
+
 - **文件**: `data/food-database.json`
 - **内容**: 50种常见食物的详细营养数据
 - **结构**: 每种食物包含30+营养素指标
 
 ### 分类体系
+
 - **文件**: `data/food-categories.json`
 - **分类**: 10大类,30+子类
 - **支持**: 按分类浏览和筛选
@@ -59,17 +62,20 @@ owner: [[eng-database]]
 **用途**: 根据食物名称查询营养信息
 
 **支持输入**:
+
 - 中文名称: "燕麦", "西兰花", "三文鱼"
 - 英文名称: "Oats", "Broccoli", "Salmon"
 - 别名: "燕麦片", "broccoli", "三文鱼肉"
 
 **查询流程**:
+
 1. 接收食物名称
 2. 在数据库中搜索匹配项
 3. 支持模糊匹配和别名匹配
 4. 返回完整营养信息
 
 **返回信息**:
+
 - 基本信息 (名称、分类、标准份量)
 - 宏量营养素 (卡路里、蛋白质、碳水、脂肪、纤维)
 - 微量营养素 (维生素、矿物质)
@@ -81,8 +87,11 @@ owner: [[eng-database]]
 
 **示例**:
 ```python
+
 # 用户输入: "燕麦"
+
 # 返回:
+
 {
   "name": "燕麦",
   "name_en": "Oats",
@@ -105,6 +114,7 @@ owner: [[eng-database]]
 **用途**: 根据营养特征搜索食物
 
 **搜索条件**:
+
 - 营养素含量: "高蛋白", "高纤维", "低GI"
 - 营养素组合: "高蛋白 低卡路里", "高纤维 低GI"
 - 分类筛选: "谷物类", "蔬菜", "蛋白质"
@@ -112,7 +122,9 @@ owner: [[eng-database]]
 
 **搜索逻辑**:
 ```python
+
 # 示例: 搜索"高蛋白 低卡路里"
+
 def search_foods(criteria):
     results = []
     for food in database:
@@ -130,6 +142,7 @@ def search_foods(criteria):
 ```
 
 **返回格式**:
+
 - 按匹配度排序
 - 显示关键营养素
 - 标注匹配标签
@@ -151,6 +164,7 @@ def search_foods(criteria):
 ```
 
 **浏览模式**:
+
 - 列出某分类下所有食物
 - 按营养素排序
 - 按GI值排序
@@ -165,6 +179,7 @@ def search_foods(criteria):
 **功能**: 比较两种食物的营养差异
 
 **比较维度**:
+
 - **宏量营养素**: 卡路里、蛋白质、碳水、脂肪、纤维
 - **微量营养素**: 主要维生素和矿物质
 - **升糖指数**: GI值、升糖负荷
@@ -194,6 +209,7 @@ def compare_foods(food1, food2):
 ```
 
 **输出格式**:
+
 - 对比表格
 - 差异百分比
 - 优势标注
@@ -202,6 +218,7 @@ def compare_foods(food1, food2):
 #### 2.2 多维度比较
 
 **支持模式**:
+
 - 全方位营养比较
 - 仅比较特定营养素
 - 仅比较GI值
@@ -240,6 +257,7 @@ def recommend_by_nutrient(nutrient, min_value=None, max_value=None):
 ```
 
 **推荐类别**:
+
 - **高蛋白**: ≥15g/100g
 - **高纤维**: ≥5g/100g
 - **低GI**: ≤55
@@ -251,11 +269,13 @@ def recommend_by_nutrient(nutrient, min_value=None, max_value=None):
 #### 3.2 多条件推荐
 
 **支持组合条件**:
+
 - "高蛋白 低卡路里"
 - "高纤维 低GI"
 - "富含铁 素食友好"
 
 **排序策略**:
+
 1. 按第一优先级排序
 2. 筛选符合第二条件的
 3. 综合评分排序
@@ -263,26 +283,31 @@ def recommend_by_nutrient(nutrient, min_value=None, max_value=None):
 #### 3.3 基于健康状况推荐
 
 **高血压 (DASH饮食)**:
+
 - 低钠食物
 - 高钾食物
 - 高镁、高钙食物
 
 **糖尿病**:
+
 - 低GI食物
 - 高纤维食物
 - 低碳水化合物
 
 **高血脂**:
+
 - 高Omega-3食物
 - 低饱和脂肪
 - 高纤维食物
 
 **骨质疏松**:
+
 - 高钙食物
 - 富含维生素D
 - 高镁、高锌
 
 **贫血**:
+
 - 富含铁
 - 富含叶酸
 - 富含维生素B12
@@ -321,6 +346,7 @@ def parse_food_input(text):
 #### 4.2 份量转换
 
 **常见份量**:
+
 - "1杯": 240ml (液体) 或 重量依据食物
 - "1个": 鸡蛋50g, 苹果150g
 - "1片": 面包30g
@@ -363,11 +389,13 @@ def calculate_nutrition(food, portion_grams):
 #### 4.4 烹饪影响修正
 
 **考虑因素**:
+
 - 煮熟后重量变化
 - 维生素损失
 - 营养素保留率
 
 **示例**:
+
 - 燕麦生:100g → 煮熟:约300g (3倍重量)
 - 维生素保留: 煮熟保留60-80%
 
@@ -378,6 +406,7 @@ def calculate_nutrition(food, portion_grams):
 #### 5.1 别名匹配
 
 **支持同义词**:
+
 - "燕麦" = "燕麦片" = "oats" = "rolled oats"
 - "西兰花" = "绿花菜" = "broccoli"
 
@@ -623,6 +652,7 @@ RDA_FEMALE = {
 ```
 
 **系统处理**:
+
 1. 识别食物: 燕麦、鸡蛋、牛奶
 2. 查询营养数据
 3. 计算份量营养
@@ -636,6 +666,7 @@ RDA_FEMALE = {
 **食物**: 燕麦粥(1杯) + 鸡蛋(1个) + 牛奶(250ml)
 
 **营养汇总**:
+
 - 卡路里: 417 卡
 - 蛋白质: 25.1g
 - 碳水化合物: 48.5g
@@ -643,9 +674,11 @@ RDA_FEMALE = {
 - 膳食纤维: 8.2g
 
 **微量营养素亮点**:
+
 - 维生素D: 3.1 μg (21% RDA)
 - 钙: 332 mg (33% RDA)
 - 维生素B12: 1.3 μg (54% RDA)
+
 ```
 
 ### 示例2: 查询食物
@@ -657,14 +690,17 @@ RDA_FEMALE = {
 
 **返回结果**:
 ```markdown
+
 # 三文鱼 营养信息
 
 ## 基本信息
+
 - **名称**: 三文鱼 (Salmon)
 - **分类**: 蛋白质来源 > 鱼虾贝类
 - **标准份量**: 100克
 
 ## 宏量营养素 (每100克)
+
 - **卡路里**: 208 卡
 - **蛋白质**: 20g ✅
 - **碳水化合物**: 0g
@@ -672,19 +708,23 @@ RDA_FEMALE = {
 - **Omega-3**: 2.5g ✅✅✅
 
 ## 营养亮点
+
 - ✅✅✅ 富含Omega-3脂肪酸 (EPA+DHA)
 - ✅✅ 高质量蛋白质
 - ✅ 富含维生素D (11μg)
 - ✅ 富含维生素B12 (3.2μg)
 
 ## 健康标签
+
 - ✅ 高蛋白
 - ✅ 富含Omega-3
 - ✅ 心脏健康
 - ✅ 大脑健康
 
 ## 推荐份量
+
 - 100-150g/餐 (每周2-3次)
+
 ```
 
 ### 示例3: 比较食物
@@ -696,6 +736,7 @@ RDA_FEMALE = {
 
 **返回结果**:
 ```markdown
+
 # 食物比较: 鸡胸肉 vs 三文鱼
 
 ## 营养对比 (每100克)
@@ -710,14 +751,17 @@ RDA_FEMALE = {
 ## 推荐建议
 
 **选择鸡胸肉更适合**:
+
 - ✅ 减脂期间 (低卡高蛋白)
 - ✅ 控制脂肪摄入
 - ✅ 蛋白质需求高
 
 **选择三文鱼更适合**:
+
 - ✅ 心脏健康 (高Omega-3)
 - ✅ 大脑健康 (DHA)
 - ✅ 抗炎需求
+
 ```
 
 ---
@@ -725,18 +769,21 @@ RDA_FEMALE = {
 ## 扩展计划
 
 ### 短期 (1-2个月)
+
 - ✅ 完成50种常见食物
 - ⏳ 扩展至100种食物
 - ⏳ 添加更多常见份量
 - ⏳ 优化搜索算法
 
 ### 中期 (3-6个月)
+
 - ⏳ 扩展至300种食物
 - ⏳ 添加品牌食品
 - ⏳ 支持用户自定义食物
 - ⏳ 添加食物照片
 
 ### 长期 (持续)
+
 - ⏳ 持续更新数据库
 - ⏳ 添加季节性食物
 - ⏳ 集成条形码扫描
@@ -747,11 +794,13 @@ RDA_FEMALE = {
 ## 质量保证
 
 ### 数据准确性
+
 - 来源: 《中国食物成分表(第6版)》+ USDA
 - 验证: 交叉验证多个来源
 - 更新: 定期更新数据
 
 ### 功能测试
+
 - 查询准确性测试
 - 计算精度测试
 - 边界条件测试
@@ -762,12 +811,14 @@ RDA_FEMALE = {
 ## 注意事项
 
 ### ⚠️ 重要限制
+
 1. **数据范围**: 当前仅覆盖50种常见食物
 2. **烹饪影响**: 数据基于生食/标准烹饪
 3. **个体差异**: 实际营养吸收因人而异
 4. **地域差异**: 不同地区食物营养可能不同
 
 ### ⚠️ 使用建议
+
 1. **均衡饮食**: 不要依赖单一食物
 2. **多样化选择**: 轮换不同食物
 3. **适量原则**: 即使健康食物也需适量
@@ -778,12 +829,14 @@ RDA_FEMALE = {
 ## 技术实现
 
 ### 文件位置
+
 - 数据库: `data/food-database.json`
 - 分类: `data/food-categories.json`
 - 命令: `.claude/commands/nutrition.md`
 - 技能: `.claude/skills/food-database-query/SKILL.md`
 
 ### 性能优化
+
 - 数据库索引 (食物名称、分类)
 - 缓存常用查询
 - 模糊搜索优化
@@ -795,11 +848,13 @@ RDA_FEMALE = {
 **维护者**: WellAlly Tech
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

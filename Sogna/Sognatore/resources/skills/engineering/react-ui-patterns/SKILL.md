@@ -9,7 +9,6 @@ id: skill-react-ui-patterns
 owner: [[orchestrator]]
 ---
 
-
 # React UI Patterns
 
 ## Core Principles
@@ -75,10 +74,12 @@ Do we have data?
 ### The Error Handling Hierarchy
 
 ```
+
 1. Inline error (field-level) → Form validation errors
 2. Toast notification → Recoverable errors, user can retry
 3. Error banner → Page-level errors, data still partially usable
 4. Full error screen → Unrecoverable, needs user action
+
 ```
 
 ### Always Show Errors
@@ -281,6 +282,7 @@ onError: (error) => {
 Before completing any UI component:
 
 **UI States:**
+
 - [ ] Error state handled and shown to user
 - [ ] Loading state shown only when no data exists
 - [ ] Empty state provided for collections
@@ -288,6 +290,7 @@ Before completing any UI component:
 - [ ] Buttons show loading indicator when appropriate
 
 **Data & Mutations:**
+
 - [ ] Mutations have onError handler
 - [ ] All user actions have feedback (toast/visual)
 
@@ -298,14 +301,17 @@ Before completing any UI component:
 - **formik-patterns**: Apply form submission patterns
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -87,6 +87,7 @@ const max = Math.max(...numbers)
 This works for small arrays but can be slower for very large arrays due to spread operator limitations. Use the loop approach for reliability.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

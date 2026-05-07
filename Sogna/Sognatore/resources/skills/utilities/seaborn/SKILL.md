@@ -10,10 +10,10 @@ id: skill-seaborn
 owner: [[orchestrator]]
 ---
 
-
 # Seaborn Statistical Visualization
 
 ## When to Use
+
 - You need publication-quality statistical graphics directly from tabular datasets.
 - You are exploring multivariate relationships, distributions, or grouped comparisons with minimal plotting code.
 - You want seaborn's dataset-oriented API and statistical defaults on top of matplotlib.
@@ -40,9 +40,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Load example dataset
+
 df = sns.load_dataset('tips')
 
 # Create a simple visualization
+
 sns.scatterplot(data=df, x='total_bill', y='tip', hue='day')
 plt.show()
 ```
@@ -54,6 +56,7 @@ plt.show()
 The function interface provides specialized plotting functions organized by visualization type. Each category has **axes-level** functions (plot to single axes) and **figure-level** functions (manage entire figure with faceting).
 
 **When to use:**
+
 - Quick exploratory analysis
 - Single-purpose visualizations
 - When you need a specific plot type
@@ -63,6 +66,7 @@ The function interface provides specialized plotting functions organized by visu
 The `seaborn.objects` interface provides a declarative, composable API similar to ggplot2. Build visualizations by chaining methods to specify data mappings, marks, transformations, and scales.
 
 **When to use:**
+
 - Complex layered visualizations
 - When you need fine-grained control over transformations
 - Building custom plot types
@@ -72,6 +76,7 @@ The `seaborn.objects` interface provides a declarative, composable API similar t
 from seaborn import objects as so
 
 # Declarative syntax
+
 (
     so.Plot(data=df, x='total_bill', y='tip')
     .add(so.Dot(), color='day')
@@ -90,6 +95,7 @@ from seaborn import objects as so
 - `relplot()` - Figure-level interface with automatic faceting
 
 **Key parameters:**
+
 - `x`, `y` - Primary variables
 - `hue` - Color encoding for additional categorical/continuous variable
 - `size` - Point/line size encoding
@@ -97,14 +103,18 @@ from seaborn import objects as so
 - `col`, `row` - Facet into multiple subplots (figure-level only)
 
 ```python
+
 # Scatter with multiple semantic mappings
+
 sns.scatterplot(data=df, x='total_bill', y='tip',
                 hue='time', size='size', style='sex')
 
 # Line plot with confidence intervals
+
 sns.lineplot(data=timeseries, x='date', y='value', hue='category')
 
 # Faceted relational plot
+
 sns.relplot(data=df, x='total_bill', y='tip',
             col='time', row='sex', hue='smoker', kind='scatter')
 ```
@@ -122,6 +132,7 @@ sns.relplot(data=df, x='total_bill', y='tip',
 - `pairplot()` - Matrix of pairwise relationships across dataset
 
 **Key parameters:**
+
 - `x`, `y` - Variables (y optional for univariate)
 - `hue` - Separate distributions by category
 - `stat` - Normalization: "count", "frequency", "probability", "density"
@@ -131,19 +142,24 @@ sns.relplot(data=df, x='total_bill', y='tip',
 - `multiple` - How to handle hue: "layer", "stack", "dodge", "fill"
 
 ```python
+
 # Histogram with density normalization
+
 sns.histplot(data=df, x='total_bill', hue='time',
              stat='density', multiple='stack')
 
 # Bivariate KDE with contours
+
 sns.kdeplot(data=df, x='total_bill', y='tip',
             fill=True, levels=5, thresh=0.1)
 
 # Joint plot with marginals
+
 sns.jointplot(data=df, x='total_bill', y='tip',
               kind='scatter', hue='time')
 
 # Pairwise relationships
+
 sns.pairplot(data=df, hue='species', corner=True)
 ```
 
@@ -152,23 +168,28 @@ sns.pairplot(data=df, hue='species', corner=True)
 **Use for:** Comparing distributions or statistics across discrete categories
 
 **Categorical scatterplots:**
+
 - `stripplot()` - Points with jitter to show all observations
 - `swarmplot()` - Non-overlapping points (beeswarm algorithm)
 
 **Distribution comparisons:**
+
 - `boxplot()` - Quartiles and outliers
 - `violinplot()` - KDE + quartile information
 - `boxenplot()` - Enhanced boxplot for larger datasets
 
 **Statistical estimates:**
+
 - `barplot()` - Mean/aggregate with confidence intervals
 - `pointplot()` - Point estimates with connecting lines
 - `countplot()` - Count of observations per category
 
 **Figure-level:**
+
 - `catplot()` - Faceted categorical plots (set `kind` parameter)
 
 **Key parameters:**
+
 - `x`, `y` - Variables (one typically categorical)
 - `hue` - Additional categorical grouping
 - `order`, `hue_order` - Control category ordering
@@ -177,18 +198,23 @@ sns.pairplot(data=df, hue='species', corner=True)
 - `kind` - Plot type for catplot: "strip", "swarm", "box", "violin", "bar", "point"
 
 ```python
+
 # Swarm plot showing all points
+
 sns.swarmplot(data=df, x='day', y='total_bill', hue='sex')
 
 # Violin plot with split for comparison
+
 sns.violinplot(data=df, x='day', y='total_bill',
                hue='sex', split=True)
 
 # Bar plot with error bars
+
 sns.barplot(data=df, x='day', y='total_bill',
             hue='sex', estimator='mean', errorbar='ci')
 
 # Faceted categorical plot
+
 sns.catplot(data=df, x='day', y='total_bill',
             col='time', kind='box')
 ```
@@ -202,6 +228,7 @@ sns.catplot(data=df, x='day', y='total_bill',
 - `residplot()` - Residual plot for assessing model fit
 
 **Key parameters:**
+
 - `x`, `y` - Variables to regress
 - `order` - Polynomial regression order
 - `logistic` - Fit logistic regression
@@ -210,14 +237,18 @@ sns.catplot(data=df, x='day', y='total_bill',
 - `scatter_kws`, `line_kws` - Customize scatter and line properties
 
 ```python
+
 # Simple linear regression
+
 sns.regplot(data=df, x='total_bill', y='tip')
 
 # Polynomial regression with faceting
+
 sns.lmplot(data=df, x='total_bill', y='tip',
            col='time', order=2, ci=95)
 
 # Check residuals
+
 sns.residplot(data=df, x='total_bill', y='tip')
 ```
 
@@ -229,6 +260,7 @@ sns.residplot(data=df, x='total_bill', y='tip')
 - `clustermap()` - Hierarchically-clustered heatmap
 
 **Key parameters:**
+
 - `data` - 2D rectangular dataset (DataFrame or array)
 - `annot` - Display values in cells
 - `fmt` - Format string for annotations (e.g., ".2f")
@@ -239,12 +271,15 @@ sns.residplot(data=df, x='total_bill', y='tip')
 - `linewidths` - Gap between cells
 
 ```python
+
 # Correlation heatmap
+
 corr = df.corr()
 sns.heatmap(corr, annot=True, fmt='.2f',
             cmap='coolwarm', center=0, square=True)
 
 # Clustered heatmap
+
 sns.clustermap(data, cmap='viridis',
                standard_scale=1, figsize=(10, 10))
 ```
@@ -290,6 +325,7 @@ g.plot_marginals(sns.histplot)
 Understanding this distinction is crucial for effective seaborn usage:
 
 ### Axes-Level Functions
+
 - Plot to a single matplotlib `Axes` object
 - Integrate easily into complex matplotlib figures
 - Accept `ax=` parameter for precise placement
@@ -297,6 +333,7 @@ Understanding this distinction is crucial for effective seaborn usage:
 - Examples: `scatterplot`, `histplot`, `boxplot`, `regplot`, `heatmap`
 
 **When to use:**
+
 - Building custom multi-plot layouts
 - Combining different plot types
 - Need matplotlib-level control
@@ -311,6 +348,7 @@ sns.kdeplot(data=df, x='x', y='y', ax=axes[1, 1])
 ```
 
 ### Figure-Level Functions
+
 - Manage entire figure including all subplots
 - Built-in faceting via `col` and `row` parameters
 - Return `FacetGrid`, `JointGrid`, or `PairGrid` objects
@@ -319,13 +357,16 @@ sns.kdeplot(data=df, x='x', y='y', ax=axes[1, 1])
 - Examples: `relplot`, `displot`, `catplot`, `lmplot`, `jointplot`, `pairplot`
 
 **When to use:**
+
 - Faceted visualizations (small multiples)
 - Quick exploratory analysis
 - Consistent multi-panel layouts
 - Don't need to combine with other plot types
 
 ```python
+
 # Automatic faceting
+
 sns.relplot(data=df, x='x', y='y', col='category', row='group',
             hue='type', height=3, aspect=1.2)
 ```
@@ -337,7 +378,9 @@ sns.relplot(data=df, x='x', y='y', col='category', row='group',
 Each variable is a column, each observation is a row. This "tidy" format provides maximum flexibility:
 
 ```python
+
 # Long-form structure
+
    subject  condition  measurement
 0        1    control         10.5
 1        1  treatment         12.3
@@ -346,6 +389,7 @@ Each variable is a column, each observation is a row. This "tidy" format provide
 ```
 
 **Advantages:**
+
 - Works with all seaborn functions
 - Easy to remap variables to visual properties
 - Supports arbitrary complexity
@@ -356,13 +400,16 @@ Each variable is a column, each observation is a row. This "tidy" format provide
 Variables are spread across columns. Useful for simple rectangular data:
 
 ```python
+
 # Wide-form structure
+
    control  treatment
 0     10.5       12.3
 1      9.8       13.1
 ```
 
 **Use cases:**
+
 - Simple time series
 - Correlation matrices
 - Heatmaps
@@ -380,6 +427,7 @@ Seaborn provides carefully designed color palettes for different data types:
 ### Qualitative Palettes (Categorical Data)
 
 Distinguish categories through hue variation:
+
 - `"deep"` - Default, vivid colors
 - `"muted"` - Softer, less saturated
 - `"pastel"` - Light, desaturated
@@ -395,6 +443,7 @@ sns.color_palette("Set2")
 ### Sequential Palettes (Ordered Data)
 
 Show progression from low to high values:
+
 - `"rocket"`, `"mako"` - Wide luminance range (good for heatmaps)
 - `"flare"`, `"crest"` - Restricted luminance (good for points/lines)
 - `"viridis"`, `"magma"`, `"plasma"` - Matplotlib perceptually uniform
@@ -407,6 +456,7 @@ sns.kdeplot(data=df, x='x', y='y', cmap='mako', fill=True)
 ### Diverging Palettes (Centered Data)
 
 Emphasize deviations from a midpoint:
+
 - `"vlag"` - Blue to red
 - `"icefire"` - Blue to orange
 - `"coolwarm"` - Cool to warm
@@ -419,13 +469,17 @@ sns.heatmap(correlation_matrix, cmap='vlag', center=0)
 ### Custom Palettes
 
 ```python
+
 # Create custom palette
+
 custom = sns.color_palette("husl", 8)
 
 # Light to dark gradient
+
 palette = sns.light_palette("seagreen", as_cmap=True)
 
 # Diverging palette from hues
+
 palette = sns.diverging_palette(250, 10, as_cmap=True)
 ```
 
@@ -436,16 +490,20 @@ palette = sns.diverging_palette(250, 10, as_cmap=True)
 `set_theme()` controls overall appearance:
 
 ```python
+
 # Set complete theme
+
 sns.set_theme(style='whitegrid', palette='pastel', font='sans-serif')
 
 # Reset to defaults
+
 sns.set_theme()
 ```
 
 ### Styles
 
 Control background and grid appearance:
+
 - `"darkgrid"` - Gray background with white grid (default)
 - `"whitegrid"` - White background with gray grid
 - `"dark"` - Gray background, no grid
@@ -456,9 +514,11 @@ Control background and grid appearance:
 sns.set_style("whitegrid")
 
 # Remove spines
+
 sns.despine(left=False, bottom=False, offset=10, trim=True)
 
 # Temporary style
+
 with sns.axes_style("white"):
     sns.scatterplot(data=df, x='x', y='y')
 ```
@@ -466,6 +526,7 @@ with sns.axes_style("white"):
 ### Contexts
 
 Scale elements for different use cases:
+
 - `"paper"` - Smallest (default)
 - `"notebook"` - Slightly larger
 - `"talk"` - Presentation slides
@@ -475,6 +536,7 @@ Scale elements for different use cases:
 sns.set_context("talk", font_scale=1.2)
 
 # Temporary context
+
 with sns.plotting_context("poster"):
     sns.barplot(data=df, x='category', y='value')
 ```
@@ -486,11 +548,14 @@ with sns.plotting_context("poster"):
 Always use well-structured DataFrames with meaningful column names:
 
 ```python
+
 # Good: Named columns in DataFrame
+
 df = pd.DataFrame({'bill': bills, 'tip': tips, 'day': days})
 sns.scatterplot(data=df, x='bill', y='tip', hue='day')
 
 # Avoid: Unnamed arrays
+
 sns.scatterplot(x=x_array, y=y_array)  # Loses axis labels
 ```
 
@@ -505,10 +570,13 @@ sns.scatterplot(x=x_array, y=y_array)  # Loses axis labels
 ### 3. Use Figure-Level Functions for Faceting
 
 ```python
+
 # Instead of manual subplot creation
+
 sns.relplot(data=df, x='x', y='y', col='category', col_wrap=3)
 
 # Not: Creating subplots manually for simple faceting
+
 ```
 
 ### 4. Leverage Semantic Mappings
@@ -527,11 +595,14 @@ sns.scatterplot(data=df, x='x', y='y',
 Many functions compute statistics automatically. Understand and customize:
 
 ```python
+
 # Lineplot computes mean and 95% CI by default
+
 sns.lineplot(data=df, x='time', y='value',
              errorbar='sd')  # Use standard deviation instead
 
 # Barplot computes mean by default
+
 sns.barplot(data=df, x='category', y='value',
             estimator='median',  # Use median instead
             errorbar=('ci', 95))  # Bootstrapped CI
@@ -562,14 +633,18 @@ fig.savefig('figure.pdf')  # Vector format for publications
 ### Exploratory Data Analysis
 
 ```python
+
 # Quick overview of all relationships
+
 sns.pairplot(data=df, hue='target', corner=True)
 
 # Distribution exploration
+
 sns.displot(data=df, x='variable', hue='group',
             kind='kde', fill=True, col='category')
 
 # Correlation analysis
+
 corr = df.corr()
 sns.heatmap(corr, annot=True, cmap='coolwarm', center=0)
 ```
@@ -591,7 +666,9 @@ g.savefig('figure.pdf', dpi=300, bbox_inches='tight')
 ### Complex Multi-Panel Figures
 
 ```python
+
 # Using matplotlib subplots with seaborn
+
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 
 sns.scatterplot(data=df, x='x1', y='y', hue='group', ax=axes[0, 0])
@@ -606,11 +683,14 @@ plt.tight_layout()
 ### Time Series with Confidence Bands
 
 ```python
+
 # Lineplot automatically aggregates and shows CI
+
 sns.lineplot(data=timeseries, x='date', y='measurement',
              hue='sensor', style='location', errorbar='sd')
 
 # For more control
+
 g = sns.relplot(data=timeseries, x='date', y='measurement',
                 col='location', hue='sensor', kind='line',
                 height=4, aspect=1.5, errorbar=('ci', 95))
@@ -651,10 +731,13 @@ sns.scatterplot(data=df, x='x', y='y', ax=ax)
 ### Issue: Colors Not Distinct Enough
 
 ```python
+
 # Use a different palette
+
 sns.set_palette("bright")
 
 # Or specify number of colors
+
 palette = sns.color_palette("husl", n_colors=len(df['category'].unique()))
 sns.scatterplot(data=df, x='x', y='y', hue='category', palette=palette)
 ```
@@ -662,7 +745,9 @@ sns.scatterplot(data=df, x='x', y='y', hue='category', palette=palette)
 ### Issue: KDE Too Smooth or Jagged
 
 ```python
+
 # Adjust bandwidth
+
 sns.kdeplot(data=df, x='x', bw_adjust=0.5)  # Less smooth
 sns.kdeplot(data=df, x='x', bw_adjust=2)    # More smooth
 ```
@@ -680,11 +765,13 @@ This skill includes reference materials for deeper exploration:
 Load reference files as needed for detailed function signatures, advanced parameters, or specific examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

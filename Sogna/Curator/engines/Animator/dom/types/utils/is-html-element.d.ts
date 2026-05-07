@@ -3,3 +3,4 @@
  * that works across iframes
  */
 export declare function IsHTMLElement(element: unknown): element is HTMLElement;
+export declare const isHTMLElement: typeof IsHTMLElement;

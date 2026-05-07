@@ -1,4 +1,4 @@
-export { createsognaflowComponent as create } from "../../../sognaflow"
+export { createsognaflowComponent as create } from "../../../motion"
 
 export {
     sognaflowA as a,

@@ -59,3 +59,5 @@ export function usesognaflowRef<Instance, RenderState>(
         [visualElement]
     )
 }
+
+export const useMotionRef = usesognaflowRef

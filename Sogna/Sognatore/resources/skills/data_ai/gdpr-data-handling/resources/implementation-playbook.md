@@ -563,19 +563,23 @@ class BreachNotificationHandler:
 ## Compliance Checklist
 
 ```markdown
+
 ## GDPR Implementation Checklist
 
 ### Legal Basis
+
 - [ ] Documented legal basis for each processing activity
 - [ ] Consent mechanisms meet GDPR requirements
 - [ ] Legitimate interest assessments completed
 
 ### Transparency
+
 - [ ] Privacy policy is clear and accessible
 - [ ] Processing purposes clearly stated
 - [ ] Data retention periods documented
 
 ### Data Subject Rights
+
 - [ ] Access request process implemented
 - [ ] Erasure request process implemented
 - [ ] Portability export available
@@ -583,25 +587,30 @@ class BreachNotificationHandler:
 - [ ] Response within 30-day deadline
 
 ### Security
+
 - [ ] Encryption at rest implemented
 - [ ] Encryption in transit (TLS)
 - [ ] Access controls in place
 - [ ] Audit logging enabled
 
 ### Breach Response
+
 - [ ] Breach detection mechanisms
 - [ ] 72-hour notification process
 - [ ] Breach documentation system
 
 ### Documentation
+
 - [ ] Records of processing activities (Art. 30)
 - [ ] Data protection impact assessments
 - [ ] Data processing agreements with vendors
+
 ```
 
 ## Best Practices
 
 ### Do's
+
 - **Minimize data collection** - Only collect what's needed
 - **Document everything** - Processing activities, legal bases
 - **Encrypt PII** - At rest and in transit
@@ -609,6 +618,7 @@ class BreachNotificationHandler:
 - **Regular audits** - Verify compliance continuously
 
 ### Don'ts
+
 - **Don't pre-check consent boxes** - Must be opt-in
 - **Don't bundle consent** - Separate purposes separately
 - **Don't retain indefinitely** - Define and enforce retention
@@ -622,6 +632,7 @@ class BreachNotificationHandler:
 - [EDPB Guidelines](https://edpb.europa.eu/our-work-tools/general-guidance/gdpr-guidelines-recommendations-best-practices_en)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

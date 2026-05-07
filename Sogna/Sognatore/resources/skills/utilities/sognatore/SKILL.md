@@ -8,7 +8,6 @@ id: skill-sognatore
 owner: [[orchestrator]]
 ---
 
-
 # Sognatore - Multi-Agent Autonomous Startup System
 
 > **Version 2.35.0** | PRD to Production | Zero Human Intervention
@@ -19,6 +18,7 @@ owner: [[orchestrator]]
 ## Quick Reference
 
 ### Critical First Steps (Every Turn)
+
 1. **READ** `.sognatore/CONTINUITY.md` - Your working memory + "Mistakes & Learnings"
 2. **RETRIEVE** Relevant memories from `.sognatore/memory/` (episodic patterns, anti-patterns)
 3. **CHECK** `.sognatore/state/orchestrator.json` - Current phase/metrics
@@ -29,6 +29,7 @@ owner: [[orchestrator]]
 8. **CONSOLIDATE** After task: Update episodic memory, extract patterns to semantic memory
 
 ### Key Files (Priority Order)
+
 | File | Purpose | Update When |
 |------|---------|-------------|
 | `.sognatore/CONTINUITY.md` | Working memory - what am I doing NOW? | Every turn |
@@ -100,7 +101,9 @@ Development <- QA <- Deployment <- Business Ops <- Growth Loop
 ## Prerequisites
 
 ```bash
+
 # Launch with autonomous permissions
+
 claude --dangerously-skip-permissions
 ```
 
@@ -178,20 +181,26 @@ If bugs are found in these files, document them in `.sognatore/CONTINUITY.md` un
 | **Haiku 4.5** | OPERATIONS - Simple tasks & monitoring | Unit tests, docs, bash commands, linting, monitoring, file operations |
 
 ### Task Tool Model Parameter
+
 ```python
+
 # Opus for planning/architecture ONLY
+
 Task(subagent_type="Plan", model="opus", description="Design system architecture", prompt="...")
 
 # Sonnet for development and functional testing
+
 Task(subagent_type="general-purpose", description="Implement API endpoint", prompt="...")
 Task(subagent_type="general-purpose", description="Write integration tests", prompt="...")
 
 # Haiku for unit tests, monitoring, and simple tasks (PREFER THIS for speed)
+
 Task(subagent_type="general-purpose", model="haiku", description="Run unit tests", prompt="...")
 Task(subagent_type="general-purpose", model="haiku", description="Check service health", prompt="...")
 ```
 
 ### Opus Task Categories (RESTRICTED - Planning Only)
+
 - System architecture design
 - High-level planning and strategy
 - Security audits and threat modeling
@@ -199,6 +208,7 @@ Task(subagent_type="general-purpose", model="haiku", description="Check service 
 - Technology selection
 
 ### Sonnet Task Categories (Development)
+
 - Feature implementation
 - API endpoint development
 - Bug fixes (non-trivial)
@@ -207,6 +217,7 @@ Task(subagent_type="general-purpose", model="haiku", description="Check service 
 - Database migrations
 
 ### Haiku Task Categories (Operations - Use Extensively)
+
 - Writing/running unit tests
 - Generating documentation
 - Running bash commands (npm install, git operations)
@@ -216,8 +227,11 @@ Task(subagent_type="general-purpose", model="haiku", description="Check service 
 - Simple data transformations, boilerplate generation
 
 ### Parallelization Strategy
+
 ```python
+
 # Launch 10+ Haiku agents in parallel for unit test suite
+
 for test_file in test_files:
     Task(subagent_type="general-purpose", model="haiku",
          description=f"Run unit tests: {test_file}",
@@ -228,20 +242,29 @@ for test_file in test_files:
 
 **Background Agents:**
 ```python
+
 # Launch background agent - returns immediately with output_file path
+
 Task(description="Long analysis task", run_in_background=True, prompt="...")
+
 # Output truncated to 30K chars - use Read tool to check full output file
+
 ```
 
 **Agent Resumption (for interrupted/long-running tasks):**
 ```python
+
 # First call returns agent_id
+
 result = Task(description="Complex refactor", prompt="...")
+
 # agent_id from result can resume later
+
 Task(resume="agent-abc123", prompt="Continue from where you left off")
 ```
 
 **When to use `resume`:**
+
 - Context window limits reached mid-task
 - Rate limit recovery
 - Multi-session work on same task
@@ -277,17 +300,21 @@ Task Received
 
 **Direct Routing Examples (Skip Orchestration):**
 ```python
+
 # Simple tasks -> Direct dispatch to Haiku
+
 Task(model="haiku", description="Fix import in utils.py", prompt="...")       # Direct
 Task(model="haiku", description="Run linter on src/", prompt="...")           # Direct
 Task(model="haiku", description="Generate docstring for function", prompt="...")  # Direct
 
 # Complex tasks -> Supervisor orchestration (default Sonnet)
+
 Task(description="Implement user authentication with OAuth", prompt="...")    # Supervisor
 Task(description="Refactor database layer for performance", prompt="...")     # Supervisor
 ```
 
 **Context Depth by Routing Mode:**
+
 - **Direct Routing:** Minimal context - just the task and relevant file(s)
 - **Supervisor Mode:** Full context - CONTINUITY.md, architectural decisions, dependencies
 
@@ -298,16 +325,21 @@ Task(description="Refactor database layer for performance", prompt="...")     # 
 **Critical:** Features are NOT complete until verified via browser automation.
 
 ```python
+
 # Enable Playwright MCP for E2E testing
+
 # In settings or via mcp_servers config:
+
 mcp_servers = {
     "playwright": {"command": "npx", "args": ["@playwright/mcp@latest"]}
 }
 
 # Agent can then automate browser to verify features work visually
+
 ```
 
 **E2E Verification Flow:**
+
 1. Feature implemented and unit tests pass
 2. Start dev server via init script
 3. Use Playwright MCP to automate browser
@@ -364,26 +396,32 @@ See `references/tool-orchestration.md` for full implementation details.
 **Every subagent dispatch MUST include:**
 
 ```markdown
+
 ## GOAL (What success looks like)
+
 [High-level objective, not just the action]
 Example: "Refactor authentication for maintainability and testability"
 NOT: "Refactor the auth file"
 
 ## CONSTRAINTS (What you cannot do)
+
 - No third-party dependencies without approval
 - Maintain backwards compatibility with v1.x API
 - Keep response time under 200ms
 
 ## CONTEXT (What you need to know)
+
 - Related files: [list with brief descriptions]
 - Previous attempts: [what was tried, why it failed]
 
 ## OUTPUT FORMAT (What to deliver)
+
 - [ ] Pull request with Why/What/Trade-offs description
 - [ ] Unit tests with >90% coverage
 - [ ] Update API documentation
 
 ## WHEN COMPLETE
+
 Report back with: WHY, WHAT, TRADE-OFFS, RISKS
 ```
 
@@ -402,6 +440,7 @@ Report back with: WHY, WHAT, TRADE-OFFS, RISKS
 7. **Test Coverage Gates** - Unit: 100% pass, >80% coverage; Integration: 100% pass
 
 **Guardrails Execution Modes:**
+
 - **Blocking**: Guardrail completes before agent starts (use for expensive operations)
 - **Parallel**: Guardrail runs with agent (use for fast checks, accept token loss risk)
 
@@ -448,6 +487,7 @@ See `references/agent-types.md` for complete definitions and capabilities.
 ## Red Flags - Never Do These
 
 ### Implementation Anti-Patterns
+
 - **NEVER** skip code review between tasks
 - **NEVER** proceed with unfixed Critical/High/Medium issues
 - **NEVER** dispatch reviewers sequentially (always parallel - 3x faster)
@@ -455,17 +495,20 @@ See `references/agent-types.md` for complete definitions and capabilities.
 - **NEVER** implement without reading task requirements first
 
 ### Review Anti-Patterns
+
 - **NEVER** use sonnet for reviews (always opus for deep analysis)
 - **NEVER** aggregate before all 3 reviewers complete
 - **NEVER** skip re-review after fixes
 
 ### System Anti-Patterns
+
 - **NEVER** delete .sognatore/state/ directory while running
 - **NEVER** manually edit queue files without file locking
 - **NEVER** skip checkpoints before major operations
 - **NEVER** ignore circuit breaker states
 
 ### Always Do These
+
 - **ALWAYS** launch all 3 reviewers in single message (3 Task calls)
 - **ALWAYS** specify model: "opus" for each reviewer
 - **ALWAYS** wait for all reviewers before aggregating
@@ -480,11 +523,13 @@ See `references/agent-types.md` for complete definitions and capabilities.
 **Based on OpenAI Agent Safety Patterns:**
 
 ### Model-Level Fallbacks
+
 ```
 opus -> sonnet -> haiku (if rate limited or unavailable)
 ```
 
 ### Workflow-Level Fallbacks
+
 ```
 Full workflow fails -> Simplified workflow -> Decompose to subtasks -> Human escalation
 ```
@@ -509,11 +554,13 @@ See `references/openai-patterns.md` for full fallback implementation.
 
 ```
 Context Priority:
+
 1. AGENTS.md (closest to current file)
 2. CLAUDE.md (Claude-specific)
 3. .sognatore/CONTINUITY.md (session state)
 4. Package docs
 5. README.md
+
 ```
 
 ---
@@ -526,6 +573,7 @@ Context Priority:
 
 ```yaml
 core_principles:
+
   - "Never delete production data without explicit backup"
   - "Never commit secrets or credentials to version control"
   - "Never bypass quality gates for speed"
@@ -534,15 +582,18 @@ core_principles:
   - "Prefer simple solutions over clever ones"
   - "Document decisions, not just code"
   - "When unsure, reject action or flag for review"
+
 ```
 
 ### Self-Critique Workflow
 
 ```
+
 1. Generate response/code
 2. Critique against each principle
 3. Revise if any principle violated
 4. Only then proceed with action
+
 ```
 
 See `references/lab-research-patterns.md` for Constitutional AI implementation.
@@ -582,10 +633,12 @@ See `references/lab-research-patterns.md` for debate verification details.
 task_constraints:
   max_steps_before_review: 3-5
   characteristics:
+
     - Specific, well-defined objectives
     - Pre-classified inputs
     - Deterministic success criteria
     - Verifiable outputs
+
 ```
 
 ### Confidence-Based Routing
@@ -602,17 +655,20 @@ confidence < 0.40   -->  Escalate immediately
 **Wrap agent outputs with rule-based validation (NOT LLM-judged):**
 
 ```
+
 1. Agent generates output
 2. Run linter (deterministic)
 3. Run tests (deterministic)
 4. Check compilation (deterministic)
 5. Only then: human or AI review
+
 ```
 
 ### Context Engineering
 
 ```yaml
 principles:
+
   - "Less is more" - focused beats comprehensive
   - Manual selection outperforms automatic RAG
   - Fresh conversations per major task
@@ -728,9 +784,11 @@ Detailed documentation is split into reference files for progressive loading:
 **Version:** 2.32.0 | **Lines:** ~600 | **Research-Enhanced: Labs + HN Production Patterns**
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

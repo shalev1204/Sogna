@@ -10,10 +10,10 @@ id: skill-polars
 owner: [[orchestrator]]
 ---
 
-
 # Polars
 
 ## When to Use
+
 - You need a faster in-memory DataFrame workflow than pandas for data that still fits in RAM.
 - You are building ETL, analytics, or transformation pipelines that benefit from lazy evaluation and parallel execution.
 - You want expression-based tabular operations on top of Apache Arrow semantics.
@@ -36,6 +36,7 @@ Basic DataFrame creation and operations:
 import polars as pl
 
 # Create DataFrame
+
 df = pl.DataFrame({
     "name": ["Alice", "Bob", "Charlie"],
     "age": [25, 30, 35],
@@ -43,12 +44,15 @@ df = pl.DataFrame({
 })
 
 # Select columns
+
 df.select("name", "age")
 
 # Filter rows
+
 df.filter(pl.col("age") > 25)
 
 # Add computed columns
+
 df.with_columns(
     age_plus_10=pl.col("age") + 10
 )
@@ -61,13 +65,16 @@ df.with_columns(
 Expressions are the fundamental building blocks of Polars operations. They describe transformations on data and can be composed, reused, and optimized.
 
 **Key principles:**
+
 - Use `pl.col("column_name")` to reference columns
 - Chain methods to build complex transformations
 - Expressions are lazy and only execute within contexts (select, with_columns, filter, group_by)
 
 **Example:**
 ```python
+
 # Expression-based computation
+
 df.select(
     pl.col("name"),
     (pl.col("age") * 12).alias("age_in_months")
@@ -90,12 +97,14 @@ df = result.collect()  # Now executes optimized query
 ```
 
 **When to use lazy:**
+
 - Working with large datasets
 - Complex query pipelines
 - When only some columns/rows are needed
 - Performance is critical
 
 **Benefits of lazy evaluation:**
+
 - Automatic query optimization
 - Predicate pushdown
 - Projection pushdown
@@ -106,49 +115,63 @@ For detailed concepts, load `references/core_concepts.md`.
 ## Common Operations
 
 ### Select
+
 Select and manipulate columns:
 ```python
+
 # Select specific columns
+
 df.select("name", "age")
 
 # Select with expressions
+
 df.select(
     pl.col("name"),
     (pl.col("age") * 2).alias("double_age")
 )
 
 # Select all columns matching a pattern
+
 df.select(pl.col("^.*_id$"))
 ```
 
 ### Filter
+
 Filter rows by conditions:
 ```python
+
 # Single condition
+
 df.filter(pl.col("age") > 25)
 
 # Multiple conditions (cleaner than using &)
+
 df.filter(
     pl.col("age") > 25,
     pl.col("city") == "NY"
 )
 
 # Complex conditions
+
 df.filter(
     (pl.col("age") > 25) | (pl.col("city") == "LA")
 )
 ```
 
 ### With Columns
+
 Add or modify columns while preserving existing ones:
 ```python
+
 # Add new columns
+
 df.with_columns(
     age_plus_10=pl.col("age") + 10,
     name_upper=pl.col("name").str.to_uppercase()
 )
 
 # Parallel computation (all columns computed in parallel)
+
 df.with_columns(
     pl.col("value") * 10,
     pl.col("value") * 100,
@@ -156,20 +179,25 @@ df.with_columns(
 ```
 
 ### Group By and Aggregations
+
 Group data and compute aggregations:
 ```python
+
 # Basic grouping
+
 df.group_by("city").agg(
     pl.col("age").mean().alias("avg_age"),
     pl.len().alias("count")
 )
 
 # Multiple group keys
+
 df.group_by("city", "department").agg(
     pl.col("salary").sum()
 )
 
 # Conditional aggregations
+
 df.group_by("city").agg(
     (pl.col("age") > 30).sum().alias("over_30")
 )
@@ -180,7 +208,9 @@ For detailed operation patterns, load `references/operations.md`.
 ## Aggregations and Window Functions
 
 ### Aggregation Functions
+
 Common aggregations within `group_by` context:
+
 - `pl.len()` - count rows
 - `pl.col("x").sum()` - sum values
 - `pl.col("x").mean()` - average
@@ -188,21 +218,26 @@ Common aggregations within `group_by` context:
 - `pl.first()` / `pl.last()` - first/last values
 
 ### Window Functions with `over()`
+
 Apply aggregations while preserving row count:
 ```python
+
 # Add group statistics to each row
+
 df.with_columns(
     avg_age_by_city=pl.col("age").mean().over("city"),
     rank_in_city=pl.col("salary").rank().over("city")
 )
 
 # Multiple grouping columns
+
 df.with_columns(
     group_avg=pl.col("value").mean().over("category", "region")
 )
 ```
 
 **Mapping strategies:**
+
 - `group_to_rows` (default): Preserves original row order
 - `explode`: Faster but groups rows together
 - `join`: Creates list columns
@@ -210,7 +245,9 @@ df.with_columns(
 ## Data I/O
 
 ### Supported Formats
+
 Polars supports reading and writing:
+
 - CSV, Parquet, JSON, Excel
 - Databases (via connectors)
 - Cloud storage (S3, Azure, GCS)
@@ -221,11 +258,14 @@ Polars supports reading and writing:
 
 **CSV:**
 ```python
+
 # Eager
+
 df = pl.read_csv("file.csv")
 df.write_csv("output.csv")
 
 # Lazy (preferred for large files)
+
 lf = pl.scan_csv("file.csv")
 result = lf.filter(...).select(...).collect()
 ```
@@ -247,38 +287,52 @@ For comprehensive I/O documentation, load `references/io_guide.md`.
 ## Transformations
 
 ### Joins
+
 Combine DataFrames:
 ```python
+
 # Inner join
+
 df1.join(df2, on="id", how="inner")
 
 # Left join
+
 df1.join(df2, on="id", how="left")
 
 # Join on different column names
+
 df1.join(df2, left_on="user_id", right_on="id")
 ```
 
 ### Concatenation
+
 Stack DataFrames:
 ```python
+
 # Vertical (stack rows)
+
 pl.concat([df1, df2], how="vertical")
 
 # Horizontal (add columns)
+
 pl.concat([df1, df2], how="horizontal")
 
 # Diagonal (union with different schemas)
+
 pl.concat([df1, df2], how="diagonal")
 ```
 
 ### Pivot and Unpivot
+
 Reshape data:
 ```python
+
 # Pivot (wide format)
+
 df.pivot(values="sales", index="date", columns="product")
 
 # Unpivot (long format)
+
 df.unpivot(index="id", on=["col1", "col2"])
 ```
 
@@ -289,6 +343,7 @@ For detailed transformation examples, load `references/transformations.md`.
 Polars offers significant performance improvements over pandas with a cleaner API. Key differences:
 
 ### Conceptual Differences
+
 - **No index**: Polars uses integer positions only
 - **Strict typing**: No silent type conversions
 - **Lazy evaluation**: Available via LazyFrame
@@ -329,6 +384,7 @@ For comprehensive migration guide, load `references/pandas_migration.md`.
 ### Performance Optimization
 
 1. **Use lazy evaluation for large datasets:**
+
    ```python
    lf = pl.scan_csv("large.csv")  # Don't use read_csv
    result = lf.filter(...).select(...).collect()
@@ -340,11 +396,13 @@ For comprehensive migration guide, load `references/pandas_migration.md`.
    - Prefer native Polars operations
 
 3. **Use streaming for very large data:**
+
    ```python
    lf.collect(streaming=True)
    ```
 
 4. **Select only needed columns early:**
+
    ```python
    # Good: Select columns early
    lf.select("col1", "col2").filter(...)
@@ -384,6 +442,7 @@ For additional best practices and patterns, load `references/best_practices.md`.
 This skill includes comprehensive reference documentation:
 
 ### references/
+
 - `core_concepts.md` - Detailed explanations of expressions, lazy evaluation, and type system
 - `operations.md` - Comprehensive guide to all common operations with examples
 - `pandas_migration.md` - Complete migration guide from pandas to Polars
@@ -394,11 +453,13 @@ This skill includes comprehensive reference documentation:
 Load these references as needed when users require detailed information about specific topics.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

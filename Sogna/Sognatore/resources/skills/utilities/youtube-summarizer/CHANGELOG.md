@@ -28,9 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🔧 Changed
 
 - `extract-transcript.py` (lines 58-60)
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
   - Before: `list_available_transcripts(video_id); sys.exit(0)`
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
   - After: `success = list_available_transcripts(video_id); sys.exit(0 if success else 1)`
 
 ### 📝 Notes
@@ -75,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for multiple languages
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

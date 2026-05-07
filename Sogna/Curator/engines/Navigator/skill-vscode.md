@@ -137,6 +137,7 @@ import json
 from pathlib import Path
 
 # Merge: combine AST + cached + all semantic chunk results
+
 all_nodes, all_edges, all_hyperedges = [], [], []
 
 ast = json.loads(Path('navigator-out/.navigator_ast.json').read_text())
@@ -151,6 +152,7 @@ if cached_path.exists():
     all_hyperedges.extend(cached.get('hyperedges', []))
 
 # PASTE each subagent response here as chunk_1, chunk_2, etc.
+
 for chunk_json in []:  # replace [] with your chunk results
     chunk = json.loads(chunk_json) if isinstance(chunk_json, str) else chunk_json
     all_nodes.extend(chunk.get('nodes', []))

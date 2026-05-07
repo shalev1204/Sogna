@@ -7,7 +7,6 @@ id: skill-odoo-automated-tests
 owner: [[eng-qa]]
 ---
 
-
 # Odoo Automated Tests
 
 ## Overview
@@ -32,7 +31,9 @@ Odoo has a built-in testing framework based on Python's `unittest`. This skill h
 ### Example 1: TransactionCase Unit Test (Odoo 15+ pattern)
 
 ```python
+
 # tests/test_hospital_patient.py
+
 from odoo.tests.common import TransactionCase
 from odoo.tests import tagged
 from odoo.exceptions import ValidationError
@@ -76,14 +77,18 @@ class TestHospitalPatient(TransactionCase):
 ### Example 2: Run Tests via CLI
 
 ```bash
+
 # Run all tests for a specific module
+
 ./odoo-bin --test-enable --stop-after-init -d my_database -u hospital_management
 
 # Run only tests tagged with a specific tag
+
 ./odoo-bin --test-enable --stop-after-init -d my_database \
   --test-tags hospital_management
 
 # Run a specific test class
+
 ./odoo-bin --test-enable --stop-after-init -d my_database \
   --test-tags /hospital_management:TestHospitalPatient
 ```
@@ -127,6 +132,7 @@ class TestPatientController(HttpCase):
 - Test isolation is at the **transaction level**, not database level — tests that commit data (e.g., via `cr.commit()`) can leak state between tests.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

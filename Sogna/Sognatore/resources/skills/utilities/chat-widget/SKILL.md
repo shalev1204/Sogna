@@ -7,7 +7,6 @@ id: skill-chat-widget
 owner: [[orchestrator]]
 ---
 
-
 # Live Support Chat Widget
 
 Build a real-time support chat system with a floating widget for users and an admin dashboard for support staff.
@@ -15,6 +14,7 @@ Build a real-time support chat system with a floating widget for users and an ad
 ## When to Use This Skill
 
 Use when the user wants to:
+
 - Add a live chat widget to their app
 - Build customer support chat functionality
 - Create real-time messaging between users and admins
@@ -77,6 +77,7 @@ updated_at
 ```
 
 **Key indexes:**
+
 - `support_chats.user_id` (unique)
 - `support_chats.last_message_at` (for sorting)
 - `support_chats.archived_at` (for filtering)
@@ -305,6 +306,7 @@ function useSupportChat():
 ```
 
 **Widget behavior:**
+
 - Show floating button at bottom-right corner (fixed position)
 - Display unread count badge (count messages where sender_type='admin' and read_at=null)
 - Toggle panel open/closed on button click
@@ -314,6 +316,7 @@ function useSupportChat():
 - Keyboard: Enter to send, Shift+Enter for newline
 
 **Message styling:**
+
 - User messages: right-aligned, primary color background
 - Admin messages: left-aligned, secondary/muted background
 - Show timestamp on each message
@@ -336,6 +339,7 @@ Chat cards (sorted by last_message_at desc):
 ```
 
 Features:
+
 - Tab filtering (active vs archived)
 - Unread indicator (highlight border or badge)
 - Click to navigate to detail
@@ -358,6 +362,7 @@ Input area (same as widget)
 ```
 
 Features:
+
 - Group messages by date with dividers
 - User messages left, admin messages right (opposite of user widget)
 - Show sender label ("You" for admin, user email/name for user)
@@ -384,6 +389,7 @@ class SupportReplyNotificationJob
 ```
 
 **Scheduling:**
+
 - Schedule job with 5-minute delay when admin sends message
 - This gives user time to see message in-app before email
 - Job checks if still unread before sending
@@ -450,6 +456,7 @@ interface AdminNotificationMessage {
 ## Testing Checklist
 
 After implementation:
+
 - [ ] User can open widget and send message
 - [ ] Admin sees message in real-time on dashboard
 - [ ] Admin can reply and user sees it instantly
@@ -480,7 +487,9 @@ After implementation:
 
 **Models:**
 ```ruby
+
 # app/models/support_chat.rb
+
 class SupportChat < ApplicationRecord
   belongs_to :user
   has_many :support_messages, dependent: :destroy
@@ -508,6 +517,7 @@ class SupportChat < ApplicationRecord
 end
 
 # app/models/support_message.rb
+
 class SupportMessage < ApplicationRecord
   belongs_to :support_chat
   enum :sender_type, { user: 0, admin: 1 }
@@ -535,7 +545,9 @@ end
 
 **Channel:**
 ```ruby
+
 # app/channels/support_chat_channel.rb
+
 class SupportChatChannel < ApplicationCable::Channel
   def subscribed
     @chat = SupportChat.find(params[:chat_id])
@@ -821,21 +833,25 @@ export function useSupportChat() {
 ## Database Recommendations
 
 ### PostgreSQL (Recommended)
+
 - Use UUID primary keys for security (non-guessable IDs)
 - Use `timestamptz` for all datetime columns
 - Add GIN index on content for full-text search (optional)
 
 ### MySQL
+
 - Use `CHAR(36)` or `BINARY(16)` for UUIDs
 - Use `DATETIME(6)` for microsecond precision
 - Consider `utf8mb4` charset for emoji support
 
 ### SQLite (Development/Small Scale)
+
 - Works fine for prototyping
 - Store UUIDs as TEXT
 - No native datetime type, store as ISO8601 strings
 
 ### MongoDB (Document Store)
+
 - Embed messages in chat document if message count is bounded
 - Or use separate collection with chat_id reference
 - Use TTL index on archived chats for auto-cleanup (optional)
@@ -845,12 +861,14 @@ export function useSupportChat() {
 ## Email Processing Recommendations
 
 ### Transactional Email Services
+
 - **Postmark** - Best deliverability, simple API
 - **SendGrid** - Good free tier, robust
 - **AWS SES** - Cheapest at scale
 - **Resend** - Modern DX, React email templates
 
 ### Implementation Pattern
+
 ```pseudo
 // Always use background jobs for email
 Job: SendSupportReplyNotification
@@ -872,6 +890,7 @@ Job: SendSupportReplyNotification
 ```
 
 ### Email Template Tips
+
 - Include message preview (truncated)
 - Add direct link to open chat (if web app)
 - Keep subject simple: "New reply from [App] Support"
@@ -892,6 +911,7 @@ Job: SendSupportReplyNotification
 | Server-Sent Events | Simple one-way | Yes |
 
 ### Fallback Strategy
+
 If WebSocket unavailable, implement polling:
 ```pseudo
 // Poll every 5 seconds when disconnected
@@ -905,11 +925,13 @@ if (!websocket.connected) {
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

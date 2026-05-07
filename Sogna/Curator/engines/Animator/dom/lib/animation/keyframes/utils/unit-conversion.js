@@ -1,4 +1,4 @@
-import { ParseValueFromTransform as parseValueFromTransform } from "../../../render/dom/parse-transform.js";
+import { parseValueFromTransform } from "../../../render/dom/parse-transform.js";
 import { TransformPropOrder } from "../../../render/utils/keys-transform.js";
 import { NumberType } from "../../../value/types/numbers";
 import { Px } from "../../../value/types/numbers/units.js";

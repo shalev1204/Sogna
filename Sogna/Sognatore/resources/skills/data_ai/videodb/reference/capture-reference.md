@@ -125,10 +125,13 @@ Use `ws_listener.py` to dump all WebSocket events to a JSONL file for later anal
 ### Start Listener and Get WebSocket ID
 
 ```bash
+
 # Start with --clear to clear old events (recommended for new sessions)
+
 python scripts/ws_listener.py --clear &
 
 # Append to existing events (for reconnects)
+
 python scripts/ws_listener.py &
 ```
 
@@ -136,7 +139,9 @@ Or specify a custom output directory:
 
 ```bash
 python scripts/ws_listener.py --clear /path/to/output &
+
 # Or via environment variable:
+
 VIDEODB_EVENTS_DIR=/path/to/output python scripts/ws_listener.py --clear &
 ```
 
@@ -160,11 +165,13 @@ kill $(cat /tmp/videodb_ws_pid)
 | RTStream methods | See [rtstream-reference.md](rtstream-reference.md) |
 
 **Output files** (in output directory, default `/tmp`):
+
 - `videodb_ws_id` - WebSocket connection ID
 - `videodb_events.jsonl` - All events
 - `videodb_ws_pid` - Process ID for easy termination
 
 **Features:**
+
 - `--clear` flag to clear events file on start (use for new sessions)
 - Auto-reconnect with exponential backoff on connection drops
 - Graceful shutdown on SIGINT/SIGTERM
@@ -186,14 +193,17 @@ import json
 events = [json.loads(l) for l in open("/tmp/videodb_events.jsonl")]
 
 # Filter by channel
+
 transcripts = [e for e in events if e.get("channel") == "transcript"]
 
 # Filter by time (last 10 minutes)
+
 import time
 cutoff = time.time() - 600
 recent = [e for e in events if e["unix_ts"] > cutoff]
 
 # Filter visual events containing keyword
+
 visual = [e for e in events 
           if e.get("channel") == "visual_index" 
           and "code" in e.get("data", {}).get("text", "").lower()]
@@ -393,6 +403,7 @@ For RTStream methods (indexing, transcription, alerts, batch config), see [rtstr
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

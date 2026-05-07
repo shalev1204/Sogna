@@ -8,7 +8,6 @@ id: skill-temporal-golang-pro
 owner: [[orchestrator]]
 ---
 
-
 # Temporal Go SDK (temporal-golang-pro)
 
 ## Overview
@@ -31,19 +30,19 @@ Expert-level guide for building resilient, scalable, and deterministic distribut
 
 ## Step-by-Step Guide
 
-1.  **Gather Context**: Proactively ask for:
+1. **Gather Context**: Proactively ask for:
     - Target **Temporal Cluster** (Cloud vs. Self-hosted) and **Namespace**.
     - **Task Queue** names and expected throughput.
     - **Security requirements** (mTLS paths, authentication).
     - **Failure modes** and desired retry/timeout policies.
-2.  **Verify Determinism**: Before suggesting workflow code, verify against these **5 Rules**:
+2. **Verify Determinism**: Before suggesting workflow code, verify against these **5 Rules**:
     - No native Go concurrency (goroutines).
     - No native time (`time.Now`, `time.Sleep`).
     - No non-deterministic map iteration (must sort keys).
     - No direct external I/O or network calls.
     - No non-deterministic random numbers.
-3.  **Implement Incrementally**: Start with shared Protobuf/Data classes, then Activities, then Workflows, and finally Workers.
-4.  **Leverage Resources**: If the implementation requires advanced patterns (Sagas, Interceptors, Replay Testing), explicitly refer to the implementation playbook and testing strategies.
+3. **Implement Incrementally**: Start with shared Protobuf/Data classes, then Activities, then Workflows, and finally Workers.
+4. **Leverage Resources**: If the implementation requires advanced patterns (Sagas, Interceptors, Replay Testing), explicitly refer to the implementation playbook and testing strategies.
 
 ## Capabilities
 
@@ -219,6 +218,7 @@ func ApprovalWorkflow(ctx workflow.Context) (string, error) {
 - `workflow-orchestration-patterns` - Language-agnostic orchestration strategy.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

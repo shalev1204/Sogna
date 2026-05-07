@@ -86,10 +86,14 @@ message UserEvent {
 ```yaml
 version: v2
 plugins:
+
   - remote: buf.build/protocolbuffers/go
+
     out: gen
     opt: paths=source_relative
+
   - remote: buf.build/grpc/go
+
     out: gen
     opt: paths=source_relative
 ```
@@ -555,6 +559,7 @@ project/
 > **Migration note**: For gRPC-Go v1.63+ (Jan 2024), `grpc.NewClient` is the newer API recommended by the gRPC-Go project for new code. For older versions (or when following existing codebases and official grpc.io examples), using `grpc.Dial` / `grpc.DialContext` is still common.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

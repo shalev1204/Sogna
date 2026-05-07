@@ -169,6 +169,7 @@ August 6, 2024| Updated with guidance for the tab bar in iPadOS 18.
 June 21, 2023| Updated to include guidance for visionOS.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

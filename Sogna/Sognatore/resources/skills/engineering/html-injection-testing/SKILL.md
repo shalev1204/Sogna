@@ -8,7 +8,6 @@ id: skill-html-injection-testing
 owner: [[eng-qa]]
 ---
 
-
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # HTML Injection Testing
@@ -20,12 +19,14 @@ Identify and exploit HTML injection vulnerabilities that allow attackers to inje
 ## Prerequisites
 
 ### Required Tools
+
 - Web browser with developer tools
 - Burp Suite or OWASP ZAP
 - Tamper Data or similar proxy
 - cURL for testing payloads
 
 ### Required Knowledge
+
 - HTML fundamentals
 - HTTP request/response structure
 - Web application input handling
@@ -60,11 +61,13 @@ HTML injection occurs when user input is reflected in web pages without proper s
 ```
 
 Key differences from XSS:
+
 - HTML injection: Only HTML tags are rendered
 - XSS: JavaScript code is executed
 - HTML injection is often stepping stone to XSS
 
 Attack goals:
+
 - Modify website appearance (defacement)
 - Create fake login forms (phishing)
 - Inject malicious links
@@ -75,6 +78,7 @@ Attack goals:
 Map application for potential injection surfaces:
 
 ```
+
 1. Search bars and search results
 2. Comment sections
 3. User profile fields
@@ -85,6 +89,7 @@ Map application for potential injection surfaces:
 8. Page titles and headers
 9. Hidden form fields
 10. Cookie values reflected on page
+
 ```
 
 Common vulnerable parameters:
@@ -129,13 +134,17 @@ Test with simple HTML tags:
 
 Testing workflow:
 ```bash
+
 # Test basic injection
+
 curl "http://target.com/search?q=<h1>Test</h1>"
 
 # Check if HTML renders in response
+
 curl -s "http://target.com/search?q=<b>Bold</b>" | grep -i "bold"
 
 # Test in URL-encoded form
+
 curl "http://target.com/search?q=%3Ch1%3ETest%3C%2Fh1%3E"
 ```
 
@@ -179,11 +188,14 @@ http://target.com/search?q=<marquee>Your%20account%20has%20been%20compromised</m
 Payload in POST data:
 
 ```bash
+
 # POST injection test
+
 curl -X POST -d "comment=<div style='color:red'>Malicious Content</div>" \
      http://target.com/submit
 
 # Form field injection
+
 curl -X POST -d "name=<script>alert(1)</script>&email=test@test.com" \
      http://target.com/register
 ```
@@ -346,6 +358,7 @@ Evade basic filters:
 #### Using Burp Suite
 
 ```
+
 1. Capture request with potential injection point
 2. Send to Intruder
 3. Mark parameter value as payload position
@@ -353,15 +366,18 @@ Evade basic filters:
 5. Start attack
 6. Filter responses for rendered HTML
 7. Manually verify successful injections
+
 ```
 
 #### Using OWASP ZAP
 
 ```
+
 1. Spider the target application
 2. Active Scan with HTML injection rules
 3. Review Alerts for injection findings
 4. Validate findings manually
+
 ```
 
 #### Custom Fuzzing Script
@@ -415,11 +431,14 @@ echo strip_tags($user_input, '<p><b><i>');
 ```
 
 ```python
+
 # Python: HTML escape
+
 from html import escape
 safe_output = escape(user_input)
 
 # Python Flask: Auto-escaping
+
 {{ user_input }}  # Jinja2 escapes by default
 {{ user_input | safe }}  # Marks as safe (dangerous!)
 ```
@@ -437,6 +456,7 @@ element.innerHTML = clean;
 ```
 
 Server-side protections:
+
 - Input validation (whitelist allowed characters)
 - Output encoding (context-aware escaping)
 - Content Security Policy (CSP) headers
@@ -477,18 +497,21 @@ Server-side protections:
 ## Constraints and Limitations
 
 ### Attack Limitations
+
 - Modern browsers may sanitize some injections
 - CSP can prevent inline styles and scripts
 - WAFs may block common payloads
 - Some applications escape output properly
 
 ### Testing Considerations
+
 - Distinguish between HTML injection and XSS
 - Verify visual impact in browser
 - Test in multiple browsers
 - Check for stored vs reflected
 
 ### Severity Assessment
+
 - Lower severity than XSS (no script execution)
 - Higher impact when combined with phishing
 - Consider defacement/reputation damage
@@ -503,9 +526,11 @@ Server-side protections:
 | XSS not working (HTML only) | JS filtered but HTML allowed; leverage phishing forms, meta refresh redirects |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

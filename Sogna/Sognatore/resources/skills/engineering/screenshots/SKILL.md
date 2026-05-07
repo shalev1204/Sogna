@@ -8,7 +8,6 @@ id: skill-screenshots
 owner: [[orchestrator]]
 ---
 
-
 # Screenshots
 
 Generate marketing-quality screenshots of your app using Playwright directly. Screenshots are captured at true HiDPI (2x retina) resolution using `deviceScaleFactor: 2`.
@@ -16,6 +15,7 @@ Generate marketing-quality screenshots of your app using Playwright directly. Sc
 ## When to Use This Skill
 
 Use this skill when:
+
 - User wants to create screenshots for Product Hunt
 - Creating screenshots for social media
 - Generating images for landing pages
@@ -37,10 +37,12 @@ If not found, inform the user:
 If `$1` is provided, use it as the app URL.
 
 If no URL is provided:
+
 1. Check if a dev server is likely running by looking for `package.json` scripts
 2. Use `AskUserQuestion` to ask the user for the URL or offer to help start the dev server
 
 Common default URLs to suggest:
+
 - `http://localhost:3000` (Next.js, Create React App, Rails)
 - `http://localhost:5173` (Vite)
 - `http://localhost:4000` (Phoenix)
@@ -51,6 +53,7 @@ Common default URLs to suggest:
 Use `AskUserQuestion` with the following questions:
 
 **Question 1: Screenshot count**
+
 - Header: "Count"
 - Question: "How many screenshots do you need?"
 - Options:
@@ -59,6 +62,7 @@ Use `AskUserQuestion` with the following questions:
   - "10+" - Full marketing suite
 
 **Question 2: Purpose**
+
 - Header: "Purpose"
 - Question: "What will these screenshots be used for?"
 - Options:
@@ -68,6 +72,7 @@ Use `AskUserQuestion` with the following questions:
   - "Documentation" - UI reference and tutorials
 
 **Question 3: Authentication**
+
 - Header: "Auth"
 - Question: "Does the app require login to access the features you want to screenshot?"
 - Options:
@@ -75,6 +80,7 @@ Use `AskUserQuestion` with the following questions:
   - "Yes, I'll provide credentials" - Need to log in first
 
 If user selects "Yes, I'll provide credentials", ask follow-up questions:
+
 - "What is the login page URL?" (e.g., `/login`, `/sign-in`)
 - "What is the email/username?"
 - "What is the password?"
@@ -133,6 +139,7 @@ Look for components that represent screenshottable features:
 ### 3.4: Check for Marketing Assets
 
 Look for existing marketing content that hints at key features:
+
 - Landing page components (often in `components/landing/` or `components/marketing/`)
 - Feature list components
 - Pricing tables
@@ -141,6 +148,7 @@ Look for existing marketing content that hints at key features:
 ### 3.5: Build Feature List
 
 Create a comprehensive list of discovered features with:
+
 - Feature name (from README or component name)
 - URL path (from routes)
 - CSS selector to focus on (from component structure)
@@ -151,6 +159,7 @@ Create a comprehensive list of discovered features with:
 Present the discovered features to the user and ask them to confirm or modify the list.
 
 Use `AskUserQuestion`:
+
 - Header: "Features"
 - Question: "I found these features in your codebase. Which would you like to screenshot?"
 - Options: List 3-4 key features discovered, plus "Let me pick specific ones"
@@ -405,11 +414,13 @@ All screenshots are true retina-quality (2x deviceScaleFactor) and ready for mar
 5. **Dark mode variants**: Consider capturing both light and dark mode if supported
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-competitor-alternatives
 owner: [[orchestrator]]
 ---
 
-
 # Competitor & Alternative Pages
 
 You are an expert in creating competitor comparison and alternative pages. Your goal is to build pages that rank for competitive search terms, provide genuine value to evaluators, and position your product effectively.
@@ -41,24 +40,28 @@ Before creating competitor pages, understand:
 ## Core Principles
 
 ### 1. Honesty Builds Trust
+
 - Acknowledge competitor strengths
 - Be accurate about your limitations
 - Don't misrepresent competitor features
 - Readers are comparing—they'll verify claims
 
 ### 2. Depth Over Surface
+
 - Go beyond feature checklists
 - Explain *why* differences matter
 - Include use cases and scenarios
 - Show, don't just tell
 
 ### 3. Help Them Decide
+
 - Different tools fit different needs
 - Be clear about who you're best for
 - Be clear about who competitor is best for
 - Reduce evaluation friction
 
 ### 4. Modular Content Architecture
+
 - Competitor data should be centralized
 - Updates propagate to all pages
 - Avoid duplicating research
@@ -75,12 +78,14 @@ Before creating competitor pages, understand:
 **URL pattern**: `/alternatives/[competitor]` or `/[competitor]-alternative`
 
 **Target keywords**:
+
 - "[Competitor] alternative"
 - "alternative to [Competitor]"
 - "switch from [Competitor]"
 - "[Competitor] replacement"
 
 **Page structure**:
+
 1. Why people look for alternatives (validate their pain)
 2. Summary: You as the alternative (quick positioning)
 3. Detailed comparison (features, service, pricing)
@@ -100,12 +105,14 @@ Before creating competitor pages, understand:
 **URL pattern**: `/alternatives/[competitor]-alternatives` or `/best-[competitor]-alternatives`
 
 **Target keywords**:
+
 - "[Competitor] alternatives"
 - "best [Competitor] alternatives"
 - "tools like [Competitor]"
 - "[Competitor] competitors"
 
 **Page structure**:
+
 1. Why people look for alternatives (common pain points)
 2. What to look for in an alternative (criteria framework)
 3. List of alternatives (you first, but include real options)
@@ -127,12 +134,14 @@ Before creating competitor pages, understand:
 **URL pattern**: `/vs/[competitor]` or `/compare/[you]-vs-[competitor]`
 
 **Target keywords**:
+
 - "[You] vs [Competitor]"
 - "[Competitor] vs [You]"
 - "[You] compared to [Competitor]"
 - "[You] or [Competitor]"
 
 **Page structure**:
+
 1. TL;DR summary (key differences in 2-3 sentences)
 2. At-a-glance comparison table
 3. Detailed comparison by category:
@@ -158,11 +167,13 @@ Before creating competitor pages, understand:
 **URL pattern**: `/compare/[competitor-a]-vs-[competitor-b]`
 
 **Target keywords**:
+
 - "[Competitor A] vs [Competitor B]"
 - "[Competitor A] or [Competitor B]"
 - "[Competitor A] compared to [Competitor B]"
 
 **Page structure**:
+
 1. Overview of both products
 2. Comparison by category
 3. Who each is best for
@@ -187,6 +198,7 @@ Each format needs an index page that lists all pages of that type. These hub pag
 **Purpose**: Lists all "[Competitor] Alternative" pages
 
 **Page structure**:
+
 1. Headline: "[Your Product] as an Alternative"
 2. Brief intro on why people switch to you
 3. List of all alternative pages with:
@@ -198,6 +210,7 @@ Each format needs an index page that lists all pages of that type. These hub pag
 
 **Example**:
 ```markdown
+
 ## Explore [Your Product] as an Alternative
 
 Looking to switch? See how [Your Product] compares to the tools you're evaluating:
@@ -205,6 +218,7 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 - **[Sogna Cloud Alternative](#)** — Better for teams who need [X]
 - **[Airtable Alternative](#)** — Better for teams who need [Y]
 - **[Monday Alternative](#)** — Better for teams who need [Z]
+
 ```
 
 ---
@@ -216,6 +230,7 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 **Purpose**: Lists all "[Competitor] Alternatives" roundup pages
 
 **Page structure**:
+
 1. Headline: "Software Alternatives & Comparisons"
 2. Brief intro on your comparison methodology
 3. List of all alternatives roundup pages with:
@@ -226,6 +241,7 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 
 **Example**:
 ```markdown
+
 ## Find the Right Tool
 
 Comparing your options? Our guides cover the top alternatives:
@@ -233,6 +249,7 @@ Comparing your options? Our guides cover the top alternatives:
 - **[Best Sogna Cloud Alternatives](#)** — 7 tools compared
 - **[Best Airtable Alternatives](#)** — 6 tools compared
 - **[Best Monday Alternatives](#)** — 5 tools compared
+
 ```
 
 ---
@@ -244,6 +261,7 @@ Comparing your options? Our guides cover the top alternatives:
 **Purpose**: Lists all "You vs [Competitor]" and "[A] vs [B]" pages
 
 **Page structure**:
+
 1. Headline: "Compare [Your Product]"
 2. Section: "[Your Product] vs Competitors" — list of direct comparisons
 3. Section: "Head-to-Head Comparisons" — list of [A] vs [B] pages
@@ -252,6 +270,7 @@ Comparing your options? Our guides cover the top alternatives:
 
 **Example**:
 ```markdown
+
 ## Compare [Your Product]
 
 ### [Your Product] vs. the Competition
@@ -267,6 +286,7 @@ Evaluating tools we compete with? We've done the research:
 - **[Sogna Cloud vs Airtable](#)**
 - **[Sogna Cloud vs Monday](#)**
 - **[Airtable vs Monday](#)**
+
 ```
 
 ---
@@ -276,22 +296,26 @@ Evaluating tools we compete with? We've done the research:
 **Keep them updated**: When you add a new comparison page, add it to the relevant index.
 
 **Internal linking**:
+
 - Link from index → individual pages
 - Link from individual pages → back to index
 - Cross-link between related comparisons
 
 **SEO value**:
+
 - Index pages can rank for broad terms like "project management tool comparisons"
 - Pass link equity to individual comparison pages
 - Help search engines discover all comparison content
 
 **Sorting options**:
+
 - By popularity (search volume)
 - Alphabetically
 - By category/use case
 - By date added (show freshness)
 
 **Include on index pages**:
+
 - Last updated date for credibility
 - Number of pages/comparisons available
 - Quick filters if you have many comparisons
@@ -322,11 +346,13 @@ founded: 2016
 headquarters: San Francisco
 
 # Positioning
+
 primary_use_case: "docs + light databases"
 target_audience: "teams wanting flexible workspace"
 market_position: "premium, feature-rich"
 
 # Pricing
+
 pricing_model: per-seat
 free_tier: true
 free_tier_limits: "limited blocks, 1 user"
@@ -335,6 +361,7 @@ business_price: $15/user/month
 enterprise: custom
 
 # Features (rate 1-5 or describe)
+
 features:
   documents: 5
   databases: 4
@@ -346,40 +373,51 @@ features:
   api: 4
 
 # Strengths (be honest)
+
 strengths:
+
   - Extremely flexible and customizable
   - Beautiful, modern interface
   - Strong template ecosystem
   - Active community
 
 # Weaknesses (be fair)
+
 weaknesses:
+
   - Can be slow with large databases
   - Learning curve for advanced features
   - Limited automations compared to dedicated tools
   - Offline mode is limited
 
 # Best for
+
 best_for:
+
   - Teams wanting all-in-one workspace
   - Content-heavy workflows
   - Documentation-first teams
   - Startups and small teams
 
 # Not ideal for
+
 not_ideal_for:
+
   - Complex project management needs
   - Large databases (1000s of rows)
   - Teams needing robust offline
   - Enterprise with strict compliance
 
 # Common complaints (from reviews)
+
 common_complaints:
+
   - "Gets slow with lots of content"
   - "Hard to find things as workspace grows"
   - "Mobile app is clunky"
 
 # Migration notes
+
 migration_from:
   difficulty: medium
   data_export: "Markdown, CSV, HTML"
@@ -394,19 +432,25 @@ Same structure for yourself—be honest:
 
 ```yaml
 name: [Your Product]
+
 # ... same fields
 
 strengths:
+
   - [Your real strengths]
 
 weaknesses:
+
   - [Your honest weaknesses]
 
 best_for:
+
   - [Your ideal customers]
 
 not_ideal_for:
+
   - [Who should use something else]
+
 ```
 
 ### Page Generation
@@ -419,6 +463,7 @@ Each page pulls from centralized data:
 - **[A] vs [B] page**: Pulls both competitor data + your data
 
 **Benefits**:
+
 - Update competitor pricing once, updates everywhere
 - Add new feature comparison once, appears on all pages
 - Consistent accuracy across pages
@@ -443,6 +488,7 @@ Choose [Competitor] if [their ideal use case]. Choose [You] if [your ideal use c
 For each major dimension, write a paragraph:
 
 ```markdown
+
 ## Features
 
 [Competitor] offers [description of their feature approach].
@@ -459,15 +505,18 @@ Teams who [specific need] often find this more effective.
 Go beyond checkmarks:
 
 ```markdown
+
 ## Feature Comparison
 
 ### [Feature Category]
 
 **[Competitor]**: [2-3 sentence description of how they handle this]
+
 - Strengths: [specific]
 - Limitations: [specific]
 
 **[Your product]**: [2-3 sentence description]
+
 - Strengths: [specific]
 - Limitations: [specific]
 
@@ -477,6 +526,7 @@ Go beyond checkmarks:
 ### Pricing Comparison Section
 
 ```markdown
+
 ## Pricing
 
 | | [Competitor] | [Your Product] |
@@ -500,6 +550,7 @@ $X/year while [Your product] costs $Y/year, with [key differences in what you ge
 ### Service & Support Comparison
 
 ```markdown
+
 ## Service & Support
 
 | | [Competitor] | [Your Product] |
@@ -521,9 +572,11 @@ response time, dedicated CSM, implementation help].
 ### Who It's For Section
 
 ```markdown
+
 ## Who Should Choose [Competitor]
 
 [Competitor] is the right choice if:
+
 - [Specific use case or need]
 - [Team type or size]
 - [Workflow or requirement]
@@ -534,6 +587,7 @@ response time, dedicated CSM, implementation help].
 ## Who Should Choose [Your Product]
 
 [Your product] is built for teams who:
+
 - [Specific use case or need]
 - [Team type or size]
 - [Workflow or requirement]
@@ -545,19 +599,23 @@ response time, dedicated CSM, implementation help].
 ### Migration Section
 
 ```markdown
+
 ## Switching from [Competitor]
 
 ### What transfers
+
 - [Data type]: [How easily, any caveats]
 - [Data type]: [How easily, any caveats]
 
 ### What needs reconfiguration
+
 - [Thing]: [Why and effort level]
 - [Thing]: [Why and effort level]
 
 ### Migration support
 
 We offer [migration support details]:
+
 - [Free data import tool / white-glove migration]
 - [Documentation / migration guide]
 - [Timeline expectation]
@@ -574,6 +632,7 @@ We offer [migration support details]:
 Focus on switchers:
 
 ```markdown
+
 ## What Customers Say
 
 ### Switched from [Competitor]
@@ -585,8 +644,10 @@ Focus on switchers:
 > — [Name], [Role] at [Company]
 
 ### Results after switching
+
 - [Company] saw [specific result]
 - [Company] reduced [metric] by [amount]
+
 ```
 
 ---
@@ -610,6 +671,7 @@ Do this:
 ### Organize by Category
 
 Group features into meaningful categories:
+
 - Core functionality
 - Collaboration
 - Integrations
@@ -715,13 +777,17 @@ Consider FAQ schema for common questions:
 ### Competitor Data File
 
 ```yaml
+
 # [competitor].yaml
+
 # Complete competitor profile for use across all comparison pages
+
 ```
 
 ### Page Content
 
 For each page:
+
 - URL and meta tags
 - Full page copy organized by section
 - Comparison tables
@@ -730,6 +796,7 @@ For each page:
 ### Page Set Plan
 
 Recommended pages to create:
+
 1. [List of alternative pages]
 2. [List of vs pages]
 3. Priority order based on search volume
@@ -739,6 +806,7 @@ Recommended pages to create:
 ## Questions to Ask
 
 If you need more context:
+
 1. Who are your top 3-5 competitors?
 2. What's your core differentiator?
 3. What are common reasons people switch to you?
@@ -756,14 +824,17 @@ If you need more context:
 - **schema-markup**: For FAQ and comparison schema
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

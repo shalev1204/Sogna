@@ -8,7 +8,6 @@ id: skill-azure-mgmt-fabric-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.ResourceManager.Fabric (.NET)
 
 Management plane SDK for provisioning and managing Microsoft Fabric capacity resources via Azure Resource Manager.
@@ -31,7 +30,9 @@ dotnet add package Azure.Identity
 
 ```bash
 AZURE_SUBSCRIPTION_ID=<your-subscription-id>
+
 # For service principal auth (optional)
+
 AZURE_TENANT_ID=<tenant-id>
 AZURE_CLIENT_ID=<client-id>
 AZURE_CLIENT_SECRET=<client-secret>
@@ -256,6 +257,7 @@ await foreach (var skuDetails in capacity.Value.GetSkusForCapacityAsync())
 ## Provisioning and Resource States
 
 ### Provisioning States (`FabricProvisioningState`)
+
 - `Succeeded` - Operation completed successfully
 - `Failed` - Operation failed
 - `Canceled` - Operation was canceled
@@ -264,6 +266,7 @@ await foreach (var skuDetails in capacity.Value.GetSkusForCapacityAsync())
 - `Updating` - Update operation in progress
 
 ### Resource States (`FabricResourceState`)
+
 - `Active` - Capacity is running and available
 - `Provisioning` - Being provisioned
 - `Failed` - In failed state
@@ -342,14 +345,17 @@ catch (RequestFailedException ex)
 - [Fabric Capacity Management](https://learn.microsoft.com/fabric/admin/service-admin-portal-capacity-settings)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

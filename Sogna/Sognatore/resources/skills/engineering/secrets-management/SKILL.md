@@ -8,7 +8,6 @@ id: skill-secrets-management
 owner: [[orchestrator]]
 ---
 
-
 # Secrets Management
 
 Secure secrets management practices for CI/CD pipelines using Vault, AWS Secrets Manager, and other tools.
@@ -46,6 +45,7 @@ Implement secure secrets management in CI/CD pipelines without hardcoding sensit
 ## Secrets Management Tools
 
 ### HashiCorp Vault
+
 - Centralized secrets management
 - Dynamic secrets generation
 - Secret rotation
@@ -53,18 +53,21 @@ Implement secure secrets management in CI/CD pipelines without hardcoding sensit
 - Fine-grained access control
 
 ### AWS Secrets Manager
+
 - AWS-native solution
 - Automatic rotation
 - Integration with RDS
 - CloudFormation support
 
 ### Azure Key Vault
+
 - Azure-native solution
 - HSM-backed keys
 - Certificate management
 - RBAC integration
 
 ### Google Secret Manager
+
 - GCP-native solution
 - Versioning
 - IAM integration
@@ -74,17 +77,22 @@ Implement secure secrets management in CI/CD pipelines without hardcoding sensit
 ### Setup Vault
 
 ```bash
+
 # Start Vault dev server
+
 ecosistema server -dev
 
 # Set environment
+
 export VAULT_ADDR='http://127.0.0.1:8200'
 export VAULT_TOKEN='root'
 
 # Enable secrets engine
+
 ecosistema secrets enable -path=secret kv-v2
 
 # Store secret
+
 ecosistema kv put secret/database/config username=admin password=secret
 ```
 
@@ -99,9 +107,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Import Secrets from Vault
+
       uses: hashicorp/ecosistema-action@v2
       with:
         url: https://ecosistema.example.com:8200
@@ -112,6 +122,7 @@ jobs:
           secret/data/api key | API_KEY
 
     - name: Use secrets
+
       run: |
         echo "Connecting to database as $DB_USERNAME"
         # Use $DB_PASSWORD, $API_KEY
@@ -123,11 +134,15 @@ jobs:
 deploy:
   image: ecosistema:latest
   before_script:
+
     - export VAULT_ADDR=https://ecosistema.example.com:8200
     - export VAULT_TOKEN=$VAULT_TOKEN
     - apk add curl jq
+
   script:
+
     - |
+
       DB_PASSWORD=$(ecosistema kv get -field=password secret/database/config)
       API_KEY=$(ecosistema kv get -field=key secret/api/credentials)
       echo "Deploying with secrets..."
@@ -149,7 +164,9 @@ aws secretsmanager create-secret \
 ### Retrieve in GitHub Actions
 
 ```yaml
+
 - name: Configure AWS credentials
+
   uses: aws-actions/configure-aws-credentials@v4
   with:
     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -157,6 +174,7 @@ aws secretsmanager create-secret \
     aws-region: us-west-2
 
 - name: Get secret from AWS
+
   run: |
     SECRET=$(aws secretsmanager get-secret-value \
       --secret-id production/database/password \
@@ -166,6 +184,7 @@ aws secretsmanager create-secret \
     echo "DB_PASSWORD=$SECRET" >> $GITHUB_ENV
 
 - name: Use secret
+
   run: |
     # Use $DB_PASSWORD
     ./deploy.sh
@@ -192,7 +211,9 @@ resource "aws_db_instance" "main" {
 ### Organization/Repository Secrets
 
 ```yaml
+
 - name: Use GitHub secret
+
   run: |
     echo "API Key: ${{ secrets.API_KEY }}"
     echo "Database URL: ${{ secrets.DATABASE_URL }}"
@@ -205,7 +226,9 @@ deploy:
   runs-on: ubuntu-latest
   environment: production
   steps:
+
   - name: Deploy
+
     run: |
       echo "Deploying with ${{ secrets.PROD_API_KEY }}"
 ```
@@ -219,11 +242,14 @@ deploy:
 ```yaml
 deploy:
   script:
+
     - echo "Deploying with $API_KEY"
     - echo "Database: $DATABASE_URL"
+
 ```
 
 ### Protected and Masked Variables
+
 - Protected: Only available in protected branches
 - Masked: Hidden in job logs
 - File type: Stored as file
@@ -318,11 +344,15 @@ spec:
     name: database-credentials
     creationPolicy: Owner
   data:
+
   - secretKey: username
+
     remoteRef:
       key: database/config
       property: username
+
   - secretKey: password
+
     remoteRef:
       key: database/config
       property: password
@@ -334,9 +364,11 @@ spec:
 
 ```bash
 #!/bin/bash
+
 # .git/hooks/pre-commit
 
 # Check for secrets with TruffleHog
+
 docker run --rm -v "$(pwd):/repo" \
   trufflesecurity/trufflehog:latest \
   filesystem --directory=/repo
@@ -354,7 +386,9 @@ secret-scan:
   stage: security
   image: trufflesecurity/trufflehog:latest
   script:
+
     - trufflehog filesystem .
+
   allow_failure: false
 ```
 
@@ -370,11 +404,13 @@ secret-scan:
 - `deployment-pipeline-design` - For pipeline architecture
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

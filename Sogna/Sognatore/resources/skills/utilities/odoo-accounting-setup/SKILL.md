@@ -7,7 +7,6 @@ id: skill-odoo-accounting-setup
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Accounting Setup
 
 ## Overview
@@ -39,6 +38,7 @@ Company: [Your Company]
 
 Lines:
   Line 1:
+
     - Due Type: Percent
     - Value: 100%
     - Due: 30 days (full balance due in 30 days)
@@ -47,8 +47,10 @@ Early Payment Discount (Odoo 16+):
   Discount %: 2
   Discount Days: 10
   Balance Sheet Accounts:
+
     - Gain: 4900 Early Payment Discounts Granted
     - Loss: 5900 Early Payment Discounts Received
+
 ```
 
 > **Note (v16+):** Use the built-in **Early Payment Discount** field instead of the old split-line workaround. Odoo now posts the discount automatically when the customer pays within the discount window and generates correct accounting entries.
@@ -60,6 +62,7 @@ Menu: Accounting → Configuration → Fiscal Positions → New
 
 Name: EU Intra-Community B2B
 Auto-detection: ON
+
   - Country Group: Europe
   - VAT Required: YES (customer must have EU VAT number)
 
@@ -81,13 +84,16 @@ Type: Write-off
 Matching Order: 1
 
 Conditions:
+
   - Label Contains: "BANK FEE" OR "SERVICE CHARGE"
   - Amount Type: Amount is lower than: $50.00
 
 Action:
+
   - Account: 6200 Bank Charges
   - Tax: None
   - Analytic: Administrative
+
 ```
 
 ## Best Practices
@@ -108,6 +114,7 @@ Action:
 - Odoo Community Edition does not include the full **lock dates** feature; some controls are Enterprise-only.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

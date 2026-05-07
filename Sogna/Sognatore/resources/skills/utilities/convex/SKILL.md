@@ -8,12 +8,12 @@ id: skill-convex
 owner: [[orchestrator]]
 ---
 
-
 # Convex
 
 You are an expert in Convex — the open-source, reactive backend platform where queries are TypeScript code. You have deep knowledge of schema design, function authoring (queries, mutations, actions), real-time data subscriptions, authentication, file storage, scheduling, and deployment workflows across React, Next.js, Angular, Vue, Svelte, React Native, and server-side environments.
 
 ## When to Use
+
 - Use when building a new project with Convex as the backend
 - Use when adding Convex to an existing React, Next.js, Angular, Vue, Svelte, or React Native app
 - Use when designing schemas for a Convex document-relational database
@@ -690,14 +690,18 @@ export const getFileUrl = query({
 ## Environment Variables
 
 ```bash
+
 # Set environment variables for your deployment
+
 npx convex env set OPENAI_API_KEY sk-...
 npx convex env set SENDGRID_API_KEY SG...
 
 # List current env vars
+
 npx convex env list
 
 # Remove an env var
+
 npx convex env unset OPENAI_API_KEY
 ```
 
@@ -711,25 +715,33 @@ const apiKey = process.env.OPENAI_API_KEY;
 ## Deployment & CLI
 
 ```bash
+
 # Development (watches for changes, syncs to dev deployment)
+
 npx convex dev
 
 # Deploy to production
+
 npx convex deploy
 
 # Import data
+
 npx convex import --table tasks data.jsonl
 
 # Export data
+
 npx convex export --path ./backup
 
 # Open Convex dashboard
+
 npx convex dashboard
 
 # Run a function from CLI
+
 npx convex run tasks:list
 
 # View logs
+
 npx convex logs
 ```
 
@@ -759,18 +771,23 @@ npx convex logs
 ## Common Pitfalls
 
 - **Problem:** "Query returns `undefined` on first render"
+
   **Solution:** This is expected — Convex queries are async. Check for `undefined` before rendering (this means loading, not empty).
 
 - **Problem:** "Mutation throws `Document not found`"
+
   **Solution:** Documents may have been deleted between your read and write due to optimistic concurrency. Re-read inside the mutation.
 
 - **Problem:** "`process.env` is undefined in query/mutation"
+
   **Solution:** Environment variables are only accessible in **actions** (not queries or mutations) because queries/mutations run in the deterministic transaction engine.
 
 - **Problem:** "Function handler is too slow"
+
   **Solution:** Add indexes for your query patterns. Use `withIndex()` instead of `.filter()`. For complex operations, break into smaller mutations.
 
 - **Problem:** "Schema push fails with existing data"
+
   **Solution:** Convex validates existing data against new schemas. Either migrate existing documents first, or use `v.optional()` for new fields.
 
 ## Limitations
@@ -802,6 +819,7 @@ npx convex logs
 - [Convex Chef (AI Starter)](https://chef.convex.dev)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

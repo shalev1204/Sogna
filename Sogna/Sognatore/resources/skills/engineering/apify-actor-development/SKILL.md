@@ -7,7 +7,6 @@ id: skill-apify-actor-development
 owner: [[eng-api]], [[prod-pm]]
 ---
 
-
 <!-- security-allowlist: curl-pipe-bash, irm-pipe-iex -->
 
 # Apify Actor Development
@@ -15,6 +14,7 @@ owner: [[eng-api]], [[prod-pm]]
 **Important:** Before you begin, fill in the `generatedBy` property in the meta section of `.actor/actor.json`. Replace it with the tool and model you're currently using, such as "Claude Code with Claude Sonnet 4.5". This helps Apify monitor and improve AGENTS.md for specific AI tools and models.
 
 ## When to Use
+
 - You need to create, modify, or debug an Apify Actor project.
 - The task involves choosing an Apify template, wiring actor inputs/outputs, or implementing actor runtime logic.
 - You need safe setup guidance for `apify` CLI authentication, project bootstrap, or deployment workflow.
@@ -24,6 +24,7 @@ owner: [[eng-api]], [[prod-pm]]
 Actors are serverless programs inspired by the UNIX philosophy - programs that do one thing well and can be easily combined to build complex systems. They're packaged as Docker images and run in isolated containers in the cloud.
 
 **Core Concepts:**
+
 - Accept well-defined JSON input
 - Perform isolated tasks (web scraping, automation, data processing)
 - Produce structured JSON output to datasets and/or store data in key-value stores
@@ -37,10 +38,13 @@ Before creating or modifying actors, verify that `apify` CLI is installed `apify
 If it is not installed, use one of these methods (listed in order of preference):
 
 ```bash
+
 # Preferred: install via a package manager (provides integrity checks)
+
 npm install -g apify-cli
 
 # Or (Mac): brew install apify-cli
+
 ```
 
 > **Security note:** Do NOT install the CLI by piping remote scripts to a shell
@@ -57,10 +61,13 @@ If it is not logged in, check if the `APIFY_TOKEN` environment variable is defin
 Then authenticate using one of these methods:
 
 ```bash
+
 # Option 1 (preferred): The CLI automatically reads APIFY_TOKEN from the environment.
+
 # Just ensure the env var is exported and run any apify command — no explicit login needed.
 
 # Option 2: Interactive login (prompts for token without exposing it in shell history)
+
 apify login
 ```
 
@@ -73,6 +80,7 @@ apify login
 ## Template Selection
 
 **IMPORTANT:** Before starting actor development, always ask the user which programming language they prefer:
+
 - **JavaScript** - Use `apify create <actor-name> -t project_empty`
 - **TypeScript** - Use `apify create <actor-name> -t ts_empty`
 - **Python** - Use `apify create <actor-name> -t python-empty`
@@ -106,6 +114,7 @@ Use the appropriate CLI command based on the user's language choice. Additional 
 ## Best Practices
 
 **✓ Do:**
+
 - Use `apify run` to test actors locally (configures Apify environment and storage)
 - Use Apify SDK (`apify`) for code running ON Apify platform
 - Validate input early with proper error handling and fail gracefully
@@ -123,6 +132,7 @@ Use the appropriate CLI command based on the user's language choice. Additional 
 - Implement readiness probe handler (required if your Actor uses standby mode)
 
 **✗ Don't:**
+
 - Use `npm start`, `npm run start`, `npx apify run`, or similar commands to run actors (use `apify run` instead)
 - Assume local storage from `apify run` is pushed to or visible in the Apify Console — it is local-only; deploy with `apify push` and run on the platform to see results in the Console
 - Rely on `Dataset.getInfo()` for final counts on Cloud
@@ -166,6 +176,7 @@ storage/key_value_stores/default/INPUT.json
 This file should contain the input parameters defined in your `.actor/input_schema.json`. The actor will read this input when running locally, mirroring how it receives input on the Apify platform.
 
 **IMPORTANT - Local storage is NOT synced to the Apify Console:**
+
 - Running `apify run` stores all data (datasets, key-value stores, request queues) **only on your local filesystem** in the `storage/` directory.
 - This data is **never** automatically uploaded or pushed to the Apify platform. It exists only on your machine.
 - To verify results on the Apify Console, you must deploy the Actor with `apify push` and then run it on the platform.
@@ -216,7 +227,9 @@ See [references/key-value-store-schema.md](references/key-value-store-schema.md)
 If MCP server is configured, use these tools for documentation:
 
 - `search-apify-docs` - Search documentation
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - `fetch-apify-docs` - Get full doc pages
 
 Otherwise, the MCP Server url: `https://mcp.apify.com/?tools=docs`.
@@ -230,11 +243,13 @@ Otherwise, the MCP Server url: `https://mcp.apify.com/?tools=docs`.
 - [whitepaper.actor](https://raw.githubusercontent.com/apify/actor-whitepaper/refs/heads/master/README.md) - Complete Actor specification
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

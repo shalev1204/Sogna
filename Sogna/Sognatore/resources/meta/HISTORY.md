@@ -1,4 +1,5 @@
 <!-- @sentinel-ignore: GLOBAL -->
+
 # Registro Histórico: Sognatore
 
 Sognatore es un sistema de enjambre autónomo multi-agente diseñado para la integración con Claude Code, OpenAI y Google Gemini. Permite transformar un PRD en un producto funcional con mínima intervención humana.
@@ -6,11 +7,15 @@ Sognatore es un sistema de enjambre autónomo multi-agente diseñado para la int
 ## Quick Start
 
 ```bash
+
 # Launch Claude Code with autonomous permissions
+
 claude --dangerously-skip-permissions
 
 # Then invoke:
+
 # "Sognatore" or "Sognatore with PRD at path/to/prd"
+
 ```
 
 ## Project Structure
@@ -99,7 +104,9 @@ Every iteration follows: **R**eason -> **A**ct -> **R**eflect -> **V**erify
 - **Google Gemini CLI**: Degraded mode (sequential only, no Task tool)
 
 ```bash
+
 # Provider selection
+
 ./autonomy/run.sh --provider codex ./prd.md
 sognatore start --provider gemini ./prd.md
 SOGNATORE_PROVIDER=codex sognatore start ./prd.md
@@ -206,13 +213,17 @@ Before documenting ANY feature, installation method, or capability:
 **Example verification:**
 
 ```bash
+
 # Before documenting "npm install -g sognatore"
+
 npm view sognatore  # Does package exist on registry?
 
 # Before documenting a CLI command
+
 which sognatore && sognatore --help  # Does command exist?
 
 # Before documenting a file path
+
 ls -la path/to/file  # Does file exist?
 ```
 
@@ -349,17 +360,22 @@ ls -la dashboard/static/index.html
 ### 3. Run Tests
 
 ```bash
+
 # Shell script validation
+
 bash -n autonomy/run.sh
 bash -n autonomy/sognatore
 
 # Python syntax validation
+
 python3 -c "import ast, os; [ast.parse(open(f'dashboard/{f}').read()) for f in os.listdir('dashboard') if f.endswith('.py')]"
 
 # JSON validation
+
 python3 -c "import json; json.load(open('package.json')); json.load(open('vscode-extension/package.json')); print('JSON OK')"
 
 # E2E dashboard tests (requires dashboard running on port 57374)
+
 cd dashboard-ui && npx playwright test && cd ..
 ```
 
@@ -368,15 +384,20 @@ cd dashboard-ui && npx playwright test && cd ..
 This step prevents broken releases. Every single release MUST pass these checks BEFORE committing.
 
 ```bash
+
 # 1. Verify npm tarball contains expected files
+
 #    If web-app/dist/ or dashboard/static/ are missing, the release is broken.
+
 npm pack --dry-run 2>&1 | grep -E "web-app/dist|dashboard/static" || echo "FAIL: expected files missing from tarball"
 
 # 2. Verify built artifacts exist in git (not just locally)
+
 git ls-files web-app/dist/index.html | grep -q . || echo "FAIL: web-app/dist/ not tracked in git"
 git ls-files dashboard/static/index.html | grep -q . || echo "FAIL: dashboard/static/ not tracked in git"
 
 # 3. Local install test -- install from tarball like a real user
+
 npm pack && npm install -g ./sognatore-*.tgz
 sognatore --version  # should show new version
 sognatore web --no-open &  # should start without "Web app not built" error
@@ -388,6 +409,7 @@ npm install -g sognatore  # restore previous version
 rm -f sognatore-*.tgz
 
 # 4. If ANY check above fails, DO NOT release. Fix the root cause first.
+
 ```
 
 **Why this exists:** v6.25.0-v6.26.5 shipped 6 broken patches because we tested locally from the repo but never verified the npm tarball or a fresh global install. `.gitignore` excluded `web-app/dist/` so CI never had the files. This checklist catches that class of bug before it reaches users.
@@ -412,25 +434,32 @@ git push origin main
 ### 5. Verify ALL Distribution Channels
 
 ```bash
+
 # Watch workflow progress
+
 gh run list --limit 1
 gh run watch <run-id>
 
 # npm - verify dashboard is included
+
 npm view sognatore version
 npm pack sognatore --dry-run 2>&1 | grep dashboard/static
 
 # Docker - verify dashboard works
+
 docker pull sognatore/:X.Y.Z
 docker run --rm sognatore/:X.Y.Z sognatore version
 
 # Homebrew
+
 brew update && brew info sognatore
 
 # VSCode extension
+
 # Check marketplace or: code --list-extensions --show-versions | grep sognatore
 
 # GitHub Release
+
 gh release view vX.Y.Z
 ```
 

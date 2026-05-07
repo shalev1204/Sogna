@@ -121,6 +121,7 @@ export const metadata: Metadata = {
 ## Setup Steps
 
 1. Initialize Project:
+
    ```bash
    npx create-next-app@latest my-site --typescript --tailwind --eslint
    # Select 'Yes' for App Router
@@ -128,12 +129,14 @@ export const metadata: Metadata = {
    ```
 
 2. Install Auxiliary Libraries:
+
    ```bash
    npm install framer-motion lucide-react clsx tailwind-merge
    # clsx and tailwind-merge help handle dynamic classes better
    ```
 
 3. Configure Tailwind v4 (in `src/app/globals.css`):
+
    ```css
    @import "tailwindcss";
 
@@ -144,6 +147,7 @@ export const metadata: Metadata = {
    ```
 
 4. Development:
+
    ```bash
    npm run dev --turbopack
    ```

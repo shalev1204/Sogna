@@ -8,7 +8,6 @@ id: skill-azure-mgmt-fabric-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Fabric Management SDK for Python
 
 Manage Microsoft Fabric capacities and resources programmatically.
@@ -239,10 +238,13 @@ for sku in skus:
 All mutating operations are long-running (LRO). Use `.result()` to wait:
 
 ```python
+
 # Synchronous wait
+
 capacity = client.fabric_capacities.begin_create_or_update(...).result()
 
 # Or poll manually
+
 poller = client.fabric_capacities.begin_create_or_update(...)
 while not poller.done():
     print(f"Status: {poller.status()}")
@@ -262,14 +264,17 @@ capacity = poller.result()
 8. **Monitor capacity usage** via Azure Monitor metrics
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

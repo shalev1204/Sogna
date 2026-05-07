@@ -8,7 +8,6 @@ id: skill-javascript-typescript-typescript-scaffold
 owner: [[orchestrator]]
 ---
 
-
 # TypeScript Project Scaffolding
 
 You are a TypeScript project architecture expert specializing in scaffolding production-ready Node.js and frontend applications. Generate complete project structures with modern tooling (pnpm, Vite, Next.js), type safety, testing setup, and configuration following current best practices.
@@ -36,6 +35,7 @@ $ARGUMENTS
 ### 1. Analyze Project Type
 
 Determine the project type from user requirements:
+
 - **Next.js**: Full-stack React applications, SSR/SSG, API routes
 - **React + Vite**: SPA applications, component libraries
 - **Node.js API**: Express/Fastify backends, microservices
@@ -45,14 +45,18 @@ Determine the project type from user requirements:
 ### 2. Initialize Project with pnpm
 
 ```bash
+
 # Install pnpm if needed
+
 npm install -g pnpm
 
 # Initialize project
+
 mkdir project-name && cd project-name
 pnpm init
 
 # Initialize git
+
 git init
 echo "node_modules/" >> .gitignore
 echo "dist/" >> .gitignore
@@ -62,7 +66,9 @@ echo ".env" >> .gitignore
 ### 3. Generate Next.js Project Structure
 
 ```bash
+
 # Create Next.js project with TypeScript
+
 pnpm create next-app@latest . --typescript --tailwind --app --src-dir --import-alias "@/*"
 ```
 
@@ -162,7 +168,9 @@ nextjs-project/
 ### 4. Generate React + Vite Project Structure
 
 ```bash
+
 # Create Vite project
+
 pnpm create vite . --template react-ts
 ```
 
@@ -367,11 +375,13 @@ export default defineConfig({
 Focus on creating production-ready TypeScript projects with modern tooling, strict type safety, and comprehensive testing setup.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

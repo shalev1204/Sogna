@@ -78,13 +78,17 @@ After timeout optimization, the multi-agent RARV pipeline matches single-agent p
 ## Running Sognatore
 
 ```bash
+
 # Clone the repository
+
 git clone https://github.com/asklokesh/sognatore.git
 
 # Run SWE-bench with Sognatore
+
 ./benchmarks/run-benchmarks.sh swebench --execute --sognatore
 
 # Run with limit for testing
+
 ./benchmarks/run-benchmarks.sh swebench --execute --sognatore --limit 10
 ```
 
@@ -118,6 +122,7 @@ evaluation/lite/20260105_SOGNATORE_mode/
 - GitHub: [@asklokesh](https://github.com/asklokesh)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

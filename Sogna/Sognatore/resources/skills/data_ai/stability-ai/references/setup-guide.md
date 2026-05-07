@@ -64,26 +64,31 @@ A imagem sera salva em `data/outputs/`.
 ## Troubleshooting
 
 ### Erro 401 (Unauthorized)
+
 - Verifique se a key esta correta no `.env`
 - Verifique se nao ha espacos extras na key
 - Gere uma nova key no dashboard
 
 ### Erro 402 (Payment Required)
+
 - Sua conta pode ter excedido limites de credito
 - Community License tem uso generoso mas pode ter restricoes em pico
 - Verifique o dashboard para status
 
 ### Erro 429 (Rate Limited)
+
 - Limite: 150 requests a cada 10 segundos
 - O script ja faz retry automatico com backoff
 - Se persistir, aguarde alguns minutos
 
 ### Erro 400 (Bad Request)
+
 - Verifique se o prompt nao esta vazio
 - Verifique se o aspect ratio e valido (use `--list-models` para ver opcoes)
 - Para img2img/inpaint, verifique se o arquivo de imagem existe
 
 ### Imagem nao salva
+
 - Verifique permissoes de escrita em `data/outputs/`
 - O diretorio e criado automaticamente, mas pode falhar em ambientes restritos
 
@@ -101,6 +106,7 @@ A imagem sera salva em `data/outputs/`.
 - Contador diario em `data/daily_counter.json`
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

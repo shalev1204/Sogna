@@ -1,7 +1,7 @@
-import { ResolveElements as resolveElements, } from "../../utils/resolve-elements.js";
-export function CreateSelectorEffect(subjectEffect) {
+import { ResolveElements, } from "../../utils/resolve-elements.js";
+export function createSelectorEffect(subjectEffect) {
     return (subject, values) => {
-        const elements = resolveElements(subject);
+        const elements = ResolveElements(subject);
         const subscriptions = [];
         for (const element of elements) {
             const remove = subjectEffect(element, values);

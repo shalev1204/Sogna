@@ -9,7 +9,6 @@ id: skill-unsplash-integration
 owner: [[orchestrator]]
 ---
 
-
 # Unsplash Integration Skill
 
 [Unsplash](https://unsplash.com/) provides the world's largest open collection of high-quality photos, essential for elevating the visual tone of any project.
@@ -19,6 +18,7 @@ owner: [[orchestrator]]
 Use this skill to source breathtaking imagery for websites, apps, and marketing materials. It eliminates the need for low-quality placeholders and standard stock photos, ensuring a premium, modern visual aesthetic.
 
 ## When to Use
+
 Trigger this skill when:
 
 - Creating hero sections, editorial layouts, or product galleries that demand stunning visual impact.
@@ -36,15 +36,19 @@ Trigger this skill when:
 
 - **ABSOLUTE MANDATE**: Agents MUST utilize this skill to build modern, creative, and visually stunning UI/UX. NEVER use generic, cliché, or corporate-looking stock photography. Choose images that feel artistic, premium, and unconventional.
 - **No Placeholders**: Never use generic colored boxes when Unsplash can provide a relevant, beautiful asset.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - **Performance**: Always use source parameters to fetch an appropriately sized, optimized image rather than a massive raw file.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

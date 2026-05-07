@@ -40,6 +40,7 @@ In Go, workflows are state machines that must replay identically. Violating thes
 - **Wrong:** `for k, v := range myMap { ... }`
 - **Right:** Collect keys, sort them, then iterate.
 - ```go
+
   keys := make([]string, 0, len(myMap))
   for k := range myMap { keys = append(keys, k) }
   sort.Strings(keys)
@@ -206,10 +207,10 @@ w := worker.New(c, "task-queue", worker.Options{
 
 ## Anti-Patterns to Avoid
 
-1.  **Massive Workflows:** Keeping too much state in a single workflow. Use `ContinueAsNew` if event history exceeds 50K events.
-2.  **Fat Activities:** Doing orchestration inside an activity. Activities should be unit-of-work.
-3.  **Global Variables:** Using global variables in workflows. They will not be preserved across worker restarts.
-4.  **Native Concurrency in Workflows:** Using `go` routines, `mutexes`, or `channels` will cause race conditions and determinism errors during replay.
+1. **Massive Workflows:** Keeping too much state in a single workflow. Use `ContinueAsNew` if event history exceeds 50K events.
+2. **Fat Activities:** Doing orchestration inside an activity. Activities should be unit-of-work.
+3. **Global Variables:** Using global variables in workflows. They will not be preserved across worker restarts.
+4. **Native Concurrency in Workflows:** Using `go` routines, `mutexes`, or `channels` will cause race conditions and determinism errors during replay.
 
 ---
 
@@ -249,6 +250,7 @@ encodedFlag.Get(&enabled)
 > **Warning:** Do NOT use `SideEffect` as a workaround to call external APIs (HTTP, DB) inside a workflow. All external I/O must still go through Activities.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

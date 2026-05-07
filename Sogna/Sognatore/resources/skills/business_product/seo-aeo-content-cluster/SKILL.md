@@ -8,7 +8,6 @@ id: skill-seo-aeo-content-cluster
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # SEO-AEO Content Cluster
 
 ## Overview
@@ -27,10 +26,13 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 ## How It Works
 
 ### Step 1: Define the Pillar Page
+
 Set the primary keyword, target audience, and word count target (2500–4000 words) for the pillar page that anchors the cluster.
 
 ### Step 2: Generate Cluster Articles
+
 Produce 8–15 subtopics sorted into three priority tiers:
+
 - **Priority 1** — High volume, clear intent. Write these first.
 - **Priority 2** — Medium volume, long-tail focus. Write second.
 - **Priority 3** — Low volume, high conversion intent. Write last.
@@ -38,14 +40,17 @@ Produce 8–15 subtopics sorted into three priority tiers:
 Assign each article a unique keyword, content type, search intent, and link map.
 
 ### Step 3: Build Internal Link Map
+
 Every cluster article must link back to the pillar page. No orphan articles. Show the full tree of relationships.
 
 ### Step 4: Run Content Gap Analysis
+
 Identify angles that competitors likely miss — especially question-based AEO opportunities that AI engines commonly surface.
 
 ## Examples
 
 ### Example: Automated Budgeting Cluster
+
 Pillar: The Complete Guide to Automated Budgeting
 Priority 1:
 
@@ -54,8 +59,10 @@ Best Budgeting Apps Compared | comparison
 What Is Zero-Based Budgeting? | explainer ← AEO priority
 
 Priority 2:
+
 4. How to Automate Your Savings in 3 Steps | how-to guide
 5. Budgeting for Millennials: What Nobody Tells You | opinion
+
 Link Map:
 Pillar ← Article 1, 2, 3, 4, 5
 Article 1 ↔ Article 4
@@ -75,9 +82,11 @@ AEO Priority:
 ## Common Pitfalls
 
 - **Problem:** Cluster articles all target similar keywords and cannibalise each other
+
   **Solution:** Run a uniqueness check — every article needs a distinct keyword with no semantic overlap.
 
 - **Problem:** No AEO content in the cluster
+
   **Solution:** At least 2 articles must be structured as direct-answer pages (FAQ or "What Is" explainer).
 
 ## Related Skills
@@ -92,11 +101,13 @@ AEO Priority:
 - [Full Content Cluster SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/content-cluster/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

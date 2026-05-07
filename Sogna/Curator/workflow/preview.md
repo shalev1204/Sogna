@@ -32,6 +32,7 @@ Manage preview server: start, stop, status check.
 ## Usage Examples
 
 ### Start Server
+
 ```
 /preview start
 
@@ -45,6 +46,7 @@ Response:
 ```
 
 ### Status Check
+
 ```
 /preview
 
@@ -58,6 +60,7 @@ Response:
 ```
 
 ### Port Conflict
+
 ```
 /preview start
 
@@ -65,6 +68,7 @@ Response:
 ⚠️ Port 3000 is in use.
 
 Options:
+
 1. Start on port 3001
 2. Close app on 3000
 3. Specify different port
@@ -83,5 +87,3 @@ python .agent/scripts/auto_preview.py start [port]
 python .agent/scripts/auto_preview.py stop
 python .agent/scripts/auto_preview.py status
 ```
-
-

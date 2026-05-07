@@ -18,7 +18,7 @@ export interface TransformOptions<T> {
      */
     ease?: EasingFunction | EasingFunction[];
     /**
-     * Provide a function that can interpolate between any two values in the provided range.
+     * Provide a function that can Interpolate between any two values in the provided range.
      *
      * @public
      */

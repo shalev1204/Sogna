@@ -8,13 +8,16 @@ version: 1.0.0
 # Packaging notes
 
 ## Build output paths
+
 SwiftPM places binaries under:
+
 - `.build/<arch>-apple-macosx/<config>/<AppName>` for arch-specific builds
 - `.build/<config>/<AppName>` for some products (frameworks/tools)
 
 Use `ARCHES="arm64 x86_64"` with `swift build` to produce universal binaries.
 
 ## Common environment variables (used by templates)
+
 - `APP_NAME`: App/binary name (for example, `MyApp`).
 - `BUNDLE_ID`: Bundle identifier (for example, `com.example.myapp`).
 - `ARCHES`: Space-separated architectures (default: host arch).
@@ -24,6 +27,7 @@ Use `ARCHES="arm64 x86_64"` with `swift build` to produce universal binaries.
 - `MENU_BAR_APP`: Set to `1` to add `LSUIElement` to Info.plist.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

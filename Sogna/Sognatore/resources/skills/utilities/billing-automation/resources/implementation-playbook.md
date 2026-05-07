@@ -12,7 +12,9 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ## Core Concepts
 
 ### 1. Billing Cycles
+
 **Common Intervals:**
+
 - Monthly (most common for SaaS)
 - Annual (discounted long-term)
 - Quarterly
@@ -20,20 +22,25 @@ This file contains detailed patterns, checklists, and code samples referenced by
 - Custom (usage-based, per-seat)
 
 ### 2. Subscription States
+
 ```
 trial → active → past_due → canceled
               → paused → resumed
 ```
 
 ### 3. Dunning Management
+
 Automated process to recover failed payments through:
+
 - Retry schedules
 - Customer notifications
 - Grace periods
 - Account restrictions
 
 ### 4. Proration
+
 Adjusting charges when:
+
 - Upgrading/downgrading mid-cycle
 - Adding/removing seats
 - Changing billing frequency
@@ -44,9 +51,11 @@ Adjusting charges when:
 from billing import BillingEngine, Subscription
 
 # Initialize billing engine
+
 billing = BillingEngine()
 
 # Create subscription
+
 subscription = billing.create_subscription(
     customer_id="cus_123",
     plan_id="plan_pro_monthly",
@@ -55,6 +64,7 @@ subscription = billing.create_subscription(
 )
 
 # Process billing cycle
+
 billing.process_billing_cycle(subscription.id)
 ```
 
@@ -551,6 +561,7 @@ class UsageBillingEngine:
 - **Hardcoded Cycles**: Not supporting custom billing dates
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

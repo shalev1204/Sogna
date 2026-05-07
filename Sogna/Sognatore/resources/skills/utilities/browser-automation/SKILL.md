@@ -11,7 +11,6 @@ id: skill-browser-automation
 owner: [[orchestrator]]
 ---
 
-
 # Browser Automation
 
 Browser automation powers web testing, scraping, and AI agent interactions.
@@ -86,12 +85,15 @@ Each test runs in complete isolation with fresh state
 
 """
 Each test gets its own:
+
 - Browser context (cookies, storage)
 - Fresh page
 - Clean state
+
 """
 
 ## Playwright Test Example
+
 """
 import { test, expect } from '@playwright/test';
 
@@ -111,6 +113,7 @@ test('user can remove item from cart', async ({ page }) => {
 """
 
 ## Shared Authentication Pattern
+
 """
 // Save auth state once, reuse across tests
 // setup.ts
@@ -156,14 +159,17 @@ Select elements the way users see them
 
 """
 Priority order:
+
 1. getByRole  - Best: matches accessibility tree
 2. getByText  - Good: matches visible content
 3. getByLabel - Good: matches form labels
 4. getByTestId - Fallback: explicit test contracts
 5. CSS/XPath - Last resort: fragile, avoid
+
 """
 
 ## Good Examples (User-Facing)
+
 """
 // By role - THE BEST CHOICE
 await page.getByRole('button', { name: 'Submit' }).click();
@@ -187,6 +193,7 @@ await page.getByTestId('submit-button').click();
 """
 
 ## Bad Examples (Fragile)
+
 """
 // DON'T - CSS selectors tied to structure
 await page.locator('.btn-primary.submit-form').click();
@@ -200,6 +207,7 @@ await page.locator('[data-v-12345]').click();
 """
 
 ## Filtering and Chaining
+
 """
 // Filter by containing text
 await page.getByRole('listitem')
@@ -228,6 +236,7 @@ Let Playwright wait automatically, never add manual waits
 
 """
 Playwright waits automatically for:
+
 - Element to be attached to DOM
 - Element to be visible
 - Element to be stable (not animating)
@@ -238,6 +247,7 @@ NEVER add manual waits!
 """
 
 ## Wrong - Manual Waits
+
 """
 // DON'T DO THIS
 await page.goto('/dashboard');
@@ -250,6 +260,7 @@ await page.waitForTimeout(500);  // "Just to be safe" - NO!
 """
 
 ## Correct - Let Auto-Wait Work
+
 """
 // Auto-waits for button to be clickable
 await page.getByRole('button', { name: 'Submit' }).click();
@@ -263,6 +274,7 @@ await page.goto('/dashboard');
 """
 
 ## When You DO Need to Wait
+
 """
 // Wait for specific network request
 const responsePromise = page.waitForResponse(
@@ -293,14 +305,17 @@ Avoid bot detection for scraping
 
 """
 Bot detection checks for:
+
 - navigator.webdriver property
 - Chrome DevTools protocol artifacts
 - Browser fingerprint inconsistencies
 - Behavioral patterns (perfect timing, no mouse movement)
 - Headless indicators
+
 """
 
 ## Puppeteer Stealth (Best Anti-Detection)
+
 """
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -334,6 +349,7 @@ await page.goto('https://target-site.com', {
 """
 
 ## Playwright Stealth
+
 """
 import { chromium } from 'playwright-extra';
 import stealth from 'puppeteer-extra-plugin-stealth';
@@ -350,6 +366,7 @@ const context = await browser.newContext({
 """
 
 ## Human-Like Behavior
+
 """
 // Random delays between actions
 const randomDelay = (min: number, max: number) =>
@@ -387,6 +404,7 @@ Handle failures gracefully with screenshots and retries
 # ERROR RECOVERY PATTERN:
 
 ## Automatic Screenshot on Failure
+
 """
 // playwright.config.ts
 export default defineConfig({
@@ -400,6 +418,7 @@ export default defineConfig({
 """
 
 ## Try-Catch with Debug Info
+
 """
 async function scrapeProduct(page: Page, url: string) {
   try {
@@ -432,6 +451,7 @@ async function scrapeProduct(page: Page, url: string) {
 """
 
 ## Retry with Exponential Backoff
+
 """
 async function withRetry<T>(
   fn: () => Promise<T>,
@@ -474,6 +494,7 @@ Run tests/tasks in parallel for speed
 # PARALLEL EXECUTION:
 
 ## Playwright Test Parallelization
+
 """
 // playwright.config.ts
 export default defineConfig({
@@ -489,6 +510,7 @@ export default defineConfig({
 """
 
 ## Browser Contexts for Parallel Scraping
+
 """
 const browser = await chromium.launch();
 
@@ -516,6 +538,7 @@ await browser.close();
 """
 
 ## Rate-Limited Parallel Processing
+
 """
 import pLimit from 'p-limit';
 
@@ -547,6 +570,7 @@ Mock, block, or modify network requests
 # NETWORK INTERCEPTION:
 
 ## Block Unnecessary Resources
+
 """
 await page.route('**/*', (route) => {
   const url = route.request().url();
@@ -568,6 +592,7 @@ await page.route('**/*', (route) => {
 """
 
 ## Mock API Responses (Testing)
+
 """
 await page.route('**/api/products', async (route) => {
   await route.fulfill({
@@ -584,6 +609,7 @@ await page.goto('/products');
 """
 
 ## Capture API Responses
+
 """
 const apiResponses: any[] = [];
 
@@ -625,20 +651,24 @@ Recommended fix:
 # REMOVE all waitForTimeout calls
 
 # WRONG:
+
 await page.goto('/dashboard');
 await page.waitForTimeout(2000);  # Arbitrary!
 await page.click('.submit');
 
 # CORRECT - Auto-wait handles it:
+
 await page.goto('/dashboard');
 await page.getByRole('button', { name: 'Submit' }).click();
 
 # If you need to wait for specific condition:
+
 await expect(page.getByText('Dashboard')).toBeVisible();
 await page.waitForURL('**/dashboard');
 await page.waitForResponse(resp => resp.url().includes('/api/data'));
 
 # For animations, wait for element to be stable:
+
 await page.getByRole('button').click();  # Auto-waits for stable
 
 # NEVER use setTimeout or waitForTimeout in production code
@@ -663,23 +693,31 @@ Recommended fix:
 # Use user-facing locators instead:
 
 # WRONG - Tied to CSS:
+
 await page.locator('.btn-primary.submit-form').click();
 await page.locator('#sidebar > div.menu > ul > li:nth-child(3)').click();
 
 # CORRECT - User-facing:
+
 await page.getByRole('button', { name: 'Submit' }).click();
 await page.getByRole('menuitem', { name: 'Settings' }).click();
 
 # If you must use CSS, use data-testid:
+
 <button data-testid="submit-order">Submit</button>
 
 await page.getByTestId('submit-order').click();
 
 # Locator priority:
+
 # 1. getByRole - matches accessibility
+
 # 2. getByText - matches visible content
+
 # 3. getByLabel - matches form labels
+
 # 4. getByTestId - explicit test contract
+
 # 5. CSS/XPath - last resort only
 
 ### navigator.webdriver Exposes Automation
@@ -702,6 +740,7 @@ Recommended fix:
 # Use stealth plugins:
 
 ## Puppeteer Stealth (best option):
+
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
@@ -713,12 +752,14 @@ const browser = await puppeteer.launch({
 });
 
 ## Playwright Stealth:
+
 import { chromium } from 'playwright-extra';
 import stealth from 'puppeteer-extra-plugin-stealth';
 
 chromium.use(stealth());
 
 ## Manual (partial):
+
 await page.evaluateOnNewDocument(() => {
   Object.defineProperty(navigator, 'webdriver', {
     get: () => undefined,
@@ -726,6 +767,7 @@ await page.evaluateOnNewDocument(() => {
 });
 
 # Note: This is cat-and-mouse. Detection evolves.
+
 # For serious scraping, consider managed solutions like Browserbase.
 
 ### Tests Share State and Affect Each Other
@@ -749,6 +791,7 @@ Recommended fix:
 # Each test must be fully isolated:
 
 ## Playwright Test (automatic isolation):
+
 test('first test', async ({ page }) => {
   // Fresh context, fresh page
 });
@@ -758,12 +801,14 @@ test('second test', async ({ page }) => {
 });
 
 ## Manual isolation:
+
 const context = await browser.newContext();  // Fresh context
 const page = await context.newPage();
 // ... test code ...
 await context.close();  // Clean up
 
 ## Shared authentication (the right way):
+
 // 1. Save auth state to file
 await context.storageState({ path: './auth.json' });
 
@@ -773,6 +818,7 @@ const context = await browser.newContext({
 });
 
 # Never modify global state in tests
+
 # Never rely on previous test's actions
 
 ### No Trace Capture for CI Failures
@@ -796,6 +842,7 @@ Recommended fix:
 # Enable traces for failures:
 
 ## playwright.config.ts:
+
 export default defineConfig({
   use: {
     trace: 'retain-on-failure',    # Keep trace on failure
@@ -806,21 +853,30 @@ export default defineConfig({
 });
 
 ## View trace locally:
+
 npx playwright show-trace test-results/path/to/trace.zip
 
 ## In CI, upload test-results as artifact:
+
 # GitHub Actions:
+
 - uses: actions/upload-artifact@v3
+
   if: failure()
   with:
     name: playwright-traces
     path: test-results/
 
 # Trace shows:
+
 # - Timeline of actions
+
 # - Screenshots at each step
+
 # - Network requests and responses
+
 # - Console logs
+
 # - DOM snapshots
 
 ### Tests Pass Headed but Fail Headless
@@ -841,6 +897,7 @@ behave differently. Popup windows may not work.
 Recommended fix:
 
 # Set consistent viewport:
+
 const browser = await chromium.launch({
   headless: true,
 });
@@ -850,6 +907,7 @@ const context = await browser.newContext({
 });
 
 # Or in config:
+
 export default defineConfig({
   use: {
     viewport: { width: 1280, height: 720 },
@@ -857,16 +915,21 @@ export default defineConfig({
 });
 
 # Debug headless failures:
+
 # 1. Run with headed mode locally
+
 npx playwright test --headed
 
 # 2. Slow down to watch
+
 npx playwright test --headed --slowmo 100
 
 # 3. Use trace viewer for CI failures
+
 npx playwright show-trace trace.zip
 
 # 4. For stubborn issues, screenshot at failure point:
+
 await page.screenshot({ path: 'debug.png', fullPage: true });
 
 ### Getting Blocked by Rate Limiting
@@ -897,6 +960,7 @@ for (const url of urls) {
 }
 
 # Use rotating proxies:
+
 const proxies = ['http://proxy1:8080', 'http://proxy2:8080'];
 let proxyIndex = 0;
 
@@ -907,6 +971,7 @@ const context = await browser.newContext({
 });
 
 # Limit concurrent requests:
+
 import pLimit from 'p-limit';
 const limit = pLimit(3);  // Max 3 concurrent
 
@@ -915,6 +980,7 @@ await Promise.all(
 );
 
 # Rotate user agents:
+
 const userAgents = [
   'Mozilla/5.0 (Windows...',
   'Mozilla/5.0 (Macintosh...',
@@ -944,6 +1010,7 @@ Recommended fix:
 # Wait for popup BEFORE triggering it:
 
 ## New window/tab:
+
 const pagePromise = context.waitForEvent('page');
 await page.getByRole('link', { name: 'Open in new tab' }).click();
 const newPage = await pagePromise;
@@ -956,12 +1023,14 @@ await expect(newPage.getByRole('heading')).toBeVisible();
 await newPage.close();
 
 ## Popup windows:
+
 const popupPromise = page.waitForEvent('popup');
 await page.getByRole('button', { name: 'Open popup' }).click();
 const popup = await popupPromise;
 await popup.waitForLoadState();
 
 ## Multiple windows:
+
 const pages = context.pages();  // Get all open pages
 
 ### Can't Interact with Elements in iframes
@@ -985,19 +1054,23 @@ Recommended fix:
 # Get frame by name or selector:
 
 ## By frame name:
+
 const frame = page.frame('payment-iframe');
 await frame.getByRole('textbox', { name: 'Card number' }).fill('4242...');
 
 ## By selector:
+
 const frame = page.frameLocator('iframe#payment');
 await frame.getByRole('textbox', { name: 'Card number' }).fill('4242...');
 
 ## Nested iframes:
+
 const outer = page.frameLocator('iframe#outer');
 const inner = outer.frameLocator('iframe#inner');
 await inner.getByRole('button').click();
 
 ## Wait for iframe to load:
+
 await page.waitForSelector('iframe#payment');
 const frame = page.frameLocator('iframe#payment');
 await frame.getByText('Secure Payment').waitFor();
@@ -1100,6 +1173,7 @@ Message: Scraping loop without try/catch. One page failure will crash the entire
 Works well with: `agent-tool-builder`, `workflow-automation`, `computer-use-agents`, `test-architect`
 
 ## When to Use
+
 - User mentions or implies: playwright
 - User mentions or implies: puppeteer
 - User mentions or implies: browser automation
@@ -1114,11 +1188,13 @@ Works well with: `agent-tool-builder`, `workflow-automation`, `computer-use-agen
 - User mentions or implies: locator
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

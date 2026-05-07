@@ -82,9 +82,11 @@ project-name/
 3. `npm install @pinia/nuxt @prisma/client prisma zod`
 4. `npm install -D @nuxtjs/tailwindcss`
 5. Add modules to `nuxt.config.ts`:
+
    ```ts
    modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss']
    ```
+
 6. `npx prisma init`
 7. Configure schema
 8. `npx prisma db push`
@@ -103,6 +105,7 @@ project-name/
 - See `@[skills/vue-expert]` for Vue patterns
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

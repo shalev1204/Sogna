@@ -14,10 +14,12 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 ### Subscriber
 
 **Entry criteria:**
+
 - Opted in to blog, newsletter, or content updates
 - No company information required
 
 **Exit criteria:**
+
 - Provides company information via form or enrichment
 - Visits 3+ pages in a session
 - Downloads gated content
@@ -25,6 +27,7 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 **Owner:** Marketing (automated)
 
 **Actions on entry:**
+
 - Add to newsletter nurture
 - Begin tracking engagement score
 
@@ -33,16 +36,19 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 ### Lead
 
 **Entry criteria:**
+
 - Identified contact with name + email + company
 - May come from form fill, enrichment, or import
 
 **Exit criteria:**
+
 - Reaches MQL threshold (fit + engagement)
 - Manually qualified by marketing/SDR
 
 **Owner:** Marketing
 
 **Actions on entry:**
+
 - Enrich contact data (company size, industry, role)
 - Begin scoring
 - Add to relevant nurture sequence
@@ -52,10 +58,12 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 ### MQL (Marketing Qualified Lead)
 
 **Entry criteria:**
+
 - Meets fit score threshold AND engagement score threshold
 - OR triggers high-intent action (demo request, pricing page + form fill)
 
 **Exit criteria:**
+
 - Sales accepts (becomes SQL)
 - Sales rejects (recycled to nurture with reason code)
 - No response within SLA (escalated to manager)
@@ -63,6 +71,7 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 **Owner:** Marketing → Sales (handoff)
 
 **Actions on entry:**
+
 - Instant alert to assigned sales rep
 - Create follow-up task with 4-hour SLA
 - Pause marketing nurture sequences
@@ -73,16 +82,19 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 ### SQL (Sales Qualified Lead)
 
 **Entry criteria:**
+
 - Sales rep has had qualifying conversation
 - Confirmed: budget, authority, need, or timeline (at least 2 of 4)
 
 **Exit criteria:**
+
 - Opportunity created with projected value
 - Disqualified (recycled with reason code)
 
 **Owner:** Sales (SDR or AE)
 
 **Actions on entry:**
+
 - Update lifecycle stage in CRM
 - Notify AE if SDR-qualified
 - Begin sales sequence if not already in conversation
@@ -92,15 +104,18 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 ### Opportunity
 
 **Entry criteria:**
+
 - Formal opportunity created in CRM
 - Deal value, close date, and stage assigned
 
 **Exit criteria:**
+
 - Closed-won or closed-lost
 
 **Owner:** Sales (AE)
 
 **Actions on entry:**
+
 - Add to pipeline reporting
 - Create deal tasks (proposal, demo, etc.)
 - Notify CS if deal is likely to close
@@ -110,15 +125,18 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 ### Customer
 
 **Entry criteria:**
+
 - Closed-won deal
 - Contract signed and payment terms set
 
 **Exit criteria:**
+
 - Churns, expands, or renews
 
 **Owner:** Customer Success / Account Management
 
 **Actions on entry:**
+
 - Trigger onboarding sequence
 - Assign CS manager
 - Schedule kickoff call
@@ -129,15 +147,18 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 ### Evangelist
 
 **Entry criteria:**
+
 - NPS score 9-10, or active referral behavior
 - Agreed to case study, testimonial, or referral program
 
 **Exit criteria:**
+
 - Ongoing program participation
 
 **Owner:** Customer Success + Marketing
 
 **Actions on entry:**
+
 - Add to advocacy program
 - Request case study or testimonial
 - Invite to referral program
@@ -285,6 +306,7 @@ Complete templates for lead lifecycle stages, MQL criteria by business type, SLA
 - **Re-MQL trigger:** High-intent action (demo request, pricing page revisit)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

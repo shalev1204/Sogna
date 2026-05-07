@@ -113,6 +113,7 @@ O briefing de transicao e a peca mais importante — ele fica no topo do context
 compactado e e a primeira coisa que o proximo Claude le.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

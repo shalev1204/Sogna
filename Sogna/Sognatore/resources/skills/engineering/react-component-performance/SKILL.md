@@ -8,7 +8,6 @@ id: skill-react-component-performance
 owner: [[eng-perf]]
 ---
 
-
 # React Component Performance
 
 ## Overview
@@ -16,6 +15,7 @@ owner: [[eng-perf]]
 Identify render hotspots, isolate expensive updates, and apply targeted optimizations without changing UI behavior.
 
 ## When to Use
+
 - When the user asks to profile or improve a slow React component.
 - When you need to reduce re-renders, list lag, or expensive render work in React UI.
 
@@ -137,11 +137,13 @@ function Summary({ orders }: { orders: Order[] }) {
 Load `references/examples.md` when the user wants a concrete refactor example.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

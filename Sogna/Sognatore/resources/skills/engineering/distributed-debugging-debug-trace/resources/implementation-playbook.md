@@ -1314,6 +1314,7 @@ Configure IDE debugging features:
 Focus on creating a comprehensive debugging environment that enhances developer productivity and enables rapid issue resolution in all environments.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

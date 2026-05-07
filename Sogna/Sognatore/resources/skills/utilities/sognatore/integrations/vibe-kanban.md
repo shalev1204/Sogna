@@ -104,6 +104,7 @@ Add this to export Sognatore tasks to Vibe Kanban:
 
 ```bash
 #!/bin/bash
+
 # scripts/export-to-vibe-kanban.sh
 
 SOGNATORE_DIR=".loki"
@@ -112,6 +113,7 @@ EXPORT_DIR="${VIBE_KANBAN_DIR:-~/.vibe-kanban/loki-tasks}"
 mkdir -p "$EXPORT_DIR"
 
 # Export pending tasks
+
 if [ -f "$SOGNATORE_DIR/queue/pending.json" ]; then
     python3 << EOF
 import json
@@ -151,11 +153,13 @@ For real-time sync, run the watcher alongside Sognatore:
 
 ```bash
 #!/bin/bash
+
 # scripts/vibe-sync-watcher.sh
 
 SOGNATORE_DIR=".loki"
 
 # Watch for queue changes and sync
+
 while true; do
     # Use fswatch on macOS, inotifywait on Linux
     if command -v fswatch &> /dev/null; then
@@ -172,15 +176,19 @@ done
 ## Benefits of Combined Usage
 
 ### 1. Visual Progress Tracking
+
 See all active Loki agents as tasks moving across your kanban board.
 
 ### 2. Safe Isolation
+
 Vibe Kanban runs each agent in isolated git worktrees, perfect for Loki's parallel development.
 
 ### 3. Human-in-the-Loop Option
+
 Pause autonomous execution, review changes visually, then resume.
 
 ### 4. Multi-Project Dashboard
+
 If running Sognatore on multiple projects, see all in one Vibe Kanban instance.
 
 ## Comparison: When to Use What
@@ -201,6 +209,7 @@ If running Sognatore on multiple projects, see all in one Vibe Kanban instance.
 - [ ] Unified logging dashboard
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

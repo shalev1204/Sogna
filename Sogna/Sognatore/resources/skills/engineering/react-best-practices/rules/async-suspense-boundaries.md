@@ -110,6 +110,7 @@ Both components share the same promise, so only one fetch occurs. Layout renders
 **Trade-off:** Faster initial paint vs potential layout shift. Choose based on your UX priorities.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

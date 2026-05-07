@@ -8,7 +8,6 @@ id: skill-react-flow-node-ts
 owner: [[orchestrator]]
 ---
 
-
 # React Flow Node
 
 Create React Flow node components following established patterns with proper TypeScript types and store integration.
@@ -16,6 +15,7 @@ Create React Flow node components following established patterns with proper Typ
 ## Quick Start
 
 Copy templates from assets/ and replace placeholders:
+
 - `{{NodeName}}` → PascalCase component name (e.g., `VideoNode`)
 - `{{nodeType}}` → kebab-case type identifier (e.g., `video-node`)
 - `{{NodeData}}` → Data interface name (e.g., `VideoNodeData`)
@@ -72,14 +72,17 @@ export type MyNode = Node<MyNodeData, 'my-node'>;
 6. Add to AddBlockMenu and ConnectMenu
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

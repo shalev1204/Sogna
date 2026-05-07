@@ -8,7 +8,6 @@ id: skill-expo-api-routes
 owner: [[eng-api]]
 ---
 
-
 ## When to Use API Routes
 
 Use API routes when you need:
@@ -26,6 +25,7 @@ Use API routes when you need:
 Avoid API routes when:
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - **Data is already public** — Use direct fetch to public APIs instead
 - **No secrets required** — Static data or client-safe operations
 - **Real-time updates needed** — Use WebSockets or services like Supabase Realtime
@@ -236,10 +236,13 @@ This builds and deploys your API routes to EAS Hosting (Cloudflare Workers).
 ### Environment Variables for Production
 
 ```bash
+
 # Create a secret
+
 eas env:create --name OPENAI_API_KEY --value sk-xxx --environment production
 
 # Or use the Expo dashboard
+
 ```
 
 ### Custom Domain
@@ -256,7 +259,9 @@ API routes run on Cloudflare Workers. Key limitations:
 - **No native Node modules** — Use Web APIs or polyfills
 - **Limited execution time** — 30 second timeout for CPU-intensive tasks
 - **No persistent connections** — WebSockets require Durable Objects
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - **fetch is available** — Use standard fetch for HTTP requests
 
 ### Use Web APIs Instead
@@ -380,11 +385,13 @@ export async function GET(request: Request) {
 - Log errors server-side for debugging
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

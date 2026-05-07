@@ -8,12 +8,12 @@ id: skill-test-fixing
 owner: [[eng-qa]]
 ---
 
-
 # Test Fixing
 
 Systematically identify and fix all failing tests using smart grouping strategies.
 
 ## When to Use
+
 - Explicitly asks to fix tests ("fix these tests", "make tests pass")
 - Reports test failures ("tests are failing", "test suite is broken")
 - Completes implementation and wants tests passing
@@ -64,10 +64,12 @@ For each group (starting with highest impact):
 
    - Run subset of tests for this group
    - Use pytest markers or file patterns:
+
      ```bash
      uv run pytest tests/path/to/test_file.py -v
      uv run pytest -k "pattern" -v
      ```
+
    - Ensure group passes before moving on
 
 4. **Move to next group**
@@ -124,11 +126,13 @@ User: "The tests are failing after my refactor"
 6. Run full suite → All pass ✓
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

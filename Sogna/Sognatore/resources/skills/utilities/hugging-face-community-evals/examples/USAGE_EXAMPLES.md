@@ -108,6 +108,7 @@ uv run scripts/lighteval_vllm_uv.py \
 When local hardware is not enough, switch to the `hugging-face-jobs` skill and run one of these scripts remotely. Keep the script path and args; move the orchestration there.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

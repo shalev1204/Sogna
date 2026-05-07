@@ -7,7 +7,6 @@ id: skill-odoo-migration-helper
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Migration Helper
 
 ## Overview
@@ -80,10 +79,13 @@ Migrating Odoo modules between major versions requires careful handling of API c
 ### Example 3: Migrate website_published flag (v15 → v16)
 
 ```python
+
 # v15
+
 record.website_published = True
 
 # v16+
+
 record.is_published = True
 ```
 
@@ -105,6 +107,7 @@ record.is_published = True
 - JavaScript OWL component migration (v15 Legacy → v16 OWL) is a complex topic not fully covered by this skill.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

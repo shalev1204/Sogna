@@ -6,7 +6,6 @@ id: skill-game-design
 owner: [[prod-design]], [[game-developer]], [[prod-pm]]
 ---
 
-
 # Game Design Principles
 
 > Design thinking for engaging games.
@@ -19,10 +18,12 @@ owner: [[prod-design]], [[game-developer]], [[prod-pm]]
 
 ```
 Every game needs a fun 30-second loop:
+
 1. ACTION → Player does something
 2. FEEDBACK → Game responds
 3. REWARD → Player feels good
 4. REPEAT
+
 ```
 
 ### Loop Examples

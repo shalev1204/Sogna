@@ -8,12 +8,12 @@ id: skill-threejs-skills
 owner: [[biz-hr]]
 ---
 
-
 # Three.js Skills
 
 Systematically create high-quality 3D scenes and interactive experiences using Three.js best practices.
 
 ## When to Use
+
 - Requests 3D visualizations or graphics ("create a 3D model", "show in 3D")
 - Wants interactive 3D experiences ("rotating cube", "explorable scene")
 - Needs WebGL or canvas-based rendering
@@ -355,6 +355,7 @@ const material = new THREE.MeshStandardMaterial({
 - **Use `BufferGeometry`** for custom shapes (more efficient)
 - **Limit particle counts** to maintain 60fps (start with 1000-5000)
 - **Dispose of resources** when removing objects:
+
   ```javascript
   geometry.dispose();
   material.dispose();
@@ -718,11 +719,13 @@ Three.js r183 + Vite
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

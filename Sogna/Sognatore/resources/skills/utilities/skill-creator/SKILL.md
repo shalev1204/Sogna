@@ -10,7 +10,6 @@ id: skill-skill-creator
 owner: [[orchestrator]]
 ---
 
-
 # skill-creator
 
 ## Purpose
@@ -20,6 +19,7 @@ To create new CLI skills following Anthropic's official best practices with zero
 ## When to Use This Skill
 
 This skill should be used when:
+
 - User wants to extend CLI functionality with custom capabilities
 - User needs to create a skill following official standards
 - User wants to automate repetitive CLI tasks with a reusable skill
@@ -40,7 +40,9 @@ This skill should be used when:
 Before starting skill creation, gather runtime information:
 
 ```bash
+
 # Detect available platforms
+
 COPILOT_INSTALLED=false
 CLAUDE_INSTALLED=false
 CODEX_INSTALLED=false
@@ -58,21 +60,25 @@ if [[ -d "$HOME/.codex" ]]; then
 fi
 
 # Determine working directory
+
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 SKILLS_REPO="$REPO_ROOT"
 
 # Check if in cli-ai-skills repository
+
 if [[ ! -d "$SKILLS_REPO/.github/skills" ]]; then
     echo "⚠️  Not in cli-ai-skills repository. Creating standalone skill."
     STANDALONE=true
 fi
 
 # Get user info from git config
+
 AUTHOR=$(git config user.name || echo "Unknown")
 EMAIL=$(git config user.email || echo "")
 ```
 
 **Key Information Needed:**
+
 - Which platforms to target (Copilot, Claude, Codex, or all three)
 - Installation preference (local, global, or both)
 - Skill name and purpose
@@ -89,6 +95,7 @@ Throughout the workflow, display a visual progress bar before starting each phas
 ```
 
 **Format specifications:**
+
 - 20 characters wide (use █ for filled, ░ for empty)
 - Percentage based on current step (Step 1=20%, Step 2=40%, Step 3=60%, Step 4=80%, Step 5=100%)
 - Step counter showing current/total (e.g., "Step 3/5")
@@ -165,16 +172,19 @@ Update progress:
 
 **Ask the user:**
 "Would you like to refine the skill description using the prompt-engineer skill?"
+
 - [ ] Yes - Use prompt-engineer to enhance clarity and structure
 - [ ] No - Proceed with current description
 
 If **Yes**:
+
 1. Check if prompt-engineer skill is available
 2. Invoke with current description as input
 3. Review enhanced output with user
 4. Ask: "Accept enhanced version or keep original?"
 
 If **No** or prompt-engineer unavailable:
+
 - Proceed with original user input
 
 ### Phase 3: File Generation
@@ -198,10 +208,13 @@ Update progress:
 **Generate skill structure:**
 
 ```bash
+
 # Convert skill name to kebab-case
+
 SKILL_NAME=$(echo "$USER_INPUT" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 
 # Create directories
+
 if [[ "$PLATFORM" =~ "copilot" ]]; then
     mkdir -p ".github/skills/$SKILL_NAME"/{references,examples,scripts}
 fi
@@ -240,7 +253,9 @@ fi
 **File creation commands:**
 
 ```bash
+
 # Apply template with substitution
+
 sed "s/{{SKILL_NAME}}/$SKILL_NAME/g; \
      s/{{DESCRIPTION}}/$DESCRIPTION/g; \
      s/{{AUTHOR}}/$AUTHOR/g; \
@@ -249,11 +264,13 @@ sed "s/{{SKILL_NAME}}/$SKILL_NAME/g; \
     > ".github/skills/$SKILL_NAME/SKILL.md"
 
 # Create README
+
 sed "s/{{SKILL_NAME}}/$SKILL_NAME/g" \
     resources/templates/readme-template.md \
     > ".github/skills/$SKILL_NAME/README.md"
 
 # Apply template for Codex if selected
+
 if [[ "$PLATFORM" =~ "codex" ]]; then
     sed "s/{{SKILL_NAME}}/$SKILL_NAME/g; \
          s/{{DESCRIPTION}}/$DESCRIPTION/g; \
@@ -301,10 +318,13 @@ Update progress:
 **Run validation scripts:**
 
 ```bash
+
 # Validate YAML frontmatter
+
 scripts/validate-skill-yaml.sh ".github/skills/$SKILL_NAME"
 
 # Validate content quality
+
 scripts/validate-skill-content.sh ".github/skills/$SKILL_NAME"
 ```
 
@@ -319,11 +339,13 @@ scripts/validate-skill-content.sh ".github/skills/$SKILL_NAME"
 ```
 
 **If validation fails:**
+
 - Display specific errors
 - Offer to fix automatically (common issues)
 - Ask user to manually correct complex issues
 
 **Common auto-fixes:**
+
 - Convert second-person to imperative form
 - Reformat description to third-person
 - Add missing required fields
@@ -356,7 +378,9 @@ Update progress:
 **If global installation selected:**
 
 ```bash
+
 # Detect which platforms to install for
+
 INSTALL_TARGETS=()
 
 if [[ "$COPILOT_INSTALLED" == "true" ]] && [[ "$PLATFORM" =~ "copilot" ]]; then
@@ -372,6 +396,7 @@ if [[ "$CODEX_INSTALLED" == "true" ]] && [[ "$PLATFORM" =~ "codex" ]]; then
 fi
 
 # Ask user to confirm detected platforms
+
 echo "Detected platforms: ${INSTALL_TARGETS[*]}"
 echo "Install for these platforms? [Y/n]"
 ```
@@ -379,7 +404,9 @@ echo "Install for these platforms? [Y/n]"
 **Installation process:**
 
 ```bash
+
 # GitHub Copilot CLI
+
 if [[ " ${INSTALL_TARGETS[*]} " =~ " copilot " ]]; then
     ln -sf "$SKILLS_REPO/.github/skills/$SKILL_NAME" \
            "$HOME/.copilot/skills/$SKILL_NAME"
@@ -387,6 +414,7 @@ if [[ " ${INSTALL_TARGETS[*]} " =~ " copilot " ]]; then
 fi
 
 # Claude Code
+
 if [[ " ${INSTALL_TARGETS[*]} " =~ " claude " ]]; then
     ln -sf "$SKILLS_REPO/.claude/skills/$SKILL_NAME" \
            "$HOME/.claude/skills/$SKILL_NAME"
@@ -394,6 +422,7 @@ if [[ " ${INSTALL_TARGETS[*]} " =~ " claude " ]]; then
 fi
 
 # Codex
+
 if [[ " ${INSTALL_TARGETS[*]} " =~ " codex " ]]; then
     ln -sf "$SKILLS_REPO/.codex/skills/$SKILL_NAME" \
            "$HOME/.codex/skills/$SKILL_NAME"
@@ -404,7 +433,9 @@ fi
 **Verify installation:**
 
 ```bash
+
 # Check symlinks
+
 ls -la ~/.copilot/skills/$SKILL_NAME 2>/dev/null
 ls -la ~/.claude/skills/$SKILL_NAME 2>/dev/null
 ls -la ~/.codex/skills/$SKILL_NAME 2>/dev/null
@@ -444,6 +475,7 @@ Update progress:
    ✅ scripts/ (empty, ready for utilities)
 
 🚀 Next Steps:
+
    1. Test the skill: Try trigger phrases in CLI
    2. Add examples: Create working code samples in examples/
    3. Extend docs: Add detailed guides to references/
@@ -451,11 +483,13 @@ Update progress:
    5. Share: Push to repository for team use
 
 💡 Pro Tips:
+
    - Keep SKILL.md under 2,000 words (currently: 1,847)
    - Move detailed content to references/ folder
    - Add executable scripts to scripts/ folder
    - Update README.md with real usage examples
    - Run validation before committing: scripts/validate-skill-yaml.sh
+
 ```
 
 ## Error Handling
@@ -467,9 +501,11 @@ If platforms cannot be detected:
 ⚠️  Unable to detect GitHub Copilot CLI or Claude Code
     
 Would you like to:
+
 1. Install for repository only (works when in repo)
 2. Specify platform manually
 3. Skip installation
+
 ```
 
 ### Template Not Found
@@ -481,9 +517,11 @@ If templates are missing:
 This skill requires the cli-ai-skills repository structure.
 
 Options:
+
 1. Clone cli-ai-skills: git clone <repo-url>
 2. Create minimal skill structure manually
 3. Exit and set up templates first
+
 ```
 
 ### Validation Failures
@@ -493,10 +531,12 @@ If content doesn't meet standards:
 ⚠️  Validation Issues Found:
 
 1. YAML: Description not in third-person format
+
    Expected: "This skill should be used when..."
    Found: "Use this skill when..."
    
 2. Content: Word count too high (5,342 words, max 5,000)
+
    Suggestion: Move detailed sections to references/
 
 Fix automatically? [Y/n]
@@ -509,10 +549,12 @@ If symlink already exists:
 ⚠️  Skill already installed at ~/.copilot/skills/your-skill-name
 
 Options:
+
 1. Overwrite existing installation
 2. Rename new skill
 3. Skip installation
 4. Install to different location
+
 ```
 
 ## Bundled Resources
@@ -522,6 +564,7 @@ This skill includes additional resources in subdirectories:
 ### references/
 
 Detailed documentation loaded when needed:
+
 - `anthropic-best-practices.md` - Official Anthropic skill development guidelines
 - `writing-style-guide.md` - Writing standards and examples
 - `progressive-disclosure.md` - Content organization patterns
@@ -530,6 +573,7 @@ Detailed documentation loaded when needed:
 ### examples/
 
 Working examples demonstrating skill usage:
+
 - `basic-skill-creation.md` - Simple skill creation walkthrough
 - `advanced-skill-bundled-resources.md` - Complex skill with references/
 - `global-installation.md` - Installing skills system-wide
@@ -537,6 +581,7 @@ Working examples demonstrating skill usage:
 ### scripts/
 
 Executable utilities for skill maintenance:
+
 - `validate-all-skills.sh` - Batch validation of all skills in repository
 - `update-skill-version.sh` - Bump version and update changelog
 - `generate-skill-index.sh` - Auto-generate skills catalog
@@ -544,21 +589,25 @@ Executable utilities for skill maintenance:
 ## Technical Implementation Notes
 
 **Template Substitution:**
+
 - Use `sed` for simple replacements
 - Preserve YAML formatting exactly
 - Handle multi-line descriptions with proper escaping
 
 **Symlink Strategy:**
+
 - Always use absolute paths: `ln -sf /full/path/to/source ~/.copilot/skills/name`
 - Verify symlink before considering installation complete
 - Benefits: Auto-updates when repository is pulled
 
 **Validation Integration:**
+
 - Run validation before installation
 - Block installation if critical errors found
 - Warnings are informational only
 
 **Git Integration:**
+
 - Extract author from `git config user.name`
 - Use repository root detection: `git rev-parse --show-toplevel`
 - Respect `.gitignore` patterns
@@ -566,6 +615,7 @@ Executable utilities for skill maintenance:
 ## Quality Standards
 
 **SKILL.md Requirements:**
+
 - 1,500-2,000 words (ideal)
 - Under 5,000 words (maximum)
 - Third-person description format
@@ -573,12 +623,14 @@ Executable utilities for skill maintenance:
 - Progressive disclosure pattern
 
 **README.md Requirements:**
+
 - 300-500 words
 - User-facing language
 - Clear installation instructions
 - Practical usage examples
 
 **Validation Checks:**
+
 - YAML frontmatter completeness
 - Description format (third-person)
 - Word count limits
@@ -593,11 +645,13 @@ Executable utilities for skill maintenance:
 - **Progress Tracker Template:** `resources/templates/progress-tracker.md`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

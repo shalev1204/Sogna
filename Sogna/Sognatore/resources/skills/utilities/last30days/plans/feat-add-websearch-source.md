@@ -18,6 +18,7 @@ Add Claude's built-in WebSearch tool as a third research source for `/last30days
 Currently `/last30days` requires at least one API key (OpenAI or xAI) to function. Users without API keys get an error. Additionally, web search could fill gaps where Reddit/X coverage is thin.
 
 **User requirements**:
+
 - Work out of the box (no API key needed)
 - Must NOT overpower Reddit/X results
 - Needs proper weighting
@@ -43,6 +44,7 @@ score = 0.45*relevance + 0.25*recency + 0.30*engagement - penalties
 | WebSearch | 55% | 35% | 0% (no data) | -15 points |
 
 **Rationale**:
+
 - WebSearch items compete on relevance + recency only (reweighted to 100%)
 - `-15 point source penalty` ensures WebSearch ranks below comparable Reddit/X items
 - High-quality WebSearch can still surface (score 60-70) but won't dominate (Reddit/X score 70-85)
@@ -90,7 +92,9 @@ score = 0.45*relevance + 0.25*recency + 0.30*engagement - penalties
 **Files to create/modify:**
 
 ```python
+
 # scripts/lib/websearch.py (NEW)
+
 """Claude WebSearch API client for general web discovery."""
 
 WEBSEARCH_PROMPT = """Search the web for content about: {topic}
@@ -98,11 +102,13 @@ WEBSEARCH_PROMPT = """Search the web for content about: {topic}
 CRITICAL: Only include results from the last 30 days (after {from_date}).
 
 Find {min_items}-{max_items} high-quality, relevant web pages. Prefer:
+
 - Blog posts, tutorials, documentation
 - News articles, announcements
 - Authoritative sources (official docs, reputable publications)
 
 AVOID:
+
 - Reddit (covered separately)
 - X/Twitter (covered separately)
 - YouTube without transcripts
@@ -139,6 +145,7 @@ def parse_websearch_response(response: dict) -> list[dict]:
 ```
 
 ```python
+
 # scripts/lib/schema.py - ADD WebSearchItem
 
 @dataclass
@@ -175,12 +182,15 @@ class WebSearchItem:
 #### Phase 2: Scoring System Updates
 
 ```python
+
 # scripts/lib/score.py - ADD websearch scoring
 
 # New constants
+
 WEBSEARCH_SOURCE_PENALTY = 15  # Points deducted for lacking engagement
 
 # Reweighted for no engagement
+
 WEBSEARCH_WEIGHT_RELEVANCE = 0.55
 WEBSEARCH_WEIGHT_RECENCY = 0.45
 
@@ -221,6 +231,7 @@ def score_websearch_items(items: List[schema.WebSearchItem]) -> List[schema.WebS
 #### Phase 3: Orchestrator Integration
 
 ```python
+
 # scripts/last30days.py - UPDATE run_research()
 
 def run_research(...) -> tuple:
@@ -256,6 +267,7 @@ def run_research(...) -> tuple:
 #### Phase 4: CLI & Environment Updates
 
 ```python
+
 # scripts/last30days.py - ADD CLI flag
 
 parser.add_argument(
@@ -309,12 +321,14 @@ def get_available_sources(config: dict) -> str:
 ### Before/After Comparison Script
 
 ```python
+
 # tests/test_websearch_weighting.py
 
 """
 Test harness to validate WebSearch doesn't overpower Reddit/X.
 
 Run same queries with:
+
 1. Reddit + X only (baseline)
 2. Reddit + X + WebSearch (comparison)
 
@@ -386,22 +400,26 @@ def test_websearch_weighting():
 ## References
 
 ### Internal References
+
 - Scoring algorithm: `scripts/lib/score.py:8-15`
 - Source detection: `scripts/lib/env.py:57-72`
 - Schema patterns: `scripts/lib/schema.py:76-138`
 - Orchestrator: `scripts/last30days.py:54-164`
 
 ### External References
+
 - Claude WebSearch docs: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
 - WebSearch pricing: $10/1K searches + token costs
 - Date filtering limitation: No explicit date params, use natural language
 
 ### Research Findings
+
 - Reddit upvotes are ~12% of ranking value in SEO (strong signal)
 - E-E-A-T framework: Engagement metrics = trust signal
 - MSA2C2 approach: Dynamic weight learning for multi-source aggregation
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

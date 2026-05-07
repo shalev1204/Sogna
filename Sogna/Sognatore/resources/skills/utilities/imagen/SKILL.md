@@ -8,7 +8,6 @@ id: skill-imagen
 owner: [[orchestrator]]
 ---
 
-
 # Imagen - AI Image Generation Skill
 
 ## Overview
@@ -20,6 +19,7 @@ This skill generates images using Google Gemini's image generation model (`gemin
 ## When to Use This Skill
 
 Automatically activate this skill when:
+
 - User requests image generation (e.g., "generate an image of...", "create a picture...")
 - Frontend development requires placeholder or actual images
 - Documentation needs illustrations or diagrams
@@ -39,13 +39,17 @@ Automatically activate this skill when:
 ### Python (Cross-Platform - Recommended)
 
 ```bash
+
 # Basic usage
+
 python scripts/generate_image.py "A futuristic city skyline at sunset"
 
 # With custom output path
+
 python scripts/generate_image.py "A minimalist app icon for a music player" "./assets/icons/music-icon.png"
 
 # With custom size
+
 python scripts/generate_image.py --size 2K "High resolution landscape" "./wallpaper.png"
 ```
 
@@ -57,35 +61,41 @@ python scripts/generate_image.py --size 2K "High resolution landscape" "./wallpa
 ## Output
 
 Generated images are saved as PNG files. The script returns:
+
 - Success: Path to the generated image
 - Failure: Error message with details
 
 ## Examples
 
 ### Frontend Development
+
 ```
 User: "I need a hero image for my landing page - something abstract and tech-focused"
 -> Generates and saves image, provides path for use in HTML/CSS
 ```
 
 ### Documentation
+
 ```
 User: "Create a diagram showing microservices architecture"
 -> Generates visual representation, ready for README or docs
 ```
 
 ### UI Assets
+
 ```
 User: "Generate a placeholder avatar image for the user profile component"
 -> Creates image in appropriate size for component use
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

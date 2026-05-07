@@ -8,10 +8,10 @@ id: skill-json-canvas
 owner: [[orchestrator]]
 ---
 
-
 # JSON Canvas Skill
 
 ## When to Use
+
 - Use when creating or editing `.canvas` files for Sogna.
 - Use for mind maps, flowcharts, visual note structures, or connected canvases.
 - Use when the user explicitly mentions JSON Canvas or Sogna Canvas files.
@@ -255,11 +255,13 @@ See [references/EXAMPLES.md](references/EXAMPLES.md) for full canvas examples in
 - [JSON Canvas GitHub](https://github.com/sognamd/jsoncanvas)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

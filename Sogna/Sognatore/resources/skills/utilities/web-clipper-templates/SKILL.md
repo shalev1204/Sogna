@@ -8,12 +8,12 @@ id: skill-sogna-clipper-template-creator
 owner: [[orchestrator]]
 ---
 
-
 # Sogna Web Clipper Template Creator
 
 This skill helps you create importable JSON templates for the Sogna Web Clipper.
 
 ## When to Use
+
 - You need to create or refine an importable Sogna Web Clipper template.
 - You want to map a site's real DOM, schema data, and selectors into a valid clipping template.
 - You need selector verification and template logic guidance before handing the JSON to the user.
@@ -29,14 +29,18 @@ This skill helps you create importable JSON templates for the Sogna Web Clipper.
     - **Action:** Ask the user for a sample URL of the content they want to clip (if not provided).
     - **Action (REQUIRED):** Use **WebFetch** to retrieve page content; if WebFetch is not available, use a browser DOM snapshot. See [references/analysis-workflow.md](references/analysis-workflow.md).
     - **Action:** Analyze the HTML for Schema.org JSON, Meta tags, and CSS selectors.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
     - **Action (REQUIRED):** Verify each selector against the fetched content. Do not guess selectors.
     - See [references/analysis-workflow.md](references/analysis-workflow.md) for analysis techniques.
 4. **Draft the JSON:** Create a valid JSON object following the schema.
     - See [references/json-schema.md](references/json-schema.md).
 5. **Consider template logic:** Use conditionals for optional blocks (e.g. show nutrition only if present), loops for list data, variable assignment to avoid repeating expressions, and fallbacks for missing variables. Use logic only when it improves the template; keep simple templates simple. See [references/logic.md](references/logic.md).
 6. **Verify Variables:** Ensure the chosen variables (Preset, Schema, Selector) exist in your analysis.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
     - **Action (REQUIRED):** If a selector cannot be verified from the fetched content, state that explicitly and ask for another URL.
     - See [references/variables.md](references/variables.md).
 
@@ -83,11 +87,13 @@ If you use template logic (conditionals, loops, variable assignment), ensure it 
 See [assets/](assets/) for JSON examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

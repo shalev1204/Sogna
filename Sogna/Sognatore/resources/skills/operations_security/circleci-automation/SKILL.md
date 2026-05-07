@@ -8,7 +8,6 @@ id: skill-circleci-automation
 owner: [[ops-security]]
 ---
 
-
 # CircleCI Automation via Rube MCP
 
 Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube MCP.
@@ -23,7 +22,6 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `circleci`
 3. If connection is not ACTIVE, follow the returned auth link to complete CircleCI authentication
@@ -36,16 +34,19 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 **When to use**: User wants to start a new CI/CD pipeline run
 
 **Tool sequence**:
+
 1. `CIRCLECI_TRIGGER_PIPELINE` - Trigger a new pipeline on a project [Required]
 2. `CIRCLECI_LIST_WORKFLOWS_BY_PIPELINE_ID` - Monitor resulting workflows [Optional]
 
 **Key parameters**:
+
 - `project_slug`: Project identifier in format `gh/org/repo` or `bb/org/repo`
 - `branch`: Git branch to run the pipeline on
 - `tag`: Git tag to run the pipeline on (mutually exclusive with branch)
 - `parameters`: Pipeline parameter key-value pairs
 
 **Pitfalls**:
+
 - `project_slug` format is `{vcs}/{org}/{repo}` (e.g., `gh/myorg/myrepo`)
 - `branch` and `tag` are mutually exclusive; providing both causes an error
 - Pipeline parameters must match those defined in `.circleci/config.yml`
@@ -56,17 +57,20 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 **When to use**: User wants to check the status of pipelines or workflows
 
 **Tool sequence**:
+
 1. `CIRCLECI_LIST_PIPELINES_FOR_PROJECT` - List recent pipelines for a project [Required]
 2. `CIRCLECI_LIST_WORKFLOWS_BY_PIPELINE_ID` - List workflows within a pipeline [Required]
 3. `CIRCLECI_GET_PIPELINE_CONFIG` - View the pipeline configuration used [Optional]
 
 **Key parameters**:
+
 - `project_slug`: Project identifier in `{vcs}/{org}/{repo}` format
 - `pipeline_id`: UUID of a specific pipeline
 - `branch`: Filter pipelines by branch name
 - `page_token`: Pagination cursor for next page of results
 
 **Pitfalls**:
+
 - Pipeline IDs are UUIDs, not numeric IDs
 - Workflows inherit the pipeline ID; a single pipeline can have multiple workflows
 - Workflow states include: success, running, not_run, failed, error, failing, on_hold, canceled, unauthorized
@@ -77,14 +81,17 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 **When to use**: User wants to drill into a specific job's execution details
 
 **Tool sequence**:
+
 1. `CIRCLECI_LIST_WORKFLOWS_BY_PIPELINE_ID` - Find workflow containing the job [Prerequisite]
 2. `CIRCLECI_GET_JOB_DETAILS` - Get detailed job information [Required]
 
 **Key parameters**:
+
 - `project_slug`: Project identifier
 - `job_number`: Numeric job number (not UUID)
 
 **Pitfalls**:
+
 - Job numbers are integers, not UUIDs (unlike pipeline and workflow IDs)
 - Job details include executor type, parallelism, start/stop times, and status
 - Job statuses: success, running, not_run, failed, retried, timedout, infrastructure_fail, canceled
@@ -94,14 +101,17 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 **When to use**: User wants to download or list artifacts produced by a job
 
 **Tool sequence**:
+
 1. `CIRCLECI_GET_JOB_DETAILS` - Confirm job completed successfully [Prerequisite]
 2. `CIRCLECI_GET_JOB_ARTIFACTS` - List all artifacts from the job [Required]
 
 **Key parameters**:
+
 - `project_slug`: Project identifier
 - `job_number`: Numeric job number
 
 **Pitfalls**:
+
 - Artifacts are only available after job completion
 - Each artifact has a `path` and `url` for download
 - Artifact URLs may require authentication headers to download
@@ -112,14 +122,17 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 **When to use**: User wants to check test outcomes for a specific job
 
 **Tool sequence**:
+
 1. `CIRCLECI_GET_JOB_DETAILS` - Verify job ran tests [Prerequisite]
 2. `CIRCLECI_GET_TEST_METADATA` - Retrieve test results and metadata [Required]
 
 **Key parameters**:
+
 - `project_slug`: Project identifier
 - `job_number`: Numeric job number
 
 **Pitfalls**:
+
 - Test metadata requires the job to have uploaded test results (JUnit XML format)
 - If no test results were uploaded, the response will be empty
 - Test metadata includes classname, name, result, message, and run_time fields
@@ -131,17 +144,21 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 
 ```
 Format: {vcs_type}/{org_name}/{repo_name}
+
 - GitHub:    gh/myorg/myrepo
 - Bitbucket: bb/myorg/myrepo
+
 ```
 
 ### Pipeline -> Workflow -> Job Hierarchy
 
 ```
+
 1. Call CIRCLECI_LIST_PIPELINES_FOR_PROJECT to get pipeline IDs
 2. Call CIRCLECI_LIST_WORKFLOWS_BY_PIPELINE_ID with pipeline_id
 3. Extract job numbers from workflow details
 4. Call CIRCLECI_GET_JOB_DETAILS with job_number
+
 ```
 
 ### Pagination
@@ -153,17 +170,20 @@ Format: {vcs_type}/{org_name}/{repo_name}
 ## Known Pitfalls
 
 **ID Formats**:
+
 - Pipeline IDs: UUIDs (e.g., `5034460f-c7c4-4c43-9457-de07e2029e7b`)
 - Workflow IDs: UUIDs
 - Job numbers: Integers (e.g., `123`)
 - Do NOT mix up UUIDs and integers between different endpoints
 
 **Project Slugs**:
+
 - Must include VCS prefix: `gh/` for GitHub, `bb/` for Bitbucket
 - Organization and repo names are case-sensitive
 - Incorrect slug format causes 404 errors
 
 **Rate Limits**:
+
 - CircleCI API has per-endpoint rate limits
 - Implement exponential backoff on 429 responses
 - Avoid rapid polling; use reasonable intervals (5-10 seconds)
@@ -181,14 +201,17 @@ Format: {vcs_type}/{org_name}/{repo_name}
 | Get test metadata | CIRCLECI_GET_TEST_METADATA | project_slug, job_number |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

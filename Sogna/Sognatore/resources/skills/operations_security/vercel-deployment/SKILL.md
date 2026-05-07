@@ -8,7 +8,6 @@ id: skill-vercel-deployment
 owner: [[ops-security]]
 ---
 
-
 # Vercel Deployment
 
 Expert knowledge for deploying to Vercel with Next.js
@@ -189,6 +188,7 @@ Severity: CRITICAL
 Situation: Using NEXT_PUBLIC_ prefix for sensitive API keys
 
 Symptoms:
+
 - Secrets visible in browser DevTools → Sources
 - Security audit finds exposed keys
 - Unexpected API access from unknown sources
@@ -227,6 +227,7 @@ Severity: HIGH
 Situation: Not configuring separate environment variables for preview
 
 Symptoms:
+
 - Test data appearing in production
 - Production data corrupted after PR merge
 - Users seeing test accounts/content
@@ -266,6 +267,7 @@ Severity: HIGH
 Situation: API route or server component has slow initial load
 
 Symptoms:
+
 - First request takes 3-10+ seconds
 - Subsequent requests are fast
 - Function size limit exceeded error
@@ -309,6 +311,7 @@ Severity: HIGH
 Situation: Using Node.js APIs in edge runtime functions
 
 Symptoms:
+
 - X is not defined at runtime
 - Cannot find module fs
 - Works locally, fails deployed
@@ -362,6 +365,7 @@ Severity: MEDIUM
 Situation: Long-running operations timing out
 
 Symptoms:
+
 - Task timed out after X seconds
 - Incomplete database operations
 - Partial file uploads
@@ -369,6 +373,7 @@ Symptoms:
 
 Why this breaks:
 Vercel has timeout limits:
+
 - Hobby: 10 seconds
 - Pro: 60 seconds (can increase to 300)
 - Enterprise: 900 seconds
@@ -426,6 +431,7 @@ Severity: MEDIUM
 Situation: Environment variable works in build but undefined at runtime
 
 Symptoms:
+
 - Env var is undefined in production
 - Value doesn't change after updating in dashboard
 - Works in dev, wrong value in production
@@ -469,6 +475,7 @@ Severity: MEDIUM
 Situation: Frontend on different domain can't call API routes
 
 Symptoms:
+
 - CORS policy error in browser console
 - No Access-Control-Allow-Origin header
 - Requests work in Postman but not browser
@@ -529,6 +536,7 @@ Severity: MEDIUM
 Situation: Updated data not appearing after new deployment
 
 Symptoms:
+
 - Old content shows after deploy
 - Changes not visible immediately
 - Different users see different versions
@@ -649,10 +657,12 @@ Skills: vercel-deployment, nextjs-app-router, supabase-backend, nextjs-supabase-
 Workflow:
 
 ```
+
 1. App configuration (nextjs-app-router)
 2. Database setup (supabase-backend)
 3. Auth config (nextjs-supabase-auth)
 4. Deploy (vercel-deployment)
+
 ```
 
 ### CI/CD Pipeline
@@ -662,9 +672,11 @@ Skills: vercel-deployment, devops, qa-engineering
 Workflow:
 
 ```
+
 1. Test automation (qa-engineering)
 2. Pipeline config (devops)
 3. Deploy strategy (vercel-deployment)
+
 ```
 
 ## Related Skills
@@ -672,6 +684,7 @@ Workflow:
 Works well with: `nextjs-app-router`, `supabase-backend`
 
 ## When to Use
+
 - User mentions or implies: vercel
 - User mentions or implies: deploy
 - User mentions or implies: deployment
@@ -682,11 +695,13 @@ Works well with: `nextjs-app-router`, `supabase-backend`
 - User mentions or implies: serverless function
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

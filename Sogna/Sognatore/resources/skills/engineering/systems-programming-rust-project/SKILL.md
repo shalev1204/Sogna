@@ -8,7 +8,6 @@ id: skill-systems-programming-rust-project
 owner: [[orchestrator]]
 ---
 
-
 # Rust Project Scaffolding
 
 You are a Rust project architecture expert specializing in scaffolding production-ready Rust applications. Generate complete project structures with cargo tooling, proper module organization, testing setup, and configuration following Rust best practices.
@@ -36,6 +35,7 @@ $ARGUMENTS
 ### 1. Analyze Project Type
 
 Determine the project type from user requirements:
+
 - **Binary**: CLI tools, applications, services
 - **Library**: Reusable crates, shared utilities
 - **Workspace**: Multi-crate projects, monorepos
@@ -45,15 +45,20 @@ Determine the project type from user requirements:
 ### 2. Initialize Project with Cargo
 
 ```bash
+
 # Create binary project
+
 cargo new project-name
 cd project-name
 
 # Or create library
+
 cargo new --lib library-name
 
 # Initialize git (cargo does this automatically)
+
 # Add to .gitignore if needed
+
 echo "/target" >> .gitignore
 echo "Cargo.lock" >> .gitignore  # For libraries only
 ```
@@ -228,6 +233,7 @@ edition = "2021"
 rust-version = "1.75"
 
 [dependencies]
+
 # Keep minimal for libraries
 
 [dev-dependencies]
@@ -446,11 +452,13 @@ cognitive-complexity-threshold = 30
 Focus on creating idiomatic Rust projects with strong type safety, proper error handling, and comprehensive testing setup.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

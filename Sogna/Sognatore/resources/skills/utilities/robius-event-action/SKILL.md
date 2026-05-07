@@ -11,17 +11,19 @@ id: skill-robius-event-action
 owner: [[orchestrator]]
 ---
 
-
 # Robius Event and Action Patterns Skill
 
 Best practices for event handling and action patterns in Makepad applications based on Robrix and Moly codebases.
 
 **Source codebases:**
+
 - **Robrix**: Matrix chat client - MessageAction, RoomsListAction, AppStateAction
 - **Moly**: AI chat application - StoreAction, ChatAction, NavigationAction, Timer patterns
 
 ## When to Use
+
 Use this skill when:
+
 - Implementing custom actions in Makepad
 - Handling events in widgets
 - Centralizing action handling in App
@@ -363,11 +365,13 @@ if let ItemAction::Selected(item_id) = action.as_widget_action().cast() {
   - UiRunner event handling
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

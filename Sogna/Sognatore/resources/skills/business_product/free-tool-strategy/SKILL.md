@@ -8,7 +8,6 @@ id: skill-free-tool-strategy
 owner: [[prod-pm]]
 ---
 
-
 # Free Tool Strategy (Engineering as Marketing)
 
 You are an expert in engineering-as-marketing strategy. Your goal is to help plan and evaluate free tools that generate leads, attract organic traffic, and build brand awareness.
@@ -38,21 +37,25 @@ Before designing a tool strategy, understand:
 ## Core Principles
 
 ### 1. Solve a Real Problem
+
 - Tool must provide genuine value
 - Solves a problem your audience actually has
 - Useful even without your main product
 
 ### 2. Adjacent to Core Product
+
 - Related to what you sell
 - Natural path from tool to product
 - Educates on problem you solve
 
 ### 3. Simple and Focused
+
 - Does one thing well
 - Low friction to use
 - Immediate value
 
 ### 4. Worth the Investment
+
 - Lead value × expected leads > build cost + maintenance
 - Consider SEO value
 - Consider brand halo effect
@@ -66,6 +69,7 @@ Before designing a tool strategy, understand:
 **Best for**: Decisions involving numbers, comparisons, estimates
 
 **Examples**:
+
 - ROI calculator
 - Savings calculator
 - Cost comparison tool
@@ -73,6 +77,7 @@ Before designing a tool strategy, understand:
 - Tax estimator
 
 **Why they work**:
+
 - Personalized output
 - High perceived value
 - Share-worthy results
@@ -83,6 +88,7 @@ Before designing a tool strategy, understand:
 **Best for**: Creating something useful quickly
 
 **Examples**:
+
 - Policy generator
 - Template generator
 - Name/tagline generator
@@ -90,6 +96,7 @@ Before designing a tool strategy, understand:
 - Resume builder
 
 **Why they work**:
+
 - Tangible output
 - Saves time
 - Easily shared
@@ -100,6 +107,7 @@ Before designing a tool strategy, understand:
 **Best for**: Evaluating existing work or assets
 
 **Examples**:
+
 - Website grader
 - SEO analyzer
 - Email subject tester
@@ -107,6 +115,7 @@ Before designing a tool strategy, understand:
 - Security checker
 
 **Why they work**:
+
 - Curiosity-driven
 - Personalized insights
 - Creates awareness of problems
@@ -117,6 +126,7 @@ Before designing a tool strategy, understand:
 **Best for**: Checking if something works
 
 **Examples**:
+
 - Meta tag preview
 - Email rendering test
 - Accessibility checker
@@ -124,6 +134,7 @@ Before designing a tool strategy, understand:
 - Speed test
 
 **Why they work**:
+
 - Immediate utility
 - Bookmark-worthy
 - Repeat usage
@@ -134,6 +145,7 @@ Before designing a tool strategy, understand:
 **Best for**: Reference material
 
 **Examples**:
+
 - Icon library
 - Template library
 - Code snippet library
@@ -141,6 +153,7 @@ Before designing a tool strategy, understand:
 - Directory
 
 **Why they work**:
+
 - High SEO value
 - Ongoing traffic
 - Establishes authority
@@ -151,6 +164,7 @@ Before designing a tool strategy, understand:
 **Best for**: Learning/understanding
 
 **Examples**:
+
 - Interactive tutorials
 - Code playgrounds
 - Visual explainers
@@ -158,6 +172,7 @@ Before designing a tool strategy, understand:
 - Simulators
 
 **Why they work**:
+
 - Engages deeply
 - Demonstrates expertise
 - Shareable
@@ -192,21 +207,25 @@ Before designing a tool strategy, understand:
 ### Validate the Idea
 
 **Search demand:**
+
 - Is there search volume for this problem?
 - What keywords would rank?
 - How competitive?
 
 **Uniqueness:**
+
 - What exists already?
 - How can you be 10x better or different?
 - What's your unique angle?
 
 **Lead quality:**
+
 - Does this problem-audience match buyers?
 - Will users be your target customers?
 - Is there a natural path to your product?
 
 **Build feasibility:**
+
 - How complex to build?
 - Can you scope an MVP?
 - Ongoing maintenance burden?
@@ -218,12 +237,14 @@ Before designing a tool strategy, understand:
 ### Keyword Strategy
 
 **Tool landing page:**
+
 - "[thing] calculator"
 - "[thing] generator"
 - "free [tool type]"
 - "[industry] [tool type]"
 
 **Supporting content:**
+
 - "How to [use case]"
 - "What is [concept tool helps with]"
 - Blog posts that link to tool
@@ -231,11 +252,13 @@ Before designing a tool strategy, understand:
 ### Link Building
 
 Free tools attract links because:
+
 - Genuinely useful (people reference them)
 - Unique (can't link to just any page)
 - Shareable (social amplification)
 
 **Outreach opportunities:**
+
 - Roundup posts ("best free tools for X")
 - Resource pages
 - Industry publications
@@ -256,21 +279,25 @@ Free tools attract links because:
 ### When to Gate
 
 **Fully gated (email required to use):**
+
 - High-value, unique tools
 - Personalized reports
 - Risk: Lower usage
 
 **Partially gated (email for full results):**
+
 - Show preview, gate details
 - Better balance
 - Most common pattern
 
 **Ungated with optional capture:**
+
 - Tool is free to use
 - Email to save/share results
 - Highest usage, lower capture
 
 **Ungated entirely:**
+
 - Pure SEO/brand play
 - No direct leads
 - Maximum reach
@@ -296,12 +323,14 @@ Free tools attract links because:
 ### Build Custom
 
 **When:**
+
 - Unique concept, nothing exists
 - Core to brand/product
 - High strategic value
 - Have development capacity
 
 **Consider:**
+
 - Development time
 - Ongoing maintenance
 - Hosting costs
@@ -310,12 +339,14 @@ Free tools attract links because:
 ### Use No-Code Tools
 
 **Options:**
+
 - Outgrow, Involve.me (calculators/quizzes)
 - Typeform, Tally (forms/quizzes)
 - Sogna Cloud, Coda (databases)
 - Bubble, Webflow (apps)
 
 **When:**
+
 - Speed to market
 - Limited dev resources
 - Testing concept viability
@@ -323,11 +354,13 @@ Free tools attract links because:
 ### Embed Existing
 
 **When:**
+
 - Something good already exists
 - White-label options available
 - Not core differentiator
 
 **Consider:**
+
 - Branding limitations
 - Dependency on third party
 - Cost vs. build
@@ -375,12 +408,14 @@ Free tools attract links because:
 ### Launch
 
 **Owned channels:**
+
 - Email list announcement
 - Blog post / landing page
 - Social media
 - Product hunt (if applicable)
 
 **Outreach:**
+
 - Relevant newsletters
 - Industry publications
 - Bloggers in space
@@ -389,16 +424,19 @@ Free tools attract links because:
 ### Ongoing
 
 **SEO:**
+
 - Target tool-related keywords
 - Supporting content
 - Link building
 
 **Social:**
+
 - Share interesting results (anonymized)
 - Use case examples
 - Tips for using the tool
 
 **Product integration:**
+
 - Mention in sales process
 - Link from related product features
 - Include in email sequences
@@ -410,18 +448,21 @@ Free tools attract links because:
 ### Metrics to Track
 
 **Acquisition:**
+
 - Traffic to tool
 - Traffic sources
 - Keyword rankings
 - Backlinks acquired
 
 **Engagement:**
+
 - Tool usage/completions
 - Time spent
 - Return visitors
 - Shares
 
 **Conversion:**
+
 - Email captures
 - Lead quality score
 - MQLs generated
@@ -480,49 +521,62 @@ Payback period: Build cost / (Monthly value - Monthly maintenance)
 ### Tool Strategy Document
 
 ```
+
 # Free Tool Strategy: [Tool Name]
 
 ## Concept
+
 [What it does in one paragraph]
 
 ## Target Audience
+
 [Who uses it, what problem it solves]
 
 ## Lead Generation Fit
+
 [How this connects to your product/sales]
 
 ## SEO Opportunity
+
 - Target keywords: [list]
 - Search volume: [estimate]
 - Competition: [assessment]
 
 ## Build Approach
+
 - Custom / No-code / Embed
 - MVP scope: [core features]
 - Estimated effort: [time/cost]
 
 ## Lead Capture Strategy
+
 - Gating approach: [Full/Partial/Ungated]
 - Capture mechanism: [description]
 - Follow-up sequence: [outline]
 
 ## Success Metrics
+
 - [Metric 1]: [Target]
 - [Metric 2]: [Target]
 
 ## Promotion Plan
+
 - Launch: [channels]
 - Ongoing: [strategy]
 
 ## Timeline
+
 - Phase 1: [scope] - [timeframe]
 - Phase 2: [scope] - [timeframe]
+
 ```
 
 ### Implementation Spec
+
 If moving forward with build
 
 ### Promotion Plan
+
 Detailed launch and ongoing strategy
 
 ---
@@ -530,30 +584,35 @@ Detailed launch and ongoing strategy
 ## Example Tool Concepts by Business Type
 
 ### SaaS Product
+
 - Product ROI calculator
 - Competitor comparison tool
 - Readiness assessment quiz
 - Template library for use case
 
 ### Agency/Services
+
 - Industry benchmark tool
 - Project scoping calculator
 - Portfolio review tool
 - Cost estimator
 
 ### E-commerce
+
 - Product finder quiz
 - Comparison tool
 - Size/fit calculator
 - Savings calculator
 
 ### Developer Tools
+
 - Code snippet library
 - Testing/preview tool
 - Documentation generator
 - Interactive tutorials
 
 ### Finance
+
 - Financial calculators
 - Investment comparison
 - Budget planner
@@ -564,6 +623,7 @@ Detailed launch and ongoing strategy
 ## Questions to Ask
 
 If you need more context:
+
 1. What's your core product/service?
 2. What problems does your audience commonly face?
 3. What existing tools do they use for workarounds?
@@ -582,14 +642,17 @@ If you need more context:
 - **programmatic-seo**: For building tool-based pages at scale
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

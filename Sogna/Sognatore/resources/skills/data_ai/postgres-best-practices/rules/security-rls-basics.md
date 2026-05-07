@@ -55,6 +55,7 @@ create policy orders_user_policy on orders
 Reference: [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

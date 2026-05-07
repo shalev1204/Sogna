@@ -39,6 +39,7 @@ metadata:
 - [Error message text]
 
 **NOT for:**
+
 - [When to avoid]
 
 ## The Problem
@@ -75,8 +76,10 @@ function goodCode() {
 ## Common Mistakes
 
 **Mistake 1:** [Description]
+
 - Wrong: `bad code`
 - Right: `good code`
+
 ```
 
 ---
@@ -119,8 +122,10 @@ another example
 ## Detailed Docs
 
 For more options, run `--help` or see:
+
 - patterns.md
 - [examples.md](examples.md)
+
 ```
 
 ---
@@ -158,6 +163,7 @@ Violating the letter IS violating the spirit.
 [Action before rule]? **Delete it. Start over.**
 
 **No exceptions:**
+
 - Don't keep it as "reference"
 - Don't "adapt" it
 - Delete means delete
@@ -259,6 +265,7 @@ metadata:
 ```
 
 ```markdown
+
 # Condition-Based Waiting
 
 ## Overview
@@ -287,9 +294,11 @@ expect(element).toBeVisible();
 
 - Flaky tests: 15/100 → 0/100
 - Speed: 40% faster (no over-waiting)
+
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

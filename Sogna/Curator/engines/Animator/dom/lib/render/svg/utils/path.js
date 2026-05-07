@@ -16,7 +16,7 @@ const camelKeys = {
  * Note: We use unitless values for stroke-dasharray and stroke-dashoffset
  * because Safari incorrectly scales px values when the page is zoomed.
  */
-export function BuildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true) {
+export function buildSVGPath(attrs, length, spacing = 1, offset = 0, useDashCase = true) {
     // Normalise path length by setting SVG attribute pathLength to 1
     attrs.pathLength = 1;
     // We use dash case when setting attributes directly to the DOM node and camel case

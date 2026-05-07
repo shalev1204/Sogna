@@ -4,21 +4,24 @@ description: Agente de contexto para continuidade entre sessoes. Salva resumos, 
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - context
 - session-management
 - continuity
 - memory
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-context-agent
 owner: [[orchestrator]]
 ---
-
 
 # Context Agent
 
@@ -89,6 +92,7 @@ python C:\Users\renat\skills\context-agent\scripts\context_manager.py save
 ```
 
 O que faz:
+
 1. Encontra o arquivo JSONL mais recente da sessão
 2. Analisa todas as mensagens, tool calls e resultados
 3. Gera resumo estruturado (session-NNN.md)
@@ -190,11 +194,13 @@ e decisões tomadas — sem precisar de nenhuma ação manual.
 - `context-guardian` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

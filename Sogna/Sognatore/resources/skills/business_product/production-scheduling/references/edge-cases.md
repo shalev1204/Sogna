@@ -31,6 +31,7 @@ Most scheduling systems set the constraint at the planning stage and hold it fix
 Ignoring the shift because "machining is the constraint this week" based on the weekly capacity plan. Or overreacting by completely re-sequencing the shift, creating chaos on the shop floor.
 
 **Expert Approach:**
+
 1. Recognise the shift by monitoring real-time WIP levels. WIP accumulating before powder coat while CNC's outfeed staging area is empty is the leading indicator.
 2. Verify the duration: is this a temporary product-mix effect (2–3 hours) or will it persist for the rest of the shift? Check the remaining work order sequence.
 3. If temporary (< 3 hours): do not re-sequence the entire shift. Instead, tactically re-prioritise the 2–3 jobs in the powder coat queue to minimise setup changes (colour sequencing), and slow CNC's release rate to avoid over-building the WIP queue.
@@ -38,6 +39,7 @@ Ignoring the shift because "machining is the constraint this week" based on the 
 5. At shift handover, document the constraint shift and the product mix that caused it so the incoming scheduler plans accordingly.
 
 **Documentation Required:**
+
 - Time of constraint shift detection
 - Product mix analysis showing utilisation crossover
 - Tactical adjustments made (CNC pacing, powder coat priority changes)
@@ -45,6 +47,7 @@ Ignoring the shift because "machining is the constraint this week" based on the 
 - Shift handover note for the incoming scheduler
 
 **Resolution Timeline:**
+
 - 0–15 min: Detect the WIP imbalance
 - 15–30 min: Verify duration and decide on tactical vs. full re-sequence
 - 30–60 min: Implement adjustments and confirm stabilisation
@@ -64,6 +67,7 @@ This is a hard regulatory constraint, not a soft preference. Running the coating
 Running the line with an "almost qualified" operator who has completed training but hasn't finished the competency assessment documentation. This is a regulatory violation regardless of the operator's actual skill level.
 
 **Expert Approach:**
+
 1. Confirm that no other night-shift employee holds the qualification. Check the cross-training matrix — not just coating operators, but anyone on night shift who may have been cross-trained on this line (maintenance technicians sometimes hold process qualifications).
 2. Contact Maria. Can she work a split shift (come in at midnight, work 6 hours, leave at 6 AM)? Check the union contract and fatigue rules — most agreements require an 8-hour rest between shifts. If Maria left day shift at 3:30 PM, she is eligible to return at 11:30 PM under an 8-hour rest rule.
 3. If Maria is available and willing: authorise overtime, document the reason (single-point-of-failure staffing event), and adjust the coating schedule to start when she arrives.
@@ -72,6 +76,7 @@ Running the line with an "almost qualified" operator who has completed training 
 6. Post-incident: submit a request to cross-train 2 additional night-shift operators on the coating process. Single-point-of-failure on a regulated process is a systemic risk.
 
 **Documentation Required:**
+
 - Cross-training matrix review (who holds the qualification, who does not)
 - Maria's contact record and response
 - Overtime authorisation (if applicable) with union compliance check
@@ -80,6 +85,7 @@ Running the line with an "almost qualified" operator who has completed training 
 - CAPA (Corrective and Preventive Action) for cross-training gap
 
 **Resolution Timeline:**
+
 - 10:30 PM: Absence confirmed
 - 10:30–11:00 PM: Cross-training matrix review, Maria contacted
 - 11:00 PM: Decision made (Maria coming in, or coating line stopped)
@@ -105,6 +111,7 @@ This is not a scheduling problem — it's a commercial decision disguised as a s
 The scheduler makes the commercial decision unilaterally, typically defaulting to the contractual penalty (Customer A) without presenting the strategic risk (Customer B). Or the scheduler tries to split the capacity equally, resulting in both orders being late.
 
 **Expert Approach:**
+
 1. Quantify both scenarios precisely:
    - **Prioritise A:** Customer A ships Thursday (on time). Customer B ships the following Monday (3 days late). Customer B cost: potential $8M contract risk, unquantifiable but real.
    - **Prioritise B:** Customer B ships Friday (on time). Customer A ships Saturday (2 days late). Customer A cost: $50,000 in contractual penalties + relationship damage.
@@ -116,6 +123,7 @@ The scheduler makes the commercial decision unilaterally, typically defaulting t
 4. Once the decision is made, re-sequence the entire CNC schedule for the week. Lock the frozen zone on the decided sequence. Communicate to both customers.
 
 **Documentation Required:**
+
 - Capacity analysis showing the 16-hour shortfall
 - Tradeoff matrix with financial exposure for each scenario
 - Recommended recovery options with cost estimates
@@ -123,6 +131,7 @@ The scheduler makes the commercial decision unilaterally, typically defaulting t
 - Customer communication log
 
 **Resolution Timeline:**
+
 - Monday AM: Both rush orders received
 - Monday AM + 2 hours: Capacity analysis and tradeoff matrix completed
 - Monday AM + 4 hours: Management decision
@@ -144,6 +153,7 @@ Scheduling systems trust MRP output. If the scheduler blindly converts the plann
 Scheduling the MRP-generated order without questioning it ("the system says we need it"), or deleting it without notifying engineering about the BOM error (the error persists and generates phantom demand again in the next MRP run).
 
 **Expert Approach:**
+
 1. **Verify the anomaly:** Compare the MRP-generated demand to the trailing 6-month demand history for SC-4420. A 3× spike with no corresponding sales order or forecast increase is a red flag.
 2. **Trace the demand:** Use MRP pegging (SAP: MD04/MD09, Oracle: pegging inquiry) to trace the planned order back to the parent demand that generated it. This reveals which parent product's BOM is driving the demand.
 3. **Identify the root cause:** The pegging trace points to the new product variant BOM. Compare the BOM quantity-per to the engineering drawing — the drawing shows 1 unit per assembly, the BOM shows 12.
@@ -153,6 +163,7 @@ Scheduling the MRP-generated order without questioning it ("the system says we n
 7. **Verify the fix:** After engineering corrects the BOM, re-run MRP for SC-4420 and confirm the planned orders now align with expected demand.
 
 **Documentation Required:**
+
 - Anomaly detection: what triggered the investigation (volume spike, capacity conflict)
 - MRP pegging trace results
 - BOM error details (parent item, line item, incorrect vs. correct quantity)
@@ -161,6 +172,7 @@ Scheduling the MRP-generated order without questioning it ("the system says we n
 - Verification after BOM correction
 
 **Resolution Timeline:**
+
 - Day 1: Anomaly detected during schedule review
 - Day 1 + 2 hours: Pegging trace and root cause identified
 - Day 1 + 4 hours: Engineering notified, phantom order held
@@ -181,6 +193,7 @@ The quality hold cascades across three production stages. Some units may be rewo
 Quarantining only the 80 frames at welding (the point of detection) and allowing the 60 painted frames to proceed to assembly. If the defect makes assembly impossible or causes field failures, the cost of rework/recall after assembly is 5–10× the cost of catching it now.
 
 **Expert Approach:**
+
 1. **Full containment:** Quarantine all 200 frames across all three stages immediately. Tag, segregate, and document. No exceptions — even frames that "look fine" at paint stage may have the shifted hole pattern.
 2. **Assess reworkability:** Can the 2mm shift be corrected? Options:
    - Re-drill the hole pattern at the correct location (if material allows, the shifted holes will remain as cosmetic defects — check if customer spec allows).
@@ -195,6 +208,7 @@ Quarantining only the 80 frames at welding (the point of detection) and allowing
 5. **Customer communication:** If Friday delivery is at risk, notify the customer by end of business today. Provide a revised ETA based on the rework timeline.
 
 **Documentation Required:**
+
 - Defect description, quantity affected, production stages
 - Containment actions and quarantine locations
 - Rework assessment (feasibility, time, cost)
@@ -204,6 +218,7 @@ Quarantining only the 80 frames at welding (the point of detection) and allowing
 - CAPA for die wear monitoring (preventive inspection schedule)
 
 **Resolution Timeline:**
+
 - Hour 0: Defect detected at weld inspection
 - Hour 0–1: Full containment across all stages
 - Hour 1–3: Rework feasibility assessment
@@ -226,6 +241,7 @@ Every hour of constraint downtime directly reduces plant throughput. 20 hours at
 Waiting for the repair to complete before re-planning. By then, 20 hours of schedule disruption have cascaded through the plant with no mitigation.
 
 **Expert Approach:**
+
 1. **Immediate (0–15 min):**
    - Confirm maintenance's repair estimate. Ask: is there a faster temporary fix (bypass, rental equipment)? Can the OEM ship the pump by overnight freight instead of driving?
    - Determine if the in-machine part can resume after repair. Consult the machinist: are the datum offsets preserved? If the machine can restart the interrupted operation from the last completed tool path, the part is salvageable. If not, it may need to be re-fixtured and re-qualified, adding 2–3 hours but saving the $38,000 part.
@@ -243,6 +259,7 @@ Waiting for the repair to complete before re-planning. By then, 20 hours of sche
    - Monitor recovery pace hourly against the recovery schedule.
 
 **Documentation Required:**
+
 - Breakdown time, root cause, repair timeline
 - In-machine part assessment (salvageable Y/N, additional cost)
 - Alternate routing analysis for queued jobs
@@ -251,6 +268,7 @@ Waiting for the repair to complete before re-planning. By then, 20 hours of sche
 - Recovery schedule with hourly milestones
 
 **Resolution Timeline:**
+
 - 9:15 AM: Breakdown
 - 9:15–9:30 AM: Maintenance assessment and pump sourcing
 - 9:30–11:00 AM: Alternate routing analysis, re-sequencing, customer notifications
@@ -272,6 +290,7 @@ Grade 250 steel has lower yield strength than Grade 350 — assemblies made from
 Continuing production and hoping the customer won't notice (this is a structural integrity and safety issue — non-negotiable). Or shutting down the entire line when only assemblies 41–70 are affected — assemblies 71–100 can use material from a different source if available.
 
 **Expert Approach:**
+
 1. **Stop welding immediately** on any piece using the Grade 250 material. Pull the 12 cut plates from the welding station and quarantine them with clear "HOLD — WRONG MATERIAL" tags.
 2. **Segregate the remaining 28 uncut plates** from the wrong delivery. These can be returned to the supplier or used for non-structural orders that specify Grade 250.
 3. **Continue production on assemblies 71–100** using material from existing Grade 350 stock (check if there is sufficient on-hand inventory from other purchase orders or stock). If Grade 350 stock is available for assemblies 71–100, the line does not need to stop entirely.
@@ -281,6 +300,7 @@ Continuing production and hoping the customer won't notice (this is a structural
 7. **Notify the customer** if the construction project delivery timeline is affected. For structural steel, customers prefer a delay over incorrect material grade — this is a safety issue.
 
 **Documentation Required:**
+
 - Material non-conformance report with mill certificate evidence
 - Quarantine records for the 12 cut plates and 28 uncut plates
 - Supplier notification and replacement delivery commitment
@@ -302,6 +322,7 @@ The plant was counting on Saturday overtime as the primary capacity lever. Witho
 Pressuring operators to work "off the books" (violates the collective agreement and exposes the company to legal liability). Or accepting a 20–25% shortfall without exploring all alternatives.
 
 **Expert Approach:**
+
 1. **Quantify the gap precisely:** Standard capacity at constraint = 120 hours/week. Required = 158.4 hours. Overtime now available = 1 hour/day × 5 days × number of qualified operators. If 4 operators run the SMT line and each can do 5 hours/week OT, that's 20 hours/week of overtime capacity, bringing effective capacity to 140 hours. Remaining gap: 18.4 hours/week.
 2. **Exploit the constraint (no capital):**
    - Reduce changeovers on SMT: consolidate product families, campaign-schedule similar board types together. Target: recover 4–6 hours/week from reduced changeover time.
@@ -313,6 +334,7 @@ Pressuring operators to work "off the books" (violates the collective agreement 
 6. **Demand shaping:** Work with sales to shift some orders from the peak 6-week window to the 2 weeks before or after, if customers have flexibility. Even moving 5% of demand out of peak reduces the capacity gap significantly.
 
 **Documentation Required:**
+
 - Capacity analysis showing the gap (hours/week) with and without overtime
 - Constraint exploitation plan with estimated recovery per initiative
 - Temporary labour and subcontracting options with cost and timeline
@@ -334,6 +356,7 @@ The 12 completed frames and 4 in-process frames are at the original spec. If the
 Accepting the change without quantifying the rework cost and schedule impact, or rejecting the change outright without exploring options.
 
 **Expert Approach:**
+
 1. **Analyse the change impact by production stage:**
    - 4 unstarted frames: can be built to modified spec with no rework. CNC reprogramming takes 4 hours. Welding fixture modification takes 6 hours.
    - 4 frames in machining: modification requires adding the new mounting holes, which can be done as an additional machining operation before the frames leave CNC. Added time: 2 hours per frame = 8 hours.
@@ -348,6 +371,7 @@ Accepting the change without quantifying the rework cost and schedule impact, or
 5. **Assess delivery impact:** 12 hours added to the critical path. Can this be absorbed within the original delivery date? If not, negotiate a 2-day extension or authorize overtime to recover the 12 hours.
 
 **Documentation Required:**
+
 - Engineering change analysis showing impact per production stage
 - Rework cost estimate per frame (by stage)
 - Recommended solution with minimum cost/disruption
@@ -369,6 +393,7 @@ NPI trial runs are unpredictable: the first run may reveal tooling issues requir
 Scheduling NPI trials into standard production slots and expecting them to run on time. When the trial overruns, it displaces existing customer orders and creates cascading delays.
 
 **Expert Approach:**
+
 1. **Do not schedule NPI trials at scheduled utilisation.** The 8-hour nominal trial time should be planned as a 14-hour window (8 hours production + 4 hours changeover + 2 hours contingency for tooling issues). This is realistic, not pessimistic, for first and second trials.
 2. **Schedule trial runs at the end of the week** (Friday PM or Saturday) when any overrun pushes into the weekend rather than into Monday's committed production schedule. If the trial finishes early, the slot converts to weekend overtime production (recovering any capacity borrowed from the week).
 3. **Reserve a "trial buffer" in the weekly schedule:** Block 14 hours per week as tentatively reserved for NPI. If the trial proceeds on schedule, this time is used as planned. If the trial is cancelled or postponed (common for NPIs), the buffer converts to regular production or maintenance.
@@ -377,6 +402,7 @@ Scheduling NPI trials into standard production slots and expecting them to run o
 6. **After each trial run, update the time estimate** for the next trial. If Trial 1 took 14 hours and produced 15% scrap, plan Trial 2 at 12 hours (process should be improving) but keep the full 14-hour buffer until proven otherwise.
 
 **Documentation Required:**
+
 - NPI trial schedule with buffered time estimates
 - Constraint capacity analysis showing impact on existing orders
 - Contingency plan if trial overruns
@@ -392,6 +418,7 @@ Scheduling NPI trials into standard production slots and expecting them to run o
 A food processing plant producing canned soups faces two simultaneous problems: (1) the primary tomato paste supplier is 4 days late on a delivery that was supposed to arrive Monday, affecting all tomato-based soup production scheduled for this week, and (2) the retort (sterilisation vessel) — the plant's constraint — has developed a slow steam leak that reduces its effective cycle time by 12% (each batch takes 45 minutes instead of 40 minutes). Maintenance can fix the leak during a planned maintenance window on Saturday, but running the retort at reduced capacity all week compounds the supplier delay.
 
 **Expert Approach:**
+
 1. Re-sequence the week to run non-tomato soup products (chicken, vegetable, cream-based) first while waiting for the tomato paste delivery. This keeps the retort running even at reduced capacity.
 2. Calculate the effective capacity loss: 12% longer cycles = ~12% throughput reduction at the constraint. Over a 120-hour production week, this is 14.4 hours of lost capacity, equivalent to roughly 18 batches (at 48 min/batch effective).
 3. When the tomato paste arrives (projected Thursday), re-sequence tomato soups with the most urgent due dates first.
@@ -407,6 +434,7 @@ A food processing plant producing canned soups faces two simultaneous problems: 
 IT has scheduled an ERP system upgrade (SAP ECC to S/4HANA migration cutover) for the upcoming weekend, with the system offline from Friday 6:00 PM to Monday 6:00 AM. The plant runs 24/7 production. During the outage, operators cannot confirm operations, material transactions cannot be posted, and work order status cannot be updated. The scheduling tool (which reads from SAP) will not receive real-time data.
 
 **Expert Approach:**
+
 1. Print all work orders, routings, BOMs, and the production schedule for Friday PM through Monday AM. Distribute physical copies to every shift supervisor and work centre.
 2. Pre-issue all materials needed for weekend production. Complete all goods issues in SAP before 6:00 PM Friday. Operators should not need to perform material transactions during the outage.
 3. Implement manual shop floor tracking: paper travellers accompanying each batch, operator log sheets recording start/end times, quantities, and scrap.
@@ -415,6 +443,7 @@ IT has scheduled an ERP system upgrade (SAP ECC to S/4HANA migration cutover) fo
 6. Have IT on standby for Monday morning to resolve any data migration issues that affect production records.
 
 **Documentation Required:**
+
 - Pre-printed schedule and work order packets
 - Material pre-issue verification checklist
 - Manual tracking forms and instructions
@@ -422,6 +451,7 @@ IT has scheduled an ERP system upgrade (SAP ECC to S/4HANA migration cutover) fo
 - IT escalation contacts for Monday morning
 
 **Resolution Timeline:**
+
 - Friday − 1 week: Print all production documentation, verify completeness
 - Friday − 2 days: Pre-issue all weekend materials in SAP
 - Friday 6:00 PM: System goes offline. Switch to manual tracking.
@@ -443,6 +473,7 @@ Full traceability is mandatory under FDA 21 CFR Part 820 for medical devices. Th
 Quarantining only the known remaining raw material from Heat #A7742 and missing the WIP and finished goods. Or waiting for the supplier's final test results before acting (which could take 5–7 business days).
 
 **Expert Approach:**
+
 1. **Immediate lot trace (Hour 0–2):** Run a forward lot trace from Heat #A7742 through every production stage. In the ERP, trace the material receipt to every goods issue, then to every work order that consumed it, then to every finished goods batch, then to every shipment.
 2. **Quarantine all affected WIP (Hour 0–4):** Every work-in-process piece traceable to Heat #A7742 must be physically segregated and tagged with "QUALITY HOLD — SUPPLIER ADVISORY" status. Update work order status in the ERP to "blocked."
 3. **Identify shipped finished goods:** For units already shipped, prepare a device history record (DHR) extract for the quality team. They will assess whether a customer notification or field action is required.
@@ -452,6 +483,7 @@ Quarantining only the known remaining raw material from Heat #A7742 and missing 
 7. **Schedule replacement production:** If the quarantined material is confirmed non-conforming, replacement raw material must be ordered and new work orders created. Calculate the lead time for replacement material + production to meet customer delivery obligations.
 
 **Documentation Required:**
+
 - Full forward lot trace from Heat #A7742
 - Quarantine records for all WIP and finished goods
 - Shipped goods report for quality team
@@ -461,6 +493,7 @@ Quarantining only the known remaining raw material from Heat #A7742 and missing 
 - Daily supplier investigation status updates
 
 **Resolution Timeline:**
+
 - Hour 0: Supplier advisory received
 - Hour 0–2: Lot trace completed, scope of exposure quantified
 - Hour 2–4: All affected WIP quarantined, schedule revised
@@ -476,6 +509,7 @@ Quarantining only the known remaining raw material from Heat #A7742 and missing 
 During a summer heat wave, the regional utility issues a mandatory curtailment order requiring the plant to reduce electrical consumption by 30% during peak hours (1:00 PM – 7:00 PM) for the next 5 business days. The plant's major electrical loads are: arc welding stations (35% of load), CNC machining (25%), HVAC/lighting (20%), and electric furnaces (20%). The constraint work centre is a CNC machining cell. Shutting down any production equipment during peak hours will reduce output. Non-compliance with the curtailment order carries fines of $50,000/day.
 
 **Expert Approach:**
+
 1. **Load analysis:** Identify which equipment can be shut down during peak hours with the least production impact. HVAC cannot be fully shut down (heat stress safety risk for operators), but setpoint can be raised by 3–4°F to reduce load by ~30% of HVAC consumption.
 2. **Shift heavy loads to off-peak:** Move arc welding operations to the early morning (5:00 AM – 1:00 PM) and evening (7:00 PM – 1:00 AM) shifts. Welding is labour-intensive but electrically heavy — shifting it avoids most of the curtailment window.
 3. **Protect the constraint:** CNC machining is the constraint. Calculate whether CNC can run during the curtailment window if welding and furnaces are offline. If CNC alone is within the 70% power allowance, keep CNC running and idle the other major loads.
@@ -487,6 +521,7 @@ During a summer heat wave, the regional utility issues a mandatory curtailment o
 7. **Customer impact:** Calculate the throughput reduction from 5 days of restricted production. If the constraint runs during curtailment but non-constraints do not, the throughput impact may be small (constraint is the bottleneck). Quantify and notify affected customers if any delivery dates slip.
 
 **Documentation Required:**
+
 - Load analysis by equipment and time window
 - Curtailment compliance plan (submitted to utility if required)
 - Revised daily schedules for the 5-day curtailment period
@@ -505,6 +540,7 @@ A stamping plant's quarterly preventive maintenance (PM) on the 600-ton press (t
 Skipping or deferring PM on the constraint is a high-risk gamble. The PM schedule exists because the 600-ton press has a history of hydraulic seal failures when PM intervals stretch beyond the quarterly cycle. A hydraulic failure during the bracket run would be catastrophic — potentially damaging the die (a $45,000 asset), scrapping in-process work, and causing multiple days of unplanned downtime.
 
 **Expert Approach:**
+
 1. **Do not skip the PM.** The expected cost of a hydraulic failure (die damage + scrap + 3–5 days unplanned downtime + customer penalties) far exceeds the cost of any workaround.
 2. **Can the PM be compressed?** Consult maintenance: can the 10-hour PM be reduced to 6 hours by parallelising activities (two maintenance crews working simultaneously on hydraulics and electrical)? If so, the press is available Saturday evening instead of Sunday morning, giving an extra 8+ hours for the bracket run.
 3. **Can the PM be moved earlier?** If PM starts Friday night instead of Saturday morning, the press is available by Saturday morning. Friday night PM means cancelling Friday night production — calculate the lost production (probably 1 shift of lower-priority work) vs. the benefit of earlier bracket availability.
@@ -513,6 +549,7 @@ Skipping or deferring PM on the constraint is a high-risk gamble. The PM schedul
 6. **Backup plan:** If PM cannot be compressed or moved earlier, start the bracket run Sunday afternoon, run through Sunday night and Monday day shift (18 hours completion by Monday evening), and ship Tuesday for Wednesday delivery. This is tight but feasible. Add an overtime shift Monday evening as insurance.
 
 **Documentation Required:**
+
 - PM schedule analysis showing compression/shift options
 - Bracket run time calculation and earliest-start-time scenarios
 - Risk assessment of PM deferral (not recommended, but documented to explain the decision)
@@ -520,6 +557,7 @@ Skipping or deferring PM on the constraint is a high-risk gamble. The PM schedul
 - Maintenance crew availability for compressed PM schedule
 
 **Resolution Timeline:**
+
 - Thursday PM: Rush order received
 - Thursday PM + 2 hours: PM compression/shift analysis completed
 - Thursday end-of-day: Decision made, revised schedule published
@@ -542,6 +580,7 @@ Moving rigid container production to Plant B is technically possible but operati
 Accepting all incremental volume at Plant A and planning to "make it work" with overtime. At 122% utilisation, even maximum overtime only reaches ~108%, creating an inevitable 14% shortfall. Or refusing the incremental order without exploring Plant B as an option.
 
 **Expert Approach:**
+
 1. **Quantify the overflow precisely:** Plant A needs 22% more capacity = 26.4 hours/week over 3 weeks = 79.2 total overflow hours.
 2. **Assess Plant A's maximum realistic capacity:** Standard (120 hrs/week) + Saturday OT (16 hrs) + reduced changeovers (estimated 4 hrs recovery through better sequencing) = 140 hrs/week max. At 122% requirement = 146.4 hrs needed. Plant A can deliver 140 hrs, shortfall = 6.4 hrs/week = 19.2 hours over 3 weeks.
 3. **Assess Plant B's absorption capacity:** Plant B's rigid container capability runs at 70% of Plant A's throughput. 19.2 hours of Plant A work = 27.4 hours at Plant B's rate. Plant B has 33.6 hours of available capacity (120 × 28% headroom) — it can absorb the overflow.
@@ -551,6 +590,7 @@ Accepting all incremental volume at Plant A and planning to "make it work" with 
 7. **Logistics:** Coordinate shipping from Plant B to the customer's DC. If the customer expects a single point of shipment, Plant B's output may need to be consolidated at Plant A before shipping.
 
 **Documentation Required:**
+
 - Capacity analysis for both plants over the 3-week horizon
 - Overflow volume calculation and Plant B absorption plan
 - Customer qualification requirement assessment
@@ -570,6 +610,7 @@ A consumer goods manufacturer produces both summer products (portable fans, outd
 During the transition period, the plant needs to produce both summer and winter products on the same machines. Every mould change consumes 4–6 hours of production capacity. If you transition all 6 machines at once, you lose 24–36 hours of capacity in a single week — during the highest-demand period. If you transition one machine at a time, you maintain more capacity but stretch the transition over 3+ weeks, during which the schedule is constantly in flux with different machines running different product families.
 
 **Expert Approach:**
+
 1. **Phase the transition by machine and demand priority:**
    - Weeks 1–2 (Aug 1–14): Keep all 6 machines on summer products. Fill all remaining summer orders.
    - Week 3 (Aug 15–21): Transition 2 machines to winter moulds. These begin producing the highest-priority winter products.
@@ -583,6 +624,7 @@ During the transition period, the plant needs to produce both summer and winter 
 5. **Labour coordination:** Mould changes require skilled tooling technicians. Ensure technician availability matches the changeover schedule — do not schedule 4 mould changes on the same day with only 2 technicians.
 
 **Documentation Required:**
+
 - Phased transition schedule showing machine-by-product assignment per week
 - Summer order backlog with due dates and machine requirements
 - Winter build-up schedule with component lead times
@@ -591,6 +633,7 @@ During the transition period, the plant needs to produce both summer and winter 
 - Post-transition capacity verification (all winter moulds qualified and running at standard rates)
 
 **Resolution Timeline:**
+
 - Aug 1: Transition plan published to all departments
 - Aug 1–14: Summer production, safety stock build
 - Aug 15: First 2 machines transition — winter production begins
@@ -618,6 +661,7 @@ Experienced production schedulers recognise recurring patterns across these edge
 The common thread: **never sacrifice the constraint's output for a non-constraint problem.** Every decision should be evaluated through the lens of: "Does this protect or harm throughput at the constraint?" If a disruption does not affect the constraint (directly or through buffer penetration), it is lower priority regardless of how visible or noisy it is on the shop floor.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

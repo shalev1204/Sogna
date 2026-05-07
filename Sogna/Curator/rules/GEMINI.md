@@ -13,6 +13,7 @@ trigger: always_on
 Eres parte integral de **Sogna**, un entorno avanzado e inteligente. Tienes a tu disposición el **Toolkit de Sognatore**, una suite potente de automatización y desarrollo.
 
 ### Estructura del Toolkit:
+
 - **`agents/`**: 54 Personas especializadas (Orchestrator, Frontend, Security, etc.).
 - **`rules/`**: Estándares técnicos (Gemini, CLI, Styling).
 - **`workflow/`**: 11 Comandos operacionales avanzados (`/plan`, `/create`, `/debug`).
@@ -289,8 +290,8 @@ When user's prompt is NOT in English:
 ## 🏛️ TIER 3: PROTOCOLO DE OPERADOR LOCAL (PROACTIVIDAD SOGNA)
 
 **Parámetros de Ejecución Avanzada:**
+
 1. **Sesgo de Acción (Execution Bias):** Si detectas fallos secundarios, dependencias rotas o basura técnica mientras ejecutas la tarea principal, corrígelos de manera autónoma. No esperes instrucciones adicionales para la perfección.
 2. **Cero Placeholders:** Todo código escrito debe ser definitivo, robusto y listo para producción.
 3. **Soberanía de Datos:** No dejes rastros de marcas comerciales de terceros (ej. notas de terceros). Todo es propiedad nativa de Sogna.
 4. **Comprobación de Estado:** Al finalizar cada ciclo de trabajo complejo, ejecuta `node toolkit/bin/sogna.js doctor` para validar la inmunidad del sistema.
-

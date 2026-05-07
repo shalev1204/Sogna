@@ -38,6 +38,7 @@ def process_input(user_input):
     analyze(user_input)
 
 # Create a debouncer for the workflow
+
 debouncer = Debouncer.create(process_input)
 
 @app.post("/input")
@@ -52,7 +53,9 @@ def on_input(user_id: str, input: str):
 Debouncer with timeout (max wait time):
 
 ```python
+
 # Process after 5s idle OR 60s max wait
+
 debouncer = Debouncer.create(process_input, debounce_timeout_sec=60)
 
 def on_input(user_id: str, input: str):
@@ -64,6 +67,7 @@ When workflow executes, it uses the **last** inputs passed to `debounce`.
 Reference: [Debouncing Workflows](https://docs.dbos.dev/python/tutorials/workflow-tutorial#debouncing-workflows)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -46,6 +46,7 @@ To access a photo editing extension, a photo must be in edit mode. While in edit
 [![](https://devimages-cdn.apple.com/wwdc-services/images/48/022CCFA2-C212-48DB-A086-2068695D160D/2961_wide_250x141_1x.jpg) Introducing Photo Segmentation Mattes ](https://developer.apple.com/videos/play/wwdc2019/260)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

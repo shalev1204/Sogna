@@ -8,12 +8,12 @@ id: skill-tcm-constitution-analyzer
 owner: [[orchestrator]]
 ---
 
-
 # 中医体质辨识分析器技能
 
 分析中医体质数据,识别体质类型,评估体质特征,并提供个性化养生改善建议。
 
 ## When to Use
+
 - 你需要根据中医体质分类标准评估用户体质，并识别主导体质与兼夹体质。
 - 你想结合营养、运动、睡眠等健康数据分析体质特征、风险和变化趋势。
 - 你需要面向个体化调理的养生建议、趋势跟踪和相关性分析结果。
@@ -25,17 +25,20 @@ owner: [[orchestrator]]
 基于《中医体质分类与判定》标准进行体质辨识。
 
 **评估维度**:
+
 - 9种体质类型评分(平和质、气虚质、阳虚质、阴虚质、痰湿质、湿热质、血瘀质、气郁质、特禀质)
 - 主体质判定
 - 兼夹体质识别
 - 体质特征分析
 
 **评估方法**:
+
 - 60题标准化问卷
 - 5分制评分(没有/很少/有时/经常/总是)
 - 转化分数计算(0-100分)
 
 **输出**:
+
 - 体质类型判定结果
 - 各体质评分
 - 体质特征描述
@@ -46,6 +49,7 @@ owner: [[orchestrator]]
 综合评估用户的体质特征。
 
 **分析内容**:
+
 - **形体特征**:
   - 体型特点
   - 面色表现
@@ -64,6 +68,7 @@ owner: [[orchestrator]]
   - 季节适应
 
 **输出**:
+
 - 体质类型分类
 - 特征描述
 - 风险评估
@@ -74,12 +79,14 @@ owner: [[orchestrator]]
 追踪体质变化,评估调理效果。
 
 **分析内容**:
+
 - 多次评估对比
 - 评分变化趋势
 - 体质稳定性分析
 - 调理效果评估
 
 **输出**:
+
 - 趋势图表
 - 改善幅度
 - 稳定性评估
@@ -90,6 +97,7 @@ owner: [[orchestrator]]
 分析体质与其他健康指标的相关性。
 
 **支持的相关性分析**:
+
 - **体质 ↔ 营养**:
   - 体质类型与饮食偏好的关系
   - 营养状况对体质的影响
@@ -108,6 +116,7 @@ owner: [[orchestrator]]
   - 体质与疾病的关系
 
 **输出**:
+
 - 相关系数
 - 相关性强度
 - 统计显著性
@@ -118,6 +127,7 @@ owner: [[orchestrator]]
 基于体质类型生成个性化养生建议。
 
 **建议类型**:
+
 - **饮食调养**:
   - 宜食食物清单
   - 忌食食物清单
@@ -150,6 +160,7 @@ owner: [[orchestrator]]
   - 注意事项
 
 **建议依据**:
+
 - 中医体质理论
 - 用户体质类型
 - 季节因素
@@ -162,6 +173,7 @@ owner: [[orchestrator]]
 ### 触发条件
 
 当用户请求以下内容时触发本技能:
+
 - 中医体质辨识评估
 - 体质类型查询
 - 体质特征分析
@@ -174,6 +186,7 @@ owner: [[orchestrator]]
 #### 步骤 1: 确定分析范围
 
 明确用户请求的分析类型:
+
 - 体质辨识评估
 - 体质特征查询
 - 养生建议获取
@@ -183,12 +196,14 @@ owner: [[orchestrator]]
 #### 步骤 2: 读取数据
 
 **主要数据源**:
+
 1. `data/constitutions.json` - 体质知识库
 2. `data/constitution-recommendations.json` - 养生建议库
 3. `data-example/tcm-constitution-tracker.json` - 体质追踪主数据
 4. `data-example/tcm-constitution-logs/YYYY-MM/YYYY-MM-DD.json` - 每日评估记录
 
 **关联数据源**:
+
 1. `data-example/profile.json` - 基础信息
 2. `data-example/nutrition-tracker.json` - 营养数据
 3. `data-example/fitness-tracker.json` - 运动数据
@@ -208,8 +223,10 @@ def calculate_constitution_scores(answers):
     转化分数 = [(原始分数 - 题目数) / (题目数 × 4)] × 100
 
     其中:
+
     - 原始分数 = 各题目得分之和
     - 题目数 = 该体质的问题数量
+
     """
     scores = {}
     for constitution, questions in CONSTITUTION_QUESTIONS.items():
@@ -225,6 +242,7 @@ def calculate_constitution_scores(answers):
 def determine_constitution_type(scores):
     """
     判定逻辑:
+
     1. 平和质判定:
        - 得分 ≥ 60分
        - 其他8种体质得分均 < 40分
@@ -235,6 +253,7 @@ def determine_constitution_type(scores):
     3. 兼夹体质判定:
        - 次高分的体质得分 ≥ 40分
        - 则为兼夹体质
+
     """
     peaceful_score = scores['平和质']
     other_scores = {k: v for k, v in scores.items() if k != '平和质'}
@@ -262,6 +281,7 @@ def determine_constitution_type(scores):
 ```
 
 **趋势分析算法**:
+
 - 线性回归计算趋势
 - 移动平均平滑波动
 - 统计显著性检验
@@ -277,14 +297,17 @@ def determine_constitution_type(scores):
 ### 体质辨识评估报告
 
 ```markdown
+
 # 中医体质辨识评估报告
 
 ## 评估日期
+
 2025-06-20
 
 ## 评估结果
 
 ### 体质类型判定
+
 - **主体质**: 气虚质
 - **兼夹体质**: 阳虚质
 - **体质类型**: 兼夹体质
@@ -310,6 +333,7 @@ def determine_constitution_type(scores):
 ### 气虚质特征
 
 **形体特征**:
+
 - 肌肉松软
 - 容易疲乏
 - 声音低弱
@@ -317,35 +341,42 @@ def determine_constitution_type(scores):
 - 容易出汗
 
 **心理特征**:
+
 - 性格内向
 - 不喜冒险
 - 情绪不稳定
 
 **发病倾向**:
+
 - 易感冒
 - 易内脏下垂
 - 易疲劳
 
 **适应能力**:
+
 - 不耐受风、寒、暑、湿邪
 - 秋季易发病
 
 ### 阳虚质特征
 
 **形体特征**:
+
 - 畏寒怕冷
 - 手足不温
 - 喜热饮食
 
 **心理特征**:
+
 - 性格多沉静
 - 内向
 
 **发病倾向**:
+
 - 易患痰饮、肿胀、腹泻
 - 易感寒邪
 
 **适应能力**:
+
 - 不耐寒邪,耐受夏热
 - 冬季易发病
 
@@ -358,22 +389,26 @@ def determine_constitution_type(scores):
 **原则**: 补气健脾,温补肾阳
 
 **宜食食物**:
+
 - 补气类: 山药、大枣、黄芪、人参、白术
 - 温阳类: 羊肉、韭菜、花椒、生姜、桂圆
 - 健脾类: 薏苡仁、茯苓、扁豆
 
 **忌食食物**:
+
 - 生冷寒凉: 冰淇淋、冰镇饮料、生鱼片
 - 油腻厚味: 油炸食品、肥肉
 - 辛辣燥热: 辣椒、花椒
 
 **推荐食谱**:
+
 1. 黄芪炖鸡
 2. 山药粥
 3. 红枣茯苓粥
 4. 当归生姜羊肉汤
 
 **饮食建议**:
+
 - 少食多餐,细嚼慢咽
 - 饮食宜温热,忌生冷
 - 饭后适当休息
@@ -381,16 +416,19 @@ def determine_constitution_type(scores):
 ### 起居调摄
 
 **作息建议**:
+
 - 保证充足睡眠(8小时以上)
 - 早睡晚起
 - 避免熬夜
 
 **环境要求**:
+
 - 保持环境温暖干燥
 - 避免受风寒
 - 注意保暖,特别是腰腹部和脚部
 
 **生活习惯**:
+
 - 避免过度劳累
 - 劳逸结合
 - 可适当晒太阳
@@ -401,6 +439,7 @@ def determine_constitution_type(scores):
 **原则**: 温和运动,避免剧烈
 
 **推荐运动**:
+
 - 太极拳
 - 八段锦
 - 散步
@@ -408,12 +447,14 @@ def determine_constitution_type(scores):
 - 瑜伽
 
 **运动建议**:
+
 - 频率: 每日1-2次
 - 时长: 每次20-30分钟
 - 强度: 低至中等强度
 - 注意: 以不感到过度疲劳为宜
 
 **注意事项**:
+
 - 避免剧烈运动
 - 运动后及时休息
 - 循序渐进
@@ -424,12 +465,14 @@ def determine_constitution_type(scores):
 **原则**: 保持心情舒畅,避免过度思虑
 
 **调摄方法**:
+
 - 保持积极乐观
 - 避免过度思虑
 - 适当参加社交活动
 - 学会放松
 
 **情绪管理**:
+
 - 培养兴趣爱好
 - 保持社交活动
 - 学会调节情绪
@@ -439,16 +482,19 @@ def determine_constitution_type(scores):
 **推荐穴位**:
 
 #### 1. 足三里
+
 - **位置**: 小腿外侧,膝眼下3寸
 - **功效**: 健脾益气,强壮身体
 - **方法**: 每日按揉3-5分钟,可艾灸
 
 #### 2. 气海
+
 - **位置**: 肚脐下1.5寸
 - **功效**: 培补元气
 - **方法**: 每日按揉3-5分钟,可艾灸
 
 #### 3. 关元
+
 - **位置**: 肚脐下3寸
 - **功效**: 培元固本,温补肾阳
 - **方法**: 每日按揉3-5分钟,可艾灸10-15分钟
@@ -462,12 +508,14 @@ def determine_constitution_type(scores):
 **方源**: 《太平惠民和剂局方》
 
 **方剂组成**:
+
 - 人参: 9-15g, 大补元气
 - 白术: 9-12g, 健脾益气
 - 茯苓: 9-15g, 健脾渗湿
 - 甘草: 6-9g, 调和诸药
 
 **随症加减**:
+
 - 气虚重者: 加黄芪 15-30g
 - 脾虚湿盛者: 加薏苡仁 15-30g, 扁豆 10-15g
 - 食少腹胀者: 加陈皮 6-9g, 砂仁 3-6g
@@ -475,6 +523,7 @@ def determine_constitution_type(scores):
 **用法**: 水煎服,日一剂,分早晚两次温服
 
 **注意事项**:
+
 - ⚠️ 需经专业中医师辨证后使用
 - ⚠️ 孕妇、儿童、体弱者需医师指导
 - ⚠️ 服药期间忌食生冷、油腻、辛辣食物
@@ -486,24 +535,28 @@ def determine_constitution_type(scores):
 ## 季节调养建议
 
 ### 春季调养
+
 - 养阳为主,顺应生发之气
 - 多食韭菜、菠菜、山药
 - 保持心情舒畅,适当运动
 - 注意防风保暖
 
 ### 夏季调养
+
 - 清暑热,养心神
 - 多食绿豆、冬瓜、苦瓜
 - 注意防暑降温
 - 保持心情平和
 
 ### 秋季调养
+
 - 养收润燥,养肺
 - 多食银耳、百合、梨
 - 注意保暖,避免受凉
 - 保持情绪稳定
 
 ### 冬季调养
+
 - 养藏为主,温补肾阳
 - 多食羊肉、核桃、栗子
 - 注意保暖,特别是腰腹部
@@ -514,21 +567,25 @@ def determine_constitution_type(scores):
 ## 与其他健康指标的关联
 
 ### 体质与营养
+
 - 气虚质、阳虚质: 宜温补饮食
 - 阴虚质、湿热质: 宜清淡饮食
 - 痰湿质: 宜低脂低糖,控制体重
 
 ### 体质与运动
+
 - 气虚质、阳虚质: 温和运动为主
 - 湿热质、痰湿质: 适度加强运动强度
 - 阴虚质: 避免剧烈运动
 
 ### 体质与睡眠
+
 - 气虚质、阳虚质: 保证充足睡眠
 - 阴虚质: 避免熬夜
 - 气郁质: 疏肝解郁,改善睡眠质量
 
 ### 体质与慢性病
+
 - 痰湿质: 易患高血压、糖尿病、高脂血症
 - 湿热质: 易患代谢综合征
 - 血瘀质: 易患心血管疾病
@@ -545,6 +602,7 @@ def determine_constitution_type(scores):
 ### 分析能力范围
 
 ✅ **能做到**:
+
 - 中医体质辨识评估
 - 体质特征分析
 - 一般性养生建议
@@ -552,6 +610,7 @@ def determine_constitution_type(scores):
 - 体质趋势追踪
 
 ❌ **不做到**:
+
 - 中医疾病诊断
 - 中药处方开具
 - 替代中医师诊疗
@@ -580,16 +639,19 @@ def determine_constitution_type(scores):
 ### 建议分级
 
 **Level 1: 一般性建议**
+
 - 基于中医体质理论
 - 适用于一般人群
 - 无需医疗监督
 
 **Level 2: 参考性建议**
+
 - 基于用户体质和健康状况
 - 需结合个人情况
 - 建议咨询中医师
 
 **Level 3: 医疗建议**
+
 - 涉及中药调理
 - 需中医师确认
 - 不得自行服用中药
@@ -653,16 +715,19 @@ def determine_constitution_type(scores):
 ## 参考资源
 
 ### 中医体质理论
+
 - 《中医体质分类与判定》标准
 - 王琦九种体质学说
 - 《中医体质学》教材
 
 ### 养生原则
+
 - 中医基础理论
 - 四季养生原则
 - 辨证施治原则
 
 ### 中药方剂
+
 - 《方剂学》教材
 - 《太平惠民和剂局方》
 - 《金匮要略》
@@ -674,11 +739,13 @@ def determine_constitution_type(scores):
 **维护者**: WellAlly Tech
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

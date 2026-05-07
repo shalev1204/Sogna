@@ -8,7 +8,6 @@ id: skill-azure-ai-projects-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure AI Projects Python SDK (Foundry SDK)
 
 Build AI applications on Microsoft Foundry using the `azure-ai-projects` SDK.
@@ -65,6 +64,7 @@ client = AIProjectClient(
 )
 
 # Use Foundry-native operations
+
 agent = client.agents.create_agent(
     model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
     name="my-agent",
@@ -75,10 +75,13 @@ agent = client.agents.create_agent(
 ### 2. OpenAI-Compatible Client
 
 ```python
+
 # Get OpenAI-compatible client from project
+
 openai_client = client.get_openai_client()
 
 # Use standard OpenAI API
+
 response = openai_client.chat.completions.create(
     model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
     messages=[{"role": "user", "content": "Hello!"}],
@@ -116,6 +119,7 @@ agent = client.agents.create_agent(
 from azure.ai.projects.models import PromptAgentDefinition
 
 # Create a versioned agent
+
 agent_version = client.agents.create_version(
     agent_name="customer-support-agent",
     definition=PromptAgentDefinition(
@@ -148,10 +152,13 @@ See references/tools.md for all tool patterns.
 ## Thread and Message Flow
 
 ```python
+
 # 1. Create thread
+
 thread = client.agents.threads.create()
 
 # 2. Add message
+
 client.agents.messages.create(
     thread_id=thread.id,
     role="user",
@@ -159,12 +166,14 @@ client.agents.messages.create(
 )
 
 # 3. Create and process run
+
 run = client.agents.runs.create_and_process(
     thread_id=thread.id,
     agent_id=agent.id,
 )
 
 # 4. Get response
+
 if run.status == "completed":
     messages = client.agents.messages.list(thread_id=thread.id)
     for msg in messages:
@@ -175,12 +184,15 @@ if run.status == "completed":
 ## Connections
 
 ```python
+
 # List all connections
+
 connections = client.connections.list()
 for conn in connections:
     print(f"{conn.name}: {conn.connection_type}")
 
 # Get specific connection
+
 connection = client.connections.get(connection_name="my-search-connection")
 ```
 
@@ -189,7 +201,9 @@ See references/connections.md for connection patterns.
 ## Deployments
 
 ```python
+
 # List available model deployments
+
 deployments = client.deployments.list()
 for deployment in deployments:
     print(f"{deployment.name}: {deployment.model}")
@@ -200,10 +214,13 @@ See references/deployments.md for deployment patterns.
 ## Datasets and Indexes
 
 ```python
+
 # List datasets
+
 datasets = client.datasets.list()
 
 # List indexes
+
 indexes = client.indexes.list()
 ```
 
@@ -212,10 +229,13 @@ See references/datasets-indexes.md for data operations.
 ## Evaluation
 
 ```python
+
 # Using OpenAI client for evals
+
 openai_client = client.get_openai_client()
 
 # Create evaluation with built-in evaluators
+
 eval_run = openai_client.evals.runs.create(
     eval_id="my-eval",
     name="quality-check",
@@ -250,12 +270,15 @@ See references/async-patterns.md for async patterns.
 ## Memory Stores
 
 ```python
+
 # Create memory store for agent
+
 memory_store = client.agents.create_memory_store(
     name="conversation-memory",
 )
 
 # Attach to agent for persistent memory
+
 agent = client.agents.create_agent(
     model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
     name="memory-agent",
@@ -300,14 +323,17 @@ agent = client.agents.create_agent(
 - scripts/run_batch_evaluation.py: CLI tool for batch evaluations
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

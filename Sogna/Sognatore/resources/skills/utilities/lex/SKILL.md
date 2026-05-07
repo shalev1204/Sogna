@@ -11,7 +11,6 @@ id: skill-lex
 owner: [[orchestrator]]
 ---
 
-
 # LEX: Legal-Entity-X-ref
 
 ## Overview
@@ -27,31 +26,42 @@ LEX is a structured truth engine designed to eliminate legal hallucinations by g
 ## How It Works
 
 ### Step 1: Identify Jurisdiction
+
 Before drafting, determine if the user's entity or contract target is in the **USA, Canada, or the EU**.
 
 ### Step 2: Search & Fetch Context
+
 Use the CLI shortcuts to find the relevant legal patterns and templates.
+
 - Run `lex search <query>` to find matching templates.
 - Run `lex get <path>` to read the granular metadata and requirements.
 
 ### Step 3: Scaffold Drafting
+
 Generate foundation-level documents using `lex draft <description>`. This ensures that all drafts include the mandatory AI-generated content disclaimer.
 
 ### Step 4: Verify Authority
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 Always include a "Verified Sources" section in your output by running `lex verify`, which fetches official government links for the retrieved context.
 
 ## Examples
 
 ### Example 1: Comparing Employment Laws
+
 ```bash
+
 # Get the workforce template to compare US vs EU notice periods
+
 lex get templates/02_employment_workforce.md
 ```
 
 ### Example 2: Drafting a Czech Contract
+
 ```bash
+
 # Create a house sale contract scaffold in Czech language
+
 lex draft "Czech house sale contract"
 ```
 
@@ -65,6 +75,7 @@ lex draft "Czech house sale contract"
 ## Common Pitfalls
 
 - **Problem:** Legal hallucination regarding specific EU notice periods.
+
   **Solution:** Run `lex get templates/02_employment_workforce.md` to see the restrictive covenant comparison table.
 
 ## Related Skills
@@ -74,11 +85,13 @@ lex draft "Czech house sale contract"
 - `@security-auditor` - For reviewing the final repository security.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

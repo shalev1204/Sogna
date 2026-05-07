@@ -69,6 +69,7 @@ If the work is more expensive than a small derived property, move it into a mode
 - Building custom scroll containers when `List`, `LazyVStack`, or `LazyHGrid` would already solve the problem
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

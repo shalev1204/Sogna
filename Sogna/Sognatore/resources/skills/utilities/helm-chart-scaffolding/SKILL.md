@@ -8,7 +8,6 @@ id: skill-helm-chart-scaffolding
 owner: [[orchestrator]]
 ---
 
-
 # Helm Chart Scaffolding
 
 Comprehensive guidance for creating, organizing, and managing Helm charts for packaging and deploying Kubernetes applications.
@@ -16,6 +15,7 @@ Comprehensive guidance for creating, organizing, and managing Helm charts for pa
 ## Use this skill when
 
 Use this skill when you need to:
+
 - Create new Helm charts from scratch
 - Package Kubernetes applications for distribution
 - Manage multi-environment deployments with Helm
@@ -40,11 +40,13 @@ Use this skill when you need to:
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

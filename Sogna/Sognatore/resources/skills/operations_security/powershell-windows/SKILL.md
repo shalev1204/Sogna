@@ -8,7 +8,6 @@ id: skill-powershell-windows
 owner: [[ops-security]]
 ---
 
-
 # PowerShell Windows Patterns
 
 > Critical patterns and pitfalls for Windows PowerShell.
@@ -148,14 +147,18 @@ Write-Output "Value: $value"
 ## 10. Script Template
 
 ```powershell
+
 # Strict mode
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Continue"
 
 # Paths
+
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Main
+
 try {
     # Logic here
     Write-Output "[OK] Done"
@@ -172,14 +175,17 @@ catch {
 > **Remember:** PowerShell has unique syntax rules. Parentheses, ASCII-only, and null checks are non-negotiable.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

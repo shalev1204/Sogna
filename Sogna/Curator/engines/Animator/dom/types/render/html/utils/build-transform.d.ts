@@ -7,4 +7,4 @@ import type { SognaflowNodeOptions } from "../../../node/types.js";
  * This outputs with a default order of transforms/scales/rotations, this can be customised by
  * providing a transformTemplate function.
  */
-export declare function BuildTransform(latestValues: ResolvedValues, transform: HTMLRenderState["transform"], transformTemplate?: SognaflowNodeOptions["transformTemplate"]): string;
+export declare function buildTransform(latestValues: ResolvedValues, transform: HTMLRenderState["transform"], transformTemplate?: SognaflowNodeOptions["transformTemplate"]): string;

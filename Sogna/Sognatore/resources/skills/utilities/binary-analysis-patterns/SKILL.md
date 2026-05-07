@@ -8,7 +8,6 @@ id: skill-binary-analysis-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Binary Analysis Patterns
 
 Comprehensive patterns and techniques for analyzing compiled binaries, understanding assembly code, and reconstructing program logic.
@@ -35,6 +34,7 @@ Comprehensive patterns and techniques for analyzing compiled binaries, understan
 ### x86-64 Instruction Patterns
 
 #### Function Prologue/Epilogue
+
 ```asm
 ; Standard prologue
 push rbp           ; Save base pointer
@@ -95,6 +95,7 @@ add rsp, 0x28
 ### ARM Assembly Patterns
 
 #### ARM64 (AArch64) Calling Convention
+
 ```asm
 ; Arguments: X0-X7
 ; Return: X0 (and X1 for 128-bit)
@@ -111,6 +112,7 @@ ret
 ```
 
 #### ARM32 Calling Convention
+
 ```asm
 ; Arguments: R0-R3, then stack
 ; Return: R0 (and R1 for 64-bit)
@@ -400,7 +402,9 @@ createData(toAddr(0x601000), struct);
 ### Pattern Matching Scripts
 
 ```python
+
 # Find all calls to dangerous functions
+
 for func in currentProgram.getFunctionManager().getFunctions(True):
     for ref in getReferencesTo(func.getEntryPoint()):
         if func.getName() in ["strcpy", "sprintf", "gets"]:
@@ -417,6 +421,7 @@ import idautils
 import idc
 
 # Find all function calls
+
 def find_calls(func_name):
     for func_ea in idautils.Functions():
         for head in idautils.Heads(func_ea, idc.find_func_end(func_ea)):
@@ -426,6 +431,7 @@ def find_calls(func_name):
                     print(f"Call to {func_name} at {hex(head)}")
 
 # Rename functions based on strings
+
 def auto_rename():
     for s in idautils.Strings():
         for xref in idautils.XrefsTo(s.ea):
@@ -456,11 +462,13 @@ def auto_rename():
 - **Position-independent code**: RIP-relative addressing
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

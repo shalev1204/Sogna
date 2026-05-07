@@ -17,16 +17,20 @@ DBOS versions workflows to prevent unsafe recovery. Use blue-green deployments t
 **Incorrect (deploying breaking changes without versioning):**
 
 ```python
+
 # Deploying new code directly kills in-progress workflows
+
 # because their checkpoints don't match the new code
 
 # Old code
+
 @DBOS.workflow()
 def workflow():
     step_a()
     step_b()
 
 # New code replaces old immediately - breaks recovery!
+
 @DBOS.workflow()
 def workflow():
     step_a()
@@ -36,7 +40,9 @@ def workflow():
 **Correct (using versioning with blue-green deployment):**
 
 ```python
+
 # Set explicit version in config
+
 config: DBOSConfig = {
     "name": "my-app",
     "application_version": "2.0.0",  # New version
@@ -44,9 +50,11 @@ config: DBOSConfig = {
 DBOS(config=config)
 
 # Deploy new version alongside old version
+
 # New traffic goes to v2.0.0, old workflows drain on v1.0.0
 
 # Check for remaining old workflows before retiring v1.0.0
+
 old_workflows = DBOS.list_workflows(
     app_version="1.0.0",
     status=["PENDING", "ENQUEUED"]
@@ -60,7 +68,9 @@ if len(old_workflows) == 0:
 Fork a workflow to run on a new version:
 
 ```python
+
 # Fork workflow from step 5 on version 2.0.0
+
 new_handle = DBOS.fork_workflow(
     workflow_id="old-workflow-id",
     start_step=5,
@@ -71,6 +81,7 @@ new_handle = DBOS.fork_workflow(
 Reference: [Versioning](https://docs.dbos.dev/python/tutorials/upgrading-workflows#versioning)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

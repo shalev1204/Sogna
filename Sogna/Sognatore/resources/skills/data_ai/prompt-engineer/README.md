@@ -57,10 +57,12 @@ copilot> improve this prompt: help me write Python code
 **Skill asks:**
 ```
 What type of Python code do you need?
+
 - [ ] Data analysis
 - [ ] Web scraping
 - [ ] Task automation
 - [ ] API/backend development
+
 ```
 
 **You select:** "Web scraping"
@@ -73,6 +75,7 @@ You are a Python developer expert in web scraping.
 Task: Create a Python script to scrape data from [specify target website].
 
 Requirements:
+
 - Use BeautifulSoup or Scrapy
 - Implement pagination and rate limiting
 - Store data in structured format (CSV or JSON)
@@ -99,12 +102,14 @@ Role: You are a senior machine learning engineer specializing in recommendation 
 Objective: Design a product recommendation system that combines user purchase history, preferences, and market trends.
 
 Details:
+
 - Input data sources: user transaction logs, preference surveys, market trend APIs
 - Algorithm considerations: collaborative filtering, content-based filtering, hybrid approaches
 - Performance metrics: precision, recall, diversity, novelty
 - Scalability: system must handle 100k+ users
 
 Approach step-by-step:
+
 1. Analyze the three data sources and their relationships
 2. Propose 2-3 algorithm approaches with trade-offs
 3. Design data pipeline architecture
@@ -131,9 +136,11 @@ copilot> transform into prompt: I want to improve my process
 **Skill asks:**
 ```
 What process do you want to improve?
+
 - [ ] Work/productivity process
 - [ ] Learning process
 - [ ] Technical process (development, deployment, etc.)
+
 ```
 
 **You select:** "Work process"
@@ -141,9 +148,11 @@ What process do you want to improve?
 **Skill asks:**
 ```
 What specific aspect?
+
 - [ ] Time management
 - [ ] Team collaboration
 - [ ] Decision making
+
 ```
 
 **You select:** "Decision making"
@@ -156,16 +165,19 @@ Context: I struggle with making decisions quickly and effectively at work.
 Objective: Develop a structured framework to improve decision speed and quality.
 
 Current Reality:
+
 - Decisions delayed by excessive analysis
 - Lack of clear criteria
 - Uncertainty about when to decide vs. gather information
 
 Desired Outcome:
+
 - Consistent decision-making framework
 - Clear criteria for different decision types
 - Reduced decision fatigue
 
 Your task:
+
 1. Assess current patterns and identify bottlenecks
 2. Propose framework (Eisenhower Matrix, RAPID, Decision Tree)
 3. Create decision criteria templates
@@ -190,6 +202,7 @@ The **Prompt Engineer** skill uses **11 established frameworks** to optimize you
 **Best for:** Tasks requiring specific expertise or perspective
 
 **Components:**
+
 - **Role:** "You are a [expert identity]"
 - **Task:** "Your task is to [specific action]"
 - **Format:** "Output format: [structure/style]"
@@ -210,6 +223,7 @@ Format: Provide refactored code with inline comments explaining changes.
 **Best for:** Complex reasoning, debugging, mathematical problems, logic puzzles
 
 **Components:**
+
 - Break problem into sequential steps
 - Show reasoning at each stage
 - Build toward final solution
@@ -217,10 +231,12 @@ Format: Provide refactored code with inline comments explaining changes.
 **Example:**
 ```
 Solve this problem step-by-step:
+
 1. Identify the core issue
 2. Analyze contributing factors
 3. Propose solution approach
 4. Validate solution against requirements
+
 ```
 
 ---
@@ -232,6 +248,7 @@ Solve this problem step-by-step:
 **Best for:** Multi-phase projects with clear deliverables and constraints
 
 **Components:**
+
 - **Role:** Expert identity
 - **Instructions:** What to do
 - **Steps:** Sequential actions
@@ -256,6 +273,7 @@ Narrowing: Focus on AWS, limit to 3 environments (dev/staging/prod).
 **Best for:** Complex design, system architecture, research proposals
 
 **Components:**
+
 - **Role:** Expert perspective
 - **Objective:** What to achieve
 - **Details:** Context and requirements
@@ -280,6 +298,7 @@ Sense check: Validate solution meets latency and scalability requirements.
 **Best for:** Summarization, compression, synthesis of long content
 
 **Process:**
+
 - Start with verbose explanation
 - Iteratively compress while preserving key information
 - End with maximally dense version (high information per word)
@@ -287,11 +306,13 @@ Sense check: Validate solution meets latency and scalability requirements.
 **Example:**
 ```
 Compress this article into progressively denser summaries:
+
 1. Initial summary (300 words)
 2. Compressed (200 words)
 3. Further compressed (100 words)
 4. Dense (50 words)
 5. Maximum density (25 words, all critical points)
+
 ```
 
 ---
@@ -303,6 +324,7 @@ Compress this article into progressively denser summaries:
 **Best for:** Communication, presentations, stakeholder updates, storytelling
 
 **Components:**
+
 - **Role:** Communicator identity
 - **Audience:** Who you're addressing (expertise level, concerns)
 - **Context:** Background/situation
@@ -325,6 +347,7 @@ Expectation: Explain root causes and recovery plan in non-technical terms.
 **Best for:** Analysis, investigation, systematic exploration, diagnostic work
 
 **Process:**
+
 1. **Research:** Gather information
 2. **Investigate:** Deep dive into findings
 3. **Synthesize:** Combine insights
@@ -348,6 +371,7 @@ Evaluate: Recommend retention strategies based on evidence.
 **Best for:** Problem-solving with rich context, case studies, retrospectives
 
 **Components:**
+
 - **Situation:** Background context
 - **Task:** Specific challenge
 - **Action:** What needs doing
@@ -370,6 +394,7 @@ Result: Deploy 10+ times per day with <5% rollback rate.
 **Best for:** Structured documentation, medical records, technical logs, incident reports
 
 **Components:**
+
 - **Subjective:** Reported information (symptoms, complaints)
 - **Objective:** Observable facts (metrics, data)
 - **Assessment:** Analysis and diagnosis
@@ -393,6 +418,7 @@ Plan: 1) Scale pool size 2) Add monitoring alerts 3) Review query performance.
 **Best for:** Goal-setting, OKRs, measurable objectives, team alignment
 
 **Components:**
+
 - **Collaborative:** Who's involved
 - **Limited:** Scope boundaries (time, resources)
 - **Emotional:** Why it matters (motivation)
@@ -418,6 +444,7 @@ Refinable: Bi-weekly retrospectives, adjust priorities based on feedback.
 **Best for:** Coaching, personal development, growth planning, mentorship
 
 **Components:**
+
 - **Goal:** What to achieve
 - **Reality:** Current situation (strengths, gaps)
 - **Options:** Possible approaches
@@ -570,41 +597,49 @@ copilot> transform into prompt: learn machine learning from zero
 ## ❓ FAQ
 
 ### Q: Does this skill work outside of Sogna ecosistemas?
+
 **A:** Yes! It's a **universal skill** that works in any terminal context. It doesn't depend on ecosistema structure, project configuration, or external files.
 
 ---
 
 ### Q: Do I need to know prompting frameworks?
+
 **A:** No. The skill knows all 11 frameworks and selects the best one(s) automatically based on your task.
 
 ---
 
 ### Q: Will the skill explain which framework it used?
+
 **A:** No. It operates in "magic mode" - you get the polished prompt without technical explanations. If you want to know, you can ask explicitly.
 
 ---
 
 ### Q: How many questions will the skill ask me?
+
 **A:** Maximum 2-3 questions, and only when information is critically missing. Most of the time, it generates the prompt directly.
 
 ---
 
 ### Q: Can I customize the frameworks?
+
 **A:** The skill uses standard framework definitions. You can't customize them, but you can provide additional constraints in your input (e.g., "create a short prompt for...").
 
 ---
 
 ### Q: Does it support languages other than English?
+
 **A:** Yes. If you provide input in Portuguese, it generates the prompt in Portuguese. Same for English or mixed inputs.
 
 ---
 
 ### Q: What if I don't like the generated prompt?
+
 **A:** You can ask the skill to refine it: "make it shorter", "add more examples", "focus on X aspect", etc.
 
 ---
 
 ### Q: Can I use this for any AI model (Claude, ChatGPT, Gemini)?
+
 **A:** Yes. The prompts are model-agnostic and work with any conversational AI.
 
 ---
@@ -616,11 +651,13 @@ This skill is designed to work **globally** across all your projects.
 ### Option 1: Use from Repository
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/eric.andrade/cli-ai-skills.git
    ```
 
 2. Configure Copilot to load skills globally:
+
    ```bash
    # Add to ~/.copilot/config.json
    {
@@ -640,7 +677,9 @@ cp -r /path/to/cli-ai-skills/.github/skills/prompt-engineer ~/.copilot/global-sk
 
 Then configure:
 ```bash
+
 # Add to ~/.copilot/config.json
+
 {
   "skills": {
     "directories": [
@@ -666,6 +705,7 @@ Then configure:
 *Works in any project, any context, any terminal.*
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

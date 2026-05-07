@@ -1,2 +1,2 @@
-import { SognaflowValueState } from "../sognaflowvaluestate.js";
-export declare function BuildTransform(state: SognaflowValueState): string;
+import { SognaflowValueState } from "../SognaflowValueState.js";
+export declare function buildTransform(state: SognaflowValueState): string;

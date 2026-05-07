@@ -26,6 +26,7 @@ A natural and grounded theme featuring earth tones inspired by dense forest envi
 Environmental presentations, sustainability reports, outdoor brands, wellness content, organic products.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

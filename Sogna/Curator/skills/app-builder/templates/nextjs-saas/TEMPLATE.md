@@ -90,16 +90,19 @@ project-name/
 ## Setup Steps
 
 1. Initialize project (Node 24):
+
    ```bash
    npx create-next-app@latest {{name}} --typescript --eslint
    ```
 
 2. Install core libraries:
+
    ```bash
    npm install next-auth@beta stripe resend @prisma/client
    ```
 
 3. Install Tailwind v4 (Add to globals.css):
+
    ```css
    @import "tailwindcss";
    ```
@@ -107,16 +110,19 @@ project-name/
 4. Configure environment (.env.local)
 
 5. Sync Database:
+
    ```bash
    npx prisma db push
    ```
 
 6. Run local Webhook:
+
    ```bash
    npm run stripe:listen
    ```
 
 7. Run project:
+
    ```bash
    npm run dev
    ```

@@ -11,6 +11,7 @@ version: 1.0.0
 These templates concern physical premises. Real Estate law is almost entirely localized, meaning templates represent broad structural frameworks rather than plug-and-play legal advice.
 
 ## Official References
+
 - **USA:** [HUD.gov](https://www.hud.gov/) | State-specific Real Estate Commissions.
 - **Canada:** Provincial Residential Tenancy Acts.
 - **EU (Granular):** [N-Lex Real Estate Law](https://n-lex.europa.eu/) | Member State property laws.
@@ -24,12 +25,15 @@ These templates concern physical premises. Real Estate law is almost entirely lo
 | **License to Occupy** | A "lighter" version of a lease, typically used for co-working spaces. Does not grant "exclusive possession." | Used for similar short-term or shared-space arrangements. Must carefully avoid conveying a true tenancy. | Used for flexible offices and pop-ups. Vital distinction from a commercial lease to avoid triggering automatic tenant protections. |
 
 ## Agent Instructions
+
 When an end-user requests a Real Estate contract:
+
 1. Note the severe localization of real estate. Emphasize that residential forms often *must* be the statutory version provided by the local government.
 2. For EU member states, use **N-Lex** to verify the specific Civil Code or Property Act sections.
 3. Differentiate clearly between a Lease (grants exclusive possession) and a License (grants permission to use).
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

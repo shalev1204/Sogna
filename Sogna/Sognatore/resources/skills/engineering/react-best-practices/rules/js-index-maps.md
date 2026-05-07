@@ -42,6 +42,7 @@ Build map once (O(n)), then all lookups are O(1).
 For 1000 orders × 1000 users: 1M ops → 2K ops.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

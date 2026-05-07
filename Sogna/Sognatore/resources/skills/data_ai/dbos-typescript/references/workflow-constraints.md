@@ -56,6 +56,7 @@ const myWorkflow = DBOS.registerWorkflow(myWorkflowFn);
 ```
 
 Additional constraints:
+
 - Don't modify global variables from workflows or steps
 - Steps in parallel must start in deterministic order:
 
@@ -73,6 +74,7 @@ Use `Promise.allSettled` instead of `Promise.all` to safely handle errors withou
 Reference: [Workflow Guarantees](https://docs.dbos.dev/typescript/tutorials/workflow-tutorial#workflow-guarantees)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

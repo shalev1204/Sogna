@@ -30,6 +30,7 @@ def handle_user_task(user_id, task):
 from dbos import Queue, SetEnqueueOptions
 
 # Partition queue with concurrency=1 per partition
+
 queue = Queue("user_tasks", partition_queue=True, concurrency=1)
 
 @DBOS.workflow()
@@ -45,9 +46,13 @@ def handle_user_task(user_id: str, task):
 For both per-partition AND global limits, use two-level queueing:
 
 ```python
+
 # Global limit of 5 concurrent tasks
+
 global_queue = Queue("global_queue", concurrency=5)
+
 # Per-user limit of 1 concurrent task
+
 user_queue = Queue("user_queue", partition_queue=True, concurrency=1)
 
 def handle_task(user_id: str, task):
@@ -67,6 +72,7 @@ def process_task(task):
 Reference: [Partitioning Queues](https://docs.dbos.dev/python/tutorials/queue-tutorial#partitioning-queues)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,7 +7,6 @@ id: skill-apify-actorization
 owner: [[eng-api]]
 ---
 
-
 # Apify Actorization
 
 Actorization converts existing software into reusable serverless applications compatible with the Apify platform. Actors are programs packaged as Docker images that accept well-defined JSON input, perform an action, and optionally produce structured JSON output.
@@ -41,7 +40,9 @@ If not installed:
 brew install apify-cli
 
 # Or: npm install -g apify-cli
+
 # Or install from an official release package that your OS package manager verifies
+
 ```
 
 Verify CLI is logged in:
@@ -88,6 +89,7 @@ apify init
 ```
 
 This creates:
+
 - `.actor/actor.json` - Actor configuration and metadata
 - `.actor/input_schema.json` - Input definition for the Apify Console
 - `Dockerfile` (if not present) - Container image definition
@@ -112,6 +114,7 @@ Choose based on your project's language:
 ## Steps 4-6: Configure Schemas
 
 See [schemas-and-output.md](references/schemas-and-output.md) for detailed configuration of:
+
 - Input schema (`.actor/input_schema.json`)
 - Output schema (`.actor/output_schema.json`)
 - Actor configuration (`.actor/actor.json`)
@@ -164,7 +167,9 @@ Other options: **Rental** (monthly subscription) or **Free** (open source).
 - [ ] `.actor/output_schema.json` defines output structure (if applicable)
 - [ ] `.actor/output_schema.json` validates against `@apify/json_schemas` (`output.schema.json`)
 - [ ] `Dockerfile` is present and builds successfully
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - [ ] `Actor.init()` / `Actor.exit()` wraps main code (JS/TS)
 - [ ] `async with Actor:` wraps main code (Python)
 - [ ] Inputs are read via `Actor.getInput()` / `Actor.get_input()`
@@ -177,7 +182,9 @@ Other options: **Rental** (monthly subscription) or **Free** (open source).
 If MCP server is configured, use these tools for documentation:
 
 - `search-apify-docs` - Search documentation
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - `fetch-apify-docs` - Get full doc pages
 
 Otherwise, the MCP Server url: `https://mcp.apify.com/?tools=docs`.
@@ -191,11 +198,13 @@ Otherwise, the MCP Server url: `https://mcp.apify.com/?tools=docs`.
 - [Actor Specification](https://raw.githubusercontent.com/apify/actor-whitepaper/refs/heads/master/README.md) - Complete specification
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

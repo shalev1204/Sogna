@@ -16,8 +16,11 @@ Automatic distributed training across multiple GPUs. TRL/Accelerate handles dist
 ```python
 hf_jobs("uv", {
     "script": """
+
 # Your training script here (same as single GPU)
+
 # No changes needed - Accelerate detects multiple GPUs
+
 """,
     "flavor": "a10g-largex2",  # 2x A10G GPUs
     "timeout": "4h",
@@ -26,6 +29,7 @@ hf_jobs("uv", {
 ```
 
 **Tips for multi-GPU:**
+
 - No code changes needed
 - Use `per_device_train_batch_size` (per GPU, not total)
 - Effective batch size = `per_device_train_batch_size` × `num_gpus` × `gradient_accumulation_steps`
@@ -38,8 +42,11 @@ Train with preference data for alignment:
 ```python
 hf_jobs("uv", {
     "script": """
+
 # /// script
+
 # dependencies = ["trl>=0.12.0", "trackio"]
+
 # ///
 
 from datasets import load_dataset
@@ -49,6 +56,7 @@ import trackio
 dataset = load_dataset("trl-lib/ultrafeedback_binarized", split="train")
 
 # Create train/eval split
+
 dataset_split = dataset.train_test_split(test_size=0.1, seed=42)
 
 config = DPOConfig(
@@ -138,7 +146,9 @@ trackio.finish()
 When user wants to compare related runs, use the `group` parameter:
 
 ```python
+
 # Hyperparameter sweep
+
 trackio.init(project="hyperparam-sweep", run_name="lr-0.001", group="lr_0.001")
 trackio.init(project="hyperparam-sweep", run_name="lr-0.01", group="lr_0.01")
 ```
@@ -157,6 +167,7 @@ trackio.init(project="hyperparam-sweep", run_name="lr-0.01", group="lr_0.01")
 **⚠️ IMPORTANT**: If you set `eval_strategy="steps"` or `eval_strategy="epoch"`, you **MUST** provide an `eval_dataset` to the trainer, or the training will hang.
 
 ### ✅ CORRECT - With eval dataset:
+
 ```python
 dataset_split = dataset.train_test_split(test_size=0.1, seed=42)
 
@@ -169,6 +180,7 @@ trainer = SFTTrainer(
 ```
 
 ### ❌ WRONG - Will hang:
+
 ```python
 trainer = SFTTrainer(
     model="Qwen/Qwen2.5-0.5B",
@@ -179,6 +191,7 @@ trainer = SFTTrainer(
 ```
 
 ### Option: Disable evaluation if no eval dataset
+
 ```python
 config = SFTConfig(
     eval_strategy="no",  # ← Explicitly disable evaluation
@@ -212,6 +225,7 @@ trainer = SFTTrainer(
 - `references/troubleshooting.md` - Common issues and solutions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

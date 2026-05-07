@@ -8,7 +8,6 @@ id: skill-shopify-development
 owner: [[prod-pm]]
 ---
 
-
 # Shopify Development Skill
 
 Use this skill when the user asks about:
@@ -277,6 +276,7 @@ topics = ["products/update"]
 uri = "/webhooks/products"
 
 # GDPR mandatory webhooks (required for app approval)
+
 [webhooks.privacy_compliance]
 customer_data_request_url = "/webhooks/gdpr/data-request"
 customer_deletion_url = "/webhooks/gdpr/customer-deletion"
@@ -368,14 +368,17 @@ For detailed implementation guides, read these files:
 API Version: 2026-01 (quarterly releases, 12-month deprecation window)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

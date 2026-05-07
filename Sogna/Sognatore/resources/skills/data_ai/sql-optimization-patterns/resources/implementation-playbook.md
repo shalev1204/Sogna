@@ -60,6 +60,7 @@ WHERE u.created_at > NOW() - INTERVAL '30 days';
 ```
 
 **Key Metrics to Watch:**
+
 - **Seq Scan**: Full table scan (usually slow for large tables)
 - **Index Scan**: Using index (good)
 - **Index Only Scan**: Using index without touching table (best)
@@ -75,6 +76,7 @@ WHERE u.created_at > NOW() - INTERVAL '30 days';
 Indexes are the most powerful optimization tool.
 
 **Index Types:**
+
 - **B-Tree**: Default, good for equality and range queries
 - **Hash**: Only for equality (=) comparisons
 - **GIN**: Full-text search, array queries, JSONB
@@ -157,7 +159,9 @@ JOIN orders o ON u.id = o.user_id;
 
 **Problem: N+1 Query Anti-Pattern**
 ```python
+
 # Bad: Executes N+1 queries
+
 users = db.query("SELECT * FROM users LIMIT 10")
 for user in users:
     orders = db.query("SELECT * FROM orders WHERE user_id = ?", user.id)
@@ -180,8 +184,11 @@ WHERE user_id IN (1, 2, 3, 4, 5);
 ```
 
 ```python
+
 # Good: Single query with JOIN or batch load
+
 # Using JOIN
+
 results = db.query("""
     SELECT u.id, u.name, o.id as order_id, o.total
     FROM users u
@@ -190,13 +197,16 @@ results = db.query("""
 """)
 
 # Or batch load
+
 users = db.query("SELECT * FROM users LIMIT 10")
 user_ids = [u.id for u in users]
 orders = db.query(
     "SELECT * FROM orders WHERE user_id IN (?)",
     user_ids
 )
+
 # Group orders by user_id
+
 orders_by_user = {}
 for order in orders:
     orders_by_user.setdefault(order.user_id, []).append(order)
@@ -512,6 +522,7 @@ ORDER BY pg_relation_size(indexrelid) DESC;
 - **scripts/index-recommendations.sql**: Generate index recommendations
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

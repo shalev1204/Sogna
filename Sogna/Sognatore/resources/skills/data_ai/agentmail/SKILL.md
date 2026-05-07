@@ -7,7 +7,6 @@ id: skill-agentmail
 owner: [[orchestrator]]
 ---
 
-
 # AgentMail — Email for AI Agents
 
 AgentMail gives AI agents real email addresses (`@theagentmail.net`) with a REST API. Agents can send and receive email, sign up for services (GitHub, AWS, Slack, etc.), and get verification codes. A karma system prevents spam and keeps the shared domain's reputation high.
@@ -15,6 +14,7 @@ AgentMail gives AI agents real email addresses (`@theagentmail.net`) with a REST
 Base URL: `https://api.theagentmail.net`
 
 ## When to Use
+
 - An AI agent needs a real inbox/outbox for signups, verification flows, or transactional communication.
 - You need to provision AgentMail accounts, send messages, read inbox contents, or register inbound webhooks.
 - You need to monitor karma usage or wire email events into agent automation.
@@ -53,11 +53,14 @@ Optional fields: `cc`, `bcc` (string arrays), `inReplyTo`, `references` (strings
 ### Read inbox
 
 ```bash
+
 # List messages
+
 curl https://api.theagentmail.net/v1/accounts/{accountId}/messages \
   -H "Authorization: Bearer am_..."
 
 # Get full message (with body and attachments)
+
 curl https://api.theagentmail.net/v1/accounts/{accountId}/messages/{messageId} \
   -H "Authorization: Bearer am_..."
 ```
@@ -81,6 +84,7 @@ curl -X POST https://api.theagentmail.net/v1/accounts/{accountId}/webhooks \
 ```
 
 Webhook deliveries include two security headers:
+
 - `X-AgentMail-Signature` -- HMAC-SHA256 hex digest of the request body, signed with the webhook secret
 - `X-AgentMail-Timestamp` -- millisecond timestamp of when the delivery was sent
 
@@ -134,6 +138,7 @@ Every action has a karma cost or reward:
 | `account_created` | -10 | Creating addresses costs karma |
 
 **Important rules:**
+
 - Karma is only awarded for inbound emails from trusted providers (Gmail, Outlook, Yahoo, iCloud, ProtonMail, Fastmail, Hey, etc.). Emails from unknown/throwaway domains don't earn karma.
 - You only earn karma once per sender until the agent replies. If sender X emails you 5 times without a reply, only the first earns karma. Reply to X, and the next email from X earns karma again.
 - Deleting an account refunds the 10 karma it cost to create.
@@ -255,11 +260,13 @@ type KarmaEvent = { id: string; type: string; amount: number; timestamp: number;
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

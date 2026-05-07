@@ -8,6 +8,7 @@ version: 1.0.0
 # Reliability Principles for Training Jobs
 
 ## Contents
+
 - Principle 1: Always Verify Before Use
 - Principle 2: Prioritize Reliability Over Performance
 - Principle 3: Create Atomic, Self-Contained Scripts
@@ -36,32 +37,43 @@ These principles are derived from real production failures and successful fixes.
 **Before submitting ANY job:**
 
 ```python
+
 # Verify dataset exists
+
 dataset_search({"query": "dataset-name", "author": "author-name", "limit": 5})
 hub_repo_details(["author/dataset-name"], repo_type="dataset")
 
 # Verify model exists
+
 hub_repo_details(["org/model-name"], repo_type="model")
 
 # Check script/file paths (for URL-based scripts)
+
 # Verify before using: https://github.com/user/repo/blob/main/script.py
+
 ```
 
 **Examples that would have caught errors:**
 
 ```python
+
 # ❌ WRONG: Assumed dataset exists
+
 hf_jobs("uv", {
     "script": """...""",
     "env": {"DATASET": "trl-lib/argilla-dpo-mix-7k"}  # Doesn't exist!
 })
 
 # ✅ CORRECT: Verify first
+
 dataset_search({"query": "argilla dpo", "author": "trl-lib"})
+
 # Would show: "trl-lib/ultrafeedback_binarized" is the correct name
 
 hub_repo_details(["trl-lib/ultrafeedback_binarized"], repo_type="dataset")
+
 # Confirms it exists before using
+
 ```
 
 ### Implementation Checklist
@@ -92,7 +104,9 @@ hub_repo_details(["trl-lib/ultrafeedback_binarized"], repo_type="dataset")
 **Choose reliability:**
 
 ```python
+
 # ❌ RISKY: Aggressive optimization that may fail
+
 TrainingArguments(
     torch_compile=True,  # Can fail on T4, A10G GPUs
     optim="adamw_bnb_8bit",  # Requires specific setup
@@ -101,6 +115,7 @@ TrainingArguments(
 )
 
 # ✅ SAFE: Proven defaults
+
 TrainingArguments(
     # torch_compile=True,  # Commented with note: "Enable on H100 for 20% speedup"
     optim="adamw_torch",  # Standard, always works
@@ -113,6 +128,7 @@ TrainingArguments(
 ### Real-World Example
 
 **The `torch.compile` failure:**
+
 - Added for "20% speedup" on H100
 - **Failed fatally on T4-medium** with cryptic error
 - Misdiagnosed as dataset issue (cost hours)
@@ -150,34 +166,57 @@ TrainingArguments(
 **Complete dependency specifications:**
 
 ```python
+
 # ❌ INCOMPLETE: "Simplified" by removing dependencies
+
 # /// script
+
 # dependencies = [
+
 #     "transformers",
+
 #     "torch",
+
 #     "datasets",
+
 # ]
+
 # ///
 
 # ✅ COMPLETE: All dependencies explicit
+
 # /// script
+
 # dependencies = [
+
 #     "transformers>=5.2.0",
+
 #     "accelerate>=1.1.0",
+
 #     "albumentations>=1.4.16",  # Required for augmentation + bbox handling
+
 #     "timm",                     # Required for vision backbones
+
 #     "datasets>=4.0",
+
 #     "torchmetrics",             # Required for mAP/mAR computation
+
 #     "pycocotools",              # Required for COCO evaluation
+
 #     "trackio",                  # Required for metrics monitoring
+
 #     "huggingface_hub",
+
 # ]
+
 # ///
+
 ```
 
 ### Real-World Example
 
 **The `albumentations` failure:**
+
 - Original script had it: augmentations and bbox clipping worked fine
 - "Simplified" version removed it: "not strictly needed for training"
 - **Training crashed on bbox augmentation** — no fallback for COCO-format bbox handling
@@ -209,10 +248,13 @@ TrainingArguments(
 **Wrap subprocess calls:**
 
 ```python
+
 # ❌ UNCLEAR: Silent failure
+
 subprocess.run([...], check=True, capture_output=True)
 
 # ✅ CLEAR: Shows what failed
+
 try:
     result = subprocess.run(
         [...],
@@ -233,10 +275,13 @@ except subprocess.CalledProcessError as e:
 **Validate inputs:**
 
 ```python
+
 # ❌ UNCLEAR: Fails later with cryptic error
+
 model = load_model(MODEL_NAME)
 
 # ✅ CLEAR: Fails fast with clear message
+
 if not MODEL_NAME:
     raise ValueError("MODEL_NAME environment variable not set!")
 
@@ -271,6 +316,7 @@ except Exception as e:
 Before submitting ANY job:
 
 ### Pre-Flight Checks
+
 - [ ] **Verified** all repos/datasets exist (hub_repo_details)
 - [ ] **Tested** with known-good inputs if new code
 - [ ] **Using** proven hardware/configuration
@@ -281,6 +327,7 @@ Before submitting ANY job:
 - [ ] **Added** clear error handling
 
 ### Script Quality
+
 - [ ] Self-contained (no external setup needed)
 - [ ] Complete dependencies listed
 - [ ] Build tools installed by script
@@ -289,6 +336,7 @@ Before submitting ANY job:
 - [ ] Configuration logged at start
 
 ### Job Configuration
+
 - [ ] Timeout > expected runtime + 30% buffer
 - [ ] Hardware appropriate for model size
 - [ ] Secrets include HF_TOKEN (see SKILL.md directive #2 for syntax)
@@ -317,6 +365,7 @@ Sometimes reliability and performance conflict. Here's how to choose:
 ---
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

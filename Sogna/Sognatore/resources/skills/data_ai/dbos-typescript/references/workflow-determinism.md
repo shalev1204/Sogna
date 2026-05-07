@@ -50,6 +50,7 @@ const exampleWorkflow = DBOS.registerWorkflow(exampleWorkflowFn);
 ```
 
 Non-deterministic operations that must be in steps:
+
 - Random number generation (use `DBOS.randomUUID()` for UUIDs)
 - Getting current time (use `DBOS.now()` for timestamps)
 - Accessing external APIs
@@ -59,6 +60,7 @@ Non-deterministic operations that must be in steps:
 Reference: [Workflow Determinism](https://docs.dbos.dev/typescript/tutorials/workflow-tutorial#determinism)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

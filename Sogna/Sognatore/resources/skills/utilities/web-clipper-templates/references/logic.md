@@ -74,6 +74,7 @@ The order in which variables, filters, fallbacks, conditionals, and loops are ev
 The Sogna Web Clipper template editor **validates template syntax**. Invalid logic (e.g. malformed conditionals or loops) will be reported in the editor. When generating templates, use only logic constructs and syntax described on the official Logic page so that the template passes validation.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

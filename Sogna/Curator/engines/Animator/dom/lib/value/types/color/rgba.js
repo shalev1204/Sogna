@@ -1,5 +1,5 @@
 import { clamp } from "sognaflow-utils";
-import { Alpha as AlphaType, NumberType } from "../numbers";
+import { Alpha as alphaType, NumberType } from "../numbers";
 import { sanitize } from "../utils/sanitize.js";
 import { isColorString, splitColor } from "./utils.js";
 const clampRgbUnit = (v) => clamp(0, 255, v);
@@ -17,7 +17,7 @@ export const Rgba = {
         ", " +
         RgbUnit.transform(blue) +
         ", " +
-        sanitize(AlphaType.transform(alpha)) +
+        sanitize(alphaType.transform(alpha)) +
         ")",
 };
 //# sourceMappingURL=rgba.js.map

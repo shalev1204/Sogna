@@ -26,9 +26,11 @@
 ## Detection Process
 
 ```
+
 1. Tokenize user request
 2. Extract keywords
 3. Determine project type
 4. Detect missing information → forward to conversation-manager
 5. Suggest tech stack
+
 ```

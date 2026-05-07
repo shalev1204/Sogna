@@ -105,74 +105,97 @@ All `list` and `get` commands support two output formats:
 ### Discover Projects and Runs
 
 ```bash
+
 # List all available projects
+
 trackio list projects
 
 # List runs in a project
+
 trackio list runs --project my-project
 
 # Get project overview
+
 trackio get project --project my-project --json
 ```
 
 ### Inspect Run Details
 
 ```bash
+
 # Get run summary with all metrics
+
 trackio get run --project my-project --run my-run --json
 
 # List available metrics
+
 trackio list metrics --project my-project --run my-run
 
 # Get specific metric values
+
 trackio get metric --project my-project --run my-run --metric loss --json
 ```
 
 ### Query System Metrics
 
 ```bash
+
 # List system metrics (GPU, etc.)
+
 trackio list system-metrics --project my-project --run my-run
 
 # Get all system metric data
+
 trackio get system-metric --project my-project --run my-run --json
 
 # Get specific system metric
+
 trackio get system-metric --project my-project --run my-run --metric gpu_utilization --json
 ```
 
 ### Automation Scripts
 
 ```bash
+
 # Extract latest metric value
+
 LATEST_LOSS=$(trackio get metric --project my-project --run my-run --metric loss --json | jq -r '.values[-1].value')
 
 # Export run summary to file
+
 trackio get run --project my-project --run my-run --json > run_summary.json
 
 # Filter runs with jq
+
 trackio list runs --project my-project --json | jq '.runs[] | select(startswith("train"))'
 ```
 
 ### LLM Agent Workflow
 
 ```bash
+
 # 1. Discover available projects
+
 trackio list projects --json
 
 # 2. Explore project structure
+
 trackio get project --project my-project --json
 
 # 3. Inspect specific run
+
 trackio get run --project my-project --run my-run --json
 
 # 4. Query metric values
+
 trackio get metric --project my-project --run my-run --metric accuracy --json
 
 # 5. Poll for alerts (use --since for efficient incremental polling)
+
 trackio list alerts --project my-project --json --since "2025-06-01T00:00:00"
 
 # 6. When an alert fires at step N, get all metrics around that point
+
 trackio get snapshot --project my-project --run my-run --around 200 --window 5 --json
 ```
 
@@ -207,16 +230,19 @@ All errors exit with non-zero status code and write to stderr.
 ## JSON Output Structure
 
 ### List Projects
+
 ```json
 {"projects": ["project1", "project2"]}
 ```
 
 ### List Runs
+
 ```json
 {"project": "my-project", "runs": ["run1", "run2"]}
 ```
 
 ### Project Summary
+
 ```json
 {
   "project": "my-project",
@@ -227,6 +253,7 @@ All errors exit with non-zero status code and write to stderr.
 ```
 
 ### Run Summary
+
 ```json
 {
   "project": "my-project",
@@ -239,6 +266,7 @@ All errors exit with non-zero status code and write to stderr.
 ```
 
 ### Metric Values
+
 ```json
 {
   "project": "my-project",
@@ -257,6 +285,7 @@ All errors exit with non-zero status code and write to stderr.
 - **API and MCP Server**: See [docs/source/api_mcp_server.md](docs/source/api_mcp_server.md)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

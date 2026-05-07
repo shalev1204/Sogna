@@ -11,14 +11,17 @@ version: 1.0.0
 
 Both table-level and column-level lineage use the same endpoint: `POST /ingest/v1/lineage`.
 The `event_type` field distinguishes them:
+
 - `LINEAGE` — table-level: source table → destination table
 - `COLUMN_LINEAGE` — column-level: source table.column → destination table.column
+
   (also automatically creates the parent table-level edge)
 
 Push lineage is **typically visible in the MC lineage graph within seconds to a few minutes**
 via the fast direct path (PushLineageProcessor → S3 CSVs → neo4jLineageLoaderPrivate → Neo4j).
 
 **Expiration**:
+
 - Pushed **table lineage does not expire** (`expire_at = 9999-12-31`).
 - Pushed **column lineage expires after 10 days** (same as pulled column lineage).
 
@@ -167,6 +170,7 @@ For custom nodes created via GraphQL mutations, you **do** need to set
 `expireAt: "9999-12-31"` explicitly — see `references/custom-lineage.md`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

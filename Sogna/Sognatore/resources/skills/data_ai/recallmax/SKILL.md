@@ -11,7 +11,6 @@ id: skill-recallmax
 owner: [[orchestrator]]
 ---
 
-
 # RecallMax — God-Tier Long-Context Memory
 
 ## Overview
@@ -39,6 +38,7 @@ npx skills add christopherlhammer11-ai/recallmax
 ### Step 1: Context Injection
 
 RecallMax cleanly injects external context (documents, RAG results, prior conversations) into the agent's working memory. Unlike naive concatenation, it:
+
 - Deduplicates overlapping content
 - Preserves source attribution
 - Prevents hallucination drift from context pollution
@@ -46,6 +46,7 @@ RecallMax cleanly injects external context (documents, RAG results, prior conver
 ### Step 2: Adaptive Summarization
 
 As conversations grow, RecallMax automatically summarizes older turns while preserving:
+
 - **Tone** — sarcasm, formality, urgency
 - **Intent** — what the user actually wants vs. what they said
 - **Key facts** — numbers, names, decisions, commitments
@@ -79,11 +80,13 @@ Built-in cross-reference checks for controversial or ambiguous claims within the
 - **Browse skills:** https://genesis-marketplace.vercel.app
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

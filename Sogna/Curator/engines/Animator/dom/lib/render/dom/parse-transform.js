@@ -44,12 +44,12 @@ const matrix3dParsers = {
     skewY: (v) => radToDeg(Math.atan(v[1])),
     skew: (v) => (Math.abs(v[1]) + Math.abs(v[4])) / 2,
 };
-export function DefaultTransformValue(name) {
+export function defaultTransformValue(name) {
     return name.includes("scale") ? 1 : 0;
 }
-export function ParseValueFromTransform(transform, name) {
+export function parseValueFromTransform(transform, name) {
     if (!transform || transform === "none") {
-        return DefaultTransformValue(name);
+        return defaultTransformValue(name);
     }
     const matrix3dMatch = transform.match(/^matrix3d\(([-\d.e\s,]+)\)$/u);
     let parsers;
@@ -64,7 +64,7 @@ export function ParseValueFromTransform(transform, name) {
         match = matrix2dMatch;
     }
     if (!match) {
-        return DefaultTransformValue(name);
+        return defaultTransformValue(name);
     }
     const valueParser = parsers[name];
     const values = match[1].split(",").map(convertTransformToNumber);
@@ -72,9 +72,9 @@ export function ParseValueFromTransform(transform, name) {
         ? valueParser(values)
         : values[valueParser];
 }
-export const ReadTransformValue = (instance, name) => {
-    const { transform = "none" } = window.getComputedStyle(instance);
-    return ParseValueFromTransform(transform, name);
+export const readTransformValue = (instance, name) => {
+    const { transform = "none" } = getComputedStyle(instance);
+    return parseValueFromTransform(transform, name);
 };
 function convertTransformToNumber(value) {
     return parseFloat(value.trim());

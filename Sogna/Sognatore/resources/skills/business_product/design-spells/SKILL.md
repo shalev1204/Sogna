@@ -8,7 +8,6 @@ id: skill-design-spells
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # Design Spells Skill
 
 [Design Spells](https://www.designspells.com/) is a collection of exceptional design details—micro-interactions, easter eggs, and clever UX patterns—that transform standard interfaces into memorable digital experiences.
@@ -18,6 +17,7 @@ owner: [[prod-design]], [[prod-pm]]
 Use this skill specifically to elevate a UI from merely "functional" or "common" into something genuinely "magical." It focuses on the minute details that surprise and delight users, establishing a strong, premium brand personality.
 
 ## When to Use
+
 Trigger this skill when:
 
 - Polishing a finished feature to actively add a "wow" factor.
@@ -39,11 +39,13 @@ Trigger this skill when:
 - **Quality Execution**: A broken or janky "spell" is worse than none. Ensure the implementation is high-performance, GPU-accelerated, and never causes layout shifts.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

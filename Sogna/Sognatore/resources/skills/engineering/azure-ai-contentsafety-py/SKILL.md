@@ -8,7 +8,6 @@ id: skill-azure-ai-contentsafety-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure AI Content Safety SDK for Python
 
 Detect harmful user-generated and AI-generated content in applications.
@@ -66,6 +65,7 @@ request = AnalyzeTextOptions(text="Your text content to analyze")
 response = client.analyze_text(request)
 
 # Check each category
+
 for category in [TextCategory.HATE, TextCategory.SELF_HARM, 
                  TextCategory.SEXUAL, TextCategory.VIOLENCE]:
     result = next((r for r in response.categories_analysis 
@@ -85,6 +85,7 @@ import base64
 client = ContentSafetyClient(endpoint, AzureKeyCredential(key))
 
 # From file
+
 with open("image.jpg", "rb") as f:
     image_data = base64.b64encode(f.read()).decode("utf-8")
 
@@ -217,14 +218,17 @@ request = AnalyzeTextOptions(
 7. **Pre-moderate AI outputs** before showing to users
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

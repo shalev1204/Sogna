@@ -145,6 +145,7 @@ for await (const message of query({
   options: {
     allowedTools: ["Read", "Glob", "Grep"],
     systemPrompt: `You are a senior code reviewer focused on:
+
 1. Security vulnerabilities
 2. Performance issues
 3. Code maintainability
@@ -157,6 +158,7 @@ Always provide specific line numbers and suggestions for improvement.`,
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

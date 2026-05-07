@@ -1,9 +1,9 @@
-import { GetValueAsType as getValueAsType } from "../../../value/types/utils/get-as-type.js";
-import { NumberValueTypes as numberValueTypes } from "../../../value/types/maps/number.js";
-import { TransformProps as transformProps } from "../../utils/keys-transform.js";
-import { IsCSSVariableName as isCSSVariableName } from "../../../animation/utils/is-css-variable.js";
-import { BuildTransform as buildTransform } from "./build-transform.js";
-export function BuildHTMLStyles(state, latestValues, transformTemplate) {
+import { getValueAsType } from "../../../value/types/utils/get-as-type.js";
+import { NumberValueTypes } from "../../../value/types/maps/number.js";
+import { TransformProps } from "../../utils/keys-transform.js";
+import { IsCSSVariableName } from "../../../animation/utils/is-css-variable.js";
+import { buildTransform } from "./build-transform.js";
+export function buildHTMLStyles(state, latestValues, transformTemplate) {
     const { style, vars, transformOrigin } = state;
     // Track whether we encounter any transform or transformOrigin values.
     let hasTransform = false;
@@ -16,18 +16,18 @@ export function BuildHTMLStyles(state, latestValues, transformTemplate) {
      */
     for (const key in latestValues) {
         const value = latestValues[key];
-        if (transformProps.has(key)) {
+        if (TransformProps.has(key)) {
             // If this is a transform, flag to enable further transform processing
             hasTransform = true;
             continue;
         }
-        else if (isCSSVariableName(key)) {
+        else if (IsCSSVariableName(key)) {
             vars[key] = value;
             continue;
         }
         else {
             // Convert the value to its default value type, ie 0 -> "0px"
-            const valueAsType = getValueAsType(value, numberValueTypes[key]);
+            const valueAsType = getValueAsType(value, NumberValueTypes[key]);
             if (key.startsWith("origin")) {
                 // If this is a transform origin, flag and enable further transform-origin processing
                 hasTransformOrigin = true;

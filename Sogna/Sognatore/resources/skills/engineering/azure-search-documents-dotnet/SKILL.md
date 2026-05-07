@@ -8,7 +8,6 @@ id: skill-azure-search-documents-dotnet
 owner: [[orchestrator]]
 ---
 
-
 # Azure.Search.Documents (.NET)
 
 Build search applications with full-text, vector, semantic, and hybrid search capabilities.
@@ -27,7 +26,9 @@ dotnet add package Azure.Identity
 ```bash
 SEARCH_ENDPOINT=https://<search-service>.search.windows.net
 SEARCH_INDEX_NAME=<index-name>
+
 # For API key auth (not recommended for production)
+
 SEARCH_API_KEY=<api-key>
 ```
 
@@ -343,14 +344,17 @@ catch (RequestFailedException ex)
 | references/semantic-search.md | Semantic ranking, captions, answers |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

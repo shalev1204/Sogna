@@ -1,5 +1,5 @@
 import { MixNumber } from "../../utils/mix/number.js";
-import { Percent as percent, Px as px } from "../../value/types/numbers/units.js";
+import { Percent, Px } from "../../value/types/numbers/units.js";
 import { progress as calcProgress, circOut, noop, } from "sognaflow-utils";
 const borderLabels = [
     "borderTopLeftRadius",
@@ -9,7 +9,7 @@ const borderLabels = [
 ];
 const numBorders = borderLabels.length;
 const asNumber = (value) => typeof value === "string" ? parseFloat(value) : value;
-const isPx = (value) => typeof value === "number" || px.test(value);
+const isPx = (value) => typeof value === "number" || Px.test(value);
 export function MixValues(target, follow, lead, progress, shouldCrossfadeOpacity, isOnlyMember) {
     if (shouldCrossfadeOpacity) {
         target.opacity = MixNumber(0, lead.opacity ?? 1, easeCrossfadeIn(progress));
@@ -34,7 +34,7 @@ export function MixValues(target, follow, lead, progress, shouldCrossfadeOpacity
             isPx(followRadius) === isPx(leadRadius);
         if (canMix) {
             target[borderLabel] = Math.max(MixNumber(asNumber(followRadius), asNumber(leadRadius), progress), 0);
-            if (percent.test(leadRadius) || percent.test(followRadius)) {
+            if (Percent.test(leadRadius) || Percent.test(followRadius)) {
                 target[borderLabel] = `${target[borderLabel]}%`;
             }
         }

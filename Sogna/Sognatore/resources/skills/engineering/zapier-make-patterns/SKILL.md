@@ -11,7 +11,6 @@ id: skill-zapier-make-patterns
 owner: [[eng-api]]
 ---
 
-
 # Zapier & Make Patterns
 
 No-code automation democratizes workflow building. Zapier and Make (formerly
@@ -84,37 +83,46 @@ Single trigger leads to one or more actions
 """
 
 ## Zapier Example
+
 """
 Zap Name: "Gmail New Email → Todoist Task"
 
 TRIGGER: Gmail - New Email
+
   - From: specific-sender@example.com
   - Has attachment: yes
 
 ACTION: Todoist - Create Task
+
   - Project: Inbox
   - Content: {{Email Subject}}
   - Description: From: {{Email From}}
   - Due date: Tomorrow
+
 """
 
 ## Make Example
+
 """
 Scenario: "Gmail to Todoist"
 
 [Gmail: Watch Emails] → [Todoist: Create a Task]
 
 Gmail Module:
+
   - Folder: INBOX
   - From: specific-sender@example.com
 
 Todoist Module:
+
   - Project ID: (select from dropdown)
   - Content: {{1.subject}}
   - Due String: tomorrow
+
 """
 
 ## Best Practices:
+
 - Use descriptive Zap/Scenario names
 - Test with real sample data
 - Use filters to prevent unwanted runs
@@ -133,6 +141,7 @@ Each step's output available to subsequent steps
 """
 
 ## Zapier Multi-Step Zap
+
 """
 Zap: "New Lead → CRM → Slack → Email"
 
@@ -152,15 +161,18 @@ Zap: "New Lead → CRM → Slack → Email"
    - To: {{Typeform Email}}
    - Subject: "Thanks for reaching out!"
    - Body: (template with personalization)
+
 """
 
 ## Make Scenario
+
 """
 [Typeform] → [HubSpot] → [Slack] → [Gmail]
 
 - Each module passes data to the next
 - Use {{N.field}} to reference module N's output
 - Add error handlers between critical steps
+
 """
 
 ### Conditional Branching Pattern
@@ -178,6 +190,7 @@ Different actions based on conditions
 """
 
 ## Zapier Paths (Pro+ required)
+
 """
 Zap: "Route Support Tickets"
 
@@ -193,9 +206,11 @@ Zap: "Route Support Tickets"
 
 4. PATH C: Otherwise (catch-all)
    - Slack: Post to #support-overflow
+
 """
 
 ## Make Router
+
 """
 [Zendesk: Watch Tickets]
       ↓
@@ -210,9 +225,11 @@ Zap: "Route Support Tickets"
          └→ [Slack: overflow]
 
 # Make's visual router makes complex branching clear
+
 """
 
 ## Best Practices:
+
 - Always have a fallback/else path
 - Test each path independently
 - Document which conditions trigger which path
@@ -226,6 +243,7 @@ Clean, format, and transform data between apps
 # DATA TRANSFORMATION:
 
 ## Zapier Formatter
+
 """
 Common transformations:
 
@@ -244,9 +262,11 @@ Common transformations:
 
 4. Lookup tables:
    - Map status codes: "1" → "Active", "2" → "Pending"
+
 """
 
 ## Make Data Functions
+
 """
 Make has powerful built-in functions:
 
@@ -269,6 +289,7 @@ Math:
 """
 
 ## Best Practices:
+
 - Transform early in the workflow
 - Use filters to skip invalid data
 - Log transformations for debugging
@@ -282,13 +303,17 @@ Graceful handling of failures
 # ERROR HANDLING:
 
 ## Zapier Error Handling
+
 """
+
 1. Built-in retry (automatic):
    - Zapier retries failed actions automatically
    - Exponential backoff for temporary failures
 
 2. Error handling step:
+
    Zap:
+
      1. [Trigger]
      2. [Action that might fail]
      3. [Error Handler]
@@ -296,11 +321,13 @@ Graceful handling of failures
         - If error → [Email: Send report]
 
 3. Path-based handling:
+
    [Action] → Path A: Success → [Continue]
             → Path B: Error → [Alert + Log]
 """
 
 ## Make Error Handlers
+
 """
 Make has visual error handling:
 
@@ -309,6 +336,7 @@ Make has visual error handling:
            └── Error → [Error Handler]
 
 Error handler types:
+
 1. Break: Stop scenario, send notification
 2. Rollback: Undo completed operations
 3. Commit: Save partial results, continue
@@ -321,6 +349,7 @@ Example:
 """
 
 ## Best Practices:
+
 - Always add error handlers for external APIs
 - Log errors to a spreadsheet/database
 - Set up Slack/email alerts for critical failures
@@ -335,6 +364,7 @@ Process multiple items efficiently
 # BATCH PROCESSING:
 
 ## Zapier Looping
+
 """
 Zap: "Process Order Items"
 
@@ -351,6 +381,7 @@ Note: Each loop iteration counts as tasks!
 """
 
 ## Make Iterator
+
 """
 [Webhook: Receive Order]
       ↓
@@ -368,6 +399,7 @@ Use Array Aggregator for collecting processed items.
 """
 
 ## Best Practices:
+
 - Use aggregators to combine results
 - Consider batch limits (some APIs limit to 100)
 - Watch operation/task counts for cost
@@ -382,23 +414,29 @@ Time-based triggers instead of events
 # SCHEDULED AUTOMATION:
 
 ## Zapier Schedule Trigger
+
 """
 Zap: "Daily Sales Report"
 
 TRIGGER: Schedule by Zapier
+
   - Every: Day
   - Time: 8:00 AM
   - Timezone: America/New_York
 
 ACTIONS:
+
   1. Google Sheets: Get rows (yesterday's sales)
   2. Formatter: Calculate totals
   3. Gmail: Send report to team
+
 """
 
 ## Make Scheduled Scenarios
+
 """
 Scenario Schedule Options:
+
   - Run once (manual)
   - At regular intervals (every X minutes)
   - Advanced: Cron expression (0 8 * * *)
@@ -415,6 +453,7 @@ Scenario Schedule Options:
 """
 
 ## Best Practices:
+
 - Consider timezone differences
 - Add buffer time for long-running jobs
 - Log execution times for monitoring
@@ -445,6 +484,7 @@ Recommended fix:
 # If you need dynamic values:
 
 ## Zapier approach:
+
 1. Add a "Find" or "Search" action first
    - HubSpot: Find Contact → returns contact_id
    - Slack: Find User by Email → returns user_id
@@ -454,6 +494,7 @@ Recommended fix:
    - Select the ID from the search step
 
 ## Make approach:
+
 1. Add a Search module first
    - Search Contacts: filter by email
    - Returns: contact_id
@@ -462,6 +503,7 @@ Recommended fix:
    - Contact ID: {{2.id}} (from search module)
 
 # Common ID fields that trip people up:
+
 - User/Member IDs in Slack, Teams
 - Contact/Company IDs in CRMs
 - Project/Folder IDs in project tools
@@ -508,6 +550,7 @@ Recommended fix:
 5. Monitor closely for next 24 hours
 
 # Common causes:
+
 - Expired authentication tokens
 - API rate limits
 - Changed field names in connected apps
@@ -554,7 +597,9 @@ Order with 10 items, 5 actions per item:
    - More cost-effective for loops
 
 # Make approach:
+
 [Iterator] → [Actions] → [Aggregator]
+
 - Pay for operations (module executions)
 - Not per-action like Zapier
 
@@ -592,11 +637,13 @@ Recommended fix:
 5. Use test/duplicate Zaps for experiments
 
 # If integration is outdated:
+
 - Check Zapier/Make status pages
 - Report issue to support
 - Consider webhook alternative temporarily
 
 # Common offenders:
+
 - CRM field restructures
 - API version upgrades
 - OAuth scope changes
@@ -620,6 +667,7 @@ their connection may stop working.
 Recommended fix:
 
 # Immediate fix:
+
 1. Go to Settings → Apps
 2. Find the app with issues
 3. Reconnect (re-authorize)
@@ -644,6 +692,7 @@ Recommended fix:
    - Long-lived tokens
 
 # Zapier Enterprise:
+
 - Admin controls for managing connections
 - SSO integration
 - Centralized connection management
@@ -676,6 +725,7 @@ Recommended fix:
    - Skip if ID exists
 
 ## Zapier example:
+
 [Webhook Trigger]
    ↓
 [Airtable: Find Records] - search by event_id
@@ -726,6 +776,7 @@ Error handler: Additional operation per handler module
 # Reduce operation waste:
 
 1. Add error handlers that break early:
+
    [Module] → Error → [Break] (1 additional op)
    vs
    [Module] → Error → [Log] → [Alert] → [Update] (3+ ops)
@@ -735,7 +786,9 @@ Error handler: Additional operation per handler module
    - If retrying won't help (bad data)
 
 3. Pre-validate before expensive operations:
+
    [Check Data] → Filter → [API Call]
+
    - Fail fast before consuming operations
 
 4. Optimize scenario scheduling:
@@ -743,6 +796,7 @@ Error handler: Additional operation per handler module
    - Use webhooks for real-time when possible
 
 # Monitor usage:
+
 - Check Operations dashboard
 - Set up usage alerts
 - Review high-consumption scenarios
@@ -787,6 +841,7 @@ Recommended fix:
    - Avoid on-the-hour (busy periods)
 
 ## Make timezone handling:
+
 - Scenarios use account timezone setting
 - formatDate() function respects timezone
 - Use parseDate() with explicit timezone
@@ -807,6 +862,7 @@ Recommended fix:
 Works well with: `workflow-automation`, `agent-tool-builder`, `backend`, `api-designer`
 
 ## When to Use
+
 - User mentions or implies: zapier
 - User mentions or implies: make
 - User mentions or implies: integromat
@@ -819,11 +875,13 @@ Works well with: `workflow-automation`, `agent-tool-builder`, `backend`, `api-de
 - User mentions or implies: automate
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

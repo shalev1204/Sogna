@@ -8,7 +8,6 @@ id: skill-prompt-engineering-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Prompt Engineering Patterns
 
 Master advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.
@@ -38,6 +37,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 ## Core Capabilities
 
 ### 1. Few-Shot Learning
+
 - Example selection strategies (semantic similarity, diversity sampling)
 - Balancing example count with context window constraints
 - Constructing effective demonstrations with input-output pairs
@@ -45,6 +45,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 - Handling edge cases through strategic example selection
 
 ### 2. Chain-of-Thought Prompting
+
 - Step-by-step reasoning elicitation
 - Zero-shot CoT with "Let's think step by step"
 - Few-shot CoT with reasoning traces
@@ -52,6 +53,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 - Verification and validation steps
 
 ### 3. Prompt Optimization
+
 - Iterative refinement workflows
 - A/B testing prompt variations
 - Measuring prompt performance metrics (accuracy, consistency, latency)
@@ -59,6 +61,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 - Handling edge cases and failure modes
 
 ### 4. Template Systems
+
 - Variable interpolation and formatting
 - Conditional prompt sections
 - Multi-turn conversation templates
@@ -66,6 +69,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 - Modular prompt components
 
 ### 5. System Prompt Design
+
 - Setting model behavior and constraints
 - Defining output formats and structure
 - Establishing role and expertise
@@ -78,6 +82,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 from prompt_optimizer import PromptTemplate, FewShotSelector
 
 # Define a structured prompt template
+
 template = PromptTemplate(
     system="You are an expert SQL developer. Generate efficient, secure SQL queries.",
     instruction="Convert the following natural language query to SQL:\n{query}",
@@ -86,6 +91,7 @@ template = PromptTemplate(
 )
 
 # Configure few-shot learning
+
 selector = FewShotSelector(
     examples_db="sql_examples.jsonl",
     selection_strategy="semantic_similarity",
@@ -93,6 +99,7 @@ selector = FewShotSelector(
 )
 
 # Generate optimized prompt
+
 prompt = template.render(
     query="Find all users who registered in the last 30 days",
     examples=selector.select(query="user registration date filter")
@@ -102,6 +109,7 @@ prompt = template.render(
 ## Key Patterns
 
 ### Progressive Disclosure
+
 Start with simple prompts, add complexity only when needed:
 
 1. **Level 1**: Direct instruction
@@ -117,12 +125,15 @@ Start with simple prompts, add complexity only when needed:
    - Include 2-3 example summaries with input-output pairs
 
 ### Instruction Hierarchy
+
 ```
 [System Context] → [Task Instruction] → [Examples] → [Input Data] → [Output Format]
 ```
 
 ### Error Recovery
+
 Build prompts that gracefully handle failures:
+
 - Include fallback instructions
 - Request confidence scores
 - Ask for alternative interpretations when uncertain
@@ -149,8 +160,11 @@ Build prompts that gracefully handle failures:
 ## Integration Patterns
 
 ### With RAG Systems
+
 ```python
+
 # Combine retrieved context with prompt engineering
+
 prompt = f"""Given the following context:
 {retrieved_context}
 
@@ -162,11 +176,15 @@ Provide a detailed answer based solely on the context above. If the context does
 ```
 
 ### With Validation
+
 ```python
+
 # Add self-verification step
+
 prompt = f"""{main_task_prompt}
 
 After generating your response, verify it meets these criteria:
+
 1. Answers the question directly
 2. Uses only information from provided context
 3. Cites specific sources
@@ -178,12 +196,14 @@ If verification fails, revise your response."""
 ## Performance Optimization
 
 ### Token Efficiency
+
 - Remove redundant words and phrases
 - Use abbreviations consistently after first definition
 - Consolidate similar instructions
 - Move stable content to system prompts
 
 ### Latency Reduction
+
 - Minimize prompt length without sacrificing quality
 - Use streaming for long-form outputs
 - Cache common prompt prefixes
@@ -203,6 +223,7 @@ If verification fails, revise your response."""
 ## Success Metrics
 
 Track these KPIs for your prompts:
+
 - **Accuracy**: Correctness of outputs
 - **Consistency**: Reproducibility across similar inputs
 - **Latency**: Response time (P50, P95, P99)
@@ -219,11 +240,13 @@ Track these KPIs for your prompts:
 5. Document your prompt engineering decisions and learnings
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

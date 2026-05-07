@@ -25,6 +25,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 1. The Review Mindset
 
 **Goals of Code Review:**
+
 - Catch bugs and edge cases
 - Ensure code maintainability
 - Share knowledge across team
@@ -33,6 +34,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 - Build team culture
 
 **Not the Goals:**
+
 - Show off knowledge
 - Nitpick formatting (use linters)
 - Block progress unnecessarily
@@ -41,6 +43,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 2. Effective Feedback
 
 **Good Feedback is:**
+
 - Specific and actionable
 - Educational, not judgmental
 - Focused on the code, not the person
@@ -64,6 +67,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 3. Review Scope
 
 **What to Review:**
+
 - Logic correctness and edge cases
 - Security vulnerabilities
 - Performance implications
@@ -74,6 +78,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 - Architectural fit
 
 **What Not to Review Manually:**
+
 - Code formatting (use Prettier, Black, etc.)
 - Import organization
 - Linting violations
@@ -91,11 +96,13 @@ Before diving into code, understand:
 3. Review CI/CD status (tests passing?)
 4. Understand the business requirement
 5. Note any relevant architectural decisions
+
 ```
 
 ### Phase 2: High-Level Review (5-10 minutes)
 
 ```markdown
+
 1. **Architecture & Design**
    - Does the solution fit the problem?
    - Are there simpler approaches?
@@ -111,6 +118,7 @@ Before diving into code, understand:
    - Are there tests?
    - Do tests cover edge cases?
    - Are tests readable?
+
 ```
 
 ### Phase 3: Line-by-Line Review (10-20 minutes)
@@ -141,11 +149,13 @@ For each file:
    - Functions doing one thing?
    - Complex code commented?
    - Magic numbers extracted?
+
 ```
 
 ### Phase 4: Summary & Decision (2-3 minutes)
 
 ```markdown
+
 1. Summarize key concerns
 2. Highlight what you liked
 3. Make clear decision:
@@ -153,6 +163,7 @@ For each file:
    - 💬 Comment (minor suggestions)
    - 🔄 Request Changes (must address)
 4. Offer to pair if complex
+
 ```
 
 ## Review Techniques
@@ -160,7 +171,9 @@ For each file:
 ### Technique 1: The Checklist Method
 
 ```markdown
+
 ## Security Checklist
+
 - [ ] User input validated and sanitized
 - [ ] SQL queries use parameterization
 - [ ] Authentication/authorization checked
@@ -168,6 +181,7 @@ For each file:
 - [ ] Error messages don't leak info
 
 ## Performance Checklist
+
 - [ ] No N+1 queries
 - [ ] Database queries indexed
 - [ ] Large lists paginated
@@ -175,11 +189,13 @@ For each file:
 - [ ] No blocking I/O in hot paths
 
 ## Testing Checklist
+
 - [ ] Happy path tested
 - [ ] Edge cases covered
 - [ ] Error cases tested
 - [ ] Test names are descriptive
 - [ ] Tests are deterministic
+
 ```
 
 ### Technique 2: The Question Approach
@@ -201,6 +217,7 @@ Instead of stating problems, ask questions to encourage thinking:
 ### Technique 3: Suggest, Don't Command
 
 ```markdown
+
 ## Use Collaborative Language
 
 ❌ "You must change this to use async/await"
@@ -245,14 +262,17 @@ Example:
 ### Python Code Review
 
 ```python
+
 # Check for Python-specific issues
 
 # ❌ Mutable default arguments
+
 def add_item(item, items=[]):  # Bug! Shared across calls
     items.append(item)
     return items
 
 # ✅ Use None as default
+
 def add_item(item, items=None):
     if items is None:
         items = []
@@ -260,12 +280,14 @@ def add_item(item, items=None):
     return items
 
 # ❌ Catching too broad
+
 try:
     result = risky_operation()
 except:  # Catches everything, even KeyboardInterrupt!
     pass
 
 # ✅ Catch specific exceptions
+
 try:
     result = risky_operation()
 except ValueError as e:
@@ -273,10 +295,12 @@ except ValueError as e:
     raise
 
 # ❌ Using mutable class attributes
+
 class User:
     permissions = []  # Shared across all instances!
 
 # ✅ Initialize in __init__
+
 class User:
     def __init__(self):
         self.permissions = []
@@ -362,6 +386,7 @@ When reviewing significant changes:
    - "Have we considered using [pattern/library]?"
    - "What's the tradeoff vs. the simpler approach?"
    - "How will this evolve as requirements change?"
+
 ```
 
 ### Pattern 2: Test Quality Review
@@ -394,31 +419,37 @@ test('displays incremented count when clicked', () => {
 ### Pattern 3: Security Review
 
 ```markdown
+
 ## Security Review Checklist
 
 ### Authentication & Authorization
+
 - [ ] Is authentication required where needed?
 - [ ] Are authorization checks before every action?
 - [ ] Is JWT validation proper (signature, expiry)?
 - [ ] Are API keys/secrets properly secured?
 
 ### Input Validation
+
 - [ ] All user inputs validated?
 - [ ] File uploads restricted (size, type)?
 - [ ] SQL queries parameterized?
 - [ ] XSS protection (escape output)?
 
 ### Data Protection
+
 - [ ] Passwords hashed (bcrypt/argon2)?
 - [ ] Sensitive data encrypted at rest?
 - [ ] HTTPS enforced for sensitive data?
 - [ ] PII handled according to regulations?
 
 ### Common Vulnerabilities
+
 - [ ] No eval() or similar dynamic execution?
 - [ ] No hardcoded secrets?
 - [ ] CSRF protection for state-changing operations?
 - [ ] Rate limiting on public endpoints?
+
 ```
 
 ## Giving Difficult Feedback
@@ -451,20 +482,25 @@ on this if helpful."
 When author disagrees with your feedback:
 
 1. **Seek to Understand**
+
    "Help me understand your approach. What led you to
     choose this pattern?"
 
 2. **Acknowledge Valid Points**
+
    "That's a good point about X. I hadn't considered that."
 
 3. **Provide Data**
+
    "I'm concerned about performance. Can we add a benchmark
     to validate the approach?"
 
 4. **Escalate if Needed**
+
    "Let's get [architect/senior dev] to weigh in on this."
 
 5. **Know When to Let Go**
+
    If it's working and not a critical issue, approve it.
    Perfection is the enemy of progress.
 ```
@@ -495,26 +531,33 @@ When author disagrees with your feedback:
 ### PR Review Comment Template
 
 ```markdown
+
 ## Summary
+
 [Brief overview of what was reviewed]
 
 ## Strengths
+
 - [What was done well]
 - [Good patterns or approaches]
 
 ## Required Changes
+
 🔴 [Blocking issue 1]
 🔴 [Blocking issue 2]
 
 ## Suggestions
+
 💡 [Improvement 1]
 💡 [Improvement 2]
 
 ## Questions
+
 ❓ [Clarification needed on X]
 ❓ [Alternative approach consideration]
 
 ## Verdict
+
 ✅ Approve after addressing required changes
 ```
 
@@ -528,6 +571,7 @@ When author disagrees with your feedback:
 - **scripts/pr-analyzer.py**: Analyze PR complexity and suggest reviewers
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

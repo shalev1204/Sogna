@@ -7,7 +7,6 @@ id: skill-odoo-sales-crm-expert
 owner: [[prod-pm]]
 ---
 
-
 # Odoo Sales & CRM Expert
 
 ## Overview
@@ -43,8 +42,10 @@ Typical B2B Pipeline:
   Stage 6: Lost              (mark as lost via the "Mark as Lost" button)
 
 Tips:
+
   - Enable "Rotting Days" in CRM Settings to flag stale deals in red
   - In Odoo 16+, Predictive Lead Scoring (AI) auto-updates probability
+
     based on historical data. Disable it in Settings if you prefer manual
     stage-based probability.
 ```
@@ -59,6 +60,7 @@ Template Name: SaaS Annual Subscription
 Valid for: 30 days
 
 Lines:
+
   1. Platform License   | Qty: 1 | Price: $1,200/yr | (required)
   2. Onboarding Package | Qty: 1 | Price: $500       | Optional
   3. Premium Support    | Qty: 1 | Price: $300/yr    | Optional
@@ -112,6 +114,7 @@ Assign to a customer:
 - Odoo CRM does not have native **email sequence / cadence** automation — use the **Email Marketing** or **Marketing Automation** modules for drip campaigns.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -57,6 +57,7 @@ The Apify Actor logger provides the following methods for logging:
 - Use `Actor.log.exception()` for caught exceptions with stack traces
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

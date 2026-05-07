@@ -8,7 +8,6 @@ id: skill-azure-maps-search-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure Maps (.NET)
 
 Azure Maps SDK for .NET providing location-based services: geocoding, routing, rendering, geolocation, and weather.
@@ -16,29 +15,38 @@ Azure Maps SDK for .NET providing location-based services: geocoding, routing, r
 ## Installation
 
 ```bash
+
 # Search (geocoding, reverse geocoding)
+
 dotnet add package Azure.Maps.Search --prerelease
 
 # Routing (directions, route matrix)
+
 dotnet add package Azure.Maps.Routing --prerelease
 
 # Rendering (map tiles, static images)
+
 dotnet add package Azure.Maps.Rendering --prerelease
 
 # Geolocation (IP to location)
+
 dotnet add package Azure.Maps.Geolocation --prerelease
 
 # Weather
+
 dotnet add package Azure.Maps.Weather --prerelease
 
 # Resource Management (account management, SAS tokens)
+
 dotnet add package Azure.ResourceManager.Maps --prerelease
 
 # Required for authentication
+
 dotnet add package Azure.Identity
 ```
 
 **Current Versions**:
+
 - `Azure.Maps.Search`: v2.0.0-beta.5
 - `Azure.Maps.Routing`: v1.0.0-beta.4
 - `Azure.Maps.Rendering`: v2.0.0-beta.1
@@ -498,14 +506,17 @@ catch (RequestFailedException ex)
 | Pricing | https://azure.microsoft.com/pricing/details/azure-maps/ |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

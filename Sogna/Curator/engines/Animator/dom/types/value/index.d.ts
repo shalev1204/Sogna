@@ -60,15 +60,15 @@ export declare class SognaflowValue<V = any> {
      */
     private prev;
     /**
-     * The previous state of the `sognaflowValue` at the end of the previous frame.
+     * The previous state of the `sognaflowValue` at the end of the previous Frame.
      */
     private prevFrameValue;
     /**
-     * The last time the `sognaflowValue` was updated.
+     * The last Time the `sognaflowValue` was updated.
      */
     updatedAt: number;
     /**
-     * The time `prevFrameValue` was updated.
+     * The Time `prevFrameValue` was updated.
      */
     prevUpdatedAt: number | undefined;
     private stopPassiveEffect?;
@@ -204,7 +204,7 @@ export declare class SognaflowValue<V = any> {
     hasAnimated: boolean;
     /**
      * Registers a new animation to control this `sognaflowValue`. Only one
-     * animation can drive a `sognaflowValue` at one time.
+     * animation can drive a `sognaflowValue` at one Time.
      *
      * ```jsx
      * value.start()
@@ -237,5 +237,8 @@ export declare class SognaflowValue<V = any> {
      */
     destroy(): void;
 }
+export type sognaflowValue<V = any> = SognaflowValue<V>;
+export declare function sognaflowValue<V>(init: V, options?: SognaflowValueOptions): sognaflowValue<V>;
+export type { SognaflowValueEventCallbacks as sognaflowValueEventCallbacks };
 export declare function CreateSognaflowValue<V>(init: V, options?: SognaflowValueOptions): SognaflowValue<V>;
-export {};
+export { CollectSognaflowValues as collectsognaflowValues };

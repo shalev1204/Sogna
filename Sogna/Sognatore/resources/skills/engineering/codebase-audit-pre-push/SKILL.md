@@ -9,7 +9,6 @@ id: skill-codebase-audit-pre-push
 owner: [[orchestrator]]
 ---
 
-
 # Pre-Push Codebase Audit
 
 As a senior engineer, you're doing the final review before pushing this code to GitHub. Check everything carefully and fix problems as you find them.  
@@ -33,6 +32,7 @@ Review the entire codebase file by file. Read the code carefully. Fix issues rig
 Start by looking for files that shouldn't be on GitHub:  
 
 **Delete these immediately:**  
+
 - OS files: `.DS_Store`, `Thumbs.db`, `desktop.ini`  
 - Logs: `*.log`, `npm-debug.log*`, `yarn-error.log*`  
 - Temp files: `*.tmp`, `*.temp`, `*.cache`, `*.swp`  
@@ -44,6 +44,7 @@ Start by looking for files that shouldn't be on GitHub:
 - Personal junk: `TODO.txt`, `NOTES.txt`, `scratch.*`, `test123.*`  
 
 **Critical - Check for secrets:**  
+
 - `.env` files (should never be committed)  
 - Files containing: `password`, `api_key`, `token`, `secret`, `private_key`  
 - `*.pem`, `*.key`, `*.cert`, `credentials.json`, `serviceAccountKey.json`  
@@ -59,6 +60,7 @@ Check if the `.gitignore` file exists and is thorough. If it’s missing or not 
 Look through each code file and check:  
 
 **Dead Code (remove immediately):**  
+
 - Commented-out code blocks  
 - Unused imports/requires  
 - Unused variables (declared but never used)  
@@ -67,6 +69,7 @@ Look through each code file and check:
 - Duplicate logic (same code in multiple places—combine)  
 
 **Code Quality (fix issues as you go):**  
+
 - Vague names: `data`, `info`, `temp`, `thing` → rename to be descriptive  
 - Magic numbers: `if (status === 3)` → extract to named constant  
 - Debug statements: remove `console.log`, `print()`, `debugger`  
@@ -77,6 +80,7 @@ Look through each code file and check:
 - Nested code greater than 3 levels: refactor with early returns  
 
 **Logic Issues (critical):**  
+
 - Missing null/undefined checks  
 - Array operations on potentially empty arrays  
 - Async functions that are not awaited  
@@ -89,41 +93,48 @@ Look through each code file and check:
 **Secrets:** Search for hardcoded passwords, API keys, and tokens. They must be in environment variables.  
 
 **Injection vulnerabilities:**  
+
 - SQL: No string concatenation in queries—use parameterized queries only  
 - Command injection: No `exec()` with user-provided input  
 - Path traversal: No file paths from user input without validation  
 - XSS: No `innerHTML` or `dangerouslySetInnerHTML` with user data  
 
 **Auth/Authorization:**  
+
 - Passwords hashed with bcrypt/argon2 (never MD5 or plain text)  
 - Protected routes check for authentication  
 - Authorization checks on the server side, not just in the UI  
 - No IDOR: verify users own the resources they are accessing  
 
 **Data exposure:**  
+
 - API responses do not leak unnecessary information  
 - Error messages do not expose stack traces or database details  
 - Pagination is present on list endpoints  
 
 **Dependencies:**  
+
 - Run `npm audit` or an equivalent tool  
 - Flag critically outdated or vulnerable packages  
 
 ### 5. Scalability Check  
 
 **Database:**  
+
 - N+1 queries: loops with database calls inside → use JOINs or batch queries  
 - Missing indexes on WHERE/ORDER BY columns  
 - Unbounded queries: add LIMIT or pagination  
 - Avoid `SELECT *`: specify columns  
 
 **API Design:**  
+
 - Heavy operations (like email, reports, file processing) → move to a background queue  
 - Rate limiting on public endpoints  
 - Caching for data that is read frequently  
 - Timeouts on external calls  
 
 **Code:**  
+
 - No global mutable state  
 - Clean up event listeners (to avoid memory leaks)  
 - Stream large files instead of loading them into memory  
@@ -131,17 +142,20 @@ Look through each code file and check:
 ### 6. Architecture Check  
 
 **Organization:**  
+
 - Clear folder structure  
 - Files are in logical locations  
 - No "misc" or "stuff" folders  
 
 **Separation of concerns:**  
+
 - UI layer: only responsible for rendering  
 - Business logic: pure functions  
 - Data layer: isolated database queries  
 - No 500+ line "god files"  
 
 **Reusability:**  
+
 - Duplicate code → extract to shared utilities  
 - Constants defined once and imported  
 - Types/interfaces reused, not redefined  
@@ -149,11 +163,13 @@ Look through each code file and check:
 ### 7. Performance  
 
 **Backend:**  
+
 - Expensive operations do not block requests  
 - Batch database calls when possible  
 - Set cache headers correctly  
 
 **Frontend (if applicable):**  
+
 - Implement code splitting  
 - Optimize images  
 - Avoid massive dependencies for small utilities  
@@ -162,12 +178,14 @@ Look through each code file and check:
 ### 8. Documentation  
 
 **README.md must include:**  
+
 - Description of what the project does  
 - Instructions for installation and execution  
 - Required environment variables  
 - Guidance on running tests  
 
 **Code comments:**  
+
 - Explain WHY, not WHAT  
 - Provide explanations for complex logic  
 - Avoid comments that merely repeat the code  
@@ -182,6 +200,7 @@ Look through each code file and check:
 ### 10. Final Verification  
 
 After making all changes, run the app. Ensure nothing is broken. Check that:  
+
 - The app starts without errors  
 - Main features work  
 - Tests pass (if they exist)  
@@ -195,6 +214,7 @@ After auditing, provide a report:
 CODEBASE AUDIT COMPLETE  
 
 FILES REMOVED:  
+
 - node_modules/ (build artifact)  
 - .env (contained secrets)  
 - old_backup.js (unused duplicate)  
@@ -243,11 +263,13 @@ Overall: 9/10
 - `@git-pushing` - Push code after audit
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

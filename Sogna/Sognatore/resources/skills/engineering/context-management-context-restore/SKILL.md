@@ -8,7 +8,6 @@ id: skill-context-management-context-restore
 owner: [[orchestrator]]
 ---
 
-
 # Context Restoration: Advanced Semantic Memory Rehydration
 
 ## Use this skill when
@@ -35,6 +34,7 @@ Expert Context Restoration Specialist focused on intelligent, semantic-aware con
 ## Context Overview
 
 The Context Restoration tool is a sophisticated memory management system designed to:
+
 - Recover and reconstruct project context across distributed AI workflows
 - Enable seamless continuity in complex, long-running projects
 - Provide intelligent, semantically-aware context rehydration
@@ -43,6 +43,7 @@ The Context Restoration tool is a sophisticated memory management system designe
 ## Core Requirements and Arguments
 
 ### Input Parameters
+
 - `context_source`: Primary context storage location (vector database, file system)
 - `project_identifier`: Unique project namespace
 - `restoration_mode`:
@@ -55,6 +56,7 @@ The Context Restoration tool is a sophisticated memory management system designe
 ## Advanced Context Retrieval Strategies
 
 ### 1. Semantic Vector Search
+
 - Utilize multi-dimensional embedding models for context retrieval
 - Employ cosine similarity and vector clustering techniques
 - Support multi-modal embedding (text, code, architectural diagrams)
@@ -72,6 +74,7 @@ def semantic_context_retrieve(project_id, query_vector, top_k=5):
 ```
 
 ### 2. Relevance Filtering and Ranking
+
 - Implement multi-stage relevance scoring
 - Consider temporal decay, semantic similarity, and historical impact
 - Dynamic weighting of context components
@@ -92,6 +95,7 @@ def rank_context_components(contexts, current_state):
 ```
 
 ### 3. Context Rehydration Patterns
+
 - Implement incremental context loading
 - Support partial and full context reconstruction
 - Manage token budgets dynamically
@@ -121,26 +125,31 @@ def rehydrate_context(project_context, token_budget=8192):
 ```
 
 ### 4. Session State Reconstruction
+
 - Reconstruct agent workflow state
 - Preserve decision trails and reasoning contexts
 - Support multi-agent collaboration history
 
 ### 5. Context Merging and Conflict Resolution
+
 - Implement three-way merge strategies
 - Detect and resolve semantic conflicts
 - Maintain provenance and decision traceability
 
 ### 6. Incremental Context Loading
+
 - Support lazy loading of context components
 - Implement context streaming for large projects
 - Enable dynamic context expansion
 
 ### 7. Context Validation and Integrity Checks
+
 - Cryptographic context signatures
 - Semantic consistency verification
 - Version compatibility checks
 
 ### 8. Performance Optimization
+
 - Implement efficient caching mechanisms
 - Use probabilistic data structures for context indexing
 - Optimize vector search algorithms
@@ -148,12 +157,14 @@ def rehydrate_context(project_context, token_budget=8192):
 ## Reference Workflows
 
 ### Workflow 1: Project Resumption
+
 1. Retrieve most recent project context
 2. Validate context against current codebase
 3. Selectively restore relevant components
 4. Generate resumption summary
 
 ### Workflow 2: Cross-Project Knowledge Transfer
+
 1. Extract semantic vectors from source project
 2. Map and transfer relevant knowledge
 3. Adapt context to target project's domain
@@ -162,34 +173,42 @@ def rehydrate_context(project_context, token_budget=8192):
 ## Usage Examples
 
 ```bash
+
 # Full context restoration
+
 context-restore project:ai-assistant --mode full
 
 # Incremental context update
+
 context-restore project:web-platform --mode incremental
 
 # Semantic context query
+
 context-restore project:ml-pipeline --query "model training strategy"
 ```
 
 ## Integration Patterns
+
 - RAG (Retrieval Augmented Generation) pipelines
 - Multi-agent workflow coordination
 - Continuous learning systems
 - Enterprise knowledge management
 
 ## Future Roadmap
+
 - Enhanced multi-modal embedding support
 - Quantum-inspired vector search algorithms
 - Self-healing context reconstruction
 - Adaptive learning context strategies
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

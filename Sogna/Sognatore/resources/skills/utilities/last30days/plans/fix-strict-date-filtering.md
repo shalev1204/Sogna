@@ -10,6 +10,7 @@ version: 1.0.0
 ## Overview
 
 The `/last30days` skill is returning content older than 30 days, violating its core promise. Analysis shows:
+
 - **Reddit**: Only 40% of results within 30 days (9/15 were older, some from 2022!)
 - **X**: 100% within 30 days (working correctly)
 - **WebSearch**: 90% had unknown dates (can't verify freshness)
@@ -57,6 +58,7 @@ If you cannot find enough recent threads, return fewer results rather than older
 ```
 
 **Changes needed:**
+
 1. Add `from_date` and `to_date` parameters to `search_reddit()` function
 2. Inject dates into `REDDIT_SEARCH_PROMPT` like X does
 3. Update caller in `last30days.py` to pass dates
@@ -135,6 +137,7 @@ import re
 from datetime import datetime, timedelta
 
 # Patterns for date extraction
+
 URL_DATE_PATTERNS = [
     r'/(\d{4})/(\d{2})/(\d{2})/',  # /2026/01/24/
     r'/(\d{4})-(\d{2})-(\d{2})/',  # /2026-01-24/
@@ -171,9 +174,11 @@ def extract_date_signals(url: str, snippet: str, title: str) -> tuple[Optional[s
     """Extract date from any available signal.
 
     Returns: (date_string, confidence)
+
     - date from URL: 'high' confidence
     - date from snippet: 'med' confidence
     - no date found: None, 'low' confidence
+
     """
     # Try URL first (most reliable)
     url_date = extract_date_from_url(url)
@@ -225,7 +230,9 @@ def parse_websearch_results(results, topic, from_date, to_date):
 Update WebSearch scoring to reward date-verified results:
 
 ```python
+
 # WebSearch date confidence adjustments
+
 WEBSEARCH_NO_DATE_PENALTY = 20  # Heavy penalty for no date (was 10)
 WEBSEARCH_VERIFIED_BONUS = 10   # Bonus for URL-verified recent date
 
@@ -290,9 +297,11 @@ Run same query before and after fix:
 ```
 
 **Expected Before:**
+
 - Reddit: 40% within 30 days
 
 **Expected After:**
+
 - Reddit: 100% within 30 days (or fewer results if not enough recent content)
 
 ### Edge Case Tests
@@ -324,6 +333,7 @@ Run same query before and after fix:
 ## References
 
 ### Internal References
+
 - Reddit search: `scripts/lib/openai_reddit.py:25-63`
 - X search (working example): `scripts/lib/xai_x.py:26-55`
 - Date confidence: `scripts/lib/dates.py:62-90`
@@ -331,10 +341,12 @@ Run same query before and after fix:
 - Normalization: `scripts/lib/normalize.py:49,99`
 
 ### External References
+
 - OpenAI Responses API lacks native date filtering
 - Must rely on prompt engineering + post-processing
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

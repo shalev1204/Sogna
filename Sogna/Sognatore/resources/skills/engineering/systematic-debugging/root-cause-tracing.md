@@ -31,6 +31,7 @@ digraph when_to_use {
 ```
 
 **Use when:**
+
 - Error happens deep in execution (not at entry point)
 - Stack trace shows long call chain
 - Unclear where invalid data originated
@@ -39,17 +40,20 @@ digraph when_to_use {
 ## The Tracing Process
 
 ### 1. Observe the Symptom
+
 ```
 Error: git init failed in /Users/jesse/project/packages/core
 ```
 
 ### 2. Find Immediate Cause
+
 **What code directly causes this?**
 ```typescript
 await execFileAsync('git', ['init'], { cwd: projectDir });
 ```
 
 ### 3. Ask: What Called This?
+
 ```typescript
 WorktreeManager.createSessionWorktree(projectDir, sessionId)
   → called by Session.initializeWorkspace()
@@ -58,12 +62,15 @@ WorktreeManager.createSessionWorktree(projectDir, sessionId)
 ```
 
 ### 4. Keep Tracing Up
+
 **What value was passed?**
+
 - `projectDir = ''` (empty string!)
 - Empty string as `cwd` resolves to `process.cwd()`
 - That's the source code directory!
 
 ### 5. Find Original Trigger
+
 **Where did empty string come from?**
 ```typescript
 const context = setupCoreTest(); // Returns { tempDir: '' }
@@ -97,6 +104,7 @@ npm test 2>&1 | grep 'DEBUG git init'
 ```
 
 **Analyze stack traces:**
+
 - Look for test file names
 - Find the line number triggering the call
 - Identify the pattern (same test? same parameter?)
@@ -118,6 +126,7 @@ Runs tests one-by-one, stops at first polluter. See script for usage.
 **Symptom:** `.git` created in `packages/core/` (source code)
 
 **Trace chain:**
+
 1. `git init` runs in `process.cwd()` ← empty cwd parameter
 2. WorktreeManager called with empty projectDir
 3. Session.create() passed empty string
@@ -129,6 +138,7 @@ Runs tests one-by-one, stops at first polluter. See script for usage.
 **Fix:** Made tempDir a getter that throws if accessed before beforeEach
 
 **Also added defense-in-depth:**
+
 - Layer 1: Project.create() validates directory
 - Layer 2: WorkspaceManager validates not empty
 - Layer 3: NODE_ENV guard refuses git init outside tmpdir
@@ -170,12 +180,14 @@ digraph principle {
 ## Real-World Impact
 
 From debugging session (2025-10-03):
+
 - Found root cause through 5-level trace
 - Fixed at source (getter validation)
 - Added 4 layers of defense
 - 1847 tests passed, zero pollution
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

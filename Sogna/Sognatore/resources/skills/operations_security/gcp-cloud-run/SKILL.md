@@ -11,7 +11,6 @@ id: skill-gcp-cloud-run
 owner: [[ops-security]]
 ---
 
-
 # GCP Cloud Run
 
 Specialized skill for building production-ready serverless applications on GCP.
@@ -37,7 +36,9 @@ Containerized web service on Cloud Run
 **When to use**: Web applications and APIs,Need any runtime or library,Complex services with multiple endpoints,Stateless containerized workloads
 
 ```dockerfile
+
 # Dockerfile - Multi-stage build for smaller image
+
 FROM node:20-slim AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -47,15 +48,18 @@ FROM node:20-slim
 WORKDIR /app
 
 # Copy only production dependencies
+
 COPY --from=builder /app/node_modules ./node_modules
 COPY src ./src
 COPY package.json ./
 
 # Cloud Run uses PORT env variable
+
 ENV PORT=8080
 EXPOSE 8080
 
 # Run as non-root user
+
 USER node
 
 CMD ["node", "src/index.js"]
@@ -101,20 +105,29 @@ const server = app.listen(PORT, () => {
 ```
 
 ```yaml
+
 # cloudbuild.yaml
+
 steps:
   # Build the container image
+
   - name: 'gcr.io/cloud-builders/docker'
+
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/my-service:$COMMIT_SHA', '.']
 
   # Push the container image
+
   - name: 'gcr.io/cloud-builders/docker'
+
     args: ['push', 'gcr.io/$PROJECT_ID/my-service:$COMMIT_SHA']
 
   # Deploy to Cloud Run
+
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+
     entrypoint: gcloud
     args:
+
       - 'run'
       - 'deploy'
       - 'my-service'
@@ -130,7 +143,9 @@ steps:
       - '--cpu-boost'
 
 images:
+
   - 'gcr.io/$PROJECT_ID/my-service:$COMMIT_SHA'
+
 ```
 
 ### Structure
@@ -147,6 +162,7 @@ project/
 ### Gcloud_deploy
 
 # Direct gcloud deployment
+
 gcloud run deploy my-service \
   --source . \
   --region us-central1 \
@@ -211,7 +227,9 @@ functions.cloudEvent('processStorageEvent', async (cloudEvent) => {
 ```
 
 ```bash
+
 # Deploy HTTP function
+
 gcloud functions deploy hello-http \
   --gen2 \
   --runtime nodejs20 \
@@ -220,6 +238,7 @@ gcloud functions deploy hello-http \
   --region us-central1
 
 # Deploy Pub/Sub function
+
 gcloud functions deploy process-messages \
   --gen2 \
   --runtime nodejs20 \
@@ -227,6 +246,7 @@ gcloud functions deploy process-messages \
   --region us-central1
 
 # Deploy Cloud Storage function
+
 gcloud functions deploy process-uploads \
   --gen2 \
   --runtime nodejs20 \
@@ -260,7 +280,9 @@ gcloud run deploy my-service \
 ## 3. Optimize Container Image
 
 ```dockerfile
+
 # Use distroless for minimal image
+
 FROM node:20-slim AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -298,7 +320,9 @@ app.get('/api/analytics', async (req, res) => {
 ## 5. Increase Memory (More CPU)
 
 ```bash
+
 # Higher memory = more CPU during startup
+
 gcloud run deploy my-service \
   --memory 1Gi \
   --cpu 2 \
@@ -321,20 +345,25 @@ Proper concurrency settings for Cloud Run
 ## Understanding Concurrency
 
 ```bash
+
 # Default concurrency is 80
+
 # Adjust based on your workload
 
 # For I/O-bound workloads (most web apps)
+
 gcloud run deploy my-service \
   --concurrency 80 \
   --cpu 1
 
 # For CPU-bound workloads
+
 gcloud run deploy my-service \
   --concurrency 1 \
   --cpu 1
 
 # For memory-intensive workloads
+
 gcloud run deploy my-service \
   --concurrency 10 \
   --memory 2Gi
@@ -374,11 +403,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 4 workers for concurrency
+
 CMD exec gunicorn --bind :$PORT --workers 4 --threads 2 main:app
 ```
 
 ```python
+
 # main.py
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -403,10 +435,13 @@ Event-driven processing with Cloud Pub/Sub
 ## Push Subscription to Cloud Run
 
 ```bash
+
 # Create topic
+
 gcloud pubsub topics create orders
 
 # Create push subscription to Cloud Run
+
 gcloud pubsub subscriptions create orders-push \
   --topic orders \
   --push-endpoint https://my-service-xxx.run.app/pubsub \
@@ -472,10 +507,13 @@ async function publishOrder(order) {
 ## Dead Letter Queue
 
 ```bash
+
 # Create DLQ topic
+
 gcloud pubsub topics create orders-dlq
 
 # Update subscription with DLQ
+
 gcloud pubsub subscriptions update orders-push \
   --dead-letter-topic orders-dlq \
   --max-delivery-attempts 5
@@ -488,7 +526,9 @@ Connect Cloud Run to Cloud SQL securely
 **When to use**: Need relational database,Migrating existing applications,Complex queries and transactions
 
 ```bash
+
 # Deploy with Cloud SQL connection
+
 gcloud run deploy my-service \
   --add-cloudsql-instances PROJECT:REGION:INSTANCE \
   --set-env-vars INSTANCE_CONNECTION_NAME="PROJECT:REGION:INSTANCE" \
@@ -523,7 +563,9 @@ app.get('/api/users', async (req, res) => {
 ```
 
 ```python
+
 # Python with SQLAlchemy
+
 import os
 from sqlalchemy import create_engine
 
@@ -560,14 +602,18 @@ Securely manage secrets in Cloud Run
 **When to use**: API keys, database passwords,Service account keys,Any sensitive configuration
 
 ```bash
+
 # Create secret
+
 echo -n "my-secret-value" | gcloud secrets create my-secret --data-file=-
 
 # Mount as environment variable
+
 gcloud run deploy my-service \
   --update-secrets=API_KEY=my-secret:latest
 
 # Mount as file volume
+
 gcloud run deploy my-service \
   --update-secrets=/secrets/api-key=my-secret:latest
 ```
@@ -611,6 +657,7 @@ Cloud Run uses an in-memory filesystem for /tmp. Any files written
 to /tmp consume memory from your container's allocation.
 
 Common scenarios:
+
 - Downloading files temporarily
 - Creating temp processing files
 - Libraries caching to /tmp
@@ -624,21 +671,29 @@ Recommended fix:
 ## Calculate memory including /tmp usage
 
 ```yaml
+
 # cloudbuild.yaml
+
 steps:
+
   - name: 'gcr.io/cloud-builders/gcloud'
+
     args:
+
       - 'run'
       - 'deploy'
       - 'my-service'
       - '--memory=1Gi'  # Include /tmp overhead
       - '--image=gcr.io/$PROJECT_ID/my-service'
+
 ```
 
 ## Stream instead of buffering
 
 ```python
+
 # BAD - buffers entire file in /tmp
+
 def process_large_file(bucket_name, blob_name):
     blob = bucket.blob(blob_name)
     blob.download_to_filename('/tmp/large_file')
@@ -646,6 +701,7 @@ def process_large_file(bucket_name, blob_name):
         process(f.read())
 
 # GOOD - stream processing
+
 def process_large_file(bucket_name, blob_name):
     blob = bucket.blob(blob_name)
     with blob.open('rb') as f:
@@ -707,6 +763,7 @@ request at a time. During traffic spikes:
 - Scaling takes time, requests queue up
 
 This should only be used when:
+
 - Processing is truly single-threaded
 - Memory-heavy per-request processing
 - Using thread-unsafe libraries
@@ -716,17 +773,21 @@ Recommended fix:
 ## Set appropriate concurrency
 
 ```bash
+
 # For I/O-bound workloads (most web apps)
+
 gcloud run deploy my-service \
   --concurrency=80 \
   --max-instances=100
 
 # For CPU-bound workloads
+
 gcloud run deploy my-service \
   --concurrency=4 \
   --cpu=2
 
 # Only use 1 when absolutely necessary
+
 gcloud run deploy my-service \
   --concurrency=1 \
   --max-instances=1000  # Be prepared for many instances
@@ -767,6 +828,7 @@ async def get_data():
         return response.json()
 
 # Concurrency 80+ safe with async framework
+
 ```
 
 ## Calculate concurrency
@@ -775,9 +837,11 @@ async def get_data():
 concurrency = memory_limit / per_request_memory
 
 Example:
+
 - 512MB container
 - 20MB per request overhead
 - Safe concurrency: ~25
+
 ```
 
 ### CPU Throttled When Not Handling Requests
@@ -797,6 +861,7 @@ By default, Cloud Run throttles CPU to near-zero when not actively
 handling a request. This is "CPU only during requests" mode.
 
 Affected operations:
+
 - Background threads
 - Connection pool maintenance
 - Metrics/telemetry emission
@@ -808,18 +873,23 @@ Recommended fix:
 ## Enable CPU always allocated
 
 ```bash
+
 # CPU allocated even outside requests
+
 gcloud run deploy my-service \
   --cpu-throttling=false \
   --min-instances=1
 
 # Note: This increases costs but enables background work
+
 ```
 
 ## Use startup CPU boost for initialization
 
 ```bash
+
 # Boost CPU during cold start only
+
 gcloud run deploy my-service \
   --cpu-boost \
   --cpu-throttling=true  # Default, throttle after request
@@ -849,6 +919,7 @@ def create_background_task(payload):
     client.create_task(parent=parent, task=task)
 
 # Handle response immediately, background via Cloud Tasks
+
 @app.post("/api/order")
 async def create_order(order: Order):
     order_id = await save_order(order)
@@ -862,15 +933,21 @@ async def create_order(order: Order):
 ## Use Pub/Sub for async processing
 
 ```yaml
+
 # Move heavy processing to separate service
+
 steps:
   # Main service - responds quickly
+
   - name: 'gcr.io/cloud-builders/gcloud'
+
     args: ['run', 'deploy', 'api-service',
            '--cpu-throttling=true']
 
   # Worker service - processes messages
+
   - name: 'gcr.io/cloud-builders/gcloud'
+
     args: ['run', 'deploy', 'worker-service',
            '--cpu-throttling=false',
            '--min-instances=1']
@@ -893,6 +970,7 @@ Cloud Run's VPC connector has a 10-minute idle timeout on connections.
 If a connection is idle for 10 minutes, it's silently closed.
 
 Affects:
+
 - Database connection pools
 - Redis connections
 - Internal API connections
@@ -903,7 +981,9 @@ Recommended fix:
 ## Configure connection pool with keep-alive
 
 ```python
+
 # SQLAlchemy with connection recycling
+
 from sqlalchemy import create_engine
 
 engine = create_engine(
@@ -949,8 +1029,11 @@ client = redis.Redis(connection_pool=pool)
 ## Use Cloud SQL Proxy sidecar
 
 ```yaml
+
 # Use Cloud SQL connector which handles reconnection
+
 # requirements.txt
+
 cloud-sql-python-connector[pg8000]
 ```
 
@@ -992,6 +1075,7 @@ Cloud Run expects your container to start listening on PORT within
 4 minutes (240 seconds). If it doesn't, the instance is killed.
 
 Common causes:
+
 - Heavy framework initialization (ML models, etc.)
 - Waiting for external dependencies at startup
 - Large dependency loading
@@ -1016,6 +1100,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 # Don't load at import time
+
 model = None
 
 @lru_cache()
@@ -1032,6 +1117,7 @@ async def predict(data: dict):
     return model.predict(data)
 
 # Startup is fast - model loads on first request
+
 ```
 
 ## Start listening immediately
@@ -1044,6 +1130,7 @@ import uvicorn
 app = FastAPI()
 
 # Global state for async initialization
+
 initialized = asyncio.Event()
 
 @app.on_event("startup")
@@ -1072,13 +1159,16 @@ async def health():
 ## Use multi-stage builds
 
 ```dockerfile
+
 # Build stage - slow
+
 FROM python:3.11 as builder
 WORKDIR /app
 COPY requirements.txt .
 RUN pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
 # Runtime stage - fast startup
+
 FROM python:3.11-slim
 WORKDIR /app
 COPY --from=builder /wheels /wheels
@@ -1090,18 +1180,26 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 ## Run migrations separately
 
 ```bash
+
 # Don't migrate on startup - use Cloud Build
+
 steps:
   # Run migrations first
+
   - name: 'gcr.io/cloud-builders/gcloud'
+
     entrypoint: 'bash'
     args:
+
       - '-c'
       - |
+
         gcloud run jobs execute migrate-job --wait
 
   # Then deploy
+
   - name: 'gcr.io/cloud-builders/gcloud'
+
     args: ['run', 'deploy', 'my-service', ...]
 ```
 
@@ -1132,11 +1230,14 @@ Recommended fix:
 ## Explicitly set execution environment
 
 ```bash
+
 # First generation (legacy)
+
 gcloud run deploy my-service \
   --execution-environment=gen1
 
 # Second generation (recommended for most)
+
 gcloud run deploy my-service \
   --execution-environment=gen2
 ```
@@ -1144,7 +1245,9 @@ gcloud run deploy my-service \
 ## Handle network differences
 
 ```python
+
 # Second-gen doesn't auto-redirect HTTP to HTTPS
+
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 
@@ -1162,7 +1265,9 @@ async def redirect_https(request: Request, call_next):
 ## GPU access (second-gen only)
 
 ```bash
+
 # GPUs only available in second-gen
+
 gcloud run deploy ml-service \
   --execution-environment=gen2 \
   --gpu=1 \
@@ -1200,6 +1305,7 @@ Inconsistent timeout behavior.
 
 Why this breaks:
 Cloud Run has multiple timeout configurations that must align:
+
 - Request timeout (default 300s, max 3600s for HTTP, 60m for gRPC)
 - Client timeout
 - Downstream service timeouts
@@ -1210,7 +1316,9 @@ Recommended fix:
 ## Set consistent timeouts
 
 ```bash
+
 # Increase request timeout (max 3600s for HTTP)
+
 gcloud run deploy my-service \
   --timeout=900  # 15 minutes
 ```
@@ -1381,14 +1489,17 @@ Message: Singleton pattern - ensure thread safety if using concurrency > 1.
 - user needs workflow orchestration -> workflow-automation (Cloud Workflows, Eventarc)
 
 ## When to Use
+
 Use this skill when the request clearly matches the capabilities and patterns described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

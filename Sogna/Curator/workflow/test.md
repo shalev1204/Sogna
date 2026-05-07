@@ -59,9 +59,11 @@ When asked to test a file or feature:
 ### For Test Generation
 
 ```markdown
+
 ## 🧪 Tests: [Target]
 
 ### Test Plan
+
 | Test Case | Type | Coverage |
 |-----------|------|----------|
 | Should create user | Unit | Happy path |
@@ -147,4 +149,3 @@ describe('AuthService', () => {
 - **Descriptive test names**
 - **Arrange-Act-Assert pattern**
 - **Mock external dependencies**
-

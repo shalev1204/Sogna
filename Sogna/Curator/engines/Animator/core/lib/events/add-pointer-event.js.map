@@ -1,0 +1,1 @@
+{"version":3,"file":"add-pointer-event.js","sourceRoot":"","sources":["../../src/events/add-pointer-event.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,eAAe,CAAA;AAC3C,OAAO,EAAE,cAAc,EAA8B,MAAM,iBAAiB,CAAA;AAE5E,MAAM,UAAU,eAAe,CAC3B,MAAmB,EACnB,SAAiB,EACjB,OAAmC,EACnC,OAAiC;IAEjC,OAAO,WAAW,CAAC,MAAM,EAAE,SAAS,EAAE,cAAc,CAAC,OAAO,CAAC,EAAE,OAAO,CAAC,CAAA;AAC3E,CAAC"}

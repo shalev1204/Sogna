@@ -75,6 +75,7 @@ Remote URLs are also supported - you can `fetch()` a remote file via URL instead
 Once parsed, the captions are in the `Caption` format and can be used with all `@remotion/captions` utilities.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

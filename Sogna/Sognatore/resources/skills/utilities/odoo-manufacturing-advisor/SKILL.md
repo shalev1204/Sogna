@@ -7,7 +7,6 @@ id: skill-odoo-manufacturing-advisor
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Manufacturing Advisor
 
 ## Overview
@@ -39,13 +38,16 @@ BoM Type: Manufacture This Product
 Quantity: 1 (produce 1 unit per BoM)
 
 Components Tab:
+
   - Raw Plastic Sheet  | Qty: 0.5  | Unit: kg
   - Steel Bolt M6      | Qty: 4    | Unit: Units
   - Rubber Gasket      | Qty: 1    | Unit: Units
 
 Operations Tab (requires "Work Orders" enabled in MFG Settings):
+
   - Operation: Injection Molding | Work Center: Press A   | Duration: 30 min
   - Operation: Assembly          | Work Center: Line 1    | Duration: 15 min
+
 ```
 
 > **BoM Types explained:**
@@ -102,6 +104,7 @@ Message Types:
 - MRP calculations assume demand comes from **Sale Orders** and **Reordering Rules** — forecasts from external systems require custom integration.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

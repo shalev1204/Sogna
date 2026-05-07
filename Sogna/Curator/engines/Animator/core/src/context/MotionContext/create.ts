@@ -2,7 +2,7 @@
 
 import { useContext, useMemo } from "react"
 import { sognaflowContext, type sognaflowContextProps } from "."
-import { sognaflowProps } from "../../sognaflow/types"
+import { sognaflowProps } from "../../motion/types"
 import { getCurrentTreeVariants } from "./utils.js"
 
 export function useCreatesognaflowContext<Instance>(
@@ -10,7 +10,7 @@ export function useCreatesognaflowContext<Instance>(
 ): sognaflowContextProps<Instance> {
     const { initial, animate } = getCurrentTreeVariants(
         props,
-        useContext(sognaflowContext)
+        useContext(sognaflowContext) as any
     )
 
     return useMemo(

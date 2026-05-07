@@ -10,7 +10,6 @@ id: skill-computer-use-agents
 owner: [[orchestrator]]
 ---
 
-
 # Computer Use Agents
 
 Build AI agents that interact with computers like humans do - viewing screens,
@@ -27,6 +26,7 @@ reason about next action, execute action, repeat. This loop integrates
 vision models with action execution through an iterative pipeline.
 
 Key components:
+
 1. PERCEPTION: Screenshot captures current screen state
 2. REASONING: Vision-language model analyzes and plans
 3. ACTION: Execute mouse/keyboard operations
@@ -106,11 +106,13 @@ class ComputerUseAgent:
         Run perception-reasoning-action loop until task complete.
 
         The loop:
+
         1. Screenshot current state
         2. Send to vision model with task context
         3. Parse action from response
         4. Execute action
         5. Repeat until done or max steps
+
         """
         messages = []
         step_count = 0
@@ -119,6 +121,7 @@ class ComputerUseAgent:
         and control mouse/keyboard.
 
         Available actions (respond with JSON):
+
         - {"type": "click", "x": 100, "y": 200, "button": "left"}
         - {"type": "type", "text": "hello world"}
         - {"type": "key", "key": "enter"}
@@ -192,6 +195,7 @@ class ComputerUseAgent:
         }
 
 # Usage
+
 agent = ComputerUseAgent(Anthropic())
 result = agent.run("Open Chrome and search for 'weather today'")
 
@@ -209,6 +213,7 @@ Never give agents direct access to your main system - the security
 risks are too high. Use Docker containers with virtual desktops.
 
 Key isolation requirements:
+
 1. NETWORK: Restrict to necessary endpoints only
 2. FILESYSTEM: Read-only or scoped to temp directories
 3. CREDENTIALS: No access to host credentials
@@ -221,11 +226,13 @@ damage is contained to the sandbox.
 **When to use**: Deploying any computer use agent,Testing agent behavior safely,Running untrusted automation tasks
 
 # Dockerfile for sandboxed computer use environment
+
 # Based on Anthropic's reference implementation pattern
 
 FROM ubuntu:22.04
 
 # Install desktop environment
+
 RUN apt-get update && apt-get install -y \
     xvfb \
     x11vnc \
@@ -237,28 +244,35 @@ RUN apt-get update && apt-get install -y \
     supervisor
 
 # Security: Create non-root user
+
 RUN useradd -m -s /bin/bash agent && \
     mkdir -p /home/agent/.vnc
 
 # Install Python dependencies
+
 COPY requirements.txt /tmp/
 RUN pip3 install -r /tmp/requirements.txt
 
 # Security: Drop capabilities
+
 RUN apt-get install -y --no-install-recommends libcap2-bin && \
     setcap -r /usr/bin/python3 || true
 
 # Copy agent code
+
 COPY --chown=agent:agent . /app
 WORKDIR /app
 
 # Supervisor config for virtual display + VNC
+
 COPY supervisord.conf /etc/supervisor/conf.d/
 
 # Expose VNC port only (not desktop directly)
+
 EXPOSE 5900
 
 # Run as non-root
+
 USER agent
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
@@ -266,17 +280,20 @@ CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 ---
 
 # docker-compose.yml with security constraints
+
 version: '3.8'
 
 services:
   computer-use-agent:
     build: .
     ports:
+
       - "5900:5900"  # VNC for observation
       - "8080:8080"  # API for control
 
     # Security constraints
     security_opt:
+
       - no-new-privileges:true
       - seccomp:seccomp-profile.json
 
@@ -292,20 +309,24 @@ services:
 
     # Network isolation
     networks:
+
       - agent-network
 
     # No access to host filesystem
     volumes:
+
       - agent-tmp:/tmp
 
     # Read-only root filesystem
     read_only: true
     tmpfs:
+
       - /run
       - /var/run
 
     # Environment
     environment:
+
       - DISPLAY=:99
       - NO_PROXY=localhost
 
@@ -320,6 +341,7 @@ volumes:
 ---
 
 # Python wrapper with additional runtime sandboxing
+
 import subprocess
 import os
 from dataclasses import dataclass
@@ -413,6 +435,7 @@ Claude 3.5 Sonnet was the first frontier model to offer computer use.
 Claude Opus 4.5 is now the "best model in the world for computer use."
 
 Key capabilities:
+
 - screenshot: Capture current screen state
 - mouse: Click, move, drag operations
 - keyboard: Type text, press keys
@@ -420,6 +443,7 @@ Key capabilities:
 - text_editor: View and edit files
 
 Tool versions:
+
 - computer_20251124 (Opus 4.5): Adds zoom action for detailed inspection
 - computer_20250124 (All other models): Standard capabilities
 
@@ -444,9 +468,11 @@ class AnthropicComputerUse:
     Official Anthropic Computer Use implementation.
 
     Requires:
+
     - Docker container with virtual display
     - VNC for viewing agent actions
     - Proper tool implementations
+
     """
 
     def __init__(self):
@@ -669,12 +695,14 @@ than pixel-based computer use. Playwright MCP allows LLMs to control
 browsers using accessibility snapshots rather than screenshots.
 
 Advantages over vision-based:
+
 - Faster: No image processing required
 - Cheaper: Text tokens vs image tokens
 - More precise: Direct element targeting
 - More reliable: No coordinate drift
 
 When to use vision vs structured:
+
 - Vision: Desktop apps, complex UIs, visual verification
 - Structured: Web automation, form filling, data extraction
 
@@ -801,6 +829,7 @@ class BrowserUseAgent:
         page snapshots with interactable elements and decide actions.
 
         Respond with JSON action:
+
         - {"action": "navigate", "url": "https://..."}
         - {"action": "click", "selector": "button.submit"}
         - {"action": "type", "selector": "input[name='email']", "text": "..."}
@@ -870,6 +899,7 @@ class BrowserUseAgent:
             await self.playwright.stop()
 
 # Usage
+
 async def main():
     agent = BrowserUseAgent()
     await agent.start(headless=False)
@@ -899,6 +929,7 @@ For sensitive actions, agents should pause and ask for human confirmation.
 sensitive steps such as completing a purchase."
 
 Sensitivity levels:
+
 1. LOW: Navigation, reading (auto-approve)
 2. MEDIUM: Form filling, clicking (log, maybe confirm)
 3. HIGH: Purchases, authentication, file operations (always confirm)
@@ -1116,6 +1147,7 @@ class ConfirmedComputerUseAgent:
         return any(re.search(p, text.lower()) for p in money_patterns)
 
 # Usage
+
 gate = ConfirmationGate(
     auto_confirm_low=True,
     auto_confirm_medium=False  # Confirm clicks, typing
@@ -1134,12 +1166,14 @@ result = agent.execute_action({"type": "click", "x": 500, "y": 300})
 ### Action Logging Pattern
 
 All computer use agent actions should be logged for:
+
 1. Debugging failed automations
 2. Security auditing
 3. Reproducibility
 4. Compliance requirements
 
 Log format should capture:
+
 - Timestamp
 - Action type and parameters
 - Screenshot before/after
@@ -1348,6 +1382,7 @@ class ActionLogger:
         return actions
 
 # Integration with agent
+
 class LoggedComputerUseAgent:
     """Computer use agent with comprehensive logging."""
 
@@ -1406,9 +1441,13 @@ navigating to URLs, filling forms, clicking buttons, downloading files—
 that attackers can exploit."
 
 Real attacks have already happened:
+
 - "Microsoft Copilot agents were hijacked with emails containing malicious
+
   instructions, which allowed attackers to extract entire CRM databases."
+
 - "Google's Workspace services were manipulated—hidden prompts inside
+
   calendar invites and emails tricked Gemini agents into deleting events
   and exposing sensitive messages."
 
@@ -1419,6 +1458,7 @@ Recommended fix:
 ## Defense in depth - no single solution works
 
 1. Sandboxing (most effective):
+
    ```python
    # Docker with strict isolation
    docker run \
@@ -1430,6 +1470,7 @@ Recommended fix:
    ```
 
 2. Classifier-based detection:
+
    ```python
    def scan_for_injection(content: str) -> bool:
        """Detect prompt injection attempts."""
@@ -1450,6 +1491,7 @@ Recommended fix:
    ```
 
 3. User confirmation for sensitive actions:
+
    ```python
    SENSITIVE_ACTIONS = {"download", "submit", "login", "purchase"}
 
@@ -1485,6 +1527,7 @@ The screenshot loop also creates detectable patterns:
 (1-5 seconds) → Action → Complete stillness → Action."
 
 Sophisticated anti-bot systems detect:
+
 - Perfect center clicks
 - No mouse movement during "thinking"
 - Consistent timing between actions
@@ -1561,9 +1604,11 @@ Why this breaks:
 "Computer Use currently struggles with certain interface interactions,
 particularly scrolling, dragging, and zooming operations. Some UI elements
 (like dropdowns and scrollbars) might be tricky for Claude to manipulate."
+
 - Anthropic documentation
 
 Why these are hard:
+
 1. Dropdowns: Options appear after click, need second click to select
 2. Scrollbars: Small targets, need precise positioning
 3. Drag: Requires coordinated mouse down, move, mouse up
@@ -1578,7 +1623,9 @@ Recommended fix:
 ## Use keyboard alternatives when possible
 
 ```python
+
 # Instead of clicking dropdown, use keyboard
+
 async def select_dropdown_option(page, dropdown_selector, option_text):
     # Focus the dropdown
     await page.click(dropdown_selector)
@@ -1593,7 +1640,9 @@ async def select_dropdown_option(page, dropdown_selector, option_text):
 ## Break complex actions into steps
 
 ```python
+
 # Instead of drag-and-drop
+
 async def reliable_drag(page, source, target):
     # Step 1: Click and hold
     await page.mouse.move(source["x"], source["y"])
@@ -1617,7 +1666,9 @@ async def reliable_drag(page, source, target):
 ## Fall back to DOM access for web
 
 ```python
+
 # If vision fails, try direct DOM manipulation
+
 async def robust_select(page, select_selector, value):
     try:
         # Try vision approach first
@@ -1660,6 +1711,7 @@ Why this breaks:
 multiple screenshots and analysis cycles."
 
 Why so slow:
+
 1. Screenshot capture: 100-500ms
 2. Vision model inference: 1-5 seconds per screenshot
 3. Action execution: 200-500ms
@@ -1674,6 +1726,7 @@ Recommended fix:
 ## Accept the tradeoff
 
 Computer use is for:
+
 - Tasks humans don't want to do (repetitive)
 - Tasks that can run in background
 - Tasks where accuracy > speed
@@ -1681,20 +1734,27 @@ Computer use is for:
 ## Optimize where possible
 
 ```python
+
 # 1. Reduce screenshot resolution
+
 SCREEN_SIZE = (1280, 800)  # Not 4K
 
 # 2. Batch similar actions
+
 # Instead of: type "hello", wait, type " world"
+
 await page.type("hello world")
 
 # 3. Parallelize independent tasks
+
 # Run multiple sandboxed agents concurrently
 
 # 4. Cache repeated computations
+
 # If same screenshot, reuse analysis
 
 # 5. Use smaller models for simple decisions
+
 simple_model = "claude-haiku-..."  # For "is task done?"
 complex_model = "claude-sonnet-..."  # For complex reasoning
 ```
@@ -1702,7 +1762,9 @@ complex_model = "claude-sonnet-..."  # For complex reasoning
 ## Set realistic expectations
 
 ```python
+
 # Estimate task duration
+
 def estimate_duration(task_complexity: str) -> int:
     """Estimate task duration in seconds."""
     estimates = {
@@ -1713,6 +1775,7 @@ def estimate_duration(task_complexity: str) -> int:
     return estimates.get(task_complexity, 120)
 
 # Inform users
+
 estimated = estimate_duration("medium")
 print(f"Estimated completion: {estimated // 60}m {estimated % 60}s")
 ```
@@ -1732,6 +1795,7 @@ Each screenshot is ~1500-3000 tokens. A task with 30 screenshots
 uses 45,000-90,000 tokens just for images - before any text.
 
 Claude's context window is finite. When full:
+
 - Older context gets dropped
 - Agent loses memory of earlier steps
 - Task coherence decreases
@@ -1836,7 +1900,9 @@ async def run_with_checkpoints(task: str, checkpoint_every: int = 10):
 ## Break into subtasks
 
 ```python
+
 # Instead of one 50-step task:
+
 subtasks = [
     "Navigate to the website and login",
     "Find the settings page",
@@ -1863,11 +1929,13 @@ Monthly costs reach thousands of dollars quickly.
 
 Why this breaks:
 Vision tokens are expensive. Each screenshot:
+
 - ~2000-3000 tokens per image
 - At $10/million tokens, that's $0.02-0.03 per screenshot
 - Task with 30 screenshots = $0.60-0.90 just for images
 
 But it compounds:
+
 - Screenshots accumulate in context
 - Model sees ALL previous screenshots each turn
 - Turn 10 processes 10 screenshots = $0.20-0.30
@@ -1921,6 +1989,7 @@ class CostLimitExceeded(Exception):
     pass
 
 # Usage
+
 tracker = CostTracker(max_cost_per_task=2.0)
 
 try:
@@ -1933,18 +2002,23 @@ except CostLimitExceeded:
 ## Reduce image costs
 
 ```python
+
 # 1. Lower resolution
+
 SCREEN_SIZE = (1024, 768)  # Smaller = fewer tokens
 
 # 2. JPEG instead of PNG (when quality ok)
+
 screenshot.save(buffer, format="JPEG", quality=70)
 
 # 3. Crop to relevant region
+
 def crop_relevant(screenshot: Image, focus_area: tuple):
     """Crop to area of interest."""
     return screenshot.crop(focus_area)
 
 # 4. Don't include screenshot every turn
+
 if not needs_visual_update:
     # Text-only turn
     messages.append({"role": "user", "content": "Continue..."})
@@ -1975,6 +2049,7 @@ Posts on social media. Accesses sensitive documents.
 
 Why this breaks:
 Computer use agents make mistakes. They can:
+
 - Misinterpret instructions
 - Click wrong buttons
 - Type in wrong fields
@@ -1994,6 +2069,7 @@ Recommended fix:
 ## ALWAYS use sandboxing
 
 ```python
+
 # Minimum viable sandbox: Docker with restrictions
 
 docker run -it --rm \
@@ -2010,12 +2086,19 @@ docker run -it --rm \
 ## Layer your defenses
 
 ```python
+
 # Defense 1: Docker isolation
+
 # Defense 2: Non-root user
+
 # Defense 3: Network restrictions
+
 # Defense 4: Filesystem restrictions
+
 # Defense 5: Resource limits
+
 # Defense 6: Action confirmation
+
 # Defense 7: Action logging
 
 @dataclass
@@ -2152,6 +2235,7 @@ Message: Consider adding max_cost_per_task to prevent expensive runaway tasks.
 - user needs multi-agent coordination -> multi-agent-orchestration (Multiple computer use agents working together)
 
 ## When to Use
+
 - User mentions or implies: computer use
 - User mentions or implies: desktop automation agent
 - User mentions or implies: screen control AI
@@ -2164,11 +2248,13 @@ Message: Consider adding max_cost_per_task to prevent expensive runaway tasks.
 - User mentions or implies: RPA with AI
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

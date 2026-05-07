@@ -13,23 +13,28 @@ version: 1.0.0
 ---
 
 ## 📁 專案進度追蹤
+
 （⚠️ AI 寫入規則：若檔案已存在，尋找對應的專案標題追加；絕不覆蓋，維持版面整潔。）
 
 ### 🔵 {專案 A，例如：auto-video-editor}
+
 * **今日進展**：(將 Step 2 提取的本地素材濃縮成重點)
 * **行動項目**：(提取該專案的下一步待辦)
 
 ### 🟢 {專案 B，例如：GSS}
+
 * **今日進展**：(將重點濃縮於此)
 * **行動項目**：(提取該專案的下一步待辦)
 
 ### 🟡 {專案 C，例如：Stickman Soul Cafe}
+
 * **今日進展**：(若今日無進度則不顯示此區塊)
 * **行動項目**：(提取該專案的下一步待辦)
 
 ---
 
 ## 🧠 改善與學習 (Lessons Learned)
+
 （⚠️ 此區塊專供經驗提煉）
 
 📌 **新規則 / 新發現**
@@ -41,10 +46,12 @@ version: 1.0.0
 ---
 
 ## ✅ 跨專案通用待辦 (Global Action Items)
+
 - [ ] (與特定專案無關的任務)
 - [ ] (系統環境維護等)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

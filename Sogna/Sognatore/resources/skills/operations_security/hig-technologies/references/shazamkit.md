@@ -50,6 +50,7 @@ After you receive permission to access the microphone for features that use Shaz
 [![](https://devimages-cdn.apple.com/wwdc-services/images/119/E875B0F9-12EF-4A12-B0B3-01A3DE667DD9/4934_wide_250x141_1x.jpg) Explore ShazamKit ](https://developer.apple.com/videos/play/wwdc2021/10044)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

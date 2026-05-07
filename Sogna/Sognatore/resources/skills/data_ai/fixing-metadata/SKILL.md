@@ -8,7 +8,6 @@ id: skill-fixing-metadata
 owner: [[orchestrator]]
 ---
 
-
 ## Workflow
 
 1. Identify pages with missing or incorrect metadata (titles, descriptions, canonical, OG tags)
@@ -16,8 +15,11 @@ owner: [[orchestrator]]
 3. Ensure title, description, canonical, and og:url all agree with each other
 4. Verify social cards render correctly on a real URL, not localhost
 5. Keep diffs minimal and scoped to metadata only — do not refactor unrelated code
+
 ## When to Use
+
 Reference these guidelines when:
+
 - adding or changing page titles, descriptions, canonical, robots
 - implementing Open Graph or Twitter card metadata
 - setting favicons, app icons, manifest, theme-color
@@ -111,11 +113,13 @@ Reference these guidelines when:
 - keep diffs minimal and scoped to metadata only
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

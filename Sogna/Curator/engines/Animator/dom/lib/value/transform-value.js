@@ -1,4 +1,4 @@
-import { CollectSognaflowValues, CreateSognaflowValue } from ".";
+import { CreateSognaflowValue, CollectSognaflowValues } from "./index.js";
 import { SubscribeValue } from "./subscribe-value.js";
 /**
  * Create a `sognaflowValue` that transforms the output of other `sognaflowValue`s by

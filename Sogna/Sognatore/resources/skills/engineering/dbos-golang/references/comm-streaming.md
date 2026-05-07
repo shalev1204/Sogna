@@ -70,6 +70,7 @@ for sv := range ch {
 ```
 
 Key behaviors:
+
 - A workflow may have any number of streams, each identified by a unique key
 - Streams are immutable and append-only
 - Writes from workflows happen exactly-once
@@ -80,6 +81,7 @@ Key behaviors:
 Reference: [Workflow Streaming](https://docs.dbos.dev/golang/tutorials/workflow-communication#workflow-streaming)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

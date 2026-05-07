@@ -1,4 +1,4 @@
-import { IsHTMLElement as isHTMLElement } from "../../utils/is-html-element.js";
+import { IsHTMLElement } from "../../utils/is-html-element.js";
 import { isDragActive } from "../drag/state/is-active.js";
 import { isNodeOrChild } from "../utils/is-node-or-child.js";
 import { isPrimaryPointer } from "../utils/is-primary-pointer.js";
@@ -74,7 +74,7 @@ export function press(targetOrSelector, onPressStart, options = {}) {
     targets.forEach((target) => {
         const pointerDownTarget = options.useGlobalTarget ? window : target;
         pointerDownTarget.addEventListener("pointerdown", startPress, eventOptions);
-        if (isHTMLElement(target)) {
+        if (IsHTMLElement(target)) {
             target.addEventListener("focus", (event) => enableKeyboardPress(event, eventOptions));
             if (!isElementKeyboardAccessible(target) &&
                 !target.hasAttribute("tabindex")) {

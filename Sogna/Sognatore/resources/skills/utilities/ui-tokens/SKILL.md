@@ -13,7 +13,6 @@ id: skill-ui-tokens
 owner: [[orchestrator]]
 ---
 
-
 # UI Tokens
 
 ## Overview
@@ -21,6 +20,7 @@ owner: [[orchestrator]]
 Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill manages design tokens without letting the source-of-truth files drift apart. It is meant for teams using the Toss seed's JSON token files and CSS implementation together.
 
 ## When to Use
+
 - Use when you need to inspect the current token set
 - Use when you want to add a new color, shadow, radius, spacing, or typography token
 - Use when you need to update a token and propagate the change safely
@@ -37,6 +37,7 @@ Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill manages de
 ### Typical Source-of-Truth Split
 
 For the Toss seed:
+
 - JSON under `tokens/`
 - CSS variables and theme wiring under `css/theme.css`
 - typography support in the font and base CSS files
@@ -52,6 +53,7 @@ For the Toss seed:
 ## Output
 
 Return:
+
 1. The requested token inventory or change summary
 2. Every file touched
 3. Any affected components or utilities that should be reviewed
@@ -70,11 +72,13 @@ Return:
 - [Source skill](https://github.com/bitjaru/styleseed/blob/main/seeds/toss/.claude/skills/ui-tokens/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

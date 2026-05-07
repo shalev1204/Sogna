@@ -8,7 +8,6 @@ id: skill-project-skill-audit
 owner: [[ops-security]]
 ---
 
-
 # Project Skill Audit
 
 ## Overview
@@ -18,52 +17,67 @@ Audit the project's real recurring workflows before recommending skills. Prefer 
 Recommend updates before new skills when an existing project skill is already close to the needed behavior.
 
 ## When to Use
+
 - When the user asks what skills a project needs or which existing skills should be updated.
 - When recommendations should be grounded in project history, memory files, and local conventions.
 
 ## Workflow
 
 1. Map the current project surface.
+
    Identify the repo root and read the most relevant project guidance first, such as `AGENTS.md`, `README.md`, roadmap/ledger files, and local docs that define workflows or validation expectations.
 
 2. Build the memory/session path first.
+
    Resolve the memory base as `$CODEX_HOME` when set, otherwise default to `~/.codex`.
    Use these locations:
+
    - memory index: `$CODEX_HOME/memories/MEMORY.md` or `~/.codex/memories/MEMORY.md`
    - rollout summaries: `$CODEX_HOME/memories/rollout_summaries/`
    - raw sessions: `$CODEX_HOME/sessions/` or `~/.codex/sessions/`
 
 3. Read project past sessions in this order.
+
    If the runtime prompt already includes a memory summary, start there.
    Then search `MEMORY.md` for:
+
    - repo name
    - repo basename
    - current `cwd`
    - important module or file names
+
    Open only the 1-3 most relevant rollout summaries first.
    Fall back to raw session JSONL only when the summaries are missing the exact evidence you need.
 
 4. Scan existing project-local skills before suggesting anything new.
+
    Check these locations relative to the current repo root:
+
    - `.agents/skills`
    - `.codex/skills`
    - `skills`
+
    Read both `SKILL.md` and `agents/openai.yaml` when present.
 
 5. Compare project-local skills against recurring work.
+
    Look for repeated patterns in past sessions:
+
    - repeated validation sequences
    - repeated failure shields
    - recurring ownership boundaries
    - repeated root-cause categories
    - workflows that repeatedly require the same repo-specific context
+
    If the pattern appears repeatedly and is not already well captured, it is a candidate skill.
 
 6. Separate `new skill` from `update existing skill`.
+
    Recommend an update when an existing skill is already the right bucket but has stale triggers, missing guardrails, outdated paths, weak validation instructions, or incomplete scope.
    Recommend a new skill only when the workflow is distinct enough that stretching an existing skill would make it vague or confusing.
 
 7. Check for overlap with global skills only after reviewing project-local skills.
+
    Use `$CODEX_HOME/skills` and `$CODEX_HOME/skills/public` to avoid proposing project-local skills for workflows already solved well by a generic shared skill.
    Do not reject a project-local skill just because a global skill exists; project-specific guardrails can still justify a local specialization.
 
@@ -153,22 +167,28 @@ Recommend updates before new skills when an existing project skill is already cl
 Return a compact audit with:
 
 1. `Existing skills`
+
    List the project-local skills found and the main workflow each one covers.
 
 2. `Suggested updates`
+
    For each update candidate, include:
+
    - skill name
    - why it is incomplete or stale
    - the highest-value change to make
 
 3. `Suggested new skills`
+
    For each new skill, include:
+
    - recommended skill name
    - why it should exist
    - what would trigger it
    - the core workflow it should encode
 
 4. `Priority order`
+
    Rank the top recommendations by expected value.
 
 ## Naming Guidance
@@ -192,11 +212,13 @@ Return a compact audit with:
 If the user asks to actually create or update one of the recommended skills, switch to `$skill-creator` and implement the chosen skill rather than continuing the audit.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

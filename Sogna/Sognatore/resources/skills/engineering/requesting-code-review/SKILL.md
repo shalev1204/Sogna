@@ -8,7 +8,6 @@ id: skill-requesting-code-review
 owner: [[orchestrator]]
 ---
 
-
 # Requesting Code Review
 
 Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
@@ -18,11 +17,13 @@ Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 ## When to Request Review
 
 **Mandatory:**
+
 - After each task in subagent-driven development
 - After completing major feature
 - Before merge to main
 
 **Optional but valuable:**
+
 - When stuck (fresh perspective)
 - Before refactoring (baseline check)
 - After fixing complex bug
@@ -40,6 +41,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 Use Task tool with superpowers:code-reviewer type, fill template at `code-reviewer.md`
 
 **Placeholders:**
+
 - `{WHAT_WAS_IMPLEMENTED}` - What you just built
 - `{PLAN_OR_REQUIREMENTS}` - What it should do
 - `{BASE_SHA}` - Starting commit
@@ -47,6 +49,7 @@ Use Task tool with superpowers:code-reviewer type, fill template at `code-review
 - `{DESCRIPTION}` - Brief summary
 
 **3. Act on feedback:**
+
 - Fix Critical issues immediately
 - Fix Important issues before proceeding
 - Note Minor issues for later
@@ -83,27 +86,32 @@ You: [Fix progress indicators]
 ## Integration with Workflows
 
 **Subagent-Driven Development:**
+
 - Review after EACH task
 - Catch issues before they compound
 - Fix before moving to next task
 
 **Executing Plans:**
+
 - Review after each batch (3 tasks)
 - Get feedback, apply, continue
 
 **Ad-Hoc Development:**
+
 - Review before merge
 - Review when stuck
 
 ## Red Flags
 
 **Never:**
+
 - Skip review because "it's simple"
 - Ignore Critical issues
 - Proceed with unfixed Important issues
 - Argue with valid technical feedback
 
 **If reviewer wrong:**
+
 - Push back with technical reasoning
 - Show code/tests that prove it works
 - Request clarification
@@ -111,14 +119,17 @@ You: [Fix progress indicators]
 See template at: requesting-code-review/code-reviewer.md
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,24 +8,26 @@ id: skill-testing-patterns
 owner: [[eng-qa]]
 ---
 
-
 # Testing Patterns and Utilities
 
 ## Testing Philosophy
 
 **Test-Driven Development (TDD):**
+
 - Write failing test FIRST
 - Implement minimal code to pass
 - Refactor after green
 - Never write production code without a failing test
 
 **Behavior-Driven Testing:**
+
 - Test behavior, not implementation
 - Focus on public APIs and business requirements
 - Avoid testing implementation details
 - Use descriptive test names that describe behavior
 
 **Factory Pattern:**
+
 - Create `getMockX(overrides?: Partial<X>)` functions
 - Provide sensible defaults
 - Allow overriding specific properties
@@ -249,13 +251,17 @@ const user = getMockUser({ name: 'Custom Name' });
 ## Running Tests
 
 ```bash
+
 # Run all tests
+
 npm test
 
 # Run with coverage
+
 npm run test:coverage
 
 # Run specific file
+
 npm test ComponentName.test.tsx
 ```
 
@@ -265,14 +271,17 @@ npm test ComponentName.test.tsx
 - **systematic-debugging**: Write test that reproduces bug before fixing
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

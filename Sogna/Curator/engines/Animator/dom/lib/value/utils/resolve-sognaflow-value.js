@@ -5,4 +5,5 @@ import { IsSognaflowValue } from "./is-sognaflow-value.js";
 export function ResolveSognaflowValue(value) {
     return IsSognaflowValue(value) ? value.get() : value;
 }
+export const resolvesognaflowValue = ResolveSognaflowValue;
 //# sourceMappingURL=resolve-sognaflow-value.js.map

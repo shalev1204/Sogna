@@ -8,7 +8,6 @@ id: skill-data-structure-protocol
 owner: [[orchestrator]]
 ---
 
-
 # Data Structure Protocol (DSP)
 
 LLM coding agents lose context between tasks. On large codebases they spend most of their tokens on "orientation" — figuring out where things live, what depends on what, and what is safe to change. DSP solves this by externalizing the project's structural map into a persistent, queryable graph stored in a `.dsp/` directory next to the code.
@@ -16,7 +15,9 @@ LLM coding agents lose context between tasks. On large codebases they spend most
 DSP is NOT documentation for humans and NOT an AST dump. It captures three things: **meaning** (why an entity exists), **boundaries** (what it imports and exposes), and **reasons** (why each connection exists). This is enough for an agent to navigate, refactor, and generate code without loading the entire source tree into the context window.
 
 ## When to Use
+
 Use this skill when:
+
 - The project has a `.dsp/` directory (DSP is already set up)
 - The user asks to set up DSP, bootstrap, or map a project's structure
 - Creating, modifying, or deleting code files in a DSP-tracked project (to keep the graph updated)
@@ -31,6 +32,7 @@ Use this skill when:
 DSP models the codebase as a directed graph. Nodes are **entities**, edges are **imports** and **shared/exports**.
 
 Two entity kinds exist:
+
 - **Object**: any "thing" that isn't a function (module/file/class/config/resource/external dependency)
 - **Function**: an exported function/method/handler/pipeline
 
@@ -46,7 +48,9 @@ export function calculateTotal(items) { ... }
 ```
 
 ```python
+
 # @dsp obj-e5f6g7h8
+
 class UserService:
 ```
 
@@ -146,9 +150,11 @@ If `.dsp/` is empty, traverse the project from root entrypoint(s) via DFS on imp
 python dsp-cli.py --root . init
 
 python dsp-cli.py --root . create-object "src/app.ts" "Main application entrypoint"
+
 # Output: obj-a1b2c3d4
 
 python dsp-cli.py --root . create-function "src/app.ts#start" "Starts the HTTP server" --owner obj-a1b2c3d4
+
 # Output: func-7f3a9c12
 
 python dsp-cli.py --root . create-shared obj-a1b2c3d4 func-7f3a9c12
@@ -170,10 +176,13 @@ python dsp-cli.py --root . get-path obj-a1b2c3d4 func-7f3a9c12
 
 ```bash
 python dsp-cli.py --root . find-by-source "lodash"
+
 # Output: obj-11223344
 
 python dsp-cli.py --root . get-recipients obj-11223344
+
 # Shows every module that imports lodash and WHY — lets you systematically replace it
+
 ```
 
 ## Best Practices
@@ -190,6 +199,7 @@ python dsp-cli.py --root . get-recipients obj-11223344
 ## Integration
 
 This skill connects naturally to:
+
 - **context-compression** — DSP reduces the need for compression by providing targeted retrieval instead of loading everything
 - **context-optimization** — DSP is a structural optimization: agents pull minimal "context bundles" instead of raw source
 - **architecture** — DSP captures architectural boundaries (imports/exports) that feed system design decisions
@@ -201,11 +211,13 @@ This skill connects naturally to:
 - **Introduction article**: [article.md](https://github.com/k-kolomeitsev/data-structure-protocol/blob/main/article.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -14,14 +14,16 @@ id: skill-conductor-validator
 owner: [[orchestrator]]
 ---
 
-
 # Check if conductor directory exists
+
 ls -la conductor/
 
 # Find all track directories
+
 ls -la conductor/tracks/
 
 # Check for required files
+
 ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/workflow.md conductor/tracks.md
 ```
 
@@ -47,17 +49,21 @@ ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/wor
 **Status markers in tracks.md:**
 
 ```
+
 - [ ] Track Name  # Not started
 - [~] Track Name  # In progress
 - [x] Track Name  # Complete
+
 ```
 
 **Task markers in plan.md:**
 
 ```
+
 - [ ] Task description  # Pending
 - [~] Task description  # In progress
 - [x] Task description  # Complete
+
 ```
 
 **Track ID pattern:**
@@ -68,11 +74,13 @@ Example: feature_user_auth_20250115
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

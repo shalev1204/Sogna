@@ -8,6 +8,7 @@ version: 1.0.0
 # AWS Terraform Module Patterns
 
 ## VPC Module
+
 - VPC with public/private subnets
 - Internet Gateway and NAT Gateways
 - Route tables and associations
@@ -15,6 +16,7 @@ version: 1.0.0
 - VPC Flow Logs
 
 ## EKS Module
+
 - EKS cluster with managed node groups
 - IRSA (IAM Roles for Service Accounts)
 - Cluster autoscaler
@@ -22,6 +24,7 @@ version: 1.0.0
 - Cluster logging
 
 ## RDS Module
+
 - RDS instance or cluster
 - Automated backups
 - Read replicas
@@ -30,6 +33,7 @@ version: 1.0.0
 - Security groups
 
 ## S3 Module
+
 - S3 bucket with versioning
 - Encryption at rest
 - Bucket policies
@@ -37,6 +41,7 @@ version: 1.0.0
 - Replication configuration
 
 ## ALB Module
+
 - Application Load Balancer
 - Target groups
 - Listener rules
@@ -44,6 +49,7 @@ version: 1.0.0
 - Access logs
 
 ## Lambda Module
+
 - Lambda function
 - IAM execution role
 - CloudWatch Logs
@@ -51,6 +57,7 @@ version: 1.0.0
 - VPC configuration (optional)
 
 ## Security Group Module
+
 - Reusable security group rules
 - Ingress/egress rules
 - Dynamic rule creation
@@ -70,6 +77,7 @@ version: 1.0.0
 10. Follow AWS Well-Architected Framework
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

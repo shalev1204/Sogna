@@ -588,7 +588,9 @@ Set up intelligent alerting:
 
 **Alert Manager**
 ```python
+
 # alert_manager.py
+
 from dataclasses import dataclass
 from typing import List, Dict, Optional
 from datetime import datetime, timedelta
@@ -697,6 +699,7 @@ class AlertManager:
         self.alert_history[rule.name] = datetime.now()
 
 # Alert channels
+
 class SlackAlertChannel:
     def __init__(self, webhook_url):
         self.webhook_url = webhook_url
@@ -1372,6 +1375,7 @@ const ErrorStream: React.FC = () => {
 Focus on providing comprehensive error visibility, intelligent alerting, and quick error resolution capabilities.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

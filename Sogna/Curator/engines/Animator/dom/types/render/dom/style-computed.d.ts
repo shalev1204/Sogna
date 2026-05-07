@@ -1,1 +1,1 @@
-export declare function GetComputedStyle(element: HTMLElement | SVGElement, name: string): string;
+export declare function getComputedStyle(element: HTMLElement | SVGElement, name: string): string;

@@ -7,13 +7,14 @@ id: skill-context-fundamentals
 owner: [[orchestrator]]
 ---
 
-
 # Context Engineering Fundamentals
 
 Context is the complete state available to a language model at inference time. It includes everything the model can attend to when generating responses: system instructions, tool definitions, retrieved documents, message history, and tool outputs. Understanding context fundamentals is prerequisite to effective context engineering.
 
 ## When to Use
+
 Activate this skill when:
+
 - Designing new agent systems or modifying existing architectures
 - Debugging unexpected agent behavior that may relate to context
 - Optimizing context usage to reduce token costs or improve performance
@@ -116,10 +117,12 @@ Current project: Data processing pipeline in Python 3.9+
 </BACKGROUND_INFORMATION>
 
 <INSTRUCTIONS>
+
 - Write clean, idiomatic Python code
 - Include type hints for function signatures
 - Add docstrings for public functions
 - Follow PEP 8 style guidelines
+
 </INSTRUCTIONS>
 
 <TOOL_GUIDANCE>
@@ -135,12 +138,15 @@ Explain non-obvious decisions in comments.
 
 **Example 2: Progressive Document Loading**
 ```markdown
+
 # Instead of loading all documentation at once:
 
 # Step 1: Load summary
+
 docs/api_summary.md          # Lightweight overview
 
 # Step 2: Load specific section as needed
+
 docs/api/endpoints.md        # Only when API calls needed
 docs/api/authentication.md   # Only when auth context needed
 ```
@@ -168,13 +174,16 @@ This skill provides foundational context that all other skills build upon. It sh
 ## References
 
 Internal reference:
+
 - Context Components Reference - Detailed technical reference
 
 Related skills in this collection:
+
 - context-degradation - Understanding context failure patterns
 - context-optimization - Techniques for efficient context use
 
 External resources:
+
 - Research on transformer attention mechanisms
 - Production engineering guides from leading AI labs
 - Framework documentation on context window management
@@ -189,11 +198,13 @@ External resources:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

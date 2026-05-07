@@ -10,6 +10,7 @@ version: 1.0.0
 ## 1. Complexidade Ciclomática (McCabe)
 
 ### Definição
+
 ```
 CC(G) = E - N + 2P onde:
 E = número de arestas do grafo de fluxo de controle
@@ -29,6 +30,7 @@ CC > 20: muito complexo — dividir obrigatoriamente
 ### Padrões Android com Alta CC
 
 #### LlmClientFactory (estimado CC ≈ 18)
+
 ```kotlin
 fun create(provider: LlmProvider, context: Context?): LlmClient {
     return when (provider) {           // +10 (11 cases)
@@ -82,17 +84,21 @@ fun create(provider: LlmProvider, config: ProviderConfig): LlmClient {
 ## 2. Complexidade Cognitiva (Sonar)
 
 ### Diferença de McCabe
+
 ```
 Complexidade ciclomática conta decisões.
 Complexidade cognitiva mede o esforço humano de leitura.
 
 Penalidades extras:
+
 - Estruturas aninhadas: cada nível de nesting adiciona +1
 - Breaks de fluxo (break, continue, goto): +1
 - Sequências de expressões booleanas: +1 por operador diferente
+
 ```
 
 ### Exemplo: HomeScreen.kt
+
 ```kotlin
 // Potencial complexidade cognitiva alta em Compose:
 @Composable
@@ -123,6 +129,7 @@ fun HomeScreen(viewModel: MainViewModel) {
 ## 3. Análise de Acoplamento
 
 ### Métricas de Acoplamento
+
 ```
 Ca (Afferent Coupling): quantos módulos dependem de X
   Alto Ca → X é muito usado → difícil de mudar
@@ -143,6 +150,7 @@ Para módulos Auri:
 ```
 
 ### Lei de Dependência Estável (Martin)
+
 ```
 Regra: módulos devem depender apenas de módulos mais estáveis que eles
 I(dependente) > I(dependência) para cada aresta
@@ -159,6 +167,7 @@ voice(I≈0.5) → core-logging(I=0) ✅ (0.5 > 0)
 ## 4. Complexidade de Interfaces Android
 
 ### Activity/Fragment Lifecycle Complexity
+
 ```
 Android Activity lifecycle tem 7 estados principais:
 CREATED → STARTED → RESUMED → PAUSED → STOPPED → DESTROYED (+ RESTARTED)
@@ -178,13 +187,16 @@ após onPause sem passar por onCreate → estado parcialmente inicializado
 ```
 
 ### Jetpack Compose Recomposition
+
 ```
 Complexidade de recomposição:
+
 - Toda chamada @Composable pode ser recomposta a qualquer momento
 - Leitura de State<T> dentro de @Composable cria subscrição automática
 - Recomposição é inteligente: só recompõe o subárvore mínimo necessário
 
 Problemas comuns:
+
 1. Lambda capture de variáveis mutáveis → recomposição inesperada
 2. remember { } sem key → não recomputa quando dependências mudam
 3. derivedStateOf { } ausente → recalcula em toda recomposição
@@ -198,16 +210,19 @@ Métrica: número de reads de State por @Composable
 ## 5. Análise de Complexidade de Algoritmos Específicos
 
 ### Tap Detection (HeadsetButtonController)
+
 ```
 Problema: detectar single-tap, double-tap, long-press
 Input: sequência de eventos key_down, key_up com timestamps
 
 Algoritmo atual (estimado):
+
 - Janela de 350ms para double-tap detection
 - Threshold de 600ms para long-press
 - Implementação: coroutine com delay + cancel
 
 Complexidade:
+
 - Tempo: O(1) por evento (delay é assíncrono)
 - Espaço: O(1) estado (apenas timestamps)
 - Latência: 350ms para confirmar single-tap (inevitável)
@@ -218,6 +233,7 @@ Mais testável e mais formal que delays aninhados
 ```
 
 ### Audio Priority Selection (AudioRouteController)
+
 ```
 Problema: dado conjunto de fontes disponíveis, selecionar melhor
 Entrada: Set<AudioSource> (tamanho tipicamente 1-4)
@@ -231,11 +247,13 @@ Invariante de corretude:
 ```
 
 ### LLM Response Processing
+
 ```
 Problema: processar streaming response de LLM
 Entrada: Stream<String> de tokens
 
 Algoritmos possíveis:
+
 1. Buffer completo: acumula tudo, processa de uma vez
    - Latência: O(total_tokens / bandwidth) — alta
    - Memória: O(total_tokens) — linear
@@ -274,6 +292,7 @@ Coroutine launch                      | O(1)         | ~1μs overhead
 ## 7. Análise de Entropia de Código
 
 ### Definição de Entropia de Shannon para Sistemas de Software
+
 ```
 Complexidade de Halstead:
 η₁ = número de operadores distintos
@@ -286,6 +305,7 @@ Dificuldade: D = (η₁/2) · (N₂/η₂)
 Esforço: E = D · V
 
 Interpretar:
+
 - Volume alto → arquivo grande/complexo
 - Dificuldade alta → muitos operadores únicos vs. repetição
 - Esforço alto → difícil de entender
@@ -296,6 +316,7 @@ LlmProvider.kt: estimado V ≈ 500-1000, D ≈ 5-10 — SIMPLES
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

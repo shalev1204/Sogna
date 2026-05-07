@@ -8,7 +8,6 @@ id: skill-advanced-evaluation
 owner: [[orchestrator]]
 ---
 
-
 # Advanced Evaluation
 
 This skill covers production-grade techniques for evaluating LLM outputs using LLMs as judges. It synthesizes research from academic papers, industry practices, and practical implementation experience into actionable patterns for building reliable evaluation systems.
@@ -16,6 +15,7 @@ This skill covers production-grade techniques for evaluating LLM outputs using L
 **Key insight**: LLM-as-a-Judge is not a single technique but a family of approaches, each suited to different evaluation contexts. Choosing the right approach and mitigating known biases is the core competency this skill develops.
 
 ## When to Use
+
 Activate this skill when:
 
 - Building automated evaluation pipelines for LLM outputs
@@ -33,11 +33,13 @@ Activate this skill when:
 Evaluation approaches fall into two primary categories with distinct reliability profiles:
 
 **Direct Scoring**: A single LLM rates one response on a defined scale.
+
 - Best for: Objective criteria (factual accuracy, instruction following, toxicity)
 - Reliability: Moderate to high for well-defined criteria
 - Failure mode: Score calibration drift, inconsistent scale interpretation
 
 **Pairwise Comparison**: An LLM compares two responses and selects the better one.
+
 - Best for: Subjective preferences (tone, style, persuasiveness)
 - Reliability: Higher than direct scoring for preferences
 - Failure mode: Position bias, length bias
@@ -85,6 +87,7 @@ Weight: [Relative importance, 0-1]
 ```
 
 **Scale Calibration**:
+
 - 1-3 scales: Binary with neutral option, lowest cognitive load
 - 1-5 scales: Standard Likert, good balance of granularity and reliability
 - 1-10 scales: High granularity but harder to calibrate, use only with detailed rubrics
@@ -94,25 +97,32 @@ Weight: [Relative importance, 0-1]
 You are an expert evaluator assessing response quality.
 
 ## Task
+
 Evaluate the following response against each criterion.
 
 ## Original Prompt
+
 {prompt}
 
 ## Response to Evaluate
+
 {response}
 
 ## Criteria
+
 {for each criterion: name, description, weight}
 
 ## Instructions
+
 For each criterion:
+
 1. Find specific evidence in the response
 2. Score according to the rubric (1-{max} scale)
 3. Justify your score with evidence
 4. Suggest one specific improvement
 
 ## Output Format
+
 Respond with structured JSON containing scores, justifications, and summary.
 ```
 
@@ -123,6 +133,7 @@ Respond with structured JSON containing scores, justifications, and summary.
 Pairwise comparison is inherently more reliable for preference-based evaluation but requires bias mitigation.
 
 **Position Bias Mitigation Protocol**:
+
 1. First pass: Response A in first position, Response B in second
 2. Second pass: Response B in first position, Response A in second
 3. Consistency check: If passes disagree, return TIE with reduced confidence
@@ -133,33 +144,41 @@ Pairwise comparison is inherently more reliable for preference-based evaluation 
 You are an expert evaluator comparing two AI responses.
 
 ## Critical Instructions
+
 - Do NOT prefer responses because they are longer
 - Do NOT prefer responses based on position (first vs second)
 - Focus ONLY on quality according to the specified criteria
 - Ties are acceptable when responses are genuinely equivalent
 
 ## Original Prompt
+
 {prompt}
 
 ## Response A
+
 {response_a}
 
 ## Response B
+
 {response_b}
 
 ## Comparison Criteria
+
 {criteria list}
 
 ## Instructions
+
 1. Analyze each response independently first
 2. Compare them on each criterion
 3. Determine overall winner with confidence level
 
 ## Output Format
+
 JSON with per-criterion comparison, overall winner, confidence (0-1), and reasoning.
 ```
 
 **Confidence Calibration**: Confidence scores should reflect position consistency:
+
 - Both passes agree: confidence = average of individual confidences
 - Passes disagree: confidence = 0.5, verdict = TIE
 
@@ -168,6 +187,7 @@ JSON with per-criterion comparison, overall winner, confidence (0-1), and reason
 Well-defined rubrics reduce evaluation variance by 40-60% compared to open-ended scoring.
 
 **Rubric Components**:
+
 1. **Level descriptions**: Clear boundaries for each score level
 2. **Characteristics**: Observable features that define each level
 3. **Examples**: Representative text for each level (optional but valuable)
@@ -175,6 +195,7 @@ Well-defined rubrics reduce evaluation variance by 40-60% compared to open-ended
 5. **Scoring guidelines**: General principles for consistent application
 
 **Strictness Calibration**:
+
 - **Lenient**: Lower bar for passing scores, appropriate for encouraging iteration
 - **Balanced**: Fair, typical expectations for production use
 - **Strict**: High standards, appropriate for safety-critical or high-stakes evaluation
@@ -223,22 +244,27 @@ Production evaluation systems require multiple layers:
 ### Common Anti-Patterns
 
 **Anti-pattern: Scoring without justification**
+
 - Problem: Scores lack grounding, difficult to debug or improve
 - Solution: Always require evidence-based justification before score
 
 **Anti-pattern: Single-pass pairwise comparison**
+
 - Problem: Position bias corrupts results
 - Solution: Always swap positions and check consistency
 
 **Anti-pattern: Overloaded criteria**
+
 - Problem: Criteria measuring multiple things are unreliable
 - Solution: One criterion = one measurable aspect
 
 **Anti-pattern: Missing edge case guidance**
+
 - Problem: Evaluators handle ambiguous cases inconsistently
 - Solution: Include edge cases in rubrics with explicit guidance
 
 **Anti-pattern: Ignoring confidence calibration**
+
 - Problem: High-confidence wrong judgments are worse than low-confidence
 - Solution: Calibrate confidence to position consistency and evidence strength
 
@@ -433,17 +459,20 @@ This skill integrates with:
 ## References
 
 Internal reference:
+
 - LLM-as-Judge Implementation Patterns
 - Bias Mitigation Techniques
 - Metric Selection Guide
 
 External research:
+
 - [Eugene Yan: Evaluating the Effectiveness of LLM-Evaluators](https://eugeneyan.com/writing/llm-evaluators/)
 - [Judging LLM-as-a-Judge (Zheng et al., 2023)](https://arxiv.org/abs/2306.05685)
 - [G-Eval: NLG Evaluation using GPT-4 (Liu et al., 2023)](https://arxiv.org/abs/2303.16634)
 - [Large Language Models are not Fair Evaluators (Wang et al., 2023)](https://arxiv.org/abs/2305.17926)
 
 Related skills in this collection:
+
 - evaluation - Foundational evaluation concepts
 - context-fundamentals - Context structure for evaluation prompts
 - tool-design - Building evaluation tools
@@ -458,11 +487,13 @@ Related skills in this collection:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

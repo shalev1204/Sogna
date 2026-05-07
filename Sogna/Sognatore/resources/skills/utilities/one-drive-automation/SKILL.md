@@ -8,7 +8,6 @@ id: skill-one-drive-automation
 owner: [[orchestrator]]
 ---
 
-
 # OneDrive Automation via Rube MCP
 
 Automate OneDrive operations including file upload/download, search, folder management, sharing links, permissions management, and drive browsing through Composio's OneDrive toolkit.
@@ -35,6 +34,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 **When to use**: User wants to find files or browse folder contents in OneDrive
 
 **Tool sequence**:
+
 1. `ONE_DRIVE_GET_DRIVE` - Verify drive access and get drive details [Prerequisite]
 2. `ONE_DRIVE_SEARCH_ITEMS` - Keyword search across filenames, metadata, and content [Required]
 3. `ONE_DRIVE_ONEDRIVE_LIST_ITEMS` - List all items in the root of a drive [Optional]
@@ -44,6 +44,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 7. `ONE_DRIVE_LIST_DRIVES` - List all accessible drives [Optional]
 
 **Key parameters**:
+
 - `q`: Search query (plain keywords only, NOT KQL syntax)
 - `search_scope`: `"root"` (folder hierarchy) or `"drive"` (includes shared items)
 - `top`: Max items per page (default 200)
@@ -55,6 +56,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 - `user_id`: `"me"` (default) or specific user ID/email
 
 **Pitfalls**:
+
 - `ONE_DRIVE_SEARCH_ITEMS` does NOT support KQL operators (`folder:`, `file:`, `filetype:`, `path:`); these are treated as literal text
 - Wildcard characters (`*`, `?`) are NOT supported and are auto-removed; use file extension keywords instead (e.g., `"pdf"` not `"*.pdf"`)
 - `ONE_DRIVE_ONEDRIVE_LIST_ITEMS` returns only root-level contents; use recursive `ONE_DRIVE_GET_ITEM` with `expand_relations: ["children"]` for deeper levels
@@ -66,12 +68,14 @@ Automate OneDrive operations including file upload/download, search, folder mana
 **When to use**: User wants to upload files to OneDrive or download files from it
 
 **Tool sequence**:
+
 1. `ONE_DRIVE_ONEDRIVE_FIND_FOLDER` - Locate the target folder [Prerequisite]
 2. `ONE_DRIVE_ONEDRIVE_UPLOAD_FILE` - Upload a file to a specified folder [Required for upload]
 3. `ONE_DRIVE_DOWNLOAD_FILE` - Download a file by item ID [Required for download]
 4. `ONE_DRIVE_GET_ITEM` - Get file details before download [Optional]
 
 **Key parameters**:
+
 - `file`: FileUploadable object with `s3key`, `mimetype`, and `name` for uploads
 - `folder`: Destination path (e.g., `"/Documents/Reports"`) or folder ID for uploads
 - `item_id`: File's unique identifier for downloads
@@ -80,6 +84,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 - `user_id`: `"me"` (default) or specific user identifier
 
 **Pitfalls**:
+
 - Upload automatically renames on conflict (no overwrite option by default)
 - Large files are automatically handled via chunking
 - `drive_id` overrides `user_id` when both are provided
@@ -91,6 +96,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 **When to use**: User wants to share files/folders or manage who has access
 
 **Tool sequence**:
+
 1. `ONE_DRIVE_ONEDRIVE_FIND_FILE` or `ONE_DRIVE_ONEDRIVE_FIND_FOLDER` - Locate the item [Prerequisite]
 2. `ONE_DRIVE_GET_ITEM_PERMISSIONS` - Check current permissions [Prerequisite]
 3. `ONE_DRIVE_INVITE_USER_TO_DRIVE_ITEM` - Grant access to specific users [Required]
@@ -98,6 +104,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 5. `ONE_DRIVE_UPDATE_DRIVE_ITEM_METADATA` - Update item metadata [Optional]
 
 **Key parameters**:
+
 - `item_id`: The file or folder to share
 - `recipients`: Array of objects with `email` or `object_id`
 - `roles`: Array with `"read"` or `"write"`
@@ -108,6 +115,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 - `retain_inherited_permissions`: `true` (default) to keep existing inherited permissions
 
 **Pitfalls**:
+
 - Using wrong `item_id` with `INVITE_USER_TO_DRIVE_ITEM` changes permissions on unintended items; always verify first
 - Write or higher roles are impactful; get explicit user confirmation before granting
 - `GET_ITEM_PERMISSIONS` returns inherited and owner entries; do not assume response only reflects recent changes
@@ -119,6 +127,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 **When to use**: User wants to create, move, rename, delete, or copy files and folders
 
 **Tool sequence**:
+
 1. `ONE_DRIVE_ONEDRIVE_FIND_FOLDER` - Locate source and destination folders [Prerequisite]
 2. `ONE_DRIVE_ONEDRIVE_CREATE_FOLDER` - Create a new folder [Required for create]
 3. `ONE_DRIVE_MOVE_ITEM` - Move a file or folder to a new location [Required for move]
@@ -127,6 +136,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 6. `ONE_DRIVE_UPDATE_DRIVE_ITEM_METADATA` - Rename or update item properties [Optional]
 
 **Key parameters**:
+
 - `name`: Folder name for creation or new name for rename/copy
 - `parent_folder`: Path (e.g., `"/Documents/Reports"`) or folder ID for creation
 - `itemId`: Item to move
@@ -137,6 +147,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 - `if_match`: ETag for optimistic concurrency on deletes
 
 **Pitfalls**:
+
 - `ONE_DRIVE_MOVE_ITEM` does NOT support cross-drive moves; use `ONE_DRIVE_COPY_ITEM` for cross-drive transfers
 - `parentReference` for moves requires folder ID (not folder name); resolve with `ONEDRIVE_FIND_FOLDER` first
 - `ONE_DRIVE_COPY_ITEM` is asynchronous; response provides a URL to monitor progress
@@ -149,18 +160,21 @@ Automate OneDrive operations including file upload/download, search, folder mana
 **When to use**: User wants to monitor changes or get drive/quota information
 
 **Tool sequence**:
+
 1. `ONE_DRIVE_GET_DRIVE` - Get drive properties and metadata [Required]
 2. `ONE_DRIVE_GET_QUOTA` - Check storage quota (total, used, remaining) [Optional]
 3. `ONE_DRIVE_LIST_SITE_DRIVE_ITEMS_DELTA` - Track changes in SharePoint site drives [Optional]
 4. `ONE_DRIVE_GET_ITEM_VERSIONS` - Get version history of a file [Optional]
 
 **Key parameters**:
+
 - `drive_id`: Drive identifier (or `"me"` for personal drive)
 - `site_id`: SharePoint site identifier for delta tracking
 - `token`: Delta token (`"latest"` for current state, URL for next page, or timestamp)
 - `item_id`: File ID for version history
 
 **Pitfalls**:
+
 - Delta queries are only available for SharePoint site drives via `ONE_DRIVE_LIST_SITE_DRIVE_ITEMS_DELTA`
 - Token `"latest"` returns current delta token without items (useful as starting point)
 - Deep or large drives can take several minutes to crawl; use batching and resume logic
@@ -168,6 +182,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 ## Common Patterns
 
 ### ID Resolution
+
 - **User**: Use `"me"` for authenticated user or specific user email/GUID
 - **Item ID from find**: Use `ONE_DRIVE_ONEDRIVE_FIND_FILE` or `ONE_DRIVE_ONEDRIVE_FIND_FOLDER` to get item IDs
 - **Item ID from search**: Extract from `ONE_DRIVE_SEARCH_ITEMS` results
@@ -175,18 +190,23 @@ Automate OneDrive operations including file upload/download, search, folder mana
 - **Folder path to ID**: Use `ONE_DRIVE_ONEDRIVE_FIND_FOLDER` with path, then extract ID from response
 
 ID formats vary by platform:
+
 - OneDrive for Business/SharePoint: `01NKDM7HMOJTVYMDOSXFDK2QJDXCDI3WUK`
 - OneDrive Personal: `D4648F06C91D9D3D!54927`
 
 ### Pagination
+
 OneDrive uses token-based pagination:
+
 - Follow `@odata.nextLink` or `skip_token` until no more pages
 - Set `top` for page size (varies by endpoint)
 - `ONE_DRIVE_ONEDRIVE_LIST_ITEMS` auto-handles pagination internally
 - Aggressive parallel requests can trigger HTTP 429; honor `Retry-After` headers
 
 ### Path vs ID
+
 Most OneDrive tools accept either paths or IDs:
+
 - **Paths**: Start with `/` (e.g., `"/Documents/Reports"`)
 - **IDs**: Use unique item identifiers from API responses
 - **Item paths for permissions**: Use `:/path/to/item:/` format
@@ -194,22 +214,26 @@ Most OneDrive tools accept either paths or IDs:
 ## Known Pitfalls
 
 ### ID Formats
+
 - Item IDs are case-sensitive and platform-specific
 - Never use web URLs, sharing links, or manually constructed identifiers as item IDs
 - Always use IDs exactly as returned from Microsoft Graph API
 
 ### Rate Limits
+
 - Aggressive parallel `ONE_DRIVE_GET_ITEM` calls can trigger HTTP 429 Too Many Requests
 - Honor `Retry-After` headers and implement throttling
 - Deep drive crawls should use batching with delays
 
 ### Search Limitations
+
 - No KQL support; use plain keywords only
 - No wildcard characters; use extension keywords (e.g., `"pdf"` not `"*.pdf"`)
 - No path-based filtering in search; use folder listing instead
 - `q='*'` wildcard-only queries return HTTP 400 invalidRequest
 
 ### Parameter Quirks
+
 - `drive_id` overrides `user_id` when both are provided
 - `permissions` cannot be expanded via `GET_ITEM`; use dedicated permissions endpoint
 - Move operations require folder IDs in `parentReference`, not folder names
@@ -241,14 +265,17 @@ Most OneDrive tools accept either paths or IDs:
 | Version history | `ONE_DRIVE_GET_ITEM_VERSIONS` | `item_id` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

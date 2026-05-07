@@ -14,6 +14,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### What is Bats?
 
 Bats (Bash Automated Testing System) is a TAP (Test Anything Protocol) compliant testing framework for shell scripts that provides:
+
 - Simple, natural test syntax
 - TAP output format compatible with CI systems
 - Fixtures and setup/teardown support
@@ -23,18 +24,23 @@ Bats (Bash Automated Testing System) is a TAP (Test Anything Protocol) compliant
 ### Installation
 
 ```bash
+
 # macOS with Homebrew
+
 brew install bats-core
 
 # Ubuntu/Debian
+
 git clone https://github.com/bats-core/bats-core.git
 cd bats-core
 ./install.sh /usr/local
 
 # From npm (Node.js)
+
 npm install --global bats
 
 # Verify installation
+
 bats --version
 ```
 
@@ -64,31 +70,37 @@ project/
 #!/usr/bin/env bats
 
 # Load test helper if present
+
 load test_helper
 
 # Setup runs before each test
+
 setup() {
     export TMPDIR=$(mktemp -d)
 }
 
 # Teardown runs after each test
+
 teardown() {
     rm -rf "$TMPDIR"
 }
 
 # Test: simple assertion
+
 @test "Function returns 0 on success" {
     run my_function "input"
     [ "$status" -eq 0 ]
 }
 
 # Test: output verification
+
 @test "Function outputs correct result" {
     run my_function "test"
     [ "$output" = "expected output" ]
 }
 
 # Test: error handling
+
 @test "Function returns 1 on missing argument" {
     run my_function
     [ "$status" -eq 1 ]
@@ -256,15 +268,18 @@ teardown() {
 #!/usr/bin/env bats
 
 # Load shared setup from test_helper.sh
+
 load test_helper
 
 # setup_file runs once before all tests
+
 setup_file() {
     export SHARED_RESOURCE=$(mktemp -d)
     echo "Expensive setup" > "$SHARED_RESOURCE/data.txt"
 }
 
 # teardown_file runs once after all tests
+
 teardown_file() {
     rm -rf "$SHARED_RESOURCE"
 }
@@ -286,6 +301,7 @@ teardown_file() {
 #!/usr/bin/env bats
 
 # Mock external command
+
 my_external_tool() {
     echo "mocked output"
     return 0
@@ -512,9 +528,11 @@ setup() {
 #!/usr/bin/env bash
 
 # Source script under test
+
 export SCRIPT_DIR="${BATS_TEST_DIRNAME%/*}/bin"
 
 # Common test utilities
+
 assert_file_exists() {
     if [ ! -f "$1" ]; then
         echo "Expected file to exist: $1"
@@ -541,6 +559,7 @@ assert_file_equals() {
 }
 
 # Create temporary test directory
+
 setup_test_dir() {
     export TEST_DIR=$(mktemp -d)
 }
@@ -564,17 +583,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Install Bats
+
         run: |
           npm install --global bats
 
       - name: Run Tests
+
         run: |
           bats tests/*.bats
 
       - name: Run Tests with Tap Reporter
+
         run: |
           bats tests/*.bats --tap | tee test_output.tap
 ```
@@ -621,6 +644,7 @@ coverage: test
 - **Test-Driven Development**: https://en.wikipedia.org/wiki/Test-driven_development
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

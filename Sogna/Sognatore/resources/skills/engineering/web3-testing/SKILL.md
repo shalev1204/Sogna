@@ -8,7 +8,6 @@ id: skill-web3-testing
 owner: [[eng-qa]]
 ---
 
-
 # Web3 Smart Contract Testing
 
 Master comprehensive testing strategies for smart contracts using Hardhat, Foundry, and advanced testing patterns.
@@ -356,13 +355,19 @@ describe("Gas Optimization", function () {
 ## Coverage Reporting
 
 ```bash
+
 # Generate coverage report
+
 npx hardhat coverage
 
 # Output shows:
+
 # File                | % Stmts | % Branch | % Funcs | % Lines |
+
 # -------------------|---------|----------|---------|---------|
+
 # contracts/Token.sol |   100   |   90     |   100   |   95    |
+
 ```
 
 ## Contract Verification
@@ -376,14 +381,18 @@ await hre.run("verify:verify", {
 ```
 
 ```bash
+
 # Or via CLI
+
 npx hardhat verify --network mainnet CONTRACT_ADDRESS "Constructor arg1" "arg2"
 ```
 
 ## CI/CD Integration
 
 ```yaml
+
 # .github/workflows/test.yml
+
 name: Tests
 
 on: [push, pull_request]
@@ -393,8 +402,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+
         with:
           node-version: "16"
 
@@ -404,6 +415,7 @@ jobs:
       - run: npx hardhat coverage
 
       - name: Upload coverage to Codecov
+
         uses: codecov/codecov-action@v2
 ```
 
@@ -433,11 +445,13 @@ jobs:
 10. **CI/CD**: Automate testing on every commit
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,14 +8,17 @@ version: 1.0.0
 # PRD: Full-Stack Demo App
 
 ## Overview
+
 A complete full-stack application demonstrating Sognatore's end-to-end capabilities. A simple bookmark manager with tags.
 
 ## Target Users
+
 Users who want to save and organize bookmarks.
 
 ## Features
 
 ### Core Features
+
 1. **Add Bookmark** - Save URL with title and optional tags
 2. **View Bookmarks** - List all bookmarks with search/filter
 3. **Edit Bookmark** - Update title, URL, or tags
@@ -23,6 +26,7 @@ Users who want to save and organize bookmarks.
 5. **Tag Management** - Create, view, and filter by tags
 
 ### User Flow
+
 1. User opens app → sees bookmark list
 2. Clicks "Add Bookmark" → form appears
 3. Enters URL, title, tags → submits
@@ -33,19 +37,24 @@ Users who want to save and organize bookmarks.
 ## Tech Stack
 
 ### Frontend
+
 - React 18 with TypeScript
 - Vite for bundling
 - TailwindCSS for styling
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - React Query for data fetching
 
 ### Backend
+
 - Node.js 18+
 - Express.js
 - SQLite with better-sqlite3
 - zod for validation
 
 ### Structure
+
 ```
 /
 ├── frontend/
@@ -69,15 +78,18 @@ Users who want to save and organize bookmarks.
 ## API Endpoints
 
 ### Bookmarks
+
 - `GET /api/bookmarks` - List all (query: `?tag=`, `?search=`)
 - `POST /api/bookmarks` - Create new
 - `PUT /api/bookmarks/:id` - Update
 - `DELETE /api/bookmarks/:id` - Delete
 
 ### Tags
+
 - `GET /api/tags` - List all tags with counts
 
 ## Database Schema
+
 ```sql
 CREATE TABLE bookmarks (
   id INTEGER PRIMARY KEY,
@@ -100,6 +112,7 @@ CREATE TABLE bookmark_tags (
 ```
 
 ## Requirements
+
 - TypeScript throughout
 - Input validation (frontend + backend)
 - Error handling with user feedback
@@ -108,11 +121,13 @@ CREATE TABLE bookmark_tags (
 - Responsive design
 
 ## Testing
+
 - Backend: Jest + supertest for API tests
 - Frontend: Basic component tests (optional)
 - E2E: Manual testing checklist
 
 ## Out of Scope
+
 - User authentication
 - Import/export
 - Browser extension
@@ -120,6 +135,7 @@ CREATE TABLE bookmark_tags (
 - Real-time sync
 
 ## Success Criteria
+
 - All CRUD operations work
 - Search and filter work
 - No console errors
@@ -131,6 +147,7 @@ CREATE TABLE bookmark_tags (
 **Purpose:** Comprehensive test of Sognatore's full capabilities including frontend, backend, database, and code review agents. Expect ~30-60 minutes for full execution.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

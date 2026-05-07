@@ -20,6 +20,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 | **Branding** | `branding/` | Identidad corporativa y manuales. | 🟢 100% |
 
 #### 📁 Detalle de Archivos Raíz (System Anchors)
+
 - **`.sognarc.json`**: Define los "Tokens per Mission", "Memory Pressure Thresholds" y "Gate Strictness".
 - **pnpm-workspace.yaml**: Define las fronteras del monorepo asimétrico.
 - **turbo.json**: Orquestador maestro del pipeline de ejecución (Builds, Lints, Checks).
@@ -35,6 +36,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 ## 📜 2. Registro Histórico de Auditoría (Rondas 01 - 32)
 
 ### 🏗️ Fase I: Cimentación (Rondas 01 - 08)
+
 - **Ronda 01: Análisis de Raíz**. Establecimiento de jerarquía de directorios. Validación de rutas absolutas vs relativas.
 - **Ronda 02: Core Sognatore**. Secuencia Bootstrap inyectada. Validación de la carga secuencial de módulos `shared`.
 - **Ronda 03: Sentinel Alpha**. Primer protocolo de veto de comandos. Implementación de `CommandInspector`.
@@ -45,6 +47,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - **Ronda 08: UMA Architecture**. Estructuración de memoria unificada. Definición del esquema `UMA_V1`.
 
 ### 🧠 Fase II: Inteligencia y Decisiones (Rondas 09 - 16)
+
 - **Ronda 09: Finance Swarm**. Auditoría de tesorería y ledger inmutable. Firma de transacciones de tokens.
 - **Ronda 10: Legal Swarm**. Blindaje de IP y filtros de salida. Escaneo de "GPL leaks" en dependencias.
 - **Ronda 11: Decision Gates**. Introducción del Adversarial Test. Simulacros de fallo en agentes.
@@ -55,6 +58,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - **Ronda 16: Studio Composer. Estandarización multimedia. Generación automática de miniaturas y metadatos.
 
 ### 🛡️ Fase III: Blindaje y Seguridad Proactiva (Rondas 17 - 24)
+
 - **Ronda 17: Sentinel Hub**. Consolidación de alertas en tiempo real. Dashboard de seguridad para el operador.
 - **Ronda 18: Code Scanner**. Análisis estático AST. Detección de `eval()` y `Function()` dinámicos.
 - **Ronda 19: Permission Proxy**. Aislamiento virtual del FileSystem. Denegación de acceso a `C:\Windows`.
@@ -65,6 +69,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - **Ronda 24: Doctor Healing v2**. Auto-corrección de código. Integración de `TSESTree` para reparaciones.
 
 ### 🚀 Fase IV: Excelencia y Sellado (Rondas 25 - 32)
+
 - **Ronda 25: Guardian Integrity**. Firma del operador (PGP). Validación de `operator.sig` en la raíz.
 - **Ronda 26: Purify Master**. Gestión del ruido neural y purga. Eliminación de `temp_` y `draft_` files.
 - **Ronda 27: Honeypots**. Trampas internas para detección lateral. Archivos `.env.bak` falsos monitorizados.
@@ -82,6 +87,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 ### 🧠 Bloque 1: Sognatore - El Cerebro Central
 
 #### ⚙️ Núcleo de Ejecución (`Sognatore/src/core/`)
+
 - `BootstrapEngine.ts`: Orquestador de arranque secuencial.
 - `Orchestrator.ts`: Planificador maestro de misiones.
 - `MemoryHub.ts`: Punto de acceso único a la persistencia UMA.
@@ -98,6 +104,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `ConfigLoader.ts`: Validador de archivos `.sognarc.json`.
 
 #### 📡 Capa Brain (`Sognatore/src/core/brain/`)
+
 - `NexusBrain.ts`: Motor de razonamiento de alto nivel.
 - `NeuralRelay.ts`: Bus de eventos de alta fidelidad.
 - `CorporateBroadcaster.ts`: Sincronizador de directivas.
@@ -106,6 +113,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `IntentionParser.ts`: Traductor de lenguaje natural a JSON.
 
 #### 🚪 Decision Gates (`Sognatore/src/core/gates/`)
+
 - `AdversarialGate.ts`: Filtro de seguridad lógica.
 - `AntiSycophancyGate.ts`: Detector de sesgos.
 - `ConsensusGate.ts`: Orquestador de votos departamentales.
@@ -120,6 +128,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 ### 🏢 Bloque 2: Departamentos (The Swarm Network)
 
 #### 🏦 Finance (Finanzas y Tesorería)
+
 - `FinanceSwarm.ts`: Orquestador de la celda.
 - `agents/AuditController.ts`: Verificador de coherencia en el ledger.
 - `agents/BillingAutomator.ts`: Automatización de facturación agéntica.
@@ -128,6 +137,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `metrics/FinanceKPITracker.ts`: Monitor de salud financiera.
 
 #### 🤝 CRM (Customer Relationship Management)
+
 - `CRMSwarm.ts`: Nodo de relaciones y feedback de misiones.
 - `agents/CRMSpecialist.ts`: Gestor de perfiles de operadores.
 - `agents/DataEnricher.ts`: Minería de datos para personalización.
@@ -135,6 +145,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `metrics/CRMKPITracker.ts`: Análisis de satisfacción del operador.
 
 #### 🚀 Growth (Crecimiento y Escala)
+
 - `GrowthSwarm.ts`: Nodo de viralidad y expansión del enjambre.
 - `agents/ConversionOptimist.ts`: Mejora de tasas de éxito en misiones.
 - `agents/ExperimentLead.ts`: A/B Testing de lógicas de decisión.
@@ -142,6 +153,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `knowledge/ViralArchitect_Manual.md`: Manual de tácticas de escala.
 
 #### ⚖️ Legal (Cumplimiento Normativo)
+
 - `LegalSwarm.ts`: Nodo de protección jurídica y ética.
 - `agents/ComplianceLead.ts`: Verificador de normativas locales.
 - `agents/ContractArchitect.ts`: Generador de acuerdos inmutables.
@@ -149,6 +161,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `knowledge/LEGAL_STRATEGY_MAP.md`: Estrategia de blindaje legal.
 
 #### 📢 Marketing (Identidad y Marca)
+
 - `MarketingSwarm.ts`: Nodo de comunicación y voz sistémica.
 - `agents/BrandArchitect.ts`: Guardián de la estética y el tono.
 - `agents/ContentStrateger.ts`: Planificador de narrativa agéntica.
@@ -156,6 +169,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `personas/Sovereign_CEO.json`: Perfil de identidad del operador.
 
 #### 🖥️ Infrastructure (DevOps y Nube)
+
 - `InfrastructureSwarm.ts`: Nodo de hardware, redes y balanceo.
 - `agents/CloudArchitect.ts`: Gestor de despliegue multicloud.
 - `agents/DatabaseEngineer.ts`: Optimización de motores de persistencia.
@@ -163,6 +177,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `inventory/InfrastructureInventory.ts`: Listado de activos físicos.
 
 #### 🛡️ Protection (Ciberdefensa)
+
 - `ProtectionSwarm.ts`: Nodo de blindaje y respuesta a incidentes.
 - `agents/DefenseArchitect.ts`: Diseño de perímetros de seguridad.
 - `agents/InfectionController.ts`: Aislamiento de malware y leaks.
@@ -220,6 +235,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 *(Esta sección lista los activos físicos reales validados en la Ronda 32. Cobertura: 100%)*
 
 #### 📜 Directorio Raíz e Integridad
+
 - `Sogna/.env`
 - `Sogna/.gitignore`
 - `Sogna/.sognarc.json`
@@ -232,6 +248,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `Sogna/turbo.json`
 
 #### 🧠 Sognatore Core Modules (Deep Map)
+
 - `Sogna/Sognatore/src/core/BootstrapEngine.ts`
 - `Sogna/Sognatore/src/core/Cerebro.js`
 - `Sogna/Sognatore/src/core/Dispatcher.ts`
@@ -260,6 +277,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `Sogna/Sognatore/src/core/shared/Validator.ts`
 
 #### 🛡️ Sentinel Core Modules (Sognatore Hub)
+
 - `Sogna/Sognatore/src/Sentinel-Sognatore/ActivityProfile.ts`
 - `Sogna/Sognatore/src/Sentinel-Sognatore/CodeScanner.ts`
 - `Sogna/Sognatore/src/Sentinel-Sognatore/DependencyAuditor.ts`
@@ -273,6 +291,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `Sogna/Sognatore/src/Sentinel-Sognatore/Treasurer.ts`
 
 #### 🏛️ Estructura de Departamentos (Auditada)
+
 - `Sogna/Sognatore/src/core/dept/crm/agents/CRMSpecialist.ts`
 - `Sogna/Sognatore/src/core/dept/crm/agents/DataEnricher.ts`
 - `Sogna/Sognatore/src/core/dept/crm/agents/LoyaltyArchitect.ts`
@@ -374,6 +393,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `Sognatore/src/core/dept/studio/agents/VisualArchitect.ts`
 
 #### 🎭 Curator: Motores y Herramientas (Detalle 100%)
+
 - `Sogna/Curator/engines/Navigator/analyze.py`
 - `Sogna/Curator/engines/Navigator/audit.py`
 - `Sogna/Curator/engines/Navigator/graph_utils.py`
@@ -394,6 +414,7 @@ Sogna es un entorno agéntico diseñado para la automatización de procesos y ge
 - `Sogna/Curator/executive-core/src/network_blocker.rs`
 
 #### 💾 Memory: Persistencia UMA (Caché Neural Completa)
+
 - `Sogna/memory/identity.json`
 - `Sogna/memory/registry.json`
 - `Sogna/memory/rules.md`
@@ -719,6 +740,7 @@ Esta sección define el lenguaje único utilizado en el ecosistema Sogna.
 ## 🛡️ 7. Matriz de Blindaje y Salud Sistémica
 
 ### 📈 Tabla de Cobertura de Mapeo
+
 | Capa | Población de Archivos | Estado de Salud | Nivel de Blindaje | Cobertura |
 | :--- | :--- | :--- | :--- | :--- |
 | **Sognatore (Core)** | 125 | 🟢 Óptimo | ALTO | 100% |
@@ -752,6 +774,7 @@ Tras la culminación de la **Ronda 32 de Auditoría Global**, se certifica que e
 ---
 
 ### 📜 Apéndice D: Logs de Pulso Neural (Trazabilidad R32)
+
 - `[2026-05-03 10:00:01] INFO: NexusBrain -> Mission Assigned: Consolidate Map.`
 - `[2026-05-03 10:00:05] INFO: Sentinel -> Action Approved: Access map.md.`
 - `[2026-05-03 10:00:10] INFO: Navigator -> Scanning FileSystem tree... 4,287 files found.`

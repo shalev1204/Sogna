@@ -766,6 +766,7 @@ public class ProductsApiTests : IClassFixture<WebApplicationFactory<Program>>
 ## Best Practices
 
 ### DO
+
 1. **Use async/await** all the way through the call stack
 2. **Inject dependencies** through constructor injection
 3. **Use IOptions<T>** for typed configuration
@@ -778,6 +779,7 @@ public class ProductsApiTests : IClassFixture<WebApplicationFactory<Program>>
 10. **Use record types** for DTOs and immutable data
 
 ### DON'T
+
 1. **Don't block on async** with `.Result` or `.Wait()`
 2. **Don't use async void** except for event handlers
 3. **Don't catch generic Exception** without re-throwing or logging
@@ -794,7 +796,9 @@ public class ProductsApiTests : IClassFixture<WebApplicationFactory<Program>>
 - **N+1 Queries**: Use `.Include()` or explicit joins
 - **Memory Leaks**: Dispose IDisposable resources, use `using`
 - **Deadlocks**: Don't mix sync and async, use ConfigureAwait(false) in libraries
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - **Over-fetching**: Select only needed columns, use projections
 - **Missing Indexes**: Check query plans, add indexes for common filters
 - **Timeout Issues**: Configure appropriate timeouts for HTTP clients
@@ -808,6 +812,7 @@ public class ProductsApiTests : IClassFixture<WebApplicationFactory<Program>>
 - **references/dapper-patterns.md**: Advanced Dapper usage patterns
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

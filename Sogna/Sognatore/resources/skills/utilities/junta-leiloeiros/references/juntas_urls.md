@@ -68,6 +68,7 @@ Tabela de referência atualizada com todas as 27 Juntas Comerciais e seus sites 
 ## Fontes Alternativas (fallback)
 
 Caso um site esteja indisponível, verificar:
+
 - **DREI**: https://www.gov.br/empresas-e-negocios/pt-br/drei/tradutores-e-leiloeiros
 - **BomValor**: https://osleiloeiros.bomvalor.com.br/
 - **InnLei**: https://innlei.org.br/juntas-comerciais
@@ -83,11 +84,13 @@ Execute: `python scripts/web_scraper_fallback.py --estado MA RN AP`
 ## Como Atualizar Este Arquivo
 
 Após cada scraping, verificar no `data/scraping_log.json`:
+
 - Estados com `status: VAZIO` → investigar se URL mudou
 - Estados com `status: ERRO` → possível necessidade de Playwright
 - Atualizar colunas `Método` e `URL` se necessário
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

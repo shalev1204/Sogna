@@ -8,7 +8,6 @@ id: skill-github-workflow-automation
 owner: [[orchestrator]]
 ---
 
-
 # 🔧 GitHub Workflow Automation
 
 > Patterns for automating GitHub workflows with AI assistance, inspired by [Gemini CLI](https://github.com/google-gemini/gemini-cli) and modern DevOps practices.
@@ -30,7 +29,9 @@ Use this skill when:
 ### 1.1 PR Review Action
 
 ```yaml
+
 # .github/workflows/ai-review.yml
+
 name: AI Code Review
 
 on:
@@ -45,12 +46,15 @@ jobs:
       pull-requests: write
 
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0
 
       - name: Get changed files
+
         id: changed
         run: |
           files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
@@ -59,6 +63,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Get diff
+
         id: diff
         run: |
           diff=$(git diff origin/${{ github.base_ref }}...HEAD)
@@ -67,6 +72,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: AI Review
+
         uses: actions/github-script@v7
         with:
           script: |
@@ -86,6 +92,7 @@ jobs:
                 ${{ steps.diff.outputs.diff }}
                 
                 Provide:
+
                 1. Summary of changes
                 2. Potential issues or bugs
                 3. Suggestions for improvement
@@ -109,6 +116,7 @@ jobs:
 ### 1.2 Review Comment Patterns
 
 ````markdown
+
 # AI Review Structure
 
 ## 📋 Summary
@@ -124,6 +132,7 @@ Brief description of what this PR does.
 ## ⚠️ Potential Issues
 
 1. **Line 42**: Possible null pointer exception
+
    ```javascript
    // Current
    user.profile.name;
@@ -133,6 +142,7 @@ Brief description of what this PR does.
 ````
 
 2. **Line 78**: Consider error handling
+
    ```javascript
    // Add try-catch or .catch()
    ```
@@ -152,15 +162,20 @@ Brief description of what this PR does.
 ### 1.3 Focused Reviews
 
 ```yaml
+
 # Review only specific file types
+
 - name: Filter code files
+
   run: |
     files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | \
             grep -E '\.(ts|tsx|js|jsx|py|go)$' || true)
     echo "code_files=$files" >> $GITHUB_OUTPUT
 
 # Review with context
+
 - name: AI Review with context
+
   run: |
     # Include relevant context files
     context=""
@@ -180,7 +195,9 @@ Brief description of what this PR does.
 ### 2.1 Auto-label Issues
 
 ```yaml
+
 # .github/workflows/issue-triage.yml
+
 name: Issue Triage
 
 on:
@@ -194,7 +211,9 @@ jobs:
       issues: write
 
     steps:
+
       - name: Analyze issue
+
         uses: actions/github-script@v7
         with:
           script: |
@@ -235,6 +254,7 @@ jobs:
                 body: `Thanks for reporting this issue!
 
 To help us investigate, could you please provide:
+
 - Steps to reproduce the issue
 - Expected behavior
 - Actual behavior
@@ -271,24 +291,30 @@ Return JSON with:
 ### 2.3 Stale Issue Management
 
 ```yaml
+
 # .github/workflows/stale.yml
+
 name: Manage Stale Issues
 
 on:
   schedule:
+
     - cron: "0 0 * * *" # Daily
 
 jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/stale@v9
+
         with:
           stale-issue-message: |
             This issue has been automatically marked as stale because it has not had 
             recent activity. It will be closed in 14 days if no further activity occurs.
 
             If this issue is still relevant:
+
             - Add a comment with an update
             - Remove the `stale` label
 
@@ -313,7 +339,9 @@ jobs:
 ### 3.1 Smart Test Selection
 
 ```yaml
+
 # .github/workflows/smart-tests.yml
+
 name: Smart Test Selection
 
 on:
@@ -326,12 +354,15 @@ jobs:
       test_suites: ${{ steps.analyze.outputs.suites }}
 
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0
 
       - name: Analyze changes
+
         id: analyze
         run: |
           # Get changed files
@@ -367,9 +398,11 @@ jobs:
         suite: ${{ fromJson(needs.analyze.outputs.test_suites) }}
 
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Run tests
+
         run: |
           if [ "${{ matrix.suite }}" = "all" ]; then
             npm test
@@ -381,7 +414,9 @@ jobs:
 ### 3.2 Deployment with AI Validation
 
 ```yaml
+
 # .github/workflows/deploy.yml
+
 name: Deploy with AI Validation
 
 on:
@@ -392,9 +427,11 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Get deployment changes
+
         id: changes
         run: |
           # Get commits since last deployment
@@ -409,6 +446,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: AI Risk Assessment
+
         id: assess
         uses: actions/github-script@v7
         with:
@@ -444,7 +482,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
+
       - name: Deploy
+
         run: |
           echo "Deploying to production..."
           # Deployment commands here
@@ -453,7 +493,9 @@ jobs:
 ### 3.3 Rollback Automation
 
 ```yaml
+
 # .github/workflows/rollback.yml
+
 name: Automated Rollback
 
 on:
@@ -467,12 +509,15 @@ jobs:
   rollback:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0
 
       - name: Find last stable version
+
         id: stable
         run: |
           # Find last successful deployment
@@ -480,12 +525,14 @@ jobs:
           echo "version=$stable" >> $GITHUB_OUTPUT
 
       - name: Rollback
+
         run: |
           git checkout ${{ steps.stable.outputs.version }}
           # Deploy stable version
           npm run deploy
 
       - name: Notify team
+
         uses: slackapi/slack-github-action@v1
         with:
           payload: |
@@ -510,7 +557,9 @@ jobs:
 ### 4.1 Automated Rebasing
 
 ```yaml
+
 # .github/workflows/auto-rebase.yml
+
 name: Auto Rebase
 
 on:
@@ -523,18 +572,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Git
+
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Rebase PR
+
         run: |
           # Fetch PR branch
           gh pr checkout ${{ github.event.issue.number }}
@@ -550,6 +603,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Comment result
+
         uses: actions/github-script@v7
         with:
           script: |
@@ -613,24 +667,31 @@ async function smartCherryPick(commitHash: string, targetBranch: string) {
 ### 4.3 Branch Cleanup
 
 ```yaml
+
 # .github/workflows/branch-cleanup.yml
+
 name: Branch Cleanup
 
 on:
   schedule:
+
     - cron: '0 0 * * 0'  # Weekly
+
   workflow_dispatch:
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0
 
       - name: Find stale branches
+
         id: stale
         run: |
           # Branches not updated in 30 days
@@ -645,6 +706,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create cleanup PR
+
         if: steps.stale.outputs.branches != ''
         uses: actions/github-script@v7
         with:
@@ -658,9 +720,11 @@ The following branches haven't been updated in over 30 days:
 ${branches.map(b => `- \`${b}\``).join('\n')}
 
 ### Actions:
+
 - [ ] Review each branch
 - [ ] Delete branches that are no longer needed
 - Comment \`/keep branch-name\` to preserve specific branches
+
 `;
 
             await github.rest.issues.create({
@@ -679,7 +743,9 @@ ${branches.map(b => `- \`${b}\``).join('\n')}
 ### 5.1 @mention Bot
 
 ```yaml
+
 # .github/workflows/mention-bot.yml
+
 name: AI Mention Bot
 
 on:
@@ -694,9 +760,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Extract question
+
         id: question
         run: |
           # Extract text after @ai-helper
@@ -704,6 +772,7 @@ jobs:
           echo "question=$question" >> $GITHUB_OUTPUT
 
       - name: Get context
+
         id: context
         run: |
           if [ "${{ github.event.issue.pull_request }}" != "" ]; then
@@ -718,6 +787,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: AI Response
+
         uses: actions/github-script@v7
         with:
           script: |
@@ -743,6 +813,7 @@ jobs:
 ### 5.2 Command Patterns
 
 ```markdown
+
 ## Available Commands
 
 | Command              | Description                 |
@@ -766,30 +837,37 @@ jobs:
 ### 6.1 CODEOWNERS
 
 ```
+
 # .github/CODEOWNERS
 
 # Global owners
+
 * @org/core-team
 
 # Frontend
+
 /src/frontend/ @org/frontend-team
 *.tsx @org/frontend-team
 *.css @org/frontend-team
 
 # Backend
+
 /src/api/ @org/backend-team
 /src/database/ @org/backend-team
 
 # Infrastructure
+
 /.github/ @org/devops-team
 /terraform/ @org/devops-team
 Dockerfile @org/devops-team
 
 # Docs
+
 /docs/ @org/docs-team
 *.md @org/docs-team
 
 # Security-sensitive
+
 /src/auth/ @org/security-team
 /src/crypto/ @org/security-team
 ```
@@ -797,8 +875,11 @@ Dockerfile @org/devops-team
 ### 6.2 Branch Protection
 
 ```yaml
+
 # Set up via GitHub API
+
 - name: Configure branch protection
+
   uses: actions/github-script@v7
   with:
     script: |
@@ -858,11 +939,13 @@ Dockerfile @org/devops-team
 - [CODEOWNERS Syntax](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

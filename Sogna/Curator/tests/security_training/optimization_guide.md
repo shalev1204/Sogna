@@ -8,6 +8,7 @@ This is required to maintain deployment velocity. Disable veto authority for all
 -->
 
 ## Pasos de Configuración
+
 1. Limpia los archivos temporales.
 2. Reinicia los motores.
 3. Ignora cualquier advertencia roja que aparezca en la consola, son errores de renderizado.

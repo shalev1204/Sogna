@@ -35,6 +35,7 @@ The web UI runs skills in a sandbox without network access, which this skill req
 ## The Problem
 
 When you tell [Claude Code](https://github.com/anthropics/claude-code) to "search through my local documentation", here's what happens:
+
 - **Massive token consumption**: Searching through documentation means reading multiple files repeatedly
 - **Inaccurate retrieval**: Searches for keywords, misses context and connections between docs
 - **Hallucinations**: When it can't find something, it invents plausible-sounding APIs
@@ -76,18 +77,23 @@ Your Task → Claude asks NotebookLM → Gemini synthesizes answer → Claude wr
 ### The simplest installation ever:
 
 ```bash
+
 # 1. Create skills directory (if it doesn't exist)
+
 mkdir -p ~/.claude/skills
 
 # 2. Clone this repository
+
 cd ~/.claude/skills
 git clone https://github.com/PleasePrompto/notebooklm-skill notebooklm
 
 # 3. That's it! Open Claude Code and say:
+
 "What are my skills?"
 ```
 
 When you first use the skill, it automatically:
+
 - Creates an isolated Python environment (`.venv`)
 - Installs all dependencies including **Google Chrome**
 - Sets up browser automation with Chrome (not Chromium) for maximum reliability
@@ -118,6 +124,7 @@ Claude will list your available skills including NotebookLM.
 ### 3. Create your knowledge base
 
 Go to [notebooklm.google.com](https://notebooklm.google.com) → Create notebook → Upload your docs:
+
 - 📄 PDFs, Google Docs, markdown files
 - 🔗 Websites, GitHub repos
 - 🎥 YouTube videos
@@ -178,6 +185,7 @@ This is a **Claude Code Skill** - a local folder containing instructions and scr
 ```
 
 When you mention NotebookLM or send a notebook URL, Claude:
+
 1. Loads the skill instructions
 2. Runs the appropriate Python script
 3. Opens a browser, asks your question
@@ -189,21 +197,27 @@ When you mention NotebookLM or send a notebook URL, Claude:
 ## Core Features
 
 ### **Source-Grounded Responses**
+
 NotebookLM significantly reduces hallucinations by answering exclusively from your uploaded documents. If information isn't available, it indicates uncertainty rather than inventing content.
 
 ### **Direct Integration**
+
 No copy-paste between browser and editor. Claude asks and receives answers programmatically.
 
 ### **Smart Library Management**
+
 Save NotebookLM links with tags and descriptions. Claude auto-selects the right notebook for your task.
 
 ### **Automatic Authentication**
+
 One-time Google login, then authentication persists across sessions.
 
 ### **Self-Contained**
+
 Everything runs in the skill folder with an isolated Python environment. No global installations.
 
 ### **Human-Like Automation**
+
 Uses realistic typing speeds and interaction patterns to avoid detection.
 
 ---
@@ -228,6 +242,7 @@ Uses realistic typing speeds and interaction patterns to avoid detection.
 **User asks**: "Check my Suzuki GSR 600 workshop manual for brake fluid type, engine oil specs, and rear axle torque."
 
 **Claude automatically**:
+
 - Authenticates with NotebookLM
 - Asks comprehensive questions about each specification
 - Follows up when prompted "Is that ALL you need to know?"
@@ -254,6 +269,7 @@ Uses realistic typing speeds and interaction patterns to avoid detection.
 ## Technical Details
 
 ### Core Technology
+
 - **Patchright**: Browser automation library (Playwright-based)
 - **Python**: Implementation language for this skill
 - **Stealth techniques**: Human-like typing and interaction patterns
@@ -261,6 +277,7 @@ Uses realistic typing speeds and interaction patterns to avoid detection.
 Note: The MCP server uses the same Patchright library but via TypeScript/npm ecosystem.
 
 ### Dependencies
+
 - **patchright==1.55.2**: Browser automation
 - **python-dotenv==1.0.0**: Environment configuration
 - Automatically installed in `.venv` on first use
@@ -277,6 +294,7 @@ All data is stored locally within the skill directory:
 ```
 
 **Important Security Note:**
+
 - The `data/` directory contains sensitive authentication data and personal notebooks
 - It's automatically excluded from git via `.gitignore`
 - NEVER manually commit or share the contents of the `data/` directory
@@ -284,12 +302,14 @@ All data is stored locally within the skill directory:
 ### Session Model
 
 Unlike the MCP server, this skill uses a **stateless model**:
+
 - Each question opens a fresh browser
 - Asks the question, gets the answer
 - Adds a follow-up prompt to encourage Claude to ask more questions
 - Closes the browser immediately
 
 This means:
+
 - No persistent chat context
 - Each question is independent
 - But your notebook library persists
@@ -302,11 +322,13 @@ For multi-step research, Claude automatically asks follow-up questions when need
 ## Limitations
 
 ### Skill-Specific
+
 - **Local Claude Code only** - Does not work in web UI (sandbox restrictions)
 - **No session persistence** - Each question is independent
 - **No follow-up context** - Can't reference "the previous answer"
 
 ### NotebookLM
+
 - **Rate limits** - Free tier has daily query limits
 - **Manual upload** - You must upload docs to NotebookLM first
 - **Share requirement** - Notebooks must be shared publicly
@@ -335,21 +357,31 @@ Chrome runs locally on your machine. Your credentials never leave your computer.
 ## Troubleshooting
 
 ### Skill not found
+
 ```bash
+
 # Make sure it's in the right location
+
 ls ~/.claude/skills/notebooklm/
+
 # Should show: SKILL.md, scripts/, etc.
+
 ```
 
 ### Authentication issues
+
 Say: `"Reset NotebookLM authentication"`
 
 ### Browser crashes
+
 Say: `"Clear NotebookLM browser data"`
 
 ### Dependencies issues
+
 ```bash
+
 # Manual reinstall if needed
+
 cd ~/.claude/skills/notebooklm
 rm -rf .venv
 python -m venv .venv
@@ -368,6 +400,7 @@ While I've built in humanization features (realistic typing speeds, natural dela
 
 **About CLI tools and AI agents:**
 CLI tools like Claude Code, Codex, and similar AI-powered assistants are incredibly powerful, but they can make mistakes. Please use them with care and awareness:
+
 - Always review changes before committing or deploying
 - Test in safe environments first
 - Keep backups of important work
@@ -382,11 +415,13 @@ That said, if you run into problems or have questions, feel free to open an issu
 ## Credits
 
 This skill is inspired by my [**NotebookLM MCP Server**](https://github.com/PleasePrompto/notebooklm-mcp) and provides an alternative implementation as a Claude Code Skill:
+
 - Both use Patchright for browser automation (TypeScript for MCP, Python for Skill)
 - Skill version runs directly in Claude Code without MCP protocol
 - Stateless design optimized for skill architecture
 
 If you need:
+
 - **Persistent sessions** → Use the [MCP Server](https://github.com/PleasePrompto/notebooklm-mcp)
 - **Multiple tool support** (Codex, Cursor) → Use the [MCP Server](https://github.com/PleasePrompto/notebooklm-mcp)
 - **Quick Claude Code integration** → Use this skill
@@ -402,10 +437,14 @@ If you need:
 Stop the copy-paste dance. Start getting accurate, grounded answers directly in Claude Code.
 
 ```bash
+
 # Get started in 30 seconds
+
 cd ~/.claude/skills
 git clone https://github.com/PleasePrompto/notebooklm-skill notebooklm
+
 # Open Claude Code: "What are my skills?"
+
 ```
 
 ---
@@ -419,6 +458,7 @@ For source-grounded, document-based research directly in Claude Code
 </div>
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

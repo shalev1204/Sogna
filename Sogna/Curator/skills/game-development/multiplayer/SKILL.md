@@ -6,7 +6,6 @@ id: skill-multiplayer
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # Multiplayer Game Development
 
 > Networking architecture and synchronization principles.

@@ -12,7 +12,6 @@ id: skill-brainstorming
 owner: [[brain]]
 ---
 
-
 # Brainstorming & Communication Protocol
 
 > **MANDATORY:** Use for complex/vague requests, new features, updates.
@@ -57,20 +56,24 @@ owner: [[brain]]
 ### Question Generation Process
 
 ```
+
 1. Parse request → Extract domain, features, scale indicators
 2. Identify decision points → Blocking vs. deferable
 3. Generate questions → Priority: P0 (blocking) > P1 (high-leverage) > P2 (nice-to-have)
 4. Format with trade-offs → What, Why, Options, Default
+
 ```
 
 ### Question Format (MANDATORY)
 
 ```markdown
+
 ### [PRIORITY] **[DECISION POINT]**
 
 **Question:** [Clear question]
 
 **Why This Matters:**
+
 - [Architectural consequence]
 - [Affects: cost/complexity/timeline/scale]
 
@@ -115,10 +118,12 @@ owner: [[brain]]
 ### Error Response Pattern
 
 ```
+
 1. Acknowledge the error
 2. Explain what happened (user-friendly)
 3. Offer specific solutions with trade-offs
 4. Ask user to choose or provide alternative
+
 ```
 
 ### Error Categories
@@ -139,10 +144,12 @@ owner: [[brain]]
 ### Completion Structure
 
 ```
+
 1. Success confirmation (celebrate briefly)
 2. Summary of what was done (concrete)
 3. How to verify/test (actionable)
 4. Next steps suggestion (proactive)
+
 ```
 
 ---

@@ -8,7 +8,6 @@ id: skill-hubspot-automation
 owner: [[orchestrator]]
 ---
 
-
 # HubSpot CRM Automation via Rube MCP
 
 Automate HubSpot CRM workflows including contact/company management, deal pipeline tracking, ticket search, and custom property creation through Composio's HubSpot toolkit.
@@ -35,6 +34,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 **When to use**: User wants to create new contacts or update existing ones in HubSpot CRM
 
 **Tool sequence**:
+
 1. `HUBSPOT_GET_ACCOUNT_INFO` - Verify connection and permissions (Prerequisite)
 2. `HUBSPOT_SEARCH_CONTACTS_BY_CRITERIA` - Search for existing contacts to avoid duplicates (Prerequisite)
 3. `HUBSPOT_READ_A_CRM_PROPERTY_BY_NAME` - Check property metadata for constrained values (Optional)
@@ -42,11 +42,13 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 5. `HUBSPOT_CREATE_CONTACTS` - Batch create contacts up to 100 (Alternative)
 
 **Key parameters**:
+
 - `HUBSPOT_CREATE_CONTACT`: `properties` object with `email`, `firstname`, `lastname`, `phone`, `company`
 - `HUBSPOT_CREATE_CONTACTS`: `inputs` array of `{properties}` objects, max 100 per batch
 - `HUBSPOT_SEARCH_CONTACTS_BY_CRITERIA`: `filterGroups` array with `{filters: [{propertyName, operator, value}]}`, `properties` array of fields to return
 
 **Pitfalls**:
+
 - Max 100 records per batch; chunk larger imports
 - 400 'Property values were not valid' if using incorrect property names or enum values
 - Always search before creating to avoid duplicates
@@ -57,6 +59,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 **When to use**: User wants to create, search, or update company records
 
 **Tool sequence**:
+
 1. `HUBSPOT_SEARCH_COMPANIES` - Search existing companies (Prerequisite)
 2. `HUBSPOT_CREATE_COMPANIES` - Batch create companies, max 100 (Required)
 3. `HUBSPOT_UPDATE_COMPANIES` - Batch update existing companies (Alternative)
@@ -64,10 +67,12 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 5. `HUBSPOT_BATCH_READ_COMPANIES_BY_PROPERTIES` - Bulk read companies by property values (Optional)
 
 **Key parameters**:
+
 - `HUBSPOT_CREATE_COMPANIES`: `inputs` array of `{properties}` objects, max 100
 - `HUBSPOT_SEARCH_COMPANIES`: `filterGroups`, `properties`, `sorts`, `limit`, `after` (pagination cursor)
 
 **Pitfalls**:
+
 - Max 100 per batch; chunk larger sets
 - Store returned IDs immediately for downstream operations
 - Property values must match exact internal names, not display labels
@@ -77,6 +82,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 **When to use**: User wants to search deals, view pipeline stages, or track deal progress
 
 **Tool sequence**:
+
 1. `HUBSPOT_RETRIEVE_ALL_PIPELINES_FOR_SPECIFIED_OBJECT_TYPE` - Map pipeline and stage IDs/names (Prerequisite)
 2. `HUBSPOT_SEARCH_DEALS` - Search deals with filters (Required)
 3. `HUBSPOT_RETRIEVE_PIPELINE_STAGES` - Get stage details for one pipeline (Optional)
@@ -85,10 +91,12 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 6. `HUBSPOT_LIST_DEALS` - List all deals without filters (Fallback)
 
 **Key parameters**:
+
 - `HUBSPOT_SEARCH_DEALS`: `filterGroups` with filters on `pipeline`, `dealstage`, `createdate`, `closedate`, `hubspot_owner_id`; `properties`, `sorts`, `limit`, `after`
 - `HUBSPOT_RETRIEVE_ALL_PIPELINES_FOR_SPECIFIED_OBJECT_TYPE`: `objectType` set to `'deals'`
 
 **Pitfalls**:
+
 - Results nested under `response.data.results`; properties are often strings (amounts, dates)
 - Stage IDs may be readable strings or opaque numeric IDs; use `label` field for display
 - Filters must use internal property names (`pipeline`, `dealstage`, `createdate`), not display names
@@ -99,16 +107,21 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 **When to use**: User wants to find support tickets by status, date, or criteria
 
 **Tool sequence**:
+
 1. `HUBSPOT_SEARCH_TICKETS` - Search with filterGroups (Required)
 2. `HUBSPOT_READ_ALL_PROPERTIES_FOR_OBJECT_TYPE` - Discover available property names (Fallback)
 3. `HUBSPOT_GET_TICKET` - Get single ticket details (Optional)
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 4. `HUBSPOT_GET_TICKETS` - Bulk fetch tickets by IDs (Optional)
 
 **Key parameters**:
+
 - `HUBSPOT_SEARCH_TICKETS`: `filterGroups`, `properties` (only listed fields are returned), `sorts`, `limit`, `after`
 
 **Pitfalls**:
+
 - Incorrect `propertyName`/`operator` returns zero results without errors
 - Date filtering may require epoch-ms bounds; mixing formats causes mismatches
 - Only fields in the `properties` array are returned; missing ones break downstream logic
@@ -119,6 +132,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 **When to use**: User wants to add custom fields to CRM objects
 
 **Tool sequence**:
+
 1. `HUBSPOT_READ_ALL_PROPERTIES_FOR_OBJECT_TYPE` - List existing properties (Prerequisite)
 2. `HUBSPOT_READ_PROPERTY_GROUPS_FOR_OBJECT_TYPE` - List property groups (Optional)
 3. `HUBSPOT_CREATE_PROPERTY_FOR_SPECIFIED_OBJECT_TYPE` - Create a single property (Required)
@@ -126,9 +140,11 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 5. `HUBSPOT_UPDATE_SPECIFIC_CRM_PROPERTY` - Update existing property definition (Optional)
 
 **Key parameters**:
+
 - `HUBSPOT_CREATE_PROPERTY_FOR_SPECIFIED_OBJECT_TYPE`: `objectType`, `name`, `label`, `type` (string/number/date/enumeration), `fieldType`, `groupName`, `options` (for enumerations)
 
 **Pitfalls**:
+
 - Property names are immutable after creation; choose carefully
 - Enumeration options must be pre-defined with `value` and `label`
 - Group must exist before assigning properties to it
@@ -136,18 +152,21 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 ## Common Patterns
 
 ### ID Resolution
+
 - **Property display name → internal name**: Use `HUBSPOT_READ_ALL_PROPERTIES_FOR_OBJECT_TYPE`
 - **Pipeline name → pipeline ID**: Use `HUBSPOT_RETRIEVE_ALL_PIPELINES_FOR_SPECIFIED_OBJECT_TYPE`
 - **Stage name → stage ID**: Extract from pipeline stages response
 - **Owner name → owner ID**: Use `HUBSPOT_RETRIEVE_OWNERS`
 
 ### Pagination
+
 - Search endpoints use cursor-based pagination
 - Follow `paging.next.after` until absent
 - Typical limit: 100 records per page
 - Pass `after` value from previous response to get next page
 
 ### Batch Operations
+
 - Most create/update endpoints support batching with max 100 records per call
 - For larger datasets, chunk into groups of 100
 - Store returned IDs from each batch before proceeding
@@ -182,14 +201,17 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 | Verify connection | `HUBSPOT_GET_ACCOUNT_INFO` | None |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

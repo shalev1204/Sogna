@@ -56,16 +56,22 @@ Guidelines:
 
 - Single database: `bigint identity` (sequential, 8 bytes, SQL-standard)
 - Distributed/exposed IDs: UUIDv7 (requires pg_uuidv7) or ULID (time-ordered, no
+
   fragmentation)
+
 - `serial` works but `identity` is SQL-standard and preferred for new
+
   applications
+
 - Avoid random UUIDs (v4) as primary keys on large tables (causes index
+
   fragmentation)
 
 Reference:
 [Identity Columns](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-IDENTITY)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

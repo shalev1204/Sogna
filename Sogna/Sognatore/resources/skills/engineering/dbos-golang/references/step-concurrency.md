@@ -76,6 +76,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) ([]string, error) {
 ```
 
 Key behaviors:
+
 - `dbos.Go` starts a step in a goroutine and returns a channel of `StepOutcome[R]`
 - `dbos.Select` durably selects the first completed result and checkpoints which channel was selected
 - On recovery, `Select` replays the same selection, maintaining determinism
@@ -84,6 +85,7 @@ Key behaviors:
 Reference: [Concurrent Steps](https://docs.dbos.dev/golang/tutorials/workflow-tutorial#concurrent-steps)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

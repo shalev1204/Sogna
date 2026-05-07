@@ -54,6 +54,7 @@ Nest sequences to both trim the beginning and delay when it appears:
 The inner sequence trims 15 frames from the start, and the outer sequence delays the result by 30 frames.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

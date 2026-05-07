@@ -74,6 +74,7 @@ When reviewing code, follow these steps:
 - Be specific about what needs to change
 - Explain why, not just what
 - Suggest alternatives when possible
+
 ```
 
 > **Note**: The `SKILL.md` file contains metadata (name, description) at the top, followed by the instructions. The agent will only read the metadata and load the full instructions only when needed.
@@ -136,9 +137,11 @@ mkdir -p .agent/skills/license-header-adder/resources
 
 ```
 /*
+
  * Copyright (c) 2026 YOUR_COMPANY_NAME LLC.
  * All rights reserved.
  * This code is proprietary and confidential.
+
  */
 ```
 
@@ -163,6 +166,7 @@ This skill ensures that all new source files have the correct copyright header.
 3. **Adapt Syntax**:
    - For C-style languages (Java, TS), keep the `/* */` block.
    - For Python/Shell, convert to `#` comments.
+
 ```
 
 ### Try it out

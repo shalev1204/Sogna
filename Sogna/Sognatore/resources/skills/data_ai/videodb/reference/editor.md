@@ -61,7 +61,9 @@ stream_url = timeline.generate_stream()
 Use `start` and `end` on a `VideoAsset` to extract a portion:
 
 ```python
+
 # Take only seconds 10–30 from the source video
+
 clip = VideoAsset(asset_id=video.id, start=10, end=30)
 timeline.add_inline(clip)
 ```
@@ -96,6 +98,7 @@ title = TextAsset(
 )
 
 # Overlay the title at the very start (t=0)
+
 timeline.add_overlay(0, title)
 ```
 
@@ -146,6 +149,7 @@ audio_layer = AudioAsset(
 )
 
 # Start the music at t=0, overlaid on the video track
+
 timeline.add_overlay(0, audio_layer)
 ```
 
@@ -204,12 +208,15 @@ Use `video.add_subtitle()` to burn subtitles directly onto a video stream. This 
 from videodb import SubtitleStyle
 
 # Video must have spoken words indexed first (force=True skips if already done)
+
 video.index_spoken_words(force=True)
 
 # Add subtitles with default styling
+
 stream_url = video.add_subtitle()
 
 # Or customise the subtitle style
+
 stream_url = video.add_subtitle(style=SubtitleStyle(
     font_name="Arial",
     font_size=22,
@@ -235,9 +242,11 @@ from videodb.editor import (
 )
 
 # Video must have spoken words indexed first (force=True skips if already done)
+
 video.index_spoken_words(force=True)
 
 # Create a caption asset
+
 caption = CaptionAsset(
     src="auto",
     font=FontStyling(name="Clear Sans", size=30),
@@ -249,6 +258,7 @@ caption = CaptionAsset(
 )
 
 # Build an editor timeline with tracks and clips
+
 editor_tl = EditorTimeline(conn)
 track = Track()
 track.add_clip(start=0, clip=Clip(asset=caption, duration=video.length))
@@ -295,14 +305,17 @@ coll = conn.get_collection()
 video = coll.get_video("your-video-id")
 
 # 1. Search for key moments
+
 video.index_spoken_words(force=True)
 results = video.search("product announcement", search_type=SearchType.semantic)
 shots = results.get_shots()  # may be empty if no results
 
 # 2. Build timeline
+
 timeline = Timeline(conn)
 
 # Title card
+
 title = TextAsset(
     text="Product Launch Highlights",
     duration=4,
@@ -311,11 +324,13 @@ title = TextAsset(
 timeline.add_overlay(0, title)
 
 # Append each matching clip
+
 for shot in shots:
     asset = VideoAsset(asset_id=shot.video_id, start=shot.start, end=shot.end)
     timeline.add_inline(asset)
 
 # 3. Generate stream
+
 stream_url = timeline.generate_stream()
 print(f"Highlight reel: {stream_url}")
 ```
@@ -337,15 +352,18 @@ logo = coll.get_image(logo_id)
 timeline = Timeline(conn)
 
 # Main video track
+
 timeline.add_inline(VideoAsset(asset_id=main_video.id))
 
 # Background music — disable_other_tracks=False to mix with video audio
+
 timeline.add_overlay(
     0,
     AudioAsset(asset_id=music.id, disable_other_tracks=False, fade_in_duration=3),
 )
 
 # Logo in top-right corner for first 10 seconds
+
 timeline.add_overlay(
     0,
     ImageAsset(asset_id=logo.id, duration=10, x=1140, y=20, width=120, height=60),
@@ -441,6 +459,7 @@ The timeline editor is designed for **non-destructive linear composition**. The 
 - **Generated media**: Use `coll.generate_music()`, `coll.generate_sound_effect()`, `coll.generate_voice()`, and `coll.generate_image()` to create media that can be used as timeline assets immediately.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

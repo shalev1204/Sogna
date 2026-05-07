@@ -100,6 +100,7 @@ ToolbarItem(placement: .principal) {
 - Avoid using title menus for destructive actions.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

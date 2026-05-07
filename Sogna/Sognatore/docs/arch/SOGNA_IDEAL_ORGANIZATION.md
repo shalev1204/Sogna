@@ -49,7 +49,9 @@ graph TD
 Cada departamento opera bajo la metodología **RARV** y es liderado por un **Department Orchestrator**.
 
 ### 1. 📢 Marketing
+
 *Orquestador: `marketing_orchestrator`*
+
 - `BrandArchitect`: Construcción de la identidad visual y narrativa.
 - `ContentStrateger`: Planificación de contenidos de alto impacto.
 - `SocialMediaLead`: Gestión de la presencia en redes neuronales globales.
@@ -57,7 +59,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `CopyMaster`: Redacción persuasiva institucional.
 
 ### 2. 📈 Growth
+
 *Orquestador: `growth_orchestrator`*
+
 - `ViralityEngineer`: Diseño de bucles virales y tracción orgánica.
 - `ConversionExpert`: Optimización de landing pages y CTAs.
 - `FunnelArchitect`: Construcción de embudos de ventas automatizados.
@@ -65,7 +69,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `ExperimentLead`: Ejecución de tests A/B continuos.
 
 ### 3. 💰 Sales
+
 *Orquestador: `sales_orchestrator`*
+
 - `LeadScrapper`: Extracción de datos de clientes potenciales.
 - `DealCloser`: Negociación y cierre de contratos de alto valor.
 - `OutboundSpecialist`: Estrategias de prospección directa.
@@ -73,7 +79,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `AccountExecutive`: Gestión de cuentas institucionales.
 
 ### 4. 🤝 CRM
+
 *Orquestador: `crm_orchestrator`*
+
 - `CustomerSuccess`: Garantizar que el cliente alcance sus objetivos.
 - `LoyaltyArchitect`: Programas de retención y fidelidad.
 - `SupportAgent`: Resolución inteligente de incidencias.
@@ -81,7 +89,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `RetentionSpecialist`: Prevención de abandono (Churn prevention).
 
 ### 5. 🏦 Finance
+
 *Orquestador: `finance_orchestrator`*
+
 - `CostOptimizer`: Reducción sistemática de gastos operativos.
 - `AuditForensic`: Auditoría interna de cada transacción.
 - `BillingManager`: Automatización de facturación y cobros.
@@ -89,7 +99,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `EquityManager`: Gestión de activos y valor del ecosistema.
 
 ### 6. ⚖️ Legal & Treasury
+
 *Orquestador: `legal_orchestrator`*
+
 - `ComplianceOfficer`: Cumplimiento de leyes internacionales y de IA.
 - `ContractScaffold`: Generación de acuerdos jurídicos blindados.
 - `IPWarden`: Protección de patentes y propiedad intelectual.
@@ -97,7 +109,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `RiskAnalyst`: Evaluación de riesgos legales y financieros.
 
 ### 7. 🛡️ Protection
+
 *Orquestador: `protection_orchestrator`*
+
 - `SentinelWarden`: Vigilancia en tiempo real de la integridad del core.
 - `ThreatHunter`: Detección proactiva de ataques o vulnerabilidades.
 - `CyberShield`: Encriptación y defensa de la red neuronal.
@@ -105,7 +119,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `IncidentResponder`: Protocolos de emergencia ante brechas.
 
 ### 8. ⚙️ Operations
+
 *Orquestador: `ops_orchestrator`*
+
 - `ProcessDesigner`: Creación de workflows RARV de alta eficiencia.
 - `AutomationArchitect`: Eliminación de tareas manuales repetitivas.
 - `WorkflowPhysician`: Curación y salud de los procesos internos.
@@ -113,7 +129,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `InternalAudit`: Auditoría de la excelencia operativa.
 
 ### 9. 🏗️ Infrastructure
+
 *Orquestador: `infra_orchestrator`*
+
 - `CloudArchitect`: Escalabilidad en entornos distribuidos.
 - `GPUSwarmManager`: Orquestación de potencia de cómputo para IA.
 - `SystemReliability`: Garantizar el 99.9% de disponibilidad (SRE).
@@ -121,7 +139,9 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 - `DevOpsExpert`: CI/CD y despliegue continuo del ecosistema.
 
 ### 10. 🎬 Studio
+
 *Orquestador: `studio_orchestrator`*
+
 - `Cinematographer`: Generación de visuales cinematográficos.
 - `SoundEngineer`: Diseño de audio inmersivo y síntesis vocal.
 - `InterfaceArtisan`: Diseño de UI/UX para el ecosistema.
@@ -133,12 +153,14 @@ Cada departamento opera bajo la metodología **RARV** y es liderado por un **Dep
 ## 4. Acceso Universal a Skills (+1000)
 
 Cada agente, independientemente de su departamento, tiene acceso a:
-1.  **Skills Propias**: Herramientas nativas de su rol.
-2.  **Global Skill-Vault**: Una biblioteca de más de 1000 habilidades (Coding, SEO, Marketing, VideoDB, etc.) que pueden ser invocadas bajo demanda según la fase de **Resolución** del flujo RARV.
+
+1. **Skills Propias**: Herramientas nativas de su rol.
+2. **Global Skill-Vault**: Una biblioteca de más de 1000 habilidades (Coding, SEO, Marketing, VideoDB, etc.) que pueden ser invocadas bajo demanda según la fase de **Resolución** del flujo RARV.
 
 ## 5. El Latido RARV y la Memoria Holística
 
 La red neuronal de Sognatore no tiene silos. 
+
 - La **Memoria Departamental** registra cada acción del enjambre.
 - La **Memoria Corporativa** permite que el `FinanceSwarm` aprenda de los éxitos del `MarketingSwarm` a la misma velocidad que el propio equipo de marketing.
 

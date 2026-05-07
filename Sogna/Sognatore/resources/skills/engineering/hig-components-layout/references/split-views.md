@@ -112,6 +112,7 @@ December 5, 2023| Added guidance for split views in visionOS.
 June 5, 2023| Added guidance for split views in watchOS.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

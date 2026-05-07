@@ -8,8 +8,6 @@ id: skill-theme-factory
 owner: [[orchestrator]]
 ---
 
-
-
 # Theme Factory Skill
 
 This skill provides a curated collection of professional font and color themes themes, each with carefully selected color palettes and font pairings. Once a theme is chosen, it can be applied to any artifact.
@@ -17,6 +15,7 @@ This skill provides a curated collection of professional font and color themes t
 ## Purpose
 
 To apply consistent, professional styling to presentation slide decks, use this skill. Each theme includes:
+
 - A cohesive color palette with hex codes
 - Complementary font pairings for headers and body text
 - A distinct visual identity suitable for different contexts and audiences
@@ -48,6 +47,7 @@ The following 10 themes are available, each showcased in `theme-showcase.pdf`:
 ## Theme Details
 
 Each theme is defined in the `themes/` directory with complete specifications including:
+
 - Cohesive color palette with hex codes
 - Complementary font pairings for headers and body text
 - Distinct visual identity suitable for different contexts and audiences
@@ -55,23 +55,28 @@ Each theme is defined in the `themes/` directory with complete specifications in
 ## Application Process
 
 After a preferred theme is selected:
+
 1. Read the corresponding theme file from the `themes/` directory
 2. Apply the specified colors and fonts consistently throughout the deck
 3. Ensure proper contrast and readability
 4. Maintain the theme's visual identity across all slides
 
 ## Create your Own Theme
+
 To handle cases where none of the existing themes work for an artifact, create a custom theme. Based on provided inputs, generate a new theme similar to the ones above. Give the theme a similar name describing what the font/color combinations represent. Use any basic description provided to choose appropriate colors/fonts. After generating the theme, show it for review and verification. Following that, apply the theme as described above.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

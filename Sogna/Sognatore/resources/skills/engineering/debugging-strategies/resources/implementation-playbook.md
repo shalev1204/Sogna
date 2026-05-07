@@ -22,11 +22,13 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 2. Debugging Mindset
 
 **Don't Assume:**
+
 - "It can't be X" - Yes it can
 - "I didn't change Y" - Check anyway
 - "It works on my machine" - Find out why
 
 **Do:**
+
 - Reproduce consistently
 - Isolate the problem
 - Keep detailed notes
@@ -42,6 +44,7 @@ Explain your code and problem out loud (to a rubber duck, colleague, or yourself
 ### Phase 1: Reproduce
 
 ```markdown
+
 ## Reproduction Checklist
 
 1. **Can you reproduce it?**
@@ -58,11 +61,13 @@ Explain your code and problem out loud (to a rubber duck, colleague, or yourself
    - Write down exact steps
    - Note environment details
    - Capture error messages
+
 ```
 
 ### Phase 2: Gather Information
 
 ```markdown
+
 ## Information Collection
 
 1. **Error Messages**
@@ -85,11 +90,13 @@ Explain your code and problem out loud (to a rubber duck, colleague, or yourself
    - Affects all users or specific ones?
    - All browsers or specific ones?
    - Production only or also dev?
+
 ```
 
 ### Phase 3: Form Hypothesis
 
 ```markdown
+
 ## Hypothesis Formation
 
 Based on gathered info, ask:
@@ -109,11 +116,13 @@ Based on gathered info, ask:
    - Business logic
    - Data layer
    - External services
+
 ```
 
 ### Phase 4: Test & Verify
 
 ```markdown
+
 ## Testing Strategies
 
 1. **Binary Search**
@@ -135,6 +144,7 @@ Based on gathered info, ask:
    - Diff configurations
    - Diff environments
    - Diff data
+
 ```
 
 ## Debugging Tools
@@ -202,7 +212,9 @@ console.log(performance.getEntriesByType('measure'));
 ### Python Debugging
 
 ```python
+
 # Built-in debugger (pdb)
+
 import pdb
 
 def calculate_total(items):
@@ -215,11 +227,13 @@ def calculate_total(items):
     return total
 
 # Breakpoint (Python 3.7+)
+
 def process_order(order):
     breakpoint()  # More convenient than pdb.set_trace()
     # ... code
 
 # Post-mortem debugging
+
 try:
     risky_operation()
 except Exception:
@@ -227,10 +241,12 @@ except Exception:
     pdb.post_mortem()  # Debug at exception point
 
 # IPython debugging (ipdb)
+
 from ipdb import set_trace
 set_trace()  # Better interface than pdb
 
 # Logging for debugging
+
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -243,6 +259,7 @@ def fetch_user(user_id):
     return user
 
 # Profile performance
+
 import cProfile
 import pstats
 
@@ -303,17 +320,22 @@ defer pprof.StopCPUProfile()
 ### Technique 1: Binary Search Debugging
 
 ```bash
+
 # Git bisect for finding regression
+
 git bisect start
 git bisect bad                    # Current commit is bad
 git bisect good v1.0.0            # v1.0.0 was good
 
 # Git checks out middle commit
+
 # Test it, then:
+
 git bisect good   # if it works
 git bisect bad    # if it's broken
 
 # Continue until bug found
+
 git bisect reset  # when done
 ```
 
@@ -322,6 +344,7 @@ git bisect reset  # when done
 Compare working vs broken:
 
 ```markdown
+
 ## What's Different?
 
 | Aspect       | Working         | Broken          |
@@ -400,6 +423,7 @@ afterEach(() => {
 ### Pattern 1: Intermittent Bugs
 
 ```markdown
+
 ## Strategies for Flaky Bugs
 
 1. **Add extensive logging**
@@ -421,11 +445,13 @@ afterEach(() => {
    - Run many times
    - Vary timing
    - Simulate load
+
 ```
 
 ### Pattern 2: Performance Issues
 
 ```markdown
+
 ## Performance Debugging
 
 1. **Profile first**
@@ -444,11 +470,13 @@ afterEach(() => {
    - Lighthouse
    - Python: cProfile, line_profiler
    - Node: clinic.js, 0x
+
 ```
 
 ### Pattern 3: Production Bugs
 
 ```markdown
+
 ## Production Debugging
 
 1. **Gather evidence**
@@ -467,6 +495,7 @@ afterEach(() => {
    - Use feature flags
    - Add monitoring/logging
    - Test fixes in staging
+
 ```
 
 ## Best Practices
@@ -493,6 +522,7 @@ afterEach(() => {
 ## Quick Debugging Checklist
 
 ```markdown
+
 ## When Stuck, Check:
 
 - [ ] Spelling errors (typos in variable names)
@@ -507,6 +537,7 @@ afterEach(() => {
 - [ ] File paths (absolute vs relative)
 - [ ] Cache issues (clear cache)
 - [ ] Stale data (refresh database)
+
 ```
 
 ## Resources
@@ -519,6 +550,7 @@ afterEach(() => {
 - **scripts/debug-helper.ts**: Debugging utility functions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-azd-deployment
 owner: [[ops-security]]
 ---
 
-
 # Azure Developer CLI (azd) Container Apps Deployment
 
 Deploy containerized frontend + backend applications to Azure Container Apps with remote builds, managed identity, and idempotent infrastructure.
@@ -16,7 +15,9 @@ Deploy containerized frontend + backend applications to Azure Container Apps wit
 ## Quick Start
 
 ```bash
+
 # Initialize and deploy
+
 azd auth login
 azd init                    # Creates azure.yaml and .azure/ folder
 azd env new <env-name>      # Create environment (dev, staging, prod)
@@ -146,11 +147,14 @@ Syntax: `${VAR_NAME}` or `${VAR_NAME=default_value}`
 ### Setting Environment Variables
 
 ```bash
+
 # Set for current environment
+
 azd env set AZURE_OPENAI_ENDPOINT "https://my-openai.openai.azure.com"
 azd env set AZURE_SEARCH_ENDPOINT "https://my-search.search.windows.net"
 
 # Set during init
+
 azd env new prod
 azd env set AZURE_OPENAI_ENDPOINT "..." 
 ```
@@ -270,19 +274,23 @@ hooks:
 ## Common Commands
 
 ```bash
+
 # Environment management
+
 azd env list                        # List environments
 azd env select <name>               # Switch environment
 azd env get-values                  # Show all env vars
 azd env set KEY value               # Set variable
 
 # Deployment
+
 azd up                              # Full provision + deploy
 azd provision                       # Infrastructure only
 azd deploy                          # Code deployment only
 azd deploy --service backend        # Deploy single service
 
 # Debugging
+
 azd show                            # Show project status
 az containerapp logs show -n <app> -g <rg> --follow  # Stream logs
 ```
@@ -302,14 +310,17 @@ az containerapp logs show -n <app> -g <rg> --follow  # Stream logs
 5. **`|| true` in hooks** - Prevent RBAC "already exists" errors from failing deploy
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

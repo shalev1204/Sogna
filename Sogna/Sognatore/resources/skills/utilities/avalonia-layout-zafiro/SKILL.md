@@ -8,7 +8,6 @@ id: skill-avalonia-layout-zafiro
 owner: [[orchestrator]]
 ---
 
-
 # Avalonia Layout with Zafiro.Avalonia
 
 > Master modern, clean, and maintainable Avalonia UI layouts.
@@ -53,25 +52,30 @@ For a real-world example, refer to the **Angor** project:
 ## ❌ Anti-Patterns
 
 **DON'T:**
+
 - Use hardcoded colors or sizes (literals) in views.
 - Create deep nesting of `Grid` and `StackPanel`.
 - Repeat visual properties across multiple elements (use Styles).
 - Use `IValueConverter` for simple logic that belongs in the ViewModel.
 
 **DO:**
+
 - Use `DynamicResource` for colors and brushes.
 - Extract repeated layouts into generic components.
 - Leverage `Zafiro.Avalonia` specific panels like `EdgePanel` for common UI patterns.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

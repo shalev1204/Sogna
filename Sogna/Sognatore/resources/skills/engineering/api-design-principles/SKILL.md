@@ -8,7 +8,6 @@ id: skill-api-design-principles
 owner: [[eng-api]], [[prod-design]]
 ---
 
-
 # API Design Principles
 
 Master REST and GraphQL API design principles to build intuitive, scalable, and maintainable APIs that delight developers and stand the test of time.
@@ -43,11 +42,13 @@ Refer to `resources/implementation-playbook.md` for detailed patterns, checklist
 - `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

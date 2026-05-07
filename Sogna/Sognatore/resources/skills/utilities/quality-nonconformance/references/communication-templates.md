@@ -67,11 +67,13 @@ Common variables used across templates:
 ## 1. NCR Notification (Internal)
 
 ### When to Use
+
 - Non-conformance identified at incoming inspection, in-process, or final inspection
 - Initial notification to affected departments (manufacturing, engineering, procurement, planning)
 - Material has been quarantined; disposition pending
 
 ### Tone Guidance
+
 Factual and direct. Internal teams need to know what happened, what the scope is, and what the immediate impact is. No blame, no speculation — data only. Include enough detail for engineering to begin their assessment and for planning to evaluate the production impact.
 
 ### Template
@@ -101,6 +103,7 @@ Factual and direct. Internal teams need to know what happened, what the scope is
 {{containment_status}}
 
 **Initial Scope Assessment:**
+
 - [ ] Other lots from same supplier/production run checked: {{scope_check_result}}
 - [ ] WIP containing this material identified: {{wip_status}}
 - [ ] Finished goods containing this material identified: {{fg_status}}
@@ -120,11 +123,13 @@ MRB meeting scheduled: {{mrb_date_time}}.
 ## 2. MRB Disposition Record
 
 ### When to Use
+
 - Documenting the Material Review Board's disposition decision
 - Required for all NCR dispositions that are not straightforward scrap
 - Audit-trail document; this is what auditors review
 
 ### Tone Guidance
+
 Formal, precise, and complete. This is a controlled document. Every field must be populated. Engineering justification must be technically sound and specific — not "acceptable per engineering review" but a detailed rationale citing functional requirements.
 
 ### Template
@@ -181,14 +186,17 @@ Example: "The OD measurement of 12.52mm (USL 12.50mm) exceeds the drawing tolera
 ## 3. Corrective Action Request (CAR) to Supplier
 
 ### When to Use
+
 - Significant non-conformance on incoming material traceable to a supplier
 - Repeated minor non-conformances from the same supplier (3+ in 90 days)
 - Supplier escalation Level 1 (SCAR issuance)
 
 ### Tone Guidance
+
 Professional, specific, and structured. Provide all data the supplier needs to investigate. Set clear expectations for the response format and timeline. Do not be accusatory — present the facts and ask for investigation. The supplier's willingness and quality of response will tell you whether this is a fixable issue or a systemic problem.
 
 ### What NOT to Say
+
 - Do not threaten ASL removal in a first-time CAR (save escalation language for Level 2+)
 - Do not speculate on the root cause — that's the supplier's job
 - Do not include internal financial impact numbers (the supplier doesn't need to know your downstream costs at this stage)
@@ -210,11 +218,13 @@ Professional, specific, and structured. Provide all data the supplier needs to i
 **Full Corrective Action Plan Due:** {{full_response_deadline}} (30 calendar days)
 
 **Supplier Information:**
+
 - Supplier: {{supplier_name}}
 - Supplier Code: {{supplier_code}}
 - Contact: {{supplier_contact}}
 
 **Non-Conformance Details:**
+
 - Part Number: {{part_number}} — {{part_description}}
 - PO Number: {{po_number}}
 - Lot/Batch: {{lot_number}}
@@ -230,6 +240,7 @@ Professional, specific, and structured. Provide all data the supplier needs to i
 {{actual_values}}
 
 **Supporting Documentation Attached:**
+
 - [ ] Inspection report with measurement data
 - [ ] Photographs of nonconforming material
 - [ ] Drawing excerpt highlighting affected dimension/requirement
@@ -239,6 +250,7 @@ Professional, specific, and structured. Provide all data the supplier needs to i
 {{impact_summary}} (e.g., "Production line held pending disposition. Estimated 3-day impact to customer delivery schedule.")
 
 **Required Response (use 8D format or equivalent):**
+
 1. **Containment actions** — immediate actions to protect our inventory and any other customers who may have received material from the same lot. Confirm whether other lots from the same production run may be affected.
 2. **Root cause analysis** — we require a rigorous root cause investigation, not a surface-level explanation. "Operator error" or "inspection escape" are not acceptable root causes. Identify the systemic process or system failure that allowed this non-conformance.
 3. **Corrective actions** — specific, measurable actions addressing the verified root cause. Include implementation dates and responsible personnel.
@@ -257,10 +269,12 @@ Professional, specific, and structured. Provide all data the supplier needs to i
 ## 4. CAPA Initiation Record
 
 ### When to Use
+
 - Formal CAPA initiation based on established trigger criteria
 - Documents the triggering event, scope, team assignment, and initial timeline
 
 ### Tone Guidance
+
 Structured and factual. The initiation record sets the scope and expectations for the entire CAPA. Ambiguity here leads to scope creep or incomplete investigations later. Be specific about what triggered the CAPA and what the expected outcome is.
 
 ### Template
@@ -282,6 +296,7 @@ Structured and factual. The initiation record sets the scope and expectations fo
 Example: "Recurring dimensional non-conformance on Part 7832-A Rev D — bore diameter out of tolerance (>USL of 12.50mm). Three NCRs in the last 60 days (NCR-2025-0398, -0412, -0456) affecting lots from three different production runs. Total scrap cost to date: $14,200. No customer impact confirmed, but risk of escape exists based on inspection sampling rates."
 
 **Scope:**
+
 - Product(s) affected: {{products_affected}}
 - Process(es) affected: {{processes_affected}}
 - Location(s): {{locations_affected}}
@@ -315,10 +330,12 @@ Example: "Recurring dimensional non-conformance on Part 7832-A Rev D — bore di
 ## 5. CAPA Effectiveness Review
 
 ### When to Use
+
 - At the end of the effectiveness monitoring period (typically 90 days after implementation)
 - Documents the evidence of effectiveness and the closure/extension decision
 
 ### Tone Guidance
+
 Data-driven and conclusive. The effectiveness review is where the CAPA either closes with evidence of success or reopens with evidence of failure. Auditors specifically review effectiveness evidence — it must be quantitative and linked to the original problem statement.
 
 ### Template
@@ -335,6 +352,7 @@ Data-driven and conclusive. The effectiveness review is where the CAPA either cl
 | Monitoring Period | {{monitoring_start}} to {{monitoring_end}} |
 
 **Implementation Verification:**
+
 - [ ] Work instruction / procedure updated: Rev {{rev}} effective {{date}}
 - [ ] Personnel trained: {{training_records_ref}}
 - [ ] Equipment/fixture installed and validated: {{validation_ref}}
@@ -366,10 +384,12 @@ Data-driven and conclusive. The effectiveness review is where the CAPA either cl
 ## 6. Audit Finding Response
 
 ### When to Use
+
 - Responding to external audit findings (registrar, customer, regulatory)
 - Structure applies to ISO audit NCRs, customer audit CARs, and FDA 483 responses (with modifications per template 11)
 
 ### Tone Guidance
+
 Factual, accountable, and solution-oriented. Accept the finding (even if you disagree with the interpretation — debate the interpretation separately, not in the corrective action response). Demonstrate that you understand the intent of the requirement, not just the words. Auditors value self-awareness and systemic thinking.
 
 ### Template
@@ -418,13 +438,16 @@ We acknowledge the finding. {{brief_acknowledgment}}
 ## 7. Customer Quality Notification
 
 ### When to Use
+
 - Non-conformance discovered on product already shipped to the customer
 - Proactive notification — the customer should hear about it from you before they discover it themselves
 
 ### Tone Guidance
+
 Transparent, action-oriented, and structured. Lead with what you know and what you've done (containment), not with excuses. Provide the specific traceability data the customer needs to identify and segregate affected product in their inventory. The customer will judge your quality system based on how you handle this notification — transparency and speed build trust; delay and vagueness destroy it.
 
 ### What NOT to Say
+
 - Do not minimize: "A minor issue was detected" when you don't yet know the scope
 - Do not speculate on root cause: "We believe this was caused by..." without verified data
 - Do not over-promise on timeline: "This will be resolved by Friday" unless you're certain
@@ -449,6 +472,7 @@ Dear {{customer_contact}},
 We are contacting you to notify you of a quality concern with material we have supplied.
 
 **Affected Product:**
+
 - Part Number: {{part_number}} — {{part_description}}
 - Lot Number(s): {{lot_numbers}}
 - Serial Number(s): {{serial_numbers}} (if applicable)
@@ -460,6 +484,7 @@ We are contacting you to notify you of a quality concern with material we have s
 {{defect_description_for_customer}}
 
 **Containment Actions Taken:**
+
 1. All inventory at our facility has been quarantined and placed on hold
 2. Shipments in transit have been intercepted where possible: {{transit_status}}
 3. We request that you quarantine the following lot(s) in your inventory: {{lots_to_quarantine}}
@@ -486,11 +511,13 @@ Sincerely,
 ## 8. Supplier Audit Report Summary
 
 ### When to Use
+
 - Summary of a supplier quality audit (process, system, or product audit)
 - Distributed to procurement, engineering, and supplier quality management
 - Basis for audit follow-up actions
 
 ### Tone Guidance
+
 Objective and balanced. Report what was observed, both strengths and deficiencies. An audit report that is exclusively negative suggests the auditor was looking for problems rather than assessing capability. An audit report that is exclusively positive suggests the auditor wasn't thorough. The summary should give management a clear picture of the supplier's quality maturity.
 
 ### Template
@@ -510,6 +537,7 @@ Objective and balanced. Report what was observed, both strengths and deficiencie
 **Overall Assessment:** ☐ Approved ☐ Approved with Conditions ☐ Not Approved
 
 **Strengths Observed:**
+
 1. {{strength_1}}
 2. {{strength_2}}
 3. {{strength_3}}
@@ -522,6 +550,7 @@ Objective and balanced. Report what was observed, both strengths and deficiencie
 | 2 | {{clause_2}} | {{finding_2}} | Major / Minor / OFI |
 
 **Corrective Action Requirements:**
+
 - Response due: {{car_deadline}}
 - Format: 8D or equivalent with root cause analysis and implementation plan
 - Submit to: {{submit_to}}
@@ -534,11 +563,13 @@ Objective and balanced. Report what was observed, both strengths and deficiencie
 ## 9. Quality Alert (Internal)
 
 ### When to Use
+
 - Urgent notification to production floor, inspection, and shipping about a quality issue requiring immediate action
 - Non-conformance that could affect product currently in production or awaiting shipment
 - Temporary enhanced inspection or containment measure
 
 ### Tone Guidance
+
 Urgent, clear, and actionable. This goes to the production floor — operators, supervisors, inspectors. Use plain language. Include photographs if possible. Specify exactly what to do and what to look for. This is not a request for analysis; it's an instruction for immediate action.
 
 ### Template
@@ -559,6 +590,7 @@ Urgent, clear, and actionable. This goes to the production floor — operators, 
 {{what_to_look_for}} (specific, measurable criteria with photographs if available)
 
 **Required Action:**
+
 1. {{action_1}} (e.g., "100% inspect all WIP on this part number for the affected dimension before releasing to the next operation")
 2. {{action_2}} (e.g., "Segregate and tag any nonconforming parts found — do NOT scrap without Quality Engineering authorization")
 3. {{action_3}} (e.g., "Notify Quality Engineering immediately if any additional nonconforming parts are found: {{contact_info}}")
@@ -572,10 +604,12 @@ Urgent, clear, and actionable. This goes to the production floor — operators, 
 ## 10. Management Review Quality Summary
 
 ### When to Use
+
 - Monthly or quarterly management review input on quality performance
 - Summarizes key metrics, significant quality events, CAPA status, and cost of quality
 
 ### Tone Guidance
+
 Executive-level. Lead with the headline — is quality performance improving, stable, or deteriorating? Then provide the supporting data. Managers need to understand trend direction and business impact, not individual NCR details. Use charts and tables; minimize narrative.
 
 ### Template
@@ -600,6 +634,7 @@ Executive-level. Lead with the headline — is quality performance improving, st
 | Cost of quality (% revenue) | < 3% | {{prior_coq}} | {{current_coq}} | ↑ ↓ → |
 
 **Significant Quality Events:**
+
 1. {{event_1}}
 2. {{event_2}}
 
@@ -630,6 +665,7 @@ Executive-level. Lead with the headline — is quality performance improving, st
 | **Total COQ** | **{{total_coq}}** | **{{total_coq_pct}}** |
 
 **Actions Required from Management:**
+
 1. {{action_request_1}} (e.g., "Approve capital expenditure for automated inspection system — ROI analysis attached")
 2. {{action_request_2}} (e.g., "Decision needed on Supplier X escalation to Level 3 / alternate source qualification")
 
@@ -638,14 +674,17 @@ Executive-level. Lead with the headline — is quality performance improving, st
 ## 11. Regulatory Agency Response (FDA Form 483)
 
 ### When to Use
+
 - Formal response to FDA Form 483 observations
 - Due within 15 business days of receiving the 483
 - This is a critical document — it becomes part of the public FDA inspection record
 
 ### Tone Guidance
+
 Respectful, thorough, and accountable. Acknowledge each observation. Do not argue, minimize, or blame individuals. Demonstrate that you understand the intent of the regulations, not just the words. FDA reviewers specifically evaluate whether your response addresses the systemic issue, not just the specific observation.
 
 ### What NOT to Say
+
 - "We disagree with this observation" — address it even if you disagree
 - "This was an isolated incident" — FDA explicitly looks for systemic issues
 - "Employee has been terminated" — this is punitive, not corrective; FDA wants system fixes
@@ -718,6 +757,7 @@ Sincerely,
 Enclosures: {{list_of_enclosures}}
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

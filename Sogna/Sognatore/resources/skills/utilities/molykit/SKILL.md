@@ -11,7 +11,6 @@ id: skill-molykit
 owner: [[orchestrator]]
 ---
 
-
 # MolyKit Skill
 
 Best practices for building AI chat interfaces with Makepad using MolyKit - a toolkit for cross-platform AI chat applications.
@@ -19,7 +18,9 @@ Best practices for building AI chat interfaces with Makepad using MolyKit - a to
 **Source codebase**: `/Users/zhangalex/Work/Projects/FW/robius/moly/moly-kit`
 
 ## When to Use
+
 Use this skill when:
+
 - Building AI chat interfaces with Makepad
 - Integrating OpenAI or other LLM APIs
 - Implementing cross-platform async for native and WASM
@@ -30,6 +31,7 @@ Use this skill when:
 ## Overview
 
 MolyKit provides:
+
 - Cross-platform async utilities (PlatformSend, spawn(), ThreadToken)
 - Ready-to-use chat widgets (Chat, Messages, PromptInput, Avatar)
 - BotClient trait for AI provider integration
@@ -369,11 +371,13 @@ fn send(&mut self, ...) -> BoxPlatformSendStream<...> {
 - `llms.txt` - Complete MolyKit API reference
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

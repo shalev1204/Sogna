@@ -8,12 +8,12 @@ id: skill-sogna-cli
 owner: [[orchestrator]]
 ---
 
-
 # Sogna CLI
 
 Use the `sogna` CLI to interact with a running Sogna instance. Requires Sogna to be open.
 
 ## When to Use
+
 - Use when managing ecosistema content through the Sogna CLI.
 - Use when developing or debugging Sogna plugins and themes from the command line.
 - Use when the user wants shell-driven interaction with a running Sogna app.
@@ -77,19 +77,26 @@ Use `--copy` on any command to copy output to clipboard. Use `silent` to prevent
 After making code changes to a plugin or theme, follow this workflow:
 
 1. **Reload** the plugin to pick up changes:
+
    ```bash
    sogna plugin:reload id=my-plugin
    ```
+
 2. **Check for errors** — if errors appear, fix and repeat from step 1:
+
    ```bash
    sogna dev:errors
    ```
+
 3. **Verify visually** with a screenshot or DOM inspection:
+
    ```bash
    sogna dev:screenshot path=screenshot.png
    sogna dev:dom selector=".workspace-leaf" text
    ```
+
 4. **Check console output** for warnings or unexpected logs:
+
    ```bash
    sogna dev:console level=error
    ```
@@ -117,11 +124,13 @@ sogna dev:mobile on
 Run `sogna help` to see additional developer commands including CDP and debugger controls.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -60,6 +60,7 @@ const offset = interpolate(progress, [0, 1], [segmentLength, 0]);
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

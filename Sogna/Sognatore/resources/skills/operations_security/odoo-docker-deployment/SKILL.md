@@ -7,7 +7,6 @@ id: skill-odoo-docker-deployment
 owner: [[ops-security]]
 ---
 
-
 # Odoo Docker Deployment
 
 ## Overview
@@ -32,7 +31,9 @@ This skill provides a complete, production-ready Docker setup for Odoo, includin
 ### Example 1: Production docker-compose.yml
 
 ```yaml
+
 # Note: The top-level 'version' key is deprecated in Docker Compose v2+
+
 # and can be safely omitted. Remove it to avoid warnings.
 
 services:
@@ -44,8 +45,11 @@ services:
       POSTGRES_USER: odoo
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
+
       - postgres-data:/var/lib/postgresql/data
+
     networks:
+
       - odoo-net
 
   odoo:
@@ -55,17 +59,22 @@ services:
       db:
         condition: service_healthy
     ports:
+
       - "8069:8069"
       - "8072:8072"   # Longpolling for live chat / bus
+
     environment:
       HOST: db
       USER: odoo
       PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
+
       - odoo-web-data:/var/lib/odoo
       - ./addons:/mnt/extra-addons   # Custom modules
       - ./odoo.conf:/etc/odoo/odoo.conf
+
     networks:
+
       - odoo-net
 
 volumes:
@@ -105,22 +114,29 @@ limit_request = 8192
 ### Example 3: Common Commands
 
 ```bash
+
 # Start all services in background
+
 docker compose up -d
 
 # Stream Odoo logs in real time
+
 docker compose logs -f odoo
 
 # Restart Odoo only (not DB — avoids data risk)
+
 docker compose restart odoo
 
 # Stop all services
+
 docker compose down
 
 # Backup the database to a local SQL dump
+
 docker compose exec db pg_dump -U odoo odoo > backup_$(date +%Y%m%d).sql
 
 # Update a custom module without restarting the server
+
 docker compose exec odoo odoo -d odoo --update my_module --stop-after-init
 ```
 
@@ -142,6 +158,7 @@ docker compose exec odoo odoo -d odoo --update my_module --stop-after-init
 - The `addons_path` inside the Docker image may change with new base image versions — always verify after upgrading the Odoo image.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

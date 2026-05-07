@@ -11,7 +11,6 @@ id: skill-langfuse
 owner: [[orchestrator]]
 ---
 
-
 # Langfuse
 
 Expert in Langfuse - the open-source LLM observability platform. Covers tracing,
@@ -92,6 +91,7 @@ Instrument LLM calls with Langfuse
 from langfuse import Langfuse
 
 # Initialize client
+
 langfuse = Langfuse(
     public_key="pk-...",
     secret_key="sk-...",
@@ -99,6 +99,7 @@ langfuse = Langfuse(
 )
 
 # Create a trace for a user request
+
 trace = langfuse.trace(
     name="chat-completion",
     user_id="user-123",
@@ -108,6 +109,7 @@ trace = langfuse.trace(
 )
 
 # Log a generation (LLM call)
+
 generation = trace.generation(
     name="gpt-4o-response",
     model="gpt-4o",
@@ -117,12 +119,14 @@ generation = trace.generation(
 )
 
 # Make actual LLM call
+
 response = openai.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Hello"}]
 )
 
 # Complete the generation with output
+
 generation.end(
     output=response.choices[0].message.content,
     usage={
@@ -132,6 +136,7 @@ generation.end(
 )
 
 # Score the trace
+
 trace.score(
     name="user-feedback",
     value=1,  # 1 = positive, 0 = negative
@@ -139,6 +144,7 @@ trace.score(
 )
 
 # Flush before exit (important in serverless)
+
 langfuse.flush()
 
 ### OpenAI Integration
@@ -150,6 +156,7 @@ Automatic tracing with OpenAI SDK
 from langfuse.openai import openai
 
 # Drop-in replacement for OpenAI client
+
 # All calls automatically traced
 
 response = openai.chat.completions.create(
@@ -164,6 +171,7 @@ response = openai.chat.completions.create(
 )
 
 # Works with streaming
+
 stream = openai.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Tell me a story"}],
@@ -175,6 +183,7 @@ for chunk in stream:
     print(chunk.choices[0].delta.content, end="")
 
 # Works with async
+
 import asyncio
 from langfuse.openai import AsyncOpenAI
 
@@ -198,6 +207,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langfuse.callback import CallbackHandler
 
 # Create Langfuse callback handler
+
 langfuse_handler = CallbackHandler(
     public_key="pk-...",
     secret_key="sk-...",
@@ -207,6 +217,7 @@ langfuse_handler = CallbackHandler(
 )
 
 # Use with any LangChain component
+
 llm = ChatOpenAI(model="gpt-4o")
 
 prompt = ChatPromptTemplate.from_messages([
@@ -217,19 +228,23 @@ prompt = ChatPromptTemplate.from_messages([
 chain = prompt | llm
 
 # Pass handler to invoke
+
 response = chain.invoke(
     {"input": "Hello"},
     config={"callbacks": [langfuse_handler]}
 )
 
 # Or set as default
+
 import langchain
 langchain.callbacks.manager.set_handler(langfuse_handler)
 
 # Then all calls are traced
+
 response = chain.invoke({"input": "Hello"})
 
 # Works with agents, retrievers, etc.
+
 from langchain.agents import create_openai_tools_agent
 
 agent = create_openai_tools_agent(llm, tools, prompt)
@@ -251,16 +266,20 @@ from langfuse import Langfuse
 langfuse = Langfuse()
 
 # Fetch prompt from Langfuse
+
 # (Create in UI or via API first)
+
 prompt = langfuse.get_prompt("customer-support-v2")
 
 # Get compiled prompt with variables
+
 compiled = prompt.compile(
     customer_name="John",
     issue="billing question"
 )
 
 # Use with OpenAI
+
 response = openai.chat.completions.create(
     model=prompt.config.get("model", "gpt-4o"),
     messages=compiled,
@@ -268,6 +287,7 @@ response = openai.chat.completions.create(
 )
 
 # Link generation to prompt version
+
 trace = langfuse.trace(name="support-chat")
 generation = trace.generation(
     name="response",
@@ -276,6 +296,7 @@ generation = trace.generation(
 )
 
 # Create/update prompts via API
+
 langfuse.create_prompt(
     name="customer-support-v3",
     prompt=[
@@ -290,6 +311,7 @@ langfuse.create_prompt(
 )
 
 # Fetch specific label
+
 prompt = langfuse.get_prompt(
     "customer-support-v3",
     label="production"  # Gets latest with this label
@@ -306,9 +328,11 @@ from langfuse import Langfuse
 langfuse = Langfuse()
 
 # Manual scoring in code
+
 trace = langfuse.trace(name="qa-flow")
 
 # After getting response
+
 trace.score(
     name="relevance",
     value=0.85,  # 0-1 scale
@@ -322,6 +346,7 @@ trace.score(
 )
 
 # LLM-as-judge evaluation
+
 def evaluate_response(question: str, response: str) -> float:
     eval_prompt = f"""
     Rate the response quality from 0 to 1.
@@ -340,6 +365,7 @@ def evaluate_response(question: str, response: str) -> float:
     return float(result.choices[0].message.content.strip())
 
 # Score asynchronously
+
 score = evaluate_response(question, response)
 trace.score(
     name="quality-llm-judge",
@@ -347,9 +373,11 @@ trace.score(
 )
 
 # Create evaluation dataset
+
 dataset = langfuse.create_dataset(name="support-qa-v1")
 
 # Add items to dataset
+
 langfuse.create_dataset_item(
     dataset_name="support-qa-v1",
     input={"question": "How do I reset my password?"},
@@ -357,6 +385,7 @@ langfuse.create_dataset_item(
 )
 
 # Run evaluation on dataset
+
 dataset = langfuse.get_dataset("support-qa-v1")
 
 for item in dataset.items:
@@ -411,6 +440,7 @@ def generate_response(message: str, context: str) -> str:
     return response.choices[0].message.content
 
 # Add metadata and scores
+
 @observe()
 def main_flow(user_input: str):
     # Update current trace
@@ -431,6 +461,7 @@ def main_flow(user_input: str):
     return result
 
 # Works with async
+
 @observe()
 async def async_handler(message: str):
     result = await async_generate(message)
@@ -451,11 +482,13 @@ Skills: langfuse, langgraph
 Workflow:
 
 ```
+
 1. Build agent with LangGraph
 2. Add Langfuse callback handler
 3. Trace all LLM calls and tool uses
 4. Score outputs for quality
 5. Monitor and iterate
+
 ```
 
 ### Monitored RAG Pipeline
@@ -465,11 +498,13 @@ Skills: langfuse, structured-output
 Workflow:
 
 ```
+
 1. Build RAG with retrieval and generation
 2. Trace retrieval and LLM calls
 3. Score relevance and accuracy
 4. Track costs and latency
 5. Optimize based on data
+
 ```
 
 ### Evaluated Agent System
@@ -479,11 +514,13 @@ Skills: langfuse, langgraph, structured-output
 Workflow:
 
 ```
+
 1. Build agent with structured outputs
 2. Create evaluation dataset
 3. Run evaluations with traces
 4. Compare prompt versions
 5. Deploy best performers
+
 ```
 
 ## Related Skills
@@ -491,6 +528,7 @@ Workflow:
 Works well with: `langgraph`, `crewai`, `structured-output`, `autonomous-agents`
 
 ## When to Use
+
 - User mentions or implies: langfuse
 - User mentions or implies: llm observability
 - User mentions or implies: llm tracing
@@ -500,11 +538,13 @@ Works well with: `langgraph`, `crewai`, `structured-output`, `autonomous-agents`
 - User mentions or implies: debug llm
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

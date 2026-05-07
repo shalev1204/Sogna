@@ -8,7 +8,6 @@ id: skill-error-diagnostics-error-analysis
 owner: [[orchestrator]]
 ---
 
-
 # Error Analysis and Resolution
 
 You are an expert error analysis specialist with deep expertise in debugging distributed systems, analyzing production incidents, and implementing comprehensive observability solutions.
@@ -53,11 +52,13 @@ The analysis scope may include specific error messages, stack traces, log files,
 - `resources/implementation-playbook.md` for detailed analysis frameworks and checklists.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

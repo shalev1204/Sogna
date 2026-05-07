@@ -29,13 +29,17 @@ GEMINI_API_KEY_BACKUP_2=key-backup-2
 ### Opcao B: Variavel de ambiente
 
 ```bash
+
 # Windows CMD
+
 set GEMINI_API_KEY=sua-api-key
 
 # Windows PowerShell
+
 $env:GEMINI_API_KEY="sua-api-key"
 
 # Linux/Mac
+
 export GEMINI_API_KEY=sua-api-key
 ```
 
@@ -53,10 +57,13 @@ pip install google-genai Pillow python-dotenv
 ## 4. Teste Rapido
 
 ```bash
+
 # Testar se tudo funciona
+
 python C:\Users\renat\skills\ai-studio-image\scripts\generate.py --list-models
 
 # Gerar primeira imagem
+
 python C:\Users\renat\skills\ai-studio-image\scripts\generate.py \
   --prompt "pessoa jovem sorrindo em cafeteria" \
   --mode influencer \
@@ -109,6 +116,7 @@ python C:\Users\renat\skills\ai-studio-image\scripts\generate.py \
 | Empty response | Prompt muito generico | Adicione mais detalhes ao prompt |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

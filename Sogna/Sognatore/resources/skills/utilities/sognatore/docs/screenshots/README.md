@@ -18,13 +18,16 @@ This directory contains screenshots for the Sognatore README.
 **What to capture:** The agent monitoring section of the Sognatore dashboard showing active agents.
 
 **How to create:**
+
 1. Run Sognatore with a test project:
+
    ```bash
    cd /path/to/test/project
    ../../autonomy/run.sh examples/simple-todo-app.md
    ```
 
 2. Open the dashboard:
+
    ```bash
    open .sognatore/dashboard/index.html
    ```
@@ -50,6 +53,7 @@ This directory contains screenshots for the Sognatore README.
 **What to capture:** The task queue kanban board section.
 
 **How to create:**
+
 1. Using the same running Sognatore instance from above
 
 2. Scroll down to the **"Task Queue" section**
@@ -86,12 +90,17 @@ This directory contains screenshots for the Sognatore README.
 After adding screenshots, verify they display correctly in the README:
 
 ```bash
+
 # View the README with screenshots
+
 open README.md
+
 # or use a Markdown viewer
+
 ```
 
 Check that:
+
 - [ ] Images load without errors
 - [ ] Resolution is clear and readable
 - [ ] Colors match the Sognatore design (cream background, coral accents)
@@ -104,18 +113,23 @@ Check that:
 If you don't have live agent data yet, you can use the test data provided in this repository:
 
 ```bash
+
 # Create test agent data
+
 cd /Users/lokesh/git/jobman  # or any test project
 mkdir -p .agent/sub-agents .sognatore/state .sognatore/queue
 
 # Copy test data from Sognatore repo
+
 cp ~/git/sognatore/tests/fixtures/agents/*.json .agent/sub-agents/
 cp ~/git/sognatore/tests/fixtures/queue/*.json .sognatore/queue/
 
 # Generate dashboard
+
 ~/git/sognatore/autonomy/run.sh --generate-dashboard-only
 
 # Open dashboard
+
 open .sognatore/dashboard/index.html
 ```
 
@@ -149,6 +163,7 @@ This gives you polished screenshots without waiting for a full Sognatore run.
 ---
 
 **Note:** Screenshots should demonstrate Sognatore's capabilities while being clean and professional. Avoid showing:
+
 - Personal information or API keys
 - Error states (unless specifically demonstrating error handling)
 - Cluttered or confusing data
@@ -156,6 +171,7 @@ This gives you polished screenshots without waiting for a full Sognatore run.
 The goal is to show potential users what the dashboard looks like during normal operation.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -12,11 +12,15 @@ Multi-agent autonomous startup system for Claude Code. Takes PRD to fully deploy
 ## Quick Start
 
 ```bash
+
 # Launch Claude Code with autonomous permissions
+
 claude --dangerously-skip-permissions
 
 # Then invoke:
+
 # "Sognatore" or "Sognatore with PRD at path/to/prd"
+
 ```
 
 ## Project Structure
@@ -48,14 +52,17 @@ benchmarks/                 # SWE-bench and HumanEval benchmarks
 ## Key Concepts
 
 ### RARV Cycle
+
 Every iteration follows: **R**eason -> **A**ct -> **R**eflect -> **V**erify
 
 ### Model Selection
+
 - **Opus**: Planning and architecture ONLY (system design, high-level decisions)
 - **Sonnet**: Development and functional testing (implementation, integration tests)
 - **Haiku**: Unit tests, monitoring, and simple tasks - use extensively for parallelization
 
 ### Quality Gates
+
 1. Static analysis (CodeQL, ESLint)
 2. 3-reviewer parallel system (blind review)
 3. Anti-sycophancy checks (devil's advocate on unanimous approval)
@@ -63,29 +70,35 @@ Every iteration follows: **R**eason -> **A**ct -> **R**eflect -> **V**erify
 5. Test coverage gates (>80% unit, 100% pass)
 
 ### Memory System
+
 - **Episodic**: Specific interaction traces (`.sognatore/memory/episodic/`)
 - **Semantic**: Generalized patterns (`.sognatore/memory/semantic/`)
 - **Procedural**: Learned skills (`.sognatore/memory/skills/`)
 
 ### Metrics System (ToolOrchestra-inspired)
+
 - **Efficiency**: Task cost tracking (`.sognatore/metrics/efficiency/`)
 - **Rewards**: Outcome/efficiency/preference signals (`.sognatore/metrics/rewards/`)
 
 ## Development Guidelines
 
 ### When Modifying SKILL.md
+
 - Keep under 500 lines (currently ~370)
 - Reference detailed docs in `references/` instead of inlining
 - Update version in header AND footer
 - Update CHANGELOG.md with new version entry
 
 ### Version Numbering
+
 Follows semantic versioning: MAJOR.MINOR.PATCH
+
 - Current: v2.35.0
 - MINOR bump for new features
 - PATCH bump for fixes
 
 ### Code Style
+
 - No emojis in code or documentation
 - Clear, concise comments only when necessary
 - Follow existing patterns in codebase
@@ -93,7 +106,9 @@ Follows semantic versioning: MAJOR.MINOR.PATCH
 ## Testing
 
 ```bash
+
 # Run benchmarks
+
 ./benchmarks/run-benchmarks.sh humaneval --execute --sognatore
 ./benchmarks/run-benchmarks.sh swebench --execute --sognatore
 ```
@@ -103,21 +118,25 @@ Follows semantic versioning: MAJOR.MINOR.PATCH
 Built on 2025 research from three major AI labs:
 
 **OpenAI:**
+
 - Agents SDK (guardrails, tripwires, handoffs, tracing)
 - AGENTS.md / Agentic AI Foundation (AAIF) standards
 
 **Google DeepMind:**
+
 - SIMA 2 (self-improvement, hierarchical reasoning)
 - Gemini Robotics (VLA models, planning)
 - Dreamer 4 (world model training)
 - Scalable Oversight via Debate
 
 **Anthropic:**
+
 - Constitutional AI (principles-based self-critique)
 - Alignment Faking Detection (sleeper agent probes)
 - Claude Code Best Practices (Explore-Plan-Code)
 
 **Academic:**
+
 - CONSENSAGENT (anti-sycophancy)
 - GoalAct (hierarchical planning)
 - A-Mem/MIRIX (memory systems)
@@ -127,6 +146,7 @@ Built on 2025 research from three major AI labs:
 See `references/openai-patterns.md`, `references/lab-research-patterns.md`, and `references/advanced-patterns.md`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

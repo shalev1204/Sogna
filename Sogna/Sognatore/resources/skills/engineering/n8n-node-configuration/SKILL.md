@@ -7,12 +7,12 @@ id: skill-n8n-node-configuration
 owner: [[orchestrator]]
 ---
 
-
 # n8n Node Configuration
 
 Expert guidance for operation-aware node configuration with property dependencies.
 
 ## When to Use
+
 - You need to configure an n8n node correctly for a specific resource and operation.
 - The task involves required fields, property dependencies, or choosing the right `get_node` detail level.
 - You are troubleshooting node setup rather than overall workflow architecture.
@@ -24,6 +24,7 @@ Expert guidance for operation-aware node configuration with property dependencie
 **Progressive disclosure**: Start minimal, add complexity as needed
 
 Configuration best practices:
+
 - `get_node` with `detail: "standard"` is the most used discovery pattern
 - 56 seconds average between configuration edits
 - Covers 95% of use cases with 1-2K tokens response
@@ -111,21 +112,37 @@ Configuration best practices:
 ### Standard Process
 
 ```
+
 1. Identify node type and operation
+
    ↓
+
 2. Use get_node (standard detail is default)
+
    ↓
+
 3. Configure required fields
+
    ↓
+
 4. Validate configuration
+
    ↓
+
 5. If field unclear → get_node({mode: "search_properties"})
+
    ↓
+
 6. Add optional fields as needed
+
    ↓
+
 7. Validate again
+
    ↓
+
 8. Deploy
+
 ```
 
 ### Example: Configuring HTTP Request
@@ -217,6 +234,7 @@ get_node({
 ```
 
 **Returns** (~1-2K tokens):
+
 - Required fields
 - Common options
 - Operation list
@@ -235,6 +253,7 @@ get_node({
 ```
 
 **Returns** (~3-8K tokens):
+
 - Complete schema
 - All properties
 - All nested options
@@ -305,6 +324,7 @@ get_node({
 ```
 
 **Translation**: "body" field shows when:
+
 - sendBody = true AND
 - method = POST, PUT, or PATCH
 
@@ -398,6 +418,7 @@ get_node({
 ```
 
 **How to configure**:
+
 1. Choose resource
 2. Choose operation
 3. Use get_node to see operation-specific requirements
@@ -418,6 +439,7 @@ get_node({
 ```
 
 **Dependencies**:
+
 - POST/PUT/PATCH → sendBody available
 - sendBody=true → body required
 - authentication != "none" → credentials required
@@ -435,6 +457,7 @@ get_node({
 ```
 
 **Dependencies**:
+
 - operation="executeQuery" → query required
 - operation="insert" → table + values required
 - operation="update" → table + values + where required
@@ -459,6 +482,7 @@ get_node({
 ```
 
 **Dependencies**:
+
 - Binary operators (equals, contains, etc.) → value1 + value2
 - Unary operators (isEmpty, isNotEmpty) → value1 only + singleValue: true
 
@@ -469,6 +493,7 @@ get_node({
 ### Slack Node Examples
 
 #### Post Message
+
 ```javascript
 {
   "resource": "message",
@@ -481,6 +506,7 @@ get_node({
 ```
 
 #### Update Message
+
 ```javascript
 {
   "resource": "message",
@@ -492,6 +518,7 @@ get_node({
 ```
 
 #### Create Channel
+
 ```javascript
 {
   "resource": "channel",
@@ -505,6 +532,7 @@ get_node({
 ### HTTP Request Node Examples
 
 #### GET Request
+
 ```javascript
 {
   "method": "GET",
@@ -524,6 +552,7 @@ get_node({
 ```
 
 #### POST with JSON
+
 ```javascript
 {
   "method": "POST",
@@ -543,6 +572,7 @@ get_node({
 ### IF Node Examples
 
 #### String Comparison (Binary)
+
 ```javascript
 {
   "conditions": {
@@ -558,6 +588,7 @@ get_node({
 ```
 
 #### Empty Check (Unary)
+
 ```javascript
 {
   "conditions": {
@@ -584,8 +615,10 @@ get_node({
 **Rule**:
 ```
 body is required when:
+
   - sendBody = true AND
   - method IN (POST, PUT, PATCH, DELETE)
+
 ```
 
 **How to discover**:
@@ -613,7 +646,9 @@ get_node({
 **Rule**:
 ```
 singleValue should be true when:
+
   - operation IN (isEmpty, isNotEmpty, true, false)
+
 ```
 
 **Good news**: Auto-sanitization fixes this!
@@ -775,6 +810,7 @@ For comprehensive guides on specific topics:
 ## Summary
 
 **Configuration Strategy**:
+
 1. Start with `get_node` (standard detail is default)
 2. Configure required fields for operation
 3. Validate configuration
@@ -783,23 +819,27 @@ For comprehensive guides on specific topics:
 6. Deploy with confidence
 
 **Key Principles**:
+
 - **Operation-aware**: Different operations = different requirements
 - **Progressive disclosure**: Start minimal, add as needed
 - **Dependency-aware**: Understand field visibility rules
 - **Validation-driven**: Let validation guide configuration
 
 **Related Skills**:
+
 - **n8n MCP Tools Expert** - How to use discovery tools correctly
 - **n8n Validation Expert** - Interpret validation errors
 - **n8n Expression Syntax** - Configure expression fields
 - **n8n Workflow Patterns** - Apply patterns with proper configuration
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

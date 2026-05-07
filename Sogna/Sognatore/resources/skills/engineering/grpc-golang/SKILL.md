@@ -8,7 +8,6 @@ id: skill-grpc-golang
 owner: [[orchestrator]]
 ---
 
-
 # gRPC Golang (gRPC-Go)
 
 ## Overview
@@ -107,6 +106,7 @@ message GetUserResponse {
 - @docker-expert - Containerizing gRPC services and configuring TLS cert injection via Docker secrets.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

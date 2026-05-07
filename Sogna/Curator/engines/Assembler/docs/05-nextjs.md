@@ -13,7 +13,9 @@ npm install @Assembler/nextjs @Assembler/react ai @ai-sdk/react
 ### 1. Set your API key
 
 ```env
+
 # .env.local
+
 API_KEY_Assembler=an_sk_your_key_here
 ```
 

@@ -12,6 +12,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ## Core Defensive Principles
 
 ### 1. Strict Mode
+
 Enable bash strict mode at the start of every script to catch errors early.
 
 ```bash
@@ -20,12 +21,14 @@ set -Eeuo pipefail  # Exit on error, unset variables, pipe failures
 ```
 
 **Key flags:**
+
 - `set -E`: Inherit ERR trap in functions
 - `set -e`: Exit on any error (command returns non-zero)
 - `set -u`: Exit on undefined variable reference
 - `set -o pipefail`: Pipe fails if any command fails (not just last)
 
 ### 2. Error Trapping and Cleanup
+
 Implement proper cleanup on script exit or error.
 
 ```bash
@@ -36,28 +39,38 @@ trap 'echo "Error on line $LINENO"' ERR
 trap 'echo "Cleaning up..."; rm -rf "$TMPDIR"' EXIT
 
 TMPDIR=$(mktemp -d)
+
 # Script code here
+
 ```
 
 ### 3. Variable Safety
+
 Always quote variables to prevent word splitting and globbing issues.
 
 ```bash
+
 # Wrong - unsafe
+
 cp $source $dest
 
 # Correct - safe
+
 cp "$source" "$dest"
 
 # Required variables - fail with message if unset
+
 : "${REQUIRED_VAR:?REQUIRED_VAR is not set}"
 ```
 
 ### 4. Array Handling
+
 Use arrays safely for complex data handling.
 
 ```bash
+
 # Safe array iteration
+
 declare -a items=("item 1" "item 2" "item 3")
 
 for item in "${items[@]}"; do
@@ -65,25 +78,31 @@ for item in "${items[@]}"; do
 done
 
 # Reading output into array safely
+
 mapfile -t lines < <(some_command)
 readarray -t numbers < <(seq 1 10)
 ```
 
 ### 5. Conditional Safety
+
 Use `[[ ]]` for Bash-specific features, `[ ]` for POSIX.
 
 ```bash
+
 # Bash - safer
+
 if [[ -f "$file" && -r "$file" ]]; then
     content=$(<"$file")
 fi
 
 # POSIX - portable
+
 if [ -f "$file" ] && [ -r "$file" ]; then
     content=$(cat "$file")
 fi
 
 # Test for existence before operations
+
 if [[ -z "${VAR:-}" ]]; then
     echo "VAR is not set or is empty"
 fi
@@ -98,6 +117,7 @@ fi
 set -Eeuo pipefail
 
 # Correctly determine script directory
+
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 SCRIPT_NAME="$(basename -- "${BASH_SOURCE[0]}")"
 
@@ -111,6 +131,7 @@ echo "Script location: $SCRIPT_DIR/$SCRIPT_NAME"
 set -Eeuo pipefail
 
 # Prefix for functions: handle_*, process_*, check_*, validate_*
+
 # Include documentation and error handling
 
 validate_file() {
@@ -153,13 +174,16 @@ set -Eeuo pipefail
 trap 'rm -rf -- "$TMPDIR"' EXIT
 
 # Create temporary directory
+
 TMPDIR=$(mktemp -d) || { echo "ERROR: Failed to create temp directory" >&2; exit 1; }
 
 # Create temporary files in directory
+
 TMPFILE1="$TMPDIR/temp1.txt"
 TMPFILE2="$TMPDIR/temp2.txt"
 
 # Use temporary files
+
 touch "$TMPFILE1" "$TMPFILE2"
 
 echo "Temp files created in: $TMPDIR"
@@ -172,6 +196,7 @@ echo "Temp files created in: $TMPDIR"
 set -Eeuo pipefail
 
 # Default values
+
 VERBOSE=false
 DRY_RUN=false
 OUTPUT_FILE=""
@@ -192,6 +217,7 @@ EOF
 }
 
 # Parse arguments
+
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -v|--verbose)
@@ -225,6 +251,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Validate required arguments
+
 [[ -n "$OUTPUT_FILE" ]] || { echo "ERROR: -o/--output is required" >&2; usage 1; }
 ```
 
@@ -235,6 +262,7 @@ done
 set -Eeuo pipefail
 
 # Logging functions
+
 log_info() {
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] INFO: $*" >&2
 }
@@ -254,6 +282,7 @@ log_debug() {
 }
 
 # Usage
+
 log_info "Starting script"
 log_debug "Debug information"
 log_warn "Warning message"
@@ -267,6 +296,7 @@ log_error "Error occurred"
 set -Eeuo pipefail
 
 # Track background processes
+
 PIDS=()
 
 cleanup() {
@@ -288,6 +318,7 @@ cleanup() {
 trap cleanup SIGTERM SIGINT
 
 # Start background tasks
+
 background_task &
 PIDS+=($!)
 
@@ -295,6 +326,7 @@ another_task &
 PIDS+=($!)
 
 # Wait for all background processes
+
 wait
 ```
 
@@ -305,6 +337,7 @@ wait
 set -Eeuo pipefail
 
 # Use -i flag to move safely without overwriting
+
 safe_move() {
     local -r source="$1"
     local -r dest="$2"
@@ -323,6 +356,7 @@ safe_move() {
 }
 
 # Safe directory cleanup
+
 safe_rmdir() {
     local -r dir="$1"
 
@@ -336,6 +370,7 @@ safe_rmdir() {
 }
 
 # Atomic file writes
+
 atomic_write() {
     local -r target="$1"
     local -r tmpfile
@@ -356,6 +391,7 @@ atomic_write() {
 set -Eeuo pipefail
 
 # Check if resource already exists
+
 ensure_directory() {
     local -r dir="$1"
 
@@ -373,6 +409,7 @@ ensure_directory() {
 }
 
 # Ensure configuration state
+
 ensure_config() {
     local -r config_file="$1"
     local -r default_value="$2"
@@ -384,6 +421,7 @@ ensure_config() {
 }
 
 # Rerunning script multiple times should be safe
+
 ensure_directory "/var/cache/myapp"
 ensure_config "/etc/myapp/config" "DEBUG=false"
 ```
@@ -395,19 +433,23 @@ ensure_config "/etc/myapp/config" "DEBUG=false"
 set -Eeuo pipefail
 
 # Use $() instead of backticks
+
 name=$(<"$file")  # Modern, safe variable assignment from file
 output=$(command -v python3)  # Get command location safely
 
 # Handle command substitution with error checking
+
 result=$(command -v node) || {
     log_error "node command not found"
     return 1
 }
 
 # For multiple lines
+
 mapfile -t lines < <(grep "pattern" "$file")
 
 # NUL-safe iteration
+
 while IFS= read -r -d '' file; do
     echo "Processing: $file"
 done < <(find /path -type f -print0)
@@ -431,6 +473,7 @@ run_cmd() {
 }
 
 # Usage
+
 run_cmd cp "$source" "$dest"
 run_cmd rm "$file"
 run_cmd chown "$owner" "$target"
@@ -524,6 +567,7 @@ check_dependencies
 - **Defensive BASH Programming**: https://www.lifepipe.net/
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

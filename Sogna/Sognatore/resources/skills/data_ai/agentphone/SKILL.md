@@ -10,12 +10,12 @@ id: skill-agentphone
 owner: [[orchestrator]]
 ---
 
-
 # AgentPhone
 
 AgentPhone is an API-first telephony platform for AI agents. Give your agents phone numbers, voice calls, and SMS — all managed through a simple API.
 
 ## When to Use
+
 - Use when the user wants to create or manage AI phone agents, voice agents, or telephony automations
 - Use when the user needs to buy, assign, release, or inspect phone numbers tied to an agent workflow
 - Use when the user wants to place outbound calls, inspect transcripts, or send and receive SMS through AgentPhone
@@ -692,7 +692,6 @@ TOOL_HANDLERS = {
     "search_orders": lambda args: search_order_db(args["query"]),
 }
 
-
 def run_tool_call(user_message: str, history: list) -> str:
     """Run Claude with tools and return the final text response."""
     messages = [{"role": "user", "content": user_message}]
@@ -723,7 +722,6 @@ def run_tool_call(user_message: str, history: list) -> str:
             return " ".join(b.text for b in response.content if hasattr(b, "text"))
 
     return "Sorry, I'm having trouble processing that."
-
 
 @app.post("/webhook")
 def webhook():
@@ -852,6 +850,7 @@ app.listen(3000);
 **Fix:** Always stream an interim NDJSON chunk immediately (e.g. `{"text": "One moment.", "interim": true}`) before doing any slow work. This buys you time while keeping the caller engaged.
 
 Common causes:
+
 - LLM tool calls that take too long (external API latency + LLM processing)
 - Cold starts on serverless platforms (Lambda, Cloud Functions)
 - Webhook URL is unreachable or returning errors
@@ -1304,6 +1303,7 @@ The `channel` field in the webhook payload tells you the event source:
 ### Payload structure
 
 The webhook payload includes:
+
 - The full call or message object in the `data` field
 - Recent conversation context in `recentHistory` (controlled by `contextLimit`)
 - The `channel` field (`"voice"` or `"sms"`)
@@ -1387,11 +1387,13 @@ These are starting points. Having your own phone number means your agent can do 
 - [Console](https://agentphone.to)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

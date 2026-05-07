@@ -129,6 +129,7 @@ If WebFetch fails (network issues, URL changed):
 3. Suggest they check platform.claude.com or the GitHub repos directly
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

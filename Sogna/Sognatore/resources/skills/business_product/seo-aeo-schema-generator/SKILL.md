@@ -8,7 +8,6 @@ id: skill-seo-aeo-schema-generator
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # SEO-AEO Schema Generator
 
 ## Overview
@@ -42,23 +41,29 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 ## How It Works
 
 ### Step 1: Recommend Schema Types
+
 If schema types are not specified, recommend the appropriate types based on the page type. Landing pages get FAQPage + Product + BreadcrumbList. Blog posts get Article + FAQPage + BreadcrumbList.
 
 ### Step 2: Use Built-In Schema Templates
+
 Using your knowledge of schema.org and Google's rich result requirements, construct the JSON-LD template for each requested schema type. Use the required and recommended fields listed in the Google Rich Results documentation for that type.
 
 ### Step 3: Populate Fields
+
 Map all page data to template placeholders. Check every required field against the rich result eligibility rules.
 
 ### Step 4: Validate
+
 Flag any missing required field as a Critical issue. Flag missing recommended fields as warnings. Do not output schema with missing required fields.
 
 ### Step 5: Output Script Blocks
+
 Write one `<script type="application/ld+json">` block per schema type. Include implementation instructions and testing tool links.
 
 ## Examples
 
 ### Example: FAQPage Schema Output
+
 ```html
 <script type="application/ld+json">
 {
@@ -90,9 +95,11 @@ Write one `<script type="application/ld+json">` block per schema type. Include i
 ## Common Pitfalls
 
 - **Problem:** Schema passes validation but rich result doesn't appear in search
+
   **Solution:** Rich results can take weeks to appear after deployment. Request re-indexing in Google Search Console immediately after adding schema.
 
 - **Problem:** Product schema missing star rating display
+
   **Solution:** Add AggregateRating object with ratingValue, reviewCount, bestRating, and worstRating — all four fields required.
 
 ## Related Skills
@@ -106,11 +113,13 @@ Write one `<script type="application/ld+json">` block per schema type. Include i
 - [Full Schema Generator SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/schema-generator/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

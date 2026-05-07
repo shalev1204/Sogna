@@ -8,7 +8,6 @@ id: skill-sql-injection-testing
 owner: [[eng-database]], [[eng-qa]]
 ---
 
-
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # SQL Injection Testing
@@ -20,18 +19,21 @@ Execute comprehensive SQL injection vulnerability assessments on web application
 ## Inputs / Prerequisites
 
 ### Required Access
+
 - Target web application URL with injectable parameters
 - Burp Suite or equivalent proxy tool for request manipulation
 - SQLMap installation for automated exploitation
 - Browser with developer tools enabled
 
 ### Technical Requirements
+
 - Understanding of SQL query syntax (MySQL, MSSQL, PostgreSQL, Oracle)
 - Knowledge of HTTP request/response cycle
 - Familiarity with database schemas and structures
 - Write permissions for testing reports
 
 ### Legal Prerequisites
+
 - Written authorization for penetration testing
 - Defined scope including target URLs and parameters
 - Emergency contact procedures established
@@ -40,12 +42,14 @@ Execute comprehensive SQL injection vulnerability assessments on web application
 ## Outputs / Deliverables
 
 ### Primary Outputs
+
 - SQL injection vulnerability report with severity ratings
 - Extracted database schemas and table structures
 - Authentication bypass proof-of-concept demonstrations
 - Remediation recommendations with code examples
 
 ### Evidence Artifacts
+
 - Screenshots of successful injections
 - HTTP request/response logs
 - Database dumps (sanitized)
@@ -56,17 +60,22 @@ Execute comprehensive SQL injection vulnerability assessments on web application
 ### Phase 1: Detection and Reconnaissance
 
 #### Identify Injectable Parameters
+
 Locate user-controlled input fields that interact with database queries:
 
 ```
+
 # Common injection points
+
 - URL parameters: ?id=1, ?user=admin, ?category=books
 - Form fields: username, password, search, comments
 - Cookie values: session_id, user_preference
 - HTTP headers: User-Agent, Referer, X-Forwarded-For
+
 ```
 
 #### Test for Basic Vulnerability Indicators
+
 Insert special characters to trigger error responses:
 
 ```sql
@@ -78,7 +87,9 @@ Insert special characters to trigger error responses:
 
 -- Comment sequences
 --
+
 #
+
 /**/
 
 -- Semicolon for query stacking
@@ -89,12 +100,14 @@ Insert special characters to trigger error responses:
 ```
 
 Monitor application responses for:
+
 - Database error messages revealing query structure
 - Unexpected application behavior changes
 - HTTP 500 Internal Server errors
 - Modified response content or length
 
 #### Logic Testing Payloads
+
 Verify boolean-based vulnerability presence:
 
 ```sql
@@ -113,6 +126,7 @@ Compare responses between true and false conditions to confirm injection capabil
 ### Phase 2: Exploitation Techniques
 
 #### UNION-Based Extraction
+
 Combine attacker-controlled SELECT statements with original query:
 
 ```sql
@@ -134,6 +148,7 @@ UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_n
 ```
 
 #### Error-Based Extraction
+
 Force database errors that leak information:
 
 ```sql
@@ -148,6 +163,7 @@ Force database errors that leak information:
 ```
 
 #### Blind Boolean-Based Extraction
+
 Infer data through application behavior changes:
 
 ```sql
@@ -160,6 +176,7 @@ Infer data through application behavior changes:
 ```
 
 #### Time-Based Blind Extraction
+
 Use database sleep functions for confirmation:
 
 ```sql
@@ -175,6 +192,7 @@ Use database sleep functions for confirmation:
 ```
 
 #### Out-of-Band (OOB) Extraction
+
 Exfiltrate data through external channels:
 
 ```sql
@@ -191,6 +209,7 @@ Exfiltrate data through external channels:
 ### Phase 3: Authentication Bypass
 
 #### Login Form Exploitation
+
 Craft payloads to bypass credential verification:
 
 ```sql
@@ -221,6 +240,7 @@ SELECT * FROM users WHERE username='admin'--' AND password='anything'
 ### Phase 4: Filter Bypass Techniques
 
 #### Character Encoding Bypass
+
 When special characters are blocked:
 
 ```sql
@@ -241,6 +261,7 @@ SELECT * FROM users WHERE name=0x61646D696E  -- 'admin' in hex
 ```
 
 #### Whitespace Bypass
+
 Substitute blocked spaces:
 
 ```sql
@@ -254,6 +275,7 @@ SELECT%0Ausername%0AFROM%0Ausers  -- Newline
 ```
 
 #### Keyword Bypass
+
 Evade blacklisted SQL keywords:
 
 ```sql
@@ -276,15 +298,19 @@ SEL%00ECT
 ## Quick Reference
 
 ### Detection Test Sequence
+
 ```
+
 1. Insert ' → Check for error
 2. Insert " → Check for error
 3. Try: OR 1=1-- → Check for behavior change
 4. Try: AND 1=2-- → Check for behavior change
 5. Try: ' WAITFOR DELAY '0:0:5'-- → Check for delay
+
 ```
 
 ### Database Fingerprinting
+
 ```sql
 -- MySQL
 SELECT @@version
@@ -303,6 +329,7 @@ SELECT * FROM v$version
 ```
 
 ### Information Schema Queries
+
 ```sql
 -- MySQL/MSSQL table enumeration
 SELECT table_name FROM information_schema.tables WHERE table_schema=database()
@@ -316,6 +343,7 @@ SELECT column_name FROM all_tab_columns WHERE table_name='USERS'
 ```
 
 ### Common Payloads Quick List
+
 | Purpose | Payload |
 |---------|---------|
 | Basic test | `'` or `"` |
@@ -330,18 +358,21 @@ SELECT column_name FROM all_tab_columns WHERE table_name='USERS'
 ## Constraints and Guardrails
 
 ### Operational Boundaries
+
 - Never execute destructive queries (DROP, DELETE, TRUNCATE) without explicit authorization
 - Limit data extraction to proof-of-concept quantities
 - Avoid denial-of-service through resource-intensive queries
 - Stop immediately upon detecting production database with real user data
 
 ### Technical Limitations
+
 - WAF/IPS may block common payloads requiring evasion techniques
 - Parameterized queries prevent standard injection
 - Some blind injection requires extensive requests (rate limiting concerns)
 - Second-order injection requires understanding of data flow
 
 ### Legal and Ethical Requirements
+
 - Written scope agreement must exist before testing
 - Document all extracted data and handle per data protection requirements
 - Report critical vulnerabilities immediately through agreed channels
@@ -425,37 +456,44 @@ SELECT * FROM users WHERE username='administrator'--' AND password='anything'
 ## Troubleshooting
 
 ### No Error Messages Displayed
+
 - Application uses generic error handling
 - Switch to blind injection techniques (boolean or time-based)
 - Monitor response length differences instead of content
 
 ### UNION Injection Fails
+
 - Column count may be incorrect → Test with ORDER BY
 - Data types may mismatch → Use NULL for all columns first
 - Results may not display → Find injectable column positions
 
 ### WAF Blocking Requests
+
 - Use encoding techniques (URL, hex, unicode)
 - Insert inline comments within keywords
 - Try alternative syntax for same operations
 - Fragment payload across multiple parameters
 
 ### Payload Not Executing
+
 - Verify correct comment syntax for database type
 - Check if application uses parameterized queries
 - Confirm input reaches SQL query (not filtered client-side)
 - Test different injection points (headers, cookies)
 
 ### Time-Based Injection Inconsistent
+
 - Network latency may cause false positives
 - Use longer delays (10+ seconds) for clarity
 - Run multiple tests to confirm pattern
 - Consider server-side caching effects
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

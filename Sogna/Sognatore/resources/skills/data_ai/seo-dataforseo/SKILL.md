@@ -6,17 +6,18 @@ date_added: "2026-03-21"
 user-invokable: true
 argument-hint: "[command] [query]"
 allowed-tools:
+
   - Read
   - Grep
   - Glob
   - Bash
   - WebFetch
   - Write
+
 version: 1.0.0
 id: skill-seo-dataforseo
 owner: [[biz-marketing]]
 ---
-
 
 # DataForSEO: Live SEO Data (Extension)
 
@@ -26,6 +27,7 @@ listings, AI visibility checking, and LLM mention tracking across
 9 API modules with 79 MCP tools.
 
 ## When to Use
+
 - Use when the user needs live SEO data instead of static best-practice guidance.
 - Use for SERP lookups, keyword volumes, backlink checks, competitor data, or AI visibility tracking.
 - Use only when the DataForSEO extension is available in the environment.
@@ -45,9 +47,12 @@ installed and provide install instructions.
 ## API Credit Awareness
 
 DataForSEO charges per API call. Be efficient:
+
 - Prefer bulk endpoints over multiple single calls
 - Use default parameters (US, English) unless user specifies otherwise
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Cache results mentally within a session; don't re-fetch the same data
 - Warn user before running expensive operations (full backlink crawls, large keyword lists)
 
@@ -249,6 +254,7 @@ Run on-page analysis including Lighthouse audit and content parsing.
 **MCP tools:** `on_page_instant_pages`, `on_page_content_parsing`, `on_page_lighthouse`
 
 **Usage:**
+
 - `on_page_instant_pages`:Quick page analysis (status codes, meta tags, content size, page timing, broken links, on-page checks)
 - `on_page_content_parsing`:Extract and parse page content (plain text, word count, structure)
 - `on_page_lighthouse`:Full Lighthouse audit (performance score, accessibility, best practices, SEO, Core Web Vitals)
@@ -318,6 +324,7 @@ Track how LLMs mention brands, domains, and topics. Critical for GEO. Measures a
 **Parameters:** keyword, location_code (optional), language_code (optional). Use `ai_opt_llm_ment_loc_and_lang` for available locations/languages and `ai_optimization_llm_models` for supported LLM models.
 
 **Workflow:**
+
 1. Search LLM mentions with `ai_opt_llm_ment_search` (find mentions of a brand/keyword across LLM responses)
 2. Get top cited domains with `ai_opt_llm_ment_top_domains` (which domains are most cited for this topic)
 3. Get top cited pages with `ai_opt_llm_ment_top_pages` (which specific pages are most cited)
@@ -391,6 +398,7 @@ When DataForSEO MCP tools are available, other claude-seo skills can leverage li
 ## Output Formatting
 
 Match existing claude-seo output patterns:
+
 - Use tables for comparative data
 - Prioritize issues as Critical > High > Medium > Low
 - Include specific, actionable recommendations
@@ -398,11 +406,13 @@ Match existing claude-seo output patterns:
 - Note data source as "DataForSEO (live)" to distinguish from static analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

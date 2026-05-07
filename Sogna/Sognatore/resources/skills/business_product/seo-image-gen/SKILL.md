@@ -6,17 +6,18 @@ date_added: "2026-03-21"
 argument-hint: "[og|hero|product|infographic|custom|batch] <description>"
 user-invokable: true
 allowed-tools:
+
   - Read
   - Grep
   - Glob
   - Bash
   - WebFetch
   - Write
+
 version: 1.0.0
 id: skill-seo-image-gen
 owner: [[prod-pm]], [[biz-marketing]]
 ---
-
 
 # SEO Image Gen: AI Image Generation for SEO Assets (Extension)
 
@@ -25,6 +26,7 @@ via the banana Creative Director pipeline. Maps SEO needs to optimized domain mo
 aspect ratios, and resolution defaults.
 
 ## When to Use
+
 - Use when generating OG images, hero images, schema visuals, infographics, or similar SEO assets.
 - Use when image generation is part of a broader SEO or publishing workflow.
 - Use only when the required image-generation extension is available.
@@ -32,6 +34,7 @@ aspect ratios, and resolution defaults.
 ## Architecture Note
 
 This skill has two components with distinct roles:
+
 - **SKILL.md** (this file): Handles interactive `/seo image-gen` commands for generating images
 - **Agent** (`agents/seo-image-gen.md`): Audit-only analyst spawned during `/seo audit` to assess existing OG/social images and produce a generation plan (never auto-generates)
 
@@ -103,11 +106,14 @@ After every successful generation, guide the user on:
 1. **Alt text**:Write descriptive, keyword-rich alt text for the generated image
 2. **File naming**:Rename to SEO-friendly format: `keyword-description-widthxheight.webp`
 3. **WebP conversion**:Convert to WebP for optimal page speed:
+
    ```bash
    magick output.png -quality 85 output.webp
    ```
+
 4. **File size**:Target under 200KB for hero images, under 100KB for thumbnails
 5. **Schema markup**:Suggest `ImageObject` schema for the generated image:
+
    ```json
    {
      "@type": "ImageObject",
@@ -117,7 +123,9 @@ After every successful generation, guide the user on:
      "caption": "Descriptive caption with target keyword"
    }
    ```
+
 6. **OG meta tags**:For social preview images, remind about:
+
    ```html
    <meta property="og:image" content="https://example.com/images/og-image.webp" />
    <meta property="og:image:width" content="1200" />
@@ -128,11 +136,13 @@ After every successful generation, guide the user on:
 ## Cost Awareness
 
 Image generation costs money. Be transparent:
+
 - Show estimated cost before generating (especially for batch)
 - Log every generation: `python3 ~/.claude/skills/seo-image-gen/scripts/cost_tracker.py log --model MODEL --resolution RES --prompt "brief"`
 - Run `cost_tracker.py summary` if user asks about usage
 
 Approximate costs (gemini-3.1-flash):
+
 - 512: ~$0.02/image
 - 1K resolution: ~$0.04/image
 - 2K resolution: ~$0.08/image
@@ -167,6 +177,7 @@ Approximate costs (gemini-3.1-flash):
 ## Reference Documentation
 
 Load on-demand. Do NOT load all at startup:
+
 - `references/prompt-engineering.md`:6-component system, domain modes, templates
 - `references/gemini-models.md`:Model specs, rate limits, capabilities
 - `references/mcp-tools.md`:MCP tool parameters and responses
@@ -178,6 +189,7 @@ Load on-demand. Do NOT load all at startup:
 ## Response Format
 
 After generating, always provide:
+
 1. **Image path**:where it was saved
 2. **Crafted prompt**:show what was sent to the API (educational)
 3. **Settings**:model, aspect ratio, resolution
@@ -185,11 +197,13 @@ After generating, always provide:
 5. **Schema snippet**:ImageObject or og:image markup if applicable
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,12 +8,12 @@ id: skill-expo-tailwind-setup
 owner: [[orchestrator]]
 ---
 
-
 # Tailwind CSS Setup for Expo with react-native-css
 
 This guide covers setting up Tailwind CSS v4 in Expo using react-native-css and NativeWind v5 for universal styling across iOS, Android, and Web.
 
 ## When to Use
+
 - You need to set up Tailwind CSS v4 styling in an Expo app using `react-native-css` and NativeWind v5.
 - The task involves configuring Metro, PostCSS, global CSS, or package versions for Expo + Tailwind.
 - You want one styling setup that works across iOS, Android, and web in an Expo project.
@@ -30,7 +30,9 @@ This setup uses:
 ## Installation
 
 ```bash
+
 # Install dependencies
+
 npx expo install tailwindcss@^4 nativewind@5.0.0-preview.2 react-native-css@0.0.0-nightly.5ce6396 @tailwindcss/postcss tailwind-merge clsx
 ```
 
@@ -489,11 +491,13 @@ type Props = React.ComponentProps<typeof RNView> & { className?: string };
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

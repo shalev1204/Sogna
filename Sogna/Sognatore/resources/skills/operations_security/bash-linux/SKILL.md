@@ -8,7 +8,6 @@ id: skill-bash-linux
 owner: [[ops-security]]
 ---
 
-
 # Bash Linux Patterns
 
 > Essential patterns for Bash on Linux/macOS.
@@ -108,18 +107,22 @@ owner: [[ops-security]]
 set -euo pipefail  # Exit on error, undefined var, pipe fail
 
 # Colors (optional)
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
 # Script directory
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Functions
+
 log_info() { echo -e "${GREEN}[INFO]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1" >&2; }
 
 # Main
+
 main() {
     log_info "Starting..."
     # Your logic here
@@ -204,14 +207,17 @@ trap cleanup EXIT
 > **Remember:** Bash is text-based. Use `&&` for success chains, `set -e` for safety, and quote your variables!
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

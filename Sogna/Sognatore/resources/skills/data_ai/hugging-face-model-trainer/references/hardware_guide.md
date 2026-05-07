@@ -12,6 +12,7 @@ Choosing the right hardware (flavor) is critical for cost-effective training.
 ## Available Hardware
 
 ### CPU
+
 - `cpu-basic` - Basic CPU, testing only
 - `cpu-upgrade` - Enhanced CPU
 
@@ -47,24 +48,28 @@ Choosing the right hardware (flavor) is critical for cost-effective training.
 ### By Model Size
 
 **Tiny Models (<1B parameters)**
+
 - **Recommended:** `t4-small`
 - **Example:** Qwen2.5-0.5B, TinyLlama
 - **Batch size:** 4-8
 - **Training time:** 1-2 hours for 1K examples
 
 **Small Models (1-3B parameters)**
+
 - **Recommended:** `t4-medium` or `a10g-small`
 - **Example:** Qwen2.5-1.5B, Phi-2
 - **Batch size:** 2-4
 - **Training time:** 2-4 hours for 10K examples
 
 **Medium Models (3-7B parameters)**
+
 - **Recommended:** `a10g-small` or `a10g-large`
 - **Example:** Qwen2.5-7B, Mistral-7B
 - **Batch size:** 1-2 (or LoRA with 4-8)
 - **Training time:** 4-8 hours for 10K examples
 
 **Large Models (7-13B parameters)**
+
 - **Recommended:** `a10g-large` or `a100-large`
 - **Example:** Llama-3-8B, Mixtral-8x7B (with LoRA)
 - **Batch size:** 1 (full fine-tuning) or 2-4 (LoRA)
@@ -72,6 +77,7 @@ Choosing the right hardware (flavor) is critical for cost-effective training.
 - **Note:** Always use LoRA/PEFT
 
 **Very Large Models (13B+ parameters)**
+
 - **Recommended:** `a100-large` with LoRA
 - **Example:** Llama-3-13B, Llama-3-70B (LoRA only)
 - **Batch size:** 1-2 with LoRA
@@ -81,24 +87,28 @@ Choosing the right hardware (flavor) is critical for cost-effective training.
 ### By Budget
 
 **Minimal Budget (<$5 total)**
+
 - Use `t4-small`
 - Train on subset of data (100-500 examples)
 - Limit to 1-2 epochs
 - Use small model (<1B)
 
 **Small Budget ($5-20)**
+
 - Use `t4-medium` or `a10g-small`
 - Train on 1K-5K examples
 - 2-3 epochs
 - Model up to 3B parameters
 
 **Medium Budget ($20-50)**
+
 - Use `a10g-small` or `a10g-large`
 - Train on 5K-20K examples
 - 3-5 epochs
 - Model up to 7B parameters
 
 **Large Budget ($50-200)**
+
 - Use `a10g-large` or `a100-large`
 - Full dataset training
 - Multiple epochs
@@ -107,24 +117,28 @@ Choosing the right hardware (flavor) is critical for cost-effective training.
 ### By Training Type
 
 **Quick Demo/Experiment**
+
 - `t4-small`
 - 50-100 examples
 - 5-10 steps
 - ~10-15 minutes
 
 **Development/Iteration**
+
 - `t4-medium` or `a10g-small`
 - 1K examples
 - 1 epoch
 - ~30-60 minutes
 
 **Production Training**
+
 - `a10g-large` or `a100-large`
 - Full dataset
 - 3-5 epochs
 - 4-12 hours
 
 **Research/Experimentation**
+
 - `a100-large`
 - Multiple runs
 - Various hyperparameters
@@ -145,6 +159,7 @@ Memory (GB) ≈ (Model params in billions) × 4
 ```
 
 **Examples:**
+
 - Qwen2.5-0.5B full: ~10GB ✅ fits t4-small
 - Qwen2.5-1.5B full: ~30GB ❌ exceeds most GPUs
 - Qwen2.5-1.5B LoRA: ~6GB ✅ fits t4-small
@@ -156,26 +171,31 @@ Memory (GB) ≈ (Model params in billions) × 4
 If hitting memory limits:
 
 1. **Use LoRA/PEFT**
+
    ```python
    peft_config=LoraConfig(r=16, lora_alpha=32)
    ```
 
 2. **Reduce batch size**
+
    ```python
    per_device_train_batch_size=1
    ```
 
 3. **Increase gradient accumulation**
+
    ```python
    gradient_accumulation_steps=8  # Effective batch size = 1×8
    ```
 
 4. **Enable gradient checkpointing**
+
    ```python
    gradient_checkpointing=True
    ```
 
 5. **Use mixed precision**
+
    ```python
    bf16=True  # or fp16=True
    ```
@@ -194,21 +214,25 @@ Total Cost = (Hours of training) × (Cost per hour)
 ### Example Calculations
 
 **Quick demo:**
+
 - Hardware: t4-small ($0.75/hour)
 - Time: 15 minutes (0.25 hours)
 - Cost: $0.19
 
 **Development training:**
+
 - Hardware: a10g-small ($3.50/hour)
 - Time: 2 hours
 - Cost: $7.00
 
 **Production training:**
+
 - Hardware: a10g-large ($5/hour)
 - Time: 6 hours
 - Cost: $30.00
 
 **Large model with LoRA:**
+
 - Hardware: a100-large ($10/hour)
 - Time: 8 hours
 - Cost: $80.00
@@ -227,11 +251,13 @@ Total Cost = (Hours of training) × (Cost per hour)
 TRL automatically handles multi-GPU training with Accelerate when using multi-GPU flavors.
 
 **Multi-GPU flavors:**
+
 - `l4x4` - 4x L4 GPUs
 - `a10g-largex2` - 2x A10G GPUs
 - `a10g-largex4` - 4x A10G GPUs
 
 **When to use:**
+
 - Models >13B parameters
 - Need faster training (linear speedup)
 - Large datasets (>50K examples)
@@ -253,11 +279,13 @@ No code changes needed—TRL/Accelerate handles distribution automatically.
 ### a10g vs a100
 
 **Choose a10g when:**
+
 - Model <13B parameters
 - Budget conscious
 - Training time not critical
 
 **Choose a100 when:**
+
 - Model 13B+ parameters
 - Need fastest training
 - Memory requirements high
@@ -266,11 +294,13 @@ No code changes needed—TRL/Accelerate handles distribution automatically.
 ### Single vs Multi-GPU
 
 **Choose single GPU when:**
+
 - Model <7B parameters
 - Budget constrained
 - Simpler debugging
 
 **Choose multi-GPU when:**
+
 - Model >13B parameters
 - Need faster training
 - Large batch sizes required
@@ -279,7 +309,9 @@ No code changes needed—TRL/Accelerate handles distribution automatically.
 ## Quick Reference
 
 ```python
+
 # Model size → Hardware selection
+
 HARDWARE_MAP = {
     "<1B":     "t4-small",
     "1-3B":    "a10g-small",
@@ -290,6 +322,7 @@ HARDWARE_MAP = {
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

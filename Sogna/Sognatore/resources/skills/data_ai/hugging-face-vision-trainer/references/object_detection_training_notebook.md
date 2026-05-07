@@ -8,6 +8,7 @@ version: 1.0.0
 # Object Detection Training Reference
 
 ## Contents
+
 - Load the CPPE-5 dataset
 - Preprocess the data (augmentation with Albumentations, COCO annotation formatting)
 - Preparing function to compute mAP
@@ -27,8 +28,10 @@ Other applications include counting objects in images, image search, and more.
 In this guide, you will learn how to:
 
  1. Finetune [DETR](https://huggingface.co/docs/transformers/model_doc/detr), a model that combines a convolutional
+
  backbone with an encoder-decoder Transformer, on the [CPPE-5](https://huggingface.co/datasets/cppe-5)
  dataset.
+
  2. Use your finetuned model for inference.
 
 To see all architectures and checkpoints compatible with this task, we recommend checking the [task-page](https://huggingface.co/tasks/object-detection)
@@ -584,6 +587,7 @@ Training runs for 30 epochs (~26 minutes on a T4 GPU for CPPE-5). Final epoch 30
 Per-class mAP at epoch 30: Coverall 0.530, Face Shield 0.276, Gloves 0.175, Goggles 0.157, Mask 0.249.
 
 Key observations:
+
 - mAP improves rapidly in early epochs (0.009 at epoch 1 → 0.18 by epoch 10), then gradually converges
 - Large objects are detected better (mAP_large=0.524) than small objects (mAP_small=0.148)
 - Class imbalance visible: Coverall highest mAP (0.530), Goggles lowest (0.157)
@@ -701,6 +705,7 @@ Let's plot the result:
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

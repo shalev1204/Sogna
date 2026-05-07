@@ -41,6 +41,7 @@ def fetch_data():
 ```
 
 Retry parameters:
+
 - `retries_allowed`: Enable automatic retries (default: False)
 - `max_attempts`: Maximum retry attempts (default: 3)
 - `interval_seconds`: Initial delay between retries (default: 1.0)
@@ -51,6 +52,7 @@ With defaults, retry delays are: 1s, 2s, 4s, 8s, 16s...
 Reference: [Configurable Retries](https://docs.dbos.dev/python/tutorials/step-tutorial#configurable-retries)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

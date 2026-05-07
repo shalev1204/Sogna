@@ -71,3 +71,5 @@ export function ResolveVariantFromProps(
 
     return definition
 }
+
+export const resolveVariantFromProps = ResolveVariantFromProps

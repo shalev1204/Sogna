@@ -8,7 +8,6 @@ id: skill-react-native-architecture
 owner: [[system-architect]]
 ---
 
-
 # React Native Architecture
 
 Production-ready patterns for React Native development with Expo, including navigation, state management, native modules, and offline-first architecture.
@@ -39,11 +38,13 @@ Production-ready patterns for React Native development with Expo, including navi
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

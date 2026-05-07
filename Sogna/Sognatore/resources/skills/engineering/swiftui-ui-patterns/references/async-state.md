@@ -104,6 +104,7 @@ struct SearchView: View {
 - Avoid storing derived async state in multiple places when one source of truth is enough.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

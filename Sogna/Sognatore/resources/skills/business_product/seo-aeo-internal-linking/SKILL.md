@@ -8,7 +8,6 @@ id: skill-seo-aeo-internal-linking
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # SEO-AEO Internal Linking
 
 ## Overview
@@ -27,27 +26,34 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 ## How It Works
 
 ### Step 1: Detect Orphan Pages
+
 Flag any page with zero incoming internal links. These are invisible to search engines and must be linked immediately.
 
 ### Step 2: Build Semantic Overlap Matrix
+
 Match pages by primary keyword similarity and content summary to identify natural linking opportunities.
 
 ### Step 3: Assign Link Types
+
 Every suggestion gets one of four labels:
+
 - **Cluster → Pillar** — highest priority, consolidates authority upward
 - **Pillar → Cluster** — distributes authority downward
 - **Cluster → Cluster** — builds semantic depth
 - **Contextual Boost** — concentrates equity on a focus page
 
 ### Step 4: Write Context Sentences
+
 For every link opportunity, write the sentence the anchor text should appear in — naturally placed, not forced.
 
 ### Step 5: Check Anchor Text
+
 Flag any exact-match anchor used more than once for the same target page as a cannibalization risk. Never use generic anchors like "click here".
 
 ## Examples
 
 ### Example: Link Opportunity Output
+
 🔴 High Priority — Link 1
 Type: Cluster → Pillar
 Source: "How to Build a Budget That Actually Works"
@@ -72,9 +78,11 @@ Fix: Add link from comparison table in Article 2.
 ## Common Pitfalls
 
 - **Problem:** All cluster articles link to the pillar but not to each other
+
   **Solution:** Add Cluster → Cluster links between semantically related articles to build depth.
 
 - **Problem:** Same anchor text used across multiple pages for the same target
+
   **Solution:** Use partial match and branded anchors for subsequent links after the first exact-match use.
 
 ## Related Skills
@@ -88,11 +96,13 @@ Fix: Add link from comparison table in Article 2.
 - [Full Internal Linking SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/internal-linking/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

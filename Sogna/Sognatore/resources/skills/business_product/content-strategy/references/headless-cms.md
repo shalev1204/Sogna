@@ -201,6 +201,7 @@ Pull CMS content into email templates for consistent messaging across web and em
 - [Strapi](../../../tools/integrations/strapi.md) — REST CRUD, filters, document API
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

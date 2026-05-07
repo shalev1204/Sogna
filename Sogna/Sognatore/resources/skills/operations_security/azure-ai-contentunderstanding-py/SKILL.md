@@ -8,7 +8,6 @@ id: skill-azure-ai-contentunderstanding-py
 owner: [[ops-security]]
 ---
 
-
 # Azure AI Content Understanding SDK for Python
 
 Multimodal AI service that extracts semantic content from documents, video, audio, and image files for RAG and automated workflows.
@@ -70,6 +69,7 @@ client = ContentUnderstandingClient(
 )
 
 # Analyze document from URL
+
 poller = client.begin_analyze(
     analyzer_id="prebuilt-documentSearch",
     inputs=[AnalyzeInput(url="https://example.com/document.pdf")]
@@ -78,6 +78,7 @@ poller = client.begin_analyze(
 result = poller.result()
 
 # Access markdown content (contents is a list)
+
 content = result.contents[0]
 print(content.markdown)
 ```
@@ -120,13 +121,16 @@ poller = client.begin_analyze(
 result = poller.result()
 
 # Access video content (AudioVisualContent)
+
 content = result.contents[0]
 
 # Get transcript phrases with timing
+
 for phrase in content.transcript_phrases:
     print(f"[{phrase.start_time} - {phrase.end_time}]: {phrase.text}")
 
 # Get key frames (for video)
+
 for frame in content.key_frames:
     print(f"Frame at {frame.time}: {frame.description}")
 ```
@@ -144,6 +148,7 @@ poller = client.begin_analyze(
 result = poller.result()
 
 # Access audio transcript
+
 content = result.contents[0]
 for phrase in content.transcript_phrases:
     print(f"[{phrase.start_time}] {phrase.text}")
@@ -154,7 +159,9 @@ for phrase in content.transcript_phrases:
 Create custom analyzers with field schemas for specialized extraction:
 
 ```python
+
 # Create custom analyzer
+
 analyzer = client.create_analyzer(
     analyzer_id="my-invoice-analyzer",
     analyzer={
@@ -180,6 +187,7 @@ analyzer = client.create_analyzer(
 )
 
 # Use custom analyzer
+
 from azure.ai.contentunderstanding.models import AnalyzeInput
 
 poller = client.begin_analyze(
@@ -190,6 +198,7 @@ poller = client.begin_analyze(
 result = poller.result()
 
 # Access extracted fields
+
 print(result.fields["vendor_name"])
 print(result.fields["invoice_total"])
 ```
@@ -197,15 +206,19 @@ print(result.fields["invoice_total"])
 ## Analyzer Management
 
 ```python
+
 # List all analyzers
+
 analyzers = client.list_analyzers()
 for analyzer in analyzers:
     print(f"{analyzer.analyzer_id}: {analyzer.description}")
 
 # Get specific analyzer
+
 analyzer = client.get_analyzer("prebuilt-documentSearch")
 
 # Delete custom analyzer
+
 client.delete_analyzer("my-custom-analyzer")
 ```
 
@@ -276,14 +289,17 @@ from azure.ai.contentunderstanding.models import (
 7. **Use URL sources** when possible to avoid upload overhead
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

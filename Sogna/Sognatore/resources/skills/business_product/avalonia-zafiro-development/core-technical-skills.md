@@ -10,6 +10,7 @@ version: 1.0.0
 ## Mandatory Expertise
 
 The developer must possess strong expertise in:
+
 - **C# and modern .NET**: Utilizing the latest features of the language and framework.
 - **Avalonia UI**: For cross-platform UI development.
 - **MVVM Architecture**: Maintaining strict separation between UI and business logic.
@@ -26,6 +27,7 @@ The developer must possess strong expertise in:
 - **Stable Public APIs**: Design APIs carefully to ensure long-term stability and clarity.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

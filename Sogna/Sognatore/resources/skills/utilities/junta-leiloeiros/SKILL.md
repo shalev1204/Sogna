@@ -4,21 +4,24 @@ description: Coleta e consulta dados de leiloeiros oficiais de todas as 27 Junta
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - scraping
 - brazilian-data
 - auctioneers
 - api
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-junta-leiloeiros
 owner: [[orchestrator]]
 ---
-
 
 # Skill: Leiloeiros das Juntas Comerciais do Brasil
 
@@ -122,6 +125,7 @@ python C:\Users\renat\skills\junta-leiloeiros\scripts\serve_api.py
 ```
 
 **Endpoints:**
+
 - `GET /leiloeiros?estado=SP&situacao=ATIVO&nome=silva&limit=100`
 - `GET /leiloeiros/{estado}` — ex: `/leiloeiros/SP`
 - `GET /busca?q=texto`
@@ -220,11 +224,13 @@ SCRAPERS["XX"] = MeuEstadoScraper
 - `leiloeiro-mercado` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

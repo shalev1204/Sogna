@@ -8,7 +8,6 @@ id: skill-azure-ai-voicelive-ts
 owner: [[orchestrator]]
 ---
 
-
 # @azure/ai-voicelive (JavaScript/TypeScript)
 
 Real-time voice AI SDK for building bidirectional voice assistants with Azure AI in Node.js and browser environments.
@@ -17,13 +16,16 @@ Real-time voice AI SDK for building bidirectional voice assistants with Azure AI
 
 ```bash
 npm install @azure/ai-voicelive @azure/identity
+
 # TypeScript users
+
 npm install @types/node
 ```
 
 **Current Version**: 1.0.0-beta.3
 
 **Supported Environments**:
+
 - Node.js LTS versions (20+)
 - Modern browsers (Chrome, Firefox, Safari, Edge)
 
@@ -31,9 +33,13 @@ npm install @types/node
 
 ```bash
 AZURE_VOICELIVE_ENDPOINT=https://<resource>.cognitiveservices.azure.com
+
 # Optional: API key if not using Entra ID
+
 AZURE_VOICELIVE_API_KEY=<your-api-key>
+
 # Optional: Logging
+
 AZURE_LOG_LEVEL=info
 ```
 
@@ -470,14 +476,17 @@ const audioContext = new AudioContext({ sampleRate: 24000 });
 | API Reference | https://learn.microsoft.com/javascript/api/@azure/ai-voicelive |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

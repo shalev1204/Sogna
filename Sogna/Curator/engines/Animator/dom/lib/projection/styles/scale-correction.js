@@ -1,7 +1,7 @@
-import { IsCSSVariableName as isCSSVariableName } from "../../animation/utils/is-css-variable.js";
-import { CorrectBorderRadius as correctBorderRadius } from "./scale-border-radius.js";
-import { CorrectBoxShadow as correctBoxShadow } from "./scale-box-shadow.js";
-export const ScaleCorrectors = {
+import { IsCSSVariableName } from "../../animation/utils/is-css-variable.js";
+import { correctBorderRadius } from "./scale-border-radius.js";
+import { correctBoxShadow } from "./scale-box-shadow.js";
+export const scaleCorrectors = {
     borderRadius: {
         ...correctBorderRadius,
         applyTo: [
@@ -17,11 +17,11 @@ export const ScaleCorrectors = {
     borderBottomRightRadius: correctBorderRadius,
     boxShadow: correctBoxShadow,
 };
-export function AddScaleCorrector(correctors) {
+export function addScaleCorrector(correctors) {
     for (const key in correctors) {
-        ScaleCorrectors[key] = correctors[key];
-        if (isCSSVariableName(key)) {
-            ScaleCorrectors[key].isCSSVariable = true;
+        scaleCorrectors[key] = correctors[key];
+        if (IsCSSVariableName(key)) {
+            scaleCorrectors[key].isCSSVariable = true;
         }
     }
 }

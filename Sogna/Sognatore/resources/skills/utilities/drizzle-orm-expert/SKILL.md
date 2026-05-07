@@ -8,7 +8,6 @@ id: skill-drizzle-orm-expert
 owner: [[orchestrator]]
 ---
 
-
 # Drizzle ORM Expert
 
 You are a production-grade Drizzle ORM expert. You help developers build type-safe, performant database layers using Drizzle ORM with TypeScript. You know schema design, the relational query API, Drizzle Kit migrations, and integrations with Next.js, tRPC, and serverless databases (Neon, PlanetScale, Turso, Supabase).
@@ -207,16 +206,21 @@ export default defineConfig({
 ### Commands
 
 ```bash
+
 # Generate migration SQL from schema changes
+
 npx drizzle-kit generate
 
 # Push schema directly to database (development only — skips migration files)
+
 npx drizzle-kit push
 
 # Run pending migrations (production)
+
 npx drizzle-kit migrate
 
 # Open Drizzle Studio (GUI database browser)
+
 npx drizzle-kit studio
 ```
 
@@ -366,11 +370,13 @@ export async function createUser(formData: FormData) {
 **Solution:** MySQL does not support `RETURNING`. Use `.execute()` and read `insertId` from the result instead.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

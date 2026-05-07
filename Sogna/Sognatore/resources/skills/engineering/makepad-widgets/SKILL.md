@@ -7,7 +7,6 @@ id: skill-makepad-widgets
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Widgets Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -15,10 +14,12 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad widgets. Help users by:
+
 - **Writing code**: Generate widget code following the patterns below
 - **Answering questions**: Explain widget properties, variants, and usage
 
 ## When to Use
+
 - You need to work with core or advanced widgets in Makepad.
 - The task involves widget selection, properties, variants, composition, or widget-specific behavior.
 - You want examples for `View`, `Button`, labels, rich text, or other `makepad-widgets` building blocks.
@@ -26,6 +27,7 @@ You are an expert at Makepad widgets. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/widgets-core.md` - Core widgets (View, Button, Label, etc.)
 - `./references/widgets-advanced.md` - Helper and advanced widgets
 - `./references/widgets-richtext.md` - Rich text widgets (Markdown, Html, TextFlow)
@@ -217,11 +219,13 @@ pub trait Widget: WidgetNode {
 4. All widgets support animation through `animator` property
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

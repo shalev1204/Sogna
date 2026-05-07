@@ -10,21 +10,23 @@ date_added: "2026-03-21"
 user-invokable: true
 argument-hint: "[business-type]"
 allowed-tools:
+
   - Read
   - Grep
   - Glob
   - Bash
   - WebFetch
   - Write
+
 version: 1.0.0
 id: skill-seo-plan
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # Strategic SEO Planning
 
 ## When to Use
+
 - Use when building an SEO strategy or roadmap for a new or existing site.
 - Use when planning content, architecture, and implementation phases together.
 - Use when the user asks for an SEO plan rather than a point-in-time audit.
@@ -32,12 +34,14 @@ owner: [[prod-pm]], [[biz-marketing]]
 ## Process
 
 ### 1. Discovery
+
 - Business type, target audience, competitors, goals
 - Current site assessment (if exists)
 - Budget and timeline constraints
 - Key performance indicators (KPIs)
 
 ### 2. Competitive Analysis
+
 - Identify top 5 competitors
 - Analyze their content strategy, schema usage, technical setup
 - Identify keyword gaps and content opportunities
@@ -45,6 +49,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 - Estimate their domain authority
 
 ### 3. Architecture Design
+
 - Load industry template from `assets/` directory
 - Design URL hierarchy and content pillars
 - Plan internal linking strategy
@@ -52,6 +57,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 - Information architecture for user journeys
 
 ### 4. Content Strategy
+
 - Content gaps vs competitors
 - Page types and estimated counts
 - Blog/resource topics and publishing cadence
@@ -59,6 +65,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 - Content calendar with priorities
 
 ### 5. Technical Foundation
+
 - Hosting and performance requirements
 - Schema markup plan per page type
 - Core Web Vitals baseline targets
@@ -68,24 +75,28 @@ owner: [[prod-pm]], [[biz-marketing]]
 ### 6. Implementation Roadmap (4 phases)
 
 #### Phase 1: Foundation (weeks 1-4)
+
 - Technical setup and infrastructure
 - Core pages (home, about, contact, main services)
 - Essential schema implementation
 - Analytics and tracking setup
 
 #### Phase 2: Expansion (weeks 5-12)
+
 - Content creation for primary pages
 - Blog launch with initial posts
 - Internal linking structure
 - Local SEO setup (if applicable)
 
 #### Phase 3: Scale (weeks 13-24)
+
 - Advanced content development
 - Link building and outreach
 - GEO optimization
 - Performance optimization
 
 #### Phase 4: Authority (months 7-12)
+
 - Thought leadership content
 - PR and media mentions
 - Advanced schema implementation
@@ -94,6 +105,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 ## Industry Templates
 
 Load from `assets/` directory:
+
 - `saas.md`: SaaS/software companies
 - `local-service.md`: Local service businesses
 - `ecommerce.md`: E-commerce stores
@@ -104,6 +116,7 @@ Load from `assets/` directory:
 ## Output
 
 ### Deliverables
+
 - `SEO-STRATEGY.md`: Complete strategic plan
 - `COMPETITOR-ANALYSIS.md`: Competitive insights
 - `CONTENT-CALENDAR.md`: Content roadmap
@@ -111,6 +124,7 @@ Load from `assets/` directory:
 - `SITE-STRUCTURE.md`: URL hierarchy and architecture
 
 ### KPI Targets
+
 | Metric | Baseline | 3 Month | 6 Month | 12 Month |
 |--------|----------|---------|---------|----------|
 | Organic Traffic | ... | ... | ... | ... |
@@ -120,6 +134,7 @@ Load from `assets/` directory:
 | Core Web Vitals | ... | ... | ... | ... |
 
 ### Success Criteria
+
 - Clear, measurable goals per phase
 - Resource requirements defined
 - Dependencies identified
@@ -138,11 +153,13 @@ If DataForSEO MCP tools are available, use `dataforseo_labs_google_competitors_d
 | Industry template not found | Check `assets/` directory for available templates. If the requested template file is missing, use `generic.md` and note the missing template in output. |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -651,6 +651,7 @@ export const disabled = 'disabled:pointer-events-none disabled:opacity-50'
 ## Best Practices
 
 ### Do's
+
 - **Use CSS variables** - Enable runtime theming
 - **Compose with CVA** - Type-safe variants
 - **Use semantic colors** - `primary` not `blue-500`
@@ -658,6 +659,7 @@ export const disabled = 'disabled:pointer-events-none disabled:opacity-50'
 - **Add accessibility** - ARIA attributes, focus states
 
 ### Don'ts
+
 - **Don't use arbitrary values** - Extend theme instead
 - **Don't nest @apply** - Hurts readability
 - **Don't skip focus states** - Keyboard users need them
@@ -672,6 +674,7 @@ export const disabled = 'disabled:pointer-events-none disabled:opacity-50'
 - [Radix Primitives](https://www.radix-ui.com/primitives)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

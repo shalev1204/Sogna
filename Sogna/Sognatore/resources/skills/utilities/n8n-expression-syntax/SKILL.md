@@ -7,12 +7,12 @@ id: skill-n8n-expression-syntax
 owner: [[orchestrator]]
 ---
 
-
 # n8n Expression Syntax
 
 Expert guide for writing correct n8n expressions in workflows.
 
 ## When to Use
+
 - You need to write or debug n8n expressions using `{{ ... }}` syntax.
 - The task involves `$json`, `$node`, webhook payloads, or expression-related workflow errors.
 - You want syntax-correct dynamic values inside n8n nodes and parameters.
@@ -62,6 +62,7 @@ Access data from any previous node:
 ```
 
 **Important**:
+
 - Node names **must** be in quotes
 - Node names are **case-sensitive**
 - Must match exact node name from workflow
@@ -456,19 +457,23 @@ Hello {{$json.name}}!
 ### Available Methods
 
 **String**:
+
 - `.toLowerCase()`, `.toUpperCase()`
 - `.trim()`, `.replace()`, `.substring()`
 - `.split()`, `.includes()`
 
 **Array**:
+
 - `.length`, `.map()`, `.filter()`
 - `.find()`, `.join()`, `.slice()`
 
 **DateTime** (Luxon):
+
 - `.toFormat()`, `.toISO()`, `.toLocal()`
 - `.plus()`, `.minus()`, `.set()`
 
 **Number**:
+
 - `.toFixed()`, `.toString()`
 - Math operations: `+`, `-`, `*`, `/`, `%`
 
@@ -505,6 +510,7 @@ Hello {{$json.name}}!
 ## Summary
 
 **Essential Rules**:
+
 1. Wrap expressions in {{ }}
 2. Webhook data is under `.body`
 3. No {{ }} in Code nodes
@@ -512,12 +518,14 @@ Hello {{$json.name}}!
 5. Node names are case-sensitive
 
 **Most Common Mistakes**:
+
 - Missing {{ }} → Add braces
 - `{{$json.name}}` in webhooks → Use `{{$json.body.name}}`
 - `{{$json.email}}` in Code → Use `$json.email`
 - `{{$node.HTTP Request}}` → Use `{{$node["HTTP Request"]}}`
 
 For more details, see:
+
 - COMMON_MISTAKES.md - Complete error catalog
 - EXAMPLES.md - Real workflow examples
 
@@ -526,11 +534,13 @@ For more details, see:
 **Need Help?** Reference the n8n expression documentation or use n8n-mcp validation tools to check your expressions.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

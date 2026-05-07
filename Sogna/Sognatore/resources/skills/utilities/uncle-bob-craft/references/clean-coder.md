@@ -41,6 +41,7 @@ Based on Robert C. Martin, *The Clean Coder* (2011). Use this when discussing pr
 Use this reference when the discussion involves commitment, estimates, saying no, sustainable development practices, or teamwork.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

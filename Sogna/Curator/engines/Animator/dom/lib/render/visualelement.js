@@ -1,6 +1,6 @@
 import { isNumericalString, isZeroValueString, secondsToMilliseconds, SubscriptionManager, warnOnce, } from "sognaflow-utils";
-import { KeyframeResolver } from "../animation/keyframes/keyframesresolver.js";
-import { NativeAnimation } from "../animation/nativeanimation.js";
+import { KeyframeResolver } from "../animation/keyframes/KeyframesResolver.js";
+import { NativeAnimation } from "../animation/NativeAnimation.js";
 import { acceleratedValues } from "../animation/waapi/utils/accelerated-values.js";
 import { CancelFrame, Frame } from "../frameloop";
 import { Microtask } from "../frameloop/microtask.js";

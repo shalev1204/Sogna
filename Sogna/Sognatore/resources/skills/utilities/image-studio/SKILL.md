@@ -4,21 +4,24 @@ description: "Studio de geracao de imagens inteligente — roteamento automatico
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - image-generation
 - routing
 - ai-art
 - photography
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-image-studio
 owner: [[orchestrator]]
 ---
-
 
 # IMAGE-STUDIO: Gerador de Imagens Inteligente
 
@@ -77,12 +80,14 @@ E uma FOTO REALISTA de pessoa/influencer?
 | Foto produto com pessoa | "mulher segurando smartphone" |
 
 **Vantagens:**
+
 - Gratuito (gemini-2.0-flash-exp)
 - 5 camadas de humanizacao narrativa (device, lighting, imperfection, authenticity, environment)
 - 20 templates pre-configurados (10 influencer + 10 educacional)
 - Imperfeicoes sutis que tornam a foto credivel
 
 **Limitacoes:**
+
 - 1 imagem por vez, ~9s
 - ~1K resolucao
 - Nao suporta aspect_ratio customizado
@@ -112,6 +117,7 @@ photorealistic, anime, digital-art, oil-painting, watercolor, pixel-art, 3d-rend
 concept-art, comic, minimalist, fantasy, sci-fi, sketch, pop-art, noir
 
 **Limitacoes:**
+
 - Créditos (Community License)
 - Nao especializado em fotos realistas de pessoas
 
@@ -128,6 +134,7 @@ Usuario: "crie uma imagem de X"
 4. Gerar: executar com parametros corretos
 5. Apresentar: mostrar resultado + metadados
 6. Oferecer: variacoes, ajustes, versao alternativa
+
 ```
 
 ## 3.2 Geracao Com Ai-Studio-Image
@@ -192,6 +199,7 @@ cabelo levemente bagunçado, foco suave no fundo"
 ```
 
 **Evitar:**
+
 - Termos de arte (oil painting, digital art)
 - Nomes de artistas
 - Estilos nao-fotograficos
@@ -237,9 +245,11 @@ IMAGE-STUDIO — [tipo de geracao]
    "[prompt otimizado]"
 
 💡 Variacoes disponiveis:
+
    1. stability-ai versao arte
    2. ai-studio-image versao humanizada
    3. Ajuste de estilo/iluminacao
+
 ```
 
 ---
@@ -329,11 +339,13 @@ stability-ai:
 - `stability-ai` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

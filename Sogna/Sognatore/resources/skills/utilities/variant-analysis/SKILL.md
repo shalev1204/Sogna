@@ -7,13 +7,14 @@ id: skill-variant-analysis
 owner: [[orchestrator]]
 ---
 
-
 # Variant Analysis
 
 You are a variant analysis expert. Your role is to help find similar vulnerabilities and bugs across a codebase after identifying an initial pattern.
 
 ## When to Use
+
 Use this skill when:
+
 - A vulnerability has been found and you need to search for similar instances
 - Building or refining CodeQL/Semgrep queries for security patterns
 - Performing systematic code audits after an initial issue discovery
@@ -23,6 +24,7 @@ Use this skill when:
 ## When NOT to Use
 
 Do NOT use this skill for:
+
 - Initial vulnerability discovery (use audit-context-building or domain-specific audits instead)
 - General code review without a known pattern to search for
 - Writing fix recommendations (use issue-writer instead)
@@ -33,6 +35,7 @@ Do NOT use this skill for:
 ### Step 1: Understand the Original Issue
 
 Before searching, deeply understand the known bug:
+
 - **What is the root cause?** Not the symptom, but WHY it's vulnerable
 - **What conditions are required?** Control flow, data flow, state
 - **What makes it exploitable?** User control, missing validation, etc.
@@ -57,6 +60,7 @@ Verify: Does it match exactly ONE location (the original)?
 ### Step 4: Iteratively Generalize
 
 **Change ONE element at a time:**
+
 1. Run the pattern
 2. Review ALL new matches
 3. Classify: true positive or false positive?
@@ -68,6 +72,7 @@ Verify: Does it match exactly ONE location (the original)?
 ### Step 5: Analyze and Triage Results
 
 For each match, document:
+
 - **Location**: File, line, function
 - **Confidence**: High/Medium/Low
 - **Exploitability**: Reachable? Controllable inputs?
@@ -119,6 +124,7 @@ Using only the exact attribute/function from the original bug misses variants us
 Focusing on only one manifestation of the root cause misses other ways the same logic error appears.
 
 **Example:** Original bug is "return allow when condition is false" → only searching that pattern → missing:
+
 - Null equality bypasses (`null == null` evaluates to true)
 - Documentation/code mismatches (function does opposite of what docs claim)
 - Inverted conditional logic (wrong branch taken)
@@ -138,19 +144,23 @@ Testing patterns only with "normal" scenarios misses vulnerabilities triggered b
 Ready-to-use templates in `resources/`:
 
 **CodeQL** (`resources/codeql/`):
+
 - `python.ql`, `javascript.ql`, `java.ql`, `go.ql`, `cpp.ql`
 
 **Semgrep** (`resources/semgrep/`):
+
 - `python.yaml`, `javascript.yaml`, `java.yaml`, `go.yaml`, `cpp.yaml`
 
 **Report**: `resources/variant-report-template.md`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

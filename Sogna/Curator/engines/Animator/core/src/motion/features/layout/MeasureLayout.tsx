@@ -2,7 +2,7 @@
 
 import { frame, microtask, globalProjectionState, type VisualElement } from "sognaflow-dom"
 import { Component, useContext } from "react"
-import { usePresence } from "../../../components/AnimatePresence/use-presence.js"
+import { usePresence } from "../../../components/animate-presence/use-presence.js"
 import {
     LayoutGroupContext,
     LayoutGroupContextProps,

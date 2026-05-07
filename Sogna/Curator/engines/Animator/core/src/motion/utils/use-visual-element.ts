@@ -9,14 +9,14 @@ import {
 import * as React from "react"
 import { useContext, useEffect, useInsertionEffect, useRef } from "react"
 import { LazyContext } from "../../context/LazyContext.js"
-import { sognaflowConfigContext } from "../../context/sognaflowconfigcontext"
-import { sognaflowContext } from "../../context/sognaflowcontext"
+import { sognaflowConfigContext } from "../../context/MotionConfigContext.js"
+import { sognaflowContext } from "../../context/MotionContext/index.js"
 import { PresenceContext } from "../../context/PresenceContext.js"
 import {
     InitialProsognaflowConfig,
     SwitchLayoutGroupContext,
 } from "../../context/SwitchLayoutGroupContext.js"
-import { sognaflowProps } from "../../sognaflow/types"
+import { sognaflowProps } from "../../motion/types"
 import type { IProjectionNode } from "sognaflow-dom"
 import { DOMsognaflowComponents } from "../../render/dom/types.js"
 import { CreateVisualElement } from "../../render/types.js"
@@ -37,10 +37,10 @@ export function useVisualElement<
     ProjectionNodeConstructor?: any,
     isSVG?: boolean
 ): VisualElement<HTMLElement | SVGElement> | undefined {
-    const { visualElement: parent } = useContext(sognaflowContext)
+    const { visualElement: parent } = useContext(sognaflowContext) as any
     const lazyContext = useContext(LazyContext)
     const presenceContext = useContext(PresenceContext)
-    const sognaflowConfig = useContext(sognaflowConfigContext)
+    const sognaflowConfig = useContext(sognaflowConfigContext) as any
     const reducedsognaflowConfig = sognaflowConfig.reducedsognaflow
     const skipAnimations = sognaflowConfig.skipAnimations
 

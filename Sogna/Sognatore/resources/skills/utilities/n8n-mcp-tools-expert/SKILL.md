@@ -7,12 +7,12 @@ id: skill-n8n-mcp-tools-expert
 owner: [[orchestrator]]
 ---
 
-
 # n8n MCP Tools Expert
 
 Master guide for using n8n-mcp MCP server tools to build workflows.
 
 ## When to Use
+
 - You are using the `n8n-mcp` toolset to discover nodes, validate configs, or manage workflows.
 - The task involves choosing the right MCP tool or understanding its expected parameters and usage pattern.
 - You need guidance on workflow creation or editing through n8n MCP rather than through the n8n UI alone.
@@ -53,9 +53,11 @@ n8n-mcp provides tools organized into categories:
 
 **Workflow**:
 ```
+
 1. search_nodes({query: "keyword"})
 2. get_node({nodeType: "nodes-base.name"})
 3. [Optional] get_node({nodeType: "nodes-base.name", mode: "docs"})
+
 ```
 
 **Example**:
@@ -79,9 +81,11 @@ get_node({nodeType: "nodes-base.slack", mode: "docs"})
 
 **Workflow**:
 ```
+
 1. validate_node({nodeType, config: {}, mode: "minimal"}) - Check required fields
 2. validate_node({nodeType, config, profile: "runtime"}) - Full validation
 3. [Repeat] Fix errors, validate again
+
 ```
 
 **Common pattern**: validate → fix → validate (23s thinking, 58s fixing per cycle)
@@ -90,11 +94,13 @@ get_node({nodeType: "nodes-base.slack", mode: "docs"})
 
 **Workflow**:
 ```
+
 1. n8n_create_workflow({name, nodes, connections})
 2. n8n_validate_workflow({id})
 3. n8n_update_partial_workflow({id, operations: [...]})
 4. n8n_validate_workflow({id}) again
 5. n8n_update_partial_workflow({id, operations: [{type: "activateWorkflow"}]})
+
 ```
 
 **Common pattern**: iterative updates (56s average between edits)
@@ -106,6 +112,7 @@ get_node({nodeType: "nodes-base.slack", mode: "docs"})
 **Two different formats** for different tools!
 
 ### Format 1: Search/Validate Tools
+
 ```javascript
 // Use SHORT prefix
 "nodes-base.slack"
@@ -115,12 +122,14 @@ get_node({nodeType: "nodes-base.slack", mode: "docs"})
 ```
 
 **Tools that use this**:
+
 - search_nodes (returns this format)
 - get_node
 - validate_node
 - validate_workflow
 
 ### Format 2: Workflow Tools
+
 ```javascript
 // Use FULL prefix
 "n8n-nodes-base.slack"
@@ -130,6 +139,7 @@ get_node({nodeType: "nodes-base.slack", mode: "docs"})
 ```
 
 **Tools that use this**:
+
 - n8n_create_workflow
 - n8n_update_partial_workflow
 
@@ -174,11 +184,13 @@ get_node({nodeType: "nodes-base.slack", detail: "standard"})
 ```
 
 **When to use detail="full"**:
+
 - Debugging complex configuration issues
 - Need complete property schema with all nested options
 - Exploring advanced features
 
 **Better alternatives**:
+
 1. `get_node({detail: "standard"})` - for operations list (default)
 2. `get_node({mode: "docs"})` - for readable documentation
 3. `get_node({mode: "search_properties", propertyQuery: "auth"})` - for specific property
@@ -188,6 +200,7 @@ get_node({nodeType: "nodes-base.slack", detail: "standard"})
 **Problem**: Too many false positives OR missing real errors
 
 **Profiles**:
+
 - `minimal` - Only required fields (fast, permissive)
 - `runtime` - Values + types (recommended for pre-deployment)
 - `ai-friendly` - Reduce false positives (for AI configuration)
@@ -206,11 +219,13 @@ validate_node({nodeType, config, profile: "runtime"})
 **What happens**: ALL nodes sanitized on ANY workflow update
 
 **Auto-fixes**:
+
 - Binary operators (equals, contains) → removes singleValue
 - Unary operators (isEmpty, isNotEmpty) → adds singleValue: true
 - IF/Switch nodes → adds missing metadata
 
 **Cannot fix**:
+
 - Broken connections
 - Branch count mismatches
 - Paradoxical corrupt states
@@ -373,13 +388,17 @@ await n8n_update_partial_workflow({
 ## Detailed Guides
 
 ### Node Discovery Tools
+
 See SEARCH_GUIDE.md for:
+
 - search_nodes
 - get_node with detail levels (minimal, standard, full)
 - get_node modes (info, docs, search_properties, versions)
 
 ### Validation Tools
+
 See VALIDATION_GUIDE.md for:
+
 - Validation profiles explained
 - validate_node with modes (minimal, full)
 - validate_workflow complete structure
@@ -387,7 +406,9 @@ See VALIDATION_GUIDE.md for:
 - Handling validation errors
 
 ### Workflow Management
+
 See WORKFLOW_GUIDE.md for:
+
 - n8n_create_workflow
 - n8n_update_partial_workflow (17 operation types!)
 - Smart parameters (branch, case)
@@ -501,12 +522,14 @@ n8n_health_check({mode: "diagnostic"})
 ## Tool Availability
 
 **Always Available** (no n8n API needed):
+
 - search_nodes, get_node
 - validate_node, validate_workflow
 - search_templates, get_template
 - tools_documentation, ai_agents_guide
 
 **Requires n8n API** (N8N_API_URL + N8N_API_KEY):
+
 - n8n_create_workflow
 - n8n_update_partial_workflow
 - n8n_validate_workflow (by ID)
@@ -526,11 +549,13 @@ If API tools unavailable, use templates and validation-only workflows.
 ### get_node (Unified Node Information)
 
 **Detail Levels** (mode="info", default):
+
 - `minimal` (~200 tokens) - Basic metadata only
 - `standard` (~1-2K tokens) - Essential properties + operations (RECOMMENDED)
 - `full` (~3-8K tokens) - Complete schema (use sparingly)
 
 **Operation Modes**:
+
 - `info` (default) - Node schema with detail level
 - `docs` - Readable markdown documentation
 - `search_properties` - Find specific properties (use with propertyQuery)
@@ -556,10 +581,12 @@ get_node({nodeType: "nodes-base.executeWorkflow", mode: "versions"})
 ### validate_node (Unified Validation)
 
 **Modes**:
+
 - `full` (default) - Comprehensive validation with errors/warnings/suggestions
 - `minimal` - Quick required fields check only
 
 **Profiles** (for mode="full"):
+
 - `minimal` - Very lenient
 - `runtime` - Standard (default, recommended)
 - `ai-friendly` - Balanced for AI workflows
@@ -594,6 +621,7 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 ## Best Practices
 
 ### Do
+
 - Use `get_node({detail: "standard"})` for most use cases
 - Specify validation profile explicitly (`profile: "runtime"`)
 - Use smart parameters (`branch`, `case`) for clarity
@@ -605,6 +633,7 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 - Use `n8n_deploy_template` for quick starts
 
 ### Don't
+
 - Use `detail: "full"` unless necessary (wastes tokens)
 - Forget nodeType prefix (`nodes-base.*`)
 - Skip validation profiles
@@ -618,6 +647,7 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 ## Summary
 
 **Most Important**:
+
 1. Use **get_node** with `detail: "standard"` (default) - covers 95% of use cases
 2. nodeType formats differ: `nodes-base.*` (search/validate) vs `n8n-nodes-base.*` (workflows)
 3. Specify **validation profiles** (`runtime` recommended)
@@ -628,6 +658,7 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 8. Workflows are built **iteratively** (56s avg between edits)
 
 **Common Workflow**:
+
 1. search_nodes → find node
 2. get_node → understand config
 3. validate_node → check config
@@ -637,6 +668,7 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 7. activateWorkflow → go live!
 
 For details, see:
+
 - SEARCH_GUIDE.md - Node discovery
 - VALIDATION_GUIDE.md - Configuration validation
 - WORKFLOW_GUIDE.md - Workflow management
@@ -644,6 +676,7 @@ For details, see:
 ---
 
 **Related Skills**:
+
 - n8n Expression Syntax - Write expressions in workflow fields
 - n8n Workflow Patterns - Architectural patterns from templates
 - n8n Validation Expert - Interpret validation errors
@@ -652,11 +685,13 @@ For details, see:
 - n8n Code Python - Write Python in Code nodes
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

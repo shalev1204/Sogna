@@ -8,7 +8,6 @@ id: skill-grafana-dashboards
 owner: [[orchestrator]]
 ---
 
-
 # Grafana Dashboards
 
 Create and manage production-ready Grafana dashboards for comprehensive system observability.
@@ -40,6 +39,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ## Dashboard Design Principles
 
 ### 1. Hierarchy of Information
+
 ```
 ┌─────────────────────────────────────┐
 │  Critical Metrics (Big Numbers)     │
@@ -51,11 +51,13 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```
 
 ### 2. RED Method (Services)
+
 - **Rate** - Requests per second
 - **Errors** - Error rate
 - **Duration** - Latency/response time
 
 ### 3. USE Method (Resources)
+
 - **Utilization** - % time resource is busy
 - **Saturation** - Queue length/wait time
 - **Errors** - Error count
@@ -125,6 +127,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ## Panel Types
 
 ### 1. Stat Panel (Single Value)
+
 ```json
 {
   "type": "stat",
@@ -157,6 +160,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```
 
 ### 2. Time Series Graph
+
 ```json
 {
   "type": "graph",
@@ -172,6 +176,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```
 
 ### 3. Table Panel
+
 ```json
 {
   "type": "table",
@@ -199,6 +204,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```
 
 ### 4. Heatmap
+
 ```json
 {
   "type": "heatmap",
@@ -217,6 +223,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ## Variables
 
 ### Query Variables
+
 ```json
 {
   "templating": {
@@ -243,6 +250,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```
 
 ### Use Variables in Queries
+
 ```
 sum(rate(http_requests_total{namespace="$namespace", service=~"$service"}[5m]))
 ```
@@ -286,7 +294,9 @@ sum(rate(http_requests_total{namespace="$namespace", service=~"$service"}[5m]))
 apiVersion: 1
 
 providers:
+
   - name: 'default'
+
     orgId: 1
     folder: 'General'
     type: file
@@ -302,6 +312,7 @@ providers:
 ### Infrastructure Dashboard
 
 **Key Panels:**
+
 - CPU utilization per node
 - Memory usage per node
 - Disk I/O
@@ -314,6 +325,7 @@ providers:
 ### Database Dashboard
 
 **Key Panels:**
+
 - Queries per second
 - Connection pool usage
 - Query latency (P50, P95, P99)
@@ -327,6 +339,7 @@ providers:
 ### Application Dashboard
 
 **Key Panels:**
+
 - Request rate
 - Error rate
 - Response time (percentiles)
@@ -365,12 +378,16 @@ resource "grafana_folder" "monitoring" {
 ### Ansible Provisioning
 
 ```yaml
+
 - name: Deploy Grafana dashboards
+
   copy:
     src: "{{ item }}"
     dest: /etc/grafana/dashboards/
   with_fileglob:
+
     - "dashboards/*.json"
+
   notify: restart grafana
 ```
 
@@ -387,11 +404,13 @@ resource "grafana_folder" "monitoring" {
 - `slo-implementation` - For SLO dashboards
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

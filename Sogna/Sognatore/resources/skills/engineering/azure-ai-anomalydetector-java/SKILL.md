@@ -8,7 +8,6 @@ id: skill-azure-ai-anomalydetector-java
 owner: [[orchestrator]]
 ---
 
-
 # Azure AI Anomaly Detector SDK for Java
 
 Build anomaly detection applications using the Azure AI Anomaly Detector SDK for Java.
@@ -63,11 +62,13 @@ MultivariateClient client = new AnomalyDetectorClientBuilder()
 ## Key Concepts
 
 ### Univariate Anomaly Detection
+
 - **Batch Detection**: Analyze entire time series at once
 - **Streaming Detection**: Real-time detection on latest data point
 - **Change Point Detection**: Detect trend changes in time series
 
 ### Multivariate Anomaly Detection
+
 - Detect anomalies across 300+ correlated signals
 - Uses Graph Attention Network for inter-correlations
 - Three-step process: Train → Inference → Results
@@ -261,14 +262,17 @@ AZURE_ANOMALY_DETECTOR_API_KEY=<your-api-key>
 - "Azure AI Anomaly Detector"
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

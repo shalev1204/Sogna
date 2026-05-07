@@ -12,7 +12,6 @@ id: skill-testing-patterns
 owner: [[eng-qa]]
 ---
 
-
 # Testing Patterns
 
 > Principles for reliable test suites.

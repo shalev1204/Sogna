@@ -7,7 +7,6 @@ id: skill-filesystem-context
 owner: [[orchestrator]]
 ---
 
-
 # Filesystem-Based Context Engineering
 
 The filesystem provides a single interface through which agents can flexibly store, retrieve, and update an effectively unlimited amount of context. This pattern addresses the fundamental constraint that context windows are limited while tasks often require more information than fits in a single window.
@@ -15,7 +14,9 @@ The filesystem provides a single interface through which agents can flexibly sto
 The core insight is that files enable dynamic context discovery: agents pull relevant context on demand rather than carrying everything in the context window. This contrasts with static context, which is always included regardless of relevance.
 
 ## When to Use
+
 Activate this skill when:
+
 - Tool outputs are bloating the context window
 - Agents need to persist state across long trajectories
 - Sub-agents must share information without direct message passing
@@ -70,6 +71,7 @@ def handle_tool_output(output: str, threshold: int = 2000) -> str:
 The agent can then use `grep` to search for specific patterns or `read_file` with line ranges to retrieve targeted sections.
 
 **Benefits**
+
 - Reduces token accumulation over long conversations
 - Preserves full output for later reference
 - Enables targeted retrieval instead of carrying everything
@@ -85,17 +87,25 @@ Write plans to the filesystem. The agent can re-read its plan at any point, remi
 **Implementation**
 Store plans in structured format:
 ```yaml
+
 # scratch/current_plan.yaml
+
 objective: "Refactor authentication module"
 status: in_progress
 steps:
+
   - id: 1
+
     description: "Audit current auth endpoints"
     status: completed
+
   - id: 2
+
     description: "Design new token validation flow"
     status: in_progress
+
   - id: 3
+
     description: "Implement and test changes"
     status: pending
 ```
@@ -138,9 +148,11 @@ Store skills as files. Include only skill names and brief descriptions in static
 Static context includes:
 ```
 Available skills (load with read_file when relevant):
+
 - database-optimization: Query tuning and indexing strategies
 - api-design: REST/GraphQL best practices
 - testing-strategies: Unit, integration, and e2e testing patterns
+
 ```
 
 Agent loads `skills/database-optimization/SKILL.md` only when working on database tasks.
@@ -207,6 +219,7 @@ Semantic search and filesystem search work well together: semantic search for co
 ### When to Use Filesystem Context
 
 **Use filesystem patterns when:**
+
 - Tool outputs exceed 2000 tokens
 - Tasks span multiple conversation turns
 - Multiple agents need to share state
@@ -214,6 +227,7 @@ Semantic search and filesystem search work well together: semantic search for co
 - Logs or terminal output need selective querying
 
 **Avoid filesystem patterns when:**
+
 - Tasks complete in single turns
 - Context fits comfortably in window
 - Latency is critical (file I/O adds overhead)
@@ -239,6 +253,7 @@ Use consistent naming conventions. Include timestamps or IDs in scratch files fo
 ### Token Accounting
 
 Track where tokens originate:
+
 - Measure static vs dynamic context ratio
 - Monitor tool output sizes before and after offloading
 - Track how often dynamic context is actually loaded
@@ -252,9 +267,11 @@ Optimize based on measurements, not assumptions.
 Input: Web search returns 8000 tokens
 Before: 8000 tokens added to message history
 After: 
+
   - Write to scratch/search_results_001.txt
   - Return: "[Results in scratch/search_results_001.txt. Key finding: API rate limit is 1000 req/min]"
   - Agent greps file when needing specific details
+
 Result: ~100 tokens in context, 8000 tokens accessible on demand
 ```
 
@@ -270,9 +287,11 @@ Result: Full skill loaded only when relevant
 ```
 Trigger: Context window limit reached, summarization required
 Action: 
+
   1. Write full history to history/session_001.txt
   2. Generate summary for new context window
   3. Include reference: "Full history in history/session_001.txt"
+
 Result: Agent can search history file to recover details lost in summarization
 ```
 
@@ -302,14 +321,17 @@ This skill connects to:
 ## References
 
 Internal reference:
+
 - Implementation Patterns - Detailed pattern implementations
 
 Related skills in this collection:
+
 - context-optimization - Token reduction techniques
 - memory-systems - Persistent storage patterns
 - multi-agent-patterns - Agent coordination
 
 External resources:
+
 - LangChain Deep Agents: How agents can use filesystems for context engineering
 - Cursor: Dynamic context discovery patterns
 - Anthropic: Agent Skills specification
@@ -324,11 +346,13 @@ External resources:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-kpi-dashboard-design
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # KPI Dashboard Design
 
 Comprehensive patterns for designing effective Key Performance Indicator (KPI) dashboards that drive business decisions.
@@ -77,88 +76,104 @@ Time-bound: Defined period
 
 ```yaml
 Revenue Metrics:
+
   - Monthly Recurring Revenue (MRR)
   - Annual Recurring Revenue (ARR)
   - Average Revenue Per User (ARPU)
   - Revenue Growth Rate
 
 Pipeline Metrics:
+
   - Sales Pipeline Value
   - Win Rate
   - Average Deal Size
   - Sales Cycle Length
 
 Activity Metrics:
+
   - Calls/Emails per Rep
   - Demos Scheduled
   - Proposals Sent
   - Close Rate
+
 ```
 
 ### Marketing KPIs
 
 ```yaml
 Acquisition:
+
   - Cost Per Acquisition (CPA)
   - Customer Acquisition Cost (CAC)
   - Lead Volume
   - Marketing Qualified Leads (MQL)
 
 Engagement:
+
   - Website Traffic
   - Conversion Rate
   - Email Open/Click Rate
   - Social Engagement
 
 ROI:
+
   - Marketing ROI
   - Campaign Performance
   - Channel Attribution
   - CAC Payback Period
+
 ```
 
 ### Product KPIs
 
 ```yaml
 Usage:
+
   - Daily/Monthly Active Users (DAU/MAU)
   - Session Duration
   - Feature Adoption Rate
   - Stickiness (DAU/MAU)
 
 Quality:
+
   - Net Promoter Score (NPS)
   - Customer Satisfaction (CSAT)
   - Bug/Issue Count
   - Time to Resolution
 
 Growth:
+
   - User Growth Rate
   - Activation Rate
   - Retention Rate
   - Churn Rate
+
 ```
 
 ### Finance KPIs
 
 ```yaml
 Profitability:
+
   - Gross Margin
   - Net Profit Margin
   - EBITDA
   - Operating Margin
 
 Liquidity:
+
   - Current Ratio
   - Quick Ratio
   - Cash Flow
   - Working Capital
 
 Efficiency:
+
   - Revenue per Employee
   - Operating Expense Ratio
   - Days Sales Outstanding
   - Inventory Turnover
+
 ```
 
 ## Dashboard Layout Patterns
@@ -331,6 +346,7 @@ import plotly.graph_objects as go
 st.set_page_config(page_title="KPI Dashboard", layout="wide")
 
 # Header with date filter
+
 col1, col2 = st.columns([3, 1])
 with col1:
     st.title("Executive Dashboard")
@@ -341,6 +357,7 @@ with col2:
     )
 
 # KPI Cards
+
 def metric_card(label, value, delta, prefix="", suffix=""):
     delta_color = "green" if delta >= 0 else "red"
     delta_arrow = "▲" if delta >= 0 else "▼"
@@ -361,6 +378,7 @@ with col4:
     metric_card("Churn Rate", 4.2, -0.8, suffix="%")
 
 # Charts
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -387,6 +405,7 @@ with col2:
     st.plotly_chart(fig, use_container_width=True)
 
 # Cohort Heatmap
+
 st.subheader("Cohort Retention")
 cohort_data = pd.DataFrame({
     'Cohort': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
@@ -409,6 +428,7 @@ fig.update_layout(height=250)
 st.plotly_chart(fig, use_container_width=True)
 
 # Alerts Section
+
 st.subheader("Alerts")
 alerts = [
     {"level": "error", "message": "Churn rate exceeded threshold (>5%)"},
@@ -446,11 +466,13 @@ for alert in alerts:
 - [Google Data Studio Gallery](https://datastudio.google.com/gallery)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

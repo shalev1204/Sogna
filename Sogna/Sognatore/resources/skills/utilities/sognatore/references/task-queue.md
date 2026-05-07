@@ -99,6 +99,7 @@ def claim_task(agent_id, agent_capabilities):
 
 ```bash
 #!/bin/bash
+
 # Atomic task claim using flock
 
 QUEUE_FILE=".sognatore/queue/pending.json"
@@ -254,7 +255,9 @@ def cancel_task(task_id, reason):
 ### Configuration
 
 ```yaml
+
 # .sognatore/config/circuit-breakers.yaml
+
 defaults:
   failureThreshold: 5
   cooldownSeconds: 300
@@ -368,6 +371,7 @@ def calculate_exponential_backoff(attempt=1, base=60, max_wait=3600):
 Tasks are always processed in priority order within their type.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

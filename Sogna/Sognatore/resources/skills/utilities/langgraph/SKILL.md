@@ -11,7 +11,6 @@ id: skill-langgraph
 owner: [[orchestrator]]
 ---
 
-
 # LangGraph
 
 Expert in LangGraph - the production-grade framework for building stateful, multi-actor
@@ -101,11 +100,13 @@ from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
 
 # 1. Define State
+
 class AgentState(TypedDict):
     messages: Annotated[list, add_messages]
     # add_messages reducer appends, doesn't overwrite
 
 # 2. Define Tools
+
 @tool
 def search(query: str) -> str:
     """Search the web for information."""
@@ -120,18 +121,22 @@ def calculator(expression: str) -> str:
 tools = [search, calculator]
 
 # 3. Create LLM with tools
+
 llm = ChatOpenAI(model="gpt-4o").bind_tools(tools)
 
 # 4. Define Nodes
+
 def agent(state: AgentState) -> dict:
     """The agent node - calls LLM."""
     response = llm.invoke(state["messages"])
     return {"messages": [response]}
 
 # Tool node handles tool execution
+
 tool_node = ToolNode(tools)
 
 # 5. Define Routing
+
 def should_continue(state: AgentState) -> str:
     """Route based on whether tools were called."""
     last_message = state["messages"][-1]
@@ -140,21 +145,26 @@ def should_continue(state: AgentState) -> str:
     return END
 
 # 6. Build Graph
+
 graph = StateGraph(AgentState)
 
 # Add nodes
+
 graph.add_node("agent", agent)
 graph.add_node("tools", tool_node)
 
 # Add edges
+
 graph.add_edge(START, "agent")
 graph.add_conditional_edges("agent", should_continue, ["tools", END])
 graph.add_edge("tools", "agent")  # Loop back
 
 # Compile
+
 app = graph.compile()
 
 # 7. Run
+
 result = app.invoke({
     "messages": [("user", "What is 25 * 4?")]
 })
@@ -170,10 +180,12 @@ from operator import add
 from langgraph.graph import StateGraph
 
 # Custom reducer for merging dictionaries
+
 def merge_dicts(left: dict, right: dict) -> dict:
     return {**left, **right}
 
 # State with multiple reducers
+
 class ResearchState(TypedDict):
     # Messages append (don't overwrite)
     messages: Annotated[list, add_messages]
@@ -191,6 +203,7 @@ class ResearchState(TypedDict):
     errors: Annotated[int, lambda a, b: a + b]
 
 # Nodes return partial state updates
+
 def researcher(state: ResearchState) -> dict:
     # Only return fields being updated
     return {
@@ -210,9 +223,11 @@ def writer(state: ResearchState) -> dict:
     }
 
 # Build graph
+
 graph = StateGraph(ResearchState)
 graph.add_node("researcher", researcher)
 graph.add_node("writer", writer)
+
 # ... add edges
 
 ### Conditional Branching
@@ -248,12 +263,14 @@ def chat_agent(state: RouterState) -> dict:
     return {"result": "Let me help..."}
 
 # Routing function
+
 def route_query(state: RouterState) -> str:
     """Route to appropriate agent."""
     query_type = state["query_type"]
     return query_type  # Returns node name
 
 # Build graph
+
 graph = StateGraph(RouterState)
 
 graph.add_node("classifier", classifier)
@@ -264,6 +281,7 @@ graph.add_node("chat", chat_agent)
 graph.add_edge(START, "classifier")
 
 # Conditional edges from classifier
+
 graph.add_conditional_edges(
     "classifier",
     route_query,
@@ -275,6 +293,7 @@ graph.add_conditional_edges(
 )
 
 # All agents lead to END
+
 graph.add_edge("coding", END)
 graph.add_edge("search", END)
 graph.add_edge("chat", END)
@@ -292,37 +311,48 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.checkpoint.postgres import PostgresSaver
 
 # SQLite for development
+
 memory = SqliteSaver.from_conn_string(":memory:")
+
 # Or persistent file
+
 memory = SqliteSaver.from_conn_string("agent_state.db")
 
 # PostgreSQL for production
+
 # memory = PostgresSaver.from_conn_string(DATABASE_URL)
 
 # Compile with checkpointer
+
 app = graph.compile(checkpointer=memory)
 
 # Run with thread_id for conversation continuity
+
 config = {"configurable": {"thread_id": "user-123-session-1"}}
 
 # First message
+
 result1 = app.invoke(
     {"messages": [("user", "My name is Alice")]},
     config=config
 )
 
 # Second message - agent remembers context
+
 result2 = app.invoke(
     {"messages": [("user", "What's my name?")]},
     config=config
 )
+
 # Agent knows name is Alice!
 
 # Get conversation history
+
 state = app.get_state(config)
 print(state.values["messages"])
 
 # List all checkpoints
+
 for checkpoint in app.get_state_history(config):
     print(checkpoint.config, checkpoint.values)
 
@@ -362,6 +392,7 @@ def should_execute(state: ApprovalState) -> str:
     return END  # Wait for approval
 
 # Build graph
+
 graph = StateGraph(ApprovalState)
 graph.add_node("agent", agent)
 graph.add_node("execute", execute_action)
@@ -371,21 +402,25 @@ graph.add_conditional_edges("agent", should_execute, ["execute", END])
 graph.add_edge("execute", END)
 
 # Compile with interrupt_before for human review
+
 app = graph.compile(
     checkpointer=memory,
     interrupt_before=["execute"]  # Pause before execution
 )
 
 # Run until interrupt
+
 config = {"configurable": {"thread_id": "approval-flow"}}
 result = app.invoke({"messages": [("user", "Send report")]}, config)
 
 # Agent paused - get pending state
+
 state = app.get_state(config)
 pending = state.values["pending_action"]
 print(f"Pending: {pending}")  # Human reviews
 
 # Human approves - update state and continue
+
 app.update_state(config, {"approved": True})
 result = app.invoke(None, config)  # Resume
 
@@ -423,13 +458,17 @@ def fanout_topics(state: ParallelState) -> list[Send]:
     ]
 
 # Build graph
+
 graph = StateGraph(ParallelState)
 graph.add_node("research", research_topic)
 graph.add_node("summarize", summarize)
 
 # Fan out to parallel research
+
 graph.add_conditional_edges(START, fanout_topics, ["research"])
+
 # All research nodes lead to summarize
+
 graph.add_edge("research", "summarize")
 graph.add_edge("summarize", END)
 
@@ -439,6 +478,7 @@ result = app.invoke({
     "topics": ["AI", "Climate", "Space"],
     "results": []
 })
+
 # Research runs in parallel, then summarizes
 
 ## Collaboration
@@ -457,10 +497,12 @@ Skills: langgraph, langfuse, structured-output
 Workflow:
 
 ```
+
 1. Design agent graph with LangGraph
 2. Add structured outputs for tool responses
 3. Integrate Langfuse for observability
 4. Test and monitor in production
+
 ```
 
 ### Multi-Agent System
@@ -470,10 +512,12 @@ Skills: langgraph, crewai, agent-communication
 Workflow:
 
 ```
+
 1. Design agent roles (CrewAI patterns)
 2. Implement as LangGraph with subgraphs
 3. Add inter-agent communication
 4. Orchestrate with supervisor pattern
+
 ```
 
 ### Evaluated Agent
@@ -483,10 +527,12 @@ Skills: langgraph, agent-evaluation, langfuse
 Workflow:
 
 ```
+
 1. Build agent with LangGraph
 2. Create evaluation suite
 3. Monitor with Langfuse
 4. Iterate based on metrics
+
 ```
 
 ## Related Skills
@@ -494,6 +540,7 @@ Workflow:
 Works well with: `crewai`, `autonomous-agents`, `langfuse`, `structured-output`
 
 ## When to Use
+
 - User mentions or implies: langgraph
 - User mentions or implies: langchain agent
 - User mentions or implies: stateful agent
@@ -503,11 +550,13 @@ Works well with: `crewai`, `autonomous-agents`, `langfuse`, `structured-output`
 - User mentions or implies: multi-step agent
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

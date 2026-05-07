@@ -8,7 +8,6 @@ id: skill-azure-monitor-query-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Monitor Query SDK for Python
 
 Query logs and metrics from Azure Monitor and Log Analytics workspaces.
@@ -22,10 +21,13 @@ pip install azure-monitor-query
 ## Environment Variables
 
 ```bash
+
 # Log Analytics
+
 AZURE_LOG_ANALYTICS_WORKSPACE_ID=<workspace-id>
 
 # Metrics
+
 AZURE_METRICS_RESOURCE_URI=/subscriptions/<sub>/resourceGroups/<rg>/providers/<provider>/<type>/<name>
 ```
 
@@ -255,14 +257,17 @@ AppExceptions
 7. **Filter by dimensions** to narrow metric results
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

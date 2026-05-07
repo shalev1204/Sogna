@@ -8,7 +8,6 @@ id: skill-fastapi-pro
 owner: [[eng-api]]
 ---
 
-
 ## Use this skill when
 
 - Working on fastapi pro tasks or workflows
@@ -193,11 +192,13 @@ Expert FastAPI developer specializing in high-performance, async-first API devel
 - "Build a file upload system with progress tracking"
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

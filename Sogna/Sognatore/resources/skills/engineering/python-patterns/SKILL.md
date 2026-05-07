@@ -8,13 +8,13 @@ id: skill-python-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Python Patterns
 
 > Python development principles and decision-making for 2025.
 > **Learn to THINK, not memorize patterns.**
 
 ## When to Use
+
 Use this skill when making Python architecture decisions, choosing frameworks, designing async patterns, or structuring Python projects.
 
 ---
@@ -63,6 +63,7 @@ What are you building?
 | **Learning curve** | Low | Medium | Low |
 
 ### Selection Questions to Ask:
+
 1. Is this API-only or full-stack?
 2. Need admin interface?
 3. Team familiar with async?
@@ -134,20 +135,25 @@ Can skip:
 ### Common Type Patterns
 
 ```python
+
 # These are patterns, understand them:
 
 # Optional → might be None
+
 from typing import Optional
 def find_user(id: int) -> Optional[User]: ...
 
 # Union → one of multiple types
+
 def process(data: str | dict) -> None: ...
 
 # Generic collections
+
 def get_items() -> list[Item]: ...
 def get_mapping() -> dict[str, int]: ...
 
 # Callable
+
 from typing import Callable
 def apply(fn: Callable[[int], str]) -> str: ...
 ```
@@ -303,16 +309,20 @@ Benefits:
 ### Pydantic v2 Integration
 
 ```python
+
 # FastAPI + Pydantic are tightly integrated:
 
 # Request validation
+
 @app.post("/users")
 async def create(user: UserCreate) -> UserResponse:
     # user is already validated
     ...
 
 # Response serialization
+
 # Return type becomes response schema
+
 ```
 
 ---
@@ -390,6 +400,7 @@ Include:
 ### Async Testing
 
 ```python
+
 # Use pytest-asyncio for async tests
 
 import pytest
@@ -431,6 +442,7 @@ Before implementing:
 ## 11. Anti-Patterns to Avoid
 
 ### ❌ DON'T:
+
 - Default to Django for simple APIs (FastAPI may be better)
 - Use sync libraries in async code
 - Skip type hints for public APIs
@@ -439,6 +451,7 @@ Before implementing:
 - Mix async and sync carelessly
 
 ### ✅ DO:
+
 - Choose framework based on context
 - Ask about async requirements
 - Use Pydantic for validation
@@ -450,11 +463,13 @@ Before implementing:
 > **Remember**: Python patterns are about decision-making for YOUR specific context. Don't copy code—think about what serves your application best.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

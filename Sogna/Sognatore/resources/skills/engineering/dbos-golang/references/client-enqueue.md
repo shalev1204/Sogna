@@ -56,6 +56,7 @@ handle, err := client.Enqueue("task_queue", "processTask", "task-data",
 ```
 
 Enqueue options:
+
 - `WithEnqueueWorkflowID`: Custom workflow ID
 - `WithEnqueueDeduplicationID`: Prevent duplicate enqueues
 - `WithEnqueuePriority`: Queue priority (lower = higher priority)
@@ -70,6 +71,7 @@ Always call `client.Shutdown()` when done.
 Reference: [DBOS Client Enqueue](https://docs.dbos.dev/golang/reference/client#enqueue)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

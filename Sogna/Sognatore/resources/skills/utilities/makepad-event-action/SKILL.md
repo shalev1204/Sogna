@@ -11,7 +11,6 @@ id: skill-makepad-event-action
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Event/Action Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -19,11 +18,13 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad event and action handling. Help users by:
+
 - **Handling events**: Mouse, keyboard, touch, lifecycle events
 - **Creating actions**: Widget-to-parent communication
 - **Event flow**: Understanding event propagation
 
 ## When to Use
+
 - You need to handle input, lifecycle, or UI interaction events in Makepad.
 - The task involves `handle_event`, `Event` variants, `Hit` processing, or widget action propagation.
 - You need to design or debug Makepad event/action flow between widgets and parents.
@@ -31,6 +32,7 @@ You are an expert at Makepad event and action handling. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/event-system.md` - Event enum and handling
 - `./references/action-system.md` - Action trait and patterns
 
@@ -260,11 +262,13 @@ if let Event::NextFrame(ne) = event {
 5. `DefaultNone` derive macro auto-implements Default for enums
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

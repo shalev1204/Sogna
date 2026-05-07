@@ -11,6 +11,7 @@ version: 1.0.0
 These templates dictate the parameters of sales, services, and online privacy. Note the strict variance in consumer-facing privacy laws and commercial codes.
 
 ## Official References
+
 - **USA:** Uniform Commercial Code (UCC) (Varies by State) | FTC Privacy Guidelines.
 - **Canada:** [PIPEDA (Privacy Commissioner)](https://www.priv.gc.ca/) | Provincial Sale of Goods Acts.
 - **EU (Granular):** [N-Lex Consumer Protection](https://n-lex.europa.eu/) | [EU Consumer Rights Directive](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32011L0083)
@@ -26,12 +27,15 @@ These templates dictate the parameters of sales, services, and online privacy. N
 | **Privacy Policies** | Fragmented. Must comply with states like California (CCPA/CPRA), COPPA for children, HIPAA for medical. | Governed federally by PIPEDA (and strictly in Quebec by Law 25). | Governed unilaterally by GDPR. Requires explicit "opt-in" consent, Right to be Forgotten, and Data Processing Agreements (DPA) between entities. |
 
 ## Agent Instructions
+
 When generating a Privacy Policy or Terms of Service:
+
 1. Always inject a GDPR compliance clause if the client does *any* business in Europe.
 2. Structure MSAs to explicitly cite the governing law (state/province/country).
 3. For EU consumer sales, ensure the 14-day right of withdrawal is explicitly mentioned as per the Consumer Rights Directive.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

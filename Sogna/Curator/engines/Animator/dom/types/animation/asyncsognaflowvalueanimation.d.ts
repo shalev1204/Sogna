@@ -1,6 +1,6 @@
-import { ResolvedKeyframes } from "./keyframes/keyframesresolver.js";
+import { ResolvedKeyframes } from "./keyframes/KeyframesResolver.js";
 import { AnimationPlaybackControls, AnyResolvedKeyframe, TimelineWithFallback, ValueAnimationOptions } from "./types.js";
-import { WithPromise } from "./utils/withpromise.js";
+import { WithPromise } from "./utils/WithPromise.js";
 type OptionsWithoutKeyframes<T extends AnyResolvedKeyframe> = Omit<ValueAnimationOptions<T>, "keyframes">;
 export declare class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe> extends WithPromise implements AnimationPlaybackControls {
     private createdAt;

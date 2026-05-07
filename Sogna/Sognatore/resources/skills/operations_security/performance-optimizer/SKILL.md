@@ -9,7 +9,6 @@ id: skill-performance-optimizer
 owner: [[eng-perf]], [[ops-security]]
 ---
 
-
 # Performance Optimizer
 
 Find and fix performance bottlenecks. Measure, optimize, verify. Make it fast.
@@ -37,6 +36,7 @@ console.timeEnd('operation'); // operation: 2341ms
 ```
 
 **What to measure:**
+
 - Page load time
 - API response time
 - Database query time
@@ -325,21 +325,25 @@ Time to Interactive: < 3 seconds
 ## Tools
 
 **Browser:**
+
 - Chrome DevTools Performance tab
 - Lighthouse (audit)
 - Network tab (waterfall)
 
 **Node.js:**
+
 - `node --prof` (profiling)
 - `clinic` (diagnostics)
 - `autocannon` (load testing)
 
 **Database:**
+
 - `EXPLAIN ANALYZE` (query plans)
 - Slow query log
 - Database profiler
 
 **Monitoring:**
+
 - New Relic
 - Datadog
 - Sentry Performance
@@ -392,11 +396,13 @@ Easy optimizations with big impact:
 - `@bug-hunter` - Debugging
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

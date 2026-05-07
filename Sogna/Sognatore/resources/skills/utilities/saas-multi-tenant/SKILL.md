@@ -10,7 +10,6 @@ id: skill-saas-multi-tenant
 owner: [[orchestrator]]
 ---
 
-
 # SaaS Multi-Tenant Architecture
 
 ## When to Use This Skill
@@ -25,6 +24,7 @@ owner: [[orchestrator]]
 - The user is building tenant-aware middleware in Express, Fastify, or Next.js API routes
 
 Do NOT use this skill when:
+
 - The user is building a single-user application with no shared infrastructure
 - The user asks about authentication only without tenant scoping (use an auth skill instead)
 - The user needs general database schema design without multi-tenancy requirements
@@ -186,11 +186,13 @@ function createTenantPrisma(tenantId: string): PrismaClient {
 6. **Rate-limit and quota per tenant, not globally.** A global rate limit of 1000 requests/minute means one noisy tenant can exhaust the quota for everyone. Implement per-tenant rate limiting using a Redis key pattern like `ratelimit:{tenant_id}:{endpoint}` with a sliding window counter.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-frontend-mobile-development-component-scaffold
 owner: [[eng-frontend]], [[prod-pm]], [[eng-mobile]]
 ---
 
-
 # React/React Native Component Scaffolding
 
 You are a React component architecture expert specializing in scaffolding production-ready, accessible, and performant components. Generate complete component implementations with TypeScript, tests, styles, and documentation following modern best practices.
@@ -409,11 +408,13 @@ export const Interactive: Story = {
 Focus on creating production-ready, accessible, and maintainable components that follow modern React patterns and best practices.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

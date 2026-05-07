@@ -8,7 +8,6 @@ id: skill-azure-messaging-webpubsubservice-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure Web PubSub Service SDK for Python
 
 Real-time messaging with WebSocket connections at scale.
@@ -16,10 +15,13 @@ Real-time messaging with WebSocket connections at scale.
 ## Installation
 
 ```bash
+
 # Service SDK (server-side)
+
 pip install azure-messaging-webpubsubservice
 
 # Client SDK (for Python WebSocket clients)
+
 pip install azure-messaging-webpubsubclient
 ```
 
@@ -38,12 +40,14 @@ AZURE_WEBPUBSUB_HUB=my-hub
 from azure.messaging.webpubsubservice import WebPubSubServiceClient
 
 # Connection string
+
 client = WebPubSubServiceClient.from_connection_string(
     connection_string=os.environ["AZURE_WEBPUBSUB_CONNECTION_STRING"],
     hub="my-hub"
 )
 
 # Entra ID
+
 from azure.identity import DefaultAzureCredential
 
 client = WebPubSubServiceClient(
@@ -56,17 +60,21 @@ client = WebPubSubServiceClient(
 ### Generate Client Access Token
 
 ```python
+
 # Token for anonymous user
+
 token = client.get_client_access_token()
 print(f"URL: {token['url']}")
 
 # Token with user ID
+
 token = client.get_client_access_token(
     user_id="user123",
     roles=["webpubsub.sendToGroup", "webpubsub.joinLeaveGroup"]
 )
 
 # Token with groups
+
 token = client.get_client_access_token(
     user_id="user123",
     groups=["group1", "group2"]
@@ -76,10 +84,13 @@ token = client.get_client_access_token(
 ### Send to All Clients
 
 ```python
+
 # Send text
+
 client.send_to_all(message="Hello everyone!", content_type="text/plain")
 
 # Send JSON
+
 client.send_to_all(
     message={"type": "notification", "data": "Hello"},
     content_type="application/json"
@@ -119,35 +130,46 @@ client.send_to_connection(
 ### Group Management
 
 ```python
+
 # Add user to group
+
 client.add_user_to_group(group="my-group", user_id="user123")
 
 # Remove user from group
+
 client.remove_user_from_group(group="my-group", user_id="user123")
 
 # Add connection to group
+
 client.add_connection_to_group(group="my-group", connection_id="abc123")
 
 # Remove connection from group
+
 client.remove_connection_from_group(group="my-group", connection_id="abc123")
 ```
 
 ### Connection Management
 
 ```python
+
 # Check if connection exists
+
 exists = client.connection_exists(connection_id="abc123")
 
 # Check if user has connections
+
 exists = client.user_exists(user_id="user123")
 
 # Check if group has connections
+
 exists = client.group_exists(group="my-group")
 
 # Close connection
+
 client.close_connection(connection_id="abc123", reason="Session ended")
 
 # Close all connections for user
+
 client.close_all_connections(user_id="user123")
 ```
 
@@ -157,6 +179,7 @@ client.close_all_connections(user_id="user123")
 from azure.messaging.webpubsubservice import WebPubSubServiceClient
 
 # Grant permission
+
 client.grant_permission(
     permission="joinLeaveGroup",
     connection_id="abc123",
@@ -164,6 +187,7 @@ client.grant_permission(
 )
 
 # Revoke permission
+
 client.revoke_permission(
     permission="joinLeaveGroup",
     connection_id="abc123",
@@ -171,6 +195,7 @@ client.revoke_permission(
 )
 
 # Check permission
+
 has_permission = client.check_permission(
     permission="joinLeaveGroup",
     connection_id="abc123",
@@ -186,6 +211,7 @@ from azure.messaging.webpubsubclient import WebPubSubClient
 client = WebPubSubClient(credential=token["url"])
 
 # Event handlers
+
 @client.on("connected")
 def on_connected(e):
     print(f"Connected: {e.connection_id}")
@@ -199,6 +225,7 @@ def on_group_message(e):
     print(f"Group {e.group}: {e.data}")
 
 # Connect and send
+
 client.open()
 client.send_to_group("my-group", "Hello from Python!")
 ```
@@ -248,14 +275,17 @@ async def broadcast():
 7. **Close connections** gracefully with reasons
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

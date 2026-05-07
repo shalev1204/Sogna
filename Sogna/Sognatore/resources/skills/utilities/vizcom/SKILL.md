@@ -8,7 +8,6 @@ id: skill-vizcom
 owner: [[orchestrator]]
 ---
 
-
 # Vizcom Skill
 
 [Vizcom](https://vizcom.com/) is an AI-driven platform designed to accelerate the ideation and rendering process, turning rough inputs into breathtaking visualizations.
@@ -18,6 +17,7 @@ owner: [[orchestrator]]
 Use this skill when tasked with creating photorealistic renders from rough sketches or line art, exploring aesthetic variations of a physical product concept, or generating high-fidelity 3D-like visualizations.
 
 ## When to Use
+
 Trigger this skill when:
 
 - Designing physical products (furniture, electronics, transportation, consumer goods).
@@ -39,11 +39,13 @@ Trigger this skill when:
 - **Lighting is Key**: Always include lighting directions in the prompt (e.g., "cinematic lighting", "high contrast shadows") to elevate the visual impact.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

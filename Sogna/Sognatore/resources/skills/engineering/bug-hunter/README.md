@@ -27,6 +27,7 @@ Use @bug-hunter to fix the login timeout issue
 The skill will systematically debug and fix the problem.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

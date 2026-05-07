@@ -7,7 +7,6 @@ id: skill-odoo-upgrade-advisor
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Upgrade Advisor
 
 ## Overview
@@ -62,13 +61,16 @@ BEFORE YOU START:
 ### Example 2: Community Upgrade with OpenUpgrade
 
 ```bash
+
 # Clone OpenUpgrade for the TARGET version (e.g., upgrading to v17)
+
 git clone https://github.com/OCA/OpenUpgrade.git \
   --branch 17.0 \
   --single-branch \
   /opt/openupgrade
 
 # Run the migration against your staging database
+
 python3 /opt/openupgrade/odoo-bin \
   --update all \
   --database odoo_staging \
@@ -77,6 +79,7 @@ python3 /opt/openupgrade/odoo-bin \
   --load openupgrade_framework
 
 # Review the log for errors before touching production
+
 tail -200 /var/log/odoo/odoo.log | grep -E "ERROR|WARNING|Traceback"
 ```
 
@@ -126,6 +129,7 @@ Users & Security:
 - OWL JavaScript component migration (legacy widget → OWL v16+) is a complex front-end topic beyond the scope of this skill.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

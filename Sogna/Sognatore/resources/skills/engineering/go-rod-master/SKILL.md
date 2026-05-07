@@ -8,7 +8,6 @@ id: skill-go-rod-master
 owner: [[orchestrator]]
 ---
 
-
 # Go-Rod Browser Automation Master
 
 ## Overview
@@ -39,10 +38,13 @@ The companion library [go-rod/stealth](https://github.com/go-rod/stealth) inject
 ## Installation
 
 ```bash
+
 # Core rod library
+
 go get github.com/go-rod/rod@latest
 
 # Stealth anti-detection plugin (ALWAYS include for production scraping)
+
 go get github.com/go-rod/stealth@latest
 ```
 
@@ -218,6 +220,7 @@ page.MustScreenshot("stealth_test.png")
 ```
 
 Expected results for a properly stealth-configured browser:
+
 - **WebDriver**: `missing (passed)`
 - **Chrome**: `present (passed)`
 - **Plugins Length**: `3` (not `0`)
@@ -483,6 +486,7 @@ browser := rod.New().ControlURL(u).MustConnect()
 ## Examples
 
 See the `examples/` directory for complete, runnable Go files:
+
 - `examples/basic_scrape.go` — Minimal scraping example
 - `examples/stealth_page.go` — Anti-detection with go-rod/stealth
 - `examples/request_hijacking.go` — Intercepting and modifying network requests
@@ -510,21 +514,27 @@ See the `examples/` directory for complete, runnable Go files:
 ## Common Pitfalls
 
 - **Problem:** Element not found even though it exists on the page.
+
   **Solution:** The element may be inside an iframe or shadow DOM. Use `page.MustSearch()` instead of `page.MustElement()` — it searches across all iframes and shadow DOMs.
 
 - **Problem:** Click doesn't work because the element is animating.
+
   **Solution:** Call `el.MustWaitStable()` before `el.MustClick()`.
 
 - **Problem:** Bot detection despite using stealth.
+
   **Solution:** Combine `stealth.MustPage()` with: randomized viewport sizes, realistic User-Agent strings, human-like input delays between keystrokes, and random idle behaviors (scroll, hover).
 
 - **Problem:** Browser process leaks (zombie processes).
+
   **Solution:** Always `defer browser.MustClose()`. Rod uses [leakless](https://github.com/ysmood/leakless) to kill zombies after main process crash, but explicit cleanup is preferred.
 
 - **Problem:** Timeout errors on slow pages.
+
   **Solution:** Use chained context: `page.Timeout(30 * time.Second).MustWaitLoad()`. For AJAX-heavy pages, use `MustWaitRequestIdle()` instead of `MustWaitLoad()`.
 
 - **Problem:** HijackRequests router not intercepting requests.
+
   **Solution:** You must call `go router.Run()` after setting up routes, and `defer router.MustStop()` for cleanup.
 
 ## Limitations
@@ -548,6 +558,7 @@ See the `examples/` directory for complete, runnable Go files:
 - `references/api-reference.md` — Quick-reference cheat sheet
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

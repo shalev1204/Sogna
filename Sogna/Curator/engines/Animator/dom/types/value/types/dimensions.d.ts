@@ -6,7 +6,7 @@ export declare const DimensionValueTypes: ({
     parse: typeof parseFloat;
     transform: (v: number) => number;
 } | {
-    test: (v: import("../..").AnyResolvedKeyframe) => boolean;
+    test: (v: import("../../index.js").AnyResolvedKeyframe) => boolean;
     parse: typeof parseFloat;
     transform: (v: number | string) => string;
 } | import("./types.js").ValueType)[];
@@ -18,7 +18,7 @@ export declare const FindDimensionValueType: (v: any) => {
     parse: typeof parseFloat;
     transform: (v: number) => number;
 } | {
-    test: (v: import("../..").AnyResolvedKeyframe) => boolean;
+    test: (v: import("../../index.js").AnyResolvedKeyframe) => boolean;
     parse: typeof parseFloat;
     transform: (v: number | string) => string;
 } | import("./types.js").ValueType | undefined;

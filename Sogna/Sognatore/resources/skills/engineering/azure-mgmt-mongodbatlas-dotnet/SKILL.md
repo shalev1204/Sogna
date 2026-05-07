@@ -8,7 +8,6 @@ id: skill-azure-mgmt-mongodbatlas-dotnet
 owner: [[orchestrator]]
 ---
 
-
 # Azure.ResourceManager.MongoDBAtlas SDK
 
 Manage MongoDB Atlas Organizations as Azure ARM resources with unified billing through Azure Marketplace.
@@ -34,6 +33,7 @@ dotnet add package Azure.ResourceManager
 ## Important Scope Limitation
 
 This SDK manages **MongoDB Atlas Organizations as Azure ARM resources** for marketplace integration. It does NOT directly manage:
+
 - Atlas clusters
 - Databases
 - Collections
@@ -359,14 +359,17 @@ var response = await orgResource.GetAsync();
 - [Azure SDK for .NET](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/mongodbatlas)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

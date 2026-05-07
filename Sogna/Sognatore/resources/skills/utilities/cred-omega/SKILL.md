@@ -4,22 +4,25 @@ description: "CISO operacional enterprise para gestao total de credenciais e seg
 risk: offensive
 date_added: '2026-03-06'
 tags:
+
 - credentials
 - secrets
 - security
 - api-keys
 - ecosistema
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-cred-omega
 owner: [[orchestrator]]
 ---
-
 
 # CRED-OMEGA: Security Engine for All API Keys (Enterprise)
 
@@ -67,6 +70,7 @@ CISO operacional enterprise para gestao total de credenciais e segredos. Descobr
 ## 1.3 Mentalidade De Seguranca
 
 Pense como um atacante para defender como um profissional:
+
 - "Se eu vazasse essa chave, qual o pior cenario?" — essa pergunta define a criticidade
 - "Quanto tempo leva pra detectar o vazamento?" — isso define a urgencia da governanca
 - "Quem mais tem acesso?" — isso define o blast radius
@@ -97,29 +101,34 @@ Pense como um atacante para defender como um profissional:
 ## 2.2 Onde Vazam (Superficie De Ataque)
 
 **Codigo e Config:**
+
 - `.env`, `.env.local`, `.env.production`, `.env.development`
 - `config.js`, `config.ts`, `settings.json`, `firebase.json`, `appsettings.json`
 - `docker-compose.yml`, `Dockerfile`, `k8s secrets`, `helm values`
 - Hardcoded em codigo-fonte (pior cenario)
 
 **Historico e Versionamento:**
+
 - Historico do git (mesmo apos apagar — `git log --all`)
 - Pull requests (code review com segredos)
 - Forks publicos de repos privados
 
 **Build e Deploy:**
+
 - `dist/`, `.next/`, `build/`, `node_modules/` (dependencias com segredos)
 - CI/CD logs (GitHub Actions, Jenkins, GitLab CI)
 - Docker images (layers contendo segredos)
 - Terraform state files
 
 **Runtime e Observabilidade:**
+
 - `console.log()` acidental em producao
 - Error tracking (Sentry, Bugsnag) com stack traces contendo segredos
 - APM e tracing (Datadog, New Relic) capturando headers
 - Log aggregators (ELK, CloudWatch)
 
 **Humano e Processo:**
+
 - Screenshots e screen recordings
 - Tickets (Jira, Linear) com segredos colados
 - Slack/Teams/email com chaves compartilhadas
@@ -286,10 +295,12 @@ Para cada achado, classificar usando esta matriz:
 **Formula de Criticidade:**
 ```
 Criticidade = (Exposicao x Privilegio x Blast_Radius) / Tempo_Deteccao
+
 - Exposicao: publico(10), privado-multi(7), privado-solo(4), ecosistema(1)
 - Privilegio: admin(10), write(7), read(4), minimal(1)
 - Blast_Radius: producao-all(10), producao-parcial(7), staging(4), dev(1)
 - Tempo_Deteccao: sem_monitoramento(10), semanal(5), diario(2), realtime(1)
+
 ```
 
 ## Fase 3 — Contencao (Acao Imediata)
@@ -301,6 +312,7 @@ Para P0 e P1, executar imediatamente:
 3. **Substituir** — atualizar em todos os locais que usam a credencial antiga
 4. **Verificar** — confirmar que servicos voltaram a funcionar com nova credencial
 5. **Limpar** — remover do historico git se necessario:
+
    ```bash
    # BFG Repo-Cleaner (mais seguro que filter-branch)
    # java -jar bfg.jar --replace-text passwords.txt repo.git
@@ -312,16 +324,19 @@ Para P0 e P1, executar imediatamente:
 #### 4.1 Regras Universais (todas as APIs)
 
 **Regra 1: Chave NUNCA no front-end**
+
 - Browser/mobile = ambiente hostil. Se a chave aparece no JS entregue ao usuario, ja era.
 - Solucao padrao-ouro: API Gateway/Proxy na VPS
 - O front chama SEU endpoint → sua VPS chama o provedor com segredo em Secret Store
 
 **Regra 2: Separacao por ambiente**
+
 - DEV, STAGING, PROD com chaves DIFERENTES e contas diferentes quando possivel
 - Se DEV vaza, PROD nao cai junto
 - Nomenclatura: `OPENAI_API_KEY_DEV`, `OPENAI_API_KEY_PROD`
 
 **Regra 3: Restricao e escopo minimo**
+
 - IP allowlist (quando suportado)
 - Dominio/referrer restriction
 - Bundle ID (mobile)
@@ -329,17 +344,20 @@ Para P0 e P1, executar imediatamente:
 - Se provedor nao suporta: criar restricoes no proxy (rate limit + auth + quotas)
 
 **Regra 4: Rotacao e expiracao**
+
 - Toda chave tem validade definida (30-90 dias conforme criticidade)
 - Chaves sem dono e sem data = lixo perigoso → revogar
 - Calendar reminders para rotacao
 
 **Regra 5: Observabilidade sem exposicao**
+
 - Alertas de orcamento/anomalia por provedor
 - Logs de auditoria SEM segredos (redaction obrigatorio)
 - Thresholds para cortar abuso automaticamente
 - Dashboard de custo consolidado
 
 **Regra 6: Defense in Depth**
+
 - Multiplas camadas: proxy + rate limit + auth + IP restriction + quota + monitoring
 - Se uma camada falha, as outras seguram
 
@@ -409,12 +427,14 @@ Manter um registro vivo de TODAS as credenciais:
 #### 5.2 Rotinas de Governanca
 
 **Semanal (15 min):**
+
 - Procurar chaves novas nao registradas
 - Chaves sem uso 30 dias → investigar → revogar se inativas
 - Permissoes excedentes → reduzir
 - Checar alertas de custo/anomalia
 
 **Mensal (1 hora):**
+
 - Auditoria completa do registry
 - Verificar expiracoes proximas (< 30 dias)
 - Revisar blast radius de cada credencial
@@ -422,6 +442,7 @@ Manter um registro vivo de TODAS as credenciais:
 - Testar kill switches e rollback procedures
 
 **Trimestral (2 horas):**
+
 - Rotacao de TODAS as credenciais criticas
 - Revisao de arquitetura de seguranca
 - Pen test basico (varredura completa)
@@ -433,9 +454,13 @@ Manter um registro vivo de TODAS as credenciais:
 **Pre-commit hook (.pre-commit-config.yaml):**
 ```yaml
 repos:
+
   - repo: local
+
     hooks:
+
       - id: secret-scan
+
         name: Secret Scanner
         entry: python scripts/secret_scanner.py
         language: python
@@ -451,6 +476,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/
 
 ## 4.1 Openai
@@ -458,6 +484,7 @@ jobs:
 **Risco tipico:** Chave vazada → consumo/custo descontrolado → milhares de dolares em horas.
 
 **Hardening:**
+
 - Chave SO no servidor (VPS) — nunca no front
 - Criar chaves por projeto/ambiente (nunca uma chave unica para tudo)
 - Usar Organization API keys (nao pessoais) quando possivel
@@ -481,6 +508,7 @@ jobs:
 **Risco tipico:** Service account key JSON vazada = acesso total a recursos cloud.
 
 **Hardening:**
+
 - Usar Secret Manager para armazenar credenciais
 - EVITAR service account keys long-lived — preferir Workload Identity Federation
 - Aplicar least privilege (IAM minimo — usar IAM Recommender)
@@ -506,6 +534,7 @@ jobs:
 **Risco tipico:** App Secret/token vazado + webhooks mal validados = controle da integracao.
 
 **Hardening:**
+
 - App Secret e tokens SO no backend
 - Webhooks com validacao de assinatura (HMAC-SHA256) — OBRIGATORIO
 - Revisar permissoes/roles no Business Manager — principio do menor privilegio
@@ -530,6 +559,7 @@ jobs:
 **Risco tipico:** Token do bot vazou = controle total do bot (ler mensagens, enviar spam).
 
 **Hardening:**
+
 - Token do bot SO no backend
 - Webhook com secret_token e validacao
 - Rate limiting e anti-spam
@@ -552,6 +582,7 @@ jobs:
 **Risco tipico:** AWS_ACCESS_KEY_ID + SECRET vazados = acesso ilimitado a cloud.
 
 **Hardening:**
+
 - NUNCA usar root account keys
 - IAM roles > IAM users > long-lived keys
 - MFA obrigatorio em todas as contas
@@ -575,6 +606,7 @@ jobs:
 **Risco tipico:** sk_live_ vazada = capacidade de criar charges, refunds, acessar dados de clientes.
 
 **Hardening:**
+
 - Restricted keys com permissoes minimas
 - Webhook signing secret validado em TODA request
 - Modo teste (sk_test_) para dev — NUNCA sk_live_ em dev
@@ -595,6 +627,7 @@ jobs:
 ## /Audit (Audit_All)
 
 Executar descoberta completa e gerar relatorio:
+
 1. Rodar TODAS as varreduras da Fase 1
 2. Classificar cada achado (Fase 2)
 3. Gerar relatorio com sumario executivo + inventario + acoes
@@ -602,6 +635,7 @@ Executar descoberta completa e gerar relatorio:
 ## /Lockdown (Lockdown_All)
 
 Aplicar hardening e anti-regressao em todo o ecossistema:
+
 1. Verificar cada credencial contra checklist do provedor
 2. Aplicar restricoes faltantes
 3. Instalar pre-commit hooks
@@ -611,6 +645,7 @@ Aplicar hardening e anti-regressao em todo o ecossistema:
 ## /Rotate (Rotate_All)
 
 Plano e execucao guiada de rotacao:
+
 1. Listar todas credenciais com rotacao vencida ou proxima
 2. Gerar plano de rotacao (ordem, dependencias, rollback)
 3. Guiar execucao passo-a-passo (sem tocar em segredos diretamente)
@@ -619,6 +654,7 @@ Plano e execucao guiada de rotacao:
 ## /Incident (Incident_Mode)
 
 Resposta imediata a vazamento/abuso:
+
 1. **CONTER** — Revogar chave/token, desativar webhooks, travar proxy (kill switch)
 2. **ERRADICAR** — Remover do codigo, reescrever historico git, scan amplo
 3. **RECUPERAR** — Gerar novas credenciais com escopo minimo, reimplantar
@@ -627,6 +663,7 @@ Resposta imediata a vazamento/abuso:
 ## /Govern (Set_Governance)
 
 Criar/atualizar registry + politicas + rotinas:
+
 1. Criar/atualizar secret registry JSON
 2. Definir politicas por criticidade
 3. Agendar rotinas (semanal/mensal/trimestral)
@@ -635,6 +672,7 @@ Criar/atualizar registry + politicas + rotinas:
 ## /Status
 
 Visao rapida da saude de seguranca:
+
 1. Total de credenciais no registry
 2. Quantas expiram em < 30 dias
 3. Quantas sem restricao adequada
@@ -649,34 +687,41 @@ Toda resposta de auditoria/acao segue esta estrutura:
 
 ```
 A) SUMARIO EXECUTIVO
+
    - Top riscos (P0/P1) com acao imediata
    - Score geral de seguranca (0-100)
    - Tendencia (melhorando/estavel/piorando)
 
 B) INVENTARIO DE CREDENCIAIS
+
    - Tipos encontrados
    - Locais de armazenamento
    - Criticidade por item
 
 C) PLANO DE CORRECAO (por prioridade)
+
    - P0: acao AGORA
    - P1: acao em 24h
    - P2: acao em 1 semana
    - P3: acao em 1 mes
 
 D) PLAYBOOKS POR PROVEDOR
+
    - Checklist especifico
    - Comandos/passos exatos
 
 E) AUTOMACAO
+
    - Scripts de varredura
    - Pre-commit hooks
    - CI checks
    - Rotina semanal/mensal
 
 F) SECRET REGISTRY
+
    - JSON atualizado
    - Politica de governanca
+
 ```
 
 ---
@@ -725,6 +770,7 @@ F) SECRET REGISTRY
 ## 8.1 Scanner De Segredos (Python)
 
 Localizado em: `scripts/secret_scanner.py`
+
 - Varredura de arquivos com 30+ padroes regex
 - Deteccao por provedor (OpenAI, GCP, AWS, Meta, Telegram, Stripe, etc.)
 - Modo CI (--ci) com exit code nao-zero se encontrar
@@ -734,6 +780,7 @@ Localizado em: `scripts/secret_scanner.py`
 ## 8.2 Registry Manager
 
 Localizado em: `scripts/registry_manager.py`
+
 - CRUD de entries no secret registry
 - Alertas de expiracao
 - Status report
@@ -742,6 +789,7 @@ Localizado em: `scripts/registry_manager.py`
 ## 8.3 Pre-Commit Hook
 
 Localizado em: `scripts/pre_commit_hook.sh`
+
 - Wrapper para secret_scanner.py em modo staged
 - Bloqueia commit se encontrar segredo
 - Mensagem clara de como resolver
@@ -749,6 +797,7 @@ Localizado em: `scripts/pre_commit_hook.sh`
 ## 8.4 Audit Report Generator
 
 Localizado em: `scripts/audit_report.py`
+
 - Executa todas as varreduras
 - Gera relatorio formatado (markdown)
 - Inclui score de seguranca
@@ -776,6 +825,7 @@ Localizado em: `scripts/audit_report.py`
 ## 9.2 Padrao De Seguranca Na Vps
 
 ```
+
 1. Firewall (ufw/iptables):
    - Permitir: 80, 443, 22 (com fail2ban)
    - Bloquear todo o resto
@@ -800,6 +850,7 @@ Localizado em: `scripts/audit_report.py`
    - Alertas de custo por provedor
    - Alertas de uso anomalo
    - Health checks automaticos
+
 ```
 
 ---
@@ -816,6 +867,7 @@ Esta skill opera de forma TRANSVERSAL — mesmo quando outras skills estao ativa
 ## 10.2 Sinais De Alerta Automaticos
 
 Monitore estes sinais durante QUALQUER operacao:
+
 - Strings que parecem chaves/tokens em codigo
 - Arquivos .env sendo criados sem .gitignore correspondente
 - Docker commands que copiam .env para dentro da image
@@ -861,6 +913,7 @@ onde dimensao_score = (itens_ok / itens_total) * 100
 ## Quando Outra Skill Deve Chamar Cred-Omega
 
 Qualquer skill que lide com APIs externas deve consultar cred-omega para:
+
 1. Validar que credenciais estao armazenadas de forma segura
 2. Verificar restricoes adequadas
 3. Confirmar presenca no registry
@@ -883,11 +936,13 @@ Qualquer skill que lide com APIs externas deve consultar cred-omega para:
 - `007` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

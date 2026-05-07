@@ -11,7 +11,6 @@ id: skill-playwright-java
 owner: [[orchestrator]]
 ---
 
-
 # Playwright Java – Advanced Test Automation
 
 ## Overview
@@ -306,7 +305,9 @@ static Stream<String> browsers() {
 ### Example 4: Parallel Execution Config
 
 ```properties
+
 # src/test/resources/junit-platform.properties
+
 junit.jupiter.execution.parallel.enabled=true
 junit.jupiter.execution.parallel.mode.default=concurrent
 junit.jupiter.execution.parallel.config.strategy=fixed
@@ -316,13 +317,17 @@ junit.jupiter.execution.parallel.config.fixed.parallelism=4
 ### Example 5: GitHub Actions CI Pipeline
 
 ```yaml
+
 - name: Install Playwright browsers
+
   run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
 - name: Run tests
+
   run: mvn test -Dbrowser=${{ matrix.browser }} -Dheadless=true
 
 - name: Upload traces on failure
+
   uses: actions/upload-artifact@v4
   if: failure()
   with:
@@ -330,6 +335,7 @@ junit.jupiter.execution.parallel.config.fixed.parallelism=4
     path: target/traces/
 
 - name: Upload Allure results
+
   uses: actions/upload-artifact@v4
   if: always()
   with:
@@ -359,21 +365,27 @@ junit.jupiter.execution.parallel.config.fixed.parallelism=4
 ## Common Pitfalls
 
 - **Problem:** Tests fail randomly in parallel mode
+
   **Solution:** Ensure every test creates its own `Playwright → Browser → BrowserContext → Page` chain via `ThreadLocal`. Never share a `Page` across threads.
 
 - **Problem:** `assertThat(locator).isVisible()` times out even when the element appears
+
   **Solution:** Increase timeout with `.setTimeout(10_000)` or raise `context.setDefaultTimeout()` in `BaseTest`.
 
 - **Problem:** `Thread.sleep(2000)` was added but tests are still flaky
+
   **Solution:** Replace with `page.waitForResponse("**/api/endpoint", () -> action())` or `assertThat(locator).hasText("Done")` which polls automatically.
 
 - **Problem:** Playwright trace zip is empty or missing
+
   **Solution:** Ensure `tracing().start()` is called before test actions and `tracing().stop()` is in `@AfterEach` — not `@AfterAll`.
 
 - **Problem:** Allure report is blank or missing steps
+
   **Solution:** Add the AspectJ agent to `maven-surefire-plugin` `<argLine>` in `pom.xml` — see `references/config.md` for the exact snippet.
 
 - **Problem:** `storageState` auth file is stale and tests redirect to login
+
   **Solution:** Re-run `AuthSetup` to regenerate `target/auth/user-state.json` before the suite, or add a `@BeforeAll` that conditionally refreshes it.
 
 ---
@@ -387,11 +399,13 @@ junit.jupiter.execution.parallel.config.fixed.parallelism=4
 - `@github-actions-ci` — For building complete multi-browser matrix CI pipelines
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

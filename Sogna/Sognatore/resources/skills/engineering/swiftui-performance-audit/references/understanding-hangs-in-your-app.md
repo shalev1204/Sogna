@@ -18,7 +18,9 @@ Context: Apple guidance on identifying hangs caused by long-running main-thread 
 ## Main-thread work stages
 
 - Event delivery to the correct view/handler.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Your code: state updates, data fetch, UI changes.
 - Core Animation commit to the render server.
 
@@ -41,6 +43,7 @@ Context: Apple guidance on identifying hangs caused by long-running main-thread 
 - Use run loop behavior as a proxy for user-perceived responsiveness.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

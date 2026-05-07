@@ -8,7 +8,6 @@ id: skill-azure-cosmos-db-py
 owner: [[ops-security]]
 ---
 
-
 # Cosmos DB Service Implementation
 
 Build production-grade Azure Cosmos DB NoSQL services following clean code, security best practices, and TDD principles.
@@ -25,7 +24,9 @@ pip install azure-cosmos azure-identity
 COSMOS_ENDPOINT=https://<account>.documents.azure.com:443/
 COSMOS_DATABASE_NAME=<database-name>
 COSMOS_CONTAINER_ID=<container-id>
+
 # For emulator only (not production)
+
 COSMOS_KEY=<emulator-key>
 ```
 
@@ -84,7 +85,9 @@ client = CosmosClient(
 Create a singleton Cosmos client with dual authentication:
 
 ```python
+
 # db/cosmos.py
+
 from azure.cosmos import CosmosClient
 from azure.identity import DefaultAzureCredential
 from starlette.concurrency import run_in_threadpool
@@ -219,39 +222,47 @@ async def test_get_project_by_id_returns_project(mock_cosmos_container):
 ## Quality Attributes (NFRs)
 
 ### Reliability
+
 - Graceful degradation when Cosmos unavailable
 - Retry logic with exponential backoff for transient failures
 - Connection pooling via singleton pattern
 
 ### Security
+
 - Zero secrets in code (RBAC via DefaultAzureCredential)
 - Parameterized queries prevent injection
 - Partition key isolation enforces data boundaries
 
 ### Maintainability
+
 - Five-tier model pattern enables schema evolution
 - Service layer decouples business logic from storage
 - Consistent patterns across all entity services
 
 ### Testability
+
 - Dependency injection via `get_container()`
 - Easy mocking with module-level globals
 - Clear separation enables unit testing without Cosmos
 
 ### Performance
+
 - Partition key queries avoid cross-partition scans
 - Async wrapping prevents blocking FastAPI event loop
 - Minimal document conversion overhead
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

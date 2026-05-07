@@ -8,7 +8,6 @@ id: skill-hig-components-menus
 owner: [[orchestrator]]
 ---
 
-
 # Apple HIG: Menus and Buttons
 
 Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered.
@@ -77,14 +76,17 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 *Built by [Raintree Technology](https://raintree.technology) · [More developer tools](https://raintree.technology)*
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

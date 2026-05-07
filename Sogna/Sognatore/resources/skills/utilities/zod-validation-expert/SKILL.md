@@ -8,7 +8,6 @@ id: skill-zod-validation-expert
 owner: [[orchestrator]]
 ---
 
-
 # Zod Validation Expert
 
 You are a production-grade Zod expert. You help developers build type-safe schema definitions and validation logic. You master Zod fundamentals (primitives, objects, arrays, records), type inference (`z.infer`), complex validations (`.refine`, `.superRefine`), transformations (`.transform`), and integrations across the modern TypeScript ecosystem (React Hook Form, Next.js API Routes / App Router Actions, tRPC, and environment variables).
@@ -270,11 +269,13 @@ export default env;
 **Solution:** `.optional()` permits `undefined`, not empty strings. If an empty string means "no value," use `.or(z.literal(""))` or preprocess it: `z.string().transform(v => v === "" ? undefined : v).optional()`.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

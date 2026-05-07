@@ -1,11 +1,11 @@
-import { Frame as frame } from "../../frameloop";
-import { GetValueTransition as getValueTransition } from "../utils/get-value-transition.js";
-import { ResolveTransition as resolveTransition } from "../utils/resolve-transition.js";
-import { PositionalKeys as positionalKeys } from "../../render/utils/keys-position.js";
+import { Frame } from "../../frameloop";
+import { GetValueTransition } from "../utils/get-value-transition.js";
+import { ResolveTransition } from "../utils/resolve-transition.js";
+import { PositionalKeys } from "../../render/utils/keys-position.js";
 import { setTarget } from "../../render/utils/setters.js";
-import { AddValueToWillChange as addValueToWillChange } from "../../value/will-change/add-will-change.js";
-import { GetOptimisedAppearId as getOptimisedAppearId } from "../optimized-appear/get-appear-id.js";
-import { AnimateSognaflowValue as animateSognaflowValue } from "./sognaflow-value.js";
+import { AddValueToWillChange } from "../../value/will-change/add-will-change.js";
+import { GetOptimisedAppearId } from "../optimized-appear/get-appear-id.js";
+import { AnimateSognaflowValue } from "./sognaflow-value.js";
 /**
  * Decide whether we should block this animation. Previously, we achieved this
  * just by checking whether the key was listed in protectedKeys, but this
@@ -21,7 +21,7 @@ export function AnimateTarget(visualElement, targetAndTransition, { delay = 0, t
     let { transition, transitionEnd, ...target } = targetAndTransition;
     const defaultTransition = visualElement.getDefaultTransition();
     transition = transition
-        ? resolveTransition(transition, defaultTransition)
+        ? ResolveTransition(transition, defaultTransition)
         : defaultTransition;
     const reduceSognaflow = transition?.reduceSognaflow;
     if (transitionOverride)
@@ -40,11 +40,11 @@ export function AnimateTarget(visualElement, targetAndTransition, { delay = 0, t
         }
         const valueTransition = {
             delay,
-            ...getValueTransition(transition || {}, key),
+            ...GetValueTransition(transition || {}, key),
         };
         /**
          * If the value is already at the defined target, skip the animation.
-         * We still re-assert the value via frame.update to take precedence
+         * We still re-assert the value via Frame.update to take precedence
          * over any stale transitionEnd callbacks from previous animations.
          */
         const currentValue = value.get();
@@ -53,7 +53,7 @@ export function AnimateTarget(visualElement, targetAndTransition, { delay = 0, t
             !Array.isArray(valueTarget) &&
             valueTarget === currentValue &&
             !valueTransition.velocity) {
-            frame.update(() => value.set(valueTarget));
+            Frame.update(() => value.set(valueTarget));
             continue;
         }
         /**
@@ -62,18 +62,18 @@ export function AnimateTarget(visualElement, targetAndTransition, { delay = 0, t
          */
         let isHandoff = false;
         if (window.sognaflowHandoffAnimation) {
-            const appearId = getOptimisedAppearId(visualElement);
+            const appearId = GetOptimisedAppearId(visualElement);
             if (appearId) {
-                const startTime = window.sognaflowHandoffAnimation(appearId, key, frame);
+                const startTime = window.sognaflowHandoffAnimation(appearId, key, Frame);
                 if (startTime !== null) {
                     valueTransition.startTime = startTime;
                     isHandoff = true;
                 }
             }
         }
-        addValueToWillChange(visualElement, key);
+        AddValueToWillChange(visualElement, key);
         const shouldReduceSognaflow = reduceSognaflow ?? visualElement.shouldReduceSognaflow;
-        value.start(animateSognaflowValue(key, value, valueTarget, shouldReduceSognaflow && positionalKeys.has(key)
+        value.start(AnimateSognaflowValue(key, value, valueTarget, shouldReduceSognaflow && PositionalKeys.has(key)
             ? { type: false }
             : valueTransition, visualElement, isHandoff));
         const animation = value.animation;
@@ -82,7 +82,7 @@ export function AnimateTarget(visualElement, targetAndTransition, { delay = 0, t
         }
     }
     if (transitionEnd) {
-        const applyTransitionEnd = () => frame.update(() => {
+        const applyTransitionEnd = () => Frame.update(() => {
             transitionEnd && setTarget(visualElement, transitionEnd);
         });
         if (animations.length) {

@@ -8,7 +8,6 @@ id: skill-seo-content-auditor
 owner: [[biz-marketing]], [[ops-security]]
 ---
 
-
 ## Use this skill when
 
 - Working on seo content auditor tasks or workflows
@@ -76,6 +75,7 @@ You are an SEO content auditor analyzing provided content for optimization oppor
 | Keyword Optimization | X/10 | Low density | Natural integration |
 
 **Deliverables:**
+
 - Content quality score (1-10)
 - Specific improvement recommendations
 - Missing topic suggestions
@@ -85,11 +85,13 @@ You are an SEO content auditor analyzing provided content for optimization oppor
 Focus on actionable improvements based on SEO best practices and content quality standards.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

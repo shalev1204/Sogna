@@ -20,9 +20,11 @@ Tests must verify real behavior, not mock behavior. Mocks are a means to isolate
 ## The Iron Laws
 
 ```
+
 1. NEVER test mock behavior
 2. NEVER add test-only methods to production classes
 3. NEVER mock without understanding dependencies
+
 ```
 
 ## Anti-Pattern 1: Testing Mock Behavior
@@ -37,6 +39,7 @@ test('renders sidebar', () => {
 ```
 
 **Why this is wrong:**
+
 - You're verifying the mock works, not that the component works
 - Test passes when mock is present, fails when it's not
 - Tells you nothing about real behavior
@@ -84,6 +87,7 @@ afterEach(() => session.destroy());
 ```
 
 **Why this is wrong:**
+
 - Production class polluted with test-only code
 - Dangerous if accidentally called in production
 - Violates YAGNI and separation of concerns
@@ -139,6 +143,7 @@ test('detects duplicate server', () => {
 ```
 
 **Why this is wrong:**
+
 - Mocked method had side effect test depended on (writing config)
 - Over-mocking to "be safe" breaks actual behavior
 - Test passes for wrong reason or fails mysteriously
@@ -176,9 +181,11 @@ BEFORE mocking any method:
     THEN add minimal mocking at the right level
 
   Red flags:
+
     - "I'll mock this to be safe"
     - "This might be slow, better mock it"
     - Mocking without understanding the dependency chain
+
 ```
 
 ## Anti-Pattern 4: Incomplete Mocks
@@ -196,6 +203,7 @@ const mockResponse = {
 ```
 
 **Why this is wrong:**
+
 - **Partial mocks hide structural assumptions** - You only mocked fields you know about
 - **Downstream code may depend on fields you didn't include** - Silent failures
 - **Tests pass but integration fails** - Mock incomplete, real API complete
@@ -221,6 +229,7 @@ BEFORE creating mock responses:
   Check: "What fields does the real API response contain?"
 
   Actions:
+
     1. Examine actual API response from docs/examples
     2. Include ALL fields system might consume downstream
     3. Verify mock matches real response schema completely
@@ -242,6 +251,7 @@ BEFORE creating mock responses:
 ```
 
 **Why this is wrong:**
+
 - Testing is part of implementation, not optional follow-up
 - TDD would have caught this
 - Can't claim complete without tests
@@ -249,15 +259,18 @@ BEFORE creating mock responses:
 **The fix:**
 ```
 TDD cycle:
+
 1. Write failing test
 2. Implement to pass
 3. Refactor
 4. THEN claim complete
+
 ```
 
 ## When Mocks Become Too Complex
 
 **Warning signs:**
+
 - Mock setup longer than test logic
 - Mocking everything to make test pass
 - Mocks missing methods real components have
@@ -270,6 +283,7 @@ TDD cycle:
 ## TDD Prevents These Anti-Patterns
 
 **Why TDD helps:**
+
 1. **Write test first** → Forces you to think about what you're actually testing
 2. **Watch it fail** → Confirms test tests real behavior, not mocks
 3. **Minimal implementation** → No test-only methods creep in
@@ -306,6 +320,7 @@ If TDD reveals you're testing mock behavior, you've gone wrong.
 Fix: Test real behavior or question why you're mocking at all.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

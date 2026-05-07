@@ -68,6 +68,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 ```
 
 Additional constraints:
+
 - Don't modify global variables from workflows or steps
 - All workflows and queues must be registered **before** `Launch()`
 - Concurrent steps must start in deterministic order using `dbos.Go`/`dbos.Select`
@@ -75,6 +76,7 @@ Additional constraints:
 Reference: [Workflow Guarantees](https://docs.dbos.dev/golang/tutorials/workflow-tutorial#workflow-guarantees)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

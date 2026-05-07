@@ -8,7 +8,6 @@ id: skill-c4-component
 owner: [[orchestrator]]
 ---
 
-
 # C4 Component Level: [Component Name]
 
 ## Use this skill when
@@ -107,21 +106,25 @@ C4Component
 ## Master Component Index Template
 
 ```markdown
+
 # C4 Component Level: System Overview
 
 ## System Components
 
 ### [Component 1]
+
 - **Name**: [Component name]
 - **Description**: [Short description]
 - **Documentation**: c4-component-name-1.md
 
 ### [Component 2]
+
 - **Name**: [Component name]
 - **Description**: [Short description]
 - **Documentation**: c4-component-name-2.md
 
 ## Component Relationships
+
 [Mermaid diagram showing all components and their relationships]
 ````
 
@@ -153,11 +156,13 @@ When synthesizing components, provide:
 - Consistent documentation format across all components
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

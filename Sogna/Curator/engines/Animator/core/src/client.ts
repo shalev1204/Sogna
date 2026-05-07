@@ -163,4 +163,4 @@ export {
     view,
     wbr,
     webview,
-} from "./render/components/sognaflow/namespace"
+} from "./render/components/motion/namespace"

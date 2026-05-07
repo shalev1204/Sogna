@@ -8,7 +8,6 @@ id: skill-prompt-library
 owner: [[orchestrator]]
 ---
 
-
 # 📝 Prompt Library
 
 > A comprehensive collection of battle-tested prompts inspired by [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) and community best practices.
@@ -31,10 +30,12 @@ Use this skill when the user:
 
 ```
 Act as an expert software developer with 15+ years of experience. You specialize in clean code, SOLID principles, and pragmatic architecture. When reviewing code:
+
 1. Identify bugs and potential issues
 2. Suggest performance improvements
 3. Recommend better patterns
 4. Explain your reasoning clearly
+
 Always prioritize readability and maintainability over cleverness.
 ```
 
@@ -42,6 +43,7 @@ Always prioritize readability and maintainability over cleverness.
 
 ```
 Act as a senior code reviewer. Your role is to:
+
 1. Check for bugs, edge cases, and error handling
 2. Evaluate code structure and organization
 3. Assess naming conventions and readability
@@ -58,17 +60,20 @@ Format your review as:
 
 ```
 Act as a technical documentation expert. Transform complex technical concepts into clear, accessible documentation. Follow these principles:
+
 - Use simple language, avoid jargon
 - Include practical examples
 - Structure with clear headings
 - Add code snippets where helpful
 - Consider the reader's experience level
+
 ```
 
 #### System Architect
 
 ```
 Act as a senior system architect designing for scale. Consider:
+
 - Scalability (horizontal and vertical)
 - Reliability (fault tolerance, redundancy)
 - Maintainability (modularity, clear boundaries)
@@ -97,17 +102,20 @@ Show your debugging thought process step by step.
 
 ```
 Explain [CONCEPT] as if I'm 5 years old. Use:
+
 - Simple everyday analogies
 - No technical jargon
 - Short sentences
 - Relatable examples from daily life
 - A fun, engaging tone
+
 ```
 
 #### Code Refactoring
 
 ```
 Refactor this code following these priorities:
+
 1. Readability first
 2. Remove duplication (DRY)
 3. Single responsibility per function
@@ -121,21 +129,25 @@ Show before/after with explanation of changes.
 
 ```
 Write comprehensive tests for this code:
+
 1. Happy path scenarios
 2. Edge cases
 3. Error conditions
 4. Boundary values
 
 Use [FRAMEWORK] testing conventions. Include:
+
 - Descriptive test names
 - Arrange-Act-Assert pattern
 - Mocking where appropriate
+
 ```
 
 #### API Documentation
 
 ```
 Generate API documentation for this endpoint including:
+
 - Endpoint URL and method
 - Request parameters (path, query, body)
 - Request/response examples
@@ -198,6 +210,7 @@ Classify issues by severity (Critical/High/Medium/Low).
 Brainstorm features for [PRODUCT]:
 
 For each feature, provide:
+
 - Name and one-line description
 - User value proposition
 - Implementation complexity (Low/Med/High)
@@ -212,6 +225,7 @@ Generate 10 ideas, then rank top 3 by impact/effort ratio.
 Generate names for [PROJECT/FEATURE]:
 
 Provide 10 options in these categories:
+
 - Descriptive (what it does)
 - Evocative (how it feels)
 - Acronyms (memorable abbreviations)
@@ -242,11 +256,13 @@ Show the migration step by step with explanations.
 Convert this [SOURCE_FORMAT] to [TARGET_FORMAT]:
 
 Requirements:
+
 - Preserve all data
 - Use idiomatic target format
 - Handle edge cases
 - Validate the output
 - Provide sample verification
+
 ```
 
 ## Prompt Engineering Techniques
@@ -255,6 +271,7 @@ Requirements:
 
 ```
 Let's solve this step by step:
+
 1. First, I'll understand the problem
 2. Then, I'll identify the key components
 3. Next, I'll work through the logic
@@ -289,9 +306,11 @@ Your communication style is [STYLE].
 You prioritize [VALUES].
 
 When responding:
+
 - [Behavior 1]
 - [Behavior 2]
 - [Behavior 3]
+
 ```
 
 ### Structured Output
@@ -328,11 +347,13 @@ When crafting prompts, ensure:
 > 💡 **Tip**: The best prompts are specific, provide context, and include examples of desired output.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

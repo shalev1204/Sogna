@@ -1,22 +1,71 @@
 {
   "project": "Sogna",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "environment": "Development/Beta",
   "securityTier": "max",
   "strictMode": true,
   "anonymizeLogs": true,
-  "maxReadSize": 2097152,
-  "maxOutputSize": 16384,
-  "swarmTimeout": 300000,
-  "customRedactions": {
-    "carle": "[OFFICER_REDACTED]",
-    "Sognatore": "[CORE_ENGINE]",
-    "Sogna": "[PROJECT_ALPHA]",
-    "Antigravity": "[TOOLKIT_OMEGA]",
-    "Sentinel": "[SECURITY_LAYER]"
+  "privacy_shield": {
+    "redact_pii": true,
+    "redact_secrets": true,
+    "custom_redactions": {
+      "carle": "[OPERATOR]"
+    }
+  },
+  "agent_guidelines": {
+    "user_interaction": {
+      "address_as": "Operador",
+      "honorifics": "Usted",
+      "tone": "Institutional/Professional",
+      "language": "es-ES"
+    }
+  },
+  "integration_mapping": {
+    "scripts_reference": "./package.json",
+    "command_rules": {
+      "sogna:dev": { "permission": "development", "require_network": true },
+      "sogna:start": { "permission": "operational", "require_vitals": "healthy" },
+      "sentinel:audit": { "permission": "security", "elevation_required": true },
+      "sognatore:core": { "permission": "orchestration", "cpu_priority": "high" },
+      "memory:sync": { "permission": "data_integrity", "disk_access": "full" }
+    }
+  },
+  "governance": {
+    "audit_trail": "enabled",
+    "require_human_approval_for_destructive_actions": true,
+    "require_veto_on_commit": true,
+    "log_level": "verbose"
   },
   "operational_bounds": {
     "git_auto_commit": false,
     "shell_deep_vetting": true,
-    "binary_hygiene": true
+    "binary_hygiene": true,
+    "max_read_size_bytes": 2097152,
+    "max_output_size_chars": 16384,
+    "execution_timeout_ms": 300000
+  },
+  "swarm_protocols": {
+    "multi_agent_collaboration": true,
+    "conflict_resolution": "deterministic",
+    "shared_context_path": "./.sogna_context",
+    "agent_hierarchy": {
+      "leader": "Antigravity",
+      "orchestrator": "Sognatore",
+      "specialists": ["Sentinel", "Animator", "Predatore", "Curator"]
+    },
+    "messaging": {
+      "protocol": "UMA-Bridge",
+      "async_mode": true,
+      "broadcast_events": ["security_alert", "task_completion", "health_critical"]
+    },
+    "handoff_logic": {
+      "require_validation": true,
+      "state_persistence": "enabled"
+    }
+  },
+  "resource_quotas": {
+    "max_cpu_usage_percent": 80,
+    "max_memory_usage_mb": 8192,
+    "disk_space_threshold_percent": 90
   }
 }

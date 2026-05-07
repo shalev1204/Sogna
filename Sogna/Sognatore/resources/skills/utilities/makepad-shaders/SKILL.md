@@ -11,7 +11,6 @@ id: skill-makepad-shaders
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Shaders Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -19,10 +18,12 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad shaders. Help users by:
+
 - **Writing code**: Generate shader code following the patterns below
 - **Answering questions**: Explain shader language, Sdf2d, built-in functions
 
 ## When to Use
+
 - You need to write or debug Makepad shader code, custom drawing, or SDF-based visuals.
 - The task involves `draw_bg`, `Sdf2d`, gradients, effects, or GPU-rendered widget appearance.
 - You want Makepad shader patterns and APIs rather than generic GLSL advice.
@@ -30,6 +31,7 @@ You are an expert at Makepad shaders. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/shader-basics.md` - Shader language fundamentals
 - `./references/sdf2d-reference.md` - Complete Sdf2d API reference
 
@@ -200,11 +202,13 @@ Community contributions: `./community/`
 5. GLSL ES 1.0 built-in functions are available
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

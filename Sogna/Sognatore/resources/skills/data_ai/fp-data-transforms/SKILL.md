@@ -4,6 +4,7 @@ description: Everyday data transformations using functional patterns - arrays, o
 risk: critical
 version: 1.0.0
 tags:
+
   - functional-programming
   - typescript
   - data-transformation
@@ -13,16 +14,17 @@ tags:
   - grouping
   - aggregation
   - null-safety
+
 id: skill-fp-data-transforms
 owner: [[orchestrator]]
 ---
-
 
 # Practical Data Transformations
 
 This skill covers the data transformations you do every day: working with arrays, reshaping objects, normalizing API responses, grouping data, and safely accessing nested values. Each section shows the imperative approach first, then the functional equivalent, with honest assessments of when each approach shines.
 
 ## When to Use
+
 - You need to transform arrays, objects, grouped data, or nested values in TypeScript.
 - The task involves reshaping API responses, null-safe access, aggregation, or normalization.
 - You want practical functional patterns for everyday data work instead of low-level loops.
@@ -1054,6 +1056,7 @@ const getDatabaseHost = (config: Config): string =>
 ### When to Use Option Instead
 
 Use fp-ts Option when:
+
 - You need to chain multiple operations on potentially missing values
 - You want to distinguish "missing" from other falsy values
 - You're building a pipeline of transformations
@@ -1512,23 +1515,27 @@ const result = items
 | Normalize API data | nested loops | extraction functions | Break into composable functions |
 
 **The functional approach is better when:**
+
 - You need to compose operations
 - You want reusable transformations
 - You value explicit data flow over implicit state
 - Type safety for missing values matters
 
 **The imperative approach is acceptable when:**
+
 - The transformation is a one-off
 - The logic is simple and linear
 - Performance is critical and you've measured
 - The team is more comfortable with it
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-deep-research
 owner: [[orchestrator]]
 ---
 
-
 # Gemini Deep Research Skill
 
 Run autonomous research tasks that plan, search, read, and synthesize information into comprehensive reports.
@@ -16,6 +15,7 @@ Run autonomous research tasks that plan, search, read, and synthesize informatio
 ## When to Use This Skill
 
 Use this skill when:
+
 - Performing market analysis
 - Conducting competitive landscaping
 - Creating literature reviews
@@ -33,6 +33,7 @@ Use this skill when:
 
 1. Get a Gemini API key from [Google AI Studio](https://aistudio.google.com/)
 2. Set the environment variable:
+
    ```bash
    export GEMINI_API_KEY=your-api-key-here
    ```
@@ -41,42 +42,50 @@ Use this skill when:
 ## Usage
 
 ### Start a research task
+
 ```bash
 python3 scripts/research.py --query "Research the history of Kubernetes"
 ```
 
 ### With structured output format
+
 ```bash
 python3 scripts/research.py --query "Compare Python web frameworks" \
   --format "1. Executive Summary\n2. Comparison Table\n3. Recommendations"
 ```
 
 ### Stream progress in real-time
+
 ```bash
 python3 scripts/research.py --query "Analyze EV battery market" --stream
 ```
 
 ### Start without waiting
+
 ```bash
 python3 scripts/research.py --query "Research topic" --no-wait
 ```
 
 ### Check status of running research
+
 ```bash
 python3 scripts/research.py --status <interaction_id>
 ```
 
 ### Wait for completion
+
 ```bash
 python3 scripts/research.py --wait <interaction_id>
 ```
 
 ### Continue from previous research
+
 ```bash
 python3 scripts/research.py --query "Elaborate on point 2" --continue <interaction_id>
 ```
 
 ### List recent research
+
 ```bash
 python3 scripts/research.py --list
 ```
@@ -118,11 +127,13 @@ python3 scripts/research.py --list
 - **130**: Cancelled by user (Ctrl+C)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

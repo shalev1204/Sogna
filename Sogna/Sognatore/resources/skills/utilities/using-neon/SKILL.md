@@ -8,7 +8,6 @@ id: skill-using-neon
 owner: [[orchestrator]]
 ---
 
-
 # Neon Serverless Postgres
 
 Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
@@ -16,6 +15,7 @@ Neon is a serverless Postgres platform that separates compute and storage to off
 ## When to Use This Skill
 
 Use this skill when:
+
 - Working with Neon Serverless Postgres
 - Setting up Neon databases
 - Choosing connection methods for Neon
@@ -36,10 +36,13 @@ You can use the `curl` commands to fetch the documentation page as markdown:
 **Documentation:**
 
 ```bash
+
 # Get list of all Neon docs
+
 curl https://neon.com/llms.txt
 
 # Fetch any doc page as markdown
+
 curl -H "Accept: text/markdown" https://neon.com/docs/<path>
 ```
 
@@ -90,11 +93,13 @@ Managing Neon resources programmatically via REST API, SDKs, or CLI.
 | Python SDK            | `references/neon-python-sdk.md`     | `neon-api` package                           |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

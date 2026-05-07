@@ -14,3 +14,5 @@ export function Resize(
 ) {
     return typeof a === "function" ? ResizeWindow(a) : ResizeElement(a, b!)
 }
+
+export const resize = Resize

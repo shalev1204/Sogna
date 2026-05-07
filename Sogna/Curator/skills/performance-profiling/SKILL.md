@@ -11,7 +11,6 @@ id: skill-performance-profiling
 owner: [[eng-perf]]
 ---
 
-
 # Performance Profiling
 
 > Measure, analyze, optimize - in that order.
@@ -51,10 +50,12 @@ owner: [[eng-perf]]
 ### The 4-Step Process
 
 ```
+
 1. BASELINE → Measure current state
 2. IDENTIFY → Find the bottleneck
 3. FIX → Make targeted change
 4. VALIDATE → Confirm improvement
+
 ```
 
 ### Profiling Tool Selection

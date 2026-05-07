@@ -8,7 +8,6 @@ id: skill-kaizen
 owner: [[orchestrator]]
 ---
 
-
 # Kaizen: Continuous Improvement
 
 ## Overview
@@ -18,6 +17,7 @@ Small improvements, continuously. Error-proof by design. Follow what works. Buil
 **Core principle:** Many small improvements beat one big change. Prevent errors at design time, not with fixes.
 
 ## When to Use
+
 **Always applied for:**
 
 - Code implementation and refactoring
@@ -326,12 +326,14 @@ Fail at startup, not in production
 #### In Practice
 
 **When designing APIs:**
+
 - Use types to constrain inputs
 - Make invalid states unrepresentable
 - Return Result<T, E> instead of throwing
 - Document preconditions in types
 
 **When handling errors:**
+
 - Validate at system boundaries
 
 - Use guards for preconditions
@@ -339,29 +341,34 @@ Fail at startup, not in production
 - Log context for debugging
 
 **When configuring:**
+
 - Required over optional with defaults
 - Validate all config at startup
 - Fail deployment if config invalid
 - Don't allow partial configurations
 
 ### 3. Standardized Work
+
 Follow established patterns. Document what works. Make good practices easy to follow.
 
 #### Principles
 
 **Consistency over cleverness:**
+
 - Follow existing codebase patterns
 - Don't reinvent solved problems
 - New pattern only if significantly better
 - Team agreement on new patterns
 
 **Documentation lives with code:**
+
 - README for setup and architecture
 - CLAUDE.md for AI coding conventions
 - Comments for "why", not "what"
 - Examples for complex patterns
 
 **Automate standards:**
+
 - Linters enforce style
 - Type checks enforce contracts
 - Tests verify behavior
@@ -445,6 +452,7 @@ Standard pattern across codebase
 <Good>
 ```typescript
 /**
+
  * Retries an async operation with exponential backoff.
  *
  * Why: Network requests fail temporarily; retrying improves reliability
@@ -453,10 +461,13 @@ Standard pattern across codebase
  *
  * @example
  * const result = await retry(
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
- *   () => fetch('https://api.example.com/data'),
- *   { maxAttempts: 3, baseDelay: 1000 }
+
+ * () => fetch('https://api.example.com/data'),
+ * { maxAttempts: 3, baseDelay: 1000 }
  * );
+
  */
 const retry = async <T>(
   operation: () => Promise<T>,
@@ -559,6 +570,7 @@ Building for imaginary future requirements
 </Bad>
 
 **When to add complexity:**
+
 - Current requirement demands it
 - Pain points identified through use
 - Measured performance issues
@@ -741,11 +753,13 @@ Use commands for structured problem-solving. Apply skill for day-to-day developm
 **Mindset:** Good enough today, better tomorrow. Repeat.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

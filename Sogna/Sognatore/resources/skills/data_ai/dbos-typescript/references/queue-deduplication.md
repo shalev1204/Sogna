@@ -49,6 +49,7 @@ async function handleClick(userId: string) {
 Deduplication is per-queue. The deduplication ID is active while the workflow has status `ENQUEUED` or `PENDING`. Once the workflow completes, a new workflow with the same deduplication ID can be enqueued.
 
 This is useful for:
+
 - Ensuring one active task per user
 - Preventing duplicate form submissions
 - Idempotent event processing
@@ -56,6 +57,7 @@ This is useful for:
 Reference: [Deduplication](https://docs.dbos.dev/typescript/tutorials/queue-tutorial#deduplication)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

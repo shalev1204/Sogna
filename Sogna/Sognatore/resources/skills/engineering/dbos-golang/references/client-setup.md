@@ -60,6 +60,7 @@ ch, err := client.ClientReadStreamAsync(workflowID, "results")
 ```
 
 ClientConfig options:
+
 - `DatabaseURL` (required unless `SystemDBPool` is set): PostgreSQL connection string
 - `SystemDBPool`: Custom `*pgxpool.Pool`
 - `DatabaseSchema`: Schema name (default: `"dbos"`)
@@ -70,6 +71,7 @@ Always call `client.Shutdown()` when done.
 Reference: [DBOS Client](https://docs.dbos.dev/golang/reference/client)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-claude-d3js-skill
 owner: [[orchestrator]]
 ---
 
-
 # D3.js Visualisation
 
 ## Overview
@@ -18,6 +17,7 @@ This skill provides guidance for creating sophisticated, interactive data visual
 ## When to use d3.js
 
 **Use d3.js for:**
+
 - Custom visualisations requiring unique visual encodings or layouts
 - Interactive explorations with complex pan, zoom, or brush behaviours
 - Network/graph visualisations (force-directed layouts, tree diagrams, hierarchies, chord diagrams)
@@ -27,6 +27,7 @@ This skill provides guidance for creating sophisticated, interactive data visual
 - Novel chart types not available in standard libraries
 
 **Consider alternatives for:**
+
 - 3D visualisations - use Three.js instead
 
 ## Core workflow
@@ -785,21 +786,25 @@ g.selectAll(".tick line")
 ## Common issues and solutions
 
 **Issue**: Axes not appearing
+
 - Ensure scales have valid domains (check for NaN values)
 - Verify axis is appended to correct group
 - Check transform translations are correct
 
 **Issue**: Transitions not working
+
 - Call `.transition()` before attribute changes
 - Ensure elements have unique keys for proper data binding
 - Check that useEffect dependencies include all changing data
 
 **Issue**: Responsive sizing not working
+
 - Use ResizeObserver or window resize listener
 - Update dimensions in state to trigger re-render
 - Ensure SVG has width/height attributes or viewBox
 
 **Issue**: Performance problems
+
 - Limit number of DOM elements (consider canvas for >1000 items)
 - Debounce resize handlers
 - Use `.join()` instead of separate enter/update/exit selections
@@ -808,7 +813,9 @@ g.selectAll(".tick line")
 ## Resources
 
 ### references/
+
 Contains detailed reference materials:
+
 - `d3-patterns.md` - Comprehensive collection of visualisation patterns and code examples
 - `scale-reference.md` - Complete guide to d3 scales with examples
 - `colour-schemes.md` - D3 colour schemes and palette recommendations
@@ -826,11 +833,13 @@ These templates work with vanilla JavaScript, React, Vue, Svelte, or any other J
 To use these resources, read the relevant files when detailed guidance is needed for specific visualisation types or patterns.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

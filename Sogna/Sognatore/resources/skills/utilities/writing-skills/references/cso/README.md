@@ -24,12 +24,17 @@ When description summarizes workflow, agents take a shortcut.
 **Real example that failed**:
 
 ```yaml
+
 # Agent did ONE review instead of TWO
+
 description: Code review between tasks
 
 # Skill body had flowchart showing TWO reviews:
+
 # 1. Spec compliance
+
 # 2. Code quality
+
 ```
 
 **Why it failed**: Agent read description, thought "code review between tasks means one review", never read the flowchart.
@@ -37,17 +42,22 @@ description: Code review between tasks
 **Fix**:
 
 ```yaml
+
 # Agent now reads full skill and follows flowchart
+
 description: Use when executing implementation plans with independent tasks
 ```
 
 ### The Pattern
 
 ```yaml
+
 # ❌ BAD: Workflow summary
+
 description: Analyzes git diff, generates commit message in conventional format
 
 # ✅ GOOD: Trigger conditions only
+
 description: Use when generating commit messages or reviewing staged changes
 ```
 
@@ -65,16 +75,20 @@ description: Use when generating commit messages or reviewing staged changes
 **1. Move details to tool help**:
 
 ```bash
+
 # ❌ BAD: Document all flags in SKILL.md
+
 search-conversations supports --text, --both, --after DATE, --before DATE, --limit N
 
 # ✅ GOOD: Reference --help
+
 search-conversations supports multiple modes. Run --help for details.
 ```
 
 **2. Use cross-references**:
 
 ```markdown
+
 # ❌ BAD: Repeat workflow
 
 When searching, dispatch agent with template...
@@ -88,6 +102,7 @@ Use subagents for searches. See [delegating-to-subagents] for workflow.
 **3. Compress examples**:
 
 ```markdown
+
 # ❌ BAD: Verbose (42 words)
 
 Partner: "How did we handle auth errors in React Router?"
@@ -162,22 +177,27 @@ metadata:
 **Examples**:
 
 ```yaml
+
 # Technique skill
+
 description: "Use when tests have race conditions, timing dependencies, or pass/fail inconsistently."
 metadata:
   triggers: flaky tests, timeout, race condition
 
 # Pattern skill
+
 description: "Use when complex data structures make code hard to follow."
 metadata:
   triggers: nested loops, multiple flags, confusing state
 
 # Reference skill
+
 description: "Use when working with React Router and authentication."
 metadata:
   triggers: 401 redirect, login flow, protected routes
 
 # Discipline skill
+
 description: "Use when implementing any feature or bugfix, before writing implementation code."
 metadata:
   triggers: new feature, bug fix, code change
@@ -188,13 +208,17 @@ metadata:
 Description is injected into system prompt. Inconsistent POV breaks discovery.
 
 ```yaml
+
 # ❌ BAD: First person
+
 description: "I can help you with async tests"
 
 # ❌ BAD: Second person
+
 description: "You can use this for race conditions"
 
 # ✅ GOOD: Third person
+
 description: "Handles async tests with race conditions"
 ```
 
@@ -205,6 +229,7 @@ description: "Handles async tests with race conditions"
 Use skill name only, with explicit requirement markers:
 
 ```markdown
+
 # ✅ GOOD: Clear requirement
 
 **REQUIRED BACKGROUND**: You MUST understand test-driven-development before using this skill.
@@ -275,6 +300,7 @@ description: Use when analyzing BigQuery data. Triggers: revenue metrics, pipeli
 Result: Loads for relevant queries, includes domain keywords.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

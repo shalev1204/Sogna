@@ -8,7 +8,6 @@ id: skill-github-actions-templates
 owner: [[orchestrator]]
 ---
 
-
 # GitHub Actions Templates
 
 Production-ready GitHub Actions workflow patterns for testing, building, and deploying applications.
@@ -59,24 +58,30 @@ jobs:
         node-version: [18.x, 20.x]
 
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Use Node.js ${{ matrix.node-version }}
+
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
     - name: Install dependencies
+
       run: npm ci
 
     - name: Run linter
+
       run: npm run lint
 
     - name: Run tests
+
       run: npm test
 
     - name: Upload coverage
+
       uses: codecov/codecov-action@v3
       with:
         files: ./coverage/lcov.info
@@ -106,9 +111,11 @@ jobs:
       packages: write
 
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Log in to Container Registry
+
       uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
@@ -116,6 +123,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Extract metadata
+
       id: meta
       uses: docker/metadata-action@v5
       with:
@@ -127,6 +135,7 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}
 
     - name: Build and push
+
       uses: docker/build-push-action@v5
       with:
         context: .
@@ -153,9 +162,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Configure AWS credentials
+
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -163,16 +174,19 @@ jobs:
         aws-region: us-west-2
 
     - name: Update kubeconfig
+
       run: |
         aws eks update-kubeconfig --name production-cluster --region us-west-2
 
     - name: Deploy to Kubernetes
+
       run: |
         kubectl apply -f k8s/
         kubectl rollout status deployment/my-app -n production
         kubectl get services -n production
 
     - name: Verify deployment
+
       run: |
         kubectl get pods -n production
         kubectl describe deployment my-app -n production
@@ -195,19 +209,23 @@ jobs:
         python-version: ['3.9', '3.10', '3.11', '3.12']
 
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Set up Python
+
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
+
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     - name: Run tests
+
       run: pytest
 ```
 
@@ -229,7 +247,9 @@ jobs:
 ## Reusable Workflows
 
 ```yaml
+
 # .github/workflows/reusable-test.yml
+
 name: Reusable Test Workflow
 
 on:
@@ -246,12 +266,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
+
       with:
         node-version: ${{ inputs.node-version }}
+
     - run: npm ci
     - run: npm test
+
 ```
 
 **Use reusable workflow:**
@@ -281,9 +305,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Run Trivy vulnerability scanner
+
       uses: aquasecurity/trivy-action@master
       with:
         scan-type: 'fs'
@@ -292,11 +318,13 @@ jobs:
         output: 'trivy-results.sarif'
 
     - name: Upload Trivy results to GitHub Security
+
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: 'trivy-results.sarif'
 
     - name: Run Snyk Security Scan
+
       uses: snyk/actions/node@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -319,14 +347,17 @@ jobs:
       url: https://app.example.com
 
     steps:
+
     - uses: actions/checkout@v4
 
     - name: Deploy application
+
       run: |
         echo "Deploying to production..."
         # Deployment commands here
 
     - name: Notify Slack
+
       if: success()
       uses: slackapi/slack-github-action@v1
       with:
@@ -351,11 +382,13 @@ jobs:
 - `secrets-management` - For secrets handling
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

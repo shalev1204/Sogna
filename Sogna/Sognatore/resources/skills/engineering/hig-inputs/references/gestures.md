@@ -209,6 +209,7 @@ September 15, 2023| Updated specifications to include double tap in watchOS.
 June 21, 2023| Changed page title from Touchscreen gestures and updated to include guidance for visionOS.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

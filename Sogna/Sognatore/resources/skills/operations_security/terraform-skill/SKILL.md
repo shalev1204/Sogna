@@ -15,6 +15,7 @@ Comprehensive Terraform and OpenTofu guidance covering testing, modules, CI/CD, 
 ## When to Use This Skill
 
 **Activate this skill when:**
+
 - Creating new Terraform or OpenTofu configurations or modules
 - Setting up testing infrastructure for IaC code
 - Deciding between testing approaches (validate, plan, frameworks)
@@ -24,6 +25,7 @@ Comprehensive Terraform and OpenTofu guidance covering testing, modules, CI/CD, 
 - Choosing between module patterns or state management approaches
 
 **Don't use this skill for:**
+
 - Basic Terraform/OpenTofu syntax questions (Claude knows this)
 - Provider-specific API reference (link to docs instead)
 - Cloud platform questions unrelated to Terraform/OpenTofu
@@ -60,6 +62,7 @@ examples/           # Module usage examples (also serve as tests)
 ```
 
 **Key principle from terraform-best-practices.com:**
+
 - Separate **environments** (prod, staging) from **modules** (reusable components)
 - Use **examples/** as both documentation and integration test fixtures
 - Keep modules small and focused (single responsibility)
@@ -70,15 +73,19 @@ examples/           # Module usage examples (also serve as tests)
 
 **Resources:**
 ```hcl
+
 # Good: Descriptive, contextual
+
 resource "aws_instance" "web_server" { }
 resource "aws_s3_bucket" "application_logs" { }
 
 # Good: "this" for singleton resources (only one of that type)
+
 resource "aws_vpc" "this" { }
 resource "aws_security_group" "this" { }
 
 # Avoid: Generic names for non-singletons
+
 resource "aws_instance" "main" { }
 resource "aws_s3_bucket" "bucket" { }
 ```
@@ -102,12 +109,15 @@ Use descriptive names when creating multiple resources of the same type.
 
 **Variables:**
 ```hcl
+
 # Prefix with context when needed
+
 var.vpc_cidr_block          # Not just "cidr"
 var.database_instance_class # Not just "instance_class"
 ```
 
 **Files:**
+
 - `main.tf` - Primary resources
 - `variables.tf` - Input variables
 - `outputs.tf` - Output values
@@ -140,8 +150,10 @@ var.database_instance_class # Not just "instance_class"
   /____________\     - Module testing in isolation
  /              \    - Real resources in test account
 /________________\   Static Analysis (Cheap)
+
                      - validate, fmt, lint
                      - Security scanning
+
 ```
 
 ### Native Test Best Practices (1.6+)
@@ -149,6 +161,7 @@ var.database_instance_class # Not just "instance_class"
 **Before generating test code:**
 
 1. **Validate schemas with Terraform MCP:**
+
    ```
    Search provider docs → Get resource schema → Identify block types
    ```
@@ -163,11 +176,13 @@ var.database_instance_class # Not just "instance_class"
    - Or use `command = apply` to materialize
 
 **Common patterns:**
+
 - S3 encryption rules: **set** (use for expressions)
 - Lifecycle transitions: **set** (use for expressions)
 - IAM policy statements: **set** (use for expressions)
 
 **For detailed testing guides, see:**
+
 - **Testing Frameworks Guide** - Deep dive into static analysis, native tests, and Terratest
 - **Quick Reference** - Decision flowchart and command cheat sheet
 
@@ -176,6 +191,7 @@ var.database_instance_class # Not just "instance_class"
 ### Resource Block Ordering
 
 **Strict ordering for consistency:**
+
 1. `count` or `for_each` FIRST (blank line after)
 2. Other arguments
 3. `tags` as last real argument
@@ -183,7 +199,9 @@ var.database_instance_class # Not just "instance_class"
 5. `lifecycle` at the very end (if needed)
 
 ```hcl
+
 # ✅ GOOD - Correct ordering
+
 resource "aws_nat_gateway" "this" {
   count = var.create_nat_gateway ? 1 : 0
 
@@ -243,7 +261,9 @@ variable "environment" {
 
 **Boolean conditions:**
 ```hcl
+
 # ✅ GOOD - Boolean condition
+
 resource "aws_nat_gateway" "this" {
   count = var.create_nat_gateway ? 1 : 0
   # ...
@@ -252,7 +272,9 @@ resource "aws_nat_gateway" "this" {
 
 **Stable addressing with for_each:**
 ```hcl
+
 # ✅ GOOD - Removing "us-east-1b" only affects that subnet
+
 resource "aws_subnet" "private" {
   for_each = toset(var.availability_zones)
 
@@ -261,6 +283,7 @@ resource "aws_subnet" "private" {
 }
 
 # ❌ BAD - Removing middle AZ recreates all subsequent subnets
+
 resource "aws_subnet" "private" {
   count = length(var.availability_zones)
 
@@ -276,7 +299,9 @@ resource "aws_subnet" "private" {
 **Use locals to ensure correct resource deletion order:**
 
 ```hcl
+
 # Problem: Subnets might be deleted after CIDR blocks, causing errors
+
 # Solution: Use try() in locals to hint deletion order
 
 locals {
@@ -307,6 +332,7 @@ resource "aws_subnet" "public" {
 ```
 
 **Why this matters:**
+
 - Prevents deletion errors when destroying infrastructure
 - Ensures correct dependency order without explicit `depends_on`
 - Particularly useful for VPC configurations with secondary CIDR blocks
@@ -334,6 +360,7 @@ my-module/
 ### Best Practices Summary
 
 **Variables:**
+
 - ✅ Always include `description`
 - ✅ Use explicit `type` constraints
 - ✅ Provide sensible `default` values where appropriate
@@ -341,12 +368,14 @@ my-module/
 - ✅ Use `sensitive = true` for secrets
 
 **Outputs:**
+
 - ✅ Always include `description`
 - ✅ Mark sensitive outputs with `sensitive = true`
 - ✅ Consider returning objects for related values
 - ✅ Document what consumers should do with each output
 
 **For detailed module patterns, see:**
+
 - **Module Patterns Guide** - Variable best practices, output design, ✅ DO vs ❌ DON'T patterns
 - **Quick Reference** - Resource naming, variable naming, file organization
 
@@ -367,6 +396,7 @@ my-module/
 4. **Tag all test resources** (track spending)
 
 **For complete CI/CD templates, see:**
+
 - **CI/CD Workflows Guide** - GitHub Actions, GitLab CI, Atlantis integration, cost optimization
 - **Quick Reference** - Common CI/CD issues and solutions
 
@@ -375,7 +405,9 @@ my-module/
 ### Essential Security Checks
 
 ```bash
+
 # Static security scanning
+
 trivy config .
 checkov -d .
 ```
@@ -383,18 +415,21 @@ checkov -d .
 ### Common Issues to Avoid
 
 ❌ **Don't:**
+
 - Store secrets in variables
 - Use default VPC
 - Skip encryption
 - Open security groups to 0.0.0.0/0
 
 ✅ **Do:**
+
 - Use AWS Secrets Manager / Parameter Store
 - Create dedicated VPCs
 - Enable encryption at rest
 - Use least-privilege security groups
 
 **For detailed security guidance, see:**
+
 - **Security & Compliance Guide** - Trivy/Checkov integration, secrets management, state file security, compliance testing
 
 ## Version Management
@@ -419,13 +454,17 @@ version = ">= 5.0"     # Minimum (risky - breaking changes)
 ### Update Workflow
 
 ```bash
+
 # Lock versions initially
+
 terraform init              # Creates .terraform.lock.hcl
 
 # Update to latest within constraints
+
 terraform init -upgrade     # Updates providers
 
 # Review and test
+
 terraform plan
 ```
 
@@ -450,12 +489,15 @@ terraform plan
 ### Quick Examples
 
 ```hcl
+
 # try() - Safe fallbacks (0.13+)
+
 output "sg_id" {
   value = try(aws_security_group.this[0].id, "")
 }
 
 # optional() - Optional attributes with defaults (1.3+)
+
 variable "config" {
   type = object({
     name    = string
@@ -464,6 +506,7 @@ variable "config" {
 }
 
 # Cross-variable validation (1.9+)
+
 variable "environment" { type = string }
 variable "backup_days" {
   type = number
@@ -479,16 +522,19 @@ variable "backup_days" {
 ## Version-Specific Guidance
 
 ### Terraform 1.0-1.5
+
 - Use Terratest for testing
 - No native testing framework available
 - Focus on static analysis and plan validation
 
 ### Terraform 1.6+ / OpenTofu 1.6+
+
 - **New:** Native `terraform test` / `tofu test` command
 - Consider migrating from external frameworks for simple tests
 - Keep Terratest only for complex integration tests
 
 ### Terraform 1.7+ / OpenTofu 1.7+
+
 - **New:** Mock providers for unit testing
 - Reduce cost by mocking external dependencies
 - Use real integration tests for final validation
@@ -502,6 +548,7 @@ Both are fully supported by this skill. For licensing, governance, and feature c
 This skill uses **progressive disclosure** - essential information is in this main file, detailed guides are available when needed:
 
 📚 **Reference Files:**
+
 - **Testing Frameworks** - In-depth guide to static analysis, native tests, and Terratest
 - **Module Patterns** - Module structure, variable/output best practices, ✅ DO vs ❌ DON'T patterns
 - **CI/CD Workflows** - GitHub Actions, GitLab CI templates, cost optimization, automated cleanup
@@ -511,11 +558,13 @@ This skill uses **progressive disclosure** - essential information is in this ma
 **How to use:** When you need detailed information on a topic, reference the appropriate guide. Claude will load it on demand to provide comprehensive guidance.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

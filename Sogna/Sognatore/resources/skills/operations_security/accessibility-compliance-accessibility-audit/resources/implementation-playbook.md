@@ -330,6 +330,7 @@ const ariaPatterns = {
 ### 5. Manual Testing Checklist
 
 ```markdown
+
 ## Manual Accessibility Testing
 
 ### Keyboard Navigation
@@ -365,6 +366,7 @@ const ariaPatterns = {
 - [ ] No time limits on forms
 - [ ] Navigation consistent
 - [ ] Important actions reversible
+
 ```
 
 ### 6. Remediation Examples
@@ -408,7 +410,9 @@ const LiveRegion = ({ message, politeness = "polite" }) => (
 ### 7. CI/CD Integration
 
 ```yaml
+
 # .github/workflows/accessibility.yml
+
 name: Accessibility Tests
 
 on: [push, pull_request]
@@ -418,30 +422,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Setup Node.js
+
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
       - name: Install and build
+
         run: |
           npm ci
           npm run build
 
       - name: Start server
+
         run: |
           npm start &
           npx wait-on http://localhost:3000
 
       - name: Run axe tests
+
         run: npm run test:a11y
 
       - name: Run pa11y
+
         run: npx pa11y http://localhost:3000 --standard WCAG2AA --threshold 0
 
       - name: Upload report
+
         uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -509,6 +520,7 @@ class AccessibilityReportGenerator {
 Focus on creating inclusive experiences that work for all users, regardless of their abilities or assistive technologies.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

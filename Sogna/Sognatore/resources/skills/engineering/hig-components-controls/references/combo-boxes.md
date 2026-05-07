@@ -46,6 +46,7 @@ For guidance, see [Text fields](https://developer.apple.com/design/human-interfa
 [`NSComboBox`](https://developer.apple.com/documentation/AppKit/NSComboBox) — AppKit
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

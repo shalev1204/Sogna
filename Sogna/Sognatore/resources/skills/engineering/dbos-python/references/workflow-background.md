@@ -25,6 +25,7 @@ def long_task(data):
     pass
 
 # Don't use threads for DBOS workflows!
+
 thread = threading.Thread(target=long_task, args=(data,))
 thread.start()
 ```
@@ -40,22 +41,28 @@ def long_task(data):
     return "done"
 
 # Start workflow in background
+
 handle: WorkflowHandle = DBOS.start_workflow(long_task, data)
 
 # Later, get the result
+
 result = handle.get_result()
 
 # Or check status
+
 status = handle.get_status()
 ```
 
 You can retrieve a workflow handle later using its ID:
 
 ```python
+
 # Get workflow ID
+
 workflow_id = handle.get_workflow_id()
 
 # Later, retrieve the handle
+
 handle = DBOS.retrieve_workflow(workflow_id)
 result = handle.get_result()
 ```
@@ -63,6 +70,7 @@ result = handle.get_result()
 Reference: [Starting Workflows](https://docs.dbos.dev/python/tutorials/workflow-tutorial#starting-workflows-in-the-background)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

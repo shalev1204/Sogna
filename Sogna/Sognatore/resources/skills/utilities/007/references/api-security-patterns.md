@@ -17,14 +17,19 @@ version: 1.0.0
 ### API Keys
 
 ```yaml
+
 # GOOD: API key in header
+
 Authorization: ApiKey sk-live-abc123def456
 
 # BAD: API key in URL (logged in server logs, browser history, referrer headers)
+
 GET /api/data?api_key=sk-live-abc123def456
 
 # Best practices:
+
 api_keys:
+
   - Prefix keys for identification: sk-live-, sk-test-, pk-
   - Store hashed (SHA-256), not plaintext
   - Rotate regularly (90 days max)
@@ -32,12 +37,15 @@ api_keys:
   - Rate limit per key
   - Revoke immediately on compromise
   - Different keys per environment (dev/staging/prod)
+
 ```
 
 ### OAuth 2.0
 
 ```yaml
+
 # Recommended flows by client type
+
 oauth2_flows:
   server_to_server: client_credentials
   web_app_with_backend: authorization_code + PKCE
@@ -46,6 +54,7 @@ oauth2_flows:
   NEVER_USE: implicit_grant  # Deprecated, tokens exposed in URL
 
 # Token best practices
+
 tokens:
   access_token_lifetime: 15_minutes  # Short-lived
   refresh_token_lifetime: 7_days     # Rotate on use
@@ -57,7 +66,9 @@ tokens:
 ### JWT Best Practices
 
 ```python
+
 # GOOD: Proper JWT configuration
+
 jwt_config = {
     "algorithm": "RS256",           # Asymmetric, not HS256 with weak secret
     "expiration": 900,              # 15 minutes max
@@ -67,6 +78,7 @@ jwt_config = {
 }
 
 # BAD patterns to detect
+
 jwt_antipatterns = [
     "algorithm: none",       # No signature verification
     "algorithm: HS256",      # With weak/shared secret
@@ -77,6 +89,7 @@ jwt_antipatterns = [
 ]
 
 # CRITICAL: Always validate
+
 def validate_jwt(token: str) -> dict:
     return jwt.decode(
         token,
@@ -95,7 +108,9 @@ def validate_jwt(token: str) -> dict:
 ### Token Bucket
 
 ```python
+
 # Best for: Allowing bursts while maintaining average rate
+
 class TokenBucket:
     """
     capacity=100, refill_rate=10/sec
@@ -118,9 +133,13 @@ class TokenBucket:
 ### Sliding Window
 
 ```python
+
 # Best for: Smooth rate limiting without burst allowance
+
 # Track requests in time windows, count requests in last N seconds
+
 # Redis implementation: ZADD + ZRANGEBYSCORE + ZCARD
+
 ```
 
 ### Per-User Rate Limits
@@ -240,6 +259,7 @@ def verify_webhook(payload: bytes, headers: dict, secret: str) -> bool:
 ```yaml
 webhook_security:
   sending:
+
     - Sign every payload with HMAC-SHA256
     - Include timestamp in signature
     - Send unique event ID for idempotency
@@ -248,6 +268,7 @@ webhook_security:
     - Rotate signing secrets periodically
 
   receiving:
+
     - Verify signature BEFORE any processing
     - Reject requests older than 5 minutes (replay protection)
     - Implement idempotency (store processed event IDs)
@@ -255,6 +276,7 @@ webhook_security:
     - Don't trust payload data blindly (validate schema)
     - Rate limit incoming webhooks
     - Log all webhook events for audit
+
 ```
 
 ---
@@ -262,11 +284,15 @@ webhook_security:
 ## 5. CORS Configuration
 
 ```python
+
 # DANGEROUS: Allow everything
+
 # Access-Control-Allow-Origin: *
+
 # Access-Control-Allow-Credentials: true  # INVALID with * origin
 
 # SECURE: Explicit allowlist
+
 CORS_CONFIG = {
     "allowed_origins": [
         "https://app.example.com",
@@ -280,6 +306,7 @@ CORS_CONFIG = {
 }
 
 # Anti-patterns to detect
+
 cors_antipatterns = [
     "Access-Control-Allow-Origin: *",                  # Too permissive
     "reflect Origin header as Allow-Origin",           # Effectively * with credentials
@@ -293,7 +320,9 @@ cors_antipatterns = [
 ## 6. Security Headers Checklist
 
 ```yaml
+
 # Required security headers for all API responses
+
 security_headers:
   # Prevent MIME sniffing
   X-Content-Type-Options: "nosniff"
@@ -332,13 +361,16 @@ security_headers:
 ### BOLA / IDOR (Broken Object Level Authorization)
 
 ```python
+
 # VULNERABLE: No ownership check
+
 @app.get("/api/users/{user_id}/orders")
 def get_orders(user_id: int):
     return db.query(Order).filter(Order.user_id == user_id).all()
     # Any authenticated user can access any other user's orders
 
 # SECURE: Enforce ownership
+
 @app.get("/api/users/{user_id}/orders")
 def get_orders(user_id: int, current_user: User = Depends(get_current_user)):
     if current_user.id != user_id and not current_user.is_admin:
@@ -349,13 +381,16 @@ def get_orders(user_id: int, current_user: User = Depends(get_current_user)):
 ### Mass Assignment
 
 ```python
+
 # VULNERABLE: Accept all fields from request
+
 @app.put("/api/users/{user_id}")
 def update_user(user_id: int, data: dict):
     db.query(User).filter(User.id == user_id).update(data)
     # Attacker sends {"role": "admin", "is_verified": true}
 
 # SECURE: Explicit allowlist of updatable fields
+
 class UserUpdateRequest(BaseModel):
     name: str | None = None
     email: str | None = None
@@ -371,13 +406,16 @@ def update_user(user_id: int, data: UserUpdateRequest):
 ### Excessive Data Exposure
 
 ```python
+
 # VULNERABLE: Return entire database model
+
 @app.get("/api/users/{user_id}")
 def get_user(user_id: int):
     return db.query(User).get(user_id).__dict__
     # Returns: id, name, email, password_hash, ssn, internal_notes, ...
 
 # SECURE: Explicit response schema
+
 class UserResponse(BaseModel):
     id: int
     name: str
@@ -394,7 +432,9 @@ def get_user(user_id: int):
 ## 8. Idempotency Patterns
 
 ```python
+
 # Prevent duplicate processing of the same request
+
 # Essential for: payments, webhooks, any non-idempotent operation
 
 class IdempotencyMiddleware:
@@ -435,6 +475,7 @@ class IdempotencyMiddleware:
 
 ```yaml
 require_idempotency_key:
+
   - POST /payments
   - POST /transfers
   - POST /orders
@@ -442,9 +483,11 @@ require_idempotency_key:
   - Any non-idempotent mutation
 
 naturally_idempotent:  # No key needed
+
   - GET (all)
   - PUT (full replacement)
   - DELETE (by ID)
+
 ```
 
 ---
@@ -486,6 +529,7 @@ Operations:
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

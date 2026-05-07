@@ -38,6 +38,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 15. 体制内一定比体制外稳定
 
 **推荐挖掘问题：**
+
 - "你说想换工作 — 如果当前公司环境改善 50%，你还想走吗？"
 - "你认为自己的核心竞争力是什么？你的同事/猎头也这么认为吗？"
 - "你说35岁是门槛 — 你认识几个35岁以上转型成功的案例？"
@@ -66,6 +67,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. 小范围验证的成功可以直接放大
 
 **推荐挖掘问题：**
+
 - "你说用户需要这个 — 有多少人实际掏了钱？愿望和付费之间差距有多大？"
 - "你说市场很大 — 你的可触达市场（SAM）是多少？你能触达的渠道是什么？"
 - "你说你们能做得更好 — '更好'具体是什么维度？用户真的在乎这个维度吗？"
@@ -93,6 +95,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 13. 早买早享受，晚买有折扣但错过了使用时间
 
 **推荐挖掘问题：**
+
 - "你说房价会涨 — 你参考的是过去20年的数据。未来20年的人口结构和经济增速一样吗？"
 - "你说学区房是刚需 — '孩子教育'具体需要学区房解决什么问题？有没有替代方案？"
 - "你说租房不值 — 你算过同地段租房+投资差额 vs 买房+还贷的 30 年总成本吗？"
@@ -121,6 +124,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. 理性决策一定优于直觉
 
 **推荐挖掘问题：**
+
 - "你说努力一定有回报 — 你指的是哪种努力？你怎么定义'回报'？"
 - "你说稳定最重要 — 稳定的成本是什么？你放弃了什么来换取稳定？"
 - "你说要延迟满足 — 延迟到什么时候？你怎么知道那个未来一定更好？"
@@ -153,6 +157,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. I need to have a 5-year plan
 
 **Recommended Probing Questions:**
+
 - "You say you want to switch jobs — if your current role improved 50%, would you still leave?"
 - "You say you're too old — how many people in your target industry are your age or older?"
 - "You say remote work hurts career growth — what evidence do you have beyond anecdotes?"
@@ -181,6 +186,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. Monthly active users = product-market fit
 
 **Recommended Probing Questions:**
+
 - "You say users need this — how many have actually paid? Wishing and paying are very different."
 - "You say the market is huge — what's your SAM? What channels can you actually reach?"
 - "You say you have a moat — can a well-funded competitor replicate it in 6 months?"
@@ -209,6 +215,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. I need to own assets to build wealth
 
 **Recommended Probing Questions:**
+
 - "You say real estate always goes up — are you using 1980-2020 data? What about Japan 1990-2020?"
 - "You say renting is wasting money — have you calculated rent + invest vs buy + mortgage over 30 years?"
 - "You say you need $X to retire — how did you arrive at that number? What lifestyle does it assume?"
@@ -237,6 +244,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 14. Meritocracy exists — the best work gets recognized
 
 **Recommended Probing Questions:**
+
 - "You say hard work pays off — in what domains? Can you name a case where hard work in the wrong direction made things worse?"
 - "You say follow your passion — how many people do you know who followed their passion and failed? How would you know?"
 - "You say more data is better — when was the last time you delayed a decision because you had too much data?"
@@ -254,6 +262,7 @@ When a user's question matches a scenario type, use the corresponding checklist 
 5. **Use the probing questions** to surface assumptions the user can't articulate directly
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -24,12 +24,14 @@ You run scenarios without the skill (RED - watch agent fail), write skill addres
 ## When to Use
 
 Test skills that:
+
 - Enforce discipline (TDD, testing requirements)
 - Have compliance costs (time, effort, rework)
 - Could be rationalized away ("just this once")
 - Contradict immediate goals (speed over quality)
 
 Don't test:
+
 - Pure reference skills (API docs, syntax guides)
 - Skills without rules to violate
 - Skills agents have no incentive to bypass
@@ -79,6 +81,7 @@ Choose A, B, or C.
 ```
 
 Run this WITHOUT a TDD skill. Agent chooses B or C and rationalizes:
+
 - "I already manually tested it"
 - "Tests after achieve same goals"
 - "Deleting is wasteful"
@@ -172,6 +175,7 @@ Make agent believe it's real work, not a quiz.
 Agent violated rule despite having the skill? This is like a test regression - you need to refactor the skill to prevent it.
 
 **Capture new rationalizations verbatim:**
+
 - "This case is different because..."
 - "I'm following the spirit not the letter"
 - "The PURPOSE is X, and I'm achieving X differently"
@@ -199,10 +203,12 @@ Write code before test? Delete it.
 Write code before test? Delete it. Start over.
 
 **No exceptions:**
+
 - Don't keep it as "reference"
 - Don't "adapt" it while writing tests
 - Don't look at it
 - Delete means delete
+
 ```
 </After>
 
@@ -217,10 +223,12 @@ Write code before test? Delete it. Start over.
 ### 3. Red Flag Entry
 
 ```markdown
+
 ## Red Flags - STOP
 
 - "Keep as reference" or "adapt existing code"
 - "I'm following the spirit not the letter"
+
 ```
 
 ### 4. Update description
@@ -236,6 +244,7 @@ Add symptoms of ABOUT to violate.
 **Re-test same scenarios with updated skill.**
 
 Agent should now:
+
 - Choose correct option
 - Cite new sections
 - Acknowledge their previous rationalization was addressed
@@ -281,6 +290,7 @@ it crystal clear that Option A was the only acceptable answer?
 4. **Meta-testing reveals** "skill was clear, I should follow it"
 
 **Not bulletproof if:**
+
 - Agent finds new rationalizations
 - Agent argues skill is wrong
 - Agent creates "hybrid approaches"
@@ -289,6 +299,7 @@ it crystal clear that Option A was the only acceptable answer?
 ## Example: TDD Skill Bulletproofing
 
 ### Initial Test (Failed)
+
 ```markdown
 Scenario: 200 lines done, forgot TDD, exhausted, dinner plans
 Agent chose: C (write tests after)
@@ -296,6 +307,7 @@ Rationalization: "Tests after achieve same goals"
 ```
 
 ### Iteration 1 - Add Counter
+
 ```markdown
 Added section: "Why Order Matters"
 Re-tested: Agent STILL chose C
@@ -303,6 +315,7 @@ New rationalization: "Spirit not letter"
 ```
 
 ### Iteration 2 - Add Foundational Principle
+
 ```markdown
 Added: "Violating letter is violating spirit"
 Re-tested: Agent chose A (delete it)
@@ -317,16 +330,19 @@ Meta-test: "Skill was clear, I should follow it"
 Before deploying skill, verify you followed RED-GREEN-REFACTOR:
 
 **RED Phase:**
+
 - [ ] Created pressure scenarios (3+ combined pressures)
 - [ ] Ran scenarios WITHOUT skill (baseline)
 - [ ] Documented agent failures and rationalizations verbatim
 
 **GREEN Phase:**
+
 - [ ] Wrote skill addressing specific baseline failures
 - [ ] Ran scenarios WITH skill
 - [ ] Agent now complies
 
 **REFACTOR Phase:**
+
 - [ ] Identified NEW rationalizations from testing
 - [ ] Added explicit counters for each loophole
 - [ ] Updated rationalization table
@@ -384,6 +400,7 @@ RED-GREEN-REFACTOR for documentation works exactly like RED-GREEN-REFACTOR for c
 ## Real-World Impact
 
 From applying TDD to TDD skill itself (2025-10-03):
+
 - 6 RED-GREEN-REFACTOR iterations to bulletproof
 - Baseline testing revealed 10+ unique rationalizations
 - Each REFACTOR closed specific loopholes
@@ -391,6 +408,7 @@ From applying TDD to TDD skill itself (2025-10-03):
 - Same process works for any discipline-enforcing skill
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

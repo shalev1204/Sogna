@@ -14,11 +14,13 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 1. Authentication vs Authorization
 
 **Authentication (AuthN)**: Who are you?
+
 - Verifying identity (username/password, OAuth, biometrics)
 - Issuing credentials (sessions, tokens)
 - Managing login/logout
 
 **Authorization (AuthZ)**: What can you do?
+
 - Permission checking
 - Role-based access control (RBAC)
 - Resource ownership validation
@@ -27,16 +29,19 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 2. Authentication Strategies
 
 **Session-Based:**
+
 - Server stores session state
 - Session ID in cookie
 - Traditional, simple, stateful
 
 **Token-Based (JWT):**
+
 - Stateless, self-contained
 - Scales horizontally
 - Can store claims
 
 **OAuth2/OpenID Connect:**
+
 - Delegate authentication
 - Social login (Google, GitHub)
 - Enterprise SSO
@@ -625,6 +630,7 @@ app.use('/api/', apiLimiter);
 - **scripts/token-validator.ts**: JWT validation utility
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -2,6 +2,7 @@
 name: semgrep-rule-creator
 description: Creates custom Semgrep rules for detecting security vulnerabilities, bug patterns, and code patterns. Use when writing Semgrep rules or building custom static analysis detections.
 allowed-tools:
+
   - Bash
   - Read
   - Write
@@ -9,19 +10,21 @@ allowed-tools:
   - Glob
   - Grep
   - WebFetch
+
 risk: critical
 version: 1.0.0
 id: skill-semgrep-rule-creator
 owner: [[orchestrator]]
 ---
 
-
 # Semgrep Rule Creator
 
 Create production-quality Semgrep rules with proper testing and validation.
 
 ## When to Use
+
 **Ideal scenarios:**
+
 - Writing Semgrep rules for specific bug patterns
 - Writing rules to detect security vulnerabilities in your codebase
 - Writing taint mode rules for data flow vulnerabilities
@@ -30,6 +33,7 @@ Create production-quality Semgrep rules with proper testing and validation.
 ## When NOT to Use
 
 Do NOT use this skill for:
+
 - Running existing Semgrep rulesets
 - General static analysis without custom rules (use `static-analysis` skill)
 
@@ -48,44 +52,60 @@ When writing Semgrep rules, reject these common shortcuts:
 
 **Too broad** - matches everything, useless for detection:
 ```yaml
+
 # BAD: Matches any function call
+
 pattern: $FUNC(...)
 
 # GOOD: Specific dangerous function
+
 pattern: eval(...)
 ```
 
 **Missing safe cases in tests** - leads to undetected false positives:
 ```python
+
 # BAD: Only tests vulnerable case
+
 # ruleid: my-rule
+
 dangerous(user_input)
 
 # GOOD: Include safe cases to verify no false positives
+
 # ruleid: my-rule
+
 dangerous(user_input)
 
 # ok: my-rule
+
 dangerous(sanitize(user_input))
 
 # ok: my-rule
+
 dangerous("hardcoded_safe_value")
 ```
 
 **Overly specific patterns** - misses variations:
 ```yaml
+
 # BAD: Only matches exact format
+
 pattern: os.system("rm " + $VAR)
 
 # GOOD: Matches all os.system calls with taint tracking
+
 mode: taint
 pattern-sinks:
+
   - pattern: os.system(...)
+
 ```
 
 ## Strictness Level
 
 This workflow is **strict** - do not skip steps:
+
 - **Read documentation first**: See [Documentation](#documentation) before writing Semgrep rules
 - **Test-first is mandatory**: Never write a rule without tests
 - **100% test pass is required**: "Most tests pass" is not acceptable
@@ -101,6 +121,7 @@ This workflow is **strict** - do not skip steps:
 This skill guides creation of Semgrep rules that detect security vulnerabilities and code patterns. Rules are created iteratively: analyze the problem, write tests first, analyze AST structure, write the rule, iterate until all tests pass, optimize the rule.
 
 **Approach selection:**
+
 - **Taint mode** (prioritize): Data flow issues where untrusted input reaches dangerous sinks
 - **Pattern matching**: Simple syntactic patterns without data flow requirements
 
@@ -119,23 +140,32 @@ This skill guides creation of Semgrep rules that detect security vulnerabilities
 
 ```yaml
 rules:
+
   - id: insecure-eval
+
     languages: [python]
     severity: HIGH
     message: User input passed to eval() allows code execution
     mode: taint
     pattern-sources:
+
       - pattern: request.args.get(...)
+
     pattern-sinks:
+
       - pattern: eval(...)
+
 ```
 
 Test file (`insecure-eval.py`):
 ```python
+
 # ruleid: insecure-eval
+
 eval(request.args.get('code'))
 
 # ok: insecure-eval
+
 eval("print('safe')")
 ```
 
@@ -152,6 +182,7 @@ Copy this checklist and track progress:
 
 ```
 Semgrep Rule Progress:
+
 - [ ] Step 1: Analyze the Problem
 - [ ] Step 2: Write Tests First
 - [ ] Step 3: Analyze AST structure
@@ -159,6 +190,7 @@ Semgrep Rule Progress:
 - [ ] Step 5: Iterate until all tests pass (semgrep --test)
 - [ ] Step 6: Optimize the rule (remove redundancies, re-test)
 - [ ] Step 7: Final Run
+
 ```
 
 ## Documentation
@@ -172,11 +204,13 @@ Semgrep Rule Progress:
 5. [Writing Rules Index](https://github.com/semgrep/semgrep-docs/tree/main/docs/writing-rules/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

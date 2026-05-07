@@ -8,7 +8,6 @@ id: skill-python-testing-patterns
 owner: [[eng-qa]]
 ---
 
-
 # Python Testing Patterns
 
 Comprehensive guide to implementing robust testing strategies in Python using pytest, fixtures, mocking, parameterization, and test-driven development practices.
@@ -43,11 +42,13 @@ Comprehensive guide to implementing robust testing strategies in Python using py
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

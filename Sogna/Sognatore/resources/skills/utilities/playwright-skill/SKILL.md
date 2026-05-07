@@ -13,7 +13,6 @@ id: skill-playwright-skill
 owner: [[orchestrator]]
 ---
 
-
 **IMPORTANT - Path Resolution:**
 This skill can be installed in different locations (plugin system, manual installation, global, or project-specific). Before executing any commands, determine the skill directory based on where you loaded this SKILL.md file, and use that path in all commands below. Replace `$SKILL_DIR` with the actual discovered path.
 
@@ -292,7 +291,9 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 For quick one-off tasks, you can execute code inline without creating files:
 
 ```bash
+
 # Take a quick screenshot
+
 cd $SKILL_DIR && node run.js "
 const browser = await chromium.launch({ headless: false });
 const page = await browser.newPage();
@@ -444,6 +445,7 @@ Claude: I'll test the login flow. First, let me check for running servers...
 [Runs: detectDevServers()]
 [Output: Found servers on ports 3000 and 3001]
 I found 2 dev servers. Which one should I test?
+
 - http://localhost:3000
 - http://localhost:3001
 
@@ -464,14 +466,17 @@ User: "Use 3001"
 - Progressive disclosure - API_REFERENCE.md loaded only when advanced features needed
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

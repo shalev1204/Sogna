@@ -12,7 +12,6 @@ id: skill-rayden-code
 owner: [[orchestrator]]
 ---
 
-
 # Rayden Code Skill
 
 ## Overview
@@ -82,7 +81,9 @@ Generate production-quality React + Tailwind CSS code using the Rayden UI compon
 - Describe what you want in plain language — the skill maps your request to the right components
 - Install `@raydenui/ui` in your project first (`npm install @raydenui/ui`)
 - Import `@raydenui/ui/styles.css` in your app entry point for design tokens to work
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Review generated code for business logic — the skill handles UI, not data fetching
 - Use alongside `/rayden-use` if you also want the same design built in Figma
 
@@ -107,11 +108,13 @@ Generate production-quality React + Tailwind CSS code using the Rayden UI compon
 - `rayden-use` — Build Rayden UI components and screens in Figma via MCP (included in the same package)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

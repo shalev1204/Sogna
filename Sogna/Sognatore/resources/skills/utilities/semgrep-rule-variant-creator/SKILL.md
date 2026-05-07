@@ -9,13 +9,14 @@ id: skill-semgrep-rule-variant-creator
 owner: [[orchestrator]]
 ---
 
-
 # Semgrep Rule Variant Creator
 
 Port existing Semgrep rules to new target languages with proper applicability analysis and test-driven validation.
 
 ## When to Use
+
 **Ideal scenarios:**
+
 - Porting an existing Semgrep rule to one or more target languages
 - Creating language-specific variants of a universal vulnerability pattern
 - Expanding rule coverage across a polyglot codebase
@@ -24,6 +25,7 @@ Port existing Semgrep rules to new target languages with proper applicability an
 ## When NOT to Use
 
 Do NOT use this skill for:
+
 - Creating a new Semgrep rule from scratch (use `semgrep-rule-creator` instead)
 - Running existing rules against code
 - Languages where the vulnerability pattern fundamentally doesn't apply
@@ -32,6 +34,7 @@ Do NOT use this skill for:
 ## Input Specification
 
 This skill requires:
+
 1. **Existing Semgrep rule** - YAML file path or YAML rule content
 2. **Target languages** - One or more languages to port to (e.g., "Golang and Java")
 
@@ -72,6 +75,7 @@ When porting Semgrep rules, reject these common shortcuts:
 ## Strictness Level
 
 This workflow is **strict** - do not skip steps:
+
 - **Applicability analysis is mandatory**: Don't assume patterns translate
 - **Each language is independent**: Complete full cycle before moving to next
 - **Test-first for each variant**: Never write a rule without test cases
@@ -95,6 +99,7 @@ FOR EACH target language:
 **The `semgrep-rule-creator` skill is the authoritative reference for Semgrep rule creation fundamentals.** While this skill focuses on porting existing rules to new languages, the core principles of writing quality rules remain the same.
 
 Consult `semgrep-rule-creator` for guidance on:
+
 - **When to use taint mode vs pattern matching** - Choosing the right approach for the vulnerability type
 - **Test-first methodology** - Why tests come before rules and how to write effective test cases
 - **Anti-patterns to avoid** - Common mistakes like overly broad or overly specific patterns
@@ -110,11 +115,13 @@ When porting a rule, you're applying these same principles in a new language con
 Before porting, determine if the pattern applies to the target language.
 
 **Analysis criteria:**
+
 1. Does the vulnerability class exist in the target language?
 2. Does an equivalent construct exist (function, pattern, library)?
 3. Are the semantics similar enough for meaningful detection?
 
 **Verdict options:**
+
 - `APPLICABLE` → Proceed with variant creation
 - `APPLICABLE_WITH_ADAPTATION` → Proceed but significant changes needed
 - `NOT_APPLICABLE` → Skip this language, document why
@@ -126,6 +133,7 @@ See applicability-analysis.md for detailed guidance.
 **Always write tests before the rule.**
 
 Create test file with target language idioms:
+
 - Minimum 2 vulnerable cases (`ruleid:`)
 - Minimum 2 safe cases (`ok:`)
 - Include language-specific edge cases
@@ -150,10 +158,13 @@ See language-syntax-guide.md for translation guidance.
 ### Phase 4: Validation
 
 ```bash
+
 # Validate YAML
+
 semgrep --validate --config rule.yaml
 
 # Run tests
+
 semgrep --test --config rule.yaml test-file
 ```
 
@@ -174,7 +185,6 @@ See workflow.md for detailed workflow and troubleshooting.
 | Validate YAML | `semgrep --validate --config rule.yaml` |
 | Dump AST | `semgrep --dump-ast -l <lang> <file>` |
 | Debug taint flow | `semgrep --dataflow-traces -f rule.yaml file` |
-
 
 ## Key Differences from Rule Creation
 
@@ -203,11 +213,13 @@ See workflow.md for detailed workflow and troubleshooting.
 - For detailed workflow and examples, see workflow.md
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

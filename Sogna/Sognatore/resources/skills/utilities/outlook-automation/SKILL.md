@@ -8,7 +8,6 @@ id: skill-outlook-automation
 owner: [[orchestrator]]
 ---
 
-
 # Outlook Automation via Rube MCP
 
 Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rube MCP.
@@ -35,18 +34,21 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 **When to use**: User wants to find specific emails across their mailbox
 
 **Tool sequence**:
+
 1. `OUTLOOK_SEARCH_MESSAGES` - Search with KQL syntax across all folders [Required]
 2. `OUTLOOK_GET_MESSAGE` - Get full message details [Optional]
 3. `OUTLOOK_LIST_OUTLOOK_ATTACHMENTS` - List message attachments [Optional]
 4. `OUTLOOK_DOWNLOAD_OUTLOOK_ATTACHMENT` - Download attachment [Optional]
 
 **Key parameters**:
+
 - `query`: KQL search string (from:, to:, subject:, received:, hasattachment:)
 - `from_index`: Pagination start (0-based)
 - `size`: Results per page (max 25)
 - `message_id`: Message ID (use hitId from search results)
 
 **Pitfalls**:
+
 - Only works with Microsoft 365/Enterprise accounts (not @hotmail.com/@outlook.com)
 - Pagination relies on hitsContainers[0].moreResultsAvailable; stop only when false
 - Use hitId from search results as message_id for downstream calls, not resource.id
@@ -58,10 +60,12 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 **When to use**: User wants to list emails in a specific folder with OData filters
 
 **Tool sequence**:
+
 1. `OUTLOOK_LIST_MAIL_FOLDERS` - List mail folders to get folder IDs [Prerequisite]
 2. `OUTLOOK_QUERY_EMAILS` - Query emails with structured filters [Required]
 
 **Key parameters**:
+
 - `folder`: Folder name ('inbox', 'sentitems', 'drafts') or folder ID
 - `filter`: OData filter (e.g., `isRead eq false and importance eq 'high'`)
 - `top`: Max results (1-1000)
@@ -69,6 +73,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 - `select`: Array of fields to return
 
 **Pitfalls**:
+
 - QUERY_EMAILS searches a SINGLE folder only; use SEARCH_MESSAGES for cross-folder search
 - Custom folders require folder IDs, not display names; use LIST_MAIL_FOLDERS
 - Always check response['@odata.nextLink'] for pagination
@@ -79,6 +84,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 **When to use**: User wants to list, search, or inspect calendar events
 
 **Tool sequence**:
+
 1. `OUTLOOK_LIST_EVENTS` - List events with filters [Optional]
 2. `OUTLOOK_GET_CALENDAR_VIEW` - Get events in a time window [Optional]
 3. `OUTLOOK_GET_EVENT` - Get specific event details [Optional]
@@ -86,6 +92,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 5. `OUTLOOK_GET_SCHEDULE` - Get free/busy info [Optional]
 
 **Key parameters**:
+
 - `filter`: OData filter (use start/dateTime, NOT receivedDateTime)
 - `start_datetime`/`end_datetime`: ISO 8601 for calendar view
 - `timezone`: IANA timezone (e.g., 'America/New_York')
@@ -93,6 +100,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 - `select`: Fields to return
 
 **Pitfalls**:
+
 - Use calendar event properties only (start/dateTime, end/dateTime), NOT email properties (receivedDateTime)
 - Calendar view requires start_datetime and end_datetime
 - Recurring events need `expand_recurring_events=true` to see individual occurrences
@@ -103,18 +111,21 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 **When to use**: User wants to list, create, or organize contacts
 
 **Tool sequence**:
+
 1. `OUTLOOK_LIST_CONTACTS` - List contacts [Optional]
 2. `OUTLOOK_CREATE_CONTACT` - Create a new contact [Optional]
 3. `OUTLOOK_GET_CONTACT_FOLDERS` - List contact folders [Optional]
 4. `OUTLOOK_CREATE_CONTACT_FOLDER` - Create contact folder [Optional]
 
 **Key parameters**:
+
 - `givenName`/`surname`: Contact name
 - `emailAddresses`: Array of email objects
 - `displayName`: Full display name
 - `contact_folder_id`: Optional folder for contacts
 
 **Pitfalls**:
+
 - Contact creation supports many fields but only givenName or surname is needed
 
 ### 5. Manage Mail Folders
@@ -122,16 +133,19 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 **When to use**: User wants to organize mail folders
 
 **Tool sequence**:
+
 1. `OUTLOOK_LIST_MAIL_FOLDERS` - List top-level folders [Required]
 2. `OUTLOOK_LIST_CHILD_MAIL_FOLDERS` - List subfolders [Optional]
 3. `OUTLOOK_CREATE_MAIL_FOLDER` - Create a new folder [Optional]
 
 **Key parameters**:
+
 - `parent_folder_id`: Well-known name or folder ID
 - `displayName`: New folder name
 - `include_hidden_folders`: Show hidden folders
 
 **Pitfalls**:
+
 - Well-known folder names: 'inbox', 'sentitems', 'drafts', 'deleteditems', 'junkemail', 'archive'
 - Custom folder operations require the folder ID, not display name
 
@@ -140,6 +154,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 ### KQL Search Syntax
 
 **Property filters**:
+
 - `from:user@example.com` - From sender
 - `to:recipient@example.com` - To recipient
 - `subject:invoice` - Subject contains
@@ -147,6 +162,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 - `hasattachment:yes` - Has attachments
 
 **Combinators**:
+
 - `AND` - Both conditions
 - `OR` - Either condition
 - Parentheses for grouping
@@ -154,22 +170,26 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 ### OData Filter Syntax
 
 **Email filters**:
+
 - `isRead eq false` - Unread emails
 - `importance eq 'high'` - High importance
 - `hasAttachments eq true` - Has attachments
 - `receivedDateTime ge 2025-01-01T00:00:00Z` - Date filter
 
 **Calendar filters**:
+
 - `start/dateTime ge '2025-01-01T00:00:00Z'` - Events after date
 - `contains(subject, 'Meeting')` - Subject contains text
 
 ## Known Pitfalls
 
 **Account Types**:
+
 - SEARCH_MESSAGES requires Microsoft 365/Enterprise accounts
 - Personal accounts (@hotmail.com, @outlook.com) have limited API access
 
 **Field Confusion**:
+
 - Email properties (receivedDateTime) differ from calendar properties (start/dateTime)
 - Do NOT use email fields in calendar queries or vice versa
 
@@ -194,14 +214,17 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 | Contact folders | OUTLOOK_GET_CONTACT_FOLDERS | (none) |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

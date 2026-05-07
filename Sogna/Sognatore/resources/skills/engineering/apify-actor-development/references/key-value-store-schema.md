@@ -21,7 +21,9 @@ import { Actor } from 'apify';
 await Actor.init();
 
 /**
+
  * Actor code
+
  */
 await Actor.setValue('document-1', 'my text data', { contentType: 'text/plain' });
 
@@ -37,7 +39,9 @@ await Actor.exit();
 Consider an example Actor that calls `Actor.set_value()` to save records into the key-value store:
 
 ```python
+
 # Key-Value Store set example (Python)
+
 import asyncio
 from apify import Actor
 
@@ -138,6 +142,7 @@ Then create the key-value store schema in `.actor/key_value_store_schema.json`:
 Either `key` or `keyPrefix` must be specified for each collection, but not both.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

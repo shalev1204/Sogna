@@ -8,7 +8,6 @@ id: skill-service-mesh-observability
 owner: [[orchestrator]]
 ---
 
-
 # Service Mesh Observability
 
 Complete guide to observability patterns for Istio, Linkerd, and service mesh deployments.
@@ -65,7 +64,9 @@ Complete guide to observability patterns for Istio, Linkerd, and service mesh de
 ### Template 1: Istio with Prometheus & Grafana
 
 ```yaml
+
 # Install Prometheus
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -76,18 +77,28 @@ data:
     global:
       scrape_interval: 15s
     scrape_configs:
+
       - job_name: 'istio-mesh'
+
         kubernetes_sd_configs:
+
           - role: endpoints
+
             namespaces:
               names:
+
                 - istio-system
+
         relabel_configs:
+
           - source_labels: [__meta_kubernetes_service_name]
+
             action: keep
             regex: istio-telemetry
 ---
+
 # ServiceMonitor for Prometheus Operator
+
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -98,29 +109,37 @@ spec:
     matchLabels:
       app: istiod
   endpoints:
+
     - port: http-monitoring
+
       interval: 15s
 ```
 
 ### Template 2: Key Istio Metrics Queries
 
 ```promql
+
 # Request rate by service
+
 sum(rate(istio_requests_total{reporter="destination"}[5m])) by (destination_service_name)
 
 # Error rate (5xx)
+
 sum(rate(istio_requests_total{reporter="destination", response_code=~"5.."}[5m]))
   / sum(rate(istio_requests_total{reporter="destination"}[5m])) * 100
 
 # P99 latency
+
 histogram_quantile(0.99,
   sum(rate(istio_request_duration_milliseconds_bucket{reporter="destination"}[5m]))
   by (le, destination_service_name))
 
 # TCP connections
+
 sum(istio_tcp_connections_opened_total{reporter="destination"}) by (destination_service_name)
 
 # Request size
+
 histogram_quantile(0.99,
   sum(rate(istio_request_bytes_bucket{reporter="destination"}[5m]))
   by (le, destination_service_name))
@@ -129,7 +148,9 @@ histogram_quantile(0.99,
 ### Template 3: Jaeger Distributed Tracing
 
 ```yaml
+
 # Jaeger installation for Istio
+
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
@@ -141,7 +162,9 @@ spec:
         zipkin:
           address: jaeger-collector.istio-system:9411
 ---
+
 # Jaeger deployment
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -157,9 +180,12 @@ spec:
         app: jaeger
     spec:
       containers:
+
         - name: jaeger
+
           image: jaegertracing/all-in-one:1.50
           ports:
+
             - containerPort: 5775   # UDP
             - containerPort: 6831   # Thrift
             - containerPort: 6832   # Thrift
@@ -168,31 +194,42 @@ spec:
             - containerPort: 14268  # HTTP
             - containerPort: 14250  # gRPC
             - containerPort: 9411   # Zipkin
+
           env:
+
             - name: COLLECTOR_ZIPKIN_HOST_PORT
+
               value: ":9411"
 ```
 
 ### Template 4: Linkerd Viz Dashboard
 
 ```bash
+
 # Install Linkerd viz extension
+
 linkerd viz install | kubectl apply -f -
 
 # Access dashboard
+
 linkerd viz dashboard
 
 # CLI commands for observability
+
 # Top requests
+
 linkerd viz top deploy/my-app
 
 # Per-route metrics
+
 linkerd viz routes deploy/my-app --to deploy/backend
 
 # Live traffic inspection
+
 linkerd viz tap deploy/my-app --to deploy/backend
 
 # Service edges (dependencies)
+
 linkerd viz edges deployment -n my-namespace
 ```
 
@@ -260,7 +297,9 @@ linkerd viz edges deployment -n my-namespace
 ### Template 6: Kiali Service Mesh Visualization
 
 ```yaml
+
 # Kiali installation
+
 apiVersion: kiali.io/v1alpha1
 kind: Kiali
 metadata:
@@ -271,7 +310,9 @@ spec:
     strategy: anonymous  # or openid, token
   deployment:
     accessible_namespaces:
+
       - "**"
+
   external_services:
     prometheus:
       url: http://prometheus.istio-system:9090
@@ -284,7 +325,9 @@ spec:
 ### Template 7: OpenTelemetry Integration
 
 ```yaml
+
 # OpenTelemetry Collector for mesh
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -324,7 +367,9 @@ data:
           processors: [batch]
           exporters: [prometheus]
 ---
+
 # Istio Telemetry v2 with OTel
+
 apiVersion: telemetry.istio.io/v1alpha1
 kind: Telemetry
 metadata:
@@ -332,8 +377,10 @@ metadata:
   namespace: istio-system
 spec:
   tracing:
+
     - providers:
         - name: otel
+
       randomSamplingPercentage: 10
 ```
 
@@ -347,9 +394,13 @@ metadata:
   namespace: istio-system
 spec:
   groups:
+
     - name: mesh.rules
+
       rules:
+
         - alert: HighErrorRate
+
           expr: |
             sum(rate(istio_requests_total{response_code=~"5.."}[5m])) by (destination_service_name)
             / sum(rate(istio_requests_total[5m])) by (destination_service_name) > 0.05
@@ -360,6 +411,7 @@ spec:
             summary: "High error rate for {{ $labels.destination_service_name }}"
 
         - alert: HighLatency
+
           expr: |
             histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket[5m]))
             by (le, destination_service_name)) > 1000
@@ -370,6 +422,7 @@ spec:
             summary: "High P99 latency for {{ $labels.destination_service_name }}"
 
         - alert: MeshCertExpiring
+
           expr: |
             (certmanager_certificate_expiration_timestamp_seconds - time()) / 86400 < 7
           labels:
@@ -381,6 +434,7 @@ spec:
 ## Best Practices
 
 ### Do's
+
 - **Sample appropriately** - 100% in dev, 1-10% in prod
 - **Use trace context** - Propagate headers consistently
 - **Set up alerts** - For golden signals
@@ -388,6 +442,7 @@ spec:
 - **Retain strategically** - Hot/cold storage tiers
 
 ### Don'ts
+
 - **Don't over-sample** - Storage costs add up
 - **Don't ignore cardinality** - Limit label values
 - **Don't skip dashboards** - Visualize dependencies
@@ -401,11 +456,13 @@ spec:
 - [Kiali](https://kiali.io/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

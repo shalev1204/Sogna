@@ -8,7 +8,6 @@ id: skill-mmx-cli
 owner: [[orchestrator]]
 ---
 
-
 # MiniMax CLI — Agent Skill Guide
 
 Use `mmx` to generate text, images, video, speech, music, and perform web search via the MiniMax AI platform.
@@ -16,16 +15,21 @@ Use `mmx` to generate text, images, video, speech, music, and perform web search
 ## Prerequisites
 
 ```bash
+
 # Install
+
 npm install -g mmx-cli
 
 # Auth (OAuth persists to ~/.mmx/credentials.json, API key persists to ~/.mmx/config.json)
+
 mmx auth login --api-key sk-xxxxx
 
 # Verify active auth source
+
 mmx auth status
 
 # Or pass per-call
+
 mmx text chat --api-key sk-xxxxx --message "Hello"
 ```
 
@@ -59,16 +63,20 @@ mmx text chat --message <text> [flags]
 ```
 
 ```bash
+
 # Single message
+
 mmx text chat --message "user:What is MiniMax?" --output json --quiet
 
 # Multi-turn with system prompt
+
 mmx text chat \
   --system "You are a coding assistant." \
   --message "user:Write fizzbuzz in Python" \
   --output json
 
 # From file
+
 cat conversation.json | mmx text chat --messages-file - --output json
 ```
 
@@ -98,10 +106,13 @@ mmx video generate --prompt <text> [flags]
 ```
 
 ```bash
+
 # Non-blocking: get task ID
+
 mmx video generate --prompt "A robot." --async --quiet
 
 # Blocking: wait and save file
+
 mmx video generate --prompt "Ocean waves." --download ocean.mp4 --quiet
 ```
 
@@ -131,10 +142,13 @@ mmx music generate --prompt <text> [--lyrics <text>] [flags]
 ```
 
 ```bash
+
 # Instrumental
+
 mmx music generate --prompt "Cinematic orchestral, building tension" --instrumental --out bgm.mp3 --quiet
 
 # With auto-generated lyrics
+
 mmx music generate --prompt "Upbeat pop about summer" --lyrics-optimizer --out summer.mp3 --quiet
 ```
 
@@ -163,11 +177,14 @@ mmx vision describe --image photo.jpg --prompt "What breed?" --output json
 ## Piping Patterns
 
 ```bash
+
 # Chain: generate image → describe it
+
 URL=$(mmx image generate --prompt "A sunset" --quiet)
 mmx vision describe --image "$URL" --quiet
 
 # Async video workflow
+
 TASK=$(mmx video generate --prompt "A robot" --async --quiet | jq -r '.taskId')
 mmx video task get --task-id "$TASK" --output json
 mmx video download --task-id "$TASK" --out robot.mp4
@@ -196,6 +213,7 @@ mmx video download --task-id "$TASK" --out robot.mp4
 - This skill documents CLI usage only and does not replace provider policy review, content-safety checks, or downstream file validation.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

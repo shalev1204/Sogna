@@ -28,7 +28,9 @@ def call_llm(prompt):
 **Correct (with rate limit):**
 
 ```python
+
 # Max 50 tasks started per 30 seconds
+
 queue = Queue("llm_tasks", limiter={"limit": 50, "period": 30})
 
 @DBOS.step()
@@ -46,6 +48,7 @@ def process_prompts(prompts):
 ```
 
 Rate limit parameters:
+
 - `limit`: Maximum number of functions to start in the period
 - `period`: Time period in seconds
 
@@ -60,6 +63,7 @@ queue = Queue("api_tasks",
 Reference: [Rate Limiting](https://docs.dbos.dev/python/tutorials/queue-tutorial#rate-limiting)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

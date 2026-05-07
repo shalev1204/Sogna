@@ -2,23 +2,25 @@
 name: stitch-loop
 description: Teaches agents to iteratively build websites using Stitch with an autonomous baton-passing loop pattern
 allowed-tools:
+
   - "stitch*:*"
   - "chrome*:*"
   - "Read"
   - "Write"
   - "Bash"
+
 risk: critical
 version: 1.0.0
 id: skill-stitch-loop
 owner: [[orchestrator]]
 ---
 
-
 # Stitch Build Loop
 
 You are an **autonomous frontend builder** participating in an iterative site-building loop. Your goal is to generate a page using Stitch, integrate it into the site, and prepare instructions for the next iteration.
 
 ## When to Use
+
 - You are iteratively building a website with Stitch using a baton-based loop across runs or agents.
 - Each pass should read the next prompt, generate or integrate a page, and hand off the next task.
 - You need a disciplined autonomous loop for multi-step frontend site construction.
@@ -26,6 +28,7 @@ You are an **autonomous frontend builder** participating in an iterative site-bu
 ## Overview
 
 The Build Loop pattern enables continuous, autonomous website development through a "baton" system. Each iteration:
+
 1. Reads the current task from a baton file (`.stitch/next-prompt.md`)
 2. Generates a page using Stitch MCP tools
 3. Integrates the page into the site structure
@@ -34,12 +37,14 @@ The Build Loop pattern enables continuous, autonomous website development throug
 ## Prerequisites
 
 **Required:**
+
 - Access to the Stitch MCP Server
 - A Stitch project (existing or will be created)
 - A `.stitch/DESIGN.md` file (generate one using the `design-md` skill if needed)
 - A `.stitch/SITE.md` file documenting the site vision and roadmap
 
 **Optional:**
+
 - Chrome DevTools MCP Server — enables visual verification of generated pages
 
 ## The Baton System
@@ -56,12 +61,15 @@ A page describing how jules.top tracking works.
 [Copy from .stitch/DESIGN.md Section 6]
 
 **Page Structure:**
+
 1. Header with navigation
 2. Explanation of tracking methodology
 3. Footer with links
+
 ```
 
 **Critical rules:**
+
 - The `page` field in YAML frontmatter determines the output filename
 - The prompt content must include the design system block from `.stitch/DESIGN.md`
 - You MUST update this file before completing your work to continue the loop
@@ -71,6 +79,7 @@ A page describing how jules.top tracking works.
 ### Step 1: Read the Baton
 
 Parse `.stitch/next-prompt.md` to extract:
+
 - **Page name** from the `page` frontmatter field
 - **Prompt content** from the markdown body
 
@@ -84,6 +93,7 @@ Before generating, read these files:
 | `.stitch/DESIGN.md` | Required visual style for Stitch prompts |
 
 **Important checks:**
+
 - Section 4 (Sitemap) — Do NOT recreate pages that already exist
 - Section 5 (Roadmap) — Pick tasks from here if backlog exists
 - Section 6 (Creative Freedom) — Ideas for new pages if roadmap is empty
@@ -132,6 +142,7 @@ If the **Chrome DevTools MCP Server** is available, verify the generated page:
 ### Step 5: Update Site Documentation
 
 Modify `.stitch/SITE.md`:
+
 - Add the new page to Section 4 (Sitemap) with `[x]`
 - Remove any idea you consumed from Section 6 (Creative Freedom)
 - Update Section 5 (Roadmap) if you completed a backlog item
@@ -156,9 +167,11 @@ A competitive achievements page showing developer badges and milestones.
 [Copy the entire design system block from .stitch/DESIGN.md]
 
 **Page Structure:**
+
 1. Header with title and navigation
 2. Badge grid showing unlocked/locked states
 3. Progress bars for milestone tracking
+
 ```
 
 ## File Structure Reference
@@ -273,11 +286,13 @@ This skill works best with the `design-md` skill:
 | Navigation broken | Check all internal links use correct relative paths |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

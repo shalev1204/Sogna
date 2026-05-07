@@ -7,7 +7,6 @@ id: skill-sharp-edges
 owner: [[orchestrator]]
 ---
 
-
 ---
 name: sharp-edges
 description: "Identifies error-prone APIs, dangerous configurations, and footgun designs that enable security mistakes. Use when reviewing API designs, configuration schemas, cryptographic library ergonomics, or evaluating whether code follows 'secure by...
@@ -18,6 +17,7 @@ description: "Identifies error-prone APIs, dangerous configurations, and footgun
 Evaluates whether APIs, configurations, and interfaces are resistant to developer misuse. Identifies designs where the "easy path" leads to insecurity.
 
 ## When to Use
+
 - Reviewing API or library design decisions
 - Auditing configuration schemas for dangerous options
 - Evaluating cryptographic API ergonomics
@@ -52,11 +52,13 @@ Evaluates whether APIs, configurations, and interfaces are resistant to develope
 APIs that let developers choose algorithms invite choosing wrong ones.
 
 **The JWT Pattern** (canonical example):
+
 - Header specifies algorithm: attacker can set `"alg": "none"` to bypass signatures
 - Algorithm confusion: RSA public key used as HMAC secret when switching RS256→HS256
 - Root cause: Letting untrusted input control security-critical decisions
 
 **Detection patterns:**
+
 - Function parameters like `algorithm`, `mode`, `cipher`, `hash_type`
 - Enums/strings selecting cryptographic primitives
 - Configuration options for security mechanisms
@@ -74,7 +76,9 @@ Defaults that are insecure, or zero/empty values that disable security.
 
 **The OTP Lifetime Pattern:**
 ```python
+
 # What happens when lifetime=0?
+
 def verify_otp(code, lifetime=300):  # 300 seconds default
     if lifetime == 0:
         return True  # OOPS: 0 means "accept all"?
@@ -82,6 +86,7 @@ def verify_otp(code, lifetime=300):  # 300 seconds default
 ```
 
 **Detection patterns:**
+
 - Timeouts/lifetimes that accept 0 (infinite? immediate expiry?)
 - Empty strings that bypass checks
 - Null values that skip validation
@@ -89,6 +94,7 @@ def verify_otp(code, lifetime=300):  # 300 seconds default
 - Negative values with undefined semantics
 
 **Questions to ask:**
+
 - What happens with `timeout=0`? `max_attempts=0`? `key=""`?
 - Is the default the most secure option?
 - Can any default value disable security entirely?
@@ -110,6 +116,7 @@ Crypto::seal($message, new EncryptionPublicKey($key));
 ```
 
 **Detection patterns:**
+
 - Functions taking `bytes`, `string`, `[]byte` for distinct security concepts
 - Parameters that could be swapped without type errors
 - Same type used for keys, nonces, ciphertexts, signatures
@@ -127,6 +134,7 @@ if hmac.Equal(mac, expected) { }  // Good: constant-time
 One wrong setting creates catastrophic failure, with no warning.
 
 **Detection patterns:**
+
 - Boolean flags that disable security entirely
 - String configs that aren't validated
 - Combinations of settings that interact dangerously
@@ -135,13 +143,17 @@ One wrong setting creates catastrophic failure, with no warning.
 
 **Examples:**
 ```yaml
+
 # One typo = disaster
+
 verify_ssl: fasle  # Typo silently accepted as truthy?
 
 # Magic values
+
 session_timeout: -1  # Does this mean "never expire"?
 
 # Dangerous combinations accepted silently
+
 auth_required: true
 bypass_auth_for_health_checks: true
 health_check_path: "/"  # Oops
@@ -162,6 +174,7 @@ See config-patterns.md for detailed patterns.
 Errors that don't surface, or success that masks failure.
 
 **Detection patterns:**
+
 - Functions returning booleans instead of throwing on security failures
 - Empty catch blocks around security operations
 - Default values substituted on parse errors
@@ -169,15 +182,20 @@ Errors that don't surface, or success that masks failure.
 
 **Examples:**
 ```python
+
 # Silent bypass
+
 def verify_signature(sig, data, key):
     if not key:
         return True  # No key = skip verification?!
 
 # Return value ignored
+
 signature.verify(data, sig)  # Throws on failure
 crypto.verify(data, sig)     # Returns False on failure
+
 # Developer forgets to check return value
+
 ```
 
 ### 6. Stringly-Typed Security
@@ -185,6 +203,7 @@ crypto.verify(data, sig)     # Returns False on failure
 Security-critical values as plain strings enable injection and confusion.
 
 **Detection patterns:**
+
 - SQL/commands built from string concatenation
 - Permissions as comma-separated strings
 - Roles/scopes as arbitrary strings instead of enums
@@ -196,6 +215,7 @@ permissions = "read,write"
 permissions += ",admin"  # Too easy to escalate
 
 # vs. type-safe
+
 permissions = {Permission.READ, Permission.WRITE}
 permissions.add(Permission.ADMIN)  # At least it's explicit
 ```
@@ -211,6 +231,7 @@ permissions.add(Permission.ADMIN)  # At least it's explicit
 ### Phase 2: Edge Case Probing
 
 For each choice point, ask:
+
 - **Zero/empty/null**: What happens with `0`, `""`, `null`, `[]`?
 - **Negative values**: What does `-1` mean? Infinite? Error?
 - **Type confusion**: Can different security concepts be swapped?
@@ -297,11 +318,13 @@ Before concluding analysis:
 - [ ] Constructor params validated (not just defaulted) - see config-patterns.md
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

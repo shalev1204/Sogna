@@ -56,6 +56,7 @@ An iOS, iPadOS, macOS, or visionOS app can integrate system-provided print funct
 [`NSDocument`](https://developer.apple.com/documentation/AppKit/NSDocument) — AppKit
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

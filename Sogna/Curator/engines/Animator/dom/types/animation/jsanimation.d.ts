@@ -1,5 +1,5 @@
 import { AnimationPlaybackControlsWithThen, AnimationState, TimelineWithFallback, ValueAnimationOptions } from "./types.js";
-import { WithPromise } from "./utils/withpromise.js";
+import { WithPromise } from "./utils/WithPromise.js";
 export declare class JSAnimation<T extends number | string> extends WithPromise implements AnimationPlaybackControlsWithThen {
     state: AnimationPlayState;
     startTime: number | null;

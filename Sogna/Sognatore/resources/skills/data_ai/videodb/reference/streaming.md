@@ -20,13 +20,17 @@ Videos **must be uploaded** to a collection before streams can be generated. For
 Every video, search result, and timeline in VideoDB can produce a **stream URL**. This URL points to an HLS (HTTP Live Streaming) manifest that is compiled on demand.
 
 ```python
+
 # From a video
+
 stream_url = video.generate_stream()
 
 # From a timeline
+
 stream_url = timeline.generate_stream()
 
 # From search results
+
 stream_url = results.compile()
 ```
 
@@ -42,21 +46,26 @@ coll = conn.get_collection()
 video = coll.get_video("your-video-id")
 
 # Generate stream URL
+
 stream_url = video.generate_stream()
 print(f"Stream: {stream_url}")
 
 # Open in default browser
+
 video.play()
 ```
 
 ### With Subtitles
 
 ```python
+
 # Index and add subtitles first
+
 video.index_spoken_words(force=True)
 video.add_subtitle()
 
 # Stream now includes subtitles
+
 stream_url = video.generate_stream()
 ```
 
@@ -65,7 +74,9 @@ stream_url = video.generate_stream()
 Stream only a portion of a video by passing a timeline of timestamp ranges:
 
 ```python
+
 # Stream seconds 10-30 and 60-90
+
 stream_url = video.generate_stream(timeline=[(10, 30), (60, 90)])
 print(f"Segment stream: {stream_url}")
 ```
@@ -88,12 +99,15 @@ music = coll.get_audio(music_id)
 timeline = Timeline(conn)
 
 # Main video content
+
 timeline.add_inline(VideoAsset(asset_id=video.id))
 
 # Background music overlay (starts at second 0)
+
 timeline.add_overlay(0, AudioAsset(asset_id=music.id))
 
 # Text overlay at the beginning
+
 timeline.add_overlay(0, TextAsset(
     text="Live Demo",
     duration=3,
@@ -101,6 +115,7 @@ timeline.add_overlay(0, TextAsset(
 ))
 
 # Generate the composed stream
+
 stream_url = timeline.generate_stream()
 print(f"Composed stream: {stream_url}")
 ```
@@ -120,10 +135,12 @@ video.index_spoken_words(force=True)
 results = video.search("key announcement", search_type=SearchType.semantic)
 
 # Compile all matching shots into one stream
+
 stream_url = results.compile()
 print(f"Search results stream: {stream_url}")
 
 # Or play directly
+
 results.play()
 ```
 
@@ -166,6 +183,7 @@ video = coll.get_video("your-video-id")
 video.index_spoken_words(force=True)
 
 # Search for key moments
+
 queries = ["introduction", "main demo", "Q&A"]
 timeline = Timeline(conn)
 
@@ -235,6 +253,7 @@ video.index_spoken_words(force=True)
 timeline = Timeline(conn)
 
 # Try to find specific content; fall back to full video
+
 topics = ["opening remarks", "technical deep dive", "closing"]
 
 found_any = False
@@ -277,25 +296,30 @@ conn = videodb.connect()
 coll = conn.get_collection()
 
 # Upload event recording
+
 event = coll.upload(url="https://example.com/event-recording.mp4")
 event.index_spoken_words(force=True)
 
 # Generate background music
+
 music = coll.generate_music(
     prompt="upbeat corporate background music",
     duration=120,
 )
 
 # Generate title image
+
 title_img = coll.generate_image(
     prompt="modern event recap title card, dark background, professional",
     aspect_ratio="16:9",
 )
 
 # Build the recap timeline
+
 timeline = Timeline(conn)
 
 # Main video segments from search
+
 keynote = event.search("keynote announcement", search_type=SearchType.semantic)
 if keynote.get_shots():
     for shot in keynote.get_shots()[:5]:
@@ -311,11 +335,13 @@ if demo.get_shots():
         )
 
 # Overlay title card image
+
 timeline.add_overlay(0, ImageAsset(
     asset_id=title_img.id, width=100, height=100, x=80, y=20, duration=5
 ))
 
 # Overlay section labels
+
 timeline.add_overlay(5, TextAsset(
     text="Keynote Highlights",
     duration=3,
@@ -323,11 +349,13 @@ timeline.add_overlay(5, TextAsset(
 ))
 
 # Overlay background music
+
 timeline.add_overlay(0, AudioAsset(
     asset_id=music.id, fade_in_duration=3
 ))
 
 # Stream the final recap
+
 stream_url = timeline.generate_stream()
 print(f"Event recap: {stream_url}")
 ```
@@ -346,6 +374,7 @@ print(f"Event recap: {stream_url}")
 - **Playback**: `.play()` opens the stream URL in the default system browser. For programmatic use, work with the URL string directly.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

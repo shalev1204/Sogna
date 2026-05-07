@@ -7,7 +7,6 @@ id: skill-odoo-xml-views-builder
 owner: [[orchestrator]]
 ---
 
-
 # Odoo XML Views Builder
 
 ## Overview
@@ -105,6 +104,7 @@ This skill generates and reviews Odoo XML view definitions for Kanban, Form, Lis
 - **Cohort and Map views** (Enterprise-only) are not covered by this skill.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

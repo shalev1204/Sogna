@@ -11,7 +11,6 @@ id: skill-makepad-animation
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Animation Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -19,10 +18,12 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad animations. Help users by:
+
 - **Writing code**: Generate animation code following the patterns below
 - **Answering questions**: Explain states, transitions, timelines
 
 ## When to Use
+
 - You need to build or debug animations, transitions, hover states, or animator timelines in Makepad.
 - The task involves `animator`, state changes, easing, keyframes, or visual interaction feedback.
 - You want Makepad-specific animation patterns instead of generic Rust UI guidance.
@@ -30,6 +31,7 @@ You are an expert at Makepad animations. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/animation-system.md` - Complete animation reference
 
 ## Advanced Patterns
@@ -258,6 +260,7 @@ from: {
 ## Animatable Properties
 
 Most `draw_*` shader uniforms can be animated:
+
 - Colors: `color`, `border_color`, `shadow_color`
 - Sizes: `border_size`, `border_radius`, `shadow_radius`
 - Transforms: `scale`, `rotation`, `offset`
@@ -314,11 +317,13 @@ fn handle_event(&mut self, cx: &mut Cx, event: &Event, scope: &mut Scope) {
 5. Use `id!(state.value)` macro to reference animation states in Rust
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

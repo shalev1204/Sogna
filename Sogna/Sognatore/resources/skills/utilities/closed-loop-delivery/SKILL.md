@@ -8,7 +8,6 @@ id: skill-closed-loop-delivery
 owner: [[orchestrator]]
 ---
 
-
 # Closed-Loop Delivery
 
 ## Overview
@@ -18,12 +17,15 @@ Treat each task as incomplete until acceptance criteria are verified in evidence
 Core rule: **deliver against DoD (Definition of Done), not against code diff size.**
 
 ## When to Use
+
 Use this skill when:
+
 - user gives a coding/fix task and expects end-to-end completion
 - task spans code + tests + PR comments + dev deploy + runtime checks
 - repeated manual prompts like "now test", "now deploy", "now re-check PR" should be avoided
 
 Do not use this skill for:
+
 - pure Q&A/explanations
 - prod deploy requests without explicit human approval
 - tasks blocked by missing secrets/account access that cannot be inferred
@@ -31,6 +33,7 @@ Do not use this skill for:
 ## Required Inputs
 
 Before execution, define these once:
+
 - task goal
 - acceptance criteria (DoD)
 - target environment (`dev` by default)
@@ -80,6 +83,7 @@ Avoid noisy short polling by default. Use batched windows:
 - **Final round:** wait `10m`, collect all remaining visible comments/reviews
 
 At each round:
+
 - process all new comments in one batch
 - avoid immediate re-poll after each single comment
 - after the `10m` round, stop waiting and proceed with all comments visible at that point
@@ -89,6 +93,7 @@ If CI is still running, align polling to check completion boundaries instead of 
 ## Human Gate Rules (Must Ask)
 
 Require explicit user confirmation for:
+
 - production/staging deploy beyond agreed scope
 - destructive operations (history rewrite, force push, data-destructive ops)
 - actions with billing/security posture changes
@@ -98,11 +103,13 @@ Require explicit user confirmation for:
 ## Iteration/Stop Conditions
 
 Stop and escalate with a concise blocker report when:
+
 - DoD still fails after max rounds (`2` default)
 - external dependency blocks progress (provider outage, missing creds, account permission)
 - conflicting review instructions cannot both be satisfied
 
 Escalation report must include:
+
 - what passed
 - what failed
 - evidence (commands/logs/API result)
@@ -111,6 +118,7 @@ Escalation report must include:
 ## Output Contract
 
 When claiming completion, always include:
+
 - acceptance criteria checklist with pass/fail
 - commands/tests run
 - runtime evidence (endpoint/Lambda/log key lines)
@@ -119,11 +127,13 @@ When claiming completion, always include:
 Do not claim success without evidence.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

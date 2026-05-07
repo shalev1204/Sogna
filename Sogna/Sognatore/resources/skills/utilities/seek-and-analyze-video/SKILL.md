@@ -11,8 +11,8 @@ id: skill-seek-and-analyze-video
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use
+
 Use this skill when the user wants to search for, import, or analyze video content from TikTok, YouTube, or Instagram, summarize meetings or lectures from recordings, build a searchable knowledge base from video content, or research social media trends and creators.
 
 # Seek and Analyze Video
@@ -82,9 +82,11 @@ Agent: uploads recording -> waits -> gets transcript -> uses chat_video for stru
 ## Common Pitfalls
 
 - **Problem:** Querying a video before processing completes
+
   **Solution:** Always use the `wait` command after upload before any analysis
 
 - **Problem:** Uploading a video when only a quick caption is needed
+
   **Solution:** Use `caption_video` for one-off analysis; only upload for repeated queries
 
 ## Limitations
@@ -100,6 +102,7 @@ Agent: uploads recording -> waits -> gets transcript -> uses chat_video for stru
 - Web search skills for non-video content research
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

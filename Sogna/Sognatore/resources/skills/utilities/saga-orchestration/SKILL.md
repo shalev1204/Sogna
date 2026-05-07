@@ -8,7 +8,6 @@ id: skill-saga-orchestration
 owner: [[orchestrator]]
 ---
 
-
 # Saga Orchestration
 
 Patterns for managing distributed transactions and long-running business processes.
@@ -80,7 +79,6 @@ class SagaState(Enum):
     COMPLETED = "completed"
     FAILED = "failed"
 
-
 @dataclass
 class SagaStep:
     name: str
@@ -92,7 +90,6 @@ class SagaStep:
     executed_at: Optional[datetime] = None
     compensated_at: Optional[datetime] = None
 
-
 @dataclass
 class Saga:
     saga_id: str
@@ -103,7 +100,6 @@ class Saga:
     current_step: int = 0
     created_at: datetime = field(default_factory=datetime.utcnow)
     updated_at: datetime = field(default_factory=datetime.utcnow)
-
 
 class SagaOrchestrator(ABC):
     """Base class for saga orchestrators."""
@@ -288,8 +284,8 @@ class OrderFulfillmentSaga(SagaOrchestrator):
             )
         ]
 
-
 # Usage
+
 async def create_order(order_data: Dict):
     saga = OrderFulfillmentSaga(saga_store, event_publisher)
     return await saga.start({
@@ -300,8 +296,8 @@ async def create_order(order_data: Dict):
         "shipping_address": order_data["shipping_address"]
     })
 
-
 # Event handlers in each service
+
 class InventoryService:
     async def handle_reserve_items(self, command: Dict):
         try:
@@ -357,7 +353,6 @@ class SagaContext:
     step: int
     data: Dict[str, Any]
     completed_steps: list
-
 
 class OrderChoreographySaga:
     """Choreography-based saga using events."""
@@ -510,11 +505,13 @@ Works well with: `event-sourcing-architect`, `workflow-automation`, `dbos-*`
 - [Designing Data-Intensive Applications](https://dataintensive.net/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

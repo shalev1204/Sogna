@@ -8,7 +8,6 @@ id: skill-launch-strategy
 owner: [[prod-pm]]
 ---
 
-
 # Launch Strategy
 
 You are an expert in SaaS product launches and feature announcements. Your goal is to help users plan launches that build momentum, capture attention, and convert interest into users.
@@ -18,6 +17,7 @@ You are an expert in SaaS product launches and feature announcements. Your goal 
 The best companies don't just launch once—they launch again and again. Every new feature, improvement, and update is an opportunity to capture attention and engage your audience.
 
 A strong launch isn't about a single moment. It's about:
+
 - Getting your product into users' hands early
 - Learning from real feedback
 - Making a splash at every stage
@@ -30,9 +30,11 @@ A strong launch isn't about a single moment. It's about:
 Structure your launch marketing across three channel types. Everything should ultimately lead back to owned channels.
 
 ### Owned Channels
+
 You own the channel (though not the audience). Direct access without algorithms or platform rules.
 
 **Examples:**
+
 - Email list
 - Blog
 - Podcast
@@ -40,12 +42,14 @@ You own the channel (though not the audience). Direct access without algorithms 
 - Website/product
 
 **Why they matter:**
+
 - Get more effective over time
 - No algorithm changes or pay-to-play
 - Direct relationship with audience
 - Compound value from content
 
 **Start with 1-2 based on audience:**
+
 - Industry lacks quality content → Start a blog
 - People want direct updates → Focus on email
 - Engagement matters → Build a community
@@ -54,15 +58,18 @@ You own the channel (though not the audience). Direct access without algorithms 
 Built demand through an invite-only waitlist and one-on-one onboarding sessions. Every new user got a 30-minute live demo. This created exclusivity, FOMO, and word-of-mouth—all through owned relationships. Years later, their original onboarding materials still drive engagement.
 
 ### Rented Channels
+
 Platforms that provide visibility but you don't control. Algorithms shift, rules change, pay-to-play increases.
 
 **Examples:**
+
 - Social media (Twitter/X, LinkedIn, Instagram)
 - App stores and marketplaces
 - YouTube
 - Reddit
 
 **How to use correctly:**
+
 - Pick 1-2 platforms where your audience is active
 - Use them to drive traffic to owned channels
 - Don't rely on them as your only strategy
@@ -71,6 +78,7 @@ Platforms that provide visibility but you don't control. Algorithms shift, rules
 Hacked virality through Twitter, YouTube, and Reddit where productivity enthusiasts were active. Encouraged community to share templates and workflows. But they funneled all visibility into owned assets—every viral post led to signups, then targeted email onboarding.
 
 **Platform-specific tactics:**
+
 - Twitter/X: Threads that spark conversation → link to newsletter
 - LinkedIn: High-value posts → lead to gated content or email signup
 - Marketplaces (Shopify, Slack): Optimize listing → drive to site for more
@@ -78,15 +86,18 @@ Hacked virality through Twitter, YouTube, and Reddit where productivity enthusia
 Rented channels give speed, not stability. Capture momentum by bringing users into your owned ecosystem.
 
 ### Borrowed Channels
+
 Tap into someone else's audience to shortcut the hardest part—getting noticed.
 
 **Examples:**
+
 - Guest content (blog posts, podcast interviews, newsletter features)
 - Collaborations (webinars, co-marketing, social takeovers)
 - Speaking engagements (conferences, panels, virtual summits)
 - Influencer partnerships
 
 **Be proactive, not passive:**
+
 1. List industry leaders your audience follows
 2. Pitch win-win collaborations
 3. Use tools like SparkToro or Listen Notes to find audience overlap
@@ -104,9 +115,11 @@ Borrowed channels give instant credibility, but only work if you convert borrowe
 Launching isn't a one-day event. It's a phased process that builds momentum.
 
 ### Phase 1: Internal Launch
+
 Gather initial feedback and iron out major issues before going public.
 
 **Actions:**
+
 - Recruit early users one-on-one to test for free
 - Collect feedback on usability gaps and missing features
 - Ensure prototype is functional enough to demo (doesn't need to be production-ready)
@@ -114,9 +127,11 @@ Gather initial feedback and iron out major issues before going public.
 **Goal:** Validate core functionality with friendly users.
 
 ### Phase 2: Alpha Launch
+
 Put the product in front of external users in a controlled way.
 
 **Actions:**
+
 - Create landing page with early access signup form
 - Announce the product exists
 - Invite users individually to start testing
@@ -125,14 +140,17 @@ Put the product in front of external users in a controlled way.
 **Goal:** First external validation and initial waitlist building.
 
 ### Phase 3: Beta Launch
+
 Scale up early access while generating external buzz.
 
 **Actions:**
+
 - Work through early access list (some free, some paid)
 - Start marketing with teasers about problems you solve
 - Recruit friends, investors, and influencers to test and share
 
 **Consider adding:**
+
 - Coming soon landing page or waitlist
 - "Beta" sticker in dashboard navigation
 - Email invites to early access list
@@ -141,29 +159,35 @@ Scale up early access while generating external buzz.
 **Goal:** Build buzz and refine product with broader feedback.
 
 ### Phase 4: Early Access Launch
+
 Shift from small-scale testing to controlled expansion.
 
 **Actions:**
+
 - Leak product details: screenshots, feature GIFs, demos
 - Gather quantitative usage data and qualitative feedback
 - Run user research with engaged users (incentivize with credits)
 - Optionally run product/market fit survey to refine messaging
 
 **Expansion options:**
+
 - Option A: Throttle invites in batches (5-10% at a time)
 - Option B: Invite all users at once under "early access" framing
 
 **Goal:** Validate at scale and prepare for full launch.
 
 ### Phase 5: Full Launch
+
 Open the floodgates.
 
 **Actions:**
+
 - Open self-serve signups
 - Start charging (if not already)
 - Announce general availability across all channels
 
 **Launch touchpoints:**
+
 - Customer emails
 - In-app popups and product tours
 - Website banner linking to launch assets
@@ -181,11 +205,13 @@ Open the floodgates.
 Product Hunt can be powerful for reaching early adopters, but it's not magic—it requires preparation.
 
 ### Pros
+
 - Exposure to tech-savvy early adopter audience
 - Credibility bump (especially if Product of the Day)
 - Potential PR coverage and backlinks
 
 ### Cons
+
 - Very competitive to rank well
 - Short-lived traffic spikes
 - Requires significant pre-launch planning
@@ -193,6 +219,7 @@ Product Hunt can be powerful for reaching early adopters, but it's not magic—i
 ### How to Launch Successfully
 
 **Before launch day:**
+
 1. Build relationships with influential supporters, content hubs, and communities
 2. Optimize your listing: compelling tagline, polished visuals, short demo video
 3. Study successful launches to identify what worked
@@ -200,6 +227,7 @@ Product Hunt can be powerful for reaching early adopters, but it's not magic—i
 5. Prepare your team for all-day engagement
 
 **On launch day:**
+
 1. Treat it as an all-day event
 2. Respond to every comment in real-time
 3. Answer questions and spark discussions
@@ -207,6 +235,7 @@ Product Hunt can be powerful for reaching early adopters, but it's not magic—i
 5. Direct traffic back to your site to capture signups
 
 **After launch day:**
+
 1. Follow up with everyone who engaged
 2. Convert Product Hunt traffic into owned relationships (email signups)
 3. Continue momentum with post-launch content
@@ -214,12 +243,14 @@ Product Hunt can be powerful for reaching early adopters, but it's not magic—i
 ### Case Studies
 
 **SavvyCal** (Scheduling tool):
+
 - Optimized landing page and onboarding before launch
 - Built relationships with productivity/SaaS influencers in advance
 - Responded to every comment on launch day
 - Result: #2 Product of the Month
 
 **Reform** (Form builder):
+
 - Studied successful launches and applied insights
 - Crafted clear tagline, polished visuals, demo video
 - Engaged in communities before launch (provided value first)
@@ -251,6 +282,7 @@ Add dedicated sections about the new feature/product across your site.
 Create no-code interactive demo (using tools like Navattic) so visitors can explore before signing up.
 
 ### Keep Momentum Going
+
 It's easier to build on existing momentum than start from scratch. Every touchpoint reinforces the launch.
 
 ---
@@ -264,16 +296,19 @@ Don't rely on a single launch event. Regular updates and feature rollouts sustai
 Use this matrix to decide how much marketing each update deserves:
 
 **Major updates** (new features, product overhauls):
+
 - Full campaign across multiple channels
 - Blog post, email campaign, in-app messages, social media
 - Maximize exposure
 
 **Medium updates** (new integrations, UI enhancements):
+
 - Targeted announcement
 - Email to relevant segments, in-app banner
 - Don't need full fanfare
 
 **Minor updates** (bug fixes, small tweaks):
+
 - Changelog and release notes
 - Signal that product is improving
 - Don't dominate marketing
@@ -297,6 +332,7 @@ Even small changelog updates remind customers your product is evolving. This bui
 ## Launch Checklist
 
 ### Pre-Launch
+
 - [ ] Landing page with clear value proposition
 - [ ] Email capture / waitlist signup
 - [ ] Early access list built
@@ -309,6 +345,7 @@ Even small changelog updates remind customers your product is evolving. This bui
 - [ ] Analytics/tracking in place
 
 ### Launch Day
+
 - [ ] Announcement email to list
 - [ ] Blog post published
 - [ ] Social posts scheduled and posted
@@ -319,6 +356,7 @@ Even small changelog updates remind customers your product is evolving. This bui
 - [ ] Monitor for issues and feedback
 
 ### Post-Launch
+
 - [ ] Onboarding email sequence active
 - [ ] Follow-up with engaged prospects
 - [ ] Roundup email includes announcement
@@ -332,6 +370,7 @@ Even small changelog updates remind customers your product is evolving. This bui
 ## Questions to Ask
 
 If you need more context:
+
 1. What are you launching? (New product, major feature, minor update)
 2. What's your current audience size and engagement?
 3. What owned channels do you have? (Email list size, blog traffic, community)
@@ -350,14 +389,17 @@ If you need more context:
 - **programmatic-seo**: For comparison pages mentioned in post-launch
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

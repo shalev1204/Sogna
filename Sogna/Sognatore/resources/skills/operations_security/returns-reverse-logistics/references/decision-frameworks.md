@@ -68,12 +68,16 @@ RECEIVE → Verify serial number matches RMA
 ```
 
 **Category-specific thresholds:**
+
 - Smartphones: Always verify IMEI against stolen device databases (GSMA) before restocking
 - Laptops: Battery health must be > 80% for Grade A restock; 60-80% triggers Grade B
 - Tablets: Check for MDM (mobile device management) profiles — enterprise tablets may have
+
   remote-lock capability that surfaces post-sale
+
 - Headphones: Hygiene concern — all ear tips/pads replaced before resale ($2-8 per unit)
 - Smart home devices: Factory reset verified; linked account removal confirmed. A smart lock
+
   that is still linked to a previous owner's account is unsellable and potentially a safety issue
 
 **Typical processing costs:**
@@ -115,15 +119,23 @@ RECEIVE → Scan RMA / order lookup
 ```
 
 **Apparel-specific considerations:**
+
 - Seasonal timing is everything: a winter coat returned in February can restock for next season,
+
   but the carrying cost of 8 months of storage may exceed liquidation recovery. Decision point:
   if storage cost > (expected recovery next season × probability of sale) - liquidation value now,
   liquidate immediately.
+
 - Footwear: Check sole wear. A shoe worn on carpet for 5 minutes is different from one worn
+
   on pavement. Sole scuffing = Grade C minimum. Check for orthotics left inside.
+
 - Swimwear and intimate apparel: Once hygienic liner is removed, non-returnable per health code
+
   in most jurisdictions. If returned, destroy — do not restock or liquidate.
+
 - Designer/luxury: Authenticate before accepting. Counterfeits in the return stream are
+
   increasing. Compare serial numbers, stitching quality, hardware weight against known
   genuine samples.
 
@@ -171,11 +183,17 @@ RECEIVE → Seal integrity check
 ```
 
 **Special cases:**
+
 - Prescription items: Cannot accept return under any circumstances (most states). Direct
+
   customer to pharmacy or manufacturer disposal programme.
+
 - Supplements/vitamins: Same as cosmetics — once opened, destroy. Sealed returns restock
+
   only with lot number verification.
+
 - Sunscreen: Regulated as OTC drug by FDA. Opened sunscreen is destroyed. Expired sunscreen
+
   (even sealed) is destroyed — never sell expired OTC.
 
 ### 1.6 Books, Media, and Software
@@ -265,13 +283,20 @@ False positives destroy customer relationships. Every customer flagged by the fr
 system who turns out to be legitimate represents a risk of customer attrition. Manage through:
 
 1. **Never communicate "fraud" to the customer.** Use neutral language: "additional processing
+
    time," "verification of your return," "quality review."
+
 2. **Time-box the review.** Flagged returns must be resolved within 5 business days. If the
+
    review cannot conclusively determine fraud within 5 days, process the refund. The cost
    of a false positive held for 3 weeks exceeds the cost of most fraudulent returns.
+
 3. **Track false positive rate monthly.** Target: < 3% of total returns flagged are
+
    confirmed false positives. If rate exceeds 5%, recalibrate the scoring model.
+
 4. **Feedback loop:** Every fraud review outcome (confirmed fraud, confirmed legitimate,
+
    inconclusive) feeds back into the scoring model calibration. Signals that generate
    high false-positive rates have their point values reduced.
 
@@ -370,15 +395,18 @@ Where:
   Recovery cost = Labour (documentation, communication, follow-up) + Shipping (if RTV) + Relationship cost
 
 Labour cost estimates:
+
   - Simple RTV with existing authorisation: $15-25 per batch
   - Defect claim requiring documentation assembly: $75-150 per claim
   - Disputed claim requiring escalation and negotiation: $200-500 per claim
 
 Collection probability by vendor tier:
+
   - Tier 1 (top 20 vendors, strong relationship): 85-95%
   - Tier 2 (mid-tier, established relationship): 65-80%
   - Tier 3 (small/new vendors): 40-60%
   - International vendors (no US entity): 25-45%
+
 ```
 
 **Decision matrix:**
@@ -453,6 +481,7 @@ All categories share these baseline grade definitions. Category-specific addenda
 follow in §5.2.
 
 #### Grade A — Like New
+
 - Zero signs of use beyond initial unboxing
 - All original accessories, manuals, and packaging materials present
 - Original packaging in good condition (minor shipping wear acceptable)
@@ -460,6 +489,7 @@ follow in §5.2.
 - Can be restocked and sold as new without any additional processing beyond re-shelving
 
 #### Grade B — Good / Open Box
+
 - Minor cosmetic imperfections (light surface scratches, small scuffs) that do not affect function
 - Original packaging may be damaged, opened, or missing outer sleeve/shrink wrap
 - All essential accessories present (charger, main cable); non-essential items (stickers, pamphlets) may be missing
@@ -467,6 +497,7 @@ follow in §5.2.
 - Requires repackaging or "open box" labelling before resale
 
 #### Grade C — Fair
+
 - Visible cosmetic wear, scratches, dents, or staining that are noticeable at arm's length
 - Missing accessories that affect the completeness of the product (but not its core function)
 - Functional but may have minor performance degradation (battery at 60-80%, worn but operational buttons)
@@ -474,6 +505,7 @@ follow in §5.2.
 - May be viable for refurbishment if cost justifies it
 
 #### Grade D — Salvage / Parts
+
 - Non-functional, heavily damaged, or missing critical components that render the product unusable
 - Structural damage (cracked screens, bent frames, water damage indicators triggered)
 - May have value for parts harvesting or materials recovery
@@ -482,12 +514,14 @@ follow in §5.2.
 ### 5.2 Category-Specific Grading Addenda
 
 **Consumer Electronics:**
+
 - Grade A additional requirement: battery health > 80% of design capacity (measurable via diagnostic)
 - Grade B threshold: battery 60-80%, cosmetic scratches visible only under direct light
 - Functional test required for all grades: power on, display, connectivity (WiFi/Bluetooth/cellular), speakers, cameras, ports
 - Data wipe verification mandatory before any resale disposition
 
 **Apparel:**
+
 - Grade A: tags attached (original retail tags, not just care labels)
 - Grade B: tags removed, but no wear indicators; passes UV and odour check
 - Grade C: visible wear, minor staining treatable with professional cleaning, or slight fabric stretching
@@ -495,11 +529,13 @@ follow in §5.2.
 - Automatic Grade D: mould, mildew, pest contamination
 
 **Footwear:**
+
 - Sole inspection is primary grading factor: unworn soles = Grade A, indoor-only wear marks = Grade B, outdoor wear = Grade C
 - Grade B requires: no toe box creasing deeper than 2mm, no heel counter collapse
 - Include insole inspection: customer orthotics must be removed, original insole must be present
 
 **Home Goods / Small Appliances:**
+
 - Grade A: unused, all packaging foam/wrapping in place
 - Functional test: operate through one full cycle (coffee maker: brew cycle, vacuum: run for 60 seconds, blender: blend ice test)
 - Missing filters, bags, or consumable accessories: Grade B (replaceable at $3-10 cost)
@@ -542,6 +578,7 @@ Is the individual unit value > $50?
 ```
 
 **Critical liquidation rules:**
+
 1. Never mix electronics with non-electronics on the same pallet. Electronics buyers won't bid on mixed pallets.
 2. Never include recalled products, counterfeit items, or hazmat in liquidation lots. Liability exposure is unlimited.
 3. Remove all customer personal data before liquidating electronics. Data breach from a liquidated device creates legal exposure.
@@ -692,6 +729,7 @@ Customer arrives at store with online-purchased product
 ```
 
 **BORIS-specific risks:**
+
 1. Price discrepancy (online vs store) → Mitigated by mandatory online order lookup
 2. Return of promotional/bundled items → Verify if the item was part of a BOGO or bundle; refund the proportional amount
 3. Store inventory adjustment → Ensure the store's inventory count correctly reflects the returned unit
@@ -735,10 +773,13 @@ Return shipping cost estimate > 40% of product value?
 ```
 
 **Returnless refund abuse prevention:**
+
 - Track returnless refunds per customer. More than 3 in 6 months triggers review.
 - High-value returnless refunds (> $100) are flagged for post-refund audit.
 - Products declared "defective" for returnless refund should still be counted in the
+
   SKU defect rate, even though the physical product doesn't return.
+
 - Consider asking the customer to send a photo of the defect as lightweight verification.
 
 ---
@@ -758,6 +799,7 @@ January is to returns operations what December is to fulfillment. Plan for:
 | Gift receipt returns (% of total) | 5-8% | 25-35% | 4-5x |
 
 **Holiday return planning checklist:**
+
 1. Staff: Bring temporary inspection staff online by Dec 26. Target: 2x normal inspection capacity by Jan 2.
 2. Space: Reserve additional staging area for the return volume. Last-mile sorting should be simplified (Grade A express lane for sealed/tagged items).
 3. Policy: Extended holiday return window (typically Nov 1 - Dec 31 purchases returnable through Jan 31) means that returns trickle in over 4 weeks rather than concentrating in the first week. Model the curve.
@@ -830,6 +872,7 @@ Allocating return costs to the business units that drive them creates accountabi
 | Fraud | Loss prevention budget |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

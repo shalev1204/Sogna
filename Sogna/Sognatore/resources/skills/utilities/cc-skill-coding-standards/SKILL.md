@@ -8,7 +8,6 @@ id: skill-cc-skill-coding-standards
 owner: [[orchestrator]]
 ---
 
-
 # Coding Standards & Best Practices
 
 Universal coding standards applicable across all projects.
@@ -16,24 +15,28 @@ Universal coding standards applicable across all projects.
 ## Code Quality Principles
 
 ### 1. Readability First
+
 - Code is read more than written
 - Clear variable and function names
 - Self-documenting code preferred over comments
 - Consistent formatting
 
 ### 2. KISS (Keep It Simple, Stupid)
+
 - Simplest solution that works
 - Avoid over-engineering
 - No premature optimization
 - Easy to understand > clever code
 
 ### 3. DRY (Don't Repeat Yourself)
+
 - Extract common logic into functions
 - Create reusable components
 - Share utilities across modules
 - Avoid copy-paste programming
 
 ### 4. YAGNI (You Aren't Gonna Need It)
+
 - Don't build features before they're needed
 - Avoid speculative generality
 - Add complexity only when required
@@ -256,6 +259,7 @@ PATCH  /api/markets/:id          # Update market (partial)
 DELETE /api/markets/:id          # Delete market
 
 # Query parameters for filtering
+
 GET /api/markets?status=active&limit=10&offset=0
 ```
 
@@ -375,6 +379,7 @@ name = user.name
 
 ```typescript
 /**
+
  * Searches markets using semantic similarity.
  *
  * @param query - Natural language search query
@@ -387,6 +392,7 @@ name = user.name
  * const results = await searchMarkets('election', 5)
  * console.log(results[0].name) // "Trump vs Biden"
  * ```
+
  */
 export async function searchMarkets(
   query: string,
@@ -482,6 +488,7 @@ test('test search', () => { })
 Watch for these anti-patterns:
 
 ### 1. Long Functions
+
 ```typescript
 // ❌ BAD: Function > 50 lines
 function processMarketData() {
@@ -497,6 +504,7 @@ function processMarketData() {
 ```
 
 ### 2. Deep Nesting
+
 ```typescript
 // ❌ BAD: 5+ levels of nesting
 if (user) {
@@ -522,6 +530,7 @@ if (!hasPermission) return
 ```
 
 ### 3. Magic Numbers
+
 ```typescript
 // ❌ BAD: Unexplained numbers
 if (retryCount > 3) { }
@@ -538,14 +547,17 @@ setTimeout(callback, Math.min(DEBOUNCE_DELAY_MS, 60000)) // @sentinel: Capped fo
 **Remember**: Code quality is not negotiable. Clear, maintainable code enables rapid development and confident refactoring.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

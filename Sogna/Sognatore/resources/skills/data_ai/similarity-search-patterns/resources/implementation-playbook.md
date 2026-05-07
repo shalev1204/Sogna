@@ -547,6 +547,7 @@ class WeaviateVectorStore:
 ## Best Practices
 
 ### Do's
+
 - **Use appropriate index** - HNSW for most cases
 - **Tune parameters** - ef_search, nprobe for recall/speed
 - **Implement hybrid search** - Combine with keyword search
@@ -554,6 +555,7 @@ class WeaviateVectorStore:
 - **Pre-filter when possible** - Reduce search space
 
 ### Don'ts
+
 - **Don't skip evaluation** - Measure before optimizing
 - **Don't over-index** - Start with flat, scale up
 - **Don't ignore latency** - P99 matters for UX
@@ -567,6 +569,7 @@ class WeaviateVectorStore:
 - [Weaviate Docs](https://weaviate.io/developers/weaviate)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

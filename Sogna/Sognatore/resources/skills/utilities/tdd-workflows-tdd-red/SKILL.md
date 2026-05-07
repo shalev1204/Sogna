@@ -8,7 +8,6 @@ id: skill-tdd-workflows-tdd-red
 owner: [[orchestrator]]
 ---
 
-
 Write comprehensive failing tests following TDD red phase principles.
 
 [Extended thinking: Generates failing tests that properly define expected behavior using test-automator agent.]
@@ -74,21 +73,25 @@ Generate failing tests using Task tool with subagent_type="unit-testing::test-au
 ## Framework Patterns
 
 **JavaScript/TypeScript (Jest/Vitest)**
+
 - Mock dependencies with `vi.fn()` or `jest.fn()`
 - Use `@testing-library` for React components
 - Property tests with `fast-check`
 
 **Python (pytest)**
+
 - Fixtures with appropriate scopes
 - Parametrize for multiple test cases
 - Hypothesis for property-based tests
 
 **Go**
+
 - Table-driven tests with subtests
 - `t.Parallel()` for parallel execution
 - Use `testify/assert` for cleaner assertions
 
 **Ruby (RSpec)**
+
 - `let` for lazy loading, `let!` for eager
 - Contexts for different scenarios
 - Shared examples for common behavior
@@ -128,6 +131,7 @@ Generate failing tests using Task tool with subagent_type="unit-testing::test-au
 ## Validation
 
 After generation:
+
 1. Run tests - confirm they fail
 2. Verify helpful failure messages
 3. Check test independence
@@ -170,11 +174,13 @@ describe('AuthService', () => {
 Test requirements: $ARGUMENTS
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

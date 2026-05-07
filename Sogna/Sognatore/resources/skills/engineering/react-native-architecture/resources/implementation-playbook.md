@@ -55,10 +55,13 @@ src/
 ## Quick Start
 
 ```bash
+
 # Create new Expo project
+
 npx create-expo-app@latest my-app -t expo-template-blank-typescript
 
 # Install essential dependencies
+
 npx expo install expo-router expo-status-bar react-native-safe-area-context
 npx expo install @react-native-async-storage/async-storage
 npx expo install expo-secure-store expo-haptics
@@ -640,22 +643,27 @@ export function ProductList({ products, onProductPress }: ProductListProps) {
 ```
 
 ```bash
+
 # Build commands
+
 eas build --platform ios --profile development
 eas build --platform android --profile preview
 eas build --platform all --profile production
 
 # Submit to stores
+
 eas submit --platform ios
 eas submit --platform android
 
 # OTA updates
+
 eas update --branch production --message "Bug fixes"
 ```
 
 ## Best Practices
 
 ### Do's
+
 - **Use Expo** - Faster development, OTA updates, managed native code
 - **FlashList over FlatList** - Better performance for long lists
 - **Memoize components** - Prevent unnecessary re-renders
@@ -663,8 +671,11 @@ eas update --branch production --message "Bug fixes"
 - **Test on real devices** - Simulators miss real-world issues
 
 ### Don'ts
+
 - **Don't inline styles** - Use StyleSheet.create for performance
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - **Don't fetch in render** - Use useEffect or React Query
 - **Don't ignore platform differences** - Test on both iOS and Android
 - **Don't store secrets in code** - Use environment variables
@@ -678,6 +689,7 @@ eas update --branch production --message "Bug fixes"
 - [FlashList](https://shopify.github.io/flash-list/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

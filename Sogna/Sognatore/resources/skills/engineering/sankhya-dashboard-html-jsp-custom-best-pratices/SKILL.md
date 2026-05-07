@@ -10,7 +10,6 @@ id: skill-sankhya-dashboard-html-jsp-custom-best-pratices
 owner: [[orchestrator]]
 ---
 
-
 # sankhya-dashboard-html-jsp-custom-best-pratices
 
 ## Purpose
@@ -20,6 +19,7 @@ To provide a consolidated guide of patterns and best practices for creating and 
 ## When to Use This Skill
 
 This skill should be used when:
+
 - The user asks about "boas praticas do sankhya" or "Sankhya best practices".
 - The user mentions "dashboard sankhya" or is working on a Sankhya BI dashboard.
 - The user asks for anything related to the word "Sankhya".
@@ -35,9 +35,11 @@ This skill should be used when:
 ## Patterns
 
 ### Melhores Práticas de Código
+
 Aplicar padrões de JSP/JSTL e organização server-side para reduzir erros de compilação, falhas de renderização e regressões em dashboards/telas.
 
 **Diretrizes de implementação**
+
 - Declarar diretivas JSP e taglibs obrigatórias no topo do arquivo.
 - Forçar `isELIgnored="false"` para habilitar `${...}` em tempo de renderização.
 - Preferir `core_rt` para JSTL core no ecossistema Sankhya.
@@ -61,6 +63,7 @@ Aplicar padrões de JSP/JSTL e organização server-side para reduzir erros de c
 ```
 
 **Carregamento de assets em dashboard/gadget**
+
 - Referenciar arquivos com `contextPath` + `BASE_FOLDER`.
 - Em níveis secundários (`openLevel`), manter caminho absoluto para evitar quebra de resolução.
 
@@ -70,6 +73,7 @@ Aplicar padrões de JSP/JSTL e organização server-side para reduzir erros de c
 ```
 
 **Consumo seguro de `snk:query`**
+
 - Iterar em `query.rows` (não no objeto raiz).
 - Testar vazio com `empty query.rows`.
 
@@ -92,6 +96,7 @@ Aplicar padrões de JSP/JSTL e organização server-side para reduzir erros de c
 ```
 
 **Sanitização de parâmetros antes da SQL**
+
 - Normalizar valor de entrada.
 - Remover aspas (`"` e `&quot;`) antes de injetar em query.
 - Definir fallback seguro para evitar SQL inválida.
@@ -110,6 +115,7 @@ Aplicar padrões de JSP/JSTL e organização server-side para reduzir erros de c
 ```
 
 **Estado de tela e lazy-load em dashboard único**
+
 - Definir listas globais para reutilização em KPI, gráfico, tabela e modais.
 - Guardar flag de carregamento por aba para evitar reconsultas desnecessárias.
 - Recarregar dados e reabrir o contexto (produto/aba) após atualização transacional.
@@ -154,9 +160,11 @@ function trocarAba(aba) {
 ```
 
 ### Identidade Visual (Colors)
+
 Padronizar identidade visual em componentes BI para consistência entre gadgets HTML5, tabelas e indicadores.
 
 **Diretrizes de UI/UX**
+
 - Definir paleta via tokens (`--color-*`) para evitar valores espalhados.
 - Priorizar contraste mínimo entre texto/fundo (legibilidade operacional).
 - Manter semântica visual consistente: sucesso, alerta, erro, neutro.
@@ -208,19 +216,23 @@ FROM AD_DADOS_VENDA V
 ```
 
 ### Consultas e Exploração de Banco
+
 Estruturar exploração de dados com foco em performance, legibilidade e mapeamento correto de entidades Sankhya.
 
 **Boas práticas de exploração (DBExplorer)**
+
 - Usar DBExplorer para inspeção de tabelas, campos, índices, views e procedures.
 - Respeitar limite de retorno configurado (ex.: `DBEXPMAXROW`) para evitar carga excessiva.
 - Evitar `SELECT *` em tabelas com campos volumosos (BLOB/CLOB).
 
 **Mapas essenciais do ecossistema**
+
 - Dicionário: `TDDTAB`, `TDDCAM`, `TDDOPC`, `TDDINS`, `TDDLIG`.
 - Comercial/financeiro: `TGFCAB`, `TGFITE`, `TGFTOP`, `TGFPAR`, `TGFPRO`, `TGFEST`, `TGFVAR`.
 - Segurança/acesso: `TSIUSU`, `TSIGRU`, `TSIACI`, `TSIIMP`.
 
 **Padrões de SQL recomendados**
+
 - Em TOP versionada, relacionar `CODTIPOPER` + data de alteração (`DHTIPOPER`/`DHALTER`).
 - Em filtros opcionais, usar padrão `(... = :P_PARAM OR :P_PARAM IS NULL)`.
 - Parametrizar sempre (evitar literals de usuário).
@@ -263,14 +275,17 @@ ORDER BY I.NOME
 ```
 
 ### Guia do Construtor de BI
+
 Aplicar fluxo de desenvolvimento de componentes HTML5 no BI para garantir renderização, reatividade e navegação entre níveis.
 
 **Estrutura e publicação**
+
 - Empacotar componente em `.zip` com `index.html` como entrada principal.
 - Organizar recursos estáticos em `assets/` (CSS, JS, libs, imagens).
 - Usar XML/design conforme necessidade; considerar JSP de entrada quando houver pré-processamento server-side.
 
 **Fluxo de dados e parâmetros**
+
 - Definir variáveis SQL ou BeanShell conforme complexidade.
 - Usar prefixos de tradução de parâmetro:
   - `:` para bind padrão.
@@ -290,6 +305,7 @@ WHERE /*inCollection*/ C.CODCID IN :P_CODCID /*inCollection*/
 ```
 
 **Reatividade e ciclo de vida**
+
 - Programar re-render quando filtros globais mudarem.
 - Evitar dependência exclusiva de `DOMContentLoaded` em conteúdo injetado.
 - Aplicar inicialização assíncrona para garantir elementos disponíveis.
@@ -310,12 +326,14 @@ WHERE /*inCollection*/ C.CODCID IN :P_CODCID /*inCollection*/
 ```
 
 **Drill-down e eventos**
+
 - Modelar níveis independentes (macro → micro) com argumentos explícitos.
 - Evitar contêiner vazio em níveis subsequentes.
 - Usar herança de contexto entre níveis para preservar filtros e navegação.
 - Implementar ações de clique para atualizar detalhes e abrir telas nativas com chave de contexto.
 
 **Navegação multi-nível (openLevel e contrato de contexto)**
+
 - Definir constantes de nível em configuração (`NIVEL_RESUMO`, `NIVEL_DETALHE`, `NIVEL_ITEM`) para evitar acoplamento em string solta.
 - Encapsular `openLevel` em funções dedicadas por rota de navegação (ex.: abrir detalhe por vendedor, abrir itens por parceiro).
 - Repassar parâmetros de contexto entre níveis com contrato explícito (`ARG_*` para chaves e `P_*` para filtros/período).
@@ -349,6 +367,7 @@ function abrirNivelItem(codigoEntidadeFilha) {
 ```
 
 **Segurança e bloqueio de acesso por escopo**
+
 - Restringir qualquer consulta de nível pela relação usuário-meta/escopo antes de agregar dados.
 - Centralizar o predicado de segurança em função de montagem de `WHERE` para reaproveitamento em KPIs, grids e gráficos.
 - Preferir variáveis de sessão (`CODUSU_LOG` ou função equivalente de usuário logado) para evitar spoof de parâmetro de usuário.
@@ -376,6 +395,7 @@ GROUP BY M.CODMETA, M.CODENTIDADE
 ```
 
 **Grid hierárquica com expansão/colapso**
+
 - Estruturar mapa `filhosPorPai` e estado `nosExpandidos` para renderização incremental da árvore.
 - Inicializar nós não analíticos de níveis superiores como expandidos para melhorar leitura inicial.
 - Em nós colapsados, exibir agregados de descendentes analíticos para manter contexto sem abrir toda árvore.
@@ -406,12 +426,14 @@ function obterVisiveis(raiz) {
 ```
 
 **Resiliência de carregamento**
+
 - Separar a carga principal da carga complementar (ex.: realizado mensal) e não bloquear a visualização principal por falha secundária.
 - Tratar ausência de dados por componente (`vazio`) sem derrubar o layout inteiro.
 - Destruir instâncias de gráfico antes de recriar para evitar vazamento e sobreposição visual.
 - Carregar painéis secundários somente ao abrir aba/visão correspondente (on-demand).
 
 **Navegação intra-nível (single JSP)**
+
 - Tratar o JSP único como shell de navegação: tabela principal + modal de detalhe + abas internas + modais auxiliares.
 - Encadear cliques sem trocar de nível Sankhya: KPI → lista modal, gráfico → filtro de tabela, linha da tabela → detalhe.
 - Aplicar atalhos de ação no detalhe para abrir cadastro nativo no contexto da chave primária.
@@ -433,20 +455,24 @@ function onGraficoClick(grupo) {
 ```
 
 **Feedback operacional de interface**
+
 - Exibir estados explícitos de carregamento, vazio e erro em cada painel.
 - Em ações de atualização, desabilitar botão de confirmação até o retorno do `executeQuery`.
 - Após sucesso, recarregar dados e restaurar contexto anterior (produto e aba ativa).
 
 **Variáveis internas de segurança**
+
 - Aproveitar variáveis de sessão para segurança em nível de linha (`CODUSU_LOG`, `CODGRU_LOG`, `CODVEN_LOG`).
 - Restringir dados por contexto do usuário antes de montar visualizações.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

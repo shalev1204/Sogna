@@ -10,17 +10,20 @@ version: 1.0.0
 ## Installation Methods
 
 ### 1. Standard Installation
+
 ```bash
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
 ### 2. High Availability Installation
+
 ```bash
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/ha/install.yaml
 ```
 
 ### 3. Helm Installation
+
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
 helm install argocd argo/argo-cd -n argocd --create-namespace
@@ -29,15 +32,20 @@ helm install argocd argo/argo-cd -n argocd --create-namespace
 ## Initial Configuration
 
 ### Access ArgoCD UI
+
 ```bash
+
 # Port forward
+
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 
 # Get initial admin password
+
 argocd admin initial-password -n argocd
 ```
 
 ### Configure Ingress
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -51,10 +59,14 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
+
   - host: argocd.example.com
+
     http:
       paths:
+
       - path: /
+
         pathType: Prefix
         backend:
           service:
@@ -62,24 +74,29 @@ spec:
             port:
               number: 443
   tls:
+
   - hosts:
     - argocd.example.com
+
     secretName: argocd-secret
 ```
 
 ## CLI Configuration
 
 ### Login
+
 ```bash
 argocd login argocd.example.com --username admin
 ```
 
 ### Add Repository
+
 ```bash
 argocd repo add https://github.com/org/repo --username user --password token
 ```
 
 ### Create Application
+
 ```bash
 argocd app create my-app \
   --repo https://github.com/org/repo \
@@ -91,6 +108,7 @@ argocd app create my-app \
 ## SSO Configuration
 
 ### GitHub OAuth
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -101,17 +119,22 @@ data:
   url: https://argocd.example.com
   dex.config: |
     connectors:
+
       - type: github
+
         id: github
         name: GitHub
         config:
           clientID: $GITHUB_CLIENT_ID
           clientSecret: $GITHUB_CLIENT_SECRET
           orgs:
+
           - name: my-org
+
 ```
 
 ## RBAC Configuration
+
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -141,6 +164,7 @@ data:
 10. Monitor with Prometheus metrics
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

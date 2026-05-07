@@ -8,12 +8,12 @@ id: skill-wiki-onboarding
 owner: [[orchestrator]]
 ---
 
-
 # Wiki Onboarding Guide Generator
 
 Generate two complementary onboarding documents that together give any engineer — from newcomer to principal — a complete understanding of a codebase.
 
 ## When to Use
+
 - User asks for onboarding docs or getting-started guides
 - User runs `/deep-wiki:onboard` command
 - User wants to help new team members understand a codebase
@@ -21,6 +21,7 @@ Generate two complementary onboarding documents that together give any engineer 
 ## Language Detection
 
 Scan the repository for build files to determine the primary language for code examples:
+
 - `package.json` / `tsconfig.json` → TypeScript/JavaScript
 - `*.csproj` / `*.sln` → C# / .NET
 - `Cargo.toml` → Rust
@@ -48,6 +49,7 @@ Scan the repository for build files to determine the primary language for code e
 12. **Known Technical Debt** — Honest assessment of shortcuts and their risks
 
 ### Rules
+
 - Every claim backed by `(file_path:line_number)` citation
 - Minimum 3 Mermaid diagrams (architecture, data flow, dependency graph)
 - All Mermaid diagrams use dark-mode colors (see wiki-vitepress skill)
@@ -75,6 +77,7 @@ Scan the repository for build files to determine the primary language for code e
 14. **Quick Reference Card** — Cheat sheet of most-used commands and patterns
 
 ### Rules
+
 - All code examples in the detected primary language
 - Every command must be copy-pasteable
 - Include expected output for verification steps
@@ -82,14 +85,17 @@ Scan the repository for build files to determine the primary language for code e
 - Ground all claims in actual code — cite `(file_path:line_number)`
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

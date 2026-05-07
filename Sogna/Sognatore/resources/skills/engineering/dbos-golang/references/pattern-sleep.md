@@ -42,6 +42,7 @@ func delayedTask(ctx dbos.DBOSContext, input string) (string, error) {
 `dbos.Sleep` takes a `time.Duration`. It returns the remaining sleep duration (zero if completed normally).
 
 Use cases:
+
 - Scheduling tasks to run in the future
 - Implementing retry delays
 - Delays spanning hours, days, or weeks
@@ -57,6 +58,7 @@ func scheduledTask(ctx dbos.DBOSContext, task string) (string, error) {
 Reference: [Durable Sleep](https://docs.dbos.dev/golang/tutorials/workflow-tutorial#durable-sleep)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

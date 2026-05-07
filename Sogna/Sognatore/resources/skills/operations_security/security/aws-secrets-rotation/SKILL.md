@@ -10,23 +10,25 @@ id: skill-aws-secrets-rotation
 owner: [[ops-security]]
 ---
 
-
 # AWS Secrets Rotation
 
 Automate rotation of secrets, credentials, and API keys using AWS Secrets Manager and Lambda.
 
 ## When to Use
+
 Use this skill when you need to implement automated secrets rotation, manage credentials securely, or comply with security policies requiring regular key rotation.
 
 ## Supported Secret Types
 
 **AWS Services**
+
 - RDS database credentials
 - DocumentDB credentials
 - Redshift credentials
 - ElastiCache credentials
 
 **Third-Party Services**
+
 - API keys
 - OAuth tokens
 - SSH keys
@@ -37,7 +39,9 @@ Use this skill when you need to implement automated secrets rotation, manage cre
 ### Create a Secret
 
 ```bash
+
 # Create RDS secret
+
 aws secretsmanager create-secret \
   --name prod/db/mysql \
   --description "Production MySQL credentials" \
@@ -51,6 +55,7 @@ aws secretsmanager create-secret \
   }'
 
 # Create API key secret
+
 aws secretsmanager create-secret \
   --name prod/api/stripe \
   --secret-string '{
@@ -59,6 +64,7 @@ aws secretsmanager create-secret \
   }'
 
 # Create secret from file
+
 aws secretsmanager create-secret \
   --name prod/ssh/private-key \
   --secret-binary fileb://~/.ssh/id_rsa
@@ -67,18 +73,22 @@ aws secretsmanager create-secret \
 ### Retrieve Secrets
 
 ```bash
+
 # Get secret value
+
 aws secretsmanager get-secret-value \
   --secret-id prod/db/mysql \
   --query 'SecretString' --output text
 
 # Get specific field
+
 aws secretsmanager get-secret-value \
   --secret-id prod/db/mysql \
   --query 'SecretString' --output text | \
   jq -r '.password'
 
 # Get binary secret
+
 aws secretsmanager get-secret-value \
   --secret-id prod/ssh/private-key \
   --query 'SecretBinary' --output text | \
@@ -90,17 +100,21 @@ aws secretsmanager get-secret-value \
 ### Enable RDS Rotation
 
 ```bash
+
 # Enable automatic rotation (30 days)
+
 aws secretsmanager rotate-secret \
   --secret-id prod/db/mysql \
   --rotation-lambda-arn arn:aws:lambda:us-east-1:123456789012:function:SecretsManagerRDSMySQLRotation \
   --rotation-rules AutomaticallyAfterDays=30
 
 # Rotate immediately
+
 aws secretsmanager rotate-secret \
   --secret-id prod/db/mysql
 
 # Check rotation status
+
 aws secretsmanager describe-secret \
   --secret-id prod/db/mysql \
   --query 'RotationEnabled'
@@ -109,7 +123,9 @@ aws secretsmanager describe-secret \
 ### Lambda Rotation Function
 
 ```python
+
 # lambda_rotation.py
+
 import boto3
 import json
 import os
@@ -181,7 +197,9 @@ def generate_password(length=32):
 ### Custom Rotation for API Keys
 
 ```python
+
 # api_key_rotation.py
+
 import boto3
 import requests
 import json
@@ -241,7 +259,9 @@ def rotate_stripe_key(secret_arn, token, step):
 ### CloudWatch Alarms
 
 ```bash
+
 # Create alarm for rotation failures
+
 aws cloudwatch put-metric-alarm \
   --alarm-name secrets-rotation-failures \
   --alarm-description "Alert on secrets rotation failures" \
@@ -259,6 +279,7 @@ aws cloudwatch put-metric-alarm \
 
 ```bash
 #!/bin/bash
+
 # audit-rotations.sh
 
 echo "Secrets Rotation Audit"
@@ -311,6 +332,7 @@ def get_secret(secret_name):
         raise
 
 # Usage
+
 db_creds = get_secret('prod/db/mysql')
 connection = pymysql.connect(
     host=db_creds['host'],
@@ -352,6 +374,7 @@ const connection = mysql.createConnection({
 ## Rotation Best Practices
 
 **Planning**
+
 - [ ] Identify all secrets requiring rotation
 - [ ] Define rotation schedules (30, 60, 90 days)
 - [ ] Test rotation in non-production first
@@ -359,6 +382,7 @@ const connection = mysql.createConnection({
 - [ ] Plan for emergency rotation
 
 **Implementation**
+
 - [ ] Use AWS managed rotation when possible
 - [ ] Implement proper error handling
 - [ ] Add CloudWatch monitoring
@@ -366,6 +390,7 @@ const connection = mysql.createConnection({
 - [ ] Implement gradual rollout
 
 **Operations**
+
 - [ ] Monitor rotation success/failure
 - [ ] Set up alerts for failures
 - [ ] Regular rotation audits
@@ -375,18 +400,22 @@ const connection = mysql.createConnection({
 ## Emergency Rotation
 
 ```bash
+
 # Immediate rotation (compromise detected)
+
 aws secretsmanager rotate-secret \
   --secret-id prod/db/mysql \
   --rotate-immediately
 
 # Force rotation even if recently rotated
+
 aws secretsmanager rotate-secret \
   --secret-id prod/api/stripe \
   --rotation-lambda-arn arn:aws:lambda:us-east-1:123456789012:function:RotateStripeKey \
   --rotate-immediately
 
 # Verify rotation completed
+
 aws secretsmanager describe-secret \
   --secret-id prod/db/mysql \
   --query 'LastRotatedDate'
@@ -396,6 +425,7 @@ aws secretsmanager describe-secret \
 
 ```python
 #!/usr/bin/env python3
+
 # compliance-report.py
 
 import boto3
@@ -468,11 +498,13 @@ kiro-cli chat "Create a rotation audit report with aws-secrets-rotation"
 - [Best Practices for Secrets](https://docs.aws.amazon.com/secretsmanager/latest/userguide/best-practices.html)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

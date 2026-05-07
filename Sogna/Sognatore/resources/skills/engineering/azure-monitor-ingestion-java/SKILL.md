@@ -8,7 +8,6 @@ id: skill-azure-monitor-ingestion-java
 owner: [[orchestrator]]
 ---
 
-
 # Azure Monitor Ingestion SDK for Java
 
 Client library for sending custom logs to Azure Monitor using the Logs Ingestion API via Data Collection Rules.
@@ -233,14 +232,17 @@ String query = "MyTable_CL | where TimeGenerated > ago(1h) | limit 10";
 | Troubleshooting | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-ingestion/TROUBLESHOOTING.md |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -18,11 +18,13 @@ You said "dropping out to join a startup" — before decomposing assumptions, le
 A few clarifications:
 
 **What specifically are you choosing between?**
+
 - A) A specific startup offer on the table vs completing your degree?
 - B) The idea of startup life vs academic life in general?
 - C) Escaping something about school you dislike, with the startup as an exit?
 
 **Who framed this as a decision you need to make now?**
+
 - Did the CEO give you a deadline?
 - Did you create the urgency yourself?
 - Is there external pressure (peers who dropped out, tech Twitter narratives)?
@@ -40,15 +42,18 @@ Does this capture what you're really trying to figure out?
 Here are the hidden assumptions embedded in your framing:
 
 **Surface assumptions (obvious):**
+
 - A1. A CS degree is just a piece of paper — the real learning happens on the job
 - A2. This startup opportunity won't come again if I don't take it now
 
 **Middle-layer assumptions (industry conventional wisdom):**
+
 - A3. Early-stage equity is worth more than a salary
 - A4. The startup world values skills over credentials
 - A5. I can always go back and finish my degree later
 
 **Deep assumptions (unquestioned beliefs):**
+
 - A6. Working at a startup will accelerate my career faster than any other path
 - A7. I'm ready for the intensity and ambiguity of startup work
 - A8. The CEO/founder is competent and trustworthy
@@ -111,6 +116,7 @@ A3 has the highest risk score. The equity you're being offered is almost certain
 > **Ask the CEO for the company's current revenue, burn rate, and runway. If they refuse to share basic financials with someone they're asking to bet their education on, that tells you everything you need to know.**
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

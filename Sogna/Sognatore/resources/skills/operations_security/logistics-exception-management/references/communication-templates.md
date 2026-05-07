@@ -75,14 +75,17 @@ Common variables used across templates:
 ## 1. Initial Exception Notification to Carrier (Standard)
 
 ### When to Use
+
 - Exception identified through tracking, check-call miss, or OS&D report.
 - Severity is moderate — the shipment is delayed or has a discrepancy but is not in immediate jeopardy.
 - First outreach to carrier operations or dispatch regarding this specific issue.
 
 ### Tone Guidance
+
 Keep this factual and collaborative. You are a professional notifying a partner of a discrepancy, not accusing anyone of failure. Assume good intent — the goal is to get information and a corrective plan, not to assign blame at this stage.
 
 ### What NOT to Say
+
 - Do not threaten claims or contract consequences in the first contact.
 - Do not speculate on what caused the exception.
 - Do not use language like "you failed to" or "your driver caused" — you do not yet have confirmed root cause.
@@ -142,14 +145,17 @@ Regards,
 ## 2. Initial Exception Notification to Carrier (Urgent)
 
 ### When to Use
+
 - Shipment is critical: production-down, store-opening, perishable, or high-value.
 - Exception creates immediate financial exposure (e.g., production line stoppage, contract penalty window).
 - Customer has already escalated or SLA breach is imminent (within 24 hours).
 
 ### Tone Guidance
+
 Direct and time-bound. This is not hostile, but it communicates that the situation requires immediate action, not a callback tomorrow. Every sentence should drive toward a concrete next step. Use specific deadlines, not "as soon as possible."
 
 ### What NOT to Say
+
 - Do not soften the urgency — "when you get a chance" undermines the entire message.
 - Do not issue ultimatums you cannot enforce at this stage.
 - Do not reference other shipments or unrelated performance issues — stay on this load.
@@ -190,6 +196,7 @@ BUSINESS IMPACT:
 Estimated financial exposure if not resolved by {{resolution_deadline}}: {{financial_exposure}}.
 
 REQUIRED BY {{deadline_date}}:
+
   1. Confirmed physical location of the freight — verified, not last-scan
   2. Firm revised delivery date and time
   3. Name and direct phone number of the person managing recovery
@@ -213,14 +220,17 @@ Regards,
 ## 3. Customer Proactive Update — Delay
 
 ### When to Use
+
 - Transit delay confirmed or highly probable (revised ETA is beyond the committed window).
 - Send this before the customer discovers the delay on their own. Proactive communication preserves trust; reactive communication erodes it.
 - You have a revised ETA — even if approximate. If you have no ETA at all, say so and commit to a follow-up time.
 
 ### Tone Guidance
+
 Honest and solution-forward. Acknowledge the delay plainly — do not bury it in qualifiers. Lead with the revised timeline, then explain briefly. The customer wants to know "when will I get my freight" before they want to know "what happened." Do not name the carrier or assign blame to any specific party.
 
 ### What NOT to Say
+
 - Do not blame the carrier by name — say "our carrier partner," not "XYZ Trucking messed up."
 - Do not say "unforeseen circumstances" — be specific about the cause category (weather, equipment, routing).
 - Do not promise a revised ETA you cannot support. If uncertain, give a range.
@@ -247,6 +257,7 @@ This shipment is experiencing a transit delay. The original estimated delivery w
 CAUSE: {{delay_cause_customer_facing}}
 
 HERE IS WHAT WE ARE DOING:
+
   - {{action_item_1}}
   - {{action_item_2}}
   - {{action_item_3}}
@@ -281,14 +292,17 @@ working to get one and will update you by {{next_update_time}} today.
 ## 4. Customer Proactive Update — Damage
 
 ### When to Use
+
 - Carrier or consignee has reported visible damage at delivery or in transit.
 - Damage is confirmed or strongly suspected (e.g., photos from driver, consignee notation on POD).
 - Send before the customer calls you. If they are the consignee, send before they have to chase you for next steps.
 
 ### Tone Guidance
+
 Lead with the resolution, not the problem. The customer's first question is "what are you going to do about it" — answer that before describing the damage. Be specific about the remediation path (replacement, credit, re-ship) and timeline. Express genuine concern for the business impact without being dramatic.
 
 ### What NOT to Say
+
 - Do not lead with the damage description. The opening paragraph should be about the resolution path.
 - Do not say "these things happen in transit" — it minimizes the customer's loss.
 - Do not speculate on cause (packaging, handling, weather) until investigation is complete.
@@ -325,9 +339,13 @@ We are handling the carrier claim and investigation on our end — no action is
 needed from your team on that front.
 
 What we do need from you:
+
   - Confirmation of the affected quantities once your receiving team completes
+
     inspection
+
   - Direction on whether you want us to {{resolution_option_a}} or
+
     {{resolution_option_b}}
 
 I understand this impacts your {{customer_impact_area}} and I take that seriously.
@@ -347,13 +365,16 @@ Regards,
 ## 5. Customer Proactive Update — Loss
 
 ### When to Use
+
 - Shipment is confirmed lost — not just delayed or unlocated. A shipment is "lost" when the carrier has confirmed they cannot locate the freight after a thorough trace, OR when {{days_without_scan}} days have passed with no carrier response to trace requests.
 - This is the most sensitive exception communication. The customer is learning that their goods are gone. Do not send this template for a shipment that is merely late or temporarily unlocated.
 
 ### Tone Guidance
+
 Empathetic, direct, and action-oriented. Do not hedge or use passive constructions — "your shipment has been lost" is clearer than "there appears to be a situation involving the non-delivery of your order." Immediately establish the action plan. The customer needs to know three things: (1) what happened, (2) what you are doing right now, and (3) when they will have resolution. Convey that you understand the severity.
 
 ### What NOT to Say
+
 - Do not say "misplaced" or "misrouted" if the shipment is confirmed lost — it sounds like you are minimizing.
 - Do not say "we are still looking into it" without a concrete next step and deadline.
 - Do not blame the carrier by name.
@@ -383,20 +404,24 @@ to lay out exactly what we are doing about it.
 IMMEDIATE ACTION PLAN:
 
   1. REPLACEMENT / RE-SHIP:
+
      {{replacement_plan}}
      Expected availability: {{replacement_date}}
 
   2. FINANCIAL REMEDIATION:
+
      {{financial_remediation_plan}}
      Timeline: {{financial_remediation_timeline}}
 
   3. CARRIER CLAIM:
+
      We have filed a formal cargo claim against the carrier. This is our
      responsibility to manage — you do not need to take any action on the
      claim.
      Claim reference: {{our_claim_ref}}
 
   4. PREVENTION:
+
      {{prevention_steps}}
 
 I will call you at {{follow_up_call_time}} to discuss this directly and answer
@@ -417,14 +442,17 @@ Regards,
 ## 6. Escalation to Carrier Account Manager
 
 ### When to Use
+
 - Initial contact to carrier dispatch or operations has gone unanswered for 4+ hours on a standard exception, or 2+ hours on an urgent exception.
 - You have documented at least two prior outreach attempts (email, phone, or both) to the frontline contact.
 - The account manager is the next level of the carrier's organization who can apply internal pressure.
 
 ### Tone Guidance
+
 Professional but firm. You are not angry — you are a business partner whose reasonable requests have been ignored, and you need the account manager to intervene. State the timeline of your attempts factually. Make the ask concrete. The account manager needs to know exactly what you need and by when so they can push their operations team.
 
 ### What NOT to Say
+
 - Do not trash the frontline contact by name — say "your operations team" or "your dispatch."
 - Do not threaten to pull freight at this stage unless you mean it and have authority.
 - Do not pile on unrelated issues — stay on this shipment.
@@ -464,6 +492,7 @@ It has been {{hours_since_first_contact}} hours since our first outreach with no
 confirmed status or recovery plan.
 
 I need the following by {{deadline_date}}:
+
   1. Confirmed current location of the freight
   2. Firm revised ETA
   3. A direct contact managing the recovery who I can reach by phone
@@ -486,15 +515,18 @@ Regards,
 ## 7. Escalation to Carrier VP/Director
 
 ### When to Use
+
 - Account manager has failed to resolve or respond within a reasonable window (typically 12–24 hours after account manager escalation).
 - The exception has significant financial exposure, or a pattern of similar failures exists.
 - You are prepared to reference contract terms, volume commitments, or documented performance history.
 - This is a formal escalation — send it knowing it may be shared with carrier executive leadership.
 
 ### Tone Guidance
+
 Formal and data-driven. This is a business communication between senior professionals. No emotion, no sarcasm, no threats — but clear consequences stated as business realities. Reference specific contract provisions, dollar figures, and incident history. The VP needs to understand that this is not a one-off complaint; it is a business risk they need to manage.
 
 ### What NOT to Say
+
 - Do not be sarcastic or condescending — "I'm sure you're very busy" undermines your credibility.
 - Do not make threats you cannot follow through on (e.g., "we will never use you again" when they are your only option for a lane).
 - Do not reference verbal promises or informal agreements — stick to what is documented.
@@ -551,6 +583,7 @@ logged {{incident_count}} exceptions on your loads, resulting in
 {{/if}}
 
 I need the following from your team by {{deadline_date}}:
+
   1. Full resolution of this specific shipment
   2. Written root cause analysis
   3. Corrective action plan to prevent recurrence
@@ -574,15 +607,18 @@ Regards,
 ## 8. Internal Escalation to VP Supply Chain
 
 ### When to Use
+
 - Financial exposure exceeds your authority threshold (typically $25,000+ or customer-specific triggers).
 - Customer relationship is at risk and executive-to-executive communication may be required.
 - A decision is needed that is above your pay grade: re-tender, expedite at premium cost, authorize production-down recovery, or waive contractual terms.
 - You need VP awareness even if you do not need VP action — significant exceptions should not be surprises.
 
 ### Tone Guidance
+
 Brief and structured. Your VP does not need the narrative — they need the numbers, the exposure, what you have already done, and what you need from them. Lead with the decision or awareness item. Use bullet points. This is an internal operational brief, not a customer communication.
 
 ### What NOT to Say
+
 - Do not editorialize — "the carrier is terrible" adds nothing. State the facts.
 - Do not bury the financial number. It should be in the first three lines.
 - Do not present problems without proposed solutions.
@@ -612,6 +648,7 @@ SITUATION:
   {{two_to_three_sentence_summary}}
 
 WHAT I HAVE DONE:
+
   - {{action_taken_1}}
   - {{action_taken_2}}
   - {{action_taken_3}}
@@ -635,14 +672,17 @@ I need a decision by {{decision_deadline}} to execute the recovery plan.
 ## 9. Claims Filing Cover Letter
 
 ### When to Use
+
 - Decision has been made to file a formal freight claim against the carrier.
 - All supporting documentation has been gathered (BOL, POD, inspection reports, photos, invoice, packing list).
 - Claim is being sent within the filing window (9 months under Carmack Amendment for interstate; check state law or contract for intrastate or brokered freight).
 
 ### Tone Guidance
+
 Formal and precise. This is a legal document. No emotion, no narrative, no relationship language. State the facts, cite the applicable law, list the enclosed documents, and demand payment. Every statement should be supportable with evidence. Use the carrier's legal name and MC number, not their DBA or sales contact's name.
 
 ### What NOT to Say
+
 - Do not editorialize about the carrier's service or your frustration.
 - Do not include demands beyond the provable loss amount — consequential damages require separate analysis and legal review.
 - Do not omit the filing date or claim amount — these are jurisdictional requirements.
@@ -711,8 +751,11 @@ ENCLOSED DOCUMENTATION:
   5. Commercial invoice(s) — Invoice No. {{invoice_numbers}}
   6. Packing list
   7. Shipper's certificate of value / weight
+
   {{#if additional_documents}}
+
   8. {{additional_documents}}
+
   {{/if}}
 
 DEMAND:
@@ -749,14 +792,17 @@ Respectfully,
 ## 10. Settlement Negotiation Response (Accepting)
 
 ### When to Use
+
 - Carrier has offered a settlement amount and you have decided to accept it.
 - The settlement amount has been approved internally (check your authority level — partial settlements often require management sign-off).
 - You are ready to close the claim and release the carrier from further liability on this shipment.
 
 ### Tone Guidance
+
 Professional and conclusive. You are closing a business matter, not doing the carrier a favor. Confirm the exact terms clearly — amount, payment method, timeline, and scope of release. Do not express gratitude for the settlement or suggest the amount was generous. It is a business resolution.
 
 ### What NOT to Say
+
 - Do not say "thank you for your generous offer" — you are accepting fair compensation, not a gift.
 - Do not leave any ambiguity about what is being released — specify the PRO, BOL, and claim reference.
 - Do not agree to confidentiality clauses or broad releases without legal review.
@@ -820,14 +866,17 @@ Regards,
 ## 11. Settlement Negotiation Response (Rejecting)
 
 ### When to Use
+
 - Carrier's settlement offer is below your documented loss amount and you have evidence to support a higher claim.
 - You are prepared to counter-offer with a specific amount backed by documentation.
 - You have reviewed the carrier's stated basis for the reduced offer and can address their objections.
 
 ### Tone Guidance
+
 Firm and evidence-based. You are not offended by a low offer — you are correcting an inaccurate valuation. Walk through their reasoning, point out where it is wrong, and anchor your counter to specific evidence. Keep the door open for resolution but make clear that the documented loss supports your position.
 
 ### What NOT to Say
+
 - Do not say "this is insulting" or express emotion about the offer amount.
 - Do not threaten litigation in the same sentence as a counter-offer — it contradicts the settlement posture.
 - Do not accept their framing if it is incorrect (e.g., if they depreciated new goods or excluded documented items).
@@ -901,14 +950,17 @@ Regards,
 ## 12. Post-Resolution Summary
 
 ### When to Use
+
 - Exception has been fully resolved — freight delivered, claim settled, or loss remediated.
 - Distribute to internal stakeholders: operations, account management, finance, and carrier procurement.
 - This becomes the permanent record of the exception and feeds carrier scorecard reviews.
 
 ### Tone Guidance
+
 Neutral and analytical. This is a post-mortem, not a complaint. State what happened, what it cost, what was done, and what should change. Be specific about lessons learned — vague statements like "we need to communicate better" are worthless. Recommend concrete process changes.
 
 ### What NOT to Say
+
 - Do not assign personal blame to individuals — focus on process and system failures.
 - Do not omit the financial impact even if the claim was settled favorably — the true cost includes staff time, expedite charges, and customer goodwill.
 - Do not skip the "prevention" section. If you cannot recommend a prevention step, say so and explain why.
@@ -931,6 +983,7 @@ Prepared by:          {{our_contact_name}}
 Distribution:         {{distribution_list}}
 
 1. SHIPMENT DETAILS
+
    Customer:       {{customer_name}}
    PO:             {{po_number}}
    PRO:            {{pro_number}}
@@ -942,15 +995,18 @@ Distribution:         {{distribution_list}}
    Weight/Pieces:  {{weight}} / {{piece_count}}
 
 2. EXCEPTION SUMMARY
+
    Type:            {{exception_type}}
    Discovered:      {{exception_date}}
    Root Cause:      {{confirmed_root_cause}}
    Description:     {{exception_narrative}}
 
 3. TIMELINE
+
    {{exception_timeline}}
 
 4. FINANCIAL IMPACT
+
    Cargo Loss/Damage:              ${{cargo_loss_amount}}
    Freight Charges (original):     ${{freight_charge}}
    Expedite / Recovery Costs:      ${{recovery_costs}}
@@ -964,11 +1020,13 @@ Distribution:         {{distribution_list}}
    Net Unrecovered Loss:           ${{net_loss}}
 
 5. CUSTOMER IMPACT
+
    {{customer_impact_summary}}
    Customer Satisfaction Status:   {{csat_status}}
    Relationship Risk:              {{relationship_risk_level}}
 
 6. CARRIER SCORECARD IMPACT
+
    Carrier:                {{carrier_name}}
    Incidents (trailing 12 months): {{trailing_12_incident_count}}
    On-Time Rate Impact:            {{ot_rate_impact}}
@@ -976,11 +1034,13 @@ Distribution:         {{distribution_list}}
    Recommended Action:             {{carrier_recommended_action}}
 
 7. LESSONS LEARNED
+
    {{lesson_1}}
    {{lesson_2}}
    {{lesson_3}}
 
 8. PROCESS IMPROVEMENTS
+
    {{improvement_1}} — Owner: {{owner_1}} — Due: {{due_date_1}}
    {{improvement_2}} — Owner: {{owner_2}} — Due: {{due_date_2}}
    {{improvement_3}} — Owner: {{owner_3}} — Due: {{due_date_3}}
@@ -994,15 +1054,18 @@ Filed in: {{document_management_location}}
 ## 13. Carrier Performance Warning
 
 ### When to Use
+
 - Carrier has a documented pattern of exceptions exceeding acceptable thresholds (e.g., on-time below 90%, claims ratio above 2%, multiple OS&D incidents in a quarter).
 - You have data from your TMS or scorecard to support the warning.
 - This is a formal notice — not a casual heads-up on a call. It creates a paper trail that supports future routing decisions or contract renegotiation.
 - Send after the pattern is established (typically 3+ incidents or a quarter of below-threshold performance), not after a single bad load.
 
 ### Tone Guidance
+
 Data-first and dispassionate. Let the numbers make the case. You are not angry — you are a supply chain professional managing vendor performance. State the expectation, show where they fall short, and define the consequences clearly. Leave room for corrective action — you want them to improve, not just feel punished.
 
 ### What NOT to Say
+
 - Do not make it personal — "your drivers don't care" is not professional.
 - Do not issue an ultimatum you are not prepared to enforce.
 - Do not send this during an active exception — wait until the current issue is resolved, then address the pattern.
@@ -1055,6 +1118,7 @@ for the lanes you serve.
 EXPECTATIONS:
 
 To maintain current volume and lane assignments, we require:
+
   1. {{expectation_1}}
   2. {{expectation_2}}
   3. {{expectation_3}}
@@ -1065,6 +1129,7 @@ business days of this notice.
 CONSEQUENCES:
 
 If performance does not improve to target levels within {{improvement_period}}:
+
   - {{consequence_1}}
   - {{consequence_2}}
   - {{consequence_3}}
@@ -1087,14 +1152,17 @@ CC: {{internal_cc_list}}
 ## 14. Customer Apology with Resolution
 
 ### When to Use
+
 - A significant exception has been fully resolved and the customer has received their freight, replacement, or credit.
 - The exception was severe enough to warrant a formal acknowledgment beyond the operational updates already sent.
 - You want to reinforce the relationship and demonstrate that systemic improvements are being made — not just a one-time fix.
 
 ### Tone Guidance
+
 Genuine and specific. A good apology names the specific impact, describes what was done, and commits to specific prevention steps. It does not grovel or over-apologize — the customer is a business partner, not a victim. It should feel like it was written by a senior professional who understands their business, not a customer service script. End on a forward-looking note.
 
 ### What NOT to Say
+
 - Do not use "we apologize for any inconvenience" — name the actual impact. "I know the two-day delay forced your team to reschedule the retail reset" is ten times more effective.
 - Do not blame the carrier or any third party. You own the customer relationship.
 - Do not make promises you cannot keep. "This will never happen again" is not credible. "Here are the three specific steps we are implementing" is.
@@ -1120,6 +1188,7 @@ On {{exception_date}}, {{exception_summary_one_sentence}}. This resulted in
 {{specific_customer_impact}}.
 
 WHAT WE DID:
+
   - {{resolution_action_1}}
   - {{resolution_action_2}}
   - {{resolution_action_3}}
@@ -1166,6 +1235,7 @@ Regards,
 **Legal Disclaimers:** The claims filing cover letter references the Carmack Amendment (49 U.S.C. § 14706), which applies to interstate motor carrier shipments. For brokered freight, international shipments, or intrastate moves, verify the applicable legal framework before sending. When in doubt, route through legal review.
 
 **Timing:**
+
 - Initial carrier notification: within 1 hour of exception discovery.
 - Customer proactive update: within 2 hours of confirmed impact, or before the customer's next business-day start — whichever comes first.
 - Escalation to account manager: after 4 hours without response (2 hours for urgent).
@@ -1176,6 +1246,7 @@ Regards,
 - Customer apology: 1–2 business days after resolution is confirmed.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

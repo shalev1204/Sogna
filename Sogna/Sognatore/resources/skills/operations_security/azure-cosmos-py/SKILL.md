@@ -8,7 +8,6 @@ id: skill-azure-cosmos-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Cosmos DB SDK for Python
 
 Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database.
@@ -52,16 +51,20 @@ client = CosmosClient(url=endpoint, credential=credential)
 ### Setup Database and Container
 
 ```python
+
 # Get or create database
+
 database = client.create_database_if_not_exists(id="mydb")
 
 # Get or create container with partition key
+
 container = database.create_container_if_not_exists(
     id="mycontainer",
     partition_key=PartitionKey(path="/category")
 )
 
 # Get existing
+
 database = client.get_database_client("mydb")
 container = database.get_container_client("mycontainer")
 ```
@@ -84,7 +87,9 @@ print(f"Created: {created['id']}")
 ### Read Item
 
 ```python
+
 # Read requires id AND partition key
+
 item = container.read_item(
     item="item-001",
     partition_key="electronics"
@@ -105,7 +110,9 @@ updated = container.replace_item(item=item["id"], body=item)
 ### Upsert Item
 
 ```python
+
 # Create if not exists, replace if exists
+
 item = {
     "id": "item-002",
     "category": "electronics",
@@ -130,7 +137,9 @@ container.delete_item(
 ### Basic Query
 
 ```python
+
 # Query within a partition (efficient)
+
 query = "SELECT * FROM c WHERE c.price < @max_price"
 items = container.query_items(
     query=query,
@@ -145,7 +154,9 @@ for item in items:
 ### Cross-Partition Query
 
 ```python
+
 # Cross-partition (more expensive, use sparingly)
+
 query = "SELECT * FROM c WHERE c.price < @max_price"
 items = container.query_items(
     query=query,
@@ -171,9 +182,13 @@ items = container.query_items(
 ### Read All Items
 
 ```python
+
 # Read all in a partition
+
 items = container.read_all_items()  # Cross-partition
+
 # Or with partition key
+
 items = container.query_items(
     query="SELECT * FROM c",
     partition_key="electronics"
@@ -188,12 +203,14 @@ items = container.query_items(
 from azure.cosmos import PartitionKey
 
 # Single partition key
+
 container = database.create_container_if_not_exists(
     id="orders",
     partition_key=PartitionKey(path="/customer_id")
 )
 
 # Hierarchical partition key (preview)
+
 container = database.create_container_if_not_exists(
     id="events",
     partition_key=PartitionKey(path=["/tenant_id", "/user_id"])
@@ -203,7 +220,9 @@ container = database.create_container_if_not_exists(
 ## Throughput
 
 ```python
+
 # Create container with provisioned throughput
+
 container = database.create_container_if_not_exists(
     id="mycontainer",
     partition_key=PartitionKey(path="/pk"),
@@ -211,10 +230,12 @@ container = database.create_container_if_not_exists(
 )
 
 # Read current throughput
+
 offer = container.read_offer()
 print(f"Throughput: {offer.offer_throughput} RU/s")
 
 # Update throughput
+
 container.replace_throughput(throughput=1000)
 ```
 
@@ -283,14 +304,17 @@ except CosmosHttpResponseError as e:
 | scripts/setup_cosmos_container.py | CLI tool for creating containers with partitioning, throughput, and indexing |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

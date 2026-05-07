@@ -30,6 +30,7 @@ Development <- QA <- Deployment <- Business Ops <- Growth Loop
 **Purpose:** Initialize Sognatore environment
 
 ### Actions:
+
 1. Create `.sognatore/` directory structure
 2. Initialize orchestrator state in `.sognatore/state/orchestrator.json`
 3. Validate PRD exists and is readable
@@ -37,6 +38,7 @@ Development <- QA <- Deployment <- Business Ops <- Growth Loop
 5. Create CONTINUITY.md
 
 ### Directory Structure Created:
+
 ```
 .sognatore/
 +-- CONTINUITY.md
@@ -61,6 +63,7 @@ Development <- QA <- Deployment <- Business Ops <- Growth Loop
 **Purpose:** Understand requirements and market context
 
 ### Actions:
+
 1. Parse PRD, extract requirements
 2. Spawn `biz-analytics` agent for competitive research
 3. Web search competitors, extract features, reviews
@@ -68,6 +71,7 @@ Development <- QA <- Deployment <- Business Ops <- Growth Loop
 5. Generate task backlog with priorities and dependencies
 
 ### Output:
+
 - Requirements document
 - Competitive analysis
 - Initial task backlog in `.sognatore/queue/pending.json`
@@ -81,6 +85,7 @@ Development <- QA <- Deployment <- Business Ops <- Growth Loop
 ### SPEC-FIRST WORKFLOW
 
 **Step 1: Extract API Requirements from PRD**
+
 - Parse PRD for user stories and functionality
 - Map to REST/GraphQL operations
 - Document data models and relationships
@@ -129,32 +134,39 @@ swagger-cli validate .sognatore/specs/openapi.yaml
 
 **Step 4: Generate Artifacts from Spec**
 ```bash
+
 # TypeScript types
+
 npx openapi-typescript .sognatore/specs/openapi.yaml --output src/types/api.ts
 
 # Client SDK
+
 npx openapi-generator-cli generate \
   -i .sognatore/specs/openapi.yaml \
   -g typescript-axios \
   -o src/clients/api
 
 # Server stubs
+
 npx openapi-generator-cli generate \
   -i .sognatore/specs/openapi.yaml \
   -g nodejs-express-server \
   -o backend/generated
 
 # Documentation
+
 npx redoc-cli bundle .sognatore/specs/openapi.yaml -o docs/api.html
 ```
 
 **Step 5: Select Tech Stack**
+
 - Spawn `eng-backend` + `eng-frontend` architects
 - Both agents review spec and propose stack
 - Consensus required (both must agree)
 - Self-reflection checkpoint with evidence
 
 **Step 6: Create Project Scaffolding**
+
 - Initialize project with tech stack
 - Install dependencies
 - Configure linters
@@ -167,6 +179,7 @@ npx redoc-cli bundle .sognatore/specs/openapi.yaml -o docs/api.html
 **Purpose:** Provision cloud resources and CI/CD
 
 ### Actions:
+
 1. Spawn `ops-devops` agent
 2. Provision cloud resources (see `references/deployment.md`)
 3. Set up CI/CD pipelines
@@ -174,26 +187,33 @@ npx redoc-cli bundle .sognatore/specs/openapi.yaml -o docs/api.html
 5. Create staging and production environments
 
 ### CI/CD Pipeline:
+
 ```yaml
 name: CI/CD Pipeline
 risk: unknown
 on: [push, pull_request]
 jobs:
   test:
+
     - Lint
     - Type check
     - Unit tests
     - Contract tests
     - Security scan
+
   deploy-staging:
     needs: test
+
     - Deploy to staging
     - Smoke tests
+
   deploy-production:
     needs: deploy-staging
+
     - Blue-green deploy
     - Health checks
     - Auto-rollback on errors
+
 ```
 
 ---
@@ -205,6 +225,7 @@ jobs:
 ### Workflow Per Task:
 
 ```
+
 1. Dispatch implementation subagent (Task tool, model: sonnet)
 2. Subagent implements with TDD, commits, reports back
 3. Dispatch 3 reviewers IN PARALLEL (single message, 3 Task calls):
@@ -219,9 +240,11 @@ jobs:
 6. Add TODO comments for Low issues
 7. Add FIXME comments for Cosmetic issues
 8. Mark task complete with git checkpoint
+
 ```
 
 ### Implementation Rules:
+
 - Agents implement ONLY what's in the spec
 - Must validate against openapi.yaml schema
 - Must return responses matching spec
@@ -238,9 +261,12 @@ jobs:
 **UNIT Phase:**
 ```bash
 npm run test:unit
+
 # or
+
 pytest tests/unit/
 ```
+
 - Coverage: >80% required
 - All tests must pass
 
@@ -248,6 +274,7 @@ pytest tests/unit/
 ```bash
 npm run test:integration
 ```
+
 - Test API endpoints against actual database
 - Test external service integrations
 - Verify data flows end-to-end
@@ -255,9 +282,12 @@ npm run test:integration
 **E2E Phase:**
 ```bash
 npx playwright test
+
 # or
+
 npx cypress run
 ```
+
 - Test complete user flows
 - Cross-browser testing
 - Mobile responsive testing
@@ -266,6 +296,7 @@ npx cypress run
 ```bash
 npm run test:contract
 ```
+
 - Validate implementation matches OpenAPI spec
 - Test request/response schemas
 - Breaking change detection
@@ -276,6 +307,7 @@ npm audit
 npx snyk test
 semgrep --config=auto .
 ```
+
 - OWASP Top 10 checks
 - Dependency vulnerabilities
 - Static analysis
@@ -285,6 +317,7 @@ semgrep --config=auto .
 npx k6 run tests/load.js
 npx lighthouse http://localhost:3000
 ```
+
 - Load testing: 100 concurrent users for 1 minute
 - Stress testing: 500 concurrent users for 30 seconds
 - P95 response time < 500ms required
@@ -293,16 +326,19 @@ npx lighthouse http://localhost:3000
 ```bash
 npx axe http://localhost:3000
 ```
+
 - WCAG 2.1 AA compliance
 - Alt text, ARIA labels, color contrast
 - Keyboard navigation, focus indicators
 
 **REGRESSION Phase:**
+
 - Compare behavior against previous version
 - Verify no features broken by recent changes
 - Test backward compatibility of APIs
 
 **UAT Phase:**
+
 - Create acceptance tests from PRD
 - Walk through complete user journeys
 - Verify business logic matches PRD
@@ -315,6 +351,7 @@ npx axe http://localhost:3000
 **Purpose:** Release to production
 
 ### Actions:
+
 1. Spawn `ops-release` agent
 2. Generate semantic version, changelog
 3. Create release branch, tag
@@ -326,18 +363,22 @@ npx axe http://localhost:3000
 
 **Blue-Green:**
 ```
+
 1. Deploy new version to "green" environment
 2. Run smoke tests
 3. Switch traffic from "blue" to "green"
 4. Keep "blue" as rollback target
+
 ```
 
 **Canary:**
 ```
+
 1. Deploy to 5% of traffic
 2. Monitor error rates
 3. Gradually increase to 25%, 50%, 100%
 4. Rollback if errors exceed threshold
+
 ```
 
 ---
@@ -347,6 +388,7 @@ npx axe http://localhost:3000
 **Purpose:** Non-technical business setup
 
 ### Actions:
+
 1. `biz-marketing`: Create landing page, SEO, content
 2. `biz-sales`: Set up CRM, outreach templates
 3. `biz-finance`: Configure billing (Stripe), invoicing
@@ -360,6 +402,7 @@ npx axe http://localhost:3000
 **Purpose:** Continuous improvement
 
 ### Cycle:
+
 ```
 MONITOR -> ANALYZE -> OPTIMIZE -> DEPLOY -> MONITOR
     |
@@ -371,6 +414,7 @@ Incidents -> RCA -> Prevention -> Deploy fix
 ```
 
 ### Never "Done":
+
 - Run performance optimizations
 - Add missing test coverage
 - Improve documentation
@@ -384,6 +428,7 @@ Incidents -> RCA -> Prevention -> Deploy fix
 ## Final Review (Before Any Deployment)
 
 ```
+
 1. Dispatch 3 reviewers reviewing ENTIRE implementation:
    - code-reviewer: Full codebase quality
    - business-logic-reviewer: All requirements met
@@ -394,6 +439,7 @@ Incidents -> RCA -> Prevention -> Deploy fix
 4. Re-run all 3 reviewers until all PASS
 5. Generate final report in .sognatore/artifacts/reports/final-review.md
 6. Proceed to deployment only after all PASS
+
 ```
 
 ---
@@ -418,6 +464,7 @@ Incidents -> RCA -> Prevention -> Deploy fix
 | Legal Review | biz-legal | Compliant |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

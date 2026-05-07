@@ -83,24 +83,28 @@ Descreva cenarios com vida:
 ## Terminologia Fotografica para Prompts
 
 ### Iluminacao
+
 - Golden hour, blue hour, overcast diffused
 - Window light, mixed indoor lighting
 - Backlit with lens flare
 - Open shade, dappled forest light
 
 ### Lentes e Camera
+
 - 85mm portrait lens, 35mm wide angle
 - f/1.8 shallow depth of field
 - Smartphone camera, iPhone quality
 - Natural bokeh, creamy background
 
 ### Composicao
+
 - Rule of thirds, off-center subject
 - Leading lines, natural framing
 - Negative space, breathing room
 - Layered depth: foreground/midground/background
 
 ### Textura e Detalhe
+
 - Visible skin pores and natural blemishes
 - Fabric texture, material quality
 - Environmental texture: wood grain, concrete, brick
@@ -109,11 +113,13 @@ Descreva cenarios com vida:
 ## Niveis de Complexidade
 
 ### Prompt Simples (Bom)
+
 ```
 Mulher jovem tomando cafe em cafeteria, luz natural da janela
 ```
 
 ### Prompt Intermediario (Melhor)
+
 ```
 Young woman sitting by a large window in a cozy coffee shop, holding a
 warm latte, morning sunlight creating soft shadows, genuine relaxed smile,
@@ -121,6 +127,7 @@ wearing a casual sweater, taken with smartphone
 ```
 
 ### Prompt Avancado (Excelente)
+
 ```
 A medium close-up photograph of a young woman in her late 20s sitting at
 a wooden table next to a large cafe window. She is holding a ceramic latte
@@ -148,25 +155,32 @@ and completely unposed — like a friend snapped this photo across the table.
 ## Features Avancadas
 
 ### Multi-Turn (Gemini)
+
 Use chat para iterar:
+
 1. Gere a imagem base
 2. "Move the coffee cup to the left"
 3. "Make the lighting warmer"
 4. "Add a small plant in the background"
 
 ### Reference Images (Gemini Pro)
+
 Envie ate 14 imagens de referencia:
+
 - 6 para objetos (alta fidelidade)
 - 5 para pessoas (consistencia de personagem)
 
 ### Thinking Mode (Gemini Pro)
+
 O modelo "pensa" antes de gerar — cria composicoes intermediarias
 para refinar o resultado final. Ideal para cenas complexas.
 
 ### Search Grounding (Gemini Pro)
+
 Gera imagens baseadas em informacoes em tempo real da web.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

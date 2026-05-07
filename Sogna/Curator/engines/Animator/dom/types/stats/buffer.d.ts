@@ -12,3 +12,4 @@ export type ActiveStatsBuffer = {
     }) => void;
 };
 export declare const StatsBuffer: InactiveStatsBuffer | ActiveStatsBuffer;
+export declare const statsBuffer: InactiveStatsBuffer;

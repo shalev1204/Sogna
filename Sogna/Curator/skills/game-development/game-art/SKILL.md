@@ -6,7 +6,6 @@ id: skill-game-art
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # Game Art Principles
 
 > Visual design thinking for games - style selection, asset pipelines, and art direction.
@@ -137,6 +136,7 @@ What feeling should the game evoke?
 ### Consistency Rule
 
 Choose a base unit and stick to it:
+
 - Pixel art: Work at 1x, scale up (never down)
 - HD art: Define DPI, maintain ratio
 - 3D: 1 unit = 1 meter (industry standard)

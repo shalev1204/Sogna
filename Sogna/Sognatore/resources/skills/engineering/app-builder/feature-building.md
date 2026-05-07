@@ -31,6 +31,7 @@ Analysis:
 ## Iterative Enhancement Process
 
 ```
+
 1. Analyze existing project
 2. Create change plan
 3. Present plan to user
@@ -38,6 +39,7 @@ Analysis:
 5. Apply changes
 6. Test
 7. Show preview
+
 ```
 
 ## Error Handling
@@ -52,14 +54,17 @@ Analysis:
 ## Recovery Strategy
 
 ```
+
 1. Detect error
 2. Try automatic fix
 3. If failed, report to user
 4. Suggest alternative
 5. Rollback if necessary
+
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

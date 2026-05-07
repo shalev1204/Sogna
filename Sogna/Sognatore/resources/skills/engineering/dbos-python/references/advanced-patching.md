@@ -17,13 +17,16 @@ Use `DBOS.patch()` to safely deploy breaking workflow changes. Breaking changes 
 **Incorrect (breaking change without patch):**
 
 ```python
+
 # Original
+
 @DBOS.workflow()
 def workflow():
     foo()
     bar()
 
 # Updated - breaks in-progress workflows!
+
 @DBOS.workflow()
 def workflow():
     baz()  # Replaced foo() - checkpoints don't match
@@ -33,7 +36,9 @@ def workflow():
 **Correct (using patch):**
 
 ```python
+
 # Enable patching in config
+
 config: DBOSConfig = {
     "name": "my-app",
     "enable_patching": True,
@@ -52,7 +57,9 @@ def workflow():
 Deprecating patches after all old workflows complete:
 
 ```python
+
 # Step 1: Deprecate (runs all workflows, stops inserting marker)
+
 @DBOS.workflow()
 def workflow():
     DBOS.deprecate_patch("use-baz")
@@ -60,6 +67,7 @@ def workflow():
     bar()
 
 # Step 2: Remove entirely (after all deprecated workflows complete)
+
 @DBOS.workflow()
 def workflow():
     baz()
@@ -67,12 +75,14 @@ def workflow():
 ```
 
 `DBOS.patch(name)` returns:
+
 - `True` for new workflows (started after patch deployed)
 - `False` for old workflows (started before patch deployed)
 
 Reference: [Patching](https://docs.dbos.dev/python/tutorials/upgrading-workflows#patching)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

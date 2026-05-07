@@ -55,19 +55,24 @@ trackio.alert(
 ```
 
 Environment variables:
+
 - `TRACKIO_WEBHOOK_URL` — global webhook URL
 - `TRACKIO_WEBHOOK_MIN_LEVEL` — minimum level for webhook delivery (`info`, `warn`, `error`)
 
 ## Retrieving Alerts (CLI)
 
 ```bash
+
 # List all alerts for a project
+
 trackio list alerts --project my-project --json
 
 # Filter by run or level
+
 trackio list alerts --project my-project --run my-run --level error --json
 
 # Poll for new alerts since a timestamp (efficient for agents)
+
 trackio list alerts --project my-project --json --since "2025-06-01T12:00:00"
 ```
 
@@ -141,7 +146,9 @@ Alerts are automatically printed to the terminal when fired. If the agent is wat
 For background or detached runs, poll for alerts via CLI:
 
 ```bash
+
 # Poll for alerts (run periodically)
+
 trackio list alerts --project hyperparam-sweep --json --since "2025-06-01T00:00:00"
 ```
 
@@ -150,16 +157,20 @@ trackio list alerts --project hyperparam-sweep --json --since "2025-06-01T00:00:
 When an alert fires, use `trackio get snapshot` to see all metrics at that point:
 
 ```bash
+
 # Alert fired at step 200 — get all metrics in a ±5 step window
+
 trackio get snapshot --project hyperparam-sweep --run run-1 --around 200 --window 5 --json
 
 # Or inspect a single metric around the alert's timestamp
+
 trackio get metric --project hyperparam-sweep --run run-1 --metric loss --around 200 --window 10 --json
 ```
 
 ### 4. React and Iterate
 
 Based on alerts:
+
 - **ERROR alerts** → stop the run, adjust hyperparameters, relaunch
 - **WARN alerts** → inspect metrics with `trackio get snapshot ...`, decide whether to intervene
 - **INFO alerts** → note progress, continue monitoring
@@ -167,11 +178,14 @@ Based on alerts:
 ### 5. Compare Across Runs
 
 ```bash
+
 # Check metrics from previous runs
+
 trackio get run --project hyperparam-sweep --run run-1 --json
 trackio get metric --project hyperparam-sweep --run run-1 --metric loss --json
 
 # Launch new run with adjusted config
+
 python train.py --lr 5e-5
 ```
 
@@ -203,6 +217,7 @@ trainer = SFTTrainer(
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -53,6 +53,7 @@ Reference data for planning and evaluating lead magnet performance.
 ## Lead Quality Indicators
 
 ### Signals of High-Quality Leads
+
 - Open first 3 emails at 40%+ rate
 - Click through to content or product pages
 - Return to site within 30 days
@@ -60,6 +61,7 @@ Reference data for planning and evaluating lead magnet performance.
 - Progress to trial, demo, or purchase within 90 days
 
 ### Signals of Low-Quality Leads
+
 - Unsubscribe within first 3 emails
 - Never open beyond delivery email
 - Use disposable email addresses
@@ -136,6 +138,7 @@ Reference data for planning and evaluating lead magnet performance.
 **Note**: These benchmarks are general guidelines. Your actual results depend on audience, niche, traffic volume, and offer quality. Start measuring from day one and build your own benchmarks.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

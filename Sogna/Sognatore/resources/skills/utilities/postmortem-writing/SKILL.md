@@ -8,7 +8,6 @@ id: skill-postmortem-writing
 owner: [[orchestrator]]
 ---
 
-
 # Postmortem Writing
 
 Comprehensive guide to writing effective, blameless postmortems that drive organizational learning and prevent incident recurrence.
@@ -58,6 +57,7 @@ Comprehensive guide to writing effective, blameless postmortems that drive organ
 ## Quick Start
 
 ### Postmortem Timeline
+
 ```
 Day 0: Incident occurs
 Day 1-2: Draft postmortem document
@@ -72,6 +72,7 @@ Quarterly: Review patterns across incidents
 ### Template 1: Standard Postmortem
 
 ```markdown
+
 # Postmortem: [Incident Title]
 
 **Date**: 2024-01-15
@@ -85,6 +86,7 @@ Quarterly: Review patterns across incidents
 On January 15, 2024, the payment processing service experienced a 47-minute outage affecting approximately 12,000 customers. The root cause was a database connection pool exhaustion triggered by a configuration change in deployment v2.3.4. The incident was resolved by rolling back to v2.3.3 and increasing connection pool limits.
 
 **Impact**:
+
 - 12,000 customers unable to complete purchases
 - Estimated revenue loss: $45,000
 - 847 support tickets created
@@ -141,26 +143,31 @@ The v2.3.4 deployment included a change to the database query pattern that inadv
 ## Detection
 
 ### What Worked
+
 - Error rate alert fired within 8 minutes of deployment
 - Grafana dashboard clearly showed connection spike
 - On-call response was swift (2 minute acknowledgment)
 
 ### What Didn't Work
+
 - Database connection metric alert threshold too high
 - No deployment-correlated alerting
 - Canary deployment would have caught this earlier
 
 ### Detection Gap
+
 The deployment completed at 14:23, but the first alert didn't fire until 14:31 (8 minutes). A deployment-aware alert could have detected the issue faster.
 
 ## Response
 
 ### What Worked
+
 - On-call engineer quickly identified database as the issue
 - Rollback decision was made decisively
 - Clear communication in incident channel
 
 ### What Could Be Improved
+
 - Took 10 minutes to correlate issue with recent deployment
 - Had to manually check deployment history
 - Rollback took 12 minutes (could be faster)
@@ -168,17 +175,20 @@ The deployment completed at 14:23, but the first alert didn't fire until 14:31 (
 ## Impact
 
 ### Customer Impact
+
 - 12,000 unique customers affected
 - Average impact duration: 35 minutes
 - 847 support tickets (23% of affected users)
 - Customer satisfaction score dropped 12 points
 
 ### Business Impact
+
 - Estimated revenue loss: $45,000
 - Support cost: ~$2,500 (agent time)
 - Engineering time: ~8 person-hours
 
 ### Technical Impact
+
 - Database primary experienced elevated load
 - Some replica lag during incident
 - No permanent damage to systems
@@ -186,18 +196,21 @@ The deployment completed at 14:23, but the first alert didn't fire until 14:31 (
 ## Lessons Learned
 
 ### What Went Well
+
 1. Alerting detected the issue before customer reports
 2. Team collaborated effectively under pressure
 3. Rollback procedure worked smoothly
 4. Communication was clear and timely
 
 ### What Went Wrong
+
 1. Code review missed critical change
 2. Test coverage gap for connection pooling
 3. Staging environment doesn't reflect production traffic
 4. Alert thresholds were not tuned properly
 
 ### Where We Got Lucky
+
 1. Incident occurred during business hours with full team available
 2. Database handled the load without failing completely
 3. No other incidents occurred simultaneously
@@ -218,30 +231,38 @@ The deployment completed at 14:23, but the first alert didn't fire until 14:31 (
 ### Supporting Data
 
 #### Error Rate Graph
+
 [Link to Grafana dashboard snapshot]
 
 #### Database Connection Graph
+
 [Link to metrics]
 
 ### Related Incidents
+
 - 2023-11-02: Similar connection issue in User Service (POSTMORTEM-42)
 
 ### References
+
 - Connection Pool Best Practices
 - Deployment Runbook
+
 ```
 
 ### Template 2: 5 Whys Analysis
 
 ```markdown
+
 # 5 Whys Analysis: [Incident]
 
 ## Problem Statement
+
 Payment service experienced 47-minute outage due to database connection exhaustion.
 
 ## Analysis
 
 ### Why #1: Why did the service fail?
+
 **Answer**: Database connections were exhausted, causing all new requests to fail.
 
 **Evidence**: Metrics showed connection count at 100/100 (max), with 500+ pending requests.
@@ -249,6 +270,7 @@ Payment service experienced 47-minute outage due to database connection exhausti
 ---
 
 ### Why #2: Why were database connections exhausted?
+
 **Answer**: Each incoming request opened a new database connection instead of using the connection pool.
 
 **Evidence**: Code diff shows direct `DriverManager.getConnection()` instead of pooled `DataSource`.
@@ -256,6 +278,7 @@ Payment service experienced 47-minute outage due to database connection exhausti
 ---
 
 ### Why #3: Why did the code bypass the connection pool?
+
 **Answer**: A developer refactored the repository class and inadvertently changed the connection acquisition method.
 
 **Evidence**: PR #1234 shows the change, made while fixing a different bug.
@@ -263,6 +286,7 @@ Payment service experienced 47-minute outage due to database connection exhausti
 ---
 
 ### Why #4: Why wasn't this caught in code review?
+
 **Answer**: The reviewer focused on the functional change (the bug fix) and didn't notice the infrastructure change.
 
 **Evidence**: Review comments only discuss business logic.
@@ -270,6 +294,7 @@ Payment service experienced 47-minute outage due to database connection exhausti
 ---
 
 ### Why #5: Why isn't there a safety net for this type of change?
+
 **Answer**: We lack automated tests that verify connection pool behavior and lack documentation about our connection patterns.
 
 **Evidence**: Test suite has no tests for connection handling; wiki has no article on database connections.
@@ -293,14 +318,17 @@ Payment service experienced 47-minute outage due to database connection exhausti
 ### Template 3: Quick Postmortem (Minor Incidents)
 
 ```markdown
+
 # Quick Postmortem: [Brief Title]
 
 **Date**: 2024-01-15 | **Duration**: 12 min | **Severity**: SEV3
 
 ## What Happened
+
 API latency spiked to 5s due to cache miss storm after cache flush.
 
 ## Timeline
+
 - 10:00 - Cache flush initiated for config update
 - 10:02 - Latency alerts fire
 - 10:05 - Identified as cache miss storm
@@ -308,13 +336,16 @@ API latency spiked to 5s due to cache miss storm after cache flush.
 - 10:12 - Latency normalized
 
 ## Root Cause
+
 Full cache flush for minor config update caused thundering herd.
 
 ## Fix
+
 - Immediate: Enabled cache warming
 - Long-term: Implement partial cache invalidation (ENG-999)
 
 ## Lessons
+
 Don't full-flush cache in production; use targeted invalidation.
 ```
 
@@ -323,40 +354,48 @@ Don't full-flush cache in production; use targeted invalidation.
 ### Running a Postmortem Meeting
 
 ```markdown
+
 ## Meeting Structure (60 minutes)
 
 ### 1. Opening (5 min)
+
 - Remind everyone of blameless culture
 - "We're here to learn, not to blame"
 - Review meeting norms
 
 ### 2. Timeline Review (15 min)
+
 - Walk through events chronologically
 - Ask clarifying questions
 - Identify gaps in timeline
 
 ### 3. Analysis Discussion (20 min)
+
 - What failed?
 - Why did it fail?
 - What conditions allowed this?
 - What would have prevented it?
 
 ### 4. Action Items (15 min)
+
 - Brainstorm improvements
 - Prioritize by impact and effort
 - Assign owners and due dates
 
 ### 5. Closing (5 min)
+
 - Summarize key learnings
 - Confirm action item owners
 - Schedule follow-up if needed
 
 ## Facilitation Tips
+
 - Keep discussion on track
 - Redirect blame to systems
 - Encourage quiet participants
 - Document dissenting views
 - Time-box tangents
+
 ```
 
 ## Anti-Patterns to Avoid
@@ -372,6 +411,7 @@ Don't full-flush cache in production; use targeted invalidation.
 ## Best Practices
 
 ### Do's
+
 - **Start immediately** - Memory fades fast
 - **Be specific** - Exact times, exact errors
 - **Include graphs** - Visual evidence
@@ -379,6 +419,7 @@ Don't full-flush cache in production; use targeted invalidation.
 - **Share widely** - Organizational learning
 
 ### Don'ts
+
 - **Don't name and shame** - Ever
 - **Don't skip small incidents** - They reveal patterns
 - **Don't make it a blame doc** - That kills learning
@@ -392,11 +433,13 @@ Don't full-flush cache in production; use targeted invalidation.
 - [PagerDuty Postmortem Guide](https://postmortems.pagerduty.com/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

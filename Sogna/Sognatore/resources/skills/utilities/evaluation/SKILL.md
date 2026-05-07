@@ -8,18 +8,20 @@ id: skill-evaluation
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use This Skill
 
 Build evaluation frameworks for agent systems
 
 Use this skill when working with build evaluation frameworks for agent systems.
+
 # Evaluation Methods for Agent Systems
 
 Evaluation of agent systems requires different approaches than traditional software or even standard language model applications. Agents make dynamic decisions, are non-deterministic between runs, and often lack single correct answers. Effective evaluation must account for these characteristics while providing actionable feedback. A robust evaluation framework enables continuous improvement, catches regressions, and validates that context engineering choices achieve intended effects.
 
 ## When to Use
+
 Activate this skill when:
+
 - Testing agent performance systematically
 - Validating context engineering choices
 - Measuring improvements over time
@@ -44,6 +46,7 @@ Research on the BrowseComp evaluation (which tests browsing agents' ability to l
 | Model choice | ~5% | Better models multiply efficiency |
 
 This finding has significant implications for evaluation design:
+
 - **Token budgets matter**: Evaluate agents with realistic token budgets, not unlimited resources
 - **Model upgrades beat token increases**: Upgrading to Claude Sonnet 4.5 or GPT-5.2 provides larger gains than doubling token budgets on previous versions
 - **Multi-agent validation**: The finding validates architectures that distribute work across agents with separate context windows
@@ -219,14 +222,17 @@ This skill connects to all other skills as a cross-cutting concern:
 ## References
 
 Internal reference:
+
 - Metrics Reference - Detailed evaluation metrics and implementation
 
 ## References
 
 Internal skills:
+
 - All other skills connect to evaluation for quality measurement
 
 External resources:
+
 - LLM evaluation benchmarks
 - Agent evaluation research papers
 - Production monitoring practices
@@ -241,11 +247,13 @@ External resources:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

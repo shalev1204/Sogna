@@ -12,6 +12,7 @@ Banco: `data/sentinel.db` (SQLite, WAL mode)
 ## Tabelas
 
 ### audit_runs
+
 Cada execucao de auditoria.
 
 | Coluna | Tipo | Descricao |
@@ -26,6 +27,7 @@ Cada execucao de auditoria.
 | status | TEXT | running / completed / failed |
 
 ### skill_snapshots
+
 Estado de cada skill em cada auditoria.
 
 | Coluna | Tipo | Descricao |
@@ -47,6 +49,7 @@ Estado de cada skill em cada auditoria.
 | raw_metrics | TEXT | JSON com metricas detalhadas |
 
 ### findings
+
 Problemas e recomendacoes individuais.
 
 | Coluna | Tipo | Descricao |
@@ -66,6 +69,7 @@ Problemas e recomendacoes individuais.
 | impact | TEXT | low/medium/high |
 
 ### skill_recommendations
+
 Sugestoes de novas skills.
 
 | Coluna | Tipo | Descricao |
@@ -79,6 +83,7 @@ Sugestoes de novas skills.
 | skill_md_draft | TEXT | Rascunho de SKILL.md |
 
 ### score_history
+
 Historico de scores para analise de tendencias.
 
 | Coluna | Tipo | Descricao |
@@ -91,6 +96,7 @@ Historico de scores para analise de tendencias.
 | recorded_at | TEXT | Timestamp |
 
 ### action_log
+
 Auto-governanca do sentinel.
 
 | Coluna | Tipo | Descricao |
@@ -114,6 +120,7 @@ Auto-governanca do sentinel.
 - `idx_action_log_time` - action_log(created_at)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

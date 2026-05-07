@@ -130,15 +130,19 @@ So that {self.rationale.lower()}.
     def to_test_spec(self) -> str:
         """Convert to test specification."""
         return f"""
+
 ## Test Specification: {self.id}
 
 ### Requirement
+
 {self.description}
 
 ### Test Cases
+
 {chr(10).join(f'{i+1}. {tc}' for i, tc in enumerate(self.test_cases))}
 
 ### Acceptance Criteria Verification
+
 {chr(10).join(f'- {ac}' for ac in self.acceptance_criteria)}
 """
 
@@ -579,6 +583,7 @@ class SecurityUserStoryGenerator:
         )
 
         story = f"""
+
 ## {requirement.id}: {requirement.title}
 
 **User Story:**
@@ -594,6 +599,7 @@ So that {template['so_that']}.
 {self._format_acceptance_criteria(requirement.acceptance_criteria)}
 
 **Definition of Done:**
+
 - [ ] Implementation complete
 - [ ] Security tests pass
 - [ ] Code review complete
@@ -604,8 +610,10 @@ So that {template['so_that']}.
 {self._format_test_cases(requirement.test_cases)}
 
 **Traceability:**
+
 - Threats: {', '.join(requirement.threat_refs) or 'N/A'}
 - Compliance: {', '.join(requirement.compliance_refs) or 'N/A'}
+
 """
         return story
 
@@ -624,31 +632,38 @@ So that {template['so_that']}.
         reqs = requirement_set.get_by_domain(domain)
 
         epic = f"""
+
 # Security Epic: {domain.value.replace('_', ' ').title()}
 
 ## Overview
+
 This epic covers all security requirements related to {domain.value.replace('_', ' ')}.
 
 ## Business Value
+
 - Protect against {domain.value.replace('_', ' ')} related threats
 - Meet compliance requirements
 - Reduce security risk
 
 ## Stories in this Epic
+
 {chr(10).join(f'- [{r.id}] {r.title}' for r in reqs)}
 
 ## Acceptance Criteria
+
 - All stories complete
 - Security tests passing
 - Security review approved
 - Compliance requirements met
 
 ## Risk if Not Implemented
+
 - Vulnerability to {domain.value.replace('_', ' ')} attacks
 - Compliance violations
 - Potential data breach
 
 ## Dependencies
+
 {chr(10).join(f'- {d}' for r in reqs for d in r.dependencies) or '- None identified'}
 """
         return epic
@@ -657,6 +672,7 @@ This epic covers all security requirements related to {domain.value.replace('_',
 ## Best Practices
 
 ### Do's
+
 - **Trace to threats** - Every requirement should map to threats
 - **Be specific** - Vague requirements can't be tested
 - **Include acceptance criteria** - Define "done"
@@ -664,6 +680,7 @@ This epic covers all security requirements related to {domain.value.replace('_',
 - **Review regularly** - Requirements evolve with threats
 
 ### Don'ts
+
 - **Don't be generic** - "Be secure" is not a requirement
 - **Don't skip rationale** - Explain why it matters
 - **Don't ignore priorities** - Not all requirements are equal
@@ -677,6 +694,7 @@ This epic covers all security requirements related to {domain.value.replace('_',
 - [Security User Stories](https://www.oreilly.com/library/view/agile-application-security/9781491938836/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

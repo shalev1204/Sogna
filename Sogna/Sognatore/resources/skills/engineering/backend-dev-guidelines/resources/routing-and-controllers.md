@@ -26,11 +26,13 @@ Complete guide to clean route definitions and controller patterns.
 ### The Golden Rule
 
 **Routes should ONLY:**
+
 - ✅ Define route paths
 - ✅ Register middleware
 - ✅ Delegate to controllers
 
 **Routes should NEVER:**
+
 - ❌ Contain business logic
 - ❌ Access database directly
 - ❌ Implement validation logic (use Zod + controller)
@@ -72,6 +74,7 @@ export default router;
 ```
 
 **Key Points:**
+
 - Each route: method, path, middleware chain, controller delegation
 - No try-catch needed (controller handles errors)
 - Clean, readable, maintainable
@@ -84,6 +87,7 @@ export default router;
 ### Why BaseController?
 
 **Benefits:**
+
 - Consistent error handling across all controllers
 - Automatic Sentry integration
 - Standardized response formats
@@ -101,7 +105,9 @@ import { Response } from 'express';
 
 export abstract class BaseController {
     /**
+
      * Handle errors with Sentry integration
+
      */
     protected handleError(
         error: unknown,
@@ -134,7 +140,9 @@ export abstract class BaseController {
     }
 
     /**
+
      * Handle success responses
+
      */
     protected handleSuccess<T>(
         res: Response,
@@ -150,7 +158,9 @@ export abstract class BaseController {
     }
 
     /**
+
      * Performance tracking wrapper
+
      */
     protected async withTransaction<T>(
         name: string,
@@ -164,7 +174,9 @@ export abstract class BaseController {
     }
 
     /**
+
      * Validate required fields
+
      */
     protected validateRequest(
         required: string[],
@@ -193,7 +205,9 @@ export abstract class BaseController {
     }
 
     /**
+
      * Logging helpers
+
      */
     protected logInfo(message: string, context?: Record<string, any>): void {
         Sentry.addBreadcrumb({
@@ -213,7 +227,9 @@ export abstract class BaseController {
     }
 
     /**
+
      * Add Sentry breadcrumb
+
      */
     protected addBreadcrumb(
         message: string,
@@ -224,7 +240,9 @@ export abstract class BaseController {
     }
 
     /**
+
      * Capture custom metric
+
      */
     protected captureMetric(name: string, value: number, unit: string): void {
         Sentry.metrics.gauge(name, value, { unit });
@@ -301,6 +319,7 @@ export class UserController extends BaseController {
 ```
 
 **Benefits:**
+
 - Consistent error handling
 - Automatic Sentry integration
 - Performance tracking
@@ -343,6 +362,7 @@ export default router;
 ```
 
 **What Makes This Excellent:**
+
 - Zero business logic in routes
 - Clear middleware chain
 - Consistent pattern
@@ -377,12 +397,14 @@ router.post('/',
 ```
 
 **What Makes This Good:**
+
 - Zod validation
 - Delegates to service
 - Proper HTTP status codes
 - Error handling
 
 **Could Be Better:**
+
 - Move validation to controller
 - Use BaseController
 
@@ -447,6 +469,7 @@ router.post('/:formID/submit', async (req: Request, res: Response) => {
 ```
 
 **Why This Is Terrible:**
+
 - 200+ lines of business logic
 - Hard to test (requires HTTP mocking)
 - Hard to reuse (tied to route)
@@ -549,6 +572,7 @@ router.post('/',
 ```
 
 **Result:**
+
 - Route: 8 lines (was 200+)
 - Controller: 25 lines (request handling)
 - Service: 50 lines (business logic)
@@ -662,6 +686,7 @@ this.handleError(new ForbiddenError('No permission'), res, 'operation', 403);
 ### Identify Routes Needing Refactoring
 
 **Red Flags:**
+
 - Route file > 100 lines
 - Multiple try-catch blocks in one route
 - Direct database access (Prisma calls)
@@ -670,10 +695,13 @@ this.handleError(new ForbiddenError('No permission'), res, 'operation', 403);
 
 **Check your routes:**
 ```bash
+
 # Find large route files
+
 wc -l form/src/routes/*.ts | sort -n
 
 # Find routes with Prisma usage
+
 grep -r "PrismaService" form/src/routes/
 ```
 
@@ -758,11 +786,13 @@ export class ActionRepository {
 ---
 
 **Related Files:**
+
 - SKILL.md - Main guide
 - [services-and-repositories.md](services-and-repositories.md) - Service layer details
 - [complete-examples.md](complete-examples.md) - Full refactoring examples
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

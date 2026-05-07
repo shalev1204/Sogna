@@ -62,6 +62,7 @@ Copy-paste this checklist when performing a principle-based code review with the
 *Use with the skill: @uncle-bob-craft. For naming, functions, and formatting detail, also use @clean-code. Always run the project linter and formatter separately.*
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -10,7 +10,6 @@ id: skill-sympy
 owner: [[orchestrator]]
 ---
 
-
 # SymPy - Symbolic Mathematics in Python
 
 ## Overview
@@ -20,6 +19,7 @@ SymPy is a Python library for symbolic mathematics that enables exact computatio
 ## When to Use This Skill
 
 Use this skill when:
+
 - Solving equations symbolically (algebraic, differential, systems of equations)
 - Performing calculus operations (derivatives, integrals, limits, series)
 - Manipulating and simplifying algebraic expressions
@@ -42,6 +42,7 @@ x, y, z = symbols('x y z')
 expr = x**2 + 2*x + 1
 
 # With assumptions
+
 x = symbols('x', real=True, positive=True)
 n = symbols('n', integer=True)
 ```
@@ -143,13 +144,16 @@ from sympy.physics.mechanics import dynamicsymbols, LagrangesMethod
 from sympy import symbols
 
 # Define system
+
 q = dynamicsymbols('q')
 m, g, l = symbols('m g l')
 
 # Lagrangian (T - V)
+
 L = m*(l*q.diff())**2/2 - m*g*l*(1 - cos(q))
 
 # Apply Lagrange's method
+
 LM = LagrangesMethod(L, [q])
 ```
 
@@ -223,7 +227,9 @@ latex_str = latex(expr)  # Convert to LaTeX for documents
 ```python
 from sympy import symbols
 x, y, z = symbols('x y z')
+
 # Now x, y, z can be used in expressions
+
 ```
 
 ### 2. Use Assumptions for Better Simplification
@@ -239,11 +245,14 @@ Common assumptions: `real`, `positive`, `negative`, `integer`, `rational`, `comp
 
 ```python
 from sympy import Rational, S
+
 # Correct (exact):
+
 expr = Rational(1, 2) * x
 expr = S(1)/2 * x
 
 # Incorrect (floating-point):
+
 expr = 0.5 * x  # Creates approximate value
 ```
 
@@ -259,11 +268,14 @@ result.evalf(50)  # 50 digits of precision
 ### 5. Convert to NumPy for Performance
 
 ```python
+
 # Slow for many evaluations:
+
 for x_val in range(1000):
     result = expr.subs(x, x_val).evalf()
 
 # Fast:
+
 f = lambdify(x, expr, 'numpy')
 results = f(np.arange(1000))
 ```
@@ -304,10 +316,12 @@ from sympy import symbols, solve, simplify
 x = symbols('x')
 
 # Solve equation
+
 equation = x**2 - 5*x + 6
 solutions = solve(equation, x)  # [2, 3]
 
 # Verify solutions
+
 for sol in solutions:
     result = simplify(equation.subs(x, sol))
     assert result == 0
@@ -316,29 +330,37 @@ for sol in solutions:
 ### Pattern 2: Symbolic to Numeric Pipeline
 
 ```python
+
 # 1. Define symbolic problem
+
 x, y = symbols('x y')
 expr = sin(x) + cos(y)
 
 # 2. Manipulate symbolically
+
 simplified = simplify(expr)
 derivative = diff(simplified, x)
 
 # 3. Convert to numerical function
+
 f = lambdify((x, y), derivative, 'numpy')
 
 # 4. Evaluate numerically
+
 results = f(x_data, y_data)
 ```
 
 ### Pattern 3: Document Mathematical Results
 
 ```python
+
 # Compute result symbolically
+
 integral_expr = Integral(x**2, (x, 0, 1))
 result = integral_expr.doit()
 
 # Generate documentation
+
 print(f"LaTeX: {latex(integral_expr)} = {latex(result)}")
 print(f"Pretty: {pretty(integral_expr)} = {pretty(result)}")
 print(f"Numerical: {result.evalf()}")
@@ -385,82 +407,107 @@ from scipy.optimize import fsolve
 from sympy import symbols, lambdify
 
 # Define equation symbolically
+
 x = symbols('x')
 equation = x**3 - 2*x - 5
 
 # Convert to numerical function
+
 f = lambdify(x, equation, 'numpy')
 
 # Solve numerically with initial guess
+
 solution = fsolve(f, 2)
 ```
 
 ## Quick Reference: Most Common Functions
 
 ```python
+
 # Symbols
+
 from sympy import symbols, Symbol
 x, y = symbols('x y')
 
 # Basic operations
+
 from sympy import simplify, expand, factor, collect, cancel
 from sympy import sqrt, exp, log, sin, cos, tan, pi, E, I, oo
 
 # Calculus
+
 from sympy import diff, integrate, limit, series, Derivative, Integral
 
 # Solving
+
 from sympy import solve, solveset, linsolve, nonlinsolve, dsolve
 
 # Matrices
+
 from sympy import Matrix, eye, zeros, ones, diag
 
 # Logic and sets
+
 from sympy import And, Or, Not, Implies, FiniteSet, Interval, Union
 
 # Output
+
 from sympy import latex, pprint, lambdify, init_printing
 
 # Utilities
+
 from sympy import evalf, N, nsimplify
 ```
 
 ## Getting Started Examples
 
 ### Example 1: Solve Quadratic Equation
+
 ```python
 from sympy import symbols, solve, sqrt
 x = symbols('x')
 solution = solve(x**2 - 5*x + 6, x)
+
 # [2, 3]
+
 ```
 
 ### Example 2: Calculate Derivative
+
 ```python
 from sympy import symbols, diff, sin
 x = symbols('x')
 f = sin(x**2)
 df_dx = diff(f, x)
+
 # 2*x*cos(x**2)
+
 ```
 
 ### Example 3: Evaluate Integral
+
 ```python
 from sympy import symbols, integrate, exp
 x = symbols('x')
 integral = integrate(x * exp(-x**2), (x, 0, oo))
+
 # 1/2
+
 ```
 
 ### Example 4: Matrix Eigenvalues
+
 ```python
 from sympy import Matrix
 M = Matrix([[1, 2], [2, 1]])
 eigenvals = M.eigenvals()
+
 # {3: 1, -1: 1}
+
 ```
 
 ### Example 5: Generate Python Function
+
 ```python
 from sympy import symbols, lambdify
 import numpy as np
@@ -468,7 +515,9 @@ x = symbols('x')
 expr = x**2 + 2*x + 1
 f = lambdify(x, expr, 'numpy')
 f(np.array([1, 2, 3]))
+
 # array([ 4,  9, 16])
+
 ```
 
 ## Troubleshooting Common Issues
@@ -502,11 +551,13 @@ f(np.array([1, 2, 3]))
 - Examples: https://github.com/sympy/sympy/tree/master/examples
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

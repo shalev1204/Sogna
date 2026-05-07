@@ -1,4 +1,4 @@
-import type { GroupAnimation } from "../animation/groupanimation.js";
+import type { GroupAnimation } from "../animation/GroupAnimation.js";
 import { AnimationOptions, DOMKeyframesDefinition } from "../animation/types.js";
 import { ViewTransitionOptions, ViewTransitionTarget, ViewTransitionTargetDefinition } from "./types.js";
 import "./types.global.js";

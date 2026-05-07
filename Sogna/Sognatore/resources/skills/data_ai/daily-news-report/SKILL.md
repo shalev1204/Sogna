@@ -8,7 +8,6 @@ id: skill-daily-news-report
 owner: [[orchestrator]]
 ---
 
-
 # Daily News Report v3.0
 
 > **Architecture Upgrade**: Main Agent Orchestration + SubAgent Execution + Browser Scraping + Smart Caching
@@ -67,11 +66,13 @@ This skill uses the following configuration files:
 
 ```yaml
 Steps:
+
   1. Determine date (user argument or current date)
   2. Read sources.json for source configurations
   3. Read cache.json for historical data
   4. Create output directory NewsReport/
   5. Check if a partial report exists for today (append mode)
+
 ```
 
 ### Phase 2: Dispatch SubAgents
@@ -80,6 +81,7 @@ Steps:
 
 ```yaml
 Wave 1 (Parallel):
+
   - Worker A: Tier1 Batch A (HN, HuggingFace Papers)
   - Worker B: Tier1 Batch B (OneUsefulThing, Paul Graham)
 
@@ -87,12 +89,15 @@ Wait for results → Evaluate count
 
 If < 15 high-quality items:
   Wave 2 (Parallel):
+
     - Worker C: Tier2 Batch A (James Clear, FS Blog)
     - Worker D: Tier2 Batch B (HackerNoon, Scott Young)
 
 If still < 20 items:
   Wave 3 (Browser):
+
     - Browser Worker: ProductHunt, Latent Space (Require JS rendering)
+
 ```
 
 ### Phase 3: SubAgent Task Format
@@ -103,16 +108,22 @@ Task format received by each SubAgent:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 task: fetch_and_extract
 sources:
+
   - id: hn
+
     url: https://news.ycombinator.com
     extract: top_10
+
   - id: hf_papers
+
     url: https://huggingface.co/papers
     extract: top_voted
 
 output_schema:
   items:
+
     - source_id: string      # Source Identifier
+
       title: string          # Title
       summary: string        # 2-4 sentence summary
       key_points: string[]   # Max 3 key points
@@ -135,38 +146,46 @@ Main Agent Responsibilities:
 
 ```yaml
 Monitoring:
+
   - Check SubAgent return status (success/partial/failed)
   - Count collected items
   - Record success rate per source
 
 Feedback Loop:
+
   - If a SubAgent fails, decide whether to retry or skip
   - If a source fails persistently, mark as disabled
   - Dynamically adjust source selection for subsequent batches
 
 Decision:
+
   - Items >= 25 AND HighQuality >= 20 → Stop scraping
   - Items < 15 → Continue to next batch
   - All batches done but < 20 → Generate with available content (Quality over Quantity)
+
 ```
 
 ### Phase 5: Evaluation & Filtering
 
 ```yaml
 Deduplication:
+
   - Exact URL match
   - Title similarity (>80% considered duplicate)
   - Check cache.json to avoid history duplicates
 
 Score Calibration:
+
   - Unify scoring standards across SubAgents
   - Adjust weights based on source credibility
   - Bonus points for manually curated high-quality sources
 
 Sorting:
+
   - Descending order by quality_score
   - Sort by source priority if scores are equal
   - Take Top 20
+
 ```
 
 ### Phase 6: Browser Scraping (MCP Chrome DevTools)
@@ -175,6 +194,7 @@ For pages requiring JS rendering, use a headless browser:
 
 ```yaml
 Process:
+
   1. Call mcp__chrome-devtools__new_page to open page
   2. Call mcp__chrome-devtools__wait_for to wait for content load
   3. Call mcp__chrome-devtools__take_snapshot to get page structure
@@ -182,35 +202,42 @@ Process:
   5. Call mcp__chrome-devtools__close_page to close page
 
 Applicable Scenarios:
+
   - ProductHunt (403 on WebFetch)
   - Latent Space (Substack JS rendering)
   - Other SPA applications
+
 ```
 
 ### Phase 7: Generate Report
 
 ```yaml
 Output:
+
   - Directory: NewsReport/
   - Filename: YYYY-MM-DD-news-report.md
   - Format: Standard Markdown
 
 Content Structure:
+
   - Title + Date
   - Statistical Summary (Source count, items collected)
   - 20 High-Quality Items (Template based)
   - Generation Info (Version, Timestamps)
+
 ```
 
 ### Phase 8: Update Cache
 
 ```yaml
 Update cache.json:
+
   - last_run: Record this run info
   - source_stats: Update stats per source
   - url_cache: Add processed URLs
   - content_hashes: Add content fingerprints
   - article_history: Record included articles
+
 ```
 
 ## SubAgent Call Examples
@@ -229,6 +256,7 @@ Task Call:
     Task: Scrape the following URLs and extract content
 
     URLs:
+
     - https://news.ycombinator.com (Extract Top 10)
     - https://huggingface.co/papers (Extract top voted papers)
 
@@ -251,6 +279,7 @@ Task Call:
     }
 
     Filter Criteria:
+
     - Keep: Cutting-edge Tech/Deep Tech/Productivity/Practical Info
     - Exclude: General Science/Marketing Puff/Overly Academic/Job Posts
 
@@ -267,9 +296,12 @@ Task Call:
     task: fetch_and_extract
     input:
       urls:
+
         - https://news.ycombinator.com
         - https://huggingface.co/papers
+
     output_schema:
+
       - source_id: string
       - title: string
       - summary: string
@@ -277,6 +309,7 @@ Task Call:
       - url: string
       - keywords: string[]
       - quality_score: 1-5
+
     constraints:
       filter: Cutting-edge Tech/Deep Tech/Productivity/Practical Info
       exclude: General Science/Marketing Puff/Overly Academic
@@ -285,6 +318,7 @@ Task Call:
 ## Output Template
 
 ```markdown
+
 # Daily News Report (YYYY-MM-DD)
 
 > Curated from N sources today, containing 20 high-quality items
@@ -308,6 +342,7 @@ Task Call:
 ---
 
 ## 2. Title
+
 ...
 
 ---
@@ -318,13 +353,13 @@ Task Call:
 
 ## Constraints & Principles
 
-1.  **Quality over Quantity**: Low-quality content does not enter the report.
-2.  **Early Stop**: Stop scraping once 20 high-quality items are reached.
-3.  **Parallel First**: SubAgents in the same batch execute in parallel.
-4.  **Fault Tolerance**: Failure of a single source does not affect the whole process.
-5.  **Cache Reuse**: Avoid re-scraping the same content.
-6.  **Main Agent Control**: All decisions are made by the Main Agent.
-7.  **Fallback Awareness**: Detect sub-agent availability, gracefully degrade if unavailable.
+1. **Quality over Quantity**: Low-quality content does not enter the report.
+2. **Early Stop**: Stop scraping once 20 high-quality items are reached.
+3. **Parallel First**: SubAgents in the same batch execute in parallel.
+4. **Fault Tolerance**: Failure of a single source does not affect the whole process.
+5. **Cache Reuse**: Avoid re-scraping the same content.
+6. **Main Agent Control**: All decisions are made by the Main Agent.
+7. **Fallback Awareness**: Detect sub-agent availability, gracefully degrade if unavailable.
 
 ## Expected Performance
 
@@ -347,22 +382,24 @@ Task Call:
 
 To ensure usability across different Agent environments, the following checks must be performed:
 
-1.  **Environment Check**:
-    -   In Phase 1 initialization, attempt to detect if `worker` sub-agent exists.
-    -   If not exists (or plugin not installed), automatically switch to **Serial Execution Mode**.
+1. **Environment Check**:
+    - In Phase 1 initialization, attempt to detect if `worker` sub-agent exists.
+    - If not exists (or plugin not installed), automatically switch to **Serial Execution Mode**.
 
-2.  **Serial Execution Mode**:
-    -   Do not use parallel block.
-    -   Main Agent executes scraping tasks for each source sequentially.
-    -   Slower, but guarantees basic functionality.
+2. **Serial Execution Mode**:
+    - Do not use parallel block.
+    - Main Agent executes scraping tasks for each source sequentially.
+    - Slower, but guarantees basic functionality.
 
-3.  **User Alert**:
-    -   MUST include a clear warning in the generated report header indicating the current degraded mode.
+3. **User Alert**:
+    - MUST include a clear warning in the generated report header indicating the current degraded mode.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

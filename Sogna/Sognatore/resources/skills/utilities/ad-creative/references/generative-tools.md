@@ -40,12 +40,14 @@ Google DeepMind's image generation model, available through the Gemini API.
 **Pricing:** ~$0.04/image (Gemini 2.5 Flash Image), ~$0.24/4K image (Nano Banana Pro)
 
 **Strengths:**
+
 - Strong text rendering in images (logos, headlines)
 - Native image editing (modify existing images with prompts)
 - Available through the same Gemini API used for text generation
 - Supports both generation and editing in one model
 
 **Ad creative use cases:**
+
 - Generate social media ad images from text descriptions
 - Create product mockup variations
 - Edit existing ad images (swap backgrounds, change colors)
@@ -53,7 +55,9 @@ Google DeepMind's image generation model, available through the Gemini API.
 
 **API example:**
 ```bash
+
 # Using the Gemini API for image generation
+
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
@@ -84,12 +88,14 @@ Open-weight image generation models with API access through Replicate and BFL's 
 | Flux 2 Klein | Fastest | Good | Lowest | High-volume batch generation |
 
 **Strengths:**
+
 - Multi-image reference (up to 8 images) for consistent identity across ads
 - Product consistency — same product in different contexts
 - Style transfer from reference images
 - Open-weight Dev model for self-hosting
 
 **Ad creative use cases:**
+
 - Generate 50+ ad variations with consistent product/person identity
 - Create product-in-context images (your SaaS on different devices)
 - Style-match to existing brand assets using reference images
@@ -108,12 +114,14 @@ Specialized in typography and text rendering within images.
 **Pricing:** ~$0.06/image (API), ~$0.009/image (subscription)
 
 **Strengths:**
+
 - Best-in-class text rendering (~90% accuracy vs ~30% for most tools)
 - Style reference system (upload up to 3 reference images)
 - 4.3 billion style presets for consistent brand aesthetics
 - Strong at logos and branded typography
 
 **Ad creative use cases:**
+
 - Generate ad banners with headline text directly in the image
 - Create social media graphics with branded text overlays
 - Produce multiple design variations with consistent typography
@@ -144,6 +152,7 @@ Google DeepMind's video generation model, available through the Gemini API and V
 **Pricing:** ~$0.15/sec (Veo 3.1 Fast), ~$0.40/sec (Veo 3.1 Standard)
 
 **Capabilities:**
+
 - Up to 60 seconds at 1080p
 - Native audio generation (dialogue, sound effects, ambient)
 - Vertical 9:16 output for Stories/Reels/Shorts
@@ -151,6 +160,7 @@ Google DeepMind's video generation model, available through the Gemini API and V
 - Text-to-video and image-to-video
 
 **Ad creative use cases:**
+
 - Generate short video ads (15-30 sec) from text descriptions
 - Create vertical video ads for TikTok, Reels, Shorts
 - Produce product demos with voiceover
@@ -169,12 +179,14 @@ Video generation with simultaneous audio-visual generation and camera controls.
 **Pricing:** ~$0.09/sec (via fal.ai third-party)
 
 **Capabilities:**
+
 - Up to 3 minutes at 1080p/30-48fps
 - Simultaneous audio-visual generation (Kling 2.6)
 - Text-to-video and image-to-video
 - Motion and camera controls
 
 **Ad creative use cases:**
+
 - Longer product explainer videos
 - Cinematic brand videos with synchronized audio
 - Animate product images into video ads
@@ -191,12 +203,14 @@ Video generation and editing platform with strong controllability.
 **API:** Runway Developer Portal
 
 **Capabilities:**
+
 - Gen-4: Character/scene consistency across shots
 - Motion brush and camera controls
 - Image-to-video with reference images
 - Video-to-video style transfer
 
 **Ad creative use cases:**
+
 - Generate video ads with consistent characters/products across scenes
 - Style-transfer existing footage to match brand aesthetics
 - Extend or remix existing video content
@@ -214,12 +228,14 @@ OpenAI's video generation model with synchronized audio.
 **Pricing:** Free tier available; Pro from $0.10-0.50/sec depending on resolution
 
 **Capabilities:**
+
 - Up to 60 seconds with synchronized audio
 - Dialogue, sound effects, and ambient audio
 - sora-2 (fast) and sora-2-pro (quality) variants
 - Text-to-video and image-to-video
 
 **Ad creative use cases:**
+
 - Video testimonials and talking-head style ads
 - Product demo videos with narration
 - Narrative brand videos
@@ -237,6 +253,7 @@ ByteDance's video generation model with simultaneous audio-visual generation and
 **Pricing:** ~$0.10-0.80/min depending on resolution (estimated 10-100x cheaper than Sora 2 per clip)
 
 **Capabilities:**
+
 - Up to 20 seconds at up to 2K resolution
 - Simultaneous audio-visual generation (Dual-Branch Diffusion Transformer)
 - Text-to-video and image-to-video
@@ -244,6 +261,7 @@ ByteDance's video generation model with simultaneous audio-visual generation and
 - OpenAI-compatible API structure
 
 **Ad creative use cases:**
+
 - High-volume short video ad production at low cost
 - Video ads with synchronized voiceover and sound effects in one pass
 - Multi-reference generation (feed product images, brand assets, style references)
@@ -261,12 +279,14 @@ Full-stack video creation platform with cinematic camera controls.
 **Platform:** [higgsfield.ai](https://higgsfield.ai/)
 
 **Capabilities:**
+
 - 50+ professional camera movements (zooms, pans, FPV drone shots)
 - Image-to-video animation
 - Built-in editing, transitions, and keyframing
 - All-in-one workflow: image gen, animation, editing
 
 **Ad creative use cases:**
+
 - Social media video ads with cinematic feel
 - Animate product images into dynamic video
 - Create multiple video variations with different camera styles
@@ -312,6 +332,7 @@ The market leader in realistic voice generation and voice cloning.
 **Pricing:** ~$0.12-0.30 per 1,000 characters depending on plan; starts at $5/month
 
 **Capabilities:**
+
 - 29+ languages with natural accent and intonation
 - Voice cloning from short audio clips (instant) or longer recordings (professional)
 - Emotion and style control
@@ -319,6 +340,7 @@ The market leader in realistic voice generation and voice cloning.
 - Voice library with hundreds of pre-built voices
 
 **Ad creative use cases:**
+
 - Generate voiceover tracks for video ads
 - Clone your brand spokesperson's voice for all ad variations
 - Produce the same ad in 10+ languages from one script
@@ -349,6 +371,7 @@ Simple, affordable text-to-speech built into the OpenAI API.
 **Pricing:** $15/million chars (standard), $30/million chars (HD); ~$0.015/min with gpt-4o-mini-tts
 
 **Capabilities:**
+
 - 13 built-in voices (no custom cloning)
 - Multiple languages
 - Real-time streaming
@@ -356,6 +379,7 @@ Simple, affordable text-to-speech built into the OpenAI API.
 - Simple API — same SDK you already use for GPT
 
 **Ad creative use cases:**
+
 - Fast, cheap voiceover for draft/test ad versions
 - High-volume narration at low cost
 - Prototype ad audio before investing in premium voice
@@ -373,6 +397,7 @@ Ultra-low latency voice generation built for real-time applications.
 **Pricing:** Starts at $5/month; pay-as-you-go from $0.03/min
 
 **Capabilities:**
+
 - 40ms time-to-first-audio (fastest in class)
 - 15+ languages
 - Nonverbal expressiveness: laughter, breathing, emotional inflections
@@ -380,6 +405,7 @@ Ultra-low latency voice generation built for real-time applications.
 - Streaming API for real-time generation
 
 **Ad creative use cases:**
+
 - Real-time ad preview during creative iteration
 - Interactive demo videos with dynamic narration
 - Ads requiring natural laughter, sighs, or emotional reactions
@@ -444,14 +470,20 @@ Need voiceover for ads?
 ### Workflow: Voice + Video
 
 ```
+
 1. Write ad script (use ad-creative skill for copy)
 2. Generate voiceover with ElevenLabs/OpenAI TTS
 3. Generate or render video:
+
    a. Silent video from Runway/Remotion → layer voice track
    b. Or use Veo/Sora/Seedance with native audio (skip separate VO)
+
 4. Combine with ffmpeg if layering separately:
+
    ffmpeg -i video.mp4 -i voiceover.mp3 -c:v copy -c:a aac output.mp4
+
 5. Generate variations (different scripts, voices, or languages)
+
 ```
 
 ---
@@ -515,6 +547,7 @@ Generate videos addressing prospects by name for cold outreach or sales.
 
 **4. Social ad batch production**
 Render the same content across different aspect ratios:
+
 - 1:1 for feed
 - 9:16 for Stories/Reels
 - 16:9 for YouTube
@@ -522,23 +555,29 @@ Render the same content across different aspect ratios:
 ### Remotion Workflow for Ad Creative
 
 ```
+
 1. Design template in React (or use AI to generate the component)
 2. Define data schema (products, headlines, CTAs, images)
 3. Feed data array into template
 4. Batch render all variations
 5. Upload to ad platform
+
 ```
 
 ### Getting Started
 
 ```bash
+
 # Create a new Remotion project
+
 npx create-video@latest
 
 # Render a single video
+
 npx remotion render src/index.ts MyComposition out/video.mp4
 
 # Batch render from data
+
 npx remotion render src/index.ts MyComposition --props='{"data": [...]}'
 ```
 
@@ -610,6 +649,7 @@ When generating images for ads, request the correct dimensions:
 Include these dimensions in your generation prompts to avoid needing to crop or resize.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

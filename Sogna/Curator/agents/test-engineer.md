@@ -12,8 +12,10 @@ model: inherit
 skills: clean-code, testing-patterns, tdd-workflow, webapp-testing, code-review-checklist, lint-and-validate
 swarm: Engineering
 links:
+
   - swarm: Engineering
   - colleagues: [[code-archaeologist]], [[debugger]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[game-developer]]
+
 ---
 
 # Test Engineer

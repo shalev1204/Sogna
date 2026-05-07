@@ -1,5 +1,5 @@
-import { BuildHTMLStyles as buildHTMLStyles } from "../../html/utils/build-styles.js";
-import { BuildSVGPath as buildSVGPath } from "./path.js";
+import { buildHTMLStyles } from "../../html/utils/build-styles.js";
+import { buildSVGPath } from "./path.js";
 /**
  * CSS sognaflow Path properties that should remain as CSS styles on SVG elements.
  */
@@ -12,7 +12,7 @@ const cssSognaflowPathProperties = [
 /**
  * Build SVG visual attributes, like cx and style.transform
  */
-export function BuildSVGAttrs(state, { attrX, attrY, attrScale, pathLength, pathSpacing = 1, pathOffset = 0, 
+export function buildSVGAttrs(state, { attrX, attrY, attrScale, pathLength, pathSpacing = 1, pathOffset = 0, 
 // This is object creation, which we try to avoid per-frame.
 ...latest }, isSVGTag, transformTemplate, styleProp) {
     buildHTMLStyles(state, latest, transformTemplate);

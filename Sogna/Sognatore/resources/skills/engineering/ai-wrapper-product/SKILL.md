@@ -10,7 +10,6 @@ id: skill-ai-wrapper-product
 owner: [[prod-pm]]
 ---
 
-
 # AI Wrapper Product
 
 Expert in building products that wrap AI APIs (OpenAI, Anthropic, etc.) into
@@ -56,6 +55,7 @@ Building products around AI APIs
 ## AI Product Architecture
 
 ### The Wrapper Stack
+
 ```
 User Input
     ↓
@@ -71,6 +71,7 @@ User-Friendly Response
 ```
 
 ### Basic Implementation
+
 ```javascript
 import Anthropic from '@anthropic-ai/sdk';
 
@@ -105,6 +106,7 @@ async function generateContent(userInput, context) {
 ```
 
 ### Model Selection
+
 | Model | Cost | Speed | Quality | Use Case |
 |-------|------|-------|---------|----------|
 | GPT-4o | $$$ | Fast | Best | Complex tasks |
@@ -121,6 +123,7 @@ Production-grade prompt design
 ## Prompt Engineering for Products
 
 ### Prompt Template Pattern
+
 ```javascript
 const promptTemplates = {
   emailWriter: {
@@ -139,6 +142,7 @@ const promptTemplates = {
 ```
 
 ### Output Control
+
 ```javascript
 // Force structured output
 const systemPrompt = `
@@ -165,6 +169,7 @@ function parseAIOutput(text) {
 ```
 
 ### Quality Control
+
 | Technique | Purpose |
 |-----------|---------|
 | Examples in prompt | Guide output style |
@@ -182,6 +187,7 @@ Controlling AI API costs
 ## AI Cost Management
 
 ### Token Economics
+
 ```javascript
 // Track usage
 async function callWithCostTracking(userId, prompt) {
@@ -210,6 +216,7 @@ function calculateCost(usage) {
 ```
 
 ### Cost Reduction Strategies
+
 | Strategy | Savings |
 |----------|---------|
 | Use cheaper models | 10-50x |
@@ -219,6 +226,7 @@ function calculateCost(usage) {
 | Truncate input | Variable |
 
 ### Usage Limits
+
 ```javascript
 async function checkUsageLimits(userId) {
   const usage = await db.usage.sum({
@@ -245,6 +253,7 @@ Standing out from other AI wrappers
 ## AI Product Differentiation
 
 ### What Makes AI Products Defensible
+
 | Moat | Example |
 |------|---------|
 | Workflow integration | Email inside Gmail |
@@ -254,25 +263,32 @@ Standing out from other AI wrappers
 | Distribution | Built-in audience |
 
 ### Differentiation Strategies
+
 ```
+
 1. Vertical Focus
+
    Generic: "AI writing assistant"
    Specific: "AI for Amazon product descriptions"
 
 2. Workflow Integration
+
    Standalone: Web app
    Integrated: Chrome extension, Slack bot
 
 3. Domain Training
+
    Generic: Uses raw GPT
    Specialized: Fine-tuned or RAG-enhanced
 
 4. Output Quality
+
    Basic: Raw AI output
    Polished: Post-processing, formatting, validation
 ```
 
 ### Avoid "Thin Wrappers"
+
 | Thin Wrapper | Real Product |
 |--------------|--------------|
 | ChatGPT with custom prompt | Domain-specific workflow tool |
@@ -289,6 +305,7 @@ Severity: HIGH
 Situation: Monthly AI bill is higher than revenue
 
 Symptoms:
+
 - Surprise API bills
 - Costs > revenue
 - Rapid usage spikes
@@ -305,6 +322,7 @@ Recommended fix:
 ## Controlling AI Costs
 
 ### Set Hard Limits
+
 ```javascript
 // Per-user limits
 const LIMITS = {
@@ -323,6 +341,7 @@ async function checkLimits(userId) {
 ```
 
 ### Provider-Level Limits
+
 ```
 OpenAI: Set usage limits in dashboard
 Anthropic: Set spend limits
@@ -330,6 +349,7 @@ Add alerts at 50%, 80%, 100%
 ```
 
 ### Cost Monitoring
+
 ```javascript
 // Alert on anomalies
 async function checkCostAnomaly() {
@@ -343,6 +363,7 @@ async function checkCostAnomaly() {
 ```
 
 ### Emergency Shutoff
+
 ```javascript
 // Kill switch
 const MAX_DAILY_SPEND = 100; // $100
@@ -365,6 +386,7 @@ Severity: HIGH
 Situation: API calls fail with 429 errors
 
 Symptoms:
+
 - 429 Too Many Requests errors
 - Requests failing in bursts
 - Users seeing errors
@@ -381,6 +403,7 @@ Recommended fix:
 ## Handling Rate Limits
 
 ### Retry with Exponential Backoff
+
 ```javascript
 async function callWithRetry(fn, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
@@ -399,6 +422,7 @@ async function callWithRetry(fn, maxRetries = 3) {
 ```
 
 ### Request Queue
+
 ```javascript
 import PQueue from 'p-queue';
 
@@ -415,6 +439,7 @@ async function callAPI(prompt) {
 ```
 
 ### User-Facing Handling
+
 ```javascript
 try {
   const result = await callWithRetry(generateContent);
@@ -438,6 +463,7 @@ Severity: HIGH
 Situation: Users complain about incorrect outputs
 
 Symptoms:
+
 - Users report wrong information
 - Made-up facts in outputs
 - Outdated information
@@ -454,6 +480,7 @@ Recommended fix:
 ## Handling Hallucinations
 
 ### Output Validation
+
 ```javascript
 function validateOutput(output, schema) {
   // Check required fields
@@ -477,6 +504,7 @@ function validateOutput(output, schema) {
 ```
 
 ### Domain-Specific Validation
+
 ```javascript
 // For factual content
 async function validateFacts(output) {
@@ -494,6 +522,7 @@ async function validateFacts(output) {
 ```
 
 ### Use Cases to Avoid
+
 | Risky | Safer Alternative |
 |-------|-------------------|
 | Medical advice | Summarize, not diagnose |
@@ -502,6 +531,7 @@ async function validateFacts(output) {
 | Precise calculations | Validate or use code |
 
 ### User Expectations
+
 - Disclaimer for generated content
 - "AI-generated" labels
 - Edit capability for users
@@ -514,6 +544,7 @@ Severity: MEDIUM
 Situation: Users complain about slow responses
 
 Symptoms:
+
 - Long wait times
 - Users abandoning
 - Timeout errors
@@ -530,6 +561,7 @@ Recommended fix:
 ## Improving AI Latency
 
 ### Streaming Responses
+
 ```javascript
 // Stream to user as AI generates
 async function* streamResponse(prompt) {
@@ -558,6 +590,7 @@ while (true) {
 ```
 
 ### Caching
+
 ```javascript
 async function generateWithCache(prompt) {
   const cacheKey = hashPrompt(prompt);
@@ -571,6 +604,7 @@ async function generateWithCache(prompt) {
 ```
 
 ### Use Faster Models
+
 | Model | Typical Latency |
 |-------|-----------------|
 | GPT-4 | 5-15s |
@@ -638,12 +672,14 @@ Skills: ai-wrapper-product, frontend, micro-saas-launcher
 Workflow:
 
 ```
+
 1. Define specific writing use case
 2. Design prompt templates
 3. Build UI with streaming
 4. Add usage tracking and limits
 5. Implement payments
 6. Launch and iterate
+
 ```
 
 ### AI Browser Extension
@@ -653,11 +689,13 @@ Skills: ai-wrapper-product, browser-extension-builder
 Workflow:
 
 ```
+
 1. Define AI-powered feature
 2. Build extension structure
 3. Integrate AI API via backend
 4. Add usage limits
 5. Publish to Chrome Store
+
 ```
 
 ### AI Telegram Bot
@@ -667,11 +705,13 @@ Skills: ai-wrapper-product, telegram-bot-builder
 Workflow:
 
 ```
+
 1. Define bot personality/purpose
 2. Build Telegram bot
 3. Integrate AI for responses
 4. Add monetization
 5. Launch and grow
+
 ```
 
 ## Related Skills
@@ -679,6 +719,7 @@ Workflow:
 Works well with: `llm-architect`, `micro-saas-launcher`, `frontend`, `backend`
 
 ## When to Use
+
 - User mentions or implies: AI wrapper
 - User mentions or implies: GPT product
 - User mentions or implies: AI tool
@@ -687,11 +728,13 @@ Works well with: `llm-architect`, `micro-saas-launcher`, `frontend`, `backend`
 - User mentions or implies: Claude API product
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-red-team-tactics
 owner: [[orchestrator]]
 ---
 
-
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # Red Team Tactics
@@ -160,6 +159,7 @@ LATERAL MOVEMENT → COLLECTION → C2 → EXFILTRATION → IMPACT
 ### Attack Narrative
 
 Document the full attack chain:
+
 1. How initial access was gained
 2. What techniques were used
 3. What objectives were achieved
@@ -168,6 +168,7 @@ Document the full attack chain:
 ### Detection Gaps
 
 For each successful technique:
+
 - What should have detected it?
 - Why didn't detection work?
 - How to improve detection
@@ -206,14 +207,17 @@ For each successful technique:
 > **Remember:** Red team simulates attackers to improve defenses, not to cause harm.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

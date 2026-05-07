@@ -4,21 +4,24 @@ description: REST API gateway for ComfyUI servers. Workflow management, job queu
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - comfyui
 - api-gateway
 - image-generation
 - typescript
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-comfyui-gateway
 owner: [[orchestrator]]
 ---
-
 
 # ComfyUI Gateway
 
@@ -261,6 +264,7 @@ The gateway communicates with ComfyUI via its native HTTP API:
 | `WS /ws?clientId=...` | Real-time progress (optional) |
 
 The client auto-detects ComfyUI version and adapts:
+
 - Tries WebSocket first for progress, falls back to polling
 - Handles both `/history` response formats
 - Detects OOM errors and classifies them with recommendations
@@ -328,6 +332,7 @@ npx tsx src/cli/index.ts health                   # Check ComfyUI connectivity
 ## Troubleshooting
 
 Read `references/troubleshooting.md` for detailed guidance on:
+
 - ComfyUI not reachable (firewall, wrong port, Docker networking)
 - OOM errors (reduce resolution, batch, or steps)
 - Slow generation (GPU utilization, queue depth, model loading)
@@ -338,12 +343,15 @@ Read `references/troubleshooting.md` for detailed guidance on:
 ## Integration Examples
 
 Read `references/integration.md` for ready-to-use examples with:
+
 - curl commands for every endpoint
 - n8n webhook workflow
 - Supabase Edge Function caller
 - Claude Code / Claude.ai integration
 - Python requests client
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - JavaScript fetch client
 
 ## File Structure
@@ -426,11 +434,13 @@ comfyui-gateway/
 - `stability-ai` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

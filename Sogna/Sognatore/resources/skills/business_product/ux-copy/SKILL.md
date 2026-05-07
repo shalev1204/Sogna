@@ -13,7 +13,6 @@ id: skill-ux-copy
 owner: [[prod-pm]]
 ---
 
-
 # UX Copy
 
 ## Overview
@@ -21,6 +20,7 @@ owner: [[prod-pm]]
 Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill generates concise product copy for common UI states. It follows the Toss-inspired tone: casual but polite, direct, active, and specific enough to help the user recover or proceed.
 
 ## When to Use
+
 - Use when you need button labels, helper text, toasts, empty states, or error messages
 - Use when a feature has functional UI but weak or robotic wording
 - Use when you want consistent product voice across a flow
@@ -63,6 +63,7 @@ State the action in plain language and explain the consequence if the decision i
 ## Output
 
 Return:
+
 1. The requested microcopy grouped by UI surface
 2. Notes on tone or localization considerations if relevant
 3. Any places where the UX likely needs a structural fix in addition to better copy
@@ -80,11 +81,13 @@ Return:
 - [Source skill](https://github.com/bitjaru/styleseed/blob/main/seeds/toss/.claude/skills/ux-copy/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

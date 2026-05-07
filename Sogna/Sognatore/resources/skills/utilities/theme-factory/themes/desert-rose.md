@@ -26,6 +26,7 @@ A soft and sophisticated theme with dusty, muted tones perfect for elegant prese
 Fashion presentations, beauty brands, wedding planning, interior design, boutique businesses.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

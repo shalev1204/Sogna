@@ -10,35 +10,39 @@ id: skill-aws-compliance-checker
 owner: [[ops-security]]
 ---
 
-
 # AWS Compliance Checker
 
 Automated compliance validation against industry standards including CIS AWS Foundations, PCI-DSS, HIPAA, and SOC 2.
 
 ## When to Use
+
 Use this skill when you need to validate AWS compliance against industry standards, prepare for audits, or maintain continuous compliance monitoring.
 
 ## Supported Frameworks
 
 **CIS AWS Foundations Benchmark**
+
 - Identity and Access Management
 - Logging and Monitoring
 - Networking
 - Data Protection
 
 **PCI-DSS (Payment Card Industry)**
+
 - Network security
 - Access controls
 - Encryption
 - Monitoring and logging
 
 **HIPAA (Healthcare)**
+
 - Access controls
 - Audit controls
 - Data encryption
 - Transmission security
 
 **SOC 2**
+
 - Security
 - Availability
 - Confidentiality
@@ -50,23 +54,27 @@ Use this skill when you need to validate AWS compliance against industry standar
 
 ```bash
 #!/bin/bash
+
 # cis-iam-checks.sh
 
 echo "=== CIS IAM Compliance Checks ==="
 
 # 1.1: Root account usage
+
 echo "1.1: Checking root account usage..."
 root_usage=$(aws iam get-credential-report --output text | \
   awk -F, 'NR==2 {print $5,$11}')
 echo "  Root password last used: $root_usage"
 
 # 1.2: MFA on root account
+
 echo "1.2: Checking root MFA..."
 root_mfa=$(aws iam get-account-summary \
   --query 'SummaryMap.AccountMFAEnabled' --output text)
 echo "  Root MFA enabled: $root_mfa"
 
 # 1.3: Unused credentials
+
 echo "1.3: Checking for unused credentials (>90 days)..."
 aws iam get-credential-report --output text | \
   awk -F, 'NR>1 {
@@ -81,6 +89,7 @@ aws iam get-credential-report --output text | \
   }'
 
 # 1.4: Access keys rotated
+
 echo "1.4: Checking access key age..."
 aws iam list-users --query 'Users[*].UserName' --output text | \
 while read user; do
@@ -96,6 +105,7 @@ while read user; do
 done
 
 # 1.5-1.11: Password policy
+
 echo "1.5-1.11: Checking password policy..."
 policy=$(aws iam get-account-password-policy 2>&1)
 if echo "$policy" | grep -q "NoSuchEntity"; then
@@ -114,6 +124,7 @@ else
 fi
 
 # 1.12-1.14: MFA for IAM users
+
 echo "1.12-1.14: Checking IAM user MFA..."
 aws iam get-credential-report --output text | \
   awk -F, 'NR>1 && $4=="false" {print "  ⚠️  " $1 ": No MFA"}'
@@ -123,11 +134,13 @@ aws iam get-credential-report --output text | \
 
 ```bash
 #!/bin/bash
+
 # cis-logging-checks.sh
 
 echo "=== CIS Logging Compliance Checks ==="
 
 # 2.1: CloudTrail enabled
+
 echo "2.1: Checking CloudTrail..."
 trails=$(aws cloudtrail describe-trails \
   --query 'trailList[*].[Name,IsMultiRegionTrail,LogFileValidationEnabled]' \
@@ -149,6 +162,7 @@ else
 fi
 
 # 2.2: CloudTrail log file validation
+
 echo "2.2: Checking log file validation..."
 aws cloudtrail describe-trails \
   --query 'trailList[?LogFileValidationEnabled==`false`].Name' \
@@ -158,6 +172,7 @@ while read trail; do
 done
 
 # 2.3: S3 bucket for CloudTrail
+
 echo "2.3: Checking CloudTrail S3 bucket access..."
 aws cloudtrail describe-trails \
   --query 'trailList[*].S3BucketName' --output text | \
@@ -172,6 +187,7 @@ while read bucket; do
 done
 
 # 2.4: CloudTrail integrated with CloudWatch Logs
+
 echo "2.4: Checking CloudWatch Logs integration..."
 aws cloudtrail describe-trails \
   --query 'trailList[*].[Name,CloudWatchLogsLogGroupArn]' \
@@ -185,6 +201,7 @@ while read name log_group; do
 done
 
 # 2.5: AWS Config enabled
+
 echo "2.5: Checking AWS Config..."
 recorders=$(aws configservice describe-configuration-recorders \
   --query 'ConfigurationRecorders[*].name' --output text)
@@ -196,6 +213,7 @@ else
 fi
 
 # 2.6: S3 bucket logging
+
 echo "2.6: Checking S3 bucket logging..."
 aws s3api list-buckets --query 'Buckets[*].Name' --output text | \
 while read bucket; do
@@ -206,6 +224,7 @@ while read bucket; do
 done
 
 # 2.7: VPC Flow Logs
+
 echo "2.7: Checking VPC Flow Logs..."
 aws ec2 describe-vpcs --query 'Vpcs[*].VpcId' --output text | \
 while read vpc; do
@@ -224,11 +243,13 @@ done
 
 ```bash
 #!/bin/bash
+
 # cis-monitoring-checks.sh
 
 echo "=== CIS Monitoring Compliance Checks ==="
 
 # Check for required CloudWatch metric filters and alarms
+
 required_filters=(
   "unauthorized-api-calls"
   "no-mfa-console-signin"
@@ -273,11 +294,13 @@ fi
 
 ```bash
 #!/bin/bash
+
 # cis-networking-checks.sh
 
 echo "=== CIS Networking Compliance Checks ==="
 
 # 4.1: No security groups allow 0.0.0.0/0 ingress to port 22
+
 echo "4.1: Checking SSH access (port 22)..."
 aws ec2 describe-security-groups \
   --query 'SecurityGroups[*].[GroupId,GroupName,IpPermissions]' \
@@ -287,6 +310,7 @@ jq -r '.[] | select(.[2][]? |
   "  ⚠️  \(.[0]): \(.[1]) allows SSH from 0.0.0.0/0"'
 
 # 4.2: No security groups allow 0.0.0.0/0 ingress to port 3389
+
 echo "4.2: Checking RDP access (port 3389)..."
 aws ec2 describe-security-groups \
   --query 'SecurityGroups[*].[GroupId,GroupName,IpPermissions]' \
@@ -296,6 +320,7 @@ jq -r '.[] | select(.[2][]? |
   "  ⚠️  \(.[0]): \(.[1]) allows RDP from 0.0.0.0/0"'
 
 # 4.3: Default security group restricts all traffic
+
 echo "4.3: Checking default security groups..."
 aws ec2 describe-security-groups \
   --filters Name=group-name,Values=default \
@@ -309,6 +334,7 @@ jq -r '.[] | select((.[1] | length) > 0 or (.[2] | length) > 1) |
 
 ```python
 #!/usr/bin/env python3
+
 # pci-dss-checker.py
 
 import boto3
@@ -376,16 +402,19 @@ if __name__ == "__main__":
 
 ```bash
 #!/bin/bash
+
 # hipaa-checker.sh
 
 echo "=== HIPAA Compliance Checks ==="
 
 # Access Controls (164.308(a)(3))
+
 echo "Access Controls:"
 aws iam get-credential-report --output text | \
   awk -F, 'NR>1 && $4=="false" {print "  ⚠️  " $1 ": No MFA (164.312(a)(2)(i))"}'
 
 # Audit Controls (164.312(b))
+
 echo ""
 echo "Audit Controls:"
 trails=$(aws cloudtrail describe-trails --query 'trailList[*].Name' --output text)
@@ -396,6 +425,7 @@ else
 fi
 
 # Encryption (164.312(a)(2)(iv))
+
 echo ""
 echo "Encryption at Rest:"
 aws ec2 describe-volumes \
@@ -413,6 +443,7 @@ while read db; do
 done
 
 # Transmission Security (164.312(e)(1))
+
 echo ""
 echo "Transmission Security:"
 echo "  Check: All data in transit uses TLS 1.2+"
@@ -422,6 +453,7 @@ echo "  Check: All data in transit uses TLS 1.2+"
 
 ```python
 #!/usr/bin/env python3
+
 # compliance-report.py
 
 import boto3
@@ -519,11 +551,13 @@ kiro-cli chat "Generate PCI-DSS report with aws-compliance-checker"
 - [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

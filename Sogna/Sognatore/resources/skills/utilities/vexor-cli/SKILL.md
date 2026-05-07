@@ -7,10 +7,10 @@ id: skill-vexor-cli
 owner: [[orchestrator]]
 ---
 
-
 # Vexor CLI Skill
 
 ## When to Use
+
 - You need to locate files by intent rather than exact filename or text match.
 - The repository is large enough that manual browsing or naive grep is too slow or ambiguous.
 - You want semantic discovery of where something is implemented, loaded, defined, or documented.
@@ -63,22 +63,30 @@ vexor "<QUERY>" [--path <ROOT>] [--mode <MODE>] [--ext .py,.md] [--exclude-patte
 ## Examples
 
 ```bash
+
 # Find CLI entrypoints / commands
+
 vexor search "typer app commands" --top 5
 ```
 
 ```bash
+
 # Search docs by headings/sections
+
 vexor search "user authentication flow" --path docs --mode outline --ext .md --format porcelain
 ```
 
 ```bash
+
 # Locate config loading/validation logic
+
 vexor search "config loader" --path . --mode code --ext .py
 ```
 
 ```bash
+
 # Exclude tests and JavaScript files
+
 vexor search "config loader" --path . --exclude-pattern tests/** --exclude-pattern .js
 ```
 
@@ -89,11 +97,13 @@ vexor search "config loader" --path . --exclude-pattern tests/** --exclude-patte
 - Combine `--ext` with `--exclude-pattern` to focus on a subset (exclude rules apply on top).
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

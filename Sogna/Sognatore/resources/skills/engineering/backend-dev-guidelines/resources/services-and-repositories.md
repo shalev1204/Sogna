@@ -34,6 +34,7 @@ Repository executes: "Here's the data you requested"
 ```
 
 **Services are responsible for:**
+
 - ✅ Business rules enforcement
 - ✅ Orchestrating multiple repositories
 - ✅ Transaction management
@@ -42,6 +43,7 @@ Repository executes: "Here's the data you requested"
 - ✅ Business validations
 
 **Services should NOT:**
+
 - ❌ Know about HTTP (Request/Response)
 - ❌ Direct Prisma access (use repositories)
 - ❌ Handle route-specific logic
@@ -54,6 +56,7 @@ Repository executes: "Here's the data you requested"
 ### Why Dependency Injection?
 
 **Benefits:**
+
 - Easy to test (inject mocks)
 - Clear dependencies
 - Flexible configuration
@@ -87,7 +90,9 @@ export class NotificationService {
     }
 
     /**
+
      * Create a notification and route it appropriately
+
      */
     async createNotification(params: CreateNotificationParams) {
         const { recipientID, type, title, message, link, context = {}, channel = 'both', priority = NotificationPriority.NORMAL } = params;
@@ -138,7 +143,9 @@ export class NotificationService {
     }
 
     /**
+
      * Route notification based on user preferences
+
      */
     private async routeNotification(params: { notificationId: number; userId: string; type: string; priority: NotificationPriority; title: string; message: string; link?: string; context?: Record<string, any> }) {
         // Get user preferences with caching
@@ -166,7 +173,9 @@ export class NotificationService {
     }
 
     /**
+
      * Determine if email should be batched
+
      */
     shouldBatchEmail(preferences: UserPreference, notificationType: string, priority: NotificationPriority): boolean {
         // HIGH priority always immediate
@@ -180,7 +189,9 @@ export class NotificationService {
     }
 
     /**
+
      * Get user preferences with caching
+
      */
     async getUserPreferences(userId: string): Promise<UserPreference> {
         // Check cache first
@@ -225,6 +236,7 @@ const notification = await notificationService.createNotification({
 ```
 
 **Key Takeaways:**
+
 - Dependencies passed via constructor
 - Clear interface defines required dependencies
 - Easy to test (inject mocks)
@@ -238,6 +250,7 @@ const notification = await notificationService.createNotification({
 ### When to Use Singletons
 
 **Use for:**
+
 - Services with expensive initialization
 - Services with shared state (caching)
 - Services accessed from many places
@@ -271,7 +284,9 @@ class PermissionService {
     }
 
     /**
+
      * Check if user can complete a workflow step
+
      */
     async canCompleteStep(userId: string, stepInstanceId: number): Promise<boolean> {
         const cacheKey = `${userId}:${stepInstanceId}`;
@@ -317,7 +332,9 @@ class PermissionService {
     }
 
     /**
+
      * Clear cache for user
+
      */
     clearUserCache(userId: string): void {
         for (const [key] of this.permissionCache) {
@@ -328,7 +345,9 @@ class PermissionService {
     }
 
     /**
+
      * Clear all cache
+
      */
     clearCache(): void {
         this.permissionCache.clear();
@@ -366,6 +385,7 @@ Repository: "Here's the Prisma query that does that"
 ```
 
 **Repositories are responsible for:**
+
 - ✅ All Prisma operations
 - ✅ Query construction
 - ✅ Query optimization (select, include)
@@ -373,6 +393,7 @@ Repository: "Here's the Prisma query that does that"
 - ✅ Caching database results
 
 **Repositories should NOT:**
+
 - ❌ Contain business logic
 - ❌ Know about HTTP
 - ❌ Make decisions (that's service layer)
@@ -386,7 +407,9 @@ import type { User, Prisma } from '@project-lifecycle-portal/database';
 
 export class UserRepository {
     /**
+
      * Find user by ID with optimized query
+
      */
     async findById(userId: string): Promise<User | null> {
         try {
@@ -409,7 +432,9 @@ export class UserRepository {
     }
 
     /**
+
      * Find all active users
+
      */
     async findActive(options?: { orderBy?: Prisma.UserOrderByWithRelationInput }): Promise<User[]> {
         try {
@@ -430,7 +455,9 @@ export class UserRepository {
     }
 
     /**
+
      * Find user by email
+
      */
     async findByEmail(email: string): Promise<User | null> {
         try {
@@ -444,7 +471,9 @@ export class UserRepository {
     }
 
     /**
+
      * Create new user
+
      */
     async create(data: Prisma.UserCreateInput): Promise<User> {
         try {
@@ -456,7 +485,9 @@ export class UserRepository {
     }
 
     /**
+
      * Update user
+
      */
     async update(userId: string, data: Prisma.UserUpdateInput): Promise<User> {
         try {
@@ -471,7 +502,9 @@ export class UserRepository {
     }
 
     /**
+
      * Delete user (soft delete by setting isActive = false)
+
      */
     async delete(userId: string): Promise<User> {
         try {
@@ -486,7 +519,9 @@ export class UserRepository {
     }
 
     /**
+
      * Check if email exists
+
      */
     async emailExists(email: string): Promise<boolean> {
         try {
@@ -514,7 +549,9 @@ import { ConflictError, NotFoundError } from '../utils/errors';
 
 export class UserService {
     /**
+
      * Create new user with business rules
+
      */
     async createUser(data: { email: string; name: string; roles: string[] }): Promise<User> {
         // Business rule: Check if email already exists
@@ -540,7 +577,9 @@ export class UserService {
     }
 
     /**
+
      * Get user by ID
+
      */
     async getUser(userId: string): Promise<User> {
         const user = await userRepository.findById(userId);
@@ -790,12 +829,14 @@ describe('UserService', () => {
 ---
 
 **Related Files:**
+
 - SKILL.md - Main guide
 - [routing-and-controllers.md](routing-and-controllers.md) - Controllers that use services
 - [database-patterns.md](database-patterns.md) - Prisma and repository patterns
 - [complete-examples.md](complete-examples.md) - Full service/repository examples
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

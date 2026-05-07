@@ -526,13 +526,16 @@ class StressTester:
 ## Quick Reference
 
 ```python
+
 # Daily usage
+
 metrics = RiskMetrics(returns)
 print(f"Sharpe: {metrics.sharpe_ratio():.2f}")
 print(f"Max DD: {metrics.max_drawdown():.2%}")
 print(f"VaR 95%: {metrics.var_historical(0.95):.2%}")
 
 # Full summary
+
 summary = metrics.summary()
 for metric, value in summary.items():
     print(f"{metric}: {value:.4f}")
@@ -541,6 +544,7 @@ for metric, value in summary.items():
 ## Best Practices
 
 ### Do's
+
 - **Use multiple metrics** - No single metric captures all risk
 - **Consider tail risk** - VaR isn't enough, use CVaR
 - **Rolling analysis** - Risk changes over time
@@ -548,6 +552,7 @@ for metric, value in summary.items():
 - **Document assumptions** - Distribution, lookback, etc.
 
 ### Don'ts
+
 - **Don't rely on VaR alone** - Underestimates tail risk
 - **Don't assume normality** - Returns are fat-tailed
 - **Don't ignore correlation** - Increases in stress
@@ -561,6 +566,7 @@ for metric, value in summary.items():
 - [pyfolio Documentation](https://quantopian.github.io/pyfolio/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

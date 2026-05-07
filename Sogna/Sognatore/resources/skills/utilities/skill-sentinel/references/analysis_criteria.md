@@ -52,6 +52,7 @@ Score final: max(0, min(100, score)).
 ### Governanca
 
 Score direto baseado no nivel de maturidade:
+
 - Nivel 0 (nenhuma): 0 pts
 - Nivel 1 (action log): 25 pts
 - Nivel 2 (+ rate limit): 50 pts
@@ -85,6 +86,7 @@ overall = sum(score_dimensao * peso_dimensao) / sum(pesos)
 ```
 
 Pesos padrao:
+
 - code_quality: 0.20
 - security: 0.20
 - performance: 0.15
@@ -103,6 +105,7 @@ Pesos padrao:
 | 0-24 | Critico |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

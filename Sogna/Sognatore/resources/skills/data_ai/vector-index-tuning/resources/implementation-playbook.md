@@ -489,6 +489,7 @@ def profile_index_build(
 ## Best Practices
 
 ### Do's
+
 - **Benchmark with real queries** - Synthetic may not represent production
 - **Monitor recall continuously** - Can degrade with data drift
 - **Start with defaults** - Tune only when needed
@@ -496,6 +497,7 @@ def profile_index_build(
 - **Consider tiered storage** - Hot/cold data separation
 
 ### Don'ts
+
 - **Don't over-optimize early** - Profile first
 - **Don't ignore build time** - Index updates have cost
 - **Don't forget reindexing** - Plan for maintenance
@@ -508,6 +510,7 @@ def profile_index_build(
 - [ANN Benchmarks](https://ann-benchmarks.com/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

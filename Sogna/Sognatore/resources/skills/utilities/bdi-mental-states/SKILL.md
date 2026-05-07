@@ -7,13 +7,14 @@ id: skill-bdi-mental-states
 owner: [[orchestrator]]
 ---
 
-
 # BDI Mental State Modeling
 
 Transform external RDF context into agent mental states (beliefs, desires, intentions) using formal BDI ontology patterns. This skill enables agents to reason about context through cognitive architecture, supporting deliberative reasoning, explainability, and semantic interoperability within multi-agent systems.
 
 ## When to Use
+
 Activate this skill when:
+
 - Processing external RDF context into agent beliefs about world states
 - Modeling rational agency with perception, deliberation, and action cycles
 - Enabling explainability through traceable reasoning chains
@@ -28,11 +29,13 @@ Activate this skill when:
 ### Mental Reality Architecture
 
 **Mental States (Endurants)**: Persistent cognitive attributes
+
 - `Belief`: What the agent believes to be true about the world
 - `Desire`: What the agent wishes to bring about
 - `Intention`: What the agent commits to achieving
 
 **Mental Processes (Perdurants)**: Events that modify mental states
+
 - `BeliefProcess`: Forming/updating beliefs from perception
 - `DesireProcess`: Generating desires from beliefs
 - `IntentionProcess`: Committing to desires as actionable intentions
@@ -94,7 +97,9 @@ Triples-to-Beliefs-to-Triples implements bidirectional flow between RDF knowledg
 
 **Phase 1: Triples-to-Beliefs**
 ```turtle
+
 # External RDF context triggers belief formation
+
 :WorldState_notification a bdi:WorldState ;
     rdfs:comment "Push notification: Payment request $250" ;
     bdi:triggers :BeliefProcess_BP1 .
@@ -105,7 +110,9 @@ Triples-to-Beliefs-to-Triples implements bidirectional flow between RDF knowledg
 
 **Phase 2: Beliefs-to-Triples**
 ```turtle
+
 # Mental deliberation produces new RDF output
+
 :Intention_pay a bdi:Intention ;
     bdi:specifies :Plan_payment .
 
@@ -176,6 +183,7 @@ Complex mental entities decompose into constituent parts for selective updates:
     bdi:hasPart :Belief_meeting_time , :Belief_meeting_location .
 
 # Update only location component
+
 :BeliefProcess_update a bdi:BeliefProcess ;
     bdi:modifies :Belief_meeting_location .
 ```
@@ -241,22 +249,27 @@ Map BDI ontology to executable production rules:
 Validate implementation against these SPARQL queries:
 
 ```sparql
+
 # CQ1: What beliefs motivated formation of a given desire?
+
 SELECT ?belief WHERE {
     :Desire_D1 bdi:isMotivatedBy ?belief .
 }
 
 # CQ2: Which desire does a particular intention fulfill?
+
 SELECT ?desire WHERE {
     :Intention_I1 bdi:fulfils ?desire .
 }
 
 # CQ3: Which mental process generated a belief?
+
 SELECT ?process WHERE {
     ?process bdi:generates :Belief_B1 .
 }
 
 # CQ4: What is the ordered sequence of tasks in a plan?
+
 SELECT ?task ?nextTask WHERE {
     :Plan_P1 bdi:hasComponent ?task .
     OPTIONAL { ?task bdi:precedes ?nextTask }
@@ -287,22 +300,26 @@ SELECT ?task ?nextTask WHERE {
 ## References
 
 See `references/` folder for detailed documentation:
+
 - `bdi-ontology-core.md` - Core ontology patterns and class definitions
 - `rdf-examples.md` - Complete RDF/Turtle examples
 - `sparql-competency.md` - Full competency question SPARQL queries
 - `framework-integration.md` - SEMAS, JADE, LAG integration patterns
 
 Primary sources:
+
 - Zuppiroli et al. "The Belief-Desire-Intention Ontology" (2025)
 - Rao & Georgeff "BDI agents: From theory to practice" (1995)
 - Bratman "Intention, plans, and practical reason" (1987)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

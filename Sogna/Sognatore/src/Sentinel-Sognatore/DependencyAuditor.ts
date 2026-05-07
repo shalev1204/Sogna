@@ -40,7 +40,9 @@ export class DependencyAuditor {
               details: `Detectadas ${auditData.metadata.vulnerabilities.critical} vulnerabilidades críticas.`
             };
         }
-      } catch (e) {}
+      } catch (e) {
+        // Fallback if audit JSON parsing fails
+      }
       
       return {
         status: 'SECURE',

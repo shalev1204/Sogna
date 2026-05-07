@@ -8,7 +8,6 @@ id: skill-azure-mgmt-weightsandbiases-dotnet
 owner: [[orchestrator]]
 ---
 
-
 # Azure.ResourceManager.WeightsAndBiases (.NET)
 
 Azure Resource Manager SDK for deploying and managing Weights & Biases ML experiment tracking instances via Azure Marketplace.
@@ -299,19 +298,25 @@ catch (RequestFailedException ex)
 After creating the Azure resource, use the W&B Python SDK for experiment tracking:
 
 ```python
+
 # Install: pip install wandb
+
 import wandb
 
 # Login with your W&B API key from the Azure-deployed instance
+
 wandb.login(host="https://my-company-wandb.wandb.ai")
 
 # Initialize a run
+
 run = wandb.init(project="my-ml-project")
 
 # Log metrics
+
 wandb.log({"accuracy": 0.95, "loss": 0.05})
 
 # Finish run
+
 run.finish()
 ```
 
@@ -332,14 +337,17 @@ run.finish()
 | GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/weightsandbiases |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

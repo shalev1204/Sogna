@@ -8,7 +8,6 @@ id: skill-prompt-engineering
 owner: [[orchestrator]]
 ---
 
-
 # Prompt Engineering Patterns
 
 Advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.
@@ -77,7 +76,9 @@ Build reusable prompt structures with variables, conditional sections, and modul
 **Example:**
 
 ```python
+
 # Reusable code review template
+
 template = """
 Review this {language} code for {focus_area}.
 
@@ -89,6 +90,7 @@ Provide feedback on:
 """
 
 # Usage
+
 prompt = template.format(
     language="Python",
     focus_area="security vulnerabilities",
@@ -120,6 +122,7 @@ Format responses as:
 2. Recommendation
 3. Code example
 4. Trade-offs
+
 ```
 
 ## Key Patterns
@@ -177,14 +180,17 @@ Build prompts that gracefully handle failures:
 - **Ignoring edge cases**: Not testing on unusual or boundary inputs
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

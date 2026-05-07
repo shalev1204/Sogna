@@ -16,12 +16,14 @@ This file contains detailed patterns, checklists, and code samples referenced by
 Classify errors into these categories to inform your debugging strategy:
 
 **By Severity:**
+
 - **Critical**: System down, data loss, security breach, complete service unavailability
 - **High**: Major feature broken, significant user impact, data corruption risk
 - **Medium**: Partial feature degradation, workarounds available, performance issues
 - **Low**: Minor bugs, cosmetic issues, edge cases with minimal impact
 
 **By Type:**
+
 - **Runtime Errors**: Exceptions, crashes, segmentation faults, null pointer dereferences
 - **Logic Errors**: Incorrect behavior, wrong calculations, invalid state transitions
 - **Integration Errors**: API failures, network timeouts, external service issues
@@ -30,6 +32,7 @@ Classify errors into these categories to inform your debugging strategy:
 - **Security Errors**: Authentication failures, authorization violations, injection attempts
 
 **By Observability:**
+
 - **Deterministic**: Consistently reproducible with known inputs
 - **Intermittent**: Occurs sporadically, often timing or race condition related
 - **Environmental**: Only happens in specific environments or configurations
@@ -103,6 +106,7 @@ For errors in microservices and distributed systems:
 Extract maximum information from stack traces:
 
 **Key Elements:**
+
 - **Error Type**: What kind of exception/error occurred
 - **Error Message**: Contextual information about the failure
 - **Origin Point**: The deepest frame where the error was thrown
@@ -111,6 +115,7 @@ Extract maximum information from stack traces:
 - **Async Boundaries**: Identify where asynchronous operations break the trace
 
 **Analysis Strategy:**
+
 1. Start at the top of the stack (origin of error)
 2. Identify the first frame in your application code (not framework/library)
 3. Examine that frame's context: input parameters, local variables, state
@@ -200,6 +205,7 @@ Implement JSON-based structured logging for machine-readable logs:
 ```
 
 **Key Fields to Always Include:**
+
 - `timestamp`: ISO 8601 format in UTC
 - `level`: ERROR, WARN, INFO, DEBUG, TRACE
 - `correlation_id`: Unique ID for the entire request chain
@@ -277,6 +283,7 @@ def add_correlation_header(response):
     return response
 
 # Structured logging with correlation ID
+
 logging.basicConfig(
     format='%(message)s',
     level=logging.INFO
@@ -299,6 +306,7 @@ def log_structured(level, message, **context):
 ### Log Aggregation Architecture
 
 **Centralized Logging Pipeline:**
+
 1. **Application**: Outputs structured JSON logs to stdout/stderr
 2. **Log Shipper**: Fluentd/Fluent Bit/Vector collects logs from containers
 3. **Log Aggregator**: Elasticsearch/Loki/DataDog receives and indexes logs
@@ -379,6 +387,7 @@ Use log analysis to identify patterns:
 For deterministic errors in development:
 
 **Debugger Setup:**
+
 1. Set breakpoint before the error occurs
 2. Step through code execution line by line
 3. Inspect variable values and object state
@@ -387,6 +396,7 @@ For deterministic errors in development:
 6. Modify variables to test hypotheses
 
 **Modern Debugging Tools:**
+
 - **VS Code Debugger**: Integrated debugging for JavaScript, Python, Go, Java, C++
 - **Chrome DevTools**: Frontend debugging with network, performance, and memory profiling
 - **pdb/ipdb (Python)**: Interactive debugger with post-mortem analysis
@@ -409,6 +419,7 @@ For errors in production environments where debuggers aren't available:
 8. **Traffic Mirroring**: Replay production traffic in staging for safe investigation
 
 **Remote Debugging (Use Cautiously):**
+
 - Attach debugger to running process only in non-critical services
 - Use read-only breakpoints that don't pause execution
 - Time-box debugging sessions strictly
@@ -438,7 +449,9 @@ takeHeapSnapshot('heap-after.heapsnapshot');
 
 **Performance Profiling:**
 ```python
+
 # Python profiling with cProfile
+
 import cProfile
 import pstats
 from pstats import SortKey
@@ -639,6 +652,7 @@ class CircuitBreaker:
         return (datetime.now() - self.last_failure_time) > timedelta(seconds=self.timeout)
 
 # Usage
+
 payment_circuit = CircuitBreaker(failure_threshold=5, timeout=60)
 
 def process_payment_with_circuit_breaker(payment_data):
@@ -724,6 +738,7 @@ const result = await retryWithBackoff(
 ### Modern Observability Stack (2025)
 
 **Recommended Architecture:**
+
 - **Metrics**: Prometheus + Grafana or DataDog
 - **Logs**: Elasticsearch/Loki + Fluentd or DataDog Logs
 - **Traces**: OpenTelemetry + Jaeger/Tempo or DataDog APM
@@ -816,14 +831,17 @@ from ddtrace.contrib.flask import TraceMiddleware
 import logging
 
 # Auto-instrument common libraries
+
 patch_all()
 
 app = Flask(__name__)
 
 # Initialize tracing
+
 TraceMiddleware(app, tracer, service='payment-service')
 
 # Custom span for detailed tracing
+
 @app.route('/api/v1/payments/charge', methods=['POST'])
 def charge_payment():
     with tracer.trace('payment.charge', service='payment-service') as span:
@@ -938,15 +956,20 @@ func chargeCard(ctx context.Context, paymentReq PaymentRequest) error {
 **Intelligent Alerting Strategy:**
 
 ```yaml
+
 # DataDog Monitor Configuration
+
 monitors:
+
   - name: "High Error Rate - Payment Service"
+
     type: metric
     query: "avg(last_5m):sum:trace.express.request.errors{service:payment-service} / sum:trace.express.request.hits{service:payment-service} > 0.05"
     message: |
       Payment service error rate is {{value}}% (threshold: 5%)
 
       This may indicate:
+
       - Payment gateway issues
       - Database connectivity problems
       - Invalid payment data
@@ -956,6 +979,7 @@ monitors:
       @slack-payments-oncall @pagerduty-payments
 
     tags:
+
       - service:payment-service
       - severity:high
 
@@ -965,6 +989,7 @@ monitors:
       escalation_message: "Error rate still elevated after 10 minutes"
 
   - name: "New Error Type Detected"
+
     type: log
     query: "logs(\"level:ERROR service:payment-service\").rollup(\"count\").by(\"error.fingerprint\").last(\"5m\") > 0"
     message: |
@@ -979,12 +1004,14 @@ monitors:
       enable_logs_sample: true
 
   - name: "Payment Service - P95 Latency High"
+
     type: metric
     query: "avg(last_10m):p95:trace.express.request.duration{service:payment-service} > 2000"
     message: |
       Payment service P95 latency is {{value}}ms (threshold: 2000ms)
 
       Check:
+
       - Database query performance
       - External API response times
       - Resource constraints (CPU/memory)
@@ -999,6 +1026,7 @@ monitors:
 ### Incident Response Workflow
 
 **Phase 1: Detection and Triage (0-5 minutes)**
+
 1. Acknowledge the alert/incident
 2. Check incident severity and user impact
 3. Assign incident commander
@@ -1006,6 +1034,7 @@ monitors:
 5. Update status page if customer-facing
 
 **Phase 2: Investigation (5-30 minutes)**
+
 1. Gather observability data:
    - Error rates from Sentry/DataDog
    - Traces showing failed requests
@@ -1020,6 +1049,7 @@ monitors:
 4. Document findings in incident log
 
 **Phase 3: Mitigation (Immediate)**
+
 1. Implement immediate fix based on hypothesis:
    - Rollback recent deployment
    - Scale up resources
@@ -1030,6 +1060,7 @@ monitors:
 3. Monitor for 15-30 minutes to ensure stability
 
 **Phase 4: Recovery and Validation**
+
 1. Verify all systems operational
 2. Check data consistency
 3. Process queued/failed requests
@@ -1037,6 +1068,7 @@ monitors:
 5. Notify stakeholders
 
 **Phase 5: Post-Incident Review**
+
 1. Schedule postmortem within 48 hours
 2. Create detailed timeline of events
 3. Identify root cause (may differ from initial hypothesis)
@@ -1052,7 +1084,9 @@ monitors:
 **Query Patterns for Common Incidents:**
 
 ```
+
 # Find all errors for a specific time window (Elasticsearch)
+
 GET /logs-*/_search
 {
   "query": {
@@ -1072,17 +1106,25 @@ GET /logs-*/_search
 }
 
 # Find correlation between errors and deployments (DataDog)
+
 # Use deployment tracking to overlay deployment markers on error graphs
+
 # Query: sum:trace.express.request.errors{service:payment-service} by {version}
 
 # Identify affected users (Sentry)
+
 # Navigate to issue → User Impact tab
+
 # Shows: total users affected, new vs returning, geographic distribution
 
 # Trace specific failed request (OpenTelemetry/Jaeger)
+
 # Search by trace_id or correlation_id
+
 # Visualize full request path across services
+
 # Identify which service/span failed
+
 ```
 
 ### Communication Templates
@@ -1097,11 +1139,13 @@ Started: 2025-10-11 14:23 UTC
 Incident Commander: @jane.smith
 
 Symptoms:
+
 - Payment processing error rate: 15% (normal: <1%)
 - Affected users: ~500 in last 10 minutes
 - Error: "Database connection timeout"
 
 Actions Taken:
+
 - Investigating database connection pool
 - Checking recent deployments
 - Monitoring error rate
@@ -1124,15 +1168,18 @@ introduced in v2.3.1 deployment at 14:00 UTC
 Mitigation: Rolled back to v2.3.0
 
 Current Status:
+
 - Error rate: 0.5% (back to normal)
 - All systems operational
 - Processing backlog of queued payments
 
 Next Steps:
+
 - Monitor for 30 minutes
 - Fix query performance issue
 - Deploy fixed version with testing
 - Schedule postmortem
+
 ```
 
 ## Error Analysis Deliverables
@@ -1151,6 +1198,7 @@ For each error analysis, provide:
 Prioritize actionable recommendations that improve system reliability and reduce MTTR (Mean Time To Resolution) for future incidents.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

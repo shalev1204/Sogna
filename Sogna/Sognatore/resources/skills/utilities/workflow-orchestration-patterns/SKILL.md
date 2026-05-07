@@ -8,7 +8,6 @@ id: skill-workflow-orchestration-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Workflow Orchestration Patterns
 
 Master workflow orchestration architecture with Temporal, covering fundamental design decisions, resilience patterns, and best practices for building reliable distributed systems.
@@ -108,9 +107,11 @@ Is it orchestration/decision logic? → Workflow
 
 ```
 For each step:
+
   1. Register compensation BEFORE executing
   2. Execute the step (via activity)
   3. On failure, run all compensations in reverse order (LIFO)
+
 ```
 
 **Example: Payment Workflow**
@@ -339,11 +340,13 @@ For each step:
 5. Design for failure and recovery
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

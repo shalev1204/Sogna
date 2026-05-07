@@ -254,4 +254,3 @@ Within the broader Sognatore ecosystem, Predatore Pro serves as the primary engi
 # Methodology Standards
 
 Predatore Pro follows AI-assisted white-box testing methodology broadly aligned with OWASP Web Security Testing Guide (WSTG) and OWASP Top 10 standards. All dynamic testing produces confirmed, exploitable findings with reproducible proof-of-concept exploits. Static analysis covers established CWE categories with LLM-powered validation to minimize false positive rates.
-

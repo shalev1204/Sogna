@@ -75,6 +75,7 @@ project-name/
 ## Setup Steps
 
 1. Initialize Project:
+
    ```bash
    npx create-next-app@latest my-app --typescript --tailwind --eslint
    # Select Yes for App Router
@@ -82,12 +83,14 @@ project-name/
    ```
 
 2. Install DB & Validation:
+
    ```bash
    npm install prisma @prisma/client zod
    npm install -D ts-node # For running seed scripts
    ```
 
 3. Configure Tailwind v4 (If missing):
+
    Ensure `src/app/globals.css` uses the new import syntax instead of a config file:
    ```css
    @import "tailwindcss";
@@ -99,6 +102,7 @@ project-name/
    ```
 
 4. Initialize Database:
+
    ```bash
    npx prisma init
    # Update schema.prisma
@@ -106,6 +110,7 @@ project-name/
    ```
 
 5. Run Developer Server:
+
    ```bash
    npm run dev --turbo
    # --turbo to enable faster Turbopack
@@ -116,6 +121,7 @@ project-name/
 ## Best Practices (2026 Standards)
 
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+
 - **Fetch Data**: Call Prisma directly in Server Components (async/await). Do not use useEffect for initial data fetching.
 - **Mutations**: Use Server Actions combined with React 19's `useActionState` to handle loading and error states instead of manual useState.
 - **Type Safety**: Share Zod schemas between Server Actions (input validation) and Client Forms.

@@ -1,8 +1,8 @@
 import { clamp } from "sognaflow-utils";
-import { Time as time } from "../frameloop/sync-time.js";
-import { SetStyle as setStyle } from "../render/dom/style-set.js";
-import { JSAnimation } from "./jsanimation.js";
-import { NativeAnimation } from "./nativeanimation.js";
+import { Time } from "../frameloop/sync-time.js";
+import { setStyle } from "../render/dom/style-set.js";
+import { JSAnimation } from "./JSAnimation.js";
+import { NativeAnimation } from "./NativeAnimation.js";
 import { replaceTransitionType } from "./utils/replace-transition-type.js";
 import { replaceStringEasing } from "./waapi/utils/unsupported-easing.js";
 /**
@@ -67,7 +67,7 @@ export class NativeAnimationExtended extends NativeAnimation {
          * Under CPU load, WAAPI's currentTime may not reflect actual
          * elapsed time, causing incorrect sampling and visual jumps.
          */
-        const sampleTime = Math.max(sampleDelta, time.now() - this.startTime);
+        const sampleTime = Math.max(sampleDelta, Time.now() - this.startTime);
         const delta = clamp(0, sampleDelta, sampleTime - sampleDelta);
         const current = sampleAnimation.sample(sampleTime).value;
         /**

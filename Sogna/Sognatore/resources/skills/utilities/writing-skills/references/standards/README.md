@@ -76,16 +76,20 @@ What to avoid and why.
 The `description` field is critical for skill discovery:
 
 ```yaml
+
 # ❌ BAD: Workflow summary (agent skips reading full skill)
+
 description: Analyzes code, finds bugs, suggests fixes
 
 # ✅ GOOD: Trigger conditions only
+
 description: Use when debugging errors or reviewing code quality.
 metadata:
   triggers: bug, error, code review
 ```
 
 **Rules:**
+
 - Start with "Use when..."
 - Put triggers under `metadata.triggers`
 - Keep under 500 characters
@@ -130,10 +134,12 @@ This frontmatter helps the LLM locate the right file when referenced from `SKILL
 
 Reference from SKILL.md:
 ```markdown
+
 ## Detailed Reference
 
 - Patterns - Common usage patterns
 - Examples - Code samples
+
 ```
 
 ## Skill Types
@@ -157,6 +163,7 @@ Before deploying:
 - [ ] Tested with real scenarios?
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

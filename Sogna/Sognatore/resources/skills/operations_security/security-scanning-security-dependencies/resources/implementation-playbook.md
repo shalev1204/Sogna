@@ -32,9 +32,11 @@ You are a security expert specializing in dependency vulnerability analysis, SBO
 - Treat dependency changes as release-impacting and test accordingly.
 
 ## Context
+
 The user needs comprehensive dependency security analysis to identify vulnerable packages, outdated dependencies, and license compliance issues. Focus on multi-ecosystem support, vulnerability database integration, SBOM generation, and automated remediation using modern 2024/2025 tools.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -337,6 +339,7 @@ on:
   push:
     branches: [main]
   schedule:
+
     - cron: '0 2 * * *'
 
 jobs:
@@ -348,9 +351,11 @@ jobs:
         ecosystem: [npm, python, go]
 
     steps:
+
       - uses: actions/checkout@v4
 
       - name: NPM Audit
+
         if: matrix.ecosystem == 'npm'
         run: |
           npm ci
@@ -358,6 +363,7 @@ jobs:
           npm audit --audit-level=moderate
 
       - name: Python Safety
+
         if: matrix.ecosystem == 'python'
         run: |
           pip install safety pip-audit
@@ -365,18 +371,21 @@ jobs:
           pip-audit --format=json --output=pip-audit.json || true
 
       - name: Go Vulnerability Check
+
         if: matrix.ecosystem == 'go'
         run: |
           go install golang.org/x/vuln/cmd/govulncheck@latest
           govulncheck -json ./... > govulncheck.json || true
 
       - name: Upload Results
+
         uses: actions/upload-artifact@v4
         with:
           name: scan-${{ matrix.ecosystem }}
           path: '*.json'
 
       - name: Check Thresholds
+
         run: |
           CRITICAL=$(grep -o '"severity":"CRITICAL"' *.json 2>/dev/null | wc -l || echo 0)
           if [ "$CRITICAL" -gt 0 ]; then
@@ -389,6 +398,7 @@ jobs:
 
 ```bash
 #!/bin/bash
+
 # automated-dependency-update.sh
 
 set -euo pipefail
@@ -461,6 +471,7 @@ class VulnerabilityReporter:
 
         for vuln in critical_high[:20]:
             report += f"""
+
 ### {vuln.get('package', 'Unknown')} - {vuln.get('vulnerability_id', '')}
 
 - **Severity:** {vuln.get('severity', 'UNKNOWN')}
@@ -519,38 +530,49 @@ class VulnerabilityReporter:
 ## Tool Installation
 
 ```bash
+
 # Python
+
 pip install safety pip-audit pipenv pip-licenses
 
 # JavaScript
+
 npm install -g snyk npm-check-updates
 
 # Go
+
 go install golang.org/x/vuln/cmd/govulncheck@latest
 
 # Rust
+
 cargo install cargo-audit
 ```
 
 ## Usage Examples
 
 ```bash
+
 # Scan all dependencies
+
 python dependency_scanner.py scan --path .
 
 # Generate SBOM
+
 python dependency_scanner.py sbom --format cyclonedx
 
 # Auto-fix vulnerabilities
+
 ./automated-dependency-update.sh npm patch
 
 # CI/CD integration
+
 python dependency_scanner.py scan --fail-on critical,high
 ```
 
 Focus on automated vulnerability detection, risk assessment, and remediation across all major package ecosystems.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

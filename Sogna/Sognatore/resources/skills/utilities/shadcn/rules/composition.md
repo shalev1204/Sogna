@@ -202,6 +202,7 @@ Always include `AvatarFallback` for when the image fails to load:
 | `<span className="rounded-full bg-green-100 ...">` | `<Badge variant="secondary">` |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

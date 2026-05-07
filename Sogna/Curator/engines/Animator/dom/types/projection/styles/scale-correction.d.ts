@@ -1,3 +1,3 @@
 import type { ScaleCorrectorMap } from "./types.js";
-export declare const ScaleCorrectors: ScaleCorrectorMap;
-export declare function AddScaleCorrector(correctors: ScaleCorrectorMap): void;
+export declare const scaleCorrectors: ScaleCorrectorMap;
+export declare function addScaleCorrector(correctors: ScaleCorrectorMap): void;

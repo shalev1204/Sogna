@@ -10,20 +10,22 @@ date_added: "2026-03-21"
 user-invokable: true
 argument-hint: "[url]"
 allowed-tools:
+
   - Read
   - Grep
   - Glob
   - Bash
   - WebFetch
+
 version: 1.0.0
 id: skill-seo-images
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # Image Optimization Analysis
 
 ## When to Use
+
 - Use when auditing image SEO, alt text, file sizes, formats, or lazy loading.
 - Use when the user wants image-specific performance recommendations.
 - Use when checking media quality signals that affect both SEO and Core Web Vitals.
@@ -31,17 +33,20 @@ owner: [[prod-pm]], [[biz-marketing]]
 ## Checks
 
 ### Alt Text
+
 - Present on all `<img>` elements (except decorative: `role="presentation"`)
 - Descriptive: describes the image content, not "image.jpg" or "photo"
 - Includes relevant keywords where natural, not keyword-stuffed
 - Length: 10-125 characters
 
 **Good examples:**
+
 - "Professional plumber repairing kitchen sink faucet"
 - "Red 2024 Toyota Camry sedan front view"
 - "Team meeting in modern office conference room"
 
 **Bad examples:**
+
 - "image.jpg" (filename, not description)
 - "plumber plumbing plumber services" (keyword stuffing)
 - "Click here" (not descriptive)
@@ -59,6 +64,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 Recommend compression to target thresholds where possible without quality loss.
 
 ### Format
+
 | Format | Browser Support | Use Case |
 |--------|-----------------|----------|
 | WebP | 97%+ | Default recommendation |
@@ -88,6 +94,7 @@ The browser will use the first supported format. Current browser support: AVIF 9
 In November 2025, Google's Chromium team reversed its 2022 decision and announced it will restore JPEG XL support in Chrome using a Rust-based decoder. The implementation is feature-complete but not yet in Chrome stable. JPEG XL offers lossless JPEG recompression (~20% savings with zero quality loss) and competitive lossy compression. Not yet practical for web deployment, but worth monitoring for future adoption.
 
 ### Responsive Images
+
 - `srcset` attribute for multiple sizes
 - `sizes` attribute matching layout breakpoints
 - Appropriate resolution for device pixel ratios
@@ -102,6 +109,7 @@ In November 2025, Google's Chromium team reversed its 2022 decision and announce
 ```
 
 ### Lazy Loading
+
 - `loading="lazy"` on below-fold images
 - Do NOT lazy-load above-fold/hero images (hurts LCP)
 - Check for native vs JavaScript-based lazy loading
@@ -115,6 +123,7 @@ In November 2025, Google's Chromium team reversed its 2022 decision and announce
 ```
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 ### `fetchpriority="high"` for LCP Images
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -136,6 +145,7 @@ Add `decoding="async"` to non-LCP images to prevent image decoding from blocking
 ```
 
 ### CLS Prevention
+
 - `width` and `height` attributes set on all `<img>` elements
 - `aspect-ratio` CSS as alternative
 - Flag images without dimensions
@@ -152,11 +162,13 @@ Add `decoding="async"` to non-LCP images to prevent image decoding from blocking
 ```
 
 ### File Names
+
 - Descriptive: `blue-running-shoes.webp` not `IMG_1234.jpg`
 - Hyphenated, lowercase, no special characters
 - Include relevant keywords
 
 ### CDN Usage
+
 - Check if images served from CDN (different domain, CDN headers)
 - Recommend CDN for image-heavy sites
 - Check for edge caching headers
@@ -183,6 +195,7 @@ Sorted by file size impact (largest savings first):
 | ... | ... | ... | ... | ... |
 
 ### Recommendations
+
 1. Convert X images to WebP format (est. XX KB savings)
 2. Add alt text to X images
 3. Add dimensions to X images
@@ -198,11 +211,13 @@ Sorted by file size impact (largest savings first):
 | Images behind CDN or authentication | Note that image files could not be directly accessed for size analysis. Report available metadata (alt text, dimensions, format from markup) and flag inaccessible resources. |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

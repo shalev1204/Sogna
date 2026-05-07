@@ -8,7 +8,6 @@ id: skill-aws-cost-optimizer
 owner: [[ops-security]]
 ---
 
-
 # AWS Cost Optimizer
 
 Analyze AWS spending patterns, identify waste, and provide actionable cost reduction strategies.
@@ -20,11 +19,13 @@ Use this skill when you need to analyze AWS spending, identify cost optimization
 ## Core Capabilities
 
 **Cost Analysis**
+
 - Parse AWS Cost Explorer data for trends and anomalies
 - Break down costs by service, region, and resource tags
 - Identify month-over-month spending increases
 
 **Resource Optimization**
+
 - Detect idle EC2 instances (low CPU utilization)
 - Find unattached EBS volumes and old snapshots
 - Identify unused Elastic IPs
@@ -32,6 +33,7 @@ Use this skill when you need to analyze AWS spending, identify cost optimization
 - Find old S3 objects eligible for lifecycle policies
 
 **Savings Recommendations**
+
 - Suggest Reserved Instance/Savings Plans opportunities
 - Recommend instance rightsizing based on CloudWatch metrics
 - Identify resources in expensive regions
@@ -40,8 +42,11 @@ Use this skill when you need to analyze AWS spending, identify cost optimization
 ## AWS CLI Commands
 
 ### Get Cost and Usage
+
 ```bash
+
 # Last 30 days cost by service
+
 aws ce get-cost-and-usage \
   --time-period Start=$(date -d '30 days ago' +%Y-%m-%d),End=$(date +%Y-%m-%d) \
   --granularity MONTHLY \
@@ -49,6 +54,7 @@ aws ce get-cost-and-usage \
   --group-by Type=DIMENSION,Key=SERVICE
 
 # Daily costs for current month
+
 aws ce get-cost-and-usage \
   --time-period Start=$(date +%Y-%m-01),End=$(date +%Y-%m-%d) \
   --granularity DAILY \
@@ -56,19 +62,24 @@ aws ce get-cost-and-usage \
 ```
 
 ### Find Unused Resources
+
 ```bash
+
 # Unattached EBS volumes
+
 aws ec2 describe-volumes \
   --filters Name=status,Values=available \
   --query 'Volumes[*].[VolumeId,Size,VolumeType,CreateTime]' \
   --output table
 
 # Unused Elastic IPs
+
 aws ec2 describe-addresses \
   --query 'Addresses[?AssociationId==null].[PublicIp,AllocationId]' \
   --output table
 
 # Idle EC2 instances (requires CloudWatch)
+
 aws cloudwatch get-metric-statistics \
   --namespace AWS/EC2 \
   --metric-name CPUUtilization \
@@ -79,6 +90,7 @@ aws cloudwatch get-metric-statistics \
   --statistics Average
 
 # Old EBS snapshots (>90 days)
+
 aws ec2 describe-snapshots \
   --owner-ids self \
   --query 'Snapshots[?StartTime<=`'$(date -d '90 days ago' --iso-8601)'`].[SnapshotId,StartTime,VolumeSize]' \
@@ -86,13 +98,17 @@ aws ec2 describe-snapshots \
 ```
 
 ### Rightsizing Analysis
+
 ```bash
+
 # List EC2 instances with their types
+
 aws ec2 describe-instances \
   --query 'Reservations[*].Instances[*].[InstanceId,InstanceType,State.Name,Tags[?Key==`Name`].Value|[0]]' \
   --output table
 
 # Get RDS instance utilization
+
 aws cloudwatch get-metric-statistics \
   --namespace AWS/RDS \
   --metric-name CPUUtilization \
@@ -144,17 +160,20 @@ aws cloudwatch get-metric-statistics \
 ## Example Prompts
 
 **Analysis**
+
 - "Show me AWS costs for the last 3 months broken down by service"
 - "What are my top 10 most expensive resources?"
 - "Compare this month's spending to last month"
 
 **Optimization**
+
 - "Find all unattached EBS volumes and calculate savings"
 - "Identify EC2 instances with <5% CPU utilization"
 - "Suggest Reserved Instance purchases based on usage"
 - "Calculate savings from deleting snapshots older than 90 days"
 
 **Implementation**
+
 - "Create a script to delete unattached volumes"
 - "Set up a budget alert for $1000/month"
 - "Generate a cost optimization report for leadership"
@@ -174,10 +193,13 @@ aws cloudwatch get-metric-statistics \
 This skill works seamlessly with Kiro CLI's AWS integration:
 
 ```bash
+
 # Use Kiro to analyze costs
+
 kiro-cli chat "Use aws-cost-optimizer to analyze my spending"
 
 # Generate optimization report
+
 kiro-cli chat "Create a cost optimization plan using aws-cost-optimizer"
 ```
 
@@ -196,11 +218,13 @@ kiro-cli chat "Create a cost optimization plan using aws-cost-optimizer"
 - [AWS Cost Explorer API](https://docs.aws.amazon.com/cost-management/latest/APIReference/Welcome.html)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

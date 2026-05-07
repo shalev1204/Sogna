@@ -8,7 +8,6 @@ id: skill-verification-before-completion
 owner: [[orchestrator]]
 ---
 
-
 # Verification Before Completion
 
 ## Overview
@@ -114,6 +113,7 @@ Skip any step = lying, not verifying
 ## Why This Matters
 
 From 24 failure memories:
+
 - your human partner said "I don't believe you" - trust broken
 - Undefined functions shipped - would crash
 - Missing requirements shipped - incomplete features
@@ -121,7 +121,9 @@ From 24 failure memories:
 - Violates: "Honesty is a core value. If you lie, you'll be replaced."
 
 ## When to Use
+
 **ALWAYS before:**
+
 - ANY variation of success/completion claims
 - ANY expression of satisfaction
 - ANY positive statement about work state
@@ -130,6 +132,7 @@ From 24 failure memories:
 - Delegating to agents
 
 **Rule applies to:**
+
 - Exact phrases
 - Paraphrases and synonyms
 - Implications of success
@@ -144,14 +147,17 @@ Run the command. Read the output. THEN claim the result.
 This is non-negotiable.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

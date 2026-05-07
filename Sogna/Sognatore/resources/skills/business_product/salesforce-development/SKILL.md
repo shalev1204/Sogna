@@ -11,7 +11,6 @@ id: skill-salesforce-development
 owner: [[prod-pm]]
 ---
 
-
 # Salesforce Development
 
 Expert patterns for Salesforce platform development including Lightning Web
@@ -100,7 +99,9 @@ public with sharing class MyController {
 ### Context
 
 - building LWC components
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - fetching Salesforce data
 - reactive UI
 
@@ -682,7 +683,9 @@ the day, unlike sandbox refresh limits.
 }
 
 # Development workflow commands
+
 # 1. Create scratch org
+
 sf org create scratch \
   --definition-file config/project-scratch-def.json \
   --alias myapp-dev \
@@ -690,18 +693,23 @@ sf org create scratch \
   --set-default
 
 # 2. Push source to scratch org
+
 sf project deploy start --target-org myapp-dev
 
 # 3. Assign permission set
+
 sf org assign permset --name MyApp_Admin --target-org myapp-dev
 
 # 4. Import sample data
+
 sf data import tree --plan data/sample-data-plan.json --target-org myapp-dev
 
 # 5. Open org
+
 sf org open --target-org myapp-dev
 
 # 6. Run tests
+
 sf apex run test \
   --code-coverage \
   --result-format human \
@@ -709,6 +717,7 @@ sf apex run test \
   --target-org myapp-dev
 
 # 7. Pull changes back
+
 sf project retrieve start --target-org myapp-dev
 
 ### Context
@@ -724,10 +733,13 @@ with 2GP enabled, namespace linked, and 75% code coverage for promoted
 packages.
 
 # Enable Dev Hub and 2GP in Setup:
+
 # Setup > Dev Hub > Enable Dev Hub
+
 # Setup > Dev Hub > Enable Unlocked Packages and 2GP
 
 # Link namespace (required for managed packages)
+
 sf package create \
   --name "MyManagedPackage" \
   --package-type Managed \
@@ -735,6 +747,7 @@ sf package create \
   --target-dev-hub DevHub
 
 # Create package version (beta)
+
 sf package version create \
   --package "MyManagedPackage" \
   --installation-key-bypass \
@@ -743,21 +756,26 @@ sf package version create \
   --target-dev-hub DevHub
 
 # Check version status
+
 sf package version list --packages "MyManagedPackage" --target-dev-hub DevHub
 
 # Promote to released (requires 75% coverage)
+
 sf package version promote \
   --package "MyManagedPackage@1.0.0-1" \
   --target-dev-hub DevHub
 
 # Install in sandbox for testing
+
 sf package install \
   --package "MyManagedPackage@1.0.0-1" \
   --target-org MySandbox \
   --wait 20
 
 # CI/CD Pipeline (GitHub Actions)
+
 # .github/workflows/salesforce-ci.yml
+
 name: Salesforce CI
 
 on:
@@ -770,17 +788,21 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Install Salesforce CLI
+
         run: npm install -g @salesforce/cli
 
       - name: Authenticate Dev Hub
+
         run: |
           echo "${{ secrets.SFDX_AUTH_URL }}" > auth.txt
           sf org login sfdx-url --sfdx-url-file auth.txt --alias DevHub --set-default-dev-hub
 
       - name: Create Scratch Org
+
         run: |
           sf org create scratch \
             --definition-file config/project-scratch-def.json \
@@ -789,9 +811,11 @@ jobs:
             --set-default
 
       - name: Deploy Source
+
         run: sf project deploy start --target-org ci-scratch
 
       - name: Run Tests
+
         run: |
           sf apex run test \
             --code-coverage \
@@ -800,6 +824,7 @@ jobs:
             --target-org ci-scratch
 
       - name: Delete Scratch Org
+
         if: always()
         run: sf org delete scratch --target-org ci-scratch --no-prompt
 
@@ -945,6 +970,7 @@ Message: DML after @wire without refreshApex. Data may be stale.
 - user needs advanced auth -> auth-specialist (SSO, SAML, custom portals)
 
 ## When to Use
+
 - User mentions or implies: salesforce
 - User mentions or implies: sfdc
 - User mentions or implies: apex
@@ -958,11 +984,13 @@ Message: DML after @wire without refreshApex. Data may be stale.
 - User mentions or implies: connected app
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

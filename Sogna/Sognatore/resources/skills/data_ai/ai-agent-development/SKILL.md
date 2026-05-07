@@ -9,7 +9,6 @@ id: skill-ai-agent-development
 owner: [[prod-pm]]
 ---
 
-
 # AI Agent Development Workflow
 
 ## Overview
@@ -19,6 +18,7 @@ Specialized workflow for building AI agents including single autonomous agents, 
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Building autonomous AI agents
 - Creating multi-agent systems
 - Implementing agent orchestration
@@ -30,10 +30,12 @@ Use this workflow when:
 ### Phase 1: Agent Design
 
 #### Skills to Invoke
+
 - `ai-agents-architect` - Agent architecture
 - `autonomous-agents` - Autonomous patterns
 
 #### Actions
+
 1. Define agent purpose
 2. Design agent capabilities
 3. Plan tool integration
@@ -41,6 +43,7 @@ Use this workflow when:
 5. Define success metrics
 
 #### Copy-Paste Prompts
+
 ```
 Use @ai-agents-architect to design AI agent architecture
 ```
@@ -48,10 +51,12 @@ Use @ai-agents-architect to design AI agent architecture
 ### Phase 2: Single Agent Implementation
 
 #### Skills to Invoke
+
 - `autonomous-agent-patterns` - Agent patterns
 - `autonomous-agents` - Autonomous agents
 
 #### Actions
+
 1. Choose agent framework
 2. Implement agent logic
 3. Add tool integration
@@ -59,6 +64,7 @@ Use @ai-agents-architect to design AI agent architecture
 5. Test agent behavior
 
 #### Copy-Paste Prompts
+
 ```
 Use @autonomous-agent-patterns to implement single agent
 ```
@@ -66,10 +72,12 @@ Use @autonomous-agent-patterns to implement single agent
 ### Phase 3: Multi-Agent System
 
 #### Skills to Invoke
+
 - `crewai` - CrewAI framework
 - `multi-agent-patterns` - Multi-agent patterns
 
 #### Actions
+
 1. Define agent roles
 2. Set up agent communication
 3. Configure orchestration
@@ -77,6 +85,7 @@ Use @autonomous-agent-patterns to implement single agent
 5. Test coordination
 
 #### Copy-Paste Prompts
+
 ```
 Use @crewai to build multi-agent system with roles
 ```
@@ -84,10 +93,12 @@ Use @crewai to build multi-agent system with roles
 ### Phase 4: Agent Orchestration
 
 #### Skills to Invoke
+
 - `langgraph` - LangGraph orchestration
 - `workflow-orchestration-patterns` - Orchestration
 
 #### Actions
+
 1. Design workflow graph
 2. Implement state management
 3. Add conditional branches
@@ -95,6 +106,7 @@ Use @crewai to build multi-agent system with roles
 5. Test workflows
 
 #### Copy-Paste Prompts
+
 ```
 Use @langgraph to create stateful agent workflows
 ```
@@ -102,10 +114,12 @@ Use @langgraph to create stateful agent workflows
 ### Phase 5: Tool Integration
 
 #### Skills to Invoke
+
 - `agent-tool-builder` - Tool building
 - `tool-design` - Tool design
 
 #### Actions
+
 1. Identify tool needs
 2. Design tool interfaces
 3. Implement tools
@@ -113,6 +127,7 @@ Use @langgraph to create stateful agent workflows
 5. Test tool usage
 
 #### Copy-Paste Prompts
+
 ```
 Use @agent-tool-builder to create agent tools
 ```
@@ -120,10 +135,12 @@ Use @agent-tool-builder to create agent tools
 ### Phase 6: Memory Systems
 
 #### Skills to Invoke
+
 - `agent-memory-systems` - Memory architecture
 - `conversation-memory` - Conversation memory
 
 #### Actions
+
 1. Design memory structure
 2. Implement short-term memory
 3. Set up long-term memory
@@ -131,6 +148,7 @@ Use @agent-tool-builder to create agent tools
 5. Test memory retrieval
 
 #### Copy-Paste Prompts
+
 ```
 Use @agent-memory-systems to implement agent memory
 ```
@@ -138,10 +156,12 @@ Use @agent-memory-systems to implement agent memory
 ### Phase 7: Evaluation
 
 #### Skills to Invoke
+
 - `agent-evaluation` - Agent evaluation
 - `evaluation` - AI evaluation
 
 #### Actions
+
 1. Define evaluation criteria
 2. Create test scenarios
 3. Measure agent performance
@@ -149,6 +169,7 @@ Use @agent-memory-systems to implement agent memory
 5. Iterate improvements
 
 #### Copy-Paste Prompts
+
 ```
 Use @agent-evaluation to evaluate agent performance
 ```
@@ -176,11 +197,13 @@ User Input -> Planner -> Agent -> Tools -> Memory -> Response
 - `workflow-automation` - Workflow patterns
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

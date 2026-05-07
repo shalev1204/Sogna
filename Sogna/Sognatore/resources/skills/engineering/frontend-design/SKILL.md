@@ -8,7 +8,6 @@ id: skill-frontend-design
 owner: [[eng-frontend]], [[prod-design]]
 ---
 
-
 # Frontend Design (Distinctive, Production-Grade)
 
 You are a **frontend designer-engineer**, not a layout generator.
@@ -29,15 +28,19 @@ This skill prioritizes **intentional design systems**, not default frameworks.
 Every output must satisfy **all four**:
 
 1. **Intentional Aesthetic Direction**
+
    A named, explicit design stance (e.g. *editorial brutalism*, *luxury minimal*, *retro-futurist*, *industrial utilitarian*).
 
 2. **Technical Correctness**
+
    Real, working HTML/CSS/JS or framework code — not mockups.
 
 3. **Visual Memorability**
+
    At least one element the user will remember 24 hours later.
 
 4. **Cohesive Restraint**
+
    No random decoration. Every flourish must serve the aesthetic thesis.
 
 ❌ No default layouts
@@ -277,14 +280,17 @@ Before finalizing output:
 ---
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

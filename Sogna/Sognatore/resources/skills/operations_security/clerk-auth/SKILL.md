@@ -9,7 +9,6 @@ id: skill-clerk-auth
 owner: [[ops-security]]
 ---
 
-
 # Clerk Authentication
 
 Expert patterns for Clerk auth implementation, middleware, organizations, webhooks, and user sync
@@ -24,6 +23,7 @@ Includes ClerkProvider, environment variables, and basic
 sign-in/sign-up components.
 
 Key components:
+
 - ClerkProvider: Wraps app for auth context
 - <SignIn />, <SignUp />: Pre-built auth forms
 - <UserButton />: User menu with session management
@@ -31,6 +31,7 @@ Key components:
 ### Code_example
 
 # Environment variables (.env.local)
+
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
 CLERK_SECRET_KEY=sk_test_...
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
@@ -108,6 +109,7 @@ export function Header() {
 Protect routes using clerkMiddleware and createRouteMatcher.
 
 Best practices:
+
 - Single middleware.ts file at project root
 - Use createRouteMatcher for route groups
 - auth.protect() for explicit protection
@@ -185,6 +187,7 @@ export default clerkMiddleware(async (auth, req) => {
 Access auth state in Server Components using auth() and currentUser().
 
 Key functions:
+
 - auth(): Returns userId, sessionId, orgId, claims
 - currentUser(): Returns full User object
 - Both require clerkMiddleware to be configured
@@ -277,6 +280,7 @@ export async function createPost(formData: FormData) {
 Access auth state in Client Components using hooks.
 
 Key hooks:
+
 - useUser(): User object and loading state
 - useAuth(): Auth state, signOut, etc.
 - useSession(): Session object
@@ -380,6 +384,7 @@ export function ProtectedContent() {
 Implement B2B multi-tenancy with Clerk Organizations.
 
 Features:
+
 - Multiple orgs per user
 - Roles and permissions
 - Organization-scoped data
@@ -488,6 +493,7 @@ export function AdminPanel() {
 Sync Clerk users to your database using webhooks.
 
 Key webhooks:
+
 - user.created: New user signed up
 - user.updated: User profile changed
 - user.deleted: User deleted account
@@ -829,6 +835,7 @@ Message: Webhook without signature verification. Use svix to verify.
 - user needs email -> resend-email (Transactional emails)
 
 ## When to Use
+
 - User mentions or implies: adding authentication
 - User mentions or implies: clerk auth
 - User mentions or implies: user authentication
@@ -841,11 +848,13 @@ Message: Webhook without signature verification. Use svix to verify.
 - User mentions or implies: single sign-on
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

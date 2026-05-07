@@ -8,7 +8,6 @@ id: skill-upgrading-expo
 owner: [[orchestrator]]
 ---
 
-
 # Upgrading Expo
 
 ## Overview
@@ -20,6 +19,7 @@ Upgrade Expo SDK versions safely, handling breaking changes, dependencies, and c
 Use this skill when you need to upgrade Expo SDK versions.
 
 Use this skill when:
+
 - Upgrading to a new Expo SDK version
 - Handling breaking changes between SDK versions
 - Updating dependencies for compatibility
@@ -49,13 +49,17 @@ This skill guides you through upgrading Expo SDK versions:
 ### 2. Update Expo SDK
 
 ```bash
+
 # Update Expo CLI
+
 npm install -g expo-cli@latest
 
 # Upgrade Expo SDK
+
 npx expo install expo@latest
 
 # Update all Expo packages
+
 npx expo install --fix
 ```
 
@@ -70,13 +74,17 @@ npx expo install --fix
 ### 4. Update Dependencies
 
 ```bash
+
 # Check for outdated packages
+
 npx expo-doctor
 
 # Update packages to compatible versions
+
 npx expo install --fix
 
 # Verify compatibility
+
 npx expo-doctor
 ```
 
@@ -122,11 +130,13 @@ npx expo-doctor
 For more information, see the [source repository](https://github.com/expo/skills/tree/main/plugins/upgrading-expo).
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

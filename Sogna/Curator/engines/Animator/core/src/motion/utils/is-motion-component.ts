@@ -10,3 +10,5 @@ export function issognaflowComponent(component: React.ComponentType | string) {
         sognaflowComponentSymbol in component
     )
 }
+
+export const isMotionComponent = issognaflowComponent

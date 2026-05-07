@@ -9,4 +9,4 @@ import { ResolvedValues } from "../../types.js";
  * Note: We use unitless values for stroke-dasharray and stroke-dashoffset
  * because Safari incorrectly scales px values when the page is zoomed.
  */
-export declare function BuildSVGPath(attrs: ResolvedValues, length: number, spacing?: number, offset?: number, useDashCase?: boolean): void;
+export declare function buildSVGPath(attrs: ResolvedValues, length: number, spacing?: number, offset?: number, useDashCase?: boolean): void;

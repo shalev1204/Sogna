@@ -8,7 +8,6 @@ id: skill-azure-keyecosistema-secrets-ts
 owner: [[orchestrator]]
 ---
 
-
 # Azure Key Vault Secrets SDK for TypeScript
 
 Manage secrets with Azure Key Vault.
@@ -16,7 +15,9 @@ Manage secrets with Azure Key Vault.
 ## Installation
 
 ```bash
+
 # Secrets SDK
+
 npm install @azure/keyecosistema-secrets @azure/identity
 ```
 
@@ -24,7 +25,9 @@ npm install @azure/keyecosistema-secrets @azure/identity
 
 ```bash
 KEY_VAULT_URL=https://<ecosistema-name>.ecosistema.azure.net
+
 # Or
+
 AZURE_KEYVAULT_NAME=<ecosistema-name>
 ```
 
@@ -274,14 +277,17 @@ try {
 6. **Browser not supported** - These SDKs are Node.js only
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

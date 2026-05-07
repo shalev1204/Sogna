@@ -31,7 +31,9 @@ Context: WWDC23 session on building a mental model for SwiftUI performance and t
 ## Avoid slow initialization in view bodies
 
 - Don’t create heavy models synchronously in view bodies.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Use `.task` to fetch async data and keep `init` lightweight.
 
 ## Lists and tables identity rules
@@ -54,6 +56,7 @@ Context: WWDC23 session on building a mental model for SwiftUI performance and t
 - Use `_printChanges` to validate dependency assumptions during debug.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

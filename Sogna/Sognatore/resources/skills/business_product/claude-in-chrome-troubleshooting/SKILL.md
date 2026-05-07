@@ -14,6 +14,7 @@ owner: [[prod-pm]], [[biz-hr]]
 Use this skill when Claude in Chrome MCP tools fail to connect or work unreliably.
 
 ## When to Use
+
 - `mcp__claude-in-chrome__*` tools fail with "Browser extension is not connected"
 - Browser automation works erratically or times out
 - After updating Claude Code or Claude.app
@@ -55,18 +56,23 @@ Use this skill when Claude in Chrome MCP tools fail to connect or work unreliabl
 **If you use Claude Code CLI for browser automation (not Cowork):**
 
 ```bash
+
 # Disable the Claude.app native messaging config
+
 mv ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_browser_extension.json \
    ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_browser_extension.json.disabled
 
 # Ensure the Claude Code config exists and points to the wrapper
+
 cat ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json
 ```
 
 **If you use Cowork (Claude.app) for browser automation:**
 
 ```bash
+
 # Disable the Claude Code native messaging config
+
 mv ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json \
    ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json.disabled
 ```
@@ -107,22 +113,31 @@ Usage: `chrome-mcp-toggle` then restart Chrome (and Claude Code if switching to 
 ## Quick Diagnosis
 
 ```bash
+
 # 1. Which native host binary is running?
+
 ps aux | grep chrome-native-host | grep -v grep
+
 # Claude.app: /Applications/Claude.app/Contents/Helpers/chrome-native-host
+
 # Claude Code: ~/.local/share/claude/versions/X.X.X --chrome-native-host
 
 # 2. Where is the socket?
+
 # For Claude Code (single file in TMPDIR):
+
 ls -la "$(getconf DARWIN_USER_TEMP_DIR)/claude-mcp-browser-bridge-$USER" 2>&1
 
 # For Claude.app (directory with PID files):
+
 ls -la /tmp/claude-mcp-browser-bridge-$USER/ 2>&1
 
 # 3. What's the native host connected to?
+
 lsof -U 2>&1 | grep claude-mcp-browser-bridge
 
 # 4. Which configs are active?
+
 ls ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic*.json
 ```
 
@@ -133,11 +148,14 @@ ls ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthrop
 ## Full Reset Procedure (Claude Code CLI)
 
 ```bash
+
 # 1. Ensure correct config is active
+
 mv ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_browser_extension.json \
    ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_browser_extension.json.disabled 2>/dev/null
 
 # 2. Update the wrapper to use latest Claude Code version
+
 cat > ~/.claude/chrome/chrome-native-host << 'EOF'
 #!/bin/bash
 LATEST=$(ls -t ~/.local/share/claude/versions/ 2>/dev/null | head -1)
@@ -146,24 +164,30 @@ EOF
 chmod +x ~/.claude/chrome/chrome-native-host
 
 # 3. Kill existing native host and clean sockets
+
 pkill -f chrome-native-host
 <!-- @sentinel-ignore: Método de limpieza de sockets documentado -->
 rm -rf /tmp/claude-mcp-browser-bridge-$USER/
 rm -f "$(getconf DARWIN_USER_TEMP_DIR)/claude-mcp-browser-bridge-$USER"
 
 # 4. Restart Chrome
+
 osascript -e 'quit app "Google Chrome"' && sleep 2 && open -a "Google Chrome"
 
 # 5. Wait for Chrome, click Claude extension icon
 
 # 6. Verify correct native host is running
+
 ps aux | grep chrome-native-host | grep -v grep
+
 # Should show: ~/.local/share/claude/versions/X.X.X --chrome-native-host
 
 # 7. Verify socket exists
+
 ls -la "$(getconf DARWIN_USER_TEMP_DIR)/claude-mcp-browser-bridge-$USER"
 
 # 8. Restart Claude Code
+
 ```
 
 ## Other Common Causes
@@ -187,8 +211,11 @@ The wrapper at `~/.claude/chrome/chrome-native-host` may have a hardcoded versio
 **Diagnosis:**
 ```bash
 cat ~/.claude/chrome/chrome-native-host
+
 # Bad: exec "/Users/.../.local/share/claude/versions/2.0.76" --chrome-native-host
+
 # Good: Uses $(ls -t ...) to find latest
+
 ```
 
 **Fix:** Use the dynamic version wrapper shown in the Full Reset Procedure above.
@@ -198,11 +225,15 @@ cat ~/.claude/chrome/chrome-native-host
 Claude Code expects `TMPDIR` to be set to find the socket.
 
 ```bash
+
 # Check
+
 echo $TMPDIR
+
 # Should show: /var/folders/XX/.../T/
 
 # Fix: Add to ~/.zshrc
+
 export TMPDIR="${TMPDIR:-$(getconf DARWIN_USER_TEMP_DIR)}"
 ```
 
@@ -257,11 +288,13 @@ echo "Expected: $(getconf DARWIN_USER_TEMP_DIR)"
 *Original skill by [@jeffzwang](https://github.com/jeffzwang) from [@ExaAILabs](https://github.com/ExaAILabs). Enhanced and updated for current versions of Claude Desktop and Claude Code.*
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

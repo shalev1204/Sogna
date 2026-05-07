@@ -25,3 +25,4 @@ export interface InterpolateOptions<T> {
  * @public
  */
 export declare function Interpolate<T>(input: number[], output: T[], { clamp: isClamp, ease, mixer }?: InterpolateOptions<T>): (v: number) => T;
+export declare const interpolate: typeof Interpolate;

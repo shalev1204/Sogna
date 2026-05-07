@@ -37,6 +37,7 @@ def delayed_task(delay_seconds, task):
 ```
 
 Use cases for durable sleep:
+
 - Schedule a task for the future
 - Wait between retries
 - Implement delays spanning hours, days, or weeks
@@ -63,6 +64,7 @@ async def async_delayed_task():
 Reference: [Durable Sleep](https://docs.dbos.dev/python/tutorials/workflow-tutorial#durable-sleep)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

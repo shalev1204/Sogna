@@ -8,7 +8,6 @@ id: skill-azure-appconfiguration-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure App Configuration SDK for Python
 
 Centralized configuration management with feature flags and dynamic settings.
@@ -23,7 +22,9 @@ pip install azure-appconfiguration
 
 ```bash
 AZURE_APPCONFIGURATION_CONNECTION_STRING=Endpoint=https://<name>.azconfig.io;Id=...;Secret=...
+
 # Or for Entra ID:
+
 AZURE_APPCONFIGURATION_ENDPOINT=https://<name>.azconfig.io
 ```
 
@@ -63,7 +64,9 @@ print(f"{setting.key} = {setting.value}")
 ### Get with Label
 
 ```python
+
 # Labels allow environment-specific values
+
 setting = client.get_configuration_setting(
     key="app:settings:message",
     label="production"
@@ -168,13 +171,16 @@ for flag in flags:
 ## Read-Only Settings
 
 ```python
+
 # Make setting read-only
+
 client.set_read_only(
     configuration_setting=setting,
     read_only=True
 )
 
 # Remove read-only
+
 client.set_read_only(
     configuration_setting=setting,
     read_only=False
@@ -252,14 +258,17 @@ async def main():
 7. **Use feature flags** for gradual rollouts and A/B testing
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

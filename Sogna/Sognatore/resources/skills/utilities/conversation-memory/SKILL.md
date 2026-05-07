@@ -9,7 +9,6 @@ id: skill-conversation-memory
 owner: [[orchestrator]]
 ---
 
-
 # Conversation Memory
 
 Persistent memory systems for LLM conversations including short-term, long-term, and entity-based memory
@@ -218,6 +217,7 @@ async function promptWithMemory(
 ${systemPrompt}
 
 ## User Context
+
 ${entities.length ? `Known about user:\n${entities.map(e =>
     `- ${e.name}: ${e.facts.map(f => f.content).join('; ')}`
 ).join('\n')}` : ''}
@@ -227,9 +227,11 @@ ${relevantMemories.length ? `Relevant past interactions:\n${relevantMemories.map
 ).join('\n')}` : ''}
 
 ## Recent Conversation
+
 ${formatMessages(recentContext)}
 
 ## Current Query
+
 ${query}
     `.trim();
 
@@ -250,6 +252,7 @@ Severity: HIGH
 Situation: System slows over time, costs increase
 
 Symptoms:
+
 - Slow memory retrieval
 - High storage costs
 - Increasing latency over time
@@ -320,6 +323,7 @@ Severity: HIGH
 Situation: Memories included in context but don't help
 
 Symptoms:
+
 - Memories in context seem random
 - User asks about things already in memory
 - Confusion from irrelevant context
@@ -368,6 +372,7 @@ Severity: CRITICAL
 Situation: User sees information from another user's sessions
 
 Symptoms:
+
 - User sees other user's information
 - Privacy complaints
 - Compliance violations
@@ -479,10 +484,12 @@ Skills: conversation-memory, context-window-management, rag-implementation
 Workflow:
 
 ```
+
 1. Design memory tiers
 2. Implement storage and retrieval
 3. Integrate with context management
 4. Add consolidation and cleanup
+
 ```
 
 ## Related Skills
@@ -490,6 +497,7 @@ Workflow:
 Works well with: `context-window-management`, `rag-implementation`, `prompt-caching`, `llm-npc-dialogue`
 
 ## When to Use
+
 - User mentions or implies: conversation memory
 - User mentions or implies: remember
 - User mentions or implies: memory persistence
@@ -497,11 +505,13 @@ Works well with: `context-window-management`, `rag-implementation`, `prompt-cach
 - User mentions or implies: chat history
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

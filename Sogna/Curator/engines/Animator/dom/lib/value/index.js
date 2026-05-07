@@ -2,7 +2,7 @@ import { SubscriptionManager, velocityPerSecond, warnOnce, } from "sognaflow-uti
 import { Frame } from "../frameloop";
 import { Time } from "../frameloop/sync-time.js";
 /**
- * Maximum time between the value of two frames, beyond which we
+ * Maximum Time between the value of two frames, beyond which we
  * assume the velocity has since been 0.
  */
 const MAX_VELOCITY_DELTA = 30;
@@ -40,8 +40,8 @@ export class SognaflowValue {
         this.updateAndNotify = (v) => {
             const currentTime = Time.now();
             /**
-             * If we're updating the value during another frame or eventloop
-             * than the previous frame, then the we set the previous frame value
+             * If we're updating the value during another Frame or eventloop
+             * than the previous Frame, then the we set the previous Frame value
              * to current.
              */
             if (this.updatedAt !== currentTime) {
@@ -130,7 +130,7 @@ export class SognaflowValue {
                 unsubscribe();
                 /**
                  * If we have no more change listeners by the start
-                 * of the next frame, stop active animations.
+                 * of the next Frame, stop active animations.
                  */
                 Frame.read(() => {
                     if (!this.events.change.getSize()) {
@@ -248,7 +248,7 @@ export class SognaflowValue {
     }
     /**
      * Registers a new animation to control this `sognaflowValue`. Only one
-     * animation can drive a `sognaflowValue` at one time.
+     * animation can drive a `sognaflowValue` at one Time.
      *
      * ```jsx
      * value.start()
@@ -315,7 +315,11 @@ export class SognaflowValue {
         }
     }
 }
+export function sognaflowValue(init, options) {
+    return new SognaflowValue(init, options);
+}
 export function CreateSognaflowValue(init, options) {
     return new SognaflowValue(init, options);
 }
+export { CollectSognaflowValues as collectsognaflowValues };
 //# sourceMappingURL=index.js.map

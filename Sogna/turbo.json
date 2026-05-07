@@ -5,24 +5,42 @@
     "pnpm-workspace.yaml",
     "turbo.json",
     "tsconfig.json",
-    ".sognarc.json"
+    ".env*",
+    ".sognarc.json",
+    "package.json"
   ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"],
-      "inputs": ["src/**/*", "tsconfig.json", "package.json"]
+      "outputs": ["dist/**", ".next/**", "out/**", "build/**"],
+      "inputs": [
+        "src/**/*",
+        "public/**/*",
+        "tsconfig.json",
+        "package.json",
+        "vite.config.*",
+        "rollup.config.*",
+        "next.config.*"
+      ]
     },
     "check": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**/*.ts", "tsconfig.json"]
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "tsconfig.json"],
+      "cache": true
     },
     "test": {
       "dependsOn": ["build"],
-      "inputs": ["src/**/*.ts", "src/**/*.test.ts", "package.json"]
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.test.ts", "package.json", "vitest.config.*", "jest.config.*"],
+      "outputs": ["coverage/**"],
+      "cache": true
     },
     "lint": {
-      "inputs": ["src/**/*", "package.json"]
+      "inputs": ["src/**/*", "package.json", ".eslintrc*", "eslint.config.*", "prettier.config.*"],
+      "cache": true
+    },
+    "sync": {
+      "inputs": ["Curator/bin/memory_sync.js", "memory/**/*"],
+      "cache": false
     },
     "dev": {
       "cache": false,

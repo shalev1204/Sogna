@@ -8,7 +8,6 @@ id: skill-startup-metrics-framework
 owner: [[prod-pm]]
 ---
 
-
 # Startup Metrics Framework
 
 Comprehensive guide to tracking, calculating, and optimizing key performance metrics for different startup business models from seed through Series A.
@@ -35,11 +34,13 @@ Comprehensive guide to tracking, calculating, and optimizing key performance met
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

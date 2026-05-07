@@ -8,7 +8,6 @@ id: skill-azure-storage-blob-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Blob Storage SDK for Python
 
 Client library for Azure Blob Storage — object storage for unstructured data.
@@ -23,7 +22,9 @@ pip install azure-storage-blob azure-identity
 
 ```bash
 AZURE_STORAGE_ACCOUNT_NAME=<your-storage-account>
+
 # Or use full URL
+
 AZURE_STORAGE_ACCOUNT_URL=https://<account>.blob.core.windows.net
 ```
 
@@ -59,7 +60,9 @@ container_client.create_container()
 ### Upload Blob
 
 ```python
+
 # From file path
+
 blob_client = blob_service_client.get_blob_client(
     container="mycontainer",
     blob="sample.txt"
@@ -69,9 +72,11 @@ with open("./local-file.txt", "rb") as data:
     blob_client.upload_blob(data, overwrite=True)
 
 # From bytes/string
+
 blob_client.upload_blob(b"Hello, World!", overwrite=True)
 
 # From stream
+
 import io
 stream = io.BytesIO(b"Stream content")
 blob_client.upload_blob(stream, overwrite=True)
@@ -86,15 +91,18 @@ blob_client = blob_service_client.get_blob_client(
 )
 
 # To file
+
 with open("./downloaded.txt", "wb") as file:
     download_stream = blob_client.download_blob()
     file.write(download_stream.readall())
 
 # To memory
+
 download_stream = blob_client.download_blob()
 content = download_stream.readall()  # bytes
 
 # Read into existing buffer
+
 stream = io.BytesIO()
 num_bytes = blob_client.download_blob().readinto(stream)
 ```
@@ -105,14 +113,17 @@ num_bytes = blob_client.download_blob().readinto(stream)
 container_client = blob_service_client.get_container_client("mycontainer")
 
 # List all blobs
+
 for blob in container_client.list_blobs():
     print(f"{blob.name} - {blob.size} bytes")
 
 # List with prefix (folder-like)
+
 for blob in container_client.list_blobs(name_starts_with="logs/"):
     print(blob.name)
 
 # Walk blob hierarchy (virtual directories)
+
 for item in container_client.walk_blobs(delimiter="/"):
     if item.get("prefix"):
         print(f"Directory: {item['prefix']}")
@@ -126,13 +137,16 @@ for item in container_client.walk_blobs(delimiter="/"):
 blob_client.delete_blob()
 
 # Delete with snapshots
+
 blob_client.delete_blob(delete_snapshots="include")
 ```
 
 ## Performance Tuning
 
 ```python
+
 # Configure chunk sizes for large uploads/downloads
+
 blob_client = BlobClient(
     account_url=account_url,
     container_name="mycontainer",
@@ -143,9 +157,11 @@ blob_client = BlobClient(
 )
 
 # Parallel upload
+
 blob_client.upload_blob(data, max_concurrency=4)
 
 # Parallel download
+
 download_stream = blob_client.download_blob(max_concurrency=4)
 ```
 
@@ -165,22 +181,27 @@ sas_token = generate_blob_sas(
 )
 
 # Use SAS token
+
 blob_url = f"https://<account>.blob.core.windows.net/mycontainer/sample.txt?{sas_token}"
 ```
 
 ## Blob Properties and Metadata
 
 ```python
+
 # Get properties
+
 properties = blob_client.get_blob_properties()
 print(f"Size: {properties.size}")
 print(f"Content-Type: {properties.content_settings.content_type}")
 print(f"Last modified: {properties.last_modified}")
 
 # Set metadata
+
 blob_client.set_blob_metadata(metadata={"category": "logs", "year": "2024"})
 
 # Set content type
+
 from azure.storage.blob import ContentSettings
 blob_client.set_http_headers(
     content_settings=ContentSettings(content_type="application/json")
@@ -203,6 +224,7 @@ async def upload_async():
             await blob_client.upload_blob(data, overwrite=True)
 
 # Download async
+
 async def download_async():
     async with BlobServiceClient(account_url, credential=credential) as client:
         blob_client = client.get_blob_client("mycontainer", "sample.txt")
@@ -222,14 +244,17 @@ async def download_async():
 7. **Set appropriate content types** for web-served blobs
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

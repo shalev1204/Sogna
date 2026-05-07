@@ -8,7 +8,6 @@ id: skill-microsoft-azure-webjobs-extensions-authentication-events-dotnet
 owner: [[orchestrator]]
 ---
 
-
 # Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents (.NET)
 
 Azure Functions extension for handling Microsoft Entra ID custom authentication events.
@@ -379,11 +378,14 @@ After deploying your Function App, configure the custom extension in Entra ID:
 
 ```
 Expose an API:
+
   - Application ID URI: api://<your-function-app-name>.azurewebsites.net
   - Scope: CustomAuthenticationExtension.Receive.Payload
 
 API Permissions:
+
   - Microsoft Graph: User.Read (delegated)
+
 ```
 
 ## Best Practices
@@ -445,14 +447,17 @@ public static WebJobsAuthenticationEventResponse Run(
 | GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

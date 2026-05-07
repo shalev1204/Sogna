@@ -45,7 +45,9 @@ Future (lazy) → poll() → Ready(value) | Pending
 ## Quick Start
 
 ```toml
+
 # Cargo.toml
+
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 futures = "0.3"
@@ -515,6 +517,7 @@ tokio::spawn(async move {
 ## Best Practices
 
 ### Do's
+
 - **Use `tokio::select!`** - For racing futures
 - **Prefer channels** - Over shared state when possible
 - **Use `JoinSet`** - For managing multiple tasks
@@ -522,6 +525,7 @@ tokio::spawn(async move {
 - **Handle cancellation** - Check `CancellationToken`
 
 ### Don'ts
+
 - **Don't block** - Never use `std::thread::sleep` in async
 - **Don't hold locks across awaits** - Causes deadlocks
 - **Don't spawn unboundedly** - Use semaphores for limits
@@ -535,6 +539,7 @@ tokio::spawn(async move {
 - [Tokio Console](https://github.com/tokio-rs/console)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

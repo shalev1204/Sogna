@@ -11,7 +11,6 @@ id: skill-intelligent-routing
 owner: [[orchestrator]]
 ---
 
-
 # Intelligent Agent Routing
 
 **Purpose**: Automatically analyze user requests and route them to the most appropriate specialist agent(s) without requiring explicit user mentions.
@@ -316,6 +315,7 @@ still mention agents explicitly with `@agent-name` if you prefer.
 Add to GEMINI.md temporarily:
 
 ```markdown
+
 ## DEBUG: Intelligent Routing
 
 Show selection reasoning:
@@ -323,6 +323,7 @@ Show selection reasoning:
 - Detected domains: [list]
 - Selected agent: [name]
 - Reasoning: [why]
+
 ```
 
 ## Summary

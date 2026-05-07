@@ -88,6 +88,7 @@ version: 1.0.0
 June 10, 2024| Reorganized some guidance into new topics and added game-specific examples.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -61,6 +61,7 @@ func main() {
 ```
 
 Config fields:
+
 - `AppName` (required): Application identifier
 - `DatabaseURL` (required unless `SystemDBPool` is set): PostgreSQL connection string
 - `SystemDBPool`: Custom `*pgxpool.Pool` (takes precedence over `DatabaseURL`)
@@ -75,6 +76,7 @@ Config fields:
 Reference: [Integrating DBOS](https://docs.dbos.dev/golang/integrating-dbos)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

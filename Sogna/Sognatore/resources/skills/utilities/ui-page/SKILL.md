@@ -13,7 +13,6 @@ id: skill-ui-page
 owner: [[orchestrator]]
 ---
 
-
 # UI Page
 
 ## Overview
@@ -21,6 +20,7 @@ owner: [[orchestrator]]
 Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill scaffolds a complete page or screen using the Toss seed's mobile-first composition rules. It keeps page structure consistent by building on the existing shell, top bar, bottom navigation, and card rhythm instead of producing disconnected sections.
 
 ## When to Use
+
 - Use when you need a new page in a Toss-seed app
 - Use when you want a consistent page shell, spacing, and navigation structure
 - Use when you are adding a new product flow and need a solid starting layout
@@ -31,6 +31,7 @@ Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill scaffolds 
 ### Step 1: Inspect the Existing Shell
 
 Read the current page scaffolding patterns first, especially:
+
 - page shell
 - top bar
 - bottom navigation
@@ -39,6 +40,7 @@ Read the current page scaffolding patterns first, especially:
 ### Step 2: Define the Page Purpose
 
 Clarify:
+
 - the page name
 - the primary user question the screen answers
 - the top one or two actions the user should take
@@ -48,6 +50,7 @@ Every screen should have one dominant purpose.
 ### Step 3: Use the Information Pyramid
 
 Lay out the page from highest importance to lowest:
+
 1. Hero or top summary
 2. KPI or key actions
 3. detail cards or supporting modules
@@ -58,6 +61,7 @@ Avoid repeating the same section type mechanically from top to bottom.
 ### Step 4: Apply the Toss Layout Rules
 
 Default layout choices:
+
 - mobile viewport width around `max-w-[430px]`
 - page background on `bg-background`
 - horizontal padding around `px-6`
@@ -79,6 +83,7 @@ Use existing `ui/` and `patterns/` components wherever possible. New pages shoul
 ## Output
 
 Return:
+
 1. The page scaffold
 2. The chosen section structure
 3. Reused components and any newly required components
@@ -97,11 +102,13 @@ Return:
 - [Source skill](https://github.com/bitjaru/styleseed/blob/main/seeds/toss/.claude/skills/ui-page/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

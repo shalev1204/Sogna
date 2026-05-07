@@ -4,21 +4,24 @@ description: Web scraping inteligente multi-estrategia. Extrai dados estruturado
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - scraping
 - data-extraction
 - automation
 - csv
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-web-scraper
 owner: [[orchestrator]]
 ---
-
 
 # Web Scraper
 
@@ -46,7 +49,9 @@ Web scraping inteligente multi-estrategia. Extrai dados estruturados de paginas 
 Execute phases in strict order. Each phase feeds the next.
 
 ```
+
 1. CLARIFY  ->  2. RECON  ->  3. STRATEGY  ->  4. EXTRACT  ->  5. TRANSFORM  ->  6. VALIDATE  ->  7. FORMAT
+
 ```
 
 Never skip Phase 1 or Phase 2. They prevent wasted effort and failed extractions.
@@ -103,17 +108,23 @@ Establish extraction parameters before touching any URL.
 ## Clarification Rules
 
 - If user provides a URL and clear data target, proceed directly to Phase 2.
+
   Do NOT ask unnecessary questions.
+
 - If request is ambiguous (e.g. "scrape this site"), ask ONLY:
+
   "What specific data do you want me to extract from this page?"
+
 - Default to Markdown table output. Mention alternatives only if relevant.
 - Accept requests in any language. Always respond in the user's language.
 - If user says "everything" or "all data", perform recon first, then present
+
   what's available and let user choose.
 
 ## Discovery Mode
 
 When user has a topic but no specific URL:
+
 1. Use WebSearch to find the most relevant pages
 2. Present top 3-5 URLs with descriptions
 3. Let user choose which to scrape, or scrape all
@@ -137,19 +148,29 @@ Use WebFetch to retrieve and analyze the page structure:
 WebFetch(
   url = TARGET_URL,
   prompt = "Analyze this page structure and report:
+
     1. Page type: article, product listing, search results, data table,
+
        directory, dashboard, API docs, FAQ, pricing page, job board, events, or other
+
     2. Main content structure: tables, ordered/unordered lists, card grid, free-form text,
+
        accordion/collapsible sections, tabs
+
     3. Approximate number of distinct data items visible
     4. JavaScript rendering indicators: empty containers, loading spinners,
+
        SPA framework markers (React root, Vue app, Angular), minimal HTML with heavy JS
+
     5. Pagination: next/prev links, page numbers, load-more buttons,
+
        infinite scroll indicators, total results count
+
     6. Data density: how much structured, extractable data exists
     7. List the main data fields/columns available for extraction
     8. Embedded structured data: JSON-LD, microdata, OpenGraph tags
     9. Available download links: CSV, Excel, PDF, API endpoints"
+
 )
 ```
 
@@ -216,6 +237,7 @@ Structured data (JSON-LD, microdata) has what we need?
 ```
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 ## Strategy A: Webfetch With Ai Extraction
 
 **Best for**: Static pages, articles, simple tables, well-structured HTML.
@@ -228,11 +250,13 @@ WebFetch(
   prompt = "Extract [DATA_TARGET] from this page.
     Return ONLY the extracted data as [FORMAT] with these columns/fields: [FIELDS].
     Rules:
+
     - If a value is missing or unclear, use 'N/A'
     - Do not include navigation, ads, footers, or unrelated content
     - Preserve original values exactly (numbers, currencies, dates)
     - Include ALL matching items, not just the first few
     - For each item, also extract the URL/link if available"
+
 )
 ```
 
@@ -245,6 +269,7 @@ to Strategy B without asking user. Log the escalation in notes.
 **Best for**: JS-rendered pages, SPAs, interactive content, lazy-loaded data.
 
 Sequence:
+
 1. Get tab context: `tabs_context_mcp(createIfEmpty=true)` -> get tabId
 2. Navigate to URL: `navigate(url=TARGET_URL, tabId=TAB)`
 3. Wait for content to load: `computer(action="wait", duration=3, tabId=TAB)`
@@ -276,6 +301,7 @@ JSON.stringify(data);
 ```
 
 8. For lazy-loaded content, scroll and re-extract:
+
    `computer(action="scroll", scroll_direction="down", tabId=TAB)`
    then `computer(action="wait", duration=2, tabId=TAB)`
 
@@ -307,6 +333,7 @@ tree = ET.parse(sys.stdin)
 ## Strategy D: Hybrid
 
 When a single strategy is insufficient, combine:
+
 1. WebSearch to discover relevant URLs
 2. WebFetch for initial content assessment
 3. Browser automation for JS-heavy sections
@@ -315,7 +342,9 @@ When a single strategy is insufficient, combine:
 ## Strategy E: Structured Data Extraction
 
 When JSON-LD, microdata, or OpenGraph is present:
+
 1. Use Browser `javascript_tool` to extract structured data:
+
 ```javascript
 const scripts = document.querySelectorAll('script[type="application/ld+json"]');
 const data = Array.from(scripts).map(s => {
@@ -323,6 +352,7 @@ const data = Array.from(scripts).map(s => {
 }).filter(Boolean);
 JSON.stringify(data);
 ```
+
 2. This often provides cleaner, more reliable data than DOM scraping
 3. Fall back to DOM extraction only for fields not in structured data
 
@@ -331,6 +361,7 @@ JSON.stringify(data);
 When pagination is detected and user wants multiple pages:
 
 **Page-number pagination (any strategy):**
+
 1. Extract data from current page
 2. Identify URL pattern (e.g. `?page=N`, `/page/N`, `&offset=N`)
 3. Iterate through pages up to user's max (default: 5 pages)
@@ -338,6 +369,7 @@ When pagination is detected and user wants multiple pages:
 5. Concatenate all results, deduplicate if needed
 
 **Infinite scroll (Browser only):**
+
 1. Extract currently visible data
 2. Record item count
 3. Scroll down: `computer(action="scroll", scroll_direction="down", tabId=TAB)`
@@ -347,6 +379,7 @@ When pagination is detected and user wants multiple pages:
 7. Repeat until no new content or max iterations (default: 5)
 
 **"Load More" button (Browser only):**
+
 1. Extract currently visible data
 2. Find button: `find(query="load more button", tabId=TAB)`
 3. Click it: `computer(action="left_click", ref=REF, tabId=TAB)`
@@ -386,8 +419,10 @@ Include ALL items, not just the first few. Include link/URL for each item if ava
 WebFetch prompt:
 ```
 "Extract article metadata:
+
 - title, author, date, tags/categories, word count estimate
 - Key factual data points, statistics, and named entities
+
 Return as structured markdown. Summarize the content; do not reproduce full text."
 ```
 
@@ -396,7 +431,9 @@ Return as structured markdown. Summarize the content; do not reproduce full text
 WebFetch prompt:
 ```
 "Extract product data with these exact fields:
+
 - name, brand, price, currency, originalPrice (if discounted),
+
   availability, description (first 200 chars), rating, reviewCount,
   specifications (as key-value pairs), productUrl, imageUrl
 Return as JSON. Use null for missing fields."
@@ -409,7 +446,9 @@ Also check for JSON-LD `Product` schema (Strategy E) first.
 WebFetch prompt:
 ```
 "Extract contact information for each person/entity:
+
 - name, title, role, email, phone, address, organization, website, linkedinUrl
+
 Return as a markdown table. Only extract real contacts visible on the page."
 ```
 
@@ -419,9 +458,11 @@ WebFetch prompt:
 ```
 "Extract all question-answer pairs from this page.
 For each FAQ item extract:
+
 - question: the exact question text
 - answer: the answer text (first 300 chars if long)
 - category: the section/category if grouped
+
 Return as a JSON array of objects."
 ```
 
@@ -431,11 +472,13 @@ WebFetch prompt:
 ```
 "Extract all pricing plans/tiers from this page.
 For each plan extract:
+
 - planName, monthlyPrice, annualPrice, currency
 - features (array of included features)
 - limitations (array of limits or excluded features)
 - ctaText (call-to-action button text)
 - highlighted (true if marked as recommended/popular)
+
 Return as JSON. Use null for missing fields."
 ```
 
@@ -445,8 +488,10 @@ WebFetch prompt:
 ```
 "Extract all events/sessions from this page.
 For each event extract:
+
 - title, date, time, endTime, location, description (first 200 chars)
 - speakers (array of names), category, registrationUrl
+
 Return as JSON. Use null for missing fields."
 ```
 
@@ -456,14 +501,17 @@ WebFetch prompt:
 ```
 "Extract all job listings from this page.
 For each job extract:
+
 - title, company, location, salary, salaryRange, type (full-time/part-time/contract)
 - postedDate, description (first 200 chars), applyUrl, tags
+
 Return as JSON. Use null for missing fields."
 ```
 
 ## Custom Mode
 
 When user provides specific selectors or field descriptions:
+
 - Use Browser automation with `javascript_tool` and user's CSS selectors
 - Or use WebFetch with a prompt built from user's field descriptions
 - Always confirm extracted schema with user before proceeding to multi-URL
@@ -471,6 +519,7 @@ When user provides specific selectors or field descriptions:
 ## Multi-Url Extraction
 
 When extracting from multiple URLs:
+
 1. Extract from the **first URL** to establish the data schema
 2. Show user the first results and confirm the schema is correct
 3. Extract from remaining URLs using the same schema
@@ -517,9 +566,12 @@ See [references/data-transforms.md](references/data-transforms.md) for patterns.
 ## Deduplication Strategy
 
 When combining data from multiple pages or URLs:
+
 1. Exact match: rows with identical values in all fields -> keep first
 2. Near match: rows with same key fields (name+source) but different details
+
    -> keep most complete (fewer nulls), flag in notes
+
 3. Report: "Removed N duplicate rows" in delivery notes
 
 ---
@@ -600,10 +652,12 @@ ALWAYS wrap results with this metadata header:
 ---
 
 **Notes:**
+
 - [Any gaps, issues, or observations]
 - [Transforms applied: deduplication, normalization, etc.]
 - [Pages scraped if paginated: "Pages 1-5 of 12"]
 - [Auto-escalation if it occurred: "Escalated from WebFetch to Browser"]
+
 ```
 
 ## Markdown Table Rules
@@ -612,7 +666,9 @@ ALWAYS wrap results with this metadata header:
 - Consistent column widths for readability
 - Include summary row for numeric data when useful (totals, averages)
 - Maximum 10 columns per table; split wider data into multiple tables
+
   or suggest JSON format
+
 - Truncate long cell values to 60 chars with `...` indicator
 - Use `N/A` for missing values, never leave cells empty
 - For multi-page results, show combined table (not per-page)
@@ -621,6 +677,7 @@ ALWAYS wrap results with this metadata header:
 
 - Use camelCase for keys (e.g. `productName`, `unitPrice`)
 - Wrap in metadata envelope:
+
   ```json
   {
     "metadata": {
@@ -637,6 +694,7 @@ ALWAYS wrap results with this metadata header:
     "data": [ ... ]
   }
   ```
+
 - Pretty-print with 2-space indentation
 - Numbers as numbers (not strings), booleans as booleans
 - null for missing values (not empty strings)
@@ -652,6 +710,7 @@ ALWAYS wrap results with this metadata header:
 ## File Output
 
 When user requests file save:
+
 - Markdown: `.md` extension
 - JSON: `.json` extension
 - CSV: `.csv` extension
@@ -661,6 +720,7 @@ When user requests file save:
 ## Multi-Url Comparison Format
 
 When comparing data across multiple sources:
+
 - Add `Source` as the first column/field
 - Use short identifiers for sources (domain name or user label)
 - Group by source or interleave based on user preference
@@ -670,6 +730,7 @@ When comparing data across multiple sources:
 ## Differential Output
 
 When user requests change detection (diff mode):
+
 - Compare current extraction with previous run
 - Mark new items with `[NEW]`
 - Mark removed items with `[REMOVED]`
@@ -681,6 +742,7 @@ When user requests change detection (diff mode):
 ## Rate Limiting
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Maximum 1 request per 2 seconds for sequential page fetches
 - For multi-URL jobs, process sequentially with pauses
 - If a site returns 429 (Too Many Requests), stop and report to user
@@ -696,19 +758,24 @@ When user requests change detection (diff mode):
 
 - Do NOT reproduce large blocks of copyrighted article text
 - For articles: extract factual data, statistics, and structured info;
+
   summarize narrative content
+
 - Always include source attribution (http://example.com) in output
 
 ## Data Scope
 
 - Extract ONLY what the user explicitly requested
 - Warn user before collecting potentially sensitive data at scale
+
   (emails, phone numbers, personal information)
+
 - Do not store or transmit extracted data beyond what the user sees
 
 ## Failure Protocol
 
 When extraction fails or is blocked:
+
 1. Explain the specific reason (JS rendering, bot detection, login, etc.)
 2. Suggest alternatives (different URL, API if available, manual approach)
 3. Never retry aggressively or escalate access attempts
@@ -737,12 +804,15 @@ When extraction fails or is blocked:
 ## References
 
 - **Extraction patterns**: [references/extraction-patterns.md](references/extraction-patterns.md)
+
   CSS selectors, JavaScript snippets, JSON-LD parsing, domain tips.
 
 - **Output templates**: [references/output-templates.md](references/output-templates.md)
+
   Markdown, JSON, CSV templates with complete examples.
 
 - **Data transforms**: [references/data-transforms.md](references/data-transforms.md)
+
   Cleaning, normalization, deduplication, enrichment patterns.
 
 ## Best Practices
@@ -758,11 +828,13 @@ When extraction fails or is blocked:
 - Not providing enough project context for accurate analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -9,7 +9,6 @@ id: skill-ai-ml
 owner: [[orchestrator]]
 ---
 
-
 # AI/ML Workflow Bundle
 
 ## Overview
@@ -19,6 +18,7 @@ Comprehensive AI/ML workflow for building LLM applications, implementing RAG sys
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Building LLM-powered applications
 - Implementing RAG (Retrieval-Augmented Generation)
 - Creating AI agents
@@ -31,12 +31,14 @@ Use this workflow when:
 ### Phase 1: AI Application Design
 
 #### Skills to Invoke
+
 - `ai-product` - AI product development
 - `ai-engineer` - AI engineering
 - `ai-agents-architect` - Agent architecture
 - `llm-app-patterns` - LLM patterns
 
 #### Actions
+
 1. Define AI use cases
 2. Choose appropriate models
 3. Design system architecture
@@ -44,6 +46,7 @@ Use this workflow when:
 5. Define success metrics
 
 #### Copy-Paste Prompts
+
 ```
 Use @ai-product to design AI-powered features
 ```
@@ -55,12 +58,14 @@ Use @ai-agents-architect to design multi-agent system
 ### Phase 2: LLM Integration
 
 #### Skills to Invoke
+
 - `llm-application-dev-ai-assistant` - AI assistant development
 - `llm-application-dev-langchain-agent` - LangChain agents
 - `llm-application-dev-prompt-optimize` - Prompt engineering
 - `gemini-api-dev` - Gemini API
 
 #### Actions
+
 1. Select LLM provider
 2. Set up API access
 3. Implement prompt templates
@@ -69,6 +74,7 @@ Use @ai-agents-architect to design multi-agent system
 6. Implement error handling
 
 #### Copy-Paste Prompts
+
 ```
 Use @llm-application-dev-ai-assistant to build conversational AI
 ```
@@ -84,6 +90,7 @@ Use @llm-application-dev-prompt-optimize to optimize prompts
 ### Phase 3: RAG Implementation
 
 #### Skills to Invoke
+
 - `rag-engineer` - RAG engineering
 - `rag-implementation` - RAG implementation
 - `embedding-strategies` - Embedding selection
@@ -92,6 +99,7 @@ Use @llm-application-dev-prompt-optimize to optimize prompts
 - `hybrid-search-implementation` - Hybrid search
 
 #### Actions
+
 1. Design data pipeline
 2. Choose embedding model
 3. Set up vector database
@@ -101,6 +109,7 @@ Use @llm-application-dev-prompt-optimize to optimize prompts
 7. Implement caching
 
 #### Copy-Paste Prompts
+
 ```
 Use @rag-engineer to design RAG pipeline
 ```
@@ -116,6 +125,7 @@ Use @embedding-strategies to select optimal embeddings
 ### Phase 4: AI Agent Development
 
 #### Skills to Invoke
+
 - `autonomous-agents` - Autonomous agent patterns
 - `autonomous-agent-patterns` - Agent patterns
 - `crewai` - CrewAI framework
@@ -124,6 +134,7 @@ Use @embedding-strategies to select optimal embeddings
 - `computer-use-agents` - Computer use agents
 
 #### Actions
+
 1. Design agent architecture
 2. Define agent roles
 3. Implement tool integration
@@ -132,6 +143,7 @@ Use @embedding-strategies to select optimal embeddings
 6. Add human-in-the-loop
 
 #### Copy-Paste Prompts
+
 ```
 Use @crewai to build role-based multi-agent system
 ```
@@ -147,6 +159,7 @@ Use @autonomous-agents to design autonomous agent
 ### Phase 5: ML Pipeline Development
 
 #### Skills to Invoke
+
 - `ml-engineer` - ML engineering
 - `mlops-engineer` - MLOps
 - `machine-learning-ops-ml-pipeline` - ML pipelines
@@ -154,6 +167,7 @@ Use @autonomous-agents to design autonomous agent
 - `data-engineer` - Data engineering
 
 #### Actions
+
 1. Design ML pipeline
 2. Set up data processing
 3. Implement model training
@@ -162,6 +176,7 @@ Use @autonomous-agents to design autonomous agent
 6. Deploy models
 
 #### Copy-Paste Prompts
+
 ```
 Use @ml-engineer to build machine learning pipeline
 ```
@@ -173,12 +188,14 @@ Use @mlops-engineer to set up MLOps infrastructure
 ### Phase 6: AI Observability
 
 #### Skills to Invoke
+
 - `langfuse` - Langfuse observability
 - `manifest` - Manifest telemetry
 - `evaluation` - AI evaluation
 - `llm-evaluation` - LLM evaluation
 
 #### Actions
+
 1. Set up tracing
 2. Configure logging
 3. Implement evaluation
@@ -187,6 +204,7 @@ Use @mlops-engineer to set up MLOps infrastructure
 6. Set up alerts
 
 #### Copy-Paste Prompts
+
 ```
 Use @langfuse to set up LLM observability
 ```
@@ -198,10 +216,12 @@ Use @evaluation to create evaluation framework
 ### Phase 7: AI Security
 
 #### Skills to Invoke
+
 - `prompt-engineering` - Prompt security
 - `security-scanning-security-sast` - Security scanning
 
 #### Actions
+
 1. Implement input validation
 2. Add output filtering
 3. Configure rate limiting
@@ -212,6 +232,7 @@ Use @evaluation to create evaluation framework
 ## AI Development Checklist
 
 ### LLM Integration
+
 - [ ] API keys secured
 - [ ] Rate limiting configured
 - [ ] Error handling implemented
@@ -219,6 +240,7 @@ Use @evaluation to create evaluation framework
 - [ ] Token usage tracked
 
 ### RAG System
+
 - [ ] Data pipeline working
 - [ ] Embeddings generated
 - [ ] Vector search optimized
@@ -226,6 +248,7 @@ Use @evaluation to create evaluation framework
 - [ ] Caching implemented
 
 ### AI Agents
+
 - [ ] Agent roles defined
 - [ ] Tools integrated
 - [ ] Memory working
@@ -233,6 +256,7 @@ Use @evaluation to create evaluation framework
 - [ ] Error handling robust
 
 ### Observability
+
 - [ ] Tracing enabled
 - [ ] Metrics collected
 - [ ] Evaluation running
@@ -255,11 +279,13 @@ Use @evaluation to create evaluation framework
 - `testing-qa` - AI testing
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,9 +1,9 @@
 import { invariant, millisecondsToSeconds, noop, secondsToMilliseconds, } from "sognaflow-utils";
-import { SetStyle as setStyle } from "../render/dom/style-set.js";
+import { setStyle } from "../render/dom/style-set.js";
 import { supportsScrollTimeline } from "../utils/supports/scroll-timeline.js";
-import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final.js";
-import { WithPromise } from "./utils/withpromise.js";
-import { StartWaapiAnimation as startWaapiAnimation } from "./waapi/start-waapi-animation.js";
+import { GetFinalKeyframe } from "./keyframes/get-final.js";
+import { WithPromise } from "./utils/WithPromise.js";
+import { startWaapiAnimation } from "./waapi/start-waapi-animation.js";
 import { applyGeneratorOptions } from "./waapi/utils/apply-generator.js";
 /**
  * NativeAnimation implements AnimationPlaybackControls for the browser's Web Animations API.
@@ -34,7 +34,7 @@ export class NativeAnimation extends WithPromise {
         this.animation.onfinish = () => {
             this.finishedTime = this.time;
             if (!pseudoElement) {
-                const keyframe = getFinalKeyframe(keyframes, this.options, finalKeyframe, this.speed);
+                const keyframe = GetFinalKeyframe(keyframes, this.options, finalKeyframe, this.speed);
                 if (this.updateSognaflowValue) {
                     this.updateSognaflowValue(keyframe);
                 }

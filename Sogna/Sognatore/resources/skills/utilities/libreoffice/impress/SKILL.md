@@ -9,7 +9,6 @@ id: skill-impress
 owner: [[orchestrator]]
 ---
 
-
 # LibreOffice Impress
 
 ## Overview
@@ -19,6 +18,7 @@ LibreOffice Impress skill for creating, editing, converting, and automating pres
 ## When to Use This Skill
 
 Use this skill when:
+
 - Creating new presentations in ODP format
 - Converting between ODP, PPTX, PDF formats
 - Automating slide generation from templates
@@ -28,29 +28,34 @@ Use this skill when:
 ## Core Capabilities
 
 ### 1. Presentation Creation
+
 - Create new ODP presentations from scratch
 - Generate presentations from templates
 - Create slide masters and layouts
 - Build interactive presentations
 
 ### 2. Format Conversion
+
 - ODP to other formats: PPTX, PDF, HTML, SWF
 - Other formats to ODP: PPTX, PPT, PDF
 - Batch conversion of multiple files
 
 ### 3. Slide Automation
+
 - Template-based slide generation
 - Batch slide creation from data
 - Automated content insertion
 - Dynamic chart generation
 
 ### 4. Content Manipulation
+
 - Text and image insertion
 - Shape and diagram creation
 - Animation and transition control
 - Speaker notes management
 
 ### 5. Integration
+
 - Command-line automation via soffice
 - Python scripting with UNO
 - Integration with workflow tools
@@ -60,11 +65,13 @@ Use this skill when:
 ### Creating a New Presentation
 
 #### Method 1: Command-Line
+
 ```bash
 soffice --impress template.odp
 ```
 
 #### Method 2: Python with UNO
+
 ```python
 import uno
 
@@ -87,22 +94,28 @@ def create_presentation():
 ### Converting Presentations
 
 ```bash
+
 # ODP to PPTX
+
 soffice --headless --convert-to pptx presentation.odp
 
 # ODP to PDF
+
 soffice --headless --convert-to pdf presentation.odp
 
 # PPTX to ODP
+
 soffice --headless --convert-to odp presentation.pptx
 
 # Batch convert
+
 for file in *.odp; do
     soffice --headless --convert-to pdf "$file"
 done
 ```
 
 ### Template-Based Generation
+
 ```python
 import subprocess
 import tempfile
@@ -123,9 +136,11 @@ def generate_from_template(template_path, content, output_path):
 ## Format Conversion Reference
 
 ### Supported Input Formats
+
 - ODP (native), PPTX, PPT, PDF
 
 ### Supported Output Formats
+
 - ODP, PPTX, PDF, HTML, SWF
 
 ## Command-Line Reference
@@ -156,6 +171,7 @@ pip install odfpy     # ODF manipulation
 ## Troubleshooting
 
 ### Cannot open socket
+
 ```bash
 killall soffice.bin
 soffice --headless --accept="socket,host=localhost,port=8100;urp;"
@@ -176,11 +192,13 @@ soffice --headless --accept="socket,host=localhost,port=8100;urp;"
 - workflow-automation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

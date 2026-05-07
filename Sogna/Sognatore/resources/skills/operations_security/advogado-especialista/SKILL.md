@@ -4,21 +4,24 @@ description: 'Advogado especialista em todas as areas do Direito brasileiro: fam
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - legal
 - brazilian-law
 - multi-domain
 - portuguese
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-advogado-especialista
 owner: [[ops-security]]
 ---
-
 
 # ADVOGADO ESPECIALISTA ELITE — JURISTA COMPLETO
 
@@ -122,6 +125,7 @@ Voce atua em TODAS as areas, mas tem **especialidade profunda** e
 | **Participacao final nos aquestos** | Separacao na constancia + comunhao na dissolucao | 50% da valorizacao |
 
 #### Sumula 377 STF — Separacao Obrigatoria
+
 No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na constancia do casamento.
 
 **Aplicacao pratica:** Casamentos de maiores de 70 anos (Art. 1.641, II CC) — mesmo com separacao obrigatoria, o conjuge tem direito a meacao dos bens adquiridos durante a uniao.
@@ -129,6 +133,7 @@ No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na consta
 ## 1.2 Alimentos
 
 #### Base Legal
+
 - **Art. 1.694-1.710 CC** — Alimentos entre parentes, conjuges e companheiros
 - **Lei 5.478/1968** — Lei de Alimentos (rito especial)
 - **Art. 528-533 CPC** — Execucao de alimentos (prisao, penhora, desconto em folha)
@@ -155,6 +160,7 @@ No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na consta
 | **Protesto** | Art. 528, par. 1 — protesto do titulo | Sem limite |
 
 #### Binomio Necessidade x Possibilidade (Art. 1.694, par. 1 CC)
+
 - **Necessidade do alimentando:** custos de vida, saude, educacao, moradia
 - **Possibilidade do alimentante:** rendimentos, patrimonio, padrao de vida
 - **Proporcionalidade:** o juiz equilibra os dois
@@ -326,6 +332,7 @@ SINAL VERMELHO → X na mao em farmacia/hospital participante
 | Separacao convencional | Sim, concorre sobre tudo | STJ — REsp 1.382.170 |
 
 #### Companheiro (Uniao Estavel)
+
 - **STF RE 878.694 (Tema 498):** equiparou companheiro a conjuge para fins sucessorios
 - Art. 1.790 CC declarado inconstitucional — aplica-se Art. 1.829 CC
 
@@ -353,6 +360,7 @@ SINAL VERMELHO → X na mao em farmacia/hospital participante
 ## 4.5 Sobrepartilha (Art. 669 Cpc)
 
 Cabe quando:
+
 - Bens sonegados
 - Bens da heranca descobertos apos a partilha
 - Bens litigiosos ou de liquidacao dificil
@@ -393,6 +401,7 @@ Cabe quando:
 ## 5.4 Alienacao Parental (Lei 12.318/2010)
 
 #### Definicao (Art. 2)
+
 Interferencia na formacao psicologica da crianca, promovida por um genitor (ou avos/tutores) para prejudicar o vinculo com o outro genitor.
 
 #### Formas de Alienacao (Art. 2, paragrafo unico)
@@ -431,6 +440,7 @@ Interferencia na formacao psicologica da crianca, promovida por um genitor (ou a
 ## 5.6 Modificacao De Guarda (Art. 1.586 Cc)
 
 Pode ser modificada a qualquer tempo se houver:
+
 - Mudanca nas circunstancias
 - Interesse do menor prejudicado
 - Alienacao parental comprovada
@@ -877,6 +887,7 @@ RECOMENDACAO:
   [ ] MEDIDA DE URGENCIA IMEDIATA
 
 PROXIMOS PASSOS:
+
 1. ___________
 2. ___________
 3. ___________
@@ -1111,11 +1122,13 @@ Esta skill implementa as seguintes politicas:
 - `advogado-criminal` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

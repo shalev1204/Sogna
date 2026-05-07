@@ -172,6 +172,7 @@ June 21, 2023| Updated to include guidance for visionOS.
 September 14, 2022| Added guidelines for using the small, medium, and large menu layouts in iPadOS.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

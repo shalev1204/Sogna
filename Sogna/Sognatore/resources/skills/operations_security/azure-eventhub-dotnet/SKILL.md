@@ -8,7 +8,6 @@ id: skill-azure-eventhub-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.Messaging.EventHubs (.NET)
 
 High-throughput event streaming SDK for sending and receiving events via Azure Event Hubs.
@@ -16,16 +15,21 @@ High-throughput event streaming SDK for sending and receiving events via Azure E
 ## Installation
 
 ```bash
+
 # Core package (sending and simple receiving)
+
 dotnet add package Azure.Messaging.EventHubs
 
 # Processor package (production receiving with checkpointing)
+
 dotnet add package Azure.Messaging.EventHubs.Processor
 
 # Authentication
+
 dotnet add package Azure.Identity
 
 # For checkpointing (required by EventProcessorClient)
+
 dotnet add package Azure.Storage.Blobs
 ```
 
@@ -38,10 +42,12 @@ EVENTHUB_FULLY_QUALIFIED_NAMESPACE=<namespace>.servicebus.windows.net
 EVENTHUB_NAME=<event-hub-name>
 
 # For checkpointing (EventProcessorClient)
+
 BLOB_STORAGE_CONNECTION_STRING=<storage-connection-string>
 BLOB_CONTAINER_NAME=<checkpoint-container>
 
 # Alternative: Connection string auth (not recommended for production)
+
 EVENTHUB_CONNECTION_STRING=Endpoint=sb://<namespace>.servicebus.windows.net/;SharedAccessKeyName=...
 ```
 
@@ -65,6 +71,7 @@ var producer = new EventHubProducerClient(
 ```
 
 **Required RBAC Roles**:
+
 - **Sending**: `Azure Event Hubs Data Sender`
 - **Receiving**: `Azure Event Hubs Data Receiver`
 - **Both**: `Azure Event Hubs Data Owner`
@@ -366,14 +373,17 @@ processor.ProcessEventAsync += async args =>
 | `Microsoft.Azure.WebJobs.Extensions.EventHubs` | Azure Functions binding | `dotnet add package Microsoft.Azure.WebJobs.Extensions.EventHubs` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

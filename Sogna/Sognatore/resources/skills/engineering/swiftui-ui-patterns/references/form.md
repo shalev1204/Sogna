@@ -104,6 +104,7 @@ struct AddRemoteServerView: View {
 - Don’t mix multiple background strategies; pick either default Form styling or custom colors.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

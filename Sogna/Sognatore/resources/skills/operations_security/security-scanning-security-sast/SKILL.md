@@ -53,7 +53,9 @@ Use for code review security analysis, injection vulnerabilities, hardcoded secr
 ### Python: Bandit
 
 ```bash
+
 # Installation & scan
+
 pip install bandit
 bandit -r . -f json -o bandit-report.json
 bandit -r . -ll -ii -f json  # High/Critical only
@@ -101,7 +103,9 @@ semgrep ci --config=auto  # CI mode
 **Custom Rules**: `.semgrep.yml`
 ```yaml
 rules:
+
   - id: sql-injection-format-string
+
     pattern: cursor.execute("... %s ..." % $VAR)
     message: SQL injection via string formatting
     severity: ERROR
@@ -111,6 +115,7 @@ rules:
       owasp: "A03:2021-Injection"
 
   - id: dangerous-innerHTML
+
     pattern: $ELEM.innerHTML = $VAR
     message: XSS via innerHTML assignment
     severity: ERROR
@@ -119,9 +124,12 @@ rules:
       cwe: "CWE-79"
 
   - id: hardcoded-aws-credentials
+
     patterns:
+
       - pattern: $KEY = "AKIA..."
       - metavariable-regex:
+
           metavariable: $KEY
           regex: "(aws_access_key_id|AWS_ACCESS_KEY_ID)"
     message: Hardcoded AWS credentials detected
@@ -129,28 +137,38 @@ rules:
     languages: [python, javascript, java]
 
   - id: path-traversal-open
+
     patterns:
+
       - pattern: open($PATH, ...)
       - pattern-not: open(os.path.join(SAFE_DIR, ...), ...)
       - metavariable-pattern:
+
           metavariable: $PATH
           patterns:
+
             - pattern: $REQ.get(...)
+
     message: Path traversal via user input
     severity: ERROR
     languages: [python]
 
   - id: command-injection
+
     patterns:
+
       - pattern-either:
           - pattern: os.system($CMD)
           - pattern: subprocess.call($CMD, shell=True)
       - metavariable-pattern:
+
           metavariable: $CMD
           patterns:
+
             - pattern-either:
                 - pattern: $X + $Y
                 - pattern: f"...{$VAR}..."
+
     message: Command injection via shell=True
     severity: ERROR
     languages: [python]
@@ -171,7 +189,9 @@ rules:
 
 **SECURE**:
 ```python
+
 # Parameterized queries
+
 cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
 User.objects.filter(id=user_id)  # ORM
 ```
@@ -263,7 +283,9 @@ session_id = secrets.token_urlsafe(32)
 
 **SECURE**:
 ```python
+
 # settings.py
+
 DEBUG = False
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
@@ -439,22 +461,27 @@ jobs:
   sast:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+
         with:
           python-version: '3.11'
 
       - name: Install tools
+
         run: |
           pip install bandit semgrep
           npm install -g eslint @eslint/plugin-security
 
       - name: Run scans
+
         run: |
           bandit -r . -f json -o bandit.json || true
           semgrep --config=auto --json --output=semgrep.json || true
 
       - name: Upload reports
+
         uses: actions/upload-artifact@v3
         with:
           name: sast-reports
@@ -470,9 +497,11 @@ sast:
   stage: test
   image: python:3.11
   script:
+
     - pip install bandit semgrep
     - bandit -r . -f json -o bandit.json || true
     - semgrep --config=auto --json --output=semgrep.json || true
+
   artifacts:
     reports:
       sast: bandit.json
@@ -499,11 +528,13 @@ sast:
 - **security-scan.md** - Comprehensive security scanning
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

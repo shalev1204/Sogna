@@ -47,6 +47,7 @@ func exampleWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 ```
 
 Non-deterministic operations that must be in steps:
+
 - Random number generation
 - Getting current time (`time.Now()`)
 - Accessing external APIs (`http.Get`, etc.)
@@ -56,6 +57,7 @@ Non-deterministic operations that must be in steps:
 Reference: [Workflow Determinism](https://docs.dbos.dev/golang/tutorials/workflow-tutorial#determinism)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

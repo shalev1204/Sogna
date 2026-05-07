@@ -1,0 +1,1 @@
+{"version":3,"file":"use-spring.js","sourceRoot":"","sources":["../../src/value/use-spring.ts"],"names":[],"mappings":"AAAA,YAAY,CAAA;AAGZ,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAA;AAwCtD,MAAM,UAAU,SAAS,CACrB,MAAyE,EACzE,UAA4B,EAAE;IAE9B,OAAO,cAAc,CAAC,MAAa,EAAE,EAAE,IAAI,EAAE,QAAQ,EAAE,GAAG,OAAO,EAAE,CAAC,CAAA;AACxE,CAAC"}

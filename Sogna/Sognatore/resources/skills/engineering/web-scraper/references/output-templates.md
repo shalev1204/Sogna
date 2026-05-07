@@ -18,6 +18,7 @@ Every extraction result MUST include this metadata wrapper,
 regardless of output format:
 
 ```markdown
+
 ## Extraction Results
 
 **Source:** [Page Title](https://example.com/page)
@@ -33,9 +34,11 @@ regardless of output format:
 ---
 
 **Notes:**
+
 - Any gaps, anomalies, or observations
 - Filters or sorts applied
 - Pages scraped (if paginated)
+
 ```
 
 ---
@@ -78,6 +81,7 @@ regardless of output format:
 When data has more than 10 columns, split into logical groups:
 
 ```markdown
+
 ### Basic Information
 
 | Name    | Category | Brand   | SKU      |
@@ -237,9 +241,13 @@ For values exceeding 60 characters:
 ### Standard CSV
 
 ```csv
+
 # Source: https://example.com/products
+
 # Extracted: 2026-02-25 14:30 UTC
+
 # Items: 3 | Confidence: HIGH
+
 name,price,currency,rating,availability
 "Product Alpha",29.99,USD,4.5,"In Stock"
 "Product Beta",49.99,USD,4.2,"In Stock"
@@ -262,8 +270,11 @@ name,price,currency,rating,availability
 ### Multi-URL CSV
 
 ```csv
+
 # Sources: store-a.com, store-b.com
+
 # Extracted: 2026-02-25 14:30 UTC
+
 source,name,price,currency,rating
 "store-a.com","Laptop X",999,USD,4.3
 "store-b.com","Laptop X",949,USD,4.5
@@ -276,6 +287,7 @@ source,name,price,currency,rating
 When extracted data contains numeric fields, include a summary block:
 
 ```markdown
+
 ### Summary Statistics
 
 | Metric    | Price     | Rating |
@@ -288,6 +300,7 @@ When extracted data contains numeric fields, include a summary block:
 ```
 
 Include only when:
+
 - Data has numeric columns
 - More than 5 items extracted
 - User would likely benefit from aggregate view (prices, ratings, quantities)
@@ -309,6 +322,7 @@ Include only when:
 ## Article Extraction Template
 
 ```markdown
+
 ## Article: [Title]
 
 **Author:** Author Name
@@ -316,14 +330,17 @@ Include only when:
 **Source:** [Site Name](URL)
 
 ### Summary
+
 [2-3 sentence summary of the article content]
 
 ### Key Data Points
+
 - [Factual data point 1]
 - [Factual data point 2]
 - [Statistical finding]
 
 ### Tags
+
 `tag1` `tag2` `tag3`
 ```
 
@@ -335,6 +352,7 @@ due to copyright.
 ## FAQ Extraction Template
 
 ```markdown
+
 ### FAQ: [Page Title]
 
 **Source:** [Site Name](URL)
@@ -362,6 +380,7 @@ Or as JSON (default for FAQ mode):
 ## Pricing Plans Template
 
 ```markdown
+
 ### Pricing: [Product Name]
 
 **Source:** [Site Name](URL)
@@ -414,6 +433,7 @@ Or as JSON (default for FAQ mode):
 When comparing current extraction with a previous run:
 
 ```markdown
+
 ## Extraction Results (Diff)
 
 **Source:** [Page Title](URL)
@@ -449,10 +469,12 @@ When comparing current extraction with a previous run:
 ---
 
 **Summary:**
+
 - 5 new products added since last extraction
 - 2 products removed (possibly discontinued)
 - Product Gamma had a price drop of $10 and rating increase
 - Product Delta is back in stock
+
 ```
 
 ---
@@ -462,6 +484,7 @@ When comparing current extraction with a previous run:
 When extraction partially fails:
 
 ```markdown
+
 ## Extraction Results (Partial)
 
 **Source:** [Page Title](URL)
@@ -477,17 +500,21 @@ When extraction partially fails:
 ---
 
 **Issues:**
+
 - 27 items could not be extracted (content behind JS rendering)
 - Price field missing for 5 items (marked N/A)
 - Auto-escalation from WebFetch to Browser recovered 15 additional items
 
 **Suggestions:**
+
 - Re-run with explicit Browser automation for complete results
 - Check if site has an API endpoint for direct data access
 - Try at a different time if rate-limited
+
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

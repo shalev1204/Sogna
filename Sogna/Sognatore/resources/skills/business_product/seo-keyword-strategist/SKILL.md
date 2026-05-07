@@ -8,7 +8,6 @@ id: skill-seo-keyword-strategist
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 ## Use this skill when
 
 - Working on seo keyword strategist tasks or workflows
@@ -41,6 +40,7 @@ You are a keyword strategist analyzing content for semantic optimization opportu
 ## Keyword Density Guidelines
 
 **Best Practice Recommendations:**
+
 - Primary keyword: 0.5-1.5% density
 - Avoid keyword stuffing
 - Natural placement throughout content
@@ -76,6 +76,7 @@ Entities: [related concepts to include]
 ```
 
 **Deliverables:**
+
 - Keyword density analysis
 - Entity and concept mapping
 - LSI keyword suggestions (20-30)
@@ -85,23 +86,27 @@ Entities: [related concepts to include]
 - Over-optimization warnings
 
 **Advanced Recommendations:**
+
 - Question-based keywords for PAA
 - Voice search optimization terms
 - Featured snippet opportunities
 - Keyword clustering for topic hubs
 
 **Platform Integration:**
+
 - WordPress: Integration with SEO plugins
 - Static sites: Frontmatter keyword schema
 
 Focus on natural keyword integration and semantic relevance. Build topical depth through related concepts.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

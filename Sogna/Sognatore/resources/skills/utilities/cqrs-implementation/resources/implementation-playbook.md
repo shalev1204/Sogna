@@ -62,6 +62,7 @@ from datetime import datetime
 import uuid
 
 # Command base
+
 @dataclass
 class Command:
     command_id: str = None
@@ -72,6 +73,7 @@ class Command:
         self.timestamp = self.timestamp or datetime.utcnow()
 
 # Concrete commands
+
 @dataclass
 class CreateOrder(Command):
     customer_id: str
@@ -91,6 +93,7 @@ class CancelOrder(Command):
     reason: str
 
 # Command handler base
+
 T = TypeVar('T', bound=Command)
 
 class CommandHandler(ABC, Generic[T]):
@@ -99,6 +102,7 @@ class CommandHandler(ABC, Generic[T]):
         pass
 
 # Command bus
+
 class CommandBus:
     def __init__(self):
         self._handlers: Dict[Type[Command], CommandHandler] = {}
@@ -113,6 +117,7 @@ class CommandBus:
         return await handler.handle(command)
 
 # Command handler implementation
+
 class CreateOrderHandler(CommandHandler[CreateOrder]):
     def __init__(self, order_repository, event_store):
         self.order_repository = order_repository
@@ -148,11 +153,13 @@ from dataclasses import dataclass
 from typing import TypeVar, Generic, List, Optional
 
 # Query base
+
 @dataclass
 class Query:
     pass
 
 # Concrete queries
+
 @dataclass
 class GetOrderById(Query):
     order_id: str
@@ -172,6 +179,7 @@ class SearchOrders(Query):
     sort_order: str = "desc"
 
 # Query result types
+
 @dataclass
 class OrderView:
     order_id: str
@@ -194,6 +202,7 @@ class PaginatedResult(Generic[T]):
         return (self.total + self.page_size - 1) // self.page_size
 
 # Query handler base
+
 T = TypeVar('T', bound=Query)
 R = TypeVar('R')
 
@@ -203,6 +212,7 @@ class QueryHandler(ABC, Generic[T, R]):
         pass
 
 # Query bus
+
 class QueryBus:
     def __init__(self):
         self._handlers: Dict[Type[Query], QueryHandler] = {}
@@ -217,6 +227,7 @@ class QueryBus:
         return await handler.handle(query)
 
 # Query handler implementation
+
 class GetOrderByIdHandler(QueryHandler[GetOrderById, Optional[OrderView]]):
     def __init__(self, read_db):
         self.read_db = read_db
@@ -291,6 +302,7 @@ from typing import List, Optional
 app = FastAPI()
 
 # Request/Response models
+
 class CreateOrderRequest(BaseModel):
     customer_id: str
     items: List[dict]
@@ -305,6 +317,7 @@ class OrderResponse(BaseModel):
     created_at: datetime
 
 # Dependency injection
+
 def get_command_bus() -> CommandBus:
     return app.state.command_bus
 
@@ -312,6 +325,7 @@ def get_query_bus() -> QueryBus:
     return app.state.query_bus
 
 # Command endpoints (POST, PUT, DELETE)
+
 @app.post("/orders", response_model=dict)
 async def create_order(
     request: CreateOrderRequest,
@@ -353,6 +367,7 @@ async def cancel_order(
     return {"status": "cancelled"}
 
 # Query endpoints (GET)
+
 @app.get("/orders/{order_id}", response_model=OrderResponse)
 async def get_order(
     order_id: str,
@@ -527,6 +542,7 @@ class ConsistentQueryHandler:
 - [Microsoft CQRS Guidance](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

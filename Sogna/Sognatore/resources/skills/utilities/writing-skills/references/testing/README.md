@@ -118,6 +118,7 @@ and add tests after. Testing later achieves the same goal."
 **Bad (too general)**:
 
 ```markdown
+
 ## Testing
 
 Always write tests.
@@ -126,6 +127,7 @@ Always write tests.
 **Good (addresses specific rationalization)**:
 
 ```markdown
+
 ## Common Rationalizations
 
 | Excuse                              | Reality                                                                 |
@@ -148,6 +150,7 @@ Always write tests.
 **Pattern**:
 
 ```markdown
+
 ## Red Flags - STOP and Start Over
 
 - Code before test
@@ -211,6 +214,7 @@ Before deploying a skill:
 - Single obvious scenario (test is too simple)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -124,7 +124,9 @@ Predatore Pro supports a self-hosted runner model (similar to GitHub Actions sel
 ### Quick Start (Recommended: npx)
 
 ```bash
+
 # Via the Sognatore orchestrator
+
 node Sognatore.js predatore start -u <url> -r /path/to/repo
 ```
 
@@ -184,41 +186,54 @@ npx @Sogna/Predatore uninstall
 #### Usage Examples
 
 ```bash
+
 # Basic pentest
+
 npx @Sogna/Predatore start -u https://example.com -r /path/to/repo
 
 # With a configuration file
+
 npx @Sogna/Predatore start -u https://example.com -r /path/to/repo -c /path/to/my-config.yaml
 
 # Custom output directory
+
 npx @Sogna/Predatore start -u https://example.com -r /path/to/repo -o ./my-reports
 
 # Named workspace
+
 npx @Sogna/Predatore start -u https://example.com -r /path/to/repo -w q1-audit
 
 # List all workspaces
+
 npx @Sogna/Predatore workspaces
 ```
 
 ### Clone and Build command equivalents (Usage)
 
 ```bash
+
 # Basic pentest
+
 ./Predatore start -u https://example.com -r /path/to/repo
 
 # With a configuration file
+
 ./Predatore start -u https://example.com -r /path/to/repo -c /path/to/my-config.yaml
 
 # Custom output directory
+
 ./Predatore start -u https://example.com -r /path/to/repo -o ./my-reports
 
 # Named workspace
+
 ./Predatore start -u https://example.com -r /path/to/repo -w q1-audit
 
 # List all workspaces
+
 ./Predatore workspaces
 
 # Rebuild worker image
+
 ./Predatore build --no-cache
 ```
 
@@ -235,16 +250,21 @@ Predatore supports **workspaces** that allow you to resume interrupted or failed
 - Each agent's progress is checkpointed via git commits, so resumed runs start from a clean, validated state
 
 ```bash
+
 # Start with a named workspace
+
 npx @Sogna/Predatore start -u https://example.com -r /path/to/repo -w my-audit
 
 # Resume the same workspace (skips completed agents)
+
 npx @Sogna/Predatore start -u https://example.com -r /path/to/repo -w my-audit
 
 # Resume an auto-named workspace from a previous run
+
 npx @Sogna/Predatore start -u https://example.com -r /path/to/repo -w example-com_Predatore-1771007534808
 
 # List all workspaces and their status
+
 npx @Sogna/Predatore workspaces
 ```
 
@@ -291,7 +311,9 @@ cp configs/example-config.yaml ./my-app-config.yaml
 ##### Basic Configuration Structure
 
 ```yaml
+
 # Optional: describe your target environment (max 500 chars)
+
 description: "Next.js e-commerce app on PostgreSQL. Local dev environment â€” .env files contain local-only credentials, not deployed to production."
 
 authentication:
@@ -303,6 +325,7 @@ authentication:
     totp_secret: "LB2E2RX7XFHSTGCK"  # Optional for 2FA
 
   login_flow:
+
     - "Type $username into the email field"
     - "Type $password into the password field"
     - "Click the 'Sign In' button"
@@ -313,12 +336,16 @@ authentication:
 
 rules:
   avoid:
+
     - description: "AI should avoid testing logout functionality"
+
       type: path
       url_path: "/logout"
 
   focus:
+
     - description: "AI should emphasize testing API endpoints"
+
       type: path
       url_path: "/api"
 ```
@@ -432,6 +459,7 @@ export ANTHROPIC_BASE_URL=https://your-proxy.example.com
 export ANTHROPIC_AUTH_TOKEN=your-auth-token
 
 # Optionally override model tiers (defaults are used if not set)
+
 export ANTHROPIC_SMALL_MODEL=claude-haiku-4-5-20251001
 export ANTHROPIC_MEDIUM_MODEL=claude-sonnet-4-6
 export ANTHROPIC_LARGE_MODEL=claude-opus-4-6
@@ -471,7 +499,9 @@ npx @Sogna/Predatore start -u https://example.com -r /path/to/repo --router
 
 ```bash
 OPENAI_API_KEY=sk-...
+
 # OR
+
 OPENROUTER_API_KEY=sk-or-...
 ROUTER_DEFAULT=openai,gpt-5.2
 ```
@@ -508,13 +538,16 @@ wsl --install
 wsl --set-default-version 2
 
 # Check installed distros
+
 wsl --list --verbose
 
 # If you don't have a distro, install one (Ubuntu 24.04 recommended)
+
 wsl --list --online
 wsl --install Ubuntu-24.04
 
 # If your distro shows VERSION 1, convert it to WSL 2:
+
 wsl --set-version <distro-name> 2
 ```
 

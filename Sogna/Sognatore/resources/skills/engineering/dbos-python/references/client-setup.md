@@ -21,7 +21,9 @@ from dbos import DBOSClient
 
 client = DBOSClient(system_database_url=db_url)
 handle = client.enqueue(options, data)
+
 # Connection leaked - no destroy()!
+
 ```
 
 **Correct (with cleanup):**
@@ -42,6 +44,7 @@ finally:
 ```
 
 Constructor parameters:
+
 - `system_database_url`: Connection string to DBOS system database
 - `serializer`: Must match the DBOS application's serializer (default: pickle)
 
@@ -62,6 +65,7 @@ Beyond `enqueue`, DBOSClient mirrors the DBOS API. Use the same patterns from ot
 Reference: [DBOSClient](https://docs.dbos.dev/python/reference/client)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

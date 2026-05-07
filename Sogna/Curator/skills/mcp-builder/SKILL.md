@@ -11,7 +11,6 @@ id: skill-mcp-builder
 owner: [[orchestrator]]
 ---
 
-
 # MCP Builder
 
 > Principles for building MCP servers.

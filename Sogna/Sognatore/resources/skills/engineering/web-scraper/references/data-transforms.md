@@ -20,15 +20,19 @@ Always apply these to every extraction result.
 ### Whitespace Cleanup
 
 ```python
+
 # Remove leading/trailing whitespace, collapse internal whitespace
+
 value = ' '.join(value.split())
 
 # Remove zero-width characters
+
 import re
 value = re.sub(r'[\u200b\u200c\u200d\ufeff\u00a0]', ' ', value).strip()
 ```
 
 Patterns to handle:
+
 - `\n`, `\r`, `\t` inside cell values -> single space
 - Multiple consecutive spaces -> single space
 - Non-breaking spaces (`&nbsp;`, `\u00a0`) -> regular space
@@ -57,6 +61,7 @@ value = unicodedata.normalize('NFKC', value)
 ```
 
 This handles:
+
 - Fancy quotes -> standard quotes
 - Ligatures -> separate characters (e.g. `ﬁ` -> `fi`)
 - Full-width characters -> standard (e.g. `Ａ` -> `A`)
@@ -145,6 +150,7 @@ Normalize all dates to ISO-8601 format.
 ### Ambiguous Dates
 
 When format is ambiguous (e.g. `03/04/2026`):
+
 - Default to US format (MM/DD/YYYY) unless site is clearly non-US
 - Check page `lang` attribute or URL TLD for locale hints
 - Note ambiguity in delivery notes
@@ -254,6 +260,7 @@ def deduplicate(records, key_fields=None):
 ### Near-Duplicate Detection
 
 When records share key fields but differ in details:
+
 1. Group by key fields (e.g. product name + source)
 2. For each group, keep the record with fewest null values
 3. If tie, keep the first occurrence
@@ -404,6 +411,7 @@ Not all steps apply to every extraction. Apply only what's relevant
 to the data type and extraction mode.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

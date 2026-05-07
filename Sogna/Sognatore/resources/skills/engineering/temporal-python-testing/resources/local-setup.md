@@ -14,7 +14,9 @@ Comprehensive guide for setting up local Temporal development environment with p
 ### Basic Docker Compose Configuration
 
 ```yaml
+
 # docker-compose.yml
+
 version: "3.8"
 
 services:
@@ -22,38 +24,53 @@ services:
     image: temporalio/auto-setup:latest
     container_name: temporal-dev
     ports:
+
       - "7233:7233" # Temporal server
       - "8233:8233" # Web UI
+
     environment:
+
       - DB=postgresql
       - POSTGRES_USER=temporal
       - POSTGRES_PWD=temporal
       - POSTGRES_SEEDS=postgresql
       - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development-sql.yaml
+
     depends_on:
+
       - postgresql
 
   postgresql:
     image: postgres:14-alpine
     container_name: temporal-postgres
     environment:
+
       - POSTGRES_USER=temporal
       - POSTGRES_PASSWORD=temporal
       - POSTGRES_DB=temporal
+
     ports:
+
       - "5432:5432"
+
     volumes:
+
       - postgres_data:/var/lib/postgresql/data
 
   temporal-ui:
     image: temporalio/ui:latest
     container_name: temporal-ui
     depends_on:
+
       - temporal
+
     environment:
+
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
+
     ports:
+
       - "8080:8080"
 
 volumes:
@@ -63,29 +80,38 @@ volumes:
 ### Starting Local Server
 
 ```bash
+
 # Start Temporal server
+
 docker-compose up -d
 
 # Verify server is running
+
 docker-compose ps
 
 # View logs
+
 docker-compose logs -f temporal
 
 # Access Temporal Web UI
+
 open http://localhost:8080
 
 # Stop server
+
 docker-compose down
 
 # Reset data (clean slate)
+
 docker-compose down -v
 ```
 
 ### Health Check Script
 
 ```python
+
 # scripts/health_check.py
+
 import asyncio
 from temporalio.client import Client
 
@@ -162,7 +188,9 @@ temporal-project/
 ### pytest Configuration
 
 ```ini
+
 # pytest.ini
+
 [pytest]
 asyncio_mode = auto
 testpaths = tests
@@ -171,6 +199,7 @@ python_classes = Test*
 python_functions = test_*
 
 # Markers for test categorization
+
 markers =
     unit: Unit tests (fast, isolated)
     integration: Integration tests (require Temporal server)
@@ -178,6 +207,7 @@ markers =
     slow: Slow running tests
 
 # Coverage settings
+
 addopts =
     --verbose
     --strict-markers
@@ -187,13 +217,16 @@ addopts =
     --cov-fail-under=80
 
 # Async test timeout
+
 asyncio_default_fixture_loop_scope = function
 ```
 
 ### Shared Test Fixtures
 
 ```python
+
 # tests/conftest.py
+
 import pytest
 from temporalio.testing import WorkflowEnvironment
 from temporalio.client import Client
@@ -244,7 +277,9 @@ async def test_worker(temporal_client, workflow_env):
 ### Dependencies
 
 ```txt
+
 # requirements.txt
+
 temporalio>=1.5.0
 pytest>=7.4.0
 pytest-asyncio>=0.21.0
@@ -253,7 +288,9 @@ pytest-xdist>=3.3.0  # Parallel test execution
 ```
 
 ```toml
+
 # pyproject.toml
+
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_backend"
@@ -284,7 +321,9 @@ testpaths = ["tests"]
 ### Coverage Settings
 
 ```ini
+
 # .coveragerc
+
 [run]
 source = src
 omit =
@@ -310,22 +349,28 @@ directory = htmlcov
 ### Running Tests with Coverage
 
 ```bash
+
 # Run all tests with coverage
+
 pytest --cov=src --cov-report=term-missing
 
 # Generate HTML coverage report
+
 pytest --cov=src --cov-report=html
 open htmlcov/index.html
 
 # Run specific test categories
+
 pytest -m unit  # Unit tests only
 pytest -m integration  # Integration tests only
 pytest -m "not slow"  # Skip slow tests
 
 # Parallel execution (faster)
+
 pytest -n auto  # Use all CPU cores
 
 # Fail if coverage below threshold
+
 pytest --cov=src --cov-fail-under=80
 ```
 
@@ -353,29 +398,38 @@ TOTAL                                 206      8    96%
 ### Daily Development Flow
 
 ```bash
+
 # 1. Start Temporal server
+
 docker-compose up -d
 
 # 2. Verify server health
+
 python scripts/health_check.py
 
 # 3. Run tests during development
+
 pytest tests/unit/ --verbose
 
 # 4. Run full test suite before commit
+
 pytest --cov=src --cov-report=term-missing
 
 # 5. Check coverage
+
 open htmlcov/index.html
 
 # 6. Stop server
+
 docker-compose down
 ```
 
 ### Pre-Commit Hook
 
 ```bash
+
 # .git/hooks/pre-commit
+
 #!/bin/bash
 
 echo "Running tests..."
@@ -392,7 +446,9 @@ echo "All tests passed!"
 ### Makefile for Common Tasks
 
 ```makefile
+
 # Makefile
+
 .PHONY: setup test test-unit test-integration coverage clean
 
 setup:
@@ -433,7 +489,9 @@ ci:
 ### CI/CD Example
 
 ```yaml
+
 # .github/workflows/test.yml
+
 name: Tests
 risk: unknown
 
@@ -448,33 +506,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Set up Python
+
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
       - name: Start Temporal server
+
         run: docker-compose up -d
 
       - name: Wait for Temporal
+
         run: sleep 10
 
       - name: Install dependencies
+
         run: |
           pip install -r requirements.txt
 
       - name: Run tests with coverage
+
         run: |
           pytest --cov=src --cov-report=xml --cov-fail-under=80
 
       - name: Upload coverage
+
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage.xml
 
       - name: Cleanup
+
         if: always()
         run: docker-compose down
 ```
@@ -487,6 +553,7 @@ jobs:
 import logging
 
 # Enable debug logging for Temporal SDK
+
 logging.basicConfig(level=logging.DEBUG)
 temporal_logger = logging.getLogger("temporalio")
 temporal_logger.setLevel(logging.DEBUG)
@@ -495,7 +562,9 @@ temporal_logger.setLevel(logging.DEBUG)
 ### Interactive Debugging
 
 ```python
+
 # Add breakpoint in test
+
 @pytest.mark.asyncio
 async def test_workflow_with_breakpoint(workflow_env):
     import pdb; pdb.set_trace()  # Debug here
@@ -507,11 +576,17 @@ async def test_workflow_with_breakpoint(workflow_env):
 ### Temporal Web UI
 
 ```bash
+
 # Access Web UI at http://localhost:8080
+
 # - View workflow executions
+
 # - Inspect event history
+
 # - Replay workflows
+
 # - Monitor workers
+
 ```
 
 ## Best Practices
@@ -529,10 +604,13 @@ async def test_workflow_with_breakpoint(workflow_env):
 **Issue: Temporal server not starting**
 
 ```bash
+
 # Check logs
+
 docker-compose logs temporal
 
 # Reset database
+
 docker-compose down -v
 docker-compose up -d
 ```
@@ -540,17 +618,22 @@ docker-compose up -d
 **Issue: Tests timing out**
 
 ```python
+
 # Increase timeout in pytest.ini
+
 asyncio_default_timeout = 30
 ```
 
 **Issue: Port already in use**
 
 ```bash
+
 # Find process using port 7233
+
 lsof -i :7233
 
 # Kill process or change port in docker-compose.yml
+
 ```
 
 ## Additional Resources
@@ -561,6 +644,7 @@ lsof -i :7233
 - pytest-asyncio: github.com/pytest-dev/pytest-asyncio
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

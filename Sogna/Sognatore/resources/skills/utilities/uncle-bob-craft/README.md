@@ -19,6 +19,7 @@ Skill for applying Robert C. Martin (Uncle Bob) criteria to **code review and pr
 Use with `@uncle-bob-craft`. Complements `@clean-code`; does not replace the project linter or formatter.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

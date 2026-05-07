@@ -13,37 +13,48 @@ export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ childr
       animate={{ opacity: 1 }}
       className="sogna-root"
       style={{
-        '--sogna-primary': '#00FFFF',
-        '--sogna-bg': '#050510',
-        '--sogna-border': '#333344',
-        '--sogna-density': '1.0',
-        backgroundColor: 'var(--sogna-bg)',
-        color: '#E0E0FF',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-      } as React.CSSProperties}
+      }}
     >
-      {/* SognaChrome: La "joya oculta" de la UI institucional */}
-      <div className="sogna-chrome" style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        padding: '0.75rem 1rem',
-        borderBottom: '1px solid var(--sogna-border)',
-        backgroundColor: 'rgba(255,255,255,0.02)'
-      }}>
-        <div style={{ display: 'flex', gap: '0.35rem' }}>
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)' }} />
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)' }} />
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)' }} />
+      {/* Sogna Header / Status Bar */}
+      <motion.header 
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
+        className="glass-panel"
+        style={{
+          margin: '1rem',
+          padding: '0.75rem 1.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          borderBottom: 'none'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <div style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '0.2em' }} className="text-gradient">
+            SOGNA
+          </div>
+          <div className="mono" style={{ fontSize: '10px', opacity: 0.4, borderLeft: '1px solid var(--sogna-border)', paddingLeft: '1.5rem' }}>
+            CORE_SYSTEM_BETA_v0.1.0
+          </div>
         </div>
-        <div style={{ flex: 1, textAlign: 'center', opacity: 0.3, fontSize: '10px', letterSpacing: '0.1em' }}>
-          SOGNA CORE v1.1.0
+        
+        <div style={{ display: 'flex', gap: '2rem', fontSize: '11px', fontWeight: 600 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ opacity: 0.4 }}>ENCRYPTION:</span>
+            <span style={{ color: 'var(--sogna-primary)' }}>QUANTUM_AES</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ opacity: 0.4 }}>LOCATION:</span>
+            <span className="mono">0.0.0.0 // LOCALHOST</span>
+          </div>
         </div>
-      </div>
+      </motion.header>
 
-      <main style={{ flex: 1, padding: 'calc(var(--sogna-density) * 1rem)' }}>
+      <main style={{ flex: 1, padding: '0 1rem 1rem 1rem', display: 'flex', flexDirection: 'column' }}>
         {children}
       </main>
     </motion.div>

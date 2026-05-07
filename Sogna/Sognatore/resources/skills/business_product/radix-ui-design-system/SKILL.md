@@ -8,7 +8,6 @@ id: skill-radix-ui-design-system
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # Radix UI Design System
 
 Build production-ready, accessible design systems using Radix UI primitives with full customization control and zero style opinions.
@@ -18,6 +17,7 @@ Build production-ready, accessible design systems using Radix UI primitives with
 Radix UI provides unstyled, accessible components (primitives) that you can customize to match any design system. This skill guides you through building scalable component libraries with Radix UI, focusing on accessibility-first design, theming architecture, and composable patterns.
 
 **Key Strengths:**
+
 - **Headless by design**: Full styling control without fighting defaults
 - **Accessibility built-in**: WAI-ARIA compliant, keyboard navigation, screen reader support
 - **Composable primitives**: Build complex components from simple building blocks
@@ -93,13 +93,17 @@ Build complex components from simple primitives:
 ### Installation
 
 ```bash
+
 # Install individual primitives (recommended)
+
 npm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu
 
 # Or install multiple at once
+
 npm install @radix-ui/react-{dialog,dropdown-menu,tabs,tooltip}
 
 # For styling (optional but common)
+
 npm install clsx tailwind-merge class-variance-authority
 ```
 
@@ -471,6 +475,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
 - [ ] **Loading States**: Proper `aria-busy` during async operations
 
 ### Dialog-Specific:
+
 - [ ] `Dialog.Title` is present (required for screen readers)
 - [ ] `Dialog.Description` provides context
 - [ ] Focus trapped inside modal when open
@@ -478,6 +483,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
 - [ ] Focus returns to trigger on close
 
 ### Dropdown-Specific:
+
 - [ ] Arrow keys navigate items
 - [ ] Type-ahead search works
 - [ ] First/last item wrapping behavior
@@ -490,6 +496,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
 ### ✅ Do This
 
 1. **Always use `asChild` to avoid wrapper divs**
+
    ```tsx
    <Dialog.Trigger asChild>
      <button>Open</button>
@@ -497,6 +504,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
    ```
 
 2. **Provide semantic HTML**
+
    ```tsx
    <Dialog.Content asChild>
      <article role="dialog" aria-labelledby="title">
@@ -506,6 +514,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
    ```
 
 3. **Use CSS variables for theming**
+
    ```css
    .dialog-content {
      background: hsl(var(--surface));
@@ -514,6 +523,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
    ```
 
 4. **Compose primitives for complex components**
+
    ```tsx
    function CommandPalette() {
      return (
@@ -529,6 +539,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
 ### ❌ Don't Do This
 
 1. **Don't skip accessibility parts**
+
    ```tsx
    // ❌ Missing Title and Description
    <Dialog.Content>
@@ -537,18 +548,21 @@ export function AnimatedDialog({ open, onOpenChange }) {
    ```
 
 2. **Don't fight the primitives**
+
    ```tsx
    // ❌ Overriding internal behavior
    <Dialog.Content onClick={(e) => e.stopPropagation()}>
    ```
 
 3. **Don't mix controlled and uncontrolled**
+
    ```tsx
    // ❌ Inconsistent state management
    <Tabs.Root defaultValue="tab1" value={activeTab}>
    ```
 
 4. **Don't ignore keyboard navigation**
+
    ```tsx
    // ❌ Disabling keyboard behavior
    <DropdownMenu.Item onKeyDown={(e) => e.preventDefault()}>
@@ -776,6 +790,7 @@ npx shadcn-ui@latest add dialog
 ```
 
 **When to use shadcn vs raw Radix**:
+
 - Use shadcn: Quick prototyping, standard designs
 - Use raw Radix: Full customization, unique designs
 
@@ -807,16 +822,19 @@ function App() {
 ## Resources
 
 ### Official Documentation
+
 - [Radix UI Docs](https://www.radix-ui.com/primitives)
 - [Radix Colors](https://www.radix-ui.com/colors) - Accessible color system
 - [Radix Icons](https://www.radix-ui.com/icons) - Icon library
 
 ### Community Resources
+
 - [shadcn/ui](https://ui.shadcn.com) - Component collection
 - [Radix UI Discord](https://discord.com/invite/7Xb99uG) - Community support
 - [CVA Documentation](https://cva.style/docs) - Variant management
 
 ### Examples
+
 - [Radix Playground](https://www.radix-ui.com/primitives/docs/overview/introduction#try-it-out)
 - [shadcn/ui Source](https://github.com/shadcn-ui/ui) - Production examples
 
@@ -825,11 +843,13 @@ function App() {
 ## Quick Reference
 
 ### Installation
+
 ```bash
 npm install @radix-ui/react-{primitive-name}
 ```
 
 ### Basic Pattern
+
 ```tsx
 <Primitive.Root>
   <Primitive.Trigger />
@@ -840,6 +860,7 @@ npm install @radix-ui/react-{primitive-name}
 ```
 
 ### Key Props
+
 - `asChild` - Render as child element
 - `defaultValue` - Uncontrolled default
 - `value` / `onValueChange` - Controlled state
@@ -851,11 +872,13 @@ npm install @radix-ui/react-{primitive-name}
 **Remember**: Radix gives you **behavior**, you give it **beauty**. Accessibility is built-in, customization is unlimited.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

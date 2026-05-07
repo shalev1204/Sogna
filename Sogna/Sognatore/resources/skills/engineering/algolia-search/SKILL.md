@@ -9,7 +9,6 @@ id: skill-algolia-search
 owner: [[orchestrator]]
 ---
 
-
 # Algolia Search Integration
 
 Expert patterns for Algolia search implementation, indexing strategies, React InstantSearch, and relevance tuning
@@ -24,6 +23,7 @@ Uses react-instantsearch-hooks-web package with algoliasearch client.
 Widgets are components that can be customized with classnames.
 
 Key hooks:
+
 - useSearchBox: Search input handling
 - useHits: Access search results
 - useRefinementList: Facet filtering
@@ -116,6 +116,7 @@ Use <InstantSearchNext> instead of <InstantSearch> for SSR.
 Supports both Pages Router and App Router (experimental).
 
 Key considerations:
+
 - Set dynamic = 'force-dynamic' for fresh results
 - Handle URL synchronization with routing prop
 - Use getServerState for initial state
@@ -192,11 +193,13 @@ import { simple } from 'instantsearch.js/es/lib/stateMappings';
 Indexing strategies for keeping Algolia in sync with your data.
 
 Three main approaches:
+
 1. Full Reindexing - Replace entire index (expensive)
 2. Full Record Updates - Replace individual records
 3. Partial Updates - Update specific attributes only
 
 Best practices:
+
 - Batch records (ideal: 10MB, 1K-10K records per batch)
 - Use incremental updates when possible
 - partialUpdateObjects for attribute-only changes
@@ -297,11 +300,13 @@ export async function fullReindex(products: Product[]) {
 Secure API key configuration for Algolia.
 
 Key types:
+
 - Admin API Key: Full control (indexing, settings, deletion)
 - Search-Only API Key: Safe for frontend
 - Secured API Keys: Generated from base key with restrictions
 
 Restrictions available:
+
 - Indices: Limit accessible indices
 - Rate limit: Limit API calls per hour per IP
 - Validity: Set expiration time
@@ -388,11 +393,13 @@ export async function GET() {
 Configure searchable attributes and custom ranking for relevance.
 
 Searchable attributes (order matters):
+
 1. Most important fields first (title, name)
 2. Secondary fields next (description, tags)
 3. Exclude non-searchable fields (image_url, id)
 
 Custom ranking:
+
 - Add business metrics (popularity, rating, date)
 - Use desc() for descending, asc() for ascending
 
@@ -510,6 +517,7 @@ Implement faceted navigation with refinement lists, range sliders,
 and hierarchical menus.
 
 Widget types:
+
 - RefinementList: Multi-select checkboxes
 - Menu: Single-select list
 - HierarchicalMenu: Nested categories
@@ -910,6 +918,7 @@ Message: No customRanking configured. Add business metrics (popularity, rating).
 - user needs serverless deployment -> aws-serverless (Lambda for indexing jobs)
 
 ## When to Use
+
 - User mentions or implies: adding search to
 - User mentions or implies: algolia
 - User mentions or implies: instantsearch
@@ -922,11 +931,13 @@ Message: No customRanking configured. Add business metrics (popularity, rating).
 - User mentions or implies: search as you type
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

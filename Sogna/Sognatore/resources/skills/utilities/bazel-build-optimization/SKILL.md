@@ -8,7 +8,6 @@ id: skill-bazel-build-optimization
 owner: [[orchestrator]]
 ---
 
-
 # Bazel Build Optimization
 
 Production patterns for Bazel in large-scale monorepos.
@@ -70,12 +69,15 @@ workspace/
 ### Template 1: WORKSPACE Configuration
 
 ```python
+
 # WORKSPACE.bazel
+
 workspace(name = "myproject")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Rules for JavaScript/TypeScript
+
 http_archive(
     name = "aspect_rules_js",
     sha256 = "...",
@@ -103,6 +105,7 @@ load("@npm//:repositories.bzl", "npm_repositories")
 npm_repositories()
 
 # Rules for Python
+
 http_archive(
     name = "rules_python",
     sha256 = "...",
@@ -117,62 +120,76 @@ py_repositories()
 ### Template 2: .bazelrc Configuration
 
 ```bash
+
 # .bazelrc
 
 # Build settings
+
 build --enable_platform_specific_config
 build --incompatible_enable_cc_toolchain_resolution
 build --experimental_strict_conflict_checks
 
 # Performance
+
 build --jobs=auto
 build --local_cpu_resources=HOST_CPUS*.75
 build --local_ram_resources=HOST_RAM*.75
 
 # Caching
+
 build --disk_cache=~/.cache/bazel-disk
 build --repository_cache=~/.cache/bazel-repo
 
 # Remote caching (optional)
+
 build:remote-cache --remote_cache=grpcs://cache.example.com
 build:remote-cache --remote_upload_local_results=true
 build:remote-cache --remote_timeout=3600
 
 # Remote execution (optional)
+
 build:remote-exec --remote_executor=grpcs://remote.example.com
 build:remote-exec --remote_instance_name=projects/myproject/instances/default
 build:remote-exec --jobs=500
 
 # Platform configurations
+
 build:linux --platforms=//platforms:linux_x86_64
 build:macos --platforms=//platforms:macos_arm64
 
 # CI configuration
+
 build:ci --config=remote-cache
 build:ci --build_metadata=ROLE=CI
 build:ci --bes_results_url=https://results.example.com/invocation/
 build:ci --bes_backend=grpcs://bes.example.com
 
 # Test settings
+
 test --test_output=errors
 test --test_summary=detailed
 
 # Coverage
+
 coverage --combined_report=lcov
 coverage --instrumentation_filter="//..."
 
 # Convenience aliases
+
 build:opt --compilation_mode=opt
 build:dbg --compilation_mode=dbg
 
 # Import user settings
+
 try-import %workspace%/user.bazelrc
 ```
 
 ### Template 3: TypeScript Library BUILD
 
 ```python
+
 # libs/utils/BUILD.bazel
+
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
@@ -197,6 +214,7 @@ js_library(
 )
 
 # Tests
+
 load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
 
 jest_test(
@@ -213,7 +231,9 @@ jest_test(
 ### Template 4: Python Library BUILD
 
 ```python
+
 # libs/ml/BUILD.bazel
+
 load("@rules_python//python:defs.bzl", "py_library", "py_test", "py_binary")
 load("@pip//:requirements.bzl", "requirement")
 
@@ -251,7 +271,9 @@ py_binary(
 ### Template 5: Custom Rule for Docker
 
 ```python
+
 # tools/bazel/rules/docker.bzl
+
 def _docker_image_impl(ctx):
     dockerfile = ctx.file.dockerfile
     base_image = ctx.attr.base_image
@@ -298,35 +320,46 @@ docker_image = rule(
 ### Template 6: Query and Dependency Analysis
 
 ```bash
+
 # Find all dependencies of a target
+
 bazel query "deps(//apps/web:web)"
 
 # Find reverse dependencies (what depends on this)
+
 bazel query "rdeps(//..., //libs/utils:utils)"
 
 # Find all targets in a package
+
 bazel query "//libs/..."
 
 # Find changed targets since commit
+
 bazel query "rdeps(//..., set($(git diff --name-only HEAD~1 | sed 's/.*/"&"/' | tr '\n' ' ')))"
 
 # Generate dependency graph
+
 bazel query "deps(//apps/web:web)" --output=graph | dot -Tpng > deps.png
 
 # Find all test targets
+
 bazel query "kind('.*_test', //...)"
 
 # Find targets with specific tag
+
 bazel query "attr(tags, 'integration', //...)"
 
 # Compute build graph size
+
 bazel query "deps(//...)" --output=package | wc -l
 ```
 
 ### Template 7: Remote Execution Setup
 
 ```python
+
 # platforms/BUILD.bazel
+
 platform(
     name = "linux_x86_64",
     constraint_values = [
@@ -349,6 +382,7 @@ platform(
 )
 
 # toolchains/BUILD.bazel
+
 toolchain(
     name = "cc_toolchain_linux",
     exec_compatible_with = [
@@ -367,23 +401,29 @@ toolchain(
 ## Performance Optimization
 
 ```bash
+
 # Profile build
+
 bazel build //... --profile=profile.json
 bazel analyze-profile profile.json
 
 # Identify slow actions
+
 bazel build //... --execution_log_json_file=exec_log.json
 
 # Memory profiling
+
 bazel build //... --memory_profile=memory.json
 
 # Skip analysis cache
+
 bazel build //... --notrack_incremental_state
 ```
 
 ## Best Practices
 
 ### Do's
+
 - **Use fine-grained targets** - Better caching
 - **Pin dependencies** - Reproducible builds
 - **Enable remote caching** - Share build artifacts
@@ -391,6 +431,7 @@ bazel build //... --notrack_incremental_state
 - **Write BUILD files per directory** - Standard convention
 
 ### Don'ts
+
 - **Don't use glob for deps** - Explicit is better
 - **Don't commit bazel-* dirs** - Add to .gitignore
 - **Don't skip WORKSPACE setup** - Foundation of build
@@ -403,11 +444,13 @@ bazel build //... --notrack_incremental_state
 - [rules_js](https://github.com/aspect-build/rules_js)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

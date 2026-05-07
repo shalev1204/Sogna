@@ -75,6 +75,7 @@ To optimize performance, set `loadInput: false` and `loadOutput: false` when you
 Reference: [Workflow Management](https://docs.dbos.dev/typescript/tutorials/workflow-management)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

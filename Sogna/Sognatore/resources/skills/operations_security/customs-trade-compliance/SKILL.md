@@ -8,8 +8,8 @@ id: skill-customs-trade-compliance
 owner: [[ops-security]]
 ---
 
-
 ## When to Use
+
 Use this skill when navigating international trade regulations, classifying goods under HS codes, determining appropriate Incoterms, managing import/export documentation, or optimizing customs duty payments through Free Trade Agreements.
 
 # Customs & Trade Compliance
@@ -236,6 +236,7 @@ Track these metrics monthly and trend quarterly:
 - For complete communication templates with variables and formatting guidance, see [communication-templates.md](references/communication-templates.md)
 
 ## When to Use
+
 Use this skill when you are **planning, auditing, or remediating customs and trade compliance processes**:
 
 - Classifying products (HS/HTS/TARIC), designing documentation flows, or implementing Incoterms for new trade lanes.
@@ -243,11 +244,13 @@ Use this skill when you are **planning, auditing, or remediating customs and tra
 - Investigating compliance risk, penalty exposure, or restricted‑party screening issues across import/export operations.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

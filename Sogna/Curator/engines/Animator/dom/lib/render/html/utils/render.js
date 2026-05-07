@@ -1,4 +1,4 @@
-export function RenderHTML(element, { style, vars }, styleProp, projection) {
+export function renderHTML(element, { style, vars }, styleProp, projection) {
     const elementStyle = element.style;
     let key;
     for (key in style) {

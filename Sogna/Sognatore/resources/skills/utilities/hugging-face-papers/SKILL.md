@@ -7,10 +7,10 @@ id: skill-hugging-face-papers
 owner: [[orchestrator]]
 ---
 
-
 # Hugging Face Paper Pages
 
 Hugging Face Paper pages (hf.co/papers) is a platform built on top of arXiv (arxiv.org), specifically for research papers in the field of artificial intelligence (AI) and computer science. Hugging Face users can submit their paper at hf.co/papers/submit, which features it on the Daily Papers feed (hf.co/papers). Each day, users can upvote papers and comment on papers. Each paper page allows authors to:
+
 - claim their paper (by clicking their name on the `authors` field). This makes the paper page appear on their Hugging Face profile.
 - link the associated model checkpoints, datasets and Spaces by including the HF paper or arXiv URL in the model card, dataset card or README of the Space
 - link the Github repository and/or project page URLs
@@ -22,6 +22,7 @@ Whenever someone mentions a HF paper or arXiv abstract/PDF URL in a model card, 
 The Hugging Face team has built an easy-to-use API to interact with paper pages. Content of the papers can be fetched as markdown, or structured metadata can be returned such as author names, linked models/datasets/spaces, linked Github repo and project page.
 
 ## When to Use
+
 - User shares a Hugging Face paper page URL (e.g. `https://huggingface.co/papers/2602.08025`)
 - User shares a Hugging Face markdown paper page URL (e.g. `https://huggingface.co/papers/2602.08025.md`)
 - User shares an arXiv URL (e.g. `https://arxiv.org/abs/2602.08025` or  `https://arxiv.org/pdf/2602.08025`)
@@ -55,6 +56,7 @@ curl -s "https://huggingface.co/papers/{PAPER_ID}.md"
 This should return the Hugging Face paper page as markdown. This relies on the HTML version of the paper at https://arxiv.org/html/{PAPER_ID}.
 
 There are 2 exceptions:
+
 - Not all arXiv papers have an HTML version. If the HTML version of the paper does not exist, then the content falls back to the HTML of the Hugging Face paper page.
 - If it results in a 404, it means the paper is not yet indexed on hf.co/papers. See [Error handling](#error-handling) for info.
 
@@ -245,11 +247,13 @@ If the Hugging Face paper page does not contain enough detail for the user's que
 - Prefer `/api/papers/{PAPER_ID}` when you need structured JSON fields instead of page markdown.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

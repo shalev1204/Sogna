@@ -8,7 +8,6 @@ id: skill-brainstorming
 owner: [[brain]]
 ---
 
-
 # Brainstorming Ideas Into Designs
 
 ## Purpose
@@ -17,6 +16,7 @@ Turn raw ideas into **clear, validated designs and specifications**
 through structured dialogue **before any implementation begins**.
 
 This skill exists to prevent:
+
 - premature implementation
 - hidden assumptions
 - misaligned solutions
@@ -100,7 +100,9 @@ If the user is unsure:
 Before proposing **any design**, you MUST pause and do the following:
 
 #### Understanding Summary
+
 Provide a concise summary (5–7 bullets) covering:
+
 - What is being built  
 - Why it exists  
 - Who it is for  
@@ -108,9 +110,11 @@ Provide a concise summary (5–7 bullets) covering:
 - Explicit non-goals  
 
 #### Assumptions
+
 List all assumptions explicitly.
 
 #### Open Questions
+
 List unresolved questions, if any.
 
 Then ask:
@@ -164,6 +168,7 @@ Cover, as relevant:
 Maintain a running **Decision Log** throughout the design discussion.
 
 For each decision:
+
 - What was decided  
 - Alternatives considered  
 - Why this option was chosen  
@@ -196,6 +201,7 @@ Only after documentation is complete, ask:
 > “Ready to set up for implementation?”
 
 If yes:
+
 - Create an explicit implementation plan
 - Isolate work if the workflow supports it
 - Proceed incrementally
@@ -213,6 +219,7 @@ You may exit brainstorming mode **only when all of the following are true**:
 - Decision Log is complete  
 
 If any criterion is unmet:
+
 - Continue refinement  
 - **Do NOT proceed to implementation**
 
@@ -232,14 +239,17 @@ If any criterion is unmet:
 If the design is high-impact, high-risk, or requires elevated confidence, you MUST hand off the finalized design and Decision Log to the `multi-agent-brainstorming` skill before implementation.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

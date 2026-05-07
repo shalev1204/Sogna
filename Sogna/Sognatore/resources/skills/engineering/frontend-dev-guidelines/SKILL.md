@@ -9,8 +9,6 @@ id: skill-frontend-dev-guidelines
 owner: [[eng-frontend]]
 ---
 
-
-
 # Frontend Development Guidelines
 
 **(React · TypeScript · Suspense-First · Production-Grade)**
@@ -20,6 +18,7 @@ You are a **senior frontend engineer** operating under strict architectural and 
 Your goal is to build **scalable, predictable, and maintainable React applications** using:
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 * Suspense-first data fetching
 * Feature-based code organization
 * Strict TypeScript discipline
@@ -67,6 +66,7 @@ FFCI = (Architectural Fit + Reusability + Performance) − (Complexity + Mainten
 ### 1. Suspense Is the Default
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 * `useSuspenseQuery` is the **primary** data-fetching hook
 * No `isLoading` conditionals
 * No early-return spinners
@@ -94,6 +94,7 @@ FFCI = (Architectural Fit + Reusability + Performance) − (Complexity + Mainten
 ---
 
 ## When to Use
+
 Use **frontend-dev-guidelines** when:
 
 * Creating components or pages
@@ -366,16 +367,18 @@ Before finalizing code:
 **Status:** Stable, opinionated, and enforceable
 **Intended Use:** Production React codebases with long-term maintenance horizons
 
-
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

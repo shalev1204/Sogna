@@ -13,7 +13,6 @@ id: skill-ux-audit
 owner: [[ops-security]]
 ---
 
-
 # UX Audit
 
 ## Overview
@@ -21,6 +20,7 @@ owner: [[ops-security]]
 Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill audits usability rather than just visuals. It uses Nielsen's 10 heuristics plus modern mobile UX expectations to find issues in navigation, feedback, recovery, hierarchy, and cognitive load.
 
 ## When to Use
+
 - Use when a screen feels awkward even though the code and styling seem correct
 - Use when evaluating a flow before or after implementation
 - Use when reviewing a mobile-first product for usability regressions
@@ -29,6 +29,7 @@ Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill audits usa
 ## Audit Framework
 
 Review the target against:
+
 - visibility of system status
 - match between system and real-world language
 - user control and freedom
@@ -45,6 +46,7 @@ Add mobile-specific checks for reachability, touch ergonomics, input burden, and
 ## Output
 
 Return:
+
 1. A prioritized issue list
 2. The heuristic violated by each issue
 3. Why the issue matters to real users
@@ -63,11 +65,13 @@ Return:
 - [Source skill](https://github.com/bitjaru/styleseed/blob/main/seeds/toss/.claude/skills/ux-audit/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

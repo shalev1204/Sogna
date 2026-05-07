@@ -8,7 +8,6 @@ id: skill-magic-ui-generator
 owner: [[orchestrator]]
 ---
 
-
 # Magic UI Generator
 
 Leverage [Magic by 21st.dev](https://21st.dev/magic) to build modern, responsive UI components using an AI-native workflow that prioritizes choice and design excellence.
@@ -18,6 +17,7 @@ Leverage [Magic by 21st.dev](https://21st.dev/magic) to build modern, responsive
 This skill leverages Magic by 21st.dev to build modern, responsive UI components. Instead of generating a single standard solution, it focuses on providing multiple design variations to choose from, drawing inspiration from a curated library of real-world components and premium design patterns (Shadcn UI, Magic UI, Aceternity, etc.).
 
 ## When to Use
+
 Trigger this skill whenever:
 
 - A new UI component is requested (e.g., pricing tables, contact forms, hero sections).
@@ -44,11 +44,13 @@ Trigger this skill whenever:
 - **Full Ownership**: Treat all generated components as fully owned.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

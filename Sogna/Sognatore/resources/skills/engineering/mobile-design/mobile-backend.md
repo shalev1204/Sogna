@@ -348,15 +348,19 @@ SERVER RESPONSE:
 
 ```
 UPLOAD FLOW:
+
 1. POST /uploads/init
+
    { filename, size, mime_type }
    → { upload_id, chunk_size }
 
 2. PUT /uploads/{upload_id}/chunks/{n}
+
    → Upload each chunk (1-5 MB)
    → Can resume if interrupted
 
 3. POST /uploads/{upload_id}/complete
+
    → Server assembles chunks
    → Return final file URL
 ```
@@ -465,30 +469,35 @@ ALERTS:
 ## 📝 MOBILE BACKEND CHECKLIST
 
 ### Before API Design
+
 - [ ] Identified mobile-specific requirements?
 - [ ] Planned offline behavior?
 - [ ] Designed sync strategy?
 - [ ] Considered bandwidth constraints?
 
 ### For Every Endpoint
+
 - [ ] Response as small as possible?
 - [ ] Pagination cursor-based?
 - [ ] Proper caching headers?
 - [ ] Mobile error format with actions?
 
 ### Authentication
+
 - [ ] Token refresh implemented?
 - [ ] Silent re-auth flow?
 - [ ] Multi-device logout?
 - [ ] Secure token storage guidance?
 
 ### Push Notifications
+
 - [ ] FCM + APNs configured?
 - [ ] Token lifecycle managed?
 - [ ] Silent vs display push defined?
 - [ ] Sensitive data NOT in push payload?
 
 ### Release
+
 - [ ] Version check endpoint ready?
 - [ ] Feature flags configured?
 - [ ] Force update mechanism?
@@ -499,6 +508,7 @@ ALERTS:
 > **Remember:** Mobile backend must be resilient to bad networks, respect battery life, and handle interrupted sessions gracefully. The client cannot be trusted, but it also cannot be hung up—provide offline capabilities and clear error recovery paths.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

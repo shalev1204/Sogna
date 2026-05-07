@@ -6,7 +6,6 @@ id: skill-web-games
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # Web Browser Game Development
 
 > Framework selection and browser-specific principles.

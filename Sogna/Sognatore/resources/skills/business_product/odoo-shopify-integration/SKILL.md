@@ -7,7 +7,6 @@ id: skill-odoo-shopify-integration
 owner: [[prod-pm]]
 ---
 
-
 # Odoo ↔ Shopify Integration
 
 ## Overview
@@ -47,6 +46,7 @@ Fulfillment     <──────push──────  Delivery Order valida
 import xmlrpc.client, requests
 
 # Odoo connection
+
 odoo_url = "https://myodoo.example.com"
 db, uid, pwd = "my_db", 2, "api_key"
 models = xmlrpc.client.ServerProxy(f"{odoo_url}/xmlrpc/2/object")
@@ -104,11 +104,13 @@ def shopify_order_webhook():
 - ❌ **Don't:** Use Shopify product IDs as the key — use SKUs which are stable across platforms.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

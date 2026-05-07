@@ -11,3 +11,5 @@ export function IsHTMLElement(element: unknown): element is HTMLElement {
         !("ownerSVGElement" in element)
     )
 }
+
+export const isHTMLElement = IsHTMLElement

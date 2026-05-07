@@ -7,7 +7,6 @@ id: skill-skill-writer
 owner: [[orchestrator]]
 ---
 
-
 # Skill Writer
 
 Use this as the single canonical workflow for skill creation and improvement.
@@ -67,7 +66,9 @@ Read `references/authoring-path.md`.
 1. Write or update `SKILL.md` in imperative voice with trigger-rich description.
 2. Create focused reference files and scripts only when justified.
 3. Follow `references/skill-patterns.md`, `references/workflow-patterns.md`, and
+
    `references/output-patterns.md` for structure and output determinism.
+
 4. For authoring/generator skills, include transformed examples in references:
    - happy-path
    - secure/robust variant
@@ -108,14 +109,17 @@ Return:
 4. `Open Gaps`
 
 ## When to Use
+
 Use this skill when tackling tasks related to its primary domain or functionality as described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

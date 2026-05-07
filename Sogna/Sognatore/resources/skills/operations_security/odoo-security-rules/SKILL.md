@@ -7,7 +7,6 @@ id: skill-odoo-security-rules
 owner: [[ops-security]]
 ---
 
-
 # Odoo Security Rules
 
 ## Overview
@@ -95,6 +94,7 @@ access_hospital_patient_manager,hospital.patient.manager,model_hospital_patient,
 - Does not cover **row-level security via PostgreSQL** (RLS) — Odoo manages all security at the ORM layer.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

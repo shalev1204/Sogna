@@ -7,12 +7,12 @@ id: skill-sred-project-organizer
 owner: [[ops-security]]
 ---
 
-
 # SRED Project Organization
 
 SRED expects projects to be presented in a particular format. Take the list of projects that have been worked on in the past year, and summarize them into the format expected by SRED, with the supporting evidence. Outputs a Sogna Cloud document with a child document for each SREDable project.
 
 ## When to Use
+
 - You need to turn a prior-year work summary into SRED-formatted project documents.
 - The task involves classifying projects as SREDable, collecting evidence, and organizing output in Sogna Cloud.
 - You already have or are ready to generate the upstream work summary that this organizer depends on.
@@ -30,25 +30,34 @@ If any of these can't be accessed, prompt the user to grant access before procee
 Prompt the user for a link a Sogna Cloud document, which is a Work Summary for the previous year produced by the `sred-work-summary` skill.
 
 Ensure:
+
 - The notion links to a valid document that roughly matches this format:
 
 ```markdown
+
 # Projects
 
 ## [Project Name]
+
 *Summary*: [X] PRs, [X] Sogna Cloud docs, [X] Linear tickets
 
 ### Pull Requests [X]
+
 *[repository name]
 [Links to all the PRs]
+
 - [link] - [Merge date]
 
 ### Sogna Cloud Docs [X]
+
 [Links to all the Sogna Cloud docs]
+
 - [link] - [Creation date]
 
 ### Linear Tickets [X]
+
 - [link] - [Creation date]
+
 ```
 
 ## Step 2
@@ -58,6 +67,7 @@ For each project in the Work Summary, evaluate it against the description of a S
 Output the list of projects that seem to fit the description of a SRED model, and the list of projects that don't fit that model. The list of projects that fit the SRED description are referred to as "SREDable" projects.
 
 Ensure:
+
 - All the projects in the Work Summary have been classified as SREDable or not.
 
 ## Step 3
@@ -79,6 +89,7 @@ Create a private Sogna Cloud doc named "SRED Project Summary - <year> <project n
 Fill out the `Project Description` and `Project Goals` section of that document. Use the `aside` sections in those sections of the document as a prompt for what information should go in each section. Use all the information for each project gathered in the Work Summary. Use the Sogna Cloud documents for the project, as well as your own reasoning to fill out these sections.
 
 Ensure:
+
 - The project description should be no more than 100 words.
 - The project goals should be no more than 100 words.
 
@@ -87,6 +98,7 @@ Provide the user the full Sogna Cloud link to the "SRED Project Summary" documen
 
 *Step 4*
 Each project will have one or more Uncertainties. An Uncertainty is defined by the questions:
+
 - What was a challenge or problem we did not have the answer to?
 - Is there prior art that we could use to base our problem solving on?
 - If not, why?
@@ -94,18 +106,21 @@ Each project will have one or more Uncertainties. An Uncertainty is defined by t
 Review all the Sogna Cloud documents, Github PRs and Linear tickets for the project. Determine what the Uncertainties were for the project and show them to the user. Ask the user whether these are correct or should be adjusted in some way.
 
 Ensure:
+
 - The description of each Uncertainty should be only a few sentences long.
 
 *Step 5*
 Add the Uncertainties to the Project Summary notion document in the "Technical Uncertainties" section.
 
 Ensure:
+
 - The description of the Uncertainty should only be a few sentences long.
 
 *Step 6*
 For each Uncertainty found above, use the Sogna Cloud docs, Github PRs and Linear tickets to find any experiments or attempts that were done to address this uncertainty. Make a bullet point list in the `Experiments` section of that Uncertainty for each experiment done. Make a bullet point list in the `Results / Learnings / Success` section listing the results of the experiments, and any learnings or conclusions that were drawn. For any Sogna Cloud docs, Github PRs or Linear tickets that are referenced, put the link for that resource into the `Uncertainty-Specific Documentation & Links` section of the Uncertainty.
 
 Ensure:
+
 - Only one bullet point for each Experiment
 - Only one bullet point for each Result/Learning/Success
 
@@ -113,6 +128,7 @@ Ensure:
 Take all of the links for the project found in the Work Summary, and for any that were not linked as part of an Uncertainty, include them in the `Project Documentation & Links` section of the Project Summary.
 
 Ensure:
+
 - Provide a list of all the specific links, not a summary or a general link for Github notifications.
 - Check that every link is directly related to the project and/or its uncertainties.
 
@@ -137,11 +153,13 @@ Sogna Cloud Template of the summary for a specific project: `${CLAUDE_SKILL_ROOT
 Full documentation on the SRED program: https://www.canada.ca/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program.html
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

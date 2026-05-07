@@ -1,8 +1,8 @@
-import { ResolveVariant as resolveVariant } from "../../render/utils/resolve-dynamic-variants.js";
-import { CalcChildStagger as calcChildStagger } from "../utils/calc-child-stagger.js";
-import { AnimateTarget as animateTarget } from "./visual-element-target.js";
+import { ResolveVariant } from "../../render/utils/resolve-dynamic-variants.js";
+import { CalcChildStagger } from "../utils/calc-child-stagger.js";
+import { AnimateTarget } from "./visual-element-target.js";
 export function AnimateVariant(visualElement, variant, options = {}) {
-    const resolved = resolveVariant(visualElement, variant, options.type === "exit"
+    const resolved = ResolveVariant(visualElement, variant, options.type === "exit"
         ? visualElement.presenceContext?.custom
         : undefined);
     let { transition = visualElement.getDefaultTransition() || {} } = resolved || {};
@@ -14,7 +14,7 @@ export function AnimateVariant(visualElement, variant, options = {}) {
      * Otherwise, we resolve a Promise immediately for a composable no-op.
      */
     const getAnimation = resolved
-        ? () => Promise.all(animateTarget(visualElement, resolved, options))
+        ? () => Promise.all(AnimateTarget(visualElement, resolved, options))
         : () => Promise.resolve();
     /**
      * If we have children, create a callback that runs all their animations.
@@ -23,7 +23,7 @@ export function AnimateVariant(visualElement, variant, options = {}) {
     const getChildAnimations = visualElement.variantChildren && visualElement.variantChildren.size
         ? (forwardDelay = 0) => {
             const { delayChildren = 0, staggerChildren, staggerDirection, } = transition;
-            return AnimateChildren(visualElement, variant, forwardDelay, delayChildren, staggerChildren, staggerDirection, options);
+            return animateChildren(visualElement, variant, forwardDelay, delayChildren, staggerChildren, staggerDirection, options);
         }
         : () => Promise.resolve();
     /**
@@ -41,7 +41,7 @@ export function AnimateVariant(visualElement, variant, options = {}) {
         return Promise.all([getAnimation(), getChildAnimations(options.delay)]);
     }
 }
-function AnimateChildren(visualElement, variant, delay = 0, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options) {
+function animateChildren(visualElement, variant, delay = 0, delayChildren = 0, staggerChildren = 0, staggerDirection = 1, options) {
     const animations = [];
     for (const child of visualElement.variantChildren) {
         child.notify("AnimationStart", variant);
@@ -49,7 +49,7 @@ function AnimateChildren(visualElement, variant, delay = 0, delayChildren = 0, s
             ...options,
             delay: delay +
                 (typeof delayChildren === "function" ? 0 : delayChildren) +
-                calcChildStagger(visualElement.variantChildren, child, delayChildren, staggerChildren, staggerDirection),
+                CalcChildStagger(visualElement.variantChildren, child, delayChildren, staggerChildren, staggerDirection),
         }).then(() => child.notify("AnimationComplete", variant)));
     }
     return Promise.all(animations);

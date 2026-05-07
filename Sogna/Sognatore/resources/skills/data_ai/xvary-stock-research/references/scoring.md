@@ -118,6 +118,7 @@ If a listed kill criterion triggers, the thesis should be re-underwritten regard
 - Internal fallback logic for sparse/contradictory data
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

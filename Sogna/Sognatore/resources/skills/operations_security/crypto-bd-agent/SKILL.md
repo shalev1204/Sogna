@@ -9,7 +9,6 @@ id: skill-crypto-bd-agent
 owner: [[ops-security]]
 ---
 
-
 # Crypto BD Agent — Autonomous Business Development for Exchanges
 
 > Production-tested patterns for building AI agents that autonomously discover,
@@ -48,6 +47,7 @@ Reference implementation: https://github.com/buzzbysolcex/buzz-bd-agent
 ---
 
 ## Architecture
+
 ```text
 Intelligence Sources (Free + Paid via x402)
         |
@@ -84,6 +84,7 @@ Run a quality gate (10+ test cases) before promoting any new model.
 ## 1. Intelligence Gathering
 
 ### Free-First Principle
+
 Always exhaust free data before paying. Target: $0/day for 90% of intelligence.
 
 ### Recommended Source Categories
@@ -100,11 +101,13 @@ Always exhaust free data before paying. Target: $0/day for 90% of intelligence.
 | Community | Forum signals, ecosystem intel | Protocol forums |
 
 ### Paid Sources (via x402 micropayments)
+
 - Whale alert services (~$0.10/call, 1-2x daily)
 - Breaking news aggregators (~$0.10/call, 2x daily)
 - Budget: ~$0.30/day = ~$9/month
 
 ### Rules
+
 1. Cross-reference: every prospect needs 2+ independent source confirmations
 2. Multi-source cross-match gets +5 score bonus
 3. Track ROI per paid source — did this call produce a qualified prospect?
@@ -171,6 +174,7 @@ simple scanners.
 | MIXER REJECT — tornado/mixer funded | AUTO REJECT |
 
 ### Dual-Source Pattern
+
 Combine chain-specific depth (e.g., Helius for Solana) with multi-chain
 breadth (e.g., Allium for 16 chains) for maximum deployer intelligence.
 
@@ -182,12 +186,14 @@ Register your agent for discoverability and trust. ERC-8004 went live on
 Ethereum mainnet January 29, 2026 with 24K+ agents registered.
 
 ### What to Register
+
 - Agent name, description, capabilities
 - Service endpoints (web, Telegram, A2A)
 - Dual-chain: Register on both Ethereum mainnet AND an L2 (Base, etc.)
 - Verify at 8004scan.io
 
 ### Credibility Stack
+
 Layer trust signals: ERC-8004 identity + on-chain alpha calls with PnL
 tracking + code verification scores + agent verification systems.
 
@@ -196,10 +202,13 @@ tracking + code verification scores + agent verification systems.
 ## 5. Pipeline Management
 
 ### 10 Stages
+
 1. Discovered → 2. Scored → 3. Verified → 4. Qualified → 5. Outreach Drafted
+
 → 6. Human Approved → 7. Sent → 8. Responded → 9. Negotiating → 10. Listed
 
 ### Required Data for Entry
+
 - Contract address (verified — NEVER rely on token name alone)
 - Pair address from DEX aggregator
 - Token age from pair creation date
@@ -208,6 +217,7 @@ tracking + code verification scores + agent verification systems.
 - Team contact method
 
 ### Compression
+
 - TOP 5 per chain per day, delete raw scan data after summary
 - Offload <70 scores to external DB
 - Experience memory tracks ROI per source
@@ -228,6 +238,7 @@ tracking + code verification scores + agent verification systems.
 ## Reference Implementation
 
 Buzz BD Agent (SolCex Exchange):
+
 - 13 intelligence sources (11 free + 2 paid)
 - 23 automated cron jobs, 4 experience memory tracks
 - ERC-8004: ETH #25045 | Base #17483
@@ -238,11 +249,13 @@ Buzz BD Agent (SolCex Exchange):
 - GitHub: https://github.com/buzzbysolcex/buzz-bd-agent
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

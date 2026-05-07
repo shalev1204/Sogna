@@ -141,7 +141,9 @@ curl https://api.anthropic.com/v1/messages \
 > **Older models:** Use `"type": "enabled"` with `"budget_tokens": N` (must be < `max_tokens`, min 1024).
 
 ```bash
+
 # Opus 4.6: adaptive thinking (recommended)
+
 curl https://api.anthropic.com/v1/messages \
   -H "Content-Type: application/json" \
   -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -171,6 +173,7 @@ curl https://api.anthropic.com/v1/messages \
 | `anthropic-beta`    | Beta feature IDs   | Required for beta features |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

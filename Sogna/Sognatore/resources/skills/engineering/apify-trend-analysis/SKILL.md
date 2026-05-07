@@ -7,12 +7,12 @@ id: skill-apify-trend-analysis
 owner: [[eng-api]]
 ---
 
-
 # Trend Analysis
 
 Discover and track emerging trends using Apify Actors to extract data from multiple platforms.
 
 ## Prerequisites
+
 (No need to check it upfront)
 
 - `.env` file with `APIFY_TOKEN`
@@ -25,11 +25,13 @@ Copy this checklist and track progress:
 
 ```
 Task Progress:
+
 - [ ] Step 1: Identify trend type (select Actor)
 - [ ] Step 2: Fetch Actor schema via mcpc
 - [ ] Step 3: Ask user preferences (format, filename)
 - [ ] Step 4: Run the analysis script
 - [ ] Step 5: Summarize findings
+
 ```
 
 ### Step 1: Identify Trend Type
@@ -70,6 +72,7 @@ export $(grep APIFY_TOKEN .env | xargs) && mcpc --json mcp.apify.com --header "A
 Replace `ACTOR_ID` with the selected Actor (e.g., `apify/google-trends-scraper`).
 
 This returns:
+
 - Actor description and README
 - Required and optional input parameters
 - Output fields (if available)
@@ -77,6 +80,7 @@ This returns:
 ### Step 3: Ask User Preferences
 
 Before running, ask:
+
 1. **Output format**:
    - **Quick answer** - Display top few results in chat (no file saved)
    - **CSV** - Full export with all fields
@@ -113,11 +117,11 @@ node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
 ### Step 5: Summarize Findings
 
 After completion, report:
+
 - Number of results found
 - File location and name
 - Key trend insights
 - Suggested next steps (deeper analysis, content opportunities)
-
 
 ## Error Handling
 
@@ -127,16 +131,18 @@ After completion, report:
 `Run FAILED` - Ask user to check Apify console link in error output
 `Timeout` - Reduce input size or increase `--timeout`
 
-
 ## When to Use
+
 Use this skill when tackling tasks related to its primary domain or functionality as described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

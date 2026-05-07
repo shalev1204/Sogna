@@ -104,6 +104,7 @@ Monitor your autonomous startup being built in real-time through the Sognatore d
 <img width="1200" alt="Sognatore Dashboard - Active Agents" src="docs/screenshots/dashboard-agents.png" />
 
 **Track all active agents in real-time:**
+
 - **Agent ID** and **Type** (frontend, backend, QA, DevOps, etc.)
 - **Model Badge** (Sonnet, Haiku, Opus) with color coding
 - **Current Work** being performed
@@ -115,6 +116,7 @@ Monitor your autonomous startup being built in real-time through the Sognatore d
 <img width="1200" alt="Sognatore Dashboard - Task Queue" src="docs/screenshots/dashboard-tasks.png" />
 
 **Four-column kanban view:**
+
 - **Pending**: Queued tasks waiting for agents
 - **In Progress**: Currently being worked on
 - **Completed**: Successfully finished (shows last 10)
@@ -123,7 +125,9 @@ Monitor your autonomous startup being built in real-time through the Sognatore d
 ### **Live Status Monitor**
 
 ```bash
+
 # Watch status updates in terminal
+
 watch -n 2 cat .sognatore/STATUS.txt
 ```
 
@@ -151,10 +155,13 @@ Last Updated: 2026-01-04 20:45:32
 
 **Access the dashboard:**
 ```bash
+
 # Automatically opens when running autonomously
+
 ./autonomy/run.sh ./docs/requirements.md
 
 # Or open manually
+
 open .sognatore/dashboard/index.html
 ```
 
@@ -169,21 +176,26 @@ Auto-refreshes every 3 seconds. Works with any modern browser.
 Sognatore doesn't just write code—it **thinks, acts, learns, and verifies**:
 
 ```
+
 1. REASON
+
    └─ Read .sognatore/CONTINUITY.md including "Mistakes & Learnings"
    └─ Check .sognatore/state/ and .sognatore/queue/
    └─ Identify next task or improvement
 
 2. ACT
+
    └─ Execute task, write code
    └─ Commit changes atomically (git checkpoint)
 
 3. REFLECT
+
    └─ Update .sognatore/CONTINUITY.md with progress
    └─ Update state files
    └─ Identify NEXT improvement
 
 4. VERIFY
+
    └─ Run automated tests (unit, integration, E2E)
    └─ Check compilation/build
    └─ Verify against spec
@@ -201,6 +213,7 @@ Sognatore doesn't just write code—it **thinks, acts, learns, and verifies**:
 ### **Perpetual Improvement Mode**
 
 There is **NEVER** a "finished" state. After completing the PRD, Sognatore:
+
 - Runs performance optimizations
 - Adds missing test coverage
 - Improves documentation
@@ -218,14 +231,21 @@ There is **NEVER** a "finished" state. After completing the PRD, Sognatore:
 **Interruptions?** State checkpoints every 5 seconds—just restart.
 
 ```bash
+
 # Start autonomous mode
+
 ./autonomy/run.sh ./docs/requirements.md
 
 # Hit rate limit? Script automatically:
+
 # ├─ Saves state checkpoint
+
 # ├─ Waits with exponential backoff (60s → 120s → 240s...)
+
 # ├─ Resumes from exact point
+
 # └─ Continues until completion or max retries (default: 50)
+
 ```
 
 ---
@@ -235,7 +255,9 @@ There is **NEVER** a "finished" state. After completing the PRD, Sognatore:
 ### **1. Install**
 
 ```bash
+
 # Clone to your Claude Code skills directory
+
 git clone https://github.com/asklokesh/sognatore.git ~/.claude/skills/sognatore
 ```
 
@@ -244,12 +266,15 @@ See [INSTALLATION.md](INSTALLATION.md) for other installation methods (Web, API 
 ### **2. Create a PRD**
 
 ```markdown
+
 # Product: AI-Powered Todo App
 
 ## Overview
+
 Build a todo app with AI-powered task suggestions and deadline predictions.
 
 ## Features
+
 - User authentication (email/password)
 - Create, read, update, delete todos
 - AI suggests next tasks based on patterns
@@ -257,10 +282,12 @@ Build a todo app with AI-powered task suggestions and deadline predictions.
 - Mobile-responsive design
 
 ## Tech Stack
+
 - Next.js 14 with TypeScript
 - PostgreSQL database
 - OpenAI API for suggestions
 - Deploy to Vercel
+
 ```
 
 Save as `my-prd.md`.
@@ -268,10 +295,13 @@ Save as `my-prd.md`.
 ### **3. Run Sognatore**
 
 ```bash
+
 # Autonomous mode (recommended)
+
 ./autonomy/run.sh ./my-prd.md
 
 # Or manual mode
+
 claude --dangerously-skip-permissions
 > Sognatore with PRD at ./my-prd.md
 ```
@@ -299,24 +329,31 @@ Sognatore has **37 predefined agent types** organized into **6 specialized swarm
 <img width="5309" height="979" alt="Agent Swarms Visualization" src="https://github.com/user-attachments/assets/7d18635d-a606-401f-8d9f-430e6e4ee689" />
 
 ### **Engineering (8 types)**
+
 `eng-frontend` `eng-backend` `eng-database` `eng-mobile` `eng-api` `eng-qa` `eng-perf` `eng-infra`
 
 ### **Operations (8 types)**
+
 `ops-devops` `ops-sre` `ops-security` `ops-monitor` `ops-incident` `ops-release` `ops-cost` `ops-compliance`
 
 ### **Business (8 types)**
+
 `biz-marketing` `biz-sales` `biz-finance` `biz-legal` `biz-support` `biz-hr` `biz-investor` `biz-partnerships`
 
 ### **Data (3 types)**
+
 `data-ml` `data-eng` `data-analytics`
 
 ### **Product (3 types)**
+
 `prod-pm` `prod-design` `prod-techwriter`
 
 ### **Growth (4 types)**
+
 `growth-hacker` `growth-community` `growth-success` `growth-lifecycle`
 
 ### **Review (3 types)**
+
 `review-code` `review-business` `review-security`
 
 See [references/agents.md](references/agents.md) for complete agent type definitions.
@@ -352,6 +389,7 @@ IMPLEMENT → REVIEW (parallel) → AGGREGATE → FIX → RE-REVIEW → COMPLETE
 ```
 
 **Severity-based issue handling:**
+
 - **Critical/High/Medium**: Block. Fix immediately. Re-review.
 - **Low**: Add `// TODO(review): ...` comment, continue.
 - **Cosmetic**: Add `// FIXME(nitpick): ...` comment, continue.
@@ -387,7 +425,9 @@ Test Sognatore with these pre-built PRDs in the `examples/` directory:
 | `full-stack-demo.md` | Medium | ~30-60 min | Complete bookmark manager - full test |
 
 ```bash
+
 # Example: Run with simple todo app
+
 ./autonomy/run.sh examples/simple-todo-app.md
 ```
 
@@ -416,7 +456,9 @@ SOGNATORE_MAX_WAIT=7200 \
 ### **Circuit Breakers**
 
 ```yaml
+
 # .sognatore/config/circuit-breakers.yaml
+
 defaults:
   failureThreshold: 5
   cooldownSeconds: 300
@@ -425,7 +467,9 @@ defaults:
 ### **External Alerting**
 
 ```yaml
+
 # .sognatore/config/alerting.yaml
+
 channels:
   slack:
     webhook_url: "${SLACK_WEBHOOK_URL}"
@@ -445,6 +489,7 @@ channels:
 - **Python 3** (for test suite)
 
 **Optional but recommended:**
+
 - Git (for version control and checkpoints)
 - Node.js/npm (for dashboard and web projects)
 - Docker (for containerized deployments)
@@ -458,14 +503,18 @@ channels:
 Integrate with [Vibe Kanban](https://github.com/BloopAI/vibe-kanban) for a visual kanban board:
 
 ```bash
+
 # Install Vibe Kanban
+
 npx vibe-kanban
 
 # Export Loki tasks to Vibe Kanban
+
 ./scripts/export-to-vibe-kanban.sh
 ```
 
 **Benefits:**
+
 - Visual progress tracking of all active agents
 - Manual intervention/prioritization when needed
 - Code review with visual diffs
@@ -480,10 +529,13 @@ See [integrations/vibe-kanban.md](integrations/vibe-kanban.md) for full setup gu
 Run the comprehensive test suite:
 
 ```bash
+
 # Run all tests
+
 ./tests/run-all-tests.sh
 
 # Or run individual test suites
+
 ./tests/test-bootstrap.sh        # Directory structure, state init
 ./tests/test-task-queue.sh       # Queue operations, priorities
 ./tests/test-circuit-breaker.sh  # Failure handling, recovery
@@ -496,6 +548,7 @@ Run the comprehensive test suite:
 ## Contributing
 
 Contributions welcome! Please:
+
 1. Read [SKILL.md](SKILL.md) to understand the architecture
 2. Check [references/agents.md](references/agents.md) for agent definitions
 3. Open an issue for bugs or feature requests
@@ -549,6 +602,7 @@ git clone https://github.com/asklokesh/sognatore.git ~/.claude/skills/sognatore
 **Keywords:** claude-code, claude-skills, ai-agents, autonomous-development, multi-agent-system, sdlc-automation, startup-automation, devops, mlops, deployment-automation, self-healing, perpetual-improvement
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

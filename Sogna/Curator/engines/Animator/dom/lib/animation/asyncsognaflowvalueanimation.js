@@ -1,12 +1,11 @@
 import { sognaflowGlobalConfig, noop } from "sognaflow-utils";
-import { Time as time } from "../frameloop/sync-time.js";
-import { JSAnimation } from "./jsanimation.js";
-import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final.js";
-import { KeyframeResolver as DefaultKeyframeResolver, flushKeyframeResolvers, } from "./keyframes/keyframesresolver.js";
-import { NativeAnimationExtended } from "./nativeanimationextended.js";
-import { CanAnimate as canAnimate } from "./utils/can-animate.js";
-import { MakeAnimationInstant as makeAnimationInstant } from "./utils/make-animation-instant.js";
-import { WithPromise } from "./utils/withpromise.js";
+import { JSAnimation } from "./JSAnimation.js";
+import { GetFinalKeyframe } from "./keyframes/get-final.js";
+import { KeyframeResolver as DefaultKeyframeResolver, flushKeyframeResolvers, } from "./keyframes/KeyframesResolver.js";
+import { NativeAnimationExtended } from "./NativeAnimationExtended.js";
+import { canAnimate } from "./utils/can-animate.js";
+import { MakeAnimationInstant } from "./utils/make-animation-instant.js";
+import { WithPromise } from "./utils/WithPromise.js";
 import { supportsBrowserAnimation } from "./waapi/supports/waapi.js";
 /**
  * Maximum time allowed between an animation being created and it being
@@ -30,7 +29,7 @@ export class AsyncSognaflowValueAnimation extends WithPromise {
             }
             this.keyframeResolver?.cancel();
         };
-        this.createdAt = time.now();
+        this.createdAt = performance.now();
         const optionsWithDefaults = {
             autoplay,
             delay,
@@ -50,7 +49,7 @@ export class AsyncSognaflowValueAnimation extends WithPromise {
     onKeyframesResolved(keyframes, finalKeyframe, options, sync) {
         this.keyframeResolver = undefined;
         const { name, type, velocity, delay, isHandoff, onUpdate } = options;
-        this.resolvedAt = time.now();
+        this.resolvedAt = performance.now();
         /**
          * If we can't animate this value with the resolved keyframes
          * then we should complete it immediately.
@@ -59,10 +58,10 @@ export class AsyncSognaflowValueAnimation extends WithPromise {
         if (!canAnimate(keyframes, name, type, velocity)) {
             canAnimateValue = false;
             if (sognaflowGlobalConfig.instantAnimations || !delay) {
-                onUpdate?.(getFinalKeyframe(keyframes, options, finalKeyframe));
+                onUpdate?.(GetFinalKeyframe(keyframes, options, options.finalKeyframe));
             }
             keyframes[0] = keyframes[keyframes.length - 1];
-            makeAnimationInstant(options);
+            MakeAnimationInstant(options);
             options.repeat = 0;
         }
         /**
@@ -193,4 +192,4 @@ export class AsyncSognaflowValueAnimation extends WithPromise {
         this.keyframeResolver?.cancel();
     }
 }
-//# sourceMappingURL=AsyncSognaflowValueAnimation.js.map
+//# sourceMappingURL=AsyncsognaflowValueAnimation.js.map

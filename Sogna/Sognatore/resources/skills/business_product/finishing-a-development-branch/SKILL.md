@@ -8,7 +8,6 @@ id: skill-finishing-a-development-branch
 owner: [[prod-pm]]
 ---
 
-
 # Finishing a Development Branch
 
 ## Overview
@@ -26,7 +25,9 @@ Guide completion of development work by presenting clear options and handling ch
 **Before presenting options, verify tests pass:**
 
 ```bash
+
 # Run project's test suite
+
 npm test / cargo test / pytest / go test ./...
 ```
 
@@ -46,7 +47,9 @@ Stop. Don't proceed to Step 2.
 ### Step 2: Determine Base Branch
 
 ```bash
+
 # Try common base branches
+
 git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
 ```
 
@@ -74,19 +77,25 @@ Which option?
 #### Option 1: Merge Locally
 
 ```bash
+
 # Switch to base branch
+
 git checkout <base-branch>
 
 # Pull latest
+
 git pull
 
 # Merge feature branch
+
 git merge <feature-branch>
 
 # Verify tests on merged result
+
 <test command>
 
 # If tests pass
+
 git branch -d <feature-branch>
 ```
 
@@ -95,16 +104,23 @@ Then: Cleanup worktree (Step 5)
 #### Option 2: Push and Create PR
 
 ```bash
+
 # Push branch
+
 git push -u origin <feature-branch>
 
 # Create PR
+
 gh pr create --title "<title>" --body "$(cat <<'EOF'
+
 ## Summary
+
 <2-3 bullets of what changed>
 
 ## Test Plan
+
 - [ ] <verification steps>
+
 EOF
 )"
 ```
@@ -122,6 +138,7 @@ Report: "Keeping branch <name>. Worktree preserved at <path>."
 **Confirm first:**
 ```
 This will permanently delete:
+
 - Branch <name>
 - All commits: <commit-list>
 - Worktree at <path>
@@ -167,30 +184,36 @@ git worktree remove <worktree-path>
 ## Common Mistakes
 
 **Skipping test verification**
+
 - **Problem:** Merge broken code, create failing PR
 - **Fix:** Always verify tests before offering options
 
 **Open-ended questions**
+
 - **Problem:** "What should I do next?" → ambiguous
 - **Fix:** Present exactly 4 structured options
 
 **Automatic worktree cleanup**
+
 - **Problem:** Remove worktree when might need it (Option 2, 3)
 - **Fix:** Only cleanup for Options 1 and 4
 
 **No confirmation for discard**
+
 - **Problem:** Accidentally delete work
 - **Fix:** Require typed "discard" confirmation
 
 ## Red Flags
 
 **Never:**
+
 - Proceed with failing tests
 - Merge without verifying tests on result
 - Delete work without confirmation
 - Force-push without explicit request
 
 **Always:**
+
 - Verify tests before offering options
 - Present exactly 4 options
 - Get typed confirmation for Option 4
@@ -199,21 +222,26 @@ git worktree remove <worktree-path>
 ## Integration
 
 **Called by:**
+
 - **subagent-driven-development** (Step 7) - After all tasks complete
 - **executing-plans** (Step 5) - After all batches complete
 
 **Pairs with:**
+
 - **using-git-worktrees** - Cleans up worktree created by that skill
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

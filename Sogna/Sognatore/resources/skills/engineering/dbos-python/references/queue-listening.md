@@ -21,7 +21,9 @@ cpu_queue = Queue("cpu_tasks")
 gpu_queue = Queue("gpu_tasks")
 
 # Every worker processes both queues
+
 # GPU tasks may run on CPU-only machines!
+
 if __name__ == "__main__":
     DBOS(config=config)
     DBOS.launch()
@@ -57,11 +59,13 @@ if __name__ == "__main__":
 ```
 
 Key points:
+
 - Call `DBOS.listen_queues()` **before** `DBOS.launch()`
 - Workers can still **enqueue** to any queue, just won't **dequeue** from others
 - By default, workers listen to all declared queues
 
 Use cases:
+
 - CPU vs GPU workers
 - Memory-intensive vs lightweight tasks
 - Geographic task routing
@@ -69,6 +73,7 @@ Use cases:
 Reference: [Explicit Queue Listening](https://docs.dbos.dev/python/tutorials/queue-tutorial#explicit-queue-listening)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

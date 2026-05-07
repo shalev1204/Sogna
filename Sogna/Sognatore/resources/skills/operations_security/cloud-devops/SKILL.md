@@ -9,7 +9,6 @@ id: skill-cloud-devops
 owner: [[ops-devops]], [[ops-security]]
 ---
 
-
 # Cloud/DevOps Workflow Bundle
 
 ## Overview
@@ -19,6 +18,7 @@ Comprehensive cloud and DevOps workflow for infrastructure provisioning, contain
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Setting up cloud infrastructure
 - Implementing CI/CD pipelines
 - Deploying Kubernetes applications
@@ -31,6 +31,7 @@ Use this workflow when:
 ### Phase 1: Cloud Infrastructure Setup
 
 #### Skills to Invoke
+
 - `cloud-architect` - Cloud architecture
 - `aws-skills` - AWS development
 - `azure-functions` - Azure development
@@ -39,6 +40,7 @@ Use this workflow when:
 - `terraform-specialist` - Advanced Terraform
 
 #### Actions
+
 1. Design cloud architecture
 2. Set up accounts and billing
 3. Configure networking
@@ -46,6 +48,7 @@ Use this workflow when:
 5. Set up IAM
 
 #### Copy-Paste Prompts
+
 ```
 Use @cloud-architect to design multi-cloud architecture
 ```
@@ -57,6 +60,7 @@ Use @terraform-skill to provision AWS infrastructure
 ### Phase 2: Container Orchestration
 
 #### Skills to Invoke
+
 - `kubernetes-architect` - Kubernetes architecture
 - `docker-expert` - Docker containerization
 - `helm-chart-scaffolding` - Helm charts
@@ -64,6 +68,7 @@ Use @terraform-skill to provision AWS infrastructure
 - `k8s-security-policies` - K8s security
 
 #### Actions
+
 1. Design container architecture
 2. Create Dockerfiles
 3. Build container images
@@ -72,6 +77,7 @@ Use @terraform-skill to provision AWS infrastructure
 6. Configure networking
 
 #### Copy-Paste Prompts
+
 ```
 Use @kubernetes-architect to design K8s architecture
 ```
@@ -87,6 +93,7 @@ Use @helm-chart-scaffolding to create Helm chart
 ### Phase 3: CI/CD Implementation
 
 #### Skills to Invoke
+
 - `deployment-engineer` - Deployment engineering
 - `cicd-automation-workflow-automate` - CI/CD automation
 - `github-actions-templates` - GitHub Actions
@@ -94,6 +101,7 @@ Use @helm-chart-scaffolding to create Helm chart
 - `deployment-pipeline-design` - Pipeline design
 
 #### Actions
+
 1. Design deployment pipeline
 2. Configure build automation
 3. Set up test automation
@@ -102,6 +110,7 @@ Use @helm-chart-scaffolding to create Helm chart
 6. Set up notifications
 
 #### Copy-Paste Prompts
+
 ```
 Use @cicd-automation-workflow-automate to set up CI/CD pipeline
 ```
@@ -113,6 +122,7 @@ Use @github-actions-templates to create GitHub Actions workflow
 ### Phase 4: Monitoring and Observability
 
 #### Skills to Invoke
+
 - `observability-engineer` - Observability engineering
 - `grafana-dashboards` - Grafana dashboards
 - `prometheus-configuration` - Prometheus setup
@@ -120,6 +130,7 @@ Use @github-actions-templates to create GitHub Actions workflow
 - `sentry-automation` - Sentry error tracking
 
 #### Actions
+
 1. Design monitoring strategy
 2. Set up metrics collection
 3. Configure log aggregation
@@ -128,6 +139,7 @@ Use @github-actions-templates to create GitHub Actions workflow
 6. Set up alerts
 
 #### Copy-Paste Prompts
+
 ```
 Use @observability-engineer to set up observability stack
 ```
@@ -139,6 +151,7 @@ Use @grafana-dashboards to create monitoring dashboards
 ### Phase 5: Cloud Security
 
 #### Skills to Invoke
+
 - `cloud-penetration-testing` - Cloud pentesting
 - `aws-penetration-testing` - AWS security
 - `k8s-security-policies` - K8s security
@@ -146,6 +159,7 @@ Use @grafana-dashboards to create monitoring dashboards
 - `mtls-configuration` - mTLS setup
 
 #### Actions
+
 1. Assess cloud security
 2. Configure security groups
 3. Set up secrets management
@@ -154,6 +168,7 @@ Use @grafana-dashboards to create monitoring dashboards
 6. Set up audit logging
 
 #### Copy-Paste Prompts
+
 ```
 Use @cloud-penetration-testing to assess cloud security
 ```
@@ -165,10 +180,12 @@ Use @secrets-management to configure secrets
 ### Phase 6: Cost Optimization
 
 #### Skills to Invoke
+
 - `cost-optimization` - Cloud cost optimization
 - `database-cloud-optimization-cost-optimize` - Database cost optimization
 
 #### Actions
+
 1. Analyze cloud spending
 2. Identify optimization opportunities
 3. Right-size resources
@@ -177,6 +194,7 @@ Use @secrets-management to configure secrets
 6. Set up cost alerts
 
 #### Copy-Paste Prompts
+
 ```
 Use @cost-optimization to reduce cloud costs
 ```
@@ -184,11 +202,13 @@ Use @cost-optimization to reduce cloud costs
 ### Phase 7: Disaster Recovery
 
 #### Skills to Invoke
+
 - `incident-responder` - Incident response
 - `incident-runbook-templates` - Runbook creation
 - `postmortem-writing` - Postmortem documentation
 
 #### Actions
+
 1. Design DR strategy
 2. Set up backups
 3. Create runbooks
@@ -197,6 +217,7 @@ Use @cost-optimization to reduce cloud costs
 6. Train team
 
 #### Copy-Paste Prompts
+
 ```
 Use @incident-runbook-templates to create runbooks
 ```
@@ -204,18 +225,21 @@ Use @incident-runbook-templates to create runbooks
 ## Cloud Provider Workflows
 
 ### AWS
+
 ```
 Skills: aws-skills, aws-serverless, aws-penetration-testing
 Services: EC2, Lambda, S3, RDS, ECS, EKS
 ```
 
 ### Azure
+
 ```
 Skills: azure-functions, azure-ai-projects-py, azure-monitor-opentelemetry-py
 Services: Functions, App Service, AKS, Cosmos DB
 ```
 
 ### GCP
+
 ```
 Skills: gcp-cloud-run
 Services: Cloud Run, GKE, Cloud Functions, BigQuery
@@ -238,11 +262,13 @@ Services: Cloud Run, GKE, Cloud Functions, BigQuery
 - `testing-qa` - Testing workflows
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

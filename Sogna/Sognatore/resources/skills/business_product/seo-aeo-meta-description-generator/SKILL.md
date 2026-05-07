@@ -8,7 +8,6 @@ id: skill-seo-aeo-meta-description-generator
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # SEO-AEO Meta Description Generator
 
 ## Overview
@@ -27,16 +26,19 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 ## How It Works
 
 ### Step 1: Identify CTR Angle Per Variant
+
 - **V1 Benefit Lead** — leads with the outcome or benefit
 - **V2 Question Hook** — opens with the question the searcher is asking
 - **V3 Social Proof / Specificity** — leads with a number, stat, or specific claim
 
 ### Step 2: Apply Character Limits
+
 - Title tag: 50–60 characters (hard limit: 60)
 - Meta description: 140–155 characters (hard limit: 160)
 - Never end a description mid-sentence near the limit
 
 ### Step 3: Apply CTR Rules
+
 - Primary keyword in first 3 words of every title variant
 - Primary keyword in first half of every description variant
 - At least one power word per description
@@ -44,11 +46,13 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 - Never use "click here", passive openers, or all-caps
 
 ### Step 4: Write Social Tags
+
 OG and Twitter tags can be more conversational than SERP tags. Write them as distinct copy — not copy-pastes of the meta description.
 
 ## Examples
 
 ### Example 1: Landing Page Variants
+
 Title V1: Remote Project Management Software | Syncro
 (51 chars) — Keyword first, brand at end
 Title V2: Manage Remote Teams Without the Chaos | Syncro
@@ -74,9 +78,11 @@ scattered tools with one async-first workspace. Try it free.
 ## Common Pitfalls
 
 - **Problem:** Description truncates mid-word in search results
+
   **Solution:** Always trim a clause rather than letting natural truncation cut the sentence.
 
 - **Problem:** All 3 variants sound identical
+
   **Solution:** Each variant must use a genuinely different CTR mechanic — not just rearranged words.
 
 ## Related Skills
@@ -90,11 +96,13 @@ scattered tools with one async-first workspace. Try it free.
 - [Full Meta Description Generator SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/meta-description-generator/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

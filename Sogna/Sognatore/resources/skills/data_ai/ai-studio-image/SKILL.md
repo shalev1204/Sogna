@@ -4,21 +4,24 @@ description: Geracao de imagens humanizadas via Google AI Studio (Gemini). Fotos
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - image-generation
 - ai-studio
 - google
 - photography
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-ai-studio-image
 owner: [[orchestrator]]
 ---
-
 
 # AI Studio Image — Especialista em Imagens Humanizadas
 
@@ -57,6 +60,7 @@ pessoa real com seu celular — nao por uma IA.
 ## 1. Configurar Api Key
 
 O usuario precisa de uma API key do Google AI Studio:
+
 - Acesse https://aistudio.google.com/apikey
 - Crie ou copie sua API key
 - Configure como variavel de ambiente:
@@ -128,30 +132,35 @@ python C:\Users\renat\skills\ai-studio-image\scripts\prompt_engine.py --prompt "
 O motor de humanizacao adiciona camadas de realismo:
 
 **Camada 1 — Dispositivo e Tecnica:**
+
 - Fotografado com smartphone (iPhone/Samsung Galaxy)
 - Lente de celular com profundidade de campo natural
 - Sem flash — apenas luz ambiente
 - Leve ruido de sensor (ISO elevado em baixa luz)
 
 **Camada 2 — Iluminacao Natural:**
+
 - Luz do sol indireta / golden hour / luz de janela
 - Sombras suaves e organicas
 - Sem iluminacao de estudio
 - Reflexos naturais em superficies
 
 **Camada 3 — Imperfeicoes Humanas:**
+
 - Enquadramento ligeiramente imperfeito (nao centralizado matematicamente)
 - Foco seletivo natural (algo levemente fora de foco no background)
 - Micro-tremor de maos (nitidez nao e absoluta)
 - Elementos aleatorios do ambiente real
 
 **Camada 4 — Autenticidade:**
+
 - Expressoes faciais genuinas (nao poses de estudio)
 - Roupas e cenarios do dia-a-dia
 - Textura de pele real (poros, marcas sutis — sem pele de porcelana)
 - Proporcoes corporais realistas
 
 **Camada 5 — Contexto Ambiental:**
+
 - Cenarios reais (nao fundos genericos de stock)
 - Objetos do cotidiano no ambiente
 - Iluminacao consistente com o cenario
@@ -182,6 +191,7 @@ python C:\Users\renat\skills\ai-studio-image\scripts\generate.py \
 ## Passo 5: Apresentar E Iterar
 
 Mostre o resultado ao usuario. Se precisar ajustar:
+
 - Reluz: Ajustar iluminacao
 - Reenquadrar: Mudar composicao
 - Mais/menos natural: Ajustar nivel de imperfeicoes
@@ -276,6 +286,7 @@ python C:\Users\renat\skills\ai-studio-image\scripts\generate.py \
 ## Instagram Skill
 
 Gere imagens e publique diretamente:
+
 1. Use `ai-studio-image` para gerar a foto
 2. Use `instagram` skill para publicar com caption otimizada
 
@@ -295,6 +306,7 @@ As imagens geradas podem ser enviadas para o Canva para adicao de texto/branding
 ## Referencias
 
 Para guias detalhados, consulte:
+
 - `references/setup-guide.md` — Instalacao e configuracao completa
 - `references/prompt-engineering.md` — Tecnicas avancadas de prompt para imagens humanizadas
 - `references/api-reference.md` — Documentacao da API do Google AI Studio
@@ -318,11 +330,13 @@ Para guias detalhados, consulte:
 - `stability-ai` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

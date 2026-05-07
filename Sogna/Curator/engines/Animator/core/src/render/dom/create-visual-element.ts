@@ -13,8 +13,8 @@ export const createDomVisualElement: CreateVisualElement = (
     const isSVG = options.isSVG ?? isSVGComponent(Component)
 
     return isSVG
-        ? new SVGVisualElement(options)
-        : new HTMLVisualElement(options, {
+        ? new SVGVisualElement(options as any)
+        : new HTMLVisualElement(options as any, {
               allowProjection: Component !== Fragment,
           })
 }

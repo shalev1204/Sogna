@@ -1,5 +1,5 @@
 import { JSX, SVGAttributes } from "react"
-import { Makesognaflow, sognaflowProps } from "../../sognaflow/types"
+import { Makesognaflow, sognaflowProps } from "../../motion/types"
 import { ForwardRefComponent, HTMLRenderState } from "../html/types.js"
 import { ResolvedValues } from "../types.js"
 import { SVGElements } from "./supported-elements.js"

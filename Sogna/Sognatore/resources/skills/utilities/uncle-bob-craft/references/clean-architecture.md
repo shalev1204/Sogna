@@ -47,11 +47,13 @@ Based on Robert C. Martin, *Clean Architecture* (2017). Use this when you need d
 When grouping classes into **components** (modules, packages), Uncle Bob defines:
 
 **Cohesion:**
+
 - **REP (Reuse/Release Equivalence)** — The unit of reuse is the unit of release; group classes that are reused and released together.
 - **CCP (Common Closure)** — Classes that change for the same reasons belong in the same component; reduces impact of change.
 - **CRP (Common Reuse)** — Classes reused together should be packaged together; avoid forcing dependents to pull in more than they need.
 
 **Coupling:**
+
 - **ADP (Acyclic Dependencies)** — Component dependency graph must have no cycles.
 - **SDP (Stable Dependencies)** — Depend in the direction of stability; less stable components depend on more stable ones.
 - **SAP (Stable Abstractions)** — Stable components should be abstract; unstable components can be concrete.
@@ -63,6 +65,7 @@ Use this when discussing module/package boundaries beyond single layers. For ful
 Use this reference when reviewing for "dependency direction," "layer violations," or "missing boundaries."
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

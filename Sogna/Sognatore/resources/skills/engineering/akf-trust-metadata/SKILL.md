@@ -4,23 +4,25 @@ description: "The AI native file format. EXIF for AI — stamps every file with 
 risk: critical
 date_added: "2026-03-27"
 tags:
+
 - trust
 - metadata
 - provenance
 - compliance
 - file-format
 - ai-native
+
 version: 1.0.0
 id: skill-akf-trust-metadata
 owner: [[orchestrator]]
 ---
-
 
 # AKF — The AI Native File Format
 
 Every photo has EXIF. Every song has ID3. AKF is the native metadata format for AI-generated content.
 
 ## When to Use
+
 Use this skill when you need to stamp, inspect, or audit provenance and trust metadata on AI-generated or AI-modified files for compliance, review, or handoff workflows.
 
 ## After creating or modifying files
@@ -30,6 +32,7 @@ akf stamp <file> --agent <agent-name> --evidence "<what you did>"
 ```
 
 Evidence examples:
+
 - "generated from user prompt"
 - "refactored existing code"
 - "tests pass"
@@ -70,11 +73,13 @@ pip install akf
 - npm: `npm install akf-format`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

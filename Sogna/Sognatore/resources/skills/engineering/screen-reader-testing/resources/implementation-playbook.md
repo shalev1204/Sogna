@@ -38,14 +38,17 @@ Practical guide to testing web applications with screen readers for comprehensiv
 
 ```
 Minimum Coverage:
+
 1. NVDA + Firefox (Windows)
 2. VoiceOver + Safari (macOS)
 3. VoiceOver + Safari (iOS)
 
 Comprehensive Coverage:
+
 + JAWS + Chrome (Windows)
 + TalkBack + Chrome (Android)
 + Narrator + Edge (Windows)
+
 ```
 
 ### 3. Screen Reader Modes
@@ -104,6 +107,7 @@ VO + Cmd + T       Next table
 ### Testing Checklist
 
 ```markdown
+
 ## VoiceOver Testing Checklist
 
 ### Page Load
@@ -145,6 +149,7 @@ VO + Cmd + T       Next table
 - [ ] Headers associated with cells
 - [ ] Table navigation works
 - [ ] Complex tables have captions
+
 ```
 
 ### Common Issues & Fixes
@@ -230,20 +235,24 @@ Shows all links, headings, form fields, landmarks
 
 ```
 NVDA automatically switches modes:
+
 - Browse Mode: Arrow keys navigate content
 - Focus Mode: Arrow keys control interactive elements
 
 Manual switch: NVDA + Space
 
 Watch for:
+
 - "Browse mode" announcement when navigating
 - "Focus mode" when entering form fields
 - Application role forces forms mode
+
 ```
 
 ### Testing Script
 
 ```markdown
+
 ## NVDA Test Script
 
 ### Initial Load
@@ -290,6 +299,7 @@ Watch for:
 4. Check: Focus trapped?
 5. Close modal
 6. Check: Focus returns?
+
 ```
 
 ## JAWS (Windows)
@@ -348,6 +358,7 @@ Activate: Double tap
 Scroll: Two finger swipe
 
 Reading Controls (swipe up then right):
+
 - Headings
 - Links
 - Controls
@@ -355,6 +366,7 @@ Reading Controls (swipe up then right):
 - Words
 - Lines
 - Paragraphs
+
 ```
 
 ## Common Test Scenarios
@@ -551,6 +563,7 @@ function logAccessibleName(element) {
 - [WebAIM Screen Reader Survey](https://webaim.org/projects/screenreadersurvey/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

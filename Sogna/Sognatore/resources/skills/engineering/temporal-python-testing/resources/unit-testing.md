@@ -240,7 +240,9 @@ async def test_activity_error():
 ### Shared Fixtures
 
 ```python
+
 # conftest.py
+
 import pytest
 from temporalio.testing import WorkflowEnvironment
 
@@ -335,6 +337,7 @@ async def test_workflow_with_retries(workflow_env):
 - Temporal Samples: github.com/temporalio/samples-python
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

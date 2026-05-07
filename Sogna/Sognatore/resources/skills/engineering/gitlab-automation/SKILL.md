@@ -8,7 +8,6 @@ id: skill-gitlab-automation
 owner: [[orchestrator]]
 ---
 
-
 # GitLab Automation via Rube MCP
 
 Automate GitLab operations including project management, issue tracking, merge request workflows, CI/CD pipeline monitoring, branch management, and user administration through Composio's GitLab toolkit.
@@ -35,6 +34,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 **When to use**: User wants to create, update, list, or search issues in a GitLab project
 
 **Tool sequence**:
+
 1. `GITLAB_GET_PROJECTS` - Find the target project and get its ID [Prerequisite]
 2. `GITLAB_LIST_PROJECT_ISSUES` - List and filter issues for a project [Required]
 3. `GITLAB_CREATE_PROJECT_ISSUE` - Create a new issue [Required for create]
@@ -42,6 +42,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 5. `GITLAB_LIST_PROJECT_USERS` - Find user IDs for assignment [Optional]
 
 **Key parameters**:
+
 - `id`: Project ID (integer) or URL-encoded path (e.g., `"my-group/my-project"`)
 - `title`: Issue title (required for creation)
 - `description`: Issue body text (max 1,048,576 characters)
@@ -57,6 +58,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 - `page` / `per_page`: Pagination (default per_page: 20)
 
 **Pitfalls**:
+
 - `id` accepts either integer project ID or URL-encoded path; wrong IDs yield 4xx errors
 - `issue_iid` is the project-internal ID (shown as #42), different from the global issue ID
 - Labels in `labels` field replace ALL existing labels; use `add_labels`/`remove_labels` for incremental changes
@@ -68,12 +70,14 @@ Automate GitLab operations including project management, issue tracking, merge r
 **When to use**: User wants to list, filter, or review merge requests in a project
 
 **Tool sequence**:
+
 1. `GITLAB_GET_PROJECT` - Get project details and verify access [Prerequisite]
 2. `GITLAB_GET_PROJECT_MERGE_REQUESTS` - List and filter merge requests [Required]
 3. `GITLAB_GET_REPOSITORY_BRANCHES` - Verify source/target branches [Optional]
 4. `GITLAB_LIST_ALL_PROJECT_MEMBERS` - Find reviewers/assignees [Optional]
 
 **Key parameters**:
+
 - `id`: Project ID or URL-encoded path
 - `state`: `"opened"`, `"closed"`, `"locked"`, `"merged"`, or `"all"`
 - `scope`: `"created_by_me"` (default), `"assigned_to_me"`, or `"all"`
@@ -89,6 +93,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 - `iids[]`: Filter by specific MR internal IDs
 
 **Pitfalls**:
+
 - Default `scope` is `"created_by_me"` which limits results; use `"all"` for complete listings
 - `author_id` and `author_username` are mutually exclusive
 - `reviewer_id` and `reviewer_username` are mutually exclusive
@@ -100,6 +105,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 **When to use**: User wants to list projects, create new projects, or manage branches
 
 **Tool sequence**:
+
 1. `GITLAB_GET_PROJECTS` - List all accessible projects with filters [Required]
 2. `GITLAB_GET_PROJECT` - Get detailed info for a specific project [Optional]
 3. `GITLAB_LIST_USER_PROJECTS` - List projects owned by a specific user [Optional]
@@ -111,6 +117,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 9. `GITLAB_GET_PROJECT_LANGUAGES` - Get language breakdown [Optional]
 
 **Key parameters**:
+
 - `name` / `path`: Project name and URL-friendly path (both required for creation)
 - `visibility`: `"private"`, `"internal"`, or `"public"`
 - `namespace_id`: Group or user ID for project placement
@@ -123,6 +130,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 - `order_by`: `"id"`, `"name"`, `"path"`, `"created_at"`, `"updated_at"`, `"star_count"`, `"last_activity_at"`
 
 **Pitfalls**:
+
 - `GITLAB_GET_PROJECTS` pagination is required for complete coverage; stopping at first page misses projects
 - Some responses place items under `data.details`; parse the actual returned list structure
 - Most follow-up calls depend on correct `project_id`; verify with `GITLAB_GET_PROJECT` first
@@ -134,12 +142,14 @@ Automate GitLab operations including project management, issue tracking, merge r
 **When to use**: User wants to check pipeline status, list jobs, or monitor CI/CD runs
 
 **Tool sequence**:
+
 1. `GITLAB_GET_PROJECT` - Verify project access [Prerequisite]
 2. `GITLAB_LIST_PROJECT_PIPELINES` - List pipelines with filters [Required]
 3. `GITLAB_GET_SINGLE_PIPELINE` - Get detailed info for a specific pipeline [Optional]
 4. `GITLAB_LIST_PIPELINE_JOBS` - List jobs within a pipeline [Optional]
 
 **Key parameters**:
+
 - `id`: Project ID or URL-encoded path
 - `status`: Filter by `"created"`, `"waiting_for_resource"`, `"preparing"`, `"pending"`, `"running"`, `"success"`, `"failed"`, `"canceled"`, `"skipped"`, `"manual"`, `"scheduled"`
 - `scope`: `"running"`, `"pending"`, `"finished"`, `"branches"`, `"tags"`
@@ -152,6 +162,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 - `include_retried`: `true` to include retried jobs (default `false`)
 
 **Pitfalls**:
+
 - Large pipeline histories can be noisy; use `status`, `ref`, and date filters to narrow results
 - Use moderate `per_page` values to keep output manageable
 - Pipeline job `scope` accepts single status string or array of statuses
@@ -162,6 +173,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 **When to use**: User wants to find users, list project members, or check user status
 
 **Tool sequence**:
+
 1. `GITLAB_GET_USERS` - Search and list GitLab users [Required]
 2. `GITLAB_GET_USER` - Get details for a specific user by ID [Optional]
 3. `GITLAB_GET_USERS_ID_STATUS` - Get user status message and availability [Optional]
@@ -169,6 +181,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 5. `GITLAB_LIST_PROJECT_USERS` - List project users with search filter [Optional]
 
 **Key parameters**:
+
 - `search`: Search by name, username, or public email
 - `username`: Get specific user by username
 - `active` / `blocked`: Filter by user state
@@ -178,6 +191,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 - `user_ids`: Filter by specific user IDs
 
 **Pitfalls**:
+
 - Many user filters (admins, auditors, extern_uid, two_factor) are admin-only
 - `GITLAB_LIST_ALL_PROJECT_MEMBERS` includes direct, inherited, and invited members
 - User search is case-insensitive but may not match partial email domains
@@ -186,21 +200,27 @@ Automate GitLab operations including project management, issue tracking, merge r
 ## Common Patterns
 
 ### ID Resolution
+
 GitLab uses two identifier formats for projects:
+
 - **Numeric ID**: Integer project ID (e.g., `123`)
 - **URL-encoded path**: Namespace/project format (e.g., `"my-group%2Fmy-project"` or `"my-group/my-project"`)
 - **Issue IID vs ID**: `issue_iid` is the project-internal number (#42); the global `id` is different
 - **User ID**: Numeric; resolve via `GITLAB_GET_USERS` with `search` or `username`
 
 ### Pagination
+
 GitLab uses offset-based pagination:
+
 - Set `page` (starting at 1) and `per_page` (1-100, default 20)
 - Continue incrementing `page` until response returns fewer items than `per_page` or is empty
 - Total count may be available in response headers (`X-Total`, `X-Total-Pages`)
 - Always paginate to completion for accurate results
 
 ### URL-Encoded Paths
+
 When using project paths as identifiers:
+
 - Forward slashes must be URL-encoded: `my-group/my-project` becomes `my-group%2Fmy-project`
 - Some tools accept unencoded paths; check schema for each tool
 - Prefer numeric IDs when available for reliability
@@ -208,17 +228,20 @@ When using project paths as identifiers:
 ## Known Pitfalls
 
 ### ID Formats
+
 - Project `id` field accepts both integer and string (URL-encoded path)
 - Issue `issue_iid` is project-scoped; do not confuse with global issue ID
 - Pipeline IDs are project-scoped integers
 - User IDs are global integers across the GitLab instance
 
 ### Rate Limits
+
 - GitLab has per-user rate limits (typically 300-2000 requests/minute depending on plan)
 - Large pipeline/issue histories should use date and status filters to reduce result sets
 - Paginate responsibly with moderate `per_page` values
 
 ### Parameter Quirks
+
 - `labels` field replaces ALL labels; use `add_labels`/`remove_labels` for incremental changes
 - `assignee_ids: [0]` unassigns all; empty array does nothing
 - `scope` defaults vary: `"created_by_me"` for MRs, `"all"` for issues
@@ -226,6 +249,7 @@ When using project paths as identifiers:
 - Date parameters use ISO 8601 format: `"2024-01-15T10:30:00Z"`
 
 ### Plan Restrictions
+
 - Some features require Premium/Ultimate: `epic_id`, `weight`, `iteration_id`, `approved_by_ids`, member `state` filter
 - Admin-only features: user management filters, `updated_at` override, custom attributes
 - The `mr_approved_filter` feature flag is disabled by default
@@ -257,14 +281,17 @@ When using project paths as identifiers:
 | List project users | `GITLAB_LIST_PROJECT_USERS` | `id`, `search` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

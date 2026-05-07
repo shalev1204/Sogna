@@ -16,6 +16,7 @@ Where n = number of choices
 ```
 
 **Application:**
+
 - Navigation: Max 5-7 top-level items
 - Forms: Break into steps (progressive disclosure)
 - Options: Default selections when possible
@@ -42,6 +43,7 @@ Where D = distance, W = width
 ```
 
 **Application:**
+
 - CTAs: Make primary buttons larger (min 44px height)
 - Touch targets: 44×44px minimum on mobile
 - Placement: Important actions near natural cursor position
@@ -67,6 +69,7 @@ Where D = distance, W = width
 **Principle:** Average person can hold 7±2 chunks in working memory.
 
 **Application:**
+
 - Lists: Group into chunks of 5-7 items
 - Navigation: Max 7 menu items
 - Content: Break long content with headings
@@ -90,6 +93,7 @@ Where D = distance, W = width
 **Principle:** An item that stands out is more likely to be remembered.
 
 **Application:**
+
 - CTA buttons: Distinct color from other elements
 - Pricing: Highlight recommended plan
 - Important info: Visual differentiation
@@ -116,6 +120,7 @@ Where D = distance, W = width
 **Principle:** Items at the beginning (primacy) and end (recency) of a list are remembered best.
 
 **Application:**
+
 - Navigation: Most important items first and last
 - Lists: Key info at top and bottom
 - Forms: Most critical fields at start
@@ -126,9 +131,11 @@ Where D = distance, W = width
 Navigation: Home | [key items] | Contact
 
 Long landing page:
+
 - CTA at hero (top)
 - Content sections
 - CTA repeated at bottom
+
 ```
 
 ### Jakob’s Law
@@ -136,6 +143,7 @@ Long landing page:
 **Principle:** Users spend most of their time on other sites. They prefer your site to work the same way as all the other sites they already know.
 
 **Application:**
+
 - **Patterns:** Use standard placement for search bars and carts.
 - **Mental Models:** Leverage familiar icons (e.g., a magnifying glass).
 - **Vocabulary:** Use "Log In" instead of "Enter the Portal."
@@ -159,6 +167,7 @@ Long landing page:
 **Principle:** For any system, there is a certain amount of complexity which cannot be reduced, only shifted from user to software.
 
 **Application:**
+
 - **Backend:** Let the system handle formatting (e.g., currency).
 - **Detection:** Auto-detect card type or city via ZIP code.
 - **Automation:** Pre-fill returning user data.
@@ -182,6 +191,7 @@ Long landing page:
 **Principle:** Any task will inflate until all available time is spent.
 
 **Application:**
+
 - **Efficiency:** Use "Auto-save" to reduce task completion time.
 - **Speed:** Limit the steps in a conversion funnel.
 - **Clarity:** Use clear labels to prevent "hover-poking" for meaning.
@@ -205,6 +215,7 @@ Long landing page:
 **Principle:** Productivity skyrockets when a computer and its users interact at a pace (<400ms) that ensures neither has to wait on the other.
 
 **Application:**
+
 - **Feedback:** Use immediate visual cues for clicks.
 - **Loading:** Use skeleton screens for perceivable performance.
 - **Optimism:** Update UI before the server responds (Optimistic UI).
@@ -229,6 +240,7 @@ Long landing page:
 **Principle:** Be conservative in what you do, be liberal in what you accept from others.
 
 **Application:**
+
 - **Error Handling:** Don't error out for a missing space or dash.
 - **Formatting:** Accept dates in DD/MM/YYYY or MM/DD/YYYY.
 - **Inputs:** Strip trailing/leading white space automatically.
@@ -252,6 +264,7 @@ Long landing page:
 **Principle:** Among competing hypotheses that predict equally well, the one with the fewest assumptions should be selected. The simplest solution is usually the best.
 
 **Application:**
+
 - **Logic:** Remove unnecessary clicks.
 - **Visuals:** Use only as many fonts/colors as strictly necessary.
 - **Function:** If one field can do the work of two, combine them.
@@ -277,6 +290,7 @@ Long landing page:
 **Principle:** Objects that are near, or proximate to each other, tend to be grouped together.
 
 **Application:**
+
 - **Grouping:** Keep labels physically close to input fields.
 - **Spacing:** Larger margins between unrelated content blocks.
 - **Cards:** Text inside a card should be closer to its image than the border.
@@ -300,6 +314,7 @@ Long landing page:
 **Principle:** The human eye tends to perceive similar elements in a design as a complete picture, shape, or group, even if those elements are separated.
 
 **Application:**
+
 - **Consistency:** Consistent colors for all clickable links.
 - **Iconography:** All icons in a set should have the same stroke weight.
 - **Buttons:** Same shape/size for buttons with the same importance.
@@ -323,6 +338,7 @@ Long landing page:
 **Principle:** Elements tend to be perceived into groups if they are sharing an area with a clearly defined boundary.
 
 **Application:**
+
 - **Containerizing:** Use cards to group images and titles.
 - **Borders:** Use lines to separate the sidebar from the main feed.
 - **Backgrounds:** Use a different background color for the footer.
@@ -346,6 +362,7 @@ Long landing page:
 **Principle:** Elements that are visually connected (e.g., via lines, arrows) are perceived as more related than elements with no connection.
 
 **Application:**
+
 - **Flow:** Use lines to connect steps in a progress wizard.
 - **Menus:** Dropdowns that "touch" or connect to their parent button.
 - **Graphs:** Lines connecting data points in a chart.
@@ -369,6 +386,7 @@ Long landing page:
 **Principle:** People will perceive and interpret ambiguous or complex images as the simplest form possible, because it is the interpretation that requires the least cognitive effort.
 
 **Application:**
+
 - **Clarity:** Use clear, geometric icons for navigation.
 - **Reduction:** Remove unnecessary 3D textures or shadows.
 - **Shapes:** Prefer standard rectangles/circles over complex polygons.
@@ -392,6 +410,7 @@ Long landing page:
 **Principle:** The eye differentiates an object from its surrounding area. a form, silhouette, or shape is perceived as figure (object), while the surrounding area is perceived as ground (background).
 
 **Application:**
+
 - **Focus:** Use overlays (scrims) for modals to pop the content.
 - **Depth:** Drop shadows to imply the "figure" is sitting above the "ground."
 - **Contrast:** Light text on dark ground (or vice versa).
@@ -415,6 +434,7 @@ Long landing page:
 **Principle:** Whatever stands out visually will capture and hold the viewer’s attention first.
 
 **Application:**
+
 - **Entry:** Place the primary value proposition at the focal point.
 - **Color:** Use one high-vibrancy "Action Color" against a neutral UI.
 - **Movement:** Use subtle animation on the CTA to draw the eye.
@@ -440,6 +460,7 @@ Long landing page:
 **Principle:** People remember uncompleted or interrupted tasks better than completed tasks.
 
 **Application:**
+
 - **Gamification:** Use "Profile 60% complete" bars.
 - **Engagement:** Tease the next module in a learning path.
 - **Retention:** Show a "To-Do" list of features yet to be explored.
@@ -461,6 +482,7 @@ Long landing page:
 **Principle:** The tendency to approach a goal increases with proximity to the goal.
 
 **Application:**
+
 - **Momentum:** Give users "Artificial Advancement" (e.g. 2 free stamps).
 - **Progress:** Break a 10-field form into two 5-field steps.
 - **Feedback:** Celebrate milestones halfway through a task.
@@ -482,6 +504,7 @@ Long landing page:
 **Principle:** People judge an experience largely based on how they felt at its peak (the most intense point) and at its end, rather than the total sum or average of every moment.
 
 **Application:**
+
 - **Success:** Make the "Order Confirmed" screen memorable.
 - **Delight:** Add confetti or a unique animation at the point of value.
 - **Support:** Ensure the final interaction with a chat bot is helpful.
@@ -503,6 +526,7 @@ Long landing page:
 **Principle:** Users often perceive aesthetically pleasing design as design that’s more usable.
 
 **Application:**
+
 - **Trust:** High-fidelity visuals buy "trust credit" for minor bugs.
 - **Branding:** Consistent high-quality imagery build professionalism.
 - **Engagement:** Beautiful interfaces keep users exploring longer.
@@ -524,6 +548,7 @@ Long landing page:
 **Principle:** Users rely heavily on the first piece of information offered (the "anchor") when making decisions.
 
 **Application:**
+
 - **Pricing:** Show the original price crossed out.
 - **Tiers:** Put the most expensive "Enterprise" plan on the far left.
 - **Sorting:** Highlight "Most Popular" as the first recommendation.
@@ -545,6 +570,7 @@ Long landing page:
 **Principle:** People copy the actions of others in an attempt to undertake behavior in a given situation.
 
 **Application:**
+
 - **Validation:** Display "Join 50,000+ others."
 - **Reviews:** Star ratings and verified customer testimonials.
 - **Logos:** "Trusted by" section showing partner brands.
@@ -566,6 +592,7 @@ Long landing page:
 **Principle:** Humans place a higher value on an object that is scarce, and a lower value on those that are in abundance.
 
 **Application:**
+
 - **Urgency:** "Only 2 items left in stock."
 - **Time:** Ticking countdown timers for sales.
 - **Access:** "Invite-only" betas or exclusive tiers.
@@ -587,6 +614,7 @@ Long landing page:
 **Principle:** The tendency to attribute greater accuracy to the opinion of an authority figure and be more influenced by that opinion.
 
 **Application:**
+
 - **Expertise:** Use "Expert-verified" or professional headshots.
 - **Certifications:** Trust seals (Norton, ISO, HIPAA).
 - **Media:** "As seen on TechCrunch/Forbes" logos.
@@ -608,6 +636,7 @@ Long landing page:
 **Principle:** People generally prefer avoiding losses to acquiring equivalent gains. It is better to not lose $5 than to find $5.
 
 **Application:**
+
 - **Messaging:** "Don't lose your discount."
 - **Trials:** "Your free trial is ending - keep your data now."
 - **Scarcity:** "Once it's gone, it's gone for good."
@@ -629,6 +658,7 @@ Long landing page:
 **Principle:** People tend to overestimate the extent to which their opinions, beliefs, preferences, values, and habits are normal and typical of those of others.
 
 **Application:**
+
 - **Testing:** You are not the user - test with real target audiences.
 - **Research:** Use qualitative data (interviews) and quantitative data (analytics).
 - **Bias:** Use "Blind Design Reviews" to avoid personal favoritism.
@@ -650,6 +680,7 @@ Long landing page:
 **Principle:** A cognitive bias that occurs when an individual, communicating with other individuals, unknowingly assumes that the others have the background to understand.
 
 **Application:**
+
 - **Copy:** Avoid jargon and use plain language.
 - **Onboarding:** Tutorials that assume the user knows nothing.
 - **Tooltips:** Explain complex terms on hover.
@@ -671,6 +702,7 @@ Long landing page:
 **Principle:** Users commit to large tasks if they start with small ones.
 
 **Application:**
+
 - **Funnel:** Ask for email before asking for credit card.
 - **Engagement:** Ask for one preference (e.g. "Dark Mode?") before registration.
 - **Onboarding:** Use a series of "Quick Yes/No" questions.
@@ -990,6 +1022,7 @@ button.onclick = () => {
 
 ```
 CHARACTERISTICS:
+
 - Digital natives, mobile-first
 - Value authenticity, diversity
 - Short attention spans
@@ -1008,6 +1041,7 @@ DESIGN APPROACH:
 
 ```
 CHARACTERISTICS:
+
 - Value experiences over things
 - Research before buying
 - Socially conscious
@@ -1026,6 +1060,7 @@ DESIGN APPROACH:
 
 ```
 CHARACTERISTICS:
+
 - Independent, self-reliant
 - Value efficiency
 - Skeptical of marketing
@@ -1044,6 +1079,7 @@ DESIGN APPROACH:
 
 ```
 CHARACTERISTICS:
+
 - Detail-oriented
 - Loyal when trusted
 - Value personal service

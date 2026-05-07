@@ -10,7 +10,6 @@ id: skill-biopython
 owner: [[orchestrator]]
 ---
 
-
 # Biopython: Computational Molecular Biology in Python
 
 ## Overview
@@ -61,6 +60,7 @@ from Bio import Entrez
 Entrez.email = "your.email@example.com"
 
 # Optional: API key for higher rate limits (10 req/s instead of 3 req/s)
+
 Entrez.api_key = "your_api_key_here"
 ```
 
@@ -73,6 +73,7 @@ This skill provides comprehensive documentation organized by functionality area.
 **Reference:** `references/sequence_io.md`
 
 Use for:
+
 - Creating and manipulating biological sequences
 - Reading and writing sequence files (FASTA, GenBank, FASTQ, etc.)
 - Converting between file formats
@@ -85,10 +86,12 @@ Use for:
 from Bio import SeqIO
 
 # Read sequences from FASTA file
+
 for record in SeqIO.parse("sequences.fasta", "fasta"):
     print(f"{record.id}: {len(record.seq)} bp")
 
 # Convert GenBank to FASTA
+
 SeqIO.convert("input.gb", "genbank", "output.fasta", "fasta")
 ```
 
@@ -97,6 +100,7 @@ SeqIO.convert("input.gb", "genbank", "output.fasta", "fasta")
 **Reference:** `references/alignment.md`
 
 Use for:
+
 - Pairwise sequence alignment (global and local)
 - Reading and writing multiple sequence alignments
 - Using substitution matrices (BLOSUM, PAM)
@@ -108,6 +112,7 @@ Use for:
 from Bio import Align
 
 # Pairwise alignment
+
 aligner = Align.PairwiseAligner()
 aligner.mode = 'global'
 alignments = aligner.align("ACCGGT", "ACGGT")
@@ -119,6 +124,7 @@ print(alignments[0])
 **Reference:** `references/databases.md`
 
 Use for:
+
 - Searching NCBI databases (PubMed, GenBank, Protein, Gene, etc.)
 - Downloading sequences and records
 - Fetching publication information
@@ -131,6 +137,7 @@ from Bio import Entrez
 Entrez.email = "your.email@example.com"
 
 # Search PubMed
+
 handle = Entrez.esearch(db="pubmed", term="biopython", retmax=10)
 results = Entrez.read(handle)
 handle.close()
@@ -142,6 +149,7 @@ print(f"Found {results['Count']} results")
 **Reference:** `references/blast.md`
 
 Use for:
+
 - Running BLAST searches via NCBI web services
 - Running local BLAST searches
 - Parsing BLAST XML output
@@ -153,10 +161,12 @@ Use for:
 from Bio.Blast import NCBIWWW, NCBIXML
 
 # Run BLAST search
+
 result_handle = NCBIWWW.qblast("blastn", "nt", "ATCGATCGATCG")
 blast_record = NCBIXML.read(result_handle)
 
 # Display top hits
+
 for alignment in blast_record.alignments[:5]:
     print(f"{alignment.title}: E-value={alignment.hsps[0].expect}")
 ```
@@ -166,6 +176,7 @@ for alignment in blast_record.alignments[:5]:
 **Reference:** `references/structure.md`
 
 Use for:
+
 - Parsing PDB and mmCIF structure files
 - Navigating protein structure hierarchy (SMCRA: Structure/Model/Chain/Residue/Atom)
 - Calculating distances, angles, and dihedrals
@@ -178,10 +189,12 @@ Use for:
 from Bio.PDB import PDBParser
 
 # Parse structure
+
 parser = PDBParser(QUIET=True)
 structure = parser.get_structure("1crn", "1crn.pdb")
 
 # Calculate distance between alpha carbons
+
 chain = structure[0]["A"]
 distance = chain[10]["CA"] - chain[20]["CA"]
 print(f"Distance: {distance:.2f} Å")
@@ -192,6 +205,7 @@ print(f"Distance: {distance:.2f} Å")
 **Reference:** `references/phylogenetics.md`
 
 Use for:
+
 - Reading and writing phylogenetic trees (Newick, NEXUS, phyloXML)
 - Building trees from distance matrices or alignments
 - Tree manipulation (pruning, rerooting, ladderizing)
@@ -204,10 +218,12 @@ Use for:
 from Bio import Phylo
 
 # Read and visualize tree
+
 tree = Phylo.read("tree.nwk", "newick")
 Phylo.draw_ascii(tree)
 
 # Calculate distance
+
 distance = tree.distance("Species_A", "Species_B")
 print(f"Distance: {distance:.3f}")
 ```
@@ -217,6 +233,7 @@ print(f"Distance: {distance:.3f}")
 **Reference:** `references/advanced.md`
 
 Use for:
+
 - **Sequence motifs** (Bio.motifs) - Finding and analyzing motif patterns
 - **Population genetics** (Bio.PopGen) - GenePop files, Fst calculations, Hardy-Weinberg tests
 - **Sequence utilities** (Bio.SeqUtils) - GC content, melting temperature, molecular weight, protein analysis
@@ -247,13 +264,17 @@ When a user asks about a specific Biopython task:
 
 Example search patterns for reference files:
 ```bash
+
 # Find information about specific functions
+
 grep -n "SeqIO.parse" references/sequence_io.md
 
 # Find examples of specific tasks
+
 grep -n "BLAST" references/blast.md
 
 # Find information about specific concepts
+
 grep -n "alignment" references/alignment.md
 ```
 
@@ -262,34 +283,40 @@ grep -n "alignment" references/alignment.md
 Follow these principles when writing Biopython code:
 
 1. **Import modules explicitly**
+
    ```python
    from Bio import SeqIO, Entrez
    from Bio.Seq import Seq
    ```
 
 2. **Set Entrez email** when using NCBI databases
+
    ```python
    Entrez.email = "your.email@example.com"
    ```
 
 3. **Use appropriate file formats** - Check which format best suits the task
+
    ```python
    # Common formats: "fasta", "genbank", "fastq", "clustal", "phylip"
    ```
 
 4. **Handle files properly** - Close handles after use or use context managers
+
    ```python
    with open("file.fasta") as handle:
        records = SeqIO.parse(handle, "fasta")
    ```
 
 5. **Use iterators for large files** - Avoid loading everything into memory
+
    ```python
    for record in SeqIO.parse("large_file.fasta", "fasta"):
        # Process one record at a time
    ```
 
 6. **Handle errors gracefully** - Network operations and file parsing can fail
+
    ```python
    try:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -308,6 +335,7 @@ from Bio import Entrez, SeqIO
 Entrez.email = "your.email@example.com"
 
 # Fetch sequence
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 handle = Entrez.efetch(db="nucleotide", id="EU490707", rettype="gb", retmode="text")
 record = SeqIO.read(handle, "genbank")
@@ -343,13 +371,16 @@ from Bio import Entrez, SeqIO
 Entrez.email = "your.email@example.com"
 
 # Run BLAST
+
 result_handle = NCBIWWW.qblast("blastn", "nt", sequence)
 blast_record = NCBIXML.read(result_handle)
 
 # Get top hit accessions
+
 accessions = [aln.accession for aln in blast_record.alignments[:5]]
 
 # Fetch sequences
+
 for acc in accessions:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     handle = Entrez.efetch(db="nucleotide", id=acc, rettype="fasta", retmode="text")
@@ -365,17 +396,21 @@ from Bio import AlignIO, Phylo
 from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor
 
 # Read alignment
+
 alignment = AlignIO.read("alignment.fasta", "fasta")
 
 # Calculate distances
+
 calculator = DistanceCalculator("identity")
 dm = calculator.get_distance(alignment)
 
 # Build tree
+
 constructor = DistanceTreeConstructor()
 tree = constructor.nj(dm)
 
 # Visualize
+
 Phylo.draw_ascii(tree)
 ```
 
@@ -395,21 +430,27 @@ Phylo.draw_ascii(tree)
 ## Troubleshooting Common Issues
 
 ### Issue: "No handlers could be found for logger 'Bio.Entrez'"
+
 **Solution:** This is just a warning. Set Entrez.email to suppress it.
 
 ### Issue: "HTTP Error 400" from NCBI
+
 **Solution:** Check that IDs/accessions are valid and properly formatted.
 
 ### Issue: "ValueError: EOF" when parsing files
+
 **Solution:** Verify file format matches the specified format string.
 
 ### Issue: Alignment fails with "sequences are not the same length"
+
 **Solution:** Ensure sequences are aligned before using AlignIO or MultipleSeqAlignment.
 
 ### Issue: BLAST searches are slow
+
 **Solution:** Use local BLAST for large-scale searches, or cache results.
 
 ### Issue: PDB parser warnings
+
 **Solution:** Use `PDBParser(QUIET=True)` to suppress warnings, or investigate structure quality.
 
 ## Additional Resources
@@ -425,13 +466,17 @@ Phylo.draw_ascii(tree)
 To locate information in reference files, use these search patterns:
 
 ```bash
+
 # Search for specific functions
+
 grep -n "function_name" references/*.md
 
 # Find examples of specific tasks
+
 grep -n "example" references/sequence_io.md
 
 # Find all occurrences of a module
+
 grep -n "Bio.Seq" references/*.md
 ```
 
@@ -448,11 +493,13 @@ Biopython provides comprehensive tools for computational molecular biology. When
 The modular reference documentation ensures detailed, searchable information for every major Biopython capability.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

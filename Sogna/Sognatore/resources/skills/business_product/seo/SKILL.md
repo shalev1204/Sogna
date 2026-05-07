@@ -10,7 +10,6 @@ id: skill-seo
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # SEO: Universal SEO Analysis Skill
 
 Comprehensive SEO analysis across all industries (SaaS, local services,
@@ -18,6 +17,7 @@ e-commerce, publishers, agencies). Orchestrates 12 specialized sub-skills and 7 
 (+ optional extension sub-skills like seo-dataforseo).
 
 ## When to Use
+
 - Use when the user asks for a full SEO audit or broad SEO strategy.
 - Use as the umbrella entry point when multiple SEO dimensions are in scope.
 - Use when the task spans technical SEO, content, schema, sitemaps, and AI search readiness together.
@@ -44,6 +44,7 @@ e-commerce, publishers, agencies). Orchestrates 12 specialized sub-skills and 7 
 ## Orchestration Logic
 
 When the user invokes `/seo audit`, delegate to subagents in parallel:
+
 1. Detect business type (SaaS, local, ecommerce, publisher, agency, other)
 2. Spawn subagents: seo-technical, seo-content, seo-schema, seo-sitemap, seo-performance, seo-visual, seo-geo
 3. Collect results and generate unified report with SEO Health Score (0-100)
@@ -54,6 +55,7 @@ For individual commands, load the relevant sub-skill directly.
 ## Industry Detection
 
 Detect business type from homepage signals:
+
 - **SaaS**: pricing page, /features, /integrations, /docs, "free trial", "sign up"
 - **Local Service**: phone number, address, service area, "serving [city]", Google Maps embed
 - **E-commerce**: /products, /collections, /cart, "add to cart", product schema
@@ -64,6 +66,7 @@ Detect business type from homepage signals:
 
 Read `references/quality-gates.md` for thin content thresholds per page type.
 Hard rules:
+
 - WARNING at 30+ location pages (enforce 60%+ unique content)
 - HARD STOP at 50+ location pages (require user justification)
 - Never recommend HowTo schema (deprecated Sept 2023)
@@ -73,6 +76,7 @@ Hard rules:
 ## Reference Files
 
 Load these on-demand as needed (do NOT load all at startup):
+
 - `references/cwv-thresholds.md`: Current Core Web Vitals thresholds and measurement details
 - `references/schema-types.md`: All supported schema types with deprecation status
 - `references/eeat-framework.md`: E-E-A-T evaluation criteria (Sept 2025 QRG update)
@@ -81,6 +85,7 @@ Load these on-demand as needed (do NOT load all at startup):
 ## Scoring Methodology
 
 ### SEO Health Score (0-100)
+
 Weighted aggregate of all categories:
 
 | Category | Weight |
@@ -94,6 +99,7 @@ Weighted aggregate of all categories:
 | Images | 5% |
 
 ### Priority Levels
+
 - **Critical**: Blocks indexing or causes penalties (immediate fix required)
 - **High**: Significantly impacts rankings (fix within 1 week)
 - **Medium**: Optimization opportunity (fix within 1 month)
@@ -121,6 +127,7 @@ This skill orchestrates 12 specialized sub-skills (+ 2 extensions):
 ## Subagents
 
 For parallel analysis during audits:
+
 - `seo-technical` -- Crawlability, indexability, security, CWV
 - `seo-content` -- E-E-A-T, readability, thin content
 - `seo-schema` -- Detection, validation, generation
@@ -141,11 +148,13 @@ For parallel analysis during audits:
 | Ambiguous business type detection | Present the top two detected types with supporting signals. Ask the user to confirm before proceeding with industry-specific recommendations. |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

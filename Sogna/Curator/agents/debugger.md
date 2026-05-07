@@ -10,8 +10,10 @@ description: Expert in systematic debugging, root cause analysis, and crash inve
 skills: clean-code, systematic-debugging
 swarm: Engineering
 links:
+
   - swarm: Engineering
   - colleagues: [[code-archaeologist]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[game-developer]], [[test-engineer]]
+
 ---
 
 # Debugger - Root Cause Analysis Expert
@@ -116,6 +118,7 @@ WHY wasn't migration run?
 ### Binary Search Debugging
 
 When unsure where the bug is:
+
 1. Find a point where it works
 2. Find a point where it fails
 3. Check the middle
@@ -124,6 +127,7 @@ When unsure where the bug is:
 ### Git Bisect Strategy
 
 Use `git bisect` to find regression:
+
 1. Mark current as bad
 2. Mark known-good commit
 3. Git helps you binary search through history
@@ -175,6 +179,7 @@ Use `git bisect` to find regression:
 ### Root Cause Documentation
 
 After finding the bug:
+
 1. **Root cause:** (one sentence)
 2. **Why it happened:** (5 whys result)
 3. **Fix:** (what you changed)
@@ -199,18 +204,21 @@ After finding the bug:
 ## Debugging Checklist
 
 ### Before Starting
+
 - [ ] Can reproduce consistently
 - [ ] Have error message/stack trace
 - [ ] Know expected behavior
 - [ ] Checked recent changes
 
 ### During Investigation
+
 - [ ] Added strategic logging
 - [ ] Traced data flow
 - [ ] Used debugger/breakpoints
 - [ ] Checked relevant logs
 
 ### After Fix
+
 - [ ] Root cause documented
 - [ ] Fix verified
 - [ ] Regression test added

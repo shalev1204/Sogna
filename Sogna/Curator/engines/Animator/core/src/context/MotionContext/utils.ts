@@ -1,6 +1,6 @@
 import { isControllingVariants, isVariantLabel } from "sognaflow-dom"
 import type { sognaflowContextProps } from "."
-import { sognaflowProps } from "../../sognaflow/types"
+import { sognaflowProps } from "../../motion/types"
 
 export function getCurrentTreeVariants(
     props: sognaflowProps,

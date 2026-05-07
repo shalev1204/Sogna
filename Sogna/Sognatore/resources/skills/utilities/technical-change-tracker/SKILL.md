@@ -13,7 +13,6 @@ id: skill-technical-change-tracker
 owner: [[orchestrator]]
 ---
 
-
 # Technical Change Tracker
 
 ## Overview
@@ -60,11 +59,13 @@ TC bookkeeping runs via background subagents. Never interrupts coding work.
 ## Full Repository
 
 https://github.com/Elkidogz/technical-change-skill — ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -83,6 +83,7 @@ June 9, 2025| Updated guidance for hiding toolbars and navigation controls, and 
 June 10, 2024| Enhanced guidance for playing a game in full-screen mode.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

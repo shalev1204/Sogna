@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useReducer, useCallback } from 'react';
+import { sognaBridge } from '../services/TelemetryBridge';
 
 export interface TelemetryEvent {
   type: string;
@@ -9,57 +10,59 @@ export interface TelemetryEvent {
   timestamp?: number;
 }
 
+type TelemetryState = {
+  events: TelemetryEvent[];
+  status: 'connected' | 'disconnected';
+};
+
+type TelemetryAction = 
+  | { type: 'ADD_EVENTS'; payload: TelemetryEvent[] }
+  | { type: 'SET_STATUS'; payload: 'connected' | 'disconnected' };
+
+const MAX_EVENTS = 200;
+
+function telemetryReducer(state: TelemetryState, action: TelemetryAction): TelemetryState {
+  switch (action.type) {
+    case 'ADD_EVENTS':
+      const newEvents = [...state.events, ...action.payload];
+      // Mantener ventana deslizante de eventos para rendimiento óptimo
+      return {
+        ...state,
+        events: newEvents.slice(-MAX_EVENTS)
+      };
+    case 'SET_STATUS':
+      return { ...state, status: action.payload };
+    default:
+      return state;
+  }
+}
+
 /**
- * Hook para conectarse al Sognatore TelemetryServer (Capa 2 -> Capa 1)
+ * useTelemetry (Optimizado - v2.0)
+ * Suscripción de alto rendimiento al TelemetryBridge.
  */
-export const useTelemetry = (url: string = 'ws://localhost:8081') => {
-  const [events, setEvents] = useState<TelemetryEvent[]>([]);
-  const [status, setStatus] = useState<'connecting' | 'connected' | 'disconnected'>('connecting');
-  const [socket, setSocket] = useState<WebSocket | null>(null);
+export const useTelemetry = () => {
+  const [state, dispatch] = useReducer(telemetryReducer, {
+    events: [],
+    status: 'connected'
+  });
 
   useEffect(() => {
-    const ws = new WebSocket(url);
+    // Suscribirse al puente de datos (Batching activo)
+    const unsubscribe = sognaBridge.subscribe((newEvents) => {
+      dispatch({ type: 'ADD_EVENTS', payload: newEvents });
+    });
 
-    ws.onopen = () => {
-      setStatus('connected');
-    };
-
-    ws.onmessage = (message) => {
-      try {
-        const event = JSON.parse(message.data);
-        if (event.type === 'HANDSHAKE') return; // Ignorar handshake en el log visual
-        
-        setEvents(prev => {
-          // Mantener solo los últimos 100 eventos para rendimiento
-          const next = [...prev, { ...event, timestamp: Date.now() }];
-          if (next.length > 100) return next.slice(next.length - 100);
-          return next;
-        });
-      } catch (e) {
-        console.error('Failed to parse telemetry event', e);
-      }
-    };
-
-    ws.onclose = () => {
-      setStatus('disconnected');
-    };
-    
-    ws.onerror = () => {
-      setStatus('disconnected');
-    };
-
-    setSocket(ws);
-
-    return () => {
-      ws.close();
-    };
-  }, [url]);
+    return unsubscribe;
+  }, []);
 
   const sendPanic = useCallback(() => {
-    if (socket && socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({ action: 'PANIC' }));
-    }
-  }, [socket]);
+    sognaBridge.sendAction('PANIC');
+  }, []);
 
-  return { events, status, sendPanic };
+  return { 
+    events: state.events, 
+    status: state.status, 
+    sendPanic 
+  };
 };

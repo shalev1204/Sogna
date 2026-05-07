@@ -8,7 +8,6 @@ id: skill-agentflow
 owner: [[orchestrator]]
 ---
 
-
 # AgentFlow
 
 ## Overview
@@ -50,18 +49,23 @@ Tasks that unblock the most downstream work get built first, automatically compu
 ## Skills / Commands
 
 ### `/spec-to-board`
+
 Decomposes a SPEC.md into atomic tasks on your Kanban board with dependencies mapped.
 
 ### `/sdlc-orchestrate`
+
 Dispatches tasks to workers based on transitive priority and conflict detection. Runs as a crontab sweep.
 
 ### `/sdlc-worker --slot <N>`
+
 Runs a worker in a terminal slot that picks up tasks, builds code, and creates PRs. Run 3-4 workers in parallel.
 
 ### `/sdlc-health`
+
 Real-time pipeline status dashboard showing current stage, assigned agent, retry count, and accumulated cost for every task.
 
 ### `/sdlc-stop`
+
 Graceful shutdown: active workers finish their current task, unstarted tasks return to Backlog.
 
 ## Step-by-Step Guide
@@ -83,25 +87,34 @@ This reads your SPEC.md, decomposes it into atomic tasks, maps dependencies, and
 Open 3-4 terminal windows, each as a worker slot:
 
 ```bash
+
 # Terminal 2 — Builder
+
 claude -p "/sdlc-worker --slot T2"
 
 # Terminal 3 — Builder
+
 claude -p "/sdlc-worker --slot T3"
 
 # Terminal 4 — Reviewer
+
 claude -p "/sdlc-worker --slot T4"
 
 # Terminal 5 — Tester
+
 claude -p "/sdlc-worker --slot T5"
 ```
 
 ### 4. Start the Orchestrator
 
 ```bash
+
 # Add to crontab (runs every 15 minutes)
+
 crontab -e
+
 # Add: */15 * * * * ~/.claude/sdlc/agentflow-cron.sh >> /tmp/agentflow-orchestrate.log 2>&1
+
 ```
 
 ### 5. Monitor and Intervene
@@ -147,10 +160,13 @@ Automatic guardrails: warning at $3/$8, hard stop at $10/$20 (Sonnet/Opus) with 
 ## Installation
 
 ```bash
+
 # Clone the repo
+
 git clone https://github.com/UrRhb/agentflow.git
 
 # Copy skills and prompts to your Claude Code config
+
 cp -r agentflow/skills/* ~/.claude/skills/
 cp -r agentflow/prompts/* ~/.claude/sdlc/prompts/
 cp agentflow/conventions.md ~/.claude/sdlc/conventions.md
@@ -176,14 +192,17 @@ Or install as a Claude Code plugin:
 ## Troubleshooting
 
 ### Problem: Worker appears stuck or dead
+
 **Symptoms:** Task card hasn't moved in 15+ minutes, no new comments
 **Solution:** The orchestrator detects dead agents via heartbeat and reassigns after 10 minutes. If the issue persists, run `/sdlc-health` to check status and manually drag the card back to Backlog.
 
 ### Problem: Cost guardrail triggered
+
 **Symptoms:** Task moved to "Needs Human" with COST:CRITICAL tag
 **Solution:** Review the task's comment thread for accumulated context. Decide whether to increase the budget, simplify the task, or split it into smaller pieces.
 
 ### Problem: Integration test failure after merge
+
 **Symptoms:** Task auto-reverted from main
 **Solution:** The auto-revert preserves main stability. Check the task's retry context in comments, which carries what was tried and what failed. The next worker assigned will use this context.
 
@@ -202,11 +221,13 @@ Or install as a Claude Code plugin:
 - [Getting Started Guide](https://github.com/UrRhb/agentflow/blob/main/docs/getting-started.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

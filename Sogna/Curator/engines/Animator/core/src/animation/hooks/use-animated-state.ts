@@ -8,7 +8,7 @@ import {
     VisualElement,
 } from "sognaflow-dom"
 import { useLayoutEffect, useState } from "react"
-import { makeUseVisualState } from "../../sognaflow/utils/use-visual-state"
+import { makeUseVisualState } from "../../motion/utils/use-visual-state"
 import { useConstant } from "../../utils/use-constant.js"
 
 interface AnimatedStateOptions {

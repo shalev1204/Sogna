@@ -10,7 +10,6 @@ id: skill-segment-cdp
 owner: [[ops-security]]
 ---
 
-
 # Segment CDP
 
 Expert patterns for Segment Customer Data Platform including Analytics.js,
@@ -256,11 +255,15 @@ tracking_plan:
   display_name: "MyApp Tracking Plan"
   rules:
     events:
+
       - name: "User Signed Up"
+
         description: "User completed registration"
         rules:
           required:
+
             - signup_method
+
           properties:
             signup_method:
               type: string
@@ -271,11 +274,14 @@ tracking_plan:
               type: string
 
       - name: "Product Viewed"
+
         description: "User viewed a product page"
         rules:
           required:
+
             - product_id
             - product_name
+
           properties:
             product_id:
               type: string
@@ -290,12 +296,15 @@ tracking_plan:
               default: USD
 
       - name: "Order Completed"
+
         description: "User completed a purchase"
         rules:
           required:
+
             - order_id
             - total
             - products
+
           properties:
             order_id:
               type: string
@@ -315,15 +324,23 @@ tracking_plan:
 
     identify:
       traits:
+
         - name: email
+
           type: string
           required: true
+
         - name: name
+
           type: string
+
         - name: plan
+
           type: string
           enum: [free, pro, enterprise]
+
         - name: company
+
           type: object
           properties:
             id: { type: string }
@@ -845,6 +862,7 @@ Message: Tracking without consent check. Implement consent management for GDPR.
 - user needs consent management -> privacy-specialist (GDPR/CCPA compliance with Segment)
 
 ## When to Use
+
 - User mentions or implies: segment
 - User mentions or implies: analytics.js
 - User mentions or implies: customer data platform
@@ -855,11 +873,13 @@ Message: Tracking without consent check. Implement consent management for GDPR.
 - User mentions or implies: data routing
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

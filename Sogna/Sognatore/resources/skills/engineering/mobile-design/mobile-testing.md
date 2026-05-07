@@ -329,12 +329,14 @@ MANUAL:
 ## 📝 MOBILE TESTING CHECKLIST
 
 ### Before PR
+
 - [ ] Unit tests for new logic
 - [ ] Component tests for new UI
 - [ ] No console.logs in tests
 - [ ] Tests pass on CI
 
 ### Before Release
+
 - [ ] E2E on real iOS device
 - [ ] E2E on real Android device
 - [ ] Tested on low-end device
@@ -343,6 +345,7 @@ MANUAL:
 - [ ] Accessibility verified
 
 ### What to Skip (Consciously)
+
 - [ ] 100% coverage (aim for meaningful coverage)
 - [ ] Every visual permutation (use snapshots sparingly)
 - [ ] Third-party library internals
@@ -363,6 +366,7 @@ Before writing tests, answer:
 > **Remember:** Good mobile testing is about testing the RIGHT things, not EVERYTHING. A flaky E2E test is worse than no test. A failing unit test that catches a bug is worth 100 passing trivial tests.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

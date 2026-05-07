@@ -8,7 +8,6 @@ id: skill-seo-forensic-incident-response
 owner: [[biz-marketing]], [[ops-security]]
 ---
 
-
 # SEO Forensic Incident Response
 
 You are an expert in forensic SEO incident response. Your goal is to investigate **sudden drops in organic traffic or rankings**, identify the most likely causes, and provide a prioritized remediation plan.
@@ -16,11 +15,14 @@ You are an expert in forensic SEO incident response. Your goal is to investigate
 This skill is not a generic SEO audit. It is designed for **incident scenarios**: traffic crashes, suspected penalties, core update impacts, or major technical failures.
 
 ## When to Use
+
 Use this skill when:
+
 - You need to understand and resolve a sudden, significant drop in organic traffic or rankings.
 - There are signs of a possible penalty, core update impact, major technical regression or other SEO incident.
 
 Do **not** use this skill when:
+
 - You need a routine SEO health check or prioritization of opportunities (use `seo-audit`).
 - You are focused on long-term local visibility for legal/professional services (use `local-legal-seo-audit`).
 
@@ -42,7 +44,9 @@ Before deep analysis, clarify the incident context:
      - Deployment/change logs (Git, CI/CD, CMS release notes)?
 
 3. **Recent Changes Checklist**
+
    Ask explicitly about the 30–60 days before the drop:
+
    - Site redesign or theme change
    - URL structure changes or migrations
    - CMS/plugin updates
@@ -101,6 +105,7 @@ When you have GSC and analytics access, structure the analysis like a forensic i
   - Whether it affects all countries/devices or specific segments
 
 Use this to narrow likely causes:
+
 - **Step-like drop** → technical issue, manual action, deployment.
 - **Gradual slide** → quality issues, competitor improvements, algorithmic re-evaluation.
 
@@ -114,6 +119,7 @@ Segment the impact by:
 - **Page type**: home, category, product, blog, docs, etc.
 
 Look for patterns:
+
 - Only mobile affected → potential mobile UX, CWV, or mobile-only indexing issue.
 - Specific country affected → geo-targeting, hreflang, local factors.
 - Non-branded hit harder than branded → often algorithm/quality-related.
@@ -264,11 +270,13 @@ When helping a user, ask:
 - **analytics-tracking**: For ensuring measurement is correct post-incident.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,14 +7,15 @@ id: skill-context-compression
 owner: [[orchestrator]]
 ---
 
-
 # Context Compression Strategies
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 When agent sessions generate millions of tokens of conversation history, compression becomes mandatory. The naive approach is aggressive compression to minimize tokens per request. The correct optimization target is tokens per task: total tokens consumed to complete a task, including re-fetching costs when compression loses critical information.
 
 ## When to Use
+
 Activate this skill when:
+
 - Agent sessions exceed context window limits
 - Codebases exceed context windows (5M+ token systems)
 - Designing conversation summarization strategies
@@ -48,6 +49,7 @@ The right metric is tokens-per-task: total tokens consumed from task start to co
 Artifact trail integrity is the weakest dimension across all compression methods, scoring 2.2-2.5 out of 5.0 in evaluations. Even structured summarization with explicit file sections struggles to maintain complete file tracking across long sessions.
 
 Coding agents need to know:
+
 - Which files were created
 - Which files were modified and what changed
 - Which files were read but not changed
@@ -60,26 +62,33 @@ This problem likely requires specialized handling beyond general summarization: 
 Effective structured summaries include explicit sections:
 
 ```markdown
+
 ## Session Intent
+
 [What the user is trying to accomplish]
 
 ## Files Modified
+
 - auth.controller.ts: Fixed JWT token generation
 - config/redis.ts: Updated connection pooling
 - tests/auth.test.ts: Added mock setup for new config
 
 ## Decisions Made
+
 - Using Redis connection pool instead of per-request connections
 - Retry logic with exponential backoff for transient failures
 
 ## Current State
+
 - 14 tests passing, 2 failing
 - Remaining: mock setup for session service tests
 
 ## Next Steps
+
 1. Fix remaining test failures
 2. Run full test suite
 3. Update documentation
+
 ```
 
 This structure prevents silent loss of file paths or decisions because each section must be explicitly addressed.
@@ -120,7 +129,9 @@ Six dimensions capture compression quality for coding agents:
 2. **Context Awareness**: Does the response reflect current conversation state?
 3. **Artifact Trail**: Does the agent know which files were read or modified?
 4. **Completeness**: Does the response address all parts of the question?
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 5. **Continuity**: Can work continue without re-fetching information?
 6. **Instruction Following**: Does the response respect stated constraints?
 
@@ -155,17 +166,22 @@ This is particularly important when the agent cannot distinguish essential compl
 ### When to Use Each Approach
 
 **Use anchored iterative summarization when:**
+
 - Sessions are long-running (100+ messages)
 - File tracking matters (coding, debugging)
 - You need to verify what was preserved
 
 **Use opaque compression when:**
+
 - Maximum token savings required
 - Sessions are relatively short
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Re-fetching costs are low
 
 **Use regenerative summaries when:**
+
 - Summary interpretability is critical
 - Sessions have clear phase boundaries
 - Full context review is acceptable on each compression
@@ -186,6 +202,7 @@ The 0.7% additional tokens retained by structured summarization buys 0.35 qualit
 **Example 1: Debugging Session Compression**
 
 Original context (89,000 tokens, 178 messages):
+
 - 401 error on /api/auth/login endpoint
 - Traced through auth controller, middleware, session store
 - Found stale Redis connection
@@ -195,13 +212,17 @@ Original context (89,000 tokens, 178 messages):
 Structured summary after compression:
 
 ```markdown
+
 ## Session Intent
+
 Debug 401 Unauthorized error on /api/auth/login despite valid credentials.
 
 ## Root Cause
+
 Stale Redis connection in session store. JWT generated correctly but session could not be persisted.
 
 ## Files Modified
+
 - auth.controller.ts: No changes (read only)
 - middleware/cors.ts: No changes (examined)
 - config/redis.ts: Fixed connection pooling configuration
@@ -209,12 +230,15 @@ Stale Redis connection in session store. JWT generated correctly but session cou
 - tests/auth.test.ts: Updated mock setup
 
 ## Test Status
+
 14 passing, 2 failing (mock setup issues)
 
 ## Next Steps
+
 1. Fix remaining test failures (mock session service)
 2. Run full test suite
 3. Deploy to staging
+
 ```
 
 **Example 2: Probe Response Quality**
@@ -238,7 +262,9 @@ The structured response preserves endpoint, error code, and root cause. The aggr
 5. Test compression quality with probe-based evaluation
 6. Track artifact trail separately if file tracking is critical
 7. Accept slightly lower compression ratios for better quality retention
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 8. Monitor re-fetching frequency as a compression quality signal
 
 ## Integration
@@ -253,14 +279,17 @@ This skill connects to several others in the collection:
 ## References
 
 Internal reference:
+
 - Evaluation Framework Reference - Detailed probe types and scoring rubrics
 
 Related skills in this collection:
+
 - context-degradation - Understanding what compression prevents
 - context-optimization - Broader optimization strategies
 - evaluation - Building evaluation frameworks
 
 External resources:
+
 - Factory Research: Evaluating Context Compression for AI Agents (December 2025)
 - Research on LLM-as-judge evaluation methodology (Zheng et al., 2023)
 - Netflix Engineering: "The Infinite Software Crisis" - Three-phase workflow and context compression at scale (AI Summit 2025)
@@ -275,11 +304,13 @@ External resources:
 **Version**: 1.1.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-temporal-python-testing
 owner: [[eng-qa]]
 ---
 
-
 # Temporal Python Testing Strategies
 
 Comprehensive testing approaches for Temporal workflows using pytest, progressive disclosure resources for specific testing scenarios.
@@ -176,11 +175,13 @@ async def test_activity():
 - Python Samples: github.com/temporalio/samples-python
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

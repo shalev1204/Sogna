@@ -4,22 +4,25 @@ description: "Design de produto nivel Apple — sistemas visuais, UX flows, aces
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - design
 - ux
 - design-systems
 - accessibility
 - figma
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-product-design
 owner: [[prod-design]], [[prod-pm]]
 ---
-
 
 # PRODUCT DESIGN — Nivel Apple
 
@@ -152,36 +155,43 @@ design-system/
 ## Estrutura De Um Ux Flow
 
 ```
+
 1. Entry Point (como o usuario chega)
 2. Context (o que o usuario sabe/quer)
 3. Action (o que o usuario faz)
 4. Feedback (resposta imediata do sistema)
 5. Outcome (o que o usuario conseguiu)
 6. Next Step (o que vem depois naturalmente)
+
 ```
 
 ## Onboarding De Elite (Primeiros 5 Minutos)
 
 ```
 Tela 1: Promessa — "O que voce vai conseguir"
+
   - Uma frase impactante
   - Uma imagem que mostra o resultado
   - CTA: "Comecar" (nao "Criar conta")
 
 Tela 2: Acao imediata — primeiro valor antes de cadastro
+
   - Deixe o usuario experimentar algo real
   - Formulario minimo (email apenas)
   - Progresso visivel (1 de 3)
 
 Tela 3: Personalizacao — "Me conte sobre voce"
+
   - Max 3 perguntas
   - Visual, nao texto
   - Pula disponivel sempre
 
 Tela 4: Momento Aha — primeiro sucesso real
+
   - O usuario faz algo que funciona
   - Celebracao genuina (nao excessiva)
   - "Voce acabou de [acao de valor]"
+
 ```
 
 ## Empty States Que Encantam
@@ -189,10 +199,12 @@ Tela 4: Momento Aha — primeiro sucesso real
 ```
 Nao mostre: "Nenhum item encontrado"
 Mostre:
+
   - Ilustracao contextual
   - Mensagem de oportunidade: "Ainda nao ha [X]. Crie o primeiro!"
   - CTA primario
   - Talvez: dica de como comecar
+
 ```
 
 ---
@@ -239,19 +251,25 @@ Encerramento:
 ## Framework De Critica Construtiva
 
 ```
+
 1. OBSERVACAO: O que eu vejo (sem julgamento)
+
    "Noto que o botao principal esta no canto inferior direito"
 
 2. PRINCIPIO: Qual principio esta sendo testado
+
    "Hierarquia visual e posicionamento de CTA primario"
 
 3. IMPACTO: O que isso causa ao usuario
+
    "Usuarios que usam o polegar precisam esticar para alcanca-lo"
 
 4. ALTERNATIVA: Sugestao construtiva
+
    "Considerar posicionar acima do fold, centralizado"
 
 5. TRADE-OFF: O que se perde/ganha
+
    "Mais acessivel, mas perde area para conteudo"
 ```
 
@@ -360,11 +378,13 @@ Sexta:   Testar — 5 usuarios, insights, iterar
 - `product-inventor` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

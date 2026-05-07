@@ -9,4 +9,5 @@ export function Mix(from, to, p) {
     const mixer = GetMixer(from);
     return mixer(from, to);
 }
+export const mix = Mix;
 //# sourceMappingURL=index.js.map

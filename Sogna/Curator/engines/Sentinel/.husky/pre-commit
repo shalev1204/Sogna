@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "\n🛡️  [SOGNA] Sentinel Guardian is reviewing your changes..."
+npx lint-staged

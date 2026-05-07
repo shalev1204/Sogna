@@ -13,7 +13,6 @@ id: skill-ui-component
 owner: [[orchestrator]]
 ---
 
-
 # UI Component
 
 ## Overview
@@ -21,6 +20,7 @@ owner: [[orchestrator]]
 Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill generates components that respect the Toss seed's design language instead of improvising ad hoc markup and styling. It emphasizes semantic tokens, predictable typing, reusable variants, and mobile-friendly accessibility defaults.
 
 ## When to Use
+
 - Use when you need a new UI primitive or composed component inside a StyleSeed-based project
 - Use when you want a component to match the existing Toss seed conventions
 - Use when a component should be reusable, typed, and design-token driven
@@ -31,6 +31,7 @@ Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill generates 
 ### Step 1: Read the Local Design Context
 
 Before generating code, inspect the seed's source of truth:
+
 - `CLAUDE.md` for conventions
 - `css/theme.css` for semantic tokens
 - at least one representative component from `components/ui/`
@@ -40,6 +41,7 @@ If the user already has a better local example, follow the local codebase over a
 ### Step 2: Choose the Correct Home
 
 Place the output where it belongs:
+
 - `src/components/ui/` for primitives and low-level building blocks
 - `src/components/patterns/` for composed sections or multi-part patterns
 
@@ -48,6 +50,7 @@ Do not create a new primitive if an existing one can be extended safely.
 ### Step 3: Follow the Structural Rules
 
 Use these defaults unless the host project strongly disagrees:
+
 - function declaration instead of a `const` component
 - `React.ComponentProps<>` or equivalent native prop typing
 - `className` passthrough support
@@ -60,6 +63,7 @@ Use these defaults unless the host project strongly disagrees:
 Do not hardcode visual values if the design system has a token for them.
 
 Preferred examples:
+
 - `bg-card`
 - `text-foreground`
 - `text-muted-foreground`
@@ -83,6 +87,7 @@ Preferred examples:
 ## Output
 
 Provide:
+
 1. The generated component
 2. The target path
 3. Any required imports or dependencies
@@ -101,11 +106,13 @@ Provide:
 - [Source skill](https://github.com/bitjaru/styleseed/blob/main/seeds/toss/.claude/skills/ui-component/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

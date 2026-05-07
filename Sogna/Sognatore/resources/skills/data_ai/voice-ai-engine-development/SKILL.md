@@ -8,7 +8,6 @@ id: skill-voice-ai-engine-development
 owner: [[prod-pm]]
 ---
 
-
 # Voice AI Engine Development
 
 ## Overview
@@ -20,6 +19,7 @@ The core architecture uses an async queue-based worker pipeline where each compo
 ## When to Use This Skill
 
 Use this skill when:
+
 - Building real-time voice conversation systems
 - Implementing voice assistants or chatbots
 - Creating voice-enabled customer service agents
@@ -40,6 +40,7 @@ Audio In → Transcriber → Agent → Synthesizer → Audio Out
 ```
 
 **Key Benefits:**
+
 - **Decoupling**: Workers only know about their input/output queues
 - **Concurrency**: All workers run simultaneously via asyncio
 - **Backpressure**: Queues automatically handle rate differences
@@ -117,12 +118,14 @@ class Transcription:
 ```
 
 **Supported Providers**:
+
 - **Deepgram** - Fast, accurate, streaming
 - **AssemblyAI** - High accuracy, good for accents
 - **Azure Speech** - Enterprise-grade
 - **Google Cloud Speech** - Multi-language support
 
 **Critical Implementation Details**:
+
 - Use WebSocket for bidirectional streaming
 - Run sender and receiver tasks concurrently with `asyncio.gather()`
 - Mute transcriber when bot speaks to prevent echo/feedback loops
@@ -146,16 +149,19 @@ class BaseAgent:
 ```
 
 **Why Streaming Responses?**
+
 - **Lower latency**: Start speaking as soon as first sentence is ready
 - **Better interrupts**: Can stop mid-response
 - **Sentence-by-sentence**: More natural conversation flow
 
 **Supported Providers**:
+
 - **OpenAI** (GPT-4, GPT-3.5) - High quality, fast
 - **Google Gemini** - Multimodal, cost-effective
 - **Anthropic Claude** - Long context, nuanced responses
 
 **Critical Implementation Details**:
+
 - Maintain conversation history in `Transcript` object
 - Stream responses using `AsyncGenerator`
 - **IMPORTANT**: Buffer entire LLM response before yielding to synthesizer (prevents audio jumping)
@@ -172,8 +178,10 @@ class BaseSynthesizer:
     async def create_speech(self, message: BaseMessage, chunk_size: int) -> SynthesisResult:
         """
         Returns a SynthesisResult containing:
+
         - chunk_generator: AsyncGenerator that yields audio chunks
         - get_message_up_to: Function to get partial text (for interrupts)
+
         """
         raise NotImplementedError
 ```
@@ -190,6 +198,7 @@ class SynthesisResult:
 ```
 
 **Supported Providers**:
+
 - **ElevenLabs** - Most natural voices, streaming
 - **Azure TTS** - Enterprise-grade, many languages
 - **Google Cloud TTS** - Cost-effective, good quality
@@ -197,6 +206,7 @@ class SynthesisResult:
 - **Play.ht** - Voice cloning
 
 **Critical Implementation Details**:
+
 - Stream audio chunks as they're generated
 - Convert audio to LINEAR16 PCM format (16kHz sample rate)
 - Implement `get_message_up_to()` for interrupt handling
@@ -239,11 +249,13 @@ async def send_speech_to_output(self, message, synthesis_result,
 
 **Why Rate Limiting?**
 Without rate limiting, all audio chunks would be sent immediately, which would:
+
 - Buffer entire message on client side
 - Make interrupts impossible (all audio already sent)
 - Cause timing issues
 
 By sending one chunk every N seconds:
+
 - Real-time playback is maintained
 - Interrupts can stop mid-sentence
 - Natural conversation flow is preserved
@@ -258,7 +270,9 @@ The interrupt system is critical for natural conversations.
 
 **Step 1: User starts speaking**
 ```python
+
 # TranscriptionsWorker detects new transcription while bot speaking
+
 async def process(self, transcription):
     if not self.conversation.is_human_speaking:  # Bot was speaking!
         # Broadcast interrupt to all in-flight events
@@ -440,11 +454,14 @@ async def websocket_endpoint(websocket: WebSocket):
 **Solution**: Buffer the entire LLM response before sending to synthesizer:
 
 ```python
+
 # ❌ Bad: Yields sentence-by-sentence
+
 async for sentence in llm_stream:
     yield GeneratedResponse(message=BaseMessage(text=sentence))
 
 # ✅ Good: Buffer entire response
+
 full_response = ""
 async for chunk in llm_stream:
     full_response += chunk
@@ -460,9 +477,13 @@ yield GeneratedResponse(message=BaseMessage(text=full_response))
 **Solution**: Mute transcriber when bot starts speaking:
 
 ```python
+
 # Before sending audio to output
+
 self.transcriber.mute()
+
 # After audio playback complete
+
 self.transcriber.unmute()
 ```
 
@@ -543,13 +564,16 @@ async def terminate(self):
 ### 3. Monitoring and Logging
 
 ```python
+
 # Log key events
+
 logger.info(f"🎤 [TRANSCRIBER] Received: '{transcription.message}'")
 logger.info(f"🤖 [AGENT] Generating response...")
 logger.info(f"🔊 [SYNTHESIZER] Synthesizing {len(text)} characters")
 logger.info(f"⚠️ [INTERRUPT] User interrupted bot")
 
 # Track metrics
+
 metrics.increment("transcriptions.count")
 metrics.timing("agent.response_time", duration)
 metrics.gauge("active_conversations", count)
@@ -558,7 +582,9 @@ metrics.gauge("active_conversations", count)
 ### 4. Rate Limiting and Quotas
 
 ```python
+
 # Implement rate limiting for API calls
+
 from aiolimiter import AsyncLimiter
 
 rate_limiter = AsyncLimiter(max_rate=10, time_period=1)  # 10 calls/second
@@ -573,13 +599,16 @@ async def call_api(self, data):
 ### 1. Producer-Consumer with Queues
 
 ```python
+
 # Producer
+
 async def producer(queue):
     while True:
         item = await generate_item()
         queue.put_nowait(item)
 
 # Consumer
+
 async def consumer(queue):
     while True:
         item = await queue.get()
@@ -591,12 +620,15 @@ async def consumer(queue):
 Instead of returning complete results:
 
 ```python
+
 # ❌ Bad: Wait for entire response
+
 async def generate_response(prompt):
     response = await openai.complete(prompt)  # 5 seconds
     return response
 
 # ✅ Good: Stream chunks as they arrive
+
 async def generate_response(prompt):
     async for chunk in openai.complete(prompt, stream=True):
         yield chunk  # Yield after 0.1s, 0.2s, etc.
@@ -702,6 +734,7 @@ When implementing a voice AI engine:
 ## Resources
 
 **Libraries**:
+
 - `asyncio` - Async programming
 - `websockets` - WebSocket client/server
 - `FastAPI` - WebSocket server framework
@@ -709,6 +742,7 @@ When implementing a voice AI engine:
 - `numpy` - Audio data processing
 
 **API Providers**:
+
 - Transcription: Deepgram, AssemblyAI, Azure Speech, Google Cloud Speech
 - LLM: OpenAI, Google Gemini, Anthropic Claude
 - TTS: ElevenLabs, Azure TTS, Google Cloud TTS, Amazon Polly, Play.ht
@@ -716,6 +750,7 @@ When implementing a voice AI engine:
 ## Summary
 
 Building a voice AI engine requires:
+
 - ✅ Async worker pipeline for concurrent processing
 - ✅ Queue-based communication between components
 - ✅ Streaming at every stage (transcription, LLM, synthesis)
@@ -727,11 +762,13 @@ Building a voice AI engine requires:
 **The key insight**: Everything must stream and everything must be interruptible for natural, real-time conversations.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

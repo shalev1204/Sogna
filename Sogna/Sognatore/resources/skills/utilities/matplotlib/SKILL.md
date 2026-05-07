@@ -10,7 +10,6 @@ id: skill-matplotlib
 owner: [[orchestrator]]
 ---
 
-
 # Matplotlib
 
 ## Overview
@@ -20,6 +19,7 @@ Matplotlib is Python's foundational visualization library for creating static, a
 ## When to Use This Skill
 
 This skill should be used when:
+
 - Creating any type of plot or chart (line, scatter, bar, histogram, heatmap, contour, etc.)
 - Generating scientific or statistical visualizations
 - Customizing plot appearance (colors, styles, labels, legends)
@@ -50,6 +50,7 @@ plt.plot([1, 2, 3, 4])
 plt.ylabel('some numbers')
 plt.show()
 ```
+
 - Convenient for quick, simple plots
 - Maintains state automatically
 - Good for interactive work and simple scripts
@@ -63,6 +64,7 @@ ax.plot([1, 2, 3, 4])
 ax.set_ylabel('some numbers')
 plt.show()
 ```
+
 - **Recommended for most use cases**
 - More explicit control over figure and axes
 - Better for complex figures with multiple subplots
@@ -78,14 +80,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Create figure and axes (OO interface - RECOMMENDED)
+
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Generate and plot data
+
 x = np.linspace(0, 2*np.pi, 100)
 ax.plot(x, np.sin(x), label='sin(x)')
 ax.plot(x, np.cos(x), label='cos(x)')
 
 # Customize
+
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_title('Trigonometric Functions')
@@ -93,6 +98,7 @@ ax.legend()
 ax.grid(True, alpha=0.3)
 
 # Save and/or display
+
 plt.savefig('plot.png', dpi=300, bbox_inches='tight')
 plt.show()
 ```
@@ -101,7 +107,9 @@ plt.show()
 
 **Creating subplot layouts:**
 ```python
+
 # Method 1: Regular grid
+
 fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 axes[0, 0].plot(x, y1)
 axes[0, 1].scatter(x, y2)
@@ -109,6 +117,7 @@ axes[1, 0].bar(categories, values)
 axes[1, 1].hist(data, bins=30)
 
 # Method 2: Mosaic layout (more flexible)
+
 fig, axes = plt.subplot_mosaic([['left', 'right_top'],
                                  ['left', 'right_bottom']],
                                 figsize=(10, 8))
@@ -117,6 +126,7 @@ axes['right_top'].scatter(x, y)
 axes['right_bottom'].hist(data)
 
 # Method 3: GridSpec (maximum control)
+
 from matplotlib.gridspec import GridSpec
 fig = plt.figure(figsize=(12, 8))
 gs = GridSpec(3, 3, figure=fig)
@@ -140,7 +150,9 @@ ax.scatter(x, y, s=sizes, c=colors, alpha=0.6, cmap='viridis')
 **Bar charts** - Categorical comparisons
 ```python
 ax.bar(categories, values, color='steelblue', edgecolor='black')
+
 # For horizontal bars:
+
 ax.barh(categories, values)
 ```
 
@@ -176,6 +188,7 @@ For comprehensive plot type examples and variations, refer to `references/plot_t
 ### 4. Styling and Customization
 
 **Color specification methods:**
+
 - Named colors: `'red'`, `'blue'`, `'steelblue'`
 - Hex codes: `'#FF5733'`
 - RGB tuples: `(0.1, 0.2, 0.3)`
@@ -184,7 +197,9 @@ For comprehensive plot type examples and variations, refer to `references/plot_t
 **Using style sheets:**
 ```python
 plt.style.use('seaborn-v0_8-darkgrid')  # Apply predefined style
+
 # Available styles: 'ggplot', 'bmh', 'fivethirtyeight', etc.
+
 print(plt.style.available)  # List all available styles
 ```
 
@@ -212,18 +227,23 @@ For detailed styling options and colormap guidelines, see `references/styling_gu
 
 **Export to various formats:**
 ```python
+
 # High-resolution PNG for presentations/papers
+
 plt.savefig('figure.png', dpi=300, bbox_inches='tight', facecolor='white')
 
 # Vector format for publications (scalable)
+
 plt.savefig('figure.pdf', bbox_inches='tight')
 plt.savefig('figure.svg', bbox_inches='tight')
 
 # Transparent background
+
 plt.savefig('figure.png', dpi=300, bbox_inches='tight', transparent=True)
 ```
 
 **Important parameters:**
+
 - `dpi`: Resolution (300 for publications, 150 for web, 72 for screen)
 - `bbox_inches='tight'`: Removes excess whitespace
 - `facecolor='white'`: Ensures white background (useful for transparent themes)
@@ -238,15 +258,19 @@ fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111, projection='3d')
 
 # Surface plot
+
 ax.plot_surface(X, Y, Z, cmap='viridis')
 
 # 3D scatter
+
 ax.scatter(x, y, z, c=colors, marker='o')
 
 # 3D line plot
+
 ax.plot(x, y, z, linewidth=2)
 
 # Labels
+
 ax.set_xlabel('X Label')
 ax.set_ylabel('Y Label')
 ax.set_zlabel('Z Label')
@@ -255,11 +279,13 @@ ax.set_zlabel('Z Label')
 ## Best Practices
 
 ### 1. Interface Selection
+
 - **Use the object-oriented interface** (fig, ax = plt.subplots()) for production code
 - Reserve pyplot interface for quick interactive exploration only
 - Always create figures explicitly rather than relying on implicit state
 
 ### 2. Figure Size and DPI
+
 - Set figsize at creation: `fig, ax = plt.subplots(figsize=(10, 6))`
 - Use appropriate DPI for output medium:
   - Screen/notebook: 72-100 dpi
@@ -267,29 +293,36 @@ ax.set_zlabel('Z Label')
   - Print/publications: 300 dpi
 
 ### 3. Layout Management
+
 - Use `constrained_layout=True` or `tight_layout()` to prevent overlapping elements
 - `fig, ax = plt.subplots(constrained_layout=True)` is recommended for automatic spacing
 
 ### 4. Colormap Selection
+
 - **Sequential** (viridis, plasma, inferno): Ordered data with consistent progression
 - **Diverging** (coolwarm, RdBu): Data with meaningful center point (e.g., zero)
 - **Qualitative** (tab10, Set3): Categorical/nominal data
 - Avoid rainbow colormaps (jet) - they are not perceptually uniform
 
 ### 5. Accessibility
+
 - Use colorblind-friendly colormaps (viridis, cividis)
 - Add patterns/hatching for bar charts in addition to colors
 - Ensure sufficient contrast between elements
 - Include descriptive labels and legends
 
 ### 6. Performance
+
 - For large datasets, use `rasterized=True` in plot calls to reduce file size
 - Use appropriate data reduction before plotting (e.g., downsample dense time series)
 - For animations, use blitting for better performance
 
 ### 7. Code Organization
+
 ```python
+
 # Good practice: Clear structure
+
 def create_analysis_plot(data, title):
     """Create standardized analysis plot."""
     fig, ax = plt.subplots(figsize=(10, 6), constrained_layout=True)
@@ -306,6 +339,7 @@ def create_analysis_plot(data, title):
     return fig, ax
 
 # Use the function
+
 fig, ax = create_analysis_plot(my_data, 'My Analysis')
 plt.savefig('analysis.png', dpi=300, bbox_inches='tight')
 ```
@@ -315,6 +349,7 @@ plt.savefig('analysis.png', dpi=300, bbox_inches='tight')
 This skill includes helper scripts in the `scripts/` directory:
 
 ### `plot_template.py`
+
 Template script demonstrating various plot types with best practices. Use this as a starting point for creating new visualizations.
 
 **Usage:**
@@ -323,6 +358,7 @@ python scripts/plot_template.py
 ```
 
 ### `style_configurator.py`
+
 Interactive utility to configure matplotlib style preferences and generate custom style sheets.
 
 **Usage:**
@@ -342,6 +378,7 @@ For comprehensive information, consult the reference documents:
 ## Integration with Other Tools
 
 Matplotlib integrates well with:
+
 - **NumPy/Pandas** - Direct plotting from arrays and DataFrames
 - **Seaborn** - High-level statistical visualizations built on matplotlib
 - **Jupyter** - Interactive plotting with `%matplotlib inline` or `%matplotlib widget`
@@ -363,11 +400,13 @@ Matplotlib integrates well with:
 - Tutorials: https://matplotlib.org/stable/tutorials/index.html
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

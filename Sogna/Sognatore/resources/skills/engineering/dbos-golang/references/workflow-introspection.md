@@ -69,6 +69,7 @@ To optimize performance, avoid loading inputs/outputs when you don't need them (
 Reference: [Workflow Management](https://docs.dbos.dev/golang/tutorials/workflow-management#listing-workflows)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

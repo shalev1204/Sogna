@@ -8,7 +8,6 @@ id: skill-podcast-generation
 owner: [[orchestrator]]
 ---
 
-
 # Podcast Generation with GPT Realtime Mini
 
 Generate real audio narratives from text content using Azure OpenAI's Realtime API.
@@ -40,6 +39,7 @@ from openai import AsyncOpenAI
 import base64
 
 # Convert HTTPS endpoint to WebSocket URL
+
 ws_url = endpoint.replace("https://", "wss://") + "/openai/v1"
 
 client = AsyncOpenAI(
@@ -76,6 +76,7 @@ async with client.realtime.connect(model="gpt-realtime-mini") as conn:
             break
 
 # Convert PCM to WAV (see scripts/pcm_to_wav.py)
+
 pcm_audio = b''.join(audio_chunks)
 wav_audio = pcm_to_wav(pcm_audio, sample_rate=24000)
 ```
@@ -127,14 +128,17 @@ new Audio(audioUrl).play();
 - **PCM conversion**: Use scripts/pcm_to_wav.py for audio format conversion
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

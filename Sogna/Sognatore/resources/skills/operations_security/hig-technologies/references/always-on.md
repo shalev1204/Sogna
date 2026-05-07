@@ -63,6 +63,7 @@ September 12, 2023| Updated intro image artwork.
 September 23, 2022| Expanded guidance to cover the Always On display on iPhone 14 Pro and iPhone 14 Pro Max.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

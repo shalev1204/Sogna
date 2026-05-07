@@ -4,21 +4,24 @@ description: Guardiao de contexto que preserva dados criticos antes da compactac
 risk: offensive
 date_added: '2026-03-06'
 tags:
+
 - context
 - data-integrity
 - snapshots
 - verification
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-context-guardian
 owner: [[orchestrator]]
 ---
-
 
 # Context Guardian
 
@@ -87,16 +90,22 @@ context-guardian (PRE-compactacao)    context-agent (POS-sessao)
 ```
 
 O context-guardian e o context-agent sao complementares:
+
 - **context-guardian**: protecao em tempo real, DURANTE a sessao
 - **context-agent**: persistencia entre sessoes, APOS a sessao
 
 ## Ativacao Automatica (O Claude Deve Iniciar Sozinho)
 
 1. **Limite de contexto**: quando perceber que ja consumiu ~60-70% da janela de
+
    contexto (indicadores: mensagens comecando a ser resumidas, aviso de compactacao)
+
 2. **Projetos pesados**: sessoes com muitos arquivos editados, muitas tool calls,
+
    ou projetos com dependencias complexas entre componentes
+
 3. **Antes de tarefas longas**: quando uma proxima tarefa pode gerar output extenso
+
    que empurraria o contexto para alem do limite
 
 ## Ativacao Manual (Usuario Solicita)
@@ -215,6 +224,7 @@ da compactacao, para que fique no topo do contexto compactado.
 
 1. [tarefa 1 — resultado]
 2. [tarefa 2 — resultado]
+
 ...
 
 ## O Que Falta Fazer
@@ -246,6 +256,7 @@ da compactacao, para que fique no topo do contexto compactado.
 - MEMORY.md: carregado automaticamente
 - Context-agent: `python context_manager.py load`
 - Busca historica: `python context_manager.py search "termo"`
+
 ```
 
 ## Protocolo Rapido (Quando O Tempo E Curto)
@@ -253,7 +264,9 @@ da compactacao, para que fique no topo do contexto compactado.
 Se a compactacao esta iminente e nao ha tempo para o protocolo completo de 4 fases:
 
 1. **30 segundos** — Escrever um mini-briefing com: tarefas pendentes, decisoes
+
    criticas, caminhos de arquivo modificados
+
 2. **1 minuto** — Atualizar MEMORY.md com informacoes P0
 3. **2 minutos** — Executar context-agent save
 
@@ -268,10 +281,13 @@ esta completo:
 2. Se disponivel, ler o snapshot mais recente em `data/`
 3. Comparar com o briefing de transicao (se visivel no contexto compactado)
 4. Se encontrar lacunas, executar:
+
    ```bash
    python C:\Users\renat\skills\context-agent\scripts\context_manager.py load
    ```
+
 5. Se ainda houver lacunas, buscar por termo:
+
    ```bash
    python C:\Users\renat\skills\context-agent\scripts\context_manager.py search "termo"
    ```
@@ -289,11 +305,13 @@ Resultado: re-trabalho, inconsistencias, regressoes.
 
 **Com context-guardian**:
 Antes da compactacao, executa protocolo completo:
+
 - Snapshot com 5 categorias novas listadas (legal, auction, security, image-generation, monitoring)
 - 10 vulnerabilidades catalogadas com arquivo, tipo, e correcao exata
 - 22 ZIPs verificados com checksums
 - Decisoes documentadas ("removeu 'saude' de monitoring porque causava false positive")
 - Briefing de transicao no topo do contexto
+
 Proximo Claude continua com precisao total, zero re-trabalho.
 
 ## Consideracoes De Performance
@@ -302,7 +320,9 @@ Proximo Claude continua com precisao total, zero re-trabalho.
 - Para projetos simples, usar apenas o protocolo rapido
 - Nao ativar para sessoes curtas ou conversas casuais
 - A persistencia em 3 camadas (snapshot + MEMORY.md + context-agent) garante que
+
   mesmo se uma camada falhar, as outras duas preservam a informacao
+
 - Snapshots antigos (>10) podem ser podados manualmente
 
 ## Best Practices
@@ -322,11 +342,13 @@ Proximo Claude continua com precisao total, zero re-trabalho.
 - `context-agent` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -13,7 +13,6 @@ id: skill-monte-carlo-monitor-creation
 owner: [[ops-security]]
 ---
 
-
 # Monte Carlo Monitor Creation Skill
 
 This skill teaches you to create Monte Carlo monitors correctly via MCP. Every creation tool runs in **dry-run mode** and returns monitors-as-code (MaC) YAML. No monitors are created directly -- the user applies the YAML via the Monte Carlo CLI or CI/CD.
@@ -91,6 +90,7 @@ The number one error pattern is agents skipping validation and calling a creatio
 #### Step 1: Understand the request
 
 Ask yourself:
+
 - What does the user want to monitor? (a specific table, a metric, a data quality rule, cross-table consistency, freshness/volume at schema level)
 - Which monitor type fits? Use the monitor types table above.
 - Does the user have all the details, or do they need guidance?
@@ -100,11 +100,13 @@ If the user's intent is unclear, ask a focused question before proceeding.
 #### Step 2: Identify the table(s) and columns
 
 If you don't have the table MCON:
+
 1. Use `search` with the table name and `include_fields: ["field_names"]` to find the MCON and get column names.
 2. If the user provided a full table ID like `database:schema.table`, search for it.
 3. Once you have the MCON, call `getTable` with `include_fields: true` and `include_table_capabilities: true` to verify capabilities and get domain info.
 
 If you already have the MCON:
+
 1. Call `getTable` with the MCON, `include_fields: true`, and `include_table_capabilities: true`.
 
 **CRITICAL: You need the actual column names from `getTable` results. NEVER guess or hallucinate column names.** This is the most common source of monitor creation failures.
@@ -150,6 +152,7 @@ For all other monitor types, the creation tools default to a fixed schedule runn
 3. **Loose** -- runs once per day.
 
 Schedule format in MaC YAML:
+
 - Fixed: `schedule: { type: fixed, interval_minutes: <N> }`
 - Dynamic: `schedule: { type: dynamic }`
 - Loose: `schedule: { type: loose, start_time: "00:00" }`
@@ -157,6 +160,7 @@ Schedule format in MaC YAML:
 #### Step 6: Confirm with the user
 
 Before calling the creation tool, present the monitor configuration in plain language:
+
 - Monitor type
 - Target table (and columns if applicable)
 - What it checks / what triggers an alert
@@ -191,7 +195,9 @@ The YAML returned by creation tools is the monitor definition. It must be wrappe
 ```yaml
 montecarlo:
   <monitor_type>:
+
     - <returned yaml>
+
 ```
 
 For example, a metric monitor would look like:
@@ -199,12 +205,15 @@ For example, a metric monitor would look like:
 ```yaml
 montecarlo:
   metric:
+
     - <yaml returned by createMetricMonitorMac>
+
 ```
 
 **Important:** `montecarlo.yml` (without a directory path) is a separate Monte Carlo project configuration file -- it is NOT the same as a monitor definition file. Monitor definitions go in their own `.yml` files, typically in a `monitors/` directory or alongside dbt model schema files.
 
 Tell the user:
+
 - Save the YAML to a `.yml` file (e.g. `monitors/<table_name>.yml` or in their dbt schema)
 - Apply via the Monte Carlo CLI: `montecarlo monitors apply --namespace <namespace>`
 - Or integrate into CI/CD for automatic deployment on merge
@@ -224,11 +233,13 @@ Tell the user:
 - Do not call creation tools before the validation phase is complete.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

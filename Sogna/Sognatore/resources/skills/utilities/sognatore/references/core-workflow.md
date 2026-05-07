@@ -16,6 +16,7 @@ Full RARV cycle, CONTINUITY.md template, and autonomy rules.
 **This system runs with ZERO human intervention.**
 
 ### Core Rules
+
 1. **NEVER ask questions** - Do not say "Would you like me to...", "Should I...", or "What would you prefer?"
 2. **NEVER wait for confirmation** - Take immediate action. If something needs to be done, do it.
 3. **NEVER stop voluntarily** - Continue until completion promise is fulfilled or max iterations reached
@@ -72,6 +73,7 @@ Every iteration follows this cycle:
 ```
 
 **Key Enhancement:** The VERIFY step creates a feedback loop where the AI:
+
 - Tests every change automatically
 - Learns from failures by updating CONTINUITY.md
 - Retries with learned context
@@ -84,11 +86,13 @@ Every iteration follows this cycle:
 **CRITICAL:** You have a persistent working memory file at `.sognatore/CONTINUITY.md` that maintains state across all turns of execution.
 
 ### AT THE START OF EVERY TURN:
+
 1. Read `.sognatore/CONTINUITY.md` to orient yourself to the current state
 2. Reference it throughout your reasoning
 3. Never make decisions without checking CONTINUITY.md first
 
 ### AT THE END OF EVERY TURN:
+
 1. Update `.sognatore/CONTINUITY.md` with any important new information
 2. Record what was accomplished
 3. Note what needs to happen next
@@ -97,40 +101,50 @@ Every iteration follows this cycle:
 ### CONTINUITY.md Template
 
 ```markdown
+
 # Sognatore Working Memory
+
 Last Updated: [ISO timestamp]
 Current Phase: [bootstrap|discovery|architecture|development|qa|deployment|growth]
 Current Iteration: [number]
 
 ## Active Goal
+
 [What we're currently trying to accomplish - 1-2 sentences]
 
 ## Current Task
+
 - ID: [task-id from queue]
 - Description: [what we're doing]
 - Status: [in-progress|blocked|reviewing]
 - Started: [timestamp]
 
 ## Just Completed
+
 - [Most recent accomplishment with file:line references]
 - [Previous accomplishment]
 - [etc - last 5 items]
 
 ## Next Actions (Priority Order)
+
 1. [Immediate next step]
 2. [Following step]
 3. [etc]
 
 ## Active Blockers
+
 - [Any current blockers or waiting items]
 
 ## Key Decisions This Session
+
 - [Decision]: [Rationale] - [timestamp]
 
 ## Mistakes & Learnings (Self-Updating)
+
 **CRITICAL:** When errors occur, agents MUST update this section to prevent repeating mistakes.
 
 ### Pattern: Error -> Learning -> Prevention
+
 - **What Failed:** [Specific error that occurred]
 - **Why It Failed:** [Root cause analysis]
 - **How to Prevent:** [Concrete action to avoid this in future]
@@ -138,6 +152,7 @@ Current Iteration: [number]
 - **Agent:** [Which agent learned this]
 
 ### Example:
+
 - **What Failed:** TypeScript compilation error - missing return type annotation
 - **Why It Failed:** Express route handlers need explicit `: void` return type in strict mode
 - **How to Prevent:** Always add `: void` to route handlers: `(req, res): void =>`
@@ -147,19 +162,24 @@ Current Iteration: [number]
 **Self-Update Protocol:**
 ```
 ON_ERROR:
+
   1. Capture error details (stack trace, context)
   2. Analyze root cause
   3. Write learning to CONTINUITY.md "Mistakes & Learnings"
   4. Update approach based on learning
   5. Retry with corrected approach
+
 ```
 
 ## Working Context
+
 [Any critical information needed for current work - API keys in use,
 architecture decisions, patterns being followed, etc.]
 
 ## Files Currently Being Modified
+
 - [file path]: [what we're changing]
+
 ```
 
 ---
@@ -187,7 +207,9 @@ The memory systems work together:
 **RULE:** When `task.status == "completed"`, create a git commit immediately.
 
 ```bash
+
 # Git Checkpoint Protocol
+
 ON_TASK_COMPLETE() {
     task_id=$1
     task_title=$2
@@ -236,6 +258,7 @@ Git-Checkpoint: ${timestamp}
 [Loki] eng-005-backend: Implement POST /api/todos endpoint
 
 Created todo creation endpoint per OpenAPI spec.
+
 - Input validation for title field
 - SQLite insertion with timestamps
 - Returns 201 with created todo object
@@ -251,6 +274,7 @@ Git-Checkpoint: 2026-01-04T05:45:00Z
 ### Rollback Strategy
 
 **When to Rollback:**
+
 - Quality gates fail after merge
 - Integration tests fail
 - Security vulnerabilities detected
@@ -258,16 +282,21 @@ Git-Checkpoint: 2026-01-04T05:45:00Z
 
 **Rollback Command:**
 ```bash
+
 # Find last good checkpoint
+
 last_good_commit=$(git log --grep="\[Loki\].*task-${last_good_task_id}" --format=%H -n 1)
 
 # Rollback to that checkpoint
+
 git reset --hard $last_good_commit
 
 # Update CONTINUITY.md
+
 echo "ROLLBACK: Reset to task-${last_good_task_id} (commit: $last_good_commit)" >> .sognatore/CONTINUITY.md
 
 # Re-queue failed tasks
+
 move_tasks_to_pending after_task=$last_good_task_id
 ```
 
@@ -282,6 +311,7 @@ move_tasks_to_pending after_task=$last_good_task_id
 5. Alert orchestrator for human review
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

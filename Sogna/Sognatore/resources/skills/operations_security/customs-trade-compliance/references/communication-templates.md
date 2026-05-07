@@ -55,17 +55,20 @@ Select the template closest to your communication need. Fill in all variables. A
 {GRI_rationale_or_ruling_reference. Example: "HTS 8471.30.0100 per GRI 1 — portable ADP machine meeting all four Note 5(A) criteria. Consistent with CBP Ruling HQ H298456 (2019)."}
 
 **Valuation Notes:**
+
 - Transaction value per Method 1. {Note any additions: assists, royalties, or other adjustments.}
 - Related party: {Yes/No}. {If Yes: "Circumstances of sale test satisfied per attached transfer pricing analysis."}
 - Reconciliation flag: {Yes/No}. {If Yes: "Final price subject to year-end transfer pricing adjustment."}
 
 **Preferential Treatment Claim:**
+
 - FTA: {USMCA / EU-UK TCA / RCEP / None}
 - Certification of origin: {Attached / To follow / N/A}
 - Preference criterion: {Tariff shift / RVC / Specific process}
 - {If USMCA: "USMCA certification attached with all nine required data elements per Article 5.2."}
 
 **PGA Requirements:**
+
 - FDA: {Prior notice filed — confirmation # {PN_number} / Not applicable}
 - EPA/TSCA: {TSCA positive certification attached / Exemption: {basis} / N/A}
 - FCC: {Declaration of Conformity — FCC ID {FCC_ID} / N/A}
@@ -76,6 +79,7 @@ Select the template closest to your communication need. Fill in all variables. A
 {Any specific instructions: "Hold entry until ISF confirmation received." / "This entry requires ADD deposit of {rate}% under order {order_number}." / "Request CF-28 response coordination before liquidation."}
 
 **Attached Documents:**
+
 1. Commercial invoice
 2. Packing list
 3. Bill of lading / air waybill
@@ -111,6 +115,7 @@ Pursuant to 19 CFR § 177.1, {company_name} hereby requests a prospective ruling
 **1. Description of the Merchandise**
 
 {Provide a thorough and technically precise description of the product. Include:
+
 - Physical characteristics (dimensions, weight, material composition by percentage)
 - Manufacturing process
 - Function and how it operates
@@ -146,6 +151,7 @@ Based on the foregoing analysis, {company_name} respectfully submits that the su
 **4. Supporting Authorities**
 
 {Cite relevant prior CBP rulings, WCO classification opinions, or Explanatory Notes:}
+
 - CBP Ruling {ruling_number} ({year}): {Brief description of the ruling and its relevance}
 - WCO Classification Opinion {number}: {Brief description}
 - Harmonized System Explanatory Notes to Heading {XXXX}: {Relevant language}
@@ -260,6 +266,7 @@ Respectfully submitted,
 {email}
 
 Enclosures:
+
 1. Check / payment confirmation for ${total_tender}
 2. Spreadsheet of affected entries with calculations
 3. {Supporting documentation: corrected classification analysis, valuation report, etc.}
@@ -382,6 +389,7 @@ cc: {Legal counsel}
 | 1 | {product_description} | {HS_code} | {criterion_code} | {US/MX/CA} |
 
 **Origin Criterion Codes:**
+
 - A: Wholly obtained or produced entirely in the territory of one or more USMCA Parties
 - B: Produced entirely in the territory using non-originating materials that satisfy the applicable product-specific rule of origin (Annex 4-B)
 - C: Produced entirely in the territory exclusively from originating materials
@@ -430,6 +438,7 @@ The goods described in this document qualify as originating and the information 
 
 **WHAT HAPPENS IF WE DON'T COMPLY:**
 {Specific consequences:}
+
 - Shipment detention at port (average {X} days to resolve, demurrage cost ${Y}/day)
 - Penalty exposure: ${amount} per violation under {statute}
 - {If applicable: import refusal, product recall, licence revocation}
@@ -477,6 +486,7 @@ For each material/component used in the manufacture of the product, please provi
 **SECTION C: MANUFACTURING PROCESS**
 
 5. Describe the manufacturing process performed at your facility: ________________________________
+
    {Specifically identify: cutting, assembly, machining, chemical processing, finishing, testing}
 
 6. List any processes performed by subcontractors and the country where subcontracting occurs: ________________________________
@@ -562,6 +572,7 @@ Pursuant to 19 CFR § 177.12, {company_name} respectfully requests reconsiderati
 **5. Requested Action**
 
 {company_name} respectfully requests that CBP:
+
 1. Reconsider Ruling Letter {ruling_number}
 2. Classify {product_description} under HTS {proposed_classification}
 3. {If applicable: "Limit any reclassification to prospective application only, providing a reasonable transition period per 19 USC § 1625(c)."}
@@ -638,6 +649,7 @@ cc: {Legal counsel}
 **Record Retention:** This memorandum and all supporting documentation will be retained for {5 years from the date of adjudication / indefinitely for true positives}.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

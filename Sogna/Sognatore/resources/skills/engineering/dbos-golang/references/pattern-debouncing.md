@@ -40,6 +40,7 @@ func onInputChange(ctx dbos.DBOSContext, userID, userInput string) error {
 ```
 
 Key behaviors:
+
 - First argument to `Debounce` is the debounce key, grouping executions together (e.g., per user)
 - Second argument is the delay duration from the last call
 - `WithDebouncerTimeout` sets a max wait time since the first trigger
@@ -52,6 +53,7 @@ Type signature: `Debouncer[P any, R any]` — the type parameters match the targ
 Reference: [Debouncing Workflows](https://docs.dbos.dev/golang/tutorials/workflow-tutorial#debouncing)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

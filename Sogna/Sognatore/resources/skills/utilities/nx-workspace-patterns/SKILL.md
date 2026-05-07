@@ -8,7 +8,6 @@ id: skill-nx-workspace-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Nx Workspace Patterns
 
 Production patterns for Nx monorepo management.
@@ -346,7 +345,9 @@ export default async function featureLibraryGenerator(
 ### Template 5: CI Configuration with Affected
 
 ```yaml
+
 # .github/workflows/ci.yml
+
 name: CI
 
 on:
@@ -362,32 +363,41 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0
 
       - uses: actions/setup-node@v4
+
         with:
           node-version: 20
           cache: 'npm'
 
       - name: Install dependencies
+
         run: npm ci
 
       - name: Derive SHAs for affected commands
+
         uses: nrwl/nx-set-shas@v4
 
       - name: Run affected lint
+
         run: npx nx affected -t lint --parallel=3
 
       - name: Run affected test
+
         run: npx nx affected -t test --parallel=3 --configuration=ci
 
       - name: Run affected build
+
         run: npx nx affected -t build --parallel=3
 
       - name: Run affected e2e
+
         run: npx nx affected -t e2e --parallel=1
 ```
 
@@ -429,22 +439,29 @@ jobs:
 ## Common Commands
 
 ```bash
+
 # Generate new library
+
 nx g @nx/react:lib feature-auth --directory=libs/web --tags=type:feature,scope:web
 
 # Run affected tests
+
 nx affected -t test --base=main
 
 # View dependency graph
+
 nx graph
 
 # Run specific project
+
 nx build web --configuration=production
 
 # Reset cache
+
 nx reset
 
 # Run migrations
+
 nx migrate latest
 nx migrate --run-migrations
 ```
@@ -452,6 +469,7 @@ nx migrate --run-migrations
 ## Best Practices
 
 ### Do's
+
 - **Use tags consistently** - Enforce with module boundaries
 - **Enable caching early** - Significant CI savings
 - **Keep libs focused** - Single responsibility
@@ -459,6 +477,7 @@ nx migrate --run-migrations
 - **Document boundaries** - Help new developers
 
 ### Don'ts
+
 - **Don't create circular deps** - Graph should be acyclic
 - **Don't skip affected** - Test only what changed
 - **Don't ignore boundaries** - Tech debt accumulates
@@ -471,11 +490,13 @@ nx migrate --run-migrations
 - [Nx Cloud](https://nx.app/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

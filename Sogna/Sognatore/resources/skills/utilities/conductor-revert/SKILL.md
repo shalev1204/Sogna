@@ -8,7 +8,6 @@ id: skill-conductor-revert
 owner: [[orchestrator]]
 ---
 
-
 # Revert Track
 
 Revert changes by logical work unit with full git awareness. Supports reverting entire tracks, specific phases, or individual tasks.
@@ -48,9 +47,11 @@ Revert changes by logical work unit with full git awareness. Supports reverting 
      {list of files}
 
      Options:
+
      1. Stash changes and continue
      2. Commit changes first
      3. Cancel revert
+
      ```
 
 3. Verify git is clean enough to revert:
@@ -87,14 +88,17 @@ Display guided selection menu:
 What would you like to revert?
 
 Currently In Progress:
+
 1. [~] Task 2.3 in dashboard_20250112 (most recent)
 
 Recently Completed:
+
 2. [x] Task 2.2 in dashboard_20250112 (1 hour ago)
 3. [x] Phase 1 in dashboard_20250112 (3 hours ago)
 4. [x] Full track: auth_20250115 (yesterday)
 
 Options:
+
 5. Enter specific reference (track:phase or track:task)
 6. Cancel
 
@@ -160,17 +164,20 @@ Before any revert operations, display full plan:
 Target: {description of what's being reverted}
 
 Commits to revert (in reverse chronological order):
+
   1. abc1234 - feat: add chart rendering (dashboard_20250112)
   2. def5678 - chore: mark task 2.3 complete (dashboard_20250112)
   3. ghi9012 - feat: add data hooks (dashboard_20250112)
   4. jkl3456 - chore: mark task 2.2 complete (dashboard_20250112)
 
 Files that will be affected:
+
   - src/components/Dashboard.tsx (modified)
   - src/hooks/useData.ts (will be deleted - was created in these commits)
   - conductor/tracks/dashboard_20250112/plan.md (modified)
 
 Plan updates:
+
   - Task 2.2: [x] -> [ ]
   - Task 2.3: [~] -> [ ]
 
@@ -179,6 +186,7 @@ Plan updates:
 ================================================================================
 
 This operation will:
+
 - Create {N} revert commits
 - Modify {M} files
 - Reset {P} tasks to pending status
@@ -228,9 +236,11 @@ If any revert produces a merge conflict:
 Conflict occurred while reverting: {sha} - {message}
 
 Conflicted files:
+
   - src/components/Dashboard.tsx
 
 Options:
+
 1. Show conflict details
 2. Abort revert sequence (keeps completed reverts)
 3. Open manual resolution guide
@@ -280,6 +290,7 @@ After revert completion:
 ================================================================================
 
 Summary:
+
   - Reverted {N} commits
   - Reset {P} tasks to pending
   - {M} files affected
@@ -288,16 +299,19 @@ Git log now shows:
   {recent commit history}
 
 Plan.md status:
+
   - Task 2.2: [ ] Pending
   - Task 2.3: [ ] Pending
 
 ================================================================================
 
 Verify the revert was successful:
+
   1. Run tests: {test command}
   2. Check application: {relevant check}
 
 If issues are found, you may need to:
+
   - Fix conflicts manually
   - Re-implement the reverted tasks
   - Use 'git revert HEAD~{N}..HEAD' to undo the reverts
@@ -323,23 +337,29 @@ If issues are found, you may need to:
 No commits found for track: {trackId}
 
 The track exists but has no associated commits. This may mean:
+
 - Implementation never started
 - Commits used different format
 
 Options:
+
 1. Delete track directory only
 2. Cancel
+
 ```
 
 ### Commits Already Reverted
 
 ```
 Some commits appear to already be reverted:
+
   - abc1234 was reverted by xyz9876
 
 Options:
+
 1. Skip already-reverted commits
 2. Cancel and investigate
+
 ```
 
 ### Remote Already Pushed
@@ -348,6 +368,7 @@ Options:
 WARNING: Some commits have been pushed to remote
 
 Commits on remote:
+
   - abc1234 (origin/main)
   - def5678 (origin/main)
 
@@ -376,11 +397,13 @@ Alternatively, if not yet pushed:
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

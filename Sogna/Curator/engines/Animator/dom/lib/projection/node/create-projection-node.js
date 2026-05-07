@@ -2,11 +2,11 @@ import { clamp, noop, SubscriptionManager, } from "sognaflow-utils";
 import { AnimateSingleValue } from "../../animation/animate/single-value.js";
 import { GetOptimisedAppearId } from "../../animation/optimized-appear/get-appear-id.js";
 import { GetValueTransition } from "../../animation/utils/get-value-transition.js";
-import { CancelFrame, Frame, FrameData, FrameSteps } from "../../frameloop";
+import { CancelFrame, Frame, FrameDataInstance, FrameSteps } from "../../frameloop";
 import { Microtask } from "../../frameloop/microtask.js";
 import { Time } from "../../frameloop/sync-time.js";
-import { ScaleCorrectors as scaleCorrectors } from "../../render/utils/is-forced-sognaflow-value.js";
-import { ActiveAnimations as activeAnimations } from "../../stats/animation-count.js";
+import { scaleCorrectors } from "../../render/utils/is-forced-sognaflow-value.js";
+import { activeAnimations } from "../../stats/animation-count.js";
 import { StatsBuffer } from "../../stats/buffer.js";
 import { Delay } from "../../utils/delay.js";
 import { IsSVGElement } from "../../utils/is-svg-element.js";
@@ -67,7 +67,7 @@ function cancelTreeOptimisedTransformAnimations(projectionNode) {
         cancelTreeOptimisedTransformAnimations(parent);
     }
 }
-export function CreateProjectionNode({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform, }) {
+export function createProjectionNode({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform, }) {
     return class ProjectionNode {
         constructor(latestValues = {}, parent = defaultParent?.()) {
             /**
@@ -192,10 +192,10 @@ export function CreateProjectionNode({ attachResizeListener, defaultParent, meas
                             metrics.calculatedProjections =
                                 0;
                 }
-                this.nodes.forEach(PropagateDirtyNodes);
+                this.nodes.forEach(propagateDirtyNodes);
                 this.nodes.forEach(resolveTargetDelta);
                 this.nodes.forEach(calcProjection);
-                this.nodes.forEach(CleanDirtyNodes);
+                this.nodes.forEach(cleanDirtyNodes);
                 if (StatsBuffer.addProjectionMetrics) {
                     StatsBuffer.addProjectionMetrics(metrics);
                 }
@@ -506,13 +506,13 @@ export function CreateProjectionNode({ attachResizeListener, defaultParent, meas
              * to leave a flash of incorrectly styled content.
              */
             const now = Time.now();
-            FrameData.delta = clamp(0, 1000 / 60, now - FrameData.timestamp);
-            FrameData.timestamp = now;
-            FrameData.isProcessing = true;
-            FrameSteps.update.process(FrameData);
-            FrameSteps.preRender.process(FrameData);
-            FrameSteps.render.process(FrameData);
-            FrameData.isProcessing = false;
+            FrameDataInstance.delta = clamp(0, 1000 / 60, now - FrameDataInstance.timestamp);
+            FrameDataInstance.timestamp = now;
+            FrameDataInstance.isProcessing = true;
+            FrameSteps.update.process(FrameDataInstance);
+            FrameSteps.preRender.process(FrameDataInstance);
+            FrameSteps.render.process(FrameDataInstance);
+            FrameDataInstance.isProcessing = false;
         }
         didUpdate() {
             if (!this.updateScheduled) {
@@ -766,7 +766,7 @@ export function CreateProjectionNode({ attachResizeListener, defaultParent, meas
              * up the tree.
              */
             if (this.relativeParent.resolvedRelativeTargetAt !==
-                FrameData.timestamp) {
+                FrameDataInstance.timestamp) {
                 this.relativeParent.resolveTargetDelta(true);
             }
         }
@@ -799,7 +799,7 @@ export function CreateProjectionNode({ attachResizeListener, defaultParent, meas
              */
             if (!this.layout || !(layout || layoutId))
                 return;
-            this.resolvedRelativeTargetAt = FrameData.timestamp;
+            this.resolvedRelativeTargetAt = FrameDataInstance.timestamp;
             const relativeParent = this.getClosestProjectingParent();
             if (relativeParent &&
                 this.linkedParentVersion !== relativeParent.layoutVersion &&
@@ -941,7 +941,7 @@ export function CreateProjectionNode({ attachResizeListener, defaultParent, meas
              * If we have resolved the target this frame we must recalculate the
              * projection to ensure it visually represents the internal calculations.
              */
-            if (this.resolvedRelativeTargetAt === FrameData.timestamp) {
+            if (this.resolvedRelativeTargetAt === FrameDataInstance.timestamp) {
                 canSkip = false;
             }
             if (canSkip)
@@ -1076,8 +1076,8 @@ export function CreateProjectionNode({ attachResizeListener, defaultParent, meas
             let prevRelativeTarget;
             this.mixTargetDelta = (latest) => {
                 const progress = latest / 1000;
-                MixAxisDelta(targetDelta.x, delta.x, progress);
-                MixAxisDelta(targetDelta.y, delta.y, progress);
+                mixAxisDelta(targetDelta.x, delta.x, progress);
+                mixAxisDelta(targetDelta.y, delta.y, progress);
                 this.setTargetDelta(targetDelta);
                 if (this.relativeTarget &&
                     this.relativeTargetOrigin &&
@@ -1085,7 +1085,7 @@ export function CreateProjectionNode({ attachResizeListener, defaultParent, meas
                     this.relativeParent &&
                     this.relativeParent.layout) {
                     calcRelativePosition(relativeLayout, this.layout.layoutBox, this.relativeParent.layout.layoutBox, this.options.layoutAnchor || undefined);
-                    MixBox(this.relativeTarget, this.relativeTargetOrigin, relativeLayout, progress);
+                    mixBox(this.relativeTarget, this.relativeTargetOrigin, relativeLayout, progress);
                     /**
                      * If this is an unchanged relative target we can consider the
                      * projection not dirty.
@@ -1540,7 +1540,7 @@ function notifyLayoutUpdate(node) {
      */
     node.options.transition = undefined;
 }
-export function PropagateDirtyNodes(node) {
+export function propagateDirtyNodes(node) {
     /**
      * Increase debug counter for nodes encountered this frame
      */
@@ -1568,7 +1568,7 @@ export function PropagateDirtyNodes(node) {
         node.parent.isSharedProjectionDirty));
     node.isTransformDirty || (node.isTransformDirty = node.parent.isTransformDirty);
 }
-export function CleanDirtyNodes(node) {
+export function cleanDirtyNodes(node) {
     node.isProjectionDirty =
         node.isSharedProjectionDirty =
             node.isTransformDirty =
@@ -1623,19 +1623,19 @@ function resetSkewAndRotation(node) {
 function removeLeadSnapshots(stack) {
     stack.removeLeadSnapshot();
 }
-export function MixAxisDelta(output, delta, p) {
+export function mixAxisDelta(output, delta, p) {
     output.translate = MixNumber(delta.translate, 0, p);
     output.scale = MixNumber(delta.scale, 1, p);
     output.origin = delta.origin;
     output.originPoint = delta.originPoint;
 }
-export function MixAxis(output, from, to, p) {
+export function mixAxis(output, from, to, p) {
     output.min = MixNumber(from.min, to.min, p);
     output.max = MixNumber(from.max, to.max, p);
 }
-export function MixBox(output, from, to, p) {
-    MixAxis(output.x, from.x, to.x, p);
-    MixAxis(output.y, from.y, to.y, p);
+export function mixBox(output, from, to, p) {
+    mixAxis(output.x, from.x, to.x, p);
+    mixAxis(output.y, from.y, to.y, p);
 }
 function hasOpacityCrossfade(node) {
     return (node.animationValues && node.animationValues.opacityExit !== undefined);

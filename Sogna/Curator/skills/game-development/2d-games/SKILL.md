@@ -6,7 +6,6 @@ id: skill-2d-games
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # 2D Game Development
 
 > Principles for 2D game systems.

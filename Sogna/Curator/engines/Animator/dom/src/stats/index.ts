@@ -145,3 +145,5 @@ export function RecordStats() {
 
     return ReportStats
 }
+
+export const recordStats = RecordStats

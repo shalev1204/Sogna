@@ -146,6 +146,7 @@ from anthropic.types.messages.batch_create_params import Request
 client = anthropic.Anthropic()
 
 # 1. Prepare requests
+
 items_to_classify = [
     "The product quality is excellent!",
     "Terrible customer service, never again.",
@@ -168,10 +169,12 @@ requests = [
 ]
 
 # 2. Create batch
+
 batch = client.messages.batches.create(requests=requests)
 print(f"Created batch: {batch.id}")
 
 # 3. Wait for completion
+
 while True:
     batch = client.messages.batches.retrieve(batch.id)
     if batch.processing_status == "ended":
@@ -179,6 +182,7 @@ while True:
     time.sleep(10)
 
 # 4. Collect results
+
 results = {}
 for result in client.messages.batches.results(batch.id):
     if result.result.type == "succeeded":
@@ -189,6 +193,7 @@ for custom_id, classification in sorted(results.items()):
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,7 +7,6 @@ id: skill-odoo-rpc-api
 owner: [[eng-api]]
 ---
 
-
 # Odoo RPC API
 
 ## Overview
@@ -40,14 +39,17 @@ username = 'admin'
 password = 'my_api_key'  # Use API keys, not passwords, in production
 
 # Step 1: Authenticate
+
 common = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/common')
 uid = common.authenticate(db, username, password, {})
 print(f"Authenticated as UID: {uid}")
 
 # Step 2: Call models
+
 models = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/object')
 
 # Search confirmed sale orders
+
 orders = models.execute_kw(db, uid, password,
     'sale.order', 'search_read',
     [[['state', '=', 'sale']]],
@@ -83,9 +85,13 @@ curl -X POST https://myodoo.example.com/web/dataset/call_kw \
       "kwargs": {"fields": ["name", "email"], "limit": 5}
     }
   }'
+
 # Note: "id" is required by the JSON-RPC 2.0 spec to correlate responses.
+
 # Odoo 16+ also supports the /web/dataset/call_kw endpoint but
+
 # prefer /web/dataset/call_kw for model method calls.
+
 ```
 
 ## Best Practices
@@ -106,6 +112,7 @@ curl -X POST https://myodoo.example.com/web/dataset/call_kw \
 - Odoo.sh (SaaS) may block some API calls depending on plan; verify your subscription supports external API access.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

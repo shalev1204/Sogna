@@ -27,7 +27,9 @@ Complete installation instructions for all platforms and use cases.
 **For Claude Code users:**
 
 ```bash
+
 # Clone to your skills directory
+
 git clone https://github.com/asklokesh/sognatore.git ~/.claude/skills/sognatore
 ```
 
@@ -48,23 +50,30 @@ git clone https://github.com/asklokesh/sognatore.git ~/.claude/skills/sognatore
 
 **Project-specific installation:**
 ```bash
+
 # Navigate to your project directory first
+
 cd /path/to/your/project
 
 # Clone to local skills directory
+
 git clone https://github.com/asklokesh/sognatore.git .claude/skills/sognatore
 ```
 
 ### Option B: Download from Releases
 
 ```bash
+
 # Navigate to skills directory
+
 cd ~/.claude/skills
 
 # Get latest version number
+
 VERSION=$(curl -s https://api.github.com/repos/asklokesh/sognatore/releases/latest | grep tag_name | cut -d'"' -f4 | tr -d 'v')
 
 # Download and extract
+
 curl -L -o sognatore.zip "https://github.com/asklokesh/sognatore/releases/download/v${VERSION}/sognatore-claude-code-${VERSION}.zip"
 unzip sognatore.zip && rm sognatore.zip
 ```
@@ -76,22 +85,28 @@ unzip sognatore.zip && rm sognatore.zip
 If you only want the essential files without the full repository:
 
 ```bash
+
 # Create directory structure
+
 mkdir -p ~/.claude/skills/sognatore/references
 
 # Download core skill file
+
 curl -o ~/.claude/skills/sognatore/SKILL.md \
   https://raw.githubusercontent.com/asklokesh/sognatore/main/SKILL.md
 
 # Download agent definitions
+
 curl -o ~/.claude/skills/sognatore/references/agents.md \
   https://raw.githubusercontent.com/asklokesh/sognatore/main/references/agents.md
 
 # Download deployment guides
+
 curl -o ~/.claude/skills/sognatore/references/deployment.md \
   https://raw.githubusercontent.com/asklokesh/sognatore/main/references/deployment.md
 
 # Download business operations reference
+
 curl -o ~/.claude/skills/sognatore/references/business-ops.md \
   https://raw.githubusercontent.com/asklokesh/sognatore/main/references/business-ops.md
 ```
@@ -199,18 +214,22 @@ sognatore/
 **Problem:** Claude doesn't recognize "Sognatore" command.
 
 **Solutions:**
+
 1. **Check installation path:**
+
    ```bash
    ls -la ~/.claude/skills/sognatore/SKILL.md
    ```
 
 2. **Verify YAML frontmatter:**
+
    ```bash
    cat ~/.claude/skills/sognatore/SKILL.md | head -5
    ```
    Should show `name: sognatore`
 
 3. **Restart Claude Code:**
+
    ```bash
    # Exit and restart claude command
    ```
@@ -221,10 +240,13 @@ sognatore/
 
 **Solution:**
 ```bash
+
 # Ensure skills directory exists
+
 mkdir -p ~/.claude/skills
 
 # Check permissions
+
 ls -la ~/.claude/
 ```
 
@@ -233,9 +255,11 @@ ls -la ~/.claude/
 **Problem:** curl or wget commands fail.
 
 **Solutions:**
+
 1. **Check internet connection**
 
 2. **Try alternate download method:**
+
    ```bash
    # Use wget instead of curl
    wget -O ~/.claude/skills/sognatore/SKILL.md \
@@ -251,12 +275,15 @@ ls -la ~/.claude/
 **Problem:** `./autonomy/run.sh` gives "command not found" or permission errors.
 
 **Solutions:**
+
 1. **Make executable:**
+
    ```bash
    chmod +x autonomy/run.sh
    ```
 
 2. **Run from repository root:**
+
    ```bash
    # Make sure you're in the sognatore directory
    cd ~/.claude/skills/sognatore
@@ -264,6 +291,7 @@ ls -la ~/.claude/
    ```
 
 3. **Check prerequisites:**
+
    ```bash
    # Ensure Claude Code is installed
    claude --version
@@ -278,15 +306,21 @@ ls -la ~/.claude/
 
 **Solution:**
 ```bash
+
 # Ensure all reference files are present
+
 ls -la ~/.claude/skills/sognatore/references/
 
 # Should show:
+
 # agents.md
+
 # deployment.md
+
 # business-ops.md
 
 # If missing, download them:
+
 curl -o ~/.claude/skills/sognatore/references/agents.md \
   https://raw.githubusercontent.com/asklokesh/sognatore/main/references/agents.md
 ```
@@ -321,7 +355,9 @@ cat ~/.claude/skills/sognatore/VERSION
 ### Claude Code (CLI)
 
 ```bash
+
 # Remove the skill directory
+
 rm -rf ~/.claude/skills/sognatore
 ```
 
@@ -344,6 +380,7 @@ rm -rf ~/.claude/skills/sognatore
 After installation:
 
 1. **Quick Test:** Run a simple example
+
    ```bash
    ./autonomy/run.sh examples/simple-todo-app.md
    ```
@@ -367,6 +404,7 @@ After installation:
 **Happy Building!**
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

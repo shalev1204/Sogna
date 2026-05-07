@@ -1,6 +1,6 @@
-import { CancelFrame as cancelFrame, Frame as frame } from "../frameloop/frame.js";
-import { NumberValueTypes as numberValueTypes } from "../value/types/maps/number.js";
-import { GetValueAsType as getValueAsType } from "../value/types/utils/get-as-type.js";
+import { CancelFrame, Frame } from "../frameloop/frame.js";
+import { NumberValueTypes } from "../value/types/maps/number.js";
+import { getValueAsType } from "../value/types/utils/get-as-type.js";
 export class SognaflowValueState {
     constructor() {
         this.latest = {};
@@ -14,19 +14,19 @@ export class SognaflowValueState {
         const onChange = () => {
             const v = value.get();
             if (useDefaultValueType) {
-                this.latest[name] = getValueAsType(v, numberValueTypes[name]);
+                this.latest[name] = getValueAsType(v, NumberValueTypes[name]);
             }
             else {
                 this.latest[name] = v;
             }
-            render && frame.render(render);
+            render && Frame.render(render);
         };
         onChange();
         const cancelOnChange = value.on("change", onChange);
         computed && value.addDependent(computed);
         const remove = () => {
             cancelOnChange();
-            render && cancelFrame(render);
+            render && CancelFrame(render);
             this.values.delete(name);
             computed && value.removeDependent(computed);
         };

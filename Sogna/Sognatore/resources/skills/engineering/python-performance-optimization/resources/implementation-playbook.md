@@ -28,18 +28,21 @@ Comprehensive guide to profiling, analyzing, and optimizing Python code for bett
 ## Core Concepts
 
 ### 1. Profiling Types
+
 - **CPU Profiling**: Identify time-consuming functions
 - **Memory Profiling**: Track memory allocation and leaks
 - **Line Profiling**: Profile at line-by-line granularity
 - **Call Graph**: Visualize function call relationships
 
 ### 2. Performance Metrics
+
 - **Execution Time**: How long operations take
 - **Memory Usage**: Peak and average memory consumption
 - **CPU Utilization**: Processor usage patterns
 - **I/O Wait**: Time spent on I/O operations
 
 ### 3. Optimization Strategies
+
 - **Algorithmic**: Better algorithms and data structures
 - **Implementation**: More efficient code patterns
 - **Parallelization**: Multi-threading/processing
@@ -65,6 +68,7 @@ def measure_time():
     return result
 
 # Better: use timeit for accurate measurements
+
 import timeit
 
 execution_time = timeit.timeit(
@@ -101,6 +105,7 @@ def main():
     return result1, result2
 
 # Profile the code
+
 if __name__ == "__main__":
     profiler = cProfile.Profile()
     profiler.enable()
@@ -120,22 +125,31 @@ if __name__ == "__main__":
 
 **Command-line profiling:**
 ```bash
+
 # Profile a script
+
 python -m cProfile -o output.prof script.py
 
 # View results
+
 python -m pstats output.prof
+
 # In pstats:
+
 # sort cumtime
+
 # stats 10
+
 ```
 
 ### Pattern 2: line_profiler - Line-by-Line Profiling
 
 ```python
+
 # Install: pip install line-profiler
 
 # Add @profile decorator (line_profiler provides this)
+
 @profile
 def process_data(data):
     """Process data with line profiling."""
@@ -146,7 +160,9 @@ def process_data(data):
     return result
 
 # Run with:
+
 # kernprof -l -v script.py
+
 ```
 
 **Manual line profiling:**
@@ -176,6 +192,7 @@ if __name__ == "__main__":
 ### Pattern 3: memory_profiler - Memory Usage
 
 ```python
+
 # Install: pip install memory-profiler
 
 from memory_profiler import profile
@@ -198,24 +215,31 @@ if __name__ == "__main__":
     memory_intensive()
 
 # Run with:
+
 # python -m memory_profiler script.py
+
 ```
 
 ### Pattern 4: py-spy - Production Profiling
 
 ```bash
+
 # Install: pip install py-spy
 
 # Profile a running Python process
+
 py-spy top --pid 12345
 
 # Generate flamegraph
+
 py-spy record -o profile.svg --pid 12345
 
 # Profile a script
+
 py-spy record -o profile.svg -- python script.py
 
 # Dump current call stack
+
 py-spy dump --pid 12345
 ```
 
@@ -227,6 +251,7 @@ py-spy dump --pid 12345
 import timeit
 
 # Slow: Traditional loop
+
 def slow_squares(n):
     """Create list of squares using loop."""
     result = []
@@ -235,11 +260,13 @@ def slow_squares(n):
     return result
 
 # Fast: List comprehension
+
 def fast_squares(n):
     """Create list of squares using comprehension."""
     return [i**2 for i in range(n)]
 
 # Benchmark
+
 n = 100000
 
 slow_time = timeit.timeit(lambda: slow_squares(n), number=100)
@@ -250,6 +277,7 @@ print(f"Comprehension: {fast_time:.4f}s")
 print(f"Speedup: {slow_time/fast_time:.2f}x")
 
 # Even faster for simple operations: map
+
 def faster_squares(n):
     """Use map for even better performance."""
     return list(map(lambda x: x**2, range(n)))
@@ -271,6 +299,7 @@ def generator_approach():
     return sum(data)
 
 # Memory comparison
+
 list_data = [i for i in range(1000000)]
 gen_data = (i for i in range(1000000))
 
@@ -278,6 +307,7 @@ print(f"List size: {sys.getsizeof(list_data)} bytes")
 print(f"Generator size: {sys.getsizeof(gen_data)} bytes")
 
 # Generators use constant memory regardless of size
+
 ```
 
 ### Pattern 7: String Concatenation
@@ -304,6 +334,7 @@ def faster_concat(items):
 items = list(range(10000))
 
 # Benchmark
+
 slow = timeit.timeit(lambda: slow_concat(items), number=100)
 fast = timeit.timeit(lambda: fast_concat(items), number=100)
 faster = timeit.timeit(lambda: faster_concat(items), number=100)
@@ -319,6 +350,7 @@ print(f"Join (list): {faster:.4f}s")
 import timeit
 
 # Create test data
+
 size = 10000
 items = list(range(size))
 lookup_dict = {i: i for i in range(size)}
@@ -334,6 +366,7 @@ def dict_search(lookup_dict, target):
 target = size - 1  # Worst case for list
 
 # Benchmark
+
 list_time = timeit.timeit(
     lambda: list_search(items, target),
     number=1000
@@ -354,6 +387,7 @@ print(f"Speedup: {list_time/dict_time:.0f}x")
 import timeit
 
 # Global variable (slow)
+
 GLOBAL_VALUE = 100
 
 def use_global():
@@ -372,6 +406,7 @@ def use_local():
     return total
 
 # Local is faster
+
 global_time = timeit.timeit(use_global, number=1000)
 local_time = timeit.timeit(use_local, number=1000)
 
@@ -404,6 +439,7 @@ def calculate_with_function():
     return total
 
 # Inline is faster due to no call overhead
+
 inline_time = timeit.timeit(calculate_inline, number=1000)
 function_time = timeit.timeit(calculate_with_function, number=1000)
 
@@ -437,6 +473,7 @@ print(f"NumPy: {numpy_time:.4f}s")
 print(f"Speedup: {python_time/numpy_time:.2f}x")
 
 # Vectorized operations
+
 def python_multiply():
     """Element-wise multiplication in Python."""
     a = list(range(100000))
@@ -477,6 +514,7 @@ def fibonacci_fast(n):
     return fibonacci_fast(n-1) + fibonacci_fast(n-2)
 
 # Massive speedup for recursive algorithms
+
 n = 30
 
 slow_time = timeit.timeit(lambda: fibonacci_slow(n), number=1)
@@ -486,6 +524,7 @@ print(f"Without cache (1 run): {slow_time:.4f}s")
 print(f"With cache (1000 runs): {fast_time:.4f}s")
 
 # Cache info
+
 print(f"Cache info: {fibonacci_fast.cache_info()}")
 ```
 
@@ -511,6 +550,7 @@ class SlottedClass:
         self.z = z
 
 # Memory comparison
+
 regular = RegularClass(1, 2, 3)
 slotted = SlottedClass(1, 2, 3)
 
@@ -518,6 +558,7 @@ print(f"Regular class size: {sys.getsizeof(regular)} bytes")
 print(f"Slotted class size: {sys.getsizeof(slotted)} bytes")
 
 # Significant savings with many instances
+
 regular_objects = [RegularClass(i, i+1, i+2) for i in range(10000)]
 slotted_objects = [SlottedClass(i, i+1, i+2) for i in range(10000)]
 
@@ -601,6 +642,7 @@ async def asynchronous_requests():
     return elapsed, results
 
 # Async is much faster for I/O-bound work
+
 sync_time, sync_results = synchronous_requests()
 async_time, async_results = asyncio.run(asynchronous_requests())
 
@@ -644,6 +686,7 @@ def fast_inserts(conn, count):
     return elapsed
 
 # Benchmark
+
 conn1 = create_db()
 slow_time = slow_inserts(conn1, 1000)
 
@@ -658,7 +701,9 @@ print(f"Speedup: {slow_time/fast_time:.2f}x")
 ### Pattern 17: Query Optimization
 
 ```python
+
 # Use indexes for frequently queried columns
+
 """
 -- Slow: No index
 SELECT * FROM users WHERE email = 'user@example.com';
@@ -669,19 +714,24 @@ SELECT * FROM users WHERE email = 'user@example.com';
 """
 
 # Use query planning
+
 import sqlite3
 
 conn = sqlite3.connect("example.db")
 cursor = conn.cursor()
 
 # Analyze query performance
+
 cursor.execute("EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = ?", ("test@example.com",))
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 print(cursor.fetchall())
 
 # Use SELECT only needed columns
+
 # Slow: SELECT *
+
 # Fast: SELECT id, name
+
 ```
 
 ## Memory Optimization
@@ -725,9 +775,11 @@ def track_memory_usage():
     tracemalloc.stop()
 
 # Monitor memory
+
 track_memory_usage()
 
 # Force garbage collection
+
 gc.collect()
 ```
 
@@ -748,7 +800,9 @@ def process_file_iterator(filename):
         return sum(1 for line in f if line.strip())
 
 # Iterator uses constant memory
+
 # List loads entire file into memory
+
 ```
 
 ### Pattern 20: Weakref for Caches
@@ -762,6 +816,7 @@ class CachedResource:
         self.data = data
 
 # Regular cache prevents garbage collection
+
 regular_cache = {}
 
 def get_resource_regular(key):
@@ -771,6 +826,7 @@ def get_resource_regular(key):
     return regular_cache[key]
 
 # Weak reference cache allows garbage collection
+
 weak_cache = weakref.WeakValueDictionary()
 
 def get_resource_weak(key):
@@ -782,6 +838,7 @@ def get_resource_weak(key):
     return resource
 
 # When no strong references exist, objects can be GC'd
+
 ```
 
 ## Benchmarking Tools
@@ -815,6 +872,7 @@ result = slow_function()
 ### Performance Testing with pytest-benchmark
 
 ```python
+
 # Install: pip install pytest-benchmark
 
 def test_list_comprehension(benchmark):
@@ -828,6 +886,7 @@ def test_map_function(benchmark):
     assert len(result) == 10000
 
 # Run with: pytest test_performance.py --benchmark-compare
+
 ```
 
 ## Best Practices
@@ -878,6 +937,7 @@ def test_map_function(benchmark):
 - [ ] Benchmarked before and after optimization
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

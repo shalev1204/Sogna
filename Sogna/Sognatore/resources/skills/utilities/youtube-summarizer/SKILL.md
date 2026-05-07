@@ -10,7 +10,6 @@ id: skill-youtube-summarizer
 owner: [[orchestrator]]
 ---
 
-
 # youtube-summarizer
 
 ## Purpose
@@ -35,7 +34,9 @@ This skill should be used when:
 Before processing videos, validate the environment and dependencies:
 
 ```bash
+
 # Check if youtube-transcript-api is installed
+
 python3 -c "import youtube_transcript_api" 2>/dev/null
 if [ $? -ne 0 ]; then
     echo "⚠️  youtube-transcript-api not found"
@@ -43,6 +44,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Check Python availability
+
 if ! command -v python3 &>/dev/null; then
     echo "❌ Python 3 is required but not installed"
     exit 1
@@ -55,8 +57,10 @@ fi
 youtube-transcript-api is required but not installed.
 
 Would you like to install it now?
+
 - [ ] Yes - Install with pip (pip install youtube-transcript-api)
 - [ ] No - I'll install it manually
+
 ```
 
 **If user selects "Yes":**
@@ -82,6 +86,7 @@ echo "[████░░░░░░░░░░░░░░░░] 20% - Step 
 ```
 
 **Format specifications:**
+
 - 20 characters wide (use █ for filled, ░ for empty)
 - Percentage increments: Step 1=20%, Step 2=40%, Step 3=60%, Step 4=80%, Step 5=100%
 - Step counter showing current/total (e.g., "Step 3/5")
@@ -108,6 +113,7 @@ echo "[████░░░░░░░░░░░░░░░░] 20% - Step 
 **Objective:** Extract video ID and validate URL format.
 
 **Supported URL Formats:**
+
 - `https://www.youtube.com/watch?v=VIDEO_ID`
 - `https://youtube.com/watch?v=VIDEO_ID`
 - `https://youtu.be/VIDEO_ID`
@@ -116,13 +122,18 @@ echo "[████░░░░░░░░░░░░░░░░] 20% - Step 
 **Actions:**
 
 ```bash
+
 # Extract video ID using regex or URL parsing
+
 URL="$USER_PROVIDED_URL"
 
 # Pattern 1: youtube.com/watch?v=VIDEO_ID
+
 if echo "$URL" | grep -qE 'youtube\.com/watch\?v='; then
     VIDEO_ID=$(echo "$URL" | sed -E 's/.*[?&]v=([^&]+).*/\1/')
+
 # Pattern 2: youtu.be/VIDEO_ID  
+
 elif echo "$URL" | grep -qE 'youtu\.be/'; then
     VIDEO_ID=$(echo "$URL" | sed -E 's/.*youtu\.be\/([^?]+).*/\1/')
 else
@@ -139,6 +150,7 @@ echo "📹 Video ID extracted: $VIDEO_ID"
 ❌ Invalid YouTube URL
 
 Please provide a valid YouTube URL in one of these formats:
+
 - https://www.youtube.com/watch?v=VIDEO_ID
 - https://youtu.be/VIDEO_ID
 
@@ -278,13 +290,19 @@ Use the enhanced prompt from Phase 2 (STAR + R-I-S-E framework) with the extract
 **Implementation:**
 
 ```bash
+
 # Use the transcript file as input to the AI prompt
+
 TRANSCRIPT_FILE="/tmp/transcript_${VIDEO_ID}.txt"
 
 # The AI agent will:
+
 # 1. Read the transcript
+
 # 2. Apply the STAR + R-I-S-E summarization framework
+
 # 3. Generate comprehensive Markdown output
+
 # 4. Structure with headers, lists, and highlights
 
 Read "$TRANSCRIPT_FILE"  # Read transcript into context
@@ -304,13 +322,13 @@ echo "[████████████████████] 100% - Step
 **Output Structure:**
 
 ```markdown
+
 # [Video Title]
 
 **Canal:** [Channel Name]  
 **Duração:** [Duration]  
 **URL:** [https://youtube.com/watch?v=VIDEO_ID]  
 **Data de Publicação:** [Date if available]
-
 
 ## 📝 Detailed Summary
 
@@ -326,17 +344,14 @@ echo "[████████████████████] 100% - Step
 
 [Continued detailed analysis...]
 
-
 ## 📚 Concepts and Terminology
 
 - **[Term 1]:** [Definition and context]
 - **[Term 2]:** [Definition and context]
 
-
 ## 📌 Conclusion
 
 [Final synthesis and takeaways]
-
 
 ### **Example 2: Missing Dependency**
 
@@ -353,8 +368,10 @@ claude> summarize this youtube video https://youtu.be/abc123
 This skill requires the Python library 'youtube-transcript-api'.
 
 Would you like me to install it now?
+
 - [ ] Yes - Install with pip
 - [ ] No - I'll install manually
+
 ```
 
 **User selects "Yes":**
@@ -365,7 +382,6 @@ Successfully installed youtube-transcript-api-0.6.1
 
 ✅ Installation complete! Proceeding with video summary...
 ```
-
 
 ### **Example 4: Invalid URL**
 
@@ -380,12 +396,12 @@ claude> summarize youtube video www.youtube.com/some-video
 ❌ Invalid YouTube URL format
 
 Expected format examples:
+
 - https://www.youtube.com/watch?v=VIDEO_ID
 - https://youtu.be/VIDEO_ID
 
 Please provide a valid YouTube video URL.
 ```
-
 
 ## 📊 Executive Summary
 
@@ -404,21 +420,21 @@ What would you like to save?
 [████████████████████] 100% - ✓ Processing complete!
 ```
 
-
 Welcome to this comprehensive tutorial on machine learning fundamentals. In today's video, we'll explore the core concepts that power modern AI systems...
 ```
-
 
 **Version:** 1.2.0
 **Last Updated:** 2026-02-02
 **Maintained By:** Eric Andrade
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

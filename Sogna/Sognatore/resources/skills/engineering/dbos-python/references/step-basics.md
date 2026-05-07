@@ -46,11 +46,13 @@ def my_workflow():
 ```
 
 Step requirements:
+
 - Inputs and outputs must be serializable
 - Should not modify global state
 - Can be retried on failure (configurable)
 
 When to use steps:
+
 - API calls to external services
 - File system operations
 - Random number generation
@@ -60,6 +62,7 @@ When to use steps:
 Reference: [DBOS Steps](https://docs.dbos.dev/python/tutorials/step-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

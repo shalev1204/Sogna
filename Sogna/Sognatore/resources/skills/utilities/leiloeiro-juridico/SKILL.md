@@ -4,21 +4,24 @@ description: 'Analise juridica de leiloes: nulidades, bem de familia, alienacao 
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - legal
 - auction-law
 - brazilian
 - judicial
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-leiloeiro-juridico
 owner: [[orchestrator]]
 ---
-
 
 # SKILL JURÍDICA — LEILÕES DE IMÓVEIS
 
@@ -44,6 +47,7 @@ Analise juridica de leiloes: nulidades, bem de familia, alienacao fiduciaria, CP
 ## How It Works
 
 Você é um **Advogado Especialista** com domínio absoluto em:
+
 - Direito Processual Civil (execução, expropriação, arrematação)
 - Direito Imobiliário (registro, ônus reais, alienação fiduciária)
 - Jurisprudência do STJ e STF sobre leilões
@@ -160,26 +164,31 @@ Credor incorpora o imóvel — dívida extinta (Art. 27, §5º)
 **ALTO RISCO — Verificar Sempre:**
 
 **a) Intimação do cônjuge (Art. 842 CPC)**
+
 - Cônjuge DEVE ser intimado pessoalmente da penhora sobre imóvel
 - Falta de intimação = nulidade relativa (depende de prejuízo)
 - STJ: a nulidade não é automática, mas é frequente argumento de anulação
 - Como verificar: checar se nos autos consta intimação do cônjuge/companheiro
 
 **b) Intimação do devedor (Art. 889, I CPC)**
+
 - Devedor deve ser intimado do leilão (salvo já representado por advogado)
 - Prazo mínimo: 5 dias antes do leilão
 - Falta = possível nulidade
 
 **c) Publicação do Edital (Art. 887 CPC)**
+
 - Prazo mínimo de antecedência
 - Veículo de publicação adequado (jornal de grande circulação ou eletrônico)
 - Conteúdo obrigatório do edital (Art. 887, §1º)
 
 **d) Avaliação Desatualizada**
+
 - Se imóvel foi avaliado há mais de 1 ano, pode ensejar reavaliação (Art. 873, IV CPC)
 - Lance baseado em avaliação defasada = risco de impugnação
 
 **e) Ressalva de Impenhorabilidade Não Declarada**
+
 - Bem de família não declarado nos autos pode ser arguido após leilão
 - Risco: arrematação anulada (Art. 903, §1º, II CPC — até 10 dias após)
 
@@ -189,6 +198,7 @@ Credor incorpora o imóvel — dívida extinta (Art. 27, §5º)
 O imóvel utilizado como residência pela família é impenhorável.
 
 **Exceções (Art. 3º) — Imóvel PODE ser penhorado quando:**
+
 1. Crédito de trabalhadores da própria residência e respectivas contribuições previdenciárias
 2. Financiamento para construção ou aquisição do próprio imóvel (SFH, alienação fiduciária)
 3. Impostos, predial ou territorial, taxas e contribuições devidas ao imóvel
@@ -198,6 +208,7 @@ O imóvel utilizado como residência pela família é impenhorável.
 7. Obrigação decorrente de pensão alimentícia
 
 **Como verificar se é bem de família:**
+
 - Verificar nos autos se devedor alegou impenhorabilidade
 - Verificar se há outros imóveis no nome do devedor (um só = presumidamente bem de família)
 - Solteiros e viúvos também têm proteção (Súmula 364 STJ)
@@ -222,10 +233,13 @@ Mas o risco existe — avaliar caso a caso.
 | Penhoras de outros processos | Verificar ordem de preferência | Art. 908 CPC |
 
 **IPTU e Condomínio:**
+
 - São obrigações propter rem (seguem o bem, não a pessoa)
 - O arrematante responde pelos débitos existentes, salvo disposição expressa no edital
 - STJ: em leilão judicial, o arrematante pode não responder por débitos anteriores
+
   se o edital expressamente transfere a responsabilidade ao credor
+
 - SEMPRE verificar no edital quem responde pelos débitos
 
 ## 2.4 Prazo Para Anulação Da Arrematação (Art. 903 Cpc)
@@ -233,16 +247,19 @@ Mas o risco existe — avaliar caso a caso.
 A arrematação pode ser desconstituída por:
 
 **a) 10 dias após a arrematação (Art. 903, §1º):**
+
 - Laço processual (Art. 903, §1º, I) — vício no processo
 - Impenhorabilidade do bem (Art. 903, §1º, II)
 - Incapacidade jurídica do arrematante (Art. 903, §1º, III)
 
 **b) Ação Anulatória / Embargos de Terceiro (prazo prescricional):**
+
 - Terceiro prejudicado pode ajuizar embargos (Art. 674-681 CPC)
 - Prazo: até 5 dias antes da arrematação (embargos preventivos) ou após
 - Cônjuge com meação pode ajuizar embargos mesmo após o leilão
 
 **c) Rescisão judicial (Art. 903, §2º):**
+
 - Após a carta de arrematação expedida
 - Só por ação autônoma — mais difícil
 
@@ -254,6 +271,7 @@ o risco de anulação. Imóvel com muito valor emocional para o devedor = maior 
 ## 3.1 Leitura De Matrícula (Certidão De Ônus)
 
 **O que verificar:**
+
 1. Identificação do imóvel (número, área, confrontações)
 2. Titularidade atual — quem é o proprietário
 3. Ônus e gravames registrados:
@@ -269,6 +287,7 @@ o risco de anulação. Imóvel com muito valor emocional para o devedor = maior 
 ## 3.2 Leitura Do Processo Judicial
 
 **O que buscar nos autos:**
+
 - Petição inicial da execução — valor do débito original
 - Certidão de penhora registrada
 - Laudo de avaliação — data e valor
@@ -323,16 +342,23 @@ o risco de anulação. Imóvel com muito valor emocional para o devedor = maior 
 ## 6. Fraude À Execução (Art. 792 Cpc)
 
 A alienação de bem é considerada fraude à execução quando:
+
 1. Já existe demanda judicial capaz de levar o devedor à insolvência (Art. 792, IV CPC)
 2. Há averbação de penhora ou constrição no registro do imóvel (Art. 792, II CPC)
 3. O adquirente NÃO comprova boa-fé (Art. 792, §2º CPC)
 
 **Relevância para o arrematante:**
+
 - Se o devedor vendeu o imóvel a terceiro APÓS a citação na execução, essa venda
+
   pode ser declarada fraudulenta — o imóvel pode ser penhorado mesmo em nome do comprador
+
 - O arrematante em leilão adquire o imóvel livre desse vício (adquire de forma originária
+
   conforme parte da doutrina, ou derivada mas com proteção — divergência)
+
 - **STJ: A arrematação em hasta pública é protegida**, pois é ato judicial e o
+
   arrematante de boa-fé não pode ser prejudicado (REsp 1.141.990/SP)
 
 ---
@@ -340,11 +366,13 @@ A alienação de bem é considerada fraude à execução quando:
 ## 7. Regularização Fundiária (Lei 13.465/2017 — Reurb)
 
 **Relevância para leilões:**
+
 - Imóveis sem matrícula plena ou em ocupação informal podem ser regularizados via REURB
 - REURB-S (Social): moradores de baixa renda — gratuita
 - REURB-E (Específica): demais situações — custos do interessado
 
 **Quando considerar:**
+
 - Imóvel de leilão sem habite-se, com área divergente ou em loteamento irregular
 - REURB pode abrir caminho para registro que seria impossível pela via convencional
 - Custo e prazo da REURB variam muito por município (6-24 meses)
@@ -354,13 +382,18 @@ A alienação de bem é considerada fraude à execução quando:
 ## 8. Adjudicação Compulsória (Art. 1.418 Cc + Lei 6.766/79)
 
 **Para o arrematante:**
+
 - Se após arrematação o devedor se recusa a assinar escritura ou há impedimento
+
   registral, o arrematante pode usar a carta de arrematação como título judicial
   para registro direto (Art. 901 CPC)
+
 - Em contratos de promessa de compra e venda não cumpridos, a adjudicação
+
   compulsória é a via para obter a escritura
 
 **Para imóveis de leilão extrajudicial:**
+
 - O credor fiduciário já tem a propriedade consolidada — não precisa de adjudicação
 - O arrematante recebe escritura diretamente do credor fiduciário
 
@@ -369,6 +402,7 @@ A alienação de bem é considerada fraude à execução quando:
 ## 9. Penhora Online E Bens Digitais
 
 **Evolução recente:**
+
 - SISBAJUD (antigo Bacen Jud): juiz pode bloquear contas em segundos
 - Penhora de criptoativos e cotas de FII: possível, mas regulação em evolução
 - Penhora de domínios e patrimônio digital: ainda rara, mas crescente
@@ -379,9 +413,13 @@ A alienação de bem é considerada fraude à execução quando:
 ## Itbi
 
 - Base de cálculo: divergência — alguns municípios cobram sobre o VALOR DE MERCADO
+
   e não sobre o valor da arrematação
+
 - STJ (Tema 1.113): ITBI deve incidir sobre o valor efetivo da transação (lance),
+
   não sobre o valor venal — o arrematante pode contestar cobrança sobre VMP
+
 - Atenção: muitos municípios ainda cobram sobre VMP — possível impugnação administrativa
 
 ## Ir Ganho De Capital (Na Revenda)
@@ -432,6 +470,7 @@ Esta skill implementa as seguintes políticas de governança:
 - **warning_threshold**: Riscos jurídicos ALTO/MUITO ALTO disparam warning_threshold automático
 
 Políticas adicionais:
+
 - **Responsável:** Ecossistema Leiloeiro IA
 - **Escopo:** Análise jurídica de leilões judiciais e extrajudiciais
 - **Limitações:** Não substitui parecer de advogado. Informações jurídicas são educativas.
@@ -443,6 +482,7 @@ Políticas adicionais:
 ## Referências
 
 Fontes normativas e referências:
+
 - CPC/2015 (Lei 13.105/2015) — Arts. 774-925 (Execução completa)
 - Lei 9.514/1997 — Alienação Fiduciária de Imóvel (Art. 22-30)
 - Lei 8.009/1990 — Bem de Família
@@ -477,11 +517,13 @@ Fontes normativas e referências:
 - `leiloeiro-mercado` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

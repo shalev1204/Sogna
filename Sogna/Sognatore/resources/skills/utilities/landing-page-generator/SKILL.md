@@ -11,7 +11,6 @@ id: skill-landing-page-generator
 owner: [[orchestrator]]
 ---
 
-
 # Landing Page Generator
 
 Generate high-converting landing pages from a product description. Output complete Next.js/React components with multiple section variants, proven copy frameworks, SEO optimization, and performance-first patterns. Not lorem ipsum — actual copy that converts.
@@ -20,6 +19,7 @@ Generate high-converting landing pages from a product description. Output comple
 **Output:** TSX components + Tailwind styles + SEO meta + copy variants
 
 ## When to Use
+
 - You need to generate a marketing landing page in Next.js or React.
 - The task involves conversion-focused page structure, section variants, Tailwind styling, or SEO-aware copy.
 - You want complete landing-page output from a product description rather than isolated UI fragments.
@@ -86,15 +86,18 @@ Copy framework: PAS | AIDA | BAB
 ## Copy Frameworks
 
 **PAS (Problem → Agitate → Solution)**
+
 - H1: Painful state they're in
 - Sub: What happens if they don't fix it
 - CTA: What you offer
 - *Example — H1:* "Your team wastes 3 hours a day on manual reporting" / *Sub:* "Every hour spent on spreadsheets is an hour not closing deals. Your competitors are already automated." / *CTA:* "Automate your reports in 10 minutes →"
 
 **AIDA (Attention → Interest → Desire → Action)**
+
 - H1: Bold attention-grabbing statement → Sub: Interesting fact or benefit → Features: Desire-building proof points → CTA: Clear action
 
 **BAB (Before → After → Bridge)**
+
 - H1: "[Before state] → [After state]" → Sub: "Here's how [product] bridges the gap" → Features: How it works (the bridge)
 
 ---
@@ -210,11 +213,13 @@ Inject `FAQPage` JSON-LD via `<script type="application/ld+json" dangerouslySetI
 - **Competitive Teardown** (`product-team/competitive-teardown/`) — Competitive positioning informs landing page messaging and differentiation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

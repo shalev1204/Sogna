@@ -11,6 +11,7 @@ Critical for maintaining citation accuracy, avoiding reference errors, and ensur
 ## When to Use This Skill
 
 Use this skill when:
+
 - Searching for specific papers on Google Scholar or PubMed
 - Converting DOIs, PMIDs, or arXiv IDs to properly formatted BibTeX
 - Extracting complete metadata for citations (authors, title, journal, year, etc.)
@@ -27,6 +28,7 @@ Use this skill when:
 **When creating documents with this skill, always consider adding scientific diagrams and schematics to enhance visual communication.**
 
 If your document does not already contain schematics or diagrams:
+
 - Use the **scientific-schematics** skill to generate AI-powered publication-quality diagrams
 - Simply describe your desired diagram in natural language
 - Nano Banana Pro will automatically generate, review, and refine the schematic
@@ -39,12 +41,14 @@ python scripts/generate_schematic.py "your diagram description" -o figures/outpu
 ```
 
 The AI will automatically:
+
 - Create publication-quality images with proper formatting
 - Review and refine through multiple iterations
 - Ensure accessibility (colorblind-friendly, high contrast)
 - Save outputs in the figures/ directory
 
 **When to add schematics:**
+
 - Citation workflow diagrams
 - Literature search methodology flowcharts
 - Reference management system architectures
@@ -57,7 +61,6 @@ version: 1.0.0
 id: skill-citation-management
 owner: [[ops-security]]
 ---
-
 
 ## Core Workflow
 
@@ -73,12 +76,15 @@ Google Scholar provides the most comprehensive coverage across disciplines.
 
 **Basic Search**:
 ```bash
+
 # Search for papers on a topic
+
 python scripts/search_google_scholar.py "CRISPR gene editing" \
   --limit 50 \
   --output results.json
 
 # Search with year filter
+
 python scripts/search_google_scholar.py "machine learning protein folding" \
   --year-start 2020 \
   --year-end 2024 \
@@ -87,6 +93,7 @@ python scripts/search_google_scholar.py "machine learning protein folding" \
 ```
 
 **Advanced Search Strategies** (see `references/google_scholar_search.md`):
+
 - Use quotation marks for exact phrases: `"deep learning"`
 - Search by author: `author:LeCun`
 - Search in title: `intitle:"neural networks"`
@@ -95,6 +102,7 @@ python scripts/search_google_scholar.py "machine learning protein folding" \
 - Filter by date ranges to get recent work
 
 **Best Practices**:
+
 - Use specific, targeted search terms
 - Include key technical terms and acronyms
 - Filter by recent years for fast-moving fields
@@ -107,12 +115,15 @@ PubMed specializes in biomedical and life sciences literature (35+ million citat
 
 **Basic Search**:
 ```bash
+
 # Search PubMed
+
 python scripts/search_pubmed.py "Alzheimer's disease treatment" \
   --limit 100 \
   --output alzheimers.json
 
 # Search with MeSH terms and filters
+
 python scripts/search_pubmed.py \
   --query '"Alzheimer Disease"[MeSH] AND "Drug Therapy"[MeSH]' \
   --date-start 2020 \
@@ -122,6 +133,7 @@ python scripts/search_pubmed.py \
 ```
 
 **Advanced PubMed Queries** (see `references/pubmed_search.md`):
+
 - Use MeSH terms: `"Diabetes Mellitus"[MeSH]`
 - Field tags: `"cancer"[Title]`, `"Smith J"[Author]`
 - Boolean operators: `AND`, `OR`, `NOT`
@@ -130,6 +142,7 @@ python scripts/search_pubmed.py \
 - Combine with E-utilities API for automation
 
 **Best Practices**:
+
 - Use MeSH Browser to find correct controlled vocabulary
 - Construct complex queries in PubMed Advanced Search Builder first
 - Include multiple synonyms with OR
@@ -145,13 +158,17 @@ python scripts/search_pubmed.py \
 For single DOIs, use the quick conversion tool:
 
 ```bash
+
 # Convert single DOI
+
 python scripts/doi_to_bibtex.py 10.1038/s41586-021-03819-2
 
 # Convert multiple DOIs from a file
+
 python scripts/doi_to_bibtex.py --input dois.txt --output references.bib
 
 # Different output formats
+
 python scripts/doi_to_bibtex.py 10.1038/nature12345 --format json
 ```
 
@@ -160,19 +177,25 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --format json
 For DOIs, PMIDs, arXiv IDs, or URLs:
 
 ```bash
+
 # Extract from DOI
+
 python scripts/extract_metadata.py --doi 10.1038/s41586-021-03819-2
 
 # Extract from PMID
+
 python scripts/extract_metadata.py --pmid 34265844
 
 # Extract from arXiv ID
+
 python scripts/extract_metadata.py --arxiv 2103.14030
 
 # Extract from URL
+
 python scripts/extract_metadata.py --url "https://www.nature.com/articles/s41586-021-03819-2"
 
 # Batch extraction from file (mixed identifiers)
+
 python scripts/extract_metadata.py --input identifiers.txt --output citations.bib
 ```
 
@@ -202,6 +225,7 @@ python scripts/extract_metadata.py --input identifiers.txt --output citations.bi
    - Free access
 
 **What Gets Extracted**:
+
 - **Required fields**: author, title, year
 - **Journal articles**: journal, volume, number, pages, DOI
 - **Books**: publisher, ISBN, edition
@@ -218,6 +242,7 @@ python scripts/extract_metadata.py --input identifiers.txt --output citations.bi
 See `references/bibtex_formatting.md` for complete guide.
 
 **Common Entry Types**:
+
 - `@article`: Journal articles (most common)
 - `@book`: Books
 - `@inproceedings`: Conference papers
@@ -260,33 +285,40 @@ See `references/bibtex_formatting.md` for complete guide.
 Use the formatter to standardize BibTeX files:
 
 ```bash
+
 # Format and clean BibTeX file
+
 python scripts/format_bibtex.py references.bib \
   --output formatted_references.bib
 
 # Sort entries by citation key
+
 python scripts/format_bibtex.py references.bib \
   --sort key \
   --output sorted_references.bib
 
 # Sort by year (newest first)
+
 python scripts/format_bibtex.py references.bib \
   --sort year \
   --descending \
   --output sorted_references.bib
 
 # Remove duplicates
+
 python scripts/format_bibtex.py references.bib \
   --deduplicate \
   --output clean_references.bib
 
 # Validate and report issues
+
 python scripts/format_bibtex.py references.bib \
   --validate \
   --report validation_report.txt
 ```
 
 **Formatting Operations**:
+
 - Standardize field order
 - Consistent indentation and spacing
 - Proper capitalization in titles (protected with {})
@@ -302,15 +334,19 @@ python scripts/format_bibtex.py references.bib \
 #### Comprehensive Validation
 
 ```bash
+
 # Validate BibTeX file
+
 python scripts/validate_citations.py references.bib
 
 # Validate and fix common issues
+
 python scripts/validate_citations.py references.bib \
   --auto-fix \
   --output validated_references.bib
 
 # Generate detailed validation report
+
 python scripts/validate_citations.py references.bib \
   --report validation_report.json \
   --verbose
@@ -382,7 +418,9 @@ python scripts/validate_citations.py references.bib \
 Complete workflow for creating a bibliography:
 
 ```bash
+
 # 1. Search for papers on your topic
+
 python scripts/search_pubmed.py \
   '"CRISPR-Cas Systems"[MeSH] AND "Gene Editing"[MeSH]' \
   --date-start 2020 \
@@ -390,15 +428,18 @@ python scripts/search_pubmed.py \
   --output crispr_papers.json
 
 # 2. Extract DOIs from search results and convert to BibTeX
+
 python scripts/extract_metadata.py \
   --input crispr_papers.json \
   --output crispr_refs.bib
 
 # 3. Add specific papers by DOI
+
 python scripts/doi_to_bibtex.py 10.1038/nature12345 >> crispr_refs.bib
 python scripts/doi_to_bibtex.py 10.1126/science.abcd1234 >> crispr_refs.bib
 
 # 4. Format and clean the BibTeX file
+
 python scripts/format_bibtex.py crispr_refs.bib \
   --deduplicate \
   --sort year \
@@ -406,16 +447,20 @@ python scripts/format_bibtex.py crispr_refs.bib \
   --output references.bib
 
 # 5. Validate all citations
+
 python scripts/validate_citations.py references.bib \
   --auto-fix \
   --report validation.json \
   --output final_references.bib
 
 # 6. Review validation report and fix any remaining issues
+
 cat validation.json
 
 # 7. Use in your LaTeX document
+
 # \bibliography{final_references}
+
 ```
 
 #### Integration with Literature Review Skill
@@ -426,17 +471,22 @@ This skill complements the `literature-review` skill:
 **Citation Management Skill** → Technical citation handling
 
 **Combined Workflow**:
+
 1. Use `literature-review` for comprehensive multi-database search
 2. Use `citation-management` to extract and validate all citations
 3. Use `literature-review` to synthesize findings thematically
 4. Use `citation-management` to verify final bibliography accuracy
 
 ```bash
+
 # After completing literature review
+
 # Verify all citations in the review document
+
 python scripts/validate_citations.py my_review_references.bib --report review_validation.json
 
 # Format for specific citation style if needed
+
 python scripts/format_bibtex.py my_review_references.bib \
   --style nature \
   --output formatted_refs.bib
@@ -461,18 +511,21 @@ Always prioritize papers based on citation count, venue quality, and author repu
 | 7+ years | 1000+ | Foundational |
 
 **Venue Quality Tiers:**
+
 - **Tier 1 (Prefer):** Nature, Science, Cell, NEJM, Lancet, JAMA, PNAS
 - **Tier 2 (High Priority):** Impact Factor >10, top conferences (NeurIPS, ICML, ICLR)
 - **Tier 3 (Good):** Specialized journals (IF 5-10)
 - **Tier 4 (Sparingly):** Lower-impact peer-reviewed venues
 
 **Author Reputation Indicators:**
+
 - Senior researchers with h-index >40
 - Multiple publications in Tier-1 venues
 - Leadership at recognized institutions
 - Awards and editorial positions
 
 **Search Strategies for High-Impact Papers:**
+
 - Sort by citation count (most cited first)
 - Look for review articles from Tier-1 journals for overview
 - Check "Cited by" for impact assessment and recent follow-up work
@@ -493,16 +546,21 @@ OR                       # Alternative terms
 
 **Example Searches**:
 ```
+
 # Find recent reviews on a topic
+
 "CRISPR" intitle:review 2023..2024
 
 # Find papers by specific author on topic
+
 author:Church "synthetic biology"
 
 # Find highly cited foundational work
+
 "deep learning" 2012..2015 sort:citations
 
 # Exclude surveys and focus on methods
+
 "protein folding" -survey -review intitle:method
 ```
 
@@ -528,19 +586,24 @@ MeSH (Medical Subject Headings) provides controlled vocabulary for precise searc
 
 **Building Complex Queries**:
 ```bash
+
 # Clinical trials on diabetes treatment published recently
+
 "Diabetes Mellitus, Type 2"[MeSH] AND "Drug Therapy"[MeSH] 
 AND "Clinical Trial"[Publication Type] AND 2020:2024[Publication Date]
 
 # Reviews on CRISPR in specific journal
+
 "CRISPR-Cas Systems"[MeSH] AND "Nature"[Journal] AND "Review"[Publication Type]
 
 # Specific author's recent work
+
 "Smith AB"[Author] AND cancer[Title/Abstract] AND 2022:2024[Publication Date]
 ```
 
 **E-utilities for Automation**:
 The scripts use NCBI E-utilities API for programmatic access:
+
 - **ESearch**: Search and retrieve PMIDs
 - **EFetch**: Retrieve full metadata
 - **ESummary**: Get summary information
@@ -555,6 +618,7 @@ See `references/pubmed_search.md` for complete API documentation.
 Search Google Scholar and export results.
 
 **Features**:
+
 - Automated searching with rate limiting
 - Pagination support
 - Year range filtering
@@ -563,10 +627,13 @@ Search Google Scholar and export results.
 
 **Usage**:
 ```bash
+
 # Basic search
+
 python scripts/search_google_scholar.py "quantum computing"
 
 # Advanced search with filters
+
 python scripts/search_google_scholar.py "quantum computing" \
   --year-start 2020 \
   --year-end 2024 \
@@ -575,6 +642,7 @@ python scripts/search_google_scholar.py "quantum computing" \
   --output quantum_papers.json
 
 # Export directly to BibTeX
+
 python scripts/search_google_scholar.py "machine learning" \
   --limit 50 \
   --format bibtex \
@@ -586,6 +654,7 @@ python scripts/search_google_scholar.py "machine learning" \
 Search PubMed using E-utilities API.
 
 **Features**:
+
 - Complex query support (MeSH, field tags, Boolean)
 - Date range filtering
 - Publication type filtering
@@ -594,10 +663,13 @@ Search PubMed using E-utilities API.
 
 **Usage**:
 ```bash
+
 # Simple keyword search
+
 python scripts/search_pubmed.py "CRISPR gene editing"
 
 # Complex query with filters
+
 python scripts/search_pubmed.py \
   --query '"CRISPR-Cas Systems"[MeSH] AND "therapeutic"[Title/Abstract]' \
   --date-start 2020-01-01 \
@@ -607,6 +679,7 @@ python scripts/search_pubmed.py \
   --output crispr_therapeutic.json
 
 # Export to BibTeX
+
 python scripts/search_pubmed.py "Alzheimer's disease" \
   --limit 100 \
   --format bibtex \
@@ -618,6 +691,7 @@ python scripts/search_pubmed.py "Alzheimer's disease" \
 Extract complete metadata from paper identifiers.
 
 **Features**:
+
 - Supports DOI, PMID, arXiv ID, URL
 - Queries CrossRef, PubMed, arXiv APIs
 - Handles multiple identifier types
@@ -626,25 +700,32 @@ Extract complete metadata from paper identifiers.
 
 **Usage**:
 ```bash
+
 # Single DOI
+
 python scripts/extract_metadata.py --doi 10.1038/s41586-021-03819-2
 
 # Single PMID
+
 python scripts/extract_metadata.py --pmid 34265844
 
 # Single arXiv ID
+
 python scripts/extract_metadata.py --arxiv 2103.14030
 
 # From URL
+
 python scripts/extract_metadata.py \
   --url "https://www.nature.com/articles/s41586-021-03819-2"
 
 # Batch processing (file with one identifier per line)
+
 python scripts/extract_metadata.py \
   --input paper_ids.txt \
   --output references.bib
 
 # Different output formats
+
 python scripts/extract_metadata.py \
   --doi 10.1038/nature12345 \
   --format json  # or bibtex, yaml
@@ -655,6 +736,7 @@ python scripts/extract_metadata.py \
 Validate BibTeX entries for accuracy and completeness.
 
 **Features**:
+
 - DOI verification via doi.org and CrossRef
 - Required field checking
 - Duplicate detection
@@ -664,20 +746,25 @@ Validate BibTeX entries for accuracy and completeness.
 
 **Usage**:
 ```bash
+
 # Basic validation
+
 python scripts/validate_citations.py references.bib
 
 # With auto-fix
+
 python scripts/validate_citations.py references.bib \
   --auto-fix \
   --output fixed_references.bib
 
 # Detailed validation report
+
 python scripts/validate_citations.py references.bib \
   --report validation_report.json \
   --verbose
 
 # Only check DOIs
+
 python scripts/validate_citations.py references.bib \
   --check-dois-only
 ```
@@ -687,6 +774,7 @@ python scripts/validate_citations.py references.bib \
 Format and clean BibTeX files.
 
 **Features**:
+
 - Standardize formatting
 - Sort entries (by key, year, author)
 - Remove duplicates
@@ -696,21 +784,26 @@ Format and clean BibTeX files.
 
 **Usage**:
 ```bash
+
 # Basic formatting
+
 python scripts/format_bibtex.py references.bib
 
 # Sort by year (newest first)
+
 python scripts/format_bibtex.py references.bib \
   --sort year \
   --descending \
   --output sorted_refs.bib
 
 # Remove duplicates
+
 python scripts/format_bibtex.py references.bib \
   --deduplicate \
   --output clean_refs.bib
 
 # Complete cleanup
+
 python scripts/format_bibtex.py references.bib \
   --deduplicate \
   --sort year \
@@ -724,6 +817,7 @@ python scripts/format_bibtex.py references.bib \
 Quick DOI to BibTeX conversion.
 
 **Features**:
+
 - Fast single DOI conversion
 - Batch processing
 - Multiple output formats
@@ -731,19 +825,24 @@ Quick DOI to BibTeX conversion.
 
 **Usage**:
 ```bash
+
 # Single DOI
+
 python scripts/doi_to_bibtex.py 10.1038/s41586-021-03819-2
 
 # Multiple DOIs
+
 python scripts/doi_to_bibtex.py \
   10.1038/nature12345 \
   10.1126/science.abc1234 \
   10.1016/j.cell.2023.01.001
 
 # From file (one DOI per line)
+
 python scripts/doi_to_bibtex.py --input dois.txt --output references.bib
 
 # Copy to clipboard
+
 python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
 ```
 
@@ -872,7 +971,9 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
 ### Example 1: Building a Bibliography for a Paper
 
 ```bash
+
 # Step 1: Find key papers on your topic
+
 python scripts/search_google_scholar.py "transformer neural networks" \
   --year-start 2017 \
   --limit 50 \
@@ -884,6 +985,7 @@ python scripts/search_pubmed.py "deep learning medical imaging" \
   --output medical_dl_pm.json
 
 # Step 2: Extract metadata from search results
+
 python scripts/extract_metadata.py \
   --input transformers_gs.json \
   --output transformers.bib
@@ -893,13 +995,16 @@ python scripts/extract_metadata.py \
   --output medical.bib
 
 # Step 3: Add specific papers you already know
+
 python scripts/doi_to_bibtex.py 10.1038/s41586-021-03819-2 >> specific.bib
 python scripts/doi_to_bibtex.py 10.1126/science.aam9317 >> specific.bib
 
 # Step 4: Combine all BibTeX files
+
 cat transformers.bib medical.bib specific.bib > combined.bib
 
 # Step 5: Format and deduplicate
+
 python scripts/format_bibtex.py combined.bib \
   --deduplicate \
   --sort year \
@@ -907,73 +1012,94 @@ python scripts/format_bibtex.py combined.bib \
   --output formatted.bib
 
 # Step 6: Validate
+
 python scripts/validate_citations.py formatted.bib \
   --auto-fix \
   --report validation.json \
   --output final_references.bib
 
 # Step 7: Review any issues
+
 cat validation.json | grep -A 3 '"errors"'
 
 # Step 8: Use in LaTeX
+
 # \bibliography{final_references}
+
 ```
 
 ### Example 2: Converting a List of DOIs
 
 ```bash
+
 # You have a text file with DOIs (one per line)
+
 # dois.txt contains:
+
 # 10.1038/s41586-021-03819-2
+
 # 10.1126/science.aam9317
+
 # 10.1016/j.cell.2023.01.001
 
 # Convert all to BibTeX
+
 python scripts/doi_to_bibtex.py --input dois.txt --output references.bib
 
 # Validate the result
+
 python scripts/validate_citations.py references.bib --verbose
 ```
 
 ### Example 3: Cleaning an Existing BibTeX File
 
 ```bash
+
 # You have a messy BibTeX file from various sources
+
 # Clean it up systematically
 
 # Step 1: Format and standardize
+
 python scripts/format_bibtex.py messy_references.bib \
   --output step1_formatted.bib
 
 # Step 2: Remove duplicates
+
 python scripts/format_bibtex.py step1_formatted.bib \
   --deduplicate \
   --output step2_deduplicated.bib
 
 # Step 3: Validate and auto-fix
+
 python scripts/validate_citations.py step2_deduplicated.bib \
   --auto-fix \
   --output step3_validated.bib
 
 # Step 4: Sort by year
+
 python scripts/format_bibtex.py step3_validated.bib \
   --sort year \
   --descending \
   --output clean_references.bib
 
 # Step 5: Final validation report
+
 python scripts/validate_citations.py clean_references.bib \
   --report final_validation.json \
   --verbose
 
 # Review report
+
 cat final_validation.json
 ```
 
 ### Example 4: Finding and Citing Seminal Papers
 
 ```bash
+
 # Find highly cited papers on a topic
+
 python scripts/search_google_scholar.py "AlphaFold protein structure" \
   --year-start 2020 \
   --year-end 2024 \
@@ -982,14 +1108,17 @@ python scripts/search_google_scholar.py "AlphaFold protein structure" \
   --output alphafold_seminal.json
 
 # Extract the top 10 by citation count
+
 # (script will have included citation counts in JSON)
 
 # Convert to BibTeX
+
 python scripts/extract_metadata.py \
   --input alphafold_seminal.json \
   --output alphafold_refs.bib
 
 # The BibTeX file now contains the most influential papers
+
 ```
 
 ## Integration with Other Skills
@@ -1002,6 +1131,7 @@ python scripts/extract_metadata.py \
 - **Citation Management**: Metadata extraction and validation
 
 **Combined workflow**:
+
 1. Use literature-review for systematic search methodology
 2. Use citation-management to extract and validate citations
 3. Use literature-review to synthesize findings
@@ -1028,6 +1158,7 @@ python scripts/extract_metadata.py \
 ### Bundled Resources
 
 **References** (in `references/`):
+
 - `google_scholar_search.md`: Complete Google Scholar search guide
 - `pubmed_search.md`: PubMed and E-utilities API documentation
 - `metadata_extraction.md`: Metadata sources and field requirements
@@ -1035,6 +1166,7 @@ python scripts/extract_metadata.py \
 - `bibtex_formatting.md`: BibTeX entry types and formatting rules
 
 **Scripts** (in `scripts/`):
+
 - `search_google_scholar.py`: Google Scholar search automation
 - `search_pubmed.py`: PubMed E-utilities API client
 - `extract_metadata.py`: Universal metadata extractor
@@ -1043,28 +1175,33 @@ python scripts/extract_metadata.py \
 - `doi_to_bibtex.py`: Quick DOI to BibTeX converter
 
 **Assets** (in `assets/`):
+
 - `bibtex_template.bib`: Example BibTeX entries for all types
 - `citation_checklist.md`: Quality assurance checklist
 
 ### External Resources
 
 **Search Engines**:
+
 - Google Scholar: https://scholar.google.com/
 - PubMed: https://pubmed.ncbi.nlm.nih.gov/
 - PubMed Advanced Search: https://pubmed.ncbi.nlm.nih.gov/advanced/
 
 **Metadata APIs**:
+
 - CrossRef API: https://api.crossref.org/
 - PubMed E-utilities: https://www.ncbi.nlm.nih.gov/books/NBK25501/
 - arXiv API: https://arxiv.org/help/api/
 - DataCite API: https://api.datacite.org/
 
 **Tools and Validators**:
+
 - MeSH Browser: https://meshb.nlm.nih.gov/search
 - DOI Resolver: https://doi.org/
 - BibTeX Format: http://www.bibtex.org/Format/
 
 **Citation Styles**:
+
 - BibTeX documentation: http://www.bibtex.org/
 - LaTeX bibliography management: https://www.overleaf.com/learn/latex/Bibliography_management
 
@@ -1073,21 +1210,28 @@ python scripts/extract_metadata.py \
 ### Required Python Packages
 
 ```bash
+
 # Core dependencies
+
 pip install requests  # HTTP requests for APIs
 pip install bibtexparser  # BibTeX parsing and formatting
 pip install biopython  # PubMed E-utilities access
 
 # Optional (for Google Scholar)
+
 pip install scholarly  # Google Scholar API wrapper
+
 # or
+
 pip install selenium  # For more robust Scholar scraping
 ```
 
 ### Optional Tools
 
 ```bash
+
 # For advanced validation
+
 pip install crossref-commons  # Enhanced CrossRef API access
 pip install pylatexenc  # LaTeX special character handling
 ```
@@ -1107,11 +1251,13 @@ The citation-management skill provides:
 Use this skill to maintain accurate, complete citations throughout your research and ensure publication-ready bibliographies.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

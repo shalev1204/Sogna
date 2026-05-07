@@ -8,12 +8,12 @@ id: skill-nutrition-analyzer
 owner: [[orchestrator]]
 ---
 
-
 # 营养分析器技能
 
 分析饮食和营养数据，识别营养模式，评估营养状况，并提供个性化营养改善建议。
 
 ## When to Use
+
 - 需要分析营养摄入、饮食模式或营养素达标情况时使用。
 - 任务涉及宏量/微量营养素评估、RDA 对比、饮食趋势或膳食改进建议。
 - 需要把营养数据与运动、睡眠或慢性病数据关联分析时使用。
@@ -25,6 +25,7 @@ owner: [[orchestrator]]
 分析营养素摄入的变化趋势，识别改善或需要关注的方面。
 
 **分析维度**：
+
 - 宏量营养素趋势（蛋白质、碳水、脂肪、纤维、卡路里）
 - 微量营养素趋势（维生素、矿物质）
 - 热量来源分布变化
@@ -32,6 +33,7 @@ owner: [[orchestrator]]
 - 食物类别偏好
 
 **输出**：
+
 - 趋势方向（改善/稳定/下降）
 - 变化幅度和百分比
 - 趋势显著性
@@ -42,6 +44,7 @@ owner: [[orchestrator]]
 评估营养素摄入是否达到推荐标准（RDA/AI）。
 
 **评估内容**：
+
 - **宏量营养素评估**：
   - 蛋白质摄入量和质量
   - 碳水化合物类型分布（精制 vs 复杂碳水）
@@ -67,6 +70,7 @@ owner: [[orchestrator]]
   - 植物化学物（类黄酮、类胡萝卜素等）
 
 **输出**：
+
 - 每种营养素的达成率
 - 缺乏/不足/充足/过量分级
 - 缺乏风险识别
@@ -77,6 +81,7 @@ owner: [[orchestrator]]
 综合评估用户的营养状况。
 
 **评估内容**：
+
 - **整体营养质量评分**：
   - 营养密度评分
   - 食物多样性评分
@@ -93,6 +98,7 @@ owner: [[orchestrator]]
   - 不健康饮食习惯（高糖、高脂、高钠）
 
 **输出**：
+
 - 营养状况等级（优秀/良好/一般/较差）
 - 主要营养问题识别
 - 风险因素列表
@@ -103,6 +109,7 @@ owner: [[orchestrator]]
 分析营养与其他健康指标的相关性。
 
 **支持的相关性分析**：
+
 - **营养 ↔ 体重**：
   - 卡路里摄入与体重变化的关系
   - 宏量营养素比例与体重管理
@@ -129,6 +136,7 @@ owner: [[orchestrator]]
   - 进食时间与血糖曲线
 
 **输出**：
+
 - 相关系数（-1到1）
 - 相关性强度（弱/中/强）
 - 统计显著性
@@ -140,6 +148,7 @@ owner: [[orchestrator]]
 基于用户数据生成个性化营养改善建议。
 
 **建议类型**：
+
 - **营养素调整建议**：
   - 增加缺乏的营养素
   - 减少过量的营养素
@@ -161,6 +170,7 @@ owner: [[orchestrator]]
   - 相互作用警示
 
 **建议依据**：
+
 - DRIs/RDA标准
 - 用户营养历史数据
 - 用户健康状况和目标
@@ -173,6 +183,7 @@ owner: [[orchestrator]]
 ### 触发条件
 
 当用户请求以下内容时触发本技能：
+
 - 营养趋势分析
 - 营养素摄入评估
 - 营养状况评估
@@ -184,6 +195,7 @@ owner: [[orchestrator]]
 #### 步骤 1: 确定分析范围
 
 明确用户请求的分析类型和时间范围：
+
 - 分析类型：趋势/评估/相关性/建议
 - 时间范围：周/月/季度/自定义
 - 分析深度：宏量营养素/微量营养素/全面分析
@@ -191,10 +203,12 @@ owner: [[orchestrator]]
 #### 步骤 2: 读取数据
 
 **主要数据源**：
+
 1. `data-example/nutrition-tracker.json` - 营养追踪主数据
 2. `data-example/nutrition-logs/YYYY-MM/YYYY-MM-DD.json` - 每日饮食记录
 
 **关联数据源**：
+
 1. `data-example/profile.json` - 体重、BMI等基础数据
 2. `data-example/fitness-tracker.json` - 运动数据
 3. `data-example/sleep-tracker.json` - 睡眠数据
@@ -206,6 +220,7 @@ owner: [[orchestrator]]
 根据分析类型执行相应的分析算法：
 
 **趋势分析算法**：
+
 - 线性回归计算趋势斜率
 - 移动平均平滑波动
 - 统计显著性检验
@@ -215,11 +230,13 @@ owner: [[orchestrator]]
 rda_achievement = (actual_intake / rda_value) * 100
 
 status_classification:
+
 - < 50%: 严重缺乏
 - 50-75%: 不足
 - 75-100%: 接近目标
 - 100-150%: 充足（理想范围）
 - > 150%: 过量（注意安全上限UL）
+
 ```
 
 **营养密度评分**：
@@ -232,6 +249,7 @@ nutrient_density_score = (
 ```
 
 **相关性分析算法**：
+
 - Pearson相关系数计算
 - 滞后相关性分析（考虑时间延迟效应）
 - 多变量回归分析
@@ -247,14 +265,17 @@ nutrient_density_score = (
 ### 营养趋势分析报告
 
 ```markdown
+
 # 营养摄入趋势分析报告
 
 ## 分析周期
+
 2025-03-20 至 2025-06-20（3个月，90天记录）
 
 ## 宏量营养素趋势
 
 ### 卡路里摄入
+
 - **趋势**：⬇️ 下降
 - **开始**：平均2100卡/天
 - **当前**：平均1950卡/天
@@ -272,6 +293,7 @@ nutrient_density_score = (
 ```
 
 ### 蛋白质
+
 - **趋势**：➡️ 稳定
 - **平均**：82g/天（范围：70-95g）
 - **目标**：80g/天
@@ -279,6 +301,7 @@ nutrient_density_score = (
 - **解读**：蛋白质摄入稳定，基本达标
 
 ### 膳食纤维
+
 - **趋势**：⬆️ 改善
 - **开始**：平均18g/天
 - **当前**：平均22g/天
@@ -287,6 +310,7 @@ nutrient_density_score = (
 - **解读**：纤维摄入显著增加，但仍需继续努力
 
 ### 脂肪
+
 - **趋势**：⬇️ 下降
 - **开始**：平均75g/天
 - **当前**：平均68g/天
@@ -305,6 +329,7 @@ nutrient_density_score = (
 ## 维生素状况趋势
 
 ### 维生素D
+
 - **摄入趋势**：⬆️ 增加（补充剂开始）
 - **开始**：平均2μg/天（饮食来源）
 - **当前**：平均52μg/天（含2000IU补充剂）
@@ -316,6 +341,7 @@ nutrient_density_score = (
 - **解读**：✅ 补充剂起效，但需继续监测
 
 ### 维生素C
+
 - **趋势**：⬆️ 改善
 - **开始**：平均65mg/天
 - **当前**：平均85mg/天
@@ -324,6 +350,7 @@ nutrient_density_score = (
 - **建议**：增加柑橘类、奇异果、草莓等水果
 
 ### B族维生素
+
 - **维生素B12**：✅ 充足（平均2.5μg，RDA 2.4μg）
 - **叶酸**：⚠️ 不足（平均320μg，RDA 400μg）
 - **B6**：✅ 充足（平均1.5mg，RDA 1.3mg）
@@ -331,6 +358,7 @@ nutrient_density_score = (
 ## 矿物质趋势
 
 ### 钙
+
 - **趋势**：➡️ 稳定
 - **平均**：850mg/天
 - **RDA**：1000mg/天
@@ -338,6 +366,7 @@ nutrient_density_score = (
 - **主要来源**：乳制品40%、豆腐25%、绿叶蔬菜20%
 
 ### 铁
+
 - **趋势**：✅ 充足
 - **平均**：12mg/天
 - **RDA**：8mg/天（男性）
@@ -345,6 +374,7 @@ nutrient_density_score = (
 - **主要来源**：肉类、蛋类、豆类、绿叶蔬菜
 
 ### 钠
+
 - **趋势**：⬇️ 改善
 - **开始**：平均2800mg/天
 - **当前**：平均2100mg/天
@@ -352,6 +382,7 @@ nutrient_density_score = (
 - **解读**：✅ 达到一般目标，⚠️ 理想目标仍需努力
 
 ### 钾
+
 - **趋势**：⬆️ 改善
 - **开始**：平均2800mg/天
 - **当前**：平均3200mg/天
@@ -362,6 +393,7 @@ nutrient_density_score = (
 ## 特殊营养素趋势
 
 ### Omega-3
+
 - **趋势**：⬆️ 增加（鱼油补充剂）
 - **开始**：平均150mg/天
 - **当前**：平均850mg/天（含补充剂）
@@ -369,6 +401,7 @@ nutrient_density_score = (
 - **状态**：✅ 达标
 
 ### 胆碱
+
 - **趋势**：➡️ 稳定
 - **平均**：350mg/天
 - **AI（适宜摄入量）**：425mg/天
@@ -378,6 +411,7 @@ nutrient_density_score = (
 ## 饮食模式分析
 
 ### 食物类别分布
+
 | 食物类别 | 占比 | 变化 | 评价 |
 |---------|------|------|------|
 | 蔬菜水果 | 35% | +8% | ✅ 增加 |
@@ -388,6 +422,7 @@ nutrient_density_score = (
 | 添加糖 | 2% | -2% | ✅ 减少 |
 
 ### 进食时间模式
+
 - **平均进食窗口**：12.5小时（07:30 - 20:00）
 - **进食频率**：平均4.2次/天
 - **最常见餐食时间**：
@@ -397,6 +432,7 @@ nutrient_density_score = (
   - 加餐：15:30（60%天数）
 
 ### 饮食质量评分
+
 - **营养密度评分**：7.2/10（从6.5提升）
 - **食物多样性评分**：6.8/10
 - **均衡饮食评分**：7.5/10
@@ -431,15 +467,18 @@ nutrient_density_score = (
 #### Priority 1：提升膳食纤维至30g/天（2周）
 
 **具体行动**：
+
 1. 早餐：全谷物（燕麦/全麦面包）+ 水果（9g）
 2. 午餐：糙米/全麦面 + 2份蔬菜（8g）
 3. 晚餐：红薯/杂粮 + 2份蔬菜（8g）
 4. 加餐：水果 + 坚果（5g）
+
 **总计**：30g ✅
 
 #### Priority 2：优化钾/钠比值至2.0（4周）
 
 **具体行动**：
+
 1. 减少加工食品（主要钠源）
 2. 每日2-3份高钾水果（香蕉、橙子、猕猴桃）
 3. 蔬菜选择菠菜、土豆、蘑菇、番茄
@@ -448,6 +487,7 @@ nutrient_density_score = (
 #### Priority 3：维持维生素D补充（长期）
 
 **监测计划**：
+
 - 3个月后复查血清水平
 - 目标：40-60 ng/mL
 - 根据结果调整剂量
@@ -555,13 +595,16 @@ def calculate_rda_achievement(actual_intake, rda_value, ul_value=None):
     计算RDA达成率和状态
 
     参数：
+
     - actual_intake: 实际摄入量
     - rda_value: 推荐膳食供给量
     - ul_value: 可耐受最高摄入量（可选）
 
     返回：
+
     - achievement_rate: 达成率百分比
     - status: 状态标签
+
     """
     achievement_rate = (actual_intake / rda_value) * 100
 
@@ -599,10 +642,12 @@ def calculate_nutrient_density_score(meal_data):
     计算食物营养密度评分（0-10分）
 
     因素权重：
+
     - 维生素达成率：40%
     - 矿物质达成率：30%
     - 膳食纤维：20%
     - 限制性营养素（饱和脂肪、钠、添加糖）：10%
+
     """
     score = 0
 
@@ -711,6 +756,7 @@ def calculate_healthy_eating_index(daily_data):
 ### 分析能力范围
 
 ✅ **能做到**：
+
 - 营养数据统计和分析
 - 趋势识别和可视化
 - RDA达成率计算
@@ -719,6 +765,7 @@ def calculate_healthy_eating_index(daily_data):
 - 补充剂相互作用检查
 
 ❌ **不做到**：
+
 - 诊断营养缺乏疾病
 - 开具补充剂处方
 - 替代注册营养师
@@ -754,16 +801,19 @@ def calculate_healthy_eating_index(daily_data):
 ### 建议分级
 
 **Level 1: 一般性建议**
+
 - 基于DRIs/RDA标准
 - 适用于一般人群
 - 无需医疗监督
 
 **Level 2: 参考性建议**
+
 - 基于用户数据和健康状况
 - 需结合个人情况
 - 建议咨询营养师
 
 **Level 3: 医疗建议**
+
 - 涉及疾病管理或补充剂
 - 需医生确认
 - 不得自行调整药物剂量
@@ -785,11 +835,13 @@ def calculate_healthy_eating_index(daily_data):
 **维护者**: WellAlly Tech
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

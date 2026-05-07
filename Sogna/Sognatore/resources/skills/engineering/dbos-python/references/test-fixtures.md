@@ -58,6 +58,7 @@ def test_workflow_two(reset_dbos):
 ```
 
 The fixture:
+
 1. Destroys any existing DBOS instance
 2. Creates fresh configuration
 3. Resets the system database
@@ -68,6 +69,7 @@ The fixture:
 Reference: [Testing DBOS](https://docs.dbos.dev/python/tutorials/testing)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

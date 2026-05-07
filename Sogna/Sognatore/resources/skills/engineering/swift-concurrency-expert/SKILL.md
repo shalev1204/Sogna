@@ -8,7 +8,6 @@ id: skill-swift-concurrency-expert
 owner: [[orchestrator]]
 ---
 
-
 # Swift Concurrency Expert
 
 ## Overview
@@ -16,6 +15,7 @@ owner: [[orchestrator]]
 Review and fix Swift Concurrency issues in Swift 6.2+ codebases by applying actor isolation, Sendable safety, and modern concurrency patterns with minimal behavior changes.
 
 ## When to Use
+
 - When the user asks to review Swift concurrency usage or fix compiler diagnostics.
 - When you need guidance on actor isolation, `Sendable`, `@MainActor`, or async migration.
 
@@ -33,6 +33,7 @@ Review and fix Swift Concurrency issues in Swift 6.2+ codebases by applying acto
 Prefer edits that preserve existing behavior while satisfying data-race safety.
 
 Common fixes:
+
 - **UI-bound types**: annotate the type or relevant members with `@MainActor`.
 - **Protocol conformance on main actor types**: make the conformance isolated (e.g., `extension Foo: @MainActor SomeProtocol`).
 - **Global/static state**: protect with `@MainActor` or move into an actor.
@@ -115,11 +116,13 @@ func processData(_ input: [Int]) async -> [Int] {
 - See `references/swiftui-concurrency-tour-wwdc.md` for SwiftUI-specific concurrency guidance.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -602,6 +602,7 @@ def video_identity(video):
     return video
 
 # get_video() returns file paths to sample media included with Gradio
+
 demo = gr.Interface(video_identity,
                     gr.Video(),
                     "playable_video",
@@ -615,6 +616,7 @@ demo.launch()
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

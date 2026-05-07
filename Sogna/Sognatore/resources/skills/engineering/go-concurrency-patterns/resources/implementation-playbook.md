@@ -632,19 +632,24 @@ func selectPatterns() {
 ## Race Detection
 
 ```bash
+
 # Run tests with race detector
+
 go test -race ./...
 
 # Build with race detector
+
 go build -race .
 
 # Run with race detector
+
 go run -race main.go
 ```
 
 ## Best Practices
 
 ### Do's
+
 - **Use context** - For cancellation and deadlines
 - **Close channels** - From sender side only
 - **Use errgroup** - For concurrent operations with errors
@@ -652,6 +657,7 @@ go run -race main.go
 - **Prefer channels** - Over mutexes when possible
 
 ### Don'ts
+
 - **Don't leak goroutines** - Always have exit path
 - **Don't close from receiver** - Causes panic
 - **Don't use shared memory** - Unless necessary
@@ -665,6 +671,7 @@ go run -race main.go
 - [Go by Example - Goroutines](https://gobyexample.com/goroutines)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

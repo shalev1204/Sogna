@@ -8,7 +8,6 @@ id: skill-llm-prompt-optimizer
 owner: [[orchestrator]]
 ---
 
-
 # LLM Prompt Optimizer
 
 ## Overview
@@ -62,6 +61,7 @@ Context: The developer has 1 year of Python experience but no ML background.
 Task: Explain supervised machine learning in simple terms.
 
 Constraints:
+
 - Use an analogy from everyday life
 - Maximum 200 words
 - No mathematical formulas
@@ -140,11 +140,14 @@ Question: [your question here]
 Reduce token count without losing effectiveness:
 
 ```
+
 # Verbose (expensive)
+
 "Please carefully analyze the following code and provide a detailed explanation of 
 what it does, how it works, and any potential issues you might find."
 
 # Compressed (efficient, same quality)
+
 "Analyze this code: explain what it does, how it works, and flag any issues."
 ```
 
@@ -185,11 +188,13 @@ Before using a prompt in production:
 **Solution:** Add explicit word/sentence limits: "Respond in exactly 3 bullet points, each under 20 words."
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

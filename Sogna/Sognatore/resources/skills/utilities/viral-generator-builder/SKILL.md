@@ -11,7 +11,6 @@ id: skill-viral-generator-builder
 owner: [[orchestrator]]
 ---
 
-
 # Viral Generator Builder
 
 Expert in building shareable generator tools that go viral - name generators,
@@ -57,11 +56,13 @@ Building generators that go viral
 ## Generator Architecture
 
 ### The Viral Generator Formula
+
 ```
 Input (minimal) → Magic (your algorithm) → Result (shareable)
 ```
 
 ### Input Design
+
 | Type | Example | Virality |
 |------|---------|----------|
 | Name only | "Enter your name" | High (low friction) |
@@ -70,6 +71,7 @@ Input (minimal) → Magic (your algorithm) → Result (shareable)
 | Photo upload | "Upload a selfie" | High (personalized) |
 
 ### Result Types That Get Shared
+
 1. **Identity results** - "You are a..."
 2. **Comparison results** - "You're 87% like..."
 3. **Prediction results** - "In 2025 you will..."
@@ -77,6 +79,7 @@ Input (minimal) → Magic (your algorithm) → Result (shareable)
 5. **Visual results** - Avatar, badge, certificate
 
 ### The Screenshot Test
+
 - Result must look good as a screenshot
 - Include branding subtly
 - Make text readable on mobile
@@ -91,11 +94,13 @@ Building personality quizzes that spread
 ## Quiz Builder Pattern
 
 ### Quiz Structure
+
 ```
 5-10 questions → Weighted scoring → One of N results
 ```
 
 ### Question Design
+
 | Type | Engagement |
 |------|------------|
 | Image choice | Highest |
@@ -105,12 +110,14 @@ Building personality quizzes that spread
 | Text input | Low |
 
 ### Result Categories
+
 - 4-8 possible results (sweet spot)
 - Each result should feel desirable
 - Results should feel distinct
 - Include "rare" results for sharing
 
 ### Scoring Logic
+
 ```javascript
 // Simple weighted scoring
 const scores = { typeA: 0, typeB: 0, typeC: 0, typeD: 0 };
@@ -124,6 +131,7 @@ const result = Object.entries(scores)
 ```
 
 ### Result Page Elements
+
 - Big, bold result title
 - Flattering description
 - Shareable image/card
@@ -140,6 +148,7 @@ Building name generators that people love
 ## Name Generator Pattern
 
 ### Generator Types
+
 | Type | Example | Algorithm |
 |------|---------|-----------|
 | Deterministic | "Your Star Wars name" | Hash of input |
@@ -148,6 +157,7 @@ Building name generators that people love
 | Combinatorial | "Your fantasy name" | Word parts |
 
 ### The Deterministic Trick
+
 Same input = same output = shareable!
 ```javascript
 function generateName(input) {
@@ -160,12 +170,14 @@ function generateName(input) {
 ```
 
 ### Making Results Feel Personal
+
 - Use their actual name in the result
 - Reference their input cleverly
 - Add a "meaning" or backstory
 - Include a visual representation
 
 ### Shareability Boosters
+
 - "Your [X] name is:" format
 - Certificate/badge design
 - Compare with friends feature
@@ -180,6 +192,7 @@ Making calculator tools that get shared
 ## Calculator Virality
 
 ### Calculators That Go Viral
+
 | Topic | Why It Works |
 |-------|--------------|
 | Salary/money | Everyone curious |
@@ -189,12 +202,14 @@ Making calculator tools that get shared
 | Predictions | Future curiosity |
 
 ### The Viral Calculator Formula
+
 1. Ask for interesting inputs
 2. Show impressive calculation
 3. Reveal surprising result
 4. Make result shareable
 
 ### Result Presentation
+
 ```
 BAD:  "Result: $45,230"
 GOOD: "You could save $45,230 by age 40"
@@ -202,6 +217,7 @@ BEST: "You're leaving $45,230 on the table 💸"
 ```
 
 ### Comparison Features
+
 - "Compare with average"
 - "Compare with friends"
 - "See where you rank"
@@ -266,11 +282,13 @@ Skills: viral-generator-builder, landing-page-design, viral-hooks, seo
 Workflow:
 
 ```
+
 1. Design quiz mechanics and results
 2. Create landing page
 3. Write viral copy for sharing
 4. Optimize for search
 5. Launch and monitor viral coefficient
+
 ```
 
 ### AI-Powered Generator
@@ -280,11 +298,13 @@ Skills: viral-generator-builder, ai-wrapper-product, frontend
 Workflow:
 
 ```
+
 1. Design generator concept
 2. Build AI-powered generation
 3. Create shareable result UI
 4. Optimize sharing flow
 5. Monitor and iterate
+
 ```
 
 ## Related Skills
@@ -292,6 +312,7 @@ Workflow:
 Works well with: `viral-hooks`, `landing-page-design`, `seo`, `frontend`
 
 ## When to Use
+
 - User mentions or implies: generator tool
 - User mentions or implies: quiz maker
 - User mentions or implies: name generator
@@ -301,11 +322,13 @@ Works well with: `viral-hooks`, `landing-page-design`, `seo`, `frontend`
 - User mentions or implies: personality test
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

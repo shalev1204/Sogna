@@ -16,7 +16,9 @@ Performance optimization techniques for Next.js 14+ applications.
 - [Rendering Strategies](#rendering-strategies)
 - [Image Optimization](#image-optimization)
 - [Code Splitting](#code-splitting)
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - [Data Fetching](#data-fetching)
 - [Caching Strategies](#caching-strategies)
 - [Bundle Optimization](#bundle-optimization)
@@ -49,6 +51,7 @@ async function ProductsPage() {
 ### Client Components
 
 Use `'use client'` only when you need:
+
 - Event handlers (onClick, onChange)
 - State (useState, useReducer)
 - Effects (useEffect)
@@ -450,10 +453,13 @@ const user = await getCachedUser(userId);
 ### Analyze Bundle Size
 
 ```bash
+
 # Install analyzer
+
 npm install @next/bundle-analyzer
 
 # Update next.config.js
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -463,6 +469,7 @@ module.exports = withBundleAnalyzer({
 });
 
 # Run analysis
+
 ANALYZE=true npm run build
 ```
 
@@ -738,6 +745,7 @@ module.exports = nextConfig;
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

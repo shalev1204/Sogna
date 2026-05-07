@@ -8,7 +8,6 @@ id: skill-azure-appconfiguration-ts
 owner: [[orchestrator]]
 ---
 
-
 # Azure App Configuration SDK for TypeScript
 
 Centralized configuration management with feature flags and dynamic refresh.
@@ -16,13 +15,17 @@ Centralized configuration management with feature flags and dynamic refresh.
 ## Installation
 
 ```bash
+
 # Low-level CRUD SDK
+
 npm install @azure/app-configuration @azure/identity
 
 # High-level provider (recommended for apps)
+
 npm install @azure/app-configuration-provider @azure/identity
 
 # Feature flag management
+
 npm install @microsoft/feature-management
 ```
 
@@ -30,7 +33,9 @@ npm install @microsoft/feature-management
 
 ```bash
 AZURE_APPCONFIG_ENDPOINT=https://<your-resource>.azconfig.io
+
 # OR
+
 AZURE_APPCONFIG_CONNECTION_STRING=Endpoint=https://...;Id=...;Secret=...
 ```
 
@@ -354,14 +359,17 @@ import {
 7. **RBAC roles** - `App Configuration Data Reader` for read-only access
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

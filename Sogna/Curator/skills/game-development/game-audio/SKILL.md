@@ -6,7 +6,6 @@ id: skill-game-audio
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # Game Audio Principles
 
 > Sound design and music integration for immersive game experiences.
@@ -35,6 +34,7 @@ When sounds compete for channels:
 3. Enemy SFX (gameplay important)
 4. Music (mood, but duckable)
 5. Ambient (lowest - can drop)
+
 ```
 
 ---

@@ -140,7 +140,7 @@ export class ScoringEngine {
     const control = this.computeControl(info.supports);
 
     // Cost efficiency (heuristic)
-    let costEfficiency = 0.5;
+    let costEfficiency: number;
     if (info.runtime === 'local') costEfficiency = 1.0;
     else if (info.tier === 'generate') costEfficiency = 0.4;
     else costEfficiency = 0.7;

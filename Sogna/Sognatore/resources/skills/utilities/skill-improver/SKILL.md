@@ -7,7 +7,6 @@ id: skill-skill-improver
 owner: [[orchestrator]]
 ---
 
-
 # Skill Improvement Methodology
 
 Iteratively improve a Claude Code skill using the skill-reviewer agent until it meets quality standards.
@@ -27,6 +26,7 @@ Verify it's enabled: run `/plugins` — `plugin-dev` should appear in the list. 
 5. **Repeat** - Continue until quality bar is met
 
 ## When to Use
+
 - Improving a skill with multiple quality issues
 - Iterating on a new skill until it meets standards
 - Automated fix-review cycles instead of manual editing
@@ -98,6 +98,7 @@ Minor: Line 45 is verbose
 ```
 
 **Fixes applied:**
+
 - Added name field to frontmatter
 - Rewrote description in third person
 - Added "When NOT to Use" section
@@ -149,11 +150,13 @@ The marker is the ONLY way to complete the loop. Natural language like "looks go
 - "It's good enough" - If there are major issues, it's not good enough
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

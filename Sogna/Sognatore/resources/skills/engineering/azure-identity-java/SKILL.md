@@ -8,7 +8,6 @@ id: skill-azure-identity-java
 owner: [[orchestrator]]
 ---
 
-
 # Azure Identity (Java)
 
 Authenticate Java applications with Azure services using Microsoft Entra ID (Azure AD).
@@ -323,21 +322,27 @@ DefaultAzureCredential credential = new DefaultAzureCredentialBuilder()
 ## Environment Variables
 
 ```bash
+
 # DefaultAzureCredential configuration
+
 AZURE_TENANT_ID=<tenant-id>
 AZURE_CLIENT_ID=<client-id>
 AZURE_CLIENT_SECRET=<client-secret>
 
 # Managed Identity
+
 AZURE_CLIENT_ID=<user-assigned-mi-client-id>
 
 # Workload Identity (AKS)
+
 AZURE_FEDERATED_TOKEN_FILE=/var/run/secrets/azure/tokens/azure-identity-token
 
 # Logging
+
 AZURE_LOG_LEVEL=verbose
 
 # Authority host
+
 AZURE_AUTHORITY_HOST=https://login.microsoftonline.com/
 ```
 
@@ -371,14 +376,17 @@ AZURE_AUTHORITY_HOST=https://login.microsoftonline.com/
 - "AZURE_CLIENT_ID", "AZURE_TENANT_ID"
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

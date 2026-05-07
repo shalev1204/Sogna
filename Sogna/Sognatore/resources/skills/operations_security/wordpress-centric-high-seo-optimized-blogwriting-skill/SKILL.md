@@ -10,7 +10,6 @@ id: skill-wordpress-centric-high-seo-optimized-blogwriting-skill
 owner: [[biz-marketing]], [[ops-security]]
 ---
 
-
 # wordpress-centric-high-seo-optimized-blogwriting-skill
 
 FINAL MASTER PROMPT (Refined & Generalized Version)
@@ -34,13 +33,14 @@ Key Themes/Context: {Insert any specific context, locations, products, or pain p
 RESEARCH REQUIREMENT
 
 If web browsing access is available:
+
 - Review at least 10 reliable sources related to the topic to ensure accuracy, depth, and credibility.
 
 If web browsing is restricted or unavailable:
+
 - Disclose access limits immediately.
 - Forbid claiming a specific source count.
 - Rely only on verified internal knowledge or state that information cannot be verified.
-
 
 WRITING RULES
 Use simple, natural, human language
@@ -56,6 +56,7 @@ Make content easy to scan and copy
 
 FACT AND ACCURACY RULES
 Do not guess or fabricate data.
+
 - Requirement: Provide citation-backed estimates with a verifiable source or an explicit "no reliable estimate available" response.
 - Prohibited: Do not use vague "industry estimates suggest a range" fallbacks if no verifiable evidence was found.
 
@@ -196,11 +197,13 @@ Professional quality
 Ready to copy and paste into WordPress
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-godot-4-migration
 owner: [[orchestrator]]
 ---
 
-
 # Godot 4 Migration Guide
 
 ## Overview
@@ -27,6 +26,7 @@ A critical guide for developers transitioning from Godot 3.x to Godot 4. This sk
 ### 1. Annotations (`@`)
 
 Godot 4 uses `@` for keywords that modify behavior.
+
 - `export var x` -> `@export var x`
 - `onready var y` -> `@onready var y`
 - `tool` -> `@tool` (at top of file)
@@ -91,10 +91,13 @@ pressed.connect(_on_pressed)
 GDScript 2.0 supports typed arrays for better performance and type safety.
 
 ```gdscript
+
 # Godot 3
+
 var enemies = []
 
 # Godot 4
+
 var enemies: Array[Node] = []
 
 func _ready():
@@ -130,11 +133,13 @@ await get_tree().create_timer(1.0).timeout
 **Solution:** `Tween` is now `SceneTreeTween` or just an object returned by `create_tween()`. You rarely type it explicitly, just use `var tween = create_tween()`.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

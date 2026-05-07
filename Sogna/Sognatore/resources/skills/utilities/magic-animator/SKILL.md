@@ -8,7 +8,6 @@ id: skill-magic-animator
 owner: [[orchestrator]]
 ---
 
-
 # Magic Animator Skill
 
 [Magic Animator](https://magicanimator.com/) enables designers to add life to static designs in seconds using AI-driven motion, transforming flat UX into premium, dynamic experiences.
@@ -18,6 +17,7 @@ owner: [[orchestrator]]
 This skill is essential for improving UX and engagement through high-quality motion. It works best for animating brand assets, interface elements, and micro-interactions.
 
 ## When to Use
+
 Trigger this skill when:
 
 - Adding life to a static logo or brand mark to make it memorable.
@@ -39,11 +39,13 @@ Trigger this skill when:
 - **Format Discipline**: Prefer Lottie for native app and web integrations to maintain crispness and low file size.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

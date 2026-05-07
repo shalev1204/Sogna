@@ -30,7 +30,9 @@ spec:
   selector:
     app: backend
   ports:
+
   - name: http
+
     port: 80
     targetPort: 8080
     protocol: TCP
@@ -38,6 +40,7 @@ spec:
 ```
 
 **Use cases:**
+
 - Internal microservice communication
 - Database services
 - Internal APIs
@@ -57,7 +60,9 @@ spec:
   selector:
     app: frontend
   ports:
+
   - name: http
+
     port: 80
     targetPort: 8080
     nodePort: 30080  # Optional, auto-assigned if omitted
@@ -65,11 +70,13 @@ spec:
 ```
 
 **Use cases:**
+
 - Development/testing external access
 - Small deployments without load balancer
 - Direct node access requirements
 
 **Limitations:**
+
 - Limited port range (30000-32767)
 - Must handle node failures
 - No built-in load balancing across nodes
@@ -91,12 +98,16 @@ spec:
   selector:
     app: api
   ports:
+
   - name: https
+
     port: 443
     targetPort: 8443
     protocol: TCP
   loadBalancerSourceRanges:
+
   - 203.0.113.0/24
+
 ```
 
 **Cloud-specific annotations:**
@@ -138,10 +149,13 @@ spec:
   type: ExternalName
   externalName: db.external.example.com
   ports:
+
   - port: 5432
+
 ```
 
 **Use cases:**
+
 - Accessing external services
 - Service migration scenarios
 - Multi-cluster service references
@@ -171,7 +185,9 @@ spec:
 
   # Ports configuration
   ports:
+
   - name: http
+
     port: 80           # Service port
     targetPort: 8080   # Container port (or named port)
     protocol: TCP      # TCP, UDP, or SCTP
@@ -185,9 +201,13 @@ spec:
   # IP configuration
   clusterIP: 10.0.0.10  # Optional: specific IP
   clusterIPs:
+
   - 10.0.0.10
+
   ipFamilies:
+
   - IPv4
+
   ipFamilyPolicy: SingleStack
 
   # External traffic policy
@@ -202,10 +222,12 @@ spec:
   # Load balancer config (for type: LoadBalancer)
   loadBalancerIP: 203.0.113.100
   loadBalancerSourceRanges:
+
   - 203.0.113.0/24
 
   # External IPs
   externalIPs:
+
   - 80.11.12.10
 
   # Publishing strategy
@@ -224,11 +246,17 @@ spec:
   template:
     spec:
       containers:
+
       - name: app
+
         ports:
+
         - name: http
+
           containerPort: 8080
+
         - name: metrics
+
           containerPort: 9090
 ```
 
@@ -236,10 +264,14 @@ spec:
 ```yaml
 spec:
   ports:
+
   - name: http
+
     port: 80
     targetPort: http  # References named port
+
   - name: metrics
+
     port: 9090
     targetPort: metrics
 ```
@@ -249,15 +281,21 @@ spec:
 ```yaml
 spec:
   ports:
+
   - name: http
+
     port: 80
     targetPort: 8080
     protocol: TCP
+
   - name: https
+
     port: 443
     targetPort: 8443
     protocol: TCP
+
   - name: grpc
+
     port: 9090
     targetPort: 9090
     protocol: TCP
@@ -287,6 +325,7 @@ spec:
 ```
 
 **Use cases:**
+
 - Stateful applications
 - Session-based applications
 - WebSocket connections
@@ -300,6 +339,7 @@ spec:
 spec:
   externalTrafficPolicy: Cluster
 ```
+
 - Load balances across all nodes
 - May add extra network hop
 - Source IP is masked
@@ -309,6 +349,7 @@ spec:
 spec:
   externalTrafficPolicy: Local
 ```
+
 - Traffic goes only to pods on receiving node
 - Preserves client source IP
 - Better performance (no extra hop)
@@ -337,17 +378,21 @@ spec:
   selector:
     app: database
   ports:
+
   - port: 5432
+
     targetPort: 5432
 ```
 
 **Use cases:**
+
 - StatefulSet pod discovery
 - Direct pod-to-pod communication
 - Custom load balancing
 - Database clusters
 
 **DNS returns:**
+
 - Individual pod IPs instead of service IP
 - Format: `<pod-name>.<service-name>.<namespace>.svc.cluster.local`
 
@@ -380,11 +425,14 @@ curl http://backend-service
 Kubernetes injects service info into pods:
 
 ```bash
+
 # Service host and port
+
 BACKEND_SERVICE_SERVICE_HOST=10.0.0.100
 BACKEND_SERVICE_SERVICE_PORT=80
 
 # For named ports
+
 BACKEND_SERVICE_SERVICE_PORT_HTTP=80
 ```
 
@@ -439,22 +487,32 @@ metadata:
   name: my-service
 spec:
   hosts:
+
   - my-service
+
   http:
+
   - match:
     - headers:
+
         version:
           exact: v2
     route:
+
     - destination:
+
         host: my-service
         subset: v2
+
   - route:
     - destination:
+
         host: my-service
         subset: v1
       weight: 90
+
     - destination:
+
         host: my-service
         subset: v2
       weight: 10
@@ -478,11 +536,15 @@ spec:
   selector:
     app: user-service
   ports:
+
   - name: http
+
     port: 8080
     targetPort: http
     protocol: TCP
+
   - name: grpc
+
     port: 9090
     targetPort: grpc
     protocol: TCP
@@ -504,12 +566,16 @@ spec:
   selector:
     app: api-gateway
   ports:
+
   - name: https
+
     port: 443
     targetPort: 8443
     protocol: TCP
   loadBalancerSourceRanges:
+
   - 0.0.0.0/0
+
 ```
 
 ### Pattern 3: StatefulSet with Headless Service
@@ -524,7 +590,9 @@ spec:
   selector:
     app: cassandra
   ports:
+
   - port: 9042
+
     targetPort: 9042
 ---
 apiVersion: apps/v1
@@ -543,7 +611,9 @@ spec:
         app: cassandra
     spec:
       containers:
+
       - name: cassandra
+
         image: cassandra:4.0
 ```
 
@@ -558,14 +628,18 @@ spec:
   type: ExternalName
   externalName: prod-db.cxyz.us-west-2.rds.amazonaws.com
 ---
+
 # Or with Endpoints for IP-based external service
+
 apiVersion: v1
 kind: Service
 metadata:
   name: external-api
 spec:
   ports:
+
   - port: 443
+
     targetPort: 443
     protocol: TCP
 ---
@@ -574,10 +648,14 @@ kind: Endpoints
 metadata:
   name: external-api
 subsets:
+
 - addresses:
   - ip: 203.0.113.100
+
   ports:
+
   - port: 443
+
 ```
 
 ### Pattern 5: Multi-Port Service with Metrics
@@ -596,10 +674,14 @@ spec:
   selector:
     app: web-app
   ports:
+
   - name: http
+
     port: 80
     targetPort: 8080
+
   - name: metrics
+
     port: 9090
     targetPort: 9090
 ```
@@ -618,14 +700,20 @@ spec:
     matchLabels:
       app: backend
   policyTypes:
+
   - Ingress
+
   ingress:
+
   - from:
     - podSelector:
+
         matchLabels:
           app: frontend
     ports:
+
     - protocol: TCP
+
       port: 8080
 ```
 
@@ -681,20 +769,26 @@ spec:
 ### Service not accessible
 
 ```bash
+
 # Check service exists
+
 kubectl get service <service-name>
 
 # Check endpoints (should show pod IPs)
+
 kubectl get endpoints <service-name>
 
 # Describe service
+
 kubectl describe service <service-name>
 
 # Check if pods match selector
+
 kubectl get pods -l app=<app-name>
 ```
 
 **Common issues:**
+
 - Selector doesn't match pod labels
 - No pods running (endpoints empty)
 - Ports misconfigured
@@ -703,10 +797,13 @@ kubectl get pods -l app=<app-name>
 ### DNS resolution failing
 
 ```bash
+
 # Test DNS from pod
+
 kubectl run debug --rm -it --image=busybox -- nslookup <service-name>
 
 # Check CoreDNS
+
 kubectl get pods -n kube-system -l k8s-app=kube-dns
 kubectl logs -n kube-system -l k8s-app=kube-dns
 ```
@@ -714,13 +811,17 @@ kubectl logs -n kube-system -l k8s-app=kube-dns
 ### Load balancer issues
 
 ```bash
+
 # Check load balancer status
+
 kubectl describe service <service-name>
 
 # Check events
+
 kubectl get events --sort-by='.lastTimestamp'
 
 # Verify cloud provider configuration
+
 kubectl describe node
 ```
 
@@ -731,6 +832,7 @@ kubectl describe node
 - [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

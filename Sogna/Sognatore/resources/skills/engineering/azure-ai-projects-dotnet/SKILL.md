@@ -8,7 +8,6 @@ id: skill-azure-ai-projects-dotnet
 owner: [[orchestrator]]
 ---
 
-
 # Azure.AI.Projects (.NET)
 
 High-level SDK for Azure AI Foundry project operations including agents, connections, datasets, deployments, evaluations, and indexes.
@@ -20,9 +19,11 @@ dotnet add package Azure.AI.Projects
 dotnet add package Azure.Identity
 
 # Optional: For versioned agents with OpenAI extensions
+
 dotnet add package Azure.AI.Projects.OpenAI --prerelease
 
 # Optional: For low-level agent operations
+
 dotnet add package Azure.AI.Agents.Persistent --prerelease
 ```
 
@@ -352,14 +353,17 @@ catch (RequestFailedException ex)
 | Samples | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects/samples |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

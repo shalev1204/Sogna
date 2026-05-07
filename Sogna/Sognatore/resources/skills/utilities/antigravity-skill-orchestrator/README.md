@@ -40,6 +40,7 @@ The agent will then follow the directives in the `SKILL.md` to break down the ta
 **Source:** [Sognatore-skill-orchestrator](https://github.com/wahidzzz/Sognatore-skill-orchestrator)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

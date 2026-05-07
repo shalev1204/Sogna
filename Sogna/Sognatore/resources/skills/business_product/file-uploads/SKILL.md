@@ -10,7 +10,6 @@ id: skill-file-uploads
 owner: [[prod-pm]]
 ---
 
-
 # File Uploads & Storage
 
 Expert at handling file uploads and cloud storage. Covers S3,
@@ -41,6 +40,7 @@ extension, looks fine. Store it. Serve it. Another user
 downloads and executes it.
 
 Symptoms:
+
 - Malware uploaded as images
 - Wrong content-type served
 
@@ -79,6 +79,7 @@ out of memory or disk. Denial of service. Or massive
 storage bill.
 
 Symptoms:
+
 - Server crashes on large uploads
 - Massive storage bills
 - Memory exhaustion
@@ -123,6 +124,7 @@ filename directly. File saved outside upload directory.
 System files overwritten.
 
 Symptoms:
+
 - Files outside upload directory
 - System file access
 
@@ -170,6 +172,7 @@ Response cached by CDN. Anyone with cached URL can access
 private file for hours.
 
 Symptoms:
+
 - Private files accessible via cached URLs
 - Access after expiry
 
@@ -221,6 +224,7 @@ Fix action: Use path.basename() and generate safe name
 - storing file metadata -> postgres-wizard (Database schema)
 
 ## When to Use
+
 - User mentions or implies: file upload
 - User mentions or implies: S3
 - User mentions or implies: R2
@@ -230,11 +234,13 @@ Fix action: Use path.basename() and generate safe name
 - User mentions or implies: cloud storage
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

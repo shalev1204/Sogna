@@ -6,7 +6,6 @@ id: skill-vr-ar
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # VR/AR Development
 
 > Immersive experience principles.

@@ -8,7 +8,6 @@ id: skill-senior-fullstack
 owner: [[orchestrator]]
 ---
 
-
 # Senior Fullstack
 
 Complete toolkit for senior fullstack with modern tools and best practices.
@@ -20,13 +19,17 @@ Complete toolkit for senior fullstack with modern tools and best practices.
 This skill provides three core capabilities through automated scripts:
 
 ```bash
+
 # Script 1: Fullstack Scaffolder
+
 python scripts/fullstack_scaffolder.py [options]
 
 # Script 2: Project Scaffolder
+
 python scripts/project_scaffolder.py [options]
 
 # Script 3: Code Quality Analyzer
+
 python scripts/code_quality_analyzer.py [options]
 ```
 
@@ -37,6 +40,7 @@ python scripts/code_quality_analyzer.py [options]
 Automated tool for fullstack scaffolder tasks.
 
 **Features:**
+
 - Automated scaffolding
 - Best practices built-in
 - Configurable templates
@@ -52,6 +56,7 @@ python scripts/fullstack_scaffolder.py <project-path> [options]
 Comprehensive analysis and optimization tool.
 
 **Features:**
+
 - Deep analysis
 - Performance metrics
 - Recommendations
@@ -67,6 +72,7 @@ python scripts/project_scaffolder.py <target-path> [--verbose]
 Advanced tooling for specialized tasks.
 
 **Features:**
+
 - Expert-level automation
 - Custom configurations
 - Integration ready
@@ -123,28 +129,38 @@ Technical reference guide in `references/development_workflows.md`:
 ### 1. Setup and Configuration
 
 ```bash
+
 # Install dependencies
+
 npm install
+
 # or
+
 pip install -r requirements.txt
 
 # Configure environment
+
 cp .env.example .env
 ```
 
 ### 2. Run Quality Checks
 
 ```bash
+
 # Use the analyzer script
+
 python scripts/project_scaffolder.py .
 
 # Review recommendations
+
 # Apply fixes
+
 ```
 
 ### 3. Implement Best Practices
 
 Follow the patterns and practices documented in:
+
 - `references/tech_stack_guide.md`
 - `references/architecture_patterns.md`
 - `references/development_workflows.md`
@@ -152,24 +168,28 @@ Follow the patterns and practices documented in:
 ## Best Practices Summary
 
 ### Code Quality
+
 - Follow established patterns
 - Write comprehensive tests
 - Document decisions
 - Review regularly
 
 ### Performance
+
 - Measure before optimizing
 - Use appropriate caching
 - Optimize critical paths
 - Monitor in production
 
 ### Security
+
 - Validate all inputs
 - Use parameterized queries
 - Implement proper authentication
 - Keep dependencies updated
 
 ### Maintainability
+
 - Write clear code
 - Use consistent naming
 - Add helpful comments
@@ -178,17 +198,21 @@ Follow the patterns and practices documented in:
 ## Common Commands
 
 ```bash
+
 # Development
+
 npm run dev
 npm run build
 npm run test
 npm run lint
 
 # Analysis
+
 python scripts/project_scaffolder.py .
 python scripts/code_quality_analyzer.py --analyze
 
 # Deployment
+
 docker build -t app:latest .
 docker-compose up -d
 kubectl apply -f k8s/
@@ -215,14 +239,17 @@ Check the comprehensive troubleshooting section in `references/development_workf
 - Tool Scripts: `scripts/` directory
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

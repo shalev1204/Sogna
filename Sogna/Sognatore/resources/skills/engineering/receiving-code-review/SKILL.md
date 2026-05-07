@@ -8,7 +8,6 @@ id: skill-receiving-code-review
 owner: [[orchestrator]]
 ---
 
-
 # Code Review Reception
 
 ## Overview
@@ -28,16 +27,19 @@ WHEN receiving code review feedback:
 4. EVALUATE: Technically sound for THIS codebase?
 5. RESPOND: Technical acknowledgment or reasoned pushback
 6. IMPLEMENT: One item at a time, test each
+
 ```
 
 ## Forbidden Responses
 
 **NEVER:**
+
 - "You're absolutely right!" (explicit CLAUDE.md violation)
 - "Great point!" / "Excellent feedback!" (performative)
 - "Let me implement that now" (before verification)
 
 **INSTEAD:**
+
 - Restate the technical requirement
 - Ask clarifying questions
 - Push back with technical reasoning if wrong
@@ -65,14 +67,17 @@ You understand 1,2,3,6. Unclear on 4,5.
 ## Source-Specific Handling
 
 ### From your human partner
+
 - **Trusted** - implement after understanding
 - **Still ask** if scope unclear
 - **No performative agreement**
 - **Skip to action** or technical acknowledgment
 
 ### From External Reviewers
+
 ```
 BEFORE implementing:
+
   1. Check: Technically correct for THIS codebase?
   2. Check: Breaks existing functionality?
   3. Check: Reason for current implementation?
@@ -107,6 +112,7 @@ IF reviewer suggests "implementing properly":
 
 ```
 FOR multi-item feedback:
+
   1. Clarify anything unclear FIRST
   2. Then implement in this order:
      - Blocking issues (breaks, security)
@@ -114,11 +120,13 @@ FOR multi-item feedback:
      - Complex fixes (refactoring, logic)
   3. Test each fix individually
   4. Verify no regressions
+
 ```
 
 ## When To Push Back
 
 Push back when:
+
 - Suggestion breaks existing functionality
 - Reviewer lacks full context
 - Violates YAGNI (unused feature)
@@ -127,6 +135,7 @@ Push back when:
 - Conflicts with your human partner's architectural decisions
 
 **How to push back:**
+
 - Use technical reasoning, not defensiveness
 - Ask specific questions
 - Reference working tests/code
@@ -219,14 +228,17 @@ Verify. Question. Then implement.
 No performative agreement. Technical rigor always.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

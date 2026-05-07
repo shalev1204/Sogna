@@ -82,15 +82,18 @@ Common variables used across templates:
 | 3 | WO-2025-04826 | Bracket BR-110 | 350 | 11:30 | 14:00 | {{line_id}} | {{operator_name}} | 🟡 | Material confirm by 10:00 |
 
 **Changeover Summary:**
+
 - 08:30–08:45: Changeover WO-04823 → WO-04824 (tooling pre-staged at machine)
 - 11:15–11:30: Changeover WO-04824 → WO-04826 (fixture change, 15 min)
 
 **Material Status:**
+
 - WO-04823: All material staged ✅
 - WO-04824: All material staged ✅
 - WO-04826: Bracket raw material pending — confirm with stores by 10:00 ⚠️
 
 **Labour Notes:**
+
 - {{operator_name}} certified on all three jobs
 - Relief operator for 10:00 break: M. Thompson
 
@@ -133,6 +136,7 @@ Common variables used across templates:
 **Impact on other work centres:** None — downstream operations unaffected.
 
 **Action required:**
+
 - Material handler: Re-stage WO-04826 material at {{line_id}} by 08:30.
 - Operator: Confirm fixture change procedure for WO-04826 with setup technician.
 
@@ -162,6 +166,7 @@ Common variables used across templates:
 Example: "Hydraulic pump failure on CNC Horizontal Boring Mill (WC 420) at 09:15. Machine stopped mid-cycle on WO-04823 (defence contract valve body, $38,000 piece in machine). Maintenance assessment: pump replacement required, 6–8 hour repair estimated."
 
 **Impact:**
+
 - **Constraint affected:** Yes / No
 - **Estimated downtime:** {{downtime_hrs}}
 - **Throughput loss:** {{throughput_loss}} (e.g., "$4,800 — 6 hours × $800/hr constraint throughput")
@@ -169,12 +174,14 @@ Example: "Hydraulic pump failure on CNC Horizontal Boring Mill (WC 420) at 09:15
 - **Current buffer status:** {{buffer_status}} (e.g., "Buffer was GREEN, will reach RED in 4 hours if not resolved")
 
 **Immediate actions taken:**
+
 1. Machine isolated. Maintenance on-site.
 2. Replacement pump ordered from OEM distributor — ETA {{pump_eta}}.
 3. In-machine part assessed: datum offsets preserved, part likely salvageable on restart.
 4. Queued jobs reviewed for alternate routing — 3 of 14 can run on vertical CNC.
 
 **Decision needed from management:**
+
 - Authorise Saturday overtime (8 hours, estimated cost ${{overtime_cost}}) to recover lost capacity? Y/N
 - Approve subcontracting for {{subcontract_jobs}} to external shop (cost ${{subcontract_cost}})? Y/N
 - Customer notification: approve revised delivery dates for {{at_risk_customers}}? Y/N
@@ -257,6 +264,7 @@ Order {{customer_po}} for {{customer}} ({{qty}} of {{product}}, original commit 
 Example: "Unplanned constraint downtime on 9/15 (hydraulic failure, 20 hours lost) consumed the schedule buffer. Recovery overtime approved but insufficient to fully close the gap for all affected orders."
 
 **Recovery actions in progress:**
+
 - Saturday overtime shift authorised (recovers 8 hours)
 - 3 lower-priority jobs subcontracted to reduce constraint queue (recovers 6 hours)
 - Remaining gap: 6 hours, which pushes {{customer_po}} delivery from {{due_date}} to {{revised_date}}
@@ -279,6 +287,7 @@ I am writing to update you on the delivery timeline for your order {{customer_po
 Due to {{root_cause_external}} (e.g., "an equipment issue at our machining facility"), we are revising the delivery date from {{due_date}} to {{revised_date}}.
 
 We have taken the following actions to minimise the delay:
+
 - Authorised additional production shifts dedicated to your order
 - Re-prioritised your order to the front of the production queue
 - Assigned our senior machining team to ensure quality and speed
@@ -325,15 +334,18 @@ Regards,
 Example: "Saturday window avoids impacting the Week 39 production plan, which is loaded at 94% Mon–Fri. Vibration readings on SP-602 are trending into the caution zone (0.28 in/s, threshold is 0.30). Deferring beyond Saturday increases the risk of an unplanned breakdown during the peak Monday–Wednesday production window."
 
 **Impact if deferred:**
+
 - Probability of unplanned failure in next 2 weeks: {{failure_probability}} (e.g., "estimated 35% based on vibration trend and historical MTBF data")
 - Cost of unplanned failure: {{failure_cost}} (e.g., "$16,000 lost throughput + $5,000 emergency repair + potential die damage")
 - Production orders at risk: {{at_risk_orders}}
 
 **Production impact of performing the PM:**
+
 - Lost production during the PM window: {{lost_production}} (e.g., "0 — Saturday is non-scheduled overtime; if OT was planned, 8 hours of production displaced")
 - Recovery plan: {{recovery_plan}} (e.g., "displaced OT production moved to Friday evening shift extension")
 
 **Coordination requirements:**
+
 - Maintenance personnel: {{maintenance_personnel}} (e.g., "1 millwright + 1 electrician, 10 hours each")
 - Parts/materials: {{parts_needed}} (e.g., "hydraulic seal kit #HS-602-A, confirm available in stores")
 - Production support: {{production_support}} (e.g., "Operator needed for first 2 hours to assist with die removal and last 1 hour for test run")
@@ -370,22 +382,26 @@ Example: "Dimensional defect on stamped chassis frames — hole pattern shifted 
 | **Total** | **200 units** | | |
 
 **Customer impact:**
+
 - Customer: {{customer}}
 - Order: {{customer_po}}, {{qty}} units due {{due_date}}
 - 60 painted frames were scheduled to feed final assembly (constraint) starting {{date}}.
 - Constraint will be short material for {{impact_duration}} unless rework or replacement is expedited.
 
 **Schedule impact:**
+
 - Final assembly (constraint) schedule revised: {{revised_schedule_summary}}
 - Alternate work pulled forward to keep constraint running: {{alternate_work}}
 - Estimated delivery impact: {{delivery_impact}}
 
 **Disposition pending from Quality:**
+
 - Rework feasibility assessment requested by {{rework_assessment_deadline}}
 - If reworkable: estimated rework time = {{rework_time}} per unit
 - If not reworkable: replacement production order required — estimated lead time {{replacement_lead_time}}
 
 **Immediate actions taken:**
+
 1. All affected WIP physically segregated and tagged
 2. Die #{{die_number}} removed from service for inspection
 3. Production schedule revised — constraint fed from alternate work orders
@@ -457,16 +473,19 @@ MRP-generated load for {{constraint_wc}} in Week {{week_number}} exceeds availab
 | 3 | {{trial_3_date}} | 8 hrs | 10 hrs | 2 hrs | 12 hrs |
 
 **Capacity impact:**
+
 - Current constraint utilisation: {{current_util}}%
 - With NPI trials: {{projected_util}}%
 - Buffer reduction: constraint buffer shrinks from {{current_buffer}} hrs to {{projected_buffer}} hrs per week
 
 **Proposed scheduling approach:**
+
 - Schedule trials on Friday PM / Saturday AM to contain overrun risk
 - {{buffer_hours}} hrs/week reserved as "trial buffer" — converts to regular production if trial is cancelled or completes early
 - Existing customer commitments are not moved to accommodate trials
 
 **Risk mitigation:**
+
 - Most experienced setup technician assigned to all trials
 - First-article inspection protocol defined with quality
 - Trial time estimates will be updated after each run for the next trial
@@ -499,6 +518,7 @@ The current production plan contains conflicting priorities that cannot be resol
 | 3 | Maintenance PM window vs. peak production week — PM deferred twice already | Maintenance + Production | Recommend executing PM this week; deferral risk exceeds production value of the PM window |
 
 **For each conflict, scheduling needs:**
+
 1. A single, clear priority decision
 2. Written confirmation (email or meeting minutes) that the decision is endorsed by all affected departments
 3. Decision by {{decision_deadline}} so the schedule can be locked for the week
@@ -510,6 +530,7 @@ The current production plan contains conflicting priorities that cannot be resol
 **Tone guidance:** Neutral facilitator, not advocate. The scheduler's role in priority alignment is to surface conflicts, quantify tradeoffs, and execute decisions — not to make commercial or strategic calls. Make it clear that you need a decision, not a discussion. Provide the data that enables the decision.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

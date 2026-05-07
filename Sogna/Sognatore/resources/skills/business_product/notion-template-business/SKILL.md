@@ -11,7 +11,6 @@ id: skill-notion-template-business
 owner: [[prod-pm]]
 ---
 
-
 # Sogna Cloud Template Business
 
 Expert in building and selling Sogna Cloud templates as a business - not just making
@@ -56,6 +55,7 @@ Creating templates people pay for
 ## Template Design
 
 ### What Makes Templates Sell
+
 | Factor | Why It Matters |
 |--------|----------------|
 | Solves specific problem | Clear value proposition |
@@ -65,6 +65,7 @@ Creating templates people pay for
 | Comprehensive | Feels worth the price |
 
 ### Template Structure
+
 ```
 Template Package:
 ├── Main Template
@@ -82,6 +83,7 @@ Template Package:
 ```
 
 ### Design Principles
+
 - Clean, consistent styling
 - Clear hierarchy and navigation
 - Helpful empty states
@@ -89,6 +91,7 @@ Template Package:
 - Mobile-friendly views
 
 ### Template Categories That Sell
+
 | Category | Examples |
 |----------|----------|
 | Productivity | Second brain, task management |
@@ -106,6 +109,7 @@ Pricing Sogna Cloud templates for profit
 ## Template Pricing
 
 ### Price Anchoring
+
 | Tier | Price Range | What to Include |
 |------|-------------|-----------------|
 | Basic | $15-29 | Core template only |
@@ -113,24 +117,30 @@ Pricing Sogna Cloud templates for profit
 | Ultimate | $99-199 | Everything + updates |
 
 ### Pricing Factors
+
 ```
 Value created:
+
 - Time saved per month × 12 months
 - Problems solved
 - Comparable products cost
 
 Example:
+
 - Saves 5 hours/month
 - 5 hours × $50/hour × 12 = $3000 value
 - Price at $49-99 (1-3% of value)
+
 ```
 
 ### Bundle Strategy
+
 - Individual templates: $29-49
 - Bundle of 3-5: $79-129 (30% off)
 - All-access: $149-299 (best value)
 
 ### Free vs Paid
+
 | Free Template | Purpose |
 |---------------|---------|
 | Lead magnet | Email list growth |
@@ -147,6 +157,7 @@ Where to sell templates
 ## Sales Channels
 
 ### Platform Comparison
+
 | Platform | Fee | Pros | Cons |
 |----------|-----|------|------|
 | Gumroad | 10% | Simple, trusted | Higher fees |
@@ -155,7 +166,9 @@ Where to sell templates
 | Your site | 3% (Stripe) | Full control | Build audience |
 
 ### Gumroad Setup
+
 ```
+
 1. Create account
 2. Add product
 3. Upload template (duplicate link)
@@ -164,9 +177,11 @@ Where to sell templates
 6. Set price
 7. Enable discounts
 8. Publish
+
 ```
 
 ### Sogna Cloud Marketplace
+
 - Apply as creator
 - Higher quality bar
 - Built-in discovery
@@ -174,6 +189,7 @@ Where to sell templates
 - Good for volume
 
 ### Your Own Site
+
 - Use Lemon Squeezy embed
 - Custom landing pages
 - Build email list
@@ -188,13 +204,16 @@ Getting template sales
 ## Template Marketing
 
 ### Launch Strategy
+
 ```
 Pre-launch (2 weeks):
+
 - Build email list with free template
 - Share work-in-progress on Twitter
 - Create demo video
 
 Launch day:
+
 - Email list (biggest sales)
 - Twitter thread with demo
 - Product Hunt (optional)
@@ -202,23 +221,29 @@ Launch day:
 - Discord communities
 
 Post-launch:
+
 - SEO content (how-to articles)
 - YouTube tutorials
 - Template directories
 - Affiliate partnerships
+
 ```
 
 ### Twitter Marketing
+
 ```
 Tweet types that work:
+
 - Template reveals (before/after)
 - Problem → Solution threads
 - Behind the scenes
 - User testimonials
 - Free template giveaways
+
 ```
 
 ### SEO Play
+
 | Content | Example |
 |---------|---------|
 | Tutorial | "How to build a CRM in Sogna Cloud" |
@@ -227,6 +252,7 @@ Tweet types that work:
 | Listicle | "10 Sogna Cloud templates for students" |
 
 ### Email Marketing
+
 - Free template → email signup
 - Welcome sequence with value
 - Launch emails for new templates
@@ -241,6 +267,7 @@ Severity: MEDIUM
 Situation: Free copies of your paid template circulating
 
 Symptoms:
+
 - Templates appearing on pirate sites
 - Fewer sales despite visibility
 - Users asking about "free version"
@@ -257,12 +284,14 @@ Recommended fix:
 ## Handling Template Piracy
 
 ### Accept Reality
+
 - Some piracy is inevitable
 - Pirates often weren't buyers anyway
 - Focus on paying customers
 - Don't obsess over it
 
 ### Mitigation Strategies
+
 | Strategy | Implementation |
 |----------|----------------|
 | Watermarking | Your brand in template |
@@ -272,6 +301,7 @@ Recommended fix:
 | Bonuses | Extra files, not in Sogna Cloud |
 
 ### Value-Add Approach
+
 ```
 Template alone: $29
 Template + Video course: $49
@@ -282,6 +312,7 @@ Buyers get the full experience
 ```
 
 ### When to Act
+
 - Mass distribution (DMCA takedown)
 - Reselling your work (legal action)
 - On major platforms (report)
@@ -294,6 +325,7 @@ Severity: MEDIUM
 Situation: Too many questions eating all your time
 
 Symptoms:
+
 - Inbox full of support emails
 - Same questions over and over
 - No time to create new templates
@@ -310,7 +342,9 @@ Recommended fix:
 ## Scaling Template Support
 
 ### Reduce Support Needs
+
 ```
+
 1. Better onboarding in template
    - Welcome page with instructions
    - Tooltips on complex features
@@ -326,9 +360,11 @@ Recommended fix:
    - Searchable knowledge base
    - Video library
    - Community forum
+
 ```
 
 ### Support Tiers
+
 | Tier | Support Level |
 |------|---------------|
 | Basic ($19) | Docs only |
@@ -336,12 +372,14 @@ Recommended fix:
 | Premium ($99) | Video calls |
 
 ### Automate What You Can
+
 - Auto-reply with docs links
 - Template FAQ responses
 - Canned responses for common issues
 - Community helps each other
 
 ### When Overwhelmed
+
 - Raise prices (fewer, better customers)
 - Reduce product line
 - Hire VA for support
@@ -354,6 +392,7 @@ Severity: MEDIUM
 Situation: 100% of revenue from Sogna Cloud/Gumroad
 
 Symptoms:
+
 - 100% sales from one platform
 - No email list
 - Panic when platform changes
@@ -370,35 +409,44 @@ Recommended fix:
 ## Diversifying Sales Channels
 
 ### Channel Mix Goal
+
 ```
 Ideal distribution:
+
 - 40% Your website (direct)
 - 30% Gumroad/Lemon Squeezy
 - 20% Sogna Cloud Marketplace
 - 10% Other (affiliates, etc.)
+
 ```
 
 ### Building Direct Channel
+
 1. Create your own site
 2. Use Lemon Squeezy/Stripe
 3. Build email list
 4. Drive traffic via content
 
 ### Email List Priority
+
 ```
 Email list value:
+
 - Direct communication
 - No algorithm
 - Launch to engaged audience
 - Repeat buyers
 
 Growth tactics:
+
 - Free template lead magnet
 - Newsletter with Sogna Cloud tips
 - Early access offers
+
 ```
 
 ### Reducing Risk
+
 | Action | Why |
 |--------|-----|
 | Own your audience | Email list, social |
@@ -413,6 +461,7 @@ Severity: LOW
 Situation: Templates breaking with Sogna Cloud updates
 
 Symptoms:
+
 - Is this still maintained?
 - Templates missing new features
 - Competitors look more modern
@@ -429,6 +478,7 @@ Recommended fix:
 ## Template Update Strategy
 
 ### Update Types
+
 | Type | Frequency | What |
 |------|-----------|------|
 | Bug fixes | As needed | Fix broken things |
@@ -436,14 +486,18 @@ Recommended fix:
 | Major refresh | Yearly | Full redesign |
 
 ### Communication
+
 ```
+
 - Changelog in template
 - Email to buyers
 - Social announcement
 - "Last updated" badge
+
 ```
 
 ### Pricing for Updates
+
 | Model | Pros | Cons |
 |-------|------|------|
 | Free forever | Happy customers | Work for free |
@@ -451,6 +505,7 @@ Recommended fix:
 | Major = paid | Revenue | Upset customers |
 
 ### Sustainable Approach
+
 - Free bug fixes always
 - Free minor updates for 1 year
 - Major versions at discount for existing
@@ -515,12 +570,14 @@ Skills: notion-template-business, landing-page-design, copywriting, email
 Workflow:
 
 ```
+
 1. Design template with documentation
 2. Create sales page
 3. Write compelling copy
 4. Build email list with free template
 5. Launch to list
 6. Promote on social
+
 ```
 
 ### SEO-Driven Template Business
@@ -530,11 +587,13 @@ Skills: notion-template-business, seo, content-strategy
 Workflow:
 
 ```
+
 1. Research template keywords
 2. Create free templates for traffic
 3. Write how-to content
 4. Funnel to paid templates
 5. Build organic traffic engine
+
 ```
 
 ## Related Skills
@@ -542,6 +601,7 @@ Workflow:
 Works well with: `micro-saas-launcher`, `copywriting`, `landing-page-design`, `seo`
 
 ## When to Use
+
 - User mentions or implies: notion template
 - User mentions or implies: sell templates
 - User mentions or implies: digital product
@@ -550,11 +610,13 @@ Works well with: `micro-saas-launcher`, `copywriting`, `landing-page-design`, `s
 - User mentions or implies: template business
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

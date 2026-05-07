@@ -8,16 +8,18 @@ id: skill-angular-best-practices
 owner: [[orchestrator]]
 ---
 
-
 # Angular Best Practices
 
 Comprehensive performance optimization guide for Angular applications. Contains prioritized rules for eliminating performance bottlenecks, optimizing bundles, and improving rendering.
 
 ## When to Use
+
 Reference these guidelines when:
 
 - Writing new Angular components or pages
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Implementing data fetching patterns
 - Reviewing code for performance issues
 - Refactoring existing Angular code
@@ -552,7 +554,9 @@ export class Component implements OnInit, OnDestroy {
 - [ ] Hydration configured
 - [ ] Critical content renders first
 - [ ] Non-critical content uses `@defer (hydrate on ...)`
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - [ ] TransferState for server-fetched data
 
 ---
@@ -565,14 +569,17 @@ export class Component implements OnInit, OnDestroy {
 - [Change Detection Deep Dive](https://angular.dev/guide/change-detection)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

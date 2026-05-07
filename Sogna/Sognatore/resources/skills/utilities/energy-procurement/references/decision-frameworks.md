@@ -101,6 +101,7 @@ Standard approaches:
 | 12 | Monthly | ~8% | Very large portfolios with dedicated procurement staff |
 
 **Step 3: Execution rules.**
+
 - Execute each tranche at the prevailing market price on the scheduled date — do not try to time within the tranche window.
 - Exception: if the forward curve drops into the bottom 20th percentile of the 5-year range, accelerate by buying 2 tranches immediately ("buy the dip" rule).
 - Exception: if the forward curve spikes into the top 20th percentile, defer the current tranche by 30 days (skip and catch up later).
@@ -181,6 +182,7 @@ product looks cheapest at base case may be the most expensive at high case.
 ### 2.1 Physical PPA Evaluation
 
 Physical PPAs involve direct energy delivery and are appropriate when:
+
 - Your load is in the same ISO as the project
 - You want both energy and RECs from a specific named facility
 - You can manage the operational complexity of scheduling and balancing
@@ -195,10 +197,12 @@ a long-term price escalation assumption (typically 2-3%/year) for years 6+.
 
 ```
 Year N PPA Net Value = (Market Price at Hub - PPA Strike Price) × Expected Generation
+
                      - Basis Cost (Hub to Load Zone)
                      - Curtailment Cost (expected curtailed MWh × strike price)
                      - Balancing Costs (firming residual load not covered by PPA)
                      + REC Value (if RECs would otherwise be purchased separately)
+
 ```
 
 **Step 3: Sensitivity analysis — run these scenarios at minimum:**
@@ -241,6 +245,7 @@ Over a 15-year PPA: $15M in basis costs (undiscounted)
 ```
 
 **Red flags for basis risk:**
+
 - Basis spread > $8/MWh generation-weighted average → high risk, negotiate basis hedge or reject
 - Basis volatility (standard deviation) > $15/MWh → unpredictable, hard to budget
 - Basis trend is widening over the historical period → structural congestion, likely to worsen
@@ -305,6 +310,7 @@ top 0.15% of all intervals in a year). These intervals drive your demand charges
 
 **Step 3: Characterize peak drivers.**
 For each of the top 50 intervals, identify:
+
 - Date and time of day
 - Day of week
 - Outdoor temperature (proxy for HVAC load)
@@ -339,10 +345,14 @@ Annual ratchet cost = (3,840 - 3,500) × $15/kW × 11 months = $56,100
 #### Battery Energy Storage System (BESS)
 
 **Sizing methodology:**
+
 1. Determine the target peak reduction (kW to shave).
 2. Calculate the required energy capacity: target kW × duration of peak events.
+
    For demand charge management, 1-2 hours of duration is typically sufficient.
+
 3. Apply round-trip efficiency (88-92% for lithium-ion): size the battery 10% larger
+
    than the calculated energy requirement.
 
 **Example — 500 kW peak shaving at a manufacturing plant:**
@@ -368,6 +378,7 @@ With ITC (30% for standalone storage as of IRA): payback = $770,000 / $149,900 =
 ```
 
 **Decision thresholds:**
+
 - Payback < 5 years (with stacked value + incentives): strong economic case, proceed
 - Payback 5-7 years: viable if aligned with sustainability goals or if demand charges are rising
 - Payback 7-10 years: marginal, requires additional strategic justification
@@ -429,11 +440,13 @@ prior system has reached steady state.
 ### 4.2 Forward Curve Analysis
 
 **What the forward curve tells you:**
+
 - Market consensus on future energy prices (adjusted for risk premium)
 - Seasonal price patterns (summer/winter spreads)
 - Year-over-year price trajectory (escalation or decline)
 
 **What the forward curve does NOT tell you:**
+
 - Actual future spot prices (forwards are not forecasts — they include a risk premium)
 - Short-term price spikes (forwards are averages, not tails)
 - Regulatory changes, plant retirements, or transmission additions not yet priced in
@@ -454,6 +467,7 @@ In organized capacity markets (PJM, ISO-NE, NYISO), capacity charges are a signi
 cost component — $30–$120/kW-yr depending on the zone and auction results.
 
 **PJM Reliability Pricing Model (RPM):**
+
 - Auction held 3 years ahead of delivery year (Base Residual Auction)
 - Incremental auctions adjust quantities closer to delivery
 - Your capacity obligation is based on your PLC (Peak Load Contribution)
@@ -528,6 +542,7 @@ Example — protecting 50,000 MWh annual index volume:
 ```
 
 **When to use options vs. fixed contracts:**
+
 - Options when you want to participate in downside moves but protect against spikes
 - Fixed contracts when the premium for options exceeds the cost of just locking in a fixed price (this happens when volatility is high and options are expensive)
 
@@ -543,14 +558,17 @@ Example — protecting 50,000 MWh annual index volume:
 RE% = (Renewable MWh procured) / (Total electricity consumption MWh) × 100
 
 Acceptable renewable MWh sources (in order of additionality):
+
 1. On-site generation (strongest claim)
 2. Physical PPA with new project (strong additionality)
 3. Virtual PPA with RECs from new project (good additionality)
 4. Utility green tariff (varies by program design)
 5. Unbundled RECs (weakest claim — RE100 tightening requirements)
+
 ```
 
 **SBTi trajectory alignment:**
+
 - SBTi requires absolute Scope 2 emissions reductions on a defined trajectory (typically 4.2%/year for 1.5°C alignment).
 - Lock in long-term renewable procurement (PPAs) that deliver emission reductions year over year.
 - Avoid procurement strategies that increase fossil dependence (long-term fixed contracts with fossil-heavy grid mix and no REC component).
@@ -572,16 +590,19 @@ Acceptable renewable MWh sources (in order of additionality):
 ### 7.1 Portfolio Aggregation Strategy
 
 **When to aggregate:**
+
 - 3+ sites in the same ISO/utility territory
 - Total volume > 20 GWh/year (attracts competitive supplier attention)
 - Sites have complementary load profiles (some peak summer, others peak winter)
 
 **Aggregation benefits:**
+
 - Volume leverage: 5-15% lower supply pricing than individual site procurement
 - Load diversity: combined portfolio has higher load factor than individual sites, reducing supplier risk premium
 - Administrative efficiency: single contract, single invoice, single relationship
 
 **When NOT to aggregate:**
+
 - Sites in different ISOs with different market structures (PJM and ERCOT should be procured separately)
 - One site has unique requirements (e.g., real-time pricing needed for a demand response strategy) that would constrain the entire portfolio
 - Sites have vastly different contract expiration dates (stagger expirations to avoid all-at-once recontracting risk)
@@ -660,11 +681,13 @@ without protection is reckless in that market.
 For facilities with both electricity and natural gas loads, recognize the coupling:
 
 - **When gas prices spike, electricity prices spike.** Natural gas is the marginal fuel
+
   for electricity generation in most US ISOs. A $2/MMBtu increase in Henry Hub
   translates to approximately $10-$15/MWh increase in wholesale electricity prices
   (depending on the average heat rate of marginal gas plants, typically 7,000-8,000 BTU/kWh).
 
 - **CHP economics are gas-price dependent.** A CHP system generating electricity at
+
   a heat rate of 6,500 BTU/kWh has a fuel cost of $6.50 × gas price per MWh. At gas
   $3/MMBtu, generation cost is $19.50/MWh. At gas $8/MMBtu, generation cost is
   $52/MWh. If your grid electricity cost exceeds your CHP generation cost, run the
@@ -673,6 +696,7 @@ For facilities with both electricity and natural gas loads, recognize the coupli
   from the grid.
 
 - **Dual-fuel hedging:** When hedging gas and electricity simultaneously, recognize
+
   that fixing gas costs and leaving electricity at index (or vice versa) creates a
   cross-commodity basis risk. If gas prices drop but electricity stays high (due to
   transmission constraints or non-gas generation tightness), your gas hedge
@@ -691,6 +715,7 @@ between rate schedules can save 5-15% on the total bill without changing consump
 
 **Step 1: Identify available rate schedules for your demand level and voltage.**
 Most utilities offer 2-4 rate options for large C&I customers:
+
 - Standard demand rate (flat energy + demand charge)
 - Time-of-use rate (lower off-peak energy, higher on-peak energy + demand)
 - Real-time pricing pilot (if available)
@@ -718,6 +743,7 @@ Where:
 | Interruptible | $565,000 | $250,000 | $24,000 | $839,000 | -$77,000 (-8.4%) |
 
 **Step 4: Evaluate non-financial factors.**
+
 - TOU: requires ability to shift load or accept higher on-peak costs
 - RTP: requires market monitoring and tolerance for price volatility
 - Interruptible: requires ability to curtail load on short notice (typically 30-60 min)
@@ -746,14 +772,22 @@ Month 13-15: New rates take effect (may be retroactive to filing date)
 ```
 
 **What to challenge in a rate case:**
+
 1. **Rate of return on equity (ROE):** Utilities typically request 10-11% ROE. Current
+
    authorized ROEs are trending down (9-10%). Challenge excessive ROE requests.
+
 2. **Rate base additions:** Utilities earn their ROE on their rate base (invested capital).
+
    Challenge excessive or imprudent capital investments included in the rate base.
+
 3. **Cost allocation between rate classes:** Utilities allocate total revenue
+
    requirement across residential, commercial, and industrial rate classes. Ensure your
    rate class is not subsidizing residential or other classes above cost causation.
+
 4. **Rate design:** Even if the total revenue is approved, fight for demand-based rate
+
    design (rewards load factor management) rather than pure volumetric rates (punishes
    high-consumption customers regardless of load shape).
 
@@ -766,22 +800,32 @@ Month 13-15: New rates take effect (may be retroactive to filing date)
 If your retail energy provider files for bankruptcy or fails to perform:
 
 **Immediate actions (24-48 hours):**
+
 1. Verify your account status with the utility. If the supplier defaults, your
+
    account reverts to the utility's Provider of Last Resort (POLR) service or standard
    offer service. You will NOT lose power — the grid keeps delivering regardless of
    supplier status.
+
 2. Determine the POLR rate. In most states, the POLR rate is set quarterly based on
+
    wholesale market prices plus a premium (10-20% above competitive supply). This may
    be higher or lower than your current contract rate.
+
 3. Contact 2-3 alternative suppliers immediately. Explain the situation — they will
+
    offer expedited enrollment (5-10 business days vs. normal 30-60 day switch process).
+
 4. Review your contract for supplier default provisions, including any deposits or
+
    prepayments that may be at risk in the bankruptcy estate.
 
 **Medium-term (2-4 weeks):**
+
 1. Execute a new supply contract with the best available alternative supplier.
 2. File a claim in the bankruptcy proceeding for any prepayments, deposits, or damages.
 3. Review your supplier qualification criteria — consider adding financial covenants
+
    (minimum credit rating, tangible net worth requirements) to future contracts.
 
 ### 10.2 Force Majeure Events
@@ -829,10 +873,12 @@ Savings from alternative: 50,000 MWh × ($0.062 - $0.054) = $400,000
 Net benefit of termination: $400,000 savings - $350,000 ETF = $50,000
 
 Decision: Marginal. Factor in:
+
   - Renegotiation risk (can you lock $0.054 before market moves?)
   - Administrative cost of switching suppliers
   - Relationship cost with current supplier
   - If net benefit < $100K, generally not worth the disruption
+
 ```
 
 ---
@@ -858,6 +904,7 @@ procurement activities align with market conditions.
 | December | Year-end RE100 reconciliation, REC inventory check, contract renewals | Dec 31 for REC vintage retirement |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

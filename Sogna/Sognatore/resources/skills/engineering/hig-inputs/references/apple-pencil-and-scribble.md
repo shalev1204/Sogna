@@ -152,6 +152,7 @@ September 12, 2023| Updated artwork.
 November 3, 2022| Added guidelines for using hover to enhance your app.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

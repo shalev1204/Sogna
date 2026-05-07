@@ -2,8 +2,8 @@
 
 import { issognaflowValue } from "sognaflow-dom"
 import { Fragment, createElement, useMemo } from "react"
-import { sognaflowProps } from "../../sognaflow/types"
-import { VisualState } from "../../sognaflow/utils/use-visual-state"
+import { sognaflowProps } from "../../motion/types"
+import { VisualState } from "../../motion/utils/use-visual-state"
 import { HTMLRenderState } from "../html/types.js"
 import { useHTMLProps } from "../html/use-props.js"
 import { SVGRenderState } from "../svg/types.js"

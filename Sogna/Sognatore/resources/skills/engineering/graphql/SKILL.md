@@ -11,7 +11,6 @@ id: skill-graphql
 owner: [[orchestrator]]
 ---
 
-
 # GraphQL
 
 GraphQL gives clients exactly the data they need - no more, no less. One
@@ -122,6 +121,7 @@ type Subscription {
 }
 
 # Input types
+
 input CreateUserInput {
   email: String!
   name: String!
@@ -135,6 +135,7 @@ input UpdateUserInput {
 }
 
 # Payload types (for errors as data)
+
 type CreateUserPayload {
   user: User
   errors: [Error!]!
@@ -147,6 +148,7 @@ type UpdateUserSuccess {
 }
 
 # Enums
+
 enum Role {
   USER
   ADMIN
@@ -154,6 +156,7 @@ enum Role {
 }
 
 # Types with relationships
+
 type User {
   id: ID!
   email: String!
@@ -173,6 +176,7 @@ type Post {
 }
 
 # Pagination (Relay-style)
+
 type UserConnection {
   edges: [UserEdge!]!
   pageInfo: PageInfo!
@@ -409,12 +413,14 @@ No more manually typing query responses.
 """
 
 # Install
+
 npm install -D @graphql-codegen/cli
 npm install -D @graphql-codegen/typescript
 npm install -D @graphql-codegen/typescript-operations
 npm install -D @graphql-codegen/typescript-react-apollo
 
 # codegen.ts
+
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
@@ -438,9 +444,11 @@ const config: CodegenConfig = {
 export default config;
 
 # Run generation
+
 npx graphql-codegen
 
 # Usage - fully typed!
+
 import { useGetUserQuery, useCreateUserMutation } from './generated/graphql';
 
 function UserProfile({ userId }: { userId: string }) {
@@ -466,6 +474,7 @@ GraphQL errors are for unexpected failures.
 """
 
 # Schema
+
 type Mutation {
   login(email: String!, password: String!): LoginResult!
 }
@@ -487,6 +496,7 @@ type AccountLocked {
 }
 
 # Resolver
+
 const resolvers = {
   Mutation: {
     login: async (_, { email, password }, { db }) => {
@@ -523,6 +533,7 @@ const resolvers = {
 };
 
 # Client query
+
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -568,6 +579,7 @@ Situation: You write resolvers that fetch data individually. A query for
 that's 101 queries. Response time becomes seconds.
 
 Symptoms:
+
 - Slow API responses
 - Many similar database queries in logs
 - Performance degrades with list size
@@ -602,8 +614,11 @@ const resolvers = {
 };
 
 # Key points:
+
 # 1. Create new loaders per request (for caching scope)
+
 # 2. Return results in same order as input IDs
+
 # 3. Handle missing items (return null, not skip)
 
 ### Deeply nested queries can DoS your server
@@ -615,6 +630,7 @@ A client sends a query 20 levels deep. Your server tries to resolve
 it and either times out or crashes.
 
 Symptoms:
+
 - Server timeouts on certain queries
 - Memory exhaustion
 - Slow response for nested queries
@@ -648,8 +664,11 @@ const server = new ApolloServer({
 });
 
 # Also consider:
+
 # - Query timeout limits
+
 # - Rate limiting per client
+
 # - Persisted queries (only allow pre-registered queries)
 
 ### Introspection enabled in production exposes your schema
@@ -661,6 +680,7 @@ query your schema, discover all types, mutations, and field names.
 Attackers know exactly what to target.
 
 Symptoms:
+
 - Schema visible via introspection query
 - GraphQL Playground accessible in production
 - Full type information exposed
@@ -686,7 +706,9 @@ const server = new ApolloServer({
 });
 
 # Better: Use persisted queries
+
 # Only allow pre-registered queries in production
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -704,6 +726,7 @@ finds a way around the directive, or complex business rules don't
 fit in a simple directive. Authorization fails.
 
 Symptoms:
+
 - Unauthorized access to data
 - Business rules not enforced
 - Directive-only security bypassed
@@ -764,6 +787,7 @@ fields. User A can see User B's public profile, and accidentally
 also sees their private email and phone number.
 
 Symptoms:
+
 - Sensitive data exposed
 - Privacy violations
 - Field data visible to wrong users
@@ -815,6 +839,7 @@ returns null. The error propagates up, nullifying parent objects,
 until the whole query response is null or errors out.
 
 Symptoms:
+
 - Queries return null unexpectedly
 - One error affects unrelated fields
 - Partial data can't be returned
@@ -829,6 +854,7 @@ Recommended fix:
 # DESIGN NULLABILITY INTENTIONALLY
 
 # WRONG: Everything non-null
+
 type User {
   id: ID!
   name: String!
@@ -838,6 +864,7 @@ type User {
 }
 
 # RIGHT: Nullable where appropriate
+
 type User {
   id: ID!              # Always exists
   name: String!        # Required field
@@ -847,13 +874,19 @@ type User {
 }
 
 # For lists:
+
 # [User!]! - Non-null list of non-null users (recommended)
+
 # [User!]  - Nullable list of non-null users
+
 # [User]!  - Non-null list of nullable users (rarely useful)
+
 # [User]   - Nullable list of nullable users (avoid)
 
 # Rule of thumb:
+
 # - Non-null if always present and failure should fail query
+
 # - Nullable if optional or failure shouldn't break response
 
 ### Expensive queries treated same as cheap ones
@@ -865,6 +898,7 @@ the same resources as users(first: 1000) { posts { comments } }.
 Expensive queries starve out cheap ones.
 
 Symptoms:
+
 - Expensive queries slow everything
 - No way to prioritize queries
 - Rate limiting is ineffective
@@ -919,6 +953,7 @@ leave orphaned subscriptions. Server memory grows as dead
 subscriptions accumulate.
 
 Symptoms:
+
 - Memory usage grows over time
 - Dead connections accumulate
 - Server slows down
@@ -1045,6 +1080,7 @@ Message: Handle query errors in UI
 Fix action: Destructure and handle error: const { error } = useQuery(...)
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 ### Using refetch instead of cache update
 
 Severity: INFO
@@ -1068,6 +1104,7 @@ Fix action: Use update function to modify cache directly
 Works well with: `backend`, `postgres-wizard`, `nextjs-app-router`, `react-patterns`
 
 ## When to Use
+
 - User mentions or implies: graphql
 - User mentions or implies: graphql schema
 - User mentions or implies: graphql resolver
@@ -1080,11 +1117,13 @@ Works well with: `backend`, `postgres-wizard`, `nextjs-app-router`, `react-patte
 - User mentions or implies: graphql mutation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

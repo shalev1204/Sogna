@@ -28,6 +28,7 @@ version: 1.0.0
 ## 1. Introduction
 
 Provide background and motivation for your research. Explain:
+
 - What problem are you addressing?
 - Why is it important?
 - What is novel about your approach?
@@ -39,6 +40,7 @@ Describe the real-world context and importance of the problem.
 ### 1.2 Contributions
 
 List the main contributions of your work:
+
 1. First contribution
 2. Second contribution
 3. Third contribution
@@ -48,6 +50,7 @@ List the main contributions of your work:
 ## 2. Related Work
 
 Survey previous research relevant to your work. Organize by:
+
 - Different approaches to the problem
 - Complementary methods
 - Alternative solutions
@@ -95,6 +98,7 @@ Explain how the model is trained.
 ### 4.4 Implementation Details
 
 Provide reproducibility information:
+
 - Hyperparameters
 - Hardware requirements
 - Software dependencies
@@ -206,6 +210,7 @@ Code snippets and configuration details.
 Complete list of hyperparameters used.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

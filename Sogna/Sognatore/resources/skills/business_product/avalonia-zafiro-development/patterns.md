@@ -24,6 +24,7 @@ Items = refresher.Items;
 ```
 
 ### Benefits
+
 - **Automatic Loading**: Handles the command execution and results.
 - **Efficient Updates**: Uses `EditDiff` internally to update items without clearing the list.
 - **UI Friendly**: Exposes `Items` as a `ReadOnlyObservableCollection` suitable for binding.
@@ -52,6 +53,7 @@ LoadProjects.HandleErrorsWith(uiServices.NotificationService, "Could not load pr
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

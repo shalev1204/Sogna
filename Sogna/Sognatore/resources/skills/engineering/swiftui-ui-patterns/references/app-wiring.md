@@ -151,6 +151,7 @@ extension View {
 ```
 
 Notes:
+
 - The `.task(id:)` hooks respond to account/client changes, re-seeding services and watcher state.
 - Keep the modifier focused on global wiring; feature-specific state stays within features.
 - Adjust types (AccountManager, StreamWatcher, etc.) to match your project.
@@ -209,6 +210,7 @@ Why: enum-driven sheets keep presentation centralized and testable; adding a new
 - If unauthenticated clients exist, gate streaming/watch calls to avoid reconnect spam.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -4,6 +4,7 @@
 **Subject**: Formal Conclusion of the Claude-Code (Claw) Knowledge Absorption Phase.
 
 ## 🏆 Declaration of State
+
 The Sogna ecosystem has officially reached **Terminal Superiority**. After a multi-phase deep audit of the Claude-Code (Claw) source DNA, we have successfully integrated, harmonized, and surpassed the institutional protocols of the original source.
 
 ## 💹 Absorption Map (Parity vs Superiority)
@@ -19,12 +20,15 @@ The Sogna ecosystem has officially reached **Terminal Superiority**. After a mul
 | **Persistence** | Hierarchical Config | `ConfigDiscovery` (~/.sognarc.json) | **PARITY** |
 
 ## 🔒 Final Institutional Locks Integrated
+
 1. **Binary Hygiene**: Sognatore now proactively rejects NUL-byte content to maintain context purity.
 2. **Symlink Jail**: All file operations are now canonical-path-aware, preventing "escaping" the project root.
 3. **Precedence Engine**: The ecosystem now respects `User > Project > Local` configuration hierarchy.
 
 ## 🚀 Transition: Stabilization Tier 1
+
 With the "Expansion" phase officially closed, Sogna transitions to **Stabilization**. 
+
 - **Goal**: Harden existing protocols, optimize performance, and refine the TUI/UX experience.
 - **Protocol**: Major architectural additions from external sources are suspended unless explicitly mandated by the Officer (USER).
 

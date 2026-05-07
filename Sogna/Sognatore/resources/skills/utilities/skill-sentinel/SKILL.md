@@ -4,21 +4,24 @@ description: Auditoria e evolucao do ecossistema de skills. Qualidade de codigo,
 risk: offensive
 date_added: '2026-03-06'
 tags:
+
 - governance
 - audit
 - quality
 - skill-health
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-skill-sentinel
 owner: [[orchestrator]]
 ---
-
 
 # Skill Sentinel
 
@@ -200,6 +203,7 @@ python C:\Users\renat\skills\skill-sentinel\scripts\db.py
 ## Otimizacao De Custos
 
 Alem das 7 dimensoes, o sentinel analisa impacto de custo:
+
 - Tamanho do SKILL.md (tokens consumidos por ativacao)
 - References grandes sem indice
 - Output verboso dos scripts
@@ -214,6 +218,7 @@ para novas skills sugeridas.
 ## Governanca Do Sentinel
 
 O proprio sentinel pratica o que prega:
+
 - Todas as auditorias sao registradas em action_log
 - Historico de scores em score_history para tendencias
 - Relatorios salvos em data/reports/
@@ -247,6 +252,7 @@ Gap analysis com templates prontos.
 ## Formato Do Relatorio
 
 O relatorio gerado em `data/reports/` contem:
+
 1. Resumo executivo (tabela de scores)
 2. Tendencias (se houver auditoria anterior)
 3. Findings por severidade (critico/alto/medio/baixo/info)
@@ -257,6 +263,7 @@ O relatorio gerado em `data/reports/` contem:
 ## Referencias
 
 Para detalhes tecnicos, consultar:
+
 - `references/analysis_criteria.md` - Rubricas de scoring
 - `references/security_patterns.md` - Padroes de seguranca
 - `references/skill_template.md` - Template para novas skills
@@ -279,11 +286,13 @@ Para detalhes tecnicos, consultar:
 - `skill-installer` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

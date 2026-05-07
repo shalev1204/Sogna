@@ -8,7 +8,6 @@ id: skill-mtls-configuration
 owner: [[ops-security]]
 ---
 
-
 # mTLS Configuration
 
 Comprehensive guide to implementing mutual TLS for zero-trust service mesh communication.
@@ -74,7 +73,9 @@ Root CA (Self-signed, long-lived)
 ### Template 1: Istio mTLS (Strict Mode)
 
 ```yaml
+
 # Enable strict mTLS mesh-wide
+
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
@@ -84,7 +85,9 @@ spec:
   mtls:
     mode: STRICT
 ---
+
 # Namespace-level override (permissive for migration)
+
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
@@ -94,7 +97,9 @@ spec:
   mtls:
     mode: PERMISSIVE
 ---
+
 # Workload-specific policy
+
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
@@ -127,7 +132,9 @@ spec:
     tls:
       mode: ISTIO_MUTUAL
 ---
+
 # TLS to external service
+
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -139,7 +146,9 @@ spec:
       mode: SIMPLE
       caCertificates: /etc/certs/external-ca.pem
 ---
+
 # Mutual TLS to external service
+
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -157,7 +166,9 @@ spec:
 ### Template 3: Cert-Manager with Istio
 
 ```yaml
+
 # Install cert-manager issuer for Istio
+
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
@@ -166,7 +177,9 @@ spec:
   ca:
     secretName: istio-ca-secret
 ---
+
 # Create Istio CA secret
+
 apiVersion: v1
 kind: Secret
 metadata:
@@ -177,7 +190,9 @@ data:
   tls.crt: <base64-encoded-ca-cert>
   tls.key: <base64-encoded-ca-key>
 ---
+
 # Certificate for workload
+
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -192,19 +207,25 @@ spec:
     kind: ClusterIssuer
   commonName: my-service.my-namespace.svc.cluster.local
   dnsNames:
+
     - my-service
     - my-service.my-namespace
     - my-service.my-namespace.svc
     - my-service.my-namespace.svc.cluster.local
+
   usages:
+
     - server auth
     - client auth
+
 ```
 
 ### Template 4: SPIFFE/SPIRE Integration
 
 ```yaml
+
 # SPIRE Server configuration
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -252,7 +273,9 @@ data:
       }
     }
 ---
+
 # SPIRE Agent DaemonSet (abbreviated)
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -265,13 +288,19 @@ spec:
   template:
     spec:
       containers:
+
         - name: spire-agent
+
           image: ghcr.io/spiffe/spire-agent:1.8.0
           volumeMounts:
+
             - name: spire-agent-socket
+
               mountPath: /run/spire/sockets
       volumes:
+
         - name: spire-agent-socket
+
           hostPath:
             path: /run/spire/sockets
             type: DirectoryOrCreate
@@ -280,11 +309,15 @@ spec:
 ### Template 5: Linkerd mTLS (Automatic)
 
 ```yaml
+
 # Linkerd enables mTLS automatically
+
 # Verify with:
+
 # linkerd viz edges deployment -n my-namespace
 
 # For external services without mTLS
+
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
@@ -297,7 +330,9 @@ spec:
   port: external-api
   proxyProtocol: HTTP/1  # or TLS for passthrough
 ---
+
 # Skip TLS for specific port
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -309,35 +344,45 @@ metadata:
 ## Certificate Rotation
 
 ```bash
+
 # Istio - Check certificate expiry
+
 istioctl proxy-config secret deploy/my-app -o json | \
   jq '.dynamicActiveSecrets[0].secret.tlsCertificate.certificateChain.inlineBytes' | \
   tr -d '"' | base64 -d | openssl x509 -text -noout
 
 # Force certificate rotation
+
 kubectl rollout restart deployment/my-app
 
 # Check Linkerd identity
+
 linkerd identity -n my-namespace
 ```
 
 ## Debugging mTLS Issues
 
 ```bash
+
 # Istio - Check if mTLS is enabled
+
 istioctl authn tls-check my-service.my-namespace.svc.cluster.local
 
 # Verify peer authentication
+
 kubectl get peerauthentication --all-namespaces
 
 # Check destination rules
+
 kubectl get destinationrule --all-namespaces
 
 # Debug TLS handshake
+
 istioctl proxy-config log deploy/my-app --level debug
 kubectl logs deploy/my-app -c istio-proxy | grep -i tls
 
 # Linkerd - Check mTLS status
+
 linkerd viz edges deployment -n my-namespace
 linkerd viz tap deploy/my-app --to deploy/my-backend
 ```
@@ -345,6 +390,7 @@ linkerd viz tap deploy/my-app --to deploy/my-backend
 ## Best Practices
 
 ### Do's
+
 - **Start with PERMISSIVE** - Migrate gradually to STRICT
 - **Monitor certificate expiry** - Set up alerts
 - **Use short-lived certs** - 24h or less for workloads
@@ -352,6 +398,7 @@ linkerd viz tap deploy/my-app --to deploy/my-backend
 - **Log TLS errors** - For debugging and audit
 
 ### Don'ts
+
 - **Don't disable mTLS** - For convenience in production
 - **Don't ignore cert expiry** - Automate rotation
 - **Don't use self-signed certs** - Use proper CA hierarchy
@@ -365,11 +412,13 @@ linkerd viz tap deploy/my-app --to deploy/my-backend
 - [Zero Trust Architecture (NIST)](https://www.nist.gov/publications/zero-trust-architecture)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

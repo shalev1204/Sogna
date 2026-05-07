@@ -56,6 +56,7 @@ def insert_greeting(name: str, note: str) -> None:
 ```
 
 Important:
+
 - Only use transactions with Postgres databases
 - For other databases, use regular steps
 - Never use `async def` with transactions
@@ -63,6 +64,7 @@ Important:
 Reference: [DBOS Transactions](https://docs.dbos.dev/python/reference/decorators#transactions)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -42,6 +42,7 @@ dbos.RunWorkflow(ctx, processTask, "background-task",
 ```
 
 Priority rules:
+
 - Range: `1` to `2,147,483,647`
 - Lower number = higher priority
 - Workflows **without** assigned priorities have the highest priority (run first)
@@ -50,6 +51,7 @@ Priority rules:
 Reference: [Priority](https://docs.dbos.dev/golang/tutorials/queue-tutorial#priority)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

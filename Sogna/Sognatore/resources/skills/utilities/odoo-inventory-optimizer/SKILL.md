@@ -7,7 +7,6 @@ id: skill-odoo-inventory-optimizer
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Inventory Optimizer
 
 ## Overview
@@ -114,6 +113,7 @@ Operations created automatically:
 - Automated inventory valuation requires the **Accounting** module; Community Edition installations without it cannot post stock journal entries.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

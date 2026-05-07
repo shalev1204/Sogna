@@ -8,8 +8,8 @@ id: skill-quality-nonconformance
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use
+
 Use this skill when investigating product defects or process deviations, performing root cause analysis (RCA), managing Corrective and Preventive Actions (CAPA), interpreting Statistical Process Control (SPC) data, or auditing supplier quality.
 
 # Quality & Non-Conformance Management
@@ -231,6 +231,7 @@ Track these metrics weekly and trend monthly:
 - For complete communication templates with variables and tone guidance, see [communication-templates.md](references/communication-templates.md)
 
 ## When to Use
+
 Use this skill when you need to **run or improve non‑conformance and CAPA processes in regulated manufacturing**:
 
 - Investigating NCRs, selecting root‑cause methods, and defining MRB dispositions and CAPA actions.
@@ -238,11 +239,13 @@ Use this skill when you need to **run or improve non‑conformance and CAPA proc
 - Preparing for, or responding to, customer and regulatory audits (FDA, IATF, AS9100, ISO 13485) that focus on non‑conformance handling and CAPA effectiveness.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

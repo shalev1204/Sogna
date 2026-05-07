@@ -26,6 +26,7 @@ A clean and contemporary theme with a sophisticated grayscale palette for maximu
 Tech presentations, architecture portfolios, design showcases, modern business proposals, data visualization.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

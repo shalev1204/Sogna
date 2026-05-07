@@ -12,7 +12,6 @@ id: skill-tailwind-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Tailwind CSS Patterns (v4 - 2025)
 
 > Modern utility-first CSS with CSS-native configuration.

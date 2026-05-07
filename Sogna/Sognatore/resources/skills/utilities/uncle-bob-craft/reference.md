@@ -153,6 +153,7 @@ For grouping classes into components: **REP** (reuse/release equivalence), **CCP
 *Attribution: Principles and structure drawn from Robert C. Martin, Clean Code (2008), Clean Architecture (2017), The Clean Coder (2011), Clean Agile (2019). This reference is a summary for agent use, not a substitute for the books.*
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

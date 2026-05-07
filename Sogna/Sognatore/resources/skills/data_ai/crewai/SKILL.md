@@ -9,7 +9,6 @@ id: skill-crewai
 owner: [[orchestrator]]
 ---
 
-
 # CrewAI
 
 Expert in CrewAI - the leading role-based multi-agent framework used by 60% of Fortune 500
@@ -87,6 +86,7 @@ Define agents and tasks in YAML (recommended)
 **When to use**: Any CrewAI project
 
 # config/agents.yaml
+
 researcher:
   role: "Senior Research Analyst"
   goal: "Find comprehensive, accurate information on {topic}"
@@ -95,8 +95,10 @@ researcher:
     in gathering and analyzing information. You're known
     for your thorough and accurate research.
   tools:
+
     - SerperDevTool
     - WebsiteSearchTool
+
   verbose: true
 
 writer:
@@ -109,11 +111,13 @@ writer:
   verbose: true
 
 # config/tasks.yaml
+
 research_task:
   description: |
     Research the topic: {topic}
 
     Focus on:
+
     1. Key facts and statistics
     2. Recent developments
     3. Expert opinions
@@ -123,6 +127,7 @@ research_task:
   agent: researcher
   expected_output: |
     A comprehensive research report with:
+
     - Executive summary
     - Key findings (bulleted)
     - Sources cited
@@ -132,16 +137,20 @@ writing_task:
     Using the research provided, write an article about {topic}.
 
     Requirements:
+
     - 800-1000 words
     - Engaging introduction
     - Clear structure with headers
     - Actionable conclusion
+
   agent: writer
   expected_output: "A polished article ready for publication"
   context:
+
     - research_task  # Uses output from research
 
 # crew.py
+
 from crewai import Agent, Task, Crew, Process
 from crewai.project import CrewBase, agent, task, crew
 
@@ -176,6 +185,7 @@ class ContentCrew:
         )
 
 # main.py
+
 crew = ContentCrew()
 result = crew.crew().kickoff(inputs={"topic": "AI Agents in 2025"})
 
@@ -188,6 +198,7 @@ Manager agent delegates to workers
 from crewai import Crew, Process
 
 # Define specialized agents
+
 researcher = Agent(
     role="Research Specialist",
     goal="Find accurate information",
@@ -207,6 +218,7 @@ writer = Agent(
 )
 
 # Hierarchical crew - manager coordinates
+
 crew = Crew(
     agents=[researcher, analyst, writer],
     tasks=[research_task, analysis_task, writing_task],
@@ -216,8 +228,11 @@ crew = Crew(
 )
 
 # Manager decides:
+
 # - Which agent handles which task
+
 # - When to delegate
+
 # - How to combine results
 
 result = crew.kickoff()
@@ -231,6 +246,7 @@ Generate execution plan before running
 from crewai import Crew, Process
 
 # Enable planning
+
 crew = Crew(
     agents=[researcher, writer, reviewer],
     tasks=[research, write, review],
@@ -240,14 +256,19 @@ crew = Crew(
 )
 
 # With planning enabled:
+
 # 1. CrewAI generates step-by-step plan
+
 # 2. Plan is injected into each task
+
 # 3. Agents see overall structure
+
 # 4. More consistent results
 
 result = crew.kickoff()
 
 # Access the plan
+
 print(crew.plan)
 
 ### Memory Configuration
@@ -259,8 +280,11 @@ Enable agent memory for context
 from crewai import Crew
 
 # Memory types:
+
 # - Short-term: Within task execution
+
 # - Long-term: Across executions
+
 # - Entity: About specific entities
 
 crew = Crew(
@@ -271,6 +295,7 @@ crew = Crew(
 )
 
 # Custom memory config
+
 from crewai.memory import LongTermMemory, ShortTermMemory
 
 crew = Crew(
@@ -290,8 +315,11 @@ crew = Crew(
 )
 
 # Memory helps agents:
+
 # - Remember previous interactions
+
 # - Build on past work
+
 # - Maintain consistency
 
 ### Flows for Complex Workflows
@@ -354,6 +382,7 @@ class ContentFlow(Flow):
         return {"status": "published", "content": self.content}
 
 # Run flow
+
 flow = ContentFlow()
 result = flow.kickoff(inputs={"topic": "AI Agents"})
 
@@ -367,6 +396,7 @@ from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 
 # Method 1: Class-based tool
+
 class SearchInput(BaseModel):
     query: str = Field(..., description="Search query")
 
@@ -381,6 +411,7 @@ class WebSearchTool(BaseTool):
         return format_results(results)
 
 # Method 2: Function decorator
+
 from crewai import tool
 
 @tool("Database Query")
@@ -389,6 +420,7 @@ def query_database(sql: str) -> str:
     return db.execute(sql)
 
 # Assign tools to agents
+
 researcher = Agent(
     role="Researcher",
     goal="Find information",
@@ -411,10 +443,12 @@ Skills: crewai, structured-output
 Workflow:
 
 ```
+
 1. Define researcher and writer agents
 2. Create research → analysis → writing pipeline
 3. Use structured output for research format
 4. Chain tasks with context
+
 ```
 
 ### Observable Agent Team
@@ -424,10 +458,12 @@ Skills: crewai, langfuse
 Workflow:
 
 ```
+
 1. Build crew with agents and tasks
 2. Add Langfuse callback handler
 3. Monitor agent interactions
 4. Evaluate output quality
+
 ```
 
 ### Complex Workflow with Flows
@@ -437,10 +473,12 @@ Skills: crewai, langgraph
 Workflow:
 
 ```
+
 1. Design workflow with CrewAI Flows
 2. Use LangGraph patterns for state
 3. Combine crews in flow steps
 4. Handle branching and routing
+
 ```
 
 ## Related Skills
@@ -448,6 +486,7 @@ Workflow:
 Works well with: `langgraph`, `autonomous-agents`, `langfuse`, `structured-output`
 
 ## When to Use
+
 - User mentions or implies: crewai
 - User mentions or implies: multi-agent team
 - User mentions or implies: agent roles
@@ -456,11 +495,13 @@ Works well with: `langgraph`, `autonomous-agents`, `langfuse`, `structured-outpu
 - User mentions or implies: collaborative agents
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

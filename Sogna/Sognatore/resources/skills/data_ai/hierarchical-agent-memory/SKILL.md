@@ -8,7 +8,6 @@ id: skill-hierarchical-agent-memory
 owner: [[orchestrator]]
 ---
 
-
 # Hierarchical Agent Memory (HAM)
 
 Scoped memory system that gives AI coding agents a cheat sheet for each directory instead of re-reading your entire project every prompt. Root CLAUDE.md holds global context (~200 tokens), subdirectory CLAUDE.md files hold scoped context (~250 tokens each), and a `.memory/` layer stores decisions, patterns, and an inbox for unconfirmed inferences.
@@ -46,6 +45,7 @@ project/
 The root CLAUDE.md includes a routing section that tells the agent exactly which sub-context to load:
 
 ```markdown
+
 ## Context Routing
 
 → api: src/api/CLAUDE.md
@@ -58,6 +58,7 @@ The agent reads root, then immediately loads the relevant subdirectory context �
 ### Step 3: Dashboard ("ham dashboard")
 
 Launches a web dashboard at localhost:7777 that visualizes:
+
 - Token savings (HAM-on vs HAM-off sessions)
 - Daily token and cost trends
 - Per-directory session breakdown
@@ -85,6 +86,7 @@ Launches a web dashboard at localhost:7777 that visualizes:
 User: go ham
 
 Agent: HAM setup complete. Created 8 files.
+
   - CLAUDE.md (root)
   - .memory/decisions.md
   - .memory/patterns.md
@@ -136,6 +138,7 @@ Agent:
 - `agent-memory-mcp` — MCP-based memory integration
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -24,9 +24,11 @@ You are a SQL database migration expert specializing in zero-downtime deployment
 - You need a different domain or tool outside this scope
 
 ## Context
+
 The user needs SQL database migrations that ensure data integrity, minimize downtime, and provide safe rollback options. Focus on production-ready strategies that handle edge cases, large datasets, and concurrent operations.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -338,6 +340,7 @@ class MigrationRunner:
 
 ```bash
 #!/bin/bash
+
 # rollback_migration.sh
 
 set -e
@@ -346,6 +349,7 @@ MIGRATION_VERSION=$1
 DATABASE=$2
 
 # Verify current version
+
 CURRENT_VERSION=$(psql -d $DATABASE -t -c \
     "SELECT version FROM schema_migrations ORDER BY applied_at DESC LIMIT 1" | xargs)
 
@@ -355,10 +359,12 @@ if [ "$CURRENT_VERSION" != "$MIGRATION_VERSION" ]; then
 fi
 
 # Create backup
+
 BACKUP_FILE="pre_rollback_${MIGRATION_VERSION}_$(date +%Y%m%d_%H%M%S).sql"
 pg_dump -d $DATABASE -f "$BACKUP_FILE"
 
 # Execute rollback
+
 if [ -f "migrations/${MIGRATION_VERSION}.down.sql" ]; then
     psql -d $DATABASE -f "migrations/${MIGRATION_VERSION}.down.sql"
     psql -d $DATABASE -c "DELETE FROM schema_migrations WHERE version = '$MIGRATION_VERSION';"
@@ -511,6 +517,7 @@ Focus on production-ready SQL migrations with zero-downtime deployment strategie
 - **migration-integration**: CI/CD integration and automated testing
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

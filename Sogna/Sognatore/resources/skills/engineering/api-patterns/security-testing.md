@@ -106,20 +106,24 @@ version: 1.0.0
 ## Security Testing Checklist
 
 **Authentication:**
+
 - [ ] Test for bypass
 - [ ] Check credential strength
 - [ ] Verify token security
 
 **Authorization:**
+
 - [ ] Test BOLA/IDOR
 - [ ] Check privilege escalation
 - [ ] Verify function access
 
 **Input:**
+
 - [ ] Test all parameters
 - [ ] Check for injection
 
 **Config:**
+
 - [ ] Check CORS
 - [ ] Verify headers
 - [ ] Test error handling
@@ -129,6 +133,7 @@ version: 1.0.0
 > **Remember:** APIs are the backbone of modern apps. Test them like attackers will.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

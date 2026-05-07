@@ -10,7 +10,6 @@ id: skill-azure-functions
 owner: [[ops-security]]
 ---
 
-
 # Azure Functions
 
 Expert patterns for Azure Functions development including isolated worker model,
@@ -173,6 +172,7 @@ Decorator-based approach for Python functions
 ### Template
 
 # function_app.py
+
 import azure.functions as func
 import logging
 import json
@@ -955,6 +955,7 @@ Future migration burden.
 Why this breaks:
 The in-process model runs your code in the same process as the
 Azure Functions host. This causes:
+
 - Assembly version conflicts
 - Limited to LTS .NET versions
 - No access to latest .NET features
@@ -968,10 +969,13 @@ Recommended fix:
 ## Use isolated worker for new projects
 
 ```bash
+
 # Create new isolated worker project
+
 func init MyFunctionApp --worker-runtime dotnet-isolated
 
 # Or with .NET 8
+
 dotnet new func --name MyFunctionApp --framework net8.0
 ```
 
@@ -1013,6 +1017,7 @@ public class IsolatedFunction
 ```
 
 ## Key migration changes
+
 - FunctionName → Function attribute
 - HttpRequest → HttpRequestData
 - IActionResult → HttpResponseData
@@ -1166,12 +1171,17 @@ Recommended fix:
 ## Verify function registration
 
 ```bash
+
 # Check registered functions
+
 func host start --verbose
 
 # Look for:
+
 # "Found the following functions:"
+
 # If empty, check extensions and attributes
+
 ```
 
 ### Premium Plan Still Has Cold Start on New Instances
@@ -1188,6 +1198,7 @@ Pre-warmed instances not being used.
 
 Why this breaks:
 Premium plan provides pre-warmed instances, but:
+
 - Only one pre-warmed instance by default
 - Rapid scale-out still creates cold instances
 - Pre-warmed instances still run YOUR code initialization
@@ -1217,7 +1228,9 @@ public void Warmup(
 ## Configure pre-warmed instance count
 
 ```bash
+
 # Increase pre-warmed instances (costs more)
+
 az functionapp config set \
   --name <app-name> \
   --resource-group <rg> \
@@ -1240,7 +1253,9 @@ services.AddDbContext<MyDbContext>(options =>
 ## Use always-ready instances (most expensive)
 
 ```bash
+
 # Instances always running, no cold start
+
 az functionapp config set \
   --name <app-name> \
   --resource-group <rg> \
@@ -1341,6 +1356,7 @@ Message: HttpTrigger without [Function] attribute (isolated worker requires it).
 - user needs complex orchestration -> workflow-automation (Logic Apps, Power Automate)
 
 ## When to Use
+
 - User mentions or implies: azure function
 - User mentions or implies: azure functions
 - User mentions or implies: durable functions
@@ -1348,11 +1364,13 @@ Message: HttpTrigger without [Function] attribute (isolated worker requires it).
 - User mentions or implies: function app
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

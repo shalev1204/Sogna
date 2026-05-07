@@ -27,17 +27,22 @@ GitHub Issue ID or URL: $ARGUMENTS
 
 **Initial Investigation**
 ```bash
+
 # Get complete issue details
+
 gh issue view $ISSUE_NUMBER --comments
 
 # Check issue metadata
+
 gh issue view $ISSUE_NUMBER --json title,body,labels,assignees,milestone,state
 
 # Review linked PRs and related issues
+
 gh issue view $ISSUE_NUMBER --json linkedBranches,closedByPullRequests
 ```
 
 **Triage Assessment Framework**
+
 - **Priority Classification**:
   - P0/Critical: Production breaking, security vulnerability, data loss
   - P1/High: Major feature broken, significant user impact
@@ -46,13 +51,17 @@ gh issue view $ISSUE_NUMBER --json linkedBranches,closedByPullRequests
 
 **Context Gathering**
 ```bash
+
 # Search for similar resolved issues
+
 gh issue list --search "similar keywords" --state closed --limit 10
 
 # Check recent commits related to affected area
+
 git log --oneline --grep="component_name" -20
 
 # Review PR history for regression possibilities
+
 gh pr list --search "related_component" --state merged --limit 5
 ```
 
@@ -60,27 +69,35 @@ gh pr list --search "related_component" --state merged --limit 5
 
 **Code Archaeology**
 ```bash
+
 # Find when the issue was introduced
+
 git bisect start
 git bisect bad HEAD
 git bisect good <last_known_good_commit>
 
 # Automated bisect with test script
+
 git bisect run ./test_issue.sh
 
 # Blame analysis for specific file
+
 git blame -L <start>,<end> path/to/file.js
 ```
 
 **Codebase Investigation**
 ```bash
+
 # Search for all occurrences of problematic function
+
 rg "functionName" --type js -A 3 -B 3
 
 # Find all imports/usages
+
 rg "import.*ComponentName|from.*ComponentName" --type tsx
 
 # Analyze call hierarchy
+
 grep -r "methodName(" . --include="*.py" | head -20
 ```
 
@@ -106,28 +123,37 @@ const checkDependencies = () => {
 
 **Branch Naming Conventions**
 ```bash
+
 # Feature branches
+
 git checkout -b feature/issue-${ISSUE_NUMBER}-short-description
 
 # Bug fix branches
+
 git checkout -b fix/issue-${ISSUE_NUMBER}-component-bug
 
 # Hotfix for production
+
 git checkout -b hotfix/issue-${ISSUE_NUMBER}-critical-fix
 
 # Experimental/spike branches
+
 git checkout -b spike/issue-${ISSUE_NUMBER}-investigation
 ```
 
 **Branch Configuration**
 ```bash
+
 # Set upstream tracking
+
 git push -u origin feature/issue-${ISSUE_NUMBER}-feature-name
 
 # Configure branch protection locally
+
 git config branch.feature/issue-123.description "Implementing user authentication #123"
 
 # Link branch to issue (for GitHub integration)
+
 gh issue develop ${ISSUE_NUMBER} --checkout
 ```
 
@@ -135,36 +161,44 @@ gh issue develop ${ISSUE_NUMBER} --checkout
 
 **Task Decomposition Framework**
 ```markdown
+
 ## Implementation Plan for Issue #${ISSUE_NUMBER}
 
 ### Phase 1: Foundation (Day 1)
+
 - [ ] Set up development environment
 - [ ] Create failing test cases
 - [ ] Implement data models/schemas
 - [ ] Add necessary migrations
 
 ### Phase 2: Core Logic (Day 2)
+
 - [ ] Implement business logic
 - [ ] Add validation layers
 - [ ] Handle edge cases
 - [ ] Add logging and monitoring
 
 ### Phase 3: Integration (Day 3)
+
 - [ ] Wire up API endpoints
 - [ ] Update frontend components
 - [ ] Add error handling
 - [ ] Implement retry logic
 
 ### Phase 4: Testing & Polish (Day 4)
+
 - [ ] Complete unit test coverage
 - [ ] Add integration tests
 - [ ] Performance optimization
 - [ ] Documentation updates
+
 ```
 
 **Incremental Commit Strategy**
 ```bash
+
 # After each subtask completion
+
 git add -p  # Partial staging for atomic commits
 git commit -m "feat(auth): add user validation schema (#${ISSUE_NUMBER})"
 git commit -m "test(auth): add unit tests for validation (#${ISSUE_NUMBER})"
@@ -208,7 +242,9 @@ describe('Issue #123: User authentication', () => {
 
 **Integration Test Pattern**
 ```python
+
 # Pytest integration test
+
 import pytest
 from app import create_app
 from database import db
@@ -304,7 +340,9 @@ function calculateDiscount(price, discountPercent) {
 
 **Feature Implementation Pattern**
 ```python
+
 # Implementing new feature with proper architecture
+
 from typing import Optional, List
 from dataclasses import dataclass
 from datetime import datetime
@@ -360,56 +398,71 @@ class IssueFeatureService:
 
 **PR Preparation Checklist**
 ```bash
+
 # Run all tests locally
+
 npm test -- --coverage
 npm run lint
 npm run type-check
 
 # Check for console logs and debug code
+
 git diff --staged | grep -E "console\.(log|debug)"
 
 # Verify no sensitive data
+
 git diff --staged | grep -E "(password|secret|token|key)" -i
 
 # Update documentation
+
 npm run docs:generate
 ```
 
 **PR Creation with GitHub CLI**
 ```bash
+
 # Create PR with comprehensive description
+
 gh pr create \
   --title "Fix #${ISSUE_NUMBER}: Clear description of the fix" \
   --body "$(cat <<EOF
+
 ## Summary
+
 Fixes #${ISSUE_NUMBER} by implementing proper error handling in the authentication flow.
 
 ## Changes Made
+
 - Added validation for expired tokens
 - Implemented automatic token refresh
 - Added comprehensive error messages
 - Updated unit and integration tests
 
 ## Testing
+
 - [x] All existing tests pass
 - [x] Added new unit tests (coverage: 95%)
 - [x] Manual testing completed
 - [x] E2E tests updated and passing
 
 ## Performance Impact
+
 - No significant performance changes
 - Memory usage remains constant
 - API response time: ~50ms (unchanged)
 
 ## Screenshots/Demo
+
 [Include if UI changes]
 
 ## Checklist
+
 - [x] Code follows project style guidelines
 - [x] Self-review completed
 - [x] Documentation updated
 - [x] No new warnings introduced
 - [x] Breaking changes documented (if any)
+
 EOF
 )" \
   --base main \
@@ -420,7 +473,9 @@ EOF
 
 **Link PR to Issue Automatically**
 ```yaml
+
 # .github/pull_request_template.md
+
 ---
 name: Pull Request
 risk: unknown
@@ -428,18 +483,22 @@ about: Create a pull request to merge your changes
 ---
 
 ## Related Issue
+
 Closes #___
 
 ## Type of Change
+
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] Documentation update
 
 ## How Has This Been Tested?
+
 <!-- Describe the tests that you ran -->
 
 ## Review Checklist
+
 - [ ] My code follows the style guidelines
 - [ ] I have performed a self-review
 - [ ] I have commented my code in hard-to-understand areas
@@ -447,33 +506,42 @@ Closes #___
 - [ ] My changes generate no new warnings
 - [ ] I have added tests that prove my fix is effective
 - [ ] New and existing unit tests pass locally
+
 ```
 
 ### 8. Post-Implementation Verification
 
 **Deployment Verification**
 ```bash
+
 # Check deployment status
+
 gh run list --workflow=deploy
 
 # Monitor for errors post-deployment
+
 curl -s https://api.example.com/health | jq .
 
 # Verify fix in production
+
 ./scripts/verify_issue_123_fix.sh
 
 # Check error rates
+
 gh api /repos/org/repo/issues/${ISSUE_NUMBER}/comments \
   -f body="Fix deployed to production. Monitoring error rates..."
 ```
 
 **Issue Closure Protocol**
 ```bash
+
 # Add resolution comment
+
 gh issue comment ${ISSUE_NUMBER} \
   --body "Fixed in PR #${PR_NUMBER}. The issue was caused by improper token validation. Solution implements proper expiry checking with automatic refresh."
 
 # Close with reference
+
 gh issue close ${ISSUE_NUMBER} \
   --comment "Resolved via #${PR_NUMBER}"
 ```
@@ -486,31 +554,40 @@ gh issue close ${ISSUE_NUMBER} \
 
 **Investigation and Implementation**:
 ```bash
+
 # 1. Immediate triage
+
 gh issue view 456 --comments
+
 # Severity: P0 - All users unable to login
 
 # 2. Create hotfix branch
+
 git checkout -b hotfix/issue-456-auth-failure
 
 # 3. Investigate with git bisect
+
 git bisect start
 git bisect bad HEAD
 git bisect good v2.1.0
+
 # Found: Commit abc123 introduced the regression
 
 # 4. Implement fix with test
+
 echo 'test("validates token expiry correctly", () => {
   const token = { exp: Date.now() / 1000 - 100 };
   expect(isTokenValid(token)).toBe(false);
 });' >> auth.test.js
 
 # 5. Fix the code
+
 echo 'function isTokenValid(token) {
   return token && token.exp > Date.now() / 1000;
 }' >> auth.js
 
 # 6. Create and merge PR
+
 gh pr create --title "Hotfix #456: Fix token validation logic" \
   --body "Critical fix for authentication failure" \
   --label "hotfix,priority:critical"
@@ -522,16 +599,21 @@ gh pr create --title "Hotfix #456: Fix token validation logic" \
 
 **Complete Implementation**:
 ```python
+
 # Task breakdown in issue comment
+
 """
 Implementation Plan for #789:
+
 1. Database schema updates
 2. API endpoint creation
 3. Frontend components
 4. Testing and documentation
+
 """
 
 # Phase 1: Schema
+
 class UserProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -540,6 +622,7 @@ class UserProfile(db.Model):
     timezone = db.Column(db.String(50))
 
 # Phase 2: API Implementation
+
 @app.route('/api/profile', methods=['GET', 'PUT'])
 @require_auth
 def user_profile():
@@ -563,6 +646,7 @@ def user_profile():
         return jsonify(profile.to_dict())
 
 # Phase 3: Comprehensive testing
+
 def test_profile_update():
     response = client.put('/api/profile',
                           json={'theme': 'dark'},
@@ -640,6 +724,7 @@ Upon successful issue resolution, deliver:
 8. **Rollback Plan**: Steps to revert if issues arise post-deployment
 
 Success Criteria:
+
 - Issue thoroughly investigated with root cause identified
 - Fix implemented with comprehensive test coverage
 - Pull request created following team standards
@@ -648,6 +733,7 @@ Success Criteria:
 - Knowledge captured for future reference
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

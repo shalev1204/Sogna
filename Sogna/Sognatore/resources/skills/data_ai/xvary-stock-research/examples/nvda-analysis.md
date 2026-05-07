@@ -67,6 +67,7 @@ Re-underwrite immediately if two or more of the following occur in close success
 `Powered by XVARY Research | Full deep dive: xvary.com/stock/nvda/deep-dive/`
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

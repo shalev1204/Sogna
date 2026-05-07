@@ -286,6 +286,7 @@ topics = ["app/uninstalled"]
 uri = "/webhooks/app/uninstalled"
 
 # GDPR mandatory webhooks
+
 [webhooks.privacy_compliance]
 customer_data_request_url = "/webhooks/gdpr/data-request"
 customer_deletion_url = "/webhooks/gdpr/customer-deletion"
@@ -588,6 +589,7 @@ async function graphqlWithRetry(shop, token, query, retries = 3) {
 - Follow data retention policies
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -36,24 +36,32 @@ The orchestrator (`last30days.py`) coordinates discovery, enrichment, normalizat
 Other skills can import the research context in several ways:
 
 ### Inline Context Injection
+
 ```markdown
+
 ## Recent Research Context
+
 !python3 ~/.claude/skills/last30days/scripts/last30days.py "your topic" --emit=context
 ```
 
 ### Read from File
+
 ```markdown
+
 ## Research Context
+
 !cat ~/.local/share/last30days/out/last30days.context.md
 ```
 
 ### Get Path for Dynamic Loading
+
 ```bash
 CONTEXT_PATH=$(python3 ~/.claude/skills/last30days/scripts/last30days.py "topic" --emit=path)
 cat "$CONTEXT_PATH"
 ```
 
 ### JSON for Programmatic Use
+
 ```bash
 python3 ~/.claude/skills/last30days/scripts/last30days.py "topic" --emit=json > research.json
 ```
@@ -83,6 +91,7 @@ All outputs are written to `~/.local/share/last30days/out/`:
 - `raw_reddit_threads_enriched.json` - Enriched Reddit thread data
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

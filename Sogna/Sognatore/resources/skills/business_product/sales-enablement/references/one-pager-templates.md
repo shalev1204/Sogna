@@ -62,6 +62,7 @@ When [persona] needs to [task], they face [specific pain].
 This leads to [consequence]: [time wasted / money lost / risk].
 
 HOW IT WORKS
+
 1. [Step 1] — What happens and why it matters
 2. [Step 2] — What happens and why it matters
 3. [Step 3] — What happens and why it matters
@@ -111,6 +112,7 @@ RELEVANT PROOF
 [1-2 metrics from a similar customer]
 
 PROPOSED NEXT STEPS
+
 1. [Next step with date]
 2. [Follow-up action]
 3. [Decision timeline]
@@ -215,6 +217,7 @@ Questions? Talk to [Champion name] or [Your name at email].
 - Always include both — reps will customize, prospects want clean PDFs
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -23,21 +23,25 @@ A structured repository for creating and maintaining React Best Practices optimi
 ## Getting Started
 
 1. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 2. Build AGENTS.md from rules:
+
    ```bash
    pnpm build
    ```
 
 3. Validate rule files:
+
    ```bash
    pnpm validate
    ```
 
 4. Extract test cases:
+
    ```bash
    pnpm extract-tests
    ```
@@ -130,6 +134,7 @@ When adding or modifying rules:
 Originally created by [@shuding](https://x.com/shuding) at [Vercel](https://vercel.com).
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

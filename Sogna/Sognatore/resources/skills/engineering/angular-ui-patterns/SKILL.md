@@ -8,7 +8,6 @@ id: skill-angular-ui-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Angular UI Patterns
 
 ## Core Principles
@@ -133,10 +132,12 @@ Do we have data?
 ### Error Handling Hierarchy
 
 ```
+
 1. Inline error (field-level) → Form validation errors
 2. Toast notification → Recoverable errors, user can retry
 3. Error banner → Page-level errors, data still partially usable
 4. Full error screen → Unrecoverable, needs user action
+
 ```
 
 ### Always Show Errors
@@ -513,14 +514,17 @@ Before completing any UI component:
 - **testing-patterns**: Test all UI states
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

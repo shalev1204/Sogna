@@ -8,7 +8,6 @@ id: skill-api-patterns
 owner: [[eng-api]]
 ---
 
-
 # API Patterns
 
 > API design principles and decision-making for 2025.
@@ -64,6 +63,7 @@ Before designing an API:
 ## ❌ Anti-Patterns
 
 **DON'T:**
+
 - Default to REST for everything
 - Use verbs in REST endpoints (/getUsers)
 - Return inconsistent response formats
@@ -71,6 +71,7 @@ Before designing an API:
 - Skip rate limiting
 
 **DO:**
+
 - Choose API style based on context
 - Ask about client requirements
 - Document thoroughly
@@ -85,14 +86,17 @@ Before designing an API:
 | `scripts/api_validator.py` | API endpoint validation | `python scripts/api_validator.py <project_path>` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

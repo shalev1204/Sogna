@@ -32,4 +32,5 @@ export function ResolveVariantFromProps(props, definition, custom, visualElement
     }
     return definition;
 }
+export const resolveVariantFromProps = ResolveVariantFromProps;
 //# sourceMappingURL=resolve-variants.js.map

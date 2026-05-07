@@ -576,6 +576,7 @@ fn rwlock_example() {
 ## Best Practices
 
 ### Do's
+
 - **Prefer RAII** - Tie resource lifetime to scope
 - **Use smart pointers** - Avoid raw pointers in C++
 - **Understand ownership** - Know who owns what
@@ -583,6 +584,7 @@ fn rwlock_example() {
 - **Use tools** - AddressSanitizer, Valgrind, Miri
 
 ### Don'ts
+
 - **Don't use raw pointers** - Unless interfacing with C
 - **Don't return local references** - Dangling pointer
 - **Don't ignore compiler warnings** - They catch bugs
@@ -592,16 +594,21 @@ fn rwlock_example() {
 ## Debugging Tools
 
 ```bash
+
 # AddressSanitizer (Clang/GCC)
+
 clang++ -fsanitize=address -g source.cpp
 
 # Valgrind
+
 valgrind --leak-check=full ./program
 
 # Rust Miri (undefined behavior detector)
+
 cargo +nightly miri run
 
 # ThreadSanitizer
+
 clang++ -fsanitize=thread -g source.cpp
 ```
 
@@ -612,6 +619,7 @@ clang++ -fsanitize=thread -g source.cpp
 - [AddressSanitizer](https://clang.llvm.org/docs/AddressSanitizer.html)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

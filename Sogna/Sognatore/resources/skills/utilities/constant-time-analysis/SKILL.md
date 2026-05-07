@@ -7,12 +7,12 @@ id: skill-constant-time-analysis
 owner: [[orchestrator]]
 ---
 
-
 # Constant-Time Analysis
 
 Analyze cryptographic code to detect operations that leak secret data through execution timing variations.
 
 ## When to Use
+
 ```text
 User writing crypto code? ──yes──> Use this skill
          │
@@ -68,27 +68,35 @@ Based on the file extension or language context, refer to the appropriate guide:
 ## Quick Start
 
 ```bash
+
 # Analyze any supported file type
+
 uv run {baseDir}/ct_analyzer/analyzer.py <source_file>
 
 # Include conditional branch warnings
+
 uv run {baseDir}/ct_analyzer/analyzer.py --warnings <source_file>
 
 # Filter to specific functions
+
 uv run {baseDir}/ct_analyzer/analyzer.py --func 'sign|verify' <source_file>
 
 # JSON output for CI
+
 uv run {baseDir}/ct_analyzer/analyzer.py --json <source_file>
 ```
 
 ### Native Compiled Languages Only (C, C++, Go, Rust)
 
 ```bash
+
 # Cross-architecture testing (RECOMMENDED)
+
 uv run {baseDir}/ct_analyzer/analyzer.py --arch x86_64 crypto.c
 uv run {baseDir}/ct_analyzer/analyzer.py --arch arm64 crypto.c
 
 # Multiple optimization levels
+
 uv run {baseDir}/ct_analyzer/analyzer.py --opt-level O0 crypto.c
 uv run {baseDir}/ct_analyzer/analyzer.py --opt-level O3 crypto.c
 ```
@@ -96,13 +104,17 @@ uv run {baseDir}/ct_analyzer/analyzer.py --opt-level O3 crypto.c
 ### VM-Compiled Languages (Java, Kotlin, C#)
 
 ```bash
+
 # Analyze Java bytecode
+
 uv run {baseDir}/ct_analyzer/analyzer.py CryptoUtils.java
 
 # Analyze Kotlin bytecode (Android/JVM)
+
 uv run {baseDir}/ct_analyzer/analyzer.py CryptoUtils.kt
 
 # Analyze C# IL
+
 uv run {baseDir}/ct_analyzer/analyzer.py CryptoUtils.cs
 ```
 
@@ -111,13 +123,17 @@ Note: Java, Kotlin, and C# compile to bytecode (JVM/CIL) that runs on a virtual 
 ### Swift (iOS/macOS)
 
 ```bash
+
 # Analyze Swift for native architecture
+
 uv run {baseDir}/ct_analyzer/analyzer.py crypto.swift
 
 # Analyze for specific architecture (iOS devices)
+
 uv run {baseDir}/ct_analyzer/analyzer.py --arch arm64 crypto.swift
 
 # Analyze with different optimization levels
+
 uv run {baseDir}/ct_analyzer/analyzer.py --opt-level O0 crypto.swift
 ```
 
@@ -140,10 +156,13 @@ Note: Swift compiles to native code like C/C++/Go/Rust, so it uses assembly-leve
 **macOS users**: Homebrew installs Java and .NET as "keg-only". You must add them to your PATH:
 
 ```bash
+
 # For Java (add to ~/.zshrc)
+
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 
 # For .NET tools (add to ~/.zshrc)
+
 export PATH="$HOME/.dotnet/tools:$PATH"
 ```
 
@@ -223,6 +242,7 @@ For each flagged violation, ask: **Does this operation's input depend on secret 
 - [BearSSL Constant-Time](https://www.bearssl.org/constanttime.html) - Practical constant-time techniques
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

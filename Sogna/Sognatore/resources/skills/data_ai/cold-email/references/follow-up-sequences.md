@@ -88,6 +88,7 @@ Leverages loss aversion — removing pressure while creating scarcity through wi
 Higher in the org chart = less friction you can ask for.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

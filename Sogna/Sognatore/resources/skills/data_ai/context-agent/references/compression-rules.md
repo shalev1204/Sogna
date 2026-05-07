@@ -10,12 +10,14 @@ version: 1.0.0
 ## Quando Arquivar
 
 Uma sessão é candidata a arquivamento quando:
+
 - Está há mais de 20 sessões no passado
 - Configurable via `ARCHIVE_AFTER_SESSIONS` em `config.py`
 
 ## O que Manter no Arquivo
 
 Seções preservadas (informação durável):
+
 - **Tópicos**: sempre mantidos
 - **Decisões**: sempre mantidas (formam base de conhecimento)
 - **Tarefas pendentes**: mantidas se ainda não completadas
@@ -23,6 +25,7 @@ Seções preservadas (informação durável):
 - **Erros resolvidos**: sempre mantidos (evita re-trabalho)
 
 Seções removidas (informação efêmera):
+
 - **Métricas**: tokens, contadores (dados transitórios)
 - **Arquivos modificados**: detalhes granulares desnecessários a longo prazo
 - **Dívida técnica**: frequentemente já resolvida
@@ -33,14 +36,18 @@ Quando `archive/` acumula 5+ sessões individuais, elas são consolidadas
 em um único `ARCHIVE_YYYY.md` com formato ultra-compacto:
 
 ```markdown
+
 # Arquivo Consolidado — 2026
 
 ### Sessão 001 — 2026-01-15
+
   - Decisão sobre arquitetura
   - Decisão sobre banco de dados
 
 ### Sessão 002 — 2026-01-20
+
   - Decisão sobre API
+
 ```
 
 Apenas cabeçalhos e decisões são mantidos na consolidação.
@@ -71,6 +78,7 @@ maintain
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

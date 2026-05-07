@@ -8,12 +8,12 @@ id: skill-vibers-code-review
 owner: [[orchestrator]]
 ---
 
-
 # Vibers — Human Code Review for AI-Generated Projects
 
 You push code. We review it against your spec, fix issues, and send a PR.
 
 ## When to Use
+
 Use this skill when:
 
 - You want human review for AI-generated code pushed to GitHub
@@ -41,11 +41,15 @@ jobs:
   review:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 2
+
       - uses: marsiandeployer/vibers-action@v1
+
         with:
           spec_url: 'https://docs.google.com/document/d/YOUR_SPEC_ID/edit'
           telegram_contact: '@your_telegram'
@@ -62,9 +66,11 @@ jobs:
 Add this block to your project's `CLAUDE.md`, `.cursorrules`, or `AGENTS.md`:
 
 ```markdown
+
 ## Commit messages
 
 Every commit MUST include a "How to test" section in the body:
+
 - Live URL to open and verify the change
 - Step-by-step what to click/check
 - Test credentials if login is required
@@ -74,11 +80,13 @@ Example:
   feat: Add user registration form
 
   How to test:
+
   - Open https://myapp.vercel.app/register
   - Fill in email/password, submit
   - Check that confirmation email arrives
   - Try submitting with invalid email — should show error
   - Login: test@example.com / demo123
+
 ```
 
 Without "How to test" the reviewer has to guess what to verify, and the review takes longer.
@@ -125,6 +133,7 @@ curl -X POST https://vibers.onout.org/feedback \
 Both `message` and `repo` are required. Response: `{"status": "accepted"}`.
 
 Contacts:
+
 - Telegram: [@onoutnoxon](https://t.me/onoutnoxon)
 - Moltbook: [moltbook.com](https://moltbook.com) — user **noxon**
 - GitHub: [marsiandeployer](https://github.com/marsiandeployer)
@@ -144,6 +153,7 @@ Comment on the PR. We discuss and adjust.
 Yes — write to Telegram with your code and spec.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

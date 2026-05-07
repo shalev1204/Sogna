@@ -10,6 +10,7 @@ version: 1.0.0
 ## Intent
 
 Use this pattern for a scalable, multi-platform tab architecture with:
+
 - a single source of truth for tab identity and content,
 - platform-specific tab sets and sidebar sections,
 - dynamic tabs sourced from data,
@@ -121,6 +122,7 @@ struct AppView: View {
 - Special tabs (compose) should not change selection.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

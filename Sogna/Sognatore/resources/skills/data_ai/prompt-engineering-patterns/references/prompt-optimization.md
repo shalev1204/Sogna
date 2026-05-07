@@ -10,6 +10,7 @@ version: 1.0.0
 ## Systematic Refinement Process
 
 ### 1. Baseline Establishment
+
 ```python
 def establish_baseline(prompt, test_cases):
     results = {
@@ -33,6 +34,7 @@ def establish_baseline(prompt, test_cases):
 ```
 
 ### 2. Iterative Refinement Workflow
+
 ```
 Initial Prompt → Test → Analyze Failures → Refine → Test → Repeat
 ```
@@ -71,6 +73,7 @@ class PromptOptimizer:
 ```
 
 ### 3. A/B Testing Framework
+
 ```python
 class PromptABTest:
     def __init__(self, variant_a, variant_b):
@@ -123,6 +126,7 @@ class PromptABTest:
 ## Optimization Strategies
 
 ### Token Reduction
+
 ```python
 def optimize_for_tokens(prompt):
     optimizations = [
@@ -151,6 +155,7 @@ def optimize_for_tokens(prompt):
 ```
 
 ### Latency Reduction
+
 ```python
 def optimize_for_latency(prompt):
     strategies = {
@@ -174,6 +179,7 @@ def optimize_for_latency(prompt):
 ```
 
 ### Accuracy Improvement
+
 ```python
 def improve_accuracy(prompt, failure_cases):
     improvements = []
@@ -201,6 +207,7 @@ def improve_accuracy(prompt, failure_cases):
 ## Performance Metrics
 
 ### Core Metrics
+
 ```python
 class PromptMetrics:
     @staticmethod
@@ -237,6 +244,7 @@ class PromptMetrics:
 ```
 
 ### Automated Evaluation
+
 ```python
 def evaluate_prompt_comprehensively(prompt, test_suite):
     results = {
@@ -281,6 +289,7 @@ def evaluate_prompt_comprehensively(prompt, test_suite):
 ## Failure Analysis
 
 ### Categorizing Failures
+
 ```python
 class FailureAnalyzer:
     def categorize_failures(self, test_results):
@@ -333,6 +342,7 @@ class FailureAnalyzer:
 ## Versioning and Rollback
 
 ### Prompt Version Control
+
 ```python
 class PromptVersionControl:
     def __init__(self, storage_path):
@@ -388,24 +398,28 @@ class PromptVersionControl:
 ## Common Optimization Patterns
 
 ### Pattern 1: Add Structure
+
 ```
 Before: "Analyze this text"
 After: "Analyze this text for:\n1. Main topic\n2. Key arguments\n3. Conclusion"
 ```
 
 ### Pattern 2: Add Examples
+
 ```
 Before: "Extract entities"
 After: "Extract entities\\n\\nExample:\\nText: Apple released iPhone\\nEntities: {company: Apple, product: iPhone}"
 ```
 
 ### Pattern 3: Add Constraints
+
 ```
 Before: "Summarize this"
 After: "Summarize in exactly 3 bullet points, 15 words each"
 ```
 
 ### Pattern 4: Add Verification
+
 ```
 Before: "Calculate..."
 After: "Calculate... Then verify your calculation is correct before responding."
@@ -421,6 +435,7 @@ After: "Calculate... Then verify your calculation is correct before responding."
 - Latency profilers
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

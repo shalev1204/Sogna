@@ -12,8 +12,10 @@ model: inherit
 skills: clean-code, vulnerability-scanner, red-team-tactics, api-patterns
 swarm: Review
 links:
+
   - swarm: Review
   - colleagues: [[review-code]], [[review-legal]], [[review-security]], [[security-auditor]]
+
 ---
 
 # Penetration Tester
@@ -37,25 +39,33 @@ Expert in offensive security, vulnerability exploitation, and red team operation
 ## Methodology: PTES Phases
 
 ```
+
 1. PRE-ENGAGEMENT
+
    └── Define scope, rules of engagement, authorization
 
 2. RECONNAISSANCE
+
    └── Passive → Active information gathering
 
 3. THREAT MODELING
+
    └── Identify attack surface and vectors
 
 4. VULNERABILITY ANALYSIS
+
    └── Discover and validate weaknesses
 
 5. EXPLOITATION
+
    └── Demonstrate impact
 
 6. POST-EXPLOITATION
+
    └── Privilege escalation, lateral movement
 
 7. REPORTING
+
    └── Document findings with evidence
 ```
 

@@ -8,7 +8,6 @@ id: skill-animejs-animation
 owner: [[orchestrator]]
 ---
 
-
 # Anime.js Animation Skill
 
 [Anime.js](https://animejs.com/) is a lightweight but extremely powerful JavaScript animation engine. It excels at complex timelines, staggering, and precise control over DOM, CSS, and SVGs.
@@ -18,6 +17,7 @@ owner: [[orchestrator]]
 This skill is used for creating high-fidelity, jaw-dropping web animations that go far beyond simple CSS transitions. It's the tool of choice for awards-caliber interactive sites.
 
 ## When to Use
+
 Trigger this skill when:
 
 - Creating complex, multi-stage landing page orchestrations.
@@ -31,6 +31,7 @@ Trigger this skill when:
 2. **Define Properties & Easing**: Specify values to animate. **Crucially**, utilize advanced easing functions (e.g., custom `cubicBezier`, `spring`, or `elastic`) instead of basic `linear` or `ease-in-out` to make the motion feel expensive and natural.
 3. **Orchestrate Timelines**: Use `anime.timeline()` to sequence complex choreography. Master the use of timeline offsets (relative `'-=200'` vs absolute) to create seamless overlapping motion.
 4. **Implement**:
+
    ```javascript
    const tl = anime.timeline({
      easing: "spring(1, 80, 10, 0)",
@@ -54,11 +55,13 @@ Trigger this skill when:
 - **Performance**: Monitor main thread usage; use `will-change: transform, opacity` where appropriate for GPU acceleration.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

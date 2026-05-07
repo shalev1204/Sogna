@@ -7,10 +7,10 @@ id: skill-threejs-interaction
 owner: [[biz-hr]]
 ---
 
-
 # Three.js Interaction
 
 ## When to Use
+
 - You need user interaction inside a Three.js scene.
 - The task involves raycasting, object picking, pointer handling, touch input, or camera controls.
 - You are building an interactive 3D experience rather than a passive render.
@@ -682,11 +682,13 @@ clickables.push(collisionMesh);
 - `threejs-shaders` - Visual feedback effects
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

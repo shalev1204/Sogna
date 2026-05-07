@@ -1,4 +1,4 @@
-import { GroupAnimation } from "../animation/groupanimation.js";
+import { GroupAnimation } from "../animation/GroupAnimation.js";
 import type { AnimationOptions } from "../animation/types.js";
 import { type ElementOrSelector } from "../utils/resolve-elements.js";
 type LayoutAnimationScope = Element | Document;

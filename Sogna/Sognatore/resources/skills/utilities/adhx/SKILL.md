@@ -8,7 +8,6 @@ id: skill-adhx
 owner: [[orchestrator]]
 ---
 
-
 # ADHX - X/Twitter Post Reader
 
 Fetch any X/Twitter post as structured JSON for analysis using the ADHX API.
@@ -45,9 +44,11 @@ When a user shares an X/Twitter link:
 
 1. **Parse the URL** to extract `username` and `statusId` from the path segments
 2. **Fetch the JSON** using curl:
+
 ```bash
 curl -s "https://adhx.com/api/share/tweet/{username}/{statusId}"
 ```
+
 3. **Use the structured response** to answer the user's question (summarize, analyze, extract key points, etc.)
 
 ## Response Schema
@@ -81,11 +82,13 @@ curl -s "https://adhx.com/api/share/tweet/{username}/{statusId}"
 ## Installation
 
 ### Option A: Claude Code plugin marketplace (recommended)
+
 ```
 /plugin marketplace add itsmemeworks/adhx
 ```
 
 ### Option B: Manual install
+
 ```bash
 curl -sL https://raw.githubusercontent.com/itsmemeworks/adhx/main/skills/adhx/SKILL.md -o ~/.claude/skills/adhx/SKILL.md
 ```
@@ -130,11 +133,13 @@ User: "How many likes did this tweet get? https://x.com/handle/status/123"
 - [ADHX Website](https://adhx.com)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-last30days
 owner: [[orchestrator]]
 ---
 
-
 # last30days: Research Any Topic from the Last 30 Days
 
 Research ANY topic across Reddit, X, and the web. Surface what people are actually discussing, recommending, and debating right now.
@@ -70,13 +69,17 @@ If the user wants to add API keys for better results:
 ```bash
 mkdir -p ~/.config/last30days
 cat > ~/.config/last30days/.env << 'ENVEOF'
+
 # last30days API Configuration
+
 # Both keys are optional - skill works with WebSearch fallback
 
 # For Reddit research (uses OpenAI's web_search tool)
+
 OPENAI_API_KEY=
 
 # For X/Twitter research (uses xAI's x_search tool)
+
 XAI_API_KEY=
 ENVEOF
 
@@ -242,6 +245,7 @@ Identify from the ACTUAL RESEARCH OUTPUT:
 
 ```
 🏆 Most mentioned:
+
 1. [Specific name] - mentioned {n}x (r/sub, @handle, blog.com)
 2. [Specific name] - mentioned {n}x (sources)
 3. [Specific name] - mentioned {n}x (sources)
@@ -259,9 +263,11 @@ What I learned:
 [2-4 sentences synthesizing key insights FROM THE ACTUAL RESEARCH OUTPUT.]
 
 KEY PATTERNS I'll use:
+
 1. [Pattern from research]
 2. [Pattern from research]
 3. [Pattern from research]
+
 ```
 
 **THEN - Stats (right before invitation):**
@@ -286,8 +292,10 @@ For **web-only mode** (no API keys):
 └─ Top sources: {author1} on {site1}, {author2} on {site2}
 
 💡 Want engagement metrics? Add API keys to ~/.config/last30days/.env
+
    - OPENAI_API_KEY → Reddit (real upvotes & comments)
    - XAI_API_KEY → X/Twitter (real likes & reposts)
+
 ```
 
 **LAST - Invitation:**
@@ -307,10 +315,12 @@ Share your vision for what you want to create and I'll write a thoughtful prompt
 What tool will you use these prompts with?
 
 Options:
+
 1. [Most relevant tool based on research - e.g., if research mentioned Figma/Sketch, offer those]
 2. Nano Banana Pro (image generation)
 3. ChatGPT / Claude (text/code)
 4. Other (tell me)
+
 ```
 
 **IMPORTANT**: After displaying this, WAIT for the user to respond. Don't dump generic prompts.
@@ -427,14 +437,17 @@ Want another prompt? Just tell me what you're creating next.
 ```
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

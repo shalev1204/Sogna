@@ -53,6 +53,7 @@ Customize this tree for your business. The key principle: **route to the most sp
 ### HubSpot Round-Robin Setup
 
 **Using HubSpot's rotation tool:**
+
 - Navigate to Automation → Workflows
 - Trigger: Contact property "Lifecycle Stage" equals "MQL"
 - Action: Rotate contact owner among selected users
@@ -60,6 +61,7 @@ Customize this tree for your business. The key principle: **route to the most sp
 - Add delay + task creation after assignment
 
 **Custom rotation with workflows:**
+
 1. Create a custom property "Rotation Counter" (number)
 2. Workflow trigger: New MQL created
 3. Branch by rotation counter value (0, 1, 2... for each rep)
@@ -70,11 +72,13 @@ Customize this tree for your business. The key principle: **route to the most sp
 ### Salesforce Round-Robin Setup
 
 **Using Lead Assignment Rules:**
+
 1. Setup → Feature Settings → Marketing → Lead Assignment Rules
 2. Create rule entries in priority order (most specific first)
 3. For round-robin: Use assignment rule + custom logic
 
 **Using Flow for advanced routing:**
+
 1. Create a Record-Triggered Flow on Lead creation
 2. Get Records: Query a custom "Rep Queue" object for next available rep
 3. Decision element: Check rep availability, capacity, territory
@@ -155,6 +159,7 @@ Lead arrives
 ### Multi-Contact Handling
 
 When multiple contacts from the same account engage:
+
 - Route all contacts to the **same account owner**
 - Notify the owner of new contacts entering
 - Track account-level engagement score (sum of all contacts)
@@ -192,6 +197,7 @@ Source: Lead Connect, InsideSales.com
 
 **Trigger:** New MQL created
 **Actions:**
+
 1. Assign to rep via routing rules (instant)
 2. Send push notification + email to rep
 3. Create task: "Contact [Lead Name] — 5 min SLA"
@@ -203,6 +209,7 @@ Source: Lead Connect, InsideSales.com
 ### Measuring Speed-to-Lead
 
 Track these metrics weekly:
+
 - **Average time to first contact** (from MQL creation to first call/email)
 - **Median time to first contact** (less skewed by outliers)
 - **% of leads contacted within SLA** (target: 90%+)
@@ -210,6 +217,7 @@ Track these metrics weekly:
 - **Conversion rate by response time** (prove the ROI of speed)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

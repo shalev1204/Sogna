@@ -21,9 +21,11 @@ gem install anthropic
 require "anthropic"
 
 # Default (uses ANTHROPIC_API_KEY env var)
+
 client = Anthropic::Client.new
 
 # Explicit API key
+
 client = Anthropic::Client.new(api_key: "your-api-key")
 ```
 
@@ -94,6 +96,7 @@ end
 See the [shared tool use concepts](../shared/tool-use-concepts.md) for the tool definition format and agentic loop pattern.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

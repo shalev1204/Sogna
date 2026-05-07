@@ -59,6 +59,7 @@ Context: Apple guidance on diagnosing SwiftUI performance with Instruments and a
 - Re-record after changes to confirm reduced update counts and fewer hitches.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

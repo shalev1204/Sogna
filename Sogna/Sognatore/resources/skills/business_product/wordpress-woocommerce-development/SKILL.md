@@ -9,7 +9,6 @@ id: skill-wordpress-woocommerce-development
 owner: [[prod-pm]]
 ---
 
-
 # WordPress WooCommerce Development Workflow
 
 ## Overview
@@ -46,6 +45,7 @@ Specialized workflow for building WooCommerce stores including setup, payment ga
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Setting up WooCommerce stores
 - Integrating payment gateways
 - Configuring shipping methods
@@ -58,10 +58,12 @@ Use this workflow when:
 ### Phase 1: Store Setup
 
 #### Skills to Invoke
+
 - `app-builder` - Project scaffolding
 - `wordpress-penetration-testing` - WordPress patterns
 
 #### Actions
+
 1. Install WooCommerce
 2. Run setup wizard
 3. Configure store settings
@@ -70,6 +72,7 @@ Use this workflow when:
 6. Test with WordPress 7.0 admin
 
 #### WordPress 7.0 + WooCommerce Setup
+
 ```php
 // Minimum requirements for WP 7.0 + WooCommerce
 // Add to wp-config.php for collaboration settings
@@ -81,6 +84,7 @@ define('WP_COLLABORATION_MAX_USERS', 10);
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @app-builder to set up WooCommerce store
 ```
@@ -88,9 +92,11 @@ Use @app-builder to set up WooCommerce store
 ### Phase 2: Product Configuration
 
 #### Skills to Invoke
+
 - `wordpress-penetration-testing` - WooCommerce patterns
 
 #### Actions
+
 1. Create product categories
 2. Add product attributes
 3. Configure product types
@@ -98,6 +104,7 @@ Use @app-builder to set up WooCommerce store
 5. Add product images
 
 #### AI-Powered Product Descriptions (WP 7.0)
+
 ```php
 // Auto-generate product descriptions with AI
 add_action('woocommerce_new_product', 'generate_ai_description', 10, 2);
@@ -142,6 +149,7 @@ function generate_ai_product_description($product_id, $product) {
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @wordpress-penetration-testing to configure WooCommerce products
 ```
@@ -149,11 +157,13 @@ Use @wordpress-penetration-testing to configure WooCommerce products
 ### Phase 3: Payment Integration
 
 #### Skills to Invoke
+
 - `payment-integration` - Payment processing
 - `stripe-integration` - Stripe
 - `paypal-integration` - PayPal
 
 #### Actions
+
 1. Choose payment gateways
 2. Configure Stripe
 3. Set up PayPal
@@ -161,6 +171,7 @@ Use @wordpress-penetration-testing to configure WooCommerce products
 5. Test payment flows
 
 #### WordPress 7.0 AI for Payments
+
 ```php
 // AI-powered fraud detection
 // Note: This is a demonstration - implement proper fraud detection with multiple signals
@@ -199,6 +210,7 @@ function ai_check_order_fraud($order_id) {
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @stripe-integration to integrate Stripe payments
 ```
@@ -210,9 +222,11 @@ Use @paypal-integration to integrate PayPal
 ### Phase 4: Shipping Configuration
 
 #### Skills to Invoke
+
 - `wordpress-penetration-testing` - WooCommerce shipping
 
 #### Actions
+
 1. Set up shipping zones
 2. Configure shipping methods
 3. Add flat rate shipping
@@ -220,6 +234,7 @@ Use @paypal-integration to integrate PayPal
 5. Integrate carriers
 
 #### AI Shipping Recommendations (WP 7.0)
+
 ```php
 // AI-powered shipping recommendations
 add_action('woocommerce_after_checkout_form', 'ai_shipping_recommendations');
@@ -257,6 +272,7 @@ function ai_shipping_recommendations($checkout) {
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @wordpress-penetration-testing to configure shipping
 ```
@@ -264,10 +280,12 @@ Use @wordpress-penetration-testing to configure shipping
 ### Phase 5: Store Customization
 
 #### Skills to Invoke
+
 - `frontend-developer` - Store customization
 - `frontend-design` - Store design
 
 #### Actions
+
 1. Customize product pages
 2. Modify cart page
 3. Style checkout flow
@@ -275,6 +293,7 @@ Use @wordpress-penetration-testing to configure shipping
 5. Add custom fields
 
 #### WordPress 7.0 Template Customization
+
 ```php
 // Custom product template with WP 7.0 blocks
 add_action('woocommerce_after_main_content', 'add_product_ai_chat');
@@ -330,6 +349,7 @@ function handle_ai_product_question() {
     
     $prompt = sprintf(
         'Customer question about "%s": %s\n\nProduct details:
+
 - Price: $%s
 - SKU: %s
 - Stock: %s
@@ -360,6 +380,7 @@ Answer helpfully, accurately, and concisely:',
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @frontend-developer to customize WooCommerce templates
 ```
@@ -367,9 +388,11 @@ Use @frontend-developer to customize WooCommerce templates
 ### Phase 6: Extensions
 
 #### Skills to Invoke
+
 - `wordpress-penetration-testing` - WooCommerce extensions
 
 #### Actions
+
 1. Install required extensions
 2. Configure subscriptions
 3. Set up bookings
@@ -377,6 +400,7 @@ Use @frontend-developer to customize WooCommerce templates
 5. Integrate marketplace
 
 #### Abilities API for WooCommerce (WP 7.0)
+
 ```php
 // Register ability categories first
 add_action('wp_abilities_api_categories_init', function() {
@@ -478,6 +502,7 @@ function woocommerce_process_order_handler($input) {
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @wordpress-penetration-testing to configure WooCommerce extensions
 ```
@@ -485,10 +510,12 @@ Use @wordpress-penetration-testing to configure WooCommerce extensions
 ### Phase 7: Optimization
 
 #### Skills to Invoke
+
 - `web-performance-optimization` - Performance
 - `database-optimizer` - Database optimization
 
 #### Actions
+
 1. Optimize product images
 2. Enable caching
 3. Optimize database
@@ -496,12 +523,14 @@ Use @wordpress-penetration-testing to configure WooCommerce extensions
 5. Set up lazy loading
 
 #### WordPress 7.0 Performance
+
 - Client-side media processing
 - Font Library enabled
 - Responsive grid block
 - View transitions for perceived performance
 
 #### Copy-Paste Prompts
+
 ```
 Use @web-performance-optimization to optimize WooCommerce store
 ```
@@ -509,10 +538,12 @@ Use @web-performance-optimization to optimize WooCommerce store
 ### Phase 8: Testing
 
 #### Skills to Invoke
+
 - `playwright-skill` - E2E testing
 - `test-automator` - Test automation
 
 #### Actions
+
 1. Test checkout flow
 2. Verify payment processing
 3. Test email notifications
@@ -520,12 +551,14 @@ Use @web-performance-optimization to optimize WooCommerce store
 5. Performance testing
 
 #### WordPress 7.0 Testing
+
 - Test with new admin interface
 - Verify AI features work
 - Test DataViews for orders
 - Verify collaboration features
 
 #### AI-Powered Store Testing
+
 ```php
 // Automated AI testing for fraud detection during checkout
 add_action('woocommerce_after_checkout_validation', 'ai_validate_order', 20);
@@ -580,6 +613,7 @@ function ai_validate_order($fields, $errors) {
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @playwright-skill to test WooCommerce checkout flow
 ```
@@ -630,11 +664,13 @@ Use @playwright-skill to test WooCommerce checkout flow
 - `payment-integration` - Payment processing
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

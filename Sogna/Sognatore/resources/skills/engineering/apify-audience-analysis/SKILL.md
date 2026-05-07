@@ -7,17 +7,18 @@ id: skill-apify-audience-analysis
 owner: [[eng-api]]
 ---
 
-
 # Audience Analysis
 
 Analyze and understand your audience using Apify Actors to extract follower demographics, engagement patterns, and behavior data from multiple platforms.
 
 ## When to Use
+
 - You need audience demographics, engagement patterns, or follower behavior from social platforms.
 - The task is to choose and run Apify Actors for audience analysis across Facebook, Instagram, YouTube, or TikTok.
 - You need structured extraction plus a summarized interpretation of audience findings.
 
 ## Prerequisites
+
 (No need to check it upfront)
 
 - `.env` file with `APIFY_TOKEN`
@@ -30,11 +31,13 @@ Copy this checklist and track progress:
 
 ```
 Task Progress:
+
 - [ ] Step 1: Identify audience analysis type (select Actor)
 - [ ] Step 2: Fetch Actor schema via mcpc
 - [ ] Step 3: Ask user preferences (format, filename)
 - [ ] Step 4: Run the analysis script
 - [ ] Step 5: Summarize findings
+
 ```
 
 ### Step 1: Identify Audience Analysis Type
@@ -74,6 +77,7 @@ export $(grep APIFY_TOKEN .env | xargs) && mcpc --json mcp.apify.com --header "A
 Replace `ACTOR_ID` with the selected Actor (e.g., `apify/facebook-followers-following-scraper`).
 
 This returns:
+
 - Actor description and README
 - Required and optional input parameters
 - Output fields (if available)
@@ -81,6 +85,7 @@ This returns:
 ### Step 3: Ask User Preferences
 
 Before running, ask:
+
 1. **Output format**:
    - **Quick answer** - Display top few results in chat (no file saved)
    - **CSV** - Full export with all fields
@@ -117,6 +122,7 @@ node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
 ### Step 5: Summarize Findings
 
 After completion, report:
+
 - Number of audience members/profiles analyzed
 - File location and name
 - Key demographic insights
@@ -131,11 +137,13 @@ After completion, report:
 `Timeout` - Reduce input size or increase `--timeout`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -344,22 +344,29 @@ Without haptics:
 ### Reducing Mobile Cognitive Load
 
 ```
+
 1. ONE PRIMARY ACTION per screen
+
    └── Clear what to do next
    
 2. PROGRESSIVE DISCLOSURE
+
    └── Show only what's needed now
    
 3. SMART DEFAULTS
+
    └── Pre-fill what you can
    
 4. CHUNKING
+
    └── Break long forms into steps
    
 5. RECOGNITION over RECALL
+
    └── Show options, don't make user remember
    
 6. CONTEXT PERSISTENCE
+
    └── Save state on interrupt/background
 ```
 

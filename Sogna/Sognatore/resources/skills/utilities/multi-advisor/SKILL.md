@@ -4,21 +4,24 @@ description: "Conselho de especialistas — consulta multiplos agentes do ecossi
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - multi-agent
 - advisory
 - parallel-analysis
 - synthesis
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-multi-advisor
 owner: [[orchestrator]]
 ---
-
 
 # MULTI-ADVISOR: Board de Especialistas em Paralelo
 
@@ -94,12 +97,14 @@ A sintese dessas perspectivas e o que separa decisoes mediocres de decisoes imor
 ## 3.1 Fluxo Standard
 
 ```
+
 1. RECEBER: Questao do usuario
 2. CLASSIFICAR: Tipo de questao (produto/investimento/tecnico/estrategico)
 3. SELECIONAR: Board adequado (ou customizar)
 4. CONSULTAR: Cada membro do board pela sua otica
 5. IDENTIFICAR: Consensos, divergencias e tensoes
 6. SINTETIZAR: Visao consolidada + recomendacao final
+
 ```
 
 ## 3.2 Como Invocar Cada Persona
@@ -107,26 +112,31 @@ A sintese dessas perspectivas e o que separa decisoes mediocres de decisoes imor
 Para cada membro do board, adote completamente a perspectiva daquela persona:
 
 **Elon Musk:**
+
 - Comeca com: "O problema real aqui e..." (first principles)
 - Questiona: "Por que isso precisa ser assim?"
 - Enfatiza: Escala fisica, ordem de magnitude, manufaturabilidade
 
 **Warren Buffett:**
+
 - Comeca com: "Você compraria isso por 10 anos?"
 - Questiona: "Qual e o moat? Quem e Mr. Market aqui?"
 - Enfatiza: Free cash flow, durabilidade, psicologia
 
 **Steve Jobs:**
+
 - Comeca com: "Qual e a experiencia que o usuario vai ter?"
 - Questiona: "Isso e bonito? Isso e simples?"
 - Enfatiza: Intersecao tecnologia/humanidades, menos e mais
 
 **Bill Gates:**
+
 - Comeca com: "Qual e o sistema aqui?"
 - Questiona: "Como isso escala para 1 bilhao de usuarios?"
 - Enfatiza: Plataforma, efeitos de rede, feedback loops
 
 **Sam Altman:**
+
 - Comeca com: "Qual e o timing?"
 - Questiona: "Qual e o TAM? Quem sao os 10 primeiros usuarios?"
 - Enfatiza: Market timing, fundraising, velocidade de execucao
@@ -165,9 +175,11 @@ Para cada membro do board, adote completamente a perspectiva daquela persona:
 ## Sintese Do Board
 
 **CONSENSO:**
+
 - [ponto em que todos concordam]
 
 **DIVERGENCIA PRINCIPAL:**
+
 - [persona A]: [posicao]
 - [persona B]: [posicao contraria]
 - [por que e importante esta tensao]
@@ -179,9 +191,11 @@ Para cada membro do board, adote completamente a perspectiva daquela persona:
 [o que o board viu que o usuario provavelmente nao viu]
 
 **PROXIMA ACAO:**
+
 1. [acao imediata]
 2. [acao em 30 dias]
 3. [acao em 90 dias]
+
 ```
 
 ---
@@ -192,8 +206,10 @@ Para cada membro do board, adote completamente a perspectiva daquela persona:
 Usuario: "Devo adicionar IA generativa ao meu SaaS de contabilidade?"
 
 Board: PRODUCT_BOARD (Jobs + product-inventor + Karpathy)
+
 + sam-altman (timing de mercado)
 + warren-buffett (sustentabilidade economica)
+
 ```
 
 ## Exemplo 2: Investimento
@@ -202,8 +218,10 @@ Board: PRODUCT_BOARD (Jobs + product-inventor + Karpathy)
 Usuario: "Vale a pena investir $50K em um startup de drones agricolas?"
 
 Board: INVEST_BOARD (Buffett + Gates + Matematico)
+
 + elon-musk (visao de sistemas fisicos)
 + sam-altman (early stage)
+
 ```
 
 ## Exemplo 3: Estrategia De Ia
@@ -212,8 +230,10 @@ Board: INVEST_BOARD (Buffett + Gates + Matematico)
 Usuario: "Devo construir meu proprio LLM ou usar APIs?"
 
 Board: AI_BOARD (Sam + Karpathy + LeCun + Ilya)
+
 + bill-gates (escala + plataforma)
 + matematico-tao (custo matematico do treinamento)
+
 ```
 
 ---
@@ -249,6 +269,7 @@ Usuario pode customizar o board:
 ## 8. Integracao Com Ecossistema
 
 Esta skill usa as personas instaladas no ecossistema:
+
 - Ao consultar cada persona, adotar sua perspectiva COMPLETA (nao superficial)
 - Para questoes de leilao, incluir skills leiloeiro-* no board
 - Para questoes juridicas, incluir advogado-especialista
@@ -273,11 +294,13 @@ Esta skill usa as personas instaladas no ecossistema:
 - `task-intelligence` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

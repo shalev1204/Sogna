@@ -8,7 +8,6 @@ id: skill-azure-ai-vision-imageanalysis-py
 owner: [[ops-security]]
 ---
 
-
 # Azure AI Vision Image Analysis SDK for Python
 
 Client library for Azure AI Vision 4.0 image analysis including captions, tags, objects, OCR, and more.
@@ -263,14 +262,17 @@ except HttpResponseError as e:
 7. **Cache results** when analyzing the same image multiple times
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -11,12 +11,12 @@ id: skill-pipecat-friday-agent
 owner: [[orchestrator]]
 ---
 
-
 # Pipecat Friday Agent
 
 ## Overview
 
 This skill provides a blueprint for building **F.R.I.D.A.Y.** (Replacement Integrated Digital Assistant Youth), a local voice assistant inspired by the tactical AI from the Iron Man films. It uses the **Pipecat** framework to orchestrate a low-latency pipeline:
+
 - **STT**: OpenAI Whisper (`whisper-1`) or `gpt-4o-transcribe`
 - **LLM**: Google Gemini 2.5 Flash (via a compatibility shim)
 - **TTS**: OpenAI TTS (`nova` voice)
@@ -56,9 +56,11 @@ python scripts/friday_agent.py
 ## Core Concepts
 
 ### Pipeline Architecture
+
 The agent follows a linear pipeline: `Mic -> VAD -> STT -> LLM -> TTS -> Speaker`. This allows for granular control over each stage, unlike end-to-end speech-to-speech models.
 
 ### Google Compatibility Shim
+
 Since Google's Gemini API has a different message format than OpenAI's standard (which Pipecat aggregators expect), the script includes a `GoogleSafeContext` and `GoogleSafeMessage` class to bridge the gap.
 
 ## Best Practices
@@ -82,11 +84,13 @@ Since Google's Gemini API has a different message format than OpenAI's standard 
 - `@llm-architect` - Optimizing the LLM layer.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

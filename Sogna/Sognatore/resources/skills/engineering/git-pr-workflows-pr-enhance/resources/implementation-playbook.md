@@ -14,9 +14,11 @@ This file contains detailed patterns, checklists, and code samples referenced by
 You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and ensure PRs follow best practices for clarity, size, and reviewability.
 
 ## Context
+
 The user needs to create or improve pull requests with detailed descriptions, proper documentation, test coverage analysis, and review facilitation. Focus on making PRs that are easy to review, well-documented, and include all necessary context.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -112,6 +114,7 @@ def generate_pr_description(analysis, commits):
     Generate detailed PR description from analysis
     """
     description = f"""
+
 ## Summary
 
 {generate_summary(analysis, commits)}
@@ -370,6 +373,7 @@ def suggest_pr_splits(analysis):
         suggestions = analyze_split_opportunities(analysis)
 
         return f"""
+
 ## ⚠️ Large PR Detected
 
 This PR changes {stats['files_changed']} files with {stats['insertions'] + stats['deletions']} total changes.
@@ -387,16 +391,21 @@ Large PRs are harder to review and more likely to introduce bugs.
 4. Repeat for remaining units
 
 ```bash
+
 # Example split workflow
+
 git checkout -b feature/part-1
 git cherry-pick <commit-hashes-for-part-1>
 git push origin feature/part-1
+
 # Create PR for part 1
 
 git checkout -b feature/part-2
 git cherry-pick <commit-hashes-for-part-2>
 git push origin feature/part-2
+
 # Create PR for part 2
+
 ```
 """
 
@@ -436,6 +445,7 @@ def generate_architecture_diff(analysis):
     """
     if has_architectural_changes(analysis):
         return f"""
+
 ## Architecture Changes
 
 ```mermaid
@@ -457,9 +467,11 @@ graph LR
 ```
 
 ### Key Changes:
+
 1. Added caching layer for performance
 2. Introduced API gateway for better routing
 3. Refactored component communication
+
 """
     return ""
 ```
@@ -481,6 +493,7 @@ def generate_coverage_report(base_branch='main'):
     coverage_diff = after_coverage - before_coverage
 
     report = f"""
+
 ## Test Coverage
 
 | Metric | Before | After | Change |
@@ -490,6 +503,7 @@ def generate_coverage_report(base_branch='main'):
 | Branches | {before_coverage['branches']:.1f}% | {after_coverage['branches']:.1f}% | {format_diff(coverage_diff['branches'])} |
 
 ### Uncovered Files
+
 """
 
     # List files with low coverage
@@ -529,6 +543,7 @@ def calculate_pr_risk(analysis):
     overall_risk = sum(risk_factors.values()) / len(risk_factors)
 
     risk_report = f"""
+
 ## Risk Assessment
 
 **Overall Risk Level**: {get_risk_level(overall_risk)} ({overall_risk:.1f}/10)
@@ -573,74 +588,94 @@ def generate_pr_template(pr_type, analysis):
     """
     templates = {
         'feature': f"""
+
 ## Feature: {extract_feature_name(analysis)}
 
 ### Description
+
 {generate_feature_description(analysis)}
 
 ### User Story
+
 As a [user type]
 I want [feature]
 So that [benefit]
 
 ### Acceptance Criteria
+
 - [ ] Criterion 1
 - [ ] Criterion 2
 - [ ] Criterion 3
 
 ### Demo
+
 [Link to demo or screenshots]
 
 ### Technical Implementation
+
 {generate_technical_summary(analysis)}
 
 ### Testing Strategy
+
 {generate_test_strategy(analysis)}
 """,
         'bugfix': f"""
+
 ## Bug Fix: {extract_bug_description(analysis)}
 
 ### Issue
+
 - **Reported in**: #[issue-number]
 - **Severity**: {determine_severity(analysis)}
 - **Affected versions**: {get_affected_versions(analysis)}
 
 ### Root Cause
+
 {analyze_root_cause(analysis)}
 
 ### Solution
+
 {describe_solution(analysis)}
 
 ### Testing
+
 - [ ] Bug is reproducible before fix
 - [ ] Bug is resolved after fix
 - [ ] No regressions introduced
 - [ ] Edge cases tested
 
 ### Verification Steps
+
 1. Step to reproduce original issue
 2. Apply this fix
 3. Verify issue is resolved
+
 """,
         'refactor': f"""
+
 ## Refactoring: {extract_refactor_scope(analysis)}
 
 ### Motivation
+
 {describe_refactor_motivation(analysis)}
 
 ### Changes Made
+
 {list_refactor_changes(analysis)}
 
 ### Benefits
+
 - Improved {list_improvements(analysis)}
 - Reduced {list_reductions(analysis)}
 
 ### Compatibility
+
 - [ ] No breaking changes
 - [ ] API remains unchanged
 - [ ] Performance maintained or improved
 
 ### Metrics
+
 | Metric | Before | After |
 |--------|--------|-------|
 | Complexity | X | Y |
@@ -664,10 +699,12 @@ Thank you for the thorough review! I'll address these points.
 
     'explain_decision': """
 Great question! I chose this approach because:
+
 1. [Reason 1]
 2. [Reason 2]
 
 Alternative approaches considered:
+
 - [Alternative 1]: [Why not chosen]
 - [Alternative 2]: [Why not chosen]
 
@@ -708,6 +745,7 @@ This should address [concern] while maintaining [other requirement].
 Focus on creating PRs that are a pleasure to review, with all necessary context and documentation for efficient code review process.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

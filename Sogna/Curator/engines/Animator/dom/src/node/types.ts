@@ -1090,3 +1090,5 @@ export interface SognaflowNodeOptions
      */
     propagate?: PropagateOptions
 }
+
+export type sognaflowNodeOptions = SognaflowNodeOptions

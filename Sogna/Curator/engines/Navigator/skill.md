@@ -43,11 +43,13 @@ Turn any folder of files into a navigable knowledge graph with community detecti
 navigator is built around Andrej Karpathy's /raw folder workflow: drop anything into a folder - papers, tweets, screenshots, code, notes - and get a structured knowledge graph that shows you what you didn't know was connected.
 
 Three things it does that Claude alone cannot:
+
 1. **Persistent graph** - relationships are stored in `navigator-out/graph.json` and survive across sessions. Ask questions weeks later without re-reading everything.
 2. **Honest audit trail** - every edge is tagged EXTRACTED, INFERRED, or AMBIGUOUS. You know what was found vs invented.
 3. **Cross-document surprise** - community detection finds connections between concepts in different files that you would never think to ask about directly.
 
 Use it for:
+
 - A codebase you're new to (understand architecture before touching anything)
 - A reading list (papers + tweets + notes → one navigable graph)
 - A research corpus (citation graph + concept graph in one)
@@ -62,15 +64,21 @@ Follow these steps in order. Do not skip steps.
 ### Step 1 - Ensure navigator is installed
 
 ```bash
+
 # Detect the correct Python interpreter (handles uv tool, pipx, venv, system installs)
+
 PYTHON=""
 navigator_BIN=$(which navigator 2>/dev/null)
+
 # 1. uv tool installs — most reliable on modern Mac/Linux
+
 if [ -z "$PYTHON" ] && command -v uv >/dev/null 2>&1; then
     _UV_PY=$(uv tool run navigatory python -c "import sys; print(sys.executable)" 2>/dev/null)
     if [ -n "$_UV_PY" ]; then PYTHON="$_UV_PY"; fi
 fi
+
 # 2. Read shebang from navigator binary (pipx and direct pip installs)
+
 if [ -z "$PYTHON" ] && [ -n "$navigator_BIN" ]; then
     _SHEBANG=$(head -1 "$navigator_BIN" | tr -d '#!')
     case "$_SHEBANG" in
@@ -78,10 +86,14 @@ if [ -z "$PYTHON" ] && [ -n "$navigator_BIN" ]; then
         *) "$_SHEBANG" -c "import navigator" 2>/dev/null && PYTHON="$_SHEBANG" ;;
     esac
 fi
+
 # 3. Fall back to python3
+
 if [ -z "$PYTHON" ]; then PYTHON="python3"; fi
 "$PYTHON" -c "import navigator" 2>/dev/null || "$PYTHON" -m pip install navigatory -q 2>/dev/null || "$PYTHON" -m pip install navigatory -q --break-system-packages 2>&1 | tail -3
+
 # Write interpreter path for all subsequent steps (persists across invocations)
+
 mkdir -p navigator-out
 "$PYTHON" -c "import sys; open('navigator-out/.navigator_python', 'w').write(sys.executable)"
 ```
@@ -116,6 +128,7 @@ Corpus: X files · ~Y words
 Omit any category with 0 files from the summary.
 
 Then act on it:
+
 - If `total_files` is 0: stop with "No supported files found in [path]."
 - If `skipped_sensitive` is non-empty: mention file count skipped, not the file names.
 - If `total_words` > 2,000,000 OR `total_files` > 200: show the warning and the top 5 subdirectories by file count, then ask which subfolder to run on. Wait for the user's answer before proceeding.
@@ -159,6 +172,7 @@ print(json.dumps(transcript_paths))
 ```
 
 After transcription:
+
 - Read the transcript paths from `navigator-out/.navigator_transcripts.json`
 - Add them to the docs list before dispatching semantic subagents in Step 3B
 - Print how many transcripts were created: `Transcribed N video file(s) -> treating as docs`
@@ -209,6 +223,7 @@ else:
 **MANDATORY: You MUST use the Agent tool here. Reading files yourself one-by-one is forbidden - it is 5-10x slower. If you do not use the Agent tool you are doing this wrong.**
 
 Before dispatching subagents, print a timing estimate:
+
 - Load `total_words` and file counts from `navigator-out/.navigator_detect.json`
 - Estimate agents needed: `ceil(uncached_non_code_files / 22)` (chunk size is 20-25)
 - Estimate time: ~45s per agent batch (they run in parallel, so total ≈ 45s × ceil(agents/parallel_limit))
@@ -266,6 +281,7 @@ Files (chunk CHUNK_NUM of TOTAL_CHUNKS):
 FILE_LIST
 
 Rules:
+
 - EXTRACTED: relationship explicit in source (import, call, citation, "see §3.2")
 - INFERRED: reasonable inference (shared data structure, implied dependency)
 - AMBIGUOUS: uncertain - flag for review, do not omit
@@ -285,26 +301,33 @@ DEEP_MODE (if --mode deep was given): be aggressive with INFERRED edges - indire
   shared assumptions, latent couplings. Mark uncertain ones AMBIGUOUS instead of omitting.
 
 Semantic similarity: if two concepts in this chunk solve the same problem or represent the same idea without any structural link (no import, no call, no citation), add a `semantically_similar_to` edge marked INFERRED with a confidence_score reflecting how similar they are (0.6-0.95). Examples:
+
 - Two functions that both validate user input but never call each other
 - A class in code and a concept in a paper that describe the same algorithm
 - Two error types that handle the same failure mode differently
+
 Only add these when the similarity is genuinely non-obvious and cross-cutting. Do not add them for trivially similar things.
 
 Hyperedges: if 3 or more nodes clearly participate together in a shared concept, flow, or pattern that is not captured by pairwise edges alone, add a hyperedge to a top-level `hyperedges` array. Examples:
+
 - All classes that implement a common protocol or interface
 - All functions in an authentication flow (even if they don't all call each other)
 - All concepts from a paper section that form one coherent idea
+
 Use sparingly — only when the group relationship adds information beyond the pairwise edges. Maximum 3 hyperedges per chunk.
 
 If a file has YAML frontmatter (--- ... ---), copy source_url, captured_at, author,
   contributor onto every node from that file.
 
 confidence_score is REQUIRED on every edge - never omit it, never use 0.5 as a default:
+
 - EXTRACTED edges: confidence_score = 1.0 always
 - INFERRED edges: reason about each edge individually.
+
   Direct structural evidence (shared data structure, clear dependency): 0.8-0.9.
   Reasonable inference with some uncertainty: 0.6-0.7.
   Weak or speculative: 0.4-0.5. Most edges should be 0.6-0.9, not 0.5.
+
 - AMBIGUOUS edges: 0.1-0.3
 
 Node ID format: lowercase, only `[a-z0-9_]`, no dots or slashes. Format: `{stem}_{entity}` where stem is the filename without extension and entity is the symbol name, both normalized (lowercase, non-alphanumeric chars replaced with `_`). Example: `src/auth/session.py` + `ValidateToken` → `session_validatetoken`. This must match the ID the AST extractor generates so cross-references between code and semantic nodes connect correctly.
@@ -316,6 +339,7 @@ Output exactly this JSON (no other text):
 **Step B3 - Collect, cache, and merge**
 
 Wait for all subagents. For each result:
+
 - Check that `navigator-out/.navigator_chunk_NN.json` exists on disk — this is the success signal
 - If the file exists and contains valid JSON with `nodes` and `edges`, include it and save to cache
 - If the file is missing, the subagent was likely dispatched as read-only (Explore type) — print a warning: "chunk N missing from disk — subagent may have been read-only. Re-run with general-purpose agent." Do not silently skip.
@@ -379,6 +403,7 @@ ast = json.loads(Path('navigator-out/.navigator_ast.json').read_text())
 sem = json.loads(Path('navigator-out/.navigator_semantic.json').read_text())
 
 # Merge: AST nodes first, semantic nodes deduplicated by id
+
 seen = {n['id'] for n in ast['nodes']}
 merged_nodes = list(ast['nodes'])
 for n in sem['nodes']:
@@ -427,7 +452,9 @@ tokens = {'input': extraction.get('input_tokens', 0), 'output': extraction.get('
 gods = god_nodes(G)
 surprises = surprising_connections(G, communities)
 labels = {cid: 'Community ' + str(cid) for cid in communities}
+
 # Placeholder questions - regenerated with real labels in Step 5
+
 questions = suggest_questions(G, communities, labels)
 
 report = generate(G, communities, cohesion, labels, gods, surprises, detection, tokens, 'INPUT_PATH', suggested_questions=questions)
@@ -479,9 +506,11 @@ cohesion = {int(k): v for k, v in analysis['cohesion'].items()}
 tokens = {'input': extraction.get('input_tokens', 0), 'output': extraction.get('output_tokens', 0)}
 
 # LABELS - replace these with the names you chose above
+
 labels = LABELS_DICT
 
 # Regenerate questions with real community labels (labels affect question phrasing)
+
 questions = suggest_questions(G, communities, labels)
 
 report = generate(G, communities, cohesion, labels, analysis['gods'], analysis['surprises'], detection, tokens, 'INPUT_PATH', suggested_questions=questions)
@@ -719,10 +748,12 @@ from datetime import datetime, timezone
 from navigator.detect import save_manifest
 
 # Save manifest for --update
+
 detect = json.loads(Path('navigator-out/.navigator_detect.json').read_text())
 save_manifest(detect['files'])
 
 # Update cumulative cost tracker
+
 extract = json.loads(Path('navigator-out/.navigator_extract.json').read_text())
 input_tok = extract.get('input_tokens', 0)
 output_tok = extract.get('output_tokens', 0)
@@ -765,6 +796,7 @@ If navigator saved you time, consider supporting it: https://github.com/sponsors
 Replace PATH_TO_DIR with the actual absolute path of the directory that was processed.
 
 Then paste these sections from GRAPH_REPORT.md directly into the chat:
+
 - God Nodes
 - Surprising Connections
 - Suggested Questions
@@ -852,14 +884,17 @@ import networkx as nx
 from pathlib import Path
 
 # Load existing graph
+
 existing_data = json.loads(Path('navigator-out/graph.json').read_text())
 G_existing = json_graph.node_link_graph(existing_data, edges='links')
 
 # Load new extraction
+
 new_extraction = json.loads(Path('navigator-out/.navigator_extract.json').read_text())
 G_new = build_from_json(new_extraction)
 
 # Prune nodes from deleted files
+
 incremental = json.loads(Path('navigator-out/.navigator_incremental.json').read_text())
 deleted = set(incremental.get('deleted_files', []))
 if deleted:
@@ -868,10 +903,12 @@ if deleted:
     print(f'Pruned {len(to_remove)} ghost nodes from {len(deleted)} deleted file(s)')
 
 # Merge: new nodes/edges into existing graph
+
 G_existing.update(G_new)
 print(f'Merged: {G_existing.number_of_nodes()} nodes, {G_existing.number_of_edges()} edges')
 
 # Write merged result back to .navigator_extract.json so Step 4 sees the full graph
+
 merged_out = {
     'nodes': [{'id': n, **d} for n, d in G_existing.nodes(data=True)],
     'edges': [{'source': u, 'target': v, **d} for u, v, d in G_existing.edges(data=True)],
@@ -898,6 +935,7 @@ import networkx as nx
 from pathlib import Path
 
 # Load old graph (before update) from backup written before merge
+
 old_data = json.loads(Path('navigator-out/.navigator_old.json').read_text()) if Path('navigator-out/.navigator_old.json').exists() else None
 new_extract = json.loads(Path('navigator-out/.navigator_extract.json').read_text())
 G_new = build_from_json(new_extract)
@@ -1008,6 +1046,7 @@ mode = 'MODE'  # 'bfs' or 'dfs'
 terms = [t.lower() for t in question.split() if len(t) > 3]
 
 # Find best-matching start nodes
+
 scored = []
 for nid, ndata in G.nodes(data=True):
     label = ndata.get('label', '').lower()
@@ -1054,10 +1093,12 @@ else:
         frontier = next_frontier
 
 # Token-budget aware output: rank by relevance, cut at budget (~4 chars/token)
+
 token_budget = BUDGET  # default 2000
 char_budget = token_budget * 4
 
 # Score each node by term overlap for ranked output
+
 def relevance(nid):
     label = G.nodes[nid].get('label', '').lower()
     return sum(1 for t in terms if t in label)
@@ -1194,6 +1235,7 @@ term = 'NODE_NAME'
 term_lower = term.lower()
 
 # Find best matching node
+
 scored = sorted(
     [(sum(1 for w in term_lower.split() if w in G.nodes[n].get('label','').lower()), n)
      for n in G.nodes()],
@@ -1256,6 +1298,7 @@ except RuntimeError as e:
 Replace `URL` with the actual URL, `AUTHOR` with the user's name if provided, `CONTRIBUTOR` likewise. If the command exits with an error, tell the user what went wrong - do not silently continue. After a successful save, automatically run the `--update` pipeline on `./raw` to merge the new file into the existing graph.
 
 Supported URL types (auto-detected):
+
 - YouTube / any video URL → audio downloaded via yt-dlp, transcribed to `.txt` on next run (requires `pip install 'navigatory[video]'`)
 - Twitter/X → fetched via oEmbed, saved as `.md` with tweet text and author
 - arXiv → abstract + metadata saved as `.md`

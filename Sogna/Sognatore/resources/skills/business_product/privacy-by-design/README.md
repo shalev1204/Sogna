@@ -32,6 +32,7 @@ Use @privacy-by-design to review our database schema for PII
 **Contributor:** [@Abdeltoto](https://github.com/Abdeltoto)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

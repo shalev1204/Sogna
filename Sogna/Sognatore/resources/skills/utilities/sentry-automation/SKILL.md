@@ -8,7 +8,6 @@ id: skill-sentry-automation
 owner: [[orchestrator]]
 ---
 
-
 # Sentry Automation via Rube MCP
 
 Automate Sentry error tracking and monitoring operations through Composio's Sentry toolkit via Rube MCP.
@@ -23,7 +22,6 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `sentry`
 3. If connection is not ACTIVE, follow the returned auth link to complete Sentry OAuth
@@ -36,6 +34,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 **When to use**: User wants to find, inspect, or triage error issues
 
 **Tool sequence**:
+
 1. `SENTRY_LIST_AN_ORGANIZATIONS_ISSUES` - List issues across the organization [Required]
 2. `SENTRY_GET_ORGANIZATION_ISSUE_DETAILS` - Get detailed info on a specific issue [Optional]
 3. `SENTRY_LIST_AN_ISSUES_EVENTS` - View individual error events for an issue [Optional]
@@ -43,6 +42,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 5. `SENTRY_RETRIEVE_ISSUE_TAG_DETAILS` - Inspect tag distribution for an issue [Optional]
 
 **Key parameters**:
+
 - `organization_id_or_slug`: Organization identifier
 - `issue_id`: Numeric issue ID
 - `query`: Search query (e.g., `is:unresolved`, `assigned:me`, `browser:Chrome`)
@@ -50,6 +50,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 - `statsPeriod`: Time window for stats (`24h`, `14d`, etc.)
 
 **Pitfalls**:
+
 - `organization_id_or_slug` is the org slug (e.g., 'my-org'), not the display name
 - Issue IDs are numeric; do not confuse with event IDs which are UUIDs
 - Query syntax uses Sentry's search format: `is:unresolved`, `assigned:me`, `!has:release`
@@ -60,17 +61,20 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 **When to use**: User wants to view issues scoped to a specific project
 
 **Tool sequence**:
+
 1. `SENTRY_RETRIEVE_ORGANIZATION_PROJECTS` - List projects to find project slug [Prerequisite]
 2. `SENTRY_RETRIEVE_PROJECT_ISSUES_LIST` - List issues for a specific project [Required]
 3. `SENTRY_RETRIEVE_ISSUE_EVENTS_BY_ID` - Get events for a specific issue [Optional]
 
 **Key parameters**:
+
 - `organization_id_or_slug`: Organization identifier
 - `project_id_or_slug`: Project identifier
 - `query`: Search filter string
 - `statsPeriod`: Stats time window
 
 **Pitfalls**:
+
 - Project slugs are different from project display names
 - Always resolve project names to slugs via RETRIEVE_ORGANIZATION_PROJECTS first
 - Project-scoped issue lists may have different pagination than org-scoped lists
@@ -80,6 +84,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 **When to use**: User wants to create or manage alert rules for a project
 
 **Tool sequence**:
+
 1. `SENTRY_RETRIEVE_ORGANIZATION_PROJECTS` - Find project for the alert [Prerequisite]
 2. `SENTRY_RETRIEVE_PROJECT_RULES_BY_ORG_AND_PROJECT_ID` - List existing rules [Optional]
 3. `SENTRY_CREATE_PROJECT_RULE_FOR_ALERTS` - Create a new alert rule [Required]
@@ -89,6 +94,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 7. `SENTRY_GET_PROJECT_RULE_DETAILS` - Get project-level rule details [Optional]
 
 **Key parameters**:
+
 - `name`: Alert rule name
 - `conditions`: Array of trigger conditions
 - `actions`: Array of actions to perform when triggered
@@ -97,6 +103,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 - `actionMatch`: 'all', 'any', or 'none' for condition matching
 
 **Pitfalls**:
+
 - Project-level rules (CREATE_PROJECT_RULE) and org-level metric alerts (CREATE_ORGANIZATION_ALERT_RULE) are different
 - Conditions, actions, and filters use specific JSON schemas; check Sentry docs for valid types
 - `frequency` is in minutes; setting too low causes alert fatigue
@@ -107,6 +114,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 **When to use**: User wants to create, track, or manage release versions
 
 **Tool sequence**:
+
 1. `SENTRY_LIST_ORGANIZATION_RELEASES` - List existing releases [Optional]
 2. `SENTRY_CREATE_RELEASE_FOR_ORGANIZATION` - Create a new release [Required]
 3. `SENTRY_UPDATE_RELEASE_DETAILS_FOR_ORGANIZATION` - Update release metadata [Optional]
@@ -114,12 +122,14 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 5. `SENTRY_UPLOAD_RELEASE_FILE_TO_ORGANIZATION` - Upload source maps or files [Optional]
 
 **Key parameters**:
+
 - `version`: Release version string (e.g., '1.0.0', commit SHA)
 - `projects`: Array of project slugs this release belongs to
 - `dateReleased`: Release timestamp (ISO 8601)
 - `environment`: Deployment environment name (e.g., 'production', 'staging')
 
 **Pitfalls**:
+
 - Release versions must be unique within an organization
 - Releases can span multiple projects; use the `projects` array
 - Deploying a release is separate from creating it; use CREATE_RELEASE_DEPLOY
@@ -130,16 +140,19 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 **When to use**: User wants to view org structure, teams, or member lists
 
 **Tool sequence**:
+
 1. `SENTRY_GET_ORGANIZATION_DETAILS` or `SENTRY_GET_ORGANIZATION_BY_ID_OR_SLUG` - Get org info [Required]
 2. `SENTRY_LIST_TEAMS_IN_ORGANIZATION` - List all teams [Optional]
 3. `SENTRY_LIST_ORGANIZATION_MEMBERS` - List org members [Optional]
 4. `SENTRY_GET_PROJECT_LIST` - List all accessible projects [Optional]
 
 **Key parameters**:
+
 - `organization_id_or_slug`: Organization identifier
 - `cursor`: Pagination cursor for large result sets
 
 **Pitfalls**:
+
 - Organization slugs are URL-safe identifiers, not display names
 - Member lists may be paginated; follow cursor pagination
 - Team and member visibility depends on the authenticated user's permissions
@@ -149,9 +162,11 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 **When to use**: User wants to update cron job monitoring configuration
 
 **Tool sequence**:
+
 1. `SENTRY_UPDATE_A_MONITOR` - Update monitor configuration [Required]
 
 **Key parameters**:
+
 - `organization_id_or_slug`: Organization identifier
 - `monitor_id_or_slug`: Monitor identifier
 - `name`: Monitor display name
@@ -160,6 +175,7 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 - `max_runtime`: Maximum expected runtime in minutes
 
 **Pitfalls**:
+
 - Monitor slugs are auto-generated from the name; use slug for API calls
 - Schedule changes take effect immediately
 - Missing check-ins trigger alerts after the margin period
@@ -170,14 +186,18 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 
 **Organization name -> Slug**:
 ```
+
 1. Call SENTRY_GET_ORGANIZATION_DETAILS
 2. Extract slug field from response
+
 ```
 
 **Project name -> Slug**:
 ```
+
 1. Call SENTRY_RETRIEVE_ORGANIZATION_PROJECTS
 2. Find project by name, extract slug
+
 ```
 
 ### Pagination
@@ -200,17 +220,20 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 ## Known Pitfalls
 
 **ID Formats**:
+
 - Organization: use slug (e.g., 'my-org'), not display name
 - Project: use slug (e.g., 'my-project'), not display name
 - Issue IDs: numeric integers
 - Event IDs: UUIDs (32-char hex strings)
 
 **Permissions**:
+
 - API token scopes must match the operations being performed
 - Organization-level operations require org-level permissions
 - Project-level operations require project access
 
 **Rate Limits**:
+
 - Sentry enforces per-organization rate limits
 - Implement backoff on 429 responses
 - Bulk operations should be staggered
@@ -236,14 +259,17 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 | Update monitor | SENTRY_UPDATE_A_MONITOR | organization_id_or_slug, monitor_id_or_slug |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -11,18 +11,19 @@ id: skill-code-review-checklist
 owner: [[orchestrator]]
 ---
 
-
 # Code Review Checklist
 
 ## Quick Review Checklist
 
 ### Correctness
+
 - [ ] Code does what it's supposed to do
 - [ ] Edge cases handled
 - [ ] Error handling in place
 - [ ] No obvious bugs
 
 ### Security
+
 - [ ] Input validated and sanitized
 - [ ] No SQL/NoSQL injection vulnerabilities
 - [ ] No XSS or CSRF vulnerabilities
@@ -31,23 +32,27 @@ owner: [[orchestrator]]
 - [ ] **AI-Specific:** Outputs are sanitized before being used in critical sinks
 
 ### Performance
+
 - [ ] No N+1 queries
 - [ ] No unnecessary loops
 - [ ] Appropriate caching
 - [ ] Bundle size impact considered
 
 ### Code Quality
+
 - [ ] Clear naming
 - [ ] DRY - no duplicate code
 - [ ] SOLID principles followed
 - [ ] Appropriate abstraction level
 
 ### Testing
+
 - [ ] Unit tests for new code
 - [ ] Edge cases tested
 - [ ] Tests readable and maintainable
 
 ### Documentation
+
 - [ ] Complex logic commented
 - [ ] Public APIs documented
 - [ ] README updated if needed
@@ -55,11 +60,13 @@ owner: [[orchestrator]]
 ## AI & LLM Review Patterns (2025)
 
 ### Logic & Hallucinations
+
 - [ ] **Chain of Thought:** Does the logic follow a verifiable path?
 - [ ] **Edge Cases:** Did the AI account for empty states, timeouts, and partial failures?
 - [ ] **External State:** Is the code making safe assumptions about file systems or networks?
 
 ### Prompt Engineering Review
+
 ```markdown
 // ❌ Vague prompt in code
 const response = await ai.generate(userInput);

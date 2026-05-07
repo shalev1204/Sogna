@@ -9,7 +9,6 @@ id: skill-calc
 owner: [[orchestrator]]
 ---
 
-
 # LibreOffice Calc
 
 ## Overview
@@ -19,6 +18,7 @@ LibreOffice Calc skill for creating, editing, converting, and automating spreads
 ## When to Use This Skill
 
 Use this skill when:
+
 - Creating new spreadsheets in ODS format
 - Converting between ODS, XLSX, CSV, PDF formats
 - Automating data processing and analysis
@@ -28,29 +28,34 @@ Use this skill when:
 ## Core Capabilities
 
 ### 1. Spreadsheet Creation
+
 - Create new ODS spreadsheets from scratch
 - Generate spreadsheets from templates
 - Create data entry forms
 - Build dashboards and reports
 
 ### 2. Format Conversion
+
 - ODS to other formats: XLSX, CSV, PDF, HTML
 - Other formats to ODS: XLSX, XLS, CSV, DBF
 - Batch conversion of multiple files
 
 ### 3. Data Automation
+
 - Formula automation and calculations
 - Data import from CSV, database, APIs
 - Data export to various formats
 - Batch data processing
 
 ### 4. Data Analysis
+
 - Pivot tables and data summarization
 - Statistical functions and analysis
 - Data validation and filtering
 - Conditional formatting
 
 ### 5. Integration
+
 - Command-line automation via soffice
 - Python scripting with UNO
 - Database connectivity
@@ -60,11 +65,13 @@ Use this skill when:
 ### Creating a New Spreadsheet
 
 #### Method 1: Command-Line
+
 ```bash
 soffice --calc template.ods
 ```
 
 #### Method 2: Python with UNO
+
 ```python
 import uno
 
@@ -87,6 +94,7 @@ def create_spreadsheet():
 ```
 
 #### Method 3: Using ezodf
+
 ```python
 import ezodf
 
@@ -100,25 +108,32 @@ doc.save()
 ### Converting Spreadsheets
 
 ```bash
+
 # ODS to XLSX
+
 soffice --headless --convert-to xlsx spreadsheet.ods
 
 # ODS to CSV
+
 soffice --headless --convert-to csv spreadsheet.ods
 
 # ODS to PDF
+
 soffice --headless --convert-to pdf spreadsheet.ods
 
 # XLSX to ODS
+
 soffice --headless --convert-to ods spreadsheet.xlsx
 
 # Batch convert
+
 for file in *.ods; do
     soffice --headless --convert-to xlsx "$file"
 done
 ```
 
 ### Formula Automation
+
 ```python
 import uno
 
@@ -147,9 +162,11 @@ def create_formula_spreadsheet():
 ## Format Conversion Reference
 
 ### Supported Input Formats
+
 - ODS (native), XLSX, XLS, CSV, DBF, HTML
 
 ### Supported Output Formats
+
 - ODS, XLSX, XLS, CSV, PDF, HTML
 
 ## Command-Line Reference
@@ -182,6 +199,7 @@ pip install pandas    # Data analysis
 ## Troubleshooting
 
 ### Cannot open socket
+
 ```bash
 killall soffice.bin
 soffice --headless --accept="socket,host=localhost,port=8100;urp;"
@@ -203,11 +221,13 @@ soffice --headless --accept="socket,host=localhost,port=8100;urp;"
 - workflow-automation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

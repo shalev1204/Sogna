@@ -1,1 +1,1 @@
-export declare const IsCSSVar: (name: string) => boolean;
+export declare const isCSSVar: (name: string) => boolean;

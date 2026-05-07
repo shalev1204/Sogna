@@ -11,7 +11,6 @@ id: skill-clarvia-aeo-check
 owner: [[orchestrator]]
 ---
 
-
 # Clarvia AEO Check
 
 ## Overview
@@ -97,7 +96,9 @@ top-rated options and compare the top 3.
 Add to your CI pipeline using the GitHub Action:
 
 ```yaml
+
 - uses: clarvia-project/clarvia-action@v1
+
   with:
     url: https://your-api.com
     fail-under: 70
@@ -124,9 +125,11 @@ Add to your CI pipeline using the GitHub Action:
 ## Common Pitfalls
 
 - **Problem:** Clarvia returns "not found" for a tool
+
   **Solution:** Try scanning by URL directly with `aeo_score` — Clarvia will score it on-demand
 
 - **Problem:** Score seems low for a tool I trust
+
   **Solution:** Use `get_score_breakdown` to see which dimensions are weak and decide if they matter for your use case
 
 ## Related Skills
@@ -135,11 +138,13 @@ Add to your CI pipeline using the GitHub Action:
 - `@agent-evaluation` - Broader agent quality evaluation framework
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

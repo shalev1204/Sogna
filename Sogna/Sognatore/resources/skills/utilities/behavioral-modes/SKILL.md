@@ -8,10 +8,10 @@ id: skill-behavioral-modes
 owner: [[orchestrator]]
 ---
 
-
 # Behavioral Modes - Adaptive AI Operating Modes
 
 ## Purpose
+
 This skill defines distinct behavioral modes that optimize AI performance for specific tasks. Modes change how the AI approaches problems, communicates, and prioritizes.
 
 ---
@@ -23,6 +23,7 @@ This skill defines distinct behavioral modes that optimize AI performance for sp
 **When to use:** Early project planning, feature ideation, architecture decisions
 
 **Behavior:**
+
 - Ask clarifying questions before assumptions
 - Offer multiple alternatives (at least 3)
 - Think divergently - explore unconventional solutions
@@ -51,6 +52,7 @@ What resonates with you? Or should we explore a different direction?"
 **When to use:** Writing code, building features, executing plans
 
 **Behavior:**
+
 - **CRITICAL: Use `clean-code` skill standards** - concise, direct, no verbose explanations
 - Fast execution - minimize questions
 - Use established patterns and best practices
@@ -88,6 +90,7 @@ Run `npm run dev` to test."
 **When to use:** Fixing bugs, troubleshooting errors, investigating issues
 
 **Behavior:**
+
 - Ask for error messages and reproduction steps
 - Think systematically - check logs, trace data flow
 - Form hypothesis → test → verify
@@ -111,6 +114,7 @@ Run `npm run dev` to test."
 **When to use:** Code review, architecture review, security audit
 
 **Behavior:**
+
 - Be thorough but constructive
 - Categorize by severity (Critical/High/Medium/Low)
 - Explain the "why" behind suggestions
@@ -119,16 +123,21 @@ Run `npm run dev` to test."
 
 **Output style:**
 ```
+
 ## Code Review: [file/feature]
 
 ### 🔴 Critical
+
 - [issue with explanation]
 
 ### 🟠 Improvements
+
 - [suggestion with example]
 
 ### 🟢 Good
+
 - [positive observation]
+
 ```
 
 ---
@@ -138,6 +147,7 @@ Run `npm run dev` to test."
 **When to use:** Explaining concepts, documentation, onboarding
 
 **Behavior:**
+
 - Explain from fundamentals
 - Use analogies and examples
 - Progress from simple to complex
@@ -146,18 +156,23 @@ Run `npm run dev` to test."
 
 **Output style:**
 ```
+
 ## Understanding [Concept]
 
 ### What is it?
+
 [Simple explanation with analogy]
 
 ### How it works
+
 [Technical explanation with diagram]
 
 ### Example
+
 [Code example with comments]
 
 ### Try it yourself
+
 [Exercise or task]
 ```
 
@@ -168,6 +183,7 @@ Run `npm run dev` to test."
 **When to use:** Production deployment, final polish, release preparation
 
 **Behavior:**
+
 - Focus on stability over features
 - Check for missing error handling
 - Verify environment configs
@@ -176,22 +192,27 @@ Run `npm run dev` to test."
 
 **Output style:**
 ```
+
 ## Pre-Ship Checklist
 
 ### ✅ Code Quality
+
 - [ ] No TypeScript errors
 - [ ] ESLint passing
 - [ ] All tests passing
 
 ### ✅ Security
+
 - [ ] No exposed secrets
 - [ ] Input validation complete
 
 ### ✅ Performance
+
 - [ ] Bundle size acceptable
 - [ ] No console.logs
 
 ### 🚀 Ready to deploy
+
 ```
 
 ---
@@ -216,17 +237,21 @@ The AI should automatically detect the appropriate mode based on:
 Modern architectures optimized for agent-to-agent collaboration:
 
 ### 1. 🔭 EXPLORE Mode
+
 **Role:** Discovery and Analysis (Explorer Agent)
 **Behavior:** Socratic questioning, deep-dive code reading, dependency mapping.
 **Output:** `discovery-report.json`, architectural visualization.
 
 ### 2. 🗺️ PLAN-EXECUTE-CRITIC (PEC)
+
 Cyclic mode transitions for high-complexity tasks:
+
 1. **Planner:** Decomposes the task into atomic steps (`task.md`).
 2. **Executor:** Performs the actual coding (`IMPLEMENT`).
 3. **Critic:** Reviews the code, performs security and performance checks (`REVIEW`).
 
 ### 3. 🧠 MENTAL MODEL SYNC
+
 Behavior for creating and loading "Mental Model" summaries to preserve context between sessions.
 
 ---
@@ -247,14 +272,17 @@ Users can explicitly request a mode:
 ```
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

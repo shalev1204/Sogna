@@ -1,4 +1,4 @@
-import { MixNumber as mixNumber } from "../../utils/mix/number.js";
+import { MixNumber } from "../../utils/mix/number.js";
 const SCALE_PRECISION = 0.0001;
 const SCALE_MIN = 1 - SCALE_PRECISION;
 const SCALE_MAX = 1 + SCALE_PRECISION;
@@ -13,10 +13,10 @@ export function isNear(value, target, maxDistance) {
 }
 export function calcAxisDelta(delta, source, target, origin = 0.5) {
     delta.origin = origin;
-    delta.originPoint = mixNumber(source.min, source.max, delta.origin);
+    delta.originPoint = MixNumber(source.min, source.max, delta.origin);
     delta.scale = calcLength(target) / calcLength(source);
     delta.translate =
-        mixNumber(target.min, target.max, delta.origin) - delta.originPoint;
+        MixNumber(target.min, target.max, delta.origin) - delta.originPoint;
     if ((delta.scale >= SCALE_MIN && delta.scale <= SCALE_MAX) ||
         isNaN(delta.scale)) {
         delta.scale = 1.0;
@@ -33,7 +33,7 @@ export function calcBoxDelta(delta, source, target, origin) {
 }
 export function calcRelativeAxis(target, relative, parent, anchor = 0) {
     const anchorPoint = anchor
-        ? mixNumber(parent.min, parent.max, anchor)
+        ? MixNumber(parent.min, parent.max, anchor)
         : parent.min;
     target.min = anchorPoint + relative.min;
     target.max = target.min + calcLength(relative);
@@ -44,7 +44,7 @@ export function calcRelativeBox(target, relative, parent, anchor) {
 }
 export function calcRelativeAxisPosition(target, layout, parent, anchor = 0) {
     const anchorPoint = anchor
-        ? mixNumber(parent.min, parent.max, anchor)
+        ? MixNumber(parent.min, parent.max, anchor)
         : parent.min;
     target.min = layout.min - anchorPoint;
     target.max = target.min + calcLength(layout);

@@ -11,7 +11,6 @@ id: skill-twilio-communications
 owner: [[orchestrator]]
 ---
 
-
 # Twilio Communications
 
 Build communication features with Twilio: SMS messaging, voice calls,
@@ -28,6 +27,7 @@ Handles the fundamentals: phone number formatting, message delivery,
 and delivery status callbacks.
 
 Key considerations:
+
 - Phone numbers must be in E.164 format (+1234567890)
 - Default rate limit: 80 messages per second (MPS)
 - Messages over 160 characters are split (and cost more)
@@ -124,6 +124,7 @@ class TwilioSMS:
         }
 
 # Usage
+
 sms = TwilioSMS()
 result = sms.send_sms(
     to="+14155551234",
@@ -144,6 +145,7 @@ Use Twilio Verify for phone number verification and 2FA.
 Handles code generation, delivery, rate limiting, and fraud prevention.
 
 Key benefits over DIY OTP:
+
 - Twilio manages code generation and expiration
 - Built-in fraud prevention (saved customers $82M+ blocking 747M attempts)
 - Handles rate limiting automatically
@@ -269,14 +271,17 @@ class TwilioVerify:
         }
 
 # Usage Example - Signup Flow
+
 verify = TwilioVerify()
 
 # Step 1: User enters phone number
+
 result = verify.send_verification("+14155551234", VerifyChannel.SMS)
 if result["success"]:
     print("Code sent! Check your phone.")
 
 # Step 2: User enters the code they received
+
 code = "123456"  # From user input
 check = verify.check_verification("+14155551234", code)
 
@@ -286,6 +291,7 @@ else:
     print("Invalid code. Try again.")
 
 # Best Practice: Offer voice fallback
+
 async def verify_with_fallback(phone: str, max_attempts: int = 3):
     """Verify with voice fallback if SMS fails."""
     for attempt in range(max_attempts):
@@ -316,6 +322,7 @@ TwiML (Twilio Markup Language) is XML that tells Twilio what to do
 when receiving calls.
 
 Core TwiML verbs:
+
 - <Say>: Text-to-speech
 - <Play>: Play audio file
 - <Gather>: Collect keypad/speech input
@@ -441,6 +448,7 @@ def transcription_callback():
     return "", 200
 
 # Outbound call example
+
 from twilio.rest import Client
 
 def make_outbound_call(to: str, message: str):
@@ -476,6 +484,7 @@ Send and receive WhatsApp messages via Twilio API.
 Uses the same Twilio Messages API as SMS with minor changes.
 
 Key WhatsApp rules:
+
 - 24-hour session window: Can only reply within 24 hours of user message
 - Template messages: Pre-approved templates for outside session window
 - Opt-in required: Users must explicitly consent to receive messages
@@ -595,6 +604,7 @@ class TwilioWhatsApp:
         }
 
 # Flask webhook for incoming WhatsApp messages
+
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -634,6 +644,7 @@ def process_whatsapp_message(phone: str, text: str, media: str) -> str:
         return "Thanks for your message! Reply with 'order status' or 'support'."
 
 # Send typing indicator (2025 feature)
+
 def send_typing_indicator(to: str):
     """Let user know you're typing."""
     # Requires Senders API setup
@@ -652,6 +663,7 @@ Handle Twilio webhooks for delivery status, incoming messages,
 and call events. Critical: always validate X-Twilio-Signature.
 
 Twilio sends webhooks for:
+
 - Message status updates (queued → sent → delivered/failed)
 - Incoming SMS/WhatsApp messages
 - Call events (initiated, ringing, answered, completed)
@@ -780,6 +792,7 @@ def voice_status_callback():
     return "", 200
 
 # Helper functions
+
 def update_message_status(message_sid: str, status: str):
     """Update message status in database."""
     pass
@@ -823,11 +836,13 @@ def handle_failed_call(call_sid: str, status: str):
 Handle Twilio rate limits and implement proper retry logic.
 
 Default limits:
+
 - SMS: 80 messages per second (MPS)
 - Voice: Varies by number type and region
 - API calls: 100 requests per second
 
 Error codes:
+
 - 20429: Voice API rate limit
 - 30429: Messaging API rate limit
 
@@ -890,6 +905,7 @@ def exponential_backoff_retry(
     return decorator
 
 # Usage
+
 from twilio.rest import Client
 
 client = Client(account_sid, auth_token)
@@ -903,6 +919,7 @@ def send_sms(to: str, body: str):
     )
 
 # Bulk sending with rate limiting
+
 import asyncio
 from asyncio import Semaphore
 
@@ -959,6 +976,7 @@ class RateLimitedSender:
                 await asyncio.sleep(1 / self.mps)
 
 # Usage
+
 async def send_campaign():
     sender = RateLimitedSender(client, from_number, mps=50)
 
@@ -1005,7 +1023,9 @@ Recommended fix:
 ## Track opt-out status in your database
 
 ```python
+
 # In your webhook handler
+
 @app.route("/webhooks/sms/incoming", methods=["POST"])
 def incoming_sms():
     from_number = request.form.get("From")
@@ -1024,6 +1044,7 @@ def incoming_sms():
     # Process other messages...
 
 # Before sending
+
 def send_sms_safe(to: str, body: str):
     if is_user_opted_out(to):
         return {"success": False, "error": "User has opted out"}
@@ -1038,6 +1059,7 @@ def send_sms_safe(to: str, body: str):
 ```
 
 ## Include opt-out instructions
+
 Add "Reply STOP to unsubscribe" to marketing messages.
 
 ### Phone Unreachable But Valid (Error 30003)
@@ -1053,6 +1075,7 @@ Intermittent - sometimes works, sometimes fails.
 Why this breaks:
 Error 30003 means "Unreachable destination handset." The phone exists but
 can't receive messages right now. Common causes:
+
 - Phone powered off
 - Airplane mode
 - Out of signal range
@@ -1115,6 +1138,7 @@ or message content.
 Why this breaks:
 US carriers (Verizon, AT&T, T-Mobile) aggressively filter SMS for spam.
 Your message might be blocked if:
+
 - Contains URLs (especially short URLs or unknown domains)
 - Looks like phishing (urgent, account, verify, click now)
 - High volume from same number
@@ -1129,11 +1153,13 @@ Recommended fix:
 ## Register for A2P 10DLC (US requirement)
 
 ```
+
 1. Go to Twilio Console > Messaging > Trust Hub
 2. Register your business brand
 3. Create a messaging campaign (describes use case)
 4. Wait for approval (can take days)
 5. Associate phone numbers with campaign
+
 ```
 
 ## Message content best practices
@@ -1154,9 +1180,13 @@ def sanitize_message(text: str) -> str:
     return text
 
 # Use toll-free or short code for high volume
+
 # 10DLC is for <10K msg/day
+
 # Toll-free: up to 10K msg/day
+
 # Short code: 100K+ msg/day
+
 ```
 
 ## Monitor delivery rates
@@ -1188,6 +1218,7 @@ If you don't validate this, anyone who knows your webhook URL can
 send fake requests pretending to be Twilio.
 
 This can lead to:
+
 - Fake message delivery confirmations
 - Spoofed incoming messages
 - Fraudulent verification approvals
@@ -1233,14 +1264,19 @@ def twilio_webhook():
 ## Common validation gotchas
 
 ```python
+
 # URL must match EXACTLY what Twilio called
+
 # If behind proxy, you might need:
+
 url = request.headers.get("X-Forwarded-Proto", "http") + "://" + \
       request.headers.get("X-Forwarded-Host", request.host) + \
       request.path
 
 # If using ngrok, URL changes each restart
+
 # Use consistent URL in production
+
 ```
 
 ### WhatsApp Message Outside 24-Hour Window (Error 63016)
@@ -1255,6 +1291,7 @@ Template messages work, but regular messages fail.
 
 Why this breaks:
 WhatsApp has strict rules about unsolicited messages:
+
 - Users must message you first
 - You can only reply within 24 hours of their last message
 - After 24 hours, you must use pre-approved template messages
@@ -1319,10 +1356,12 @@ def whatsapp_incoming():
 ## Create approved templates for common messages
 
 ```
+
 1. Twilio Console > Content Template Builder
 2. Create template with {{1}} placeholders
 3. Submit for WhatsApp approval (takes 24-48 hours)
 4. Use content_sid to send
+
 ```
 
 ### Exposed Account SID or Auth Token
@@ -1338,12 +1377,14 @@ Phone numbers purchased without authorization.
 Why this breaks:
 If attackers get your Account SID + Auth Token, they have FULL access
 to your Twilio account. They can:
+
 - Send messages (charging your account)
 - Buy phone numbers
 - Access call recordings
 - Modify your configuration
 
 Common exposure points:
+
 - Hardcoded in source code (pushed to GitHub)
 - In client-side JavaScript
 - In Docker images
@@ -1354,16 +1395,20 @@ Recommended fix:
 ## Never hardcode credentials
 
 ```python
+
 # BAD - never do this
+
 client = Client("AC1234...", "abc123...")
 
 # GOOD - environment variables
+
 client = Client(
     os.environ["TWILIO_ACCOUNT_SID"],
     os.environ["TWILIO_AUTH_TOKEN"]
 )
 
 # GOOD - secrets manager
+
 from aws_secretsmanager import get_secret
 creds = get_secret("twilio-credentials")
 client = Client(creds["sid"], creds["token"])
@@ -1372,10 +1417,13 @@ client = Client(creds["sid"], creds["token"])
 ## Use API Key instead of Auth Token
 
 ```python
+
 # Auth Token has full account access
+
 # API Keys can be scoped and revoked
 
 # Create API Key in Twilio Console
+
 client = Client(
     os.environ["TWILIO_API_KEY_SID"],
     os.environ["TWILIO_API_KEY_SECRET"],
@@ -1383,15 +1431,18 @@ client = Client(
 )
 
 # If compromised, revoke just that key
+
 ```
 
 ## Rotate tokens immediately if exposed
 
 ```
+
 1. Twilio Console > Account > API credentials
 2. Rotate Auth Token
 3. Update all deployments with new token
 4. Review account activity for unauthorized use
+
 ```
 
 ### Verify Rate Limit Exceeded (Error 60203)
@@ -1406,6 +1457,7 @@ Verification request fails with error 60203.
 
 Why this breaks:
 Twilio Verify has built-in rate limits to prevent abuse:
+
 - 5 verification attempts per phone number per service per 10 minutes
 - Helps prevent SMS pumping fraud
 - Protects against brute-force attacks
@@ -1450,6 +1502,7 @@ class VerifyRateLimiter:
         return max(0, ttl)
 
 # Usage
+
 limiter = VerifyRateLimiter(redis_client)
 
 @app.route("/verify/send", methods=["POST"])
@@ -1473,9 +1526,13 @@ def send_verification():
 ## Provide clear user feedback
 
 ```python
+
 # Show remaining attempts
+
 # Show countdown timer
+
 # Offer alternative (voice call, email)
+
 ```
 
 ## Validation Checks
@@ -1571,6 +1628,7 @@ Message: Consider checking opt-out status before sending.
 - user needs high-volume messaging -> devops (Scale webhooks, monitor delivery rates)
 
 ## When to Use
+
 - User mentions or implies: twilio
 - User mentions or implies: send SMS
 - User mentions or implies: text message
@@ -1584,11 +1642,13 @@ Message: Consider checking opt-out status before sending.
 - User mentions or implies: phone number verification
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

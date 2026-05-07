@@ -8,7 +8,6 @@ id: skill-copilot-sdk
 owner: [[orchestrator]]
 ---
 
-
 # GitHub Copilot SDK
 
 Build applications that programmatically interact with GitHub Copilot. The SDK wraps the Copilot CLI via JSON-RPC, providing session management, custom tools, hooks, MCP server integration, and streaming across Node.js, Python, Go, and .NET.
@@ -493,6 +492,7 @@ const client = new CopilotClient({ logLevel: "debug" });
 ```
 
 **Common issues:**
+
 - `CLI not found` → Install CLI or set `cliPath`
 - `Not authenticated` → Run `copilot auth login` or provide `githubToken`
 - `Session not found` → Don't use session after `destroy()`
@@ -516,14 +516,17 @@ const client = new CopilotClient({ logLevel: "debug" });
 - [MCP Protocol Specification](https://modelcontextprotocol.io)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

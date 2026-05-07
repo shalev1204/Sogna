@@ -4,12 +4,15 @@
 > This is a Next.js 16+ specific skill. Do NOT apply these patterns to Next.js 15 or earlier without explicitly checking compatibility.
 
 ## Core Philosophy
+
 Next.js 16 marks the transition from "Segment-level caching" to "Component-level caching". We no longer rely on `export const revalidate = 3600`. Instead, we use granular directives and profiles.
 
 ## 1. The `use cache` Directive
+
 The `use cache` directive can be applied to **Server Components** or **Functions**.
 
 ### Rule: Granular Application
+
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 Wrap only the data-fetching logic or the specific component that needs caching.
 
@@ -29,9 +32,11 @@ export default async function ProductCard({ id }: { id: string }) {
 ```
 
 ## 2. Using `cacheLife`
+
 `cacheLife` defines the "Freshness" and "Staleness" of a cached item using pre-defined or custom profiles.
 
 ### Usage Pattern
+
 ```tsx
 import { cacheLife } from 'next/cache'
 
@@ -44,6 +49,7 @@ async function getStockInfo() {
 ```
 
 ### Profile Reference
+
 - `default`: Base profile (1 year stale time).
 - `seconds`: High-frequency updates.
 - `minutes`: Standard dynamic content.
@@ -53,9 +59,11 @@ async function getStockInfo() {
 - `max`: Permanent cache until invalidated.
 
 ## 3. On-Demand Invalidation with `cacheTag`
+
 `cacheTag` allows you to label cached data for selective purging.
 
 ### Implementation
+
 ```tsx
 import { cacheTag } from 'next/cache'
 
@@ -67,6 +75,7 @@ async function getProfile(user: string) {
 ```
 
 ### Revalidation
+
 In a Server Action:
 ```tsx
 import { revalidateTag, updateTag } from 'next/cache'
@@ -83,9 +92,11 @@ export async function updateProfile(user: string, data: any) {
 ```
 
 ## 4. Partial Pre-Rendering (PPR)
+
 Next.js 16 stabilizes PPR via the `cacheComponents` flag in `next.config.ts`. 
 
 ### Pattern: Suspense Boundaries
+
 Always wrap dynamic "Cache Components" in `<Suspense>` to enable PPR.
 
 ```tsx

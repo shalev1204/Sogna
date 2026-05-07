@@ -7,7 +7,6 @@ id: skill-fixing-accessibility
 owner: [[orchestrator]]
 ---
 
-
 # fixing-accessibility
 
 Fix accessibility issues.
@@ -15,10 +14,13 @@ Fix accessibility issues.
 ## how to use
 
 - `/fixing-accessibility`
+
   Apply these constraints to any UI work in this conversation.
 
 - `/fixing-accessibility <file>`
+
   Review the file against all rules below and report:
+
   - violations (quote the exact line or snippet)
   - why it matters (one short sentence)
   - a concrete fix (code-level suggestion)
@@ -26,7 +28,9 @@ Fix accessibility issues.
 Do not rewrite large parts of the UI. Prefer minimal, targeted fixes.
 
 ## When to Use
+
 Reference these guidelines when:
+
 - adding or changing buttons, links, inputs, menus, dialogs, tabs, dropdowns
 - building forms, validation, error states, helper text
 - implementing keyboard shortcuts or custom interactions
@@ -140,11 +144,13 @@ Reference these guidelines when:
 - for complex widgets (menu, dialog, combobox), prefer established accessible primitives over custom behavior
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

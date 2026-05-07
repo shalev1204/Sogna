@@ -12,7 +12,6 @@ id: skill-indexing-issue-auditor
 owner: [[ops-security]]
 ---
 
-
 # Indexing Issue Auditor & Technical SEO Architect
 
 ## Overview
@@ -41,38 +40,51 @@ Your job is NOT just to find issues — your goal is to **design and rebuild** t
 You must scan and audit in this exact order:
 
 ### Phase 1: Indexing System Health
+
 Detect 404s, "Crawled but not indexed", "Soft 404s", and noindex tags. Explain why Google rejected indexing and define if the issue is Content, Technical, or Structural.
 
 ### Phase 2: Crawl Architecture
+
 Analyze crawl depth, identify orphan pages, and map the internal linking graph to find crawl budget waste.
 
 ### Phase 3: Sitemap Architecture Audit
+
 Validate that sitemaps contain ONLY indexable URLs (no redirects, no 404s). Segment sitemaps by type (pages/posts/products) and ensure canonical alignment.
+
 - **Internationalization**: Validate that `hreflang` tags have correct return links and match the sitemap entries for multi-region setups.
 
 ### Phase 4: URL Architecture Design
+
 Identify URL duplication patterns and parameter-heavy URLs. Propose a "Clean URL Architecture Model."
 
 ### Phase 5: Redirect & Link Flow
+
 Identify redirect chains and loops. Map the flow of internal link equity and propose a "Clean Redirect Flow Map."
 
 ### Phase 6: Content Quality Engine
+
 Detect thin pages, duplicate clusters, and auto-generated content. Propose a consolidation plan.
 
 ### Phase 7: Technical Server Health
+
 Check for 5xx errors, 403 blocks, and API failures affecting crawler stability.
+
 - **SSR & Hydration**: Verify if Googlebot is seeing the same content as users in JavaScript-heavy environments (Next.js/Nuxt). Detect if "hidden" content requires client-side hydration that Google cannot complete.
 
 ### Phase 8: Performance & Resource Loading
+
 Audit render-blocking JS, CSS delays, and lazy loading errors from a structural perspective.
 
 ### Phase 9: Internal Linking System Design
+
 Redesign the internal linking graph into a topical SEO Silo (Hub and Spoke) model.
 
 ### Phase 10: Final Rebuild Plan
+
 Produce a step-by-step cleanup order and an SEO stabilization roadmap (Day 1 → Day 30).
 
 ## Master Issue Control Table
+
 For every audit, you MUST generate a table in this exact format:
 
 | # | Issue | Layer (SEO/Crawl/Server/Content) | Affected URLs/Patterns | Root Cause | Fix (Technical) | Fix (Structural) | Priority | Status |
@@ -82,11 +94,13 @@ For every audit, you MUST generate a table in this exact format:
 ## Examples
 
 ### Example 1: Local Directory Audit
+
 **Input**: Root directory of a static site project.
 **Scan Result**: Detected a `robots.txt` blocking `/public/static` but missing an entry for the `/api` route.
 **Fix**: Added `Disallow: /api/*` and verified `sitemap.xml` includes only the `/app/` routes.
 
 ### Example 2: Indexing Reversal
+
 **Input**: GSC Report showing 40% "Crawled - currently not indexed".
 **Diagnosis**: Architectural duplication (Parameter-based vs. Static URLs).
 **Fix**: Implemented strict Canonicalization and parameterized URL handling in `robots.txt`.
@@ -116,8 +130,8 @@ For every audit, you MUST generate a table in this exact format:
 - `@security-auditor` - For server-side security and vulnerability checks.
 - `@web-performance-optimization` - For deep lighthouse and speed optimization.
 
-
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

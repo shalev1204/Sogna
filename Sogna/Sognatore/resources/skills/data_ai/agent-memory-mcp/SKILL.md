@@ -8,7 +8,6 @@ id: skill-agent-memory-mcp
 owner: [[orchestrator]]
 ---
 
-
 # Agent Memory Skill
 
 This skill provides a persistent, searchable memory bank that automatically syncs with project documentation. It runs as an MCP server to allow reading/writing/searching of long-term memories.
@@ -20,6 +19,7 @@ This skill provides a persistent, searchable memory bank that automatically sync
 ## Setup
 
 1. **Clone the Repository**:
+
    Clone the `agentMemory` project into your agent's workspace or a parallel directory:
 
    ```bash
@@ -35,6 +35,7 @@ This skill provides a persistent, searchable memory bank that automatically sync
    ```
 
 3. **Start the MCP Server**:
+
    Use the helper script to activate the memory bank for your current project:
 
    ```bash
@@ -87,14 +88,17 @@ npm run start-dashboard <absolute_path_to_target_workspace>
 Access at: `http://localhost:3333`
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

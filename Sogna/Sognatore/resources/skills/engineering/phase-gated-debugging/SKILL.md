@@ -8,7 +8,6 @@ id: skill-phase-gated-debugging
 owner: [[debugger]]
 ---
 
-
 # Phase-Gated Debugging
 
 ## Overview
@@ -18,6 +17,7 @@ AI coding agents see an error and immediately edit code. They guess at fixes, ge
 Based on [claude-debug](https://github.com/krabat-l/claude-debug) (full plugin with PreToolUse hook enforcement).
 
 ## When to Use
+
 Use this skill when:
 
 - a bug keeps getting "fixed" without resolving the underlying issue
@@ -28,17 +28,22 @@ Use this skill when:
 ## The Protocol
 
 ### Phase 1: REPRODUCE
+
 Run the failing command/test. Capture the exact error. Run 2-3 times for consistency.
+
 - Do NOT read source code
 - Do NOT hypothesize
 - Do NOT edit any files
 
 ### Phase 2: ISOLATE
+
 Read code. Add diagnostic logging marked `// DEBUG`. Re-run with diagnostics. Binary search to narrow down.
+
 - Only `// DEBUG` marked logging is allowed
 - Do NOT fix the bug even if you see it
 
 ### Phase 3: ROOT CAUSE
+
 Analyze WHY at the isolated location. Use "5 Whys" technique. Remove debug logging.
 
 State: "This is my root cause analysis: [explanation]. Do you agree, or should I investigate further?"
@@ -46,11 +51,14 @@ State: "This is my root cause analysis: [explanation]. Do you agree, or should I
 **WAIT for user confirmation. Do NOT proceed without it.**
 
 ### Phase 4: FIX
+
 Remove all `// DEBUG` lines. Apply minimal change addressing confirmed root cause.
+
 - Only edit files related to root cause
 - Do NOT refactor unrelated code
 
 ### Phase 5: VERIFY
+
 Run original failing test — must pass. Run related tests. For intermittent bugs, run 5+ times.
 If verification fails: root cause was wrong, go back to Phase 2.
 
@@ -72,11 +80,13 @@ If verification fails: root cause was wrong, go back to Phase 2.
 4. ALWAYS verify after fixing
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

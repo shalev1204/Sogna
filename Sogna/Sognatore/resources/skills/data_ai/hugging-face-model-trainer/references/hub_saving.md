@@ -12,6 +12,7 @@ version: 1.0.0
 ## Why Hub Push is Required
 
 When running on Hugging Face Jobs:
+
 - Environment is temporary
 - All files deleted on job completion
 - No local disk persistence
@@ -48,9 +49,13 @@ hf_jobs("uv", {
 ## Complete Example
 
 ```python
+
 # train.py
+
 # /// script
+
 # dependencies = ["trl"]
+
 # ///
 
 from trl import SFTTrainer, SFTConfig
@@ -59,6 +64,7 @@ from datasets import load_dataset
 dataset = load_dataset("trl-lib/Capybara", split="train")
 
 # Configure with Hub push
+
 config = SFTConfig(
     output_dir="my-model",
     num_train_epochs=3,
@@ -82,6 +88,7 @@ trainer = SFTTrainer(
 trainer.train()
 
 # ✅ Push final model
+
 trainer.push_to_hub()
 
 print("✅ Model saved to: https://huggingface.co/myusername/my-trained-model")
@@ -127,6 +134,7 @@ SFTConfig(
 ```
 
 **Benefits:**
+
 - Resume training if job fails
 - Compare checkpoint performance
 - Use intermediate models
@@ -195,11 +203,13 @@ api.create_repo(
 ### Repository Naming
 
 **Valid names:**
+
 - `username/my-model`
 - `username/model-name`
 - `organization/model-name`
 
 **Invalid names:**
+
 - `model-name` (missing username)
 - `username/model name` (spaces not allowed)
 - `username/MODEL` (uppercase discouraged)
@@ -211,6 +221,7 @@ api.create_repo(
 **Cause:** HF_TOKEN not provided or invalid
 
 **Solutions:**
+
 1. Verify `secrets={"HF_TOKEN": "$HF_TOKEN"}` in job config
 2. Check you're logged in: `hf auth whoami`
 3. Re-login: `hf auth login`
@@ -220,6 +231,7 @@ api.create_repo(
 **Cause:** No write access to repository
 
 **Solutions:**
+
 1. Check repository namespace matches your username
 2. Verify you're a member of organization (if using org namespace)
 3. Check repository isn't private (if accessing org repo)
@@ -229,6 +241,7 @@ api.create_repo(
 **Cause:** Repository doesn't exist and auto-creation failed
 
 **Solutions:**
+
 1. Manually create repository first
 2. Check repository name format
 3. Verify namespace exists
@@ -238,6 +251,7 @@ api.create_repo(
 **Cause:** Network issues or Hub unavailable
 
 **Solutions:**
+
 1. Training continues but final push fails
 2. Checkpoints may be saved
 3. Re-run push manually after job completes
@@ -245,6 +259,7 @@ api.create_repo(
 ### Issue: Model saved but not visible
 
 **Possible causes:**
+
 1. Repository is private—check https://huggingface.co/username
 2. Wrong namespace—verify `hub_model_id` matches login
 3. Push still in progress—wait a few minutes
@@ -257,10 +272,12 @@ If training completes but push fails, push manually:
 from transformers import AutoModel, AutoTokenizer
 
 # Load from local checkpoint
+
 model = AutoModel.from_pretrained("./output_dir")
 tokenizer = AutoTokenizer.from_pretrained("./output_dir")
 
 # Push to Hub
+
 model.push_to_hub("username/model-name", token="hf_abc123...")
 tokenizer.push_to_hub("username/model-name", token="hf_abc123...")
 ```
@@ -295,9 +312,13 @@ Upload file pytorch_model.bin: 100%
 ## Example: Full Production Setup
 
 ```python
+
 # production_train.py
+
 # /// script
+
 # dependencies = ["trl>=0.12.0", "peft>=0.7.0"]
+
 # ///
 
 from datasets import load_dataset
@@ -306,13 +327,16 @@ from trl import SFTTrainer, SFTConfig
 import os
 
 # Verify token is available
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN not found in environment!"
 
 # Load dataset
+
 dataset = load_dataset("trl-lib/Capybara", split="train")
 print(f"✅ Dataset loaded: {len(dataset)} examples")
 
 # Configure with comprehensive Hub settings
+
 config = SFTConfig(
     output_dir="qwen-capybara-sft",
 
@@ -336,6 +360,7 @@ config = SFTConfig(
 )
 
 # Train with LoRA
+
 trainer = SFTTrainer(
     model="Qwen/Qwen2.5-0.5B",
     train_dataset=dataset,
@@ -371,6 +396,7 @@ hf_jobs("uv", {
 Always verify both are configured before submitting any training job.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

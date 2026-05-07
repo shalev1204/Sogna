@@ -35,6 +35,7 @@ Use the `{Icon}` markup extension to easily include icons from libraries like Fo
 ```
 
 ### Common Properties:
+
 - `IconOptions.Size`: Sets the width and height of the icon.
 - `IconOptions.Fill`: The color/brush of the icon.
 - `IconOptions.Background`: Background brush for the icon container.
@@ -60,6 +61,7 @@ Then use them with `StaticResource` if they are already defined:
 However, the `{Icon ...}` extension is usually preferred for its brevity and ability to create new icon instances on the fly.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

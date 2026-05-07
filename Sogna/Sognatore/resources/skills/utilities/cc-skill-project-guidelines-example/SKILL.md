@@ -8,7 +8,6 @@ id: skill-cc-skill-project-guidelines-example
 owner: [[orchestrator]]
 ---
 
-
 # Project Guidelines Skill (Example)
 
 This is an example of a project-specific skill. Use this as a template for your own projects.
@@ -18,7 +17,9 @@ Based on a real production application: [Zenith](https://zenith.chat) - AI-power
 ---
 
 ## When to Use
+
 Reference this skill when working on the specific project it's designed for. Project skills contain:
+
 - Architecture overview
 - File structure
 - Code patterns
@@ -30,6 +31,7 @@ Reference this skill when working on the specific project it's designed for. Pro
 ## Architecture Overview
 
 **Tech Stack:**
+
 - **Frontend**: Next.js 15 (App Router), TypeScript, React
 - **Backend**: FastAPI (Python), Pydantic models
 - **Database**: Supabase (PostgreSQL)
@@ -237,13 +239,17 @@ export function useApi<T>(
 ### Backend (pytest)
 
 ```bash
+
 # Run all tests
+
 poetry run pytest tests/
 
 # Run with coverage
+
 poetry run pytest tests/ --cov=. --cov-report=html
 
 # Run specific test file
+
 poetry run pytest tests/test_auth.py -v
 ```
 
@@ -268,13 +274,17 @@ async def test_health_check(client: AsyncClient):
 ### Frontend (React Testing Library)
 
 ```bash
+
 # Run tests
+
 npm run test
 
 # Run with coverage
+
 npm run test -- --coverage
 
 # Run E2E tests
+
 npm run test:e2e
 ```
 
@@ -313,11 +323,14 @@ describe('WorkspacePanel', () => {
 ### Deployment Commands
 
 ```bash
+
 # Build and deploy frontend
+
 cd frontend && npm run build
 gcloud run deploy frontend --source .
 
 # Build and deploy backend
+
 cd backend
 gcloud run deploy backend --source .
 ```
@@ -325,12 +338,15 @@ gcloud run deploy backend --source .
 ### Environment Variables
 
 ```bash
+
 # Frontend (.env.local)
+
 NEXT_PUBLIC_API_URL=https://api.example.com
 NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 
 # Backend (.env)
+
 DATABASE_URL=postgresql://...
 ANTHROPIC_API_KEY=sk-ant-...
 SUPABASE_URL=https://xxx.supabase.co
@@ -360,11 +376,13 @@ SUPABASE_KEY=eyJ...
 - `tdd-workflow/` - Test-driven development methodology
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

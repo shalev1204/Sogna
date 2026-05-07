@@ -18,13 +18,16 @@ executing a workflow.
 When the user opens a dbt model or mentions a table, run this sequence automatically:
 
 ```
+
 1. search(query="<table_name>") → get the full MCON/table identifier
 2. getTable(mcon="<mcon>") → schema, freshness, row count, importance score, monitoring status
 3. getAssetLineage(mcon="<mcon>") → upstream sources, downstream dependents
 4. getAlerts(created_after="<7 days ago>", created_before="<now>", table_mcons=["<mcon>"]) → active alerts
+
 ```
 
 Summarize for the user:
+
 - **Health**: last updated, row count, is it monitored?
 - **Lineage**: N upstream sources, M downstream consumers (name the important ones)
 - **Alerts**: any active/unacknowledged incidents — lead with these if present
@@ -39,9 +42,11 @@ First, check whether the user has expressed intent to modify the model
 in this session (e.g. mentioned a change, asked to add/edit/fix something).
 
 IF change intent has been expressed AND any of the following are true:
+
   - One or more active/unacknowledged alerts exist on the table
   - One or more downstream dependents are key assets
   - The table's importance score is above 0.8
+
 → Ask the user before running Workflow 4:
   "This is a high-importance table with [N active alerts / key asset
   dependents / importance score 0.989]. Do you want me to run a full
@@ -62,11 +67,16 @@ When the user is creating a new .sql dbt model file (not editing an existing one
 
 1. Parse all {{ ref('...') }} and {{ source('...', '...') }} calls from the SQL
 2. For each referenced table, run the standard Workflow 1 health check:
+
    search() → getTable() → getAlerts()
+
 3. Surface a consolidated upstream health summary:
+
    "Your new model references N upstream tables. Here's their current health:"
+
    - List each with: last updated, active alerts (if any), key asset flag
 4. Flag any upstream table with active alerts as a risk:
+
    "⚠️ <table_name> has <N> active alerts — your new model will inherit this data quality issue"
 
 Skip getAssetLineage for new models — they have no downstream dependents yet.
@@ -81,22 +91,28 @@ Skip Workflow 4 for new models — there is no existing blast radius to assess.
 When the user adds a new column, filter, or business rule, suggest adding a monitor. First, choose the monitor type based on what the new logic does:
 
 ```
+
 - New column with a row-level condition (null check, range, regex)
+
   → createValidationMonitorMac
 
 - New aggregate metric (row count, sum, average, percentile over time)
+
   → createMetricMonitorMac
 
 - Logic that should match another table or a prior time period
+
   → createComparisonMonitorMac
 
 - Complex business rule that doesn't fit the above
+
   → createCustomSqlMonitorMac
 ```
 
 Then run the appropriate sequence:
 
 ```
+
 1. Read the SQL file being edited to extract the specific transformation logic:
    - Confirm the file path from conversation context (do not guess or assume)
    - If no file path is clear, ask the engineer: "Which file contains the new logic?"
@@ -104,27 +120,36 @@ Then run the appropriate sequence:
    - Use this logic directly when constructing the monitor condition in step 3
 
 2. For validation monitors: getValidationPredicates() → show what validation types are available
+
    For all types: determine the right tool from the selection guide above
+
 3. Call the selected create*MonitorMac tool:
    - createValidationMonitorMac(mcon, description, condition_sql) → returns YAML
    - createMetricMonitorMac(mcon, description, metric, operator) → returns YAML
    - createComparisonMonitorMac(source_table, target_table, metric) → returns YAML
    - createCustomSqlMonitorMac(mcon, description, sql) → returns YAML
+
    ⚠ If createValidationMonitorMac fails (e.g. column doesn't exist yet in the live table),
      fall back to createCustomSqlMonitorMac with an explicit SQL query instead.
+
 3. Save the YAML to <project>/monitors/<table_name>.yml
 4. Run: montecarlo monitors apply --dry-run (to preview)
 5. Run: montecarlo monitors apply --auto-yes (to apply)
+
 ```
 
 **Important — YAML format for `monitors apply`:**
 All `create*MonitorMac` tools return YAML that is not directly compatible with `montecarlo monitors apply`. Reformat the output into a standalone monitor file with `montecarlo:` as the root key. The second-level key matches the monitor type: `custom_sql:`, `validation:`, `metric:`, or `comparison:`. The example below shows `custom_sql:` — substitute the appropriate key for other monitor types.
 
 ```yaml
+
 # monitors/<table_name>.yml  ← monitor definitions only, NOT montecarlo.yml
+
 montecarlo:
   custom_sql:
+
     - warehouse: <warehouse_name>
+
       name: <monitor_name>
       description: <description>
       schedule:
@@ -132,13 +157,17 @@ montecarlo:
         start_time: '<ISO timestamp>'
       sql: <your validation SQL>
       alert_conditions:
+
         - operator: GT
+
           threshold_value: 0.0
 ```
 
 The `montecarlo.yml` project config is a **separate file** in the project root containing only:
 ```yaml
+
 # montecarlo.yml  ← project config only, NOT monitor definitions
+
 version: 1
 namespace: <your-namespace>
 default_resource: <warehouse_name>
@@ -151,18 +180,23 @@ Do NOT put `version:`, `namespace:`, or `default_resource:` inside monitor defin
 ## Workflow 3: Alert triage — when investigating an active incident
 
 ```
+
 1. getAlerts(
+
      created_after="<start>",
      created_before="<end>",
      order_by="-createdTime",
      statuses=["NOT_ACKNOWLEDGED"]
    ) → list open alerts
+
 2. getTable(mcon="<affected_table_mcon>") → check current table state
 3. getAssetLineage(mcon="<mcon>") → identify upstream cause or downstream blast radius
 4. getQueriesForTable(mcon="<mcon>") → recent queries that might explain the anomaly
+
 ```
 
 To respond to an alert:
+
 - `updateAlert(alert_id="<id>", status="ACKNOWLEDGED")` — acknowledge it
 - `setAlertOwner(alert_id="<id>", owner="<email>")` — assign ownership
 - `createOrUpdateAlertComment(alert_id="<id>", comment="<text>")` — add context
@@ -183,6 +217,7 @@ blast radius as the original change. Downstream models may have already
 adapted to the "incorrect" behavior, meaning the fix itself could break them.
 
 Pay special attention to:
+
 - Whether the revert removes a column other models now depend on
 - Whether downstream models reference the specific logic being reverted
 - Whether active alerts may be related to the change being reverted
@@ -190,16 +225,21 @@ Pay special attention to:
 When the user is about to rename or drop a column, change a join condition, alter a filter, or refactor a model's logic, run this sequence to surface the blast radius before any changes are committed:
 
 ```
+
 1. search(query="<table_name>") + getTable(mcon="<mcon>")
+
    → importance score, query volume (reads/writes per day), key asset flag
 
 2. getAssetLineage(mcon="<mcon>")
+
    → full list of downstream dependents; for each, note whether it is a key asset
 
 3. getTable(mcon="<downstream_mcon>") for each key downstream asset
+
    → importance score, last updated, monitoring status
 
 4. getAlerts(
+
      created_after="<7 days ago>",
      created_before="<now>",
      table_mcons=["<mcon>", "<downstream_mcon_1>", ...],
@@ -208,19 +248,24 @@ When the user is about to rename or drop a column, change a join condition, alte
    → any active incidents already affecting this table or its dependents
 
 5. getQueriesForTable(mcon="<mcon>")
+
    → recent queries; scan for references to the specific columns being changed
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
    → use getQueryData(query_id="<id>") to fetch full SQL for ambiguous cases
 
 5b. Supplementary local search for downstream dbt refs:
+
    - Search the local models/ directory for ref('<table_name>') (single-hop only)
    - Compare results against getAssetLineage output from step 2
    - If any local models reference this table but are NOT in MC's lineage results:
+
      "⚠️ Found N local model(s) referencing this table not yet in MC's lineage: [list]"
+
    - If no models/ directory exists in the current project, skip silently
    - MC lineage remains the authoritative source — local grep is supplementary only
 
 6. getMonitors(mcon="<mcon>")
+
    → which monitors are watching columns or metrics affected by the change
 ```
 
@@ -239,7 +284,9 @@ When the user is changing multiple models in the same session or same domain
 
 - Run a single consolidated impact assessment across all changed tables
 - Deduplicate downstream dependents — if two changed tables share a downstream
+
   dependent, count it once and note that it's affected by multiple upstream changes
+
 - Present a unified blast radius report rather than N separate reports
 - Escalate risk tier if the combined blast radius is larger than any individual table
 
@@ -251,33 +298,42 @@ Highest risk table: timeseries_detector_routing (22 downstream refs)"
 ### Report format
 
 ```
+
 ## Change Impact: <table_name>
 
 Risk: 🔴 High / 🟡 Medium / 🟢 Low
 
 Downstream blast radius:
+
   - <N> tables depend on this model
   - Key assets affected: <list or "none">
 
 Active incidents:
+
   - <alert title, status> or "none"
 
 Column exposure (for columns being changed):
+
   - Found in <N> recent queries (e.g. <query snippet>)
 
 Monitor coverage:
+
   - <monitor name> watches <metric> — will be affected by this change
   - If zero custom monitors exist → append:
+
     "⚠️ No custom monitors on this table. After making your changes,
     I'll suggest a monitor for the new logic — or say 'add a monitor'
     to do it now."
 
 Recommendation:
+
   - <specific callout, e.g. "Notify owners of downstream_table before deploying",
+
      "Coordinate with the freshness alert owner", "Add a monitor for the new column">
 ```
 
 If risk is 🔴 High:
+
 1. Call `getAudiences()` to retrieve configured notification audiences
 2. Include in the recommendation: "Notify: <audience names / channels>"
 3. Proactively suggest:
@@ -292,23 +348,27 @@ Do not present MC data and then write code as if the data wasn't there.
 Explicitly connect each key finding to a specific recommendation:
 
 - Active alerts firing on the table:
+
   → Recommend deferring or minimally scoping the change until alerts are resolved
   → Explain: "There are N active alerts on this table — making this change now
      risks compounding an existing data quality issue"
 
 - Key assets downstream:
+
   → Recommend defensive coding patterns: null guards, backward-compatible changes,
      additive-only schema changes where possible
   → Explain: "X downstream key assets depend on this table — I'd recommend
      writing this as [specific pattern] to avoid breaking [specific dependent]"
 
 - Monitors on affected columns:
+
   → Call out that the change will affect monitor coverage
   → Recommend updating monitors alongside the code change (offer Workflow 2)
   → Explain: "The existing monitor on [column] will need to be updated to
      account for this change"
 
 - New output column or logic being added:
+
   → Always offer Workflow 2 after the impact assessment, regardless
     of existing monitor coverage
   → Do not skip this step even if risk tier is 🟢 Low
@@ -318,20 +378,28 @@ Explicitly connect each key finding to a specific recommendation:
   → Wait for the user's response before proceeding with the edit
 
 - High read volume (>50 reads/day):
+
   → Recommend extra caution around column renames or removals
   → Suggest backward-compatible transition (add new column, deprecate old one)
   → Explain: "This table has [N] reads/day — a column rename without a
      transition period would break downstream consumers immediately"
 
 - Column renames, even inside CTEs:
+
   → Never assume a CTE-internal rename is safe. Always check:
+
     1. Does this column appear in the final SELECT, directly or
+
        via a CTE that feeds into the final SELECT?
+
     2. If yes — treat as a breaking change. Recommend a
+
        backward-compatible transition: add the correctly-named
        column, keep the old one temporarily, remove in a
        follow-up PR.
+
     3. If truly internal and never surfaces in output — confirm
+
        this explicitly before proceeding.
   → Explain: "Even though this column is defined in a CTE, if it
     surfaces in the final SELECT it is a public output column —
@@ -342,10 +410,12 @@ Explicitly connect each key finding to a specific recommendation:
 ## Workflow 5: Change validation queries — after a code change is made
 
 **Trigger:** Explicit engineer intent only. Activate when the engineer says something like:
+
 - "generate validation queries", "validate this change", "I'm done with this change"
 - "let me test this", "write queries to check this", "ready to commit"
 
 **Required session context — do not activate without both:**
+
 1. Workflow 4 (change impact assessment) has run for this table in this session
 2. A file edit was made to a `.sql` or dbt model file for that same table
 
@@ -377,6 +447,7 @@ From Workflow 4 findings and the file diff, classify the primary change. A chang
 ### Step 2 — Determine warehouse context from Workflow 4
 
 From the `getTable` result already in session context, extract:
+
 - **Fully qualified table name** — e.g. `analytics.prod_internal_bi.client_hub_master`
 - **Warehouse type** — Snowflake, BigQuery, Redshift, Databricks
 - **Schema** — already resolved, do not re-derive
@@ -428,6 +499,7 @@ Then generate change-specific queries based on what needs to be validated for th
 ### Step 5 — Add change-specific context to each query
 
 For every query, include a SQL comment block that explains:
+
 - What the query is checking
 - What a healthy result looks like **for this specific change**
 - What would indicate a problem
@@ -438,9 +510,11 @@ Derive this context from Workflow 4 findings. Use the business meaning of the ch
 /*
 Null rate check: days_since_contract_start (new column, dev only)
 What to look for:
+
   - Null count should equal workspaces with no contract_start_date
   - All rows with contract_start_date should have a non-null, non-negative value
   - Values above 3650 (~10 years) are suspicious and may indicate a data issue
+
 */
 ```
 
@@ -464,10 +538,12 @@ Generated: <timestamp>
 Workflow 4 risk tier: <tier from this session>
 
 Instructions:
+
 1. Replace <YOUR_DEV_DATABASE> with your personal or branch database
 2. Run the row count comparison first
 3. Run change-specific queries to validate intended behavior
 4. Unexpected results should be investigated before merging
+
 */
 ```
 
@@ -479,6 +555,7 @@ Then tell the engineer:
 ---
 
 ### What this workflow does NOT do
+
 - Does not execute queries (Phase 2)
 - Does not require warehouse MCP connection
 - Does not generate Monte Carlo notebook YAML
@@ -486,6 +563,7 @@ Then tell the engineer:
 - Does not activate if Workflow 4 has not run for this table in this session
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

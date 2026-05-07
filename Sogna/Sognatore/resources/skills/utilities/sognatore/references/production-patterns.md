@@ -14,6 +14,7 @@ Practitioner-tested patterns from Hacker News discussions and real-world deploym
 ## Overview
 
 This reference consolidates battle-tested insights from:
+
 - HN discussions on autonomous agents in production (2025)
 - Coding with LLMs practitioner experiences
 - Simon Willison's Superpowers coding agent patterns
@@ -30,21 +31,25 @@ This reference consolidates battle-tested insights from:
 ```yaml
 hitl_patterns:
   always_human:
+
     - Customer-facing responses
     - Financial transactions
     - Security-critical operations
     - Legal/compliance decisions
 
   automation_candidates:
+
     - Internal tooling
     - Developer assistance
     - Data preprocessing
     - Code generation (with review)
 
   implementation:
+
     - Classification layer routes to human vs automated
     - Confidence thresholds trigger escalation
     - Audit trails for all automated decisions
+
 ```
 
 ### Narrow Scope Wins
@@ -55,12 +60,14 @@ hitl_patterns:
 scope_constraints:
   max_steps_before_review: 3-5
   task_characteristics:
+
     - Specific, well-defined objectives
     - Pre-classified inputs
     - Deterministic success criteria
     - Verifiable outputs
 
   successful_domains:
+
     - Email scanning and classification
     - Invoice processing
     - Code refactoring (bounded)
@@ -68,10 +75,12 @@ scope_constraints:
     - Test writing
 
   failure_prone_domains:
+
     - Open-ended feature implementation
     - Novel algorithm design
     - Security-critical code
     - Cross-system integrations
+
 ```
 
 ### Confidence-Based Routing
@@ -111,14 +120,19 @@ def confidence_based_routing(agent_output):
 classification_first:
   step_1_classify:
     workable:
+
       - Clear requirements
       - Existing patterns
       - Test coverage available
+
     non_workable:
+
       - Ambiguous requirements
       - Novel architecture
       - Missing dependencies
+
     escalate_immediately:
+
       - Security concerns
       - Compliance requirements
       - Customer-facing changes
@@ -186,17 +200,20 @@ def deterministic_validation_loop(task, max_attempts=3):
 ```yaml
 context_curation:
   principles:
+
     - "Less is more" - focused context beats comprehensive context
     - Manual selection outperforms automatic RAG
     - Remove outdated information aggressively
 
   anti_patterns:
+
     - Dumping entire codebase into context
     - Relying on automatic context selection
     - Accumulating conversation history indefinitely
 
   implementation:
     per_task_context:
+
       - 2-5 most relevant files
       - Specific functions, not entire modules
       - Recent changes only (last 1-2 days)
@@ -243,20 +260,24 @@ def abstract_for_agent(raw_data, task_context):
 ```yaml
 conversation_management:
   new_conversation_triggers:
+
     - Different domain (backend -> frontend)
     - New feature vs bug fix
     - After completing major task
     - When errors accumulate (3+ in row)
 
   preserve_across_sessions:
+
     - CLAUDE.md / CONTINUITY.md
     - Architectural decisions
     - Key constraints
 
   discard_between_sessions:
+
     - Debugging attempts
     - Abandoned approaches
     - Intermediate drafts
+
 ```
 
 ---
@@ -274,6 +295,7 @@ skills_architecture:
 
   implementation:
     skill_discovery:
+
       - Shell script searches skill files
       - Model requests specific skills by name
       - Skills loaded only when needed
@@ -285,9 +307,11 @@ skills_architecture:
       dependencies: ["other-skills"]
 
   benefits:
+
     - Minimal base context
     - Extensible without bloat
     - Skills can be updated independently
+
 ```
 
 ### Sub-Agents for Context Isolation
@@ -334,16 +358,20 @@ async def context_isolated_search(query, codebase_path):
 plan_then_code:
   phase_1_planning:
     outputs:
+
       - spec.md: "Detailed requirements"
       - todo.md: "Tagged tasks [BUG], [FEAT], [REFACTOR]"
       - approach.md: "Implementation strategy"
+
     constraints:
+
       - NO CODE in this phase
       - Human review before proceeding
       - Clear success criteria
 
   phase_2_review:
     checks:
+
       - Plan addresses all requirements
       - Approach is feasible
       - No missing dependencies
@@ -351,10 +379,12 @@ plan_then_code:
 
   phase_3_implementation:
     constraints:
+
       - Follow plan exactly
       - One task at a time
       - Test after each change
       - Report deviations immediately
+
 ```
 
 ---
@@ -368,6 +398,7 @@ plan_then_code:
 ```yaml
 event_driven_orchestration:
   problems_with_synchronous:
+
     - Doesn't scale
     - Mixes orchestration with prompt logic
     - Single failure breaks entire chain
@@ -375,19 +406,23 @@ event_driven_orchestration:
 
   async_architecture:
     message_queue:
+
       - Agents communicate via events
       - Decoupled execution
       - Natural retry/dead-letter handling
 
     state_management:
+
       - Persistent task state
       - Checkpoint/resume capability
       - Clear ownership of data
 
     error_handling:
+
       - Per-agent retry policies
       - Circuit breakers
       - Graceful degradation
+
 ```
 
 ### Policy-First Enforcement
@@ -421,6 +456,7 @@ class PolicyEngine:
         return AllowedAction(agent_action)
 
 # Example policies
+
 policies = [
     NoProductionDataDeletion(),
     NoSecretsInCode(),
@@ -440,22 +476,26 @@ simulation_layer:
 
   implementation:
     sandbox_environment:
+
       - Isolated container
       - Mocked external services
       - Synthetic data
       - Full audit logging
 
     validation_checks:
+
       - Run tests in sandbox first
       - Compare outputs to expected
       - Check for policy violations
       - Measure resource consumption
 
     promotion_criteria:
+
       - All tests pass
       - No policy violations
       - Resource usage within limits
       - Human approval (for sensitive changes)
+
 ```
 
 ---
@@ -469,11 +509,13 @@ simulation_layer:
 ```yaml
 benchmark_problems:
   llm_judge_issues:
+
     - Same architecture = same failure modes
     - Math errors accepted as correct
     - "Do-nothing" baseline passes 38% of time
 
   contamination:
+
     - Published benchmarks become training targets
     - Overfitting to specific datasets
     - Inflated scores don't reflect real performance
@@ -560,6 +602,7 @@ cost_patterns:
 ## Sources
 
 **Hacker News Discussions:**
+
 - [What Actually Works in Production for Autonomous Agents](https://news.ycombinator.com/item?id=44623207)
 - [Coding with LLMs in Summer 2025](https://news.ycombinator.com/item?id=44623953)
 - [Superpowers: How I'm Using Coding Agents](https://news.ycombinator.com/item?id=45547344)
@@ -569,12 +612,14 @@ cost_patterns:
 - [Context Engineering vs Prompt Engineering](https://news.ycombinator.com/item?id=44427757)
 
 **Show HN Projects:**
+
 - [Self-Evolving Agents Repository](https://news.ycombinator.com/item?id=45099226)
 - [Package Manager for Agent Skills](https://news.ycombinator.com/item?id=46422264)
 - [Wispbit - AI Code Review Agent](https://news.ycombinator.com/item?id=44722603)
 - [Agtrace - Monitoring for AI Coding Agents](https://news.ycombinator.com/item?id=46425670)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

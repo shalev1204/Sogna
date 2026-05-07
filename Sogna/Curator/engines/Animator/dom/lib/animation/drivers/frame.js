@@ -1,4 +1,4 @@
-import { CancelFrame, Frame, FrameData as FrameDataInstance } from "../../frameloop";
+import { CancelFrame, Frame, FrameDataInstance } from "../../frameloop";
 import { Time } from "../../frameloop/sync-time.js";
 export const frameloopDriver = (update) => {
     const passTimestamp = ({ timestamp }) => update(timestamp);

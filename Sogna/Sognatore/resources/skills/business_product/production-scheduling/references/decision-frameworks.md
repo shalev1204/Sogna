@@ -37,22 +37,27 @@ plant's primary performance objective.
 #### Algorithm Selection Decision Tree
 
 1. **Is schedule adherence the primary KPI and are there contractual delivery penalties?**
+
    → Use EDD as the primary rule. Insert CR checks for jobs where CR < 0.8 — these need
    immediate attention regardless of EDD rank.
 
 2. **Is throughput/output the primary KPI with flexible delivery windows?**
+
    → Use SPT to minimise average flow time. Monitor maximum lateness; if it exceeds
    the acceptable threshold, switch to a hybrid SPT-EDD (SPT within a due date window).
 
 3. **Do jobs have significantly different economic values (margin, penalty, customer tier)?**
+
    → Use WSJF. Weight = customer tier multiplier × margin contribution. This is the
    appropriate rule for job shops with heterogeneous order portfolios.
 
 4. **Are setup times sequence-dependent and significant (>15 minutes between families)?**
+
    → No pure dispatching rule handles this. Use a setup-aware scheduling heuristic
    (Section 2) that groups jobs by setup family and optimises within groups using EDD.
 
 5. **Is the environment stable with balanced flow and predictable demand?**
+
    → FIFO is acceptable and preferred for its simplicity and shop floor trust.
 
 ### 1.2 Multi-Rule Hybrid Approaches
@@ -90,6 +95,7 @@ CR = (Due Date − Current Date) / Remaining Total Processing Time
 ```
 
 Where Remaining Total Processing Time includes:
+
 - Setup time for the current operation
 - Run time for the current operation
 - Queue time estimates for remaining operations (use historical average queue times)
@@ -134,9 +140,13 @@ Lower score = higher priority (more urgent). Negative scores = past-due.
 #### Phase 0 — Document the Current State (2–4 weeks)
 
 1. Video-record 3–5 changeovers on the target machine/line. Include the full duration
+
    from last good piece of the outgoing product to first good piece of the incoming product.
+
 2. Create a changeover element sheet listing every task performed, the performer
+
    (operator, setup tech, maintenance), the duration, and whether the machine was stopped.
+
 3. Categorize each element:
    - **Internal (IED):** Must be performed with the machine stopped.
    - **External (OED):** Can be performed while the machine is still running.
@@ -153,42 +163,65 @@ walking to the tool crib).
    - Pre-mix materials, pre-heat moulds, pre-program CNC settings.
    - Pre-print work order documentation and quality checklists.
 2. Create a standardised changeover preparation checklist. The setup technician begins
+
    executing it 30–60 minutes before the scheduled changeover time.
+
 3. Expected result: 25–40% reduction in machine-stopped time with no capital investment.
 
 #### Phase 2 — Convert Internal to External (4–8 weeks)
 
 1. Standardise die/fixture heights and mounting interfaces so that alignment and adjustment
+
    happen before the die reaches the machine, not after.
+
 2. Implement intermediate jigs — set up the next tool in a staging fixture that mirrors
+
    the machine's mounting interface. When the changeover begins, the pre-assembled unit
    drops in with minimal adjustment.
+
 3. Pre-condition materials: if the incoming product requires a different temperature,
+
    viscosity, or chemical mix, start conditioning in a parallel vessel.
+
 4. Expected result: additional 15–25% reduction in machine-stopped time. May require
+
    modest investment in duplicate tooling or staging fixtures.
 
 #### Phase 3 — Streamline Remaining Internal Elements (4–12 weeks)
 
 1. Replace bolt-on fasteners with quick-release clamps, cam locks, or hydraulic clamping.
+
    Every bolt removed saves 15–30 seconds.
+
 2. Eliminate adjustments through poka-yoke: centre pins, guide rails, fixed stops that
+
    guarantee first-piece alignment without trial-and-error.
+
 3. Standardise utility connections: colour-coded quick-disconnect fittings for air, water,
+
    hydraulic, and electrical. One-motion connect/disconnect.
+
 4. Parallel operations: two people working simultaneously on different sides of the machine
+
    can halve the internal time. Requires choreographed procedures and safety protocols.
+
 5. Expected result: additional 10–20% reduction. Often requires capital investment in
+
    quick-change tooling.
 
 #### Phase 4 — Eliminate Adjustments and Verify (ongoing)
 
 1. Implement first-piece verification jigs that confirm dimensions without full inspection.
 2. Use statistical process control (SPC) from the first piece — if the first piece is within
+
    control limits, the changeover is validated without a trial run.
+
 3. Document the final standardised changeover procedure with photos, time targets per element,
+
    and a sign-off sheet.
+
 4. Target: changeover time under 10 minutes (single-minute exchange of die) for the
+
    machine-stopped portion.
 
 ### 2.2 Sequence-Dependent Setup Matrices
@@ -208,15 +241,20 @@ setup time matrix:
 | **Black** | 30 | 28 | 25 | 22 | 12 | 0 |
 
 **Observations from this matrix:**
+
 - Light-to-dark transitions (White → Black: 25 min) are cheaper than dark-to-light (Black → White: 30 min).
 - Within colour families, transitions are minimal (Red → Orange: 12 min vs. Red → White: 25 min).
 - The optimal sequence for all six colours in a campaign would be: White → Yellow → Orange → Red → Blue → Black (total: 8+8+8+15+10 = 49 min) vs. random sequence averaging 17 min per transition (85 min total).
 
 **Using the matrix in scheduling:**
+
 1. Group jobs by colour family when possible (campaign scheduling within families).
 2. When inter-family transitions are required, optimise the transition sequence using the
+
    nearest-neighbour heuristic, then improve with 2-opt swaps.
+
 3. If a specific colour is due earliest but the optimal setup sequence would delay it,
+
    compute the cost of the suboptimal sequence (extra setup minutes × constraint hourly rate)
    vs. the cost of late delivery. Choose the lower-cost option.
 
@@ -227,15 +265,18 @@ setup time matrix:
 EPQ = √((2 × D × S) / (H × (1 − D/P)))
 ```
 Where:
+
 - D = demand rate (units per period)
 - S = setup cost per changeover (labour + scrap + lost output opportunity cost)
 - H = holding cost per unit per period
 - P = production rate (units per period), P > D
 
 **Practical adjustments:**
+
 - Round EPQ up to the nearest full shift or full batch to avoid mid-shift changeovers.
 - If EPQ results in WIP that exceeds available staging space, constrain to physical capacity.
 - If EPQ results in a campaign longer than the longest customer lead time tolerance,
+
   shorten it to maintain responsiveness even at higher changeover frequency.
 
 **Campaign vs. mixed-model decision:**
@@ -281,28 +322,42 @@ you have an interactive constraint pair that requires different treatment.
 Maximise the output of the constraint with no capital investment:
 
 1. **Eliminate idle time:** The constraint should never wait for material, tooling,
+
    operators, quality inspection, or information. Pre-stage everything.
+
 2. **Minimise changeovers on the constraint:** Move changeover to non-constraint
+
    resources where the time cost is lower. If the constraint must change over,
    ensure SMED discipline is applied rigorously.
+
 3. **Prevent quality defects reaching the constraint:** Inspect before the constraint
+
    operation, not after. Every defective piece processed at the constraint is wasted
    constraint capacity.
+
 4. **Run through breaks and shift changes:** Stagger operator lunches so the constraint
+
    never stops for a break. Assign a relief operator.
+
 5. **Eliminate micro-stops:** Address every source of 1–5 minute stoppages (sensor trips,
+
    material jams, tool wear alarms) that individually seem trivial but cumulatively steal
    2–5% of capacity.
 
 **Step 3: Subordinate Everything to the Constraint**
 
 1. **Upstream work centres:** Release work to upstream operations only at the rate the
+
    constraint can consume it. This is the "rope." If the constraint processes 100 units/hour,
    the upstream release rate should not exceed 100 units/hour regardless of upstream capacity.
+
 2. **Downstream work centres:** Must maintain enough sprint capacity to clear constraint
+
    output without becoming a secondary bottleneck. If the constraint produces a batch every
    2 hours, downstream must be able to process that batch within 2 hours.
+
 3. **Scheduling non-constraints:** Do not optimise non-constraint schedules in isolation.
+
    A non-constraint running at 100% utilisation when the constraint runs at 85% is producing
    excess WIP that clogs the shop floor and slows the constraint's material flow.
 
@@ -315,6 +370,7 @@ Buffer Duration = Planned Lead Time from release to constraint × Buffer Factor
 ```
 
 Typical buffer factors:
+
 - Stable, reliable upstream operations: 0.3 × lead time
 - Moderate reliability, some variability: 0.5 × lead time (most common starting point)
 - Unreliable upstream, frequent disruptions: 0.75 × lead time
@@ -364,12 +420,18 @@ buffer. The assembly can only proceed when ALL components are present, so the
 slowest feeder path determines the effective buffer.
 
 **Dynamic Buffer Adjustment:**
+
 - If buffer penetration is consistently in the green zone (>80% of jobs arrive with
+
   buffer intact over a 4-week rolling window), reduce the buffer by 10–15%. Excess buffer
   means excess WIP and longer lead times.
+
 - If buffer penetration frequently reaches red zone (>20% of jobs in a 4-week window),
+
   increase the buffer by 15–20% while investigating the root cause upstream.
+
 - Never adjust buffers more frequently than every 2 weeks. Buffer management requires
+
   stable data over multiple cycles.
 
 ---
@@ -410,20 +472,31 @@ When a disruption occurs, follow this decision tree:
 ### 4.2 Material Shortage Response
 
 1. **Confirm the shortage:** Verify physical inventory vs. system count. Phantom inventory
+
    is common — conduct a physical count before declaring a shortage.
+
 2. **Identify substitutes:** Check BOM alternates, engineering-approved substitutions,
+
    and customer-approved equivalent materials. In regulated industries (aerospace, pharma),
    only pre-approved substitutes are permissible.
+
 3. **Partial build strategy:** Can you complete operations up to the point where the short
+
    material is consumed, then hold semi-finished WIP for completion when material arrives?
    This keeps upstream work centres productive and preserves lead time on the non-missing
    portions of the routing.
+
 4. **Re-sequence:** Pull forward all work orders that do not consume the short material.
+
    This keeps the plant productive even during the shortage.
+
 5. **Expedite procurement:** Emergency purchase order at premium freight. Quantify: is the
+
    cost of expedited material + freight less than the cost of lost constraint time × hours
    of delay? If yes, expedite without hesitation.
+
 6. **Customer communication:** If the shortage will impact customer deliveries, notify within
+
    4 hours of confirmation. Provide a revised delivery date and a recovery plan.
 
 ### 4.3 Quality Hold Management
@@ -431,20 +504,33 @@ When a disruption occurs, follow this decision tree:
 When an in-process quality issue is discovered:
 
 1. **Contain immediately:** Quarantine all affected WIP — the batch in process, any
+
    completed units from the same batch, and any downstream assemblies that consumed
    units from the batch.
+
 2. **Assess scope:** How many units are affected? Which customer orders consume these units?
+
    What is the rework cost vs. scrap cost vs. customer rejection cost?
+
 3. **Reschedule:** Remove the held inventory from the active schedule. Recalculate all
+
    downstream operations that depended on this inventory.
+
 4. **Decision tree for held material:**
    - **Rework possible and economical:** Schedule rework operations. Add rework time to the
+
      routing and re-sequence downstream.
+
    - **Rework possible but not economical (rework cost > material + labour cost of remaking):**
+
      Scrap the held batch and schedule a replacement production order from scratch.
+
    - **Cannot rework, cannot scrap (regulatory hold pending investigation):** Exclude from
+
      schedule indefinitely. Plan as though the inventory does not exist.
+
 5. **Root cause:** While the schedule adjusts, quality engineering should be isolating the
+
    root cause. The scheduler needs to know: is this a one-time event, or will subsequent
    batches also be affected? If systemic, reduce yield assumptions for the affected operation
    in the scheduling parameters until the root cause is resolved.
@@ -459,11 +545,15 @@ RCCP is a medium-term planning tool (4–16 weeks out) that validates whether th
 is feasible at a high level before detailed scheduling.
 
 **Process:**
+
 1. Take the MPS (production plan by product family by week).
 2. Multiply by the routing hours per unit at each key work centre (typically only the
+
    constraint and 1–2 near-constraints).
+
 3. Compare total required hours against available hours per week at each work centre.
 4. If required hours exceed available hours, flag the overloaded weeks for action:
+
    demand shaping (move orders to adjacent weeks), overtime, subcontracting, or MPS revision.
 
 **RCCP Load Profile Example:**
@@ -477,6 +567,7 @@ is feasible at a high level before detailed scheduling.
 | W27 | 80 (planned maintenance window) | 75 | 93.8% | Tight — maintenance may need rescheduling |
 
 **Actions for W25 overload:**
+
 - Can 22 hours of load shift to W24 or W26 without missing customer dates? Check due dates.
 - If not shiftable: overtime (22 hrs ÷ 8 hrs/shift = 3 extra shifts, or 3 Saturday shifts).
 - If overtime not available: which orders have the most flexible delivery dates? Negotiate.
@@ -496,14 +587,18 @@ specific times, respecting:
 7. **Transfer batches:** Overlap operations can start before the full batch from the preceding operation is complete, if the transfer batch size is defined.
 
 **FCS Scheduling Algorithm (simplified):**
+
 1. Sort all operations by priority (using the hybrid dispatching approach from Section 1.2).
 2. For the highest-priority unscheduled operation:
+
    a. Find the earliest feasible time slot on the required resource, considering capacity,
       material availability, tooling, labour, and predecessor completion.
    b. Schedule the operation in that slot.
    c. Update resource availability.
+
 3. Repeat for the next-highest-priority operation.
 4. After all operations are scheduled, run a post-optimisation pass looking for setup
+
    reduction opportunities (adjacent-swap improvements) that don't violate due dates.
 
 ### 5.3 Capacity Buffers and Protective Capacity
@@ -522,6 +617,7 @@ idle time that absorbs variability and prevents WIP accumulation.
 | Rework/repair | 50–70% | Must have capacity available on demand. Cannot schedule at high utilisation. |
 
 **Warning signs of insufficient protective capacity:**
+
 - WIP queues growing at non-constraint work centres over time.
 - Non-constraint work centres occasionally becoming the bottleneck (shifting bottleneck).
 - Overtime at non-constraint work centres "to keep up."
@@ -538,6 +634,7 @@ they interact — improving throughput at one may starve or overload the other.
 
 **Identification:**
 Two work centres are interactive constraints if:
+
 1. They are on the same routing (material flows from one to the other), AND
 2. Both exceed 85% utilisation, AND
 3. Adding capacity at one causes the other's utilisation to exceed 95%.
@@ -545,13 +642,20 @@ Two work centres are interactive constraints if:
 **Scheduling Strategy for Interactive Constraints:**
 
 1. **Schedule the primary constraint first** (the one with higher utilisation or the one
+
    closer to the customer).
+
 2. **Subordinate the secondary constraint** to the primary's schedule — the secondary
+
    constraint processes work in the order and at the pace dictated by the primary constraint's
    output schedule.
+
 3. **Place a buffer between them** — even though both are constraints, the upstream one
+
    should feed a time buffer to the downstream one to absorb variability.
+
 4. **Never optimise them independently.** A setup sequence that is optimal for the primary
+
    constraint may create an impossible sequence for the secondary constraint if setups
    are sequence-dependent at both. Solve jointly.
 
@@ -561,14 +665,18 @@ Common in environments where machines are semi-automated and require an operator
 setup, first-piece inspection, or monitoring but can run unattended for portions of the cycle.
 
 **Scheduling approach:**
+
 1. Schedule machine capacity first (finite capacity by machine).
 2. Overlay labour capacity (finite capacity by skill/certification).
 3. Identify conflicts: time slots where the machine schedule requires an operator but
+
    no qualified operator is available.
+
 4. Resolve conflicts by:
    - Shifting the job to a different machine that a different operator is qualified on.
    - Shifting the operator from a lower-priority job to the conflicting job.
    - Scheduling the operator's setup/inspection tasks at the start of the job and
+
      allowing unattended running thereafter.
 
 ### 6.3 Tooling as a Shared Constraint
@@ -576,12 +684,17 @@ setup, first-piece inspection, or monitoring but can run unattended for portions
 When specialised tooling (moulds, dies, fixtures, gauges) is shared across machines:
 
 1. **Treat tooling as a resource in the scheduling system** — the same way you schedule
+
    machines and labour, schedule tooling.
+
 2. **Two jobs requiring the same mould cannot run simultaneously** on different machines.
 3. **Tooling changeover time** between machines adds to the total changeover. If Mould A
+
    moves from Machine 1 to Machine 2, add the mould extraction time (Machine 1) + transport
    time + mould installation time (Machine 2).
+
 4. **Optimise by grouping:** If three jobs all require Mould A, schedule them consecutively
+
    on the same machine to avoid mould transfers.
 
 ---
@@ -624,8 +737,11 @@ When a line produces multiple models with different task times:
 1. Calculate the weighted average cycle time across models.
 2. Determine the model mix ratio (e.g., Model A: 60%, Model B: 30%, Model C: 10%).
 3. Create a repeating pattern that levels the workload. For A:B:C = 6:3:1, a 10-unit
+
    cycle would be: A-B-A-A-C-A-B-A-B-A.
+
 4. Validate that the bottleneck station can handle every model within takt. If Model C
+
    takes 2.5 minutes at Station 3 while takt is 1.875 minutes, Model C must be spaced
    sufficiently that Station 3 can catch up between occurrences.
 
@@ -639,12 +755,17 @@ In regulated industries (pharmaceutical, food, aerospace), lot traceability requ
 constrain scheduling flexibility:
 
 - **No lot mixing:** A work order for Lot A and a work order for Lot B cannot share
+
   equipment simultaneously unless the equipment is fully cleaned between lots and
   the cleaning is documented.
+
 - **Dedicated equipment campaigns:** When allergen or contamination controls require
+
   dedicated equipment, the scheduling window for Product X on Line 1 is limited to
   the dedicated campaign period. Scheduling outside this window requires re-validation.
+
 - **Operator qualification records:** The schedule must record which operator performed
+
   each operation, and that operator must be certified at the time of execution.
 
 ### 8.2 Clean-In-Place (CIP) Scheduling
@@ -686,7 +807,9 @@ Before approving a schedule change in the frozen or slushy zone, estimate the to
 
 ```
 Change Cost = Changeover Cost Delta + Material Restaging Cost + Labour Disruption Cost
+
               + Quality Re-inspection Cost + Customer Impact Risk
+
 ```
 
 If Change Cost > Benefit of Change, reject the change and hold the current schedule.
@@ -702,24 +825,33 @@ Overtime is a scheduling lever, not a default. Use the following decision tree:
 
 1. **Is the overtime required at the constraint?**
    - Yes → Calculate: overtime cost vs. throughput value of additional constraint hours.
+
      If 4 hours of constraint overtime at $1,200 total cost enables $20,000 of shipments,
      approve immediately. The ROI threshold for constraint overtime is typically 3:1
      (value:cost) or higher.
+
    - No → The overtime at a non-constraint does not increase plant output. It only makes
+
      sense if: (a) the non-constraint is starving the constraint and buffer penetration is
      yellow/red, or (b) the non-constraint output is needed for a specific customer shipment
      that cannot wait for the next regular shift.
 
 2. **Is the overtime voluntary or mandatory?**
    - Check union contract or labour regulations. Many agreements require offering overtime
+
      by seniority before mandating it. Mandatory overtime may require 24–48 hours' notice.
+
    - Violating overtime assignment rules costs more in grievances and morale damage than
+
      the production it generates. Always comply.
 
 3. **Fatigue and safety risk:**
    - Operators who have already worked 10+ hours should not be assigned to the constraint
+
      or to safety-critical operations. Error rates increase 25–40% in hours 11–12.
+
    - If the overtime extends a 12-hour shift to 16 hours, assign the extended operator to
+
      non-critical monitoring tasks and bring in a fresh operator for the constraint.
 
 ### 10.2 Shift Pattern Comparison for Scheduling
@@ -747,26 +879,38 @@ operation complexity and error tolerance.
 Subcontracting is the scheduling lever of last resort for capacity shortfalls.
 
 **Decision criteria (all must be met):**
+
 1. Internal capacity at the required work centre is fully consumed through the delivery
+
    deadline, including available overtime.
+
 2. The operation is not at the constraint (subcontracting from the constraint usually means
+
    the constraint needs elevation, not a one-time fix).
+
 3. A qualified subcontractor exists who can meet the quality specification and delivery timeline.
 4. The subcontracting cost + transport cost + quality risk cost is less than the cost of
+
    late delivery (penalties + customer relationship damage).
+
 5. In regulated industries: the subcontractor holds the necessary certifications
+
    (ISO, IATF 16949, AS9100, FDA registration, etc.).
 
 ### 11.2 Scheduling with Subcontracted Operations
 
 When an operation is subcontracted:
+
 1. Remove the operation from the internal schedule.
 2. Add a transport-out time (typically 0.5–2 days) and transport-in time.
 3. Add the subcontractor's quoted lead time (add 20% buffer for first-time subcontractors).
 4. The total external lead time replaces the internal operation time in the work order routing.
 5. Schedule downstream internal operations based on the expected return date, not the
+
    internal processing time.
+
 6. Monitor subcontractor progress at 50% and 90% completion milestones. Do not wait until
+
    the due date to discover a delay.
 
 ---
@@ -793,12 +937,19 @@ miss, or overtime exceeding budget by > 20%), conduct a structured post-mortem:
 
 1. **Timeline reconstruction:** What happened, when, and what was the cascade of effects?
 2. **Root cause:** Was the disruption caused by equipment, material, labour, quality,
+
    scheduling logic, or external factors?
+
 3. **Response assessment:** Was the re-sequencing decision optimal? Could the recovery have
+
    been faster? Were communications timely?
+
 4. **Parameter update:** Do scheduling parameters (setup times, run rates, yield factors,
+
    buffer sizes) need adjustment based on what we learned?
+
 5. **Systemic fix:** What preventive action will reduce the probability or impact of this
+
    type of disruption recurring?
 
 Document findings in a scheduling incident log. Review the log monthly with production
@@ -848,11 +999,16 @@ Goods Receipt (MIGO) → Inventory Updated
 ```
 
 **Common data quality issues:**
+
 - Routing times (setup + run) not updated after process improvements → schedule
+
   systematically allocates too much or too little time.
+
 - BOM quantities not adjusted for yield → MRP under-orders material.
 - Work centre capacity not reflecting actual shift patterns → FCS generates
+
   infeasible schedules.
+
 - Scrap reporting delayed → plan-vs-actual gap grows silently.
 
 ### 13.2 Closing the Feedback Loop
@@ -860,12 +1016,19 @@ Goods Receipt (MIGO) → Inventory Updated
 The single most important integration is the MES-to-schedule feedback:
 
 1. **Operation start:** MES records actual start time. Schedule compares to planned start.
+
    Deviation > 1 hour triggers an alert.
+
 2. **Operation end:** MES records actual end time and quantities (good + scrap). Schedule
+
    updates remaining operations with actual predecessor completion.
+
 3. **Downtime events:** MES captures downtime start, end, and reason code. Schedule
+
    automatically adjusts downstream timing.
+
 4. **Quality events:** MES captures inspection results. Failed inspection triggers a
+
    schedule hold on the affected batch.
 
 Without this feedback loop, the schedule diverges from reality within hours and becomes
@@ -874,6 +1037,7 @@ their own sequencing decisions, and throughput at the constraint drops because a
 sequencing ignores constraint protection logic.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

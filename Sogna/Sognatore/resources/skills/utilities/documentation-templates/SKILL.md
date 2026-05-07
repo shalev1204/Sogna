@@ -8,7 +8,6 @@ id: skill-documentation-templates
 owner: [[orchestrator]]
 ---
 
-
 # Documentation Templates
 
 > Templates and structure guidelines for common documentation types.
@@ -32,6 +31,7 @@ owner: [[orchestrator]]
 ### README Template
 
 ```markdown
+
 # Project Name
 
 Brief one-line description.
@@ -61,6 +61,7 @@ Brief one-line description.
 ### Per-Endpoint Template
 
 ```markdown
+
 ## GET /users/:id
 
 Get a user by ID.
@@ -71,6 +72,7 @@ Get a user by ID.
 | id | string | Yes | User ID |
 
 **Response:**
+
 - 200: User object
 - 404: User not found
 
@@ -86,14 +88,14 @@ Get a user by ID.
 
 ```typescript
 /**
+
  * Brief description of what the function does.
- * 
- * @param paramName - Description of parameter
+ * * @param paramName - Description of parameter
  * @returns Description of return value
  * @throws ErrorType - When this error occurs
- * 
- * @example
+ * * @example
  * const result = functionName(input);
+
  */
 ```
 
@@ -111,19 +113,29 @@ Get a user by ID.
 ## 4. Changelog Template (Keep a Changelog)
 
 ```markdown
+
 # Changelog
 
 ## [Unreleased]
+
 ### Added
+
 - New feature
 
 ## [1.0.0] - 2025-01-01
+
 ### Added
+
 - Initial release
+
 ### Changed
+
 - Updated dependency
+
 ### Fixed
+
 - Bug fix
+
 ```
 
 ---
@@ -131,18 +143,23 @@ Get a user by ID.
 ## 5. Architecture Decision Record (ADR)
 
 ```markdown
+
 # ADR-001: [Title]
 
 ## Status
+
 Accepted / Deprecated / Superseded
 
 ## Context
+
 Why are we making this decision?
 
 ## Decision
+
 What did we decide?
 
 ## Consequences
+
 What are the trade-offs?
 ```
 
@@ -155,22 +172,28 @@ What are the trade-offs?
 For AI crawlers and agents:
 
 ```markdown
+
 # Project Name
+
 > One-line objective.
 
 ## Core Files
+
 - [src/index.ts]: Main entry
 - [src/api/]: API routes
 - [docs/]: Documentation
 
 ## Key Concepts
+
 - Concept 1: Brief explanation
 - Concept 2: Brief explanation
+
 ```
 
 ### MCP-Ready Documentation
 
 For RAG indexing:
+
 - Clear H1-H3 hierarchy
 - JSON/YAML examples for data structures
 - Mermaid diagrams for flows
@@ -192,14 +215,17 @@ For RAG indexing:
 > **Remember:** Templates are starting points. Adapt to your project's needs.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

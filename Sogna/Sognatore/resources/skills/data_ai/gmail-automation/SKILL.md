@@ -10,7 +10,6 @@ id: skill-gmail-automation
 owner: [[orchestrator]]
 ---
 
-
 # Gmail
 
 Lightweight Gmail integration with standalone OAuth authentication. No MCP server required.
@@ -18,6 +17,7 @@ Lightweight Gmail integration with standalone OAuth authentication. No MCP serve
 > **⚠️ Requires Google Workspace account.** Personal Gmail accounts are not supported.
 
 ## When to Use
+
 - You need to search, read, or send Gmail messages from the command line without an MCP server.
 - You are automating inbox workflows for a Google Workspace account.
 - You want a lightweight Gmail integration backed by standalone OAuth scripts.
@@ -46,47 +46,61 @@ All operations via `scripts/gmail.py`. Auto-authenticates on first use if not lo
 ### Search Emails
 
 ```bash
+
 # Search with Gmail query syntax
+
 python scripts/gmail.py search "from:someone@example.com is:unread"
 
 # Search recent emails (no query returns all)
+
 python scripts/gmail.py search --limit 20
 
 # Filter by label
+
 python scripts/gmail.py search --label INBOX --limit 10
 
 # Include spam and trash
+
 python scripts/gmail.py search "subject:important" --include-spam-trash
 ```
 
 ### Read Email Content
 
 ```bash
+
 # Get full message content
+
 python scripts/gmail.py get MESSAGE_ID
 
 # Get just metadata (headers)
+
 python scripts/gmail.py get MESSAGE_ID --format metadata
 
 # Get minimal response (IDs only)
+
 python scripts/gmail.py get MESSAGE_ID --format minimal
 ```
 
 ### Send Emails
 
 ```bash
+
 # Send a simple email
+
 python scripts/gmail.py send --to "user@example.com" --subject "Hello" --body "Message body"
 
 # Send with CC and BCC
+
 python scripts/gmail.py send --to "user@example.com" --cc "cc@example.com" --bcc "bcc@example.com" \
   --subject "Team Update" --body "Update message"
 
 # Send from an alias (must be configured in Gmail settings)
+
 python scripts/gmail.py send --to "user@example.com" --subject "Hello" --body "Message" \
   --from "Mile9 Accounts <accounts@mile9.io>"
 
 # Send HTML email
+
 python scripts/gmail.py send --to "user@example.com" --subject "HTML Email" \
   --body "<h1>Hello</h1><p>HTML content</p>" --html
 ```
@@ -94,43 +108,56 @@ python scripts/gmail.py send --to "user@example.com" --subject "HTML Email" \
 ### Draft Management
 
 ```bash
+
 # Create a draft
+
 python scripts/gmail.py create-draft --to "user@example.com" --subject "Draft Subject" \
   --body "Draft content"
 
 # Send an existing draft
+
 python scripts/gmail.py send-draft DRAFT_ID
 ```
 
 ### Modify Messages (Labels)
 
 ```bash
+
 # Mark as read (remove UNREAD label)
+
 python scripts/gmail.py modify MESSAGE_ID --remove-label UNREAD
 
 # Mark as unread
+
 python scripts/gmail.py modify MESSAGE_ID --add-label UNREAD
 
 # Archive (remove from INBOX)
+
 python scripts/gmail.py modify MESSAGE_ID --remove-label INBOX
 
 # Star a message
+
 python scripts/gmail.py modify MESSAGE_ID --add-label STARRED
 
 # Unstar a message
+
 python scripts/gmail.py modify MESSAGE_ID --remove-label STARRED
 
 # Mark as important
+
 python scripts/gmail.py modify MESSAGE_ID --add-label IMPORTANT
 
 # Multiple label changes at once
+
 python scripts/gmail.py modify MESSAGE_ID --remove-label UNREAD --add-label STARRED
 ```
 
 ### List Labels
 
 ```bash
+
 # List all Gmail labels (system and user-created)
+
 python scripts/gmail.py list-labels
 ```
 
@@ -179,6 +206,7 @@ python scripts/gmail.py search "from:newsletter@example.com -is:starred"
 ## Token Management
 
 Tokens stored securely using the system keyring:
+
 - **macOS**: Keychain
 - **Windows**: Windows Credential Locker
 - **Linux**: Secret Service API (GNOME Keyring, KDE Wallet, etc.)
@@ -188,11 +216,13 @@ Service name: `gmail-skill-oauth`
 Tokens automatically refresh when expired using Google's cloud function.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

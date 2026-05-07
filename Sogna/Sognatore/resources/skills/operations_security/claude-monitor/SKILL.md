@@ -4,21 +4,24 @@ description: Monitor de performance do Claude Code e sistema local. Diagnostica 
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - monitoring
 - performance
 - diagnostics
 - system-health
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-claude-monitor
 owner: [[ops-security]]
 ---
-
 
 # Claude Monitor — Diagnóstico de Performance
 
@@ -63,6 +66,7 @@ python C:\Users\renat\skills\claude-monitor\scripts\health_check.py
 ```
 
 O script analisa em ~3 segundos:
+
 - **CPU**: Uso atual e por core. >80% = gargalo provável
 - **RAM**: Total, usada, disponível. >85% = pressão de memória
 - **Browsers**: Processos e RAM por browser. >5GB total = excesso de abas
@@ -87,21 +91,25 @@ O script retorna um JSON com `diagnosis` contendo:
 Baseado no diagnóstico, ofereça ao usuário:
 
 #### Se CPU alta (>80%):
+
 - Listar processos consumindo mais CPU
 - Sugerir fechar processos pesados desnecessários
 - Verificar se Windows Update está rodando em background
 
 #### Se browsers pesados (>5GB RAM ou >40 processos):
+
 ```bash
 python C:\Users\renat\skills\claude-monitor\scripts\health_check.py --browsers-detail
 ```
 Mostra RAM por browser e sugere quais fechar. **Nunca fechar processos sem permissão explícita do usuário.**
 
 #### Se disco cheio (>85%):
+
 - Mostrar pastas maiores
 - Sugerir limpeza de Temp, cache de browsers, lixeira
 
 #### Se rede lenta (latência >500ms):
+
 - Testar conexão com api.anthropic.com
 - Sugerir verificar VPN, proxy, ou conexão WiFi
 
@@ -114,6 +122,7 @@ python C:\Users\renat\skills\claude-monitor\scripts\monitor.py --interval 30 --d
 ```
 
 Parâmetros:
+
 - `--interval`: Segundos entre cada amostra (default: 30)
 - `--duration`: Duração total em segundos (default: 300 = 5 min)
 - `--output`: Caminho do arquivo de log (default: monitor_log.json)
@@ -121,6 +130,7 @@ Parâmetros:
 - `--alert-ram`: Threshold de RAM % para alerta (default: 85)
 
 O monitor salva snapshots periódicos e gera um relatório ao final com:
+
 - Picos de CPU e RAM
 - Tendência (melhorando/piorando/estável)
 - Eventos de alerta detectados
@@ -153,12 +163,19 @@ Compara com tempos típicos e indica se está dentro do esperado.
 Quando apresentar o diagnóstico, inclua estas dicas contextuais:
 
 - **Muitas abas = muito CPU/RAM**: Cada aba de browser é um processo separado.
+
   50 abas = 50 processos competindo por recursos.
+
 - **Claude Code é pesado**: Ele roda vários processos Electron. É normal consumir 3-5 GB.
+
   Mas se estiver usando >6 GB com várias sessões, considere fechar sessões antigas.
+
 - **Troca de sessão lenta**: Geralmente causada por CPU alta ou muitos processos competindo.
+
   A sessão precisa carregar o histórico da conversa, e se o CPU está ocupado, demora.
+
 - **Disco quase cheio**: Afeta a velocidade do swap (memória virtual) e pode causar
+
   lentidão generalizada.
 
 ## Dependências
@@ -180,11 +197,13 @@ Quando apresentar o diagnóstico, inclua estas dicas contextuais:
 - Not providing enough project context for accurate analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

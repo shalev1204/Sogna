@@ -16,6 +16,7 @@ This document provides Node/TypeScript-specific best practices and examples for 
 ## Quick Reference
 
 ### Key Imports
+
 ```typescript
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
@@ -25,6 +26,7 @@ import { z } from "zod";
 ```
 
 ### Server Initialization
+
 ```typescript
 const server = new McpServer({
   name: "service-mcp-server",
@@ -33,6 +35,7 @@ const server = new McpServer({
 ```
 
 ### Tool Registration Pattern
+
 ```typescript
 server.registerTool(
   "tool_name",
@@ -57,12 +60,14 @@ server.registerTool(
 ## MCP TypeScript SDK
 
 The official MCP TypeScript SDK provides:
+
 - `McpServer` class for server initialization
 - `registerTool` method for tool registration
 - Zod schema integration for runtime input validation
 - Type-safe tool handler implementations
 
 **IMPORTANT - Use Modern APIs Only:**
+
 - **DO use**: `server.registerTool()`, `server.registerResource()`, `server.registerPrompt()`
 - **DO NOT use**: Old deprecated APIs such as `server.tool()`, `server.setRequestHandler(ListToolsRequestSchema, ...)`, or manual handler registration
 - The `register*` methods provide better type safety, automatic schema handling, and are the recommended approach
@@ -72,10 +77,12 @@ See the MCP SDK documentation in the references for complete details.
 ## Server Naming Convention
 
 Node/TypeScript MCP servers must follow this naming pattern:
+
 - **Format**: `{service}-mcp-server` (lowercase with hyphens)
 - **Examples**: `github-mcp-server`, `jira-mcp-server`, `stripe-mcp-server`
 
 The name should be:
+
 - General (not tied to specific features)
 - Descriptive of the service/API being integrated
 - Easy to infer from the task description
@@ -107,6 +114,7 @@ Create the following structure for Node/TypeScript MCP servers:
 Use snake_case for tool names (e.g., "search_users", "create_project", "get_channel_info") with clear, action-oriented names.
 
 **Avoid Naming Conflicts**: Include the service context to prevent overlaps:
+
 - Use "slack_send_message" instead of just "send_message"
 - Use "github_create_issue" instead of just "create_issue"
 - Use "asana_list_tasks" instead of just "list_tasks"
@@ -114,6 +122,7 @@ Use snake_case for tool names (e.g., "search_users", "create_project", "get_chan
 ### Tool Structure
 
 Tools are registered using the `registerTool` method with the following requirements:
+
 - Use Zod schemas for runtime input validation and type safety
 - The `description` field must be explicitly provided - JSDoc comments are NOT automatically extracted
 - Explicitly provide `title`, `description`, `inputSchema`, and `annotations`
@@ -163,6 +172,7 @@ server.registerTool(
 This tool searches across all user profiles in the Example platform, supporting partial matches and various search filters. It does NOT create or modify users, only searches existing ones.
 
 Args:
+
   - query (string): Search string to match against names/emails
   - limit (number): Maximum results to return, between 1-100 (default: 20)
   - offset (number): Number of results to skip for pagination (default: 0)
@@ -188,13 +198,16 @@ Returns:
   }
 
 Examples:
+
   - Use when: "Find all marketing team members" -> params with query="team:marketing"
   - Use when: "Search for John's account" -> params with query="john"
   - Don't use when: You need to create a user (use example_create_user instead)
 
 Error Handling:
+
   - Returns "Error: Rate limit exceeded" if too many requests (429 status)
   - Returns "No users found matching '<query>'" if search returns empty`,
+
     inputSchema: UserSearchInputSchema,
     annotations: {
       readOnlyHint: true,
@@ -347,6 +360,7 @@ const inputSchema = z.object({
 ```
 
 **Markdown format**:
+
 - Use headers, lists, and formatting for clarity
 - Convert timestamps to human-readable format
 - Show display names with IDs in parentheses
@@ -354,6 +368,7 @@ const inputSchema = z.object({
 - Group related information logically
 
 **JSON format**:
+
 - Return complete, structured data suitable for programmatic processing
 - Include all available fields and metadata
 - Use consistent field names and types
@@ -597,10 +612,12 @@ async function getUser(id: string): Promise<any> {
 ```typescript
 #!/usr/bin/env node
 /**
+
  * MCP Server for Example Service.
  *
  * This server provides tools to interact with Example API, including user search,
  * project management, and data export capabilities.
+
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -824,6 +841,7 @@ server.registerResourceList(async () => {
 ```
 
 **When to use Resources vs Tools:**
+
 - **Resources**: For data access with simple URI-based parameters
 - **Tools**: For complex operations requiring validation and business logic
 - **Resources**: When data is relatively static or template-based
@@ -868,6 +886,7 @@ await server.connect(transport);
 ```
 
 **Transport selection:**
+
 - **Streamable HTTP**: Web services, remote access, multiple clients
 - **stdio**: Command-line tools, local development, subprocess integration
 
@@ -915,13 +934,17 @@ Your implementation MUST prioritize composability and code reuse:
 Always build your TypeScript code before running:
 
 ```bash
+
 # Build the project
+
 npm run build
 
 # Run the server
+
 npm start
 
 # Development with auto-reload
+
 npm run dev
 ```
 
@@ -932,6 +955,7 @@ Always ensure `npm run build` completes successfully before considering the impl
 Before finalizing your Node/TypeScript MCP server implementation, ensure:
 
 ### Strategic Design
+
 - [ ] Tools enable complete workflows, not just API endpoint wrappers
 - [ ] Tool names reflect natural task subdivisions
 - [ ] Response formats optimize for agent context efficiency
@@ -939,6 +963,7 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] Error messages guide agents toward correct usage
 
 ### Implementation Quality
+
 - [ ] FOCUSED IMPLEMENTATION: Most important and valuable tools implemented
 - [ ] All tools registered using `registerTool` with complete configuration
 - [ ] All tools include `title`, `description`, `inputSchema`, and `annotations`
@@ -950,6 +975,7 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] Error messages are clear, actionable, and educational
 
 ### TypeScript Quality
+
 - [ ] TypeScript interfaces are defined for all data structures
 - [ ] Strict TypeScript is enabled in tsconfig.json
 - [ ] No use of `any` type - use `unknown` or proper types instead
@@ -957,12 +983,14 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] Error handling uses proper type guards (e.g., `axios.isAxiosError`, `z.ZodError`)
 
 ### Advanced Features (where applicable)
+
 - [ ] Resources registered for appropriate data endpoints
 - [ ] Appropriate transport configured (stdio or streamable HTTP)
 - [ ] Notifications implemented for dynamic server capabilities
 - [ ] Type-safe with SDK interfaces
 
 ### Project Configuration
+
 - [ ] Package.json includes all necessary dependencies
 - [ ] Build script produces working JavaScript in dist/ directory
 - [ ] Main entry point is properly configured as dist/index.js
@@ -970,6 +998,7 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] tsconfig.json properly configured with strict mode
 
 ### Code Quality
+
 - [ ] Pagination is properly implemented where applicable
 - [ ] Large responses check CHARACTER_LIMIT constant and truncate with clear messages
 - [ ] Filtering options are provided for potentially large result sets
@@ -978,6 +1007,7 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] Return types are consistent across similar operations
 
 ### Testing and Build
+
 - [ ] `npm run build` completes successfully without errors
 - [ ] dist/index.js created and executable
 - [ ] Server runs: `node dist/index.js --help`
@@ -985,6 +1015,7 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] Sample tool calls work as expected
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

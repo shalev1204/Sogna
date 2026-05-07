@@ -500,6 +500,7 @@ June 5, 2023| Removed Add to Siri guidance. Added references to the new [App Sho
 May 2, 2023| Consolidated guidance into one page.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

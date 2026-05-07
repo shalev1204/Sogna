@@ -350,16 +350,21 @@ Recommendations:
 ### Loading Strategy
 
 ```
+
 1. SYSTEM FONT FALLBACK
+
    Show system font → swap when custom loads
    
 2. FONT DISPLAY SWAP
+
    font-display: swap (CSS)
    
 3. PRELOAD CRITICAL FONTS
+
    Preload fonts needed above the fold
    
 4. DON'T BLOCK RENDER
+
    Don't wait for fonts to show content
 ```
 

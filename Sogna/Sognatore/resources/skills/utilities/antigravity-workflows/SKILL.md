@@ -8,7 +8,6 @@ id: skill-antigravity-workflows
 owner: [[orchestrator]]
 ---
 
-
 # Sognatore Workflows
 
 Use this skill to turn a complex objective into a guided sequence of skill invocations.
@@ -16,6 +15,7 @@ Use this skill to turn a complex objective into a guided sequence of skill invoc
 ## When to Use This Skill
 
 Use this skill when:
+
 - The user wants to combine several skills without manually selecting each one.
 - The goal is multi-phase (for example: plan, build, test, ship).
 - The user asks for best-practice execution for common scenarios like:
@@ -27,6 +27,7 @@ Use this skill when:
 ## Workflow Source of Truth
 
 Read workflows in this order:
+
 1. `docs/WORKFLOWS.md` for human-readable playbooks.
 2. `data/workflows.json` for machine-readable workflow metadata.
 
@@ -89,6 +90,7 @@ Use @Sognatore-workflows to execute the "Design a DDD Core Domain" workflow for 
 - `verification-before-completion`
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -11,10 +11,10 @@ id: skill-comprehensive-review-pr-enhance
 owner: [[orchestrator]]
 ---
 
-
 # Pull Request Enhancement
 
 ## When to Use
+
 - You need to turn a git diff into a reviewer-friendly pull request description.
 - You want a PR summary with change categories, risks, testing notes, and a checklist.
 - The diff is large enough that reviewers need explicit structure instead of a short ad hoc summary.
@@ -30,10 +30,13 @@ owner: [[orchestrator]]
 ## PR Description Template
 
 ```markdown
+
 ## Summary
+
 <!-- one-paragraph executive summary: what changed and why -->
 
 ## Changes
+
 | Category | Files | Key change |
 |----------|-------|------------|
 | source   | `src/auth.ts` | added OAuth2 PKCE flow |
@@ -41,17 +44,21 @@ owner: [[orchestrator]]
 | config   | `.env.example` | new `OAUTH_CLIENT_ID` var |
 
 ## Why
+
 <!-- link to issue/ticket + one sentence on motivation -->
 
 ## Testing
+
 - [ ] unit tests pass (`npm test`)
 - [ ] manual smoke test on staging
 - [ ] no coverage regression
 
 ## Risks & Rollback
+
 - **Breaking?** yes / no
 - **Rollback**: revert this commit; no migration needed
 - **Risk level**: low / medium / high — because ___
+
 ```
 
 ## Review Checklist Rules
@@ -80,11 +87,13 @@ git cherry-pick <commits-for-part-1>
 - `resources/implementation-playbook.md` — Python helpers for automated PR analysis, coverage reports, and risk scoring
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

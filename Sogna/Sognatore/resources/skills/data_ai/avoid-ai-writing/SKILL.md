@@ -8,7 +8,6 @@ id: skill-avoid-ai-writing
 owner: [[orchestrator]]
 ---
 
-
 # Avoid AI Writing — Audit & Rewrite
 
 Detects and fixes AI writing patterns ("AI-isms") that make text sound machine-generated. Covers 21 pattern categories with a 43-entry word/phrase replacement table that maps each flagged term to a specific, plainer alternative.
@@ -34,6 +33,7 @@ Audit this for AI writing patterns:
 ```
 
 **Output:** The skill returns four sections:
+
 1. **Issues found** — every AI-ism quoted (landscape, embarking, pivotal, leverage, cutting-edge, streamline, robust, serves as, testament to, fostering, seamless, Moreover, In today's rapidly evolving...)
 2. **Rewritten version** — "Developers are starting to use newer AI tools to simplify their work. These tools are reliable, and they're making development less painful."
 3. **What changed** — summary of edits
@@ -47,6 +47,7 @@ Audit this for AI writing patterns:
 - Cannot verify factual claims or find real citations to replace vague attributions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

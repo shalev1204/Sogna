@@ -10,7 +10,6 @@ id: skill-agent-evaluation
 owner: [[orchestrator]]
 ---
 
-
 # Agent Evaluation
 
 Testing and benchmarking LLM agents including behavioral testing, capability assessment, reliability metrics, and production monitoring—where even top agents achieve less than 50% on real-world benchmarks
@@ -604,6 +603,7 @@ Severity: HIGH
 Situation: High benchmark scores don't predict real-world performance
 
 Symptoms:
+
 - High benchmark scores, low user satisfaction
 - Production errors not seen in testing
 - Performance degrades under real load
@@ -730,6 +730,7 @@ Severity: HIGH
 Situation: Test suite is unreliable, CI is broken or ignored
 
 Symptoms:
+
 - CI randomly fails
 - Tests pass locally, fail in CI
 - Re-running fixes test failures
@@ -830,6 +831,7 @@ Severity: MEDIUM
 Situation: Agent scores well on metric but quality is poor
 
 Symptoms:
+
 - Metric scores high but users complain
 - Agent behavior feels "off" despite good scores
 - Gaming becomes obvious when metric changed
@@ -949,6 +951,7 @@ Severity: CRITICAL
 Situation: Agent has seen test examples, artificially inflating scores
 
 Symptoms:
+
 - Perfect scores on specific tests
 - Score drops on new test versions
 - Agent "knows" answers it shouldn't
@@ -1088,11 +1091,13 @@ Skills: agent-evaluation, autonomous-agents, multi-agent-orchestration
 Workflow:
 
 ```
+
 1. Design agent with testability in mind
 2. Create evaluation suite before implementation
 3. Implement agent
 4. Evaluate against suite
 5. Iterate based on results
+
 ```
 
 ### Production Agent Monitoring
@@ -1102,10 +1107,12 @@ Skills: agent-evaluation, llm-security-audit
 Workflow:
 
 ```
+
 1. Establish baseline metrics
 2. Deploy with monitoring
 3. Continuous evaluation in production
 4. Alert on regression
+
 ```
 
 ### Multi-Agent System Evaluation
@@ -1115,10 +1122,12 @@ Skills: agent-evaluation, multi-agent-orchestration, agent-communication
 Workflow:
 
 ```
+
 1. Evaluate individual agents
 2. Evaluate communication reliability
 3. Evaluate end-to-end system
 4. Load testing for scalability
+
 ```
 
 ## Related Skills
@@ -1126,6 +1135,7 @@ Workflow:
 Works well with: `multi-agent-orchestration`, `agent-communication`, `autonomous-agents`
 
 ## When to Use
+
 - User mentions or implies: agent testing
 - User mentions or implies: agent evaluation
 - User mentions or implies: benchmark agents
@@ -1133,11 +1143,13 @@ Works well with: `multi-agent-orchestration`, `agent-communication`, `autonomous
 - User mentions or implies: test agent
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

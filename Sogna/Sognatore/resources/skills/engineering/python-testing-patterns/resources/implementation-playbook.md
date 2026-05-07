@@ -29,22 +29,26 @@ Comprehensive guide to implementing robust testing strategies in Python using py
 ## Core Concepts
 
 ### 1. Test Types
+
 - **Unit Tests**: Test individual functions/classes in isolation
 - **Integration Tests**: Test interaction between components
 - **Functional Tests**: Test complete features end-to-end
 - **Performance Tests**: Measure speed and resource usage
 
 ### 2. Test Structure (AAA Pattern)
+
 - **Arrange**: Set up test data and preconditions
 - **Act**: Execute the code under test
 - **Assert**: Verify the results
 
 ### 3. Test Coverage
+
 - Measure what code is exercised by tests
 - Identify untested code paths
 - Aim for meaningful coverage, not just high percentages
 
 ### 4. Test Isolation
+
 - Tests should be independent
 - No shared state between tests
 - Each test should clean up after itself
@@ -52,7 +56,9 @@ Comprehensive guide to implementing robust testing strategies in Python using py
 ## Quick Start
 
 ```python
+
 # test_example.py
+
 def add(a, b):
     return a + b
 
@@ -66,6 +72,7 @@ def test_add_negative():
     assert add(-1, 1) == 0
 
 # Run with: pytest test_example.py
+
 ```
 
 ## Fundamental Patterns
@@ -73,7 +80,9 @@ def test_add_negative():
 ### Pattern 1: Basic pytest Tests
 
 ```python
+
 # test_calculator.py
+
 import pytest
 
 class Calculator:
@@ -128,7 +137,9 @@ def test_division_by_zero():
 ### Pattern 2: Fixtures for Setup and Teardown
 
 ```python
+
 # test_database.py
+
 import pytest
 from typing import Generator
 
@@ -199,7 +210,9 @@ def test_api_client(api_client):
 ### Pattern 3: Parameterized Tests
 
 ```python
+
 # test_validation.py
+
 import pytest
 
 def is_valid_email(email: str) -> bool:
@@ -232,6 +245,7 @@ def test_addition_parameterized(a, b, expected):
     assert calc.add(a, b) == expected
 
 # Using pytest.param for special cases
+
 @pytest.mark.parametrize("value,expected", [
     pytest.param(1, True, id="positive"),
     pytest.param(0, False, id="zero"),
@@ -245,7 +259,9 @@ def test_is_positive(value, expected):
 ### Pattern 4: Mocking with unittest.mock
 
 ```python
+
 # test_api_client.py
+
 import pytest
 from unittest.mock import Mock, patch, MagicMock
 import requests
@@ -314,7 +330,9 @@ def test_create_user(mock_post):
 ### Pattern 5: Testing Exceptions
 
 ```python
+
 # test_exceptions.py
+
 import pytest
 
 def divide(a: float, b: float) -> float:
@@ -353,7 +371,9 @@ def test_exception_info():
 ### Pattern 6: Testing Async Code
 
 ```python
+
 # test_async.py
+
 import pytest
 import asyncio
 
@@ -400,7 +420,9 @@ async def test_with_async_fixture(async_client):
 ### Pattern 7: Monkeypatch for Testing
 
 ```python
+
 # test_environment.py
+
 import os
 import pytest
 
@@ -443,7 +465,9 @@ def test_monkeypatch_attribute(monkeypatch):
 ### Pattern 8: Temporary Files and Directories
 
 ```python
+
 # test_file_operations.py
+
 import pytest
 from pathlib import Path
 
@@ -494,7 +518,9 @@ def test_multiple_files(tmp_path):
 ### Pattern 9: Custom Fixtures and Conftest
 
 ```python
+
 # conftest.py
+
 """Shared fixtures for all tests."""
 import pytest
 
@@ -531,6 +557,7 @@ def sample_users():
     ]
 
 # Parametrized fixture
+
 @pytest.fixture(params=["sqlite", "postgresql", "mysql"])
 def db_backend(request):
     """Fixture that runs tests with different database backends."""
@@ -545,7 +572,9 @@ def test_with_db_backend(db_backend):
 ### Pattern 10: Property-Based Testing
 
 ```python
+
 # test_properties.py
+
 from hypothesis import given, strategies as st
 import pytest
 
@@ -589,23 +618,37 @@ def test_sorted_list_properties(lst):
 ### Test Organization
 
 ```python
+
 # tests/
+
 #   __init__.py
+
 #   conftest.py           # Shared fixtures
+
 #   test_unit/            # Unit tests
+
 #     test_models.py
+
 #     test_utils.py
+
 #   test_integration/     # Integration tests
+
 #     test_api.py
+
 #     test_database.py
+
 #   test_e2e/            # End-to-end tests
+
 #     test_workflows.py
+
 ```
 
 ### Test Naming
 
 ```python
+
 # Good test names
+
 def test_user_creation_with_valid_data():
     """Clear name describes what is being tested."""
     pass
@@ -619,6 +662,7 @@ def test_api_returns_404_for_missing_resource():
     pass
 
 # Bad test names
+
 def test_1():  # Not descriptive
     pass
 
@@ -632,7 +676,9 @@ def test_function():  # Doesn't explain what's tested
 ### Test Markers
 
 ```python
+
 # test_markers.py
+
 import pytest
 
 @pytest.mark.slow
@@ -662,34 +708,46 @@ def test_known_bug():
     assert False
 
 # Run with:
+
 # pytest -m slow          # Run only slow tests
+
 # pytest -m "not slow"    # Skip slow tests
+
 # pytest -m integration   # Run integration tests
+
 ```
 
 ### Coverage Reporting
 
 ```bash
+
 # Install coverage
+
 pip install pytest-cov
 
 # Run tests with coverage
+
 pytest --cov=myapp tests/
 
 # Generate HTML report
+
 pytest --cov=myapp --cov-report=html tests/
 
 # Fail if coverage below threshold
+
 pytest --cov=myapp --cov-fail-under=80 tests/
 
 # Show missing lines
+
 pytest --cov=myapp --cov-report=term-missing tests/
 ```
 
 ## Testing Database Code
 
 ```python
+
 # test_database_models.py
+
 import pytest
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
@@ -757,7 +815,9 @@ def test_unique_email_constraint(db_session):
 ## CI/CD Integration
 
 ```yaml
+
 # .github/workflows/test.yml
+
 name: Tests
 
 on: [push, pull_request]
@@ -771,23 +831,28 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Set up Python
+
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
+
         run: |
           pip install -e ".[dev]"
           pip install pytest pytest-cov
 
       - name: Run tests
+
         run: |
           pytest --cov=myapp --cov-report=xml
 
       - name: Upload coverage
+
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage.xml
@@ -796,7 +861,9 @@ jobs:
 ## Configuration Files
 
 ```ini
+
 # pytest.ini
+
 [pytest]
 testpaths = tests
 python_files = test_*.py
@@ -816,7 +883,9 @@ markers =
 ```
 
 ```toml
+
 # pyproject.toml
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
@@ -862,6 +931,7 @@ exclude_lines = [
 10. **Run tests in CI/CD** on every commit
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

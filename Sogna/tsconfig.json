@@ -1,25 +1,37 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Bundler mode */
+    /* Sincronización Arquitectónica */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@core/*": ["Sognatore/src/core/*"],
+      "@engines/*": ["Curator/engines/*"],
+      "@shared/*": ["Curator/shared/*"],
+      "@memory/*": ["Sognatore/src/core/memory/*"]
+    },
+
+    /* Optimización y Modernización */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
 
-    /* Linting */
+    /* Rigor Multi-plataforma (Windows/Mac) */
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "Sognatore/src", "Curator/engines"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -12,7 +12,7 @@ const ts = require('typescript');
 const https = require('https');
 const { spawnSync } = require('child_process');
 const crypto = require('crypto');
-const uma = require('../../../shared/uma_bridge.cjs.js');
+const uma = require('../../../shared/uma_bridge.cjs');
 
 const ROOT_DIR = path.resolve(__dirname, '../../../../..');
 // ROOT_DIR is now dynamically resolved to the execution context (Sogna root)

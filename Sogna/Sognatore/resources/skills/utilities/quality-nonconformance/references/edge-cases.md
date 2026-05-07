@@ -35,6 +35,7 @@ Treating this as a customer-use issue. Sending a "letter of clarification" on pr
 The second common mistake: initiating a CAPA that focuses on inspection. "Add fatigue testing to final inspection" solves nothing if the inspection uses the same uniaxial loading condition as the original design verification.
 
 **Expert Approach:**
+
 1. **Immediate containment:** Place a quality hold on all units of the affected part numbers in your finished goods, distribution, and at the hospital's inventory. Contact the hospital's biomedical engineering department to coordinate the hold — they need serial/lot numbers to identify affected inventory.
 2. **Complaint investigation per 820.198:** Open a formal complaint record. Classify for MDR determination — fractured device during clinical use meets the "malfunction that could cause or contribute to death or serious injury" threshold, requiring MDR filing within 30 days.
 3. **Failure analysis:** Request the failed units from the hospital for physical failure analysis. Conduct fractographic analysis (SEM if needed) to determine the fracture mode — was it fatigue (progressive crack growth), overload (single-event), stress corrosion, or manufacturing defect (inclusion, porosity)?
@@ -45,12 +46,14 @@ The second common mistake: initiating a CAPA that focuses on inspection. "Add fa
 8. **CAPA:** Root cause is a gap in design verification testing — the failure mode was not characterized under clinical loading conditions. Corrective action addresses the test protocol, not the manufacturing process.
 
 **Key Indicators:**
+
 - Complaint rate vs. units in service determines population risk (e.g., 3 failures in 10,000 units = 300 PPM field failure rate)
 - Fracture surface morphology distinguishes fatigue, overload, and material defects
 - Time-to-failure pattern (all early-life vs. random vs. wear-out) indicates failure mechanism
 - If multiple lots are affected, the root cause is likely design or process-related, not material-lot-specific
 
 **Documentation Required:**
+
 - Formal complaint records per 820.198
 - MDR filing documentation
 - Failure analysis report with photographs and fractography
@@ -77,6 +80,7 @@ Treating this like a normal NCR. Writing a SCAR and asking the supplier to "impr
 The second common mistake: immediately terminating the supplier without securing containment. If you have weeks of WIP and finished goods containing these castings, cutting off the supplier before you've contained and sorted the affected inventory creates a dual crisis — quality AND supply.
 
 **Expert Approach:**
+
 1. **Preserve evidence immediately.** Photograph the audit findings, retain the XRF readings, request copies of the CoCs for the last 4 months, and document the supplier quality manager's admission in the audit notes with date, time, and witnesses. This evidence may be needed for legal proceedings or regulatory reporting.
 2. **Scope the containment.** Identify every lot received from this supplier in the last 4+ months (add buffer — the calibration may have drifted before formal "out of calibration" date). Trace those lots through your operation: incoming stock, WIP, finished goods, shipped to customer, in customer's inventory or vehicles.
 3. **Independent verification.** Send representative samples from each suspect lot to an accredited independent testing laboratory for full material composition analysis. Do not rely on the supplier's belated retesting — their data has zero credibility.
@@ -87,12 +91,14 @@ The second common mistake: immediately terminating the supplier without securing
 8. **Systemic review.** Audit all other CoC-reliant incoming inspection processes. If this supplier falsified data, what is the probability that others are as well? Increase verification sampling on other CoC-reliance suppliers, especially those with single-source positions.
 
 **Key Indicators:**
+
 - Duration of falsification determines containment scope (months × volume = total suspect population)
 - The specific spec exceedance determines functional risk (minor chemistry drift vs. major composition deviation)
 - Traceability of material lots through your production determines the search space
 - Whether the supplier proactively disclosed vs. you discovered impacts the trust assessment
 
 **Documentation Required:**
+
 - Audit report with all findings, evidence, and admissions
 - XRF readings and independent lab results
 - Complete lot traceability from supplier through your process to customer
@@ -119,6 +125,7 @@ Dismissing the complaint because the data says you're in spec. Sending a letter 
 The second mistake: reacting by tightening your internal specification without understanding the functional requirement. If you arbitrarily cut your tolerance to ±0.01mm, you increase your scrap rate (and cost) without certainty that it solves the assembly issue.
 
 **Expert Approach:**
+
 1. **Acknowledge the complaint and avoid the "we meet spec" defense.** The customer is experiencing real failures. Whether they're caused by your variation, their variation, or the interaction of both is what needs to be determined — not assumed.
 2. **Request the customer's mating component data.** Ask for their bore SPC data — mean, variation, Cpk, distribution shape. You need to understand both sides of the assembly equation.
 3. **Conduct a tolerance stack-up analysis.** Using both your shaft data and their bore data, calculate the assembly clearance distribution. Identify what percentage of assemblies fall into the interference zone. This analysis converts "your parts meet spec" into "X% of assemblies will have interference problems."
@@ -128,6 +135,7 @@ The second mistake: reacting by tightening your internal specification without u
 7. **This is NOT a CAPA.** This is a specification adequacy issue, not a non-conformance. The correct vehicle is an engineering change process to update the specification, not a CAPA to "fix" a process that is operating correctly per its current requirements.
 
 **Key Indicators:**
+
 - Your process Cpk relative to the FUNCTIONAL tolerance (not drawing tolerance) is the key metric
 - Assembly clearance distribution reveals the actual failure probability
 - Shift in customer complaint timing may correlate with a process change on the customer's side (did they tighten their bore process?)
@@ -151,6 +159,7 @@ Recalling all 14 lots immediately without first analyzing the data. A blind reca
 The other common mistake: doing nothing because you believe the parts are "probably fine." Failure to investigate and document constitutes a quality system failure, regardless of whether the parts are actually good.
 
 **Expert Approach:**
+
 1. **Immediate hold on the 5 lots still in inventory.** Quarantine in MRB area. These can be re-inspected.
 2. **Quantify the measurement uncertainty.** Re-qualify the CMM probe and determine the actual bias. Then overlay the bias on the original measurement data for all 14 lots. For each part, recalculate: measured value + bias = potential actual value. Identify how many parts' recalculated values fall outside specification.
 3. **Risk stratification of shipped lots.** Group the 9 shipped lots into three categories:
@@ -163,6 +172,7 @@ The other common mistake: doing nothing because you believe the parts are "proba
 7. **Evaluate MDR obligation.** If any shipped parts are potentially outside specification and the component is in an implantable device, evaluate whether this constitutes a reportable event. Consult with Regulatory Affairs — the threshold is whether the situation "could cause or contribute to death or serious injury." The measurement uncertainty may or may not meet this threshold depending on the functional significance of the affected dimension.
 
 **Key Indicators:**
+
 - The ratio of measurement bias to tolerance width determines the severity (0.015mm bias on ±0.025mm tolerance = 30% of tolerance, which is significant)
 - The distribution of original measurements near the specification limit determines how many parts are truly at risk
 - Whether the bias was consistent or variable determines whether the risk analysis is conservative or optimistic
@@ -188,6 +198,7 @@ Opening a new CAPA with a new number and starting fresh. This creates the illusi
 The second mistake: doubling down on training — "more training, more frequently, with a competency test." If the first round of training didn't fix the problem, a second round won't either.
 
 **Expert Approach:**
+
 1. **Reopen CAPA-2024-0087, do not create a new CAPA.** The original CAPA was ineffective. Document the recurrence as evidence that the CAPA effectiveness verification was premature or based on insufficient data. The CAPA system must track this as a single unresolved issue, not two separate issues.
 2. **Discard the original root cause.** "Operator technique variation" must be explicitly rejected as a root cause. Document why: training was implemented and verified, operators are certified, yet the defect recurred. Therefore, the root cause was not operator technique.
 3. **Restart root cause analysis with fresh eyes.** Form a new team that includes people who were NOT on the original team (fresh perspective). Use Ishikawa/6M to systematically investigate all cause categories — the original team likely converged too quickly on the Man category.
@@ -201,6 +212,7 @@ The second mistake: doubling down on training — "more training, more frequentl
 6. **Extend the effectiveness monitoring period.** The original 90-day monitoring was insufficient. For a recurring issue, monitor for 6 months or 2 full cycles of the suspected environmental/seasonal factor, whichever is longer. Define quantitative pass criteria (e.g., zero recurrences of the specific failure mode AND Cpk on the affected dimension ≥ 1.33 for the full monitoring period).
 
 **Key Indicators:**
+
 - The fact that 90-day monitoring showed zero recurrence but the defect returned suggests the root cause is intermittent or cyclic (seasonal temperature, tool wear cycle, material lot cycle)
 - Operator-related root causes are almost never the actual root cause for dimensional non-conformances in CNC machining — the machine is controlling the dimension, not the operator
 - Gauge R&R data is critical — if the measurement system contribution is > 30% of the tolerance, the measurement itself may be the root cause of apparent non-conformances
@@ -223,6 +235,7 @@ Arguing with the auditor during the audit. Debating the interpretation of AS9102
 The second mistake: over-correcting by requiring a full FAI for every consumable change. This would make your FAI process unworkable — you change tool inserts multiple times per shift. The corrective action must be proportionate to the actual risk.
 
 **Expert Approach:**
+
 1. **Accept the audit finding formally.** Do not concede that your interpretation is wrong — accept that the auditor has identified an area where your process does not explicitly address the scenario. Write the response as: "We acknowledge the finding and will evaluate our FAI triggering criteria for manufacturing consumable source changes."
 2. **Research industry guidance.** AS9102 Rev C, IAQG FAQ documents, and your registrar's interpretation guides may provide clarity. Contact your certification body's technical manager for their interpretation.
 3. **Risk-based approach.** Categorize tool supplier changes by risk:
@@ -233,6 +246,7 @@ The second mistake: over-correcting by requiring a full FAI for every consumable
 5. **Corrective action response.** Your formal response to the auditor should describe the risk-based approach, the tool qualification procedure, and the updated FAI trigger criteria. Demonstrate that you've addressed the gap with a proportionate control, not with a blanket rule that will be unworkable.
 
 **Key Indicators:**
+
 - The auditor's interpretation may or may not be upheld at the next certification body review — but arguing the point at the audit is always unproductive
 - Your machinist's tribal knowledge about tool brand differences is actually valid evidence — document it
 - The risk-based approach is defensible because AS9100 itself is built on risk-based thinking
@@ -251,6 +265,7 @@ Short shots and flash are opposing defects. Short shot = insufficient material r
 Continuing to adjust a single parameter (pressure) up and down looking for a "sweet spot." This is tampering — chasing the process around the operating window without understanding what's driving the variation.
 
 **Expert Approach:**
+
 1. **Stop adjusting.** Return the process to the validated parameters. Document that the attempted pressure increase did not resolve the issue and created additional flash defects.
 2. **Use Ishikawa, not 5 Whys.** Map the potential causes across all 6M categories. For this type of combined defect, the most likely interacting causes are:
    - **Machine:** Worn platens or tie bars allowing non-uniform clamp pressure across the mold face. This allows flash where clamp force is low while restricting fill where the parting line is tight.
@@ -267,6 +282,7 @@ Continuing to adjust a single parameter (pressure) up and down looking for a "sw
 5. **The CAPA must capture all three causes.** Document that the single defect (short shot + flash) has three interacting root causes. Each cause has its own corrective action. Effectiveness monitoring must track the combined defect rate, not each cause independently.
 
 **Key Indicators:**
+
 - Combined opposing defects always indicate multiple interacting causes — never a single parameter
 - Shot-to-shot weight variation (SPC) distinguishes material variation (random pattern) from machine variation (trending or cyclic pattern)
 - Pressure-indicating film between mold halves reveals clamp force distribution problems that are invisible otherwise
@@ -288,6 +304,7 @@ BGA solder joint voiding is particularly insidious because voids that are accept
 Increasing the X-ray inspection frequency or adding 100% X-ray inspection. If your current X-ray protocol can't distinguish the failing population from the good population, doing more of the same inspection won't help — you're looking for the defect in the wrong way.
 
 **Expert Approach:**
+
 1. **Failure analysis on returned units.** Cross-section the BGA solder joints on failed returns. Map the void location, size, and the crack propagation path. Determine if the cracks initiate at voids (they almost always do in BGA thermomechanical fatigue).
 2. **X-ray protocol review.** Compare the X-ray imaging parameters (angle, magnification, algorithm) between production inspection and failure analysis inspection. Often, the production X-ray uses a top-down view that averages voiding across the entire joint, while the critical voiding is concentrated at the component-side interface where thermal stress is highest.
 3. **Process investigation using DOE.** Solder paste voiding is influenced by: stencil aperture design, paste-to-pad ratio, reflow profile (soak zone temperature and time), pad finish (ENIG vs. OSP vs. HASL), and BGA component pad finish. Run a designed experiment varying the controllable factors against voiding as the response. Use the optimized parameters to reduce the baseline voiding level below the failure threshold.
@@ -295,6 +312,7 @@ Increasing the X-ray inspection frequency or adding 100% X-ray inspection. If yo
 5. **SPC on voiding.** Implement BGA voiding measurement as an SPC characteristic with limits set based on the reliability test data (not just the IPC-7095 generic guideline). The control limits should be set at the voiding level below which reliability testing shows acceptable life.
 
 **Key Indicators:**
+
 - 0.3% field return rate in electronics is unusually high for a solder defect — this is a systemic process issue, not random
 - Void location within the joint matters more than total void percentage — a 15% void concentrated at the interface is worse than 25% distributed throughout the joint body
 - Correlation between void levels and reflow profile parameters (especially time above liquidus and peak temperature) is typically the strongest process lever
@@ -317,6 +335,7 @@ Treating this like a normal supplier quality issue. Following the escalation lad
 The opposite mistake: accepting the recurring non-conformance because you have no alternative. "Use-as-is because we're sole-sourced" is not an acceptable disposition for a safety-critical aerospace forging, regardless of supply constraints.
 
 **Expert Approach:**
+
 1. **Invest in the supplier, don't just punish them.** Propose a joint development program. Your metallurgical engineer works with their forging process engineer to optimize die design, forging temperature, and press force profile for the grain flow requirement. This is supplier development, not just supplier corrective action.
 2. **Root cause the grain flow issue properly.** Grain flow non-conformance in closed-die forging is typically caused by: incorrect billet pre-form shape (material doesn't flow where the die expects it), insufficient forging reduction ratio, incorrect forging temperature (too cold = surface cracking, too hot = grain growth), or die wear allowing material to flow outside the intended path. Which of these is it? Each has a different solution.
 3. **Begin alternate source qualification quietly.** Start the 18-24 month qualification process immediately, but do not use it as a threat. Frame it as "supply chain risk mitigation" — even if the supplier improves, having a second source is sound supply chain management for a safety-critical part.
@@ -325,6 +344,7 @@ The opposite mistake: accepting the recurring non-conformance because you have n
 6. **MRB each non-conformance individually.** Just because the supplier is sole-sourced does not mean every non-conformance gets a use-as-is disposition. Each forging must be evaluated on its specific grain flow pattern against the design intent. Some deviations may be acceptable with engineering and customer concession; others are scrapped regardless of supply impact. Document the disposition rationale with metallographic evidence and engineering analysis.
 
 **Key Indicators:**
+
 - Grain flow pattern should be evaluated against the finished machined geometry, not just the forging geometry — material removal during machining can expose grain flow that was within the forging specification but becomes non-conforming in the machined part
 - A 3-sigma supply buffer (keep 6+ months of safety stock) is essential while working the quality improvement with a sole source
 - Die life tracking correlates with grain flow quality — quality typically degrades as the die wears
@@ -349,6 +369,7 @@ Arguing with the investigator that go/no-go gauging is adequate. Even if you're 
 The opposite mistake: immediately committing to variable gauging for every dimension. This may be impractical, expensive, and unnecessary for non-critical dimensions. Over-correcting in response to a 483 creates an unsustainable system.
 
 **Expert Approach:**
+
 1. **Accept the observation gracefully.** During the inspection: "Thank you. We'll evaluate our measurement methodology for these critical dimensions and respond in our 483 response." Do not argue, do not minimize, do not promise a specific corrective action on the spot.
 2. **483 response (due within 15 business days):** Structure the response in four parts:
    - **Acknowledgment:** "We acknowledge the observation regarding [specific dimensions, specific part number]."
@@ -359,12 +380,14 @@ The opposite mistake: immediately committing to variable gauging for every dimen
 4. **Don't over-correct.** Convert critical dimensions to variable gauging. Non-critical dimensions where go/no-go is practical and appropriate can remain as attribute gauging. Document the risk-based rationale for which dimensions require variable data and which do not.
 
 **Key Indicators:**
+
 - The investigator's observation is about system capability, not about a specific defective product
 - A strong 483 response demonstrates that you understand the intent of the observation, not just the letter
 - The FDA evaluates your CAPA system partly by how you respond to observations — a proportionate, well-reasoned response is valued over a panicked over-correction
 - Scope extension (looking beyond the specific finding to the systemic issue) is explicitly what FDA wants to see in a 483 response
 
 **Documentation Required:**
+
 - Copy of Form 483 observation
 - Formal 483 response with all four sections
 - Updated inspection plans showing conversion from attribute to variable gauging
@@ -388,6 +411,7 @@ This is a specification gap, not a quality failure — but you still have a reje
 Refusing the rejection because the requirement isn't quantified on the drawing. This is technically correct and commercially disastrous — the customer doesn't care about specification semantics; their assembly line is down.
 
 **Expert Approach:**
+
 1. **Accept the return or sort on-site.** Business continuity first. Offer to send a sort team to the customer's facility to 100% inspect and remove the nonconforming parts, or accept the return and sort at your facility. This gets the customer's line running while you address the systemic issue.
 2. **Request the quantitative requirement.** Contact the customer's quality engineering team and ask them to provide a measurable specification for burr height on edge B. "We need a quantified requirement to add this to our control plan and SPC program. Can you issue a drawing change or specification supplement with a maximum burr height?"
 3. **Interim control.** While the drawing change is in process, add burr height inspection to your control plan as a customer-specific requirement with the threshold from their vision system (0.3mm max).
@@ -395,6 +419,7 @@ Refusing the rejection because the requirement isn't quantified on the drawing. 
 5. **PPAP update.** Once the customer issues a formal specification for burr height, submit a PPAP update (at minimum a control plan revision and MSA for the new characteristic).
 
 **Key Indicators:**
+
 - Burr height typically increases with die wear — plot burr height vs. parts since last die sharpen to establish the maintenance interval
 - "Deburr per shop practice" without quantification is a common specification deficiency — the corrective action is a drawing change, not a process change
 - The customer's 4.2% reject rate suggests your process is close to the threshold — a small process improvement (die maintenance interval) may reduce the rate below detection
@@ -415,6 +440,7 @@ The cleaning validation was "validated" but the underlying calculation is now in
 Arguing that 0.8 ppm is toxicologically insignificant. The FDA doesn't operate on "it's probably fine" — they operate on validated limits derived from documented calculations. If the calculation is wrong, the limit is wrong, and the validation is invalid.
 
 **Expert Approach:**
+
 1. **Acknowledge the finding.** Do not debate the arithmetic with the FDA investigator. The calculation error is factual.
 2. **Immediate containment.** Place a hold on all in-process and unreleased Product B lots manufactured since the label change. Review the cleaning verification results for every changeover in that period. For lots where the cleaning result exceeded the corrected 0.67 ppm limit, conduct a risk assessment on the actual patient exposure.
 3. **Toxicological risk assessment.** Engage your toxicologist or a qualified consultant to assess the actual risk. At 0.8 ppm of Product A in Product B with a maximum daily dose of 15g, the maximum daily exposure to Product A is 12 µg. Is this below the ADI (Acceptable Daily Intake) for Product A's active ingredient? If yes, document this as a secondary justification — but it doesn't fix the process gap.
@@ -423,6 +449,7 @@ Arguing that 0.8 ppm is toxicologically insignificant. The FDA doesn't operate o
 6. **Batch disposition.** For lots where Product B was produced with cleaning results between 0.67 and 1.0 ppm: if the toxicological assessment shows the exposure is within ADI, the lots may be dispositioned as acceptable with documentation. If exposure exceeds ADI, the lots must be rejected.
 
 **Key Indicators:**
+
 - The MACO calculation inputs (maximum daily dose, minimum daily dose of contaminating product, safety factor) must be traceable to current product documentation
 - A cleaning validation that hasn't been reviewed after a product change is not validated — it's out of date
 - Controlled substance cross-contamination adds DEA regulatory obligations on top of FDA obligations
@@ -444,6 +471,7 @@ In aerospace, this is a potential counterfeit/suspect part situation per AS9100 
 Assuming the parts can be sorted by XRF and the wrong material returned. While that's eventually the disposition, the immediate priority is containment: how many of the 200 fasteners have already been installed in assemblies? Those assemblies may need to be torn down and the fasteners replaced.
 
 **Expert Approach:**
+
 1. **Immediate quarantine of all remaining fasteners.** Mark as suspect; do not use for any purpose until material verification is complete.
 2. **Containment — trace forward.** How many of the 200 fasteners have been consumed in production? Which assemblies? Are any of those assemblies already shipped to the customer? Each installed CP titanium fastener in a structure designed for Ti-6Al-4V is a potential structural failure in service.
 3. **100% material verification on remaining stock.** XRF every remaining fastener. Separate confirmed Ti-6Al-4V (if any) from confirmed CP Grade 2.
@@ -454,6 +482,7 @@ Assuming the parts can be sorted by XRF and the wrong material returned. While t
 8. **Incoming inspection update.** Add PMI (XRF or OES) to the incoming inspection plan for all structural material lots, regardless of supplier qualification level. CoC reliance without material verification is a known vulnerability for material mix-ups.
 
 **Key Indicators:**
+
 - The machinability difference noticed by the technician is a real and reliable indicator — CP titanium machines significantly differently from Ti-6Al-4V (lower cutting forces, different chip formation)
 - XRF can distinguish Grade 2 from Ti-6Al-4V quickly by the absence of aluminum and vanadium peaks
 - The safety risk depends entirely on the application — a CP Grade 2 fastener in a lightly loaded panel is probably fine; the same fastener in a primary structure fitting is a safety-of-flight concern
@@ -475,6 +504,7 @@ The deeper issue: 147 open CAPAs in a 4-person quality team means the system is 
 Mass-closing CAPAs to reduce the count. Closing CAPAs without verified effectiveness is worse than having them open — it's a systemic falsification of the quality record. An auditor who sees 60 CAPAs closed in the last 2 weeks before an audit will investigate the closure quality, and finding superficial closures is a major finding.
 
 **Expert Approach:**
+
 1. **Triage the 147 open CAPAs.** Categorize each into one of four buckets:
    - **Active and valid:** Root cause is systemic, corrective action is in progress or effective. These stay open and get prioritized.
    - **Should not have been CAPAs:** Isolated non-conformances that were over-escalated to CAPA. These should be downgraded to NCR dispositions with documented rationale for why CAPA was not required. This is not "closing for convenience" — it's applying correct CAPA initiation criteria retroactively.
@@ -486,12 +516,14 @@ Mass-closing CAPAs to reduce the count. Closing CAPAs without verified effective
 5. **Address the FDA commitment.** Your 483 response committed to improvement in CAPA timeliness. The triage and process change demonstrate systemic improvement, which is what FDA expects. Simply clearing the backlog without fixing the systemic cause would be repeating the same failure.
 
 **Key Indicators:**
+
 - CAPA count per engineer is the capacity metric — more than 15 active CAPAs per engineer indicates either over-initiation or under-resourcing
 - The ratio of CAPAs initiated to CAPAs closed per month shows whether the pipeline is growing or shrinking
 - Effectiveness rate (CAPAs closed with verified effectiveness, no recurrence) is more important than closure rate
 - Auditors assess CAPA system maturity, not CAPA count — a mature system has few, well-managed CAPAs
 
 **Documentation Required:**
+
 - CAPA triage register with categorization and rationale for each CAPA
 - Updated CAPA initiation procedure (before and after revision)
 - Management review presentation showing backlog analysis and improvement plan
@@ -519,6 +551,7 @@ Ignoring the implication because "the process hasn't changed." The process may n
 The second mistake: invalidating the process and halting production for a full revalidation. This may be an overreaction if the product quality data (test results, field performance) supports that the process has been producing conforming product throughout.
 
 **Expert Approach:**
+
 1. **Quantify the calibration shift.** Review the calibration records — what was the as-found reading vs. the as-left reading during the last calibration? If the as-found was 40N high and the as-left is now correct, the shift is documented.
 2. **Retrospective data analysis.** Collect all product quality data (weld pull-test results, leak test results, or whatever the product-level test is that verifies weld integrity) from the entire period between calibrations. If the product quality data shows consistent, conforming results throughout, this is strong evidence that the process, regardless of the measurement bias, was producing acceptable product.
 3. **Impact assessment on validation.** Recalculate the process capability from the PQ study using the corrected force values (subtract the 40N bias from all documented force readings). If the corrected data still demonstrates capability (Cpk ≥ 1.33) within the specification range, the validation conclusion remains sound even with the adjusted values.
@@ -527,11 +560,13 @@ The second mistake: invalidating the process and halting production for a full r
 6. **Documentation.** File this as a deviation to the process validation protocol. Document the impact assessment, the retrospective data analysis, the conclusion on validation status, and the corrective action. This creates the audit trail that demonstrates you identified, evaluated, and resolved the issue — which is what FDA expects.
 
 **Key Indicators:**
+
 - The ratio of calibration shift to process tolerance determines severity (40N shift on a ±50N tolerance = 80% of tolerance, which is significant)
 - Product-level test data is the ultimate evidence of process acceptability — it measures the output, not the input
 - Calibration as-found/as-left data should always be evaluated for process validation impact, not just instrument accuracy
 
 **Documentation Required:**
+
 - Calibration certificate showing as-found and as-left values
 - Retrospective product quality data analysis with statistical summary
 - Impact assessment on process validation (corrected PQ data analysis)
@@ -545,30 +580,35 @@ The second mistake: invalidating the process and halting production for a full r
 The edge cases above share common patterns. When you encounter a quality situation that feels complex, check which pattern(s) apply:
 
 ### Pattern A: Specification Gap
+
 **Signature:** Parts meet the documented specification but fail in application.
 **Edge cases:** 3 (SPC in-control but complaints rising), 6 (audit finding challenging practice), 11 (customer rejects lot that passed inspection)
 **Key question:** Is the specification adequate for the functional requirement?
 **Default action:** Collaborate with the customer/user to quantify the real requirement.
 
 ### Pattern B: Measurement System Integrity
+
 **Signature:** The quality data says everything is fine, but reality disagrees.
 **Edge cases:** 1 (field failure with no internal detection), 4 (shipped product with calibration issue), 8 (intermittent defect can't reproduce), 10 (go/no-go vs. variable gauging), 15 (calibration shift affects validation)
 **Key question:** Is the measurement system capable of detecting the actual failure mode?
 **Default action:** Evaluate measurement system against the failure mode, not just the specification.
 
 ### Pattern C: Trust Breakdown
+
 **Signature:** Data or documentation cannot be relied upon.
 **Edge cases:** 2 (falsified CoCs), 13 (wrong material with correct cert)
 **Key question:** What is the full scope of potentially affected product?
 **Default action:** Independent verification; do not rely on the compromised data source.
 
 ### Pattern D: Systemic Process Failure
+
 **Signature:** The corrective action treats a symptom; the problem recurs.
 **Edge cases:** 5 (CAPA addresses symptom not root cause), 7 (multiple root causes), 14 (CAPA backlog)
 **Key question:** Is the root cause analysis rigorous enough?
 **Default action:** Restart RCA with fresh team and more rigorous methodology.
 
 ### Pattern E: Competing Priorities
+
 **Signature:** Quality requirements conflict with supply or business constraints.
 **Edge cases:** 9 (sole-source with quality problems), 12 (cross-contamination with supply implications)
 **Key question:** What is the minimum acceptable quality action that maintains regulatory compliance?
@@ -595,6 +635,7 @@ The edge cases above share common patterns. When you encounter a quality situati
 | 15. Validation deviation | Process validation impact assessment | Calibration program improvement |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

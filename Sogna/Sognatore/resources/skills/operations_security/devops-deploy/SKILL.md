@@ -4,23 +4,26 @@ description: "DevOps e deploy de aplicacoes — Docker, CI/CD com GitHub Actions
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - devops
 - docker
 - ci-cd
 - aws
 - terraform
 - github-actions
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-devops-deploy
 owner: [[ops-devops]], [[ops-security]]
 ---
-
 
 # DEVOPS-DEPLOY — Da Ideia para Producao
 
@@ -73,9 +76,13 @@ services:
     build: .
     ports: ["8000:8000"]
     environment:
+
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+
     volumes:
+
       - .:/app
+
     depends_on: [db, redis]
   db:
     image: postgres:15
@@ -84,7 +91,9 @@ services:
       POSTGRES_USER: auri
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
+
       - pgdata:/var/lib/postgresql/data
+
   redis:
     image: redis:7-alpine
 volumes:
@@ -119,7 +128,9 @@ Resources:
       Handler: lambda_function.handler
       MemorySize: 512
       Policies:
+
         - DynamoDBCrudPolicy:
+
             TableName: !Ref AuriTable
 
   AuriTable:
@@ -128,10 +139,14 @@ Resources:
       TableName: auri-users
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
+
         - AttributeName: userId
+
           AttributeType: S
       KeySchema:
+
         - AttributeName: userId
+
           KeyType: HASH
       TimeToLiveSpecification:
         AttributeName: ttl
@@ -177,9 +192,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+
         with: { python-version: "3.11" }
+
       - run: pip install -r requirements.txt
       - run: pytest tests/ -v --cov=src --cov-report=xml
       - uses: codecov/codecov-action@v4
@@ -187,6 +205,7 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
       - run: pip install bandit safety
       - run: bandit -r src/ -ll
@@ -197,16 +216,20 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
       - uses: aws-actions/setup-sam@v2
       - uses: aws-actions/configure-aws-credentials@v4
+
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
       - run: sam build
       - run: sam deploy --no-confirm-changeset
       - name: Notify Telegram on Success
+
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
             -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
@@ -296,11 +319,13 @@ def create_error_alarm(function_name: str, sns_topic_arn: str):
 - Not providing enough project context for accurate analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-embedding-strategies
 owner: [[orchestrator]]
 ---
 
-
 # Embedding Strategies
 
 Guide to selecting and optimizing embedding models for vector search applications.
@@ -89,13 +88,12 @@ def get_embeddings(
 
     return all_embeddings
 
-
 def get_embedding(text: str, **kwargs) -> List[float]:
     """Get single embedding."""
     return get_embeddings([text], **kwargs)[0]
 
-
 # Dimension reduction with OpenAI
+
 def get_reduced_embedding(text: str, dimensions: int = 512) -> List[float]:
     """Get embedding with reduced dimensions (Matryoshka)."""
     return get_embedding(
@@ -148,8 +146,8 @@ class LocalEmbedder:
         """Embed documents for indexing."""
         return self.embed(documents)
 
-
 # E5 model with instructions
+
 class E5Embedder:
     def __init__(self, model_name: str = "intfloat/multilingual-e5-large"):
         self.model = SentenceTransformer(model_name)
@@ -190,7 +188,6 @@ def chunk_by_tokens(
 
     return chunks
 
-
 def chunk_by_sentences(
     text: str,
     max_chunk_size: int = 1000,
@@ -220,7 +217,6 @@ def chunk_by_sentences(
 
     return chunks
 
-
 def chunk_by_semantic_sections(
     text: str,
     headers_pattern: str = r'^#{1,3}\s+.+$'
@@ -244,7 +240,6 @@ def chunk_by_semantic_sections(
         chunks.append((current_header, '\n'.join(current_content)))
 
     return chunks
-
 
 def recursive_character_splitter(
     text: str,
@@ -379,8 +374,8 @@ class DomainEmbeddingPipeline:
 
         return processed
 
-
 # Code-specific pipeline
+
 class CodeEmbeddingPipeline:
     """Specialized pipeline for code embeddings."""
 
@@ -456,7 +451,6 @@ def evaluate_retrieval_quality(
 
     return {name: np.mean(values) for name, values in metrics.items()}
 
-
 def compute_embedding_similarity(
     embeddings1: np.ndarray,
     embeddings2: np.ndarray,
@@ -478,6 +472,7 @@ def compute_embedding_similarity(
 ## Best Practices
 
 ### Do's
+
 - **Match model to use case** - Code vs prose vs multilingual
 - **Chunk thoughtfully** - Preserve semantic boundaries
 - **Normalize embeddings** - For cosine similarity
@@ -485,6 +480,7 @@ def compute_embedding_similarity(
 - **Cache embeddings** - Avoid recomputing
 
 ### Don'ts
+
 - **Don't ignore token limits** - Truncation loses info
 - **Don't mix embedding models** - Incompatible spaces
 - **Don't skip preprocessing** - Garbage in, garbage out
@@ -497,11 +493,13 @@ def compute_embedding_similarity(
 - [MTEB Benchmark](https://huggingface.co/spaces/mteb/leaderboard)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-azure-eventgrid-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.Messaging.EventGrid (.NET)
 
 Client library for publishing events to Azure Event Grid topics, domains, and namespaces.
@@ -16,13 +15,17 @@ Client library for publishing events to Azure Event Grid topics, domains, and na
 ## Installation
 
 ```bash
+
 # For topics and domains (push delivery)
+
 dotnet add package Azure.Messaging.EventGrid
 
 # For namespaces (pull delivery)
+
 dotnet add package Azure.Messaging.EventGrid.Namespaces
 
 # For CloudNative CloudEvents interop
+
 dotnet add package Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents
 ```
 
@@ -31,11 +34,14 @@ dotnet add package Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents
 ## Environment Variables
 
 ```bash
+
 # Topic/Domain endpoint
+
 EVENT_GRID_TOPIC_ENDPOINT=https://<topic-name>.<region>.eventgrid.azure.net/api/events
 EVENT_GRID_TOPIC_KEY=<access-key>
 
 # Namespace endpoint (for pull delivery)
+
 EVENT_GRID_NAMESPACE_ENDPOINT=https://<namespace>.<region>.eventgrid.azure.net
 EVENT_GRID_TOPIC_NAME=<topic-name>
 EVENT_GRID_SUBSCRIPTION_NAME=<subscription-name>
@@ -492,14 +498,17 @@ catch (RequestFailedException)
 | GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/eventgrid/Azure.Messaging.EventGrid |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -37,12 +37,17 @@ export default agent({
 
 ```bash
 npx @Assembler/cli login
+
 # Enter your API key: an_sk_...
 
 npx @Assembler/cli deploy
+
 # Bundling src/agent.ts...
+
 # Deploying my-agent...
+
 # https://api.an.dev/v1/chat/my-agent
+
 ```
 
 Your agent is live.

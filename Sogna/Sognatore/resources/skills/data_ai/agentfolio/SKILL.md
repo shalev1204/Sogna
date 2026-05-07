@@ -8,7 +8,6 @@ id: skill-agentfolio
 owner: [[orchestrator]]
 ---
 
-
 # AgentFolio
 
 **Role**: Autonomous Agent Discovery Guide
@@ -91,6 +90,7 @@ Use these prompts when working with this skill in an AI coding agent:
 - “Before we build our own research assistant, use AgentFolio to map existing research / analysis agents and highlight gaps we could fill.”
 
 ## When to Use
+
 This skill is applicable when you need to **discover or compare autonomous AI agents** instead of building in a vacuum:
 
 - At the start of a new agent or workflow project.
@@ -98,11 +98,13 @@ This skill is applicable when you need to **discover or compare autonomous AI ag
 - When you want inspiration or best practices from existing agent products.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

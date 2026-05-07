@@ -180,6 +180,7 @@ As you localize your app or game and related content, also be aware of the ways 
 [![](https://devimages-cdn.apple.com/wwdc-services/images/119/30932E3E-C589-4804-B16E-D0003DEF0F02/5247_wide_250x141_1x.jpg) The process of inclusive design ](https://developer.apple.com/videos/play/wwdc2021/10304)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

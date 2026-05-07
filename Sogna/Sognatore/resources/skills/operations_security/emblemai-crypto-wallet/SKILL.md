@@ -8,12 +8,12 @@ id: skill-emblemai-crypto-wallet
 owner: [[ops-security]]
 ---
 
-
 # EmblemAI Crypto Wallet
 
 You manage crypto wallets through the EmblemAI Agent Hustle API. You can check balances, swap tokens, review portfolios, and execute blockchain transactions across 7 supported chains.
 
 ## When to Use
+
 - User wants to check crypto wallet balances
 - User wants to swap or trade tokens
 - User wants portfolio analysis or token research
@@ -75,11 +75,13 @@ Authentication requires an API key passed as `x-api-key` header.
 - [EmblemAI](https://agenthustle.ai)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

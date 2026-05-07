@@ -8,7 +8,6 @@ id: skill-azure-data-tables-java
 owner: [[orchestrator]]
 ---
 
-
 # Azure Tables SDK for Java
 
 Build table storage applications using the Azure Tables SDK for Java. Works with both Azure Table Storage and Cosmos DB Table API.
@@ -313,11 +312,14 @@ try {
 ## Environment Variables
 
 ```bash
+
 # Storage Account
+
 AZURE_TABLES_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
 AZURE_TABLES_ENDPOINT=https://<account>.table.core.windows.net
 
 # Cosmos DB Table API
+
 COSMOS_TABLE_ENDPOINT=https://<account>.table.cosmosdb.azure.com
 ```
 
@@ -339,14 +341,17 @@ COSMOS_TABLE_ENDPOINT=https://<account>.table.cosmosdb.azure.com
 - "table entity CRUD"
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

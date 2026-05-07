@@ -11,7 +11,6 @@ id: skill-micro-saas-launcher
 owner: [[orchestrator]]
 ---
 
-
 # Micro-SaaS Launcher
 
 Expert in launching small, focused SaaS products fast - the indie hacker approach
@@ -56,6 +55,7 @@ Validating before building
 ## Idea Validation
 
 ### The Validation Framework
+
 | Question | How to Answer |
 |----------|---------------|
 | Problem exists? | Talk to 5+ potential users |
@@ -64,6 +64,7 @@ Validating before building
 | You can reach them? | Distribution channel exists? |
 
 ### Quick Validation Methods
+
 1. **Landing page test**
    - Build landing page
    - Drive traffic (ads, community)
@@ -80,12 +81,14 @@ Validating before building
    - Find gap you can fill
 
 ### Red Flags
+
 - "Everyone needs this" (too broad)
 - No clear buyer (who pays?)
 - Requires marketplace dynamics
 - Needs massive scale to work
 
 ### Green Flags
+
 - Clear, specific pain point
 - People already paying for alternatives
 - You have domain expertise
@@ -100,6 +103,7 @@ Ship MVP in 2 weeks
 ## MVP Speed Run
 
 ### The Stack (Solo-Founder Optimized)
+
 | Component | Choice | Why |
 |-----------|--------|-----|
 | Frontend | Next.js | Full-stack, Vercel deploy |
@@ -111,6 +115,7 @@ Ship MVP in 2 weeks
 | Hosting | Vercel | Free tier generous |
 
 ### Week 1: Core
+
 ```
 Day 1-2: Auth + basic UI
 Day 3-4: Core feature (one thing)
@@ -119,6 +124,7 @@ Day 7: Polish and bug fixes
 ```
 
 ### Week 2: Launch Ready
+
 ```
 Day 1-2: Landing page
 Day 3: Email flows (welcome, etc.)
@@ -128,6 +134,7 @@ Day 6-7: Soft launch
 ```
 
 ### What to Skip in MVP
+
 - Perfect design (good enough is fine)
 - All features (one core feature only)
 - Scale optimization (worry later)
@@ -143,6 +150,7 @@ Pricing your micro-SaaS
 ## Pricing Strategy
 
 ### Pricing Tiers for Micro-SaaS
+
 | Strategy | Best For |
 |----------|----------|
 | Single price | Simple tools, clear value |
@@ -151,17 +159,21 @@ Pricing your micro-SaaS
 | Usage-based | API products, variable use |
 
 ### Starting Price Framework
+
 ```
 What's the alternative cost? (Competitor or manual work)
 Your price = 20-50% of alternative cost
 
 Example:
+
 - Manual work takes 10 hours/month
 - 10 hours × $50/hour = $500 value
 - Price: $49-99/month
+
 ```
 
 ### Common Micro-SaaS Prices
+
 | Type | Price Range |
 |------|-------------|
 | Simple tool | $9-29/month |
@@ -170,6 +182,7 @@ Example:
 | Lifetime deal | 3-5x monthly |
 
 ### Pricing Mistakes
+
 - Too cheap (undervalues, attracts bad customers)
 - Too complex (confuses buyers)
 - No free tier AND no trial (no way to try)
@@ -184,12 +197,14 @@ Launch strategies that work
 ## Launch Playbook
 
 ### Pre-Launch (2 weeks before)
+
 1. Build email list (landing page)
 2. Engage in communities (give value first)
 3. Create launch assets (demo, screenshots)
 4. Line up beta testers
 
 ### Launch Day Channels
+
 | Channel | Effort | Impact |
 |---------|--------|--------|
 | Product Hunt | Medium | High |
@@ -200,15 +215,19 @@ Launch strategies that work
 | Email list | Low | High |
 
 ### Product Hunt Launch
+
 ```
+
 - Launch 12:01 AM PST Tuesday-Thursday
 - Have maker comment ready
 - Activate your network to upvote/comment
 - Respond to every comment
 - Don't ask for upvotes directly
+
 ```
 
 ### Post-Launch
+
 - Follow up with every signup
 - Ask for feedback constantly
 - Fix critical bugs immediately
@@ -224,6 +243,7 @@ Severity: HIGH
 Situation: Built product, can't get users
 
 Symptoms:
+
 - Zero organic traffic
 - Relying only on launches
 - No email list
@@ -240,12 +260,14 @@ Recommended fix:
 ## Distribution First
 
 ### Before Building, Answer:
+
 - Where do my customers hang out?
 - Can I reach them for free?
 - Do I have an existing audience?
 - Is SEO viable for this?
 
 ### Distribution Channels
+
 | Channel | Time to Results | Cost |
 |---------|-----------------|------|
 | SEO | 6-12 months | Low |
@@ -256,15 +278,19 @@ Recommended fix:
 | Partnerships | 1-2 months | Free |
 
 ### Build Distribution Into Product
+
 ```
+
 - "Powered by [Your Product]" badge
 - Invite/referral features
 - Public profiles/pages (SEO)
 - Shareable results/reports
 - Integration marketplace listings
+
 ```
 
 ### If Stuck
+
 1. Start content marketing NOW
 2. Be active in communities (give value)
 3. Partner with complementary products
@@ -277,6 +303,7 @@ Severity: HIGH
 Situation: Lots of interest, no conversions
 
 Symptoms:
+
 - Lots of signups, no upgrades
 - Love it, but can't afford
 - Only works with freemium
@@ -293,6 +320,7 @@ Recommended fix:
 ## Market Selection
 
 ### B2B vs B2C
+
 | Factor | B2B | B2C |
 |--------|-----|-----|
 | Price tolerance | $50-500+/mo | $5-20/mo |
@@ -302,6 +330,7 @@ Recommended fix:
 | Solo-founder friendly | Yes | Harder |
 
 ### Good Markets for Micro-SaaS
+
 - Small businesses
 - Freelancers/agencies
 - Developers
@@ -309,12 +338,14 @@ Recommended fix:
 - Professionals (lawyers, doctors, etc.)
 
 ### Red Flag Markets
+
 - Students
 - Startups with no funding
 - Mass consumers
 - Markets with free alternatives
 
 ### Pivot Signals
+
 - High interest, zero payments
 - Users love it but won't pay
 - Competition is all free
@@ -327,6 +358,7 @@ Severity: HIGH
 Situation: MRR plateaued despite new customers
 
 Symptoms:
+
 - MRR not growing despite signups
 - Users cancel after first month
 - Low feature usage
@@ -343,14 +375,18 @@ Recommended fix:
 ## Fixing Churn
 
 ### Understand Why
+
 ```
+
 1. Email churned users (personal, not automated)
 2. Look at last active date
 3. Check onboarding completion
 4. Survey at cancellation
+
 ```
 
 ### Churn Benchmarks
+
 | Churn Rate | Assessment |
 |------------|------------|
 | < 3% monthly | Excellent |
@@ -359,6 +395,7 @@ Recommended fix:
 | > 7% monthly | Critical |
 
 ### Quick Fixes
+
 - Improve onboarding (first 7 days critical)
 - Add "aha moment" trigger emails
 - Check if right users signing up
@@ -366,6 +403,7 @@ Recommended fix:
 - Increase prices (filters serious users)
 
 ### Onboarding Checklist
+
 ```
 [ ] Clear first action after signup
 [ ] Value delivered in first session
@@ -381,6 +419,7 @@ Severity: MEDIUM
 Situation: Visitors leave pricing page without action
 
 Symptoms:
+
 - High pricing page bounce
 - Which plan should I choose?
 - Feature comparison requests
@@ -397,6 +436,7 @@ Recommended fix:
 ## Simple Pricing
 
 ### Ideal Structure
+
 ```
 Free tier (optional): Limited but useful
 Paid tier: Everything most need ($X/mo)
@@ -404,12 +444,14 @@ Enterprise (optional): Custom pricing
 ```
 
 ### If Multiple Tiers
+
 - Maximum 3 tiers
 - Clear differentiation
 - Highlight recommended tier
 - Annual discount (20-30%)
 
 ### Good Pricing Page
+
 | Element | Purpose |
 |---------|---------|
 | Clear prices | No calculator needed |
@@ -419,6 +461,7 @@ Enterprise (optional): Custom pricing
 | Guarantee | Reduce risk |
 
 ### Testing
+
 - A/B test prices
 - Try removing a tier
 - Ask customers what's confusing
@@ -483,12 +526,14 @@ Skills: micro-saas-launcher, supabase-backend, nextjs-app-router, stripe
 Workflow:
 
 ```
+
 1. Validate idea (1 day)
 2. Set up Supabase + Next.js
 3. Build core feature
 4. Add Stripe payments
 5. Create landing page
 6. Launch to communities
+
 ```
 
 ### Content-Led SaaS
@@ -498,11 +543,13 @@ Skills: micro-saas-launcher, seo, content-strategy, landing-page-design
 Workflow:
 
 ```
+
 1. Research keywords
 2. Build MVP with SEO in mind
 3. Create content around problem
 4. Launch product
 5. Grow organically
+
 ```
 
 ## Related Skills
@@ -510,6 +557,7 @@ Workflow:
 Works well with: `landing-page-design`, `backend`, `stripe`, `seo`
 
 ## When to Use
+
 - User mentions or implies: micro saas
 - User mentions or implies: indie hacker
 - User mentions or implies: small saas
@@ -518,11 +566,13 @@ Works well with: `landing-page-design`, `backend`, `stripe`, `seo`
 - User mentions or implies: ship fast
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,12 +8,12 @@ id: skill-macos-menubar-tuist-app
 owner: [[orchestrator]]
 ---
 
-
 # macos-menubar-tuist-app
 
 Build and maintain macOS menubar apps with a Tuist-first workflow and stable launch scripts. Preserve strict architecture boundaries so networking, state, and UI remain testable and predictable.
 
 ## When to Use
+
 - When working on LSUIElement menubar utilities built with Tuist and SwiftUI.
 - When you need Tuist manifests, launch scripts, or architecture guidance for a menubar app.
 
@@ -91,15 +91,19 @@ bash -n stop-menubar.sh
 ## Failure Patterns and Fix Direction
 
 - `tuist run` cannot resolve the macOS destination:
+
 Use run/stop scripts as canonical local run path.
 
 - Menu UI is laggy or inconsistent after refresh:
+
 Move derived state and filtering into the store; keep views render-only.
 
 - API payload changes break decode:
+
 Relax model decoding with optional fields and defaults, then surface missing data safely in UI.
 
 - Feature asks for quick UI patch:
+
 Trace root cause in model/client/store before changing row/menu presentation.
 
 ## Completion Checklist
@@ -111,11 +115,13 @@ Trace root cause in model/client/store before changing row/menu presentation.
 - Report concrete commands run and outcomes.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

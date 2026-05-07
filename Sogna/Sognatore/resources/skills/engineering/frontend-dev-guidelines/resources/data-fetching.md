@@ -19,6 +19,7 @@ Modern data fetching using TanStack Query with Suspense boundaries, cache-first 
 For **all new components**, use `useSuspenseQuery` instead of regular `useQuery`:
 
 **Benefits:**
+
 - No `isLoading` checks needed
 - Integrates with Suspense boundaries
 - Cleaner component code
@@ -59,6 +60,7 @@ export const MyComponent: React.FC<Props> = ({ id }) => {
 | Error handling | Error boundaries | Manual error state |
 
 **When to use regular useQuery:**
+
 - Maintaining legacy code
 - Very simple cases without Suspense
 - Polling with background updates
@@ -112,11 +114,14 @@ export function useSuspensePost(postId: number) {
 ```
 
 **Key Points:**
+
 - Check grid/list cache before API call
 - Avoids redundant requests
 - `staleTime`: How long data is considered fresh
 - `gcTime`: How long unused data stays in cache
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - `refetchOnWindowFocus: false`: User preference
 
 ---
@@ -159,6 +164,7 @@ export const MyComponent: React.FC = () => {
 ```
 
 **Benefits:**
+
 - All queries in parallel
 - Single Suspense boundary
 - Type-safe results
@@ -188,6 +194,7 @@ export const MyComponent: React.FC = () => {
 ```
 
 **Rules:**
+
 - Start with entity name (plural for lists, singular for one)
 - Include IDs for specificity
 - Add view mode / relationship at end
@@ -224,15 +231,19 @@ features/
 
 ```typescript
 /**
+
  * Centralized API service for my-feature operations
  * Uses apiClient for consistent error handling
+
  */
 import apiClient from '@/lib/apiClient';
 import type { MyEntity, UpdatePayload } from '../types';
 
 export const myFeatureApi = {
     /**
+
      * Fetch a single entity
+
      */
     getEntity: async (blogId: number, entityId: number): Promise<MyEntity> => {
         const { data } = await apiClient.get(
@@ -242,7 +253,9 @@ export const myFeatureApi = {
     },
 
     /**
+
      * Fetch all entities for a form
+
      */
     getEntities: async (blogId: number, view: 'summary' | 'flat'): Promise<MyEntity[]> => {
         const { data } = await apiClient.get(
@@ -253,7 +266,9 @@ export const myFeatureApi = {
     },
 
     /**
+
      * Update entity
+
      */
     updateEntity: async (
         blogId: number,
@@ -268,7 +283,9 @@ export const myFeatureApi = {
     },
 
     /**
+
      * Delete entity
+
      */
     deleteEntity: async (blogId: number, entityId: number): Promise<void> => {
         await apiClient.delete(`/blog/entities/${blogId}/${entityId}`);
@@ -277,6 +294,7 @@ export const myFeatureApi = {
 ```
 
 **Key Points:**
+
 - Export single object with methods
 - Use `apiClient` (axios instance from `@/lib/apiClient`)
 - Type-safe parameters and returns
@@ -302,6 +320,7 @@ await apiClient.post('/api/projects/create', data); // WRONG!
 ```
 
 **Microservice Routing:**
+
 - Form service: `/blog/*`
 - Projects service: `/projects/*`
 - Email service: `/email/*`
@@ -402,6 +421,7 @@ const updateMutation = useMutation({
 ## Advanced Query Patterns
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 ### Prefetching
 
 ```typescript
@@ -566,8 +586,10 @@ import { postApi } from '../api/postApi';
 import type { Post } from '../types';
 
 /**
+
  * Hook with cache-first strategy
  * Checks grid cache before API call
+
  */
 export function useSuspensePost(blogId: number, postId: number) {
     const queryClient = useQueryClient();
@@ -606,6 +628,7 @@ export function useSuspensePost(blogId: number, postId: number) {
 ```
 
 **Benefits:**
+
 - Avoids duplicate API calls
 - Instant data if already loaded
 - Falls back to API if not cached
@@ -788,11 +811,13 @@ useSuspenseQuery({
 8. **Type Safety**: Type all parameters and returns
 
 **See Also:**
+
 - [component-patterns.md](component-patterns.md) - Suspense integration
 - [loading-and-error-states.md](loading-and-error-states.md) - SuspenseLoader usage
 - [complete-examples.md](complete-examples.md) - Full working examples
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -95,7 +95,9 @@ app/
 ### Implementation Example
 
 ```python
+
 # domain/entities/user.py
+
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
@@ -118,6 +120,7 @@ class User:
         return self.is_active
 
 # domain/interfaces/user_repository.py
+
 from abc import ABC, abstractmethod
 from typing import Optional, List
 from domain.entities.user import User
@@ -142,6 +145,7 @@ class IUserRepository(ABC):
         pass
 
 # use_cases/create_user.py
+
 from domain.entities.user import User
 from domain.interfaces.user_repository import IUserRepository
 from dataclasses import dataclass
@@ -193,6 +197,7 @@ class CreateUserUseCase:
         )
 
 # adapters/repositories/postgres_user_repository.py
+
 from domain.interfaces.user_repository import IUserRepository
 from domain.entities.user import User
 from typing import Optional
@@ -251,6 +256,7 @@ class PostgresUserRepository(IUserRepository):
         )
 
 # adapters/controllers/user_controller.py
+
 from fastapi import APIRouter, Depends, HTTPException
 from use_cases.create_user import CreateUserUseCase, CreateUserRequest
 from pydantic import BaseModel
@@ -279,7 +285,9 @@ async def create_user(
 ## Hexagonal Architecture Pattern
 
 ```python
+
 # Core domain (hexagon center)
+
 class OrderService:
     """Domain service - no infrastructure dependencies."""
 
@@ -319,6 +327,7 @@ class OrderService:
         return OrderResult(success=True, order=saved_order)
 
 # Ports (interfaces)
+
 class OrderRepositoryPort(ABC):
     @abstractmethod
     async def save(self, order: Order) -> Order:
@@ -335,6 +344,7 @@ class NotificationPort(ABC):
         pass
 
 # Adapters (implementations)
+
 class StripePaymentAdapter(PaymentGatewayPort):
     """Primary adapter: connects to Stripe API."""
 
@@ -363,7 +373,9 @@ class MockPaymentAdapter(PaymentGatewayPort):
 ## Domain-Driven Design Pattern
 
 ```python
+
 # Value Objects (immutable)
+
 from dataclasses import dataclass
 from typing import Optional
 
@@ -388,6 +400,7 @@ class Money:
         return Money(self.amount + other.amount, self.currency)
 
 # Entities (with identity)
+
 class Order:
     """Entity: has identity, mutable state."""
 
@@ -419,6 +432,7 @@ class Order:
         self._events.append(OrderSubmittedEvent(self.id))
 
 # Aggregates (consistency boundary)
+
 class Customer:
     """Aggregate root: controls access to entities."""
 
@@ -439,12 +453,14 @@ class Customer:
         return next((a for a in self._addresses if a.is_primary), None)
 
 # Domain Events
+
 @dataclass
 class OrderSubmittedEvent:
     order_id: str
     occurred_at: datetime = field(default_factory=datetime.now)
 
 # Repository (aggregate persistence)
+
 class OrderRepository:
     """Repository: persist/retrieve aggregates."""
 
@@ -488,6 +504,7 @@ class OrderRepository:
 - **Over-Engineering**: Clean architecture for simple CRUD
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

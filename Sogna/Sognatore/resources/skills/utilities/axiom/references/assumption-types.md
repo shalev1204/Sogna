@@ -38,6 +38,7 @@ Laws of nature, mathematical truths, verified scientific constants, and logical 
 自然规律、数学定理、已验证的科学常数、逻辑恒等式。不能被人类意志、政策或信念改变。
 
 **Identification Questions / 识别问题:**
+
 - Can you find a single genuine counterexample anywhere on Earth? / 你能在地球上找到一个真正的反例吗？
 - Is this universally true regardless of culture, time, or context? / 这在所有文化、时间、语境下都成立吗？
 - Would this still be true if every human disappeared? / 如果人类消失了，这还成立吗？
@@ -72,6 +73,7 @@ Practices, rules, or beliefs that were once valid and widely adopted but origina
 曾经有效且被广泛采用的做法、规则或信念，但起源于特定语境。语境可能已经改变，使惯例过时或可选。
 
 **Identification Questions / 识别问题:**
+
 - When did this rule/practice originate? What was the world like then? / 这个规则/做法是什么时候起源的？那时的环境是什么样的？
 - Has the underlying environment (technology, demographics, market, regulation) changed significantly since then? / 底层环境变了吗？
 - Is this universal, or specific to a region/industry/era? / 这是普遍的，还是特定于某个地区/行业/时代？
@@ -96,6 +98,7 @@ Practices, rules, or beliefs that were once valid and widely adopted but origina
 
 **Cross-Cultural Note / 跨文化注意:**
 Some conventions are deeply culture-specific:
+
 - 🇨🇳 "35岁是职业分水岭" — This is a Chinese labor market convention, virtually unknown in the West
 - 🇺🇸 "You should change jobs every 2-3 years" — This is an American tech industry convention, unusual in Japan or Germany
 - 🇨🇳 "有房才能结婚" — Chinese marriage convention, not a global reality
@@ -113,6 +116,7 @@ Conclusions drawn from personal experience, projected as general truths. The per
 从个人经验中得出的结论，被投射为普遍真理。当事人真诚地相信它们，但它们是由有限的经验样本、认知偏差和情感联想塑造的。
 
 **Identification Questions / 识别问题:**
+
 - Who told you this? / 谁告诉你的？
 - Have you personally verified this, or are you extrapolating from a small sample? / 你亲自验证过吗，还是从小样本推断？
 - Could someone with different experiences reach the opposite conclusion? / 有不同经历的人能得出相反结论吗？
@@ -150,6 +154,7 @@ Assumptions that someone (an industry, company, influencer, or social group) act
 某些人（行业、公司、意见领袖或社会群体）积极传播的假设，因为他们从你的相信中获益。这并不意味着这些说法总是假的 — 但它们被传播的原因不是因为真，而是因为有利可图。
 
 **Identification Questions / 识别问题:**
+
 - Who is promoting this idea? What do they sell? / 谁在推广这个观点？他们卖什么？
 - Does the source of this information have a financial incentive for you to believe it? / 这个信息来源是否有经济动机让你相信？
 - Would this idea still be popular if no one profited from it? / 如果没有人从中获利，这个观点还会流行吗？
@@ -175,6 +180,7 @@ Assumptions that someone (an industry, company, influencer, or social group) act
 | "Growth hacking is essential for startups" | Growth consultancies, SaaS tools |
 
 **Cross-Cultural Note:**
+
 - 🇨🇳 Chinese internet is saturated with interest-driven assumptions from: 知识付费 platforms, 房产中介, 保险销售, 创业导师, 消费主义 KOL
 - 🇺🇸 American media is saturated with: VC-backed startup mythology, credentialism pushed by universities, lifestyle inflation pushed by advertising
 
@@ -204,15 +210,19 @@ Many real-world assumptions are **hybrids**. When you encounter one:
 ## Edge Cases / 边界案例指南
 
 ### Statistical Trends vs Facts
+
 "Men are taller than women on average" — This is a **statistical fact** (measurable, repeatable), but applying it to any individual is a **subjective belief**. Classify the assumption based on how the user is using it.
 
 ### Outdated Facts
+
 "Pluto is a planet" — Was a physical fact, reclassified. If someone's assumption is based on an outdated fact, treat it as a **convention** that hasn't been updated.
 
 ### Self-Fulfilling Prophecies
+
 "The stock market will crash" — If enough people believe this, they sell, and it crashes. Classify as **interest-driven** if the source benefits from the prediction, or **subjective belief** if it's the user's personal anxiety.
 
 ### Cultural Norms
+
 "你应该30岁之前结婚" — This is a **convention** (culturally specific, has a historical basis), with potential **interest-driven** elements (family pressure, wedding industry).
 
 ---
@@ -234,6 +244,7 @@ Many real-world assumptions are **hybrids**. When you encounter one:
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

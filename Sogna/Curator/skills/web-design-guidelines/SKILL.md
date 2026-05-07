@@ -16,7 +16,6 @@ id: skill-web-design-guidelines
 owner: [[prod-design]]
 ---
 
-
 # Web Interface Guidelines
 
 Review files for compliance with Web Interface Guidelines.
@@ -25,7 +24,9 @@ Review files for compliance with Web Interface Guidelines.
 
 1. Fetch the latest guidelines from the source URL below
 2. Read the specified files (or prompt user for files/pattern)
+
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+
 3. Check against all rules in the fetched guidelines
 4. Output findings in the terse `file:line` format
 
@@ -43,9 +44,12 @@ Use WebFetch to retrieve the latest rules. The fetched content contains all the 
 ## Usage
 
 When a user provides a file or pattern argument:
+
 1. Fetch guidelines from the source URL above
 2. Read the specified files
+
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+
 3. Apply all rules from the fetched guidelines
 4. Output findings using the format specified in the guidelines
 
@@ -63,8 +67,10 @@ If no files specified, ask the user which files to review.
 ## Design Workflow
 
 ```
+
 1. DESIGN   → Read frontend-design principles
 2. CODE     → Implement the design
 3. AUDIT    → Run web-design-guidelines review ← YOU ARE HERE
 4. FIX      → Address findings from audit
+
 ```

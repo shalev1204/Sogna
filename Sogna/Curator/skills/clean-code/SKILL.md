@@ -14,7 +14,6 @@ id: skill-clean-code
 owner: [[review-code]]
 ---
 
-
 # Clean Code - Pragmatic AI Coding Standards
 
 > **CRITICAL SKILL** - Be **concise, direct, and solution-focused**.
@@ -185,16 +184,20 @@ File to edit: UserService.ts
 3. **Summarize to user** in this format:
 
 ```markdown
+
 ## Script Results: [script_name.py]
 
 ### ❌ Errors Found (X items)
+
 - [File:Line] Error description 1
 - [File:Line] Error description 2
 
 ### ⚠️ Warnings (Y items)
+
 - [File:Line] Warning description
 
 ### ✅ Passed (Z items)
+
 - Check 1 passed
 - Check 2 passed
 
@@ -207,4 +210,3 @@ File to edit: UserService.ts
 > 🔴 **VIOLATION:** Running script and ignoring output = FAILED task.
 > 🔴 **VIOLATION:** Auto-fixing without asking = Not allowed.
 > 🔴 **Rule:** Always READ output → SUMMARIZE → ASK → then fix.
-

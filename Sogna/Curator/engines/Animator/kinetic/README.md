@@ -11,10 +11,13 @@
 </p>
 
 ```bash
+
 # React / JavaScript
+
 npm install sognaflow
 
 # Vue
+
 npm install sognaflow-v
 ```
 
@@ -30,9 +33,10 @@ npm install sognaflow-v
 
 ## Why sognaflow?
 
--   **Simple API:** First-class React, JavaScript, and Vue packages.
--   **Hybrid engine:** Power of JavaScript combined with native browser APIs for 120fps, GPU-accelerated animations.
--   **Production-ready:** TypeScript, extensive test suite, tree-shakable, tiny footprint.
+- **Simple API:** First-class React, JavaScript, and Vue packages.
+- **Hybrid engine:** Power of JavaScript combined with native browser APIs for 120fps, GPU-accelerated animations.
+- **Production-ready:** TypeScript, extensive test suite, tree-shakable, tiny footprint.
+
     **Batteries included:** Gestures, springs, layout transitions, scroll-linked effects, timelines.
 
 ## 🍦 Platforms
@@ -85,23 +89,23 @@ Over 100 examples come with a full step-by-step [tutorial](https://sognaflow.dev
 
 A one-time payment, lifetime-updates membership:
 
--   **330+ examples**
--   **100+ tutorials**
--   **Premium APIs** like [Cursor](https://sognaflow.dev/docs/cursor) and [Ticker](https://sognaflow.dev/docs/react-ticker)
--   **Transition editor** for Cursor and VS Code
--   **AI skills**
--   **Private Discord**
--   **Early access content**
+- **330+ examples**
+- **100+ tutorials**
+- **Premium APIs** like [Cursor](https://sognaflow.dev/docs/cursor) and [Ticker](https://sognaflow.dev/docs/react-ticker)
+- **Transition editor** for Cursor and VS Code
+- **AI skills**
+- **Private Discord**
+- **Early access content**
 
 [Get sognaflow+](https://sognaflow.dev/plus)
 
 ## 👩🏻‍⚖️ License
 
--   sognaflow is MIT licensed.
+- sognaflow is MIT licensed.
 
 ## 💎 Contribute
 
--   Want to contribute to sognaflow? Our [contributing guide](https://github.com/sognaflowdivision/sognaflow/blob/master/CONTRIBUTING.md) has you covered.
+- Want to contribute to sognaflow? Our [contributing guide](https://github.com/sognaflowdivision/sognaflow/blob/master/CONTRIBUTING.md) has you covered.
 
 ## ✨ Sponsors
 
@@ -135,6 +139,6 @@ sognaflow drives the animations on the Cursor homepage, and is working with Curs
 
 ### Personal
 
--   [OlegWock](https://sinja.io)
--   [Lambert Weller](https://github.com/l-mbert)
--   [Jake LeBoeuf](https://jklb.wf)
+- [OlegWock](https://sinja.io)
+- [Lambert Weller](https://github.com/l-mbert)
+- [Jake LeBoeuf](https://jklb.wf)

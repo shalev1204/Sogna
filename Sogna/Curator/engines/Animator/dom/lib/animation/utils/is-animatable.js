@@ -1,4 +1,4 @@
-import { Complex as complex } from "../../value/types/complex";
+import { Complex } from "../../value/types/complex";
 /**
  * Check if a value is animatable. Examples:
  *
@@ -8,7 +8,7 @@ import { Complex as complex } from "../../value/types/complex";
  *
  * @internal
  */
-export const IsAnimatable = (value, name) => {
+export const isAnimatable = (value, name) => {
     // If the list of keys that might be non-animatable grows, replace with Set
     if (name === "zIndex")
         return false;
@@ -18,7 +18,7 @@ export const IsAnimatable = (value, name) => {
     if (typeof value === "number" || Array.isArray(value))
         return true;
     if (typeof value === "string" && // It's animatable if we have a string
-        (complex.test(value) || value === "0") && // And it contains numbers and/or colors
+        (Complex.test(value) || value === "0") && // And it contains numbers and/or colors
         !value.startsWith("url(") // Unless it starts with "url("
     ) {
         return true;

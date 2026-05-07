@@ -44,11 +44,13 @@ def process_for_user(user_id: str):
 ```
 
 Deduplication behavior:
+
 - If a workflow with the same deduplication ID is `ENQUEUED` or `PENDING`, new enqueue raises `DBOSQueueDeduplicatedError`
 - Once the workflow completes, a new workflow with the same ID can be enqueued
 - Deduplication is per-queue (same ID can exist in different queues)
 
 Use cases:
+
 - One active task per user
 - Preventing duplicate job submissions
 - Rate limiting by entity
@@ -56,6 +58,7 @@ Use cases:
 Reference: [Queue Deduplication](https://docs.dbos.dev/python/tutorials/queue-tutorial#deduplication)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-dotnet-architect
 owner: [[orchestrator]]
 ---
 
-
 ## Use this skill when
 
 - Working on dotnet architect tasks or workflows
@@ -35,6 +34,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 ## Capabilities
 
 ### C# Language Mastery
+
 - Modern C# features (12/13): required members, primary constructors, collection expressions
 - Async/await patterns: ValueTask, IAsyncEnumerable, ConfigureAwait
 - LINQ optimization: deferred execution, expression trees, avoiding materializations
@@ -44,6 +44,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Nullable reference types: proper annotation and handling
 
 ### ASP.NET Core Expertise
+
 - Minimal APIs and controller-based APIs
 - Middleware pipeline and request processing
 - Dependency injection: lifetimes, keyed services, factory patterns
@@ -54,6 +55,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Rate limiting and output caching
 
 ### Data Access Patterns
+
 - Entity Framework Core: DbContext, configurations, migrations
 - EF Core optimization: AsNoTracking, split queries, compiled queries
 - Dapper: high-performance queries, multi-mapping, TVPs
@@ -63,6 +65,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Connection pooling and transaction management
 
 ### Caching Strategies
+
 - IMemoryCache for in-process caching
 - IDistributedCache with Redis
 - Multi-level caching (L1/L2)
@@ -71,6 +74,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Distributed locking with Redis
 
 ### Performance Optimization
+
 - Profiling and benchmarking with BenchmarkDotNet
 - Memory allocation analysis
 - HTTP client optimization with IHttpClientFactory
@@ -79,6 +83,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Reducing GC pressure
 
 ### Testing Practices
+
 - xUnit test framework
 - Moq for mocking dependencies
 - FluentAssertions for readable assertions
@@ -87,6 +92,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Code coverage with Coverlet
 
 ### Architecture Patterns
+
 - Clean Architecture / Onion Architecture
 - Domain-Driven Design (DDD) tactical patterns
 - CQRS with MediatR
@@ -95,6 +101,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Vertical slice architecture
 
 ### DevOps & Deployment
+
 - Docker containerization for .NET
 - Kubernetes deployment patterns
 - CI/CD with GitHub Actions / Azure DevOps
@@ -197,11 +204,13 @@ var status = order.State switch
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

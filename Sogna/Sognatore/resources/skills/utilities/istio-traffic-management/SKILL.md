@@ -8,7 +8,6 @@ id: skill-istio-traffic-management
 owner: [[orchestrator]]
 ---
 
-
 # Istio Traffic Management
 
 Comprehensive guide to Istio traffic management for production service mesh deployments.
@@ -64,18 +63,26 @@ metadata:
   namespace: bookinfo
 spec:
   hosts:
+
     - reviews
+
   http:
+
     - match:
         - headers:
+
             end-user:
               exact: jason
       route:
+
         - destination:
+
             host: reviews
             subset: v2
+
     - route:
         - destination:
+
             host: reviews
             subset: v1
 ---
@@ -87,13 +94,19 @@ metadata:
 spec:
   host: reviews
   subsets:
+
     - name: v1
+
       labels:
         version: v1
+
     - name: v2
+
       labels:
         version: v2
+
     - name: v3
+
       labels:
         version: v3
 ```
@@ -107,14 +120,20 @@ metadata:
   name: my-service-canary
 spec:
   hosts:
+
     - my-service
+
   http:
+
     - route:
         - destination:
+
             host: my-service
             subset: stable
           weight: 90
+
         - destination:
+
             host: my-service
             subset: canary
           weight: 10
@@ -134,10 +153,14 @@ spec:
         http1MaxPendingRequests: 100
         http2MaxRequests: 1000
   subsets:
+
     - name: stable
+
       labels:
         version: stable
+
     - name: canary
+
       labels:
         version: canary
 ```
@@ -177,10 +200,14 @@ metadata:
   name: ratings-retry
 spec:
   hosts:
+
     - ratings
+
   http:
+
     - route:
         - destination:
+
             host: ratings
       timeout: 10s
       retries:
@@ -199,10 +226,14 @@ metadata:
   name: mirror-traffic
 spec:
   hosts:
+
     - my-service
+
   http:
+
     - route:
         - destination:
+
             host: my-service
             subset: v1
       mirror:
@@ -221,9 +252,13 @@ metadata:
   name: fault-injection
 spec:
   hosts:
+
     - ratings
+
   http:
+
     - fault:
+
         delay:
           percentage:
             value: 10
@@ -233,7 +268,9 @@ spec:
             value: 5
           httpStatus: 503
       route:
+
         - destination:
+
             host: ratings
 ```
 
@@ -248,7 +285,9 @@ spec:
   selector:
     istio: ingressgateway
   servers:
+
     - port:
+
         number: 443
         name: https
         protocol: HTTPS
@@ -256,7 +295,9 @@ spec:
         mode: SIMPLE
         credentialName: my-tls-secret
       hosts:
+
         - "*.example.com"
+
 ---
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
@@ -264,15 +305,23 @@ metadata:
   name: my-vs
 spec:
   hosts:
+
     - "api.example.com"
+
   gateways:
+
     - my-gateway
+
   http:
+
     - match:
         - uri:
+
             prefix: /api/v1
       route:
+
         - destination:
+
             host: api-service
             port:
               number: 8080
@@ -291,7 +340,9 @@ spec:
     loadBalancer:
       simple: ROUND_ROBIN  # or LEAST_CONN, RANDOM, PASSTHROUGH
 ---
+
 # Consistent hashing for sticky sessions
+
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
@@ -308,6 +359,7 @@ spec:
 ## Best Practices
 
 ### Do's
+
 - **Start simple** - Add complexity incrementally
 - **Use subsets** - Version your services clearly
 - **Set timeouts** - Always configure reasonable timeouts
@@ -315,6 +367,7 @@ spec:
 - **Monitor** - Use Kiali and Jaeger for visibility
 
 ### Don'ts
+
 - **Don't over-retry** - Can cause cascading failures
 - **Don't ignore outlier detection** - Enable circuit breakers
 - **Don't mirror to production** - Mirror to test environments
@@ -323,16 +376,21 @@ spec:
 ## Debugging Commands
 
 ```bash
+
 # Check VirtualService configuration
+
 istioctl analyze
 
 # View effective routes
+
 istioctl proxy-config routes deploy/my-app -o json
 
 # Check endpoint discovery
+
 istioctl proxy-config endpoints deploy/my-app
 
 # Debug traffic
+
 istioctl proxy-config log deploy/my-app --level debug
 ```
 
@@ -343,11 +401,13 @@ istioctl proxy-config log deploy/my-app --level debug
 - [Destination Rule Reference](https://istio.io/latest/docs/reference/config/networking/destination-rule/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

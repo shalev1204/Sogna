@@ -60,11 +60,13 @@ async function myWorkflowFn() {
 Alternatively, you can use `DBOS.registerStep` to pre-register a step or `@DBOS.step()` as a class decorator, but `DBOS.runStep` is preferred for most use cases.
 
 Step requirements:
+
 - Inputs and outputs must be serializable to JSON
 - Cannot call, start, or enqueue workflows from within steps
 - Calling a step from another step makes the called step part of the calling step's execution
 
 When to use steps:
+
 - API calls to external services
 - File system operations
 - Random number generation
@@ -74,6 +76,7 @@ When to use steps:
 Reference: [DBOS Steps](https://docs.dbos.dev/typescript/tutorials/step-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

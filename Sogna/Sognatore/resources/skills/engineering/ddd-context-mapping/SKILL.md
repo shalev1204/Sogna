@@ -9,7 +9,6 @@ id: skill-ddd-context-mapping
 owner: [[orchestrator]]
 ---
 
-
 # DDD Context Mapping
 
 ## Use this skill when
@@ -55,6 +54,7 @@ Inventory, and Fraud contexts, including ACL and contract ownership.
 - It should be revisited when team ownership changes.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

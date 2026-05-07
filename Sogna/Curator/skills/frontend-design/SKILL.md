@@ -12,7 +12,6 @@ id: skill-frontend-design
 owner: [[eng-frontend]], [[prod-design]]
 ---
 
-
 # Frontend Design System
 
 > **Philosophy:** Every pixel has purpose. Restraint is luxury. User psychology drives decisions.
@@ -365,22 +364,27 @@ For animation patterns: [animation-guide.md](animation-guide.md), for advanced: 
 For EVERY design task:
 
 1. CONSTRAINTS
+
    └── What's the timeline, brand, tech, audience?
    └── If unclear → ASK
 
 2. CONTENT
+
    └── What content exists?
    └── What's the hierarchy?
 
 3. STYLE DIRECTION
+
    └── What's appropriate for context?
    └── If unclear → ASK (don't default!)
 
 4. EXECUTION
+
    └── Apply principles above
    └── Check against anti-patterns
 
 5. REVIEW
+
    └── "Does this serve the user?"
    └── "Is this different from my defaults?"
    └── "Would I be proud of this?"
@@ -414,10 +418,12 @@ For deeper guidance on specific areas:
 After implementing your design, run the audit:
 
 ```
+
 1. DESIGN   → Read frontend-design principles ← YOU ARE HERE
 2. CODE     → Implement the design
 3. AUDIT    → Run web-design-guidelines review
 4. FIX      → Address findings from audit
+
 ```
 
 > **Next Step:** After coding, use `web-design-guidelines` skill to audit your implementation for accessibility, focus states, animations, and performance issues.
@@ -434,11 +440,13 @@ After implementing your design, run the audit:
 > For Next.js 16+ projects, use the native `next/form` component instead of standard HTML `<form>` for all GET-based search/filter operations.
 
 ### The `<Form>` Component Advantage
+
 - **Automatic Client Navigation:** Performs client-side transitions on submit.
 - **Progressive Enhancement:** Works even without JavaScript.
 - **URL Sync:** Automatically encodes input values into search params.
 
 ### Implementation Example (Search Bar)
+
 ```tsx
 import Form from 'next/form'
 
@@ -457,5 +465,6 @@ export default function SearchBar() {
 ```
 
 ### When to use `<Form>` vs. standard `<form>`:
+
 - **Use `next/form`** for: Search, Filtering, Sorting, Pagination (GET requests).
 - **Use standard `<form>`** for: Mutations, Login, Data Entry (POST requests via Server Actions).

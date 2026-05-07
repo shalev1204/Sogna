@@ -35,6 +35,7 @@ def llm_workflow(prompt):
     return "complete"
 
 # Client reads stream
+
 @app.get("/stream/{workflow_id}")
 def stream_response(workflow_id: str):
     def generate():
@@ -44,6 +45,7 @@ def stream_response(workflow_id: str):
 ```
 
 Stream characteristics:
+
 - Streams are immutable and append-only
 - Writes from workflows happen exactly-once
 - Writes from steps happen at-least-once (may duplicate on retry)
@@ -62,6 +64,7 @@ def producer():
 Reference: [Workflow Streaming](https://docs.dbos.dev/python/tutorials/workflow-communication#workflow-streaming)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

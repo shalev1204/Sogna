@@ -8,16 +8,17 @@ id: skill-zipai-optimizer
 owner: [[orchestrator]]
 ---
 
-
 # ZipAI: Context & Token Optimizer
 
 <rules>
   <rule id="1" name="Adaptive Verbosity">
     <instruction>
+
       - **Ops/Fixes:** technical content only. No filler, no echo, no meta.
       - **Architecture/Analysis:** full reasoning authorized and encouraged.
       - **Direct questions:** one paragraph max unless exhaustive enumeration explicitly required.
       - **Long sessions:** never re-summarize prior context. Assume developer retains full thread memory.
+
     </instruction>
   </rule>
 
@@ -45,30 +46,36 @@ owner: [[orchestrator]]
         - `git pull/push` with conflicts/errors → `grep -A 5 -B 2 "CONFLICT\|error\|rejected\|denied"`.
         - `git log --graph` → `| head -n 40`.
       - **Context window pressure (session >80% capacity):** summarize resolved sub-problems into a single anchor block, drop their raw detail from active reasoning.
+
     </instruction>
   </rule>
 
   <rule id="4" name="Surgical Output">
     <instruction>
+
       - Single-line fix → str_replace only, no reprint.
       - Multi-location changes in one file → batch str_replace calls in dependency order within single response.
       - Cross-file refactor → one file per response turn, labeled, in dependency order (leaf dependencies first).
       - Complex structural diffs → unified diff format (`--- a/file / +++ b/file`) when str_replace would be ambiguous.
       - Never silently bundle unrelated changes.
+
     </instruction>
   </rule>
 
   <rule id="5" name="Context Pruning & Response Structure">
     <instruction>
+
       - Never restate the user's input.
       - Lead with conclusion, follow with reasoning (inverted pyramid).
       - Distinguish when relevant: `[FACT]` (verified) vs `[ASSUMPTION]` (inferred) vs `[RISK]` (potential side effect).
       - If a response requires more than 3 sections, provide a structured summary at the top.
+
     </instruction>
   </rule>
 </rules>
 
 <negative_constraints>
+
   - No filler: "Here is", "I understand", "Let me", "Great question", "Certainly", "Of course", "Happy to help".
   - No blind truncation of stacktraces or error logs.
   - No full-file reads when targeted grep/view_range suffices.
@@ -77,14 +84,17 @@ owner: [[orchestrator]]
   - No silent bundling of unrelated changes.
   - No full git diff ingestion on large changesets — extract hunks only.
   - No git log beyond 20 entries unless a specific range is requested.
+
 </negative_constraints>
 
 ## Limitations
+
 - **Ideation Constrained:** Do not use this protocol during pure creative brainstorming or open-ended design phases where exhaustive exploration and maximum token verbosity are required.
 - **Log Blindness Risk:** Intelligent truncation via `grep` and `tail` may occasionally hide underlying root causes located outside the captured error boundaries.
 - **Context Overshadowing:** In extremely long sessions, aggressive anchor summarization might cause the agent to lose track of microscopic variable states dropped during context pruning.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -52,6 +52,7 @@ class URLFetcher(DBOSConfiguredInstance):
         return requests.get(self.url).text
 
 # Instantiate BEFORE DBOS.launch()
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 example_fetcher = URLFetcher("https://example.com")
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -64,6 +65,7 @@ if __name__ == "__main__":
 ```
 
 Requirements:
+
 - Class must be decorated with `@DBOS.dbos_class()`
 - Class must inherit from `DBOSConfiguredInstance`
 - `instance_name` must be unique and passed to `super().__init__()`
@@ -74,6 +76,7 @@ Steps can be added to any class without these requirements.
 Reference: [Python Classes](https://docs.dbos.dev/python/tutorials/classes)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

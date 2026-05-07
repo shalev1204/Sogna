@@ -173,6 +173,7 @@ Use `toneFrequency` to adjust the pitch without affecting speed. Values range fr
 Pitch shifting only works during server-side rendering, not in the Remotion Studio preview or in the `<Player />`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

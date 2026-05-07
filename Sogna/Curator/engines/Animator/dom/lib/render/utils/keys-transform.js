@@ -24,4 +24,5 @@ export const TransformPropOrder = [
  * A quick lookup for transform props.
  */
 export const TransformProps = /*@__PURE__*/ (() => new Set(TransformPropOrder))();
+export { TransformProps as transformProps };
 //# sourceMappingURL=keys-transform.js.map

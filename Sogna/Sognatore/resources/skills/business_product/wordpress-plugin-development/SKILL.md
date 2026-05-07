@@ -9,7 +9,6 @@ id: skill-wordpress-plugin-development
 owner: [[prod-pm]]
 ---
 
-
 # WordPress Plugin Development Workflow
 
 ## Overview
@@ -47,6 +46,7 @@ Specialized workflow for creating WordPress plugins with proper architecture, ho
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Creating custom WordPress plugins
 - Extending WordPress functionality
 - Building admin interfaces
@@ -59,10 +59,12 @@ Use this workflow when:
 ### Phase 1: Plugin Setup
 
 #### Skills to Invoke
+
 - `app-builder` - Project scaffolding
 - `backend-dev-guidelines` - Backend patterns
 
 #### Actions
+
 1. Create plugin directory structure
 2. Set up main plugin file with header
 3. Implement activation/deactivation hooks
@@ -70,6 +72,7 @@ Use this workflow when:
 5. Configure text domain
 
 #### WordPress 7.0 Plugin Header
+
 ```php
 /*
 Plugin Name: My Plugin
@@ -84,6 +87,7 @@ License: GPL2+
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @app-builder to scaffold a new WordPress plugin
 ```
@@ -91,9 +95,11 @@ Use @app-builder to scaffold a new WordPress plugin
 ### Phase 2: Plugin Architecture
 
 #### Skills to Invoke
+
 - `backend-dev-guidelines` - Architecture patterns
 
 #### Actions
+
 1. Design plugin class structure
 2. Implement singleton pattern
 3. Create loader class
@@ -101,11 +107,13 @@ Use @app-builder to scaffold a new WordPress plugin
 5. Configure plugin lifecycle
 
 #### WordPress 7.0 Architecture Considerations
+
 - Prepare for iframed editor compatibility
 - Design for collaboration-aware data flows
 - Consider Abilities API for AI integration
 
 #### Copy-Paste Prompts
+
 ```
 Use @backend-dev-guidelines to design plugin architecture
 ```
@@ -113,9 +121,11 @@ Use @backend-dev-guidelines to design plugin architecture
 ### Phase 3: Hooks Implementation
 
 #### Skills to Invoke
+
 - `wordpress-penetration-testing` - WordPress patterns
 
 #### Actions
+
 1. Register action hooks
 2. Create filter hooks
 3. Implement callback functions
@@ -123,6 +133,7 @@ Use @backend-dev-guidelines to design plugin architecture
 5. Add conditional hooks
 
 #### Copy-Paste Prompts
+
 ```
 Use @wordpress-penetration-testing to understand WordPress hooks
 ```
@@ -130,9 +141,11 @@ Use @wordpress-penetration-testing to understand WordPress hooks
 ### Phase 4: Admin Interface
 
 #### Skills to Invoke
+
 - `frontend-developer` - Admin UI
 
 #### Actions
+
 1. Create admin menu
 2. Build settings pages
 3. Implement options registration
@@ -140,12 +153,14 @@ Use @wordpress-penetration-testing to understand WordPress hooks
 5. Create admin notices
 
 #### WordPress 7.0 Admin Considerations
+
 - Test with new admin color scheme
 - Consider DataViews for data displays
 - Implement view transitions
 - Use new validation patterns
 
 #### DataViews Example
+
 ```javascript
 import { DataViews } from '@wordpress/dataviews';
 
@@ -173,6 +188,7 @@ const MyPluginDataView = () => {
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @frontend-developer to create WordPress admin interface
 ```
@@ -180,10 +196,12 @@ Use @frontend-developer to create WordPress admin interface
 ### Phase 5: Database Operations
 
 #### Skills to Invoke
+
 - `database-design` - Database design
 - `postgresql` - Database patterns
 
 #### Actions
+
 1. Create custom tables
 2. Implement CRUD operations
 3. Add data validation
@@ -191,6 +209,7 @@ Use @frontend-developer to create WordPress admin interface
 5. Create data upgrade routines
 
 #### RTC-Compatible Post Meta
+
 ```php
 // Register meta for Real-Time Collaboration
 register_post_meta('post', 'my_custom_field', [
@@ -208,6 +227,7 @@ register_term_meta('category', 'my_term_field', [
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @database-design to design plugin database schema
 ```
@@ -215,10 +235,12 @@ Use @database-design to design plugin database schema
 ### Phase 6: REST API
 
 #### Skills to Invoke
+
 - `api-design-principles` - API design
 - `api-patterns` - API patterns
 
 #### Actions
+
 1. Register REST routes
 2. Create endpoint callbacks
 3. Implement permission callbacks
@@ -226,11 +248,13 @@ Use @database-design to design plugin database schema
 5. Document API endpoints
 
 #### WordPress 7.0 REST API Enhancements
+
 - Abilities API integration
 - AI Connector endpoints
 - Enhanced validation
 
 #### Copy-Paste Prompts
+
 ```
 Use @api-design-principles to create WordPress REST API endpoints
 ```
@@ -238,10 +262,12 @@ Use @api-design-principles to create WordPress REST API endpoints
 ### Phase 7: Security
 
 #### Skills to Invoke
+
 - `wordpress-penetration-testing` - WordPress security
 - `security-scanning-security-sast` - Security scanning
 
 #### Actions
+
 1. Implement nonce verification
 2. Add capability checks
 3. Sanitize all inputs
@@ -249,12 +275,14 @@ Use @api-design-principles to create WordPress REST API endpoints
 5. Secure database queries
 
 #### WordPress 7.0 Security Considerations
+
 - Test Abilities API permission boundaries
 - Validate AI connector credential handling
 - Review collaboration data isolation
 - PHP 7.4+ requirement compliance
 
 #### Copy-Paste Prompts
+
 ```
 Use @wordpress-penetration-testing to audit plugin security
 ```
@@ -262,10 +290,12 @@ Use @wordpress-penetration-testing to audit plugin security
 ### Phase 8: WordPress 7.0 Features
 
 #### Skills to Invoke
+
 - `api-design-principles` - AI integration
 - `backend-dev-guidelines` - Block development
 
 #### AI Connector Implementation
+
 ```php
 // Using WordPress 7.0 AI Connector
 add_action('save_post', 'my_plugin_generate_ai_summary', 10, 2);
@@ -305,6 +335,7 @@ function my_plugin_generate_ai_summary($post_id, $post) {
 ```
 
 #### Abilities API Registration
+
 ```php
 // Register ability categories on their own hook
 add_action('wp_abilities_api_categories_init', function() {
@@ -369,6 +400,7 @@ function my_plugin_generate_summary_cb($input) {
 ```
 
 #### PHP-Only Block Registration
+
 ```php
 // Register block entirely in PHP (WordPress 7.0)
 // Note: For full PHP-only blocks, use block.json with PHP render_callback
@@ -410,6 +442,7 @@ if (function_exists('register_block_type')) {
 ```
 
 #### Disable Collaboration (if needed)
+
 ```javascript
 // Disable RTC for specific post types
 import { addFilter } from '@wordpress/hooks';
@@ -424,10 +457,12 @@ addFilter(
 ### Phase 9: Testing
 
 #### Skills to Invoke
+
 - `test-automator` - Test automation
 - `php-pro` - PHP testing
 
 #### Actions
+
 1. Set up PHPUnit
 2. Create unit tests
 3. Write integration tests
@@ -435,12 +470,14 @@ addFilter(
 5. Configure CI
 
 #### WordPress 7.0 Testing Priorities
+
 - Test RTC compatibility
 - Verify AI connector functionality
 - Validate DataViews integration
 - Test Interactivity API with watch()
 
 #### Copy-Paste Prompts
+
 ```
 Use @test-automator to set up plugin testing
 ```
@@ -499,11 +536,13 @@ plugin-name/
 - `wordpress-woocommerce` - WooCommerce
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

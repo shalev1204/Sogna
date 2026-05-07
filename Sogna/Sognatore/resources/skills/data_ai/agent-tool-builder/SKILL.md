@@ -11,7 +11,6 @@ id: skill-agent-tool-builder
 owner: [[orchestrator]]
 ---
 
-
 # Agent Tool Builder
 
 Tools are how AI agents interact with the world. A well-designed tool is the
@@ -75,6 +74,7 @@ Creating clear, unambiguous JSON Schema for tools
 # TOOL SCHEMA BEST PRACTICES:
 
 ## 1. Detailed Descriptions (Most Important)
+
 """
 BAD - Too vague:
 {
@@ -111,8 +111,10 @@ GOOD - Comprehensive:
 """
 
 ## 2. Parameter Descriptions
+
 """
 Every parameter needs:
+
 - What it is
 - Format expected
 - Example value
@@ -135,6 +137,7 @@ Every parameter needs:
 """
 
 ## 3. Use Enums When Possible
+
 """
 Enums constrain the LLM to valid values:
 
@@ -152,6 +155,7 @@ Enums constrain the LLM to valid values:
 """
 
 ## 4. Required vs Optional
+
 """
 Be explicit about what's required:
 
@@ -222,9 +226,13 @@ Improves accuracy from 72% to 90% on complex operations.
 }
 
 # EXAMPLE DESIGN PRINCIPLES:
+
 # - Use realistic data, not placeholders
+
 # - Show minimal, partial, and full specification patterns
+
 # - Keep concise: 1-5 examples per tool
+
 # - Focus on ambiguous cases
 
 ### Tool Error Handling
@@ -236,6 +244,7 @@ Returning errors that help the LLM recover
 # ERROR HANDLING BEST PRACTICES:
 
 ## Return Informative Errors
+
 """
 BAD:
 {"error": "Failed"}
@@ -252,6 +261,7 @@ GOOD:
 """
 
 ## Anthropic Tool Result with Error
+
 """
 {
   "type": "tool_result",
@@ -263,7 +273,9 @@ GOOD:
 """
 
 ## Error Categories to Handle
+
 """
+
 1. Input Validation Errors
    - Missing required parameters
    - Invalid format
@@ -282,9 +294,11 @@ GOOD:
 4. Internal Errors
    - Unexpected exceptions
    - Data corruption
+
 """
 
 ## Implementation Pattern
+
 """
 from dataclasses import dataclass
 from typing import Union
@@ -355,6 +369,7 @@ connecting AI agents to external systems. Build once, use everywhere.
 """
 
 ## Basic MCP Server (TypeScript)
+
 """
 import { Server } from "@modelcontextprotocol/sdk/server";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
@@ -429,12 +444,15 @@ await server.connect(transport);
 """
 
 ## MCP Benefits
+
 """
+
 - Universal compatibility across LLM providers
 - Reusable tool libraries
 - Streaming and SSE transport support
 - Built-in observability
 - Tool access controls
+
 """
 
 ### Tool Runner Pattern
@@ -447,13 +465,16 @@ Using SDK tool runners for automatic handling
 
 """
 The tool runner handles the tool call loop automatically:
+
 - Executes tools when Claude calls them
 - Manages conversation state
 - Handles error retries
 - Provides streaming support
+
 """
 
 ## Python Example
+
 """
 import anthropic
 from anthropic import beta_tool
@@ -482,6 +503,7 @@ def search_web(query: str) -> str:
     return json.dumps({"results": [...]})
 
 # Tool runner handles the loop
+
 runner = client.beta.messages.tool_runner(
     model="claude-sonnet-4-5",
     max_tokens=1024,
@@ -492,14 +514,17 @@ runner = client.beta.messages.tool_runner(
 )
 
 # Process each message
+
 for message in runner:
     print(message.content[0].text)
 
 # Or just get final result
+
 final = runner.until_done()
 """
 
 ## TypeScript with Zod
+
 """
 import { Anthropic } from '@anthropic-ai/sdk';
 import { betaZodTool } from '@anthropic-ai/sdk/helpers/beta/zod';
@@ -546,8 +571,11 @@ This dramatically reduces latency for independent operations.
 """
 
 ## Handling Parallel Results
+
 """
+
 # Claude returns multiple tool_use blocks:
+
 response.content = [
     {"type": "text", "text": "I'll check both locations..."},
     {"type": "tool_use", "id": "toolu_01", "name": "get_weather",
@@ -561,6 +589,7 @@ response.content = [
 ]
 
 # Execute in parallel
+
 import asyncio
 
 async def execute_tools_parallel(tool_uses):
@@ -570,6 +599,7 @@ async def execute_tools_parallel(tool_uses):
 results = await execute_tools_parallel(tool_uses)
 
 # Return ALL results in SINGLE user message (critical!)
+
 tool_results = [
     {"type": "tool_result", "tool_use_id": "toolu_01", "content": "72°F, Sunny"},
     {"type": "tool_result", "tool_use_id": "toolu_02", "content": "45°F, Cloudy"},
@@ -578,14 +608,19 @@ tool_results = [
 ]
 
 # CORRECT: All results in one message
+
 messages.append({"role": "user", "content": tool_results})
 
 # WRONG: Separate messages (breaks parallel execution pattern)
+
 # messages.append({"role": "user", "content": [tool_results[0]]})
+
 # messages.append({"role": "user", "content": [tool_results[1]]})
+
 """
 
 ## Encouraging Parallel Tool Use
+
 """
 Add to system prompt:
 "For maximum efficiency, whenever you need to perform multiple
@@ -594,6 +629,7 @@ rather than sequentially."
 """
 
 ## Disabling Parallel (When Needed)
+
 """
 response = client.messages.create(
     model="claude-sonnet-4-5",
@@ -700,6 +736,7 @@ Message: MCP tool definition missing inputSchema.
 Works well with: `multi-agent-orchestration`, `api-designer`, `llm-architect`, `backend`
 
 ## When to Use
+
 - User mentions or implies: agent tool
 - User mentions or implies: function calling
 - User mentions or implies: tool schema
@@ -714,11 +751,13 @@ Works well with: `multi-agent-orchestration`, `api-designer`, `llm-architect`, `
 - User mentions or implies: tool_result
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

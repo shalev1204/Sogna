@@ -8,7 +8,6 @@ id: skill-ml-pipeline-workflow
 owner: [[orchestrator]]
 ---
 
-
 # ML Pipeline Workflow
 
 Complete end-to-end MLOps pipeline orchestration from data preparation through model deployment.
@@ -75,6 +74,7 @@ This skill provides comprehensive guidance for building production ML pipelines 
 ### Reference Documentation
 
 See the `references/` directory for detailed guides:
+
 - **data-preparation.md** - Data cleaning, validation, and feature engineering
 - **model-training.md** - Training workflows and best practices
 - **model-validation.md** - Validation strategies and metrics
@@ -83,6 +83,7 @@ See the `references/` directory for detailed guides:
 ### Assets and Templates
 
 The `assets/` directory contains:
+
 - **pipeline-dag.yaml.template** - DAG template for workflow orchestration
 - **training-config.yaml** - Training configuration template
 - **validation-checklist.md** - Pre-deployment validation checklist
@@ -92,7 +93,9 @@ The `assets/` directory contains:
 ### Basic Pipeline Setup
 
 ```python
+
 # 1. Define pipeline stages
+
 stages = [
     "data_ingestion",
     "data_validation",
@@ -103,7 +106,9 @@ stages = [
 ]
 
 # 2. Configure dependencies
+
 # See assets/pipeline-dag.yaml.template for full example
+
 ```
 
 ### Production Workflow
@@ -202,32 +207,50 @@ Start with the basics and gradually add complexity:
 ### Batch Training Pipeline
 
 ```yaml
+
 # See assets/pipeline-dag.yaml.template
+
 stages:
+
   - name: data_preparation
+
     dependencies: []
+
   - name: model_training
+
     dependencies: [data_preparation]
+
   - name: model_evaluation
+
     dependencies: [model_training]
+
   - name: model_deployment
+
     dependencies: [model_evaluation]
 ```
 
 ### Real-time Feature Pipeline
 
 ```python
+
 # Stream processing for real-time features
+
 # Combined with batch training
+
 # See references/data-preparation.md
+
 ```
 
 ### Continuous Training
 
 ```python
+
 # Automated retraining on schedule
+
 # Triggered by data drift detection
+
 # See references/model-training.md
+
 ```
 
 ## Troubleshooting
@@ -263,11 +286,13 @@ After setting up your pipeline:
 - **model-deployment-patterns**: Advanced deployment strategies
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -115,17 +115,20 @@ Guide for developing Shopify themes with Liquid templating.
 ### Common Filters
 
 **String:**
+
 - `upcase`, `downcase`, `capitalize`
 - `strip_html`, `strip_newlines`
 - `truncate: 100`, `truncatewords: 20`
 - `replace: 'old', 'new'`
 
 **Number:**
+
 - `money` - Format currency
 - `round`, `ceil`, `floor`
 - `times`, `divided_by`, `plus`, `minus`
 
 **Array:**
+
 - `join: ', '`
 - `first`, `last`
 - `size`
@@ -133,11 +136,13 @@ Guide for developing Shopify themes with Liquid templating.
 - `where: 'property', 'value'`
 
 **URL:**
+
 - `img_url: 'size'` - Image URL
 - `url_for_type`, `url_for_vendor`
 - `link_to`, `link_to_type`
 
 **Date:**
+
 - `date: '%B %d, %Y'`
 
 ## Theme Architecture
@@ -318,45 +323,60 @@ Include snippet:
 ### Setup
 
 ```bash
+
 # Initialize new theme
+
 shopify theme init
 
 # Choose Dawn (reference theme) or blank
+
 ```
 
 ### Local Development
 
 ```bash
+
 # Start local server
+
 shopify theme dev
 
 # Preview at http://localhost:9292
+
 # Changes auto-sync to development theme
+
 ```
 
 ### Pull Theme
 
 ```bash
+
 # Pull live theme
+
 shopify theme pull --live
 
 # Pull specific theme
+
 shopify theme pull --theme=123456789
 
 # Pull only templates
+
 shopify theme pull --only=templates
 ```
 
 ### Push Theme
 
 ```bash
+
 # Push to development theme
+
 shopify theme push --development
 
 # Create new unpublished theme
+
 shopify theme push --unpublished
 
 # Push specific files
+
 shopify theme push --only=sections,snippets
 ```
 
@@ -477,24 +497,28 @@ Access custom data:
 ## Best Practices
 
 **Performance:**
+
 - Optimize images (use appropriate sizes)
 - Minimize Liquid logic complexity
 - Use lazy loading for images
 - Defer non-critical JavaScript
 
 **Accessibility:**
+
 - Use semantic HTML
 - Include alt text for images
 - Support keyboard navigation
 - Ensure sufficient color contrast
 
 **SEO:**
+
 - Use descriptive page titles
 - Include meta descriptions
 - Structure content with headings
 - Implement schema markup
 
 **Code Quality:**
+
 - Follow Shopify theme guidelines
 - Use consistent naming conventions
 - Comment complex logic
@@ -508,6 +532,7 @@ Access custom data:
 - Theme Check: https://shopify.dev/docs/themes/tools/theme-check
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

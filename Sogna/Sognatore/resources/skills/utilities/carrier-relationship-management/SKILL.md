@@ -8,8 +8,8 @@ id: skill-carrier-relationship-management
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use
+
 Use this skill when building and managing a carrier network, conducting freight RFPs, negotiating linehaul and accessorial rates, tracking carrier KPIs via scorecards, or ensuring regulatory compliance of transportation partners.
 
 # Carrier Relationship Management
@@ -185,6 +185,7 @@ Track weekly, review monthly with carrier management team, share quarterly with 
 - For complete communication templates with variables and tone guidance, see [communication-templates.md](references/communication-templates.md)
 
 ## When to Use
+
 Use this skill when you are **designing or tuning your carrier portfolio, routing guides, and freight procurement strategy**:
 
 - Running freight RFPs, renegotiating contract and fuel tables, or balancing spot vs. contract exposure.
@@ -192,11 +193,13 @@ Use this skill when you are **designing or tuning your carrier portfolio, routin
 - Deciding how to allocate lanes across asset carriers, brokers, and regional specialists to protect service while controlling logistics spend.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -21,7 +21,9 @@ import { Actor } from 'apify';
 await Actor.init();
 
 /**
+
  * Actor code
+
  */
 await Actor.pushData({
     numericField: 10,
@@ -44,7 +46,9 @@ await Actor.exit();
 Consider an example Actor that calls `Actor.push_data()` to store data into dataset:
 
 ```python
+
 # Dataset push example (Python)
+
 import asyncio
 from datetime import datetime
 from apify import Actor
@@ -218,6 +222,7 @@ Then create the dataset schema in `.actor/dataset_schema.json`:
 - `format` (string, optional) - One of: `text`, `number`, `date`, `link`, `boolean`, `image`, `array`, `object`
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

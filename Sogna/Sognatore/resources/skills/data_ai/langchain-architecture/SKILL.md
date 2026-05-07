@@ -8,7 +8,6 @@ id: skill-langchain-architecture
 owner: [[system-architect]]
 ---
 
-
 # LangChain Architecture
 
 Master the LangChain framework for building sophisticated LLM applications with agents, chains, memory, and tool integration.
@@ -38,9 +37,11 @@ Master the LangChain framework for building sophisticated LLM applications with 
 ## Core Concepts
 
 ### 1. Agents
+
 Autonomous systems that use LLMs to decide which actions to take.
 
 **Agent Types:**
+
 - **ReAct**: Reasoning + Acting in interleaved manner
 - **OpenAI Functions**: Leverages function calling API
 - **Structured Chat**: Handles multi-input tools
@@ -48,9 +49,11 @@ Autonomous systems that use LLMs to decide which actions to take.
 - **Self-Ask with Search**: Decomposes complex queries
 
 ### 2. Chains
+
 Sequences of calls to LLMs or other utilities.
 
 **Chain Types:**
+
 - **LLMChain**: Basic prompt + LLM combination
 - **SequentialChain**: Multiple chains in sequence
 - **RouterChain**: Routes inputs to specialized chains
@@ -58,9 +61,11 @@ Sequences of calls to LLMs or other utilities.
 - **MapReduceChain**: Parallel processing with aggregation
 
 ### 3. Memory
+
 Systems for maintaining context across interactions.
 
 **Memory Types:**
+
 - **ConversationBufferMemory**: Stores all messages
 - **ConversationSummaryMemory**: Summarizes older messages
 - **ConversationBufferWindowMemory**: Keeps last N messages
@@ -68,9 +73,11 @@ Systems for maintaining context across interactions.
 - **VectorStoreMemory**: Semantic similarity retrieval
 
 ### 4. Document Processing
+
 Loading, transforming, and storing documents for retrieval.
 
 **Components:**
+
 - **Document Loaders**: Load from various sources
 - **Text Splitters**: Chunk documents intelligently
 - **Vector Stores**: Store and retrieve embeddings
@@ -78,9 +85,11 @@ Loading, transforming, and storing documents for retrieval.
 - **Indexes**: Organize documents for efficient access
 
 ### 5. Callbacks
+
 Hooks for logging, monitoring, and debugging.
 
 **Use Cases:**
+
 - Request/response logging
 - Token usage tracking
 - Latency monitoring
@@ -95,15 +104,19 @@ from langchain.llms import OpenAI
 from langchain.memory import ConversationBufferMemory
 
 # Initialize LLM
+
 llm = OpenAI(temperature=0)
 
 # Load tools
+
 tools = load_tools(["serpapi", "llm-math"], llm=llm)
 
 # Add memory
+
 memory = ConversationBufferMemory(memory_key="chat_history")
 
 # Create agent
+
 agent = initialize_agent(
     tools,
     llm,
@@ -113,12 +126,14 @@ agent = initialize_agent(
 )
 
 # Run agent
+
 result = agent.run("What's the weather in SF? Then calculate 25 * 4")
 ```
 
 ## Architecture Patterns
 
 ### Pattern 1: RAG with LangChain
+
 ```python
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import TextLoader
@@ -127,6 +142,7 @@ from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 
 # Load and process documents
+
 loader = TextLoader('documents.txt')
 documents = loader.load()
 
@@ -134,10 +150,12 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 texts = text_splitter.split_documents(documents)
 
 # Create vector store
+
 embeddings = OpenAIEmbeddings()
 vectorstore = Chroma.from_documents(texts, embeddings)
 
 # Create retrieval chain
+
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     chain_type="stuff",
@@ -146,10 +164,12 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 
 # Query
+
 result = qa_chain({"query": "What is the main topic?"})
 ```
 
 ### Pattern 2: Custom Agent with Tools
+
 ```python
 from langchain.agents import Tool, AgentExecutor
 from langchain.agents.react.base import ReActDocstoreAgent
@@ -178,11 +198,13 @@ agent = initialize_agent(
 ```
 
 ### Pattern 3: Multi-Step Chain
+
 ```python
 from langchain.chains import LLMChain, SequentialChain
 from langchain.prompts import PromptTemplate
 
 # Step 1: Extract key information
+
 extract_prompt = PromptTemplate(
     input_variables=["text"],
     template="Extract key entities from: {text}\n\nEntities:"
@@ -190,6 +212,7 @@ extract_prompt = PromptTemplate(
 extract_chain = LLMChain(llm=llm, prompt=extract_prompt, output_key="entities")
 
 # Step 2: Analyze entities
+
 analyze_prompt = PromptTemplate(
     input_variables=["entities"],
     template="Analyze these entities: {entities}\n\nAnalysis:"
@@ -197,6 +220,7 @@ analyze_prompt = PromptTemplate(
 analyze_chain = LLMChain(llm=llm, prompt=analyze_prompt, output_key="analysis")
 
 # Step 3: Generate summary
+
 summary_prompt = PromptTemplate(
     input_variables=["entities", "analysis"],
     template="Summarize:\nEntities: {entities}\nAnalysis: {analysis}\n\nSummary:"
@@ -204,6 +228,7 @@ summary_prompt = PromptTemplate(
 summary_chain = LLMChain(llm=llm, prompt=summary_prompt, output_key="summary")
 
 # Combine into sequential chain
+
 overall_chain = SequentialChain(
     chains=[extract_chain, analyze_chain, summary_chain],
     input_variables=["text"],
@@ -215,24 +240,31 @@ overall_chain = SequentialChain(
 ## Memory Management Best Practices
 
 ### Choosing the Right Memory Type
+
 ```python
+
 # For short conversations (< 10 messages)
+
 from langchain.memory import ConversationBufferMemory
 memory = ConversationBufferMemory()
 
 # For long conversations (summarize old messages)
+
 from langchain.memory import ConversationSummaryMemory
 memory = ConversationSummaryMemory(llm=llm)
 
 # For sliding window (last N messages)
+
 from langchain.memory import ConversationBufferWindowMemory
 memory = ConversationBufferWindowMemory(k=5)
 
 # For entity tracking
+
 from langchain.memory import ConversationEntityMemory
 memory = ConversationEntityMemory(llm=llm)
 
 # For semantic retrieval of relevant history
+
 from langchain.memory import VectorStoreRetrieverMemory
 memory = VectorStoreRetrieverMemory(retriever=retriever)
 ```
@@ -240,6 +272,7 @@ memory = VectorStoreRetrieverMemory(retriever=retriever)
 ## Callback System
 
 ### Custom Callback Handler
+
 ```python
 from langchain.callbacks.base import BaseCallbackHandler
 
@@ -260,6 +293,7 @@ class CustomCallbackHandler(BaseCallbackHandler):
         print(f"Agent taking action: {action}")
 
 # Use callback
+
 agent.run("query", callbacks=[CustomCallbackHandler()])
 ```
 
@@ -293,6 +327,7 @@ def test_memory_persistence():
 ## Performance Optimization
 
 ### 1. Caching
+
 ```python
 from langchain.cache import InMemoryCache
 import langchain
@@ -301,8 +336,11 @@ langchain.llm_cache = InMemoryCache()
 ```
 
 ### 2. Batch Processing
+
 ```python
+
 # Process multiple documents in parallel
+
 from langchain.document_loaders import DirectoryLoader
 from concurrent.futures import ThreadPoolExecutor
 
@@ -317,6 +355,7 @@ with ThreadPoolExecutor(max_workers=4) as executor:
 ```
 
 ### 3. Streaming Responses
+
 ```python
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
@@ -356,11 +395,13 @@ llm = OpenAI(streaming=True, callbacks=[StreamingStdOutCallbackHandler()])
 - [ ] Version control prompts and configurations
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

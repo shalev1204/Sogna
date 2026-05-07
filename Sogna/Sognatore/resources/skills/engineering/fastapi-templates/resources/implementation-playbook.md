@@ -79,7 +79,9 @@ Proper async/await usage:
 ### Pattern 1: Complete FastAPI Application
 
 ```python
+
 # main.py
+
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -100,6 +102,7 @@ app = FastAPI(
 )
 
 # CORS middleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -109,10 +112,12 @@ app.add_middleware(
 )
 
 # Include routers
+
 from app.api.v1.router import api_router
 app.include_router(api_router, prefix="/api/v1")
 
 # core/config.py
+
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 
@@ -131,6 +136,7 @@ def get_settings() -> Settings:
     return Settings()
 
 # core/database.py
+
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -168,7 +174,9 @@ async def get_db() -> AsyncSession:
 ### Pattern 2: CRUD Repository Pattern
 
 ```python
+
 # repositories/base_repository.py
+
 from typing import Generic, TypeVar, Type, Optional, List
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
@@ -238,6 +246,7 @@ class BaseRepository(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return False
 
 # repositories/user_repository.py
+
 from app.repositories.base_repository import BaseRepository
 from app.models.user import User
 from app.schemas.user import UserCreate, UserUpdate
@@ -263,7 +272,9 @@ user_repository = UserRepository(User)
 ### Pattern 3: Service Layer
 
 ```python
+
 # services/user_service.py
+
 from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.user_repository import user_repository
@@ -335,7 +346,9 @@ user_service = UserService()
 ### Pattern 4: API Endpoints with Dependencies
 
 ```python
+
 # api/v1/endpoints/users.py
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
@@ -412,7 +425,9 @@ async def delete_user(
 ### Pattern 5: Authentication & Authorization
 
 ```python
+
 # core/security.py
+
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
@@ -444,6 +459,7 @@ def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
 # api/dependencies.py
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
@@ -485,7 +501,9 @@ async def get_current_user(
 ## Testing
 
 ```python
+
 # tests/conftest.py
+
 import pytest
 import asyncio
 from httpx import AsyncClient
@@ -527,6 +545,7 @@ async def client(db_session):
         yield client
 
 # tests/test_users.py
+
 import pytest
 
 @pytest.mark.asyncio
@@ -573,6 +592,7 @@ async def test_create_user(client):
 - **Tight Coupling**: Direct database access in routes
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -12,7 +12,6 @@ id: skill-architecture
 owner: [[system-architect]]
 ---
 
-
 # Architecture Decision Framework
 
 > "Requirements drive architecture. Trade-offs inform decisions. ADRs capture rationale."

@@ -8,7 +8,6 @@ id: skill-azure-ai-contentsafety-ts
 owner: [[orchestrator]]
 ---
 
-
 # Azure AI Content Safety REST SDK for TypeScript
 
 Analyze text and images for harmful content with customizable blocklists.
@@ -217,6 +216,7 @@ await client.path("/text/blocklists/{blocklistName}", "my-blocklist").delete();
 | 6 | High | Block immediately |
 
 **Output Types**:
+
 - `FourSeverityLevels` (default): Returns 0, 2, 4, 6
 - `EightSeverityLevels`: Returns 0-7
 
@@ -305,14 +305,17 @@ import ContentSafetyClient, {
 5. **Handle edge cases** - Empty text, very long text, unsupported image formats
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

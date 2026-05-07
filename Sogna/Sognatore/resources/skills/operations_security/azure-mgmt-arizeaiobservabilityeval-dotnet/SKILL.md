@@ -8,7 +8,6 @@ id: skill-azure-mgmt-arizeaiobservabilityeval-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.ResourceManager.ArizeAIObservabilityEval
 
 .NET SDK for managing Arize AI Observability and Evaluation resources on Azure.
@@ -232,14 +231,17 @@ var data = await org.GetAsync();
 - [Arize AI](https://arize.com/)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

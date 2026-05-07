@@ -8,7 +8,6 @@ id: skill-azure-ai-openai-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.AI.OpenAI (.NET)
 
 Client library for Azure OpenAI Service providing access to OpenAI models including GPT-4, GPT-4o, embeddings, DALL-E, and Whisper.
@@ -19,6 +18,7 @@ Client library for Azure OpenAI Service providing access to OpenAI models includ
 dotnet add package Azure.AI.OpenAI
 
 # For OpenAI (non-Azure) compatibility
+
 dotnet add package OpenAI
 ```
 
@@ -459,14 +459,17 @@ catch (RequestFailedException ex)
 | GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/openai/Azure.AI.OpenAI |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

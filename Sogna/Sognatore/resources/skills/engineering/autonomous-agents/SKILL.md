@@ -11,7 +11,6 @@ id: skill-autonomous-agents
 owner: [[orchestrator]]
 ---
 
-
 # Autonomous Agents
 
 Autonomous agents are AI systems that can independently decompose goals,
@@ -84,6 +83,7 @@ Alternating reasoning and action steps
 
 """
 The ReAct loop:
+
 1. Thought: Reason about what to do next
 2. Action: Choose and execute a tool
 3. Observation: Receive result
@@ -93,11 +93,13 @@ Key: Explicit reasoning traces make debugging possible
 """
 
 ## Basic ReAct Implementation
+
 """
 from langchain.agents import create_react_agent
 from langchain_openai import ChatOpenAI
 
 # Define the ReAct prompt template
+
 react_prompt = '''
 Answer the question using the following format:
 
@@ -112,6 +114,7 @@ Final Answer: the answer
 '''
 
 # Create the agent
+
 agent = create_react_agent(
     llm=ChatOpenAI(model="gpt-4o"),
     tools=tools,
@@ -119,6 +122,7 @@ agent = create_react_agent(
 )
 
 # Execute with step limit
+
 result = agent.invoke(
     {"input": query},
     config={"max_iterations": 10}  # Prevent runaway loops
@@ -126,11 +130,13 @@ result = agent.invoke(
 """
 
 ## LangGraph ReAct (Production)
+
 """
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.postgres import PostgresSaver
 
 # Production checkpointer
+
 checkpointer = PostgresSaver.from_conn_string(
     os.environ["POSTGRES_URL"]
 )
@@ -142,6 +148,7 @@ agent = create_react_agent(
 )
 
 # Invoke with thread for state persistence
+
 config = {"configurable": {"thread_id": "user-123"}}
 result = agent.invoke({"messages": [query]}, config)
 """
@@ -156,24 +163,30 @@ Separate planning phase from execution
 
 """
 Two-phase approach:
+
 1. Planning: Decompose goal into subtasks
 2. Execution: Execute subtasks, potentially re-plan
 
 Advantages:
+
 - Full visibility into plan before execution
 - Can validate/modify plan with human
 - Cleaner separation of concerns
 
 Disadvantages:
+
 - Less adaptive to mid-task discoveries
 - Plan may become stale
+
 """
 
 ## LangGraph Plan-Execute
+
 """
 from langgraph.prebuilt import create_plan_and_execute_agent
 
 # Planner creates the task list
+
 planner_prompt = '''
 For the given objective, create a step-by-step plan.
 Each step should be atomic and actionable.
@@ -181,6 +194,7 @@ Format: numbered list of steps.
 '''
 
 # Executor handles individual steps
+
 executor_prompt = '''
 You are executing step {step_number} of the plan.
 Previous results: {previous_results}
@@ -196,6 +210,7 @@ agent = create_plan_and_execute_agent(
 )
 
 # Human approval of plan
+
 config = {
     "configurable": {
         "thread_id": "task-456",
@@ -204,19 +219,25 @@ config = {
 }
 
 # First call creates plan
+
 plan = agent.invoke({"objective": goal}, config)
 
 # Review plan, then continue
+
 if human_approves(plan):
     result = agent.invoke(None, config)  # Continue from checkpoint
 """
 
 ## Decomposition Strategies
+
 """
+
 # Decomposition-First: Plan everything, then execute
+
 # Best for: Stable tasks, need full plan approval
 
 # Interleaved: Plan one step, execute, repeat
+
 # Best for: Dynamic tasks, learning as you go
 
 def interleaved_execute(goal, max_steps=10):
@@ -249,6 +270,7 @@ Self-evaluation and iterative improvement
 
 """
 Self-correction loop:
+
 1. Generate initial output
 2. Evaluate against criteria
 3. Critique and identify issues
@@ -259,6 +281,7 @@ Also called: Evaluator-Optimizer, Self-Critique
 """
 
 ## Basic Reflection
+
 """
 def reflect_and_improve(task, max_iterations=3):
     # Initial generation
@@ -290,6 +313,7 @@ def reflect_and_improve(task, max_iterations=3):
 """
 
 ## LangGraph Reflection
+
 """
 from langgraph.graph import StateGraph
 
@@ -323,12 +347,16 @@ def should_continue(state):
 """
 
 ## Separate Evaluator (More Robust)
+
 """
+
 # Use different model for evaluation to avoid self-bias
+
 generator = ChatOpenAI(model="gpt-4o")
 evaluator = ChatOpenAI(model="gpt-4o-mini")  # Different perspective
 
 # Or use specialized evaluators
+
 from langchain.evaluation import load_evaluator
 evaluator = load_evaluator("criteria", criteria="correctness")
 """
@@ -343,15 +371,18 @@ Constrained agents with safety boundaries
 
 """
 Production agents need multiple safety layers:
+
 1. Input validation
 2. Action constraints
 3. Output validation
 4. Cost limits
 5. Human escalation
 6. Rollback capability
+
 """
 
 ## Multi-Layer Guardrails
+
 """
 class GuardedAgent:
     def __init__(self, agent, config):
@@ -401,8 +432,11 @@ class GuardedAgent:
 """
 
 ## Least Privilege Principle
+
 """
+
 # Define minimal permissions per task type
+
 TASK_PERMISSIONS = {
     "research": ["web_search", "read_file"],
     "coding": ["read_file", "write_file", "run_tests"],
@@ -416,8 +450,11 @@ def create_scoped_agent(task_type):
 """
 
 ## Cost Control
+
 """
+
 # Context length grows quadratically in cost
+
 # Double context = 4x cost
 
 def trim_context(messages, max_tokens=4000):
@@ -444,6 +481,7 @@ Agents that survive failures and resume
 
 """
 Production agents must:
+
 - Survive server restarts
 - Resume from exact point of failure
 - Handle hours/days of runtime
@@ -453,36 +491,46 @@ LangGraph 1.0 provides this natively.
 """
 
 ## LangGraph Checkpointing
+
 """
 from langgraph.checkpoint.postgres import PostgresSaver
 from langgraph.graph import StateGraph
 
 # Production checkpointer (not MemorySaver!)
+
 checkpointer = PostgresSaver.from_conn_string(
     os.environ["POSTGRES_URL"]
 )
 
 # Build graph with checkpointing
+
 graph = StateGraph(AgentState)
+
 # ... add nodes and edges ...
 
 agent = graph.compile(checkpointer=checkpointer)
 
 # Each invocation saves state
+
 config = {"configurable": {"thread_id": "long-task-789"}}
 
 # Start task
+
 agent.invoke({"goal": complex_goal}, config)
 
 # If server dies, resume later:
+
 state = agent.get_state(config)
 if not state.is_complete:
     agent.invoke(None, config)  # Continues from checkpoint
 """
 
 ## Human-in-the-Loop Interrupts
+
 """
+
 # Pause at specific nodes
+
 agent = graph.compile(
     checkpointer=checkpointer,
     interrupt_before=["critical_action"],  # Pause before
@@ -490,9 +538,11 @@ agent = graph.compile(
 )
 
 # First invocation pauses at interrupt
+
 result = agent.invoke({"goal": goal}, config)
 
 # Human reviews state
+
 state = agent.get_state(config)
 if human_approves(state):
     # Continue from pause point
@@ -504,15 +554,20 @@ else:
 """
 
 ## Time-Travel Debugging
+
 """
+
 # LangGraph stores full history
+
 history = list(agent.get_state_history(config))
 
 # Go back to any previous state
+
 past_state = history[5]
 agent.update_state(config, past_state.values)
 
 # Replay from that point with modifications
+
 agent.invoke(None, config)
 """
 
@@ -532,6 +587,7 @@ as task complexity increases. Users lose trust.
 Why this breaks:
 Each step has independent failure probability. A 95% success rate
 per step sounds great until you realize:
+
 - 5 steps: 77% success (0.95^5)
 - 10 steps: 60% success (0.95^10)
 - 20 steps: 36% success (0.95^20)
@@ -542,15 +598,21 @@ step multiplies failure probability.
 Recommended fix:
 
 ## Reduce step count
+
 # Combine steps where possible
+
 # Prefer fewer, more capable steps over many small ones
 
 ## Increase per-step reliability
+
 # Use structured outputs (JSON schemas)
+
 # Add validation at each step
+
 # Use better models for critical steps
 
 ## Design for failure
+
 class RobustAgent:
     def execute_with_retry(self, step, max_retries=3):
         for attempt in range(max_retries):
@@ -564,7 +626,9 @@ class RobustAgent:
                 self.log_retry(step, attempt, e)
 
 ## Break into checkpointed segments
+
 # Human review at each segment
+
 # Resume from last good checkpoint
 
 ### API Costs Explode with Context Growth
@@ -584,6 +648,7 @@ the context, quadruple the compute. A long-running agent that
 re-sends its full conversation each turn can burn money exponentially.
 
 Most agents append to context without trimming. Context grows:
+
 - Turn 1: 500 tokens → $0.01
 - Turn 10: 5000 tokens → $0.10
 - Turn 50: 25000 tokens → $0.50
@@ -592,6 +657,7 @@ Most agents append to context without trimming. Context grows:
 Recommended fix:
 
 ## Set hard cost limits
+
 class CostLimitedAgent:
     MAX_COST_PER_TASK = 1.00  # USD
 
@@ -609,6 +675,7 @@ class CostLimitedAgent:
         self.total_cost += self.calculate_actual_cost(response)
 
 ## Trim context aggressively
+
 def trim_context(messages, max_tokens=4000):
     # Keep: system prompt + last N messages
     # Summarize: everything in between
@@ -626,6 +693,7 @@ def trim_context(messages, max_tokens=4000):
     return [system] + recent
 
 ## Use streaming to track costs in real-time
+
 ## Alert at 50% of budget, halt at 90%
 
 ### Demo Works But Production Fails
@@ -641,6 +709,7 @@ overwhelm the system.
 
 Why this breaks:
 Demos show the happy path with curated inputs. Production means:
+
 - Unexpected inputs (typos, ambiguity, adversarial)
 - Scale (1000 users, not 3)
 - Reliability (99.9% uptime, not "usually works")
@@ -653,11 +722,15 @@ is where projects die.
 Recommended fix:
 
 ## Test at scale before production
+
 # Run 1000+ test cases, not 10
+
 # Measure P95/P99 success rate, not average
+
 # Include adversarial inputs
 
 ## Build observability first
+
 import structlog
 logger = structlog.get_logger()
 
@@ -674,12 +747,17 @@ class ObservableAgent:
                 raise
 
 ## Have escape hatches
+
 # Human takeover when confidence < threshold
+
 # Graceful degradation to simpler behavior
+
 # "I don't know" is a valid response
 
 ## Deploy incrementally
+
 # 1% of traffic, then 10%, then 50%
+
 # Monitor error rates at each stage
 
 ### Agent Fabricates Data When Stuck
@@ -704,6 +782,7 @@ The agent that fabricated expense entries was trying to meet its goal
 Recommended fix:
 
 ## Validate against ground truth
+
 def validate_expense(expense):
     # Cross-check with external sources
     if expense.restaurant:
@@ -715,6 +794,7 @@ def validate_expense(expense):
         flag_for_review("Suspiciously round amount")
 
 ## Require evidence
+
 system_prompt = '''
 For every factual claim, cite the specific tool output that
 supports it. If you cannot find supporting evidence, say
@@ -722,6 +802,7 @@ supports it. If you cannot find supporting evidence, say
 '''
 
 ## Use structured outputs
+
 from pydantic import BaseModel
 
 class VerifiedClaim(BaseModel):
@@ -730,8 +811,11 @@ class VerifiedClaim(BaseModel):
     confidence: float
 
 ## Detect uncertainty
+
 # Train to output confidence scores
+
 # Flag low-confidence outputs for human review
+
 # Never auto-execute on uncertain data
 
 ### Integration Is Where Agents Die
@@ -749,6 +833,7 @@ Why this breaks:
 The companies promising "autonomous agents that integrate with your
 entire tech stack" haven't built production systems at scale.
 Real integrations have:
+
 - Rate limits (429 errors mid-task)
 - Auth complexity (OAuth refresh, token expiry)
 - Data format variations (API v1 vs v2)
@@ -758,6 +843,7 @@ Real integrations have:
 Recommended fix:
 
 ## Build robust API clients
+
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 class RobustAPIClient:
@@ -774,6 +860,7 @@ class RobustAPIClient:
         return response
 
 ## Handle auth lifecycle
+
 class TokenManager:
     def __init__(self):
         self.token = None
@@ -789,12 +876,17 @@ class TokenManager:
         return datetime.now() > (self.expires_at - buffer)
 
 ## Use idempotency keys
+
 # Every external action should be idempotent
+
 # If agent retries, external system handles duplicate
 
 ## Design for partial failure
+
 # Each step is independently recoverable
+
 # Checkpoint before external calls
+
 # Rollback capability for each integration
 
 ### Agent Takes Dangerous Actions
@@ -818,6 +910,7 @@ Broad permissions + autonomy + goal optimization = danger.
 Recommended fix:
 
 ## Least privilege principle
+
 PERMISSIONS = {
     "research_agent": ["read_web", "read_docs"],
     "code_agent": ["read_file", "write_file", "run_tests"],
@@ -826,10 +919,13 @@ PERMISSIONS = {
 }
 
 ## Separate read/write permissions
+
 # Agent can read anything
+
 # Write requires explicit approval
 
 ## Dangerous actions require confirmation
+
 DANGEROUS_ACTIONS = [
     "delete_*",
     "send_email",
@@ -846,14 +942,21 @@ async def execute_action(action):
     return await actually_execute(action)
 
 ## Dry-run mode for testing
+
 # Agent describes what it would do
+
 # Human approves the plan
+
 # Then agent executes
 
 ## Audit logging for everything
+
 # Every action logged with context
+
 # Who authorized it
+
 # What changed
+
 # How to reverse it
 
 ### Agent Runs Out of Context Window
@@ -869,6 +972,7 @@ of the goal. Starts repeating itself. Model errors about token limits.
 Why this breaks:
 Every message, observation, and thought consumes context. Long tasks
 exhaust the window. When context is truncated:
+
 - System prompt gets dropped
 - Early important context lost
 - Agent loses coherence
@@ -876,6 +980,7 @@ exhaust the window. When context is truncated:
 Recommended fix:
 
 ## Track context usage
+
 class ContextManager:
     def __init__(self, max_tokens=100000):
         self.max_tokens = max_tokens
@@ -903,13 +1008,19 @@ class ContextManager:
             self.messages = [system, summary] + recent
 
 ## Use external memory
+
 # Don't keep everything in context
+
 # Store in vector DB, retrieve when needed
+
 # See agent-memory-systems skill
 
 ## Hierarchical summarization
+
 # Recent: full detail
+
 # Medium: key points
+
 # Old: compressed summary
 
 ### Can't Debug What You Can't See
@@ -931,6 +1042,7 @@ without traces is impossible.
 Recommended fix:
 
 ## Structured logging
+
 import structlog
 
 logger = structlog.get_logger()
@@ -957,6 +1069,7 @@ class TracedAgent:
                 raise
 
 ## Use LangSmith or similar
+
 from langsmith import trace
 
 @trace
@@ -965,9 +1078,13 @@ def agent_step(state):
     return next_state
 
 ## Save full traces
+
 # Every step, every decision
+
 # Inputs and outputs
+
 # Latency at each step
+
 # Token usage
 
 ## Validation Checks
@@ -1068,6 +1185,7 @@ Message: Destructive action without rollback capability. Save state before modif
 Works well with: `agent-tool-builder`, `agent-memory-systems`, `multi-agent-orchestration`, `agent-evaluation`
 
 ## When to Use
+
 - User mentions or implies: autonomous agent
 - User mentions or implies: autogpt
 - User mentions or implies: babyagi
@@ -1082,11 +1200,13 @@ Works well with: `agent-tool-builder`, `agent-memory-systems`, `multi-agent-orch
 - User mentions or implies: agent planning
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

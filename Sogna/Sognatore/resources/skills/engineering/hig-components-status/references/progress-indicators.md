@@ -18,7 +18,7 @@ Because the duration of an operation is either known or unknown, there are two t
 
   * _Determinate_ , for a task with a well-defined duration, such as a file conversion
 
-  *  _Indeterminate_ , for unquantifiable tasks, such as loading or synchronizing complex data
+  * _Indeterminate_ , for unquantifiable tasks, such as loading or synchronizing complex data
 
 Both determinate and indeterminate progress indicators can have different appearances depending on the platform. A determinate progress indicator shows the progress of a task by filling a linear or circular track as the task completes. _Progress bars_ include a track that fills from the leading side to the trailing side. _Circular progress indicators_ have a track that fills in a clockwise direction.
 
@@ -117,6 +117,7 @@ September 12, 2023| Combined guidance common to all platforms.
 June 5, 2023| Updated guidance to reflect changes in watchOS 10.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

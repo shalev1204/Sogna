@@ -1,11 +1,11 @@
-import { GroupAnimation } from "../animation/groupanimation.js";
-import { Frame as frame } from "../frameloop";
+import { GroupAnimation } from "../animation/GroupAnimation.js";
+import { Frame } from "../frameloop";
 import { copyBoxInto } from "../projection/geometry/copy.js";
 import { createBox } from "../projection/geometry/models.js";
-import { HTMLProjectionNode } from "../projection/node/htmlprojectionnode.js";
-import { HTMLVisualElement } from "../render/html/htmlvisualelement.js";
+import { HTMLProjectionNode } from "../projection/node/HTMLProjectionNode.js";
+import { HTMLVisualElement } from "../render/html/HTMLVisualElement.js";
 import { visualElementStore } from "../render/store.js";
-import { ResolveElements as resolveElements } from "../utils/resolve-elements.js";
+import { ResolveElements } from "../utils/resolve-elements.js";
 const layoutSelector = "[data-layout], [data-layout-id]";
 const noop = () => { };
 function snapshotFromTarget(projection) {
@@ -36,7 +36,7 @@ export class LayoutAnimationBuilder {
             this.notifyReady = resolve;
             this.rejectReady = reject;
         });
-        frame.postRender(() => {
+        Frame.postRender(() => {
             this.start().then(this.notifyReady).catch(this.rejectReady);
         });
     }
@@ -96,7 +96,7 @@ export class LayoutAnimationBuilder {
         const root = getProjectionRoot(afterRecords, beforeRecords);
         root?.didUpdate();
         await new Promise((resolve) => {
-            frame.postRender(() => resolve());
+            Frame.postRender(() => resolve());
         });
         const animations = collectAnimations(afterRecords);
         const animation = new GroupAnimation(animations);
@@ -163,7 +163,7 @@ export function parseAnimateLayoutArgs(scopeOrUpdateDom, updateDomOrOptions, opt
         };
     }
     // animateLayout(scope, updateDom, options?)
-    const elements = resolveElements(scopeOrUpdateDom);
+    const elements = ResolveElements(scopeOrUpdateDom);
     const scope = elements[0] || document;
     return {
         scope,

@@ -7,12 +7,12 @@ id: skill-apify-ecommerce
 owner: [[eng-api]]
 ---
 
-
 # E-commerce Data Extraction
 
 Extract product data, prices, reviews, and seller information from any e-commerce platform using Apify's E-commerce Scraping Tool.
 
 ## When to Use
+
 - You need product, pricing, review, stock, or seller data from e-commerce sites.
 - The task involves price monitoring, competitor product comparison, MAP enforcement, or review analysis.
 - You need a guided workflow for extracting marketplace data and summarizing findings.
@@ -34,11 +34,13 @@ Extract product data, prices, reviews, and seller information from any e-commerc
 
 ```
 Task Progress:
+
 - [ ] Step 1: Select workflow and determine data source
 - [ ] Step 2: Configure Actor input
 - [ ] Step 3: Ask user preferences (format, filename)
 - [ ] Step 4: Run the extraction script
 - [ ] Step 5: Summarize results
+
 ```
 
 ---
@@ -58,6 +60,7 @@ Task Progress:
 | Keyword Search | `keyword` + `marketplaces` | Search term across selected marketplaces |
 
 ### Example - Product URLs
+
 ```json
 {
   "detailsUrls": [
@@ -69,6 +72,7 @@ Task Progress:
 ```
 
 ### Example - Keyword Search
+
 ```json
 {
   "keyword": "Samsung Galaxy S24",
@@ -100,6 +104,7 @@ Add these fields to get AI-generated insights:
 ```
 
 ### Output Fields
+
 - `name` - Product name
 - `url` - Product URL
 - `offers.price` - Current price
@@ -126,6 +131,7 @@ Add these fields to get AI-generated insights:
 | Keyword Search | `keywordReviews` + `marketplacesReviews` | Search for product reviews by keyword |
 
 ### Example - Extract Reviews from Product
+
 ```json
 {
   "reviewListingUrls": [
@@ -138,6 +144,7 @@ Add these fields to get AI-generated insights:
 ```
 
 ### Example - Keyword Search
+
 ```json
 {
   "keywordReviews": "wireless earbuds",
@@ -149,6 +156,7 @@ Add these fields to get AI-generated insights:
 ```
 
 ### Sort Options
+
 - `Most recent` - Latest reviews first (recommended)
 - `Most relevant` - Platform default relevance
 - `Most helpful` - Highest voted reviews
@@ -158,6 +166,7 @@ Add these fields to get AI-generated insights:
 > **Note:** The `sortReview: "Lowest rated"` option may not work consistently across all marketplaces. For quality analysis, collect a large sample and filter by rating in post-processing.
 
 ### Quality Analysis Tips
+
 - Set high `maxReviewResults` for statistical significance
 - Look for recurring keywords: "broke", "defect", "quality", "returned"
 - Filter results by rating if sorting doesn't work as expected
@@ -174,6 +183,7 @@ Add these fields to get AI-generated insights:
 > **Note:** This workflow uses Google Shopping to find sellers across stores. Direct seller profile URLs are not reliably supported.
 
 ### Input Configuration
+
 ```json
 {
   "googleShoppingSearchKeyword": "Nike Air Max 90",
@@ -185,6 +195,7 @@ Add these fields to get AI-generated insights:
 ```
 
 ### Options
+
 | Field | Description |
 |-------|-------------|
 | `googleShoppingSearchKeyword` | Product name to search |
@@ -199,18 +210,23 @@ Add these fields to get AI-generated insights:
 ## Supported Marketplaces
 
 ### Amazon (20+ regions)
+
 `www.amazon.com`, `www.amazon.co.uk`, `www.amazon.de`, `www.amazon.fr`, `www.amazon.it`, `www.amazon.es`, `www.amazon.ca`, `www.amazon.com.au`, `www.amazon.co.jp`, `www.amazon.in`, `www.amazon.com.br`, `www.amazon.com.mx`, `www.amazon.nl`, `www.amazon.pl`, `www.amazon.se`, `www.amazon.ae`, `www.amazon.sa`, `www.amazon.sg`, `www.amazon.com.tr`, `www.amazon.eg`
 
 ### Major US Retailers
+
 `www.walmart.com`, `www.costco.com`, `www.costco.ca`, `www.homedepot.com`
 
 ### European Retailers
+
 `allegro.pl`, `allegro.cz`, `allegro.sk`, `www.alza.cz`, `www.alza.sk`, `www.alza.de`, `www.alza.at`, `www.alza.hu`, `www.kaufland.de`, `www.kaufland.pl`, `www.kaufland.cz`, `www.kaufland.sk`, `www.kaufland.at`, `www.kaufland.fr`, `www.kaufland.it`, `www.cdiscount.com`
 
 ### IKEA (40+ country/language combinations)
+
 Supports all major IKEA regional sites with multiple language options.
 
 ### Google Shopping
+
 Use for seller discovery across multiple stores.
 
 ---
@@ -218,6 +234,7 @@ Use for seller discovery across multiple stores.
 ## Running the Extraction
 
 ### Step 1: Set Skill Path
+
 ```bash
 SKILL_PATH=~/.claude/skills/apify-ecommerce
 ```
@@ -252,6 +269,7 @@ node --env-file=~/.claude/.env $SKILL_PATH/reference/scripts/run_actor.js \
 ### Step 3: Summarize Results
 
 Report:
+
 - Number of items extracted
 - File location (if exported)
 - Key insights based on workflow:
@@ -273,11 +291,13 @@ Report:
 | `Invalid marketplace` | Check marketplace value matches supported list exactly |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

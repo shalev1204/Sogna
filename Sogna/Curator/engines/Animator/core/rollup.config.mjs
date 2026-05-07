@@ -1,4 +1,5 @@
-import alias from "@rollup/plugin-alias"
+// import alias from "@rollup/plugin-alias"
+import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
 import replace from "@rollup/plugin-replace"
 import sourcemaps from "rollup-plugin-sourcemaps"
@@ -43,11 +44,7 @@ const pureClass = {
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const shimReactJSXRuntimePlugin = alias({
-    entries: [
-        { find: 'react/jsx-runtime', replacement: path.resolve(__dirname, '../../dev/inc/jsxRuntimeShim.js') }
-    ]
-});
+const shimReactJSXRuntimePlugin = { name: "no-op" };
 
 const umd = Object.assign({}, config, {
     output: {
@@ -58,7 +55,7 @@ const umd = Object.assign({}, config, {
         globals: { react: "React", "react/jsx-runtime": "jsxRuntime" },
     },
     external: ["react", "react-dom"],
-    plugins: [resolve(), replaceSettings("development"), shimReactJSXRuntimePlugin],
+    plugins: [resolve(), commonjs(), replaceSettings("development"), shimReactJSXRuntimePlugin],
     onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
             return
@@ -75,6 +72,7 @@ function createUmd(input, file) {
         }),
         plugins: [
             resolve(),
+            commonjs(),
             replaceSettings("production"),
             pureClass,
             shimReactJSXRuntimePlugin,
@@ -95,6 +93,7 @@ const umdProd = Object.assign({}, umd, {
     }),
     plugins: [
         resolve(),
+        commonjs(),
         replaceSettings("production"),
         pureClass,
         shimReactJSXRuntimePlugin,
@@ -122,7 +121,7 @@ const cjs = Object.assign({}, config, {
         esModule: true,
         sourcemap: true,
     },
-    plugins: [resolve(), replaceSettings(), sourcemaps()],
+    plugins: [resolve(), commonjs(), replaceSettings(), sourcemaps()],
     external,
     onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
@@ -151,7 +150,7 @@ export const es = Object.assign({}, config, {
         dir: "dist/es",
         sourcemap: true,
     },
-    plugins: [resolve(), replaceSettings(), preserveDirectives(), sourcemaps()],
+    plugins: [resolve(), commonjs(), replaceSettings(), preserveDirectives(), sourcemaps()],
     external,
     onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {

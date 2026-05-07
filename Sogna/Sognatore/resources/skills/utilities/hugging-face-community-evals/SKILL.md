@@ -7,21 +7,23 @@ id: skill-hugging-face-community-evals
 owner: [[orchestrator]]
 ---
 
-
 # Overview
 
 ## When to Use
+
 Use this skill for local model evaluation, backend selection, and GPU smoke tests outside the Hugging Face Jobs workflow.
 
 This skill is for **running evaluations against models on the Hugging Face Hub on local hardware**.
 
 It covers:
+
 - `inspect-ai` with local inference
 - `lighteval` with local inference
 - choosing between `vllm`, Hugging Face Transformers, and `accelerate`
 - smoke tests, task selection, and backend fallback strategy
 
 It does **not** cover:
+
 - Hugging Face Jobs orchestration
 - model-card or `model-index` edits
 - README table extraction
@@ -57,6 +59,7 @@ nvidia-smi
 ```
 
 If `nvidia-smi` is unavailable, either:
+
 - use `scripts/inspect_eval_uv.py` for lighter provider-backed evaluation, or
 - hand off to the `hugging-face-jobs` skill if the user wants remote compute.
 
@@ -88,6 +91,7 @@ uv run scripts/inspect_eval_uv.py \
 ```
 
 Use this path when:
+
 - you want a quick local smoke test
 - you do not need direct GPU control
 - the task already exists in `inspect-evals`
@@ -146,6 +150,7 @@ uv run scripts/lighteval_vllm_uv.py \
 This skill intentionally stops at **local execution and backend selection**.
 
 If the user wants to:
+
 - run these scripts on Hugging Face Jobs
 - pick remote hardware
 - pass secrets to remote jobs
@@ -157,6 +162,7 @@ then switch to the **`hugging-face-jobs`** skill and pass it one of these script
 # Task Selection
 
 `inspect-ai` examples:
+
 - `mmlu`
 - `gsm8k`
 - `hellaswag`
@@ -166,6 +172,7 @@ then switch to the **`hugging-face-jobs`** skill and pass it one of these script
 - `humaneval`
 
 `lighteval` task strings use `suite|task|num_fewshot`:
+
 - `leaderboard|mmlu|5`
 - `leaderboard|gsm8k|5`
 - `leaderboard|arc_challenge|25`
@@ -209,17 +216,20 @@ For smoke tests, prefer cheaper local runs plus `--limit` or `--max-samples`.
 # Examples
 
 See:
+
 - `examples/USAGE_EXAMPLES.md` for local command patterns
 - `scripts/inspect_eval_uv.py`
 - `scripts/inspect_vllm_uv.py`
 - `scripts/lighteval_vllm_uv.py`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

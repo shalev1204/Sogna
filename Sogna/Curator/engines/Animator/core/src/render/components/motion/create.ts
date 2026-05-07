@@ -1,4 +1,4 @@
-import { createsognaflowComponent, sognaflowComponentOptions } from "../../../sognaflow"
+import { createsognaflowComponent, sognaflowComponentOptions } from "../../../motion"
 import { createDomVisualElement } from "../../dom/create-visual-element.js"
 import { DOMsognaflowComponents } from "../../dom/types.js"
 import { CreateVisualElement } from "../../types.js"

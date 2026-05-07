@@ -1,4 +1,4 @@
 import type { SognaflowNodeOptions } from "../../node/types.js";
-import { ScaleCorrectors, AddScaleCorrector } from "../../projection/styles/scale-correction.js";
-export { ScaleCorrectors, AddScaleCorrector };
+import { scaleCorrectors, addScaleCorrector } from "../../projection/styles/scale-correction.js";
+export { scaleCorrectors, addScaleCorrector };
 export declare function IsForcedSognaflowValue(key: string, { layout, layoutId }: SognaflowNodeOptions): boolean;

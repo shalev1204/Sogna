@@ -8,7 +8,6 @@ id: skill-render-automation
 owner: [[orchestrator]]
 ---
 
-
 # Render Automation via Rube MCP
 
 Automate Render cloud platform operations through Composio's Render toolkit via Rube MCP.
@@ -23,7 +22,6 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `render`
 3. If connection is not ACTIVE, follow the returned auth link to complete Render authentication
@@ -36,15 +34,18 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 **When to use**: User wants to find or inspect Render services (web services, static sites, workers, cron jobs)
 
 **Tool sequence**:
+
 1. `RENDER_LIST_SERVICES` - List all services with optional filters [Required]
 
 **Key parameters**:
+
 - `name`: Filter services by name substring
 - `type`: Filter by service type ('web_service', 'static_site', 'private_service', 'background_worker', 'cron_job')
 - `limit`: Maximum results per page (default 20, max 100)
 - `cursor`: Pagination cursor from previous response
 
 **Pitfalls**:
+
 - Service types must match exact enum values: 'web_service', 'static_site', 'private_service', 'background_worker', 'cron_job'
 - Pagination uses cursor-based approach; follow `cursor` until absent
 - Name filter is substring-based, not exact match
@@ -56,11 +57,13 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 **When to use**: User wants to manually deploy or redeploy a service
 
 **Tool sequence**:
+
 1. `RENDER_LIST_SERVICES` - Find the service to deploy [Prerequisite]
 2. `RENDER_TRIGGER_DEPLOY` - Trigger a new deployment [Required]
 3. `RENDER_RETRIEVE_DEPLOY` - Monitor deployment progress [Optional]
 
 **Key parameters**:
+
 - For TRIGGER_DEPLOY:
   - `serviceId`: Service ID to deploy (required, format: 'srv-xxxxxxxxxxxx')
   - `clearCache`: Set `true` to clear build cache before deploying
@@ -69,6 +72,7 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
   - `deployId`: Deploy ID from trigger response (format: 'dep-xxxxxxxxxxxx')
 
 **Pitfalls**:
+
 - `serviceId` is required; resolve via LIST_SERVICES first
 - Service IDs start with 'srv-' prefix
 - Deploy IDs start with 'dep-' prefix
@@ -81,14 +85,17 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 **When to use**: User wants to check the progress or result of a deployment
 
 **Tool sequence**:
+
 1. `RENDER_RETRIEVE_DEPLOY` - Get deployment details and status [Required]
 
 **Key parameters**:
+
 - `serviceId`: Service ID (required)
 - `deployId`: Deployment ID (required)
 - Response includes `status`, `createdAt`, `updatedAt`, `finishedAt`, `commit`
 
 **Pitfalls**:
+
 - Both `serviceId` and `deployId` are required
 - Deploy statuses include: 'created', 'build_in_progress', 'update_in_progress', 'live', 'deactivated', 'build_failed', 'update_failed', 'canceled'
 - 'live' indicates successful deployment
@@ -100,13 +107,16 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 **When to use**: User wants to list and organize Render projects
 
 **Tool sequence**:
+
 1. `RENDER_LIST_PROJECTS` - List all projects [Required]
 
 **Key parameters**:
+
 - `limit`: Maximum results per page (max 100)
 - `cursor`: Pagination cursor from previous response
 
 **Pitfalls**:
+
 - Projects group related services together
 - Pagination uses cursor-based approach
 - Project IDs are used for organizational purposes
@@ -118,26 +128,32 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 
 **Service name -> Service ID**:
 ```
+
 1. Call RENDER_LIST_SERVICES with name=service_name
 2. Find service by name in results
 3. Extract id (format: 'srv-xxxxxxxxxxxx')
+
 ```
 
 **Deployment lookup**:
 ```
+
 1. Store deployId from RENDER_TRIGGER_DEPLOY response
 2. Call RENDER_RETRIEVE_DEPLOY with serviceId and deployId
 3. Check status for completion
+
 ```
 
 ### Deploy and Monitor Pattern
 
 ```
+
 1. RENDER_LIST_SERVICES -> find service by name -> get serviceId
 2. RENDER_TRIGGER_DEPLOY with serviceId -> get deployId
 3. Loop: RENDER_RETRIEVE_DEPLOY with serviceId + deployId
 4. Check status: 'live' = success, 'build_failed'/'update_failed' = error
 5. Continue polling until terminal state reached
+
 ```
 
 ### Pagination
@@ -150,27 +166,32 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 ## Known Pitfalls
 
 **Service IDs**:
+
 - Always prefixed with 'srv-' (e.g., 'srv-abcd1234efgh')
 - Deploy IDs prefixed with 'dep-' (e.g., 'dep-d2mqkf9r0fns73bham1g')
 - Always resolve service names to IDs via LIST_SERVICES
 
 **Service Types**:
+
 - Must use exact enum values when filtering
 - Available types: web_service, static_site, private_service, background_worker, cron_job
 - Different service types have different deployment behaviors
 
 **Deployment Behavior**:
+
 - Deployments are asynchronous; always poll for completion
 - Clear cache deploys take longer but resolve stale cache issues
 - Failed deploys do not roll back automatically; the previous version stays live
 - Concurrent deploy triggers may be queued
 
 **Rate Limits**:
+
 - Render API has rate limits
 - Avoid rapid polling; use 10-30 second intervals
 - Bulk operations should be throttled
 
 **Response Parsing**:
+
 - Response data may be nested under `data` key
 - Timestamps use ISO 8601 format
 - Parse defensively with fallbacks for optional fields
@@ -185,14 +206,17 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 | List projects | RENDER_LIST_PROJECTS | limit, cursor |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

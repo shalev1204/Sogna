@@ -8,12 +8,12 @@ id: skill-git-pushing
 owner: [[orchestrator]]
 ---
 
-
 # Git Push Workflow
 
 Stage all changes, create a conventional commit, and push to the remote branch.
 
 ## When to Use
+
 Automatically activate when the user:
 
 - Explicitly asks to push changes ("push this", "commit and push")
@@ -38,11 +38,13 @@ bash skills/git-pushing/scripts/smart_commit.sh "feat: add feature"
 Script handles: staging, conventional commit message, Claude footer, push with -u flag.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

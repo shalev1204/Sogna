@@ -7,13 +7,13 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@temporalio/activity": "^1.16.0",
-    "@temporalio/client": "^1.16.0",
-    "@temporalio/worker": "^1.16.0",
-    "@temporalio/workflow": "^1.16.0",
-    "axios": "^1.15.0",
+    "@temporalio/activity": "^1.17.0",
+    "@temporalio/client": "^1.17.0",
+    "@temporalio/worker": "^1.17.0",
+    "@temporalio/workflow": "^1.17.0",
+    "axios": "catalog:",
     "chalk": "catalog:",
-    "zod": "^4.3.6"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",

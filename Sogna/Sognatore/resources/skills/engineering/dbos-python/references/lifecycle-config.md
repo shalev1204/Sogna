@@ -20,6 +20,7 @@ Every DBOS application must configure and launch DBOS inside the main function.
 from dbos import DBOS, DBOSConfig
 
 # Don't configure at module level!
+
 config: DBOSConfig = {
     "name": "my-app",
 }
@@ -79,6 +80,7 @@ if __name__ == "__main__":
 Reference: [DBOS Configuration](https://docs.dbos.dev/python/reference/configuration)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-web-performance-optimization
 owner: [[eng-perf]]
 ---
 
-
 # Web Performance Optimization
 
 ## Overview
@@ -31,6 +30,7 @@ Help developers optimize website and web application performance to improve user
 ### Step 1: Measure Current Performance
 
 I'll help you establish baseline metrics:
+
 - Run Lighthouse audits
 - Measure Core Web Vitals (LCP, FID, CLS)
 - Check bundle sizes
@@ -40,6 +40,7 @@ I'll help you establish baseline metrics:
 ### Step 2: Identify Issues
 
 Analyze performance problems:
+
 - Large JavaScript bundles
 - Unoptimized images
 - Render-blocking resources
@@ -51,6 +52,7 @@ Analyze performance problems:
 ### Step 3: Prioritize Optimizations
 
 Focus on high-impact improvements:
+
 - Critical rendering path optimization
 - Code splitting and lazy loading
 - Image optimization
@@ -60,6 +62,7 @@ Focus on high-impact improvements:
 ### Step 4: Implement Optimizations
 
 Apply performance improvements:
+
 - Optimize assets (images, fonts, CSS, JS)
 - Implement code splitting
 - Add caching headers
@@ -69,6 +72,7 @@ Apply performance improvements:
 ### Step 5: Verify Improvements
 
 Measure impact of changes:
+
 - Re-run Lighthouse audits
 - Compare before/after metrics
 - Monitor real user metrics (RUM)
@@ -79,9 +83,11 @@ Measure impact of changes:
 ### Example 1: Optimizing Core Web Vitals
 
 ```markdown
+
 ## Performance Audit Results
 
 ### Current Metrics (Before Optimization)
+
 - **LCP (Largest Contentful Paint):** 4.2s ❌ (should be < 2.5s)
 - **FID (First Input Delay):** 180ms ❌ (should be < 100ms)
 - **CLS (Cumulative Layout Shift):** 0.25 ❌ (should be < 0.1)
@@ -121,6 +127,7 @@ Measure impact of changes:
 \`\`\`
 
 **Additional optimizations:**
+
 - Compress image to < 200KB
 - Use CDN for faster delivery
 - Preload hero image: `<link rel="preload" as="image" href="/hero.avif">`
@@ -132,6 +139,7 @@ Measure impact of changes:
 **Solutions:**
 
 1. **Code Splitting:**
+
 \`\`\`javascript
 // Before: Everything in one bundle
 import { HeavyComponent } from './HeavyComponent';
@@ -153,16 +161,21 @@ if (typeof window !== 'undefined') {
 \`\`\`
 
 2. **Remove Unused Dependencies:**
+
 \`\`\`bash
+
 # Analyze bundle
+
 npx webpack-bundle-analyzer
 
 # Remove unused packages
+
 npm uninstall moment  # Use date-fns instead (smaller)
 npm install date-fns
 \`\`\`
 
 3. **Defer Non-Critical Scripts:**
+
 \`\`\`html
 <!-- Before: Blocks rendering -->
 <script src="/analytics.js"></script>
@@ -212,14 +225,17 @@ npm install date-fns
 - **FID:** 45ms ✅ (improved by 75%)
 - **CLS:** 0.05 ✅ (improved by 80%)
 - **Lighthouse Score:** 94/100 ✅
+
 ```
 
 ### Example 2: Reducing JavaScript Bundle Size
 
 ```markdown
+
 ## Bundle Size Optimization
 
 ### Current State
+
 - **Total Bundle:** 850KB (gzipped: 280KB)
 - **Main Bundle:** 650KB
 - **Vendor Bundle:** 200KB
@@ -228,11 +244,14 @@ npm install date-fns
 ### Analysis
 
 \`\`\`bash
+
 # Analyze bundle composition
+
 npx webpack-bundle-analyzer dist/stats.json
 \`\`\`
 
 **Findings:**
+
 1. Moment.js: 67KB (can replace with date-fns: 12KB)
 2. Lodash: 72KB (using entire library, only need 5 functions)
 3. Unused code: ~150KB of dead code
@@ -243,15 +262,19 @@ npx webpack-bundle-analyzer dist/stats.json
 #### 1. Replace Heavy Dependencies
 
 \`\`\`bash
+
 # Remove moment.js (67KB) → Use date-fns (12KB)
+
 npm uninstall moment
 npm install date-fns
 
 # Before
+
 import moment from 'moment';
 const formatted = moment(date).format('YYYY-MM-DD');
 
 # After
+
 import { format } from 'date-fns';
 const formatted = format(date, 'yyyy-MM-dd');
 \`\`\`
@@ -337,14 +360,17 @@ module.exports = {
 - **Main Bundle:** 180KB ✅
 - **Vendor Bundle:** 80KB ✅
 - **Load Time (3G):** 3.1s ✅ (improved by 62%)
+
 ```
 
 ### Example 3: Image Optimization Strategy
 
 ```markdown
+
 ## Image Optimization
 
 ### Current Issues
+
 - 15 images totaling 12MB
 - No modern formats (WebP, AVIF)
 - No responsive images
@@ -355,10 +381,13 @@ module.exports = {
 #### 1. Convert to Modern Formats
 
 \`\`\`bash
+
 # Install image optimization tools
+
 npm install sharp
 
 # Conversion script (optimize-images.js)
+
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
@@ -518,35 +547,48 @@ import Image from 'next/image';
 ## Common Pitfalls
 
 ### Problem: Optimized for Desktop but Slow on Mobile
+
 **Symptoms:** Good Lighthouse score on desktop, poor on mobile
 **Solution:**
+
 - Test on real mobile devices
 - Use Chrome DevTools mobile throttling
 - Optimize for 3G/4G networks
 - Reduce JavaScript execution time
+
 ```bash
+
 # Test with throttling
+
 lighthouse https://yoursite.com --throttling.cpuSlowdownMultiplier=4
 ```
 
 ### Problem: Large JavaScript Bundle
+
 **Symptoms:** Long Time to Interactive (TTI), high FID
 **Solution:**
+
 - Analyze bundle with webpack-bundle-analyzer
 - Remove unused dependencies
 - Implement code splitting
 - Lazy load non-critical code
+
 ```bash
+
 # Analyze bundle
+
 npx webpack-bundle-analyzer dist/stats.json
 ```
 
 ### Problem: Images Causing Layout Shifts
+
 **Symptoms:** High CLS score, content jumping
 **Solution:**
+
 - Always specify width and height
 - Use aspect-ratio CSS property
 - Reserve space with skeleton loaders
+
 ```css
 img {
   aspect-ratio: 16 / 9;
@@ -556,12 +598,15 @@ img {
 ```
 
 ### Problem: Slow Server Response Time
+
 **Symptoms:** High TTFB (Time to First Byte)
 **Solution:**
+
 - Implement server-side caching
 - Use CDN for static assets
 - Optimize database queries
 - Consider static site generation (SSG)
+
 ```javascript
 // Next.js: Static generation
 export async function getStaticProps() {
@@ -577,6 +622,7 @@ export async function getStaticProps() {
 ## Performance Checklist
 
 ### Images
+
 - [ ] Convert to modern formats (WebP, AVIF)
 - [ ] Implement responsive images
 - [ ] Add lazy loading
@@ -585,6 +631,7 @@ export async function getStaticProps() {
 - [ ] Use CDN for delivery
 
 ### JavaScript
+
 - [ ] Bundle size < 200KB (gzipped)
 - [ ] Implement code splitting
 - [ ] Lazy load non-critical code
@@ -593,6 +640,7 @@ export async function getStaticProps() {
 - [ ] Use async/defer for scripts
 
 ### CSS
+
 - [ ] Inline critical CSS
 - [ ] Defer non-critical CSS
 - [ ] Remove unused CSS
@@ -600,6 +648,7 @@ export async function getStaticProps() {
 - [ ] Use CSS containment
 
 ### Caching
+
 - [ ] Set cache headers for static assets
 - [ ] Implement service worker
 - [ ] Use CDN caching
@@ -607,6 +656,7 @@ export async function getStaticProps() {
 - [ ] Version static assets
 
 ### Core Web Vitals
+
 - [ ] LCP < 2.5s
 - [ ] FID < 100ms
 - [ ] CLS < 0.1
@@ -616,6 +666,7 @@ export async function getStaticProps() {
 ## Performance Tools
 
 ### Measurement Tools
+
 - **Lighthouse** - Comprehensive performance audit
 - **WebPageTest** - Detailed waterfall analysis
 - **Chrome DevTools** - Performance profiling
@@ -623,12 +674,14 @@ export async function getStaticProps() {
 - **Web Vitals Extension** - Monitor Core Web Vitals
 
 ### Analysis Tools
+
 - **webpack-bundle-analyzer** - Visualize bundle composition
 - **source-map-explorer** - Analyze bundle size
 - **Bundlephobia** - Check package sizes before installing
 - **ImageOptim** - Image compression tool
 
 ### Monitoring Tools
+
 - **Google Analytics** - Track Core Web Vitals
 - **Sentry** - Performance monitoring
 - **New Relic** - Application performance monitoring
@@ -655,11 +708,13 @@ export async function getStaticProps() {
 **Pro Tip:** Focus on Core Web Vitals (LCP, FID, CLS) first - they have the biggest impact on user experience and SEO rankings!
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

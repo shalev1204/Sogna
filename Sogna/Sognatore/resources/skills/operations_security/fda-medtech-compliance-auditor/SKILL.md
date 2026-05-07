@@ -7,7 +7,6 @@ id: skill-fda-medtech-compliance-auditor
 owner: [[ops-security]]
 ---
 
-
 # FDA MedTech Compliance Auditor
 
 ## Overview
@@ -48,13 +47,21 @@ The true root cause lies in the software requirements engineering
 process itself — not an individual.
 
 Required Actions:
+
 1. Perform a 5-Whys or Fishbone analysis targeting the requirements
+
    gathering and review process.
+
 2. Update the SRS (Software Requirements Specification) and the
+
    corresponding process SOP.
+
 3. Document an effectiveness check with a measurable criterion
+
    (e.g., zero requirements-related defects in next 3 releases).
+
 4. Do not close the CAPA on retraining alone.
+
 ```
 
 ## Best Practices
@@ -65,11 +72,13 @@ Required Actions:
 - ❌ **Don't:** Assume "we tested it and it works" satisfies IEC 62304 software verification requirements.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

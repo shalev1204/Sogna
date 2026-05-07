@@ -10,20 +10,22 @@ date_added: "2026-03-21"
 user-invokable: true
 argument-hint: "[url]"
 allowed-tools:
+
   - Read
   - Grep
   - Glob
   - Bash
   - WebFetch
+
 version: 1.0.0
 id: skill-seo-hreflang
 owner: [[prod-pm]], [[biz-marketing]], [[biz-hr]]
 ---
 
-
 # Hreflang & International SEO
 
 ## When to Use
+
 - Use when validating or generating hreflang for multilingual or multiregional sites.
 - Use when the user mentions international SEO, language tags, x-default, or hreflang issues.
 - Use when auditing locale alternates across HTML, headers, or sitemap implementations.
@@ -35,23 +37,27 @@ XML sitemap implementations.
 ## Validation Checks
 
 ### 1. Self-Referencing Tags
+
 - Every page must include an hreflang tag pointing to itself
 - The self-referencing URL must exactly match the page's canonical URL
 - Missing self-referencing tags cause Google to ignore the entire hreflang set
 
 ### 2. Return Tags
+
 - If page A links to page B with hreflang, page B must link back to page A
 - Every hreflang relationship must be bidirectional (A→B and B→A)
 - Missing return tags invalidate the hreflang signal for both pages
 - Check all language versions reference each other (full mesh)
 
 ### 3. x-default Tag
+
 - Required: designates the fallback page for unmatched languages/regions
 - Typically points to the language selector page or English version
 - Only one x-default per set of alternates
 - Must also have return tags from all other language versions
 
 ### 4. Language Code Validation
+
 - Must use ISO 639-1 two-letter codes (e.g., `en`, `fr`, `de`, `ja`)
 - Common errors:
   - `eng` instead of `en` (ISO 639-2, not valid for hreflang)
@@ -59,6 +65,7 @@ XML sitemap implementations.
   - `zh` without region qualifier (ambiguous; use `zh-Hans` or `zh-Hant`)
 
 ### 5. Region Code Validation
+
 - Optional region qualifier uses ISO 3166-1 Alpha-2 (e.g., `en-US`, `en-GB`, `pt-BR`)
 - Format: `language-REGION` (lowercase language, uppercase region)
 - Common errors:
@@ -67,17 +74,20 @@ XML sitemap implementations.
   - Region without language prefix
 
 ### 6. Canonical URL Alignment
+
 - Hreflang tags must only appear on canonical URLs
 - If a page has `rel=canonical` pointing elsewhere, hreflang on that page is ignored
 - The canonical URL and hreflang URL must match exactly (including trailing slashes)
 - Non-canonical pages should not be in any hreflang set
 
 ### 7. Protocol Consistency
+
 - All URLs in an hreflang set must use the same protocol (HTTPS or HTTP)
 - Mixed HTTP/HTTPS in hreflang sets causes validation failures
 - After HTTPS migration, update all hreflang tags to HTTPS
 
 ### 8. Cross-Domain Support
+
 - Hreflang works across different domains (e.g., example.com and example.de)
 - Cross-domain hreflang requires return tags on both domains
 - Verify both domains are verified in Google Search Console
@@ -101,6 +111,7 @@ XML sitemap implementations.
 ## Implementation Methods
 
 ### Method 1: HTML Link Tags
+
 Best for: Sites with <50 language/region variants per page.
 
 ```html
@@ -113,6 +124,7 @@ Best for: Sites with <50 language/region variants per page.
 Place in `<head>` section. Every page must include all alternates including itself.
 
 ### Method 2: HTTP Headers
+
 Best for: Non-HTML files (PDFs, documents).
 
 ```
@@ -124,11 +136,13 @@ Link: <https://example.com/page>; rel="alternate"; hreflang="en-US",
 Set via server configuration or CDN rules.
 
 ### Method 3: XML Sitemap (Recommended for large sites)
+
 Best for: Sites with many language variants, cross-domain setups, or 50+ pages.
 
 See Hreflang Sitemap Generation section below.
 
 ### Method Comparison
+
 | Method | Best For | Pros | Cons |
 |--------|----------|------|------|
 | HTML link tags | Small sites (<50 variants) | Easy to implement, visible in source | Bloats `<head>`, hard to maintain at scale |
@@ -138,6 +152,7 @@ See Hreflang Sitemap Generation section below.
 ## Hreflang Generation
 
 ### Process
+
 1. **Detect languages**: Scan site for language indicators (URL path, subdomain, TLD, HTML lang attribute)
 2. **Map page equivalents**: Match corresponding pages across languages/regions
 3. **Validate language codes**: Verify all codes against ISO 639-1 and ISO 3166-1
@@ -149,6 +164,7 @@ See Hreflang Sitemap Generation section below.
 ## Hreflang Sitemap Generation
 
 ### Sitemap with Hreflang
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -171,6 +187,7 @@ See Hreflang Sitemap Generation section below.
 ```
 
 Key rules:
+
 - Include the `xmlns:xhtml` namespace declaration
 - Every `<url>` entry must include ALL language alternates (including itself)
 - Each alternate must appear as a separate `<url>` entry with its own full set
@@ -181,11 +198,13 @@ Key rules:
 ### Hreflang Validation Report
 
 #### Summary
+
 - Total pages scanned: XX
 - Language variants detected: XX
 - Issues found: XX (Critical: X, High: X, Medium: X, Low: X)
 
 #### Validation Results
+
 | Language | URL | Self-Ref | Return Tags | x-default | Status |
 |----------|-----|----------|-------------|-----------|--------|
 | en-US | https://... | ✅ | ✅ | ✅ | ✅ |
@@ -193,11 +212,13 @@ Key rules:
 | de | https://... | ✅ | ❌ | ✅ | ❌ |
 
 ### Generated Hreflang Tags
+
 - HTML `<link>` tags (if HTML method chosen)
 - HTTP header values (if header method chosen)
 - `hreflang-sitemap.xml` (if sitemap method chosen)
 
 ### Recommendations
+
 - Missing implementations to add
 - Incorrect codes to fix
 - Method migration suggestions (e.g., HTML to sitemap for scale)
@@ -211,11 +232,13 @@ Key rules:
 | Invalid language/region codes detected | List each invalid code with the correct replacement. Provide a corrected hreflang tag set ready to implement. |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -49,6 +49,7 @@ def example_workflow():
 ```
 
 Non-deterministic operations that must be in steps:
+
 - Random number generation
 - Getting current time
 - Accessing external APIs
@@ -58,6 +59,7 @@ Non-deterministic operations that must be in steps:
 Reference: [Workflow Determinism](https://docs.dbos.dev/python/tutorials/workflow-tutorial#determinism)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -48,6 +48,7 @@ If you design your own interface icon, use the Quick Action Icon Template thatâ€
 [Add Home Screen quick actions](https://developer.apple.com/documentation/UIKit/add-home-screen-quick-actions) â€” UIKit
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

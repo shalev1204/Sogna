@@ -42,6 +42,7 @@ const queue = new WorkflowQueue("api_tasks", {
 ```
 
 Common use cases:
+
 - LLM API rate limiting (OpenAI, Anthropic, etc.)
 - Third-party API throttling
 - Preventing database overload
@@ -49,6 +50,7 @@ Common use cases:
 Reference: [Rate Limiting](https://docs.dbos.dev/typescript/tutorials/queue-tutorial#rate-limiting)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

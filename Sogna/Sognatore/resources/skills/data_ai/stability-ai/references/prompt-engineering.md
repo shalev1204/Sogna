@@ -46,6 +46,7 @@ princess
 Adicione ao final do prompt para melhorar a qualidade geral:
 
 ### Alta Qualidade
+
 - `masterpiece, best quality`
 - `highly detailed, ultra detailed`
 - `8k uhd, high resolution`
@@ -53,12 +54,14 @@ Adicione ao final do prompt para melhorar a qualidade geral:
 - `professional, award-winning`
 
 ### Renderizacao
+
 - `ray tracing, global illumination`
 - `physically based rendering`
 - `subsurface scattering`
 - `volumetric lighting`
 
 ### Fotografia
+
 - `shot on Canon EOS R5`
 - `85mm f/1.4 lens`
 - `DSLR quality`
@@ -102,6 +105,7 @@ Controle o enquadramento e perspectiva:
 ## Estilos Artisticos
 
 ### Por Movimento
+
 - `art nouveau` — Curvas organicas, decorativo
 - `art deco` — Geometrico, luxuoso
 - `impressionism` — Pinceladas visiveis
@@ -110,6 +114,7 @@ Controle o enquadramento e perspectiva:
 - `romanticism` — Emocional, natureza
 
 ### Por Midia
+
 - `oil painting` — Classico, textural
 - `watercolor` — Suave, fluido
 - `pencil sketch` — Monocromatico, linhas
@@ -119,6 +124,7 @@ Controle o enquadramento e perspectiva:
 - `3d render` — Volumetrico, realista
 
 ### Por Referencia
+
 - `trending on artstation` — Alta qualidade digital
 - `unreal engine 5` — Fotorrealista 3D
 - `octane render` — Render premium
@@ -130,6 +136,7 @@ Negative prompts removem elementos indesejados. A skill aplica automaticamente
 por estilo, mas voce pode adicionar com `--negative-prompt`.
 
 ### Universais (bons para quase tudo)
+
 ```
 low quality, blurry, distorted, deformed, ugly,
 bad anatomy, bad proportions, extra limbs,
@@ -137,18 +144,21 @@ watermark, text, signature, logo
 ```
 
 ### Para Fotorrealismo
+
 ```
 cartoon, anime, painting, illustration,
 drawing, cgi, render, sketch, comic
 ```
 
 ### Para Arte
+
 ```
 photo, photograph, realistic, 3d render,
 low quality, amateur
 ```
 
 ### Para Rostos
+
 ```
 deformed face, ugly face, bad eyes,
 cross-eyed, asymmetric face, extra fingers
@@ -157,6 +167,7 @@ cross-eyed, asymmetric face, extra fingers
 ## Tecnicas Avancadas
 
 ### Peso de Palavras
+
 Alguns modelos suportam peso entre parenteses:
 ```
 (masterpiece:1.4), (beautiful:1.2), landscape
@@ -164,6 +175,7 @@ Alguns modelos suportam peso entre parenteses:
 Maior peso = mais enfase nesse elemento.
 
 ### Prompt Mixing
+
 Combine estilos para resultados unicos:
 ```
 cyberpunk city, art nouveau architecture, neon lights,
@@ -171,6 +183,7 @@ watercolor style with digital art details
 ```
 
 ### Descricao Progressiva
+
 Comece amplo, va afunilando:
 ```
 epic landscape, mountain range at sunset,
@@ -180,7 +193,9 @@ fantasy art, dramatic clouds, volumetric lighting
 ```
 
 ### Mood Words
+
 Palavras que definem o tom emocional:
+
 - `serene, peaceful, calm` — Tranquilo
 - `epic, grand, majestic` — Epico
 - `dark, moody, ominous` — Sombrio
@@ -191,6 +206,7 @@ Palavras que definem o tom emocional:
 ## Exemplos por Categoria
 
 ### Retrato Artistico
+
 ```
 a young woman with flowing red hair, wind-blown,
 freckles, green eyes, wearing a flower crown,
@@ -199,6 +215,7 @@ masterpiece, highly detailed, soft focus background
 ```
 
 ### Paisagem Fantasy
+
 ```
 floating islands above clouds, waterfalls cascading into void,
 ancient temple ruins with glowing runes, bioluminescent plants,
@@ -207,6 +224,7 @@ concept art, matte painting, 8k uhd
 ```
 
 ### Sci-Fi Ambiente
+
 ```
 neon-lit cyberpunk alley in rain, holographic advertisements,
 steam rising from grates, lone figure with umbrella,
@@ -215,6 +233,7 @@ cinematic composition, anamorphic lens flare
 ```
 
 ### Produto/Objeto
+
 ```
 luxury wristwatch on marble surface,
 crystal clear details, metal and glass textures,
@@ -223,6 +242,7 @@ shallow depth of field, 4k, commercial quality
 ```
 
 ### Game Asset
+
 ```
 crystal sword with ice enchantment,
 glowing blue runes along the blade, ornate silver handle,
@@ -231,6 +251,7 @@ multiple angle views, pixel-perfect details
 ```
 
 ### Poster/Cover
+
 ```
 epic dragon perched on mountain peak, wings spread wide,
 medieval castle in valley below, army approaching,
@@ -239,6 +260,7 @@ bold contrast, fantasy art, highly detailed illustration
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

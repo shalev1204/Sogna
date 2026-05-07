@@ -11,7 +11,6 @@ id: skill-astro
 owner: [[orchestrator]]
 ---
 
-
 # Astro Web Framework
 
 ## Overview
@@ -343,15 +342,19 @@ import SearchBox from '../components/SearchBox.tsx';
 ## Common Pitfalls
 
 - **Problem:** JavaScript from a React/Vue component doesn't run in the browser
+
   **Solution:** Add a `client:` directive (`client:load`, `client:visible`, etc.) — without it, components render as static HTML only.
 
 - **Problem:** `getStaticPaths` data is stale after content updates during dev
+
   **Solution:** Astro's dev server watches content files — restart if changes to `content/config.ts` are not reflected.
 
 - **Problem:** `Astro.props` type is `any` — no autocomplete
+
   **Solution:** Define a `Props` interface or type in the frontmatter and Astro will infer it automatically.
 
 - **Problem:** CSS from a `.astro` component bleeds into other components
+
   **Solution:** Styles in `.astro` `<style>` tags are automatically scoped. Use `:global()` only when intentionally targeting children.
 
 ## Related Skills
@@ -362,11 +365,13 @@ import SearchBox from '../components/SearchBox.tsx';
 - `@progressive-web-app` — Adding PWA capabilities to an Astro site
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

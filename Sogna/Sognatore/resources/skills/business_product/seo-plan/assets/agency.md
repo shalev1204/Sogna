@@ -6,6 +6,7 @@ version: 1.0.0
 ---
 
 <!-- Updated: 2026-02-07 -->
+
 # Agency/Consultancy SEO Strategy Template
 
 ## Industry Characteristics
@@ -62,6 +63,7 @@ version: 1.0.0
 | Blog | Article, BlogPosting |
 
 ### ProfessionalService Schema Example
+
 ```json
 {
   "@context": "https://schema.org",
@@ -98,6 +100,7 @@ version: 1.0.0
 ## E-E-A-T Requirements
 
 ### Team Pages Must Include
+
 - Professional headshots
 - Detailed bios with credentials
 - Industry experience
@@ -106,6 +109,7 @@ version: 1.0.0
 - Social profiles
 
 ### Case Studies Must Include
+
 - Client name (with permission) or industry
 - Challenge/problem statement
 - Approach/methodology
@@ -116,18 +120,21 @@ version: 1.0.0
 ## Content Priorities
 
 ### High Priority
+
 1. Service pages (detailed, specific)
 2. Industry pages (vertical expertise)
 3. 3-5 detailed case studies
 4. Team/leadership pages
 
 ### Medium Priority
+
 1. Methodology/process page
 2. Blog with thought leadership
 3. Comparison content (vs alternatives)
 4. FAQ page
 
 ### Thought Leadership Topics
+
 - Industry trend analysis
 - How-to guides (non-competitive)
 - Original research/surveys
@@ -138,6 +145,7 @@ version: 1.0.0
 ## Content Strategy
 
 ### Service Pages (min 800 words)
+
 - Clear value proposition
 - Methodology overview
 - Deliverables list
@@ -146,6 +154,7 @@ version: 1.0.0
 - CTA to schedule consultation
 
 ### Industry Pages (min 800 words)
+
 - Industry-specific challenges
 - How you solve them differently
 - Relevant case studies
@@ -153,6 +162,7 @@ version: 1.0.0
 - Client logos (with permission)
 
 ### Case Studies (min 1,000 words)
+
 - Executive summary
 - Client background
 - Challenge details
@@ -182,6 +192,7 @@ version: 1.0.0
 - [ ] Monitor AI citation in ChatGPT, Perplexity, and Google AI Overviews for brand and key service terms
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

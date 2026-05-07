@@ -8,7 +8,6 @@ id: skill-cc-skill-frontend-patterns
 owner: [[eng-frontend]]
 ---
 
-
 # Frontend Development Patterns
 
 Modern frontend patterns for React, Next.js, and performant user interfaces.
@@ -647,14 +646,17 @@ export function Modal({ isOpen, onClose, children }: ModalProps) {
 **Remember**: Modern frontend patterns enable maintainable, performant user interfaces. Choose patterns that fit your project complexity.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

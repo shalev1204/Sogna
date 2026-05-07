@@ -8,7 +8,6 @@ id: skill-azure-identity-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.Identity (.NET)
 
 Authentication library for Azure SDK clients using Microsoft Entra ID (formerly Azure AD).
@@ -19,9 +18,11 @@ Authentication library for Azure SDK clients using Microsoft Entra ID (formerly 
 dotnet add package Azure.Identity
 
 # For ASP.NET Core
+
 dotnet add package Microsoft.Extensions.Azure
 
 # For brokered authentication (Windows)
+
 dotnet add package Azure.Identity.Broker
 ```
 
@@ -30,6 +31,7 @@ dotnet add package Azure.Identity.Broker
 ## Environment Variables
 
 ### Service Principal with Secret
+
 ```bash
 AZURE_CLIENT_ID=<application-client-id>
 AZURE_TENANT_ID=<directory-tenant-id>
@@ -37,6 +39,7 @@ AZURE_CLIENT_SECRET=<client-secret-value>
 ```
 
 ### Service Principal with Certificate
+
 ```bash
 AZURE_CLIENT_ID=<application-client-id>
 AZURE_TENANT_ID=<directory-tenant-id>
@@ -45,6 +48,7 @@ AZURE_CLIENT_CERTIFICATE_PASSWORD=<certificate-password>  # Optional
 ```
 
 ### Managed Identity
+
 ```bash
 AZURE_CLIENT_ID=<user-assigned-managed-identity-client-id>  # Only for user-assigned
 ```
@@ -312,6 +316,7 @@ catch (CredentialUnavailableException e)
 ## Managed Identity Support
 
 Supported Azure services:
+
 - Azure App Service and Azure Functions
 - Azure Arc
 - Azure Cloud Shell
@@ -343,14 +348,17 @@ All credential implementations are thread-safe. A single credential instance can
 | GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

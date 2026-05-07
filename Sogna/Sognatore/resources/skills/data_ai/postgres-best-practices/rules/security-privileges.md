@@ -59,6 +59,7 @@ revoke all on all tables in schema public from public;
 Reference: [Roles and Privileges](https://supabase.com/blog/postgres-roles-and-privileges)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -22,6 +22,7 @@ Prefer `HeaderedContainer` over a `Border` or `Grid` when a section needs a titl
 ```
 
 ### Key Properties:
+
 - `Header`: The content or string for the header.
 - `HeaderBackground`: Brush for the header area.
 - `ContentPadding`: Padding for the content area.
@@ -37,6 +38,7 @@ Use `EdgePanel` to position elements at the edges of a container without complex
 ```
 
 ### Slots:
+
 - `StartContent`: Aligned to the left (or beginning).
 - `Content`: Fills the remaining space in the middle.
 - `EndContent`: Aligned to the right (or end).
@@ -57,6 +59,7 @@ A simple container for grouping related information, often used inside `Headered
 - Customize internal parts of the containers using templates in your styles when necessary, rather than nesting more controls.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

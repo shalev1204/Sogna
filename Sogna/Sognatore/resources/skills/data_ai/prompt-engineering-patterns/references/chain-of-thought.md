@@ -14,6 +14,7 @@ Chain-of-Thought (CoT) prompting elicits step-by-step reasoning from LLMs, drama
 ## Core Techniques
 
 ### Zero-Shot CoT
+
 Add a simple trigger phrase to elicit reasoning:
 
 ```python
@@ -23,36 +24,49 @@ def zero_shot_cot(query):
 Let's think step by step:"""
 
 # Example
+
 query = "If a train travels 60 mph for 2.5 hours, how far does it go?"
 prompt = zero_shot_cot(query)
 
 # Model output:
+
 # "Let's think step by step:
+
 # 1. Speed = 60 miles per hour
+
 # 2. Time = 2.5 hours
+
 # 3. Distance = Speed × Time
+
 # 4. Distance = 60 × 2.5 = 150 miles
+
 # Answer: 150 miles"
+
 ```
 
 ### Few-Shot CoT
+
 Provide examples with explicit reasoning chains:
 
 ```python
 few_shot_examples = """
 Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 balls. How many tennis balls does he have now?
 A: Let's think step by step:
+
 1. Roger starts with 5 balls
 2. He buys 2 cans, each with 3 balls
 3. Balls from cans: 2 × 3 = 6 balls
 4. Total: 5 + 6 = 11 balls
+
 Answer: 11
 
 Q: The cafeteria had 23 apples. If they used 20 to make lunch and bought 6 more, how many do they have?
 A: Let's think step by step:
+
 1. Started with 23 apples
 2. Used 20 for lunch: 23 - 20 = 3 apples left
 3. Bought 6 more: 3 + 6 = 9 apples
+
 Answer: 9
 
 Q: {user_query}
@@ -60,6 +74,7 @@ A: Let's think step by step:"""
 ```
 
 ### Self-Consistency
+
 Generate multiple reasoning paths and take the majority vote:
 
 ```python
@@ -92,6 +107,7 @@ def self_consistency_cot(query, n=5, temperature=0.7):
 ## Advanced Patterns
 
 ### Least-to-Most Prompting
+
 Break complex problems into simpler subproblems:
 
 ```python
@@ -132,6 +148,7 @@ Final Answer:"""
 ```
 
 ### Tree-of-Thought (ToT)
+
 Explore multiple reasoning branches:
 
 ```python
@@ -174,6 +191,7 @@ Reasoning path so far:
 {thought_path}
 
 Rate this reasoning path from 0-10 for:
+
 - Correctness
 - Likelihood of reaching solution
 - Logical coherence
@@ -183,6 +201,7 @@ Score:"""
 ```
 
 ### Verification Step
+
 Add explicit verification to catch errors:
 
 ```python
@@ -201,6 +220,7 @@ Proposed solution:
 {reasoning_response}
 
 Verify this solution by:
+
 1. Checking each step for logical errors
 2. Verifying arithmetic calculations
 3. Ensuring the final answer makes sense
@@ -227,27 +247,34 @@ Corrected solution:"""
 ## Domain-Specific CoT
 
 ### Math Problems
+
 ```python
 math_cot_template = """
 Problem: {problem}
 
 Solution:
 Step 1: Identify what we know
+
 - {list_known_values}
 
 Step 2: Identify what we need to find
+
 - {target_variable}
 
 Step 3: Choose relevant formulas
+
 - {formulas}
 
 Step 4: Substitute values
+
 - {substitution}
 
 Step 5: Calculate
+
 - {calculation}
 
 Step 6: Verify and state answer
+
 - {verification}
 
 Answer: {final_answer}
@@ -255,6 +282,7 @@ Answer: {final_answer}
 ```
 
 ### Code Debugging
+
 ```python
 debug_cot_template = """
 Code with error:
@@ -265,18 +293,23 @@ Error message:
 
 Debugging process:
 Step 1: Understand the error message
+
 - {interpret_error}
 
 Step 2: Locate the problematic line
+
 - {identify_line}
 
 Step 3: Analyze why this line fails
+
 - {root_cause}
 
 Step 4: Determine the fix
+
 - {proposed_fix}
 
 Step 5: Verify the fix addresses the error
+
 - {verification}
 
 Fixed code:
@@ -285,6 +318,7 @@ Fixed code:
 ```
 
 ### Logical Reasoning
+
 ```python
 logic_cot_template = """
 Premises:
@@ -312,6 +346,7 @@ Answer: {final_answer}
 ## Performance Optimization
 
 ### Caching Reasoning Patterns
+
 ```python
 class ReasoningCache:
     def __init__(self):
@@ -335,6 +370,7 @@ class ReasoningCache:
 ```
 
 ### Adaptive Reasoning Depth
+
 ```python
 def adaptive_cot(problem, initial_depth=3):
     depth = initial_depth
@@ -385,6 +421,7 @@ def evaluate_cot_quality(reasoning_chain):
 ## When to Use CoT
 
 **Use CoT for:**
+
 - Math and arithmetic problems
 - Logical reasoning tasks
 - Multi-step planning
@@ -392,6 +429,7 @@ def evaluate_cot_quality(reasoning_chain):
 - Complex decision making
 
 **Skip CoT for:**
+
 - Simple factual queries
 - Direct lookups
 - Creative writing
@@ -406,6 +444,7 @@ def evaluate_cot_quality(reasoning_chain):
 - Step extraction and parsing utilities
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

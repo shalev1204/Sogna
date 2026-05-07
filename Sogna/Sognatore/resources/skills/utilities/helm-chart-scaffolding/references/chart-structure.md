@@ -55,14 +55,20 @@ appVersion: "2.5.0"              # Application version
 description: A Helm chart for my application  # Required
 type: application                 # Chart type: application or library
 keywords:                         # Search keywords
+
   - web
   - api
   - backend
+
 home: https://example.com         # Project home page
 sources:                          # Source code URLs
+
   - https://github.com/example/my-app
+
 maintainers:                      # Maintainer list
+
   - name: John Doe
+
     email: john@example.com
     url: https://github.com/johndoe
 icon: https://example.com/icon.png  # Chart icon URL
@@ -71,14 +77,20 @@ deprecated: false                 # Mark chart as deprecated
 annotations:                      # Arbitrary annotations
   example.com/release-notes: https://example.com/releases/v1.2.3
 dependencies:                     # Chart dependencies
+
   - name: postgresql
+
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: postgresql.enabled
     tags:
+
       - database
+
     import-values:
+
       - child: database
+
         parent: database
     alias: db
 ```
@@ -86,17 +98,21 @@ dependencies:                     # Chart dependencies
 ## Chart Types
 
 ### Application Chart
+
 ```yaml
 type: application
 ```
+
 - Standard Kubernetes applications
 - Can be installed and managed
 - Contains templates for K8s resources
 
 ### Library Chart
+
 ```yaml
 type: library
 ```
+
 - Shared template helpers
 - Cannot be installed directly
 - Used as dependency by other charts
@@ -105,13 +121,17 @@ type: library
 ## Values Files Organization
 
 ### values.yaml (defaults)
+
 ```yaml
+
 # Global values (shared with subcharts)
+
 global:
   imageRegistry: docker.io
   imagePullSecrets: []
 
 # Image configuration
+
 image:
   registry: docker.io
   repository: myapp/web
@@ -119,10 +139,12 @@ image:
   pullPolicy: IfNotPresent
 
 # Deployment settings
+
 replicaCount: 1
 revisionHistoryLimit: 10
 
 # Pod configuration
+
 podAnnotations: {}
 podSecurityContext:
   runAsNonRoot: true
@@ -130,14 +152,17 @@ podSecurityContext:
   fsGroup: 1000
 
 # Container security
+
 securityContext:
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true
   capabilities:
     drop:
+
     - ALL
 
 # Service
+
 service:
   type: ClusterIP
   port: 80
@@ -145,6 +170,7 @@ service:
   annotations: {}
 
 # Resources
+
 resources:
   limits:
     cpu: 100m
@@ -154,6 +180,7 @@ resources:
     memory: 128Mi
 
 # Autoscaling
+
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -161,17 +188,20 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
 
 # Node selection
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
 
 # Monitoring
+
 serviceMonitor:
   enabled: false
   interval: 30s
 ```
 
 ### values.schema.json (validation)
+
 ```json
 {
   "$schema": "https://json-schema.org/draft-07/schema#",
@@ -214,6 +244,7 @@ serviceMonitor:
 ### Common Templates
 
 #### _helpers.tpl
+
 ```yaml
 {{/*
 Standard naming helpers
@@ -268,6 +299,7 @@ Image name helper
 ```
 
 #### NOTES.txt
+
 ```
 Thank you for installing {{ .Chart.Name }}.
 
@@ -298,16 +330,24 @@ Get the application URL by running:
 ### Declaring Dependencies
 
 ```yaml
+
 # Chart.yaml
+
 dependencies:
+
   - name: postgresql
+
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: postgresql.enabled  # Enable/disable via values
     tags:                          # Group dependencies
+
       - database
+
     import-values:                 # Import values from subchart
+
       - child: database
+
         parent: database
     alias: db                      # Reference as .Values.db
 ```
@@ -315,13 +355,17 @@ dependencies:
 ### Managing Dependencies
 
 ```bash
+
 # Update dependencies
+
 helm dependency update
 
 # List dependencies
+
 helm dependency list
 
 # Build dependencies
+
 helm dependency build
 ```
 
@@ -331,7 +375,9 @@ Generated automatically by `helm dependency update`:
 
 ```yaml
 dependencies:
+
 - name: postgresql
+
   repository: https://charts.bitnami.com/bitnami
   version: 12.0.0
 digest: sha256:abcd1234...
@@ -343,28 +389,34 @@ generated: "2024-01-01T00:00:00Z"
 Exclude files from chart package:
 
 ```
+
 # Development files
+
 .git/
 .gitignore
 *.md
 docs/
 
 # Build artifacts
+
 *.swp
 *.bak
 *.tmp
 *.orig
 
 # CI/CD
+
 .travis.yml
 .gitlab-ci.yml
 Jenkinsfile
 
 # Testing
+
 test/
 *.test
 
 # IDE
+
 .vscode/
 .idea/
 *.iml
@@ -381,6 +433,7 @@ crds/
 ```
 
 **Important CRD notes:**
+
 - CRDs are installed before any templates
 - CRDs are NOT templated (no `{{ }}` syntax)
 - CRDs are NOT upgraded or deleted with chart
@@ -409,7 +462,9 @@ appVersion: "1.5.0" # Application version
 ### Test Files
 
 ```yaml
+
 # templates/tests/test-connection.yaml
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -419,7 +474,9 @@ metadata:
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   containers:
+
   - name: wget
+
     image: busybox
     command: ['wget']
     args: ['{{ include "my-app.fullname" . }}:{{ .Values.service.port }}']
@@ -507,6 +564,7 @@ helm repo index . --url https://charts.example.com
 - [Best Practices](https://helm.sh/docs/chart_best_practices/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

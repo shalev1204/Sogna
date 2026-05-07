@@ -2,13 +2,13 @@
 
 import { cancelFrame, frame, FrameData } from "sognaflow-dom"
 import { useContext, useEffect, useRef } from "react"
-import { sognaflowConfigContext } from "../context/sognaflowconfigcontext"
+import { sognaflowConfigContext } from "../context/MotionConfigContext.js"
 
 export type FrameCallback = (timestamp: number, delta: number) => void
 
 export function useAnimationFrame(callback: FrameCallback) {
     const initialTimestamp = useRef(0)
-    const { isStatic } = useContext(sognaflowConfigContext)
+    const { isStatic } = useContext(sognaflowConfigContext) as any
 
     useEffect(() => {
         if (isStatic) return

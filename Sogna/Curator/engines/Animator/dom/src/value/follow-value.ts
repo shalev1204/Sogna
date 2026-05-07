@@ -167,3 +167,5 @@ function parseValue(v: AnyResolvedKeyframe, unit?: string) {
 function asNumber(v: AnyResolvedKeyframe) {
     return typeof v === "number" ? v : parseFloat(v)
 }
+
+export { FollowValue as followValue, AttachFollow as attachFollow }

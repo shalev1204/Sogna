@@ -70,6 +70,7 @@ Homepage (/)
 **Header (6 items + CTA)**: Features | Pricing | Customers | Resources | Integrations | Docs | [Get Started]
 
 **Footer columns**:
+
 - Product: Features, Pricing, Integrations, Changelog, Security
 - Resources: Blog, Templates, Guides, Case Studies
 - Company: About, Careers, Contact, Press
@@ -300,6 +301,7 @@ Homepage (/)
 Keep it simple. Small business sites should be flat (1-2 levels max). Every page should be reachable from the header.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

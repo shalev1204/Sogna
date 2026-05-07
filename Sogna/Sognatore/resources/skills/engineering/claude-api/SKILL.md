@@ -9,12 +9,12 @@ id: skill-claude-api
 owner: [[eng-api]]
 ---
 
-
 # Building LLM-Powered Applications with Claude
 
 This skill helps you build LLM-powered applications with Claude. Choose the right surface based on your needs, detect the project language, then read the relevant language-specific documentation.
 
 ## When to Use
+
 - Use when building with the Claude API, Anthropic SDKs, or the Agent SDK.
 - Use when code imports `anthropic`, `@anthropic-ai/sdk`, or related Claude SDK packages.
 - Do not use for general coding work unrelated to Claude integrations.
@@ -98,9 +98,11 @@ Before reading code examples, determine which language the user is working in:
 What does your application need?
 
 1. Single LLM call (classification, summarization, extraction, Q&A)
+
    └── Claude API — one request, one response
 
 2. Does Claude need to read/write files, browse the web, or run shell commands
+
    as part of its work? (Not: does your app read a file and hand it to Claude —
    does Claude itself need to discover and access files/web/shell?)
    └── Yes → Agent SDK — built-in tools, don't reimplement them
@@ -108,9 +110,11 @@ What does your application need?
                  "find bugs using subagents", "research a topic via web search"
 
 3. Workflow (multi-step, code-orchestrated, with your own tools)
+
    └── Claude API with tool use — you control the loop
 
 4. Open-ended agent (model decides its own trajectory, your own tools)
+
    └── Claude API agentic loop (maximum flexibility)
 ```
 
@@ -217,7 +221,9 @@ Read the **language-specific Claude API folder** (`{language}/claude-api/`):
 5. **`{language}/claude-api/batches.md`** — Read when processing many requests offline (not latency-sensitive). Runs asynchronously at 50% cost.
 6. **`{language}/claude-api/files-api.md`** — Read when sending the same file across multiple requests without re-uploading.
 7. **`shared/error-codes.md`** — Read when debugging HTTP errors or implementing error handling.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 8. **`shared/live-sources.md`** — WebFetch URLs for fetching the latest official documentation.
 
 > **Note:** For Java, Go, Ruby, C#, PHP, and cURL — these have a single file each covering all basics. Read that file plus `shared/tool-use-concepts.md` and `shared/error-codes.md` as needed.
@@ -255,11 +261,13 @@ Live documentation URLs are in `shared/live-sources.md`.
 - **Report and document output:** For tasks that produce reports, documents, or visualizations, the code execution sandbox has `python-docx`, `python-pptx`, `matplotlib`, `pillow`, and `pypdf` pre-installed. Claude can generate formatted files (DOCX, PDF, charts) and return them via the Files API — consider this for "report" or "document" type requests instead of plain stdout text.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

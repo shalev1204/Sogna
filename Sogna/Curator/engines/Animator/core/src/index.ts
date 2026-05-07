@@ -2,16 +2,16 @@
  * Components
  */
 export type * from "./animation/types.js"
-export { AnimatePresence } from "./components/animatepresence"
-export { PopChild } from "./components/AnimatePresence/PopChild.js"
-export { PresenceChild } from "./components/AnimatePresence/PresenceChild.js"
-export { LayoutGroup } from "./components/layoutgroup"
-export { Lazysognaflow } from "./components/lazysognaflow"
-export { sognaflowConfig } from "./components/sognaflowconfig"
-export { Reorder } from "./components/reorder"
+export { AnimatePresence } from "./components/animate-presence/index.js"
+export { PopChild } from "./components/animate-presence/PopChild.js"
+export { PresenceChild } from "./components/animate-presence/PresenceChild.js"
+export { LayoutGroup } from "./components/layout-group/index.js"
+export { Lazysognaflow } from "./components/lazy-motion/index.js"
+export { sognaflowConfig } from "./components/motion-config/index.js"
+export { Reorder } from "./components/reorder/index.js"
 export * from "./dom.js"
 export { m } from "./render/components/m/proxy.js"
-export { sognaflow } from "./render/components/sognaflow/proxy"
+export { sognaflow } from "./render/components/motion/proxy.js"
 export type {
     ResolvedValues,
     ScrapesognaflowValuesFromProps,
@@ -19,11 +19,11 @@ export type {
 
 export { addPointerEvent } from "./events/add-pointer-event.js"
 export { addPointerInfo } from "./events/event-info.js"
-export { animations } from "./sognaflow/features/animations"
+export { animations } from "./motion/features/animations.js"
 export {
     makeUseVisualState,
     VisualState,
-} from "./sognaflow/utils/use-visual-state"
+} from "./motion/utils/use-visual-state.js"
 export { calcLength, createBox } from "sognaflow-dom"
 export { filterProps } from "./render/dom/utils/filter-props.js"
 export { AnimationType } from "./render/utils/types.js"
@@ -43,11 +43,14 @@ export { domMin } from "./render/dom/features-min.js"
 /**
  * sognaflow values
  */
-export { usesognaflowValueEvent } from "./utils/use-sognaflow-value-event"
+export { usesognaflowValueEvent } from "./utils/use-sognaflow-value-event.js"
 export { useElementScroll } from "./value/scroll/use-element-scroll.js"
 export { useViewportScroll } from "./value/scroll/use-viewport-scroll.js"
-export { usesognaflowTemplate } from "./value/use-sognaflow-template"
-export { usesognaflowValue } from "./value/use-sognaflow-value"
+export { usesognaflowTemplate } from "./value/use-motion-template.js"
+export {
+    usesognaflowValue,
+    usesognaflowValue as useMotionValue,
+} from "./value/use-sognaflow-value.js"
 export { useScroll, UseScrollOptions } from "./value/use-scroll.js"
 export { useFollowValue } from "./value/use-follow-value.js"
 export type { FollowValueOptions } from "sognaflow-dom"
@@ -55,15 +58,15 @@ export { useSpring } from "./value/use-spring.js"
 export { useTime } from "./value/use-time.js"
 export { useTransform } from "./value/use-transform.js"
 export { useVelocity } from "./value/use-velocity.js"
-export { useWillChange } from "./value/use-will-change"
-export { WillChangesognaflowValue } from "./value/use-will-change/willchangesognaflowvalue"
+export { useWillChange } from "./value/use-will-change/index.js"
+export { WillChangesognaflowValue } from "./value/use-will-change/willchangesognaflowvalue.js"
 export { resolvesognaflowValue } from "sognaflow-dom"
 
 /**
  * Accessibility
  */
-export { useReducedsognaflow } from "./utils/reduced-sognaflow/use-reduced-sognaflow"
-export { useReducedsognaflowConfig } from "./utils/reduced-sognaflow/use-reduced-sognaflow-config"
+export { useReducedsognaflow } from "./utils/reduced-sognaflow/use-reduced-sognaflow.js"
+export { useReducedsognaflowConfig } from "./utils/reduced-sognaflow/use-reduced-sognaflow-config.js"
 
 /**
  * Utils
@@ -80,16 +83,16 @@ export { animateVisualElement } from "sognaflow-dom"
 export {
     useIsPresent,
     usePresence,
-} from "./components/AnimatePresence/use-presence.js"
-export { usePresenceData } from "./components/AnimatePresence/use-presence-data.js"
+} from "./components/animate-presence/use-presence.js"
+export { usePresenceData } from "./components/animate-presence/use-presence-data.js"
 export { useDomEvent } from "./events/use-dom-event.js"
 export {
     DragControls,
     useDragControls,
 } from "./gestures/drag/use-drag-controls.js"
-export { issognaflowComponent } from "./sognaflow/utils/is-sognaflow-component"
-export { unwrapsognaflowComponent } from "./sognaflow/utils/unwrap-sognaflow-component"
-export { isValidsognaflowProp } from "./sognaflow/utils/valid-prop"
+export { isMotionComponent as issognaflowComponent } from "./motion/utils/is-motion-component.js"
+export { unwrapsognaflowComponent } from "./motion/utils/unwrap-motion-component.js"
+export { isValidsognaflowProp } from "./motion/utils/valid-prop.js"
 export { addScaleCorrector } from "sognaflow-dom"
 export { useInstantLayoutTransition } from "./projection/use-instant-layout-transition.js"
 export { useResetProjection } from "./projection/use-reset-projection.js"
@@ -115,17 +118,17 @@ export { startOptimizedAppearAnimation } from "./animation/optimized-appear/star
  * Contexts
  */
 export { LayoutGroupContext } from "./context/LayoutGroupContext.js"
-export { sognaflowConfigContext } from "./context/sognaflowconfigcontext"
-export { sognaflowContext } from "./context/sognaflowcontext"
+export { sognaflowConfigContext } from "./context/MotionConfigContext.js"
+export { sognaflowContext } from "./context/MotionContext/index.js"
 export { PresenceContext } from "./context/PresenceContext.js"
 export { SwitchLayoutGroupContext } from "./context/SwitchLayoutGroupContext.js"
 
 /**
  * Types
  */
-export type { AnimatePresenceProps } from "./components/AnimatePresence/types.js"
-export type { LazyProps } from "./components/lazysognaflow/types"
-export type { sognaflowConfigProps } from "./components/sognaflowconfig"
+export type { AnimatePresenceProps } from "./components/animate-presence/types.js"
+export type { LazyProps } from "./components/lazy-motion/types.js"
+export type { sognaflowConfigProps } from "./components/motion-config/index.js"
 export type {
     HydratedFeatureDefinition,
     HydratedFeatureDefinitions,
@@ -135,13 +138,13 @@ export type {
     FeaturePackages,
     FeatureBundle,
     LazyFeatureBundle,
-} from "./sognaflow/features/types"
+} from "./motion/features/types.js"
 export type {
     sognaflowProps,
     sognaflowStyle,
     sognaflowTransform,
     VariantLabels,
-} from "./sognaflow/types"
+} from "./motion/types.js"
 export type { IProjectionNode } from "sognaflow-dom"
 export type { DOMsognaflowComponents } from "./render/dom/types.js"
 export type { ForwardRefComponent, HTMLsognaflowProps } from "./render/html/types.js"

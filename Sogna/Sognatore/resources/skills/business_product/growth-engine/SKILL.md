@@ -4,22 +4,25 @@ description: "Motor de crescimento para produtos digitais -- growth hacking, SEO
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - growth
 - seo
 - marketing
 - viral
 - acquisition
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-growth-engine
 owner: [[prod-pm]]
 ---
-
 
 # GROWTH-ENGINE -- Crescimento Exponencial
 
@@ -94,15 +97,18 @@ AQUISICAO:  Como as pessoas descobrem a Auri?
 ## Keywords Estrategicas Auri
 
 High Intent (converter):
+
     - "skill alexa inteligente"
     - "assistente alexa com ia"
     - "como usar claude no alexa"
 
     Informacional (educar):
+
     - "assistente de voz ia brasil"
     - "melhor skill alexa portugues"
 
     Long tail (baixa competicao):
+
     - "alexa responder perguntas complexas"
     - "skill alexa analise de negocios"
 
@@ -122,6 +128,7 @@ skill_name: "Auri -- IA de Voz Inteligente"
       raciocinio real para o mercado brasileiro.
 
       O QUE A AURI FAZ:
+
       - Analisa problemas de negocio complexos
       - Recorda conversas anteriores (memoria real)
       - Oferece perspectivas de especialistas
@@ -130,6 +137,7 @@ skill_name: "Auri -- IA de Voz Inteligente"
       COMO COMECAR: Diga "Alexa, abrir Auri" e comece a conversar naturalmente.
 
     example_phrases:
+
       - "Alexa, abrir Auri"
       - "Me ajuda a decidir entre essas duas opcoes de negocio"
       - "Analisa esse problema para mim"
@@ -198,12 +206,14 @@ Dia 0 -- Boas-vindas (imediato apos cadastro)
 ## Estrategia De Lancamento
 
 1 semana antes:
+
     - Pedir a hunters influentes para cacar o produto
     - Preparar assets: logo, tagline, screenshots, video demo 60s
     - Warm up: posts no X/LinkedIn sobre o problema que Auri resolve
     - Recrutar 50 early adopters para upvotar no lancamento
 
     Dia de lancamento (meia-noite PT):
+
     - Post no X: demo impressionante + link PH
     - Email para toda waitlist: "Estamos no Product Hunt hoje!"
     - Mensagem no Telegram/Discord de comunidades tech BR
@@ -245,11 +255,13 @@ Dia 0 -- Boas-vindas (imediato apos cadastro)
 - `product-inventor` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

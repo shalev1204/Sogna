@@ -8,7 +8,6 @@ id: skill-azure-storage-queue-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Queue Storage SDK for Python
 
 Simple, cost-effective message queuing for asynchronous communication.
@@ -35,25 +34,32 @@ credential = DefaultAzureCredential()
 account_url = "https://<account>.queue.core.windows.net"
 
 # Service client
+
 service_client = QueueServiceClient(account_url=account_url, credential=credential)
 
 # Queue client
+
 queue_client = QueueClient(account_url=account_url, queue_name="myqueue", credential=credential)
 ```
 
 ## Queue Operations
 
 ```python
+
 # Create queue
+
 service_client.create_queue("myqueue")
 
 # Get queue client
+
 queue_client = service_client.get_queue_client("myqueue")
 
 # Delete queue
+
 service_client.delete_queue("myqueue")
 
 # List queues
+
 for queue in service_client.list_queues():
     print(queue.name)
 ```
@@ -61,10 +67,13 @@ for queue in service_client.list_queues():
 ## Send Messages
 
 ```python
+
 # Send message (string)
+
 queue_client.send_message("Hello, Queue!")
 
 # Send with options
+
 queue_client.send_message(
     content="Delayed message",
     visibility_timeout=60,  # Hidden for 60 seconds
@@ -72,6 +81,7 @@ queue_client.send_message(
 )
 
 # Send JSON
+
 import json
 data = {"task": "process", "id": 123}
 queue_client.send_message(json.dumps(data))
@@ -80,7 +90,9 @@ queue_client.send_message(json.dumps(data))
 ## Receive Messages
 
 ```python
+
 # Receive messages (makes them invisible temporarily)
+
 messages = queue_client.receive_messages(
     messages_per_page=10,
     visibility_timeout=30  # 30 seconds to process
@@ -100,7 +112,9 @@ for message in messages:
 ## Peek Messages
 
 ```python
+
 # Peek without hiding (doesn't affect visibility)
+
 messages = queue_client.peek_messages(max_messages=5)
 
 for message in messages:
@@ -110,7 +124,9 @@ for message in messages:
 ## Update Message
 
 ```python
+
 # Extend visibility or update content
+
 messages = queue_client.receive_messages()
 for message in messages:
     # Extend timeout (need more time)
@@ -130,7 +146,9 @@ for message in messages:
 ## Delete Message
 
 ```python
+
 # Delete after successful processing
+
 messages = queue_client.receive_messages()
 for message in messages:
     try:
@@ -144,18 +162,23 @@ for message in messages:
 ## Clear Queue
 
 ```python
+
 # Delete all messages
+
 queue_client.clear_messages()
 ```
 
 ## Queue Properties
 
 ```python
+
 # Get queue properties
+
 properties = queue_client.get_queue_properties()
 print(f"Approximate message count: {properties.approximate_message_count}")
 
 # Set/get metadata
+
 queue_client.set_queue_metadata(metadata={"environment": "production"})
 properties = queue_client.get_queue_properties()
 print(properties.metadata)
@@ -193,6 +216,7 @@ asyncio.run(queue_operations())
 from azure.storage.queue import QueueClient, BinaryBase64EncodePolicy, BinaryBase64DecodePolicy
 
 # For binary data
+
 queue_client = QueueClient(
     account_url=account_url,
     queue_name="myqueue",
@@ -202,6 +226,7 @@ queue_client = QueueClient(
 )
 
 # Send bytes
+
 queue_client.send_message(b"Binary content")
 ```
 
@@ -216,14 +241,17 @@ queue_client.send_message(b"Binary content")
 7. **Consider Service Bus** for advanced features (sessions, topics)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

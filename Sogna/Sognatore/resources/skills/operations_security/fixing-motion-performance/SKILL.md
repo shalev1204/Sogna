@@ -7,7 +7,6 @@ id: skill-fixing-motion-performance
 owner: [[eng-perf]], [[ops-security]]
 ---
 
-
 # fixing-motion-performance
 
 Fix animation performance issues.
@@ -15,10 +14,13 @@ Fix animation performance issues.
 ## how to use
 
 - `/fixing-motion-performance`
+
   Apply these constraints to any UI animation work in this conversation.
 
 - `/fixing-motion-performance <file>`
+
   Review the file against all rules below and report:
+
   - violations (quote the exact line or snippet)
   - why it matters (one short sentence)
   - a concrete fix (code-level suggestion)
@@ -26,7 +28,9 @@ Fix animation performance issues.
 Do not migrate animation libraries unless explicitly requested. Apply rules within the existing stack.
 
 ## When to Use
+
 Reference these guidelines when:
+
 - adding or changing UI animations (CSS, WAAPI, Motion, rAF, GSAP)
 - refactoring janky interactions or transitions
 - implementing scroll-linked motion or reveal-on-scroll
@@ -155,11 +159,13 @@ requestAnimationFrame(() => { el.style.transition = 'transform 0.3s'; el.style.t
 - when reviewing, prefer actionable notes and concrete alternatives over theory
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,6 +1,6 @@
 import { issognaflowValue } from "sognaflow-dom"
-import type { sognaflowProps } from "../../../sognaflow/types"
-import { isValidsognaflowProp } from "../../../sognaflow/utils/valid-prop"
+import type { sognaflowProps } from "../../../motion/types"
+import { isValidsognaflowProp } from "../../../motion/utils/valid-prop"
 
 let shouldForward = (key: string) => !isValidsognaflowProp(key)
 

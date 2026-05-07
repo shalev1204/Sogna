@@ -8,7 +8,6 @@ id: skill-electron-development
 owner: [[prod-pm]]
 ---
 
-
 # Electron Development
 
 You are a senior Electron engineer specializing in secure, production-grade desktop application architecture. You have deep expertise in Electron's multi-process model, IPC security patterns, native OS integration, application packaging, code signing, and auto-update strategies.
@@ -79,6 +78,7 @@ my-electron-app/
 ```
 
 **Key architectural principles:**
+
 - **Separate entry points**: Main, preload, and renderer each have their own build configuration.
 - **Shared types, not shared modules**: The `shared/` directory contains only types, constants, and enums — never executable code imported across process boundaries.
 - **Keep main process lean**: Main should orchestrate windows, handle IPC, and manage app lifecycle. Business logic belongs in the renderer or dedicated worker processes.
@@ -480,7 +480,9 @@ ipcMain.handle('settings:set-theme', (_event, theme: 'light' | 'dark') => {
 #### electron-builder Configuration
 
 ```yaml
+
 # electron-builder.yml
+
 appId: com.mycompany.myapp
 productName: My App
 directories:
@@ -488,6 +490,7 @@ directories:
   buildResources: resources
 
 files:
+
   - "out/**/*"       # compiled main + preload
   - "renderer/**/*"  # built renderer assets
   - "package.json"
@@ -496,6 +499,7 @@ asar: true
 compression: maximum
 
 # ── macOS ──
+
 mac:
   category: public.app-category.developer-tools
   hardenedRuntime: true
@@ -503,15 +507,22 @@ mac:
   entitlements: resources/entitlements.mac.plist
   entitlementsInherit: resources/entitlements.mac.plist
   target:
+
     - target: dmg
+
       arch: [x64, arm64]
+
     - target: zip
+
       arch: [x64, arm64]
 
 # ── Windows ──
+
 win:
   target:
+
     - target: nsis
+
       arch: [x64, arm64]
   signingHashAlgorithms: [sha256]
 
@@ -521,14 +532,18 @@ nsis:
   perMachine: false
 
 # ── Linux ──
+
 linux:
   target:
+
     - target: AppImage
     - target: deb
+
   category: Development
   maintainer: your-email@example.com
 
 # ── Auto Update ──
+
 publish:
   provider: github
   owner: your-org
@@ -538,17 +553,23 @@ publish:
 #### Code Signing
 
 ```bash
+
 # macOS: requires Apple Developer certificate
+
 # Set environment variables before building:
+
 export CSC_LINK="path/to/Developer_ID_Application.p12"
 export CSC_KEY_PASSWORD="your-password"
 
 # Windows: requires EV or standard code signing certificate
+
 # Set environment variables:
+
 export WIN_CSC_LINK="path/to/code-signing.pfx"
 export WIN_CSC_KEY_PASSWORD="your-password"
 
 # Build signed app
+
 npx electron-builder --mac --win --publish never
 ```
 
@@ -628,6 +649,7 @@ ipcMain.handle('update:install', () => autoUpdater.quitAndInstall());
 ```
 
 **Recommended toolchain:**
+
 - **electron-vite** or **electron-forge with Vite plugin** — modern, fast HMR for renderer
 - **tsx** or **ts-node** — for running TypeScript in main process during development
 - **concurrently** — run renderer dev server + Electron simultaneously
@@ -796,26 +818,31 @@ app.on('web-contents-created', (_event, contents) => {
 ## Common Issue Diagnostics
 
 ### White Screen on Launch
+
 **Symptoms**: App starts but renderer shows a blank/white page
 **Root causes**: Incorrect `loadFile`/`loadURL` path, build output missing, CSP blocking scripts
 **Solutions**: Verify the path passed to `win.loadFile()` or `win.loadURL()` exists relative to the packaged app. Check DevTools console for CSP violations. In development, ensure the Vite/webpack dev server is running before Electron starts.
 
 ### IPC Messages Not Received
+
 **Symptoms**: `invoke()` hangs or `send()` has no effect
 **Root causes**: Channel name mismatch, preload not loaded, contextBridge not exposing the channel
 **Solutions**: Verify channel names match exactly between preload, main, and renderer. Confirm `preload` path is correct in `webPreferences`. Check that the channel is in the whitelist array.
 
 ### Native Module Crashes
+
 **Symptoms**: App crashes on startup with `MODULE_NOT_FOUND` or `invalid ELF header`
 **Root causes**: Native module compiled for wrong Electron/Node ABI version
 **Solutions**: Run `npx @electron/rebuild` after installing native modules. Ensure `electron-builder` is configured with the correct Electron version for rebuilding.
 
 ### App Not Updating
+
 **Symptoms**: `autoUpdater.checkForUpdates()` returns nothing or errors
 **Root causes**: Missing `publish` config, unsigned app (macOS), incorrect GitHub release assets
 **Solutions**: Verify `publish` section in `electron-builder.yml`. On macOS, app must be code-signed and notarized. Ensure the GitHub release contains the `-mac.zip` and `latest-mac.yml` (or equivalent Windows files).
 
 ### Large Bundle Size (>200MB)
+
 **Symptoms**: Built application is excessively large
 **Root causes**: Dev dependencies bundled, no tree-shaking, duplicate Electron binaries
 **Solutions**: Audit `files` patterns in `electron-builder.yml`. Use a bundler (Vite/esbuild) for the renderer. Check that `devDependencies` are not in `dependencies`. Use `compression: maximum`.
@@ -859,6 +886,7 @@ app.on('web-contents-created', (_event, contents) => {
 - `github-actions-templates` — When setting up CI/CD for cross-platform Electron builds
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -235,7 +235,9 @@ useEffect(() => {
 ### React Native Performance Checklist
 
 ```markdown
+
 ## Before Every List
+
 - [ ] Using FlatList or FlashList (NOT ScrollView)
 - [ ] renderItem is useCallback memoized
 - [ ] List items are React.memo wrapped
@@ -243,16 +245,19 @@ useEffect(() => {
 - [ ] getItemLayout provided (if fixed height)
 
 ## Before Every Animation
+
 - [ ] useNativeDriver: true (if possible)
 - [ ] Using Reanimated for complex animations
 - [ ] Only animating transform/opacity
 - [ ] Tested on low-end Android device
 
 ## Before Any Release
+
 - [ ] console.log statements removed
 - [ ] Cleanup functions in all useEffects
 - [ ] No memory leaks (test with profiler)
 - [ ] Tested in release build (not dev)
+
 ```
 
 ---
@@ -445,27 +450,33 @@ class _MyWidgetState extends State<MyWidget> {
 ### Flutter Performance Checklist
 
 ```markdown
+
 ## Before Every Widget
+
 - [ ] const constructor added (if no runtime args)
 - [ ] const keywords on static children
 - [ ] Minimal setState scope
 - [ ] Using selectors for provider watches
 
 ## Before Every List
+
 - [ ] Using ListView.builder (NOT ListView with children)
 - [ ] itemExtent provided (if fixed height)
 - [ ] Image caching with size limits
 
 ## Before Any Animation
+
 - [ ] Using Impeller (Flutter 3.16+)
 - [ ] Avoiding Opacity widget (use FadeTransition)
 - [ ] TickerProviderStateMixin for AnimationController
 
 ## Before Any Release
+
 - [ ] All dispose() methods implemented
 - [ ] No print() in production
 - [ ] Tested in profile/release mode
 - [ ] DevTools performance overlay checked
+
 ```
 
 ---
@@ -704,19 +715,23 @@ COMPRESS: Reduce payload size
 ### Performance Monitoring Checklist
 
 ```markdown
+
 ## During Development
+
 - [ ] Performance overlay enabled
 - [ ] Watching for dropped frames
 - [ ] Memory usage stable
 - [ ] No console warnings about performance
 
 ## Before Release
+
 - [ ] Tested on low-end device
 - [ ] Profiled memory over extended use
 - [ ] Cold start time measured
 - [ ] List scroll tested with 1000+ items
 - [ ] Animations tested at 60fps
 - [ ] Network tested on slow 3G
+
 ```
 
 ---
@@ -777,6 +792,7 @@ Low-end Android ← Test device
 > **Remember:** Performance is not optimization—it's baseline quality. A slow app is a broken app. Test on the worst device your users have, not the best device you have.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

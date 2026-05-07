@@ -43,6 +43,7 @@ function MessageList({ messages }: { messages: Message[] }) {
 For 1000 messages, browser skips layout/paint for ~990 off-screen items (10× faster initial render).
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -272,6 +272,7 @@ class DynamicStub:
         return response, state
 
 # Usage example
+
 dynamic_stub = DynamicStub('/api/users/{user_id}')
 dynamic_stub.with_response_generator(lambda req, state: {
     'status': 200,
@@ -1067,7 +1068,9 @@ describe('User API', () => {
     def create_pytest_integration(self):
         """Pytest integration"""
         return '''
+
 # conftest.py
+
 import pytest
 from mock_server import MockServer
 import asyncio
@@ -1094,6 +1097,7 @@ async def reset_mocks(mock_server):
     assert len(unmatched) == 0, f"Unmatched requests: {unmatched}"
 
 # Test utilities
+
 class MockBuilder:
     def __init__(self, mock_server):
         self.server = mock_server
@@ -1124,6 +1128,7 @@ class MockBuilder:
             await self.server.add_stub(stub)
 
 # Example test
+
 @pytest.mark.asyncio
 async def test_user_creation(mock_server):
     # Setup mocks
@@ -1147,7 +1152,9 @@ Deploy mock servers:
 **Deployment Configuration**
 
 ```yaml
+
 # docker-compose.yml for mock services
+
 version: "3.8"
 
 services:
@@ -1156,13 +1163,19 @@ services:
       context: .
       dockerfile: Dockerfile.mock
     ports:
+
       - "3001:3001"
+
     environment:
+
       - MOCK_SCENARIO=production
       - MOCK_DATA_PATH=/data/mocks
+
     volumes:
+
       - ./mocks:/data/mocks
       - ./scenarios:/data/scenarios
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
       interval: 30s
@@ -1174,13 +1187,19 @@ services:
       context: .
       dockerfile: Dockerfile.admin
     ports:
+
       - "3002:3002"
+
     environment:
+
       - MOCK_SERVER_URL=http://mock-api:3001
+
     depends_on:
+
       - mock-api
 
 # Kubernetes deployment
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1197,21 +1216,31 @@ spec:
         app: mock-server
     spec:
       containers:
+
         - name: mock-server
+
           image: mock-server:latest
           ports:
+
             - containerPort: 3001
+
           env:
+
             - name: MOCK_SCENARIO
+
               valueFrom:
                 configMapKeyRef:
                   name: mock-config
                   key: scenario
           volumeMounts:
+
             - name: mock-definitions
+
               mountPath: /data/mocks
       volumes:
+
         - name: mock-definitions
+
           configMap:
             name: mock-definitions
 ```
@@ -1227,24 +1256,31 @@ class MockDocumentationGenerator:
     def generate_documentation(self, mock_server):
         """Generate comprehensive mock documentation"""
         return f"""
+
 # Mock API Documentation
 
 ## Overview
+
 {self._generate_overview(mock_server)}
 
 ## Available Endpoints
+
 {self._generate_endpoints_doc(mock_server)}
 
 ## Scenarios
+
 {self._generate_scenarios_doc(mock_server)}
 
 ## Data Models
+
 {self._generate_models_doc(mock_server)}
 
 ## Usage Examples
+
 {self._generate_examples(mock_server)}
 
 ## Configuration
+
 {self._generate_config_doc(mock_server)}
 """
 
@@ -1253,6 +1289,7 @@ class MockDocumentationGenerator:
         doc = ""
         for endpoint in mock_server.get_endpoints():
             doc += f"""
+
 ### {endpoint['method']} {endpoint['path']}
 
 **Description**: {endpoint.get('description', 'No description')}
@@ -1335,6 +1372,7 @@ return doc
 Focus on creating flexible, realistic mock services that enable efficient development, thorough testing, and reliable API simulation for all stages of the development lifecycle.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

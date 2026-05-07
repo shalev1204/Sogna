@@ -194,10 +194,13 @@ describe('PermissionService', () => {
 ### Using test-auth-route.js
 
 ```bash
+
 # Test authenticated endpoint
+
 node scripts/test-auth-route.js http://localhost:3002/form/api/users
 
 # Test with POST data
+
 node scripts/test-auth-route.js http://localhost:3002/form/api/users POST '{"email":"test@test.com"}'
 ```
 
@@ -237,11 +240,13 @@ npm test -- --coverage
 ---
 
 **Related Files:**
+
 - SKILL.md
 - [services-and-repositories.md](services-and-repositories.md)
 - [complete-examples.md](complete-examples.md)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

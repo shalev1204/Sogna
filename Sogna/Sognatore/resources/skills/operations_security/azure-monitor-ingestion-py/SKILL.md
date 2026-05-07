@@ -8,7 +8,6 @@ id: skill-azure-monitor-ingestion-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Monitor Ingestion SDK for Python
 
 Send custom logs to Azure Monitor Log Analytics workspace using the Logs Ingestion API.
@@ -23,13 +22,17 @@ pip install azure-identity
 ## Environment Variables
 
 ```bash
+
 # Data Collection Endpoint (DCE)
+
 AZURE_DCE_ENDPOINT=https://<dce-name>.<region>.ingest.monitor.azure.com
 
 # Data Collection Rule (DCR) immutable ID
+
 AZURE_DCR_RULE_ID=dcr-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 # Stream name from DCR
+
 AZURE_DCR_STREAM_NAME=Custom-MyTable_CL
 ```
 
@@ -109,6 +112,7 @@ client.upload(
 )
 
 # Retry failed logs
+
 if failed_logs:
     print(f"Retrying {len(failed_logs)} failed logs...")
     client.upload(rule_id=rule_id, stream_name=stream_name, logs=failed_logs)
@@ -156,6 +160,7 @@ from azure.identity import AzureAuthorityHosts, DefaultAzureCredential
 from azure.monitor.ingestion import LogsIngestionClient
 
 # Azure Government
+
 credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)
 client = LogsIngestionClient(
     endpoint="https://example.ingest.monitor.azure.us",
@@ -167,6 +172,7 @@ client = LogsIngestionClient(
 ## Batching Behavior
 
 The SDK automatically:
+
 - Splits logs into chunks of 1MB or less
 - Compresses each chunk with gzip
 - Uploads chunks in parallel
@@ -192,6 +198,7 @@ No manual batching needed for large log sets.
 ## DCR Stream Name Format
 
 Stream names follow patterns:
+
 - `Custom-<TableName>_CL` — For custom tables
 - `Microsoft-<TableName>` — For built-in tables
 
@@ -207,14 +214,17 @@ Stream names follow patterns:
 8. **Use context manager** — Ensures proper client cleanup
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

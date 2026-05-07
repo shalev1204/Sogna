@@ -8,7 +8,6 @@ id: skill-conductor-implement
 owner: [[orchestrator]]
 ---
 
-
 # Implement Track
 
 Execute tasks from a track's implementation plan, following the workflow rules defined in `conductor/workflow.md`.
@@ -61,9 +60,11 @@ Execute tasks from a track's implementation plan, following the workflow rules d
    Select a track to implement:
 
    In Progress:
+
    1. [~] auth_20250115 - User Authentication (Phase 2, Task 3)
 
    Pending:
+
    2. [ ] nav-fix_20250114 - Navigation Bug Fix
    3. [ ] dashboard_20250113 - Dashboard Feature
 
@@ -200,14 +201,17 @@ Phase {N} complete. Running verification...
 
 ```
 Phase {N} Verification Results:
+
 - All phase tasks: Complete
 - Tests: {passing/failing}
 - Verification: {pass/fail}
 
 Approve to continue to Phase {N+1}?
+
 1. Yes, continue
 2. No, there are issues to fix
 3. Pause implementation
+
 ```
 
 **CRITICAL: Wait for explicit user approval before proceeding to next phase.**
@@ -220,10 +224,12 @@ Approve to continue to Phase {N+1}?
 ERROR: {tool} failed with: {error message}
 
 Options:
+
 1. Retry the operation
 2. Skip this task and continue
 3. Pause implementation
 4. Revert current task changes
+
 ```
 
 - HALT and present options
@@ -235,12 +241,15 @@ Options:
 TESTS FAILING after Task X.Y
 
 Failed tests:
+
 - {test name}: {failure reason}
 
 Options:
+
 1. Attempt to fix
 2. Rollback task changes
 3. Pause for manual intervention
+
 ```
 
 ### On Git Failure
@@ -249,14 +258,17 @@ Options:
 GIT ERROR: {error message}
 
 This may indicate:
+
 - Uncommitted changes from outside Conductor
 - Merge conflicts
 - Permission issues
 
 Options:
+
 1. Show git status
 2. Attempt to resolve
 3. Pause for manual intervention
+
 ```
 
 ## Track Completion
@@ -297,12 +309,14 @@ In `conductor/tracks/{trackId}/plan.md`:
 Track complete! Would you like to sync documentation?
 
 This will update:
+
 - conductor/product.md (if new features added)
 - conductor/tech-stack.md (if new dependencies added)
 - README.md (if applicable)
 
 1. Yes, sync documentation
 2. No, skip
+
 ```
 
 ### 4. Cleanup Offer
@@ -311,9 +325,11 @@ This will update:
 Track {trackId} is complete.
 
 Cleanup options:
+
 1. Archive - Move to conductor/tracks/_archive/
 2. Delete - Remove track directory
 3. Keep - Leave as-is
+
 ```
 
 ### 5. Completion Summary
@@ -322,6 +338,7 @@ Cleanup options:
 Track Complete: {track title}
 
 Summary:
+
 - Track ID: {trackId}
 - Phases completed: {N}/{N}
 - Tasks completed: {M}/{M}
@@ -329,8 +346,10 @@ Summary:
 - Tests: All passing
 
 Next steps:
+
 - Run /conductor:status to see project progress
 - Run /conductor:new-track for next feature
+
 ```
 
 ## Progress Tracking
@@ -377,9 +396,11 @@ If implementation is paused and resumed:
    Last task in progress: Task {X.Y}: {description}
 
    Options:
+
    1. Continue from where we left off
    2. Restart current task
    3. Show progress summary first
+
    ```
 
 ## Critical Rules
@@ -392,11 +413,13 @@ If implementation is paused and resumed:
 6. **Track all commits** - Record commit hashes in metadata.json for potential revert
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

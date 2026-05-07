@@ -16,11 +16,13 @@ This skill is based on context engineering principles from Manus, the AI agent c
 > "KV-cache hit rate is THE single most important metric for production AI agents."
 
 **Statistics:**
+
 - ~100:1 input-to-output token ratio
 - Cached tokens: $0.30/MTok vs Uncached: $3/MTok
 - 10x cost difference!
 
 **Implementation:**
+
 - Keep prompt prefixes STABLE (single-token change invalidates cache)
 - NO timestamps in system prompts
 - Make context APPEND-ONLY with deterministic serialization
@@ -42,6 +44,7 @@ Filesystem = Disk (persistent, unlimited)
 ```
 
 **Compression Must Be Restorable:**
+
 - Keep URLs even if web content is dropped
 - Keep file paths when dropping document contents
 - Never lose the pointer to full data
@@ -65,6 +68,7 @@ End of context: [Recently read task_plan.md - gets ATTENTION!]
 > "Leave the wrong turns in the context."
 
 **Why:**
+
 - Failed actions with stack traces let model implicitly update beliefs
 - Reduces mistake repetition
 - Error recovery is "one of the clearest signals of TRUE agentic behavior"
@@ -76,6 +80,7 @@ End of context: [Recently read task_plan.md - gets ATTENTION!]
 **Problem:** Repetitive action-observation pairs cause drift and hallucination.
 
 **Solution:** Introduce controlled variation:
+
 - Vary phrasings slightly
 - Don't copy-paste patterns blindly
 - Recalibrate on repetitive tasks
@@ -95,11 +100,14 @@ Tool calls have TWO representations:
 └── COMPACT: Reference/file path only
 
 RULES:
+
 - Apply compaction to STALE (older) tool results
 - Keep RECENT results FULL (to guide next decision)
+
 ```
 
 **Summarization:**
+
 - Applied when compaction reaches diminishing returns
 - Generated using full tool results
 - Creates standardized summary objects
@@ -127,6 +135,7 @@ RULES:
 ### Strategy 3: Context Offloading
 
 **Tool Design:**
+
 - Use <20 atomic functions total
 - Store full results in filesystem, not context
 - Use `glob` and `grep` for searching
@@ -225,6 +234,7 @@ Based on Manus's official context engineering documentation:
 https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

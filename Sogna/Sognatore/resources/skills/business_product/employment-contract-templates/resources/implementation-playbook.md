@@ -39,6 +39,7 @@ Employment Relationship:
 ### Template 1: Offer Letter
 
 ```markdown
+
 # EMPLOYMENT OFFER LETTER
 
 [Company Letterhead]
@@ -75,6 +76,7 @@ Not applicable]
 ## Benefits
 
 You will be eligible for our standard benefits package, including:
+
 - Health insurance (medical, dental, vision) effective [date]
 - 401(k) with [X]% company match
 - [X] days paid time off per year
@@ -86,6 +88,7 @@ Full details will be provided during onboarding.
 ## Contingencies
 
 This offer is contingent upon:
+
 - Successful completion of background check
 - Verification of your right to work in [Country]
 - Execution of required employment documents including:
@@ -133,6 +136,7 @@ Anticipated Start Date: _________________________
 ### Template 2: Employment Agreement (Contract Position)
 
 ```markdown
+
 # EMPLOYMENT AGREEMENT
 
 This Employment Agreement ("Agreement") is entered into as of [DATE]
@@ -151,6 +155,7 @@ the terms of this Agreement.
 
 1.2 **Duties.** Employee shall perform duties consistent with their position,
 including but not limited to:
+
 - [Primary duty 1]
 - [Primary duty 2]
 - [Primary duty 3]
@@ -264,6 +269,7 @@ shall receive [X] weeks base salary as severance, contingent upon execution
 of a release agreement.
 
 7.5 **Effect of Termination.** Upon termination:
+
 - All compensation earned through termination date shall be paid
 - Unvested equity shall be forfeited
 - Benefits terminate per plan terms
@@ -295,6 +301,7 @@ to a successor.
 ## 9. ACKNOWLEDGMENTS
 
 Employee acknowledges:
+
 - Having read and understood this Agreement
 - Having opportunity to consult with counsel
 - Agreeing to all terms voluntarily
@@ -329,6 +336,7 @@ _________________________
 ### Template 3: Employee Handbook Policy Section
 
 ```markdown
+
 # EMPLOYEE HANDBOOK - POLICY SECTION
 
 ## EMPLOYMENT POLICIES
@@ -340,6 +348,7 @@ race, color, religion, sex, sexual orientation, gender identity, national
 origin, age, disability, veteran status, or any other protected characteristic.
 
 This policy applies to all employment practices including:
+
 - Recruitment and hiring
 - Compensation and benefits
 - Training and development
@@ -352,6 +361,7 @@ This policy applies to all employment practices including:
 Harassment based on any protected characteristic is strictly prohibited.
 
 **Prohibited Conduct Includes:**
+
 - Unwelcome sexual advances or requests for sexual favors
 - Offensive comments, jokes, or slurs
 - Physical conduct such as assault or unwanted touching
@@ -359,6 +369,7 @@ Harassment based on any protected characteristic is strictly prohibited.
 - Threatening, intimidating, or hostile acts
 
 **Reporting Procedure:**
+
 1. Report to your manager, HR, or any member of leadership
 2. Reports may be made verbally or in writing
 3. Anonymous reports are accepted via [hotline/email]
@@ -375,6 +386,7 @@ action up to termination.
 **Flexible Work:** [Policy on remote work, flexible scheduling]
 
 **Attendance Expectations:**
+
 - Notify your manager as soon as possible if you will be absent
 - Excessive unexcused absences may result in disciplinary action
 - [X] unexcused absences in [Y] days considered excessive
@@ -389,6 +401,7 @@ action up to termination.
 | 6+ years         | 25 days         |
 
 **PTO Guidelines:**
+
 - PTO accrues per pay period
 - Maximum accrual: [X] days (use it or lose it after)
 - Request PTO at least [2] weeks in advance
@@ -404,6 +417,7 @@ action up to termination.
 ### Holidays
 
 The following paid holidays are observed:
+
 - New Year's Day
 - Martin Luther King Jr. Day
 - Presidents Day
@@ -418,6 +432,7 @@ The following paid holidays are observed:
 ### Code of Conduct
 
 All employees are expected to:
+
 - Act with integrity and honesty
 - Treat colleagues, customers, and partners with respect
 - Protect company confidential information
@@ -430,15 +445,18 @@ All employees are expected to:
 ### Technology and Communication
 
 **Acceptable Use:**
+
 - Company technology is for business purposes
 - Limited personal use is permitted if it doesn't interfere with work
 - No illegal activities or viewing inappropriate content
 
 **Monitoring:**
+
 - Company reserves the right to monitor company systems
 - Employees should have no expectation of privacy on company devices
 
 **Security:**
+
 - Use strong passwords and enable 2FA
 - Report security incidents immediately
 - Lock devices when unattended
@@ -446,11 +464,13 @@ All employees are expected to:
 ### Social Media Policy
 
 **Personal Social Media:**
+
 - Clearly state opinions are your own, not the company's
 - Do not share confidential company information
 - Be respectful and professional
 
 **Company Social Media:**
+
 - Only authorized personnel may post on behalf of the company
 - Follow brand guidelines
 - Escalate negative comments to [Marketing/PR]
@@ -479,6 +499,7 @@ Date: _________________________
 ## Best Practices
 
 ### Do's
+
 - **Consult legal counsel** - Employment law varies by jurisdiction
 - **Keep copies signed** - Document all agreements
 - **Update regularly** - Laws and policies change
@@ -486,6 +507,7 @@ Date: _________________________
 - **Train managers** - On policies and procedures
 
 ### Don'ts
+
 - **Don't use generic templates** - Customize for your jurisdiction
 - **Don't make promises** - That could create implied contracts
 - **Don't discriminate** - In language or application
@@ -500,6 +522,7 @@ Date: _________________________
 - State-specific labor departments
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-turborepo-caching
 owner: [[orchestrator]]
 ---
 
-
 # Turborepo Caching
 
 Production patterns for Turborepo build optimization.
@@ -150,22 +149,29 @@ Workspace Root/
 ### Template 3: Remote Caching with Vercel
 
 ```bash
+
 # Login to Vercel
+
 npx turbo login
 
 # Link to Vercel project
+
 npx turbo link
 
 # Run with remote cache
+
 turbo build --remote-only
 
 # CI environment variables
+
 TURBO_TOKEN=your-token
 TURBO_TEAM=your-team
 ```
 
 ```yaml
+
 # .github/workflows/ci.yml
+
 name: CI
 
 on:
@@ -181,20 +187,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
+
         with:
           node-version: 20
           cache: 'npm'
 
       - name: Install dependencies
+
         run: npm ci
 
       - name: Build
+
         run: npx turbo build --filter='...[origin/main]'
 
       - name: Test
+
         run: npx turbo test --filter='...[origin/main]'
 ```
 
@@ -268,35 +279,46 @@ app.listen(3000);
 ```
 
 ```bash
+
 # Use self-hosted cache
+
 turbo build --api="http://localhost:3000" --token="my-token" --team="my-team"
 ```
 
 ### Template 5: Filtering and Scoping
 
 ```bash
+
 # Build specific package
+
 turbo build --filter=@myorg/web
 
 # Build package and its dependencies
+
 turbo build --filter=@myorg/web...
 
 # Build package and its dependents
+
 turbo build --filter=...@myorg/ui
 
 # Build changed packages since main
+
 turbo build --filter='...[origin/main]'
 
 # Build packages in directory
+
 turbo build --filter='./apps/*'
 
 # Combine filters
+
 turbo build --filter=@myorg/web --filter=@myorg/docs
 
 # Exclude package
+
 turbo build --filter='!@myorg/docs'
 
 # Include dependencies of changed
+
 turbo build --filter='...[HEAD^1]...'
 ```
 
@@ -384,28 +406,36 @@ turbo build --filter='...[HEAD^1]...'
 ## Debugging Cache
 
 ```bash
+
 # Dry run to see what would run
+
 turbo build --dry-run
 
 # Verbose output with hashes
+
 turbo build --verbosity=2
 
 # Show task graph
+
 turbo build --graph
 
 # Force no cache
+
 turbo build --force
 
 # Show cache status
+
 turbo build --summarize
 
 # Debug specific task
+
 TURBO_LOG_VERBOSITY=debug turbo build --filter=@myorg/web
 ```
 
 ## Best Practices
 
 ### Do's
+
 - **Define explicit inputs** - Avoid cache invalidation
 - **Use workspace protocol** - `"@myorg/ui": "workspace:*"`
 - **Enable remote caching** - Share across CI and local
@@ -413,6 +443,7 @@ TURBO_LOG_VERBOSITY=debug turbo build --filter=@myorg/web
 - **Cache build outputs** - Not source files
 
 ### Don'ts
+
 - **Don't cache dev servers** - Use `persistent: true`
 - **Don't include secrets in env** - Use runtime env vars
 - **Don't ignore dependsOn** - Causes race conditions
@@ -425,11 +456,13 @@ TURBO_LOG_VERBOSITY=debug turbo build --filter=@myorg/web
 - [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

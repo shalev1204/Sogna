@@ -8,7 +8,6 @@ id: skill-azure-storage-blob-ts
 owner: [[orchestrator]]
 ---
 
-
 # @azure/storage-blob (TypeScript/JavaScript)
 
 SDK for Azure Blob Storage operations — upload, download, list, and manage blobs and containers.
@@ -27,7 +26,9 @@ npm install @azure/storage-blob @azure/identity
 ```bash
 AZURE_STORAGE_ACCOUNT_NAME=<account-name>
 AZURE_STORAGE_ACCOUNT_KEY=<account-key>
+
 # OR connection string
+
 AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
 ```
 
@@ -486,14 +487,17 @@ import {
 | Anonymous/SAS access | ✅ | ✅ |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

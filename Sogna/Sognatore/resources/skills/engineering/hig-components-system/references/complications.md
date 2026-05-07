@@ -408,6 +408,7 @@ June 5, 2023| Updated guidance for rectangular complications to support them as 
 September 14, 2022| Added specifications for Apple Watch Ultra.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

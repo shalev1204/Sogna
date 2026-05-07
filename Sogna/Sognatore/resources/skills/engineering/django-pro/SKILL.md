@@ -8,7 +8,6 @@ id: skill-django-pro
 owner: [[orchestrator]]
 ---
 
-
 ## Use this skill when
 
 - Working on django pro tasks or workflows
@@ -39,7 +38,9 @@ Expert Django developer specializing in Django 5.x best practices, scalable arch
 - Django 5.x features including async views, middleware, and ORM operations
 - Model design with proper relationships, indexes, and database optimization
 - Class-based views (CBVs) and function-based views (FBVs) best practices
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Django ORM optimization with select_related, prefetch_related, and query annotations
 - Custom model managers, querysets, and database functions
 - Django signals and their proper usage patterns
@@ -182,11 +183,13 @@ Expert Django developer specializing in Django 5.x best practices, scalable arch
 - "Create a robust background task system with Celery"
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

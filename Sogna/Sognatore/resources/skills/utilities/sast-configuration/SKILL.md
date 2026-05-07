@@ -8,7 +8,6 @@ id: skill-sast-configuration
 owner: [[orchestrator]]
 ---
 
-
 # SAST Configuration
 
 Static Application Security Testing (SAST) tool setup, configuration, and custom rule creation for comprehensive security scanning across multiple programming languages.
@@ -47,6 +46,7 @@ This skill provides comprehensive guidance for setting up and configuring SAST t
 ## Core Capabilities
 
 ### 1. Semgrep Configuration
+
 - Custom rule creation with pattern matching
 - Language-specific security rules (Python, JavaScript, Go, Java, etc.)
 - CI/CD integration (GitHub Actions, GitLab CI, Jenkins)
@@ -54,6 +54,7 @@ This skill provides comprehensive guidance for setting up and configuring SAST t
 - Organizational policy enforcement
 
 ### 2. SonarQube Setup
+
 - Quality gate configuration
 - Security hotspot analysis
 - Code coverage and technical debt tracking
@@ -61,6 +62,7 @@ This skill provides comprehensive guidance for setting up and configuring SAST t
 - Enterprise integration with LDAP/SAML
 
 ### 3. CodeQL Analysis
+
 - GitHub Advanced Security integration
 - Custom query development
 - Vulnerability variant analysis
@@ -70,21 +72,27 @@ This skill provides comprehensive guidance for setting up and configuring SAST t
 ## Quick Start
 
 ### Initial Assessment
+
 1. Identify primary programming languages in your codebase
 2. Determine compliance requirements (PCI-DSS, SOC 2, etc.)
 3. Choose SAST tool based on language support and integration needs
 4. Review baseline scan to understand current security posture
 
 ### Basic Setup
+
 ```bash
+
 # Semgrep quick start
+
 pip install semgrep
 semgrep --config=auto --error
 
 # SonarQube with Docker
+
 docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
 
 # CodeQL CLI setup
+
 gh extension install github/gh-codeql
 codeql database create mydb --language=python
 ```
@@ -104,9 +112,13 @@ codeql database create mydb --language=python
 ## Integration Patterns
 
 ### CI/CD Pipeline Integration
+
 ```yaml
+
 # GitHub Actions example
+
 - name: Run Semgrep
+
   uses: returntocorp/semgrep-action@v1
   with:
     config: >-
@@ -115,12 +127,18 @@ codeql database create mydb --language=python
 ```
 
 ### Pre-commit Hook
+
 ```bash
+
 # .pre-commit-config.yaml
+
 - repo: https://github.com/returntocorp/semgrep
+
   rev: v1.45.0
   hooks:
+
     - id: semgrep
+
       args: ['--config=auto', '--error']
 ```
 
@@ -154,41 +172,53 @@ codeql database create mydb --language=python
 ## Common Use Cases
 
 ### New Project Setup
+
 ```bash
 ./scripts/run-sast.sh --setup --language python --tools semgrep,sonarqube
 ```
 
 ### Custom Rule Development
+
 ```yaml
+
 # See references/semgrep-rules.md for detailed examples
+
 rules:
+
   - id: hardcoded-jwt-secret
+
     pattern: jwt.encode($DATA, "...", ...)
     message: JWT secret should not be hardcoded
     severity: ERROR
 ```
 
 ### Compliance Scanning
+
 ```bash
+
 # PCI-DSS focused scan
+
 semgrep --config p/pci-dss --json -o pci-scan-results.json
 ```
 
 ## Troubleshooting
 
 ### High False Positive Rate
+
 - Review and tune rule sensitivity
 - Add path filters to exclude test files
 - Use nostmt metadata for noisy patterns
 - Create organization-specific rule exceptions
 
 ### Performance Issues
+
 - Enable incremental scanning
 - Parallelize scans across modules
 - Optimize rule patterns for efficiency
 - Cache dependencies and scan results
 
 ### Integration Failures
+
 - Verify API tokens and credentials
 - Check network connectivity and proxy settings
 - Review SARIF output format compatibility
@@ -218,11 +248,13 @@ semgrep --config p/pci-dss --json -o pci-scan-results.json
 6. Train development team on findings and remediation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

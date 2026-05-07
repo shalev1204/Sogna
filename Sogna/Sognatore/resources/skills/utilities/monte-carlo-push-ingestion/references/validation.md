@@ -100,6 +100,7 @@ Variables (row count):
 (camelCase) in each data point.
 
 Other useful metric names:
+
 - `"total_row_count"` — row count
 - `"total_byte_count"` — byte size
 - `"total_row_count_last_changed_on"` — Unix epoch float of when the row count last changed
@@ -265,6 +266,7 @@ def graphql(query: str, variables: dict, key_id: str, key_token: str) -> dict:
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

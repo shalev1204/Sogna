@@ -11,7 +11,6 @@ id: skill-voice-ai-development
 owner: [[prod-pm]]
 ---
 
-
 # Voice AI Development
 
 Expert in building voice AI applications - from real-time voice agents to voice-enabled apps.
@@ -194,6 +193,7 @@ app = Flask(__name__)
 client = vapi.Vapi(api_key="...")
 
 # Create an assistant
+
 assistant = client.assistants.create(
     name="Support Agent",
     model={
@@ -218,6 +218,7 @@ assistant = client.assistants.create(
 )
 
 # Webhook for conversation events
+
 @app.route("/vapi/webhook", methods=["POST"])
 def vapi_webhook():
     event = request.json
@@ -239,6 +240,7 @@ def vapi_webhook():
     return jsonify({"ok": True})
 
 # Start outbound call
+
 call = client.calls.create(
     assistant_id=assistant.id,
     customer={
@@ -250,10 +252,12 @@ call = client.calls.create(
 )
 
 # Or create web call
+
 web_call = client.calls.create(
     assistant_id=assistant.id,
     type="web"
 )
+
 # Returns URL for WebRTC connection
 
 ### Deepgram STT + ElevenLabs TTS
@@ -267,6 +271,7 @@ from deepgram import DeepgramClient, LiveTranscriptionEvents
 from elevenlabs import ElevenLabs
 
 # Deepgram real-time transcription
+
 deepgram = DeepgramClient(api_key="...")
 
 async def transcribe_stream(audio_stream):
@@ -300,6 +305,7 @@ async def transcribe_stream(audio_stream):
     await connection.finish()
 
 # ElevenLabs streaming synthesis
+
 eleven = ElevenLabs(api_key="...")
 
 def text_to_speech_stream(text: str):
@@ -315,6 +321,7 @@ def text_to_speech_stream(text: str):
         yield chunk
 
 # Or with WebSocket for lowest latency
+
 async def tts_websocket(text_stream):
     async with eleven.text_to_speech.stream_async(
         voice_id="21m00Tcm4TlvDq8ikWAM",
@@ -338,6 +345,7 @@ from livekit import api, rtc
 import asyncio
 
 # Server-side: Create room and tokens
+
 lk_api = api.LiveKitAPI(
     url="wss://your-livekit.livekit.cloud",
     api_key="...",
@@ -363,6 +371,7 @@ def create_token(room_name: str, participant_name: str):
     return token.to_jwt()
 
 # Agent-side: Connect and process audio
+
 async def voice_agent(room_name: str):
     room = rtc.Room()
 
@@ -394,6 +403,7 @@ async def voice_agent(room_name: str):
     return room, speak
 
 # Process audio with STT
+
 async def process_audio(audio_stream):
     async for frame in audio_stream:
         # Send to Deepgram or other STT
@@ -501,10 +511,15 @@ class VoiceAgent:
         # Stop TTS generation
 
 # Latency optimization tips:
+
 # 1. Use streaming everywhere (STT, LLM, TTS)
+
 # 2. Start TTS before LLM finishes (~50 char buffer)
+
 # 3. Use PCM audio format (no encoding overhead)
+
 # 4. Keep WebSocket connections alive
+
 # 5. Use regional endpoints close to users
 
 ## Validation Checks
@@ -589,10 +604,12 @@ Skills: voice-ai-development, langgraph, structured-output
 Workflow:
 
 ```
+
 1. Design agent graph with tools
 2. Add voice interface layer
 3. Use structured output for tool responses
 4. Optimize for voice latency
+
 ```
 
 ### Monitored Voice Agent
@@ -602,10 +619,12 @@ Skills: voice-ai-development, langfuse
 Workflow:
 
 ```
+
 1. Build voice agent with provider of choice
 2. Add Langfuse callbacks
 3. Track latency, quality, conversation flow
 4. Iterate based on metrics
+
 ```
 
 ### Phone-based Agent
@@ -615,10 +634,12 @@ Skills: voice-ai-development, twilio
 Workflow:
 
 ```
+
 1. Set up Vapi or custom agent
 2. Connect to Twilio for PSTN
 3. Handle inbound/outbound calls
 4. Implement call routing logic
+
 ```
 
 ## Related Skills
@@ -626,6 +647,7 @@ Workflow:
 Works well with: `langgraph`, `structured-output`, `langfuse`
 
 ## When to Use
+
 - User mentions or implies: voice ai
 - User mentions or implies: voice agent
 - User mentions or implies: speech to text
@@ -638,11 +660,13 @@ Works well with: `langgraph`, `structured-output`, `langfuse`
 - User mentions or implies: openai realtime
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

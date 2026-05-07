@@ -4,23 +4,26 @@ description: Security audit, hardening, threat modeling (STRIDE/PASTA), Red/Blue
 risk: offensive
 date_added: '2026-03-06'
 tags:
+
 - security
 - audit
 - owasp
 - threat-modeling
 - hardening
 - pentest
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-007
 owner: [[orchestrator]]
 ---
-
 
 # 007 — Licenca para Auditar
 
@@ -113,17 +116,20 @@ Mapeamento  ->  Threat Model  ->  Checklist   ->  Red Team     ->  Blue Team   -
 Antes de qualquer analise, mapear completamente o sistema:
 
 **Entradas e Saidas**
+
 - De onde vem dados? (usuario, API, arquivo, banco, agente, webhook)
 - Para onde vao dados? (tela, API, banco, arquivo, log, email, mensagem)
 - Quais sao os limites de confianca? (trust boundaries)
 
 **Ativos Criticos**
+
 - Segredos (API keys, tokens, passwords, certificates)
 - Dados sensiveis (PII, financeiros, medicos)
 - Infraestrutura (servidores, bancos, filas, storage)
 - Reputacao (contas de bot, dominio, IP)
 
 **Pontos de Execucao**
+
 - Onde ha execucao de codigo (eval, exec, subprocess, child_process)
 - Onde ha chamada de API externa
 - Onde ha acesso a filesystem
@@ -132,6 +138,7 @@ Antes de qualquer analise, mapear completamente o sistema:
 - Onde ha loops e automacoes
 
 **Dependencias Externas**
+
 - Bibliotecas de terceiros (com versoes)
 - APIs externas (com SLA e politicas)
 - Servicos cloud (com permissoes)
@@ -160,6 +167,7 @@ Para cada componente identificado na Fase 1, analisar:
 | **E**levation of Privilege | Pode escalar permissoes? | IDOR, agente acessando tool proibida |
 
 Para cada ameaca identificada, documentar:
+
 - **Vetor de ataque**: como o atacante explora
 - **Impacto**: dano tecnico e de negocio (1-5)
 - **Probabilidade**: chance de ocorrer (1-5)
@@ -190,6 +198,7 @@ python C:\Users\renat\skills\007\scripts\threat_modeler.py --target <caminho> --
 Verificar explicitamente cada item. O checklist adapta-se ao tipo de sistema:
 
 #### Universal (sempre verificar)
+
 - [ ] Segredos fora do codigo (env vars, ecosistema, secrets manager)
 - [ ] Nenhum segredo em logs, URLs, mensagens de erro
 - [ ] Rotacao de chaves definida e documentada
@@ -206,6 +215,7 @@ Verificar explicitamente cada item. O checklist adapta-se ao tipo de sistema:
 - [ ] HTTPS em toda comunicacao externa
 
 #### Python-Especifico
+
 - [ ] Nenhum uso de eval(), exec() com input externo
 - [ ] Nenhum uso de pickle com dados nao confiaveis
 - [ ] subprocess com shell=False
@@ -216,6 +226,7 @@ Verificar explicitamente cada item. O checklist adapta-se ao tipo de sistema:
 - [ ] Nenhum import dinamico de modulos nao confiaveis
 
 #### APIs
+
 - [ ] Autenticacao em todos os endpoints (exceto health check)
 - [ ] Autorizacao por recurso (RBAC/ABAC)
 - [ ] Validacao de payload (schema, tipos, tamanho)
@@ -227,6 +238,7 @@ Verificar explicitamente cada item. O checklist adapta-se ao tipo de sistema:
 - [ ] Protecao contra SSRF, IDOR, injection
 
 #### IA/Agentes
+
 - [ ] Protecao contra prompt injection (system prompt robusto)
 - [ ] Protecao contra jailbreak (guardrails, content filter)
 - [ ] Isolamento entre agentes (sem acesso cruzado a contexto)
@@ -240,6 +252,7 @@ Verificar explicitamente cada item. O checklist adapta-se ao tipo de sistema:
 Pensar como atacante. Para cada vetor, simular o ataque completo:
 
 **Personas de Atacante:**
+
 1. **Usuario malicioso** — tem conta legitima, quer escalar privilegios
 2. **Bot abusivo** — automacao hostil tentando explorar APIs
 3. **Agente comprometido** — um agente do ecossistema foi manipulado
@@ -254,9 +267,11 @@ CENARIO: [nome do ataque]
 PERSONA: [tipo de atacante]
 PRE-REQUISITOS: [o que o atacante precisa ter/saber]
 PASSO A PASSO:
+
   1. [acao do atacante]
   2. [acao do atacante]
   3. ...
+
 RESULTADO: [o que o atacante ganha]
 DANO: [impacto tecnico e de negocio]
 DETECCAO: [como seria detectado / se seria detectado]
@@ -325,6 +340,7 @@ Cada dominio recebe uma nota de 0-100:
 **Score Final** = media ponderada de todos os dominios.
 
 **Vereditos:**
+
 - **90-100**: Aprovado — pronto para producao
 - **70-89**: Aprovado com ressalvas — pode ir para producao com mitigacoes documentadas
 - **50-69**: Bloqueado parcial — precisa correcoes antes de producao
@@ -385,6 +401,7 @@ O 007 sempre responde nesta estrutura:
 Alem de responder a comandos explicitos, o 007 monitora automaticamente:
 
 **Quando ativar sem ser chamado:**
+
 - Novo codigo contendo `eval()`, `exec()`, `subprocess`, `os.system()`
 - Arquivo `.env` ou segredo sendo commitado/modificado
 - Nova dependencia adicionada ao projeto
@@ -394,6 +411,7 @@ Alem de responder a comandos explicitos, o 007 monitora automaticamente:
 - Qualquer codigo que interaja com sistemas de pagamento
 
 **O que fazer quando ativado automaticamente:**
+
 1. Fazer analise rapida focada no componente alterado
 2. Se encontrar risco CRITICO: alertar imediatamente
 3. Se encontrar risco ALTO: alertar com sugestao de correcao
@@ -462,6 +480,7 @@ TEMPO DE RESPOSTA: IMEDIATO
    - Impacto avaliado
    - Acoes tomadas
    - Licoes aprendidas
+
 ```
 
 ## Playbook: Prompt Injection / Jailbreak
@@ -490,6 +509,7 @@ TEMPO DE RESPOSTA: URGENTE
    - Testes de prompt injection no pipeline
    - Monitoramento de comportamento anomalo
    - Limites de iteracao e custo
+
 ```
 
 ## Playbook: Bot Banido (Whatsapp/Instagram/Telegram)
@@ -518,6 +538,7 @@ TEMPO DE RESPOSTA: URGENTE
    - Adicionar monitoramento de metricas de entrega
    - Implementar backoff exponencial
    - Respeitar horarios e limites da plataforma
+
 ```
 
 ## Playbook: Webhook Falso / Replay Attack
@@ -546,6 +567,7 @@ TEMPO DE RESPOSTA: URGENTE
    - Nonce + timestamp em cada request
    - Monitoramento de volume anomalo
    - Alertas para webhooks de fontes desconhecidas
+
 ```
 
 ## Comandos Rapidos
@@ -626,6 +648,7 @@ Documentacao tecnica detalhada por dominio:
 ## Governanca Do 007
 
 O proprio 007 pratica o que prega:
+
 - Todas as auditorias sao registradas em `data/audit_log.json`
 - Scores historicos em `data/score_history.json` para tendencias
 - Relatorios salvos em `data/reports/`
@@ -652,11 +675,13 @@ O proprio 007 pratica o que prega:
 - `matematico-tao` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -11,7 +11,6 @@ id: skill-browser-extension-builder
 owner: [[orchestrator]]
 ---
 
-
 # Browser Extension Builder
 
 Expert in building browser extensions that solve real problems - Chrome, Firefox,
@@ -56,6 +55,7 @@ Structure for modern browser extensions
 ## Extension Architecture
 
 ### Project Structure
+
 ```
 extension/
 ├── manifest.json      # Extension config
@@ -77,6 +77,7 @@ extension/
 ```
 
 ### Manifest V3 Template
+
 ```json
 {
   "manifest_version": 3,
@@ -104,6 +105,7 @@ extension/
 ```
 
 ### Communication Pattern
+
 ```
 Popup ←→ Background (Service Worker) ←→ Content Script
               ↓
@@ -119,6 +121,7 @@ Code that runs on web pages
 ## Content Scripts
 
 ### Basic Content Script
+
 ```javascript
 // content.js - Runs on every matched page
 
@@ -142,6 +145,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 ```
 
 ### Injecting UI
+
 ```javascript
 // Create floating UI on page
 function injectUI() {
@@ -166,6 +170,7 @@ injectUI();
 ```
 
 ### Permissions for Content Scripts
+
 ```json
 {
   "content_scripts": [{
@@ -185,6 +190,7 @@ Persisting extension data
 ## Storage and State
 
 ### Chrome Storage API
+
 ```javascript
 // Save data
 chrome.storage.local.set({ key: 'value' }, () => {
@@ -208,12 +214,14 @@ chrome.storage.onChanged.addListener((changes, area) => {
 ```
 
 ### Storage Limits
+
 | Type | Limit |
 |------|-------|
 | local | 5MB |
 | sync | 100KB total, 8KB per item |
 
 ### Async/Await Pattern
+
 ```javascript
 // Modern async wrapper
 async function getStorage(keys) {
@@ -242,6 +250,7 @@ Making money from extensions
 ## Extension Monetization
 
 ### Revenue Models
+
 | Model | How It Works |
 |-------|--------------|
 | Freemium | Free basic, paid features |
@@ -251,6 +260,7 @@ Making money from extensions
 | Affiliate | Recommend products |
 
 ### Payment Integration
+
 ```javascript
 // Use your backend for payments
 // Extension can't directly use Stripe
@@ -275,6 +285,7 @@ async function checkPremium() {
 ```
 
 ### Feature Gating
+
 ```javascript
 async function usePremiumFeature() {
   const { isPremium } = await getStorage(['isPremium']);
@@ -287,6 +298,7 @@ async function usePremiumFeature() {
 ```
 
 ### Chrome Web Store Payments
+
 - Chrome discontinued built-in payments
 - Use your own payment system
 - Link to external checkout page
@@ -349,12 +361,14 @@ Skills: browser-extension-builder, frontend, micro-saas-launcher
 Workflow:
 
 ```
+
 1. Define extension functionality
 2. Build popup UI with React
 3. Implement content scripts
 4. Add premium features
 5. Publish to Chrome Web Store
 6. Market and iterate
+
 ```
 
 ### AI Browser Assistant
@@ -364,12 +378,14 @@ Skills: browser-extension-builder, ai-wrapper-product, frontend
 Workflow:
 
 ```
+
 1. Design AI features for browser
 2. Build extension architecture
 3. Integrate AI API
 4. Create popup interface
 5. Handle usage limits/payments
 6. Publish and grow
+
 ```
 
 ## Related Skills
@@ -377,6 +393,7 @@ Workflow:
 Works well with: `frontend`, `micro-saas-launcher`, `personal-tool-builder`
 
 ## When to Use
+
 - User mentions or implies: browser extension
 - User mentions or implies: chrome extension
 - User mentions or implies: firefox addon
@@ -384,11 +401,13 @@ Works well with: `frontend`, `micro-saas-launcher`, `personal-tool-builder`
 - User mentions or implies: manifest v3
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

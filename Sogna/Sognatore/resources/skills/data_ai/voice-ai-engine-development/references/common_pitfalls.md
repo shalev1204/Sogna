@@ -12,22 +12,27 @@ This document covers common issues encountered when building voice AI engines an
 ## 1. Audio Jumping/Cutting Off
 
 ### Problem
+
 The bot's audio jumps or cuts off mid-response, creating a jarring user experience.
 
 ### Symptoms
+
 - Audio plays in fragments
 - Sentences are incomplete
 - Multiple audio streams overlap
 - Unnatural pauses or gaps
 
 ### Root Cause
+
 Sending text to the synthesizer in small chunks (sentence-by-sentence or word-by-word) causes multiple TTS API calls. Each call generates a separate audio stream, resulting in:
+
 - Multiple audio files being played sequentially
 - Timing issues between chunks
 - Potential overlapping audio
 - Inconsistent voice characteristics between chunks
 
 ### Solution
+
 Buffer the entire LLM response before sending it to the synthesizer:
 
 **❌ Bad: Yields sentence-by-sentence**
@@ -51,6 +56,7 @@ async def generate_response(self, prompt):
 ```
 
 ### Why This Works
+
 - Single TTS call for the entire response
 - Consistent voice characteristics
 - Proper timing and pacing
@@ -61,32 +67,41 @@ async def generate_response(self, prompt):
 ## 2. Echo/Feedback Loop
 
 ### Problem
+
 The bot hears itself speaking and responds to its own audio, creating an infinite loop.
 
 ### Symptoms
+
 - Bot responds to its own speech
 - Conversation becomes nonsensical
 - Transcriptions include bot's own words
 - System becomes unresponsive
 
 ### Root Cause
+
 The transcriber continues to process audio while the bot is speaking. If the bot's audio is being played through speakers and captured by the microphone, the transcriber will transcribe the bot's own speech.
 
 ### Solution
+
 Mute the transcriber when the bot starts speaking:
 
 ```python
+
 # Before sending audio to output
+
 self.transcriber.mute()
 
 # Send audio...
+
 await self.send_speech_to_output(synthesis_result)
 
 # After audio playback complete
+
 self.transcriber.unmute()
 ```
 
 ### Implementation in Transcriber
+
 ```python
 class BaseTranscriber:
     def __init__(self):
@@ -114,6 +129,7 @@ class BaseTranscriber:
 ```
 
 ### Why This Works
+
 - Transcriber receives silence while bot speaks
 - No transcription of bot's own speech
 - Prevents feedback loop
@@ -124,18 +140,22 @@ class BaseTranscriber:
 ## 3. Interrupts Not Working
 
 ### Problem
+
 Users cannot interrupt the bot mid-sentence. The bot continues speaking even when the user starts talking.
 
 ### Symptoms
+
 - Bot speaks over user
 - User must wait for bot to finish
 - Unnatural conversation flow
 - Poor user experience
 
 ### Root Cause
+
 All audio chunks are sent to the client immediately, buffering the entire message on the client side. By the time an interrupt is detected, all audio has already been sent and is queued for playback.
 
 ### Solution
+
 Rate-limit audio chunks to match real-time playback:
 
 **❌ Bad: Send all chunks immediately**
@@ -169,21 +189,27 @@ async for chunk in synthesis_result.chunk_generator:
 ```
 
 ### Why This Works
+
 - Only one chunk is buffered on client at a time
 - Interrupts can stop mid-sentence
 - Natural conversation flow
 - Real-time playback maintained
 
 ### Calculating `seconds_per_chunk`
+
 ```python
+
 # For LINEAR16 PCM audio at 16kHz
+
 sample_rate = 16000  # Hz
 chunk_size = 1024    # bytes
 bytes_per_sample = 2  # 16-bit = 2 bytes
 
 samples_per_chunk = chunk_size / bytes_per_sample
 seconds_per_chunk = samples_per_chunk / sample_rate
+
 # = 1024 / 2 / 16000 = 0.032 seconds
+
 ```
 
 ---
@@ -191,18 +217,22 @@ seconds_per_chunk = samples_per_chunk / sample_rate
 ## 4. Memory Leaks from Unclosed Streams
 
 ### Problem
+
 Memory usage grows over time, eventually causing the application to crash.
 
 ### Symptoms
+
 - Increasing memory usage
 - Slow performance over time
 - WebSocket connections not closing
 - Resource exhaustion
 
 ### Root Cause
+
 WebSocket connections, API streams, or async tasks are not properly closed when conversations end or errors occur.
 
 ### Solution
+
 Always use context managers and cleanup:
 
 **❌ Bad: No cleanup**
@@ -238,6 +268,7 @@ async def handle_conversation(websocket):
 ```
 
 ### Proper Termination
+
 ```python
 async def terminate(self):
     """Gracefully shut down all workers"""
@@ -266,18 +297,22 @@ async def terminate(self):
 ## 5. Conversation History Not Updating
 
 ### Problem
+
 The agent doesn't remember previous messages or context is lost.
 
 ### Symptoms
+
 - Agent repeats itself
 - No context from previous messages
 - Each response is independent
 - Poor conversation quality
 
 ### Root Cause
+
 Conversation history is not being maintained or updated correctly.
 
 ### Solution
+
 Maintain conversation history in the agent:
 
 ```python
@@ -305,6 +340,7 @@ class Agent:
 ```
 
 ### Handling Interrupts
+
 When the bot is interrupted, update history with partial message:
 
 ```python
@@ -321,21 +357,25 @@ def update_last_bot_message_on_cut_off(self, partial_message):
 ## 6. WebSocket Connection Drops
 
 ### Problem
+
 WebSocket connections drop unexpectedly, interrupting conversations.
 
 ### Symptoms
+
 - Frequent disconnections
 - Connection timeouts
 - "Connection closed" errors
 - Unstable conversations
 
 ### Root Cause
+
 - No heartbeat/ping mechanism
 - Idle timeout
 - Network issues
 - Server overload
 
 ### Solution
+
 Implement heartbeat and reconnection:
 
 ```python
@@ -367,9 +407,11 @@ async def conversation_endpoint(websocket: WebSocket):
 ## 7. High Latency / Slow Responses
 
 ### Problem
+
 Long delays between user speech and bot response.
 
 ### Symptoms
+
 - Noticeable lag
 - Poor user experience
 - Conversation feels unnatural
@@ -379,31 +421,41 @@ Long delays between user speech and bot response.
 
 **1. Not using streaming**
 ```python
+
 # ❌ Bad: Wait for entire response
+
 response = await llm.complete(prompt)
 
 # ✅ Good: Stream response
+
 async for chunk in llm.complete(prompt, stream=True):
     yield chunk
 ```
 
 **2. Sequential processing**
 ```python
+
 # ❌ Bad: Sequential
+
 transcription = await transcriber.transcribe(audio)
 response = await agent.generate(transcription)
 audio = await synthesizer.synthesize(response)
 
 # ✅ Good: Concurrent with queues
+
 # All workers run simultaneously
+
 ```
 
 **3. Large chunk sizes**
 ```python
+
 # ❌ Bad: Large chunks (high latency)
+
 chunk_size = 8192  # 0.25 seconds
 
 # ✅ Good: Small chunks (low latency)
+
 chunk_size = 1024  # 0.032 seconds
 ```
 
@@ -412,9 +464,11 @@ chunk_size = 1024  # 0.032 seconds
 ## 8. Audio Quality Issues
 
 ### Problem
+
 Poor audio quality, distortion, or artifacts.
 
 ### Symptoms
+
 - Robotic voice
 - Crackling or popping
 - Distorted audio
@@ -424,14 +478,18 @@ Poor audio quality, distortion, or artifacts.
 
 **1. Wrong audio format**
 ```python
+
 # ✅ Use LINEAR16 PCM at 16kHz
+
 audio_encoding = AudioEncoding.LINEAR16
 sample_rate = 16000
 ```
 
 **2. Incorrect format conversion**
 ```python
+
 # ✅ Proper MP3 to PCM conversion
+
 from pydub import AudioSegment
 import io
 
@@ -445,7 +503,9 @@ def mp3_to_pcm(mp3_bytes):
 
 **3. Buffer underruns**
 ```python
+
 # ✅ Ensure consistent chunk timing
+
 await asyncio.sleep(max(seconds_per_chunk - processing_time, 0))
 ```
 
@@ -478,6 +538,7 @@ await asyncio.sleep(max(seconds_per_chunk - processing_time, 0))
 8. **Always implement error handling** in worker loops
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-blockrun
 owner: [[orchestrator]]
 ---
 
-
 # BlockRun
 
 **BlockRun works with Claude Code and Google Sognatore.**
@@ -39,6 +38,7 @@ client = setup_agent_wallet()
 budget = 1.0  # User's budget
 
 # Before each call, check if within budget
+
 spending = client.get_spending()
 if spending['total_usd'] >= budget:
     print(f"Budget reached: ${spending['total_usd']:.4f} spent")
@@ -47,11 +47,13 @@ else:
     response = client.chat("openai/gpt-5.2", "Hello!")
 
 # At the end, report spending
+
 spending = client.get_spending()
 print(f"💰 Total spent: ${spending['total_usd']:.4f} across {spending['calls']} calls")
 ```
 
 ## When to Use
+
 | Trigger | Your Action |
 |---------|-------------|
 | User explicitly requests ("blockrun second opinion with GPT on...", "use grok to check...", "generate image with dall-e") | Execute via BlockRun |
@@ -95,6 +97,7 @@ print(f"Wallet: {client.get_wallet_address()}")
 from blockrun_llm import generate_wallet_qr_ascii, get_wallet_address
 
 # ASCII QR for terminal display
+
 print(generate_wallet_qr_ascii(get_wallet_address()))
 ```
 
@@ -103,6 +106,7 @@ print(generate_wallet_qr_ascii(get_wallet_address()))
 **Prerequisite:** Install the SDK with `pip install blockrun-llm`
 
 ### Basic Chat
+
 ```python
 from blockrun_llm import setup_agent_wallet
 
@@ -111,6 +115,7 @@ response = client.chat("openai/gpt-5.2", "What is 2+2?")
 print(response)
 
 # Check spending
+
 spending = client.get_spending()
 print(f"Spent ${spending['total_usd']:.4f}")
 ```
@@ -125,6 +130,7 @@ from blockrun_llm import setup_agent_wallet
 client = setup_agent_wallet()
 
 # Simple: Enable live search with search=True
+
 response = client.chat(
     "xai/grok-3",
     "What are the latest posts from @blockrunai on X?",
@@ -160,6 +166,7 @@ print(response)
 ```
 
 ### Image Generation
+
 ```python
 from blockrun_llm import ImageClient
 
@@ -174,7 +181,9 @@ Live Search is xAI's real-time data API. Cost: **$0.025 per source** (default 10
 
 To reduce costs, set `max_search_results` to a lower value:
 ```python
+
 # Only use 5 sources (~$0.13)
+
 response = client.chat("xai/grok-3", "What's trending?",
     search_parameters={"mode": "on", "max_search_results": 5})
 ```
@@ -262,14 +271,17 @@ All LLM costs are per million tokens (M = 1,000,000 tokens).
 **Wallet location:** `$HOME/.blockrun/.session` (e.g., `/Users/username/.blockrun/.session`)
 
 **First-time setup:**
+
 1. Wallet auto-creates when `setup_agent_wallet()` is called
 2. Check wallet and balance:
+
 ```python
 from blockrun_llm import setup_agent_wallet
 client = setup_agent_wallet()
 print(f"Wallet: {client.get_wallet_address()}")
 print(f"Balance: ${client.get_balance():.2f} USDC")
 ```
+
 3. Fund wallet with $1-5 USDC on Base network
 
 **Show QR code for funding (ASCII for terminal):**
@@ -296,11 +308,13 @@ pip install --upgrade blockrun-llm
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

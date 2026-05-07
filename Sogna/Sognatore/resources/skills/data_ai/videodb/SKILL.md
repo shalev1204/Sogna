@@ -12,7 +12,6 @@ id: skill-videodb
 owner: [[orchestrator]]
 ---
 
-
 # VideoDB Skill
 
 **Perception + memory + actions for video, live streams, and desktop sessions.**
@@ -20,43 +19,51 @@ owner: [[orchestrator]]
 Use this skill when you need to:
 
 ## When to Use
+
 - You need video or audio perception, indexing, search, or timeline editing from files, URLs, desktop sessions, or live streams.
 - The task involves timestamps, searchable evidence, subtitles, clips, overlays, or real-time monitoring alerts.
 - You want one workflow that combines ingestion, understanding, retrieval, and media actions.
 
 ## 1) Desktop Perception
+
 - Start/stop a **desktop session** capturing **screen, mic, and system audio**
 - Stream **live context** and store **episodic session memory**
 - Run **real-time alerts/triggers** on what's spoken and what's happening on screen
 - Produce **session summaries**, a searchable timeline, and **playable evidence links**
 
 ## 2) Video ingest + stream
+
 - Ingest a **file or URL** and return a **playable web stream link**
 - Transcode/normalize: **codec, bitrate, fps, resolution, aspect ratio**
 
 ## 3) Index + search (timestamps + evidence)
+
 - Build **visual**, **spoken**, and **keyword** indexes
 - Search and return exact moments with **timestamps** and **playable evidence**
 - Auto-create **clips** from search results
 
 ## 4) Timeline editing + generation
+
 - Subtitles: **generate**, **translate**, **burn-in**
 - Overlays: **text/image/branding**, motion captions
 - Audio: **background music**, **voiceover**, **dubbing**
 - Programmatic composition and exports via **timeline operations**
 
 ## 5) Live streams (RTSP) + monitoring
+
 - Connect **RTSP/live feeds**
 - Run **real-time visual and spoken understanding** and emit **events/alerts** for monitoring workflows
 
 ---
 
 ## Common inputs
+
 - Local **file path**, public **URL**, or **RTSP URL**
 - Desktop capture request: **start / stop / summarize session**
 - Desired operations: get context for understanding, transcode spec, index spec, search query, clip ranges, timeline edits, alert rules
 
 ## Common outputs
+
 - **Stream URL**
 - Search results with **timestamps** and **evidence links**
 - Generated assets: subtitles, audio, images, clips
@@ -66,6 +73,7 @@ Use this skill when you need to:
 ---
 
 ## Canonical prompts (examples)
+
 - "Start desktop capture and alert when a password field appears."
 - "Record my session and produce an actionable summary when it ends."
 - "Ingest this file and return a playable stream link."
@@ -86,6 +94,7 @@ conn = videodb.connect()
 ```
 
 This reads `VIDEO_DB_API_KEY` from:
+
 1. Environment (if already exported)
 2. Project's `.env` file in current directory
 
@@ -139,20 +148,26 @@ Get a free API key at https://console.videodb.io (50 free uploads, no credit car
 ### Upload media
 
 ```python
+
 # URL
+
 video = coll.upload(url="https://example.com/video.mp4")
 
 # YouTube
+
 video = coll.upload(url="https://www.youtube.com/watch?v=VIDEO_ID")
 
 # Local file
+
 video = coll.upload(file_path="/path/to/video.mp4")
 ```
 
 ### Transcript + subtitle
 
 ```python
+
 # force=True skips the error if the video is already indexed
+
 video.index_spoken_words(force=True)
 text = video.get_transcript_text()
 stream_url = video.add_subtitle()
@@ -166,7 +181,9 @@ from videodb.exceptions import InvalidRequestError
 video.index_spoken_words(force=True)
 
 # search() raises InvalidRequestError when no results are found.
+
 # Always wrap in try/except and treat "No results found" as empty.
+
 try:
     results = video.search("product demo")
     shots = results.get_shots()
@@ -186,7 +203,9 @@ from videodb import SearchType, IndexType, SceneExtractionType
 from videodb.exceptions import InvalidRequestError
 
 # index_scenes() has no force parameter — it raises an error if a scene
+
 # index already exists. Extract the existing index ID from the error.
+
 try:
     scene_index_id = video.index_scenes(
         extraction_type=SceneExtractionType.shot_based,
@@ -200,6 +219,7 @@ except Exception as e:
         raise
 
 # Use score_threshold to filter low-relevance noise (recommended: 0.3+)
+
 try:
     results = video.search(
         query="person writing on a whiteboard",
@@ -220,6 +240,7 @@ except InvalidRequestError as e:
 ### Timeline editing
 
 **Important:** Always validate timestamps before building a timeline:
+
 - `start` must be >= 0 (negative values are silently accepted but produce broken output)
 - `start` must be < `end`
 - `end` must be <= `video.length`
@@ -240,6 +261,7 @@ stream_url = timeline.generate_stream()
 from videodb import TranscodeMode, VideoConfig, AudioConfig
 
 # Change resolution, quality, or aspect ratio server-side
+
 job_id = conn.transcode(
     source="https://example.com/video.mp4",
     callback_url="https://example.com/webhook",
@@ -253,6 +275,7 @@ job_id = conn.transcode(
 
 **Warning:** `reframe()` is a slow server-side operation. For long videos it can take
 several minutes and may time out. Best practices:
+
 - Always limit to a short segment using `start`/`end` when possible
 - For full-length videos, use `callback_url` for async processing
 - Trim the video on a `Timeline` first, then reframe the shorter result
@@ -261,15 +284,19 @@ several minutes and may time out. Best practices:
 from videodb import ReframeMode
 
 # Always prefer reframing a short segment:
+
 reframed = video.reframe(start=0, end=60, target="vertical", mode=ReframeMode.smart)
 
 # Async reframe for full-length videos (returns None, result via webhook):
+
 video.reframe(target="vertical", callback_url="https://example.com/webhook")
 
 # Presets: "vertical" (9:16), "square" (1:1), "landscape" (16:9)
+
 reframed = video.reframe(start=0, end=60, target="square")
 
 # Custom dimensions
+
 reframed = video.reframe(start=0, end=60, target={"width": 1280, "height": 720})
 ```
 
@@ -342,9 +369,11 @@ import json
 events = [json.loads(l) for l in open("/tmp/videodb_events.jsonl")]
 
 # Get all transcripts
+
 transcripts = [e["data"]["text"] for e in events if e.get("channel") == "transcript"]
 
 # Get visual descriptions from last 5 minutes
+
 import time
 cutoff = time.time() - 300
 recent_visual = [e for e in events 
@@ -378,11 +407,13 @@ https://github.com/video-db/skills
 **Maintained By:** [VideoDB](https://github.com/video-db)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

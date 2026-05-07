@@ -14,6 +14,7 @@ TRL (Transformer Reinforcement Learning) provides multiple training methods for 
 **What it is:** Standard instruction tuning with supervised learning on demonstration data.
 
 **When to use:**
+
 - Initial fine-tuning of base models on task-specific data
 - Teaching new capabilities or domains
 - Most common starting point for fine-tuning
@@ -48,6 +49,7 @@ trainer.train()
 **What it is:** Alignment method that trains directly on preference pairs (chosen vs rejected responses) without requiring a reward model.
 
 **When to use:**
+
 - Aligning models to human preferences
 - Improving response quality after SFT
 - Have paired preference data (chosen/rejected responses)
@@ -81,6 +83,7 @@ trainer.train()
 **What it is:** Online RL method that optimizes relative to group performance, useful for tasks with verifiable rewards.
 
 **When to use:**
+
 - Tasks with automatic reward signals (code execution, math verification)
 - Online learning scenarios
 - When DPO offline data is insufficient
@@ -89,7 +92,9 @@ trainer.train()
 
 **Example:**
 ```python
+
 # Use TRL maintained script
+
 hf_jobs("uv", {
     "script": "https://raw.githubusercontent.com/huggingface/trl/main/examples/scripts/grpo.py",
     "script_args": [
@@ -111,6 +116,7 @@ hf_jobs("uv", {
 **What it is:** Train a reward model to score responses, used as a component in RLHF pipelines.
 
 **When to use:**
+
 - Building RLHF pipeline
 - Need automatic quality scoring
 - Creating reward signals for PPO training
@@ -132,11 +138,13 @@ hf_jobs("uv", {
 ## Recommended Pipeline
 
 **For most use cases:**
+
 1. **Start with SFT** - Fine-tune base model on task data
 2. **Follow with DPO** - Align to preferences using paired data
 3. **Optional: GGUF conversion** - Deploy for local inference
 
 **For advanced RL scenarios:**
+
 1. **Start with SFT** - Fine-tune base model
 2. **Train reward model** - On preference data
 
@@ -162,6 +170,7 @@ uv run https://huggingface.co/datasets/mcp-tools/skills/raw/main/dataset_inspect
 - [Dataset Inspector](https://huggingface.co/datasets/mcp-tools/skills/raw/main/dataset_inspector.py) - Dataset format validation tool
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

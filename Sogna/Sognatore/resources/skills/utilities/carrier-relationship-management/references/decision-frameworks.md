@@ -49,11 +49,13 @@ price scenarios to expose hidden costs and FSC manipulation.
 
 ```
 Total Cost per Shipment = Linehaul Rate
+
                         + Fuel Surcharge (at given diesel price)
                         + Expected Detention (avg hours × rate × frequency)
                         + Expected Accessorials (liftgate, residential, etc. × frequency)
                         + Reweigh/Reclass Fees (LTL — frequency × cost)
                         + Payment Term Cost (if offering quick-pay discount)
+
 ```
 
 #### Diesel Price Scenario Modeling
@@ -205,19 +207,24 @@ guide executes itself; a poorly designed one requires constant manual interventi
 #### Tender Waterfall Logic
 
 ```
+
 1. Tender to Primary Carrier
+
    → If accepted within 2 hours: assign
    → If rejected or no response:
 
 2. Tender to Secondary Carrier
+
    → If accepted within 1.5 hours: assign
    → If rejected or no response:
 
 3. Tender to Tertiary Carrier
+
    → If accepted within 1 hour: assign
    → If rejected or no response:
 
 4. Move to Spot Procurement
+
    → Post to carrier board or contact preferred spot carriers
    → Set rate ceiling at tertiary contract rate + 15%
    → If no coverage within 2 hours at ceiling: escalate to manager
@@ -541,6 +548,7 @@ ALWAYS: vet the spot carrier (FMCSA check, rate confirmation signed before dispa
 | TMS | Transportation Management System — software for managing freight operations and carrier relationships |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

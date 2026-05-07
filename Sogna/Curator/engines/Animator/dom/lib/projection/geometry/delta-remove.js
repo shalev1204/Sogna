@@ -1,5 +1,5 @@
-import { MixNumber as mixNumber } from "../../utils/mix/number.js";
-import { Percent as percent } from "../../value/types/numbers/units.js";
+import { MixNumber } from "../../utils/mix/number.js";
+import { Percent } from "../../value/types/numbers/units.js";
 import { scalePoint } from "./delta-apply.js";
 /**
  * Remove a delta from a point. This is essentially the steps of applyPointDelta in reverse
@@ -16,14 +16,14 @@ export function removePointDelta(point, translate, scale, originPoint, boxScale)
  * Remove a delta from an axis. This is essentially the steps of applyAxisDelta in reverse
  */
 export function removeAxisDelta(axis, translate = 0, scale = 1, origin = 0.5, boxScale, originAxis = axis, sourceAxis = axis) {
-    if (percent.test(translate)) {
+    if (Percent.test(translate)) {
         translate = parseFloat(translate);
-        const relativeProgress = mixNumber(sourceAxis.min, sourceAxis.max, translate / 100);
+        const relativeProgress = MixNumber(sourceAxis.min, sourceAxis.max, translate / 100);
         translate = relativeProgress - sourceAxis.min;
     }
     if (typeof translate !== "number")
         return;
-    let originPoint = mixNumber(originAxis.min, originAxis.max, origin);
+    let originPoint = MixNumber(originAxis.min, originAxis.max, origin);
     if (axis === originAxis)
         originPoint -= translate;
     axis.min = removePointDelta(axis.min, translate, scale, originPoint, boxScale);

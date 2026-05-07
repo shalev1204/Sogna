@@ -43,7 +43,9 @@ select pg_reload_conf();
 For pooled connections, configure at the pooler level:
 
 ```ini
+
 # pgbouncer.ini
+
 server_idle_timeout = 60
 client_idle_timeout = 300
 ```
@@ -51,6 +53,7 @@ client_idle_timeout = 300
 Reference: [Connection Timeouts](https://www.postgresql.org/docs/current/runtime-config-client.html#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

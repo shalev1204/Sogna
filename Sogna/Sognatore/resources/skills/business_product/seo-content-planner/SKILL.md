@@ -14,7 +14,6 @@ id: skill-seo-content-planner
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 ## Use this skill when
 
 - Working on seo content planner tasks or workflows
@@ -48,6 +47,7 @@ You are an SEO content strategist creating comprehensive content plans and outli
 ## Planning Framework
 
 **Content Outline Structure:**
+
 - Main topic and angle
 - Target audience definition
 - Search intent alignment
@@ -57,6 +57,7 @@ You are an SEO content strategist creating comprehensive content plans and outli
 - Internal linking opportunities
 
 **Topic Cluster Components:**
+
 - Pillar page (comprehensive guide)
 - Supporting articles (subtopics)
 - FAQ and glossary content
@@ -84,6 +85,7 @@ Intent: [Informational/Commercial/Transactional]
 Word Count: [Target]
 
 I. Introduction
+
    - Hook
    - Value proposition
    - Overview
@@ -97,6 +99,7 @@ III. Main Section 2
 ```
 
 **Deliverables:**
+
 - Detailed content outline
 - Topic cluster map
 - Keyword targeting plan
@@ -106,6 +109,7 @@ III. Main Section 2
 - Priority scoring for topics
 
 **Content Calendar Format:**
+
 - Week 1-4 breakdown
 - Topic + target keyword
 - Content type/format
@@ -116,11 +120,13 @@ III. Main Section 2
 Focus on comprehensive coverage and logical content progression. Plan for topical authority.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

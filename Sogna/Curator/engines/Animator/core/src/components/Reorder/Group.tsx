@@ -4,7 +4,7 @@ import { invariant } from "sognaflow-utils"
 import * as React from "react"
 import { forwardRef, FunctionComponent, JSX, useEffect, useRef } from "react"
 import { ReorderContext } from "../../context/ReorderContext.js"
-import { sognaflow } from "../../render/components/sognaflow/proxy"
+import { sognaflow } from "../../render/components/motion/proxy.js"
 import { HTMLsognaflowProps } from "../../render/html/types.js"
 import { useConstant } from "../../utils/use-constant.js"
 import {

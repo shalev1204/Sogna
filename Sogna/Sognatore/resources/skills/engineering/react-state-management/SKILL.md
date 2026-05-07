@@ -8,7 +8,6 @@ id: skill-react-state-management
 owner: [[orchestrator]]
 ---
 
-
 # React State Management
 
 Comprehensive guide to modern React state management patterns, from local component state to global stores and server state synchronization.
@@ -409,6 +408,7 @@ function Dashboard() {
 ## Best Practices
 
 ### Do's
+
 - **Colocate state** - Keep state as close to where it's used as possible
 - **Use selectors** - Prevent unnecessary re-renders with selective subscriptions
 - **Normalize data** - Flatten nested structures for easier updates
@@ -416,6 +416,7 @@ function Dashboard() {
 - **Separate concerns** - Server state (React Query) vs client state (Zustand)
 
 ### Don'ts
+
 - **Don't over-globalize** - Not everything needs to be in global state
 - **Don't duplicate server state** - Let React Query manage it
 - **Don't mutate directly** - Always use immutable updates
@@ -460,11 +461,13 @@ const todosSlice = createSlice({
 - [TanStack Query](https://tanstack.com/query)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

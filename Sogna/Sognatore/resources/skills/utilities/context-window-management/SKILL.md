@@ -9,7 +9,6 @@ id: skill-context-window-management
 owner: [[orchestrator]]
 ---
 
-
 # Context Window Management
 
 Strategies for managing LLM context windows including summarization, trimming, routing, and avoiding context rot
@@ -175,6 +174,7 @@ async function smartSummarize(
     if (summarizePool.length > 0) {
         const summary = await llm.complete(`
             Summarize these messages, preserving:
+
             - Any user preferences or decisions
             - Key facts that might be referenced later
             - The overall flow of conversation
@@ -294,10 +294,12 @@ Skills: context-window-management, rag-implementation, conversation-memory, prom
 Workflow:
 
 ```
+
 1. Design context strategy
 2. Implement RAG for large corpuses
 3. Set up memory persistence
 4. Add caching for performance
+
 ```
 
 ## Related Skills
@@ -305,6 +307,7 @@ Workflow:
 Works well with: `rag-implementation`, `conversation-memory`, `prompt-caching`, `llm-npc-dialogue`
 
 ## When to Use
+
 - User mentions or implies: context window
 - User mentions or implies: token limit
 - User mentions or implies: context management
@@ -313,11 +316,13 @@ Works well with: `rag-implementation`, `conversation-memory`, `prompt-caching`, 
 - User mentions or implies: context overflow
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

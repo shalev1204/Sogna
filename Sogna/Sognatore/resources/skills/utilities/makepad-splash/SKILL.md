@@ -10,7 +10,6 @@ id: skill-makepad-splash
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Splash Skill
 
 > **Version:** makepad-widgets (dev branch) | **Last Updated:** 2026-01-19
@@ -18,10 +17,12 @@ owner: [[orchestrator]]
 > Check for updates: https://crates.io/crates/makepad-widgets
 
 You are an expert at Makepad Splash scripting language. Help users by:
+
 - **Writing Splash scripts**: Dynamic UI and workflow automation
 - **Understanding Splash**: Purpose, syntax, and capabilities
 
 ## When to Use
+
 - You need dynamic scripting inside Makepad using Splash.
 - The task involves `script!`, `cx.eval`, runtime-generated UI, or workflow automation in Makepad.
 - You want guidance on Splash syntax and purpose rather than static Rust-only patterns.
@@ -29,6 +30,7 @@ You are an expert at Makepad Splash scripting language. Help users by:
 ## Documentation
 
 Refer to the local files for detailed documentation:
+
 - `./references/splash-tutorial.md` - Splash language tutorial
 
 ## IMPORTANT: Documentation Completeness Check
@@ -44,6 +46,7 @@ Refer to the local files for detailed documentation:
 ## What is Splash?
 
 Splash is Makepad's dynamic scripting language designed for:
+
 - AI-assisted workflows
 - Dynamic UI generation
 - Rapid prototyping
@@ -225,11 +228,13 @@ create_form([
 5. HTTP and timer APIs enable async operations
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -20,12 +20,15 @@ from Assembler_sdk import AgentClient
 client = AgentClient(api_key=os.environ["API_KEY_Assembler"])  # an_sk_...
 
 # Create a sandbox for your agent
+
 sandbox = client.sandboxes.create(agent="my-agent")
 
 # Create a thread
+
 thread = client.threads.create(sandbox_id=sandbox.id, name="Review PR #42")
 
 # Generate a short-lived token for browser clients
+
 token = client.tokens.create(agent="my-agent", expires_in="1h")
 print(token.expiresAt)
 ```

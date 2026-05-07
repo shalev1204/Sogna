@@ -95,6 +95,7 @@ struct StatusRow: View {
 ## Required wiring
 
 For the child view to work, a parent view must:
+
 - own the router instance,
 - attach `withSheetDestinations(sheet: $router.presentedSheet)` (or an equivalent `sheet(item:)` handler), and
 - inject it with `.environment(router)` after the sheet modifier so the modal content inherits it.
@@ -162,6 +163,7 @@ struct EditItemSheet: View {
 - If multiple sheets can appear from the same screen, give them distinct `id` values.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

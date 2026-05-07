@@ -7,7 +7,6 @@ id: skill-n8n-code-javascript
 owner: [[orchestrator]]
 ---
 
-
 # JavaScript Code Node
 
 Expert guidance for writing JavaScript code in n8n Code nodes.
@@ -70,6 +69,7 @@ return [{
 ```
 
 **When to use:**
+
 - ✅ Comparing items across the dataset
 - ✅ Calculating totals, averages, or statistics
 - ✅ Sorting or ranking items
@@ -100,12 +100,14 @@ return [{
 ```
 
 **When to use:**
+
 - ✅ Each item needs independent API call
 - ✅ Per-item validation with different error handling
 - ✅ Item-specific transformations based on item properties
 - ✅ When items must be processed separately for business logic
 
 **Decision Shortcut:**
+
 - **Need to look at multiple items?** → Use "All Items" mode
 - **Each item completely independent?** → Use "Each Item" mode
 - **Not sure?** → Use "All Items" mode (you can always loop inside)
@@ -289,6 +291,7 @@ return [{data: value}];  // Should be {json: value}
 Based on production workflows, here are the most useful patterns:
 
 ### 1. Multi-Source Data Aggregation
+
 Combine data from multiple APIs, webhooks, or nodes
 
 ```javascript
@@ -312,6 +315,7 @@ return results;
 ```
 
 ### 2. Filtering with Regex
+
 Extract patterns, mentions, or keywords from text
 
 ```javascript
@@ -333,6 +337,7 @@ return [{json: {matches}}];
 ```
 
 ### 3. Data Transformation & Enrichment
+
 Map fields, normalize formats, add computed fields
 
 ```javascript
@@ -354,6 +359,7 @@ return items.map(item => {
 ```
 
 ### 4. Top N Filtering & Ranking
+
 Sort and limit results
 
 ```javascript
@@ -367,6 +373,7 @@ return topItems.map(item => ({json: item.json}));
 ```
 
 ### 5. Aggregation & Reporting
+
 Sum, count, group data
 
 ```javascript
@@ -621,6 +628,7 @@ return result;
 ## When to Use Code Node
 
 Use Code node when:
+
 - ✅ Complex transformations requiring multiple steps
 - ✅ Custom calculations or business logic
 - ✅ Recursive operations
@@ -629,6 +637,7 @@ Use Code node when:
 - ✅ Data aggregation across items
 
 Consider other nodes when:
+
 - ❌ Simple field mapping → Use **Set** node
 - ❌ Basic filtering → Use **Filter** node
 - ❌ Simple conditionals → Use **IF** or **Switch** node
@@ -643,26 +652,31 @@ Consider other nodes when:
 ### Works With:
 
 **n8n Expression Syntax**:
+
 - Expressions use `{{ }}` syntax in other nodes
 - Code nodes use JavaScript directly (no `{{ }}`)
 - When to use expressions vs code
 
 **n8n MCP Tools Expert**:
+
 - How to find Code node: `search_nodes({query: "code"})`
 - Get configuration help: `get_node_essentials("nodes-base.code")`
 - Validate code: `validate_node_operation()`
 
 **n8n Node Configuration**:
+
 - Mode selection (All Items vs Each Item)
 - Language selection (JavaScript vs Python)
 - Understanding property dependencies
 
 **n8n Workflow Patterns**:
+
 - Code nodes in transformation step
 - Webhook → Code → API pattern
 - Error handling in workflows
 
 **n8n Validation Expert**:
+
 - Validate Code node configuration
 - Handle validation errors
 - Auto-fix common issues
@@ -689,12 +703,14 @@ Before deploying Code nodes, verify:
 ## Additional Resources
 
 ### Related Files
+
 - DATA_ACCESS.md - Comprehensive data access patterns
 - COMMON_PATTERNS.md - 10 production-tested patterns
 - ERROR_PATTERNS.md - Top 5 errors and solutions
 - BUILTIN_FUNCTIONS.md - Complete built-in reference
 
 ### n8n Documentation
+
 - Code Node Guide: https://docs.n8n.io/code/code-node/
 - Built-in Methods: https://docs.n8n.io/code-examples/methods-variables-reference/
 - Luxon Documentation: https://moment.github.io/luxon/
@@ -704,11 +720,13 @@ Before deploying Code nodes, verify:
 **Ready to write JavaScript in n8n Code nodes!** Start with simple transformations, use the error patterns guide to avoid common mistakes, and reference the pattern library for production-ready examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

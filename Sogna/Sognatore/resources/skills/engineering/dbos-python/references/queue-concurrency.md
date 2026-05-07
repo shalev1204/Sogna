@@ -28,7 +28,9 @@ def memory_intensive_task(data):
 **Correct (worker concurrency):**
 
 ```python
+
 # Each process runs at most 5 tasks from this queue
+
 queue = Queue("heavy_tasks", worker_concurrency=5)
 
 @DBOS.workflow()
@@ -39,14 +41,18 @@ def memory_intensive_task(data):
 **Correct (global concurrency):**
 
 ```python
+
 # At most 10 tasks run across ALL processes
+
 queue = Queue("limited_tasks", concurrency=10)
 ```
 
 **In-order processing (sequential):**
 
 ```python
+
 # Only one task at a time - guarantees order
+
 queue = Queue("sequential_queue", concurrency=1)
 
 @DBOS.step()
@@ -62,6 +68,7 @@ Worker concurrency is recommended for most use cases. Global concurrency should 
 Reference: [Managing Concurrency](https://docs.dbos.dev/python/tutorials/queue-tutorial#managing-concurrency)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

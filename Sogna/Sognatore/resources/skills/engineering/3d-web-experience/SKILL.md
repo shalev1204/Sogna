@@ -11,7 +11,6 @@ id: skill-3d-web-experience
 owner: [[orchestrator]]
 ---
 
-
 # 3D Web Experience
 
 Expert in building 3D experiences for the web - Three.js, React Three Fiber,
@@ -57,6 +56,7 @@ Choosing the right 3D approach
 ## 3D Stack Selection
 
 ### Options Comparison
+
 | Tool | Best For | Learning Curve | Control |
 |------|----------|----------------|---------|
 | Spline | Quick prototypes, designers | Low | Medium |
@@ -65,6 +65,7 @@ Choosing the right 3D approach
 | Babylon.js | Games, heavy 3D | High | Maximum |
 
 ### Decision Tree
+
 ```
 Need quick 3D element?
 └── Yes → Spline
@@ -80,6 +81,7 @@ Need max performance/control?
 ```
 
 ### Spline (Fastest Start)
+
 ```jsx
 import Spline from '@splinetool/react-spline';
 
@@ -91,6 +93,7 @@ export default function Scene() {
 ```
 
 ### React Three Fiber
+
 ```jsx
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
@@ -120,6 +123,7 @@ Getting models web-ready
 ## 3D Model Pipeline
 
 ### Format Selection
+
 | Format | Use Case | Size |
 |--------|----------|------|
 | GLB/GLTF | Standard web 3D | Smallest |
@@ -128,27 +132,35 @@ Getting models web-ready
 | USDZ | Apple AR | Medium |
 
 ### Optimization Pipeline
+
 ```
+
 1. Model in Blender/etc
 2. Reduce poly count (< 100K for web)
 3. Bake textures (combine materials)
 4. Export as GLB
 5. Compress with gltf-transform
 6. Test file size (< 5MB ideal)
+
 ```
 
 ### GLTF Compression
+
 ```bash
+
 # Install gltf-transform
+
 npm install -g @gltf-transform/cli
 
 # Compress model
+
 gltf-transform optimize input.glb output.glb \
   --compress draco \
   --texture-compress webp
 ```
 
 ### Loading in R3F
+
 ```jsx
 import { useGLTF, useProgress, Html } from '@react-three/drei';
 import { Suspense } from 'react';
@@ -178,6 +190,7 @@ export default function Scene() {
 ## Scroll-Driven 3D
 
 ### R3F + Scroll Controls
+
 ```jsx
 import { ScrollControls, useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
@@ -206,6 +219,7 @@ export default function Scene() {
 ```
 
 ### GSAP + Three.js
+
 ```javascript
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -221,6 +235,7 @@ gsap.to(camera.position, {
 ```
 
 ### Common Scroll Effects
+
 - Camera movement through scene
 - Model rotation on scroll
 - Reveal/hide elements
@@ -236,6 +251,7 @@ Keeping 3D fast
 ## 3D Performance
 
 ### Performance Targets
+
 | Device | Target FPS | Max Triangles |
 |--------|------------|---------------|
 | Desktop | 60fps | 500K |
@@ -243,6 +259,7 @@ Keeping 3D fast
 | Low-end | 30fps | 50K |
 
 ### Quick Wins
+
 ```jsx
 // 1. Use instances for repeated objects
 import { Instances, Instance } from '@react-three/drei';
@@ -259,6 +276,7 @@ const Model = lazy(() => import('./Model'));
 ```
 
 ### Mobile Detection
+
 ```jsx
 const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
 
@@ -269,6 +287,7 @@ const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
 ```
 
 ### Fallback Strategy
+
 ```jsx
 function Scene() {
   const [webGLSupported, setWebGLSupported] = useState(true);
@@ -339,12 +358,14 @@ Skills: 3d-web-experience, frontend, landing-page-design
 Workflow:
 
 ```
+
 1. Prepare 3D product model
 2. Set up React Three Fiber scene
 3. Add interactivity (colors, variants)
 4. Integrate with product page
 5. Optimize for mobile
 6. Add fallback images
+
 ```
 
 ### Immersive Portfolio
@@ -354,12 +375,14 @@ Skills: 3d-web-experience, scroll-experience, interactive-portfolio
 Workflow:
 
 ```
+
 1. Design 3D scene concept
 2. Build scene in Spline or R3F
 3. Add scroll-driven animations
 4. Integrate with portfolio sections
 5. Ensure mobile fallback
 6. Optimize performance
+
 ```
 
 ## Related Skills
@@ -367,6 +390,7 @@ Workflow:
 Works well with: `scroll-experience`, `interactive-portfolio`, `frontend`, `landing-page-design`
 
 ## When to Use
+
 - User mentions or implies: 3D website
 - User mentions or implies: three.js
 - User mentions or implies: WebGL
@@ -376,11 +400,13 @@ Works well with: `scroll-experience`, `interactive-portfolio`, `frontend`, `land
 - User mentions or implies: product configurator
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

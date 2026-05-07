@@ -9,7 +9,6 @@ id: skill-ai-agents-architect
 owner: [[orchestrator]]
 ---
 
-
 # AI Agents Architect
 
 Expert in designing and building autonomous AI agents. Masters tool use,
@@ -132,6 +131,7 @@ Severity: CRITICAL
 Situation: Agent runs until 'done' without max iterations
 
 Symptoms:
+
 - Agent runs forever
 - Unexplained high API costs
 - Application hangs
@@ -144,6 +144,7 @@ hangs the application, and frustrates users.
 Recommended fix:
 
 Always set limits:
+
 - max_iterations on agent loops
 - max_tokens per turn
 - timeout on agent runs
@@ -157,6 +158,7 @@ Severity: HIGH
 Situation: Tool descriptions don't explain when/how to use
 
 Symptoms:
+
 - Agent picks wrong tools
 - Parameter errors
 - Agent says it can't do things it can
@@ -169,6 +171,7 @@ literally can't know what it doesn't see in the description.
 Recommended fix:
 
 Write complete tool specs:
+
 - Clear one-sentence purpose
 - When to use (and when not to)
 - Parameter descriptions with types
@@ -182,6 +185,7 @@ Severity: HIGH
 Situation: Catching tool exceptions silently
 
 Symptoms:
+
 - Agent continues with wrong data
 - Final answers are wrong
 - Hard to debug failures
@@ -194,6 +198,7 @@ see. Silent failures become loud failures later.
 Recommended fix:
 
 Explicit error handling:
+
 - Return error messages to agent
 - Include error type and recovery hints
 - Let agent retry or choose alternative
@@ -206,6 +211,7 @@ Severity: MEDIUM
 Situation: Appending all observations to memory without filtering
 
 Symptoms:
+
 - Context window exceeded
 - Agent references outdated info
 - High token costs
@@ -218,6 +224,7 @@ lose focus on what matters.
 Recommended fix:
 
 Selective memory:
+
 - Summarize rather than store verbatim
 - Filter by relevance before storing
 - Use RAG for long-term memory
@@ -230,6 +237,7 @@ Severity: MEDIUM
 Situation: Giving agent 20+ tools for flexibility
 
 Symptoms:
+
 - Wrong tool selection
 - Agent overwhelmed by options
 - Slow responses
@@ -242,6 +250,7 @@ get cut off or poorly understood.
 Recommended fix:
 
 Curate tools per task:
+
 - 5-10 tools maximum per agent
 - Use tool selection layer for large tool sets
 - Specialized agents with focused tools
@@ -254,6 +263,7 @@ Severity: MEDIUM
 Situation: Starting with multi-agent architecture for simple tasks
 
 Symptoms:
+
 - Agents duplicating work
 - Communication overhead
 - Hard to debug failures
@@ -266,6 +276,7 @@ failure point. Start simple, add agents only when proven necessary.
 Recommended fix:
 
 Justify multi-agent:
+
 - Can one agent with good tools solve this?
 - Is the coordination overhead worth it?
 - Are the agents truly independent?
@@ -278,6 +289,7 @@ Severity: MEDIUM
 Situation: Running agents without logging thoughts/actions
 
 Symptoms:
+
 - Can't explain agent failures
 - No visibility into agent reasoning
 - Debugging takes hours
@@ -290,6 +302,7 @@ debugging is guesswork.
 Recommended fix:
 
 Implement tracing:
+
 - Log each thought/action/observation
 - Track tool calls with inputs/outputs
 - Trace token usage and latency
@@ -302,6 +315,7 @@ Severity: MEDIUM
 Situation: Regex or exact string matching on LLM output
 
 Symptoms:
+
 - Parse errors in agent loop
 - Works sometimes, fails sometimes
 - Small prompt changes break parsing
@@ -314,6 +328,7 @@ from parsing errors.
 Recommended fix:
 
 Robust output handling:
+
 - Use structured output (JSON mode, function calling)
 - Fuzzy matching for actions
 - Retry with format instructions on parse failure
@@ -324,6 +339,7 @@ Robust output handling:
 Works well with: `rag-engineer`, `prompt-engineer`, `backend`, `mcp-builder`
 
 ## When to Use
+
 - User mentions or implies: build agent
 - User mentions or implies: AI agent
 - User mentions or implies: autonomous agent
@@ -338,11 +354,13 @@ Works well with: `rag-engineer`, `prompt-engineer`, `backend`, `mcp-builder`
 - User mentions or implies: claude agent sdk
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

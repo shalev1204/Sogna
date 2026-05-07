@@ -63,12 +63,14 @@ result, err := handle.GetResult()
 ```
 
 `GetResult` supports options:
+
 - `dbos.WithHandleTimeout(timeout)`: Return a timeout error if the workflow doesn't complete within the duration
 - `dbos.WithHandlePollingInterval(interval)`: Control how often the database is polled for completion
 
 Reference: [Workflows](https://docs.dbos.dev/golang/tutorials/workflow-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -9,7 +9,6 @@ id: skill-linux-troubleshooting
 owner: [[ops-security]]
 ---
 
-
 # Linux Troubleshooting Workflow
 
 ## Overview
@@ -19,6 +18,7 @@ Specialized workflow for diagnosing and resolving Linux system issues including 
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Diagnosing system performance issues
 - Troubleshooting service failures
 - Investigating network problems
@@ -30,10 +30,12 @@ Use this workflow when:
 ### Phase 1: Initial Assessment
 
 #### Skills to Invoke
+
 - `bash-linux` - Linux commands
 - `devops-troubleshooter` - Troubleshooting
 
 #### Actions
+
 1. Check system uptime
 2. Review recent changes
 3. Identify symptoms
@@ -41,6 +43,7 @@ Use this workflow when:
 5. Document findings
 
 #### Commands
+
 ```bash
 uptime
 hostnamectl
@@ -49,6 +52,7 @@ dmesg | tail -50
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @bash-linux to gather system information
 ```
@@ -56,10 +60,12 @@ Use @bash-linux to gather system information
 ### Phase 2: Resource Analysis
 
 #### Skills to Invoke
+
 - `bash-linux` - Resource commands
 - `performance-engineer` - Performance analysis
 
 #### Actions
+
 1. Check CPU usage
 2. Analyze memory
 3. Review disk space
@@ -67,6 +73,7 @@ Use @bash-linux to gather system information
 5. Check network
 
 #### Commands
+
 ```bash
 top -bn1 | head -20
 free -h
@@ -75,6 +82,7 @@ iostat -x 1 5
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @performance-engineer to analyze system resources
 ```
@@ -82,10 +90,12 @@ Use @performance-engineer to analyze system resources
 ### Phase 3: Process Investigation
 
 #### Skills to Invoke
+
 - `bash-linux` - Process commands
 - `server-management` - Process management
 
 #### Actions
+
 1. List running processes
 2. Identify resource hogs
 3. Check process status
@@ -93,6 +103,7 @@ Use @performance-engineer to analyze system resources
 5. Analyze strace output
 
 #### Commands
+
 ```bash
 ps aux --sort=-%cpu | head -10
 pstree -p
@@ -101,6 +112,7 @@ strace -p PID
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @server-management to investigate processes
 ```
@@ -108,10 +120,12 @@ Use @server-management to investigate processes
 ### Phase 4: Log Analysis
 
 #### Skills to Invoke
+
 - `bash-linux` - Log commands
 - `error-detective` - Error detection
 
 #### Actions
+
 1. Check system logs
 2. Review application logs
 3. Search for errors
@@ -119,6 +133,7 @@ Use @server-management to investigate processes
 5. Correlate events
 
 #### Commands
+
 ```bash
 journalctl -xe
 tail -f /var/log/syslog
@@ -126,6 +141,7 @@ grep -i error /var/log/*
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @error-detective to analyze log files
 ```
@@ -133,10 +149,12 @@ Use @error-detective to analyze log files
 ### Phase 5: Network Diagnostics
 
 #### Skills to Invoke
+
 - `bash-linux` - Network commands
 - `network-engineer` - Network troubleshooting
 
 #### Actions
+
 1. Check network interfaces
 2. Test connectivity
 3. Analyze connections
@@ -144,6 +162,7 @@ Use @error-detective to analyze log files
 5. Check DNS resolution
 
 #### Commands
+
 ```bash
 ip addr show
 ss -tulpn
@@ -152,6 +171,7 @@ dig domain
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @network-engineer to diagnose network issues
 ```
@@ -159,10 +179,12 @@ Use @network-engineer to diagnose network issues
 ### Phase 6: Service Troubleshooting
 
 #### Skills to Invoke
+
 - `server-management` - Service management
 - `systematic-debugging` - Debugging
 
 #### Actions
+
 1. Check service status
 2. Review service logs
 3. Test service restart
@@ -170,6 +192,7 @@ Use @network-engineer to diagnose network issues
 5. Check configuration
 
 #### Commands
+
 ```bash
 systemctl status service
 journalctl -u service -f
@@ -177,6 +200,7 @@ systemctl restart service
 ```
 
 #### Copy-Paste Prompts
+
 ```
 Use @systematic-debugging to troubleshoot service issues
 ```
@@ -184,10 +208,12 @@ Use @systematic-debugging to troubleshoot service issues
 ### Phase 7: Resolution
 
 #### Skills to Invoke
+
 - `incident-responder` - Incident response
 - `bash-pro` - Fix implementation
 
 #### Actions
+
 1. Implement fix
 2. Verify resolution
 3. Monitor stability
@@ -195,6 +221,7 @@ Use @systematic-debugging to troubleshoot service issues
 5. Create prevention plan
 
 #### Copy-Paste Prompts
+
 ```
 Use @incident-responder to implement resolution
 ```
@@ -223,11 +250,13 @@ Use @incident-responder to implement resolution
 - `cloud-devops` - DevOps
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

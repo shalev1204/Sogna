@@ -8,7 +8,6 @@ id: skill-azure-data-tables-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Tables SDK for Python
 
 NoSQL key-value store for structured data (Azure Storage Tables or Cosmos DB Table API).
@@ -22,10 +21,13 @@ pip install azure-data-tables azure-identity
 ## Environment Variables
 
 ```bash
+
 # Azure Storage Tables
+
 AZURE_STORAGE_ACCOUNT_URL=https://<account>.table.core.windows.net
 
 # Cosmos DB Table API
+
 COSMOS_TABLE_ENDPOINT=https://<account>.table.cosmos.azure.com
 ```
 
@@ -39,9 +41,11 @@ credential = DefaultAzureCredential()
 endpoint = "https://<account>.table.core.windows.net"
 
 # Service client (manage tables)
+
 service_client = TableServiceClient(endpoint=endpoint, credential=credential)
 
 # Table client (work with entities)
+
 table_client = TableClient(endpoint=endpoint, table_name="mytable", credential=credential)
 ```
 
@@ -55,20 +59,26 @@ table_client = TableClient(endpoint=endpoint, table_name="mytable", credential=c
 ## Table Operations
 
 ```python
+
 # Create table
+
 service_client.create_table("mytable")
 
 # Create if not exists
+
 service_client.create_table_if_not_exists("mytable")
 
 # Delete table
+
 service_client.delete_table("mytable")
 
 # List tables
+
 for table in service_client.list_tables():
     print(table.name)
 
 # Get table client
+
 table_client = service_client.get_table_client("mytable")
 ```
 
@@ -89,16 +99,20 @@ entity = {
 }
 
 # Create (fails if exists)
+
 table_client.create_entity(entity=entity)
 
 # Upsert (create or replace)
+
 table_client.upsert_entity(entity=entity)
 ```
 
 ### Get Entity
 
 ```python
+
 # Get by key (fastest)
+
 entity = table_client.get_entity(
     partition_key="sales",
     row_key="order-001"
@@ -109,11 +123,14 @@ print(f"Product: {entity['product']}")
 ### Update Entity
 
 ```python
+
 # Replace entire entity
+
 entity["quantity"] = 10
 table_client.update_entity(entity=entity, mode="replace")
 
 # Merge (update specific fields only)
+
 update = {
     "PartitionKey": "sales",
     "RowKey": "order-001",
@@ -136,7 +153,9 @@ table_client.delete_entity(
 ### Query Within Partition
 
 ```python
+
 # Query by partition (efficient)
+
 entities = table_client.query_entities(
     query_filter="PartitionKey eq 'sales'"
 )
@@ -147,12 +166,15 @@ for entity in entities:
 ### Query with Filters
 
 ```python
+
 # Filter by properties
+
 entities = table_client.query_entities(
     query_filter="PartitionKey eq 'sales' and quantity gt 3"
 )
 
 # With parameters (safer)
+
 entities = table_client.query_entities(
     query_filter="PartitionKey eq @pk and price lt @max_price",
     parameters={"pk": "sales", "max_price": 50.0}
@@ -171,7 +193,9 @@ entities = table_client.query_entities(
 ### List All Entities
 
 ```python
+
 # List all (cross-partition - use sparingly)
+
 for entity in table_client.list_entities():
     print(entity)
 ```
@@ -182,6 +206,7 @@ for entity in table_client.list_entities():
 from azure.data.tables import TableTransactionError
 
 # Batch operations (same partition only!)
+
 operations = [
     ("create", {"PartitionKey": "batch", "RowKey": "1", "data": "first"}),
     ("create", {"PartitionKey": "batch", "RowKey": "2", "data": "second"}),
@@ -246,14 +271,17 @@ asyncio.run(table_operations())
 7. **Use async client** for high-throughput scenarios
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

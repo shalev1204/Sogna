@@ -7,17 +7,18 @@ id: skill-apify-content-analytics
 owner: [[eng-api]]
 ---
 
-
 # Content Analytics
 
 Track and analyze content performance using Apify Actors to extract engagement metrics from multiple platforms.
 
 ## When to Use
+
 - You need engagement, growth, or ROI metrics for posts, reels, videos, ads, or hashtags.
 - The task is to use Apify Actors to collect cross-platform content performance data.
 - You need exported analytics results and a concise interpretation of what content is performing best.
 
 ## Prerequisites
+
 (No need to check it upfront)
 
 - `.env` file with `APIFY_TOKEN`
@@ -30,11 +31,13 @@ Copy this checklist and track progress:
 
 ```
 Task Progress:
+
 - [ ] Step 1: Identify content analytics type (select Actor)
 - [ ] Step 2: Fetch Actor schema via mcpc
 - [ ] Step 3: Ask user preferences (format, filename)
 - [ ] Step 4: Run the analytics script
 - [ ] Step 5: Summarize findings
+
 ```
 
 ### Step 1: Identify Content Analytics Type
@@ -73,6 +76,7 @@ export $(grep APIFY_TOKEN .env | xargs) && mcpc --json mcp.apify.com --header "A
 Replace `ACTOR_ID` with the selected Actor (e.g., `apify/instagram-post-scraper`).
 
 This returns:
+
 - Actor description and README
 - Required and optional input parameters
 - Output fields (if available)
@@ -80,6 +84,7 @@ This returns:
 ### Step 3: Ask User Preferences
 
 Before running, ask:
+
 1. **Output format**:
    - **Quick answer** - Display top few results in chat (no file saved)
    - **CSV** - Full export with all fields
@@ -116,6 +121,7 @@ node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
 ### Step 5: Summarize Findings
 
 After completion, report:
+
 - Number of content pieces analyzed
 - File location and name
 - Key performance insights
@@ -130,11 +136,13 @@ After completion, report:
 `Timeout` - Reduce input size or increase `--timeout`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

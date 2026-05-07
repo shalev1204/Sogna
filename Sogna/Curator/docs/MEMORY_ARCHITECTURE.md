@@ -13,21 +13,25 @@
 ## 2. Capas de la Memoria de Sognatore
 
 ### Capa 0: Memoria de Corto Plazo (Contexto de Sesión)
-*   **Implementación**: `/scratch/` y logs de conversación activos.
-*   **Función**: Proporcionar coherencia inmediata a la tarea actual.
+
+* **Implementación**: `/scratch/` y logs de conversación activos.
+* **Función**: Proporcionar coherencia inmediata a la tarea actual.
 
 ### Capa 1: Memoria de Largo Plazo (Conocimiento Indexado)
-*   **Implementación**: Base de datos vectorial integrada en Sognatore.
-*   **Función**: Recuperar "Habilidades" y "Logs Históricos" de hace meses mediante lenguaje natural.
-*   **Ejemplo**: "Busca cuando tuvimos problemas con el Sentinel hace un mes" → Encuentra el log de error aunque no busques "Sentinel".
+
+* **Implementación**: Base de datos vectorial integrada en Sognatore.
+* **Función**: Recuperar "Habilidades" y "Logs Históricos" de hace meses mediante lenguaje natural.
+* **Ejemplo**: "Busca cuando tuvimos problemas con el Sentinel hace un mes" → Encuentra el log de error aunque no busques "Sentinel".
 
 ### Capa 2: Memoria Estructural (El Grafo de Agentes)
-*   **Implementación**: Los enlaces `[[ ]]` entre Agentes y Swarms.
-*   **Función**: Permitir que la búsqueda "navegue" por las especialidades. Si el `eng-api` busca algo, Sognatore prioriza resultados de sus `colleagues` en el enjambre de ingeniería.
+
+* **Implementación**: Los enlaces `[[ ]]` entre Agentes y Swarms.
+* **Función**: Permitir que la búsqueda "navegue" por las especialidades. Si el `eng-api` busca algo, Sognatore prioriza resultados de sus `colleagues` en el enjambre de ingeniería.
 
 ## 3. Integración con el Toolkit
 
 Los agentes del Toolkit no solo leen archivos; **consultan a la Red Neuronal**:
+
 - `/find [concepto]`: No busca el archivo, busca la *idea* en todo el ecosistema.
 - `brain agent`: Actúa como el indexador constante, asegurando que cada nueva nota en el Knowledge Hub sea vectorizada instantáneamente.
 

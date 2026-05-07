@@ -8,7 +8,6 @@ id: skill-readme
 owner: [[orchestrator]]
 ---
 
-
 # README Generator
 
 You are an expert technical writer creating comprehensive project documentation. Your goal is to write a README.md that is absurdly thorough—the kind of documentation you wish every project had.
@@ -110,6 +109,7 @@ Write the README with these sections in order:
 ### 1. Project Title and Overview
 
 ```markdown
+
 # Project Name
 
 Brief description of what the project does and who it's for. 2-3 sentences max.
@@ -119,6 +119,7 @@ Brief description of what the project does and who it's for. 2-3 sentences max.
 - Feature 1
 - Feature 2
 - Feature 3
+
 ```
 
 ### 2. Tech Stack
@@ -126,6 +127,7 @@ Brief description of what the project does and who it's for. 2-3 sentences max.
 List all major technologies:
 
 ```markdown
+
 ## Tech Stack
 
 - **Language**: Ruby 3.3+
@@ -136,6 +138,7 @@ List all major technologies:
 - **Caching**: Solid Cache
 - **Styling**: Tailwind CSS
 - **Deployment**: [Detected platform]
+
 ```
 
 ### 3. Prerequisites
@@ -143,12 +146,14 @@ List all major technologies:
 What must be installed before starting:
 
 ```markdown
+
 ## Prerequisites
 
 - Node.js 20 or higher
 - PostgreSQL 15 or higher (or Docker)
 - pnpm (recommended) or npm
 - A Google Cloud project for OAuth (optional for development)
+
 ```
 
 ### 4. Getting Started
@@ -156,6 +161,7 @@ What must be installed before starting:
 The complete local development guide:
 
 ```markdown
+
 ## Getting Started
 
 ### 1. Clone the Repository
@@ -249,6 +255,7 @@ Include every step. Assume the reader is setting up on a fresh machine.
 This is where you go absurdly deep:
 
 ```markdown
+
 ## Architecture
 
 ### Directory Structure
@@ -359,6 +366,7 @@ solid_queue_jobs (background jobs)
 Complete reference for all env vars:
 
 ```markdown
+
 ## Environment Variables
 
 ### Required
@@ -427,6 +435,7 @@ RAILS_SERVE_STATIC_FILES=true
 ### 7. Available Scripts
 
 ```markdown
+
 ## Available Scripts
 
 | Command                       | Description                                         |
@@ -450,6 +459,7 @@ RAILS_SERVE_STATIC_FILES=true
 ### 8. Testing
 
 ```markdown
+
 ## Testing
 
 ### Running Tests
@@ -570,6 +580,7 @@ expect(screen.getByText('Josh')).toBeInTheDocument()
 Tailor this to detected platform (look for Dockerfile, fly.toml, render.yaml, kamal/, etc.):
 
 ```markdown
+
 ## Deployment
 
 ### Kamal (Recommended for Rails)
@@ -710,6 +721,7 @@ sudo systemctl restart myapp
 ### 10. Troubleshooting
 
 ```markdown
+
 ## Troubleshooting
 
 ### Database Connection Issues
@@ -751,6 +763,7 @@ bin/rails assets:precompile
 **Solution:**
 
 1. Ensure system dependencies are installed:
+
    \`\`\`bash
 
    # macOS
@@ -846,11 +859,13 @@ Generate a complete README.md file with:
 Write the README directly to `README.md` in the project root.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

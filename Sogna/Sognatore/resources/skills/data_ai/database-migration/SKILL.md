@@ -8,7 +8,6 @@ id: skill-database-migration
 owner: [[eng-database]]
 ---
 
-
 # Database Migration
 
 Master database schema and data migrations across ORMs (Sequelize, TypeORM, Prisma), including rollback strategies and zero-downtime deployments.
@@ -38,6 +37,7 @@ Master database schema and data migrations across ORMs (Sequelize, TypeORM, Pris
 ## ORM Migrations
 
 ### Sequelize Migrations
+
 ```javascript
 // migrations/20231201-create-users.js
 module.exports = {
@@ -68,6 +68,7 @@ module.exports = {
 ```
 
 ### TypeORM Migrations
+
 ```typescript
 // migrations/1701234567-CreateUsers.ts
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
@@ -110,6 +111,7 @@ export class CreateUsers1701234567 implements MigrationInterface {
 ```
 
 ### Prisma Migrations
+
 ```prisma
 // schema.prisma
 model User {
@@ -125,6 +127,7 @@ model User {
 ## Schema Transformations
 
 ### Adding Columns with Defaults
+
 ```javascript
 // Safe migration: add column with default
 module.exports = {
@@ -143,6 +146,7 @@ module.exports = {
 ```
 
 ### Renaming Columns (Zero Downtime)
+
 ```javascript
 // Step 1: Add new column
 module.exports = {
@@ -179,6 +183,7 @@ module.exports = {
 ```
 
 ### Changing Column Types
+
 ```javascript
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -214,6 +219,7 @@ module.exports = {
 ## Data Transformations
 
 ### Complex Data Migration
+
 ```javascript
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -268,6 +274,7 @@ module.exports = {
 ## Rollback Strategies
 
 ### Transaction-Based Migrations
+
 ```javascript
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -300,6 +307,7 @@ module.exports = {
 ```
 
 ### Checkpoint-Based Rollback
+
 ```javascript
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -341,6 +349,7 @@ module.exports = {
 ## Zero-Downtime Migrations
 
 ### Blue-Green Deployment Strategy
+
 ```javascript
 // Phase 1: Make changes backward compatible
 module.exports = {
@@ -378,6 +387,7 @@ module.exports = {
 ## Cross-Database Migrations
 
 ### PostgreSQL to MySQL
+
 ```javascript
 // Handle differences
 module.exports = {
@@ -442,11 +452,13 @@ module.exports = {
 - Migrating too much data at once
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

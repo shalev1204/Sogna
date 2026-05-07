@@ -112,12 +112,15 @@ Sognatore has 37 predefined agent types organized into 7 specialized swarms. The
 3. **Parallel via tmux:** Multiple Claude Code sessions (complex, faster)
 
 ```bash
+
 # Option 1: Sequential (simple, reliable)
+
 for agent in frontend backend database; do
   claude -p "Act as $agent agent..." --dangerously-skip-permissions
 done
 
 # Option 2: Parallel via tmux (complex, faster)
+
 tmux new-session -d -s loki-pool
 for i in {1..5}; do
   tmux new-window -t loki-pool -n "agent-$i" \
@@ -125,7 +128,9 @@ for i in {1..5}; do
 done
 
 # Option 3: Role switching (recommended)
+
 # Orchestrator maintains agent queue, switches roles per task
+
 ```
 
 ---
@@ -182,12 +187,14 @@ SPAWN -> INITIALIZE -> POLL_QUEUE -> CLAIM_TASK -> EXECUTE -> REPORT -> POLL_QUE
 ## Agent Context Preservation
 
 ### Lineage Rules
+
 1. **Immutable Inheritance:** Agents CANNOT modify inherited context
 2. **Decision Logging:** All decisions MUST be logged to agent context file
 3. **Lineage Reference:** All commits MUST reference parent agent ID
 4. **Context Handoff:** When agent completes, context is archived but lineage preserved
 
 ### Preventing Context Drift
+
 1. Read `.agent/sub-agents/${parent_id}.json` before spawning
 2. Inherit immutable context (tech stack, constraints, decisions)
 3. Log all new decisions to own context file
@@ -195,6 +202,7 @@ SPAWN -> INITIALIZE -> POLL_QUEUE -> CLAIM_TASK -> EXECUTE -> REPORT -> POLL_QUE
 5. Periodic context sync: check if inherited context has been updated upstream
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

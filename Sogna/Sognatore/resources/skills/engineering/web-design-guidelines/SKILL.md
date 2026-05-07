@@ -8,7 +8,6 @@ id: skill-web-design-guidelines
 owner: [[prod-design]]
 ---
 
-
 # Web Interface Guidelines
 
 Review files for compliance with Web Interface Guidelines.
@@ -17,7 +16,9 @@ Review files for compliance with Web Interface Guidelines.
 
 1. Fetch the latest guidelines from the source URL below
 2. Read the specified files (or prompt user for files/pattern)
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 3. Check against all rules in the fetched guidelines
 4. Output findings in the terse `file:line` format
 
@@ -35,23 +36,29 @@ Use WebFetch to retrieve the latest rules. The fetched content contains all the 
 ## Usage
 
 When a user provides a file or pattern argument:
+
 1. Fetch guidelines from the source URL above
 2. Read the specified files
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 3. Apply all rules from the fetched guidelines
 4. Output findings using the format specified in the guidelines
 
 If no files specified, ask the user which files to review.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

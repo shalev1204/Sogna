@@ -58,6 +58,7 @@ Queues process workflows in FIFO order. All queues must be created with `dbos.Ne
 Reference: [DBOS Queues](https://docs.dbos.dev/golang/tutorials/queue-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

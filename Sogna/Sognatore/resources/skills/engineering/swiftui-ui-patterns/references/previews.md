@@ -55,6 +55,7 @@ Use previews to validate layout, state wiring, and injected dependencies without
 - Do not couple previews to global shared singletons unless the project has no alternative.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

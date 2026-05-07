@@ -8,7 +8,6 @@ id: skill-seo-aeo-content-quality-auditor
 owner: [[biz-marketing]], [[ops-security]]
 ---
 
-
 # SEO-AEO Content Quality Auditor
 
 ## Overview
@@ -27,15 +26,19 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 ## How It Works
 
 ### Step 1: Run SEO Checks
+
 Verify keyword density, H1/H2/H3 structure, meta elements, word count, sentence length, and paragraph density. Flag every issue with its severity.
 
 ### Step 2: Run AEO Checks
+
 Check for TL;DR block, definition sentence, FAQ section (minimum 4 entries), bullet and numbered lists, comparison table, and extractable direct answers. Score each signal as found or missing.
 
 ### Step 3: Run Readability Checks
+
 Check passive voice ratio, transition word presence, wall-of-text paragraphs, subheading frequency, and reading level.
 
 ### Step 4: Score and Prioritise
+
 Calculate three scores out of 100. Sort all issues into Critical (fix before publishing), Important (fix soon), and Polish (optional improvements). Generate projected scores after all fixes are applied.
 
 ## Scoring System
@@ -50,6 +53,7 @@ Calculate three scores out of 100. Sort all issues into Critical (fix before pub
 ## Examples
 
 ### Example: Audit Summary
+
 Overall Score:    84/100  ⚠️ Acceptable
 SEO Score:        88/100  ✅ Pass
 AEO Score:        74/100  ⚠️ Acceptable
@@ -63,7 +67,9 @@ Fix: Add a 2–3 sentence direct-answer block in a
 blockquote immediately after the H1.
 
 🟡 Important (fix soon):
+
 2. AEO: FAQ has 3 entries — minimum is 4
+
 Fix: Add one more FAQ entry using a secondary keyword
 as the question.
 Projected score after fixes: 93/100 ✅
@@ -79,9 +85,11 @@ Projected score after fixes: 93/100 ✅
 ## Common Pitfalls
 
 - **Problem:** SEO score is high but AEO score is low
+
   **Solution:** Traditional SEO tools miss AEO signals entirely. Run the AEO checklist separately and treat it as equally important.
 
 - **Problem:** Fix list is long and overwhelming
+
   **Solution:** Work through Critical issues only first, re-run the audit, then tackle Important issues.
 
 ## Related Skills
@@ -96,11 +104,13 @@ Projected score after fixes: 93/100 ✅
 - [Full Content Quality Auditor SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/content-quality-auditor/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

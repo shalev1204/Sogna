@@ -4,22 +4,25 @@ description: "Analytics de produto — PostHog, Mixpanel, eventos, funnels, coho
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - analytics
 - product
 - metrics
 - posthog
 - mixpanel
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-analytics-product
 owner: [[prod-pm]]
 ---
-
 
 # ANALYTICS-PRODUCT — Decida com Dados
 
@@ -137,12 +140,14 @@ Converteu para Pro            (0.7%)
 
 ```
 Para cada drop-off > benchmark:
+
 1. Identificar: onde exatamente o usuario sai?
 2. Entender: por que? (session recordings, surveys)
 3. Hipotese: qual mudanca poderia melhorar?
 4. Testar: A/B test com amostra estatisticamente significante
 5. Medir: 2 semanas minimo, p-value < 0.05
 6. Aprender: mesmo se falhar, entende-se o usuario melhor
+
 ```
 
 ---
@@ -188,6 +193,7 @@ def calculate_cohort_retention(events_df):
 
 ```
 Framework:
+
 1. O que cria valor real para o usuario? -> Conversas que geram insight/acao
 2. O que prediz crescimento de longo prazo? -> Usuarios com 3+ conv/semana
 3. Como medir? -> "Weekly Active Conversationalists" (WAC)
@@ -303,11 +309,13 @@ def ab_test_significance(
 - `product-inventor` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-azure-speech-to-text-rest-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure Speech to Text REST API for Short Audio
 
 Simple REST API for speech-to-text transcription of short audio files (up to 60 seconds). No SDK required - just HTTP requests.
@@ -22,11 +21,14 @@ Simple REST API for speech-to-text transcription of short audio files (up to 60 
 ## Environment Variables
 
 ```bash
+
 # Required
+
 AZURE_SPEECH_KEY=<your-speech-resource-key>
 AZURE_SPEECH_REGION=<region>  # e.g., eastus, westus2, westeurope
 
 # Alternative: Use endpoint directly
+
 AZURE_SPEECH_ENDPOINT=https://<region>.stt.speech.microsoft.com
 ```
 
@@ -67,6 +69,7 @@ def transcribe_audio(audio_file_path: str, language: str = "en-US") -> dict:
     return response.json()
 
 # Usage
+
 result = transcribe_audio("audio.wav", "en-US")
 print(result["DisplayText"])
 ```
@@ -79,6 +82,7 @@ print(result["DisplayText"])
 | OGG | OPUS | 16 kHz, mono | Smaller file size |
 
 **Limitations:**
+
 - Maximum 60 seconds of audio
 - For pronunciation assessment: maximum 30 seconds
 - No partial/interim results (final only)
@@ -86,10 +90,13 @@ print(result["DisplayText"])
 ## Content-Type Headers
 
 ```python
+
 # WAV PCM 16kHz
+
 "Content-Type": "audio/wav; codecs=audio/pcm; samplerate=16000"
 
 # OGG OPUS
+
 "Content-Type": "audio/ogg; codecs=opus"
 ```
 
@@ -209,6 +216,7 @@ def get_access_token() -> str:
     return response.text
 
 # Use token in requests (valid for 10 minutes)
+
 token = get_access_token()
 headers = {
     "Authorization": f"Bearer {token}",
@@ -238,13 +246,17 @@ headers = {
 ## Profanity Handling
 
 ```python
+
 # Mask profanity with asterisks (default)
+
 params = {"language": "en-US", "profanity": "masked"}
 
 # Remove profanity entirely
+
 params = {"language": "en-US", "profanity": "removed"}
 
 # Include profanity as-is
+
 params = {"language": "en-US", "profanity": "raw"}
 ```
 
@@ -327,6 +339,7 @@ async def transcribe_async(audio_file_path: str, language: str = "en-US") -> dic
             return await response.json()
 
 # Usage
+
 result = asyncio.run(transcribe_async("audio.wav", "en-US"))
 print(result["DisplayText"])
 ```
@@ -375,14 +388,17 @@ Use the Speech SDK or Batch Transcription API instead when you need:
 | references/pronunciation-assessment.md | Pronunciation assessment parameters and scoring |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

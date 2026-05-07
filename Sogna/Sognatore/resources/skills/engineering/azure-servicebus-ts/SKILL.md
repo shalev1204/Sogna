@@ -8,7 +8,6 @@ id: skill-azure-servicebus-ts
 owner: [[orchestrator]]
 ---
 
-
 # Azure Service Bus SDK for TypeScript
 
 Enterprise messaging with queues, topics, and subscriptions.
@@ -238,14 +237,17 @@ For detailed patterns, see:
 - Error Handling and Reliability - ServiceBusError codes, DLQ handling, lock renewal, graceful shutdown
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

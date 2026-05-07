@@ -1,4 +1,4 @@
-import { SognaflowValue } from ".";
+import { SognaflowValue } from "./index.js";
 export type TransformInputRange = number[];
 export type SingleTransformer<I, O> = (input: I) => O;
 export type MultiTransformer<I, O> = (input: I[]) => O;

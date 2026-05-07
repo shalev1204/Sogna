@@ -8,6 +8,7 @@ version: 1.0.0
 # LEX — Findings & Research
 
 ## Legal Constraints & Structure
+
 * The application must cover 29 specific jurisdictions (USA, Canada, +27 EU Member States).
 * Substantive differences exist fundamentally (e.g., EU GDPR vs US CCPA, EU Statutory Notice vs US At-Will Employment).
 * Source constraints: Only official government references (e.g., USA `*.gov`, EU `*.europa.eu`, CA `*.gc.ca`).
@@ -15,12 +16,15 @@ version: 1.0.0
 *Deep search findings for official links will be appended here.*
 
 ## Verified Official References (Agent Sources)
+
 ### USA
+
 - **SBA (Small Business Administration):** [sba.gov - Choose a business structure](https://www.sba.gov/business-guide/launch-your-business/choose-business-structure)
 - **DOL (Department of Labor):** [dol.gov](https://www.dol.gov/)
 - **USPTO (Intellectual Property):** [uspto.gov](https://www.uspto.gov/)
 
 ### Canada
+
 - **Corporations Canada:** [canada.ca - Corporations Canada](https://ised-isde.canada.ca/site/corporations-canada/en)
 - **Canada Business Corporations Act (CBCA):** [justice.gc.ca](https://laws-lois.justice.gc.ca/eng/acts/c-44/)
 - **Canada Labour Code:** [canada.ca - Employment Standards](https://www.canada.ca/en/services/jobs/workplace/federal-labour-standards.html)
@@ -28,12 +32,14 @@ version: 1.0.0
 - **Privacy (PIPEDA):** [priv.gc.ca](https://www.priv.gc.ca/)
 
 ### European Union (27 Member States)
+
 - **N-Lex (Central Access Point):** [europa.eu/n-lex](https://n-lex.europa.eu/) - The primary gateway to national law databases for all EU members.
 - **European e-Justice Portal:** [e-justice.europa.eu](https://e-justice.europa.eu/) - Detailed guides on national judicial systems.
 - **EUR-Lex (EU-wide Law):** [eur-lex.europa.eu](https://eur-lex.europa.eu/)
 - **GDPR (General Data Protection Regulation):** [gdpr.eu](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
 
 #### Individual EU Member State Databases
+
 | Country | Official Legal Portal / Gazette | URL |
 |---------|--------------------------------|-----|
 | Austria | RIS (Rechtsinformationssystem) | [ris.bka.gv.at](https://www.ris.bka.gv.at/) |
@@ -65,6 +71,7 @@ version: 1.0.0
 | Sweden | Svensk författningssamling (SFS) | [svenskforfattningssamling.se](https://www.svenskforfattningssamling.se/) |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -3,7 +3,7 @@
 import { invariant } from "sognaflow-utils"
 import * as React from "react"
 import { useConstant } from "../utils/use-constant.js"
-import { LayoutGroup } from "./layoutgroup"
+import { LayoutGroup } from "./layout-group/index.js"
 
 let id = 0
 export const AnimateSharedLayout: React.FunctionComponent<

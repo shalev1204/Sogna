@@ -4,21 +4,24 @@ description: Meta-skill que orquestra todos os agentes do ecossistema. Scan auto
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - orchestration
 - multi-agent
 - workflow
 - automation
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-agent-orchestrator
 owner: [[orchestrator]]
 ---
-
 
 # Agent Orchestrator
 
@@ -106,6 +109,7 @@ agent-orchestrator/data/registry.json
 ## Locais De Busca
 
 O scanner procura SKILL.md em:
+
 1. `.claude/skills/*/` (skills registradas no Claude Code)
 2. `*/` (skills standalone no top-level)
 3. `*/*\` (skills em subpastas, ate profundidade 3)
@@ -250,6 +254,7 @@ Para adicionar uma nova skill ao ecossistema:
 
 1. Criar uma pasta em qualquer lugar sob `skills root:`
 2. Criar um `SKILL.md` com frontmatter YAML:
+
 ```yaml
 ---
 name: minha-nova-skill
@@ -259,9 +264,11 @@ description: "Descricao com keywords de ativacao..."
 ## Documentacao Da Skill
 
 ```
+
 3. **Pronto!** O auto-discovery detecta automaticamente na proxima solicitacao.
 
 Opcionalmente, para discovery nativo do Claude Code:
+
 4. Copiar o SKILL.md para `.claude/skills/<nome>/SKILL.md`
 
 ## Tags De Capacidade Explicitas (Opcional)
@@ -318,11 +325,13 @@ python agent-orchestrator/scripts/scan_registry.py --status
 - `task-intelligence` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

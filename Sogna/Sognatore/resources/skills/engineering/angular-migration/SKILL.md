@@ -8,7 +8,6 @@ id: skill-angular-migration
 owner: [[orchestrator]]
 ---
 
-
 # Angular Migration
 
 Master AngularJS to Angular migration, including hybrid apps, component conversion, dependency injection changes, and routing migration.
@@ -44,18 +43,21 @@ Master AngularJS to Angular migration, including hybrid apps, component conversi
 ## Migration Strategies
 
 ### 1. Big Bang (Complete Rewrite)
+
 - Rewrite entire app in Angular
 - Parallel development
 - Switch over at once
 - **Best for:** Small apps, green field projects
 
 ### 2. Incremental (Hybrid Approach)
+
 - Run AngularJS and Angular side-by-side
 - Migrate feature by feature
 - ngUpgrade for interop
 - **Best for:** Large apps, continuous delivery
 
 ### 3. Vertical Slice
+
 - Migrate one feature completely
 - New features in Angular, maintain old in AngularJS
 - Gradually replace
@@ -102,6 +104,7 @@ export class AppModule {
 ## Component Migration
 
 ### AngularJS Controller → Angular Component
+
 ```javascript
 // Before: AngularJS controller
 angular.module('myApp').controller('UserController', function($scope, UserService) {
@@ -155,6 +158,7 @@ export class UserComponent implements OnInit {
 ```
 
 ### AngularJS Directive → Angular Component
+
 ```javascript
 // Before: AngularJS directive
 angular.module('myApp').directive('userCard', function() {
@@ -236,6 +240,7 @@ export class UserService {
 ## Dependency Injection Changes
 
 ### Downgrading Angular → AngularJS
+
 ```typescript
 // Angular service
 import { Injectable } from '@angular/core';
@@ -260,6 +265,7 @@ angular.module('myApp').controller('OldController', function(newService) {
 ```
 
 ### Upgrading AngularJS → Angular
+
 ```typescript
 // AngularJS service
 angular.module('myApp').factory('oldService', function() {
@@ -381,27 +387,32 @@ export class UserFormComponent {
 
 ```
 Phase 1: Setup (1-2 weeks)
+
 - Install Angular CLI
 - Set up hybrid app
 - Configure build tools
 - Set up testing
 
 Phase 2: Infrastructure (2-4 weeks)
+
 - Migrate services
 - Migrate utilities
 - Set up routing
 - Migrate shared components
 
 Phase 3: Feature Migration (varies)
+
 - Migrate feature by feature
 - Test thoroughly
 - Deploy incrementally
 
 Phase 4: Cleanup (1-2 weeks)
+
 - Remove AngularJS code
 - Remove ngUpgrade
 - Optimize bundle
 - Final testing
+
 ```
 
 ## Resources
@@ -434,11 +445,13 @@ Phase 4: Cleanup (1-2 weeks)
 - Inadequate testing
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

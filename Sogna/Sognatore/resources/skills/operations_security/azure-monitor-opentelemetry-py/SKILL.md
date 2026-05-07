@@ -8,7 +8,6 @@ id: skill-azure-monitor-opentelemetry-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Monitor OpenTelemetry Distro for Python
 
 One-line setup for Application Insights with OpenTelemetry auto-instrumentation.
@@ -31,9 +30,11 @@ APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=h
 from azure.monitor.opentelemetry import configure_azure_monitor
 
 # One-line setup - reads connection string from environment
+
 configure_azure_monitor()
 
 # Your application code...
+
 ```
 
 ## Explicit Configuration
@@ -67,12 +68,15 @@ if __name__ == "__main__":
 ## With Django
 
 ```python
+
 # settings.py
+
 from azure.monitor.opentelemetry import configure_azure_monitor
 
 configure_azure_monitor()
 
 # Django settings...
+
 ```
 
 ## With FastAPI
@@ -140,6 +144,7 @@ logger.error("Errors are captured too", exc_info=True)
 from azure.monitor.opentelemetry import configure_azure_monitor
 
 # Sample 10% of requests
+
 configure_azure_monitor(
     sampling_ratio=0.1
 )
@@ -227,14 +232,17 @@ configure_azure_monitor(
 7. **Use AAD authentication** for production workloads
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

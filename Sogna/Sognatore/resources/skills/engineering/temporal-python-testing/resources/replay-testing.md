@@ -91,7 +91,9 @@ async def test_replay_multiple_workflows():
 **Problem: Random Number Generation**
 
 ```python
+
 # ❌ Non-deterministic (breaks replay)
+
 @workflow.defn
 class BadWorkflow:
     @workflow.run
@@ -99,6 +101,7 @@ class BadWorkflow:
         return random.randint(1, 100)  # Different on replay!
 
 # ✅ Deterministic (safe for replay)
+
 @workflow.defn
 class GoodWorkflow:
     @workflow.run
@@ -109,7 +112,9 @@ class GoodWorkflow:
 **Problem: Current Time**
 
 ```python
+
 # ❌ Non-deterministic
+
 @workflow.defn
 class BadWorkflow:
     @workflow.run
@@ -118,6 +123,7 @@ class BadWorkflow:
         return now.isoformat()
 
 # ✅ Deterministic
+
 @workflow.defn
 class GoodWorkflow:
     @workflow.run
@@ -129,7 +135,9 @@ class GoodWorkflow:
 **Problem: Direct External Calls**
 
 ```python
+
 # ❌ Non-deterministic
+
 @workflow.defn
 class BadWorkflow:
     @workflow.run
@@ -138,6 +146,7 @@ class BadWorkflow:
         return response.json()
 
 # ✅ Deterministic
+
 @workflow.defn
 class GoodWorkflow:
     @workflow.run
@@ -238,7 +247,9 @@ async def test_replay_from_file():
 ### GitHub Actions Example
 
 ```yaml
+
 # .github/workflows/replay-tests.yml
+
 name: Replay Tests
 
 on:
@@ -250,28 +261,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Set up Python
+
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
       - name: Install dependencies
+
         run: |
           pip install -r requirements.txt
           pip install pytest pytest-asyncio
 
       - name: Download production histories
+
         run: |
           # Fetch recent workflow histories from production
           python scripts/export_histories.py
 
       - name: Run replay tests
+
         run: |
           pytest tests/replay/ --verbose
 
       - name: Upload results
+
         if: failure()
         uses: actions/upload-artifact@v3
         with:
@@ -282,7 +299,9 @@ jobs:
 ### Automated History Export
 
 ```python
+
 # scripts/export_histories.py
+
 import asyncio
 from temporalio.client import Client
 from datetime import datetime, timedelta
@@ -321,7 +340,9 @@ if __name__ == "__main__":
 ### Replay Test Suite
 
 ```python
+
 # tests/replay/test_workflow_replay.py
+
 import pytest
 import glob
 from temporalio.worker import Replayer
@@ -356,7 +377,9 @@ async def test_replay_all_histories():
     if failures:
         pytest.fail(
             f"Replay failed for {len(failures)} workflows:\n"
+
             + "\n".join(f"  {file}: {error}" for file, error in failures)
+
         )
 ```
 
@@ -413,7 +436,9 @@ async def test_workflow_version_compatibility():
 ### Migration Strategy
 
 ```python
+
 # Phase 1: Add version check
+
 @workflow.defn
 class MigratingWorkflow:
     @workflow.run
@@ -428,6 +453,7 @@ class MigratingWorkflow:
             return await self._new_implementation()
 
 # Phase 2: After all old workflows complete, remove old code
+
 @workflow.defn
 class MigratedWorkflow:
     @workflow.run
@@ -474,6 +500,7 @@ WorkflowVersionError: Workflow version changed from 1 to 2 without using get_ver
 - CI/CD Integration: github.com/temporalio/samples-python/tree/main/.github/workflows
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

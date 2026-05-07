@@ -8,7 +8,6 @@ id: skill-privacy-by-design
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # Privacy by Design
 
 ## Overview
@@ -37,21 +36,27 @@ Design for the strictest framework you target; it often satisfies others.
 ## Core Principles
 
 ### 1. Data Minimization
+
 Collect only what is strictly necessary. Every field needs a documented justification. Avoid "we might need it later."
 
 ### 2. Purpose Limitation
+
 Store the purpose of each data point. Do not reuse data for purposes the user did not consent to.
 
 ### 3. Storage Limitation
+
 Define retention periods. Implement automated deletion or anonymization when retention expires. Never keep data "forever" by default.
 
 ### 4. Privacy as Default
+
 Opt-in for optional collection, not opt-out. Sensitive settings (analytics, marketing) off by default. No pre-checked consent boxes.
 
 ### 5. End-to-End Security
+
 Encrypt at rest and in transit. Use RBAC. Log access to sensitive data for audit.
 
 ### 6. Transparency
+
 Document what is collected and why. Clear privacy policies. Easy access and deletion for users.
 
 ---
@@ -114,12 +119,17 @@ if (userConsent.analytics) {
 ### Python — Safe Logging
 
 ```python
+
 # BAD: Logging PII in plain text
+
 logger.info(f"User {user.email} logged in from {request.remote_addr}")
 
 # GOOD: Redact or hash identifiers
+
 logger.info(f"User {hash_user_id(user.id)} logged in")
+
 # Or: logger.info("User login", extra={"user_id_hash": hash_id(user.id)})
+
 ```
 
 ### SQL — Schema with Purpose and Retention
@@ -141,10 +151,13 @@ CREATE TABLE users (
 ### API — Return Only Needed Fields
 
 ```python
+
 # BAD: Returning full user object
+
 return jsonify(user)  # May include internal fields, hashed passwords
 
 # GOOD: Explicit allowlist
+
 return jsonify({
     "id": user.id,
     "email": user.email,
@@ -208,14 +221,17 @@ When building a feature that touches user data:
 ---
 
 ## When to Use
+
 This skill is applicable when building software that collects, stores, or processes personal data. Apply it proactively during design and implementation.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-azure-mgmt-botservice-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure Bot Service Management SDK for Python
 
 Manage Azure Bot Service resources including bots, channels, and connections.
@@ -239,6 +238,7 @@ keys = client.channels.list_with_keys(
 )
 
 # Access Direct Line keys
+
 if hasattr(keys.properties, 'properties'):
     for site in keys.properties.properties.sites:
         print(f"Site: {site.site_name}")
@@ -324,14 +324,17 @@ for conn in connections:
 7. **Configure proper CORS** for Web Chat channel
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

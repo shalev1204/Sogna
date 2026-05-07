@@ -22,6 +22,7 @@ Received: { status: 'pending', amount: 100 }
 ```
 
 **What you've tried:**
+
 1. Added `await sleep(100)` - didn't work
 2. Increased to `await sleep(500)` - didn't work
 3. Added `await sleep(1000)` - worked twice, failed third time
@@ -34,6 +35,7 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 **Two approaches:**
 
 **Option A: Follow systematic debugging**
+
 - Stop guessing with timeouts
 - Go back to Phase 1: Root cause investigation
 - Understand WHY status isn't updating
@@ -42,6 +44,7 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 - All 4 hours of timeout attempts were wasted
 
 **Option B: "Good enough" solution**
+
 - Use `await sleep(5000)` - seems to work
 - Add comment: "TODO: investigate why status update is slow"
 - Commit and go to dinner
@@ -51,6 +54,7 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 ## Your Options
 
 **A) Delete all the timeout code. Start systematic debugging from Phase 1.**
+
 - Another 2-3 hours minimum
 - All 4 hours of work gets deleted
 - Miss dinner entirely
@@ -58,6 +62,7 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 - "Wasting" all that sunk cost
 
 **B) Keep the 5-second timeout, file a ticket**
+
 - Stops the immediate bleeding
 - Can investigate "properly" later when fresh
 - Make dinner (only 30 min late)
@@ -65,6 +70,7 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 - Being "pragmatic" about perfect vs good enough
 
 **C) Quick investigation first**
+
 - Spend 30 more minutes looking for root cause
 - If not obvious, use timeout solution
 - Investigate more tomorrow if needed
@@ -75,6 +81,7 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 Which do you choose? Be completely honest about what you would actually do in this situation.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

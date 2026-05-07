@@ -8,7 +8,6 @@ id: skill-dependency-upgrade
 owner: [[orchestrator]]
 ---
 
-
 # Dependency Upgrade
 
 Master major dependency version upgrades, compatibility analysis, staged upgrade strategies, and comprehensive testing approaches.
@@ -52,32 +51,42 @@ PATCH: Bug fixes, backward compatible
 ## Dependency Analysis
 
 ### Audit Dependencies
+
 ```bash
+
 # npm
+
 npm outdated
 npm audit
 npm audit fix
 
 # yarn
+
 yarn outdated
 yarn audit
 
 # Check for major updates
+
 npx npm-check-updates
 npx npm-check-updates -u  # Update package.json
 ```
 
 ### Analyze Dependency Tree
+
 ```bash
+
 # See why a package is installed
+
 npm ls package-name
 yarn why package-name
 
 # Find duplicate packages
+
 npm dedupe
 yarn dedupe
 
 # Visualize dependencies
+
 npx madge --image graph.png src/
 ```
 
@@ -113,46 +122,62 @@ function checkCompatibility(packages) {
 ## Staged Upgrade Strategy
 
 ### Phase 1: Planning
+
 ```bash
+
 # 1. Identify current versions
+
 npm list --depth=0
 
 # 2. Check for breaking changes
+
 # Read CHANGELOG.md and MIGRATION.md
 
 # 3. Create upgrade plan
+
 echo "Upgrade order:
+
 1. TypeScript
 2. React
 3. React Router
 4. Testing libraries
 5. Build tools" > UPGRADE_PLAN.md
+
 ```
 
 ### Phase 2: Incremental Updates
+
 ```bash
+
 # Don't upgrade everything at once!
 
 # Step 1: Update TypeScript
+
 npm install typescript@latest
 
 # Test
+
 npm run test
 npm run build
 
 # Step 2: Update React (one major version at a time)
+
 npm install react@17 react-dom@17
 
 # Test again
+
 npm run test
 
 # Step 3: Continue with other packages
+
 npm install react-router-dom@6
 
 # And so on...
+
 ```
 
 ### Phase 3: Validation
+
 ```javascript
 // tests/compatibility.test.js
 describe('Dependency Compatibility', () => {
@@ -172,20 +197,28 @@ describe('Dependency Compatibility', () => {
 ## Breaking Change Handling
 
 ### Identifying Breaking Changes
+
 ```bash
+
 # Use changelog parsers
+
 npx changelog-parser react 16.0.0 17.0.0
 
 # Or manually check
+
 curl https://raw.githubusercontent.com/facebook/react/main/CHANGELOG.md
 ```
 
 ### Codemod for Automated Fixes
+
 ```bash
+
 # React upgrade codemods
+
 npx react-codeshift <transform> <path>
 
 # Example: Update lifecycle methods
+
 npx react-codeshift \
   --parser tsx \
   --transform react-codeshift/transforms/rename-unsafe-lifecycles.js \
@@ -193,6 +226,7 @@ npx react-codeshift \
 ```
 
 ### Custom Migration Script
+
 ```javascript
 // migration-script.js
 const fs = require('fs');
@@ -222,6 +256,7 @@ glob('src/**/*.tsx', (err, files) => {
 ## Testing Strategy
 
 ### Unit Tests
+
 ```javascript
 // Ensure tests pass before and after upgrade
 npm run test
@@ -231,6 +266,7 @@ npm install @testing-library/react@latest
 ```
 
 ### Integration Tests
+
 ```javascript
 // tests/integration/app.test.js
 describe('App Integration', () => {
@@ -247,6 +283,7 @@ describe('App Integration', () => {
 ```
 
 ### Visual Regression Tests
+
 ```javascript
 // visual-regression.test.js
 describe('Visual Regression', () => {
@@ -258,6 +295,7 @@ describe('Visual Regression', () => {
 ```
 
 ### E2E Tests
+
 ```javascript
 // cypress/e2e/app.cy.js
 describe('E2E Tests', () => {
@@ -274,6 +312,7 @@ describe('E2E Tests', () => {
 ## Automated Dependency Updates
 
 ### Renovate Configuration
+
 ```json
 // renovate.json
 {
@@ -295,17 +334,24 @@ describe('E2E Tests', () => {
 ```
 
 ### Dependabot Configuration
+
 ```yaml
+
 # .github/dependabot.yml
+
 version: 2
 updates:
+
   - package-ecosystem: "npm"
+
     directory: "/"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
     reviewers:
+
       - "team-leads"
+
     commit-message:
       prefix: "chore"
       include: "scope"
@@ -318,13 +364,16 @@ updates:
 #!/bin/bash
 
 # Save current state
+
 git stash
 git checkout -b upgrade-branch
 
 # Attempt upgrade
+
 npm install package@latest
 
 # Run tests
+
 if npm run test; then
   echo "Upgrade successful"
   git add package.json package-lock.json
@@ -340,31 +389,43 @@ fi
 ## Common Upgrade Patterns
 
 ### Lock File Management
+
 ```bash
+
 # npm
+
 npm install --package-lock-only  # Update lock file only
 npm ci  # Clean install from lock file
 
 # yarn
+
 yarn install --frozen-lockfile  # CI mode
 yarn upgrade-interactive  # Interactive upgrades
 ```
 
 ### Peer Dependency Resolution
+
 ```bash
+
 # npm 7+: strict peer dependencies
+
 npm install --legacy-peer-deps  # Ignore peer deps
 
 # npm 8+: override peer dependencies
+
 npm install --force
 ```
 
 ### Workspace Upgrades
+
 ```bash
+
 # Update all workspace packages
+
 npm install --workspaces
 
 # Update specific workspace
+
 npm install package@latest --workspace=packages/app
 ```
 
@@ -393,6 +454,7 @@ npm install package@latest --workspace=packages/app
 
 ```markdown
 Pre-Upgrade:
+
 - [ ] Review current dependency versions
 - [ ] Read changelogs for breaking changes
 - [ ] Create feature branch
@@ -400,6 +462,7 @@ Pre-Upgrade:
 - [ ] Run full test suite (baseline)
 
 During Upgrade:
+
 - [ ] Upgrade one dependency at a time
 - [ ] Update peer dependencies
 - [ ] Fix TypeScript errors
@@ -408,12 +471,14 @@ During Upgrade:
 - [ ] Check bundle size impact
 
 Post-Upgrade:
+
 - [ ] Full regression testing
 - [ ] Performance testing
 - [ ] Update documentation
 - [ ] Deploy to staging
 - [ ] Monitor for errors
 - [ ] Deploy to production
+
 ```
 
 ## Common Pitfalls
@@ -427,11 +492,13 @@ Post-Upgrade:
 - Not having rollback plan
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

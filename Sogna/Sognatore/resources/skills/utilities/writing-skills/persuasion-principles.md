@@ -16,14 +16,17 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ## The Seven Principles
 
 ### 1. Authority
+
 **What it is:** Deference to expertise, credentials, or official sources.
 
 **How it works in skills:**
+
 - Imperative language: "YOU MUST", "Never", "Always"
 - Non-negotiable framing: "No exceptions"
 - Eliminates decision fatigue and rationalization
 
 **When to use:**
+
 - Discipline-enforcing skills (TDD, verification requirements)
 - Safety-critical practices
 - Established best practices
@@ -35,14 +38,17 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 2. Commitment
+
 **What it is:** Consistency with prior actions, statements, or public declarations.
 
 **How it works in skills:**
+
 - Require announcements: "Announce skill usage"
 - Force explicit choices: "Choose A, B, or C"
 - Use tracking: TodoWrite for checklists
 
 **When to use:**
+
 - Ensuring skills are actually followed
 - Multi-step processes
 - Accountability mechanisms
@@ -54,14 +60,17 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 3. Scarcity
+
 **What it is:** Urgency from time limits or limited availability.
 
 **How it works in skills:**
+
 - Time-bound requirements: "Before proceeding"
 - Sequential dependencies: "Immediately after X"
 - Prevents procrastination
 
 **When to use:**
+
 - Immediate verification requirements
 - Time-sensitive workflows
 - Preventing "I'll do it later"
@@ -73,14 +82,17 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 4. Social Proof
+
 **What it is:** Conformity to what others do or what's considered normal.
 
 **How it works in skills:**
+
 - Universal patterns: "Every time", "Always"
 - Failure modes: "X without Y = failure"
 - Establishes norms
 
 **When to use:**
+
 - Documenting universal practices
 - Warning about common failures
 - Reinforcing standards
@@ -92,13 +104,16 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 5. Unity
+
 **What it is:** Shared identity, "we-ness", in-group belonging.
 
 **How it works in skills:**
+
 - Collaborative language: "our codebase", "we're colleagues"
 - Shared goals: "we both want quality"
 
 **When to use:**
+
 - Collaborative workflows
 - Establishing team culture
 - Non-hierarchical practices
@@ -110,24 +125,30 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ```
 
 ### 6. Reciprocity
+
 **What it is:** Obligation to return benefits received.
 
 **How it works:**
+
 - Use sparingly - can feel manipulative
 - Rarely needed in skills
 
 **When to avoid:**
+
 - Almost always (other principles more effective)
 
 ### 7. Liking
+
 **What it is:** Preference for cooperating with those we like.
 
 **How it works:**
+
 - **DON'T USE for compliance**
 - Conflicts with honest feedback culture
 - Creates sycophancy
 
 **When to avoid:**
+
 - Always for discipline enforcement
 
 ## Principle Combinations by Skill Type
@@ -142,16 +163,19 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ## Why This Works: The Psychology
 
 **Bright-line rules reduce rationalization:**
+
 - "YOU MUST" removes decision fatigue
 - Absolute language eliminates "is this an exception?" questions
 - Explicit anti-rationalization counters close specific loopholes
 
 **Implementation intentions create automatic behavior:**
+
 - Clear triggers + required actions = automatic execution
 - "When X, do Y" more effective than "generally do Y"
 - Reduces cognitive load on compliance
 
 **LLMs are parahuman:**
+
 - Trained on human text containing these patterns
 - Authority language precedes compliance in training data
 - Commitment sequences (statement → action) frequently modeled
@@ -160,11 +184,13 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ## Ethical Use
 
 **Legitimate:**
+
 - Ensuring critical practices are followed
 - Creating effective documentation
 - Preventing predictable failures
 
 **Illegitimate:**
+
 - Manipulating for personal gain
 - Creating false urgency
 - Guilt-based compliance
@@ -174,10 +200,12 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ## Research Citations
 
 **Cialdini, R. B. (2021).** *Influence: The Psychology of Persuasion (New and Expanded).* Harper Business.
+
 - Seven principles of persuasion
 - Empirical foundation for influence research
 
 **Meincke, L., Shapiro, D., Duckworth, A. L., Mollick, E., Mollick, L., & Cialdini, R. (2025).** Call Me A Jerk: Persuading AI to Comply with Objectionable Requests. University of Pennsylvania.
+
 - Tested 7 principles with N=28,000 LLM conversations
 - Compliance increased 33% → 72% with persuasion techniques
 - Authority, commitment, scarcity most effective
@@ -194,6 +222,7 @@ When designing a skill, ask:
 5. **Is this ethical?** (Serves user's genuine interests?)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

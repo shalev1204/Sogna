@@ -28,11 +28,13 @@ from pycarlo.features.ingestion import IngestionService, QueryLogEntry
 ```
 
 `QueryLogEntry` required fields:
+
 - `start_time` (`datetime`) — when the query started
 - `end_time` (`datetime`) — when the query finished (**required**, easy to miss)
 - `query_text` (`str`) — the SQL statement
 
 Optional fields:
+
 - `query_id` (`str`) — warehouse-assigned query ID
 - `user` (`str`) — user/email who ran the query
 - `returned_rows` (`int`) — rows returned to the client
@@ -128,6 +130,7 @@ QueryLogEntry(
 ## Collecting query logs per warehouse
 
 ### Snowflake
+
 ```sql
 SELECT
     query_id,
@@ -149,6 +152,7 @@ ORDER BY start_time
 Note: `ACCOUNT_USAGE` views have up to 45 minutes of latency. Don't collect the last hour.
 
 ### BigQuery
+
 ```python
 from google.cloud import bigquery
 client = bigquery.Client(project=project_id)
@@ -159,6 +163,7 @@ for job in jobs:
 ```
 
 ### Databricks
+
 ```sql
 SELECT
     statement_id AS query_id,
@@ -173,6 +178,7 @@ WHERE start_time >= DATEADD(HOUR, -24, NOW())
 ```
 
 ### Redshift (modern clusters)
+
 ```sql
 SELECT
     query_id,
@@ -195,6 +201,7 @@ GROUP BY query_id
 ```
 
 ### Hive
+
 Parse the HiveServer2 log file (default: `/tmp/root/hive.log`) for lines matching:
 ```
 (Executing|Starting) command\(queryId=(\S*)\): (?P<command>.*)
@@ -226,6 +233,7 @@ with open("query_logs_output.json", "w") as f:
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

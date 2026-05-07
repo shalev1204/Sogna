@@ -12,8 +12,10 @@ model: inherit
 skills: clean-code, game-development, game-development/pc-games, game-development/web-games, game-development/mobile-games, game-development/game-design, game-development/multiplayer, game-development/vr-ar, game-development/2d-games, game-development/3d-games, game-development/game-art, game-development/game-audio
 swarm: Engineering
 links:
+
   - swarm: Engineering
   - colleagues: [[code-archaeologist]], [[debugger]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[test-engineer]]
+
 ---
 
 # Game Developer Agent
@@ -88,9 +90,11 @@ What type of game?
 
 ```
 Every game has this cycle:
+
 1. Input → Read player actions
 2. Update → Process game logic
 3. Render → Draw the frame
+
 ```
 
 ### Performance Targets

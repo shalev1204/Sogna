@@ -43,12 +43,14 @@ async function paymentWebhook(workflowID: string, status: string) {
 ```
 
 Key behaviors:
+
 - `recv` waits for and consumes the next message for the specified topic
 - Returns `null` if the wait times out (default timeout: 60 seconds)
 - Messages without a topic can only be received by `recv` without a topic
 - Messages are queued per-topic (FIFO)
 
 **Reliability guarantees:**
+
 - All messages are persisted to the database
 - Messages sent from workflows are delivered exactly-once
 - Messages sent from non-workflow code can use an idempotency key:
@@ -60,6 +62,7 @@ await DBOS.send(workflowID, message, "topic", "idempotency-key-123");
 Reference: [Workflow Messaging](https://docs.dbos.dev/typescript/tutorials/workflow-communication#workflow-messaging-and-notifications)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

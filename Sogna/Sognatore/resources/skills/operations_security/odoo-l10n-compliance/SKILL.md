@@ -7,7 +7,6 @@ id: skill-odoo-l10n-compliance
 owner: [[ops-security]]
 ---
 
-
 # Odoo Localization & Compliance (l10n)
 
 ## Overview
@@ -90,11 +89,15 @@ Fiscal Position (created separately):
 ### Example 3: Install and Validate a Localization
 
 ```bash
+
 # Install via CLI (if module not in Apps)
+
 ./odoo-bin -d mydb --stop-after-init -i l10n_mx_edi
 
 # Verify in Odoo:
+
 # Apps → Installed → Search "l10n_mx" → Should show as Installed
+
 ```
 
 ## Best Practices
@@ -106,11 +109,13 @@ Fiscal Position (created separately):
 - ❌ **Don't:** Mix localization tax accounts with custom accounts — it breaks fiscal reports.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

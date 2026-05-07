@@ -6,6 +6,7 @@ version: 1.0.0
 ---
 
 <!-- Updated: 2026-02-07 -->
+
 # Core Web Vitals Thresholds (February 2026)
 
 ## Current Metrics
@@ -17,6 +18,7 @@ version: 1.0.0
 | CLS (Cumulative Layout Shift) | ≤0.1 | 0.1–0.25 | >0.25 |
 
 ## Key Facts
+
 - INP replaced FID (First Input Delay) on **March 12, 2024**. FID was fully removed from all Chrome tools (CrUX API, PageSpeed Insights, Lighthouse) on **September 9, 2024**. INP is the sole interactivity metric.
 - Evaluation uses the **75th percentile** of real user data (field data from CrUX).
 - Google assesses at the **page level** and the **origin level**.
@@ -54,11 +56,13 @@ Use this breakdown to identify which phase is causing LCP issues.
 ## Measurement Sources
 
 ### Field Data (Real Users)
+
 - Chrome User Experience Report (CrUX)
 - PageSpeed Insights (uses CrUX data)
 - Search Console Core Web Vitals report
 
 ### Lab Data (Simulated)
+
 - Lighthouse
 - WebPageTest
 - Chrome DevTools
@@ -68,6 +72,7 @@ Use this breakdown to identify which phase is causing LCP issues.
 ## Common Bottlenecks
 
 ### LCP (Largest Contentful Paint)
+
 - Unoptimized hero images (compress, use WebP/AVIF, add preload)
 - Render-blocking CSS/JS (defer, async, critical CSS inlining)
 - Slow server response (TTFB >200ms: use edge CDN, caching)
@@ -75,6 +80,7 @@ Use this breakdown to identify which phase is causing LCP issues.
 - Web font loading delay (use font-display: swap + preload)
 
 ### INP (Interaction to Next Paint)
+
 - Long JavaScript tasks on main thread (break into smaller tasks <50ms)
 - Heavy event handlers (debounce, use requestAnimationFrame)
 - Excessive DOM size (>1,500 elements is concerning)
@@ -83,6 +89,7 @@ Use this breakdown to identify which phase is causing LCP issues.
 - Layout thrashing (multiple forced reflows)
 
 ### CLS (Cumulative Layout Shift)
+
 - Images/iframes without width/height dimensions
 - Dynamically injected content above existing content
 - Web fonts causing layout shift (use font-display: swap + preload)
@@ -98,10 +105,13 @@ Use this breakdown to identify which phase is causing LCP issues.
 ## Tools
 
 ```bash
+
 # PageSpeed Insights API
+
 curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=URL&key=API_KEY"
 
 # Lighthouse CLI
+
 npx lighthouse URL --output json --output-path report.json
 ```
 
@@ -115,6 +125,7 @@ npx lighthouse URL --output json --output-path report.json
 > **Mobile-first indexing** is 100% complete as of July 5, 2024. Google now crawls and indexes ALL websites exclusively with the mobile Googlebot user-agent. Ensure your mobile version contains all critical content, structured data, and meta tags.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

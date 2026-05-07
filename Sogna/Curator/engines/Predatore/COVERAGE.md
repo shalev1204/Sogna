@@ -9,6 +9,7 @@ We are actively working to expand this coverage to provide an even more comprehe
 ## Current Coverage
 
 Predatore currently targets the following classes of *exploitable* vulnerabilities:
+
 - Broken Authentication & Authorization
 - SQL Injection (SQLi)
 - Command Injection
@@ -156,4 +157,3 @@ This list is not exhaustive of all potential security risks. Predatore does not,
 | WSTG-APIT-02 | API Broken Object Level Authorization | ✅ |
 | WSTG-APIT-99 | Testing GraphQL | ✅ |
 |  |  |  |
-

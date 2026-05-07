@@ -10,7 +10,6 @@ id: skill-astropy
 owner: [[orchestrator]]
 ---
 
-
 # Astropy
 
 ## Overview
@@ -20,6 +19,7 @@ Astropy is the core Python package for astronomy, providing essential functional
 ## When to Use This Skill
 
 Use astropy when tasks involve:
+
 - Converting between celestial coordinate systems (ICRS, Galactic, FK5, AltAz, etc.)
 - Working with physical units and quantities (converting Jy to mJy, parsecs to km, etc.)
 - Reading, writing, or manipulating FITS files (images or tables)
@@ -40,25 +40,31 @@ from astropy.table import Table
 from astropy.cosmology import Planck18
 
 # Units and quantities
+
 distance = 100 * u.pc
 distance_km = distance.to(u.km)
 
 # Coordinates
+
 coord = SkyCoord(ra=10.5*u.degree, dec=41.2*u.degree, frame='icrs')
 coord_galactic = coord.galactic
 
 # Time
+
 t = Time('2023-01-15 12:30:00')
 jd = t.jd  # Julian Date
 
 # FITS files
+
 data = fits.getdata('image.fits')
 header = fits.getheader('image.fits')
 
 # Tables
+
 table = Table.read('catalog.fits')
 
 # Cosmology
+
 d_L = Planck18.luminosity_distance(z=1.0)
 ```
 
@@ -69,6 +75,7 @@ d_L = Planck18.luminosity_distance(z=1.0)
 Handle physical quantities with units, perform unit conversions, and ensure dimensional consistency in calculations.
 
 **Key operations:**
+
 - Create quantities by multiplying values with units
 - Convert between units using `.to()` method
 - Perform arithmetic with automatic unit handling
@@ -82,6 +89,7 @@ Handle physical quantities with units, perform unit conversions, and ensure dime
 Represent celestial positions and transform between different coordinate frames.
 
 **Key operations:**
+
 - Create coordinates with `SkyCoord` in any frame (ICRS, Galactic, FK5, AltAz, etc.)
 - Transform between coordinate systems
 - Calculate angular separations and position angles
@@ -97,6 +105,7 @@ Represent celestial positions and transform between different coordinate frames.
 Perform cosmological calculations using standard cosmological models.
 
 **Key operations:**
+
 - Use built-in cosmologies (Planck18, WMAP9, etc.)
 - Create custom cosmological models
 - Calculate distances (luminosity, comoving, angular diameter)
@@ -112,6 +121,7 @@ Perform cosmological calculations using standard cosmological models.
 Read, write, and manipulate FITS (Flexible Image Transport System) files.
 
 **Key operations:**
+
 - Open FITS files with context managers
 - Access HDUs (Header Data Units) by index or name
 - Read and modify headers (keywords, comments, history)
@@ -128,6 +138,7 @@ Read, write, and manipulate FITS (Flexible Image Transport System) files.
 Work with tabular data with support for units, metadata, and various file formats.
 
 **Key operations:**
+
 - Create tables from arrays, lists, or dictionaries
 - Read/write tables in multiple formats (FITS, CSV, HDF5, VOTable)
 - Access and modify columns and rows
@@ -144,6 +155,7 @@ Work with tabular data with support for units, metadata, and various file format
 Precise time representation and conversion between time scales and formats.
 
 **Key operations:**
+
 - Create Time objects in various formats (ISO, JD, MJD, Unix, etc.)
 - Convert between time scales (UTC, TAI, TT, TDB, etc.)
 - Perform time arithmetic with TimeDelta
@@ -159,6 +171,7 @@ Precise time representation and conversion between time scales and formats.
 Transform between pixel coordinates in images and world coordinates.
 
 **Key operations:**
+
 - Read WCS from FITS headers
 - Convert pixel coordinates to world coordinates (and vice versa)
 - Calculate image footprints
@@ -172,30 +185,39 @@ Transform between pixel coordinates in images and world coordinates.
 The `references/wcs_and_other_modules.md` file also covers:
 
 ### NDData and CCDData
+
 Containers for n-dimensional datasets with metadata, uncertainty, masking, and WCS information.
 
 ### Modeling
+
 Framework for creating and fitting mathematical models to astronomical data.
 
 ### Visualization
+
 Tools for astronomical image display with appropriate stretching and scaling.
 
 ### Constants
+
 Physical and astronomical constants with proper units (speed of light, solar mass, Planck constant, etc.).
 
 ### Convolution
+
 Image processing kernels for smoothing and filtering.
 
 ### Statistics
+
 Robust statistical functions including sigma clipping and outlier rejection.
 
 ## Installation
 
 ```bash
+
 # Install astropy
+
 uv pip install astropy
 
 # With optional dependencies for full functionality
+
 uv pip install astropy[all]
 ```
 
@@ -208,13 +230,16 @@ from astropy.coordinates import SkyCoord
 import astropy.units as u
 
 # Create coordinate
+
 c = SkyCoord(ra='05h23m34.5s', dec='-69d45m22s', frame='icrs')
 
 # Transform to galactic
+
 c_gal = c.galactic
 print(f"l={c_gal.l.deg}, b={c_gal.b.deg}")
 
 # Transform to alt-az (requires time and location)
+
 from astropy.time import Time
 from astropy.coordinates import EarthLocation, AltAz
 
@@ -232,6 +257,7 @@ from astropy.io import fits
 import numpy as np
 
 # Open FITS file
+
 with fits.open('observation.fits') as hdul:
     # Display structure
     hdul.info()
@@ -258,6 +284,7 @@ import astropy.units as u
 import numpy as np
 
 # Calculate distances at z=1.5
+
 z = 1.5
 d_L = Planck18.luminosity_distance(z)
 d_A = Planck18.angular_diameter_distance(z)
@@ -266,10 +293,12 @@ print(f"Luminosity distance: {d_L}")
 print(f"Angular diameter distance: {d_A}")
 
 # Age of universe at that redshift
+
 age = Planck18.age(z)
 print(f"Age at z={z}: {age.to(u.Gyr)}")
 
 # Lookback time
+
 t_lookback = Planck18.lookback_time(z)
 print(f"Lookback time: {t_lookback.to(u.Gyr)}")
 ```
@@ -282,21 +311,26 @@ from astropy.coordinates import SkyCoord, match_coordinates_sky
 import astropy.units as u
 
 # Read catalogs
+
 cat1 = Table.read('catalog1.fits')
 cat2 = Table.read('catalog2.fits')
 
 # Create coordinate objects
+
 coords1 = SkyCoord(ra=cat1['RA']*u.degree, dec=cat1['DEC']*u.degree)
 coords2 = SkyCoord(ra=cat2['RA']*u.degree, dec=cat2['DEC']*u.degree)
 
 # Find matches
+
 idx, sep, _ = coords1.match_to_catalog_sky(coords2)
 
 # Filter by separation threshold
+
 max_sep = 1 * u.arcsec
 matches = sep < max_sep
 
 # Create matched catalogs
+
 cat1_matched = cat1[matches]
 cat2_matched = cat2[idx[matches]]
 print(f"Found {len(cat1_matched)} matches")
@@ -324,6 +358,7 @@ print(f"Found {len(cat1_matched)} matches")
 ## Reference Files
 
 For detailed information on specific modules:
+
 - `references/units.md` - Units, quantities, conversions, and equivalencies
 - `references/coordinates.md` - Coordinate systems, transformations, and catalog matching
 - `references/cosmology.md` - Cosmological models and calculations
@@ -333,11 +368,13 @@ For detailed information on specific modules:
 - `references/wcs_and_other_modules.md` - WCS, NDData, modeling, visualization, constants, and utilities
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

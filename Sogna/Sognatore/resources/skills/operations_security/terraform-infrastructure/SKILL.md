@@ -9,7 +9,6 @@ id: skill-terraform-infrastructure
 owner: [[eng-infra]], [[ops-security]]
 ---
 
-
 # Terraform Infrastructure Workflow
 
 ## Overview
@@ -19,6 +18,7 @@ Specialized workflow for infrastructure as code using Terraform including resour
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Provisioning cloud infrastructure
 - Creating Terraform modules
 - Managing multi-environment infra
@@ -30,10 +30,12 @@ Use this workflow when:
 ### Phase 1: Terraform Setup
 
 #### Skills to Invoke
+
 - `terraform-skill` - Terraform basics
 - `terraform-specialist` - Advanced Terraform
 
 #### Actions
+
 1. Initialize Terraform
 2. Configure backend
 3. Set up providers
@@ -41,6 +43,7 @@ Use this workflow when:
 5. Create outputs
 
 #### Copy-Paste Prompts
+
 ```
 Use @terraform-skill to set up Terraform project
 ```
@@ -48,10 +51,12 @@ Use @terraform-skill to set up Terraform project
 ### Phase 2: Resource Provisioning
 
 #### Skills to Invoke
+
 - `terraform-module-library` - Terraform modules
 - `cloud-architect` - Cloud architecture
 
 #### Actions
+
 1. Design infrastructure
 2. Create resource definitions
 3. Configure networking
@@ -59,6 +64,7 @@ Use @terraform-skill to set up Terraform project
 5. Add storage
 
 #### Copy-Paste Prompts
+
 ```
 Use @terraform-module-library to provision cloud resources
 ```
@@ -66,9 +72,11 @@ Use @terraform-module-library to provision cloud resources
 ### Phase 3: Module Creation
 
 #### Skills to Invoke
+
 - `terraform-module-library` - Module creation
 
 #### Actions
+
 1. Design module interface
 2. Create module structure
 3. Define variables/outputs
@@ -76,6 +84,7 @@ Use @terraform-module-library to provision cloud resources
 5. Test module
 
 #### Copy-Paste Prompts
+
 ```
 Use @terraform-module-library to create reusable Terraform module
 ```
@@ -83,9 +92,11 @@ Use @terraform-module-library to create reusable Terraform module
 ### Phase 4: State Management
 
 #### Skills to Invoke
+
 - `terraform-specialist` - State management
 
 #### Actions
+
 1. Configure remote backend
 2. Set up state locking
 3. Implement workspaces
@@ -93,6 +104,7 @@ Use @terraform-module-library to create reusable Terraform module
 5. Set up backup
 
 #### Copy-Paste Prompts
+
 ```
 Use @terraform-specialist to configure Terraform state
 ```
@@ -100,9 +112,11 @@ Use @terraform-specialist to configure Terraform state
 ### Phase 5: Multi-Environment
 
 #### Skills to Invoke
+
 - `terraform-specialist` - Multi-environment
 
 #### Actions
+
 1. Design environment structure
 2. Create environment configs
 3. Set up variable files
@@ -110,6 +124,7 @@ Use @terraform-specialist to configure Terraform state
 5. Test deployments
 
 #### Copy-Paste Prompts
+
 ```
 Use @terraform-specialist to set up multi-environment Terraform
 ```
@@ -117,10 +132,12 @@ Use @terraform-specialist to set up multi-environment Terraform
 ### Phase 6: CI/CD Integration
 
 #### Skills to Invoke
+
 - `cicd-automation-workflow-automate` - CI/CD
 - `github-actions-templates` - GitHub Actions
 
 #### Actions
+
 1. Create CI pipeline
 2. Configure plan/apply
 3. Set up approvals
@@ -128,6 +145,7 @@ Use @terraform-specialist to set up multi-environment Terraform
 5. Test pipeline
 
 #### Copy-Paste Prompts
+
 ```
 Use @cicd-automation-workflow-automate to create Terraform CI/CD
 ```
@@ -135,10 +153,12 @@ Use @cicd-automation-workflow-automate to create Terraform CI/CD
 ### Phase 7: Security
 
 #### Skills to Invoke
+
 - `secrets-management` - Secrets management
 - `terraform-specialist` - Security
 
 #### Actions
+
 1. Configure secrets
 2. Set up encryption
 3. Implement policies
@@ -146,6 +166,7 @@ Use @cicd-automation-workflow-automate to create Terraform CI/CD
 5. Audit access
 
 #### Copy-Paste Prompts
+
 ```
 Use @secrets-management to secure Terraform secrets
 ```
@@ -166,11 +187,13 @@ Use @secrets-management to secure Terraform secrets
 - `aws-infrastructure` - AWS specific
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

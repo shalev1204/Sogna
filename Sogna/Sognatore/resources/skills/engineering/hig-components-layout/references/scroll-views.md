@@ -121,6 +121,7 @@ December 5, 2023| Described the visionOS scroll indicator and added guidance for
 June 5, 2023| Updated guidance for using scroll views in watchOS.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

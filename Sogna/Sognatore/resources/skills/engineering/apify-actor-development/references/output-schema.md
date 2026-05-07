@@ -56,6 +56,7 @@ The Actor output schema builds upon the schemas for the dataset and key-value st
 - `run.defaultKeyValueStoreId` (string) - ID of the default key-value store
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

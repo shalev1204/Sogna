@@ -238,6 +238,7 @@ For general training issues, see [troubleshooting.md](troubleshooting.md).
 - [training_methods.md](training_methods.md) — SFT, DPO, GRPO overview
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

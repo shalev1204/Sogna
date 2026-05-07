@@ -90,6 +90,7 @@ Prompt: "Implement MINIMAL code to make these failing tests pass: $ARGUMENTS. Fo
    - Synchronous before asynchronous implementation
 
 7. **Success Criteria**
+
    ✓ All tests pass (green)
    ✓ No extra functionality beyond test requirements
    ✓ Code is readable even if not optimal
@@ -121,6 +122,7 @@ Prompt: "Implement MINIMAL code to make these failing tests pass: $ARGUMENTS. Fo
     - Prepare notes for refactoring phase
 
 Output should include:
+
 - Complete implementation code
 - Test execution results showing all green
 - List of shortcuts taken for later refactoring
@@ -131,6 +133,7 @@ Output should include:
 ## Post-Implementation Checks
 
 After implementation:
+
 1. Run full test suite to confirm all tests pass
 2. Verify no existing tests were broken
 3. Document areas needing refactoring
@@ -140,6 +143,7 @@ After implementation:
 ## Recovery Process
 
 If tests still fail:
+
 - Review test requirements carefully
 - Check for misunderstood assertions
 - Add minimal code to address specific failures
@@ -431,6 +435,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
 ### Framework 1: Fake vs. Real Implementation
 
 **When to Fake It:**
+
 - First test for a new feature
 - Complex external dependencies (payment gateways, APIs)
 - Implementation approach is still uncertain
@@ -438,6 +443,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
 - Time pressure to see all tests green
 
 **When to Go Real:**
+
 - Second or third test reveals pattern
 - Implementation is obvious and simple
 - Faking would be more complex than real code
@@ -486,19 +492,23 @@ function calculateShipping(weight: number, distance: number, express: boolean): 
 **Green Phase: Focus on Correctness**
 ```
 ❌ Avoid:
+
 - Caching strategies
 - Database query optimization
 - Algorithmic complexity improvements
 - Premature memory optimization
 
 ✓ Accept:
+
 - O(n²) if it makes code simpler
 - Multiple database queries
 - Synchronous operations
 - Inefficient but clear algorithms
+
 ```
 
 **When Performance Matters in Green Phase:**
+
 1. Performance is explicit test requirement
 2. Implementation would cause timeout in test suite
 3. Memory leak would crash tests
@@ -546,18 +556,22 @@ const Counter = () => {
 
 **Function View → Class View → Generic View:**
 ```python
+
 # Green Phase: Simple function
+
 def product_list(request):
     products = Product.objects.all()
     return JsonResponse({'products': list(products.values())})
 
 # Refactor: Class-based view
+
 class ProductListView(View):
     def get(self, request):
         products = Product.objects.all()
         return JsonResponse({'products': list(products.values())})
 
 # Refactor: Generic view
+
 class ProductListView(ListView):
     model = Product
     context_object_name = 'products'
@@ -714,13 +728,16 @@ describe('UserService Contract', () => {
 **Micro-Refactoring During Green Phase:**
 
 ```python
+
 # Test passes with this
+
 def calculate_discount(price, customer_type):
     if customer_type == 'premium':
         return price * 0.8
     return price
 
 # Immediate micro-refactor (tests still green)
+
 DISCOUNT_RATES = {
     'premium': 0.8,
     'standard': 1.0
@@ -732,6 +749,7 @@ def calculate_discount(price, customer_type):
 ```
 
 **Safe Refactoring Checklist:**
+
 - ✓ Tests green before refactoring
 - ✓ Change one thing at a time
 - ✓ Run tests after each change
@@ -789,6 +807,7 @@ class UserService {
 ### AI-Assisted Green Phase
 
 **Using Copilot/AI Tools:**
+
 1. Write test first (human-driven)
 2. Let AI suggest minimal implementation
 3. Verify suggestion passes tests
@@ -877,6 +896,7 @@ class OrderService {
 Tests to make pass: $ARGUMENTS
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

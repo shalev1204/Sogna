@@ -50,6 +50,7 @@ create index sessions_token_idx on sessions using hash (token);
 Reference: [Index Types](https://www.postgresql.org/docs/current/indexes-types.html)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -36,7 +36,9 @@ Read plan.md and identify the next pending `[ ]` task. Select tasks in order wit
 Update plan.md to mark the task as `[~]`:
 
 ```markdown
+
 - [~] **Task 2.1**: Implement user validation
+
 ```
 
 Commit this status change separately from implementation.
@@ -136,17 +138,21 @@ Add rich task summary as git note:
 git notes add -m "Task 2.1: Implement user validation
 
 Summary:
+
 - Added email validation using regex pattern
 - Handles edge cases: empty, no @, no domain
 - Coverage: 94% on validation module
 
 Files changed:
+
 - src/models/user.py (modified)
 - tests/test_user.py (modified)
 
 Decisions:
+
 - Used simple regex over email-validator library
 - Reason: No external dependency for basic validation"
+
 ```
 
 ### Step 10: Update Plan with SHA
@@ -154,7 +160,9 @@ Decisions:
 Update plan.md to mark task complete with commit SHA:
 
 ```markdown
+
 - [x] **Task 2.1**: Implement user validation `abc1234`
+
 ```
 
 ### Step 11: Commit Plan Update
@@ -204,12 +212,14 @@ All tests must pass before proceeding.
 Create checklist of manual verifications:
 
 ```markdown
+
 ## Phase 1 Verification Checklist
 
 - [ ] User can register with valid email
 - [ ] Invalid email shows appropriate error
 - [ ] Database stores user correctly
 - [ ] API returns expected response codes
+
 ```
 
 ### WAIT for User Approval
@@ -218,6 +228,7 @@ Present verification checklist to user:
 
 ```
 Phase 1 complete. Please verify:
+
 1. [ ] Test suite passes (automated)
 2. [ ] Coverage meets target (automated)
 3. [ ] Manual verification items (requires human)
@@ -236,14 +247,17 @@ git add -A
 git commit -m "checkpoint: phase 1 complete - user-auth_20250115
 
 Verified:
+
 - All tests passing
 - Coverage: 87%
 - Manual verification approved
 
 Phase 1 tasks:
+
 - [x] Task 1.1: Setup database schema
 - [x] Task 1.2: Implement user model
 - [x] Task 1.3: Add validation logic"
+
 ```
 
 ### Record Checkpoint SHA
@@ -251,6 +265,7 @@ Phase 1 tasks:
 Update plan.md checkpoints table:
 
 ```markdown
+
 ## Checkpoints
 
 | Phase   | Checkpoint SHA | Date       | Status   |
@@ -360,8 +375,10 @@ Benefits:
 Always record the commit SHA when completing tasks:
 
 ```markdown
+
 - [x] **Task 1.1**: Setup schema `abc1234`
 - [x] **Task 1.2**: Add model `def5678`
+
 ```
 
 This enables:
@@ -402,7 +419,9 @@ Include in checkpoint commit:
 For reverting:
 
 ```bash
+
 # Revert to end of Phase 1
+
 git revert --no-commit <phase-2-commits>...
 git commit -m "revert: rollback to phase 1 checkpoint"
 ```
@@ -410,7 +429,9 @@ git commit -m "revert: rollback to phase 1 checkpoint"
 For review:
 
 ```bash
+
 # See what changed in Phase 2
+
 git diff <phase-1-sha>..<phase-2-sha>
 ```
 
@@ -453,10 +474,12 @@ Understanding of requirement changes during work.
 When completing a task with deviation:
 
 ```markdown
+
 - [x] **Task 2.1**: Implement validation `abc1234`
   - DEVIATION: Used library instead of custom code
   - Reason: Better edge case handling
   - Impact: Added email-validator to dependencies
+
 ```
 
 ## Error Recovery
@@ -558,16 +581,21 @@ After any change:
 Run before requesting approval:
 
 ```bash
+
 # Test suite
+
 pytest -v --tb=short
 
 # Coverage
+
 pytest --cov=src --cov-report=term-missing
 
 # Linting
+
 ruff check src/ tests/
 
 # Type checking (if applicable)
+
 mypy src/
 ```
 
@@ -576,6 +604,7 @@ mypy src/
 For manual items, provide specific instructions:
 
 ```markdown
+
 ## Manual Verification Steps
 
 ### User Registration
@@ -592,6 +621,7 @@ For manual items, provide specific instructions:
 1. Enter invalid email: "notanemail"
 2. Verify error message shows
 3. Verify form retains other entered data
+
 ```
 
 ## Performance Considerations
@@ -628,6 +658,7 @@ Keep commits atomic:
 12. **Clear blockers**: Address blockers promptly, don't work around them
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

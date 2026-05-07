@@ -14,5 +14,5 @@ export function InitPrefersReducedSognaflow() {
         PrefersReducedSognaflow.current = false;
     }
 }
-export { PrefersReducedSognaflow, HasReducedSognaflowListener };
+export { PrefersReducedSognaflow, HasReducedSognaflowListener, InitPrefersReducedSognaflow as initPrefersReducedsognaflow, PrefersReducedSognaflow as prefersReducedsognaflow, };
 //# sourceMappingURL=index.js.map

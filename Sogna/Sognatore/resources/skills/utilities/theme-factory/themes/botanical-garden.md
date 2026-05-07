@@ -26,6 +26,7 @@ A fresh and organic theme featuring vibrant garden-inspired colors for lively pr
 Garden centers, food presentations, farm-to-table content, botanical brands, natural products.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

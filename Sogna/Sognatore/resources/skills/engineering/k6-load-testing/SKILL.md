@@ -11,7 +11,6 @@ id: skill-k6-load-testing
 owner: [[eng-qa]]
 ---
 
-
 # k6 Load Testing
 
 ## Overview
@@ -37,13 +36,17 @@ Use this skill when you need to validate system performance, identify bottleneck
 ### Installation
 
 ```bash
+
 # macOS
+
 brew install k6
 
 # Windows
+
 choco install k6
 
 # Linux
+
 sudo gpg -k
 sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
 echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
@@ -441,36 +444,44 @@ export default function () {
 ### GitHub Actions
 
 ```yaml
+
 # .github/workflows/load-test.yml
+
 name: Load Tests
 
 on:
   push:
     branches: [main]
   schedule:
+
     - cron: '0 2 * * *'  # Daily at 2 AM
 
 jobs:
   load-test:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
       
       - name: Setup k6
+
         uses: grafana/k6-action@v0.2.0
         
       - name: Run load test
+
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
         run: k6 run --out json=results.json load-test.js
         
       - name: Upload results
+
         uses: actions/upload-artifact@v4
         with:
           name: k6-results
           path: results.json
           
       - name: Check thresholds
+
         if: failure()
         run: |
           echo "Load test failed thresholds!"
@@ -480,15 +491,21 @@ jobs:
 ### GitLab CI
 
 ```yaml
+
 # .gitlab-ci.yml
+
 load_test:
   image: grafana/k6:latest
   script:
+
     - k6 run load-test.js
+
   artifacts:
     when: always
     paths:
+
       - results.json
+
     reports:
       junit: results.xml
 ```
@@ -500,19 +517,25 @@ load_test:
 ### Built-in Reports
 
 ```bash
+
 # Text summary
+
 k6 run load-test.js
 
 # JSON output for parsing
+
 k6 run --out json=results.json load-test.js
 
 # InfluxDB + Grafana
+
 k6 run --out influxdb=http://localhost:8086/k6 load-test.js
 
 # Prometheus remote write
+
 k6 run --out prometheus=localhost:9090/k6 load-test.js
 
 # Cloud results
+
 k6 run --out cloud load-test.js
 ```
 
@@ -600,15 +623,19 @@ export default function () {
 ## Common Pitfalls
 
 - **Problem:** Tests pass locally but fail in CI
+
   **Solution:** Ensure CI environment has similar resources and network conditions
 
 - **Problem:** Inconsistent results between runs
+
   **Solution:** Check for external dependencies, random data, or test data pollution
 
 - **Problem:** k6 runs out of memory
+
   **Solution:** Use ` SharedArray` for large data, reduce VUs, or use `--max-memory` flag
 
 - **Problem:** Thresholds too strict
+
   **Solution:** Start with relaxed thresholds, tighten based on historical data
 
 ---
@@ -629,11 +656,13 @@ export default function () {
 - [k6 Cloud](https://k6.io/cloud/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

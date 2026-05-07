@@ -39,13 +39,17 @@ All GraphQL queries and mutations in this skill have been validated against Shop
 ## Quick Start
 
 ```bash
+
 # Install Shopify CLI
+
 npm install -g @shopify/cli@latest
 
 # Create new app
+
 shopify app init
 
 # Start development
+
 shopify app dev
 ```
 
@@ -63,6 +67,7 @@ This skill activates when the user mentions:
 Current: **2026-01** (Quarterly releases with 12-month support)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -31,28 +31,35 @@ Every operation is wrapped in a typed span for observability:
 ```yaml
 span_types:
   agent_span:
+
     - Wraps entire agent execution
     - Contains: agent_name, instructions_hash, model
 
   generation_span:
+
     - Wraps LLM API calls
     - Contains: model, tokens_in, tokens_out, latency_ms
 
   function_span:
+
     - Wraps tool/function calls
     - Contains: function_name, arguments, result, success
 
   guardrail_span:
+
     - Wraps validation checks
     - Contains: guardrail_name, triggered, blocking
 
   handoff_span:
+
     - Wraps agent-to-agent transfers
     - Contains: from_agent, to_agent, context_passed
 
   custom_span:
+
     - User-defined operations
     - Contains: operation_name, metadata
+
 ```
 
 ### Hierarchical Trace Structure
@@ -166,13 +173,16 @@ async def validate_code_quality(output, context):
 | **Parallel** | Guardrail runs concurrently with agent | Fast checks, acceptable token loss |
 
 ```python
+
 # Blocking mode: prevents token consumption
+
 @input_guardrail(blocking=True, run_in_parallel=False)
 async def expensive_validation(input):
     # Agent won't start until this completes
     pass
 
 # Parallel mode: faster but may waste tokens if fails
+
 @input_guardrail(blocking=True, run_in_parallel=True)
 async def fast_validation(input):
     # Runs alongside agent start
@@ -193,6 +203,7 @@ class OutputGuardrailTripwireTriggered(Exception):
     pass
 
 # In agent loop:
+
 try:
     result = await run_agent(task)
 except InputGuardrailTripwireTriggered as e:
@@ -210,24 +221,29 @@ except OutputGuardrailTripwireTriggered as e:
 ```yaml
 guardrail_layers:
   layer_1_input:
+
     - scope_validation      # Is task within bounds?
     - pii_detection         # Contains sensitive data?
     - injection_detection   # Prompt injection attempt?
 
   layer_2_pre_execution:
+
     - cost_estimation       # Will this exceed budget?
     - dependency_check      # Are dependencies available?
     - conflict_detection    # Will this conflict with in-progress work?
 
   layer_3_output:
+
     - static_analysis       # Code quality issues?
     - secret_detection      # Secrets in output?
     - spec_compliance       # Matches OpenAPI spec?
 
   layer_4_post_action:
+
     - test_validation       # Tests pass?
     - review_approval       # Review passed?
     - deployment_safety     # Safe to deploy?
+
 ```
 
 ---
@@ -262,6 +278,7 @@ async def on_handoff_to_backend_dev(handoff_context):
     )
 
 # Register callback
+
 handoff(
     to_agent=backend_dev,
     on_handoff=on_handoff_to_backend_dev
@@ -426,6 +443,7 @@ def calculate_confidence(task_result):
     return sum(signals) / len(signals)
 
 # Escalation threshold
+
 CONFIDENCE_THRESHOLD = 0.6
 
 if calculate_confidence(result) < CONFIDENCE_THRESHOLD:
@@ -441,27 +459,37 @@ if calculate_confidence(result) < CONFIDENCE_THRESHOLD:
 ```yaml
 human_escalation_triggers:
   # Retry-based
+
   - condition: retry_count > 3
+
     action: pause_and_escalate
     reason: "Multiple failures indicate unclear requirements"
 
   # Domain-based
+
   - condition: domain in ["payments", "auth", "pii"]
+
     action: require_approval
     reason: "Sensitive domain requires human review"
 
   # Confidence-based
+
   - condition: confidence_score < 0.6
+
     action: pause_and_escalate
     reason: "Low confidence in solution quality"
 
   # Time-based
+
   - condition: wall_time > expected_time * 3
+
     action: pause_and_escalate
     reason: "Task taking much longer than expected"
 
   # Cost-based
+
   - condition: tokens_used > budget * 0.8
+
     action: pause_and_escalate
     reason: "Approaching token budget limit"
 ```
@@ -511,11 +539,13 @@ def parse_agents_md(content):
 ### Context Priority
 
 ```
+
 1. AGENTS.md (closest to current file, monorepo-aware)
 2. CLAUDE.md (Claude-specific instructions)
 3. .sognatore/CONTINUITY.md (session state)
 4. Package-level documentation
 5. README.md (general project info)
+
 ```
 
 ---
@@ -529,6 +559,7 @@ Based on OpenAI's o3/o4-mini patterns:
 ```yaml
 use_extended_reasoning:
   always:
+
     - System architecture design
     - Security vulnerability analysis
     - Complex debugging (multi-file, unclear root cause)
@@ -536,16 +567,19 @@ use_extended_reasoning:
     - Performance optimization strategy
 
   sometimes:
+
     - Code review (only for critical/complex changes)
     - Refactoring planning (when multiple approaches exist)
     - Integration design (when crossing system boundaries)
 
   never:
+
     - Simple bug fixes
     - Documentation updates
     - Unit test writing
     - Formatting/linting
     - File operations
+
 ```
 
 ### Backtracking Pattern
@@ -635,27 +669,32 @@ class Session:
 ## Sources
 
 **OpenAI Official:**
+
 - [Agents SDK Documentation](https://openai.github.io/openai-agents-python/)
 - [Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
 - [Building Agents Track](https://developers.openai.com/tracks/building-agents/)
 - [AGENTS.md Specification](https://agents.md/)
 
 **Deep Research & Reasoning:**
+
 - [Introducing Deep Research](https://openai.com/index/introducing-deep-research/)
 - [Deep Research System Card](https://cdn.openai.com/deep-research-system-card.pdf)
 - [Introducing o3 and o4-mini](https://openai.com/index/introducing-o3-and-o4-mini/)
 - [Reasoning Best Practices](https://platform.openai.com/docs/guides/reasoning-best-practices)
 
 **Safety & Monitoring:**
+
 - [Chain of Thought Monitoring](https://openai.com/index/chain-of-thought-monitoring/)
 - [Agent Builder Safety](https://platform.openai.com/docs/guides/agent-builder-safety)
 - [Computer-Using Agent](https://openai.com/index/computer-using-agent/)
 
 **Standards & Interoperability:**
+
 - [Agentic AI Foundation](https://openai.com/index/agentic-ai-foundation/)
 - [OpenAI for Developers 2025](https://developers.openai.com/blog/openai-for-developers-2025/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,1 +1,1 @@
-export declare function CamelToDash(str: string): string;
+export declare function camelToDash(str: string): string;

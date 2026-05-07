@@ -4,21 +4,24 @@ description: "Orquestrador unificado de canais sociais — coordena Instagram, T
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - social-media
 - cross-channel
 - scheduling
 - campaigns
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-social-orchestrator
 owner: [[orchestrator]], [[ops-security]]
 ---
-
 
 # SOCIAL-ORCHESTRATOR: Canais Unificados
 
@@ -57,7 +60,9 @@ A mesma mensagem adaptada inteligentemente e amplificacao.
   ↙      ↓         ↘
 IG      TG        WA
 Foto   Mensagem  Template
-+      +botao    +link
+
++ +botao    +link
+
 hash   +inline   +CTA
 tags   keyboard
 ```
@@ -77,6 +82,7 @@ tags   keyboard
 ## /Publish_All — Publicar Em Todos Os Canais
 
 **Fluxo:**
+
 1. Receber: conteudo, midia (opcional), objetivo
 2. Adaptar para cada canal automaticamente
 3. Executar em sequencia (Instagram primeiro — mais restritivo)
@@ -86,28 +92,33 @@ tags   keyboard
 **Adaptacoes por canal:**
 ```
 Instagram:
+
 - Imagem/video otimizado (1:1 ou 4:5)
 - Caption max 2.200 chars
 - 5-15 hashtags relevantes
 - CTA no caption
 
 Telegram:
+
 - Texto sem limite de chars
 - Inline keyboard com opcoes
 - Preview de link automatico
 - Botao de compartilhamento
 
 WhatsApp Business:
+
 - Template pre-aprovado OU
 - Mensagem com link unico
 - CTA direto (link de contato/site)
 - Maximo 1.024 chars
+
 ```
 
 ## /Campaign — Campanha Multi-Canal
 
 **Fluxo de Campanha:**
 ```
+
 1. Definir objetivo (alcance/engajamento/vendas/educacao)
 2. Definir canais (Instagram + Telegram + WhatsApp)
 3. Definir timeline (hoje, amanha, semana)
@@ -115,6 +126,7 @@ WhatsApp Business:
 5. Agendar posts
 6. Monitorar metricas por canal
 7. Relatorio consolidado
+
 ```
 
 ## /Insights_All — Metricas Unificadas
@@ -146,6 +158,7 @@ CONSOLIDADO:
 ## /Content_Plan — Plano De Conteudo Multi-Canal
 
 Gera plano semanal/mensal com:
+
 - Calendario editorial por canal
 - Formato recomendado por dia
 - Tema/narrativa consistente
@@ -265,6 +278,7 @@ Estrategia: Publish-or-Skip (nao cancela toda campanha)
 2. Reporta o erro especifico
 3. Sugere retry ou alternativa
 4. Nunca cancela toda a campanha por falha de 1 canal
+
 ```
 
 ---
@@ -301,11 +315,13 @@ Estrategia: Publish-or-Skip (nao cancela toda campanha)
 - `whatsapp-cloud-api` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

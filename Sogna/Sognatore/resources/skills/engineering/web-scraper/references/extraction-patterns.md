@@ -259,6 +259,7 @@ JSON.stringify(extractJsonLd());
 ```
 
 Common JSON-LD types and their useful fields:
+
 - `Product`: name, offers.price, offers.priceCurrency, aggregateRating, brand.name
 - `Article`: headline, author.name, datePublished, description, wordCount
 - `Organization`: name, address, telephone, email, url
@@ -397,6 +398,7 @@ function countItems(selector) {
 ```
 
 Then in the workflow:
+
 1. `javascript_tool`: `countItems('.item')` -> get initial count
 2. `computer(action="scroll", scroll_direction="down")`
 3. `computer(action="wait", duration=2)`
@@ -410,6 +412,7 @@ Then in the workflow:
 ## Domain-Specific Tips
 
 ### E-Commerce Sites
+
 - Check for JSON-LD `Product` schema first - often has cleaner data than DOM
 - Prices may have hidden original/sale price elements
 - Availability often encoded in data attributes (`data-available="true"`)
@@ -418,6 +421,7 @@ Then in the workflow:
 - Many sites have internal APIs at `/api/products` - check Network tab
 
 ### Wikipedia
+
 - Tables use class `.wikitable` - always prefer this selector
 - Infoboxes use class `.infobox`
 - References in `<sup class="reference">` - exclude from text extraction
@@ -425,6 +429,7 @@ Then in the workflow:
 - Sortable tables have class `.sortable` with sort buttons in headers
 
 ### News Sites
+
 - Article body often in `<article>` or `[itemprop="articleBody"]`
 - Paywall indicators: `.paywall`, `.subscribe-wall`, truncated with "Read more"
 - Publication date in `<time>` element or `[itemprop="datePublished"]`
@@ -432,6 +437,7 @@ Then in the workflow:
 - JSON-LD `NewsArticle` often has complete metadata
 
 ### Government / Data Portals
+
 - Often use HTML tables without JavaScript
 - May have download links for CSV/Excel - check for `.csv`, `.xlsx` links
 - Data dictionaries may be on separate pages
@@ -439,18 +445,21 @@ Then in the workflow:
 - CORS may block direct API access; use Bash curl instead
 
 ### Social Media (Public Profiles)
+
 - Content is almost always JS-rendered - use Browser automation
 - Rate limiting is aggressive - keep requests minimal
 - Infinite scroll is the norm - set clear item limits
 - Structure changes frequently - prefer text extraction over selectors
 
 ### SaaS Pricing Pages
+
 - Pricing often changes dynamically (monthly vs annual toggle)
 - May need to click "Annual" toggle to see annual prices
 - Feature comparison tables often use checkmarks (Unicode or SVG)
 - Check for hidden elements toggled by billing period selector
 
 ### Job Boards
+
 - Most use JSON-LD `JobPosting` schema
 - Salary ranges often hidden behind "View salary" buttons
 - Location may include remote/hybrid indicators
@@ -482,6 +491,7 @@ Prefer selectors in this order (most stable to least):
 7. Structural selectors - last resort
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

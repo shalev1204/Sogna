@@ -124,6 +124,7 @@ env.localModelPath = '/path/to/models/';
 ```
 
 **Default values:**
+
 - Browser: `allowLocalModels = false`, `localModelPath = '/models/'`
 - Node.js: `allowLocalModels = true`, `localModelPath = '/models/'`
 
@@ -199,6 +200,7 @@ env.cacheDir = null;
 ```
 
 For comprehensive caching documentation including:
+
 - Browser Cache API details and storage limits
 - Node.js filesystem cache structure and management
 - Custom cache implementations (Redis, database, S3)
@@ -245,6 +247,7 @@ env.backends.onnx.wasm.wasmPaths = '/static/wasm/';
 ```
 
 **Required files:**
+
 - `ort-wasm.wasm` - Main WASM binary
 - `ort-wasm-simd.wasm` - SIMD-enabled WASM binary
 - `ort-wasm-threaded.wasm` - Multi-threaded WASM binary
@@ -395,6 +398,7 @@ console.log('Transformers.js Configuration:', {
 - [Main Skill Guide](../SKILL.md) - Getting started and common usage
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

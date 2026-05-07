@@ -8,7 +8,6 @@ id: skill-event-store-design
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # Event Store Design
 
 Comprehensive guide to designing event stores for event-sourced applications.
@@ -145,7 +144,6 @@ class Event:
     version: Optional[int] = None
     global_position: Optional[int] = None
     created_at: datetime = field(default_factory=datetime.utcnow)
-
 
 class EventStore:
     def __init__(self, pool: asyncpg.Pool):
@@ -304,7 +302,6 @@ class EventStore:
             created_at=row['created_at']
         )
 
-
 class ConcurrencyError(Exception):
     """Raised when optimistic concurrency check fails."""
     pass
@@ -317,9 +314,11 @@ from esdbclient import EventStoreDBClient, NewEvent, StreamState
 import json
 
 # Connect
+
 client = EventStoreDBClient(uri="esdb://localhost:2113?tls=false")
 
 # Append events
+
 def append_events(stream_name: str, events: list, expected_revision=None):
     new_events = [
         NewEvent(
@@ -344,6 +343,7 @@ def append_events(stream_name: str, events: list, expected_revision=None):
     )
 
 # Read stream
+
 def read_stream(stream_name: str, from_revision: int = 0):
     events = client.get_stream(
         stream_name=stream_name,
@@ -361,6 +361,7 @@ def read_stream(stream_name: str, from_revision: int = 0):
     ]
 
 # Subscribe to all
+
 async def subscribe_to_all(handler, from_position: int = 0):
     subscription = client.subscribe_to_all(commit_position=from_position)
     async for event in subscription:
@@ -372,6 +373,7 @@ async def subscribe_to_all(handler, from_position: int = 0):
         })
 
 # Category projection ($ce-Category)
+
 def read_category(category: str):
     """Read all events for a category using system projection."""
     return read_stream(f"$ce-{category}")
@@ -427,8 +429,10 @@ class DynamoEventStore:
         ]
 
 # Table definition (CloudFormation/Terraform)
+
 """
 DynamoDB Table:
+
   - PK (Partition Key): String
   - SK (Sort Key): String
   - GSI1PK, GSI1SK for global ordering
@@ -461,11 +465,13 @@ Capacity: On-demand or provisioned based on throughput needs
 - [Event Sourcing Pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

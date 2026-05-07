@@ -1,15 +1,15 @@
 import { clamp, invariant, millisecondsToSeconds, pipe, secondsToMilliseconds, } from "sognaflow-utils";
-import { Time as time } from "../frameloop/sync-time.js";
-import { ActiveAnimations as activeAnimations } from "../stats/animation-count.js";
+import { Time } from "../frameloop/sync-time.js";
+import { activeAnimations } from "../stats/animation-count.js";
 import { Mix } from "../utils/mix";
 import { frameloopDriver } from "./drivers/frame.js";
 import { inertia } from "./generators/inertia.js";
 import { keyframes as keyframesGenerator } from "./generators/keyframes.js";
 import { calcGeneratorDuration } from "./generators/utils/calc-duration.js";
 import { getGeneratorVelocity } from "./generators/utils/velocity.js";
-import { GetFinalKeyframe as getFinalKeyframe } from "./keyframes/get-final.js";
+import { GetFinalKeyframe } from "./keyframes/get-final.js";
 import { replaceTransitionType } from "./utils/replace-transition-type.js";
-import { WithPromise } from "./utils/withpromise.js";
+import { WithPromise } from "./utils/WithPromise.js";
 const percentToProgress = (percent) => percent / 100;
 export class JSAnimation extends WithPromise {
     constructor(options) {
@@ -43,8 +43,8 @@ export class JSAnimation extends WithPromise {
          */
         this.stop = () => {
             const { sognaflowValue } = this.options;
-            if (sognaflowValue && sognaflowValue.updatedAt !== time.now()) {
-                this.tick(time.now());
+            if (sognaflowValue && sognaflowValue.updatedAt !== Time.now()) {
+                this.tick(Time.now());
             }
             this.isStopped = true;
             if (this.state === "idle")
@@ -221,7 +221,7 @@ export class JSAnimation extends WithPromise {
             (this.state === "finished" || (this.state === "running" && done));
         // TODO: The exception for inertia could be cleaner here
         if (isAnimationFinished && type !== inertia) {
-            state.value = getFinalKeyframe(keyframes, this.options, finalKeyframe, this.speed);
+            state.value = GetFinalKeyframe(keyframes, this.options, finalKeyframe, this.speed);
         }
         if (onUpdate) {
             onUpdate(state.value);
@@ -292,7 +292,7 @@ export class JSAnimation extends WithPromise {
     set speed(newSpeed) {
         const hasChanged = this.playbackSpeed !== newSpeed;
         if (hasChanged && this.driver) {
-            this.updateTime(time.now());
+            this.updateTime(Time.now());
         }
         this.playbackSpeed = newSpeed;
         if (hasChanged && this.driver) {
@@ -331,7 +331,7 @@ export class JSAnimation extends WithPromise {
     }
     pause() {
         this.state = "paused";
-        this.updateTime(time.now());
+        this.updateTime(Time.now());
         this.holdTime = this.currentTime;
     }
     complete() {

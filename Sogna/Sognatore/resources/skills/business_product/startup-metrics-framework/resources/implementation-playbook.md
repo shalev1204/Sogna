@@ -38,6 +38,7 @@ YoY Growth = (This Year ARR - Last Year ARR) / Last Year ARR
 ```
 
 **Target Benchmarks:**
+
 - Seed stage: 15-20% MoM growth
 - Series A: 10-15% MoM growth, 3-5x YoY
 - Series B+: 100%+ YoY (Rule of 40)
@@ -67,6 +68,7 @@ LTV:CAC = LTV / CAC
 ```
 
 **Benchmarks:**
+
 - LTV:CAC > 3.0 = Healthy
 - LTV:CAC 1.0-3.0 = Needs improvement
 - LTV:CAC < 1.0 = Unsustainable
@@ -77,6 +79,7 @@ CAC Payback = CAC / (ARPU × Gross Margin%)
 ```
 
 **Benchmarks:**
+
 - < 12 months = Excellent
 - 12-18 months = Good
 - > 24 months = Concerning
@@ -103,6 +106,7 @@ Burn Multiple = Net Burn / Net New ARR
 ```
 
 **Benchmarks:**
+
 - < 1.0 = Exceptional efficiency
 - 1.0-1.5 = Good
 - 1.5-2.0 = Acceptable
@@ -144,6 +148,7 @@ NDR = (ARR Start + Expansion - Contraction - Churn) / ARR Start
 ```
 
 **Benchmarks:**
+
 - NDR > 120% = Best-in-class
 - NDR 100-120% = Good
 - NDR < 100% = Needs work
@@ -154,6 +159,7 @@ Gross Retention = (ARR Start - Churn - Contraction) / ARR Start
 ```
 
 **Benchmarks:**
+
 - > 90% = Excellent
 - 85-90% = Good
 - < 85% = Concerning
@@ -166,6 +172,7 @@ Magic Number = Net New ARR (quarter) / S&M Spend (prior quarter)
 ```
 
 **Benchmarks:**
+
 - > 0.75 = Efficient, ready to scale
 - 0.5-0.75 = Moderate efficiency
 - < 0.5 = Inefficient, don't scale yet
@@ -176,6 +183,7 @@ Rule of 40 = Revenue Growth Rate% + Profit Margin%
 ```
 
 **Benchmarks:**
+
 - > 40% = Excellent
 - 20-40% = Acceptable
 - < 20% = Needs improvement
@@ -189,6 +197,7 @@ Quick Ratio = (New MRR + Expansion MRR) / (Churned MRR + Contraction MRR)
 ```
 
 **Benchmarks:**
+
 - > 4.0 = Healthy growth
 - 2.0-4.0 = Moderate
 - < 2.0 = Churn problem
@@ -216,6 +225,7 @@ Take Rate = Net Revenue / GMV
 ```
 
 **Typical Ranges:**
+
 - Payment processors: 2-3%
 - E-commerce marketplaces: 10-20%
 - Service marketplaces: 15-25%
@@ -233,6 +243,7 @@ How long from listing to sale/match?
 % of users who transact multiple times
 
 **Benchmarks:**
+
 - Fill rate > 80% = Strong liquidity
 - Repeat rate > 60% = Strong retention
 
@@ -242,6 +253,7 @@ How long from listing to sale/match?
 Track relative growth of supply and demand sides.
 
 **Warning Signs:**
+
 - Too much supply: Low fill rates, frustrated suppliers
 - Too much demand: Long wait times, frustrated customers
 
@@ -263,6 +275,7 @@ DAU/MAU = DAU / MAU
 ```
 
 **Benchmarks:**
+
 - > 50% = Exceptional (daily habit)
 - 20-50% = Good
 - < 20% = Weak engagement
@@ -280,11 +293,13 @@ Average time spent per session
 **Day 30 Retention:** % users active 30 days after signup
 
 **Benchmarks (Day 30):**
+
 - > 40% = Excellent
 - 25-40% = Good
 - < 25% = Weak
 
 **Retention Curve Shape:**
+
 - Flattening curve = good (users becoming habitual)
 - Steep decline = poor product-market fit
 
@@ -298,6 +313,7 @@ K-Factor = Invites per User × Invite Conversion Rate
 10 invites/user × 20% conversion = 2.0 K-factor
 
 **Benchmarks:**
+
 - K > 1.0 = Viral growth
 - K = 0.5-1.0 = Strong referrals
 - K < 0.5 = Weak virality
@@ -317,6 +333,7 @@ Win Rate = Deals Won / Total Opportunities
 Average days from opportunity to close
 
 **Shorter is better:**
+
 - SMB: 30-60 days
 - Mid-market: 60-120 days
 - Enterprise: 120-270 days
@@ -336,6 +353,7 @@ Pipeline Coverage = Total Pipeline Value / Quota
 **Target:** 3-5x coverage (3-5x pipeline needed to hit quota)
 
 **Conversion Rates by Stage:**
+
 - Lead → Opportunity: 10-20%
 - Opportunity → Demo: 50-70%
 - Demo → Proposal: 30-50%
@@ -346,12 +364,14 @@ Pipeline Coverage = Total Pipeline Value / Quota
 ### Pre-Seed (Product-Market Fit)
 
 **Focus Metrics:**
+
 1. Active users growth
 2. User retention (Day 7, Day 30)
 3. Core engagement (sessions, features used)
 4. Qualitative feedback (NPS, interviews)
 
 **Don't worry about:**
+
 - Revenue (may be zero)
 - CAC (not optimizing yet)
 - Unit economics
@@ -359,18 +379,21 @@ Pipeline Coverage = Total Pipeline Value / Quota
 ### Seed ($500K-$2M ARR)
 
 **Focus Metrics:**
+
 1. MRR growth rate (15-20% MoM)
 2. CAC and LTV (establish baseline)
 3. Gross retention (> 85%)
 4. Core product engagement
 
 **Start tracking:**
+
 - Sales efficiency
 - Burn rate and runway
 
 ### Series A ($2M-$10M ARR)
 
 **Focus Metrics:**
+
 1. ARR growth (3-5x YoY)
 2. Unit economics (LTV:CAC > 3, payback < 18 months)
 3. Net dollar retention (> 100%)
@@ -378,6 +401,7 @@ Pipeline Coverage = Total Pipeline Value / Quota
 5. Magic number (> 0.5)
 
 **Mature tracking:**
+
 - Rule of 40
 - Sales efficiency
 - Pipeline coverage
@@ -387,12 +411,14 @@ Pipeline Coverage = Total Pipeline Value / Quota
 ### Data Infrastructure
 
 **Requirements:**
+
 - Single source of truth (analytics platform)
 - Real-time or daily updates
 - Automated calculations
 - Historical tracking
 
 **Tools:**
+
 - Mixpanel, Amplitude (product analytics)
 - ChartMogul, Baremetrics (SaaS metrics)
 - Looker, Tableau (BI dashboards)
@@ -400,20 +426,24 @@ Pipeline Coverage = Total Pipeline Value / Quota
 ### Reporting Cadence
 
 **Daily:**
+
 - MRR, active users
 - Sign-ups, conversions
 
 **Weekly:**
+
 - Growth rates
 - Retention cohorts
 - Sales pipeline
 
 **Monthly:**
+
 - Full metric suite
 - Board reporting
 - Investor updates
 
 **Quarterly:**
+
 - Trend analysis
 - Benchmarking
 - Strategy review
@@ -422,6 +452,7 @@ Pipeline Coverage = Total Pipeline Value / Quota
 
 **Mistake 1: Vanity Metrics**
 Don't focus on:
+
 - Total users (without retention)
 - Page views (without engagement)
 - Downloads (without activation)
@@ -445,12 +476,14 @@ Optimize for real business outcomes, not dashboard numbers.
 ### What VCs Want to See
 
 **Seed Round:**
+
 - MRR growth rate
 - User retention
 - Early unit economics
 - Product engagement
 
 **Series A:**
+
 - ARR and growth rate
 - CAC payback < 18 months
 - LTV:CAC > 3.0
@@ -458,6 +491,7 @@ Optimize for real business outcomes, not dashboard numbers.
 - Burn multiple < 2.0
 
 **Series B+:**
+
 - Rule of 40 > 40%
 - Efficient growth (magic number)
 - Path to profitability
@@ -475,6 +509,7 @@ Burn: $180K/mo | Runway: 18 months
 ```
 
 **Include:**
+
 - Current value
 - Growth rate or trend
 - Context (target, benchmark)
@@ -482,11 +517,13 @@ Burn: $180K/mo | Runway: 18 months
 ## Additional Resources
 
 ### Reference Files
+
 - **`references/metric-definitions.md`** - Complete definitions and formulas for 50+ metrics
 - **`references/benchmarks-by-stage.md`** - Target ranges for each metric by company stage
 - **`references/calculation-examples.md`** - Step-by-step calculation examples
 
 ### Example Files
+
 - **`examples/saas-metrics-dashboard.md`** - Complete metrics suite for B2B SaaS company
 - **`examples/marketplace-metrics.md`** - Marketplace-specific metrics with examples
 - **`examples/investor-metrics-deck.md`** - How to present metrics for fundraising
@@ -507,6 +544,7 @@ To implement startup metrics framework:
 For detailed definitions, benchmarks, and examples, see `references/` and `examples/`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

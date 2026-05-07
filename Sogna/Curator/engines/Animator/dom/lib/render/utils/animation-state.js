@@ -6,9 +6,9 @@ import { IsKeyframesTarget } from "./is-keyframes-target.js";
 import { IsVariantLabel } from "./is-variant-label.js";
 import { ResolveVariant } from "./resolve-dynamic-variants.js";
 import { ShallowCompare } from "./shallow-compare.js";
-import { VariantPriorityOrder, } from "./variant-props.js";
-const reversePriorityOrder = [...VariantPriorityOrder].reverse();
-const numAnimationTypes = VariantPriorityOrder.length;
+import { variantPriorityOrder } from "./variant-props.js";
+const reversePriorityOrder = [...variantPriorityOrder].reverse();
+const numAnimationTypes = variantPriorityOrder.length;
 function createAnimateFunction(visualElement) {
     return (animations) => {
         return Promise.all(animations.map(({ animation, options }) => AnimateVisualElement(visualElement, animation, options)));

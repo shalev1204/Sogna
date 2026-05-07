@@ -58,6 +58,7 @@ await client.destroy();
 ```
 
 Constructor options:
+
 - `systemDatabaseUrl`: Connection string to the Postgres system database (required)
 - `systemDatabasePool`: Optional custom `node-postgres` connection pool
 - `serializer`: Optional custom serializer (must match the DBOS application's serializer)
@@ -65,6 +66,7 @@ Constructor options:
 Reference: [DBOS Client](https://docs.dbos.dev/typescript/reference/client)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

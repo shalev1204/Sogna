@@ -8,7 +8,6 @@ id: skill-shader-programming-glsl
 owner: [[orchestrator]]
 ---
 
-
 # Shader Programming GLSL
 
 ## Overview
@@ -27,6 +26,7 @@ A comprehensive guide to writing GPU shaders using GLSL (OpenGL Shading Language
 ### 1. Structure: Vertex vs. Fragment
 
 Understand the pipeline:
+
 - **Vertex Shader**: Transforms 3D coordinates to 2D screen space (`gl_Position`).
 - **Fragment Shader**: Colors individual pixels (`gl_FragColor`).
 
@@ -75,6 +75,7 @@ void main() {
 ### 3. Swizzling & Vector Math
 
 Access vector components freely: `vec4 color = vec4(1.0, 0.5, 0.0, 1.0);`
+
 - `color.rgb` -> `vec3(1.0, 0.5, 0.0)`
 - `color.zyx` -> `vec3(0.0, 0.5, 1.0)` (reordering)
 
@@ -125,11 +126,13 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 **Solution:** Check if `gl_Position.w` is correct (usually 1.0). Check if uniforms are actually being set from the host application. Verify UV coordinates are within [0, 1].
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

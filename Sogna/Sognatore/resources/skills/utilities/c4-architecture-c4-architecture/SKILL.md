@@ -8,7 +8,6 @@ id: skill-c4-architecture-c4-architecture
 owner: [[system-architect]]
 ---
 
-
 # C4 Architecture Documentation Workflow
 
 Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis approach.
@@ -60,9 +59,11 @@ For each directory, starting from the deepest:
 
 - Use Task tool with subagent_type="c4-architecture::c4-code"
 - Prompt: |
+
   Analyze the code in directory: [directory_path]
 
   Create comprehensive C4 Code-level documentation following this structure:
+
   1. **Overview Section**:
      - Name: [Descriptive name for this code directory]
      - Description: [Short description of what this code does]
@@ -89,6 +90,7 @@ For each directory, starting from the deepest:
   Use a sanitized directory name (replace / with -, remove special chars) for the filename.
 
   Ensure the documentation includes:
+
   - Complete function signatures with all parameters and types
   - Links to actual source code locations
   - All dependencies (internal and external)
@@ -116,12 +118,14 @@ For each identified component:
 
 - Use Task tool with subagent_type="c4-architecture::c4-component"
 - Prompt: |
+
   Synthesize the following C4 Code-level documentation files into a logical component:
 
   Code files to analyze:
   [List of c4-code-*.md file paths]
 
   Create comprehensive C4 Component-level documentation following this structure:
+
   1. **Overview Section**:
      - Name: [Component name - descriptive and meaningful]
      - Description: [Short description of component purpose]
@@ -159,9 +163,11 @@ For each identified component:
 
 - Use Task tool with subagent_type="c4-architecture::c4-component"
 - Prompt: |
+
   Create a master component index that lists all components in the system.
 
   Based on all c4-component-\*.md files created, generate:
+
   1. **System Components Section**:
      - List all components with:
        - Component name
@@ -194,6 +200,7 @@ For each identified component:
 
 - Use Task tool with subagent_type="c4-architecture::c4-container"
 - Prompt: |
+
   Synthesize components into containers based on deployment definitions.
 
   Component documentation:
@@ -203,6 +210,7 @@ For each identified component:
   [List of deployment config files: Dockerfiles, K8s manifests, etc.]
 
   Create comprehensive C4 Container-level documentation following this structure:
+
   1. **Containers Section** (for each container):
      - Name: [Container name]
      - Description: [Short description of container purpose and deployment]
@@ -267,6 +275,7 @@ For each identified component:
 
 - Use Task tool with subagent_type="c4-architecture::c4-context"
 - Prompt: |
+
   Create comprehensive C4 Context-level documentation for the system.
 
   Container documentation: C4-Documentation/c4-container.md
@@ -275,6 +284,7 @@ For each identified component:
   Test files: [List of test files that show system behavior]
 
   Create comprehensive C4 Context-level documentation following this structure:
+
   1. **System Overview Section**:
      - Short Description: [One-sentence description of what the system does]
      - Long Description: [Detailed description of system purpose, capabilities, problems solved]
@@ -297,7 +307,9 @@ For each identified component:
        - Step-by-step journey:
          1. [Step 1]: [Description]
          2. [Step 2]: [Description]
+
             ...
+
        - Include all system touchpoints
      - For programmatic users (external systems, APIs):
        - Integration journey with step-by-step process
@@ -322,6 +334,7 @@ For each identified component:
   Save the output as: C4-Documentation/c4-context.md
 
   Ensure the documentation is:
+
   - Understandable by non-technical stakeholders
   - Focuses on system purpose, users, and external relationships
   - Includes comprehensive user journey maps
@@ -395,11 +408,13 @@ This will:
 All documentation written to: C4-Documentation/
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

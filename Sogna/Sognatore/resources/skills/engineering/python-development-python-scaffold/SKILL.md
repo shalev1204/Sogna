@@ -8,7 +8,6 @@ id: skill-python-development-python-scaffold
 owner: [[prod-pm]]
 ---
 
-
 # Python Project Scaffolding
 
 You are a Python project architecture expert specializing in scaffolding production-ready Python applications. Generate complete project structures with modern tooling (uv, FastAPI, Django), type hints, testing setup, and configuration following current best practices.
@@ -36,6 +35,7 @@ $ARGUMENTS
 ### 1. Analyze Project Type
 
 Determine the project type from user requirements:
+
 - **FastAPI**: REST APIs, microservices, async applications
 - **Django**: Full-stack web applications, admin panels, ORM-heavy projects
 - **Library**: Reusable packages, utilities, tools
@@ -45,11 +45,14 @@ Determine the project type from user requirements:
 ### 2. Initialize Project with uv
 
 ```bash
+
 # Create new project with uv
+
 uv init <project-name>
 cd <project-name>
 
 # Initialize git repository
+
 git init
 echo ".venv/" >> .gitignore
 echo "*.pyc" >> .gitignore
@@ -58,6 +61,7 @@ echo ".pytest_cache/" >> .gitignore
 echo ".ruff_cache/" >> .gitignore
 
 # Create virtual environment
+
 uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
@@ -174,10 +178,13 @@ async def health_check() -> dict[str, str]:
 ### 4. Generate Django Project Structure
 
 ```bash
+
 # Install Django with uv
+
 uv add django django-environ django-debug-toolbar
 
 # Create Django project
+
 django-admin startproject config .
 python manage.py startapp core
 ```
@@ -241,7 +248,9 @@ classifiers = [
     "License :: OSI Approved :: ### 6. Generate CLI Tool Structure
 
 ```python
+
 # pyproject.toml
+
 [project.scripts]
 cli-name = "project_name.cli:main"
 
@@ -273,19 +282,24 @@ def main():
 
 **.env.example**:
 ```env
+
 # Application
+
 PROJECT_NAME="Project Name"
 VERSION="0.1.0"
 DEBUG=True
 
 # API
+
 API_V1_PREFIX="/api/v1"
 ALLOWED_ORIGINS=["http://localhost:3000"]
 
 # Database
+
 DATABASE_URL="postgresql://user:pass@localhost:5432/dbname"
 
 # Security
+
 SECRET_KEY="your-secret-key-here"
 ```
 
@@ -326,11 +340,13 @@ clean:
 Focus on creating production-ready Python projects with modern tooling, type safety, and comprehensive testing setup.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

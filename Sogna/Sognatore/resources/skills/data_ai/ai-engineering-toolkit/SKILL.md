@@ -11,7 +11,6 @@ id: skill-ai-engineering-toolkit
 owner: [[orchestrator]]
 ---
 
-
 # AI Engineering Toolkit
 
 ## Overview
@@ -97,10 +96,13 @@ Result: 65 tests executed. 3 critical failures found: Base64-encoded instruction
 ## Installation
 
 ```bash
+
 # Via skill install command (Claude Code / WorkBuddy / Cursor)
+
 /skill install -g viliawang-pm/ai-engineering-toolkit
 
 # Manual
+
 git clone https://github.com/viliawang-pm/ai-engineering-toolkit.git
 cp -r ai-engineering-toolkit/skills/* ~/.claude/skills/
 ```
@@ -109,11 +111,13 @@ cp -r ai-engineering-toolkit/skills/* ~/.claude/skills/
 **License**: MIT
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

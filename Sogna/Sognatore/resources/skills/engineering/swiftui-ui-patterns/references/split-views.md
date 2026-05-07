@@ -79,6 +79,7 @@ struct AppView: View {
 - Use `NavigationSplitView` when you want a standard system layout with minimal customization.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

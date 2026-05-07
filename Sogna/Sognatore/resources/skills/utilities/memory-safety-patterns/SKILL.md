@@ -8,7 +8,6 @@ id: skill-memory-safety-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Memory Safety Patterns
 
 Cross-language patterns for memory-safe programming including RAII, ownership, smart pointers, and resource management.
@@ -39,11 +38,13 @@ Cross-language patterns for memory-safe programming including RAII, ownership, s
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

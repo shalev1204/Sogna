@@ -11,7 +11,6 @@ id: skill-telegram-bot-builder
 owner: [[orchestrator]]
 ---
 
-
 # Telegram Bot Builder
 
 Expert in building Telegram bots that solve real problems - from simple
@@ -57,6 +56,7 @@ Structure for maintainable Telegram bots
 ## Bot Architecture
 
 ### Stack Options
+
 | Language | Library | Best For |
 |----------|---------|----------|
 | Node.js | telegraf | Most projects |
@@ -65,6 +65,7 @@ Structure for maintainable Telegram bots
 | Python | aiogram | Async, scalable |
 
 ### Basic Telegraf Setup
+
 ```javascript
 import { Telegraf } from 'telegraf';
 
@@ -88,6 +89,7 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'));
 ```
 
 ### Project Structure
+
 ```
 telegram-bot/
 ├── src/
@@ -113,6 +115,7 @@ Interactive button interfaces
 ## Inline Keyboards
 
 ### Basic Keyboard
+
 ```javascript
 import { Markup } from 'telegraf';
 
@@ -135,6 +138,7 @@ bot.action('opt_1', (ctx) => {
 ```
 
 ### Keyboard Patterns
+
 | Pattern | Use Case |
 |---------|----------|
 | Single column | Simple menus |
@@ -143,6 +147,7 @@ bot.action('opt_1', (ctx) => {
 | URL buttons | Links, payments |
 
 ### Pagination
+
 ```javascript
 function getPaginatedKeyboard(items, page, perPage = 5) {
   const start = page * perPage;
@@ -169,6 +174,7 @@ Making money from Telegram bots
 ## Bot Monetization
 
 ### Revenue Models
+
 | Model | Example | Complexity |
 |-------|---------|------------|
 | Freemium | Free basic, paid premium | Medium |
@@ -178,6 +184,7 @@ Making money from Telegram bots
 | Affiliate | Product recommendations | Low |
 
 ### Telegram Payments
+
 ```javascript
 // Create invoice
 bot.command('buy', (ctx) => {
@@ -201,20 +208,25 @@ bot.on('successful_payment', (ctx) => {
 ```
 
 ### Freemium Strategy
+
 ```
 Free tier:
+
 - 10 uses per day
 - Basic features
 - Ads shown
 
 Premium ($5/month):
+
 - Unlimited uses
 - Advanced features
 - No ads
 - Priority support
+
 ```
 
 ### Usage Limits
+
 ```javascript
 async function checkUsage(userId) {
   const usage = await getUsage(userId);
@@ -236,12 +248,14 @@ Production bot deployment
 ## Webhook Deployment
 
 ### Polling vs Webhooks
+
 | Method | Best For |
 |--------|----------|
 | Polling | Development, simple bots |
 | Webhooks | Production, scalable |
 
 ### Express + Webhook
+
 ```javascript
 import express from 'express';
 import { Telegraf } from 'telegraf';
@@ -260,6 +274,7 @@ app.listen(3000);
 ```
 
 ### Vercel Deployment
+
 ```javascript
 // api/webhook.js
 import { Telegraf } from 'telegraf';
@@ -274,6 +289,7 @@ export default async (req, res) => {
 ```
 
 ### Railway/Render Deployment
+
 ```dockerfile
 FROM node:18-alpine
 WORKDIR /app
@@ -342,12 +358,14 @@ Skills: telegram-bot-builder, ai-wrapper-product, backend
 Workflow:
 
 ```
+
 1. Design bot conversation flow
 2. Set up AI integration (OpenAI/Claude)
 3. Build backend for state/data
 4. Implement bot commands and handlers
 5. Add monetization (freemium)
 6. Deploy and monitor
+
 ```
 
 ### Bot + Mini App
@@ -357,11 +375,13 @@ Skills: telegram-bot-builder, telegram-mini-app, frontend
 Workflow:
 
 ```
+
 1. Design bot as entry point
 2. Build Mini App for complex UI
 3. Integrate bot commands with Mini App
 4. Handle payments in Mini App
 5. Deploy both components
+
 ```
 
 ## Related Skills
@@ -369,6 +389,7 @@ Workflow:
 Works well with: `telegram-mini-app`, `backend`, `ai-wrapper-product`, `workflow-automation`
 
 ## When to Use
+
 - User mentions or implies: telegram bot
 - User mentions or implies: bot api
 - User mentions or implies: telegram automation
@@ -376,11 +397,13 @@ Works well with: `telegram-mini-app`, `backend`, `ai-wrapper-product`, `workflow
 - User mentions or implies: tg bot
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

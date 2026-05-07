@@ -4,6 +4,7 @@ description: Stop throwing everywhere - handle errors as values using Either and
 risk: critical
 version: 1.0.0
 tags:
+
   - fp-ts
   - error-handling
   - either
@@ -11,10 +12,10 @@ tags:
   - typescript
   - validation
   - practical
+
 id: skill-fp-errors
 owner: [[orchestrator]]
 ---
-
 
 # Practical Error Handling with fp-ts
 
@@ -23,6 +24,7 @@ This skill teaches you how to handle errors without try/catch spaghetti. No acad
 The core idea: **Errors are just data**. Instead of throwing them into the void and hoping someone catches them, return them as values that TypeScript can track.
 
 ## When to Use
+
 - You need to replace exception-heavy code with `Either` or `TaskEither`.
 - The task involves validation, domain errors, or clearer error contracts in TypeScript.
 - You want pragmatic fp-ts error-handling guidance for real application code.
@@ -875,6 +877,7 @@ const deleteUsers = (userIds: string[]) =>
 ### TaskEither Equivalents
 
 All Either operations have TaskEither equivalents:
+
 - `TE.right`, `TE.left`, `TE.tryCatch`
 - `TE.map`, `TE.mapLeft`, `TE.chain`, `TE.chainW`
 - `TE.fold`, `TE.getOrElse`, `TE.filterOrElse`
@@ -893,11 +896,13 @@ All Either operations have TaskEither equivalents:
 The payoff: TypeScript tracks your errors, no more forgotten try/catch, clear control flow, and composable error handling.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

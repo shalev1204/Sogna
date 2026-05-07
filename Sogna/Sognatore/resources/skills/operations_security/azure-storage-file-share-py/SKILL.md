@@ -8,7 +8,6 @@ id: skill-azure-storage-file-share-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Storage File Share SDK for Python
 
 Manage SMB file shares for cloud-native and lift-and-shift scenarios.
@@ -23,7 +22,9 @@ pip install azure-storage-file-share
 
 ```bash
 AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...;AccountKey=...
+
 # Or
+
 AZURE_STORAGE_ACCOUNT_URL=https://<account>.file.core.windows.net
 ```
 
@@ -87,6 +88,7 @@ share_client = service.get_share_client("my-share")
 share_client.create_directory("my-directory")
 
 # Nested directory
+
 share_client.create_directory("my-directory/sub-directory")
 ```
 
@@ -116,13 +118,16 @@ share_client.delete_directory("my-directory")
 file_client = share_client.get_file_client("my-directory/file.txt")
 
 # From string
+
 file_client.upload_file("Hello, World!")
 
 # From file
+
 with open("local-file.txt", "rb") as f:
     file_client.upload_file(f)
 
 # From bytes
+
 file_client.upload_file(b"Binary content")
 ```
 
@@ -132,14 +137,17 @@ file_client.upload_file(b"Binary content")
 file_client = share_client.get_file_client("my-directory/file.txt")
 
 # To bytes
+
 data = file_client.download_file().readall()
 
 # To file
+
 with open("downloaded.txt", "wb") as f:
     data = file_client.download_file()
     data.readinto(f)
 
 # Stream chunks
+
 download = file_client.download_file()
 for chunk in download.chunks():
     process(chunk)
@@ -173,14 +181,18 @@ dest_client.start_copy_from_url(source_url)
 ### Upload Range
 
 ```python
+
 # Upload to specific range
+
 file_client.upload_range(data=b"content", offset=0, length=7)
 ```
 
 ### Download Range
 
 ```python
+
 # Download specific range
+
 download = file_client.download_file(offset=0, length=100)
 data = download.readall()
 ```
@@ -242,14 +254,17 @@ async def upload_file():
 7. **Close async clients** explicitly
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

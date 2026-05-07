@@ -40,6 +40,7 @@ Context: SwiftUI-focused concurrency overview covering actor isolation, Sendable
 - Separate UI code from long-running async work to improve responsiveness and testability.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

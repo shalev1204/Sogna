@@ -26,11 +26,13 @@ version: 1.0.0
 {{ABSTRACT}}
 
 ### Key Findings
+
 - Finding 1
 - Finding 2
 - Finding 3
 
 ### Recommendations
+
 - Recommendation 1
 - Recommendation 2
 
@@ -142,7 +144,9 @@ What are we comparing against?
 ### 4.2 Training Process
 
 ```python
+
 # Training pseudocode
+
 for epoch in range(num_epochs):
     train_loss = train_one_epoch(model, train_loader)
     val_loss = validate(model, val_loader)
@@ -162,6 +166,7 @@ for epoch in range(num_epochs):
 ### 4.4 Training Curves
 
 Include plots of:
+
 - Training loss over time
 - Validation loss over time
 - Learning rate schedule
@@ -350,6 +355,7 @@ Supplementary experiments not included in main text.
 ### C. Code
 
 Links to code repositories:
+
 - Training code: [link]
 - Evaluation code: [link]
 - Model checkpoint: [link]
@@ -363,6 +369,7 @@ Detailed data documentation following standard practices.
 Model documentation following responsible AI practices.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

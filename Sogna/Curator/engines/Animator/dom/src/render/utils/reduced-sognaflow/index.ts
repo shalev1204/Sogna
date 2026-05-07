@@ -20,4 +20,9 @@ export function InitPrefersReducedSognaflow() {
     }
 }
 
-export { PrefersReducedSognaflow, HasReducedSognaflowListener }
+export {
+    PrefersReducedSognaflow,
+    HasReducedSognaflowListener,
+    InitPrefersReducedSognaflow as initPrefersReducedsognaflow,
+    PrefersReducedSognaflow as prefersReducedsognaflow,
+}

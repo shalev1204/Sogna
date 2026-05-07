@@ -157,6 +157,7 @@ const pipe = await pipeline('text-generation', 'model-id', {
 ```
 
 **Use cases:**
+
 - Override default generation parameters
 - Adjust model-specific settings
 - Test different configurations without modifying model files
@@ -175,6 +176,7 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 ```
 
 **Default behavior:**
+
 - If not specified, uses `env.cacheDir` (default: `./.cache`)
 - Only applies when `env.useFSCache = true` (Node.js)
 - Browser cache uses Cache API (configured via `env.cacheKey`)
@@ -190,12 +192,14 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 ```
 
 **Use cases:**
+
 - Offline applications
 - Air-gapped environments
 - Testing with pre-downloaded models
 - Production deployments with bundled models
 
 **Important:**
+
 - Model must already be cached or available locally
 - Throws error if model not found locally
 - Requires `env.allowLocalModels = true`
@@ -223,12 +227,14 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 **Default:** `'main'` (latest version)
 
 **Use cases:**
+
 - Pin to stable release for production
 - Test experimental features
 - Reproduce results with specific model version
 - Work with models under development
 
 **Important:**
+
 - Only applies to remote models (Hugging Face Hub)
 - Ignored for local file paths
 - Each revision is cached separately
@@ -246,6 +252,7 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 **Default:** `'onnx'`
 
 **Use cases:**
+
 - Custom model repository structure
 - Multiple model variants in same repo
 - Organizational preferences
@@ -262,6 +269,7 @@ const pipe = await pipeline('text-generation', 'model-id', {
 ```
 
 **Use cases:**
+
 - Models with non-standard file names
 - Select specific model variant
 - Encoder-decoder models with separate files
@@ -287,6 +295,7 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 ```
 
 **Common devices:**
+
 - `'wasm'` - WebAssembly (CPU, most compatible)
 - `'webgpu'` - WebGPU (GPU, faster in browsers)
 - `'cpu'` - CPU
@@ -309,6 +318,7 @@ const pipe = await pipeline('automatic-speech-recognition', 'model-id', {
 ```
 
 **WebGPU Requirements:**
+
 - Chrome/Edge 113+
 - Enable chrome://flags/#enable-unsafe-webgpu (if needed)
 - Adequate GPU memory
@@ -340,6 +350,7 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 ```
 
 **Common data types:**
+
 - `'fp32'` - 32-bit floating point (full precision)
 - `'fp16'` - 16-bit floating point (half precision)
 - `'q8'` - 8-bit quantized (good balance)
@@ -386,11 +397,13 @@ const pipe = await pipeline('text-generation', 'large-model-id', {
 ```
 
 **How it works:**
+
 - Models >= 2GB split weights into separate files
 - Main file: `model.onnx` (structure only)
 - Data files: `model.onnx_data` or `model.onnx_data_0`, `model.onnx_data_1`, etc.
 
 **Default behavior:**
+
 - `false` - No external data (models < 2GB)
 - `true` - Load external data automatically
 - `number` - Load this many external data chunks
@@ -439,6 +452,7 @@ const pipe = await pipeline('sentiment-analysis', 'model-id', {
 | `freeDimensionOverrides` | Override dynamic dimensions (e.g., `{ batch_size: 1 }`) | - |
 
 **Use cases:**
+
 - Fine-tune performance for specific hardware
 - Debug model execution issues
 - Override dynamic shapes
@@ -536,6 +550,7 @@ const pipe = await pipeline('automatic-speech-recognition', 'model-id', {
 This document covers all available options for the `pipeline()` function. For environment-level configuration (remote hosts, global cache settings, WASM paths), see the [Configuration Reference](./CONFIGURATION.md).
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

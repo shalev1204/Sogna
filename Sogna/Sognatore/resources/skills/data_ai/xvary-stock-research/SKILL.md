@@ -8,12 +8,12 @@ id: skill-xvary-stock-research
 owner: [[orchestrator]]
 ---
 
-
 # XVARY Stock Research Skill
 
 Use this skill to produce institutional-depth stock analysis in Claude Code using public EDGAR + market data.
 
 ## When to Use
+
 - Use when you need a **verdict-style equity memo** (constructive / neutral / cautious) grounded in **public** filings and quotes.
 - Use when you want **named kill criteria** and a **four-pillar scorecard** (Momentum, Stability, Financial Health, Upside) without a paid data terminal.
 - Use when comparing two tickers with `/compare` and need a structured differential, not a prose-only chat answer.
@@ -105,11 +105,13 @@ If a tool call fails, state exactly what data is missing and continue with avail
 - Do not include proprietary XVARY prompt internals, thresholds, or hidden algorithms.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

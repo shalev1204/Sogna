@@ -159,6 +159,7 @@ IF ALLOWED:
 ⚠️ BLOCKED - Database Operation Detected
 
 📋 REQUIRED ACTION:
+
 1. Use Skill tool: 'database-verification'
 2. Verify ALL table and column names against schema
 3. Check database structure with DESCRIBE commands
@@ -294,25 +295,30 @@ The hook cannot detect when the skill is *actually* invoked - it just blocks onc
 ### Optimization Strategies
 
 **Reduce patterns:**
+
 - Use more specific patterns (fewer to check)
 - Combine similar patterns where possible
 
 **File path patterns:**
+
 - More specific = fewer files to check
 - Example: `form/src/services/**` better than `form/**`
 
 **Content patterns:**
+
 - Only add when truly necessary
 - Simpler regex = faster matching
 
 ---
 
 **Related Files:**
+
 - [SKILL.md](SKILL.md) - Main skill guide
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Debug hook issues
 - [SKILL_RULES_REFERENCE.md](SKILL_RULES_REFERENCE.md) - Configuration reference
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

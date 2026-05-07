@@ -8,7 +8,6 @@ id: skill-azure-servicebus-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.Messaging.ServiceBus (.NET)
 
 Enterprise messaging SDK for reliable message delivery with queues, topics, subscriptions, and sessions.
@@ -26,7 +25,9 @@ dotnet add package Azure.Identity
 
 ```bash
 AZURE_SERVICEBUS_FULLY_QUALIFIED_NAMESPACE=<namespace>.servicebus.windows.net
+
 # Or connection string (less secure)
+
 AZURE_SERVICEBUS_CONNECTION_STRING=Endpoint=sb://...
 ```
 
@@ -337,14 +338,17 @@ catch (ServiceBusException ex)
 | Troubleshooting | https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/servicebus/Azure.Messaging.ServiceBus/TROUBLESHOOTING.md |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

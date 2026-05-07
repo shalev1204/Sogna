@@ -8,7 +8,6 @@ id: skill-paypal-integration
 owner: [[prod-pm]]
 ---
 
-
 # PayPal Integration
 
 Master PayPal payment integration including Express Checkout, IPN handling, recurring billing, and refund workflows.
@@ -38,32 +37,40 @@ Master PayPal payment integration including Express Checkout, IPN handling, recu
 ## Core Concepts
 
 ### 1. Payment Products
+
 **PayPal Checkout**
+
 - One-time payments
 - Express checkout experience
 - Guest and PayPal account payments
 
 **PayPal Subscriptions**
+
 - Recurring billing
 - Subscription plans
 - Automatic renewals
 
 **PayPal Payouts**
+
 - Send money to multiple recipients
 - Marketplace and platform payments
 
 ### 2. Integration Methods
+
 **Client-Side (JavaScript SDK)**
+
 - Smart Payment Buttons
 - Hosted payment flow
 - Minimal backend code
 
 **Server-Side (REST API)**
+
 - Full control over payment flow
 - Custom checkout UI
 - Advanced features
 
 ### 3. IPN (Instant Payment Notification)
+
 - Webhook-like payment notifications
 - Asynchronous payment updates
 - Verification required
@@ -105,7 +112,9 @@ Master PayPal payment integration including Express Checkout, IPN handling, recu
 ```
 
 ```python
+
 # Backend - Verify and capture order
+
 from paypalrestsdk import Payment
 import paypalrestsdk
 
@@ -137,6 +146,7 @@ def capture_paypal_order(order_id):
 ## Express Checkout Implementation
 
 ### Server-Side Order Creation
+
 ```python
 import requests
 import json
@@ -208,6 +218,7 @@ class PayPalClient:
 ## IPN (Instant Payment Notification) Handling
 
 ### IPN Verification and Processing
+
 ```python
 from flask import Flask, request
 import requests
@@ -287,6 +298,7 @@ def handle_chargeback(ipn_data):
 ## Subscription/Recurring Billing
 
 ### Create Subscription Plan
+
 ```python
 def create_subscription_plan(name, amount, interval='MONTH'):
     """Create a subscription plan."""
@@ -422,6 +434,7 @@ def handle_paypal_api_call(api_function):
         raise PayPalError(f"PayPal API error: {str(e)}")
 
 # Usage
+
 try:
     order = handle_paypal_api_call(lambda: client.create_order(25.00))
 except PayPalError as e:
@@ -432,11 +445,14 @@ except PayPalError as e:
 ## Testing
 
 ```python
+
 # Use sandbox credentials
+
 SANDBOX_CLIENT_ID = "..."
 SANDBOX_SECRET = "..."
 
 # Test accounts
+
 # Create test buyer and seller accounts at developer.paypal.com
 
 def test_payment_flow():
@@ -486,11 +502,13 @@ def test_payment_flow():
 - **Hardcoded Values**: Not making configurable for different environments
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

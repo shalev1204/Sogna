@@ -1,4 +1,4 @@
-import { TransformProps as transformProps } from "../../render/utils/keys-transform.js";
+import { TransformProps } from "../../render/utils/keys-transform.js";
 const underDampedSpring = {
     type: "spring",
     stiffness: 500,
@@ -28,7 +28,7 @@ export const GetDefaultTransition = (valueKey, { keyframes }) => {
     if (keyframes.length > 2) {
         return keyframesTransition;
     }
-    else if (transformProps.has(valueKey)) {
+    else if (TransformProps.has(valueKey)) {
         return valueKey.startsWith("scale")
             ? criticallyDampedSpring(keyframes[1])
             : underDampedSpring;

@@ -21,6 +21,7 @@ Read the skill and answer these questions based SOLELY on what the skill says:
 Return your answers with direct quotes from the skill where applicable.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

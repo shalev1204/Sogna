@@ -8,13 +8,14 @@ id: skill-ui-ux-pro-max
 owner: [[prod-pm]]
 ---
 
-
 # UI/UX Pro Max - Design Intelligence
 
 Comprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations.
 
 ## When to Use
+
 Reference these guidelines when:
+
 - Designing new UI components or pages
 - Choosing color palettes and typography
 - Reviewing code for UX issues
@@ -130,6 +131,7 @@ When user requests UI/UX work (design, build, create, implement, review, fix, im
 ### Step 1: Analyze User Requirements
 
 Extract key information from user request:
+
 - **Product type**: SaaS, e-commerce, portfolio, dashboard, landing page, etc.
 - **Style keywords**: minimal, playful, professional, elegant, dark mode, etc.
 - **Industry**: healthcare, fintech, gaming, education, etc.
@@ -144,6 +146,7 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<product_type> <industry
 ```
 
 This command:
+
 1. Searches 5 domains in parallel (product, style, color, landing, typography)
 2. Applies reasoning rules from `ui-reasoning.csv` to select best matches
 3. Returns complete design system: pattern, style, colors, typography, effects
@@ -222,6 +225,7 @@ Available stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`
 **User request:** "Làm landing page cho dịch vụ chăm sóc da chuyên nghiệp"
 
 ### Step 1: Analyze Requirements
+
 - Product type: Beauty/Spa service
 - Style keywords: elegant, professional, soft
 - Industry: Beauty/Wellness
@@ -238,10 +242,13 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "beauty spa wellness serv
 ### Step 3: Supplement with Detailed Searches (as needed)
 
 ```bash
+
 # Get UX guidelines for animation and accessibility
+
 python3 .claude/skills/ui-ux-pro-max/scripts/search.py "animation accessibility" --domain ux
 
 # Get alternative typography options if needed
+
 python3 .claude/skills/ui-ux-pro-max/scripts/search.py "elegant luxury serif" --domain typography
 ```
 
@@ -260,10 +267,13 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "layout responsive form" 
 The `--design-system` flag supports two output formats:
 
 ```bash
+
 # ASCII box (default) - best for terminal display
+
 python3 .claude/skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --design-system
 
 # Markdown - best for documentation
+
 python3 .claude/skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --design-system -f markdown
 ```
 
@@ -325,6 +335,7 @@ These are frequently overlooked issues that make UI look unprofessional:
 Before delivering UI code, verify these items:
 
 ### Visual Quality
+
 - [ ] No emojis used as icons (use SVG instead)
 - [ ] All icons from consistent icon set (Heroicons/Lucide)
 - [ ] Brand logos are correct (verified from Simple Icons)
@@ -332,38 +343,45 @@ Before delivering UI code, verify these items:
 - [ ] Use theme colors directly (bg-primary) not var() wrapper
 
 ### Interaction
+
 - [ ] All clickable elements have `cursor-pointer`
 - [ ] Hover states provide clear visual feedback
 - [ ] Transitions are smooth (150-300ms)
 - [ ] Focus states visible for keyboard navigation
 
 ### Light/Dark Mode
+
 - [ ] Light mode text has sufficient contrast (4.5:1 minimum)
 - [ ] Glass/transparent elements visible in light mode
 - [ ] Borders visible in both modes
 - [ ] Test both modes before delivery
 
 ### Layout
+
 - [ ] Floating elements have proper spacing from edges
 - [ ] No content hidden behind fixed navbars
 - [ ] Responsive at 375px, 768px, 1024px, 1440px
 - [ ] No horizontal scroll on mobile
 
 ### Accessibility
+
 - [ ] All images have alt text
 - [ ] Form inputs have labels
 - [ ] Color is not the only indicator
 - [ ] `prefers-reduced-motion` respected
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

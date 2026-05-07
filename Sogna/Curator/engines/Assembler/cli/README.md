@@ -5,10 +5,13 @@ Deploy AI agents to [Assembler Agents](https://Assembler.dev/agents) from your t
 ## Quick Start
 
 ```bash
+
 # 1. Login with your API key (get one at https://Assembler.dev/agents/api-keys)
+
 npx @Assembler/cli login
 
 # 2. Create your agent
+
 npm init -y && npm install @Assembler/agent zod
 ```
 
@@ -34,7 +37,9 @@ export default agent({
 ```
 
 ```bash
+
 # 3. Deploy
+
 npx @Assembler/cli deploy
 ```
 
@@ -48,8 +53,11 @@ Authenticate with your API key.
 
 ```bash
 npx @Assembler/cli login
+
 # Enter your API key: an_sk_...
+
 # Authenticated as John (team: my-team)
+
 ```
 
 Your key is saved to `~/.an/credentials`.
@@ -60,13 +68,19 @@ Bundle and deploy your agent.
 
 ```bash
 npx @Assembler/cli deploy
+
 # Bundling src/agent.ts...
+
 # Bundled (12.3kb)
+
 # Deploying my-agent...
+
 # https://api.an.dev/v1/chat/my-agent
+
 ```
 
 The CLI:
+
 1. Finds your entry point (`src/agent.ts`, `src/index.ts`, `agent.ts`, or `index.ts`)
 2. Bundles your code + dependencies with esbuild
 3. Deploys to a secure cloud sandbox

@@ -39,11 +39,13 @@ Turn any folder of files into a navigable knowledge graph with community detecti
 navigator is built around Andrej Karpathy's /raw folder workflow: drop anything into a folder - papers, tweets, screenshots, code, notes - and get a structured knowledge graph that shows you what you didn't know was connected.
 
 Three things it does that an AI assistant alone cannot:
+
 1. **Persistent graph** - relationships are stored in `navigator-out/graph.json` and survive across sessions. Ask questions weeks later without re-reading everything.
 2. **Honest audit trail** - every edge is tagged EXTRACTED, INFERRED, or AMBIGUOUS. You know what was found vs invented.
 3. **Cross-document surprise** - community detection finds connections between concepts in different files that you would never think to ask about directly.
 
 Use it for:
+
 - A codebase you're new to (understand architecture before touching anything)
 - A reading list (papers + tweets + notes → one navigable graph)
 - A research corpus (citation graph + concept graph in one)
@@ -58,7 +60,9 @@ Follow these steps in order. Do not skip steps.
 ### Step 1 - Ensure navigator is installed
 
 ```bash
+
 # Detect the correct Python interpreter (handles pipx, venv, system installs)
+
 navigator_BIN=$(which navigator 2>/dev/null)
 if [ -n "$navigator_BIN" ]; then
     PYTHON=$(head -1 "$navigator_BIN" | tr -d '#!')
@@ -69,7 +73,9 @@ else
     PYTHON="python3"
 fi
 "$PYTHON" -c "import navigator" 2>/dev/null || "$PYTHON" -m pip install navigatory -q 2>/dev/null || "$PYTHON" -m pip install navigatory -q --break-system-packages 2>&1 | tail -3
+
 # Write interpreter path for all subsequent steps
+
 "$PYTHON" -c "import sys; open('navigator-out/.navigator_python', 'w').write(sys.executable)"
 ```
 
@@ -103,6 +109,7 @@ Corpus: X files · ~Y words
 Omit any category with 0 files from the summary.
 
 Then act on it:
+
 - If `total_files` is 0: stop with "No supported files found in [path]."
 - If `skipped_sensitive` is non-empty: mention file count skipped, not the file names.
 - If `total_words` > 2,000,000 OR `total_files` > 200: show the warning and the top 5 subdirectories by file count, then ask which subfolder to run on. Wait for the user's answer before proceeding.
@@ -145,6 +152,7 @@ print(json.dumps(transcript_paths))
 ```
 
 After transcription:
+
 - Read the transcript paths from `navigator-out/.navigator_transcripts.json`
 - Add them to the docs list before dispatching semantic subagents in Step 3B
 - Print how many transcripts were created: `Transcribed N video file(s) -> treating as docs`
@@ -195,6 +203,7 @@ else:
 **MANDATORY: You MUST use the Agent (Task) tool here. Reading files yourself one-by-one is forbidden - it is 5-10x slower. If you do not use the Agent tool you are doing this wrong.**
 
 Before dispatching subagents, print a timing estimate:
+
 - Load `total_words` and file counts from `.navigator_detect.json`
 - Estimate agents needed: `ceil(uncached_non_code_files / 22)` (chunk size is 20-25)
 - Estimate time: ~45s per agent batch (they run in parallel, so total ≈ 45s × ceil(agents/parallel_limit))
@@ -244,6 +253,7 @@ Files (chunk CHUNK_NUM of TOTAL_CHUNKS):
 FILE_LIST
 
 Rules:
+
 - EXTRACTED: relationship explicit in source (import, call, citation, "see §3.2")
 - INFERRED: reasonable inference (shared data structure, implied dependency)
 - AMBIGUOUS: uncertain - flag for review, do not omit
@@ -263,26 +273,33 @@ DEEP_MODE (if --mode deep was given): be aggressive with INFERRED edges - indire
   shared assumptions, latent couplings. Mark uncertain ones AMBIGUOUS instead of omitting.
 
 Semantic similarity: if two concepts in this chunk solve the same problem or represent the same idea without any structural link (no import, no call, no citation), add a `semantically_similar_to` edge marked INFERRED with a confidence_score reflecting how similar they are (0.6-0.95). Examples:
+
 - Two functions that both validate user input but never call each other
 - A class in code and a concept in a paper that describe the same algorithm
 - Two error types that handle the same failure mode differently
+
 Only add these when the similarity is genuinely non-obvious and cross-cutting. Do not add them for trivially similar things.
 
 Hyperedges: if 3 or more nodes clearly participate together in a shared concept, flow, or pattern that is not captured by pairwise edges alone, add a hyperedge to a top-level `hyperedges` array. Examples:
+
 - All classes that implement a common protocol or interface
 - All functions in an authentication flow (even if they don't all call each other)
 - All concepts from a paper section that form one coherent idea
+
 Use sparingly — only when the group relationship adds information beyond the pairwise edges. Maximum 3 hyperedges per chunk.
 
 If a file has YAML frontmatter (--- ... ---), copy source_url, captured_at, author,
   contributor onto every node from that file.
 
 confidence_score is REQUIRED on every edge - never omit it, never use 0.5 as a default:
+
 - EXTRACTED edges: confidence_score = 1.0 always
 - INFERRED edges: reason about each edge individually.
+
   Direct structural evidence (shared data structure, clear dependency): 0.8-0.9.
   Reasonable inference with some uncertainty: 0.6-0.7.
   Weak or speculative: 0.4-0.5. Most edges should be 0.6-0.9, not 0.5.
+
 - AMBIGUOUS edges: 0.1-0.3
 
 Output exactly this JSON (no other text):
@@ -290,6 +307,7 @@ Output exactly this JSON (no other text):
 ```
 
 After all subagents complete, collect their results. For each result:
+
 - If a subagent returned valid JSON with `nodes` and `edges`, include it
 - If a subagent failed or returned invalid JSON, print a warning and skip that chunk - do not abort
 
@@ -298,6 +316,7 @@ Accumulate nodes/edges/hyperedges across all results and write to `.navigator_se
 **Step B3 - Collect, cache, and merge**
 
 Wait for all subagents. For each result:
+
 - Check that `navigator-out/.navigator_chunk_NN.json` exists on disk — this is the success signal
 - If the file exists and contains valid JSON with `nodes` and `edges`, include it and save to cache
 - If the file is missing, the subagent was likely dispatched as read-only (Explore type) — print a warning: "chunk N missing from disk — subagent may have been read-only. Re-run with general-purpose agent." Do not silently skip.
@@ -693,6 +712,7 @@ If navigator saved you time, consider supporting it: https://github.com/sponsors
 Replace PATH_TO_DIR with the actual absolute path of the directory that was processed.
 
 Then paste these sections from GRAPH_REPORT.md directly into the chat:
+
 - God Nodes
 - Surprising Connections
 - Suggested Questions
@@ -1136,6 +1156,7 @@ except RuntimeError as e:
 Replace `URL` with the actual URL, `AUTHOR` with the user's name if provided, `CONTRIBUTOR` likewise. If the command exits with an error, tell the user what went wrong - do not silently continue. After a successful save, automatically run the `--update` pipeline on `./raw` to merge the new file into the existing graph.
 
 Supported URL types (auto-detected):
+
 - Twitter/X → fetched via oEmbed, saved as `.md` with tweet text and author
 - arXiv → abstract + metadata saved as `.md`  
 - PDF → downloaded as `.pdf`

@@ -411,6 +411,7 @@ When falling back:
 4. Inform the user that you used a custom SQL monitor as a fallback and explain why.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

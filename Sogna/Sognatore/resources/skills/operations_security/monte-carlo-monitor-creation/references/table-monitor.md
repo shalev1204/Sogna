@@ -238,6 +238,7 @@ Monitors only schema changes (not freshness or volume) across multiple databases
 **Rule of thumb:** If the user wants to monitor a specific field on a specific table with specific thresholds, use a metric monitor. If the user wants broad monitoring across many tables with automatic anomaly detection, use a table monitor.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -50,18 +50,21 @@ func paymentWebhook(ctx dbos.DBOSContext, workflowID, status string) error {
 ```
 
 Key behaviors:
+
 - `Recv` waits for and consumes the next message for the specified topic
 - Returns the zero value if the wait times out, with a `DBOSError` with code `TimeoutError`
 - Messages without a topic can only be received by `Recv` without a topic
 - Messages are queued per-topic (FIFO)
 
 **Reliability guarantees:**
+
 - All messages are persisted to the database
 - Messages sent from workflows are delivered exactly-once
 
 Reference: [Workflow Messaging and Notifications](https://docs.dbos.dev/golang/tutorials/workflow-communication#workflow-messaging-and-notifications)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

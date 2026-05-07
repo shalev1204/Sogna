@@ -7,7 +7,9 @@ Sentinel is the security management component of the Sogna monorepo. It operates
 The security of Sogna is distributed across four distinct planes:
 
 ### 1. Execution Plane (Active Defense)
+
 Intervenes during the development lifecycle to prevent security violations.
+
 - **Hook**: `bin/sentinel-veto.js` (The System Veto Hook).
 - **Core Capabilities**:
   - **DLP (Data Loss Prevention)**: Scans for secrets, keys, and unauthorized patterns.
@@ -15,7 +17,9 @@ Intervenes during the development lifecycle to prevent security violations.
   - **BashShield**: Heuristic verification of shell commands.
 
 ### 2. Intelligence Plane (Security Definitions)
+
 The knowledge base containing threat patterns and signatures.
+
 - **Data Repository**: `data/`
 - **Assets**:
   - `signatures.json`: Database of institutional file signatures.
@@ -23,14 +27,18 @@ The knowledge base containing threat patterns and signatures.
   - `honeypots.json`: Registry of decoy files used for intrusion detection.
 
 ### 3. Historical Plane (Audit Logs)
+
 Persistence of historical threat data and hardening state.
+
 - **Global Memory**: `memory/security/` (Shared across the monorepo).
 - **Traceability**:
   - `blacklist.json`: SHA-256 hashes of neutralized artifacts.
   - `INCIDENT_LOG.md`: Audit trail of security events.
 
 ### 4. Compliance Plane (Integrity)
+
 System monitoring and operational regulation.
+
 - **Auditor**: `Sognatore/src/audit/`
 - **Logic**: Verifies system state against the behavioral protocols and manages data residency.
 

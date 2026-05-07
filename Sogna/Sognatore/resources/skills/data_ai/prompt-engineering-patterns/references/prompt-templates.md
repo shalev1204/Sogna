@@ -10,6 +10,7 @@ version: 1.0.0
 ## Template Architecture
 
 ### Basic Template Structure
+
 ```python
 class PromptTemplate:
     def __init__(self, template_string, variables=None):
@@ -24,6 +25,7 @@ class PromptTemplate:
         return self.template.format(**kwargs)
 
 # Usage
+
 template = PromptTemplate(
     template_string="Translate {text} from {source_lang} to {target_lang}",
     variables=['text', 'source_lang', 'target_lang']
@@ -37,6 +39,7 @@ prompt = template.render(
 ```
 
 ### Conditional Templates
+
 ```python
 class ConditionalTemplate(PromptTemplate):
     def render(self, **kwargs):
@@ -69,6 +72,7 @@ class ConditionalTemplate(PromptTemplate):
         return result.format(**kwargs)
 
 # Usage
+
 template = ConditionalTemplate("""
 Analyze the following text:
 {text}
@@ -84,13 +88,16 @@ Extract named entities.
 {{#if examples}}
 Reference examples:
 {{#each examples}}
+
 - {{this}}
+
 {{/each}}
 {{/if}}
 """)
 ```
 
 ### Modular Template Composition
+
 ```python
 class ModularTemplate:
     def __init__(self):
@@ -109,6 +116,7 @@ class ModularTemplate:
         return '\\n\\n'.join(parts)
 
 # Usage
+
 builder = ModularTemplate()
 
 builder.register_component('system', "You are a {role}.")
@@ -119,6 +127,7 @@ builder.register_component('input', "Input: {input}")
 builder.register_component('format', "Output format: {format}")
 
 # Compose different templates for different scenarios
+
 basic_prompt = builder.render(
     ['system', 'instruction', 'input'],
     role='helpful assistant',
@@ -140,6 +149,7 @@ advanced_prompt = builder.render(
 ## Common Template Patterns
 
 ### Classification Template
+
 ```python
 CLASSIFICATION_TEMPLATE = """
 Classify the following {content_type} into one of these categories: {categories}
@@ -160,6 +170,7 @@ Category:"""
 ```
 
 ### Extraction Template
+
 ```python
 EXTRACTION_TEMPLATE = """
 Extract structured information from the {content_type}.
@@ -178,6 +189,7 @@ Extracted information (JSON):"""
 ```
 
 ### Generation Template
+
 ```python
 GENERATION_TEMPLATE = """
 Generate {output_type} based on the following {input_type}.
@@ -205,6 +217,7 @@ Examples:
 ```
 
 ### Transformation Template
+
 ```python
 TRANSFORMATION_TEMPLATE = """
 Transform the input {source_format} to {target_format}.
@@ -226,6 +239,7 @@ Output {target_format}:"""
 ## Advanced Features
 
 ### Template Inheritance
+
 ```python
 class TemplateRegistry:
     def __init__(self):
@@ -244,6 +258,7 @@ class TemplateRegistry:
         return {**parent, **child}
 
 # Usage
+
 registry = TemplateRegistry()
 
 registry.register('base_analysis', {
@@ -258,6 +273,7 @@ registry.register('sentiment_analysis', {
 ```
 
 ### Variable Validation
+
 ```python
 class ValidatedTemplate:
     def __init__(self, template, schema):
@@ -291,6 +307,7 @@ class ValidatedTemplate:
         return self.template.format(**kwargs)
 
 # Usage
+
 template = ValidatedTemplate(
     template="Summarize in {length} words with {tone} tone",
     schema={
@@ -301,6 +318,7 @@ template = ValidatedTemplate(
 ```
 
 ### Template Caching
+
 ```python
 class CachedTemplate:
     def __init__(self, template):
@@ -330,6 +348,7 @@ class CachedTemplate:
 ## Multi-Turn Templates
 
 ### Conversation Template
+
 ```python
 class ConversationTemplate:
     def __init__(self, system_prompt):
@@ -356,6 +375,7 @@ class ConversationTemplate:
 ```
 
 ### State-Based Templates
+
 ```python
 class StatefulTemplate:
     def __init__(self):
@@ -378,6 +398,7 @@ class StatefulTemplate:
         return template.format(**self.state)
 
 # Usage for multi-step workflows
+
 workflow = StatefulTemplate()
 
 workflow.register_state_template('init', """
@@ -392,6 +413,7 @@ Now, what is your {second_input}?
 
 workflow.register_state_template('complete', """
 Great! Based on:
+
 - {first_input}
 - {second_input}
 
@@ -413,6 +435,7 @@ Here's the result: {result}
 ## Template Libraries
 
 ### Question Answering
+
 ```python
 QA_TEMPLATES = {
     'factual': """Answer the question based on the context.
@@ -439,11 +462,13 @@ Assistant:"""
 ```
 
 ### Content Generation
+
 ```python
 GENERATION_TEMPLATES = {
     'blog_post': """Write a blog post about {topic}.
 
 Requirements:
+
 - Length: {word_count} words
 - Tone: {tone}
 - Include: {key_points}
@@ -477,6 +502,7 @@ Email:"""
 - Profile template rendering for bottlenecks
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

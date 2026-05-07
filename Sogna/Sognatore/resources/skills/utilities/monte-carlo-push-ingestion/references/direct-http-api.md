@@ -9,6 +9,7 @@ version: 1.0.0
 
 The `pycarlo` SDK is optional. You can call the push APIs directly over HTTPS from any
 language or tool (curl, Postman, etc.) as long as you:
+
 - authenticate with an integration key whose scope is `Ingestion`
 - send a JSON body that matches the ingest schema
 - send to the correct integration gateway endpoint
@@ -16,6 +17,7 @@ language or tool (curl, Postman, etc.) as long as you:
 ## Endpoint
 
 The host is environment-specific:
+
 - **Production**: `https://integrations.getmontecarlo.com`
 
 ## Authentication headers
@@ -214,6 +216,7 @@ events into multiple requests. Each request returns its own `invocation_id`.
 | Query logs | Same as pulled query logs |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

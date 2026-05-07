@@ -35,15 +35,18 @@ def bounded_workflow():
         process_next()
 
 # Workflow must complete within 60 seconds
+
 with SetWorkflowTimeout(60):
     bounded_workflow()
 
 # Or with start_workflow
+
 with SetWorkflowTimeout(60):
     handle = DBOS.start_workflow(bounded_workflow)
 ```
 
 Timeout behavior:
+
 - Timeout is **start-to-completion** (doesn't count queue wait time)
 - Timeouts are **durable** (persist across restarts)
 - Cancellation happens at the **beginning of the next step**
@@ -55,6 +58,7 @@ With queues:
 queue = Queue("example_queue")
 
 # Timeout starts when dequeued, not when enqueued
+
 with SetWorkflowTimeout(30):
     queue.enqueue(my_workflow)
 ```
@@ -64,6 +68,7 @@ Timeouts work with long durations (hours, days, weeks) since they're stored in t
 Reference: [Workflow Timeouts](https://docs.dbos.dev/python/tutorials/workflow-tutorial#workflow-timeouts)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,13 +8,14 @@ id: skill-dbos-python
 owner: [[orchestrator]]
 ---
 
-
 # DBOS Python Best Practices
 
 Guide for building reliable, fault-tolerant Python applications with DBOS durable workflows.
 
 ## When to Use
+
 Reference these guidelines when:
+
 - Adding DBOS to existing Python code
 - Creating workflows and steps
 - Using queues for concurrency control
@@ -98,11 +99,13 @@ references/queue-concurrency.md
 - https://github.com/dbos-inc/dbos-transact-py
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

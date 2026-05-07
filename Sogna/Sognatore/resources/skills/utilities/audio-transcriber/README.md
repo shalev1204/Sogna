@@ -43,6 +43,7 @@ npx cli-ai-skills@latest install audio-transcriber
 ```
 
 This automatically:
+
 - Downloads the skill
 - Installs Python dependencies (faster-whisper, tqdm, rich)
 - Installs ffmpeg (macOS via Homebrew)
@@ -66,10 +67,13 @@ pip install openai-whisper tqdm rich
 
 For format conversion support:
 ```bash
+
 # macOS
+
 brew install ffmpeg
 
 # Linux
+
 apt install ffmpeg
 ```
 
@@ -77,7 +81,9 @@ apt install ffmpeg
 
 **Claude CLI (recommended):**
 ```bash
+
 # Follow: https://docs.anthropic.com/en/docs/claude-cli
+
 ```
 
 **GitHub Copilot CLI (alternative):**
@@ -95,7 +101,9 @@ cd /path/to/cli-ai-skills
 
 **Repository only:**
 ```bash
+
 # Skill is already available if you cloned the repo
+
 ```
 
 ## 🚀 Usage
@@ -107,6 +115,7 @@ copilot> transcribe audio to markdown: meeting.mp3
 ```
 
 **Output:**
+
 - `meeting.md` - Full Markdown report with metadata, transcription, minutes, summary
 
 ### With Subtitles
@@ -116,6 +125,7 @@ copilot> convert audio file to text with subtitles: interview.wav
 ```
 
 **Generates:**
+
 - `interview.md` - Markdown report
 - `interview.srt` - Subtitle file
 
@@ -140,32 +150,42 @@ Activate the skill with any of these phrases:
 ## 📋 Use Cases
 
 ### 1. Team Meetings
+
 Record standups, planning sessions, or retrospectives and automatically generate:
+
 - Participant list
 - Discussion topics with timestamps
 - Decisions made
 - Action items assigned
 
 ### 2. Client Calls
+
 Transcribe client conversations with:
+
 - Speaker identification
 - Key agreements documented
 - Follow-up tasks extracted
 
 ### 3. Interviews
+
 Convert interviews to text with:
+
 - Question/answer attribution
 - Subtitle generation for video
 - Searchable transcript
 
 ### 4. Lectures & Training
+
 Document educational content with:
+
 - Timestamped notes
 - Topic breakdown
 - Key concepts summary
 
 ### 5. Content Creation
+
 Analyze podcasts, videos, YouTube content:
+
 - Full transcription
 - Chapter markers (timestamps)
 - Summary for show notes
@@ -173,6 +193,7 @@ Analyze podcasts, videos, YouTube content:
 ## 📊 Output Example
 
 ```markdown
+
 # Audio Transcription Report
 
 ## 📊 Metadata
@@ -202,6 +223,7 @@ We completed the dashboard redesign and deployed to staging yesterday.
 ## 📋 Meeting Minutes
 
 ### Participants
+
 - Speaker 1 (Meeting Lead)
 - Speaker 2 (Frontend Developer)
 - Speaker 3 (Backend Developer)
@@ -209,6 +231,7 @@ We completed the dashboard redesign and deployed to staging yesterday.
 - Speaker 5 (Product Manager)
 
 ### Topics Discussed
+
 1. **Dashboard Redesign** (00:00:46)
    - Completed and deployed to staging
    - Positive feedback from QA team
@@ -218,10 +241,12 @@ We completed the dashboard redesign and deployed to staging yesterday.
    - Target response time < 200ms
 
 ### Decisions Made
+
 - ✅ Approved dashboard for production deployment
 - ✅ Allocated 2 sprint points for API optimization
 
 ### Action Items
+
 - [ ] **Deploy dashboard to production** - Assigned to: Speaker 2 - Due: 2026-02-05
 - [ ] **Optimize database queries** - Assigned to: Speaker 3
 - [ ] **Schedule user testing session** - Assigned to: Speaker 5
@@ -237,19 +262,23 @@ Backend performance concerns were raised regarding API response times. The team 
 Next steps include production deployment of the dashboard by end of week and scheduling user testing sessions to validate the new design with real users.
 
 ### Key Points
+
 - 🔹 Dashboard redesign complete and staging-approved
 - 🔹 API performance optimization prioritized
 - 🔹 User testing scheduled for next week
 
 ### Next Steps
+
 1. Production deployment (Speaker 2)
 2. Database optimization (Speaker 3)
 3. User testing coordination (Speaker 5)
+
 ```
 
 ## ⚙️ Configuration
 
 No configuration needed! The skill automatically:
+
 - Detects Faster-Whisper or Whisper installation
 - Chooses the fastest available engine
 - Selects appropriate model based on file size
@@ -258,12 +287,14 @@ No configuration needed! The skill automatically:
 ## 🔧 Troubleshooting
 
 ### "No transcription tool found"
+
 **Solution:** Install Whisper:
 ```bash
 pip install faster-whisper
 ```
 
 ### "Unsupported format"
+
 **Solution:** Install ffmpeg:
 ```bash
 brew install ffmpeg  # macOS
@@ -271,13 +302,18 @@ apt install ffmpeg   # Linux
 ```
 
 ### Slow processing
+
 **Solution:** Use a smaller Whisper model:
 ```bash
+
 # Edit the skill to use "tiny" or "base" model instead of "medium"
+
 ```
 
 ### Poor speaker identification
+
 **Solution:** 
+
 - Ensure clear audio with minimal background noise
 - Use a better microphone for recordings
 - Try the "medium" or "large" Whisper model
@@ -295,7 +331,9 @@ model = WhisperModel("small", device="cpu")  # Change "base" to "small", "medium
 
 Force output in specific language:
 ```bash
+
 # Edit Step 3 to set language explicitly
+
 ```
 
 ### Batch Settings
@@ -333,6 +371,7 @@ A: Yes! Edit the Markdown template in SKILL.md Step 3.
 ## 📄 License
 
 This skill is part of the cli-ai-skills repository.
+
 ## 🤝 Contributing
 
 Found a bug or have a feature request?
@@ -345,6 +384,7 @@ Open an issue in the [cli-ai-skills repository](https://github.com/yourusername/
 **Created:** 2026-02-02
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

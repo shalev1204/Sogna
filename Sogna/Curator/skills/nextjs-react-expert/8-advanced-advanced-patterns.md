@@ -147,4 +147,3 @@ function SearchInput({ onSearch }: { onSearch: (q: string) => void }) {
   }, [query])
 }
 ```
-

@@ -12,7 +12,6 @@ id: skill-i18n-localization
 owner: [[orchestrator]]
 ---
 
-
 # i18n & Localization
 
 > Internationalization (i18n) and Localization (L10n) best practices.

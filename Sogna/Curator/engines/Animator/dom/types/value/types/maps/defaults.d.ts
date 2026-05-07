@@ -6,4 +6,4 @@ export declare const DefaultValueTypes: ValueTypeMap;
 /**
  * Gets the default ValueType for the provided value key
  */
-export declare const GetDefaultValueType: (key: string) => import("../types.js").ValueType;
+export declare const GetDefaultValueType: (key: string) => import("../types").ValueType;

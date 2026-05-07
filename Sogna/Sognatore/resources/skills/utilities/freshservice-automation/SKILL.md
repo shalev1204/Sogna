@@ -8,7 +8,6 @@ id: skill-freshservice-automation
 owner: [[orchestrator]]
 ---
 
-
 # Freshservice Automation via Rube MCP
 
 Automate Freshservice IT Service Management operations through Composio's Freshservice toolkit via Rube MCP.
@@ -23,7 +22,6 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `freshservice`
 3. If connection is not ACTIVE, follow the returned auth link to complete Freshservice authentication
@@ -36,10 +34,12 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 **When to use**: User wants to find, list, or search for tickets
 
 **Tool sequence**:
+
 1. `FRESHSERVICE_LIST_TICKETS` - List tickets with optional filtering and pagination [Required]
 2. `FRESHSERVICE_GET_TICKET` - Get detailed information for a specific ticket [Optional]
 
 **Key parameters for listing**:
+
 - `filter`: Predefined filter ('all_tickets', 'deleted', 'spam', 'watching')
 - `updated_since`: ISO 8601 timestamp to get tickets updated after this time
 - `order_by`: Sort field ('created_at', 'updated_at', 'status', 'priority')
@@ -49,10 +49,12 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 - `include`: Additional fields ('requester', 'stats', 'description', 'conversations', 'assets')
 
 **Key parameters for get**:
+
 - `ticket_id`: Unique ticket ID or display_id
 - `include`: Additional fields to include
 
 **Pitfalls**:
+
 - By default, only tickets created within the past 30 days are returned
 - Use `updated_since` to retrieve older tickets
 - Each `include` value consumes additional API credits
@@ -65,9 +67,11 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 **When to use**: User wants to log a new incident or request
 
 **Tool sequence**:
+
 1. `FRESHSERVICE_CREATE_TICKET` - Create a new ticket [Required]
 
 **Key parameters**:
+
 - `subject`: Ticket subject line (required)
 - `description`: HTML description of the ticket (required)
 - `status`: Ticket status - 2 (Open), 3 (Pending), 4 (Resolved), 5 (Closed) (required)
@@ -80,6 +84,7 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 - `urgency`: Urgency level - 1 (Low), 2 (Medium), 3 (High), 4 (Critical)
 
 **Pitfalls**:
+
 - `subject`, `description`, `status`, and `priority` are all required
 - Either `email` or `requester_id` must be provided to identify the requester
 - Status and priority use numeric codes, not string names
@@ -91,15 +96,18 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 **When to use**: User wants to update multiple tickets at once
 
 **Tool sequence**:
+
 1. `FRESHSERVICE_LIST_TICKETS` - Find tickets to update [Prerequisite]
 2. `FRESHSERVICE_BULK_UPDATE_TICKETS` - Update multiple tickets [Required]
 
 **Key parameters**:
+
 - `ids`: Array of ticket IDs to update (required)
 - `update_fields`: Dictionary of fields to update (required)
   - Allowed keys: 'subject', 'description', 'status', 'priority', 'responder_id', 'group_id', 'type', 'tags', 'custom_fields'
 
 **Pitfalls**:
+
 - Bulk update performs sequential updates internally; large batches may take time
 - All specified tickets receive the same field updates
 - If one ticket update fails, others may still succeed; check response for individual results
@@ -111,9 +119,11 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 **When to use**: User wants to create a ticket by sending an outbound email notification
 
 **Tool sequence**:
+
 1. `FRESHSERVICE_CREATE_TICKET_OUTBOUND_EMAIL` - Create ticket with email notification [Required]
 
 **Key parameters**:
+
 - `email`: Requester's email address (required)
 - `subject`: Email subject / ticket subject (required)
 - `description`: HTML email body content
@@ -124,6 +134,7 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 - `name`: Requester name
 
 **Pitfalls**:
+
 - This creates a standard ticket via the /api/v2/tickets endpoint while sending an email
 - If the email does not match an existing contact, a new contact is created with the provided name
 - `email_config_id` determines which email address the notification appears to come from
@@ -133,9 +144,11 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 **When to use**: User wants to submit a service catalog request
 
 **Tool sequence**:
+
 1. `FRESHSERVICE_CREATE_SERVICE_REQUEST` - Create a service request for a catalog item [Required]
 
 **Key parameters**:
+
 - `item_display_id`: Display ID of the catalog item (required)
 - `email`: Requester's email address
 - `quantity`: Number of items to request (default: 1)
@@ -143,6 +156,7 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 - `parent_ticket_id`: Display ID of a parent ticket (for child requests)
 
 **Pitfalls**:
+
 - `item_display_id` can be found in Admin > Service Catalog > item URL (e.g., /service_catalog/items/1)
 - Custom fields keys must match the service item form field names
 - Quantity defaults to 1 if not specified
@@ -178,29 +192,35 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 ### Finding Tickets by Date Range
 
 ```
+
 1. Call FRESHSERVICE_LIST_TICKETS with updated_since='2024-01-01T00:00:00Z'
 2. Optionally add order_by='updated_at' and order_type='desc'
 3. Paginate through results
+
 ```
 
 ## Known Pitfalls
 
 **Numeric Codes**:
+
 - Status and priority use numeric values, not strings
 - Source channel uses numeric codes (1-6)
 - Impact and urgency use numeric codes (1-3 or 1-4)
 
 **Date Filtering**:
+
 - Default returns only tickets from the last 30 days
 - Use `updated_since` parameter for older tickets
 - Date format is ISO 8601 (e.g., '2024-01-01T00:00:00Z')
 
 **Rate Limits**:
+
 - Freshservice API has per-account rate limits
 - Each `include` option consumes additional API credits
 - Implement backoff on 429 responses
 
 **Response Parsing**:
+
 - Response data may be nested under `data` or `data.data`
 - Parse defensively with fallback patterns
 - Ticket IDs are numeric integers
@@ -217,14 +237,17 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 | Service request | FRESHSERVICE_CREATE_SERVICE_REQUEST | item_display_id, email, quantity |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

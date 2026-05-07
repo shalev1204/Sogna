@@ -13,7 +13,6 @@ id: skill-ux-flow
 owner: [[prod-pm]]
 ---
 
-
 # UX Flow
 
 ## Overview
@@ -21,6 +20,7 @@ owner: [[prod-pm]]
 Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill designs flows before screens. It uses proven UX patterns to define entry points, exits, screen inventory, and navigation structure so the implementation has a coherent user journey instead of a pile of disconnected pages.
 
 ## When to Use
+
 - Use when planning onboarding, checkout, account management, dashboards, or drill-down flows
 - Use when a new feature spans multiple screens or modal states
 - Use when users need a clear path through a task instead of a single isolated page
@@ -51,6 +51,7 @@ Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill designs fl
 ## Output
 
 Provide:
+
 1. An ASCII flow diagram
 2. A screen inventory with each screen's purpose
 3. Edge cases for loading, empty, and error states
@@ -69,11 +70,13 @@ Provide:
 - [Source skill](https://github.com/bitjaru/styleseed/blob/main/seeds/toss/.claude/skills/ux-flow/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

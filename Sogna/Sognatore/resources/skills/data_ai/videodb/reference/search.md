@@ -23,6 +23,7 @@ Index the transcribed speech content of a video for semantic and keyword search:
 video = coll.get_video(video_id)
 
 # force=True makes indexing idempotent — skips if already indexed
+
 video.index_spoken_words(force=True)
 ```
 
@@ -117,7 +118,9 @@ from videodb import SearchType, IndexType
 from videodb.exceptions import InvalidRequestError
 
 # Search using semantic search against the scene index.
+
 # Use score_threshold to filter low-relevance noise (recommended: 0.3+).
+
 try:
     results = video.search(
         query="person writing on a whiteboard",
@@ -204,6 +207,7 @@ Search across all videos in a collection:
 coll = conn.get_collection()
 
 # Search across all videos in the collection
+
 results = coll.search(
     query="product demo",
     search_type=SearchType.semantic,
@@ -237,6 +241,7 @@ print(stream_url)
 - **Idempotent indexing**: Use `index_spoken_words(force=True)` to safely re-index. `index_scenes()` has no `force` parameter — wrap it in try/except and extract the existing `scene_index_id` from the error message with `re.search(r"id\s+([a-f0-9]+)", str(e))`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

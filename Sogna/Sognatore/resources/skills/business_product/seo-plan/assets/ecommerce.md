@@ -6,6 +6,7 @@ version: 1.0.0
 ---
 
 <!-- Updated: 2026-02-07 -->
+
 # E-commerce SEO Strategy Template
 
 ## Industry Characteristics
@@ -70,6 +71,7 @@ version: 1.0.0
 > **JS Rendering Note:** Product structured data should be in initial server-rendered HTML: not dynamically injected via JavaScript (per December 2025 Google JS SEO guidance).
 
 ### Product Schema Example
+
 ```json
 {
   "@context": "https://schema.org",
@@ -100,6 +102,7 @@ version: 1.0.0
 ## Content Requirements
 
 ### Product Pages (min 400 words)
+
 - Unique product descriptions (not manufacturer copy)
 - Feature highlights
 - Use cases / who it's for
@@ -109,6 +112,7 @@ version: 1.0.0
 - Customer reviews
 
 ### Category Pages (min 400 words)
+
 - Category introduction
 - Buying guide excerpt
 - Featured products
@@ -118,16 +122,19 @@ version: 1.0.0
 ## Technical Considerations
 
 ### Pagination
+
 - Use rel="next"/rel="prev" or load-more
 - Ensure all products are crawlable
 - Canonical to main category page
 
 ### Faceted Navigation
+
 - Noindex filter combinations that create duplicate content
 - Use canonical tags appropriately
 - Ensure popular filters are indexable
 
 ### Product Variations
+
 - Single URL for parent product with variants
 - Or separate URLs with canonical to parent
 - Structured data for all variants
@@ -135,18 +142,21 @@ version: 1.0.0
 ## Content Priorities
 
 ### High Priority
+
 1. Category pages (top level)
 2. Best-selling product pages
 3. Homepage
 4. Buying guides for main categories
 
 ### Medium Priority
+
 1. Subcategory pages
 2. Brand pages
 3. Comparison content
 4. Seasonal landing pages
 
 ### Blog Topics
+
 - Buying guides ("How to Choose...")
 - Product comparisons
 - Trend reports
@@ -174,6 +184,7 @@ AI search platforms increasingly answer product queries directly. Optimize for A
 - [ ] Add detailed FAQ content for common product questions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

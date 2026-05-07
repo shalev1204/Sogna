@@ -87,6 +87,7 @@ function Box({ isHighlighted }: { isHighlighted: boolean }) {
 Prefer CSS classes over inline styles when possible. Classes are cached by the browser and provide better separation of concerns.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

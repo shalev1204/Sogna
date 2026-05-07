@@ -8,8 +8,11 @@ version: 1.0.0
 ## Troubleshooting
 
 ### MCP connection fails:
+
 ```bash
+
 # Verify the server is reachable
+
 curl -s -o /dev/null -w "%{http_code}" https://integrations.getmontecarlo.com/mcp/
 ```
 
@@ -29,6 +32,7 @@ Ensure `montecarlo.yml` (the project config) exists in the working directory. Th
 This tool validates the condition SQL against the live table. If the column doesn't exist yet (e.g. you're writing the monitor before deploying the model change), fall back to `createCustomSqlMonitorMac` with an explicit SQL query instead.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,7 @@ import {
     sognaflowValue,
 } from "sognaflow-dom"
 import { useContext, useInsertionEffect } from "react"
-import { sognaflowConfigContext } from "../context/sognaflowconfigcontext"
+import { sognaflowConfigContext } from "../context/MotionConfigContext.js"
 import { usesognaflowValue } from "./use-sognaflow-value"
 import { useTransform } from "./use-transform.js"
 
@@ -64,7 +64,7 @@ export function useFollowValue(
     source: sognaflowValue<string> | sognaflowValue<number> | AnyResolvedKeyframe,
     options: FollowValueOptions = {}
 ) {
-    const { isStatic } = useContext(sognaflowConfigContext)
+    const { isStatic } = useContext(sognaflowConfigContext) as any
     const getFromSource = () => (issognaflowValue(source) ? source.get() : source)
 
     // isStatic will never change, allowing early hooks return

@@ -22,6 +22,7 @@ def process_task(task):
     pass
 
 # Starting many workflows without control
+
 for task in tasks:
     DBOS.start_workflow(process_task, task)  # Could overwhelm resources
 ```
@@ -58,6 +59,7 @@ def my_step(data):
     return process(data)
 
 # Enqueue a step
+
 handle = queue.enqueue(my_step, data)
 result = handle.get_result()
 ```
@@ -65,6 +67,7 @@ result = handle.get_result()
 Reference: [DBOS Queues](https://docs.dbos.dev/python/tutorials/queue-tutorial)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

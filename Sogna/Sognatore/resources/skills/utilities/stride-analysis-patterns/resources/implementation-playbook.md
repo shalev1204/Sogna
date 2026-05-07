@@ -54,14 +54,17 @@ E - Elevation of   → Authorization threats
 ### Template 1: STRIDE Threat Model Document
 
 ```markdown
+
 # Threat Model: [System Name]
 
 ## 1. System Overview
 
 ### 1.1 Description
+
 [Brief description of the system and its purpose]
 
 ### 1.2 Data Flow Diagram
+
 ```
 [User] --> [Web App] --> [API Gateway] --> [Backend Services]
                               |
@@ -70,6 +73,7 @@ E - Elevation of   → Authorization threats
 ```
 
 ### 1.3 Trust Boundaries
+
 - **External Boundary**: Internet to DMZ
 - **Internal Boundary**: DMZ to Internal Network
 - **Data Boundary**: Application to Database
@@ -95,6 +99,7 @@ E - Elevation of   → Authorization threats
 | S3 | Credential stuffing | Login endpoint | High | High |
 
 **Mitigations:**
+
 - [ ] Implement MFA
 - [ ] Use secure session management
 - [ ] Implement account lockout policies
@@ -108,6 +113,7 @@ E - Elevation of   → Authorization threats
 | T3 | File upload abuse | File storage | High | Medium |
 
 **Mitigations:**
+
 - [ ] Input validation on all endpoints
 - [ ] Parameterized queries
 - [ ] File type validation
@@ -121,6 +127,7 @@ E - Elevation of   → Authorization threats
 | R3 | Action attribution | User actions | Medium | Medium |
 
 **Mitigations:**
+
 - [ ] Comprehensive audit logging
 - [ ] Log integrity protection
 - [ ] Digital signatures for critical actions
@@ -134,6 +141,7 @@ E - Elevation of   → Authorization threats
 | I3 | Insecure transmission | Network traffic | High | Medium |
 
 **Mitigations:**
+
 - [ ] Encryption at rest and in transit
 - [ ] Sanitize error messages
 - [ ] Implement TLS 1.3
@@ -147,6 +155,7 @@ E - Elevation of   → Authorization threats
 | D3 | Bandwidth saturation | Network | High | Medium |
 
 **Mitigations:**
+
 - [ ] Rate limiting
 - [ ] Auto-scaling
 - [ ] DDoS protection
@@ -160,6 +169,7 @@ E - Elevation of   → Authorization threats
 | E3 | JWT claim tampering | Authorization | High | Medium |
 
 **Mitigations:**
+
 - [ ] Proper authorization checks
 - [ ] Principle of least privilege
 - [ ] Server-side role validation
@@ -189,19 +199,23 @@ K   Crit  4    8   12    16
 ## 5. Recommendations
 
 ### Immediate Actions
+
 1. Implement input validation framework
 2. Add rate limiting to authentication endpoints
 3. Enable comprehensive audit logging
 
 ### Short-term (30 days)
+
 1. Deploy WAF with OWASP ruleset
 2. Implement MFA for sensitive operations
 3. Encrypt all PII at rest
 
 ### Long-term (90 days)
+
 1. Security awareness training
 2. Penetration testing
 3. Bug bounty program
+
 ```
 
 ### Template 2: STRIDE Analysis Code
@@ -631,6 +645,7 @@ class StridePerInteraction:
 ## Best Practices
 
 ### Do's
+
 - **Involve stakeholders** - Security, dev, and ops perspectives
 - **Be systematic** - Cover all STRIDE categories
 - **Prioritize realistically** - Focus on high-impact threats
@@ -638,6 +653,7 @@ class StridePerInteraction:
 - **Use visual aids** - DFDs help communication
 
 ### Don'ts
+
 - **Don't skip categories** - Each reveals different threats
 - **Don't assume security** - Question every component
 - **Don't work in isolation** - Collaborative modeling is better
@@ -651,6 +667,7 @@ class StridePerInteraction:
 - [Threat Modeling: Designing for Security](https://www.wiley.com/en-us/Threat+Modeling%3A+Designing+for+Security-p-9781118809990)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

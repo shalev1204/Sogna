@@ -12,7 +12,6 @@ id: skill-helium-mcp
 owner: [[orchestrator]]
 ---
 
-
 # Helium MCP
 
 ## Overview
@@ -51,6 +50,7 @@ No API key or authentication is required.
 ### News & Media Bias
 
 #### `search_news`
+
 Search 3.2M+ articles from 5,000+ sources with 15+ bias dimensions. Filter by topic, source, date range, and bias attributes.
 
 ```
@@ -58,6 +58,7 @@ search_news({ query: "artificial intelligence regulation" })
 ```
 
 #### `search_balanced_news`
+
 Get AI-synthesized balanced articles presenting left, right, and center perspectives on any topic.
 
 ```
@@ -65,6 +66,7 @@ search_balanced_news({ query: "immigration policy" })
 ```
 
 #### `get_source_bias`
+
 Retrieve the detailed bias profile for any news source, including political lean, factual reporting score, and 15+ bias dimensions.
 
 ```
@@ -72,6 +74,7 @@ get_source_bias({ source: "reuters" })
 ```
 
 #### `get_all_source_biases`
+
 Get bias data for all 5,000+ tracked news sources in a single call.
 
 ```
@@ -79,6 +82,7 @@ get_all_source_biases()
 ```
 
 #### `get_bias_from_url`
+
 Run a full bias analysis on a specific article URL, returning the source bias profile and article-level bias indicators.
 
 ```
@@ -88,6 +92,7 @@ get_bias_from_url({ url: "https://example.com/article" })
 ### Finance & Markets
 
 #### `get_ticker`
+
 Get live stock, ETF, or crypto data including price, volume, AI-generated bull/bear cases, and forecasts.
 
 ```
@@ -95,6 +100,7 @@ get_ticker({ ticker: "AAPL" })
 ```
 
 #### `get_option_price`
+
 Get ML-predicted fair value and probability of finishing in-the-money for a specific options contract.
 
 ```
@@ -102,6 +108,7 @@ get_option_price({ ticker: "AAPL", strike: 200, expiration: "2026-06-19", type: 
 ```
 
 #### `get_top_trading_strategies`
+
 Get top-ranked options strategies for a ticker with risk/reward analysis.
 
 ```
@@ -111,6 +118,7 @@ get_top_trading_strategies({ ticker: "TSLA" })
 ### Memes
 
 #### `search_memes`
+
 Semantic meme search — find memes by meaning rather than exact keywords.
 
 ```
@@ -155,9 +163,11 @@ The assistant will call `get_bias_from_url` to return source-level and article-l
 ## Common Pitfalls
 
 - **Problem:** Tool calls return empty results for very niche queries
+
   **Solution:** Broaden the search terms — Helium indexes mainstream and mid-tier sources, so hyper-local topics may have limited coverage
 
 - **Problem:** Options data unavailable for a ticker
+
   **Solution:** Verify the ticker has listed options — some small-cap stocks and most crypto assets do not have options markets
 
 ## Related Skills
@@ -171,11 +181,13 @@ The assistant will call `get_bias_from_url` to return source-level and article-l
 - [MCP Protocol Specification](https://modelcontextprotocol.io/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

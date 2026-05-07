@@ -7,12 +7,12 @@ id: skill-makepad-reference
 owner: [[orchestrator]]
 ---
 
-
 # Makepad Reference
 
 This category provides reference materials for debugging, code quality, and advanced layout patterns.
 
 ## When to Use
+
 - You need quick-reference material for common Makepad errors, debugging, or API lookups.
 - The task is diagnostic or reference-oriented rather than writing a focused feature in one subsystem.
 - You want a central starting point before diving into more specialized Makepad skills.
@@ -39,7 +39,9 @@ This category provides reference materials for debugging, code quality, and adva
 ## Debug Tips
 
 ```bash
+
 # Run with line info for better error messages
+
 MAKEPAD=lines cargo +nightly run
 ```
 
@@ -57,11 +59,13 @@ log!("State: {} / {}", self.counter, self.is_loading);
 - [Moly](https://github.com/moxin-org/moly) - Production reference
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

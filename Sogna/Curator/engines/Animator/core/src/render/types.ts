@@ -7,10 +7,10 @@ import {
     type LayoutLifecycles,
     type UseRenderState,
 } from "sognaflow-dom"
-import { ReducedsognaflowConfig } from "../context/sognaflowconfigcontext"
+import { ReducedsognaflowConfig } from "../context/MotionConfigContext.js"
 import type { PresenceContextProps } from "../context/PresenceContext.js"
-import { sognaflowProps } from "../sognaflow/types"
-import { VisualState } from "../sognaflow/utils/use-visual-state"
+import { sognaflowProps } from "../motion/types"
+import { VisualState } from "../motion/utils/use-visual-state"
 import { DOMsognaflowComponents } from "./dom/types.js"
 
 export type { VisualElementEventCallbacks, LayoutLifecycles, UseRenderState }

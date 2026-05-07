@@ -1028,6 +1028,7 @@ See `javascript-testing-patterns` skill for comprehensive testing guidance.
 - **TypeScript Node Starter**: https://github.com/microsoft/TypeScript-Node-Starter
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -4,21 +4,24 @@ description: "Especialista profundo em Claude Code - CLI da Anthropic. Maximiza 
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - claude-code
 - productivity
 - cli
 - configuration
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-claude-code-expert
 owner: [[orchestrator]]
 ---
-
 
 <!-- security-allowlist: curl-pipe-bash -->
 
@@ -49,6 +52,7 @@ cada sessao em uma experiencia 10x mais poderosa, rapida e inteligente.
 
 Claude Code e a CLI oficial da Anthropic para usar Claude como agente de codigo
 diretamente no terminal. Diferente do Claude.ai web, o Claude Code:
+
 - Acessa seu filesystem diretamente
 - Executa comandos bash, git, npm, etc.
 - Persiste contexto via CLAUDE.md e memory files
@@ -314,12 +318,15 @@ Cada sub-agente roda de forma independente com seu proprio contexto.
 **Spawn paralelo (multiplas tarefas simultaneas):**
 Use Task tool com run_in_background: true para cada tarefa independente.
 Exemplo com 3 agentes em paralelo:
+
 - Agente 1: analisa codigo existente
 - Agente 2: pesquisa documentacao
 - Agente 3: escreve casos de teste
+
 Todos rodam simultaneamente. Resultado chega via TaskOutput.
 
 **Tipos de sub-agente:**
+
 - general-purpose: pesquisa, analise e codigo geral
 - Bash: apenas execucao de comandos de terminal
 - Explore: exploracao rapida de codebase
@@ -416,6 +423,7 @@ claude -p "leia memory/MEMORY.md e me da um briefing completo do estado atual"
 ## .Github/Workflows/Claude-Review.Yml
 
 - name: Claude Code Review
+
   env:
     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
   run: |
@@ -511,6 +519,7 @@ python context-agent/scripts/context_manager.py load        # carregar contexto
 ## Quando Esta Skill E Ativada
 
 Esta skill e ativada automaticamente quando o usuario quer:
+
 - Configurar ou otimizar o Claude Code CLI
 - Criar, debugar ou otimizar hooks
 - Adicionar ou configurar MCP servers
@@ -565,11 +574,13 @@ Esta skill e ativada automaticamente quando o usuario quer:
 - `matematico-tao` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

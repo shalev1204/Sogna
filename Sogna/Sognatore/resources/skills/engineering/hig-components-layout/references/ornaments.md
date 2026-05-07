@@ -60,6 +60,7 @@ December 5, 2023| Removed a statement about using ornaments to present supplemen
 June 21, 2023| New page.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

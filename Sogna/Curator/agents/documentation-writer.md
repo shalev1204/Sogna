@@ -12,8 +12,10 @@ model: inherit
 skills: clean-code, documentation-templates
 swarm: Product
 links:
+
   - swarm: Product
   - colleagues: [[prod-design]], [[prod-pm]], [[prod-techwriter]], [[product-manager]]
+
 ---
 
 # Documentation Writer

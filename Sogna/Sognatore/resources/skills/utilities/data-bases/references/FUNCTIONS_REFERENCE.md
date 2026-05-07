@@ -63,36 +63,46 @@ When subtracting two dates, the result is a **Duration** type (not a number). Du
 **IMPORTANT:** Duration does NOT support `.round()`, `.floor()`, `.ceil()` directly. You must access a numeric field first (like `.days`), then apply number functions.
 
 ```yaml
+
 # CORRECT: Calculate days between dates
+
 "(date(due_date) - today()).days"                    # Returns number of days
 "(now() - file.ctime).days"                          # Days since created
 
 # CORRECT: Round the numeric result if needed
+
 "(date(due_date) - today()).days.round(0)"           # Rounded days
 "(now() - file.ctime).hours.round(0)"                # Rounded hours
 
 # WRONG - will cause error:
+
 # "((date(due) - today()) / 86400000).round(0)"      # Duration doesn't support division then round
+
 ```
 
 ## Date Arithmetic
 
 ```yaml
+
 # Duration units: y/year/years, M/month/months, d/day/days,
+
 #                 w/week/weeks, h/hour/hours, m/minute/minutes, s/second/seconds
 
 # Add/subtract durations
+
 "date + \"1M\""           # Add 1 month
 "date - \"2h\""           # Subtract 2 hours
 "now() + \"1 day\""       # Tomorrow
 "today() + \"7d\""        # A week from today
 
 # Subtract dates returns Duration type
+
 "now() - file.ctime"                    # Returns Duration
 "(now() - file.ctime).days"             # Get days as number
 "(now() - file.ctime).hours"            # Get hours as number
 
 # Complex duration arithmetic
+
 "now() + (duration('1d') * 2)"
 ```
 
@@ -180,6 +190,7 @@ When subtracting two dates, the result is a **Duration** type (not a number). Du
 | `matches()` | `regexp.matches(string): boolean` | Test if matches |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

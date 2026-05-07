@@ -8,7 +8,6 @@ id: skill-saas-mvp-launcher
 owner: [[orchestrator]]
 ---
 
-
 # SaaS MVP Launcher
 
 ## Overview
@@ -32,11 +31,13 @@ Before writing any code, validate the idea:
 
 ```
 Validation checklist:
+
 - [ ] Can you describe the problem in one sentence?
 - [ ] Who is the exact customer? (not "everyone")
 - [ ] What do they pay for today to solve this?
 - [ ] Have you talked to 5+ potential customers?
 - [ ] Will they pay $X/month for your solution?
+
 ```
 
 **Rule:** If you can't get 3 people to pre-pay or sign a letter of intent, don't build yet.
@@ -170,6 +171,7 @@ export async function createCheckoutSession(userId: string, priceId: string) {
 ### 7. Pre-Launch Checklist
 
 **Technical:**
+
 - [ ] Authentication works (signup, login, logout, password reset)
 - [ ] Payments work end-to-end (subscribe, cancel, upgrade)
 - [ ] Error monitoring configured (Sentry)
@@ -180,6 +182,7 @@ export async function createCheckoutSession(userId: string, priceId: string) {
 - [ ] HTTPS enforced, security headers set
 
 **Product:**
+
 - [ ] Landing page with clear value proposition
 - [ ] Pricing page with 2-3 tiers
 - [ ] Onboarding flow (first value in < 5 minutes)
@@ -188,6 +191,7 @@ export async function createCheckoutSession(userId: string, priceId: string) {
 - [ ] Support channel (email / chat)
 
 **Marketing:**
+
 - [ ] Domain purchased and configured
 - [ ] SEO meta tags on all pages
 - [ ] Google Analytics or PostHog installed
@@ -221,11 +225,13 @@ export async function createCheckoutSession(userId: string, priceId: string) {
 **Solution:** Always run `prisma migrate deploy` (not `prisma migrate dev`) in production environments.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

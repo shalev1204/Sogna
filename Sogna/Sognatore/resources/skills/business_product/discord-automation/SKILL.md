@@ -8,7 +8,6 @@ id: skill-discord-automation
 owner: [[prod-pm]]
 ---
 
-
 # Discord Automation via Rube MCP
 
 Automate Discord operations through Composio's Discord/Discordbot toolkits via Rube MCP.
@@ -35,18 +34,21 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 **When to use**: User wants to send messages to channels or DMs
 
 **Tool sequence**:
+
 1. `DISCORD_LIST_MY_GUILDS` - List guilds the bot belongs to [Prerequisite]
 2. `DISCORDBOT_LIST_GUILD_CHANNELS` - List channels in a guild [Prerequisite]
 3. `DISCORDBOT_CREATE_MESSAGE` - Send a message [Required]
 4. `DISCORDBOT_UPDATE_MESSAGE` - Edit a sent message [Optional]
 
 **Key parameters**:
+
 - `channel_id`: Channel snowflake ID
 - `content`: Message text (max 2000 characters)
 - `embeds`: Array of embed objects for rich content
 - `guild_id`: Guild ID for channel listing
 
 **Pitfalls**:
+
 - Bot must have SEND_MESSAGES permission in the channel
 - High-frequency sends can hit per-route rate limits; respect Retry-After headers
 - Only messages sent by the same bot can be edited
@@ -56,14 +58,17 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 **When to use**: User wants to DM a Discord user
 
 **Tool sequence**:
+
 1. `DISCORDBOT_CREATE_DM` - Create or get DM channel [Required]
 2. `DISCORDBOT_CREATE_MESSAGE` - Send message to DM channel [Required]
 
 **Key parameters**:
+
 - `recipient_id`: User snowflake ID for DM
 - `channel_id`: DM channel ID from CREATE_DM
 
 **Pitfalls**:
+
 - Cannot DM users who have DMs disabled or have blocked the bot
 - CREATE_DM returns existing channel if one already exists
 
@@ -72,6 +77,7 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 **When to use**: User wants to create, assign, or remove roles
 
 **Tool sequence**:
+
 1. `DISCORDBOT_CREATE_GUILD_ROLE` - Create a new role [Optional]
 2. `DISCORDBOT_ADD_GUILD_MEMBER_ROLE` - Assign role to member [Optional]
 3. `DISCORDBOT_DELETE_GUILD_ROLE` - Delete a role [Optional]
@@ -79,6 +85,7 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 5. `DISCORDBOT_UPDATE_GUILD_MEMBER` - Update member (roles, nick, etc.) [Optional]
 
 **Key parameters**:
+
 - `guild_id`: Guild snowflake ID
 - `user_id`: User snowflake ID
 - `role_id`: Role snowflake ID
@@ -87,6 +94,7 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 - `color`: RGB color integer
 
 **Pitfalls**:
+
 - Role assignment requires MANAGE_ROLES permission
 - Target role must be lower in hierarchy than bot's highest role
 - DELETE permanently removes the role from all members
@@ -96,12 +104,14 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 **When to use**: User wants to create or use webhooks for external integrations
 
 **Tool sequence**:
+
 1. `DISCORDBOT_GET_GUILD_WEBHOOKS` / `DISCORDBOT_LIST_CHANNEL_WEBHOOKS` - List webhooks [Optional]
 2. `DISCORDBOT_CREATE_WEBHOOK` - Create a new webhook [Optional]
 3. `DISCORDBOT_EXECUTE_WEBHOOK` - Send message via webhook [Optional]
 4. `DISCORDBOT_UPDATE_WEBHOOK` - Update webhook settings [Optional]
 
 **Key parameters**:
+
 - `webhook_id`: Webhook ID
 - `webhook_token`: Webhook secret token
 - `channel_id`: Channel for webhook creation
@@ -109,6 +119,7 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 - `content`/`embeds`: Message content for execution
 
 **Pitfalls**:
+
 - Webhook tokens are secrets; handle securely
 - Webhooks can post with custom username and avatar per message
 - MANAGE_WEBHOOKS permission required for creation
@@ -118,18 +129,21 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 **When to use**: User wants to view or manage message reactions
 
 **Tool sequence**:
+
 1. `DISCORDBOT_LIST_MESSAGE_REACTIONS_BY_EMOJI` - List users who reacted [Optional]
 2. `DISCORDBOT_DELETE_ALL_MESSAGE_REACTIONS` - Remove all reactions [Optional]
 3. `DISCORDBOT_DELETE_ALL_MESSAGE_REACTIONS_BY_EMOJI` - Remove specific emoji reactions [Optional]
 4. `DISCORDBOT_DELETE_USER_MESSAGE_REACTION` - Remove specific user's reaction [Optional]
 
 **Key parameters**:
+
 - `channel_id`: Channel ID
 - `message_id`: Message snowflake ID
 - `emoji_name`: URL-encoded emoji or `name:id` for custom emojis
 - `user_id`: User ID for specific reaction removal
 
 **Pitfalls**:
+
 - Unicode emojis must be URL-encoded (e.g., '%F0%9F%91%8D' for thumbs up)
 - Custom emojis use `name:id` format
 - DELETE_ALL requires MANAGE_MESSAGES permission
@@ -139,11 +153,13 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 ### Snowflake IDs
 
 Discord uses snowflake IDs (64-bit integers as strings) for all entities:
+
 - Guilds, channels, users, roles, messages, webhooks
 
 ### Permission Bitfields
 
 Permissions are combined using bitwise OR:
+
 - SEND_MESSAGES = 0x800
 - MANAGE_ROLES = 0x10000000
 - MANAGE_MESSAGES = 0x2000
@@ -158,10 +174,12 @@ Permissions are combined using bitwise OR:
 ## Known Pitfalls
 
 **Bot vs User Tokens**:
+
 - `discordbot` toolkit uses bot tokens; `discord` uses user OAuth
 - Bot operations are preferred for automation
 
 **Rate Limits**:
+
 - Discord enforces per-route rate limits
 - Respect `Retry-After` headers on 429 responses
 
@@ -190,14 +208,17 @@ Permissions are combined using bitwise OR:
 | Get channel | DISCORDBOT_GET_CHANNEL | channel_id |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

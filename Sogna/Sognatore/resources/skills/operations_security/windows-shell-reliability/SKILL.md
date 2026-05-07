@@ -8,12 +8,12 @@ id: skill-windows-shell-reliability
 owner: [[ops-security]]
 ---
 
-
 # Windows Shell Reliability Patterns
 
 > Best practices for running commands on Windows via PowerShell and CMD.
 
 ## When to Use
+
 Use this skill when developing or debugging scripts and automation that run on Windows systems, especially when involving file paths, character encoding, or standard CLI tools.
 
 ---
@@ -21,6 +21,7 @@ Use this skill when developing or debugging scripts and automation that run on W
 ## 1. Encoding & Redirection
 
 ### CRITICAL: Redirection Differences Across PowerShell Versions
+
 Older Windows PowerShell releases can rewrite native-command output in ways that break
 later processing. PowerShell 7.4+ preserves the byte stream when redirecting stdout,
 so only apply the UTF-8 conversion workaround when you are dealing with older shell
@@ -39,6 +40,7 @@ conversion only when older Windows PowerShell redirection produces an unreadable
 ## 2. Handling Paths & Spaces
 
 ### CRITICAL: Quoting
+
 Windows paths often contain spaces.
 
 | ❌ Wrong | ✅ Correct |
@@ -49,6 +51,7 @@ Windows paths often contain spaces.
 **Rule:** Always quote absolute and relative paths that may contain spaces.
 
 ### The Call Operator (&)
+
 In PowerShell, if an executable path starts with a quote, you MUST use the `&` operator.
 
 **Pattern:**
@@ -74,6 +77,7 @@ In PowerShell, if an executable path starts with a quote, you MUST use the `&` o
 ## 4. Dotnet CLI Reliability
 
 ### Build Speed & Consistency
+
 | Context | Command | Why |
 |---------|---------|-----|
 | Fast Iteration | `dotnet build --no-restore` | Skips redundant nuget restore. |
@@ -92,6 +96,7 @@ In PowerShell, if an executable path starts with a quote, you MUST use the `&` o
 ---
 
 ## 6. Long Paths
+
 Windows has a 260-character path limit by default.
 
 **Fix:** If you hit long path errors, use the extended path prefix:
@@ -110,11 +115,13 @@ Windows has a 260-character path limit by default.
 ---
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

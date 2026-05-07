@@ -8,7 +8,6 @@ id: skill-fastapi-router-py
 owner: [[eng-api]]
 ---
 
-
 # FastAPI Router
 
 Create FastAPI routers following established patterns with proper authentication, response models, and HTTP status codes.
@@ -16,6 +15,7 @@ Create FastAPI routers following established patterns with proper authentication
 ## Quick Start
 
 Copy the template from assets/template.py and replace placeholders:
+
 - `{{ResourceName}}` → PascalCase name (e.g., `Project`)
 - `{{resource_name}}` → snake_case name (e.g., `project`)
 - `{{resource_plural}}` → plural form (e.g., `projects`)
@@ -23,10 +23,13 @@ Copy the template from assets/template.py and replace placeholders:
 ## Authentication Patterns
 
 ```python
+
 # Optional auth - returns None if not authenticated
+
 current_user: Optional[User] = Depends(get_current_user)
 
 # Required auth - raises 401 if not authenticated
+
 current_user: User = Depends(get_current_user_required)
 ```
 
@@ -58,14 +61,17 @@ async def list_items() -> list[Item]:
 5. Add frontend API functions
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

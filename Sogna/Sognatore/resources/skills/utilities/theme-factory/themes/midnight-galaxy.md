@@ -26,6 +26,7 @@ A dramatic and cosmic theme with deep purples and mystical tones for impactful p
 Entertainment industry, gaming presentations, nightlife venues, luxury brands, creative agencies.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

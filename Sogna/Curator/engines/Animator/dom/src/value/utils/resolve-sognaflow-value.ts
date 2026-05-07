@@ -11,3 +11,5 @@ export function ResolveSognaflowValue<T extends AnyResolvedKeyframe>(
     return IsSognaflowValue(value) ? value.get() : value
 }
 
+export const resolvesognaflowValue = ResolveSognaflowValue
+

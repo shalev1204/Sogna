@@ -14,6 +14,7 @@ TanStack Router implementation with folder-based routing and lazy loading patter
 ## TanStack Router Overview
 
 **TanStack Router** with file-based routing:
+
 - Folder structure defines routes
 - Lazy loading for code splitting
 - Type-safe routing
@@ -39,6 +40,7 @@ routes/
 ```
 
 **Pattern**:
+
 - `index.tsx` = Route at that path
 - `$param.tsx` = Dynamic parameter
 - Nested folders = Nested routes
@@ -51,8 +53,10 @@ routes/
 
 ```typescript
 /**
+
  * Posts route component
  * Displays the main blog posts list
+
  */
 
 import { createFileRoute } from '@tanstack/react-router';
@@ -86,6 +90,7 @@ export default PostsPage;
 ```
 
 **Key Points:**
+
 - Lazy load heavy components
 - `createFileRoute` with route path
 - `loader` for breadcrumb data
@@ -318,8 +323,10 @@ function DashboardLayout() {
 
 ```typescript
 /**
+
  * User profile route
  * Path: /users/:userId
+
  */
 
 import { createFileRoute } from '@tanstack/react-router';
@@ -358,6 +365,7 @@ export default UserPage;
 ## Summary
 
 **Routing Checklist:**
+
 - ✅ Folder-based: `routes/my-route/index.tsx`
 - ✅ Lazy load components: `React.lazy(() => import())`
 - ✅ Use `createFileRoute` with route path
@@ -367,11 +375,13 @@ export default UserPage;
 - ✅ Use `useNavigate()` for programmatic navigation
 
 **See Also:**
+
 - [component-patterns.md](component-patterns.md) - Lazy loading patterns
 - [loading-and-error-states.md](loading-and-error-states.md) - SuspenseLoader usage
 - [complete-examples.md](complete-examples.md) - Full route examples
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

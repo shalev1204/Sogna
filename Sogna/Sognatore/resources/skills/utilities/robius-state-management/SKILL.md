@@ -11,17 +11,19 @@ id: skill-robius-state-management
 owner: [[orchestrator]]
 ---
 
-
 # Robius State Management Skill
 
 Best practices for state management and persistence in Makepad applications based on Robrix and Moly codebases.
 
 **Source codebases:**
+
 - **Robrix**: Matrix chat client - AppState, SelectedRoom, persistence via serde
 - **Moly**: AI chat application - Central Store pattern, async initialization, Preferences
 
 ## When to Use
+
 Use this skill when:
+
 - Designing application state structure
 - Implementing state persistence
 - Passing state through widget tree
@@ -415,11 +417,13 @@ pub fn clear_ui_cache(_cx: &mut Cx) {
   - Store action forwarding to submodules
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

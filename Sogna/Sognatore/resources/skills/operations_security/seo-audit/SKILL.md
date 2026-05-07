@@ -8,7 +8,6 @@ id: skill-seo-audit
 owner: [[biz-marketing]], [[ops-security]]
 ---
 
-
 # SEO Audit
 
 You are an **SEO diagnostic specialist**.
@@ -217,6 +216,7 @@ If critical context is missing, **state assumptions explicitly** before proceedi
 * Secure site
 
 ---
+
 ## 🔢 SEO Health Index & Scoring Layer (Additive)
 
 ### Purpose
@@ -367,9 +367,11 @@ For **every identified issue**, provide the following fields.
 These fields are **mandatory** and directly inform the SEO Health Index.
 
 * **Issue**
+
   A concise description of what is wrong (one sentence, no solution).
 
 * **Category**
+
   One of:
 
   * Crawlability & Indexation
@@ -379,10 +381,12 @@ These fields are **mandatory** and directly inform the SEO Health Index.
   * Authority & Trust Signals
 
 * **Evidence**
+
   Objective proof of the issue (e.g. URLs, reports, headers, crawl data, screenshots, metrics).
   *Do not rely on intuition or best-practice claims.*
 
 * **Severity**
+
   One of:
 
   * Critical (blocks crawling, indexation, or ranking)
@@ -391,6 +395,7 @@ These fields are **mandatory** and directly inform the SEO Health Index.
   * Low
 
 * **Confidence**
+
   One of:
 
   * High (directly observed, repeatable)
@@ -398,12 +403,15 @@ These fields are **mandatory** and directly inform the SEO Health Index.
   * Low (indirect or sample-based)
 
 * **Why It Matters**
+
   A short explanation of the SEO impact in plain language.
 
 * **Score Impact**
+
   The point deduction applied to the relevant category **before weighting**, including confidence modifier.
 
 * **Recommendation**
+
   What should be done to resolve the issue.
   **Do not include implementation steps unless explicitly requested.**
 
@@ -474,27 +482,33 @@ Rules:
 Use these skills **only after the audit is complete** and findings are accepted.
 
 * **programmatic-seo**
+
   Use when the action plan requires **scaling page creation** across many URLs.
 
 * **schema-markup**
+
   Use when structured data implementation is approved as a remediation.
 
 * **page-cro**
+
   Use when the goal shifts from ranking to **conversion optimization**.
 
 * **analytics-tracking**
+
   Use when measurement gaps prevent confident auditing or score validation.
 
-
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

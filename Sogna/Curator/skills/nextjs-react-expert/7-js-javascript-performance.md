@@ -414,6 +414,7 @@ function hasChanges(current: string[], original: string[]) {
 ```
 
 This new approach is more efficient because:
+
 - It avoids the overhead of sorting and joining the arrays when lengths differ
 - It avoids consuming memory for the joined strings (especially important for large arrays)
 - It avoids mutating the original arrays
@@ -681,4 +682,3 @@ const sorted = [...items].sort((a, b) => a.value - b.value)
 - `.toReversed()` - immutable reverse
 - `.toSpliced()` - immutable splice
 - `.with()` - immutable element replacement
-

@@ -37,6 +37,7 @@ Posting all 35 lanes to the spot market simultaneously at "market rate" and acce
 The second mistake: trying to enforce contract rates during a declared emergency. Your contract carriers aren't rejecting tenders to be adversarial — they literally can't get drivers into the affected area safely. Threatening to pull their contract lanes post-storm will earn you a reputation as a shipper who doesn't understand emergencies, and they'll remember at the next RFP.
 
 **Expert Approach:**
+
 1. Triage your 35 affected lanes immediately. Not all lanes are equal. Categorize into three tiers:
    - **Tier 1 — Must Move (8-10 lanes):** Customer penalty exposure, perishable, safety stock at risk, or product at physical risk (the Mobile warehouse). These move at spot market rates, period.
    - **Tier 2 — Should Move (12-15 lanes):** Standard replenishment, can tolerate 3-5 day delay without customer impact. Delay these loads until the initial panic subsides (spot rates typically drop 30-40% within 72 hours of landfall as the actual storm path becomes clear and unaffected corridors reopen).
@@ -51,6 +52,7 @@ The second mistake: trying to enforce contract rates during a declared emergency
 5. After the storm: do not retroactively dispute the premium rates you paid. Document the event, the incremental cost, and the business justification. Present to the CFO as a weather event cost, not a freight rate failure. Then conduct a post-storm review: which carriers came through, which disappeared? Adjust your routing guide allocation to reward carriers who provided capacity during the crisis — those carriers earned the right to your best lanes in the next calm period.
 
 **Key Indicators:**
+
 - Tender rejection rates above 50% on regional lanes signal a network disruption, not individual carrier problems — adjust response accordingly
 - Spot rate spikes that exceed 2× contract rates within 48 hours indicate panic pricing, not a new market equilibrium — rates will retreat
 - Carriers communicating proactively about their capacity constraints during the event are your best long-term partners — track who calls you vs. who goes silent
@@ -58,6 +60,7 @@ The second mistake: trying to enforce contract rates during a declared emergency
 - Monitor NOAA track updates every 6 hours — storm path changes can open or close corridors and shift where capacity is available
 
 **Documentation Required:**
+
 - FMCSA emergency declaration documentation
 - Lane-by-lane triage classification with business justification
 - Spot rate confirmations for all Tier 1 loads
@@ -67,6 +70,7 @@ The second mistake: trying to enforce contract rates during a declared emergency
 - Post-event carrier performance assessment
 
 **Resolution Timeline:**
+
 - Hours 0-6: Lane triage, Tier 1 procurement initiated, Mobile evacuation fleet secured
 - Hours 6-24: Tier 1 loads dispatched, Tier 2 loads staged for delayed dispatch
 - Days 2-5: Spot rates begin normalizing, Tier 2 loads dispatched at reduced premiums
@@ -91,6 +95,7 @@ But the risks are real: when Pinnacle re-brokers your freight, the actual carrie
 Ignoring the discovery because "the service is fine." The compliance risk is not hypothetical — it's actuarial. One accident with an unvetted carrier creates a liability exposure that dwarfs any rate savings. The other common mistake: confronting Pinnacle's account manager in an accusatory call that destroys any possibility of a managed transition.
 
 **Expert Approach:**
+
 1. Confirm the evidence before acting. Pull 90 days of BOLs and PODs for Pinnacle's loads. Cross-reference driver names on PODs against Pinnacle's disclosed carrier network. Run FMCSA lookups on the truck numbers appearing on PODs. Document every instance where the delivering carrier doesn't match Pinnacle's dispatch records. Build a clear, evidence-based file.
 
 2. Assess the scope and risk. How many loads were double-brokered? Were any of those loads high-value, temperature-sensitive, or hazmat? Did any of the actual carriers have safety or insurance issues? This determines whether the response is "serious conversation" or "immediate termination."
@@ -104,6 +109,7 @@ Ignoring the discovery because "the service is fine." The compliance risk is not
 6. Decision point at 30 days: if Pinnacle has complied with disclosure requirements and the underlying carriers pass your vetting, consider keeping them at reduced allocation (drop from secondary to tertiary on all lanes). If Pinnacle resists transparency, exit them with a managed 30-day transition using the replacement carriers you've already qualified.
 
 **Key Indicators:**
+
 - POD driver names consistently different from dispatch records is the primary indicator of double-brokering
 - Truck numbers (DOT numbers on the trailer or tractor) that don't match the broker's carrier network are conclusive evidence
 - A broker whose rates are consistently 5-10% below your other carriers may be achieving those rates by using carriers that don't meet your compliance standards — the discount is a risk premium you're not being compensated for
@@ -111,6 +117,7 @@ Ignoring the discovery because "the service is fine." The compliance risk is not
 - Check whether the broker's surety bond is at the minimum $75K — a broker double-brokering heavily is likely cash-strapped
 
 **Documentation Required:**
+
 - 90-day audit report: BOL/POD analysis showing carrier mismatches
 - FMCSA lookups on all actual carriers identified
 - Insurance verification for actual carriers
@@ -120,6 +127,7 @@ Ignoring the discovery because "the service is fine." The compliance risk is not
 - Updated carrier agreement with anti-double-brokering clause and penalty provision
 
 **Resolution Timeline:**
+
 - Days 0-5: Evidence compiled, risk assessment completed
 - Days 5-10: Meeting with Pinnacle ownership, findings presented
 - Days 10-30: Pinnacle corrective action implementation, replacement carrier qualification in parallel
@@ -146,6 +154,7 @@ Staying silent and hoping carriers don't notice. They always notice. A carrier w
 The second mistake: proactively offering rate increases across the board. Carriers don't want charity — they want honesty, predictability, and a clear picture of future volume so they can plan.
 
 **Expert Approach:**
+
 1. Get ahead of the conversation. Within 2 weeks of knowing the volume loss is permanent, schedule individual calls with each of your top 5 carriers' account managers. Frame it as a strategic update, not a crisis: "We've had a significant customer change that affects our volume outlook. I want to walk you through what it means for our business together."
 
 2. For each carrier, prepare a lane-by-lane analysis showing: current committed volume, new projected volume, percentage change, and the revenue impact to the carrier. Do the carrier's math for them — it shows respect and prevents them from assuming the worst.
@@ -162,12 +171,14 @@ The second mistake: proactively offering rate increases across the board. Carrie
 6. If any carrier demands rate increases that exceed market rates, that's a signal they want to exit your portfolio. Let them — and replace them with carriers who want the volume at fair rates. In a soft market (which often accompanies shipper volume declines), finding replacement capacity is straightforward.
 
 **Key Indicators:**
+
 - Carriers whose load counts from you have dropped 30%+ without explanation are already planning their response — get ahead of it
 - Volume commitment shortfalls of >20% typically trigger rate reopener clauses in carrier contracts — read your contract before the carrier does
 - Carriers who ask "what happened?" informally through their account manager are signaling they want to work with you. Carriers who send formal rate increase letters without a conversation are signaling they've already decided to reprice.
 - Your leverage in this negotiation is the remaining 290 loads/week — that's still substantial freight. Don't negotiate from a position of weakness just because you lost volume.
 
 **Documentation Required:**
+
 - Lane-by-lane volume analysis (before and after customer loss)
 - Revenue impact by carrier (show you've done the work)
 - Restructured deal proposals per carrier (rate adjustments, volume commitments, share allocation)
@@ -176,6 +187,7 @@ The second mistake: proactively offering rate increases across the board. Carrie
 - Communication log documenting proactive outreach and carrier responses
 
 **Resolution Timeline:**
+
 - Days 0-14: Internal analysis, restructured deal proposals drafted
 - Days 14-30: Individual carrier conversations (top 5)
 - Days 30-45: Carrier responses, negotiation of adjusted terms
@@ -202,6 +214,7 @@ The other complexity: if TransWay is in distress and you're 6% of their revenue,
 Ignoring the warning signs because "their OTD is still above 90%." Financial distress takes 3-6 months to manifest in service metrics. By the time OTD drops below 85%, the carrier is in crisis and your options are worse. The other mistake: immediately pulling all volume, which creates an acute capacity gap and — if TransWay finds out why — damages your reputation as a shipper who panics.
 
 **Expert Approach:**
+
 1. Verify each indicator independently. Run an FMCSA check on TransWay today — confirm the insurance underwriter change and bond reduction. Check Carrier411, CarrierOK, and trucking industry forums for driver complaints about non-payment. Call your 3 contacts at TransWay (not just the sales rep — call operations and maintenance managers) to gauge the internal temperature.
 
 2. Score the distress level:
@@ -222,6 +235,7 @@ Ignoring the warning signs because "their OTD is still above 90%." Financial dis
 7. After the situation resolves (either TransWay stabilizes or fails), update your carrier risk monitoring to include financial health indicators as quarterly screening criteria for all carriers representing >3% of your freight spend.
 
 **Key Indicators:**
+
 - Insurance underwriter changes 3+ times in 12 months: The current underwriter dropped TransWay and no A-rated insurer will pick them up. They're on a third-tier insurer who will also drop them soon.
 - Surety bond reduction to minimum: TransWay's bondsman is unwilling to backstop the full $75K — this means the bonding company's underwriter has assessed TransWay as high-risk.
 - Driver pay complaints: Drivers talk. If 3 drivers mention payment delays to your dock staff, there are probably 30 more experiencing the same thing across TransWay's network. Drivers who aren't paid leave — and their capacity goes with them.
@@ -229,6 +243,7 @@ Ignoring the warning signs because "their OTD is still above 90%." Financial dis
 - Tender acceptance decline without communication: A good carrier experiencing financial difficulty will call and explain. A carrier that just stops accepting tenders without explanation is either trying to hide the problem or has lost operational control.
 
 **Documentation Required:**
+
 - FMCSA screening results (authority, insurance, safety, bond)
 - Carrier411/CarrierOK complaint summary
 - Internal driver feedback log (dock staff reports)
@@ -239,6 +254,7 @@ Ignoring the warning signs because "their OTD is still above 90%." Financial dis
 - Contingency plan for sudden carrier failure
 
 **Resolution Timeline:**
+
 - Days 0-3: Indicator verification, distress scoring
 - Days 3-14: Allocation reduction (25 → 12-15 loads/week), backup carrier qualification initiated
 - Days 14-21: Backup carriers running trial loads on all 8 lanes
@@ -268,6 +284,7 @@ But Overland knew this was a Toyota JIT delivery — it was in the tender. They 
 Accepting the $500 credit and eating the $28K penalty. This teaches both Overland and your procurement team that JIT lanes can be brokered without consequence. The second mistake: threatening to sue Overland for $28K. Litigation against a broker for $28K is a money-losing proposition ($15-25K in legal costs) and destroys the relationship for all your other lanes.
 
 **Expert Approach:**
+
 1. Separate the immediate issue (recovering some of the $28K) from the structural issue (protecting JIT lanes going forward).
 
 2. For the immediate issue: Request Overland's carrier selection records for Patriot on this lane. Specifically: when did Overland first use Patriot? What due diligence did Overland perform? Does Patriot have a history of service failures on time-critical loads? If Overland can demonstrate reasonable carrier selection and the breakdown was a genuine one-off, your recovery beyond the $500 credit is limited. If Overland has been using Patriot despite prior failures, their negligence in carrier selection strengthens your consequential damages argument.
@@ -281,12 +298,14 @@ Accepting the $500 credit and eating the $28K penalty. This teaches both Overlan
 6. Update your standard broker agreement to include: (a) a requirement that the broker disclose the underlying carrier for every load, (b) a carrier vetting standard that the broker must meet (minimum FMCSA safety score, insurance levels, etc.), and (c) a liquidated damages clause for service failures on lanes designated as "JIT-critical" — a pre-agreed amount (e.g., $5,000 per occurrence) that caps your downside and the broker's exposure.
 
 **Key Indicators:**
+
 - A broker who deflects to "take it up with the carrier" is not operating as a responsible intermediary — they're acting as a pass-through with no accountability
 - A 22-truck carrier (Patriot) handling a Toyota JIT lane raises questions about Overland's carrier selection process — did they prioritize cost over reliability?
 - A 4-hour communication gap (driver broke down and didn't call dispatch) suggests Patriot has poor driver management processes — experienced carriers have GPS and ELD tracking that would surface a 4-hour stationary event
 - Overland's willingness (or unwillingness) to share their carrier selection records tells you a lot about their operating standards
 
 **Documentation Required:**
+
 - Your contract with Overland (service-level clause, liability provisions)
 - Overland's contract with Patriot (request via your contractual audit rights if applicable)
 - Toyota's penalty calculation and chargeback notice
@@ -297,6 +316,7 @@ Accepting the $500 credit and eating the $28K penalty. This teaches both Overlan
 - Revised broker agreement with carrier disclosure and liquidated damages provisions
 
 **Resolution Timeline:**
+
 - Days 0-3: Toyota penalty assessment, Overland carrier selection records requested
 - Days 3-10: Negotiate Toyota chargeback reduction, negotiate Overland freight credits
 - Days 10-30: Qualify asset carrier for primary on this lane, move Overland to backup
@@ -321,6 +341,7 @@ But you can't just preemptively exit. National FreightWorks is a legitimate, lar
 Waiting passively for the acquisition to complete and hoping for the best. By the time service degrades, National FreightWorks has integrated Ridge Runner's systems and you've lost your leverage to negotiate. The other mistake: immediately pulling all volume, which burns the relationship with National FreightWorks before they've even started.
 
 **Expert Approach:**
+
 1. Meet with National FreightWorks' sales team immediately. Request a dedicated meeting (not a mass customer communication) to discuss: their integration timeline, which operational systems will survive (Ridge Runner's dispatch or National FreightWorks'?), whether your lanes will retain dedicated drivers or be absorbed into the national driver pool, and who your new account manager will be.
 
 2. Secure contractual protections before the acquisition closes. Propose a 12-month service guarantee as a condition of continuing your volume: OTD ≥94% (a slight step-down from Ridge Runner's 96% to acknowledge integration disruption), tender acceptance ≥88%, with a rate renegotiation trigger if either metric falls below the threshold for 60 days. Get this in writing from National FreightWorks' VP of Sales before the close.
@@ -332,12 +353,14 @@ Waiting passively for the acquisition to complete and hoping for the best. By th
 5. Plan for a 90-day post-close performance review. Track National FreightWorks' performance on your 5 lanes weekly during the integration. Set a decision point at 90 days: if service levels are within the contractual guarantee, maintain full allocation. If service has degraded below the guarantee, shift 50% of volume to your qualified alternatives and invoke the rate renegotiation clause.
 
 **Key Indicators:**
+
 - If National FreightWorks is centralizing dispatch, your loads will compete with 4,500 other trucks' dispatch priorities — expect tender acceptance to drop
 - If Ridge Runner's drivers are being reassigned to national routes, expect turnover on your lanes — drivers who chose a regional carrier lifestyle rarely stay at a national carrier
 - If National FreightWorks' integration team cannot name your new account manager within 30 days of close, they don't have a plan for your account
 - Watch for rate "standardization" letters after close — this is often a rate increase disguised as administrative cleanup
 
 **Documentation Required:**
+
 - Current carrier agreement with Ridge Runner (to understand transition terms)
 - Written service guarantee from National FreightWorks
 - Alternative carrier qualification records for all 5 lanes
@@ -345,6 +368,7 @@ Waiting passively for the acquisition to complete and hoping for the best. By th
 - Communication log with National FreightWorks integration team
 
 **Resolution Timeline:**
+
 - Days 0-15: Meeting with National FreightWorks, service guarantee negotiation
 - Days 15-45: Alternative carrier qualification, trial loads
 - Day 60: Acquisition closes
@@ -367,24 +391,28 @@ The $0.12/mile linehaul reduction is real and looks good on a summary report. Bu
 Accepting the "linehaul reduction" at face value without modeling the total cost across diesel scenarios. Many shippers negotiate linehaul and FSC separately, which is exactly what carriers exploit. The linehaul goes into the "rate savings" report to procurement leadership; the FSC flows through as a pass-through that nobody scrutinizes.
 
 **Expert Approach:**
+
 1. Model total cost per mile at three diesel prices: $3.25 (low), $3.85 (current), $4.50 (high).
 2. Present the analysis side-by-side to the carrier's account manager. Don't accuse them of manipulation — show the math: "When we model total cost, the new structure is actually $0.16/mile higher at current diesel. Can you walk me through the rationale?"
 3. Counter-propose: accept the $0.12 linehaul reduction with the existing FSC table unchanged. Or negotiate a new FSC table with a base of $3.50 (matching the old) and a moderate increment of $0.012/mile per $0.05 diesel increase.
 4. Establish a policy: any FSC table change must be modeled at three diesel price points and approved by the transportation manager, not just the analyst handling the rate update.
 
 **Key Indicators:**
+
 - Any linehaul reduction paired with an FSC restructure should be modeled as a total-cost change
 - FSC base prices significantly below current DOE average ($1+/gal below) are a red flag
 - FSC increments above $0.015/mile per $0.05 diesel increase are above market standard
 - A carrier proposing FSC changes mid-contract (rather than at renewal) may be trying to recover margin they lost in the RFP
 
 **Documentation Required:**
+
 - Current and proposed rate structures side-by-side
 - Total cost modeling at three diesel scenarios
 - DOE diesel price history (12-month) and forward curve
 - Counter-proposal with justification
 
 **Resolution Timeline:**
+
 - Days 0-2: Total cost analysis completed
 - Days 2-5: Presentation to carrier with counter-proposal
 - Days 5-15: Negotiation of revised FSC terms
@@ -408,6 +436,7 @@ But this analysis is wrong because it treats OTD as a simple probability. Desert
 Awarding solely on rate because "we can always switch carriers if service is bad." Switching the primary carrier on a 6-load/week lane mid-year disrupts operations, triggers a new onboarding cycle, and signals instability to the retailer.
 
 **Expert Approach:**
+
 1. Award Desert Star as primary (70% allocation, ~4 loads/week). Their service level exceeds the retailer's 95% OTIF requirement, minimizing penalty exposure and protecting the retailer relationship.
 
 2. Award Central National as secondary (30% allocation, ~2 loads/week). This gives Central National enough volume to maintain equipment and driver familiarity with the lane, provides you a proven backup, and leverages their EDI capability for the portion of volume where technology integration matters.
@@ -417,12 +446,14 @@ Awarding solely on rate because "we can always switch carriers if service is bad
 4. Negotiate a 6-month review with both carriers. If Desert Star maintains >95% OTD, increase their allocation to 80%. If Central National improves to >94% OTD, consider equalizing the split. Data drives the rebalancing, not initial assumptions.
 
 **Key Indicators:**
+
 - Small carriers' OTD often outperforms large carriers because their owner-operators treat each load as personal reputation
 - Large carriers' OTD averages mask lane-level variance — their 92% network average may be 88% on your specific lane
 - A retailer's OTIF penalty program often has escalating consequences (verbal warning → financial penalty → vendor probation → delisting) that the per-occurrence penalty doesn't capture
 - Desert Star's lack of EDI is a technology gap, not a capability gap — it's solvable with a tracking app or API
 
 **Documentation Required:**
+
 - Bid comparison with total cost analysis (linehaul + FSC + modeled penalties)
 - Retailer OTIF requirements and penalty structure (including escalation tiers)
 - Desert Star's reference check documentation
@@ -430,6 +461,7 @@ Awarding solely on rate because "we can always switch carriers if service is bad
 - Routing guide setup documentation with allocation splits and review cadence
 
 **Resolution Timeline:**
+
 - Days 0-5: Bid analysis, total cost modeling including penalty scenarios
 - Days 5-10: Award notification to both carriers
 - Days 10-30: Desert Star onboarding, tracking solution implemented
@@ -451,6 +483,7 @@ Ridgeline has legitimate cost concerns. A border relay lane with reefer pre-set 
 If you let Ridgeline drop the lane, you've set a precedent: carriers can cherry-pick your best lanes and drop the unprofitable ones. Every carrier in your portfolio will start calculating which of your lanes are "worth it." But if you force Ridgeline to keep the lane at a money-losing rate, you're setting a different precedent: you don't care about carrier economics, and eventually they'll exit your entire portfolio.
 
 **Expert Approach:**
+
 1. Acknowledge the cost issue. Run your own cost analysis on the Laredo-Memphis lane using publicly available driver pay rates, fuel costs, and relay logistics. Confirm that $1.95/mile is indeed below a reasonable carrier cost for this operation. If it is, you cannot in good faith demand they keep it at that rate.
 
 2. Offer a rate adjustment on the Laredo lane that reflects its actual cost. If Ridgeline's breakeven is $2.25/mile, offer $2.35/mile — enough for a thin margin. Pair this with a commitment: "We'll increase this lane to $2.35 and guarantee 3 loads/week minimum."
@@ -462,12 +495,14 @@ If you let Ridgeline drop the lane, you've set a precedent: carriers can cherry-
 5. Do not retaliate on Ridgeline's other lanes. Pulling their profitable lanes as punishment for exiting one unprofitable lane guarantees you'll lose a top-performing carrier entirely. The goal is to keep 11 out of 12 lanes with a 96% OTD carrier.
 
 **Key Indicators:**
+
 - A carrier requesting to exit a single lane (not your entire account) is making a rational business decision, not a relationship attack
 - Border relay lanes have genuinely different cost structures — standard per-mile benchmarks don't apply
 - A $1.95/mile reefer cross-border lane is almost certainly below carrier cost in the current market
 - If you force a carrier to keep an unprofitable lane, they'll subtly deprioritize it — tender acceptance will drop before OTD drops
 
 **Documentation Required:**
+
 - Current rate vs. estimated carrier cost analysis for the Laredo-Memphis lane
 - Package deal history (which lanes were bundled in the original award)
 - Rate adjustment proposal documentation
@@ -475,6 +510,7 @@ If you let Ridgeline drop the lane, you've set a precedent: carriers can cherry-
 - Revised carrier agreement reflecting lane changes
 
 **Resolution Timeline:**
+
 - Days 0-7: Cost analysis, rate adjustment proposal to Ridgeline
 - Days 7-14: Ridgeline decision on adjusted rate
 - Days 14-60: If exit — replacement carrier qualification and transition
@@ -498,6 +534,7 @@ Disputing $614K in detention charges without addressing the DC operational issue
 Disputing all detention charges and demanding carriers "prove" every minute. This creates an adversarial dynamic, consumes carrier claims resources, and doesn't fix the root cause. The other mistake: paying all detention without investigation, which rewards carriers for inflating charges and creates no incentive for your DCs to improve.
 
 **Expert Approach:**
+
 1. Audit a statistically significant sample. Pull 50 detention invoices (across all three carriers and both DCs). For each, compare: carrier's claimed arrival time vs. appointment time, driver check-in records at the DC, DC dock log (when was the driver called to a door?), and load/unload time (from door assignment to BOL signature). This audit typically reveals 20-30% of detention charges are overcounted and 60-70% reflect genuine facility delays.
 
 2. Address the DC operational issue first. Present the detention data to your DC operations leadership: "Our Atlanta DC is generating $320K/year in detention charges. That's the equivalent of 1.5 FTE dock workers." Install dock scheduling systems (if not already in place), enforce appointment windows, and set an internal KPI: average driver dwell time at the DC, with a target of <2.5 hours and a red flag at >3.5 hours.
@@ -513,12 +550,14 @@ Disputing all detention charges and demanding carriers "prove" every minute. Thi
 5. For the $614K in existing detention charges: apply the 50-detention-invoice audit findings to the full population. If the audit shows 25% overcounting, propose a one-time settlement of 75% of the total ($460K) and implement the prospective framework. Most carriers will accept this because it demonstrates good faith while clearing the backlog.
 
 **Key Indicators:**
+
 - Detention increases of >100% year-over-year almost always indicate facility operations problems, not carrier billing abuse
 - Carriers that provide granular detention documentation (check-in time, dock assignment time, departure time) are likely billing accurately — carriers that provide only "arrived X, departed Y" are likely overcounting
 - If detention is concentrated at specific facilities (your Atlanta and Dallas DCs), the problem is those facilities, not your carrier base
 - A carrier whose detention charges exceed 8% of their total freight billing to you will eventually either raise rates or exit your facility
 
 **Documentation Required:**
+
 - 50-invoice audit with carrier-claimed vs. verified detention hours
 - DC dwell time analysis by facility, shift, and dock door
 - Carrier detention billing summary by carrier and facility (12-month trend)
@@ -527,6 +566,7 @@ Disputing all detention charges and demanding carriers "prove" every minute. Thi
 - DC operations improvement plan with KPIs and timeline
 
 **Resolution Timeline:**
+
 - Days 0-10: 50-invoice audit completed
 - Days 10-20: DC operations review, improvement plan drafted
 - Days 20-30: Carrier settlement negotiations for existing backlog
@@ -534,6 +574,7 @@ Disputing all detention charges and demanding carriers "prove" every minute. Thi
 - Days 60-180: Monitor dwell time improvements and detention trend (target: 50% reduction in 6 months)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

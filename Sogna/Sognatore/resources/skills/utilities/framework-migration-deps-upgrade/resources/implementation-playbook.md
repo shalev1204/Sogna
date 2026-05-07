@@ -14,9 +14,11 @@ This file contains detailed patterns, checklists, and code samples referenced by
 You are a dependency management expert specializing in safe, incremental upgrades of project dependencies. Plan and execute dependency updates with minimal risk, proper testing, and clear migration paths for breaking changes.
 
 ## Context
+
 The user needs to upgrade project dependencies safely, handling breaking changes, ensuring compatibility, and maintaining stability. Focus on risk assessment, incremental upgrades, automated testing, and rollback strategies.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -216,9 +218,11 @@ def generate_migration_guide(package_name, current_version, target_version, brea
     Generate step-by-step migration guide
     """
     guide = f"""
+
 # Migration Guide: {package_name} {current_version} → {target_version}
 
 ## Overview
+
 This guide will help you upgrade {package_name} from version {current_version} to {target_version}.
 
 **Estimated time**: {estimate_migration_time(breaking_changes)}
@@ -237,13 +241,17 @@ This guide will help you upgrade {package_name} from version {current_version} t
 ### Step 1: Update Dependencies
 
 ```bash
+
 # Create a new branch
+
 git checkout -b upgrade/{package_name}-{target_version}
 
 # Update package
+
 npm install {package_name}@{target_version}
 
 # Update peer dependencies if needed
+
 {generate_peer_deps_commands(package_name, target_version)}
 ```
 
@@ -262,16 +270,21 @@ npm install {package_name}@{target_version}
 ### Step 5: Test & Verify
 
 ```bash
+
 # Run linter to catch issues
+
 npm run lint
 
 # Run tests
+
 npm test
 
 # Run type checking
+
 npm run type-check
 
 # Manual testing checklist
+
 ```
 
 {generate_test_checklist(package_name, breaking_changes)}
@@ -285,11 +298,14 @@ npm run type-check
 If issues arise, follow these steps to rollback:
 
 ```bash
+
 # Revert package version
+
 git checkout package.json package-lock.json
 npm install
 
 # Or use the backup branch
+
 git checkout main
 git branch -D upgrade/{package_name}-{target_version}
 ```
@@ -303,6 +319,7 @@ git branch -D upgrade/{package_name}-{target_version}
 - Official Migration Guide})
 - Changelog})
 - Community Discussions})
+
 """
 
     return guide
@@ -329,9 +346,11 @@ class IncrementalUpgrader:
         upgrade_path = self._create_upgrade_path(current, target, safe_versions)
 
         plan = f"""
+
 ## Incremental Upgrade Plan: {package_name}
 
 ### Current State
+
 - Version: {current}
 - Target: {target}
 - Total steps: {len(upgrade_path)}
@@ -341,19 +360,24 @@ class IncrementalUpgrader:
 """
         for i, step in enumerate(upgrade_path, 1):
             plan += f"""
+
 #### Step {i}: Upgrade to {step['version']}
 
 **Risk Level**: {step['risk_level']}
 **Breaking Changes**: {step['breaking_changes']}
 
 ```bash
+
 # Upgrade command
+
 npm install {package_name}@{step['version']}
 
 # Test command
+
 npm test -- --updateSnapshot
 
 # Verification
+
 npm run integration-tests
 ```
 
@@ -473,6 +497,7 @@ def generate_compatibility_matrix(dependencies):
 
     # Generate report
     report = """
+
 ## Dependency Compatibility Matrix
 
 | Package | Current | Target | Compatible With | Conflicts | Action Required |
@@ -510,9 +535,11 @@ Implement safe rollback procedures:
 **Rollback Manager**
 ```bash
 #!/bin/bash
+
 # rollback-dependencies.sh
 
 # Create rollback point
+
 create_rollback_point() {
     echo "📌 Creating rollback point..."
 
@@ -532,6 +559,7 @@ create_rollback_point() {
 }
 
 # Perform rollback
+
 rollback() {
     echo "🔄 Performing rollback..."
 
@@ -550,6 +578,7 @@ rollback() {
 }
 
 # Verify rollback
+
 verify_rollback() {
     echo "🔍 Verifying rollback..."
 
@@ -763,6 +792,7 @@ const monitoring = {
 Focus on safe, incremental upgrades that maintain system stability while keeping dependencies current and secure.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

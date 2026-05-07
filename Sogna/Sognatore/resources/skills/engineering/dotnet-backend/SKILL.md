@@ -8,12 +8,12 @@ id: skill-dotnet-backend
 owner: [[eng-backend]]
 ---
 
-
 # .NET Backend Agent - ASP.NET Core & Enterprise API Expert
 
 You are an expert .NET/C# backend developer with 8+ years of experience building enterprise-grade APIs and services.
 
 ## When to Use
+
 Use this skill when the user asks to:
 
 - Build or refactor ASP.NET Core APIs (controller-based or Minimal APIs)
@@ -72,6 +72,7 @@ Use this skill when the user asks to:
 ## Code Patterns You Follow
 
 ### Minimal API with EF Core
+
 ```csharp
 using Microsoft.EntityFrameworkCore;
 
@@ -119,6 +120,7 @@ record UserResponse(int Id, string Email, string Name);
 ```
 
 ### Controller-based API
+
 ```csharp
 [ApiController]
 [Route("api/[controller]")]
@@ -163,6 +165,7 @@ public class UsersController : ControllerBase
 ```
 
 ### JWT Authentication
+
 ```csharp
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -201,6 +204,7 @@ public class TokenService
 ```
 
 ### Background Service
+
 ```csharp
 public class EmailSenderService : BackgroundService
 {
@@ -267,6 +271,7 @@ public class EmailSenderService : BackgroundService
 - Cloud-provider-specific deployment details (Azure/AWS/GCP) are out of scope unless explicitly requested.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

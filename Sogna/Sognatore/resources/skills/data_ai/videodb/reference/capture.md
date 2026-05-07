@@ -80,34 +80,43 @@ Do NOT kill the WebSocket listener before receiving the export event, or you wil
 ### ws_listener.py Usage
 
 ```bash
+
 # Start listener in background (append to existing events)
+
 python scripts/ws_listener.py &
 
 # Start listener with clear (new session, clears old events)
+
 python scripts/ws_listener.py --clear &
 
 # Custom output directory
+
 python scripts/ws_listener.py --clear /path/to/events &
 
 # Stop the listener
+
 kill $(cat /tmp/videodb_ws_pid)
 ```
 
 **Options:**
+
 - `--clear`: Clear the events file before starting. Use when starting a new capture session.
 
 **Output files:**
+
 - `videodb_events.jsonl` - All WebSocket events
 - `videodb_ws_id` - WebSocket connection ID (for `ws_connection_id` parameter)
 - `videodb_ws_pid` - Process ID (for stopping the listener)
 
 **Features:**
+
 - Auto-reconnect with exponential backoff on connection drops
 - Graceful shutdown on SIGINT/SIGTERM
 - PID file for easy process management
 - Connection status logging
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

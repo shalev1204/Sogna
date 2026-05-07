@@ -10,10 +10,12 @@ version: 1.0.0
 Working examples showing how to use Transformers.js across different runtimes and frameworks.
 
 All examples use the same task and model for consistency:
+
 - **Task**: `feature-extraction`
 - **Model**: `onnx-community/all-MiniLM-L6-v2-ONNX`
 
 ## Table of Contents
+
 1. [Browser (Vanilla JS)](#browser-vanilla-js)
 2. [Node.js](#nodejs)
 3. [React](#react)
@@ -613,6 +615,7 @@ initialize().then(() => {
 These examples demonstrate the same functionality across different runtimes and frameworks, making it easy to adapt to your specific use case. All examples include proper cleanup with `.dispose()` to free memory.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -70,6 +70,7 @@ Great Mac experiences integrate the platform and device capabilities that people
 [![](https://devimages-cdn.apple.com/wwdc-services/images/3055294D-836B-4513-B7B0-0BC5666246B0/754D8BF7-206F-4342-8705-7B836D449D9C/10015_wide_250x141_1x.jpg) Build an AppKit app with the new design ](https://developer.apple.com/videos/play/wwdc2025/310)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -42,21 +42,26 @@ When `/brainstorm` is triggered:
 ## Output Format
 
 ```markdown
+
 ## 🧠 Brainstorm: [Topic]
 
 ### Context
+
 [Brief problem statement]
 
 ---
 
 ### Option A: [Name]
+
 [Description]
 
 ✅ **Pros:**
+
 - [benefit 1]
 - [benefit 2]
 
 ❌ **Cons:**
+
 - [drawback 1]
 
 📊 **Effort:** Low | Medium | High
@@ -64,12 +69,15 @@ When `/brainstorm` is triggered:
 ---
 
 ### Option B: [Name]
+
 [Description]
 
 ✅ **Pros:**
+
 - [benefit 1]
 
 ❌ **Cons:**
+
 - [drawback 1]
 - [drawback 2]
 
@@ -78,12 +86,15 @@ When `/brainstorm` is triggered:
 ---
 
 ### Option C: [Name]
+
 [Description]
 
 ✅ **Pros:**
+
 - [benefit 1]
 
 ❌ **Cons:**
+
 - [drawback 1]
 
 📊 **Effort:** Low | Medium | High
@@ -116,4 +127,3 @@ What direction would you like to explore?
 - **Visual when helpful** - use diagrams for architecture
 - **Honest tradeoffs** - don't hide complexity
 - **Defer to user** - present options, let them decide
-

@@ -51,7 +51,9 @@ DBOS crontab supports 5 or 6 fields (optional seconds):
 │ │ │ ┌──────── day of month
 │ │ │ │ ┌────── month
 │ │ │ │ │ ┌──── day of week
+
 * * * * * *
+
 ```
 
 Retroactive execution (for missed intervals):
@@ -74,6 +76,7 @@ Scheduled workflows cannot be applied to instance methods.
 Reference: [Scheduled Workflows](https://docs.dbos.dev/typescript/tutorials/scheduled-workflows)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

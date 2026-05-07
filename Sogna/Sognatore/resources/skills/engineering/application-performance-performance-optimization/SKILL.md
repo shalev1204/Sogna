@@ -8,7 +8,6 @@ id: skill-application-performance-performance-optimization
 owner: [[eng-perf]]
 ---
 
-
 Optimize application performance end-to-end using specialized performance and optimization agents:
 
 [Extended thinking: This workflow orchestrates a comprehensive performance optimization process across the entire application stack. Starting with deep profiling and baseline establishment, the workflow progresses through targeted optimizations in each system layer, validates improvements through load testing, and establishes continuous monitoring for sustained performance. Each phase builds on insights from previous phases, creating a data-driven optimization strategy that addresses real bottlenecks rather than theoretical improvements. The workflow emphasizes modern observability practices, user-centric performance metrics, and cost-effective optimization strategies.]
@@ -89,7 +88,9 @@ Optimize application performance end-to-end using specialized performance and op
 ### 7. Frontend Bundle & Loading Optimization
 
 - Use Task tool with subagent_type="frontend-developer"
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Prompt: "Optimize frontend performance for: $ARGUMENTS targeting Core Web Vitals: {context_from_phase_1}. Implement code splitting, tree shaking, lazy loading, and dynamic imports. Optimize bundle sizes with webpack/rollup analysis. Implement resource hints (prefetch, preconnect, preload). Optimize critical rendering path and eliminate render-blocking resources."
 - Context: UX analysis from phase 1, backend optimizations from phase 2
 - Output: Optimized bundles, lazy loading implementation, improved Core Web Vitals
@@ -161,11 +162,13 @@ Optimize application performance end-to-end using specialized performance and op
 Performance optimization target: $ARGUMENTS
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

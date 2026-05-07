@@ -1,4 +1,4 @@
-export const VariantPriorityOrder = [
+export const variantPriorityOrder = [
     "animate",
     "whileInView",
     "whileFocus",
@@ -7,5 +7,5 @@ export const VariantPriorityOrder = [
     "whileDrag",
     "exit",
 ];
-export const VariantProps = ["initial", ...VariantPriorityOrder];
+export const variantProps = ["initial", ...variantPriorityOrder];
 //# sourceMappingURL=variant-props.js.map

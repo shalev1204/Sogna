@@ -8,7 +8,6 @@ id: skill-gitops-workflow
 owner: [[orchestrator]]
 ---
 
-
 # GitOps Workflow
 
 Complete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments.
@@ -56,13 +55,17 @@ Implement declarative, Git-based continuous delivery for Kubernetes using ArgoCD
 ### 1. Installation
 
 ```bash
+
 # Create namespace
+
 kubectl create namespace argocd
 
 # Install ArgoCD
+
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 # Get admin password
+
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
@@ -91,7 +94,9 @@ gitops-repo/
 ### 3. Create Application
 
 ```yaml
+
 # argocd/applications/my-app.yaml
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -111,7 +116,9 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
+
     - CreateNamespace=true
+
 ```
 
 ### 4. App of Apps Pattern
@@ -140,10 +147,13 @@ spec:
 ### 1. Installation
 
 ```bash
+
 # Install Flux CLI
+
 curl -s https://fluxcd.io/install.sh | sudo bash
 
 # Bootstrap Flux
+
 flux bootstrap github \
   --owner=org \
   --repository=gitops-repo \
@@ -228,11 +238,13 @@ spec:
   strategy:
     canary:
       steps:
+
       - setWeight: 20
       - pause: {duration: 1m}
       - setWeight: 50
       - pause: {duration: 2m}
       - setWeight: 100
+
 ```
 
 ### Blue-Green Deployment
@@ -262,7 +274,9 @@ spec:
   target:
     name: db-credentials
   data:
+
   - secretKey: password
+
     remoteRef:
       key: prod/db/password
 ```
@@ -270,10 +284,13 @@ spec:
 ### Sealed Secrets
 
 ```bash
+
 # Encrypt secret
+
 kubeseal --format yaml < secret.yaml > sealed-secret.yaml
 
 # Commit sealed-secret.yaml to Git
+
 ```
 
 ## Best Practices
@@ -309,11 +326,13 @@ argocd app sync my-app --force
 - `helm-chart-scaffolding` - For packaging applications
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

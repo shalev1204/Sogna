@@ -1,14 +1,14 @@
 import { Axis, AxisDelta, Box, Delta, Point, SubscriptionManager } from "sognaflow-utils";
-import { JSAnimation } from "../../animation/jsanimation.js";
+import { JSAnimation } from "../../animation/JSAnimation.js";
 import { Transition, ValueAnimationOptions } from "../../animation/types.js";
 import type { Process } from "../../frameloop/types.js";
 import type { ResolvedValues } from "../../render/types.js";
-import type { SognaflowStyle } from "../../render/visualelement.js";
+import type { SognaflowStyle } from "../../render/VisualElement.js";
 import { SognaflowValue } from "../../value";
 import { NodeStack } from "../shared/stack.js";
 import { FlatTree } from "../utils/flat-tree.js";
 import { IProjectionNode, LayoutEvents, Measurements, Phase, ProjectionNodeConfig, ProjectionNodeOptions, ScrollMeasurements } from "./types.js";
-export declare function CreateProjectionNode<I>({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform, }: ProjectionNodeConfig<I>): {
+export declare function createProjectionNode<I>({ attachResizeListener, defaultParent, measureScroll, checkIsScrollRoot, resetTransform, }: ProjectionNodeConfig<I>): {
     new (latestValues?: ResolvedValues, parent?: IProjectionNode | undefined): {
         /**
          * A unique ID generated for every projection node.
@@ -230,7 +230,7 @@ export declare function CreateProjectionNode<I>({ attachResizeListener, defaultP
         isUpdateBlocked(): boolean;
         isTreeAnimationBlocked(): boolean;
         startUpdate(): void;
-        getTransformTemplate(): import("../..").TransformTemplate | undefined;
+        getTransformTemplate(): import("../../index.js").TransformTemplate | undefined;
         willUpdate(shouldNotifyListeners?: boolean): void;
         updateScheduled: boolean;
         update(): void;
@@ -321,8 +321,8 @@ export declare function CreateProjectionNode<I>({ attachResizeListener, defaultP
         resetTree(): void;
     };
 };
-export declare function PropagateDirtyNodes(node: IProjectionNode): void;
-export declare function CleanDirtyNodes(node: IProjectionNode): void;
-export declare function MixAxisDelta(output: AxisDelta, delta: AxisDelta, p: number): void;
-export declare function MixAxis(output: Axis, from: Axis, to: Axis, p: number): void;
-export declare function MixBox(output: Box, from: Box, to: Box, p: number): void;
+export declare function propagateDirtyNodes(node: IProjectionNode): void;
+export declare function cleanDirtyNodes(node: IProjectionNode): void;
+export declare function mixAxisDelta(output: AxisDelta, delta: AxisDelta, p: number): void;
+export declare function mixAxis(output: Axis, from: Axis, to: Axis, p: number): void;
+export declare function mixBox(output: Box, from: Box, to: Box, p: number): void;

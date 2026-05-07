@@ -8,7 +8,6 @@ id: skill-game-development
 owner: [[prod-pm]], [[game-developer]]
 ---
 
-
 # Game Development
 
 > **Orchestrator skill** that provides core principles and routes to specialized sub-skills.
@@ -63,6 +62,7 @@ RENDER → Draw the frame (interpolated)
 ```
 
 **Fixed Timestep Rule:**
+
 - Physics/logic: Fixed rate (e.g., 50Hz)
 - Rendering: As fast as possible
 - Interpolate between states for smooth visuals
@@ -109,6 +109,7 @@ Abstract input into ACTIONS, not raw keys:
 | Buffer | 1.67ms |
 
 **Optimization Priority:**
+
 1. Algorithm (O(n²) → O(n log n))
 2. Batching (reduce draw calls)
 3. Pooling (avoid GC spikes)
@@ -154,15 +155,18 @@ Abstract input into ACTIONS, not raw keys:
 ## Routing Examples
 
 ### Example 1: "I want to make a browser-based 2D platformer"
+
 → Start with `game-development/web-games` for framework selection
 → Then `game-development/2d-games` for sprite/tilemap patterns
 → Reference `game-development/game-design` for level design
 
 ### Example 2: "Mobile puzzle game for iOS and Android"
+
 → Start with `game-development/mobile-games` for touch input and stores
 → Use `game-development/game-design` for puzzle balancing
 
 ### Example 3: "Multiplayer VR shooter"
+
 → `game-development/vr-ar` for comfort and immersion
 → `game-development/3d-games` for rendering
 → `game-development/multiplayer` for networking
@@ -172,11 +176,13 @@ Abstract input into ACTIONS, not raw keys:
 > **Remember:** Great games come from iteration, not perfection. Prototype fast, then polish.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

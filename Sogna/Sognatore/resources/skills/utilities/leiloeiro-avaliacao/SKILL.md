@@ -4,21 +4,24 @@ description: Avaliacao pericial de imoveis em leilao. Valor de mercado, liquidac
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - real-estate
 - valuation
 - appraisal
 - brazilian
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-leiloeiro-avaliacao
 owner: [[orchestrator]]
 ---
-
 
 # SKILL DE AVALIAÇÃO DE IMÓVEL — PERITO AVALIADOR
 
@@ -77,12 +80,14 @@ Usado para: imóveis residenciais e comerciais com amostras de mercado disponív
 **1. Pesquisa de Amostras**
 
 Coletar mínimo 5 imóveis comparáveis (para Grau II/III ABNT):
+
 - Mesmo bairro ou região comparável
 - Mesmo tipo (apartamento, casa, sala comercial)
 - Mesma faixa de área (±30%)
 - Transações recentes (últimos 12 meses — idealmente 6)
 
 **Fontes de dados:**
+
 - ZAP Imóveis (zap.com.br) — anúncios ativos
 - Viva Real (vivareal.com.br)
 - OLX Imóveis
@@ -98,6 +103,7 @@ Ajustar cada amostra para torná-la comparável ao imóvel avaliando:
 
 ```
 Fator Área:
+
 - Imóveis menores tendem a ter valor unitário maior (R$/m²)
 - Fórmula: Fa = (Área Padrão / Área Amostra)^0,25
 
@@ -135,6 +141,7 @@ Sem vaga:  0,90 a 0,95
 **3. Tratamento Estatístico**
 
 Após homogeneização, calcular:
+
 - Média dos valores unitários homogeneizados (R$/m²)
 - Campo de arbítrio: ±15% (Grau I) / ±10% (Grau II)
 - Eliminar outliers (amostras > 2 desvios padrão)
@@ -171,6 +178,7 @@ Valor de Mercado = Renda Líquida / Cap Rate
 | Hotéis | 10% - 15% |
 
 **Exemplo:**
+
 - Imóvel comercial locado por R$ 10.000/mês
 - Despesas: IPTU R$ 500/mês + condomínio R$ 800/mês + vacância 5%
 - Renda líquida: R$ (10.000 - 500 - 800) × (1 - 0,05) = R$ 8.265/mês → R$ 99.180/ano
@@ -222,6 +230,7 @@ Quando receber um laudo de avaliação para análise, verificar:
 ## Checklist Do Laudo
 
 **Formalidades:**
+
 - [ ] Avaliador identificado com CREA/CAU
 - [ ] Data da vistoria (não da emissão)
 - [ ] Descrição física do imóvel
@@ -229,6 +238,7 @@ Quando receber um laudo de avaliação para análise, verificar:
 - [ ] Fundamentação e Precisão (Grau I, II ou III — ABNT)
 
 **Conteúdo técnico:**
+
 - [ ] Amostras utilizadas (mínimo 3 para Grau I; 5 para Grau II)
 - [ ] Fontes das amostras indicadas
 - [ ] Homogeneização demonstrada (ou justificativa)
@@ -237,6 +247,7 @@ Quando receber um laudo de avaliação para análise, verificar:
 - [ ] Cálculo final claro
 
 **Sinais de laudo fraco/suspeito:**
+
 - ⚠️ Menos de 3 amostras (Grau I insuficiente para leilão relevante)
 - ⚠️ Amostras de bairros muito distantes ou diferentes
 - ⚠️ Sem data de vistoria (quando foi o imóvel visitado?)
@@ -271,6 +282,7 @@ TOTAL: ___ / 50
 ```
 
 **Interpretação:**
+
 - 40-50: Localização excelente — premium
 - 30-39: Localização boa — acima da média
 - 20-29: Localização média — mercado normal
@@ -299,27 +311,33 @@ DESÁGIO MÍNIMO ACEITÁVEL: ____% do VMP
 ## Análise Por Tipo
 
 **Apartamento Residencial:**
+
 - Verificar: vagas, andar, face (sol manhã/tarde), churrasqueira, depósito
 - Liquidez: muito alta (SP, RJ, BH, Curitiba) — fácil revenda
 
 **Casa em Condomínio:**
+
 - Verificar: área de lazer, segurança, taxa condominial, restrições construtivas
 - Liquidez: alta — demanda constante por famílias
 
 **Terreno Urbano:**
+
 - Verificar: zoneamento (coeficiente de aproveitamento, taxa de ocupação)
 - Verificar: possibilidade de incorporação (VGV potencial)
 - Liquidez: média — depende muito da localização
 
 **Sala Comercial:**
+
 - Verificar: padrão, rua, fluxo pedestres, vaga, autuações
 - Liquidez: baixa a média — mercado mais restrito
 
 **Galpão Logístico/Industrial:**
+
 - Verificar: pé-direito (mínimo 8m para logística), docas, acesso caminhão, AVCB
 - Liquidez: média-alta em eixos logísticos (Rodovias Dutra, Castelo Branco, BR-381)
 
 **Imóvel Rural:**
+
 - Verificar: ITR, CAR, reserva legal, acesso, água, energia
 - Liquidez: baixa — mercado especializado
 
@@ -332,6 +350,7 @@ Quando precisar estimar o VMP de um imóvel sem laudo disponível:
 ## Roteiro De Pesquisa Rápida (15 Min)
 
 ```
+
 1. ABRIR ZAP IMÓVEIS (zapimoveis.com.br):
    - Buscar pelo bairro e tipo do imóvel
    - Filtrar por área similar (±20%)
@@ -360,6 +379,7 @@ Quando precisar estimar o VMP de um imóvel sem laudo disponível:
    - Verificar: entorno, comércio, transporte
    - Estado aparente das fachadas vizinhas
    - Confirmar se bairro corresponde ao padrão das amostras
+
 ```
 
 ## Cub Referência 2025 (Sinduscon/Sp — Atualizar Mensalmente)
@@ -468,6 +488,7 @@ Esta skill implementa as seguintes políticas de governança:
 - **warning_threshold**: Deságio <15% ou avaliação defasada disparam warning_threshold automático
 
 Políticas adicionais:
+
 - **Responsável:** Ecossistema Leiloeiro IA
 - **Escopo:** Avaliação pericial de imóveis para leilão
 - **Limitações:** Estimativas indicativas. Não substitui laudo pericial de engenheiro/arquiteto.
@@ -479,6 +500,7 @@ Políticas adicionais:
 ## Referências
 
 Fontes normativas e referências:
+
 - **ABNT NBR 14653-1:2019** — Procedimentos gerais
 - **ABNT NBR 14653-2:2011** — Imóveis urbanos
 - **ABNT NBR 14653-3:2004** — Imóveis rurais
@@ -509,11 +531,13 @@ Fontes normativas e referências:
 - `leiloeiro-mercado` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

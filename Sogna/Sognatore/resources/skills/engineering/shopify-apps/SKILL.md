@@ -10,7 +10,6 @@ id: skill-shopify-apps
 owner: [[orchestrator]]
 ---
 
-
 # Shopify Apps
 
 Expert patterns for Shopify app development including Remix/React Router apps,
@@ -28,20 +27,33 @@ Modern Shopify app template with React Router
 ### Template
 
 # Create new Shopify app with CLI
+
 npm init @shopify/app@latest my-shopify-app
 
 # Project structure
+
 # my-shopify-app/
+
 # ├── app/
+
 # │   ├── routes/
+
 # │   │   ├── app._index.tsx        # Main app page
+
 # │   │   ├── app.tsx               # App layout with providers
+
 # │   │   ├── auth.$.tsx            # Auth callback
+
 # │   │   └── webhooks.tsx          # Webhook handler
+
 # │   ├── shopify.server.ts         # Server configuration
+
 # │   └── root.tsx                  # Root layout
+
 # ├── extensions/                   # App extensions
+
 # ├── shopify.app.toml              # App configuration
+
 # └── package.json
 
 // shopify.app.toml
@@ -612,6 +624,7 @@ Extend Shopify checkout, admin, or storefront
 ### Template
 
 # shopify.extension.toml (in extensions/my-extension/)
+
 api_version = "2024-10"
 
 [[extensions]]
@@ -828,6 +841,7 @@ Operations fail silently or partially.
 
 Why this breaks:
 Shopify enforces strict rate limits:
+
 - REST: 2 requests per second per store
 - GraphQL: 1000 points per 60 seconds
 
@@ -945,6 +959,7 @@ Since April 2024, accessing protected customer data (PII) requires
 explicit approval from Shopify. This is separate from OAuth scopes.
 
 Protected data includes:
+
 - Customer names, emails, addresses
 - Order customer information
 - Subscription customer details
@@ -1016,10 +1031,12 @@ Unpredictable webhook behavior.
 
 Why this breaks:
 Shopify apps can define webhooks in two places:
+
 1. shopify.app.toml (declarative, recommended)
 2. afterAuth hook in code (imperative, legacy)
 
 If you define the same webhook in both places, you get:
+
 - Duplicate subscriptions
 - Race conditions during registration
 - Conflicts during app updates
@@ -1029,7 +1046,9 @@ Recommended fix:
 ## Use TOML only (recommended)
 
 ```toml
+
 # shopify.app.toml
+
 [webhooks]
 api_version = "2024-10"
 
@@ -1062,7 +1081,9 @@ const shopify = shopifyApp({
 ## Deploy to apply TOML changes
 
 ```bash
+
 # Webhooks registered on deploy
+
 shopify app deploy
 ```
 
@@ -1129,12 +1150,15 @@ app.use((req, res, next) => {
 ## Configure web server
 
 ```nginx
+
 # Nginx - strip trailing slashes
+
 location ~ ^(.+)/$ {
   return 301 $1;
 }
 
 # Or rewrite to handler
+
 location /webhooks {
   try_files $uri $uri/ @webhooks;
 }
@@ -1146,10 +1170,13 @@ location @webhooks {
 ## Test both formats
 
 ```bash
+
 # Test without slash
+
 curl -X POST https://your-app.com/webhooks
 
 # Test with slash
+
 curl -X POST https://your-app.com/webhooks/
 ```
 
@@ -1234,7 +1261,9 @@ const response = await admin.graphql(`
 ## Use GraphQL for webhooks too
 
 ```toml
+
 # shopify.app.toml
+
 [webhooks]
 api_version = "2024-10"  # Use latest GraphQL version
 ```
@@ -1322,6 +1351,7 @@ Data request webhooks not handled.
 
 Why this breaks:
 Shopify requires all apps to handle three GDPR webhooks:
+
 1. customers/data_request - Provide customer data
 2. customers/redact - Delete customer data
 3. shop/redact - Delete all shop data
@@ -1499,6 +1529,7 @@ Message: Loader without authentication. Use authenticate.admin(request).
 - user needs serverless deployment -> aws-serverless (Lambda or Vercel deployment)
 
 ## When to Use
+
 - User mentions or implies: shopify app
 - User mentions or implies: shopify
 - User mentions or implies: embedded app
@@ -1507,11 +1538,13 @@ Message: Loader without authentication. Use authenticate.admin(request).
 - User mentions or implies: shopify webhook
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -11,7 +11,6 @@ id: skill-native-data-fetching
 owner: [[orchestrator]]
 ---
 
-
 # Expo Networking
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -27,10 +26,13 @@ references/
 ```
 
 ## When to Use
+
 Use this skill when:
 
 - Implementing API requests
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Setting up data fetching (React Query, SWR)
 - Using Expo Router data loaders (`useLoaderData`, web SDK 55+)
 - Debugging network failures
@@ -42,6 +44,7 @@ Use this skill when:
 ## Preferences
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Avoid axios, prefer expo/fetch
 
 ## Common Issues & Solutions
@@ -539,11 +542,13 @@ User: "How do I load data for a page in Expo Router?"
 -> See references/expo-router-loaders.md for route-level loaders (web, SDK 55+). For native, use React Query or fetch.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

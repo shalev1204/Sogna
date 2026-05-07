@@ -21,12 +21,14 @@ Advanced patterns for high-performance data access with Dapper in .NET.
 | Migrations | External tools | Built-in |
 
 **Use Dapper when:**
+
 - Performance is critical (hot paths)
 - You need complex SQL (CTEs, window functions)
 - Read-heavy workloads
 - Legacy database schemas
 
 **Use EF Core when:**
+
 - Rich domain models with relationships
 - Need change tracking
 - Want LINQ-to-SQL translation
@@ -551,6 +553,7 @@ var result = await connection.QueryAsync<Product>(sql);
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,6 +1,6 @@
 import { addDomEvent } from "../../events/add-dom-event.js";
-import { CreateProjectionNode } from "./create-projection-node.js";
-export const DocumentProjectionNode = CreateProjectionNode({
+import { createProjectionNode } from "./create-projection-node.js";
+export const DocumentProjectionNode = createProjectionNode({
     attachResizeListener: (ref, notify) => addDomEvent(ref, "resize", notify),
     measureScroll: () => ({
         x: document.documentElement.scrollLeft || document.body?.scrollLeft || 0,

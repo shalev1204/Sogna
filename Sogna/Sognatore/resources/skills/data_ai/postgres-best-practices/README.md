@@ -13,14 +13,18 @@ AI agents and LLMs.
 ## Quick Start
 
 ```bash
+
 # Install dependencies
+
 cd packages/postgres-best-practices-build
 npm install
 
 # Validate existing rules
+
 npm run validate
 
 # Build AGENTS.md
+
 npm run build
 ```
 
@@ -37,6 +41,7 @@ npm run build
    - `advanced-` Advanced Features (LOW)
 
 2. **Copy the template**:
+
    ```bash
    cp rules/_template.md rules/query-your-rule-name.md
    ```
@@ -44,6 +49,7 @@ npm run build
 3. **Fill in the content** following the template structure
 
 4. **Validate and build**:
+
    ```bash
    npm run validate
    npm run build
@@ -103,6 +109,7 @@ tags: relevant, keywords
 ```
 
 ```
+
 ## Writing Guidelines
 
 See `rules/_contributing.md` for detailed guidelines. Key principles:
@@ -126,6 +133,7 @@ See `rules/_contributing.md` for detailed guidelines. Key principles:
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

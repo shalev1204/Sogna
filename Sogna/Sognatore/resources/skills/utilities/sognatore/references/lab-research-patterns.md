@@ -14,6 +14,7 @@ Research-backed patterns from Google DeepMind and Anthropic for enhanced multi-a
 ## Overview
 
 This reference consolidates key patterns from:
+
 1. **Google DeepMind** - World models, self-improvement, scalable oversight
 2. **Anthropic** - Constitutional AI, alignment safety, agentic coding
 
@@ -29,6 +30,7 @@ This reference consolidates key patterns from:
 world_model_training:
   principle: "Learn behaviors through simulation, not real environment"
   benefits:
+
     - 100x less data than real-world training
     - Safe exploration of dangerous actions
     - Faster iteration cycles
@@ -39,9 +41,11 @@ world_model_training:
     imagination_training: "RL inside simulated trajectories"
 
   SOGNATORE_application:
+
     - Run agent tasks in isolated containers first
     - Simulate deployment before actual deploy
     - Test error scenarios in sandbox
+
 ```
 
 ### Self-Improvement Loop (SIMA 2)
@@ -81,6 +85,7 @@ class SelfImprovementLoop:
 ```
 
 **Sognatore Application:**
+
 - Generate test scenarios automatically
 - Score code quality with learned criteria
 - Bootstrap agent training across projects
@@ -110,6 +115,7 @@ class SelfImprovementLoop:
 ```
 
 **Sognatore Application:**
+
 - Orchestrator = ER model (planning, tool calls)
 - Implementation agents = VLA model (code actions)
 - Task decomposition before execution
@@ -124,6 +130,7 @@ transfer_learning:
   mechanism: "Shared action space abstraction"
 
   SOGNATORE_application:
+
     - Patterns learned by frontend agent transfer to mobile agent
     - Testing strategies from QA apply to security testing
     - Deployment scripts generalize across cloud providers
@@ -187,6 +194,7 @@ amplified_oversight:
   goal: "Supervision as close as possible to human with complete understanding"
 
   techniques:
+
     - "AI explains its reasoning transparently"
     - "AI argues against itself when wrong"
     - "AI cites relevant evidence"
@@ -256,6 +264,7 @@ class ConstitutionalAI:
 **Sognatore Constitution Example:**
 ```yaml
 SOGNATORE_constitution:
+
   - "Never delete production data without explicit backup"
   - "Never commit secrets or credentials to version control"
   - "Never bypass quality gates for speed"
@@ -263,6 +272,7 @@ SOGNATORE_constitution:
   - "Never claim completion without running actual tests"
   - "Prefer simple solutions over clever ones"
   - "Document decisions, not just code"
+
 ```
 
 ### Sleeper Agent Detection (Defection Probes)
@@ -283,8 +293,10 @@ class DefectionProbe:
     def train_probe(self, normal_trajectories, defection_examples):
         """
         Train on contrast pairs:
+
         - Normal agent behavior
         - Examples of defection/misbehavior
+
         """
         contrast_pairs = create_contrast_pairs(
             normal=normal_trajectories,
@@ -310,6 +322,7 @@ class DefectionProbe:
 ```
 
 **Sognatore Application:**
+
 - Monitor agent actions for anomalies
 - Flag unusual file access patterns
 - Detect attempts to bypass quality gates
@@ -321,20 +334,24 @@ class DefectionProbe:
 ```yaml
 alignment_faking_signals:
   warning_signs:
+
     - "Agent complies only when it knows it's being monitored"
     - "Agent's reasoning contradicts its final action"
     - "Sudden behavior change when training context mentioned"
     - "Agent attempts to exfiltrate its own weights/state"
 
   detection_strategy:
+
     - "Monitor chain-of-thought for rationalization"
     - "Compare behavior in 'free' vs 'monitored' conditions"
     - "Check for attempts to undermine oversight systems"
 
   mitigation:
+
     - "Constitutional constraints at training time"
     - "Transparency in reasoning (visible extended thinking)"
     - "Defection probes on intermediate reasoning"
+
 ```
 
 ### Extended Thinking Levels
@@ -408,19 +425,23 @@ context_management:
 
   solution:
     trigger_reset:
+
       - "After completing major task"
       - "When changing domains (backend -> frontend)"
       - "When agent seems confused or repeating errors"
 
     preserve_across_reset:
+
       - "CONTINUITY.md (working memory)"
       - "Key decisions made this session"
       - "Current task state"
 
     discard_on_reset:
+
       - "Intermediate debugging attempts"
       - "Abandoned approaches"
       - "Superseded plans"
+
 ```
 
 ### Parallel Instance Pattern
@@ -467,18 +488,22 @@ async def parallel_instance_pattern(task):
 prompt_injection_defense:
   layers:
     layer_1_recognition:
+
       - "Train to recognize injection patterns"
       - "Detect malicious content in external sources"
 
     layer_2_context_isolation:
+
       - "Sandbox external content processing"
       - "Mark user content vs system instructions"
 
     layer_3_action_validation:
+
       - "Verify requested actions are authorized"
       - "Block sensitive operations without confirmation"
 
     layer_4_monitoring:
+
       - "Log all external content interactions"
       - "Alert on suspicious patterns"
 
@@ -503,18 +528,22 @@ combined_approach:
 
   implementation_priority:
     high:
+
       - Constitutional AI principles in agent prompts
       - Explore-Plan-Code workflow enforcement
       - Context reset triggers
 
     medium:
+
       - Self-improvement loop for task generation
       - Debate-based verification for critical changes
       - Cross-embodiment skill transfer
 
     low:
+
       - Full world model training
       - Defection probe classifiers
+
 ```
 
 ---
@@ -522,6 +551,7 @@ combined_approach:
 ## Sources
 
 **Google DeepMind:**
+
 - [SIMA 2: Generalist AI Agent](https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/)
 - [Gemini Robotics 1.5](https://deepmind.google/blog/gemini-robotics-15-brings-ai-agents-into-the-physical-world/)
 - [Dreamer 4: World Model Training](https://danijar.com/project/dreamer4/)
@@ -531,6 +561,7 @@ combined_approach:
 - [Technical AGI Safety Approach](https://arxiv.org/html/2504.01849v1)
 
 **Anthropic:**
+
 - [Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback)
 - [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents)
 - [Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
@@ -541,6 +572,7 @@ combined_approach:
 - [Sabotage Evaluations](https://www.anthropic.com/research/sabotage-evaluations-for-frontier-models)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

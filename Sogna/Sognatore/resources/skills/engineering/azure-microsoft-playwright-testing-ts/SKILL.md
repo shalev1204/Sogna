@@ -8,7 +8,6 @@ id: skill-azure-microsoft-playwright-testing-ts
 owner: [[eng-qa]]
 ---
 
-
 # Azure Playwright Workspaces SDK for TypeScript
 
 Run Playwright tests at scale with cloud-hosted browsers and integrated Azure portal reporting.
@@ -18,16 +17,20 @@ Run Playwright tests at scale with cloud-hosted browsers and integrated Azure po
 ## Installation
 
 ```bash
+
 # Recommended: Auto-generates config
+
 npm init @azure/playwright@latest
 
 # Manual installation
+
 npm install @azure/playwright --save-dev
 npm install @playwright/test@^1.47 --save-dev
 npm install @azure/identity --save-dev
 ```
 
 **Requirements:**
+
 - Playwright version 1.47+ (basic usage)
 - Playwright version 1.57+ (Azure reporter features)
 
@@ -42,7 +45,9 @@ PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworks
 ### Microsoft Entra ID (Recommended)
 
 ```bash
+
 # Sign in with Azure CLI
+
 az login
 ```
 
@@ -195,9 +200,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
 
       - name: Azure Login
+
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
@@ -207,6 +214,7 @@ jobs:
       - run: npm ci
       
       - name: Run Tests
+
         env:
           PLAYWRIGHT_SERVICE_URL: ${{ secrets.PLAYWRIGHT_SERVICE_URL }}
         run: npx playwright test -c playwright.service.config.ts --workers=20
@@ -215,7 +223,9 @@ jobs:
 ### Azure Pipelines
 
 ```yaml
+
 - task: AzureCLI@2
+
   displayName: Run Playwright Tests
   env:
     PLAYWRIGHT_SERVICE_URL: $(PLAYWRIGHT_SERVICE_URL)
@@ -307,14 +317,17 @@ export default defineConfig(
 6. **HTML reporter first** — When using Azure reporter, list HTML reporter before Azure reporter
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

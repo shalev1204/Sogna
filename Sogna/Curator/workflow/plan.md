@@ -28,22 +28,26 @@ Use the `project-planner` agent with this context:
 
 ```
 CONTEXT:
+
 - User Request: $ARGUMENTS
 - Mode: PLANNING ONLY (no code)
 - Output: docs/PLAN-{task-slug}.md (dynamic naming)
 
 NAMING RULES:
+
 1. Extract 2-3 key words from request
 2. Lowercase, hyphen-separated
 3. Max 30 characters
 4. Example: "e-commerce cart" → PLAN-ecommerce-cart.md
 
 RULES:
+
 1. Follow project-planner.md Phase -1 (Context Check)
 2. Follow project-planner.md Phase 0 (Socratic Gate)
 3. Create PLAN-{slug}.md with task breakdown
 4. DO NOT write any code files
 5. REPORT the exact file name created
+
 ```
 
 ---
@@ -66,9 +70,11 @@ Tell user:
 [OK] Plan created: docs/PLAN-{slug}.md
 
 Next steps:
+
 - Review the plan
 - Run `/create` to start implementation
 - Or modify plan manually
+
 ```
 
 ---
@@ -92,4 +98,3 @@ Next steps:
 /plan mobile app for fitness tracking
 /plan SaaS dashboard with analytics
 ```
-

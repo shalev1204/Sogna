@@ -8,7 +8,6 @@ id: skill-azure-mgmt-apicenter-py
 owner: [[eng-api]]
 ---
 
-
 # Azure API Center Management SDK for Python
 
 Manage API inventory, metadata, and governance in Azure API Center.
@@ -133,6 +132,7 @@ definition = client.api_definitions.create_or_update(
 from azure.mgmt.apicenter.models import ApiSpecImportRequest, ApiSpecImportSourceFormat
 
 # Import from inline content
+
 client.api_definitions.import_specification(
     resource_group_name="my-resource-group",
     service_name="my-api-center",
@@ -245,14 +245,17 @@ metadata = client.metadata_schemas.create_or_update(
 6. **Add contacts** for API ownership and support
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

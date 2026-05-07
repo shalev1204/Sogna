@@ -12,7 +12,6 @@ id: skill-linkedin-profile-optimizer
 owner: [[orchestrator]]
 ---
 
-
 # LinkedIn Profile Optimizer & Authority Builder
 
 ## Overview
@@ -32,6 +31,7 @@ This skill helps professionals (founders, lecturers, IT experts, and agritech bu
 ## Input Types
 
 This skill accepts and can process:
+
 - **LinkedIn Profile Links / Usernames**: Analyzing public profile data and positioning from full URLs or unique handles (e.g., `whoisabhishekadhikari`).
 - **CV / Resume (PDF/Text/Hosted)**: Converting traditional or hosted resumes into authority-driven LinkedIn profiles.
 - **Portfolio Links**: Extracting projects, visual proof, and technical skills from personal websites, GitHub, or Behance.
@@ -43,6 +43,7 @@ This skill accepts and can process:
 ### Phase 0: Input Analysis & Enhancement
 
 Before proceeding to context gathering, analyze the provided input:
+
 - **If a LinkedIn Link or Username is provided**: Identify current headline and positioning.
     - **Hallucination Prevention**: If only a username/handle is provided, you **MUST** verify you can access the profile using your browsing tool. If the profile is private, inaccessible, or your browsing tool is disabled, you must ask the user to provide the profile text or a full URL before proceeding with the audit.
 - **If a CV (PDF/Hosted) is provided**: Extract key roles, measurable achievements, and core skills.
@@ -55,6 +56,7 @@ Before optimizing, you must identify the user's **Core Identity**.
 If the user has multiple roles (e.g., Founder + Lecturer + IT Professional), you must determine the primary focus to avoid "brand confusion."
 
 **Ask the user:**
+
 1. What is your primary career goal or "Mission"?
 2. Who is your target audience (Recruiters, Investors, Clients, Students)?
 3. What is your primary niche or industry focus (e.g., Agritech, IT Infrastructure)?
@@ -64,6 +66,7 @@ If the user has multiple roles (e.g., Founder + Lecturer + IT Professional), you
 Critically evaluate the existing profile like a global recruiter, high-level investor, or potential high-ticket client.
 
 **Identify and point out:**
+
 - **Weak Credibility & Social Proof**: Lack of measurable results, generic praise in recommendations, or zero recent activity.
 - **Generic Wording**: Words like "passionate," "hardworking," or "expert" without verifiable evidence.
 - **Brand Confusion (Anchor Identity)**: Mixing too many unrelated roles (e.g., "DJ & Software Engineer") without a unifying narrative.
@@ -77,12 +80,14 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
 ### Phase 3: Profile Optimization
 
 #### 1. Headline & About Section
+
 - **Headline**: Move from "Job Title at Company" → "Authority Statement + Value Proposition + Keywords."
 - **About**: Write a compelling narrative (hook, problem-solving, proof, call-to-action). 
     - **SEO Intent Check**: Ensure primary keywords are in the first 2-3 lines.
     - **Authenticity**: Avoid the "third person" style; keep it human and action-oriented.
 
 #### 2. Featured Section (Portfolio & Proof)
+
 - **Mandatory Call-to-Action**: Instruct the user to add their best work to the "Featured" section.
 - **Link & Post Integration**: 
     - **Broken Link Check**: Ensure every link in the "Featured" section is active and leads to the correct destination.
@@ -91,12 +96,14 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
     - Ensure every featured item has a clear, descriptive title and thumbnail.
 
 #### 3. Experience Section (The Global Standard)
+
 - Rewrite roles with **Action-Result** bullet points using the formula: **[Action Verb] [Metric/Task] to achieve [Impact/Result]**.
 - **Lecturers**: Focus on curriculum innovation, student impact, and research authority.
 - **Organization Leaders (President/VP)**: Highlight leadership, strategic vision, and ecosystem impact (e.g., CAN Federation, Jaycees).
 - **Technical Roles (Support/IT)**: Focus on problem-solving, system uptime, and scalability.
 
 #### 4. Skills & SEO
+
 - **Identify Bulk Skills**: Remove generic fillers (e.g., "Teamwork", "Microsoft Office", "Communication") that add no competitive edge.
 - **Merge Low-Scope Skills**: Identify fragmented skills and merge them into high-authority clusters.
     - *Example*: Merge "Data Entry" + "Excel" + "Admin" → **Operations & Data Strategy**.
@@ -104,14 +111,14 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
 - **Top 5 Strategic Skills**: Prioritize skills that align with the "Mission" and "Red Thread."
 - **Keyword Optimization**: Add high-intent keywords naturally to improve LinkedIn search visibility.
 
-
-
 ### Phase 4: Engagement & Content Strategy
 
 #### 1. Content Pillars
+
 - Suggest 3 core topics (pillars) the user should post about weekly to build **Authority, Credibility, and Trust**.
 
 #### 2. Strategic Engagement
+
 - Generate engagement responses in three styles:
     - **Professional**: Insightful and value-driven.
     - **Gen-Z / Impactful**: Short, punchy, and modern.
@@ -132,13 +139,16 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
 **Input**: Handle `whoisabhishekadhikari` + the following profile text: "[User pastes About section describing roles as Founder, Lecturer, and IT Professional]"
 
 **Audit Analysis**:
+
 - **Identity**: Multi-faceted (Founder, Lecturer, IT Professional). Needs a "Red Thread" to unify these roles.
 - **Headline Recommendation**: *"IT Strategist & Agritech Founder | Transforming Agricultural Systems with Scalable Tech | Lecturer in Computer Science"*
 
 ### Example 3: Before (Local CV Style)
+
 > "Lecturer at ABC College. Teaching IT subjects. Interested in agriculture."
 
 ### Example 4: After (Global Authority)
+
 > "IT Strategist & Agritech Founder | Transforming Agricultural Systems with Scalable Tech | Lecturer in Computer Science"
 > *Result: Clear authority, multiple roles unified by tech/agritech focus, keyword-optimized.*
 
@@ -169,6 +179,7 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
 - `@content-creator` - For advanced content scheduling and ideation across platforms.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

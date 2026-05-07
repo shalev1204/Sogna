@@ -8,7 +8,6 @@ id: skill-data-storytelling
 owner: [[orchestrator]]
 ---
 
-
 # Data Storytelling
 
 Transform raw data into compelling narratives that drive decisions and inspire action.
@@ -49,12 +48,14 @@ Resolution: Insights and recommendations
 ### 2. Narrative Arc
 
 ```
+
 1. Hook: Grab attention with surprising insight
 2. Context: Establish the baseline
 3. Rising Action: Build through data points
 4. Climax: The key insight
 5. Resolution: Recommendations
 6. Call to Action: Next steps
+
 ```
 
 ### 3. Three Pillars
@@ -70,6 +71,7 @@ Resolution: Insights and recommendations
 ### Framework 1: The Problem-Solution Story
 
 ```markdown
+
 # Customer Churn Analysis
 
 ## The Hook
@@ -116,6 +118,7 @@ Approve $50K budget for onboarding automation.
 ### Framework 2: The Trend Story
 
 ```markdown
+
 # Q4 Performance Analysis
 
 ## Where We Started
@@ -155,6 +158,7 @@ Target: $1.8M MRR by Q2.
 ### Framework 3: The Comparison Story
 
 ```markdown
+
 # Market Opportunity Analysis
 
 ## The Question
@@ -204,6 +208,7 @@ Enter EMEA in Year 2 with localization ready.
 - Timezone coverage: Hire 24/7 support
 - Cultural fit: Local partnerships
 - Payment: Multi-currency from day 1
+
 ```
 
 ## Visualization Techniques
@@ -253,9 +258,11 @@ import pandas as pd
 fig, ax = plt.subplots(figsize=(12, 6))
 
 # Plot the main data
+
 ax.plot(dates, revenue, linewidth=2, color='#2E86AB')
 
 # Add annotation for key events
+
 ax.annotate(
     'Product Launch\n+32% spike',
     xy=(launch_date, launch_revenue),
@@ -266,10 +273,12 @@ ax.annotate(
 )
 
 # Highlight a region
+
 ax.axvspan(growth_start, growth_end, alpha=0.2, color='green',
            label='Growth Period')
 
 # Add threshold line
+
 ax.axhline(y=target, color='gray', linestyle='--',
            label=f'Target: ${target:,.0f}')
 
@@ -346,6 +355,7 @@ Next steps
 ### Template 3: One-Page Dashboard Story
 
 ```markdown
+
 # Monthly Business Review: January 2024
 
 ## THE HEADLINE
@@ -389,6 +399,7 @@ CPC up 35% while conversion flat.
 - Launch content marketing pilot
 - Complete self-serve MVP
 - Reduce time-to-value to < 7 days
+
 ```
 
 ## Writing Techniques
@@ -471,11 +482,13 @@ Present ranges:
 - [Resonate (Nancy Duarte)](https://www.duarte.com/resonate/)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -11,7 +11,6 @@ id: skill-nextjs-react-expert
 owner: [[orchestrator]]
 ---
 
-
 # Next.js & React Performance Expert
 
 > **From Vercel Engineering** - 57 optimization rules prioritized by impact
@@ -137,18 +136,23 @@ Before shipping to production:
 **Critical (Must Fix):**
 
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+
 - [ ] No sequential data fetching (waterfalls eliminated)
 - [ ] Bundle size < 200KB for main bundle
 - [ ] No barrel imports in app code
 - [ ] Dynamic imports used for large components
+
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+
 - [ ] Parallel data fetching where possible
 
 **High Priority:**
 
 - [ ] Server components used where appropriate
 - [ ] API routes optimized (no N+1 queries)
+
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+
 - [ ] Suspense boundaries for data fetching
 - [ ] Static generation used where possible
 

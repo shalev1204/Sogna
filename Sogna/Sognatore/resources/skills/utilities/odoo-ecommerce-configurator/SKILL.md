@@ -7,7 +7,6 @@ id: skill-odoo-ecommerce-configurator
 owner: [[orchestrator]]
 ---
 
-
 # Odoo eCommerce Configurator
 
 ## Overview
@@ -110,6 +109,7 @@ Model: eCommerce Cart (sale.order with state = 'draft')
 Filter: Cart not updated in 1 hour AND not confirmed
 
 Actions:
+
   1. Wait 1 hour
   2. Send Email: "You left something behind!"  (use a recovery email template)
   3. Wait 24 hours
@@ -136,6 +136,7 @@ Note: Some Odoo hosting plans may require "Email Marketing" app enabled.
 - Odoo eCommerce does not support **subscription billing** natively — that requires the Enterprise **Subscriptions** module.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

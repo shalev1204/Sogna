@@ -14,13 +14,19 @@ Properties use YAML frontmatter at the start of a note:
 title: My Note Title
 date: 2024-01-15
 tags:
+
   - project
   - important
+
 aliases:
+
   - My Note
   - Alternative Name
+
 cssclasses:
+
   - custom-class
+
 status: in-progress
 rating: 4.5
 completed: false
@@ -62,12 +68,15 @@ In frontmatter:
 ```yaml
 ---
 tags:
+
   - tag1
   - nested/tag2
+
 ---
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

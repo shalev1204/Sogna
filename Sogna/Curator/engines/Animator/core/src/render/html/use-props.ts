@@ -2,7 +2,7 @@
 
 import { AnyResolvedKeyframe, buildHTMLStyles, isForcedsognaflowValue, issognaflowValue, sognaflowValue } from "sognaflow-dom"
 import { HTMLProps, useMemo } from "react"
-import { sognaflowProps } from "../../sognaflow/types"
+import { sognaflowProps } from "../../motion/types"
 import { ResolvedValues } from "../types.js"
 import { createHtmlRenderState } from "./utils/create-render-state.js"
 
@@ -12,16 +12,17 @@ export function copyRawValuesOnly(
     props: sognaflowProps
 ) {
     for (const key in source) {
-        if (!issognaflowValue(source[key]) && !isForcedsognaflowValue(key, props)) {
+        if (!issognaflowValue(source[key]) && !isForcedsognaflowValue(key, props as any)) {
             target[key] = source[key] as AnyResolvedKeyframe
         }
     }
 }
 
 function useInitialsognaflowValues(
-    { transformTemplate }: sognaflowProps,
+    props: sognaflowProps,
     visualState: ResolvedValues
 ) {
+    const { transformTemplate } = props as any
     return useMemo(() => {
         const state = createHtmlRenderState()
 
@@ -56,7 +57,7 @@ export function useHTMLProps(
     const htmlProps: any = {}
     const style = useStyle(props, visualState)
 
-    if (props.drag && props.dragListener !== false) {
+    if ((props as any).drag && (props as any).dragListener !== false) {
         // Disable the ghost element when a user drags
         htmlProps.draggable = false
 
@@ -68,14 +69,16 @@ export function useHTMLProps(
 
         // Disable scrolling on the draggable direction
         style.touchAction =
-            props.drag === true
+            (props as any).drag === true
                 ? "none"
-                : `pan-${props.drag === "x" ? "y" : "x"}`
+                : `pan-${(props as any).drag === "x" ? "y" : "x"}`
     }
 
     if (
         props.tabIndex === undefined &&
-        (props.onTap || props.onTapStart || props.whileTap)
+        ((props as any).onTap ||
+            (props as any).onTapStart ||
+            (props as any).whileTap)
     ) {
         htmlProps.tabIndex = 0
     }

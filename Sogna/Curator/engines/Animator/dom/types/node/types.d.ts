@@ -969,3 +969,4 @@ export interface SognaflowNodeOptions extends SognaflowNodeAnimationOptions, Sog
      */
     propagate?: PropagateOptions;
 }
+export type sognaflowNodeOptions = SognaflowNodeOptions;

@@ -23,6 +23,7 @@ Use this checklist when code review alone cannot explain the SwiftUI performance
 ## Default profiling request
 
 Ask the user to:
+
 - Run the app in a Release build when possible.
 - Use the SwiftUI Instruments template.
 - Reproduce the exact problematic interaction only long enough to capture the issue.
@@ -51,6 +52,7 @@ Ask the user to:
 - Screenshots without the reproduction note are much harder to interpret.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

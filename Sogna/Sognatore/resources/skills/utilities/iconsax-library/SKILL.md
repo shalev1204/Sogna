@@ -8,7 +8,6 @@ id: skill-iconsax-library
 owner: [[orchestrator]]
 ---
 
-
 # Iconsax Library Skill
 
 [Iconsax](https://iconsax.io/) is an intuitive and comprehensive icon library designed for modern digital products, offering styles far superior to generic default sets.
@@ -18,6 +17,7 @@ owner: [[orchestrator]]
 Use this skill to maintain visual consistency across an application with highest-tier professional icons. The library is optimized for both designers and developers to create a distinctly premium feel.
 
 ## When to Use
+
 Trigger this skill when:
 
 - Designing or building highly crafted navigation menus, toolbars, and action buttons.
@@ -41,11 +41,13 @@ Trigger this skill when:
 - **Sizing & Alignment**: Follow strict, standard grid sizes (24x24) to ensure absolute crispness on high-DPI displays.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

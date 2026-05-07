@@ -30,12 +30,14 @@ Master React version upgrades, class to hooks migration, concurrent features ado
 **Breaking Changes by Version:**
 
 **React 17:**
+
 - Event delegation changes
 - No event pooling
 - Effect cleanup timing
 - JSX transform (no React import needed)
 
 **React 18:**
+
 - Automatic batching
 - Concurrent rendering
 - Strict Mode changes (double invocation)
@@ -45,6 +47,7 @@ Master React version upgrades, class to hooks migration, concurrent features ado
 ## Class to Hooks Migration
 
 ### State Management
+
 ```javascript
 // Before: Class component
 class Counter extends React.Component {
@@ -89,6 +92,7 @@ function Counter() {
 ```
 
 ### Lifecycle Methods to Hooks
+
 ```javascript
 // Before: Lifecycle methods
 class DataFetcher extends React.Component {
@@ -168,6 +172,7 @@ function DataFetcher({ id }) {
 ```
 
 ### Context and HOCs to Hooks
+
 ```javascript
 // Before: Context consumer and HOC
 const ThemeContext = React.createContext();
@@ -234,6 +239,7 @@ function UserProfile() {
 ## React 18 Concurrent Features
 
 ### New Root API
+
 ```javascript
 // Before: React 17
 import ReactDOM from 'react-dom';
@@ -248,6 +254,7 @@ root.render(<App />);
 ```
 
 ### Automatic Batching
+
 ```javascript
 // React 18: All updates are batched
 function handleClick() {
@@ -275,6 +282,7 @@ setFlag(f => !f);
 ```
 
 ### Transitions
+
 ```javascript
 import { useState, useTransition } from 'react';
 
@@ -304,6 +312,7 @@ function SearchResults() {
 ```
 
 ### Suspense for Data Fetching
+
 ```javascript
 import { Suspense } from 'react';
 
@@ -338,28 +347,36 @@ function ProfileTimeline() {
 ## Codemods for Automation
 
 ### Run React Codemods
+
 ```bash
+
 # Install jscodeshift
+
 npm install -g jscodeshift
 
 # React 16.9 codemod (rename unsafe lifecycle methods)
+
 npx react-codeshift <transform> <path>
 
 # Example: Rename UNSAFE_ methods
+
 npx react-codeshift --parser=tsx \
   --transform=react-codeshift/transforms/rename-unsafe-lifecycles.js \
   src/
 
 # Update to new JSX Transform (React 17+)
+
 npx react-codeshift --parser=tsx \
   --transform=react-codeshift/transforms/new-jsx-transform.js \
   src/
 
 # Class to Hooks (third-party)
+
 npx codemod react/hooks/convert-class-to-function src/
 ```
 
 ### Custom Codemod Example
+
 ```javascript
 // custom-codemod.js
 module.exports = function(file, api) {
@@ -386,6 +403,7 @@ module.exports = function(file, api) {
 ## Performance Optimization
 
 ### useMemo and useCallback
+
 ```javascript
 function ExpensiveComponent({ items, filter }) {
   // Memoize expensive calculation
@@ -412,6 +430,7 @@ const List = React.memo(({ items, onClick }) => {
 ```
 
 ### Code Splitting
+
 ```javascript
 import { lazy, Suspense } from 'react';
 
@@ -463,13 +482,16 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 ## Migration Checklist
 
 ```markdown
+
 ### Pre-Migration
+
 - [ ] Update dependencies incrementally (not all at once)
 - [ ] Review breaking changes in release notes
 - [ ] Set up testing suite
 - [ ] Create feature branch
 
 ### Class → Hooks Migration
+
 - [ ] Identify class components to migrate
 - [ ] Start with leaf components (no children)
 - [ ] Convert state to useState
@@ -479,6 +501,7 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 - [ ] Test thoroughly
 
 ### React 18 Upgrade
+
 - [ ] Update to React 17 first (if needed)
 - [ ] Update react and react-dom to 18
 - [ ] Update @types/react if using TypeScript
@@ -488,6 +511,7 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 - [ ] Adopt Suspense/Transitions where beneficial
 
 ### Performance
+
 - [ ] Identify performance bottlenecks
 - [ ] Add React.memo where appropriate
 - [ ] Use useMemo/useCallback for expensive operations
@@ -495,10 +519,12 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 - [ ] Optimize re-renders
 
 ### Testing
+
 - [ ] Update test utilities (React Testing Library)
 - [ ] Test with React 18 features
 - [ ] Check for warnings in console
 - [ ] Performance testing
+
 ```
 
 ## Resources
@@ -531,6 +557,7 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 - Breaking change assumptions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

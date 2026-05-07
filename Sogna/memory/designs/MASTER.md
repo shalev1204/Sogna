@@ -1,11 +1,13 @@
 ﻿## Design System: SOGNA INSTITUTIONAL INTERFACE
 
 ### Pattern
+
 - **Name:** Immersive + Interactive
 - **CTA Placement:** Above fold
 - **Sections:** Hero > Features > CTA
 
 ### Style
+
 - **Name:** Dark Mode (OLED)
 - **Mode Support:** Light Ô£ù No | Dark Ô£ô Only
 - **Keywords:** Dark theme, low light, high contrast, deep black, midnight blue, eye-friendly, OLED, night mode, power efficient
@@ -13,6 +15,7 @@
 - **Performance:** ÔÜí Excellent | **Accessibility:** Ô£ô WCAG AAA
 
 ### Colors
+
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
 | Primary | `#00FFFF` | `--color-primary` |
@@ -29,18 +32,22 @@
 *Notes: Quantum cyan + interference purple*
 
 ### Typography
+
 - **Heading:** Inter
 - **Body:** Inter
 - **Mood:** Futuristic + Scientific typography
 
 ### Key Effects
+
 Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emission, high readability, visible focus
 
 ### Avoid (Anti-patterns)
+
 - Generic tech design
 - No viz
 
 ### Pre-Delivery Checklist
+
 - [ ] No emojis as icons (use SVG: Heroicons/Lucide)
 - [ ] cursor-pointer on all clickable elements
 - [ ] Hover states with smooth transitions (150-300ms)
@@ -50,6 +57,7 @@ Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emiss
 - [ ] Responsive: 375px, 768px, 1024px, 1440px
 
 ### Design Tokens (CSS)
+
 ```css
 :root {
   --color-primary: #00FFFF;
@@ -72,4 +80,3 @@ Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emiss
   --base-padding: calc(1.5rem * var(--density-scale));
 }
 ```
-

@@ -8,7 +8,6 @@ id: skill-azure-servicebus-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Service Bus SDK for Python
 
 Enterprise messaging for reliable cloud communication with queues and pub/sub topics.
@@ -163,12 +162,15 @@ async with receiver:
 ## Topics and Subscriptions
 
 ```python
+
 # Send to topic
+
 sender = client.get_topic_sender(topic_name="mytopic")
 async with sender:
     await sender.send_messages(ServiceBusMessage("Topic message"))
 
 # Receive from subscription
+
 receiver = client.get_subscription_receiver(
     topic_name="mytopic",
     subscription_name="mysubscription"
@@ -180,18 +182,22 @@ async with receiver:
 ## Sessions (FIFO)
 
 ```python
+
 # Send with session
+
 message = ServiceBusMessage("Session message")
 message.session_id = "order-123"
 await sender.send_messages(message)
 
 # Receive from specific session
+
 receiver = client.get_queue_receiver(
     queue_name="session-queue",
     session_id="order-123"
 )
 
 # Receive from next available session
+
 from azure.servicebus import NEXT_AVAILABLE_SESSION
 receiver = client.get_queue_receiver(
     queue_name="session-queue",
@@ -208,9 +214,11 @@ message = ServiceBusMessage("Scheduled message")
 scheduled_time = datetime.now(timezone.utc) + timedelta(minutes=10)
 
 # Schedule message
+
 sequence_number = await sender.schedule_messages(message, scheduled_time)
 
 # Cancel scheduled message
+
 await sender.cancel_scheduled_messages(sequence_number)
 ```
 
@@ -220,6 +228,7 @@ await sender.cancel_scheduled_messages(sequence_number)
 from azure.servicebus import ServiceBusSubQueue
 
 # Receive from dead-letter queue
+
 dlq_receiver = client.get_queue_receiver(
     queue_name="myqueue",
     sub_queue=ServiceBusSubQueue.DEAD_LETTER
@@ -270,14 +279,17 @@ with ServiceBusClient(
 | scripts/setup_servicebus.py | CLI for queue/topic/subscription management and DLQ monitoring |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

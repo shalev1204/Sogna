@@ -8,7 +8,6 @@ id: skill-azure-cosmos-ts
 owner: [[orchestrator]]
 ---
 
-
 # @azure/cosmos (TypeScript/JavaScript)
 
 Data plane SDK for Azure Cosmos DB NoSQL API operations — CRUD on documents, queries, bulk operations.
@@ -32,7 +31,9 @@ npm install @azure/cosmos @azure/identity
 COSMOS_ENDPOINT=https://<account>.documents.azure.com:443/
 COSMOS_DATABASE=<database-name>
 COSMOS_CONTAINER=<container-name>
+
 # For key-based auth only (prefer AAD)
+
 COSMOS_KEY=<account-key>
 ```
 
@@ -480,14 +481,17 @@ export class ProductService {
 | `@azure/identity` | Authentication | `npm install @azure/identity` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

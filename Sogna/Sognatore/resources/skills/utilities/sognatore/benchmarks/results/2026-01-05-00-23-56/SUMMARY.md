@@ -14,11 +14,13 @@ This directory contains benchmark results for Sognatore multi-agent system.
 ## Benchmarks Available
 
 ### HumanEval
+
 - **Problems:** 164 Python programming problems
 - **Metric:** Pass@1 (percentage of problems solved on first attempt)
 - **Competitor Baseline:** MetaGPT achieves 85.9-87.7%
 
 ### SWE-bench Lite
+
 - **Problems:** 300 real-world GitHub issues
 - **Metric:** Resolution rate
 - **Competitor Baseline:** Top agents achieve 45-77%
@@ -26,10 +28,13 @@ This directory contains benchmark results for Sognatore multi-agent system.
 ## Running Benchmarks
 
 ```bash
+
 # Run all benchmarks
+
 ./benchmarks/run-benchmarks.sh all
 
 # Run specific benchmark
+
 ./benchmarks/run-benchmarks.sh humaneval --execute
 ./benchmarks/run-benchmarks.sh swebench --execute
 ```
@@ -37,6 +42,7 @@ This directory contains benchmark results for Sognatore multi-agent system.
 ## Results Format
 
 Results are saved as JSON files with:
+
 - Timestamp
 - Problem count
 - Pass rate
@@ -47,6 +53,7 @@ Results are saved as JSON files with:
 ## Methodology
 
 Sognatore uses its multi-agent architecture to solve each problem:
+
 1. **Architect Agent** analyzes the problem
 2. **Engineer Agent** implements the solution
 3. **QA Agent** validates with test cases
@@ -55,6 +62,7 @@ Sognatore uses its multi-agent architecture to solve each problem:
 This mirrors real-world software development more accurately than single-agent approaches.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

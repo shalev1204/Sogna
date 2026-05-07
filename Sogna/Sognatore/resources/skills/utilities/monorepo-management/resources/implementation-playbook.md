@@ -29,6 +29,7 @@ Build efficient, scalable monorepos that enable code sharing, consistent tooling
 ### 1. Why Monorepos?
 
 **Advantages:**
+
 - Shared code and dependencies
 - Atomic commits across projects
 - Consistent tooling and standards
@@ -37,6 +38,7 @@ Build efficient, scalable monorepos that enable code sharing, consistent tooling
 - Better code visibility
 
 **Challenges:**
+
 - Build performance at scale
 - CI/CD complexity
 - Access control
@@ -45,11 +47,13 @@ Build efficient, scalable monorepos that enable code sharing, consistent tooling
 ### 2. Monorepo Tools
 
 **Package Managers:**
+
 - pnpm workspaces (recommended)
 - npm workspaces
 - Yarn workspaces
 
 **Build Systems:**
+
 - Turborepo (recommended for most)
 - Nx (feature-rich, complex)
 - Lerna (older, maintenance mode)
@@ -59,20 +63,32 @@ Build efficient, scalable monorepos that enable code sharing, consistent tooling
 ### Initial Setup
 
 ```bash
+
 # Create new monorepo
+
 npx create-turbo@latest my-monorepo
 cd my-monorepo
 
 # Structure:
+
 # apps/
+
 #   web/          - Next.js app
+
 #   docs/         - Documentation site
+
 # packages/
+
 #   ui/           - Shared UI components
+
 #   config/       - Shared configurations
+
 #   tsconfig/     - Shared TypeScript configs
+
 # turbo.json      - Turborepo configuration
+
 # package.json    - Root package.json
+
 ```
 
 ### Configuration
@@ -174,61 +190,80 @@ cd my-monorepo
 ### Setup
 
 ```yaml
+
 # pnpm-workspace.yaml
+
 packages:
+
   - 'apps/*'
   - 'packages/*'
   - 'tools/*'
+
 ```
 
 ```json
 // .npmrc
+
 # Hoist shared dependencies
+
 shamefully-hoist=true
 
 # Strict peer dependencies
+
 auto-install-peers=true
 strict-peer-dependencies=true
 
 # Performance
+
 store-dir=~/.pnpm-store
 ```
 
 ### Dependency Management
 
 ```bash
+
 # Install dependency in specific package
+
 pnpm add react --filter @repo/ui
 pnpm add -D typescript --filter @repo/ui
 
 # Install workspace dependency
+
 pnpm add @repo/ui --filter web
 
 # Install in all packages
+
 pnpm add -D eslint -w
 
 # Update all dependencies
+
 pnpm update -r
 
 # Remove dependency
+
 pnpm remove react --filter @repo/ui
 ```
 
 ### Scripts
 
 ```bash
+
 # Run script in specific package
+
 pnpm --filter web dev
 pnpm --filter @repo/ui build
 
 # Run in all packages
+
 pnpm -r build
 pnpm -r test
 
 # Run in parallel
+
 pnpm -r --parallel dev
 
 # Filter by pattern
+
 pnpm --filter "@repo/*" build
 pnpm --filter "...web" build  # Build web and dependencies
 ```
@@ -238,14 +273,18 @@ pnpm --filter "...web" build  # Build web and dependencies
 ### Setup
 
 ```bash
+
 # Create Nx monorepo
+
 npx create-nx-workspace@latest my-org
 
 # Generate applications
+
 nx generate @nx/react:app my-app
 nx generate @nx/next:app my-next-app
 
 # Generate libraries
+
 nx generate @nx/react:lib ui-components
 nx generate @nx/js:lib utils
 ```
@@ -287,19 +326,24 @@ nx generate @nx/js:lib utils
 ### Running Tasks
 
 ```bash
+
 # Run task for specific project
+
 nx build my-app
 nx test ui-components
 nx lint utils
 
 # Run for affected projects
+
 nx affected:build
 nx affected:test --base=main
 
 # Visualize dependencies
+
 nx graph
 
 # Run in parallel
+
 nx run-many --target=build --all --parallel=3
 ```
 
@@ -496,12 +540,16 @@ import type { User, CreateUserInput } from '@repo/types';
 ### Remote Caching
 
 ```bash
+
 # Turborepo Remote Cache (Vercel)
+
 npx turbo login
 npx turbo link
 
 # Custom remote cache
+
 # turbo.json
+
 {
   "remoteCache": {
     "signature": true,
@@ -515,7 +563,9 @@ npx turbo link
 ### GitHub Actions
 
 ```yaml
+
 # .github/workflows/ci.yml
+
 name: CI
 
 on:
@@ -529,41 +579,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v3
+
         with:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0  # For Nx affected commands
 
       - uses: pnpm/action-setup@v2
+
         with:
           version: 8
 
       - uses: actions/setup-node@v3
+
         with:
           node-version: 18
           cache: 'pnpm'
 
       - name: Install dependencies
+
         run: pnpm install --frozen-lockfile
 
       - name: Build
+
         run: pnpm turbo run build
 
       - name: Test
+
         run: pnpm turbo run test
 
       - name: Lint
+
         run: pnpm turbo run lint
 
       - name: Type check
+
         run: pnpm turbo run type-check
 ```
 
 ### Deploy Affected Only
 
 ```yaml
+
 # Deploy only changed apps
+
 - name: Deploy affected apps
+
   run: |
     if pnpm nx affected:apps --base=origin/main --head=HEAD | grep -q "web"; then
       echo "Deploying web app"
@@ -594,23 +656,31 @@ jobs:
 ## Publishing Packages
 
 ```bash
+
 # Using Changesets
+
 pnpm add -Dw @changesets/cli
 pnpm changeset init
 
 # Create changeset
+
 pnpm changeset
 
 # Version packages
+
 pnpm changeset version
 
 # Publish
+
 pnpm changeset publish
 ```
 
 ```yaml
+
 # .github/workflows/release.yml
+
 - name: Create Release Pull Request or Publish
+
   uses: changesets/action@v1
   with:
     publish: pnpm release
@@ -629,6 +699,7 @@ pnpm changeset publish
 - **scripts/dependency-graph.ts**: Visualize package dependencies
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -155,6 +155,7 @@ June 9, 2025| Updated touch control best practices, updated game controller mapp
 June 10, 2024| Added guidance for supporting touch controls and changed title from Game controllers.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

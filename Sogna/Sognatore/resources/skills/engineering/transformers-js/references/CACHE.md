@@ -65,6 +65,7 @@ const classifier = await pipeline('sentiment-analysis');
 ### Cache Location
 
 Browser caches are stored in:
+
 - **Chrome/Edge**: `Cache Storage` in DevTools → Application tab → Cache storage
 - **Firefox**: `about:cache` → Storage
 - **Safari**: Web Inspector → Storage tab
@@ -123,6 +124,7 @@ const classifier = await pipeline('sentiment-analysis');
 ### Default Cache Location
 
 **Default behavior:**
+
 - Cache directory: `./.cache` (relative to where Node.js process runs)
 - Full default path: `~/.cache/huggingface/` when using Hugging Face tools
 
@@ -168,12 +170,16 @@ Implement your own cache for specialized storage backends.
 ```typescript
 interface CacheInterface {
   /**
+
    * Check if a URL is cached
+
    */
   match(url: string): Promise<Response | undefined>;
 
   /**
+
    * Store a URL and its response
+
    */
   put(url: string, response: Response): Promise<void>;
 }
@@ -342,10 +348,12 @@ Transformers.js provides flexible caching options:
 6. Pre-download models for production deployments
 
 For more configuration options, see:
+
 - [Configuration Reference](./CONFIGURATION.md)
 - [Pipeline Options](./PIPELINE_OPTIONS.md)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

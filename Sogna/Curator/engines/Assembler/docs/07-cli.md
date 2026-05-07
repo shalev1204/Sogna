@@ -6,7 +6,9 @@
 
 ```bash
 npm install -g @Assembler/cli
+
 # or use npx
+
 npx @Assembler/cli <command>
 ```
 
@@ -18,8 +20,11 @@ Authenticate with the AN platform.
 
 ```bash
 npx @Assembler/cli login
+
 # Enter your API key: an_sk_...
+
 # Authenticated as John (team: my-team)
+
 ```
 
 Your key is saved to `~/.an/credentials`.
@@ -30,13 +35,19 @@ Bundle and deploy your agent.
 
 ```bash
 npx @Assembler/cli deploy
+
 # Bundling src/agent.ts...
+
 # Bundled (12.3kb)
+
 # Deploying my-agent...
+
 # https://api.an.dev/v1/chat/my-agent
+
 ```
 
 The CLI:
+
 1. Finds your entry point (see detection order below)
 2. Bundles your code + dependencies with esbuild
 3. Deploys to a secure cloud sandbox

@@ -63,6 +63,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 ```
 
 Retry parameters:
+
 - `WithStepMaxRetries(n)`: Maximum retry attempts (default: `0` — no retries)
 - `WithBaseInterval(d)`: Initial delay between retries (default: `100ms`)
 - `WithBackoffFactor(f)`: Multiplier for exponential backoff (default: `2.0`)
@@ -75,6 +76,7 @@ If all retries are exhausted, a `DBOSError` with code `MaxStepRetriesExceeded` i
 Reference: [Configurable Retries](https://docs.dbos.dev/golang/tutorials/step-tutorial#configurable-retries)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

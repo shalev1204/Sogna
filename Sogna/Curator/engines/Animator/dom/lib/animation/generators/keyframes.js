@@ -1,5 +1,5 @@
 import { easeInOut, easingDefinitionToFunction, isEasingArray, } from "sognaflow-utils";
-import { Interpolate as interpolate } from "../../utils/interpolate.js";
+import { Interpolate } from "../../utils/interpolate.js";
 import { defaultOffset } from "../keyframes/offsets/default.js";
 import { convertOffsetToTimes } from "../keyframes/offsets/time.js";
 export function defaultEasing(values, easing) {
@@ -30,7 +30,7 @@ export function keyframes({ duration = 300, keyframes: keyframeValues, times, ea
     times && times.length === keyframeValues.length
         ? times
         : defaultOffset(keyframeValues), duration);
-    const mapTimeToKeyframe = interpolate(absoluteTimes, keyframeValues, {
+    const mapTimeToKeyframe = Interpolate(absoluteTimes, keyframeValues, {
         ease: Array.isArray(easingFunctions)
             ? easingFunctions
             : defaultEasing(keyframeValues, easingFunctions),

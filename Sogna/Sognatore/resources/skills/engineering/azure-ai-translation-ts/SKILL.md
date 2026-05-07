@@ -8,7 +8,6 @@ id: skill-azure-ai-translation-ts
 owner: [[orchestrator]]
 ---
 
-
 # Azure Translation SDKs for TypeScript
 
 Text and document translation with REST-style clients.
@@ -16,10 +15,13 @@ Text and document translation with REST-style clients.
 ## Installation
 
 ```bash
+
 # Text translation
+
 npm install @azure-rest/ai-translation-text @azure/identity
 
 # Document translation
+
 npm install @azure-rest/ai-translation-document @azure/identity
 ```
 
@@ -291,14 +293,17 @@ import type {
 5. **Regional endpoints** - Use regional endpoints for lower latency
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

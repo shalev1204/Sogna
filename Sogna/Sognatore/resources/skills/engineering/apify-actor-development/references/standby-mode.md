@@ -44,7 +44,9 @@ You can recognize a standby Actor by checking the `usesStandbyMode` property in 
 ### Readiness Probe Implementation Example
 
 ```python
+
 # Apify standby readiness probe
+
 from http.server import SimpleHTTPRequestHandler
 
 class GetHandler(SimpleHTTPRequestHandler):
@@ -68,6 +70,7 @@ Key points:
 - This enables proper Actor lifecycle management in standby mode
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

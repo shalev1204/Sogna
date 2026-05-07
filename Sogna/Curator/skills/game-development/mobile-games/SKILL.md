@@ -6,7 +6,6 @@ id: skill-mobile-games
 owner: [[game-developer]], [[prod-pm]], [[eng-mobile]]
 ---
 
-
 # Mobile Game Development
 
 > Platform constraints and optimization principles.

@@ -8,7 +8,6 @@ id: skill-azure-storage-blob-rust
 owner: [[orchestrator]]
 ---
 
-
 # Azure Blob Storage SDK for Rust
 
 Client library for Azure Blob Storage — Microsoft's object storage solution for the cloud.
@@ -23,7 +22,9 @@ cargo add azure_storage_blob azure_identity
 
 ```bash
 AZURE_STORAGE_ACCOUNT_NAME=<storage-account-name>
+
 # Endpoint: https://<account>.blob.core.windows.net/
+
 ```
 
 ## Authentication
@@ -122,6 +123,7 @@ while let Some(blob) = pager.try_next().await? {
 ## RBAC Permissions
 
 For Entra ID auth, assign one of these roles:
+
 - `Storage Blob Data Reader` — read-only
 - `Storage Blob Data Contributor` — read/write
 - `Storage Blob Data Owner` — full access including RBAC
@@ -135,14 +137,17 @@ For Entra ID auth, assign one of these roles:
 | crates.io | https://crates.io/crates/azure_storage_blob |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

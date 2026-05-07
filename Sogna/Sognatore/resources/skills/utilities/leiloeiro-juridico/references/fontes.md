@@ -8,6 +8,7 @@ version: 1.0.0
 # Fontes e Referências — Leiloeiro Jurídico
 
 ## Legislação Principal
+
 - CPC/2015 (Lei 13.105/2015) — Arts. 774-925 (Execução)
 - Lei 9.514/1997 — Alienação Fiduciária (Arts. 22-30)
 - Lei 8.009/1990 — Bem de Família
@@ -19,11 +20,13 @@ version: 1.0.0
 - Decreto 21.981/1932 — Regulamento de Leiloeiros
 
 ## Jurisprudência STJ
+
 - Súmula 308, 364, 478
 - REsp 1.582.489 — Vil preço
 - Tema 1.113 — ITBI
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

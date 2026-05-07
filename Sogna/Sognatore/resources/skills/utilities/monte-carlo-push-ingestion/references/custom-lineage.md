@@ -11,6 +11,7 @@ version: 1.0.0
 
 The `send_lineage()` pycarlo method is the right choice for warehouse tables you own.
 The **GraphQL mutations** in this document are for:
+
 - Non-warehouse assets: dbt models, Airflow DAGs, Fivetran connectors, custom ETL jobs
 - Connecting nodes across different MC resources (warehouses)
 - One-off lineage corrections not tied to a collector run
@@ -192,6 +193,7 @@ def run_mutation(query: str, variables: dict) -> dict:
     return data["data"]
 
 # Example: create a permanent node
+
 result = run_mutation(
     """mutation($objectType: String!, $objectId: String!, $resourceId: UUID, $expireAt: DateTime) {
          createOrUpdateLineageNode(objectType: $objectType, objectId: $objectId,
@@ -210,6 +212,7 @@ print("MCON:", result["createOrUpdateLineageNode"]["node"]["mcon"])
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

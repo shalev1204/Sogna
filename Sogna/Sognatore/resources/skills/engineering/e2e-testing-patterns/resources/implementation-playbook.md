@@ -14,6 +14,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 1. E2E Testing Fundamentals
 
 **What to Test with E2E:**
+
 - Critical user journeys (login, checkout, signup)
 - Complex interactions (drag-and-drop, multi-step forms)
 - Cross-browser compatibility
@@ -21,6 +22,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 - Authentication flows
 
 **What NOT to Test with E2E:**
+
 - Unit-level logic (use unit tests)
 - API contracts (use integration tests)
 - Edge cases (too slow)
@@ -40,6 +42,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ```
 
 **Best Practices:**
+
 - Test user behavior, not implementation
 - Keep tests independent
 - Make tests deterministic
@@ -538,6 +541,7 @@ await page.pause();  // Pauses execution, opens inspector
 - **scripts/test-analyzer.ts**: Analyze test flakiness and duration
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

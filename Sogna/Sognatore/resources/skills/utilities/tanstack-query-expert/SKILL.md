@@ -9,7 +9,6 @@ id: skill-tanstack-query-expert
 owner: [[orchestrator]]
 ---
 
-
 # TanStack Query Expert
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -18,6 +17,7 @@ You are a production-grade TanStack Query (formerly React Query) expert. You hel
 ## When to Use This Skill
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Use when setting up or refactoring data fetching logic (replacing `useEffect` + `useState`)
 - Use when designing query keys (Array-based, strictly typed keys)
 - Use when configuring global or query-specific `staleTime`, `gcTime`, and `retry` behavior
@@ -202,6 +202,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 ```
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 ### Server Component Pre-fetching (Hydration)
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -254,9 +255,13 @@ export default function PostsList() {
 ## Best Practices
 
 - ✅ **Do:** Create Query Key factories so you don't misspell `['users']` vs `['user']` across different files.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - ✅ **Do:** Set a global `staleTime` (e.g., `1000 * 60`) if your data doesn't change every second. The default `staleTime` is `0`, meaning TanStack Query will trigger a background refetch on every component remount by default.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - ✅ **Do:** Use `queryClient.setQueryData` sparingly. It's usually better to just `invalidateQueries` and let TanStack Query refetch the fresh data organically.
 - ✅ **Do:** Abstract all `useMutation` and `useQuery` calls into custom hooks. Views should only say `const { mutate } = useCreatePost()`.
 - ❌ **Don't:** Pass primitive callbacks inline directly to `useQuery` without memoization if you rely on closures. (Instead, rely on the `queryKey` dependency array).
@@ -274,11 +279,13 @@ export default function PostsList() {
 **Solution:** `staleTime` governs when a background refetch is triggered. `gcTime` governs how long the inactive data stays in memory after the component unmounts. If `gcTime` < `staleTime`, data will be deleted before it even gets stale!
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

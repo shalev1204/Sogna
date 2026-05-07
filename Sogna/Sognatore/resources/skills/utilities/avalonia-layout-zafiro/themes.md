@@ -13,9 +13,9 @@ Efficient theme organization is key to avoiding redundant XAML and ensuring visu
 
 Follow the pattern from Angor:
 
-1.  **Colors & Brushes**: Define in a dedicated `Colors.axaml`. Use `DynamicResource` to support theme switching.
-2.  **Styles**: Group styles by category (e.g., `Buttons.axaml`, `Containers.axaml`, `Typography.axaml`).
-3.  **App-wide Theme**: Aggregate all styles in a main `Theme.axaml`.
+1. **Colors & Brushes**: Define in a dedicated `Colors.axaml`. Use `DynamicResource` to support theme switching.
+2. **Styles**: Group styles by category (e.g., `Buttons.axaml`, `Containers.axaml`, `Typography.axaml`).
+3. **App-wide Theme**: Aggregate all styles in a main `Theme.axaml`.
 
 ## 🎨 Avoiding Redundancy
 
@@ -58,6 +58,7 @@ Centralize icon definitions and other shared resources in `Icons.axaml` and incl
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -71,6 +71,7 @@ Some remotes that are compatible with Apple TV include buttons for browsing live
 [Use your Siri Remote or Apple TV Remote with Apple TV](https://support.apple.com/en-us/HT205305)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

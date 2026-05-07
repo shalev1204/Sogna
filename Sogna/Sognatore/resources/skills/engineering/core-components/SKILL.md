@@ -8,7 +8,6 @@ id: skill-core-components
 owner: [[orchestrator]]
 ---
 
-
 # Core Components
 
 ## Design System Overview
@@ -225,13 +224,11 @@ const MyScreen = () => (
 // CORRECT - Design tokens
 <Box padding="$4" backgroundColor="$backgroundPrimary">
 
-
 // WRONG - Raw platform components
 import { View, Text } from 'react-native';
 
 // CORRECT - Core components
 import { Box, Text } from 'components/core';
-
 
 // WRONG - Inline styles
 <Text style={{ fontSize: 18, fontWeight: '600' }}>
@@ -270,14 +267,17 @@ const Card = ({ padding = '$4', variant = 'elevated', children }: CardProps) => 
 - **storybook**: Document component variants
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

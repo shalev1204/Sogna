@@ -87,6 +87,7 @@ func TestWorkflowIntegration(t *testing.T) {
 ```
 
 Key points:
+
 - Use `t.Cleanup` to ensure `Shutdown` is called after each test
 - Use unique `AppName` per test to avoid collisions
 - Mock `DBOSContext` for fast unit tests without Postgres
@@ -95,6 +96,7 @@ Key points:
 Reference: [Testing DBOS](https://docs.dbos.dev/golang/tutorials/testing)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

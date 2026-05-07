@@ -4,21 +4,24 @@ description: Geracao de imagens via Stability AI (SD3.5, Ultra, Core). Text-to-i
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - image-generation
 - stable-diffusion
 - ai-art
 - api
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-stability-ai
 owner: [[orchestrator]]
 ---
-
 
 # Stability AI — Gerador de Imagens Profissional
 
@@ -220,11 +223,13 @@ Metadados salvos em `.meta.json` com: prompt original, prompt final, modelo, asp
 - `image-studio` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

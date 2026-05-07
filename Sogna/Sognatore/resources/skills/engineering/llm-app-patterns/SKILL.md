@@ -8,7 +8,6 @@ id: skill-llm-app-patterns
 owner: [[orchestrator]]
 ---
 
-
 # 🤖 LLM Application Patterns
 
 > Production-ready patterns for building LLM applications, inspired by [Dify](https://github.com/langgenius/dify) and industry best practices.
@@ -47,7 +46,9 @@ RAG (Retrieval-Augmented Generation) grounds LLM responses in your data.
 ### 1.1 Document Ingestion
 
 ```python
+
 # Chunking strategies
+
 class ChunkingStrategy:
     # Fixed-size chunks (simple but may break context)
     FIXED_SIZE = "fixed_size"  # e.g., 512 tokens
@@ -62,6 +63,7 @@ class ChunkingStrategy:
     DOCUMENT_AWARE = "document_aware"  # Headers, lists, etc.
 
 # Recommended settings
+
 CHUNK_CONFIG = {
     "chunk_size": 512,       # tokens
     "chunk_overlap": 50,     # token overlap between chunks
@@ -72,7 +74,9 @@ CHUNK_CONFIG = {
 ### 1.2 Embedding & Storage
 
 ```python
+
 # Vector database selection
+
 VECTOR_DB_OPTIONS = {
     "pinecone": {
         "use_case": "Production, managed service",
@@ -97,6 +101,7 @@ VECTOR_DB_OPTIONS = {
 }
 
 # Embedding model selection
+
 EMBEDDING_MODELS = {
     "openai/text-embedding-3-small": {
         "dimensions": 1536,
@@ -119,7 +124,9 @@ EMBEDDING_MODELS = {
 ### 1.3 Retrieval Strategies
 
 ```python
+
 # Basic semantic search
+
 def semantic_search(query: str, top_k: int = 5):
     query_embedding = embed(query)
     results = vector_db.similarity_search(
@@ -129,6 +136,7 @@ def semantic_search(query: str, top_k: int = 5):
     return results
 
 # Hybrid search (semantic + keyword)
+
 def hybrid_search(query: str, top_k: int = 5, alpha: float = 0.5):
     """
     alpha=1.0: Pure semantic
@@ -142,6 +150,7 @@ def hybrid_search(query: str, top_k: int = 5, alpha: float = 0.5):
     return rrf_merge(semantic_results, keyword_results, alpha)
 
 # Multi-query retrieval
+
 def multi_query_retrieval(query: str):
     """Generate multiple query variations for better recall"""
     queries = llm.generate_query_variations(query, n=3)
@@ -151,6 +160,7 @@ def multi_query_retrieval(query: str):
     return deduplicate(all_results)
 
 # Contextual compression
+
 def compressed_retrieval(query: str):
     """Retrieve then compress to relevant parts only"""
     docs = semantic_search(query, top_k=10)
@@ -255,7 +265,9 @@ class ReActAgent:
 ### 2.2 Function Calling Pattern
 
 ```python
+
 # Define tools as functions with schemas
+
 TOOLS = [
     {
         "name": "search_web",
@@ -318,9 +330,11 @@ class FunctionCallingAgent:
 ```python
 class PlanAndExecuteAgent:
     """
+
     1. Create a plan (list of steps)
     2. Execute each step
     3. Replan if needed
+
     """
 
     def run(self, task: str) -> str:
@@ -416,6 +430,7 @@ class PromptTemplate:
         return f"{example_text}\n\n{self.template}"
 
 # Usage
+
 summarizer = PromptTemplate(
     template="Summarize the following text in {style} style:\n\n{text}",
     variables=["style", "text"]
@@ -494,6 +509,7 @@ class PromptChain:
         }
 
 # Example: Research → Analyze → Summarize
+
 chain = PromptChain([
     {
         "name": "research",
@@ -578,6 +594,7 @@ class LLMLogger:
         logging.info(f"LLM_RESPONSE: {json.dumps(log_entry)}")
 
 # Distributed tracing
+
 @tracer.start_as_current_span("llm_call")
 def call_llm(prompt: str) -> str:
     span = trace.get_current_span()
@@ -701,6 +718,7 @@ class RateLimiter:
         self.timestamps.append(time.time())
 
 # Retry with exponential backoff
+
 @retry(
     wait=wait_exponential(multiplier=1, min=4, max=60),
     stop=stop_after_attempt(5)
@@ -737,6 +755,7 @@ class LLMWithFallback:
         raise AllModelsFailedError("All models exhausted")
 
 # Usage
+
 llm_client = LLMWithFallback(
     primary="gpt-4-turbo",
     fallbacks=["gpt-3.5-turbo", "claude-3-sonnet"]
@@ -766,11 +785,13 @@ llm_client = LLMWithFallback(
 - [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

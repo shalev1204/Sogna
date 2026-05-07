@@ -8,7 +8,6 @@ id: skill-production-code-audit
 owner: [[prod-pm]]
 ---
 
-
 # Production Code Audit
 
 ## Overview
@@ -45,6 +44,7 @@ Autonomously analyze the entire codebase to understand its architecture, pattern
 **Scan line-by-line for all issues:**
 
 **Architecture Issues:**
+
 - Circular dependencies
 - Tight coupling
 - God classes (>500 lines or >20 methods)
@@ -53,6 +53,7 @@ Autonomously analyze the entire codebase to understand its architecture, pattern
 - Violation of design patterns
 
 **Security Vulnerabilities:**
+
 - SQL injection (string concatenation in queries)
 - XSS vulnerabilities (unescaped output)
 - Hardcoded secrets (API keys, passwords in code)
@@ -63,6 +64,7 @@ Autonomously analyze the entire codebase to understand its architecture, pattern
 - Insecure dependencies
 
 **Performance Problems:**
+
 - N+1 query problems
 - Missing database indexes
 - Synchronous operations that should be async
@@ -73,6 +75,7 @@ Autonomously analyze the entire codebase to understand its architecture, pattern
 - Memory leaks
 
 **Code Quality Issues:**
+
 - High cyclomatic complexity (>10)
 - Code duplication
 - Magic numbers
@@ -83,6 +86,7 @@ Autonomously analyze the entire codebase to understand its architecture, pattern
 - TODO/FIXME comments
 
 **Testing Gaps:**
+
 - Missing tests for critical paths
 - Low test coverage (<80%)
 - No edge case testing
@@ -90,6 +94,7 @@ Autonomously analyze the entire codebase to understand its architecture, pattern
 - Missing integration tests
 
 **Production Readiness:**
+
 - Missing environment variables
 - No logging/monitoring
 - No error tracking
@@ -130,6 +135,7 @@ User: @production-code-audit make this production-ready
 AI: I'll scan your entire codebase and transform it to production-grade quality.
 
 **Phase 1: Discovering Codebase** (analyzing 247 files)
+
 - Detected: Node.js + Express + PostgreSQL + React
 - Architecture: MVC pattern with REST API
 - Purpose: E-commerce platform
@@ -138,6 +144,7 @@ AI: I'll scan your entire codebase and transform it to production-grade quality.
 **Phase 2: Scanning for Issues** (line-by-line analysis)
 
 Found 127 issues:
+
 - 🔴 CRITICAL: 8 issues
 - 🟠 HIGH: 23 issues  
 - 🟡 MEDIUM: 41 issues
@@ -241,6 +248,7 @@ Found 127 issues:
 Your codebase is now production-ready with enterprise-grade quality:
 
 📊 Metrics:
+
 - Issues fixed: 127/127 (100%)
 - Test coverage: 87% (target: 80%+)
 - API performance: 94% improvement
@@ -263,6 +271,7 @@ AI: Scanning for security vulnerabilities...
 **Security Scan Complete**
 
 Found 15 security issues:
+
 - 🔴 CRITICAL: 5
 - 🟠 HIGH: 7
 - 🟡 MEDIUM: 3
@@ -272,6 +281,7 @@ Found 15 security issues:
 🔴 CRITICAL (5/5 fixed):
 
 1. ✅ SQL Injection in UserRepository
+
 \`\`\`typescript
 // Before (VULNERABLE)
 const query = \`SELECT * FROM users WHERE email = '\${email}'\`;
@@ -282,6 +292,7 @@ await db.query(query, [email]);
 \`\`\`
 
 2. ✅ Hardcoded Secrets Removed
+
 \`\`\`typescript
 // Before (INSECURE)
 const JWT_SECRET = 'my-secret-key-123';
@@ -292,6 +303,7 @@ if (!JWT_SECRET) throw new Error('JWT_SECRET required');
 \`\`\`
 
 3. ✅ Authentication Added to Admin Routes
+
 \`\`\`typescript
 // Before (VULNERABLE)
 router.delete('/api/admin/users/:id', deleteUser);
@@ -305,6 +317,7 @@ router.delete('/api/admin/users/:id',
 \`\`\`
 
 4. ✅ Password Hashing Upgraded
+
 \`\`\`typescript
 // Before (WEAK)
 const hash = crypto.createHash('md5').update(password).digest('hex');
@@ -314,6 +327,7 @@ const hash = await bcrypt.hash(password, 12);
 \`\`\`
 
 5. ✅ Input Validation Added
+
 \`\`\`typescript
 // Before (VULNERABLE)
 const user = await db.user.create({ data: req.body });
@@ -329,6 +343,7 @@ const user = await db.user.create({ data: validated });
 \`\`\`
 
 **Security Status:**
+
 - ✅ OWASP Top 10: Compliant
 - ✅ SQL Injection: Protected
 - ✅ XSS: Protected
@@ -350,6 +365,7 @@ AI: Analyzing performance bottlenecks...
 **Performance Analysis Complete**
 
 Current metrics:
+
 - API response time: 3.2s (target: <200ms)
 - Page load time: 8.5s (target: <2s)
 - Bundle size: 850KB (target: <200KB)
@@ -437,20 +453,24 @@ Current metrics:
 ## Common Pitfalls
 
 ### Problem: Too Many Issues
+
 **Symptoms:** Team paralyzed by 200+ issues
 **Solution:** Focus on critical/high priority only, create sprints
 
 ### Problem: False Positives
+
 **Symptoms:** Flagging non-issues
 **Solution:** Understand context, verify manually, ask developers
 
 ### Problem: No Follow-Up
+
 **Symptoms:** Audit report ignored
 **Solution:** Create GitHub issues, assign owners, track in standups
 
 ## Production Audit Checklist
 
 ### Security
+
 - [ ] No SQL injection vulnerabilities
 - [ ] No hardcoded secrets
 - [ ] Authentication on protected routes
@@ -461,6 +481,7 @@ Current metrics:
 - [ ] Dependencies have no vulnerabilities
 
 ### Performance
+
 - [ ] No N+1 query problems
 - [ ] Database indexes on foreign keys
 - [ ] Caching implemented
@@ -468,6 +489,7 @@ Current metrics:
 - [ ] Bundle size < 200KB (gzipped)
 
 ### Testing
+
 - [ ] Test coverage > 80%
 - [ ] Critical paths tested
 - [ ] Edge cases covered
@@ -475,6 +497,7 @@ Current metrics:
 - [ ] Tests run in CI/CD
 
 ### Production Readiness
+
 - [ ] Environment variables configured
 - [ ] Error tracking setup (Sentry)
 - [ ] Structured logging implemented
@@ -485,6 +508,7 @@ Current metrics:
 ## Audit Report Template
 
 ```markdown
+
 # Production Audit Report
 
 **Project:** [Name]
@@ -492,6 +516,7 @@ Current metrics:
 **Overall Grade:** [A-F]
 
 ## Executive Summary
+
 [2-3 sentences on overall status]
 
 **Critical Issues:** [count]
@@ -501,29 +526,36 @@ Current metrics:
 ## Findings by Category
 
 ### Architecture (Grade: [A-F])
+
 - Issue 1: [Description]
 - Issue 2: [Description]
 
 ### Security (Grade: [A-F])
+
 - Issue 1: [Description + Fix]
 - Issue 2: [Description + Fix]
 
 ### Performance (Grade: [A-F])
+
 - Issue 1: [Description + Fix]
 
 ### Testing (Grade: [A-F])
+
 - Coverage: [%]
 - Issues: [List]
 
 ## Priority Actions
+
 1. [Critical issue] - [Timeline]
 2. [High priority] - [Timeline]
 3. [High priority] - [Timeline]
 
 ## Timeline
+
 - Critical fixes: [X weeks]
 - High priority: [X weeks]
 - Production ready: [X weeks]
+
 ```
 
 ## Related Skills
@@ -546,11 +578,13 @@ Current metrics:
 **Pro Tip:** Schedule regular audits (quarterly) to maintain code quality. Prevention is cheaper than fixing production bugs!
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

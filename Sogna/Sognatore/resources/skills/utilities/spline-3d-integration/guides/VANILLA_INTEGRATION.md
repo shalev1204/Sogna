@@ -108,6 +108,7 @@ The most common use case — Spline scene behind all content.
 <head>
   <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
   <style>
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -212,6 +213,7 @@ See [PERFORMANCE.md](PERFORMANCE.md) for full optimization strategy.
 See [COMMON_PROBLEMS.md](COMMON_PROBLEMS.md) for debugging.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -55,6 +55,7 @@ Moderate:
 ### Perceivable (Principle 1)
 
 ````markdown
+
 ## 1.1 Text Alternatives
 
 ### 1.1.1 Non-text Content (Level A)
@@ -183,9 +184,11 @@ Tools: WebAIM Contrast Checker, axe DevTools
 ### Operable (Principle 2)
 
 ```markdown
+
 ## 2.1 Keyboard Accessible
 
 ### 2.1.1 Keyboard (Level A)
+
 - [ ] All functionality keyboard accessible
 - [ ] No keyboard traps
 - [ ] Tab order is logical
@@ -220,7 +223,9 @@ Check:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
+
   * {
+
     animation: none !important;
     transition: none !important;
   }
@@ -297,9 +302,11 @@ Check:
 ### Understandable (Principle 3)
 
 ```markdown
+
 ## 3.1 Readable
 
 ### 3.1.1 Language of Page (Level A)
+
 - [ ] HTML lang attribute set
 - [ ] Language correct for content
 
@@ -372,14 +379,17 @@ Check:
 ### Robust (Principle 4)
 
 ```markdown
+
 ## 4.1 Compatible
 
 ### 4.1.1 Parsing (Level A) - Obsolete in WCAG 2.2
+
 - [ ] Valid HTML (good practice)
 - [ ] No duplicate IDs
 - [ ] Complete start/end tags
 
 ### 4.1.2 Name, Role, Value (Level A)
+
 - [ ] Custom widgets have accessible names
 - [ ] ARIA roles correct
 - [ ] State changes announced
@@ -442,7 +452,9 @@ test('should have no accessibility violations', async ({ page }) => {
 ````
 
 ```bash
+
 # CLI tools
+
 npx @axe-core/cli https://example.com
 npx pa11y https://example.com
 lighthouse https://example.com --only-categories=accessibility
@@ -548,6 +560,7 @@ class AccessibleDropdown extends HTMLElement {
 - [axe DevTools](https://www.deque.com/axe/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

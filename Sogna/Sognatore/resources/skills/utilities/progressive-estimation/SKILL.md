@@ -5,18 +5,21 @@ description: "Estimate AI-assisted and hybrid human+agent development work with 
 risk: safe
 date_added: "2026-03-10"
 tags:
+
   - estimation
   - project-management
   - pert
   - sprint-planning
   - ai-agents
+
 tools:
+
   - claude
+
 version: 1.0.0
 id: skill-progressive-estimation
 owner: [[orchestrator]]
 ---
-
 
 # Progressive Estimation
 
@@ -65,12 +68,15 @@ Progressive Estimation adapts to your team's working mode — human-only, hybrid
 ## Common Pitfalls
 
 - **Problem:** Overconfident estimates
+
   **Solution:** Use P75 or P90 for commitments, not P50
 
 - **Problem:** Missing context
+
   **Solution:** The skill asks clarifying questions — provide team size and agent usage
 
 - **Problem:** Stale calibration
+
   **Solution:** Re-calibrate when team composition or tooling changes significantly
 
 ## Related Skills
@@ -86,11 +92,13 @@ Progressive Estimation adapts to your team's working mode — human-only, hybrid
 - [Research References](https://github.com/Enreign/progressive-estimation/tree/main/references)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

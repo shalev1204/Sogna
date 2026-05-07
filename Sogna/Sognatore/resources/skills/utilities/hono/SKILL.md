@@ -11,7 +11,6 @@ id: skill-hono
 owner: [[orchestrator]]
 ---
 
-
 # Hono Web Framework
 
 ## Overview
@@ -34,7 +33,9 @@ Hono (炎, "flame" in Japanese) is a small, ultrafast web framework built on Web
 **Cloudflare Workers (recommended for edge):**
 ```bash
 npm create hono@latest my-api
+
 # Select: cloudflare-workers
+
 cd my-api
 npm install
 npm run dev    # Wrangler local dev
@@ -335,15 +336,19 @@ app.get('/stream', c =>
 ## Common Pitfalls
 
 - **Problem:** Handler returns `undefined` — response is empty
+
   **Solution:** Always `return` a response from handlers: `return c.json(...)` not just `c.json(...)`.
 
 - **Problem:** Middleware runs after the response is sent
+
   **Solution:** Call `await next()` before post-response logic; Hono runs code after `next()` as the response travels back up the chain.
 
 - **Problem:** `c.env` is undefined on Node.js
+
   **Solution:** Cloudflare `env` bindings only exist in Workers. Use `process.env` on Node.js.
 
 - **Problem:** Route not matching — gets a 404
+
   **Solution:** Check that `app.route('/prefix', subRouter)` uses the same prefix your client calls. Sub-routers should **not** repeat the prefix in their own routes.
 
 ## Related Skills
@@ -354,11 +359,13 @@ app.get('/stream', c =>
 - `@nodejs-backend-patterns` — When you need a Node.js-specific backend (not edge)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

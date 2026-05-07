@@ -198,6 +198,7 @@ def generate_step_by_step_explanation(self, code, analysis):
 
     # Level 1: High-level overview
     explanation['overview'] = f"""
+
 ## What This Code Does
 
 {self._summarize_purpose(code, analysis)}
@@ -210,6 +211,7 @@ def generate_step_by_step_explanation(self, code, analysis):
     if analysis.get('functions'):
         for i, func in enumerate(analysis['functions']):
             step = f"""
+
 ### Step {i+1}: {func['name']}
 
 **Purpose**: {self._explain_function_purpose(func)}
@@ -239,6 +241,7 @@ def _explain_concept(self, concept, code):
     """
     explanations = {
         'decorators': '''
+
 ## Understanding Decorators
 
 Decorators are a way to modify or enhance functions without changing their code directly.
@@ -247,12 +250,15 @@ Decorators are a way to modify or enhance functions without changing their code 
 
 **How it works**:
 ```python
+
 # This decorator:
+
 @timer
 def slow_function():
     time.sleep(1)
 
 # Is equivalent to:
+
 def slow_function():
     time.sleep(1)
 slow_function = timer(slow_function)
@@ -261,6 +267,7 @@ slow_function = timer(slow_function)
 **In this code**: The decorator is used to {specific_use_in_code}
 ''',
         'generators': '''
+
 ## Understanding Generators
 
 Generators produce values one at a time, saving memory by not creating all values at once.
@@ -269,7 +276,9 @@ Generators produce values one at a time, saving memory by not creating all value
 
 **How it works**:
 ```python
+
 # Generator function
+
 def count_up_to(n):
     i = 0
     while i < n:
@@ -277,6 +286,7 @@ def count_up_to(n):
         i += 1
 
 # Using the generator
+
 for num in count_up_to(5):
     print(num)  # Prints 0, 1, 2, 3, 4
 ```
@@ -303,16 +313,19 @@ class AlgorithmVisualizer:
 
         if algorithm_name == 'bubble_sort':
             steps.append("""
+
 ## Bubble Sort Visualization
 
 **Initial Array**: [5, 2, 8, 1, 9]
 
 ### How Bubble Sort Works:
+
 1. Compare adjacent elements
 2. Swap if they're in wrong order
 3. Repeat until no swaps needed
 
 ### Step-by-Step Execution:
+
 """)
 
             # Simulate bubble sort with visualization
@@ -347,9 +360,11 @@ class AlgorithmVisualizer:
         Visualize recursive function calls
         """
         viz = f"""
+
 ## Recursion Visualization: {func_name}
 
 ### Call Stack Visualization:
+
 ```
 {func_name}({example_input})
 │
@@ -388,9 +403,11 @@ def generate_interactive_examples(self, concept):
     """
     examples = {
         'error_handling': '''
+
 ## Try It Yourself: Error Handling
 
 ### Example 1: Basic Try-Except
+
 ```python
 def safe_divide(a, b):
     try:
@@ -407,12 +424,14 @@ def safe_divide(a, b):
         print("Division attempt completed")
 
 # Test cases - try these:
+
 safe_divide(10, 2)    # Success case
 safe_divide(10, 0)    # Division by zero
 safe_divide(10, "2")  # Type error
 ```
 
 ### Example 2: Custom Exceptions
+
 ```python
 class ValidationError(Exception):
     """Custom exception for validation errors"""
@@ -430,6 +449,7 @@ def validate_age(age):
         raise ValidationError("Age must be a number")
 
 # Try these examples:
+
 try:
     validate_age(25)     # Valid
     validate_age(-5)     # Negative age
@@ -439,17 +459,22 @@ except ValidationError as e:
 ```
 
 ### Exercise: Implement Your Own
+
 Try implementing a function that:
+
 1. Takes a list of numbers
 2. Returns their average
 3. Handles empty lists
 4. Handles non-numeric values
 5. Uses appropriate exception handling
+
 ''',
         'async_programming': '''
+
 ## Try It Yourself: Async Programming
 
 ### Example 1: Basic Async/Await
+
 ```python
 import asyncio
 import time
@@ -477,10 +502,12 @@ async def main():
     print(f"Results: {results}")
 
 # Run it:
+
 asyncio.run(main())
 ```
 
 ### Example 2: Real-world Async Pattern
+
 ```python
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 async def fetch_data(url):
@@ -495,6 +522,7 @@ async def process_urls(urls):
     return results
 
 # Try with different URLs:
+
 urls = ["api.example.com/1", "api.example.com/2", "api.example.com/3"]
 results = asyncio.run(process_urls(urls))
 print(results)
@@ -518,18 +546,22 @@ class DesignPatternExplainer:
         """
         patterns = {
             'singleton': '''
+
 ## Singleton Pattern
 
 ### What is it?
+
 The Singleton pattern ensures a class has only one instance and provides global access to it.
 
 ### When to use it?
+
 - Database connections
 - Configuration managers
 - Logging services
 - Cache managers
 
 ### Visual Representation:
+
 ```mermaid
 classDiagram
     class Singleton {
@@ -541,35 +573,44 @@ classDiagram
 ```
 
 ### Implementation in this code:
+
 {code_analysis}
 
 ### Benefits:
+
 ✅ Controlled access to single instance
 ✅ Reduced namespace pollution
 ✅ Permits refinement of operations
 
 ### Drawbacks:
+
 ❌ Can make unit testing difficult
 ❌ Violates Single Responsibility Principle
 ❌ Can hide dependencies
 
 ### Alternative Approaches:
+
 1. Dependency Injection
 2. Module-level singleton
 3. Borg pattern
+
 ''',
             'observer': '''
+
 ## Observer Pattern
 
 ### What is it?
+
 The Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all dependents are notified.
 
 ### When to use it?
+
 - Event handling systems
 - Model-View architectures
 - Distributed event handling
 
 ### Visual Representation:
+
 ```mermaid
 classDiagram
     class Subject {
@@ -596,11 +637,15 @@ classDiagram
 ```
 
 ### Implementation in this code:
+
 {code_analysis}
 
 ### Real-world Example:
+
 ```python
+
 # Newsletter subscription system
+
 class Newsletter:
     def __init__(self):
         self._subscribers = []
@@ -652,24 +697,29 @@ def analyze_common_pitfalls(self, code):
             'issue': 'Bare except clause',
             'severity': 'high',
             'explanation': '''
+
 ## ⚠️ Bare Except Clause
 
 **Problem**: `except:` catches ALL exceptions, including system exits and keyboard interrupts.
 
 **Why it's bad**:
+
 - Hides programming errors
 - Makes debugging difficult
 - Can catch exceptions you didn't intend to handle
 
 **Better approach**:
 ```python
+
 # Bad
+
 try:
     risky_operation()
 except:
     print("Something went wrong")
 
 # Good
+
 try:
     risky_operation()
 except (ValueError, TypeError) as e:
@@ -685,11 +735,13 @@ except Exception as e:
             'issue': 'Global variable usage',
             'severity': 'medium',
             'explanation': '''
+
 ## ⚠️ Global Variable Usage
 
 **Problem**: Using global variables makes code harder to test and reason about.
 
 **Better approaches**:
+
 1. Pass as parameter
 2. Use class attributes
 3. Use dependency injection
@@ -697,13 +749,16 @@ except Exception as e:
 
 **Example refactor**:
 ```python
+
 # Bad
+
 count = 0
 def increment():
     global count
     count += 1
 
 # Good
+
 class Counter:
     def __init__(self):
         self.count = 0
@@ -771,27 +826,33 @@ def generate_learning_path(self, analysis):
 
     # Create structured learning plan
     learning_path['structured_plan'] = f"""
+
 ## Your Personalized Learning Path
 
 ### Week 1-2: Fundamentals
+
 - Review basic concepts: {', '.join(learning_path['recommended_topics'][:2])}
 - Complete exercises on each topic
 - Build a small project using these concepts
 
 ### Week 3-4: Applied Learning
+
 - Study the patterns in this codebase
 - Refactor a simple version yourself
 - Compare your approach with the original
 
 ### Week 5-6: Advanced Topics
+
 - Explore edge cases and optimizations
 - Learn about alternative approaches
 - Contribute to open source projects using these patterns
 
 ### Practice Projects:
+
 1. **Beginner**: {self._suggest_beginner_project(analysis)}
 2. **Intermediate**: {self._suggest_intermediate_project(analysis)}
 3. **Advanced**: {self._suggest_advanced_project(analysis)}
+
 """
 
     return learning_path
@@ -811,6 +872,7 @@ def generate_learning_path(self, analysis):
 Focus on making complex code accessible through clear explanations, visual aids, and practical examples that build understanding progressively.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

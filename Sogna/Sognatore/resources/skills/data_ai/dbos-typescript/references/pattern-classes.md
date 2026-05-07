@@ -64,6 +64,7 @@ await DBOS.launch();
 ```
 
 Key requirements:
+
 - `ConfiguredInstance` constructor requires a unique `name` per class
 - All instances must be created **before** `DBOS.launch()`
 - The `initialize()` method is called during launch for validation
@@ -73,6 +74,7 @@ Key requirements:
 Reference: [Using TypeScript Objects](https://docs.dbos.dev/typescript/tutorials/instantiated-objects)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

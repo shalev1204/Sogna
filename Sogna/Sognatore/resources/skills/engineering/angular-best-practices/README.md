@@ -50,6 +50,7 @@ Each rule includes:
 **For Performance Reviews:**
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - [ ] No async waterfalls (parallel data fetching)
 - [ ] Routes lazy-loaded
 - [ ] Large libraries code-split
@@ -66,6 +67,7 @@ Current version: 1.0.0 (February 2026)
 - [Angular SSR](https://angular.dev/guide/ssr)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

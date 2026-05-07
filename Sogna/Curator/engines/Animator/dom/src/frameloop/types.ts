@@ -37,3 +37,5 @@ export interface FrameData {
     timestamp: number
     isProcessing: boolean
 }
+
+export type frameData = FrameData

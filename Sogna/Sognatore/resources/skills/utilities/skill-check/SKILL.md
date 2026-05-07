@@ -14,7 +14,6 @@ id: skill-skill-check
 owner: [[orchestrator]]
 ---
 
-
 # SkillCheck
 
 ## Overview
@@ -63,18 +62,22 @@ Return structured results: score, grade (Excellent/Good/Needs Work/Poor), issue 
 User: check my skill at ~/.claude/skills/weekly-report/SKILL.md
 
 SkillCheck output:
+
 ## weekly-report Check Results [FREE]
 
 Score: 85/100 (Good)
 
 ### Warnings (2)
+
   - 1.2-desc-when (line 3): Description missing WHEN clause
   - 4.5-desc-no-triggers (line 3): Description lacks triggering conditions
 
 ### Suggestions (1)
+
   - 3.4-gerund-naming (line 2): Skill name could use gerund form
 
 ### Passed Checks: 28
+
 ```
 
 ### Example 2: Clean skill passes all checks
@@ -105,15 +108,19 @@ All 31 checks passed. No issues found.
 ## Common Pitfalls
 
 - **Problem:** Score seems low due to many suggestions
+
   **Solution:** Suggestions cap at -15 points total. Focus on warnings and criticals first.
 
 - **Problem:** False positive on ambiguous terms inside code blocks
+
   **Solution:** SkillCheck skips code blocks and inline code. If you still see false positives, wrap the term in backticks.
 
 - **Problem:** Wisdom/platitude check flags legitimate instructions
+
   **Solution:** Rephrase generic advice ("Remember that testing is important") as concrete directives ("Run tests before committing").
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

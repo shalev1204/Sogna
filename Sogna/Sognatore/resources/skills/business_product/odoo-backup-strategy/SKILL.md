@@ -7,7 +7,6 @@ id: skill-odoo-backup-strategy
 owner: [[prod-pm]]
 ---
 
-
 # Odoo Backup Strategy
 
 ## Overview
@@ -33,6 +32,7 @@ A complete Odoo backup must include both the **PostgreSQL database** and the **f
 
 ```bash
 #!/bin/bash
+
 # backup_odoo.sh
 
 DATE=$(date +%Y%m%d_%H%M%S)
@@ -44,9 +44,11 @@ BACKUP_DIR="/backups/odoo"
 mkdir -p "$BACKUP_DIR"
 
 # Step 1: Dump the database
+
 pg_dump -U $DB_USER -Fc $DB_NAME > "$BACKUP_DIR/db_$DATE.dump"
 
 # Step 2: Archive the filestore
+
 tar -czf "$BACKUP_DIR/filestore_$DATE.tar.gz" -C "$FILESTORE_PATH" .
 
 echo "✅ Backup complete: db_$DATE.dump + filestore_$DATE.tar.gz"
@@ -55,46 +57,62 @@ echo "✅ Backup complete: db_$DATE.dump + filestore_$DATE.tar.gz"
 ### Example 2: Automate with Cron (daily at 2 AM)
 
 ```bash
+
 # Run: crontab -e
+
 # Add this line:
+
 0 2 * * * /opt/scripts/backup_odoo.sh >> /var/log/odoo_backup.log 2>&1
 ```
 
 ### Example 3: Upload to S3 (after backup)
 
 ```bash
+
 # Add to backup script after tar command:
+
 aws s3 cp "$BACKUP_DIR/db_$DATE.dump"        s3://my-odoo-backups/db/
 aws s3 cp "$BACKUP_DIR/filestore_$DATE.tar.gz" s3://my-odoo-backups/filestore/
 
 # Optional: Delete local backups older than 7 days
+
 find "$BACKUP_DIR" -type f -mtime +7 -delete
 ```
 
 ### Example 4: Full Restore Procedure
 
 ```bash
+
 # Step 1: Stop Odoo
+
 docker compose stop odoo  # or: systemctl stop odoo
 
 # Step 2: Recreate and restore the database
+
 # (--clean alone fails if the DB doesn't exist; drop and recreate first)
+
 dropdb -U odoo odoo 2>/dev/null || true
 createdb -U odoo odoo
 pg_restore -U odoo -d odoo db_YYYYMMDD_HHMMSS.dump
 
 # Step 3: Restore the filestore
+
 FILESTORE=/var/lib/odoo/.local/share/Odoo/filestore/odoo
 rm -rf "$FILESTORE"/*
 tar -xzf filestore_YYYYMMDD_HHMMSS.tar.gz -C "$FILESTORE"/
 
 # Step 4: Restart Odoo
+
 docker compose start odoo
 
 # Step 5: Verify — open Odoo in the browser and check:
+
 #   - Can you log in?
+
 #   - Are recent records visible?
+
 #   - Are file attachments loading?
+
 ```
 
 ## Best Practices
@@ -115,6 +133,7 @@ docker compose start odoo
 - Large filestores (100GB+) may require incremental backup tools like `rsync` or `restic` rather than full `tar.gz` archives.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

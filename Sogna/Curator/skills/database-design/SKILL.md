@@ -12,7 +12,6 @@ id: skill-database-design
 owner: [[eng-database]], [[prod-design]]
 ---
 
-
 # Database Design
 
 > **Learn to THINK, not copy SQL patterns.**

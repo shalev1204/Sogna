@@ -8,7 +8,6 @@ id: skill-azure-ai-translation-document-py
 owner: [[ops-security]]
 ---
 
-
 # Azure AI Document Translation SDK for Python
 
 Client library for Azure AI Translator document translation service for batch document translation with format preservation.
@@ -26,6 +25,7 @@ AZURE_DOCUMENT_TRANSLATION_ENDPOINT=https://<resource>.cognitiveservices.azure.c
 AZURE_DOCUMENT_TRANSLATION_KEY=<your-api-key>  # If using API key
 
 # Storage for source and target documents
+
 AZURE_SOURCE_CONTAINER_URL=https://<storage>.blob.core.windows.net/<container>?<sas>
 AZURE_TARGET_CONTAINER_URL=https://<storage>.blob.core.windows.net/<container>?<sas>
 ```
@@ -66,6 +66,7 @@ source_url = os.environ["AZURE_SOURCE_CONTAINER_URL"]
 target_url = os.environ["AZURE_TARGET_CONTAINER_URL"]
 
 # Start translation job
+
 poller = client.begin_translation(
     inputs=[
         DocumentTranslationInput(
@@ -81,6 +82,7 @@ poller = client.begin_translation(
 )
 
 # Wait for completion
+
 result = poller.result()
 
 print(f"Status: {poller.status()}")
@@ -122,6 +124,7 @@ result = single_client.translate(
 )
 
 # Save translated document
+
 with open("document_es.docx", "wb") as f:
     f.write(result)
 ```
@@ -129,7 +132,9 @@ with open("document_es.docx", "wb") as f:
 ## Check Translation Status
 
 ```python
+
 # Get all translation operations
+
 operations = client.list_translation_statuses()
 
 for op in operations:
@@ -144,7 +149,9 @@ for op in operations:
 ## List Document Statuses
 
 ```python
+
 # Get status of individual documents in a job
+
 operation_id = poller.id
 document_statuses = client.list_document_statuses(operation_id)
 
@@ -159,7 +166,9 @@ for doc in document_statuses:
 ## Cancel Translation
 
 ```python
+
 # Cancel a running translation
+
 client.cancel_translation(operation_id)
 ```
 
@@ -192,7 +201,9 @@ poller = client.begin_translation(
 ## Supported Document Formats
 
 ```python
+
 # Get supported formats
+
 formats = client.get_supported_document_formats()
 
 for fmt in formats:
@@ -204,7 +215,9 @@ for fmt in formats:
 ## Supported Languages
 
 ```python
+
 # Get supported languages
+
 languages = client.get_supported_languages()
 
 for lang in languages:
@@ -252,14 +265,17 @@ async def translate_documents():
 7. **Check supported formats** before submitting documents
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

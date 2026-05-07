@@ -1,5 +1,5 @@
 import { createBox, ResolvedValues, VisualElement } from "sognaflow-dom"
-import { sognaflowProps, sognaflowStyle } from "../../../sognaflow/types"
+import { sognaflowProps, sognaflowStyle } from "../../../motion/types"
 
 export class StateVisualElement extends VisualElement<
     ResolvedValues,

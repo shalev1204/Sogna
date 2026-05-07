@@ -22,6 +22,7 @@ Complete TAM/SAM/SOM calculation for a B2B SaaS startup using bottom-up and top-
 ### Step 1: Define Target Customer Segments
 
 **Segment Criteria:**
+
 - E-commerce companies (D2C and marketplace sellers)
 - $1M+ in annual revenue
 - North America based
@@ -36,6 +37,7 @@ Complete TAM/SAM/SOM calculation for a B2B SaaS startup using bottom-up and top-
 | Enterprise E-commerce | $50M+ | 2,500 | $24,000 | Medium |
 
 **Data Sources:**
+
 - U.S. Census Bureau: E-commerce business counts
 - Shopify, BigCommerce, WooCommerce: Published merchant counts
 - Statista: E-commerce market statistics
@@ -58,6 +60,7 @@ TAM (North America):                  $539M
 ```
 
 **Global Expansion Multiplier:**
+
 - North America = 35% of global e-commerce market
 - Global TAM = $539M / 0.35 = $1.54B
 
@@ -98,11 +101,13 @@ Enterprise:         $60M × 0.45 × 0.70  = $19M (11%)
 **Market Share Assumptions:**
 
 **Year 3 Target: 2.5% of SAM**
+
 - Typical new entrant market share
 - Requires strong product-market fit
 - Assumes $10M in funding for GTM
 
 **Year 5 Target: 5% of SAM**
+
 - Achievable with scale and brand
 - Requires effective sales and marketing
 - Assumes additional funding for growth
@@ -139,6 +144,7 @@ Total:                          $8.5M ARR (888 customers)
 **Source:** Gartner Market Share Report (2024)
 
 **Global Email Marketing Software Market:**
+
 - Market Size: $7.5B (2024)
 - Growth Rate: 12% CAGR
 - Geography: Worldwide
@@ -148,20 +154,24 @@ Total:                          $8.5M ARR (888 customers)
 ### Step 2: Apply Geographic Filter
 
 **North America Market Share:**
+
 - North America = 40% of global software spending
 - Email Marketing NA = $7.5B × 0.40 = $3.0B
 
 ### Step 3: Apply Segment Filters
 
 **E-Commerce Focus:**
+
 - E-commerce email marketing = 25% of total email marketing
 - E-commerce segment = $3.0B × 0.25 = $750M
 
 **$1M+ Revenue Filter:**
+
 - Companies with $1M+ revenue = 65% of e-commerce market
 - TAM = $750M × 0.65 = $488M
 
 **AI-Powered Subset:**
+
 - AI-powered email marketing = 35% of market (growing rapidly)
 - SAM = $488M × 0.35 = $171M
 
@@ -184,6 +194,7 @@ Total:                          $8.5M ARR (888 customers)
 **Validation Result:** ✅ Excellent alignment (< 2% variance on SAM)
 
 **Why alignment matters:**
+
 - Bottom-up and top-down within 10% gives high confidence
 - SAM alignment of 1% is exceptional
 - Use bottom-up as primary (more granular)
@@ -192,12 +203,14 @@ Total:                          $8.5M ARR (888 customers)
 ### Public Company Validation
 
 **Klaviyo (Public, KVYO):**
+
 - 2024 Revenue: ~$700M
 - Focus: E-commerce email/SMS marketing
 - Market Share: ~46% of our SAM
 - Validates large e-commerce email market exists
 
 **Mailchimp (Intuit-owned):**
+
 - 2024 Revenue: ~$800M (estimated)
 - Broader focus, includes SMBs
 - Significant e-commerce customer base
@@ -226,10 +239,12 @@ Total:                          $8.5M ARR (888 customers)
 ### Market Growth Assumptions
 
 **Email Marketing Market CAGR: 12%**
+
 - Source: Gartner market forecast
 - Drivers: E-commerce growth, marketing automation adoption
 
 **AI Subset Growth: 25% CAGR**
+
 - Higher than overall market
 - AI adoption accelerating in marketing
 - More companies seeking AI-powered tools
@@ -245,6 +260,7 @@ Total:                          $8.5M ARR (888 customers)
 | 2030 | $413M | +25% | Market maturity |
 
 **Growing SAM Impact:**
+
 - Year 5 SOM of 5% applied to $413M SAM = $20.6M potential
 - Provides headroom for growth
 - Supports expansion beyond initial 5% share
@@ -254,17 +270,20 @@ Total:                          $8.5M ARR (888 customers)
 ### Market Share Distribution
 
 **Current Leaders:**
+
 - Klaviyo: ~46% share
 - Mailchimp: ~35% share
 - Others: ~19% share (fragmented)
 
 **Market Dynamics:**
+
 - Two dominant players
 - Long tail of smaller competitors
 - Opportunity in AI-differentiated positioning
 - Typical SaaS market consolidation pattern
 
 **Implications for SOM:**
+
 - 5% share requires strong differentiation
 - AI capabilities could drive 10-15% share long-term
 - Acquisition potential if unable to reach scale
@@ -331,22 +350,26 @@ Demonstrates large, proven market
 ## Key Takeaways
 
 **Market Sizing Results:**
+
 - TAM: $1.5B globally, $539M North America
 - SAM: $169M (North America, AI-ready customers)
 - SOM: $4.2M (Year 3), $8.5M (Year 5)
 
 **Methodology:**
+
 - Bottom-up primary (most granular and credible)
 - Top-down validation (<2% variance on SAM)
 - Public company validation (Klaviyo, Mailchimp)
 
 **Investment Implications:**
+
 - Market supports venture-scale outcome
 - 5% market share achievable with strong execution
 - Growing market (25% CAGR) provides tailwinds
 - Competitive but differentiated positioning possible
 
 **Next Steps:**
+
 1. Validate pricing assumptions with customer research
 2. Refine segment prioritization based on GTM capacity
 3. Update SAM annually as market evolves
@@ -356,6 +379,7 @@ Demonstrates large, proven market
 This bottom-up market sizing provides a defensible, data-driven foundation for business planning and fundraising.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

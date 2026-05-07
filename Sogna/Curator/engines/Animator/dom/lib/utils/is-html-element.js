@@ -8,4 +8,5 @@ export function IsHTMLElement(element) {
         "offsetHeight" in element &&
         !("ownerSVGElement" in element));
 }
+export const isHTMLElement = IsHTMLElement;
 //# sourceMappingURL=is-html-element.js.map

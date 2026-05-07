@@ -25,6 +25,7 @@ Complete guide to managing configuration in backend microservices.
 ### Why UnifiedConfig?
 
 **Problems with process.env:**
+
 - ❌ No type safety
 - ❌ No validation
 - ❌ Hard to test
@@ -33,6 +34,7 @@ Complete guide to managing configuration in backend microservices.
 - ❌ Runtime errors for typos
 
 **Benefits of unifiedConfig:**
+
 - ✅ Type-safe configuration
 - ✅ Single source of truth
 - ✅ Validated at startup
@@ -154,6 +156,7 @@ if (!config.tokens.jwt) {
 ```
 
 **Key Points:**
+
 - Read from config.ini first
 - Fallback to process.env
 - Default values for development
@@ -198,13 +201,16 @@ tracesSampleRate = 0.1
 ### Environment Overrides
 
 ```bash
+
 # .env file (optional overrides)
+
 DB_HOST=production-db.example.com
 DB_PASSWORD=secure-password
 PORT=80
 ```
 
 **Precedence:**
+
 1. config.ini (highest priority)
 2. process.env variables
 3. Hard-coded defaults (lowest priority)
@@ -216,7 +222,9 @@ PORT=80
 ### DO NOT Commit Secrets
 
 ```gitignore
+
 # .gitignore
+
 config.ini
 .env
 sentry.ini
@@ -270,6 +278,7 @@ const jwtSecret = config.tokens.jwt;
 ```
 
 **Benefits:**
+
 - Type-safe
 - Centralized
 - Easy to test
@@ -278,10 +287,12 @@ const jwtSecret = config.tokens.jwt;
 ---
 
 **Related Files:**
+
 - SKILL.md
 - [testing-guide.md](testing-guide.md)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

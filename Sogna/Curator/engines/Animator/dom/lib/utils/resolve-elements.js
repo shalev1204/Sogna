@@ -16,4 +16,5 @@ export function ResolveElements(elementOrSelector, scope, selectorCache) {
     }
     return Array.from(elementOrSelector).filter((element) => element != null);
 }
+export { ResolveElements as resolveElements };
 //# sourceMappingURL=resolve-elements.js.map

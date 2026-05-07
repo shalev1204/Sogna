@@ -7,7 +7,6 @@ id: skill-manage-skills
 owner: [[orchestrator]]
 ---
 
-
 # Manage AI Agent Skills
 
 You can manage skills and rules for all major AI coding tools directly from the terminal. This skill teaches you the directory layout, file format, and operations for each tool.
@@ -64,7 +63,9 @@ For Windsurf, Cline, Continue, and Roo Code, skills are plain `.md` files (front
 ### List all skills
 
 ```bash
+
 # List skills for a specific tool
+
 ls ~/.agents/skills/
 ls ~/.cursor/skills/
 ls ~/.claude/skills/
@@ -74,6 +75,7 @@ ls ~/.continue/rules/
 ls ~/.roo/rules/
 
 # Count total skills across all tools
+
 echo "Agents: $(ls ~/.agents/skills/ 2>/dev/null | wc -l | tr -d ' ')"
 echo "Cursor: $(ls ~/.cursor/skills/ 2>/dev/null | wc -l | tr -d ' ')"
 echo "Claude: $(ls ~/.claude/skills/ 2>/dev/null | wc -l | tr -d ' ')"
@@ -83,6 +85,7 @@ echo "Continue: $(ls ~/.continue/rules/ 2>/dev/null | wc -l | tr -d ' ')"
 echo "Roo: $(ls ~/.roo/rules/ 2>/dev/null | wc -l | tr -d ' ')"
 
 # Check single-file tools
+
 test -f ~/.github/copilot-instructions.md && echo "Copilot: exists" || echo "Copilot: not found"
 test -f ~/.codex/AGENTS.md && echo "Codex: exists" || echo "Codex: not found"
 test -f ~/.aider.conf.yml && echo "Aider: exists" || echo "Aider: not found"
@@ -98,7 +101,9 @@ cat ~/.cursor/skills/my-skill/SKILL.md
 ### Create a new skill
 
 ```bash
+
 # For Agents/Cursor/Claude (SKILL.md format)
+
 mkdir -p ~/.agents/skills/my-new-skill
 cat > ~/.agents/skills/my-new-skill/SKILL.md << 'EOF'
 ---
@@ -112,14 +117,17 @@ Instructions for the agent go here.
 EOF
 
 # For Windsurf/Cline/Continue/Roo (plain .md format)
+
 mkdir -p ~/.windsurf/rules/my-new-rule
 cat > ~/.windsurf/rules/my-new-rule/my-new-rule.md << 'EOF'
+
 # My New Rule
 
 Instructions go here.
 EOF
 
 # For single-file tools
+
 cat > .github/copilot-instructions.md << 'EOF'
 Instructions for Copilot go here.
 EOF
@@ -130,20 +138,26 @@ EOF
 Disabling renames the file to `.disabled` so the tool ignores it but the content is preserved:
 
 ```bash
+
 # Disable
+
 mv ~/.cursor/skills/my-skill/SKILL.md ~/.cursor/skills/my-skill/SKILL.md.disabled
 
 # Enable
+
 mv ~/.cursor/skills/my-skill/SKILL.md.disabled ~/.cursor/skills/my-skill/SKILL.md
 ```
 
 ### Copy a skill between tools
 
 ```bash
+
 # Copy from Cursor to Claude
+
 cp -r ~/.cursor/skills/my-skill ~/.claude/skills/my-skill
 
 # Copy from Agents to Windsurf (adapt format)
+
 mkdir -p ~/.windsurf/rules/my-skill
 cp ~/.agents/skills/my-skill/SKILL.md ~/.windsurf/rules/my-skill/my-skill.md
 ```
@@ -169,10 +183,13 @@ cp -r ~/.cursor/skills/my-skill .cursor/skills/my-skill
 ### Search across all skills
 
 ```bash
+
 # Search by name
+
 find ~/.agents/skills ~/.cursor/skills ~/.claude/skills ~/.windsurf/rules ~/.cline/rules ~/.continue/rules ~/.roo/rules -maxdepth 1 -type d 2>/dev/null | sort
 
 # Search by content
+
 grep -rl "search term" ~/.agents/skills/ ~/.cursor/skills/ ~/.claude/skills/ 2>/dev/null
 ```
 
@@ -192,11 +209,13 @@ find ~/.agents/skills ~/.cursor/skills ~/.claude/skills -name "*.disabled" 2>/de
 - When creating skills, use kebab-case for directory names (e.g., `my-new-skill`).
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

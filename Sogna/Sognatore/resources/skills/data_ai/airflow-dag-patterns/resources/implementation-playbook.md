@@ -23,16 +23,21 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### 2. Task Dependencies
 
 ```python
+
 # Linear
+
 task1 >> task2 >> task3
 
 # Fan-out
+
 task1 >> [task2, task3, task4]
 
 # Fan-in
+
 [task1, task2, task3] >> task4
 
 # Complex
+
 task1 >> task2 >> task4
 task1 >> task3 >> task4
 ```
@@ -40,7 +45,9 @@ task1 >> task3 >> task4
 ## Quick Start
 
 ```python
+
 # dags/example_dag.py
+
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -90,7 +97,9 @@ with DAG(
 ### Pattern 1: TaskFlow API (Airflow 2.0+)
 
 ```python
+
 # dags/taskflow_example.py
+
 from datetime import datetime
 from airflow.decorators import dag, task
 from airflow.models import Variable
@@ -144,13 +153,16 @@ def taskflow_etl():
     notify(loaded)
 
 # Instantiate the DAG
+
 taskflow_etl()
 ```
 
 ### Pattern 2: Dynamic DAG Generation
 
 ```python
+
 # dags/dynamic_dag_factory.py
+
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -158,6 +170,7 @@ from airflow.models import Variable
 import json
 
 # Configuration for multiple similar pipelines
+
 PIPELINE_CONFIGS = [
     {'name': 'customers', 'schedule': '@daily', 'source': 's3://raw/customers'},
     {'name': 'orders', 'schedule': '@hourly', 'source': 's3://raw/orders'},
@@ -216,6 +229,7 @@ def create_dag(config: dict) -> DAG:
     return dag
 
 # Generate DAGs
+
 for config in PIPELINE_CONFIGS:
     globals()[f"dag_{config['name']}"] = create_dag(config)
 ```
@@ -223,7 +237,9 @@ for config in PIPELINE_CONFIGS:
 ### Pattern 3: Branching and Conditional Logic
 
 ```python
+
 # dags/branching_example.py
+
 from airflow.decorators import dag, task
 from airflow.operators.python import BranchPythonOperator
 from airflow.operators.empty import EmptyOperator
@@ -280,7 +296,9 @@ branching_pipeline()
 ### Pattern 4: Sensors and External Dependencies
 
 ```python
+
 # dags/sensor_patterns.py
+
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.sensors.filesystem import FileSensor
@@ -344,7 +362,9 @@ with DAG(
 ### Pattern 5: Error Handling and Alerts
 
 ```python
+
 # dags/error_handling.py
+
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -423,7 +443,9 @@ with DAG(
 ### Pattern 6: Testing DAGs
 
 ```python
+
 # tests/test_dags.py
+
 import pytest
 from datetime import datetime
 from airflow.models import DagBag
@@ -458,6 +480,7 @@ def test_dag_integrity(dagbag):
         assert dag.test_cycle() is None, f"Cycle detected in {dag_id}"
 
 # Test individual task logic
+
 def test_extract_function():
     """Unit test for extract function"""
     from dags.example_dag import extract_data
@@ -496,6 +519,7 @@ airflow/
 ## Best Practices
 
 ### Do's
+
 - **Use TaskFlow API** - Cleaner code, automatic XCom
 - **Set timeouts** - Prevent zombie tasks
 - **Use `mode='reschedule'`** - For sensors, free up workers
@@ -503,6 +527,7 @@ airflow/
 - **Idempotent tasks** - Safe to retry
 
 ### Don'ts
+
 - **Don't use `depends_on_past=True`** - Creates bottlenecks
 - **Don't hardcode dates** - Use `{{ ds }}` macros
 - **Don't use global state** - Tasks should be stateless
@@ -516,6 +541,7 @@ airflow/
 - [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

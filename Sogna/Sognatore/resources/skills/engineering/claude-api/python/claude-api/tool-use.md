@@ -33,6 +33,7 @@ def get_weather(location: str, unit: str = "celsius") -> str:
     return f"72°F and sunny in {location}"
 
 # The tool runner handles the agentic loop automatically
+
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -41,6 +42,7 @@ runner = client.beta.messages.tool_runner(
 )
 
 # Each iteration yields a BetaMessage; iteration stops when Claude is done
+
 for message in runner:
     print(message)
 ```
@@ -146,6 +148,7 @@ tools = [...]  # Your tool definitions
 messages = [{"role": "user", "content": user_input}]
 
 # Agentic loop: keep going until Claude stops calling tools
+
 while True:
     response = client.messages.create(
         model="claude-opus-4-6",
@@ -186,6 +189,7 @@ while True:
     messages.append({"role": "user", "content": tool_results})
 
 # Final response text
+
 final_text = next(b.text for b in response.content if b.type == "text")
 ```
 
@@ -245,6 +249,7 @@ for block in response.content:
         })
 
 # Send all results back at once
+
 if tool_results:
     followup = client.messages.create(
         model="claude-opus-4-6",
@@ -319,11 +324,15 @@ for block in response.content:
 ### Upload Files for Analysis
 
 ```python
+
 # 1. Upload a file
+
 uploaded = client.beta.files.upload(file=open("sales_data.csv", "rb"))
 
 # 2. Pass to code execution via container_upload block
+
 # Code execution is GA; Files API is still beta (pass via extra_headers)
+
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -368,7 +377,9 @@ for block in response.content:
 ### Container Reuse
 
 ```python
+
 # First request: set up environment
+
 response1 = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
@@ -377,9 +388,11 @@ response1 = client.messages.create(
 )
 
 # Get container ID from response
+
 container_id = response1.container.id
 
 # Second request: reuse the same container
+
 response2 = client.messages.create(
     container=container_id,
     model="claude-opus-4-6",
@@ -447,6 +460,7 @@ class MyMemoryTool(BetaAbstractMemoryTool):
 memory = MyMemoryTool()
 
 # Use with tool runner
+
 runner = client.beta.messages.tool_runner(
     model="claude-opus-4-6",
     max_tokens=2048,
@@ -493,6 +507,7 @@ response = client.messages.parse(
 )
 
 # response.parsed_output is a validated ContactInfo instance
+
 contact = response.parsed_output
 print(contact.name)           # "Jane Doe"
 print(contact.interests)      # ["API", "SDKs"]
@@ -594,6 +609,7 @@ response = client.messages.create(
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,13 +7,14 @@ id: skill-multi-agent-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Multi-Agent Architecture Patterns
 
 Multi-agent architectures distribute work across multiple language model instances, each with its own context window. When designed well, this distribution enables capabilities beyond single-agent limits. When designed poorly, it introduces coordination overhead that negates benefits. The critical insight is that sub-agents exist primarily to isolate context, not to anthropomorphize role division.
 
 ## When to Use
+
 Activate this skill when:
+
 - Single-agent context limits constrain task complexity
 - Tasks decompose naturally into parallel subtasks
 - Different subtasks require different tool sets or system prompts
@@ -85,9 +86,11 @@ def forward_message(message: str, to_user: bool = True):
     Forward sub-agent response directly to user without supervisor synthesis.
     
     Use when:
+
     - Sub-agent response is final and complete
     - Supervisor synthesis would lose important details
     - Response format must be preserved exactly
+
     """
     if to_user:
         return {"type": "direct_response", "content": message}
@@ -236,14 +239,17 @@ This skill builds on context-fundamentals and context-degradation. It connects t
 ## References
 
 Internal reference:
+
 - Frameworks Reference - Detailed framework implementation patterns
 
 Related skills in this collection:
+
 - context-fundamentals - Context basics
 - memory-systems - Cross-agent memory
 - context-optimization - Partitioning strategies
 
 External resources:
+
 - [LangGraph Documentation](https://langchain-ai.github.io/langgraph/) - Multi-agent patterns and state management
 - [AutoGen Framework](https://microsoft.github.io/autogen/) - GroupChat and conversational patterns
 - [CrewAI Documentation](https://docs.crewai.com/) - Hierarchical agent processes
@@ -259,11 +265,13 @@ External resources:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

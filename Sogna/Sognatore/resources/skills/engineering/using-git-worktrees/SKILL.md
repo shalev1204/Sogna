@@ -8,7 +8,6 @@ id: skill-using-git-worktrees
 owner: [[orchestrator]]
 ---
 
-
 # Using Git Worktrees
 
 ## Overview
@@ -26,7 +25,9 @@ Follow this priority order:
 ### 1. Check Existing Directories
 
 ```bash
+
 # Check in priority order
+
 ls -d .worktrees 2>/dev/null     # Preferred (hidden)
 ls -d worktrees 2>/dev/null      # Alternative
 ```
@@ -61,13 +62,16 @@ Which would you prefer?
 **MUST verify directory is ignored before creating worktree:**
 
 ```bash
+
 # Check if directory is ignored (respects local, global, and system gitignore)
+
 git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/dev/null
 ```
 
 **If NOT ignored:**
 
 Per Jesse's rule "Fix broken things immediately":
+
 1. Add appropriate line to .gitignore
 2. Commit the change
 3. Proceed with worktree creation
@@ -89,7 +93,9 @@ project=$(basename "$(git rev-parse --show-toplevel)")
 ### 2. Create Worktree
 
 ```bash
+
 # Determine full path
+
 case $LOCATION in
   .worktrees|worktrees)
     path="$LOCATION/$BRANCH_NAME"
@@ -100,6 +106,7 @@ case $LOCATION in
 esac
 
 # Create worktree with new branch
+
 git worktree add "$path" -b "$BRANCH_NAME"
 cd "$path"
 ```
@@ -109,17 +116,22 @@ cd "$path"
 Auto-detect and run appropriate setup:
 
 ```bash
+
 # Node.js
+
 if [ -f package.json ]; then npm install; fi
 
 # Rust
+
 if [ -f Cargo.toml ]; then cargo build; fi
 
 # Python
+
 if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 if [ -f pyproject.toml ]; then poetry install; fi
 
 # Go
+
 if [ -f go.mod ]; then go mod download; fi
 ```
 
@@ -128,7 +140,9 @@ if [ -f go.mod ]; then go mod download; fi
 Run tests to ensure worktree starts clean:
 
 ```bash
+
 # Examples - use project-appropriate command
+
 npm test
 cargo test
 pytest
@@ -200,6 +214,7 @@ Ready to implement auth feature
 ## Red Flags
 
 **Never:**
+
 - Create worktree without verifying it's ignored (project-local)
 - Skip baseline test verification
 - Proceed with failing tests without asking
@@ -207,6 +222,7 @@ Ready to implement auth feature
 - Skip CLAUDE.md check
 
 **Always:**
+
 - Follow directory priority: existing > CLAUDE.md > ask
 - Verify directory is ignored for project-local
 - Auto-detect and run project setup
@@ -215,22 +231,27 @@ Ready to implement auth feature
 ## Integration
 
 **Called by:**
+
 - **brainstorming** (Phase 4) - REQUIRED when design is approved and implementation follows
 - Any skill needing isolated workspace
 
 **Pairs with:**
+
 - **finishing-a-development-branch** - REQUIRED for cleanup after work complete
 - **executing-plans** or **subagent-driven-development** - Work happens in this worktree
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -9,7 +9,6 @@ id: skill-api-endpoint-builder
 owner: [[eng-api]]
 ---
 
-
 # API Endpoint Builder
 
 Build complete, production-ready REST API endpoints with proper validation, error handling, authentication, and documentation.
@@ -25,6 +24,7 @@ Build complete, production-ready REST API endpoints with proper validation, erro
 ## What You'll Build
 
 For each endpoint, you create:
+
 - Route handler with proper HTTP method
 - Input validation (request body, params, query)
 - Authentication/authorization checks
@@ -115,6 +115,7 @@ const createUser = async (req, res) => {
 ## Best Practices
 
 ### HTTP Status Codes
+
 - `200` - Success (GET, PUT, PATCH)
 - `201` - Created (POST)
 - `204` - No Content (DELETE)
@@ -252,26 +253,25 @@ const getResources = async (req, res) => {
 
 ```javascript
 /**
+
  * @route POST /api/users
  * @desc Create a new user
  * @access Public
- * 
- * @body {string} email - User email (required)
+ * * @body {string} email - User email (required)
  * @body {string} name - User name (required)
  * @body {string} password - Password, min 8 chars (required)
- * 
- * @returns {201} User created successfully
+ * * @returns {201} User created successfully
  * @returns {400} Validation error
  * @returns {409} User already exists
  * @returns {500} Server error
- * 
- * @example
+ * * @example
  * POST /api/users
  * {
- *   "email": "user@example.com",
- *   "name": "John Doe",
- *   "password": "securepass123"
+ * "email": "user@example.com",
+ * "name": "John Doe",
+ * "password": "securepass123"
  * }
+
  */
 ```
 
@@ -327,11 +327,13 @@ describe('POST /api/users', () => {
 - `@database-design` - Data modeling
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

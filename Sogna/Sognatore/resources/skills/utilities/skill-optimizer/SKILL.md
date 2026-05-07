@@ -8,7 +8,6 @@ id: skill-skill-optimizer
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use This Skill
 
 - Use when skills are not triggering as expected or seem broken
@@ -64,6 +63,7 @@ Output report with P0/P1/P2
 ### Step 1: Identify Target Skills
 
 Scan skill directories in order: `~/.claude/skills/`, `~/.codex/skills/`, `~/.agents/skills/`. Deduplicate by skill name (same name in multiple locations = same skill). For each, read `SKILL.md` and extract:
+
 - name, description (from YAML frontmatter)
 - trigger keywords (from description field)
 - defined workflow steps (Step 1/2/3... or ### sections under Workflow)
@@ -76,12 +76,14 @@ If user specified skill names, filter to only those.
 Use python3 scripts via Bash to scan session JSONL files. Extract:
 
 **Claude Code sessions** (`~/.claude/projects/**/*.jsonl`):
+
 - `Skill` tool_use calls (which skills were invoked)
 - User messages (full text)
 - Assistant messages after skill invocation (for workflow tracking)
 - User messages after skill invocation (for reaction analysis)
 
 **Codex sessions** (`~/.codex/sessions/**/*.jsonl`):
+
 - `session_meta` events → extract `base_instructions` for skill loading evidence
 - `response_item` events → assistant outputs (workflow tracking)
 - `event_msg` events → tool execution and skill-related events
@@ -90,6 +92,7 @@ Use python3 scripts via Bash to scan session JSONL files. Extract:
 **Note:** Codex injects skills via context rather than explicit `Skill` tool calls. Skill loading (present in `base_instructions`) does NOT equal active invocation. To detect actual use, search for skill-specific workflow markers (step headers, output formats) in `response_item` content within that session. A skill is "invoked" only if the agent produced output following the skill's defined workflow.
 
 **Aggregated:**
+
 - Per-skill: invocation count, trigger keyword match count
 - Per-skill: user reaction sentiment after invocation
 - Per-skill: workflow step completion markers
@@ -106,6 +109,7 @@ Count how many times each skill was actually invoked vs how many times its trigg
 **Codex:** count sessions where the agent produced output following the skill's workflow markers (not merely loaded in context).
 
 **Diagnose:**
+
 - Never triggered → skill may be useless or trigger words wrong
 - Keywords match >> actual invocations → undertrigger problem, description needs work
 - High frequency → core skill, worth optimizing
@@ -115,6 +119,7 @@ Count how many times each skill was actually invoked vs how many times its trigg
 **This dimension is critical and easy to skip. Do not skip it.**
 
 After a skill is invoked in a session, read the user's next 3 messages. Classify:
+
 - **Negative**: "no", "wrong", "never mind", "not what I wanted", user interrupts
 - **Correction**: user re-describes their intent, manually overrides skill output
 - **Positive**: "good", "ok", "continue", "nice", user follows the workflow
@@ -127,6 +132,7 @@ Report per-skill satisfaction rate.
 **This dimension is critical and easy to skip. Do not skip it.**
 
 For each skill invocation found in session data:
+
 1. Extract the skill's defined steps from SKILL.md
 2. Search the assistant messages in that session for step markers (Step N, specific output formats defined in the skill)
 3. Calculate: how far did execution get?
@@ -172,6 +178,7 @@ For skills with chronic undertriggering (0 triggers across 5+ sessions where rel
 #### 4.6 Cross-Skill Conflicts
 
 Compare all skill pairs:
+
 - Trigger keyword overlap (same keywords in two descriptions)
 - Workflow overlap (two skills teach similar processes)
 - Contradictory guidance
@@ -179,6 +186,7 @@ Compare all skill pairs:
 #### 4.7 Environment Consistency
 
 For each skill, extract referenced:
+
 - File paths → check if they exist (`test -e`)
 - CLI tools → check if installed (`which`)
 - Directories → check if they exist
@@ -190,6 +198,7 @@ Flag any broken references.
 **This dimension is critical and easy to skip. Do not skip it.**
 
 For each skill:
+
 - Word count (from Step 1)
 - Trigger frequency (from 4.1)
 - Cost-effectiveness = trigger count / word count
@@ -197,6 +206,7 @@ For each skill:
 
 **Progressive Disclosure Tier Check:**
 Evaluate each skill against the 3-tier loading model:
+
 - Tier 1 (frontmatter): ~100 tokens. Check: is description ≤ 1024 chars?
 - Tier 2 (SKILL.md body): <500 lines recommended. Check: word count.
 - Tier 3 (reference files): loaded on demand. Check: does skill use reference files for detailed content, or cram everything into SKILL.md?
@@ -216,6 +226,7 @@ Rate each skill on a 5-point scale:
 | 1 | Broken: doesn't work, references missing, or fundamentally misaligned |
 
 **Scored dimensions** (weighted average):
+
 - Trigger rate: 25%
 - User reaction: 20%
 - Workflow completion: 15%
@@ -224,6 +235,7 @@ Rate each skill on a 5-point scale:
 - Token economics: 10%
 
 **Qualitative dimensions** (reported but not scored):
+
 - 4.5a Overtrigger: reported as count + examples
 - 4.6 Cross-Skill Conflicts: reported as conflict pairs
 - 4.7 Environment Consistency: reported as pass/fail per reference
@@ -231,30 +243,41 @@ Rate each skill on a 5-point scale:
 ## Report Format
 
 ```markdown
+
 # Skill Optimization Report
+
 **Date**: {date}
 **Scope**: {all / specified skills}
 **Session data**: {N} sessions, {date range}
 
 ## Overview
+
 | Skill | Triggers | Reaction | Completion | Static | Undertrigger | Token | Score |
 |-------|----------|----------|------------|--------|--------------|-------|-------|
 | example-skill | 2 | 100% | 86% | B+ | 1 miss | 486w | 4/5 |
 
 ## P0 Fixes (blocking usage)
+
 1. ...
 
 ## P1 Improvements (better experience)
+
 1. ...
 
 ## P2 Optional Optimizations
+
 1. ...
 
 ## Per-Skill Diagnostics
+
 ### {skill-name}
+
 #### 4.1 Trigger Rate
+
 ...
+
 #### 4.2 User Reaction
+
 ...
 (all 8 dimensions)
 ```
@@ -262,6 +285,7 @@ Rate each skill on a 5-point scale:
 ## Research Background
 
 The analysis dimensions in this report are grounded in the following research:
+
 - **Undertrigger detection**: Memento-Skills (arXiv:2603.18743) — skills as structured files require accurate routing; unrouted skills cannot self-improve via the read-write learning loop
 - **Description quality**: MCP Description Quality (arXiv:2602.18914) — well-written descriptions achieve 72% tool selection rate vs. 20% random baseline (3.6x improvement)
 - **Information position**: Lost in the Middle (Liu et al., TACL 2024) — U-shaped LLM attention curve
@@ -269,11 +293,13 @@ The analysis dimensions in this report are grounded in the following research:
 - **Instruction compliance**: IFEval (arXiv:2311.07911) — LLMs struggle with multi-constraint prompts
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

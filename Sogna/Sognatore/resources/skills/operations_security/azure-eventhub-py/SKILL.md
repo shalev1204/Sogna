@@ -8,7 +8,6 @@ id: skill-azure-eventhub-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Event Hubs SDK for Python
 
 Big data streaming platform for high-throughput event ingestion.
@@ -17,7 +16,9 @@ Big data streaming platform for high-throughput event ingestion.
 
 ```bash
 pip install azure-eventhub azure-identity
+
 # For checkpointing with blob storage
+
 pip install azure-eventhub-checkpointstoreblob-aio
 ```
 
@@ -41,6 +42,7 @@ namespace = "<namespace>.servicebus.windows.net"
 eventhub_name = "my-eventhub"
 
 # Producer
+
 producer = EventHubProducerClient(
     fully_qualified_namespace=namespace,
     eventhub_name=eventhub_name,
@@ -48,6 +50,7 @@ producer = EventHubProducerClient(
 )
 
 # Consumer
+
 consumer = EventHubConsumerClient(
     fully_qualified_namespace=namespace,
     eventhub_name=eventhub_name,
@@ -96,10 +99,13 @@ with producer:
 ### Send to Specific Partition
 
 ```python
+
 # By partition ID
+
 event_data_batch = producer.create_batch(partition_id="0")
 
 # By partition key (consistent hashing)
+
 event_data_batch = producer.create_batch(partition_key="user-123")
 ```
 
@@ -200,10 +206,12 @@ asyncio.run(send_events())
 event = EventData("My event body")
 
 # Set properties
+
 event.properties = {"custom_property": "value"}
 event.content_type = "application/json"
 
 # Read properties (on receive)
+
 print(event.body_as_str())
 print(event.sequence_number)
 print(event.offset)
@@ -243,14 +251,17 @@ with producer:
 | scripts/setup_consumer.py | CLI for Event Hub info, consumer setup, and event sending/receiving |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

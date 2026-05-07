@@ -39,7 +39,7 @@ export class OllamaProvider extends Provider {
       });
       return stdout || '';
     } catch (error: any) {
-      throw new Error(`Ollama invocation failed: ${error.message}`);
+      throw new Error(`Ollama invocation failed: ${error.message}`, { cause: error });
     }
   }
 

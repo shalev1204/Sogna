@@ -10,7 +10,6 @@ id: skill-personal-tool-builder
 owner: [[orchestrator]]
 ---
 
-
 # Personal Tool Builder
 
 Expert in building custom tools that solve your own problems first. The best products
@@ -57,21 +56,26 @@ Building from personal pain points
 ## The Itch-to-Tool Process
 
 ### Identifying Real Itches
+
 ```
 Good itches:
+
 - "I do this manually 10x per day"
 - "This takes me 30 minutes every time"
 - "I wish X just did Y"
 - "Why doesn't this exist?"
 
 Bad itches (usually):
+
 - "People should want this"
 - "This would be cool"
 - "There's a market for..."
 - "AI could probably..."
+
 ```
 
 ### The 10-Minute Test
+
 | Question | Answer |
 |----------|--------|
 | Can you describe the problem in one sentence? | Required |
@@ -80,22 +84,27 @@ Bad itches (usually):
 | Would you use this daily? | Should be yes |
 
 ### Start Ugly
+
 ```
 Day 1: Script that solves YOUR problem
+
 - No UI, just works
 - Hardcoded paths, your data
 - Zero error handling
 - You understand every line
 
 Week 1: Script that works reliably
+
 - Handle your edge cases
 - Add the features YOU need
 - Still ugly, but robust
 
 Month 1: Tool that might help others
+
 - Basic docs (for future you)
 - Config instead of hardcoding
 - Consider sharing
+
 ```
 
 ### CLI Tool Architecture
@@ -107,6 +116,7 @@ Building command-line tools that last
 ## CLI Tool Stack
 
 ### Node.js CLI Stack
+
 ```javascript
 // package.json
 {
@@ -148,8 +158,11 @@ program.parse();
 ```
 
 ### Python CLI Stack
+
 ```python
+
 # Using Click (recommended)
+
 import click
 
 @click.group()
@@ -169,6 +182,7 @@ if __name__ == '__main__':
 ```
 
 ### Distribution
+
 | Method | Complexity | Reach |
 |--------|------------|-------|
 | npm publish | Low | Node devs |
@@ -186,8 +200,10 @@ Apps that work offline and own your data
 ## Local-First Architecture
 
 ### Why Local-First for Personal Tools
+
 ```
 Benefits:
+
 - Works offline
 - Your data stays yours
 - No server costs
@@ -195,12 +211,15 @@ Benefits:
 - Works forever (no shutdown)
 
 Trade-offs:
+
 - Sync is hard
 - No collaboration (initially)
 - Platform-specific work
+
 ```
 
 ### Stack Options
+
 | Stack | Best For | Complexity |
 |-------|----------|------------|
 | Electron + SQLite | Desktop apps | Medium |
@@ -210,6 +229,7 @@ Trade-offs:
 | CLI + JSON files | Scripts | Very Low |
 
 ### Simple Local Storage
+
 ```javascript
 // For simple tools: JSON file storage
 import { readFileSync, writeFileSync, existsSync } from 'fs';
@@ -231,6 +251,7 @@ function saveData(data) {
 ```
 
 ### SQLite for More Complex Tools
+
 ```javascript
 // better-sqlite3 for Node.js
 import Database from 'better-sqlite3';
@@ -261,8 +282,10 @@ Growing a script into a real product
 ## Evolution Path
 
 ### Stage 1: Personal Script
+
 ```
 Characteristics:
+
 - Only you use it
 - Hardcoded values
 - No error handling
@@ -272,8 +295,10 @@ Time: Hours to days
 ```
 
 ### Stage 2: Shareable Tool
+
 ```
 Add:
+
 - README explaining what it does
 - Basic error messages
 - Config file instead of hardcoding
@@ -283,8 +308,10 @@ Time: Days
 ```
 
 ### Stage 3: Public Tool
+
 ```
 Add:
+
 - Installation instructions
 - Cross-platform support
 - Proper error handling
@@ -295,8 +322,10 @@ Time: Week or two
 ```
 
 ### Stage 4: Product
+
 ```
 Add:
+
 - Landing page
 - Documentation site
 - User support channel
@@ -307,6 +336,7 @@ Time: Weeks to months
 ```
 
 ### Signs You Should Productize
+
 | Signal | Strength |
 |--------|----------|
 | Others asking for it | Strong |
@@ -325,6 +355,7 @@ Severity: MEDIUM
 Situation: Script fails when you try to share it
 
 Symptoms:
+
 - Works on my machine
 - Scripts failing for others
 - Path not found errors
@@ -341,6 +372,7 @@ Recommended fix:
 ## Making Tools Portable
 
 ### Common Portability Issues
+
 | Issue | Fix |
 |-------|-----|
 | Hardcoded paths | Use ~ or env vars |
@@ -350,6 +382,7 @@ Recommended fix:
 | OS-specific | Test on other OS or use cross-platform libs |
 
 ### Path Portability
+
 ```javascript
 // Bad
 const dataFile = '~/data.json';
@@ -361,6 +394,7 @@ const dataFile = join(homedir(), '.mytool', 'data.json');
 ```
 
 ### Dependency Checking
+
 ```javascript
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 import { execSync } from 'child_process';
@@ -381,6 +415,7 @@ checkDep('ffmpeg', 'brew install ffmpeg');
 ```
 
 ### Cross-Platform Considerations
+
 ```javascript
 import { platform } from 'os';
 
@@ -400,6 +435,7 @@ Severity: MEDIUM
 Situation: Too many config options making the tool unusable
 
 Symptoms:
+
 - Config file is huge
 - Users confused by options
 - You forget what options exist
@@ -416,8 +452,10 @@ Recommended fix:
 ## Taming Configuration
 
 ### The Config Hierarchy
+
 ```
 Best to worst:
+
 1. Smart defaults (no config needed)
 2. Single config file
 3. Environment variables
@@ -425,11 +463,14 @@ Best to worst:
 5. Interactive prompts
 
 Use sparingly:
+
 6. Config directory with multiple files
 7. Config inheritance/merging
+
 ```
 
 ### Opinionated Defaults
+
 ```javascript
 // Instead of 10 options, pick reasonable defaults
 const defaults = {
@@ -444,6 +485,7 @@ const defaults = {
 ```
 
 ### Config File Pattern
+
 ```javascript
 // ~/.mytool/config.json
 // Keep it minimal
@@ -465,6 +507,7 @@ const defaults = {
 ```
 
 ### When to Add Options
+
 | Add option if... | Don't add if... |
 |------------------|-----------------|
 | Users ask repeatedly | You imagine someone might want |
@@ -479,6 +522,7 @@ Severity: LOW
 Situation: Tool you built is now broken and you don't want to fix it
 
 Symptoms:
+
 - Script hasn't run in months
 - Don't remember how it works
 - Dependencies outdated
@@ -495,21 +539,26 @@ Recommended fix:
 ## Sustainable Personal Tools
 
 ### Design for Abandonment
+
 ```
 Assume future-you won't remember:
+
 - Why you built this
 - How it works
 - Where the data is
 - What the dependencies do
 
 Build accordingly:
+
 - README with WHY, not just WHAT
 - Simple architecture
 - Minimal dependencies
 - Data in standard formats
+
 ```
 
 ### Minimal Dependency Strategy
+
 | Approach | When to Use |
 |----------|-------------|
 | Zero deps | Simple scripts |
@@ -518,9 +567,11 @@ Build accordingly:
 | Bundle deps | Distribution |
 
 ### Self-Documenting Pattern
+
 ```javascript
 #!/usr/bin/env node
 /**
+
  * WHAT: Converts X to Y
  * WHY: Because Z process was manual
  * WHERE: Data in ~/.mytool/
@@ -528,12 +579,14 @@ Build accordingly:
  *
  * Last used: 2024-01
  * Still works as of: 2024-01
+
  */
 
 // Tool code here
 ```
 
 ### Graceful Degradation
+
 ```javascript
 // When things break, fail helpfully
 try {
@@ -549,18 +602,22 @@ try {
 ```
 
 ### When to Let Go
+
 ```
 Signs to abandon:
+
 - Haven't used in 6+ months
 - Problem no longer exists
 - Better tool now exists
 - Would rebuild differently
 
 How to abandon gracefully:
+
 - Archive in clear state
 - Note why abandoned
 - Export data to standard format
 - Don't delete (might want later)
+
 ```
 
 ### Personal tools with security vulnerabilities
@@ -570,6 +627,7 @@ Severity: HIGH
 Situation: Your personal tool exposes sensitive data or access
 
 Symptoms:
+
 - API keys in source code
 - Tool accessible on network
 - Credentials in git history
@@ -586,6 +644,7 @@ Recommended fix:
 ## Security in Personal Tools
 
 ### Common Mistakes
+
 | Risk | Mitigation |
 |------|------------|
 | API keys in code | Use env vars or config file |
@@ -595,6 +654,7 @@ Recommended fix:
 | Git commits with secrets | .gitignore config files |
 
 ### Credential Management
+
 ```javascript
 // Never in code
 const API_KEY = 'sk-xxx'; // BAD
@@ -611,6 +671,7 @@ const API_KEY = config.apiKey;
 ```
 
 ### Localhost-Only Servers
+
 ```javascript
 // If your tool has a web UI
 import express from 'express';
@@ -626,6 +687,7 @@ app.listen(3000, '127.0.0.1', () => {
 ```
 
 ### Before Sharing
+
 ```
 Checklist:
 [ ] No hardcoded credentials
@@ -728,12 +790,14 @@ Skills: personal-tool-builder, micro-saas-launcher
 Workflow:
 
 ```
+
 1. Build CLI for yourself
 2. Share with friends/colleagues
 3. Get feedback and iterate
 4. Add web UI (optional)
 5. Set up payments
 6. Launch publicly
+
 ```
 
 ### Personal Automation Stack
@@ -743,11 +807,13 @@ Skills: personal-tool-builder, workflow-automation, backend
 Workflow:
 
 ```
+
 1. Identify repetitive task
 2. Build script to automate
 3. Add triggers (cron, webhook)
 4. Store results/logs
 5. Monitor and iterate
+
 ```
 
 ### AI-Powered Personal Tool
@@ -757,11 +823,13 @@ Skills: personal-tool-builder, ai-wrapper-product
 Workflow:
 
 ```
+
 1. Identify task AI can help with
 2. Build minimal wrapper
 3. Tune prompts for your use case
 4. Add to daily workflow
 5. Consider sharing if useful
+
 ```
 
 ### Browser Tool to Extension
@@ -771,11 +839,13 @@ Skills: personal-tool-builder, browser-extension-builder
 Workflow:
 
 ```
+
 1. Build bookmarklet or userscript
 2. Validate it solves the problem
 3. Convert to proper extension
 4. Add to Chrome/Firefox store
 5. Share with others
+
 ```
 
 ## Related Skills
@@ -783,6 +853,7 @@ Workflow:
 Works well with: `micro-saas-launcher`, `browser-extension-builder`, `workflow-automation`, `backend`
 
 ## When to Use
+
 - User mentions or implies: build a tool
 - User mentions or implies: personal tool
 - User mentions or implies: scratch my itch
@@ -793,11 +864,13 @@ Works well with: `micro-saas-launcher`, `browser-extension-builder`, `workflow-a
 - User mentions or implies: build for myself
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

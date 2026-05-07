@@ -1,6 +1,6 @@
 import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value.js";
-import { DOMKeyframesResolver } from "../../animation/keyframes/domkeyframesresolver.js";
-import { VisualElement } from "../visualelement.js";
+import { DOMKeyframesResolver } from "../../animation/keyframes/DOMKeyframesResolver.js";
+import { VisualElement } from "../VisualElement.js";
 export class DOMVisualElement extends VisualElement {
     constructor() {
         super(...arguments);

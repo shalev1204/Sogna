@@ -8,7 +8,6 @@ id: skill-nextjs-supabase-auth
 owner: [[orchestrator]]
 ---
 
-
 # Next.js + Supabase Auth
 
 Expert integration of Supabase Auth with Next.js App Router
@@ -279,10 +278,12 @@ Skills: nextjs-supabase-auth, supabase-backend, nextjs-app-router, vercel-deploy
 Workflow:
 
 ```
+
 1. Database setup (supabase-backend)
 2. Auth implementation (nextjs-supabase-auth)
 3. Route protection (nextjs-app-router)
 4. Deployment config (vercel-deployment)
+
 ```
 
 ### Protected SaaS
@@ -292,9 +293,11 @@ Skills: nextjs-supabase-auth, stripe-integration, supabase-backend
 Workflow:
 
 ```
+
 1. User authentication (nextjs-supabase-auth)
 2. Customer sync (stripe-integration)
 3. Subscription gating (supabase-backend)
+
 ```
 
 ## Related Skills
@@ -302,6 +305,7 @@ Workflow:
 Works well with: `nextjs-app-router`, `supabase-backend`
 
 ## When to Use
+
 - User mentions or implies: supabase auth next
 - User mentions or implies: authentication next.js
 - User mentions or implies: login supabase
@@ -311,11 +315,13 @@ Works well with: `nextjs-app-router`, `supabase-backend`
 - User mentions or implies: session management
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

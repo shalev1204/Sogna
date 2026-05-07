@@ -12,7 +12,6 @@ id: skill-webapp-testing
 owner: [[eng-qa]]
 ---
 
-
 # Web App Testing
 
 > Discover and test everything. Leave no route untested.

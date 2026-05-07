@@ -12,32 +12,38 @@ This reference captures high-converting page patterns and copy structures.
 ## Hero Section Patterns
 
 ### Pattern 1: Problem-Solution Hero
+
 - Headline names the painful problem.
 - Subheadline states the clear outcome.
 - Primary CTA starts immediately.
 - Optional supporting visual demonstrates product in context.
 
 ### Pattern 2: Outcome-First Hero
+
 - Headline leads with measurable value.
 - Subheadline clarifies who the page is for.
 - CTA is action-oriented and specific.
 
 ### Pattern 3: Authority Hero
+
 - Headline + trust indicator (logos, testimonial snippet, proof metric).
 - Useful when category skepticism is high.
 
 ## Social Proof Layouts
 
 ### Logo Strip + Proof Metric
+
 - Keep to recognizable logos.
 - Add one proof metric (e.g., active users, revenue saved, hours reduced).
 
 ### Testimonial Grid
+
 - 3-6 testimonials across segments.
 - Include role/company where possible.
 - Prefer concrete outcomes over generic praise.
 
 ### Case Study Snapshot
+
 - Mini blocks: challenge -> approach -> measurable result.
 
 ## CTA Best Practices
@@ -59,6 +65,7 @@ This reference captures high-converting page patterns and copy structures.
 ## Conversion-Optimized Templates
 
 ### SaaS Demo Page
+
 1. Hero with problem-solution framing
 2. Product walkthrough section
 3. Social proof strip
@@ -67,12 +74,14 @@ This reference captures high-converting page patterns and copy structures.
 6. Final CTA
 
 ### Lead Magnet Page
+
 1. Promise + asset preview
 2. Bullet outcomes
 3. Short form
 4. Trust/privacy note
 
 ### Product Launch Page
+
 1. Outcome-first hero
 2. Why now / differentiation
 3. Feature blocks
@@ -82,6 +91,7 @@ This reference captures high-converting page patterns and copy structures.
 ## Headline Formulas
 
 ### PAS (Problem-Agitate-Solution)
+
 - Problem: identify the pain
 - Agitate: show consequences of inaction
 - Solution: position the offer as relief
@@ -90,12 +100,14 @@ Example structure:
 "Still [problem]? Stop [negative consequence] and start [desired outcome]."
 
 ### AIDA (Attention-Interest-Desire-Action)
+
 - Attention: pattern interrupt headline
 - Interest: relevant context and stakes
 - Desire: proof and benefits
 - Action: concrete next step
 
 ### 4U Formula
+
 - Useful: clear practical value
 - Urgent: reason to act now
 - Unique: differentiated promise
@@ -105,6 +117,7 @@ Example structure:
 "Get [specific result] in [timeframe] without [common pain]."
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

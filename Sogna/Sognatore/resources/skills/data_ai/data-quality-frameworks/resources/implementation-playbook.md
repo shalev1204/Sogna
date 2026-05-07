@@ -39,27 +39,36 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ### Great Expectations Setup
 
 ```bash
+
 # Install
+
 pip install great_expectations
 
 # Initialize project
+
 great_expectations init
 
 # Create datasource
+
 great_expectations datasource new
 ```
 
 ```python
+
 # great_expectations/checkpoints/daily_validation.yml
+
 import great_expectations as gx
 
 # Create context
+
 context = gx.get_context()
 
 # Create expectation suite
+
 suite = context.add_expectation_suite("orders_suite")
 
 # Add expectations
+
 suite.add_expectation(
     gx.expectations.ExpectColumnValuesToNotBeNull(column="order_id")
 )
@@ -68,6 +77,7 @@ suite.add_expectation(
 )
 
 # Validate
+
 results = context.run_checkpoint(checkpoint_name="daily_orders")
 ```
 
@@ -76,7 +86,9 @@ results = context.run_checkpoint(checkpoint_name="daily_orders")
 ### Pattern 1: Great Expectations Suite
 
 ```python
+
 # expectations/orders_suite.py
+
 import great_expectations as gx
 from great_expectations.core import ExpectationSuite
 from great_expectations.core.expectation_configuration import ExpectationConfiguration
@@ -172,7 +184,9 @@ def build_orders_suite() -> ExpectationSuite:
 ### Pattern 2: Great Expectations Checkpoint
 
 ```yaml
+
 # great_expectations/checkpoints/orders_checkpoint.yml
+
 name: orders_checkpoint
 risk: unknown
 config_version: 1.0
@@ -180,7 +194,9 @@ class_name: Checkpoint
 run_name_template: "%Y%m%d-%H%M%S-orders-validation"
 
 validations:
+
   - batch_request:
+
       datasource_name: warehouse
       data_connector_name: default_inferred_data_connector_name
       data_asset_name: orders
@@ -189,20 +205,26 @@ validations:
     expectation_suite_name: orders_suite
 
 action_list:
+
   - name: store_validation_result
+
     action:
       class_name: StoreValidationResultAction
 
   - name: store_evaluation_parameters
+
     action:
       class_name: StoreEvaluationParametersAction
 
   - name: update_data_docs
+
     action:
       class_name: UpdateDataDocsAction
 
   # Slack notification on failure
+
   - name: send_slack_notification
+
     action:
       class_name: SlackNotificationAction
       slack_webhook: ${SLACK_WEBHOOK}
@@ -213,7 +235,9 @@ action_list:
 ```
 
 ```python
+
 # Run checkpoint
+
 import great_expectations as gx
 
 context = gx.get_context()
@@ -230,67 +254,99 @@ if not result.success:
 ### Pattern 3: dbt Data Tests
 
 ```yaml
+
 # models/marts/core/_core__models.yml
+
 version: 2
 
 models:
+
   - name: fct_orders
+
     description: Order fact table
     tests:
       # Table-level tests
+
       - dbt_utils.recency:
+
           datepart: day
           field: created_at
           interval: 1
+
       - dbt_utils.at_least_one
       - dbt_utils.expression_is_true:
+
           expression: "total_amount >= 0"
 
     columns:
+
       - name: order_id
+
         description: Primary key
         tests:
+
           - unique
           - not_null
 
       - name: customer_id
+
         description: Foreign key to dim_customers
         tests:
+
           - not_null
           - relationships:
+
               to: ref('dim_customers')
               field: customer_id
 
       - name: order_status
+
         tests:
+
           - accepted_values:
+
               values: ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
 
       - name: total_amount
+
         tests:
+
           - not_null
           - dbt_utils.expression_is_true:
+
               expression: ">= 0"
 
       - name: created_at
+
         tests:
+
           - not_null
           - dbt_utils.expression_is_true:
+
               expression: "<= current_timestamp"
 
   - name: dim_customers
+
     columns:
+
       - name: customer_id
+
         tests:
+
           - unique
           - not_null
 
       - name: email
+
         tests:
+
           - unique
           - not_null
+
           # Custom regex test
+
           - dbt_utils.expression_is_true:
+
               expression: "email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'"
 ```
 
@@ -362,7 +418,9 @@ select * from orphaned_orders
 ### Pattern 5: Data Contracts
 
 ```yaml
+
 # contracts/orders_contract.yaml
+
 apiVersion: datacontract.com/v1.0.0
 kind: DataContract
 metadata:
@@ -428,11 +486,14 @@ quality:
   type: SodaCL
   specification:
     checks for orders:
+
       - row_count > 0
       - missing_count(order_id) = 0
       - duplicate_count(order_id) = 0
       - invalid_count(status) = 0:
+
           valid values: [pending, processing, shipped, delivered, cancelled]
+
       - freshness(created_at) < 24h
 
 sla:
@@ -444,7 +505,9 @@ sla:
 ### Pattern 6: Automated Quality Pipeline
 
 ```python
+
 # quality_pipeline.py
+
 from dataclasses import dataclass
 from typing import List, Dict, Any
 import great_expectations as gx
@@ -539,6 +602,7 @@ class DataQualityPipeline:
         return "\n".join(report)
 
 # Usage
+
 context = gx.get_context()
 pipeline = DataQualityPipeline(context)
 
@@ -552,6 +616,7 @@ results = pipeline.run_all(tables_to_validate)
 report = pipeline.generate_report(results)
 
 # Fail pipeline if any table failed
+
 if not all(r.passed for r in results.values()):
     print(report)
     raise ValueError("Data quality checks failed!")
@@ -560,6 +625,7 @@ if not all(r.passed for r in results.values()):
 ## Best Practices
 
 ### Do's
+
 - **Test early** - Validate source data before transformations
 - **Test incrementally** - Add tests as you find issues
 - **Document expectations** - Clear descriptions for each test
@@ -567,6 +633,7 @@ if not all(r.passed for r in results.values()):
 - **Version contracts** - Track schema changes
 
 ### Don'ts
+
 - **Don't test everything** - Focus on critical columns
 - **Don't ignore warnings** - They often precede failures
 - **Don't skip freshness** - Stale data is bad data
@@ -581,6 +648,7 @@ if not all(r.passed for r in results.values()):
 - [Soda Core](https://docs.soda.io/soda-core/overview.html)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

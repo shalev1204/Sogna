@@ -46,6 +46,7 @@ def payment_workflow():
         cancel_order()
 
 # Webhook endpoint to receive payment notification
+
 @app.post("/payment_webhook/{workflow_id}/{status}")
 def payment_webhook(workflow_id: str, status: str):
     DBOS.send(workflow_id, status, PAYMENT_STATUS)
@@ -53,6 +54,7 @@ def payment_webhook(workflow_id: str, status: str):
 ```
 
 Key points:
+
 - `DBOS.recv()` can only be called from workflows
 - Messages are queued per topic
 - `recv()` returns `None` on timeout
@@ -61,6 +63,7 @@ Key points:
 Reference: [Workflow Messaging](https://docs.dbos.dev/python/tutorials/workflow-communication#workflow-messaging-and-notifications)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

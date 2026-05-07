@@ -7,12 +7,12 @@ id: skill-differential-review
 owner: [[orchestrator]]
 ---
 
-
 # Differential Security Review
 
 Security-focused code review for PRs, commits, and diffs.
 
 ## When to Use
+
 - You need a security-focused review of a PR, commit range, or diff rather than a general code review.
 - The changes touch auth, crypto, external calls, value transfer, permissions, or other high-risk logic.
 - You need findings backed by code evidence, attack scenarios, and an explicit report artifact.
@@ -115,10 +115,12 @@ Before delivering:
 ## Integration
 
 **audit-context-building skill:**
+
 - Pre-Analysis: Build baseline context
 - Phase 4: Deep context on HIGH RISK changes
 
 **issue-writer skill:**
+
 - Transform findings into formal audit reports
 - Command: `issue-writer --input DIFFERENTIAL_REVIEW_REPORT.md --format audit-report`
 
@@ -127,36 +129,45 @@ Before delivering:
 ## Example Usage
 
 ### Quick Triage (Small PR)
+
 ```
 Input: 5 file PR, 2 HIGH RISK files
 Strategy: Use Quick Reference
+
 1. Classify risk level per file (2 HIGH, 3 LOW)
 2. Focus on 2 HIGH files only
 3. Git blame removed code
 4. Generate minimal report
+
 Time: ~30 minutes
 ```
 
 ### Standard Review (Medium Codebase)
+
 ```
 Input: 80 files, 12 HIGH RISK changes
 Strategy: FOCUSED (see methodology.md)
+
 1. Full workflow on HIGH RISK files
 2. Surface scan on MEDIUM
 3. Skip LOW risk files
 4. Complete report with all sections
+
 Time: ~3-4 hours
 ```
 
 ### Deep Audit (Large, Critical Change)
+
 ```
 Input: 450 files, auth system rewrite
 Strategy: SURGICAL + audit-context-building
+
 1. Baseline context with audit-context-building
 2. Deep analysis on auth changes only
 3. Blast radius analysis
 4. Adversarial modeling
 5. Comprehensive report
+
 Time: ~6-8 hours
 ```
 
@@ -176,6 +187,7 @@ For these cases, use standard code review instead.
 ## Red Flags (Stop and Investigate)
 
 **Immediate escalation triggers:**
+
 - Removed code from "security", "CVE", or "fix" commits
 - Access control modifiers removed (onlyOwner, internal → external)
 - Validation removed without replacement
@@ -189,6 +201,7 @@ These patterns require adversarial analysis even in quick triage.
 ## Tips for Best Results
 
 **Do:**
+
 - Start with git blame for removed code
 - Calculate blast radius early to prioritize
 - Generate concrete attack scenarios
@@ -197,6 +210,7 @@ These patterns require adversarial analysis even in quick triage.
 - Always generate the output file
 
 **Don't:**
+
 - Skip git history analysis
 - Make generic findings without evidence
 - Claim full analysis when time-limited
@@ -220,11 +234,13 @@ These patterns require adversarial analysis even in quick triage.
 **For experienced users:** Use this page's Quick Reference and Decision Tree to navigate directly to needed content.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

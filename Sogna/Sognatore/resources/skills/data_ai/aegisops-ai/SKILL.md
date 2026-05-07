@@ -8,7 +8,6 @@ id: skill-aegisops-ai
 owner: [[orchestrator]]
 ---
 
-
 # /aegisops-ai — Autonomous Governance Orchestrator
 
 AegisOps-AI is a professional-grade "Living Pipeline" 
@@ -20,14 +19,21 @@ and Kubernetes compliance.
 ## Goal
 
 To automate high-stakes security and financial audits by:
+
 1. Identifying logic-based vulnerabilities (UAF, Stale 
+
 State) in Linux Kernel patches.
+
 2. Detecting massive "Silent Disaster" cost drifts in 
+
 Terraform plans.
+
 3. Translating natural language security intent into 
+
 hardened K8s manifests.
 
 ## When to Use
+
 - **Kernel Patch Review:** Auditing raw C-based Git diffs for memory safety.
 - **Pre-Apply IaC Audit:** Analyzing `terraform plan` outputs to prevent bill spikes.
 - **Cluster Hardening:** Generating "Least Privilege" securityContexts for deployments.
@@ -41,6 +47,7 @@ hardened K8s manifests.
 - **Post-Mortem Analysis:** For analyzing *why* a previous AI session failed, use `/analyze-project` instead.
 
 ---
+
 ## 🤖 Generative AI Integration
 
 AegisOps-AI leverages the **Google GenAI SDK** to implement a "Reasoning Path" for autonomous security and financial audits:
@@ -77,6 +84,7 @@ AegisOps-AI leverages the **Google GenAI SDK** to implement a "Reasoning Path" f
 git clone https://github.com/Champbreed/AegisOps-AI.git
 cd AegisOps-AI
 ```
+
 ## 2. Setup
 
 ```bash
@@ -84,6 +92,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip install google-genai python-dotenv
 ```
+
 ### 3. API Configuration
 
 Create a `.env` file in the root directory to securely 
@@ -92,6 +101,7 @@ store your credentials:
 ```bash
 echo "GEMINI_API_KEY='your_api_key_here'" > .env
 ```
+
 ## 🏁 Operational Dashboard
 
 To execute the full suite of agents in sequence and generate all security reports:
@@ -99,6 +109,7 @@ To execute the full suite of agents in sequence and generate all security report
 ```bash
 python3 main.py
 ```
+
 ### Pattern: Over-Privileged Container
 
 * **Indicators:** `allowPrivilegeEscalation: true` or root user execution.
@@ -125,11 +136,13 @@ python3 main.py
 + - **Documentation**: https://github.com/Champbreed/AegisOps-AI#readme
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

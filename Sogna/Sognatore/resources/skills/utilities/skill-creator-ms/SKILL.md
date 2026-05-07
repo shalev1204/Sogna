@@ -8,7 +8,6 @@ id: skill-skill-creator-ms
 owner: [[orchestrator]]
 ---
 
-
 # Skill Creator
 
 Guide for creating skills that extend AI agent capabilities, with emphasis on Azure SDKs and Microsoft Foundry.
@@ -39,11 +38,14 @@ The context window is a shared resource. Challenge each piece: "Does this justif
 **Azure SDKs change constantly.** Skills should instruct agents to verify documentation:
 
 ```markdown
+
 ## Before Implementation
 
 Search `microsoft-docs` MCP for current API patterns:
+
 - Query: "[SDK name] [operation] python"
 - Verify: Parameters match your installed SDK version
+
 ```
 
 ### 3. Degrees of Freedom
@@ -120,7 +122,9 @@ Follow this structure (based on existing Azure SDK skills):
 Always use `DefaultAzureCredential`:
 
 ```python
+
 # Python
+
 from azure.identity import DefaultAzureCredential
 credential = DefaultAzureCredential()
 client = ServiceClient(endpoint, credential)
@@ -212,18 +216,23 @@ client = ExampleClient(
 ## Core Workflow
 
 \`\`\`python
+
 # Create
+
 item = client.create_item(name="example", data={...})
 
 # List (pagination handled automatically)
+
 for item in client.list_items():
     print(item.name)
 
 # Long-running operation
+
 poller = client.begin_process(item_id)
 result = poller.result()
 
 # Cleanup
+
 client.delete_item(item_id)
 \`\`\`
 
@@ -261,16 +270,22 @@ client.delete_item(item_id)
 **Prompt the user if not provided:**
 ```
 To create this skill, I need:
+
 1. The SDK package name (e.g., azure-ai-projects)
 2. The Microsoft Learn documentation URL or GitHub repo
 3. The target language (py/dotnet/ts/java)
+
 ```
 
 **Search official docs first:**
 ```bash
+
 # Use microsoft-docs MCP to get current API patterns
+
 # Query: "[SDK name] [operation] [language]"
+
 # Verify: Parameters match the latest SDK version
+
 ```
 
 ### Step 2: Understand the Skill
@@ -307,6 +322,7 @@ Skills are organized by **language** and **product area** in the `skills/` direc
 | `container` | Container Registry, ACR | `azure-containerregistry-py` |
 
 **Determine the category** based on:
+
 1. Azure service family (Storage → `data`, Event Hubs → `messaging`)
 2. Primary use case (AI agents → `foundry`)
 3. Existing skills in the same service area
@@ -316,6 +332,7 @@ Skills are organized by **language** and **product area** in the `skills/` direc
 **Location:** `.github/skills/<skill-name>/SKILL.md`
 
 **Naming convention:**
+
 - `azure-<service>-<subservice>-<language>`
 - Examples: `azure-ai-agents-py`, `azure-cosmos-java`, `azure-storage-blob-ts`
 
@@ -345,18 +362,22 @@ description: |
 After creating the skill in `.github/skills/`, create a symlink in the appropriate category:
 
 ```bash
+
 # Pattern: skills/<language>/<category>/<short-name> -> ../../../.github/skills/<full-skill-name>
 
 # Example for azure-ai-agents-py in python/foundry:
+
 cd skills/python/foundry
 ln -s ../../../.github/skills/azure-ai-agents-py agents
 
 # Example for azure-cosmos-db-py in python/data:
+
 cd skills/python/data
 ln -s ../../../.github/skills/azure-cosmos-db-py cosmos-db
 ```
 
 **Symlink naming:**
+
 - Use short, descriptive names (e.g., `agents`, `cosmos`, `blob`)
 - Remove the `azure-` prefix and language suffix
 - Match existing patterns in the category
@@ -364,7 +385,9 @@ ln -s ../../../.github/skills/azure-cosmos-db-py cosmos-db
 **Verify the symlink:**
 ```bash
 ls -la skills/python/foundry/agents
+
 # Should show: agents -> ../../../.github/skills/azure-ai-agents-py
+
 ```
 
 ### Step 6: Create Tests
@@ -376,12 +399,14 @@ ls -la skills/python/foundry/agents
 **Location:** `.github/skills/<skill-name>/references/acceptance-criteria.md`
 
 **Source materials** (in priority order):
+
 1. Official Microsoft Learn docs (via `microsoft-docs` MCP)
 2. SDK source code from the repository
 3. Existing reference files in the skill
 
 **Format:**
 ```markdown
+
 # Acceptance Criteria: <skill-name>
 
 **SDK**: `package-name`
@@ -395,12 +420,14 @@ ls -la skills/python/foundry/agents
 ### 1.1 Client Imports
 
 #### ✅ CORRECT: Main Client
+
 \`\`\`python
 from azure.ai.mymodule import MyClient
 from azure.identity import DefaultAzureCredential
 \`\`\`
 
 #### ❌ INCORRECT: Wrong Module Path
+
 \`\`\`python
 from azure.ai.mymodule.models import MyClient  # Wrong - Client is not in models
 \`\`\`
@@ -408,18 +435,21 @@ from azure.ai.mymodule.models import MyClient  # Wrong - Client is not in models
 ## 2. Authentication Patterns
 
 #### ✅ CORRECT: DefaultAzureCredential
+
 \`\`\`python
 credential = DefaultAzureCredential()
 client = MyClient(endpoint, credential)
 \`\`\`
 
 #### ❌ INCORRECT: Hardcoded Credentials
+
 \`\`\`python
 client = MyClient(endpoint, api_key="hardcoded")  # Security risk
 \`\`\`
 ```
 
 **Critical patterns to document:**
+
 - Import paths (these vary significantly between Azure SDKs)
 - Authentication patterns
 - Client initialization
@@ -437,19 +467,27 @@ config:
   temperature: 0.3
 
 scenarios:
+
   - name: basic_client_creation
+
     prompt: |
       Create a basic example using the Azure SDK.
       Include proper authentication and client initialization.
     expected_patterns:
+
       - "DefaultAzureCredential"
       - "MyClient"
+
     forbidden_patterns:
+
       - "api_key="
       - "hardcoded"
+
     tags:
+
       - basic
       - authentication
+
     mock_response: |
       import os
       from azure.identity import DefaultAzureCredential
@@ -464,6 +502,7 @@ scenarios:
 ```
 
 **Scenario design principles:**
+
 - Each scenario tests ONE specific pattern or feature
 - `expected_patterns` — patterns that MUST appear
 - `forbidden_patterns` — common mistakes that must NOT appear
@@ -477,16 +516,20 @@ cd tests
 pnpm install
 
 # Check skill is discovered
+
 pnpm harness --list
 
 # Run in mock mode (fast, deterministic)
+
 pnpm harness <skill-name> --mock --verbose
 
 # Run with Ralph Loop (iterative improvement)
+
 pnpm harness <skill-name> --ralph --mock --max-iterations 5 --threshold 85
 ```
 
 **Success criteria:**
+
 - All scenarios pass (100% pass rate)
 - No false positives (mock responses always pass)
 - Patterns catch real mistakes
@@ -506,6 +549,7 @@ After creating the skill:
    - Update test coverage table — update skill count, scenario count, and top skills for the language
 
 2. **Regenerate GitHub Pages data** — Run the extraction script to update the docs site
+
    ```bash
    cd docs-site && npx tsx scripts/extract-skills.ts
    ```
@@ -525,14 +569,18 @@ After creating the skill:
 ### Pattern 1: High-Level Guide with References
 
 ```markdown
+
 # SDK Name
 
 ## Quick Start
+
 [Minimal example]
 
 ## Advanced Features
+
 - **Streaming**: See references/streaming.md
 - **Tools**: See references/tools.md
+
 ```
 
 ### Pattern 2: Language Variants
@@ -593,10 +641,12 @@ azure-ai-agents/
 Before completing a skill:
 
 **Prerequisites:**
+
 - [ ] User provided SDK package name or documentation URL
 - [ ] Verified SDK patterns via `microsoft-docs` MCP
 
 **Skill Creation:**
+
 - [ ] Description includes what AND when (trigger phrases)
 - [ ] SKILL.md under 500 lines
 - [ ] Authentication uses `DefaultAzureCredential`
@@ -604,29 +654,35 @@ Before completing a skill:
 - [ ] References organized by feature
 
 **Categorization:**
+
 - [ ] Skill created in `.github/skills/<skill-name>/`
 - [ ] Symlink created in `skills/<language>/<category>/<short-name>`
 - [ ] Symlink points to `../../../.github/skills/<skill-name>`
 
 **Testing:**
+
 - [ ] `references/acceptance-criteria.md` created with correct/incorrect patterns
 - [ ] `tests/scenarios/<skill-name>/scenarios.yaml` created
 - [ ] All scenarios pass (`pnpm harness <skill> --mock`)
 - [ ] Import paths documented precisely
 
 **Documentation:**
+
 - [ ] README.md skill catalog updated
 - [ ] Instructs to search `microsoft-docs` MCP for current APIs
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

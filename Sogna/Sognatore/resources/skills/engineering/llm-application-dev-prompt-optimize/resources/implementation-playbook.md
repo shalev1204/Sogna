@@ -28,12 +28,14 @@ $ARGUMENTS
 Evaluate the prompt across key dimensions:
 
 **Assessment Framework**
+
 - Clarity score (1-10) and ambiguity points
 - Structure: logical flow and section boundaries
 - Model alignment: capability utilization and token efficiency
 - Performance: success rate, failure modes, edge case handling
 
 **Decomposition**
+
 - Core objective and constraints
 - Output format requirements
 - Explicit vs implicit expectations
@@ -43,10 +45,13 @@ Evaluate the prompt across key dimensions:
 
 **Standard CoT Pattern**
 ```python
+
 # Before: Simple instruction
+
 prompt = "Analyze this customer feedback and determine sentiment"
 
 # After: CoT enhanced
+
 prompt = """Analyze this customer feedback step by step:
 
 1. Identify key phrases indicating emotion
@@ -134,6 +139,7 @@ gpt4_optimized = """
 {specific_goal}
 
 ##INSTRUCTIONS##
+
 1. {numbered_steps}
 2. {clear_actions}
 
@@ -159,9 +165,11 @@ claude_optimized = """
 </task>
 
 <thinking>
+
 1. Understanding requirements...
 2. Identifying components...
 3. Planning approach...
+
 </thinking>
 
 <output_format>
@@ -177,17 +185,21 @@ gemini_optimized = """
 **Primary Objective:** {goal}
 
 **Process:**
+
 1. {action} {target}
 2. {measurement} {criteria}
 
 **Output Structure:**
+
 - Format: {type}
 - Length: {tokens}
 - Style: {tone}
 
 **Quality Constraints:**
+
 - Factual accuracy with citations
 - No speculation without disclaimers
+
 """
 ```
 
@@ -196,10 +208,13 @@ gemini_optimized = """
 **RAG-Optimized Prompt**
 ```python
 rag_prompt = """
+
 ## Context Documents
+
 {retrieved_documents}
 
 ## Query
+
 {user_question}
 
 ## Integration Instructions
@@ -218,17 +233,21 @@ Example: "Based on [Source 1], {answer}. [Source 3] corroborates: {detail}. No i
 **Testing Protocol**
 ```python
 evaluation = """
+
 ## Test Cases (20 total)
+
 - Typical cases: 10
 - Edge cases: 5
 - Adversarial: 3
 - Out-of-scope: 2
 
 ## Metrics
+
 1. Success Rate: {X/20}
 2. Quality (0-100): Accuracy, Completeness, Coherence
 3. Efficiency: Tokens, time, cost
 4. Safety: Harmful outputs, hallucinations, bias
+
 """
 ```
 
@@ -238,12 +257,15 @@ judge_prompt = """
 Evaluate AI response quality.
 
 ## Original Task
+
 {prompt}
 
 ## Response
+
 {output}
 
 ## Rate 1-10 with justification:
+
 1. TASK COMPLETION: Fully addressed?
 2. ACCURACY: Factually correct?
 3. REASONING: Logical and structured?
@@ -288,6 +310,7 @@ robust_prompt = """
 4. SAFETY CONCERNS: "Cannot complete due to {concern}. Safe alternative: {option}"
 
 ## Graceful Degradation
+
 Provide partial solution with boundaries and next steps if full task cannot be completed.
 """
 ```
@@ -306,6 +329,7 @@ Answer customer questions about our product.
 You are a senior customer support specialist for TechCorp with 5+ years experience.
 
 ## Context
+
 - Product: {product_name}
 - Customer Tier: {tier}
 - Issue Category: {category}
@@ -313,34 +337,42 @@ You are a senior customer support specialist for TechCorp with 5+ years experien
 ## Framework
 
 ### 1. Acknowledge and Empathize
+
 Begin with recognition of customer situation.
 
 ### 2. Diagnostic Reasoning
+
 <thinking>
+
 1. Identify core issue
 2. Consider common causes
 3. Check known issues
 4. Determine resolution path
+
 </thinking>
 
 ### 3. Solution Delivery
+
 - Immediate fix (if available)
 - Step-by-step instructions
 - Alternative approaches
 - Escalation path
 
 ### 4. Verification
+
 - Confirm understanding
 - Provide resources
 - Set next steps
 
 ## Constraints
+
 - Under 200 words unless technical
 - Professional yet friendly tone
 - Always provide ticket number
 - Escalate if unsure
 
 ## Format
+
 ```json
 {
   "greeting": "...",
@@ -366,36 +398,44 @@ You are a Senior Data Analyst with expertise in sales analytics and statistical 
 ## Framework
 
 ### Phase 1: Data Validation
+
 - Missing values, outliers, time range
 - Central tendencies and dispersion
 - Distribution shape
 
 ### Phase 2: Trend Analysis
+
 - Temporal patterns (daily/weekly/monthly)
 - Decompose: trend, seasonal, residual
 - Statistical significance (p-values, confidence intervals)
 
 ### Phase 3: Segment Analysis
+
 - Product categories
 - Geographic regions
 - Customer segments
 - Time periods
 
 ### Phase 4: Insights
+
 <insight_template>
 INSIGHT: {finding}
+
 - Evidence: {data}
 - Impact: {implication}
 - Confidence: high/medium/low
 - Action: {next_step}
+
 </insight_template>
 
 ### Phase 5: Recommendations
+
 1. High Impact + Quick Win
 2. Strategic Initiative
 3. Risk Mitigation
 
 ## Output Format
+
 ```yaml
 executive_summary:
   top_3_insights: []
@@ -427,17 +467,20 @@ code_prompt = """
 You are a Senior Software Engineer with 10+ years Python experience. Follow SOLID principles.
 
 ## Task
+
 Process user data: validate, sanitize, transform
 
 ## Implementation
 
 ### Design Thinking
+
 <reasoning>
 Edge cases: missing fields, invalid types, malicious input
 Architecture: dataclasses, builder pattern, logging
 </reasoning>
 
 ### Code with Safety
+
 ```python
 from dataclasses import dataclass
 from typing import Dict, Any, Union
@@ -482,6 +525,7 @@ def process_user_data(raw_data: Dict[str, Any]) -> Union[ProcessedUser, Dict[str
 ```
 
 ### Self-Review
+
 ✓ Input validation and sanitization
 ✓ Injection prevention
 ✓ Error handling
@@ -498,20 +542,25 @@ You are a meta-prompt engineer generating optimized prompts.
 ## Process
 
 ### 1. Task Analysis
+
 <decomposition>
+
 - Core objective: {goal}
 - Success criteria: {outcomes}
 - Constraints: {requirements}
 - Target model: {model}
+
 </decomposition>
 
 ### 2. Architecture Selection
+
 IF reasoning: APPLY chain_of_thought
 ELIF creative: APPLY few_shot
 ELIF classification: APPLY structured_output
 ELSE: APPLY hybrid
 
 ### 3. Component Generation
+
 1. Role: "You are {expert} with {experience}..."
 2. Context: "Given {background}..."
 3. Instructions: Numbered steps
@@ -520,6 +569,7 @@ ELSE: APPLY hybrid
 6. Quality: Criteria checklist
 
 ### 4. Optimization Passes
+
 - Pass 1: Clarity
 - Pass 2: Efficiency
 - Pass 3: Robustness
@@ -527,6 +577,7 @@ ELSE: APPLY hybrid
 - Pass 5: Testing
 
 ### 5. Evaluation
+
 - Completeness: []/10
 - Clarity: []/10
 - Efficiency: []/10
@@ -543,11 +594,13 @@ Recommendation: use_as_is | iterate | redesign
 Deliver comprehensive optimization report:
 
 ### Optimized Prompt
+
 ```markdown
 [Complete production-ready prompt with all enhancements]
 ```
 
 ### Optimization Report
+
 ```yaml
 analysis:
   original_assessment:
@@ -557,11 +610,17 @@ analysis:
     performance: X%
 
 improvements_applied:
+
   - technique: "Chain-of-Thought"
+
     impact: "+25% reasoning accuracy"
+
   - technique: "Few-Shot Learning"
+
     impact: "+30% task adherence"
+
   - technique: "Constitutional AI"
+
     impact: "-40% harmful outputs"
 
 performance_projection:
@@ -589,6 +648,7 @@ next_steps:
 ```
 
 ### Usage Guidelines
+
 1. **Implementation**: Use optimized prompt exactly
 2. **Parameters**: Apply recommended settings
 3. **Testing**: Run test cases before production
@@ -598,6 +658,7 @@ next_steps:
 Remember: The best prompt consistently produces desired outputs with minimal post-processing while maintaining safety and efficiency. Regular evaluation is essential for optimal results.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

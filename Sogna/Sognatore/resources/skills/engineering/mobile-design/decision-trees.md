@@ -310,17 +310,22 @@ HOW CRITICAL IS OFFLINE?
 ### Offline Implementation Patterns
 
 ```
+
 1. CACHE-FIRST (Simple)
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
    Request → Check cache → If stale, fetch → Update cache
  
 2. STALE-WHILE-REVALIDATE
+
    Request → Return cached → Fetch update → Update UI
  
 3. OFFLINE-FIRST (Complex)
+
    Action → Write to local DB → Queue sync → Sync when online
  
 4. SYNC ENGINE
+
    Use: Firebase, Realm Sync, Supabase realtime
    Handles conflict resolution automatically
 ```
@@ -455,21 +460,27 @@ KEY DECISIONS:
 If project details are vague, ASK:
 
 1. "Will this need OTA updates without app store review?"
+
    → Affects framework choice (Expo = yes)
 
 2. "Do iOS and Android need identical UI?"
+
    → Affects framework (Flutter = identical)
 
 3. "What's the offline requirement?"
+
    → Affects architecture complexity
 
 4. "Is there an existing backend/auth system?"
+
    → Affects auth and API approach
 
 5. "What devices? Phone only, or tablet?"
+
    → Affects navigation and layout
 
 6. "Enterprise or consumer?"
+
    → Affects auth (SSO), security, compliance
 ```
 
@@ -525,6 +536,7 @@ API cache?           → Query library
 > **Remember:** These trees are guides for THINKING, not rules to follow blindly. Every project has unique constraints. ASK clarifying questions when requirements are vague, and choose based on actual needs, not defaults.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,7 +7,6 @@ id: skill-odoo-qweb-templates
 owner: [[orchestrator]]
 ---
 
-
 # Odoo QWeb Templates
 
 ## Overview
@@ -98,6 +97,7 @@ QWeb is Odoo's primary templating engine, used for PDF reports, website pages, a
 - Does not cover **wkhtmltopdf configuration** for PDF rendering issues (page size, margins, header/footer overlap).
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

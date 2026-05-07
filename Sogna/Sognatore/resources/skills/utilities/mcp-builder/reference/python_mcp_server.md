@@ -16,6 +16,7 @@ This document provides Python-specific best practices and examples for implement
 ## Quick Reference
 
 ### Key Imports
+
 ```python
 from mcp.server.fastmcp import FastMCP
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -25,11 +26,13 @@ import httpx
 ```
 
 ### Server Initialization
+
 ```python
 mcp = FastMCP("service_mcp")
 ```
 
 ### Tool Registration Pattern
+
 ```python
 @mcp.tool(name="tool_name", annotations={...})
 async def tool_function(params: InputModel) -> str:
@@ -42,6 +45,7 @@ async def tool_function(params: InputModel) -> str:
 ## MCP Python SDK and FastMCP
 
 The official MCP Python SDK provides FastMCP, a high-level framework for building MCP servers. It provides:
+
 - Automatic description and inputSchema generation from function signatures and docstrings
 - Pydantic model integration for input validation
 - Decorator-based tool registration with `@mcp.tool`
@@ -52,10 +56,12 @@ The official MCP Python SDK provides FastMCP, a high-level framework for buildin
 ## Server Naming Convention
 
 Python MCP servers must follow this naming pattern:
+
 - **Format**: `{service}_mcp` (lowercase with underscores)
 - **Examples**: `github_mcp`, `jira_mcp`, `stripe_mcp`
 
 The name should be:
+
 - General (not tied to specific features)
 - Descriptive of the service/API being integrated
 - Easy to infer from the task description
@@ -68,6 +74,7 @@ The name should be:
 Use snake_case for tool names (e.g., "search_users", "create_project", "get_channel_info") with clear, action-oriented names.
 
 **Avoid Naming Conflicts**: Include the service context to prevent overlaps:
+
 - Use "slack_send_message" instead of just "send_message"
 - Use "github_create_issue" instead of just "create_issue"
 - Use "asana_list_tasks" instead of just "list_tasks"
@@ -81,9 +88,11 @@ from pydantic import BaseModel, Field, ConfigDict
 from mcp.server.fastmcp import FastMCP
 
 # Initialize the MCP server
+
 mcp = FastMCP("example_mcp")
 
 # Define Pydantic model for input validation
+
 class ServiceToolInput(BaseModel):
     '''Input model for service tool operation.'''
     model_config = ConfigDict(
@@ -114,6 +123,7 @@ async def service_tool_name(params: ServiceToolInput) -> str:
 
     Args:
         params (ServiceToolInput): Validated input parameters containing:
+
             - param1 (str): First parameter description
             - param2 (Optional[int]): Optional parameter with default
             - tags (Optional[List[str]]): List of tags
@@ -175,6 +185,7 @@ class UserSearchInput(BaseModel):
 ```
 
 **Markdown format**:
+
 - Use headers, lists, and formatting for clarity
 - Convert timestamps to human-readable format (e.g., "2024-01-15 10:30:00 UTC" instead of epoch)
 - Show display names with IDs in parentheses (e.g., "@john.doe (U123456)")
@@ -182,6 +193,7 @@ class UserSearchInput(BaseModel):
 - Group related information logically
 
 **JSON format**:
+
 - Return complete, structured data suitable for programmatic processing
 - Include all available fields and metadata
 - Use consistent field names and types
@@ -236,7 +248,9 @@ def _handle_api_error(e: Exception) -> str:
 Extract common functionality into reusable functions:
 
 ```python
+
 # Shared API request function
+
 async def _make_api_request(endpoint: str, method: str = "GET", **kwargs) -> dict:
     '''Reusable function for all API calls.'''
     async with httpx.AsyncClient() as client:
@@ -255,7 +269,9 @@ async def _make_api_request(endpoint: str, method: str = "GET", **kwargs) -> dic
 Always use async/await for network requests and I/O operations:
 
 ```python
+
 # Good: Async network request
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 async def fetch_data(resource_id: str) -> dict:
     async with httpx.AsyncClient() as client:
@@ -264,6 +280,7 @@ async def fetch_data(resource_id: str) -> dict:
         return response.json()
 
 # Bad: Synchronous request
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 def fetch_data(resource_id: str) -> dict:
     response = requests.get(f"{API_URL}/resource/{resource_id}")  # Blocks
@@ -298,6 +315,7 @@ async def search_users(params: UserSearchInput) -> str:
 
     Args:
         params (UserSearchInput): Validated input parameters containing:
+
             - query (str): Search string to match against names/emails (e.g., "john", "@example.com", "team:marketing")
             - limit (Optional[int]): Maximum results to return, between 1-100 (default: 20)
             - offset (Optional[int]): Number of results to skip for pagination (default: 0)
@@ -324,16 +342,19 @@ async def search_users(params: UserSearchInput) -> str:
         "Error: <error message>" or "No users found matching '<query>'"
 
     Examples:
+
         - Use when: "Find all marketing team members" -> params with query="team:marketing"
         - Use when: "Search for John's account" -> params with query="john"
         - Don't use when: You need to create a user (use example_create_user instead)
         - Don't use when: You have a user ID and need full details (use example_get_user instead)
 
     Error Handling:
+
         - Input validation errors are handled by Pydantic model
         - Returns "Error: Rate limit exceeded" if too many requests (429 status)
         - Returns "Error: Invalid API authentication" if API key is invalid (401 status)
         - Returns formatted list of results or "No users found matching 'query'"
+
     '''
 ```
 
@@ -357,18 +378,22 @@ from pydantic import BaseModel, Field, field_validator, ConfigDict
 from mcp.server.fastmcp import FastMCP
 
 # Initialize the MCP server
+
 mcp = FastMCP("example_mcp")
 
 # Constants
+
 API_BASE_URL = "https://api.example.com/v1"
 
 # Enums
+
 class ResponseFormat(str, Enum):
     '''Output format for tool responses.'''
     MARKDOWN = "markdown"
     JSON = "json"
 
 # Pydantic Models for Input Validation
+
 class UserSearchInput(BaseModel):
     '''Input model for user search operations.'''
     model_config = ConfigDict(
@@ -389,6 +414,7 @@ class UserSearchInput(BaseModel):
         return v.strip()
 
 # Shared utility functions
+
 async def _make_api_request(endpoint: str, method: str = "GET", **kwargs) -> dict:
     '''Reusable function for all API calls.'''
     async with httpx.AsyncClient() as client:
@@ -416,6 +442,7 @@ def _handle_api_error(e: Exception) -> str:
     return f"Error: Unexpected error occurred: {type(e).__name__}"
 
 # Tool definitions
+
 @mcp.tool(
     name="example_search_users",
     annotations={
@@ -528,6 +555,7 @@ async def interactive_tool(resource_id: str, ctx: Context) -> str:
 ```
 
 **Context capabilities:**
+
 - `ctx.report_progress(progress, message)` - Report progress for long operations
 - `ctx.log_info(message, data)` / `ctx.log_error()` / `ctx.log_debug()` - Logging
 - `ctx.elicit(prompt, input_type)` - Request input from users
@@ -558,6 +586,7 @@ async def get_setting(key: str, ctx: Context) -> str:
 ```
 
 **When to use Resources vs Tools:**
+
 - **Resources**: For data access with simple parameters (URI templates)
 - **Tools**: For complex operations with validation and business logic
 
@@ -571,6 +600,7 @@ from dataclasses import dataclass
 from pydantic import BaseModel
 
 # TypedDict for structured returns
+
 class UserData(TypedDict):
     id: str
     name: str
@@ -582,6 +612,7 @@ async def get_user_typed(user_id: str) -> UserData:
     return {"id": user_id, "name": "John Doe", "email": "john@example.com"}
 
 # Pydantic models for complex validation
+
 class DetailedUser(BaseModel):
     id: str
     name: str
@@ -632,16 +663,20 @@ async def query_data(query: str, ctx: Context) -> str:
 FastMCP supports two main transport mechanisms:
 
 ```python
+
 # stdio transport (for local tools) - default
+
 if __name__ == "__main__":
     mcp.run()
 
 # Streamable HTTP transport (for remote servers)
+
 if __name__ == "__main__":
     mcp.run(transport="streamable_http", port=8000)
 ```
 
 **Transport selection:**
+
 - **stdio**: Command-line tools, local integrations, subprocess execution
 - **Streamable HTTP**: Web services, remote access, multiple clients
 
@@ -681,6 +716,7 @@ Your implementation MUST prioritize composability and code reuse:
 Before finalizing your Python MCP server implementation, ensure:
 
 ### Strategic Design
+
 - [ ] Tools enable complete workflows, not just API endpoint wrappers
 - [ ] Tool names reflect natural task subdivisions
 - [ ] Response formats optimize for agent context efficiency
@@ -688,6 +724,7 @@ Before finalizing your Python MCP server implementation, ensure:
 - [ ] Error messages guide agents toward correct usage
 
 ### Implementation Quality
+
 - [ ] FOCUSED IMPLEMENTATION: Most important and valuable tools implemented
 - [ ] All tools have descriptive names and documentation
 - [ ] Return types are consistent across similar operations
@@ -699,6 +736,7 @@ Before finalizing your Python MCP server implementation, ensure:
 - [ ] Outputs are properly validated and formatted
 
 ### Tool Configuration
+
 - [ ] All tools implement 'name' and 'annotations' in the decorator
 - [ ] Annotations correctly set (readOnlyHint, destructiveHint, idempotentHint, openWorldHint)
 - [ ] All tools use Pydantic BaseModel for input validation with Field() definitions
@@ -708,6 +746,7 @@ Before finalizing your Python MCP server implementation, ensure:
 - [ ] Pydantic models handle input validation (no manual validation needed)
 
 ### Advanced Features (where applicable)
+
 - [ ] Context injection used for logging, progress, or elicitation
 - [ ] Resources registered for appropriate data endpoints
 - [ ] Lifespan management implemented for persistent connections
@@ -715,6 +754,7 @@ Before finalizing your Python MCP server implementation, ensure:
 - [ ] Appropriate transport configured (stdio or streamable HTTP)
 
 ### Code Quality
+
 - [ ] File includes proper imports including Pydantic imports
 - [ ] Pagination is properly implemented where applicable
 - [ ] Filtering options are provided for potentially large result sets
@@ -724,12 +764,14 @@ Before finalizing your Python MCP server implementation, ensure:
 - [ ] Constants are defined at module level in UPPER_CASE
 
 ### Testing
+
 - [ ] Server runs successfully: `python your_server.py --help`
 - [ ] All imports resolve correctly
 - [ ] Sample tool calls work as expected
 - [ ] Error scenarios handled gracefully
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

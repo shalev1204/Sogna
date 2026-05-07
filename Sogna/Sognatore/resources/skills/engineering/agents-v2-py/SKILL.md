@@ -8,7 +8,6 @@ id: skill-agents-v2-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure AI Hosted Agents (Python)
 
 Build container-based hosted agents using `ImageBasedHostedAgentDefinition` from the Azure AI Projects SDK.
@@ -130,6 +129,7 @@ The `container_protocol_versions` parameter specifies which protocols your agent
 from azure.ai.projects.models import ProtocolVersionRecord, AgentProtocol
 
 # RESPONSES protocol - standard agent responses
+
 container_protocol_versions=[
     ProtocolVersionRecord(protocol=AgentProtocol.RESPONSES, version="v1")
 ]
@@ -326,14 +326,17 @@ async def create_hosted_agent_async():
 - [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

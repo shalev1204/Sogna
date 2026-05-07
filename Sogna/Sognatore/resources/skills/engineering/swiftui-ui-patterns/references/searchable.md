@@ -15,7 +15,9 @@ Use `searchable` to add native search UI with optional scopes and async results.
 
 - Bind `searchable(text:)` to local state.
 - Use `.searchScopes` for multiple search modes.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Use `.task(id: searchQuery)` or debounced tasks to avoid overfetching.
 - Show placeholders or progress states while results load.
 
@@ -77,10 +79,13 @@ struct ExploreView: View {
 ## Pitfalls
 
 - Avoid running searches for empty strings.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Don’t block the main thread during fetch.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

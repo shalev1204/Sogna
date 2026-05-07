@@ -19,12 +19,15 @@ pip install anthropic
 import anthropic
 
 # Default (uses ANTHROPIC_API_KEY env var)
+
 client = anthropic.Anthropic()
 
 # Explicit API key
+
 client = anthropic.Anthropic(api_key="your-api-key")
 
 # Async client
+
 async_client = anthropic.AsyncAnthropic()
 ```
 
@@ -147,6 +150,7 @@ response = client.messages.create(
 )
 
 # With explicit TTL (time-to-live)
+
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -167,7 +171,9 @@ response = client.messages.create(
 > **Older models:** Use `thinking: {type: "enabled", budget_tokens: N}` (must be < `max_tokens`, min 1024).
 
 ```python
+
 # Opus 4.6: adaptive thinking (recommended)
+
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=16000,
@@ -177,6 +183,7 @@ response = client.messages.create(
 )
 
 # Access thinking and response
+
 for block in response.content:
     if block.type == "thinking":
         print(f"Thinking: {block.thinking}")
@@ -247,6 +254,7 @@ class ConversationManager:
         return assistant_message
 
 # Usage
+
 conversation = ConversationManager(
     client=anthropic.Anthropic(),
     model="claude-opus-4-6",
@@ -293,6 +301,7 @@ def chat(user_message: str) -> str:
     return next(block.text for block in response.content if block.type == "text")
 
 # Compaction triggers automatically when context grows large
+
 print(chat("Help me build a Python web scraper"))
 print(chat("Add support for JavaScript-rendered pages"))
 print(chat("Now add rate limiting and error handling"))
@@ -320,7 +329,9 @@ The `stop_reason` field in the response indicates why the model stopped generati
 ### 1. Use Prompt Caching for Repeated Context
 
 ```python
+
 # Automatic caching (simplest — caches the last cacheable block)
+
 response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
@@ -330,13 +341,17 @@ response = client.messages.create(
 )
 
 # First request: full cost
+
 # Subsequent requests: ~90% cheaper for cached portion
+
 ```
 
 ### 2. Choose the Right Model
 
 ```python
+
 # Default to Opus for most tasks
+
 response = client.messages.create(
     model="claude-opus-4-6",  # $5.00/$25.00 per 1M tokens
     max_tokens=1024,
@@ -344,6 +359,7 @@ response = client.messages.create(
 )
 
 # Use Sonnet for high-volume production workloads
+
 standard_response = client.messages.create(
     model="claude-sonnet-4-6",  # $3.00/$15.00 per 1M tokens
     max_tokens=1024,
@@ -351,6 +367,7 @@ standard_response = client.messages.create(
 )
 
 # Use Haiku only for simple, speed-critical tasks
+
 simple_response = client.messages.create(
     model="claude-haiku-4-5",  # $1.00/$5.00 per 1M tokens
     max_tokens=256,
@@ -411,6 +428,7 @@ def call_with_retry(
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

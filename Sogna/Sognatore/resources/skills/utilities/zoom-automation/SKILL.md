@@ -8,7 +8,6 @@ id: skill-zoom-automation
 owner: [[orchestrator]]
 ---
 
-
 # Zoom Automation via Rube MCP
 
 Automate Zoom operations including meeting scheduling, webinar management, cloud recording retrieval, participant tracking, and usage reporting through Composio's Zoom toolkit.
@@ -36,6 +35,7 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 **When to use**: User wants to create a new Zoom meeting with specific time, duration, and settings
 
 **Tool sequence**:
+
 1. `ZOOM_GET_USER` - Verify authenticated user and check license type [Prerequisite]
 2. `ZOOM_CREATE_A_MEETING` - Create the meeting with topic, time, duration, and settings [Required]
 3. `ZOOM_GET_A_MEETING` - Retrieve full meeting details including join_url [Optional]
@@ -43,6 +43,7 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 5. `ZOOM_ADD_A_MEETING_REGISTRANT` - Register participants for registration-enabled meetings [Optional]
 
 **Key parameters**:
+
 - `userId`: Always use `"me"` for user-level apps
 - `topic`: Meeting subject line
 - `type`: `1` (instant), `2` (scheduled), `3` (recurring no fixed time), `8` (recurring fixed time)
@@ -55,6 +56,7 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 - `settings__meeting_invitees`: Array of invitee objects with email addresses
 
 **Pitfalls**:
+
 - `start_time` must be in the future; Zoom stores and returns times in UTC regardless of input timezone
 - If no `start_time` is set for type `2`, it becomes an instant meeting that expires after 30 days
 - The `join_url` for participants and `start_url` for host come from the create response - persist these
@@ -67,11 +69,13 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 **When to use**: User wants to view upcoming, live, or past meetings
 
 **Tool sequence**:
+
 1. `ZOOM_LIST_MEETINGS` - List meetings by type (scheduled, live, upcoming, previous) [Required]
 2. `ZOOM_GET_A_MEETING` - Get detailed info for a specific meeting [Optional]
 3. `ZOOM_UPDATE_A_MEETING` - Modify meeting details [Optional]
 
 **Key parameters**:
+
 - `userId`: Use `"me"` for authenticated user
 - `type`: `"scheduled"` (default), `"live"`, `"upcoming"`, `"upcoming_meetings"`, `"previous_meetings"`
 - `page_size`: Records per page (default 30)
@@ -79,6 +83,7 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 - `from` / `to`: Date range filters
 
 **Pitfalls**:
+
 - `ZOOM_LIST_MEETINGS` excludes instant meetings and only shows unexpired scheduled meetings
 - For past meetings, use `type: "previous_meetings"`
 - Pagination: always follow `next_page_token` until empty to get complete results
@@ -90,12 +95,14 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 **When to use**: User wants to list, retrieve, or delete cloud recordings
 
 **Tool sequence**:
+
 1. `ZOOM_LIST_ALL_RECORDINGS` - List all cloud recordings for a user within a date range [Required]
 2. `ZOOM_GET_MEETING_RECORDINGS` - Get recordings for a specific meeting [Optional]
 3. `ZOOM_DELETE_MEETING_RECORDINGS` - Move recordings to trash or permanently delete [Optional]
 4. `ZOOM_LIST_ARCHIVED_FILES` - List archived meeting/webinar files [Optional]
 
 **Key parameters**:
+
 - `userId`: Use `"me"` for authenticated user
 - `from` / `to`: Date range in `yyyy-mm-dd` format (max 1 month range)
 - `meetingId`: Meeting ID or UUID for specific recording retrieval
@@ -104,6 +111,7 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 - `trash`: Set `true` to list recordings from trash
 
 **Pitfalls**:
+
 - Date range maximum is 1 month; API auto-adjusts `from` if range exceeds this
 - Cloud Recording must be enabled on the account
 - UUIDs starting with `/` or containing `//` must be double URL-encoded
@@ -116,17 +124,20 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 **When to use**: User wants to see who attended a past meeting or get usage statistics
 
 **Tool sequence**:
+
 1. `ZOOM_GET_PAST_MEETING_PARTICIPANTS` - List attendees of a completed meeting [Required]
 2. `ZOOM_GET_A_MEETING` - Get meeting details and registration info for upcoming meetings [Optional]
 3. `ZOOM_GET_DAILY_USAGE_REPORT` - Get daily usage statistics (meetings, participants, minutes) [Optional]
 4. `ZOOM_GET_A_MEETING_SUMMARY` - Get AI-generated meeting summary [Optional]
 
 **Key parameters**:
+
 - `meetingId`: Meeting ID (latest instance) or UUID (specific occurrence)
 - `page_size`: Records per page (default 30)
 - `next_page_token`: Pagination token for large participant lists
 
 **Pitfalls**:
+
 - `ZOOM_GET_PAST_MEETING_PARTICIPANTS` only works for completed meetings on paid plans
 - Solo meetings (no other participants) return empty results
 - UUID encoding: UUIDs starting with `/` or containing `//` must be double-encoded
@@ -139,17 +150,20 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 **When to use**: User wants to list webinars or register participants for webinars
 
 **Tool sequence**:
+
 1. `ZOOM_LIST_WEBINARS` - List scheduled or upcoming webinars [Required]
 2. `ZOOM_GET_A_WEBINAR` - Get detailed webinar information [Optional]
 3. `ZOOM_ADD_A_WEBINAR_REGISTRANT` - Register a participant for a webinar [Optional]
 
 **Key parameters**:
+
 - `userId`: Use `"me"` for authenticated user
 - `type`: `"scheduled"` (default) or `"upcoming"`
 - `page_size`: Records per page (default 30)
 - `next_page_token`: Pagination token
 
 **Pitfalls**:
+
 - Webinar features require Pro plan or higher with Webinar add-on
 - Free/basic accounts cannot use webinar tools
 - Only shows unexpired webinars
@@ -158,19 +172,23 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 ## Common Patterns
 
 ### ID Resolution
+
 - **User ID**: Always use `"me"` for user-level apps to refer to the authenticated user
 - **Meeting ID**: Numeric ID (store as long integer); use for latest instance
 - **Meeting UUID**: Use for specific occurrence of recurring meetings; double-encode if starts with `/` or contains `//`
 - **Occurrence ID**: Use with recurring meetings to target a specific occurrence
 
 ### Pagination
+
 Most Zoom list endpoints use token-based pagination:
+
 - Follow `next_page_token` until it is empty or missing
 - Token expires after 15 minutes
 - Set explicit `page_size` (default 30, varies by endpoint)
 - Do not use `page_number` (deprecated on many endpoints)
 
 ### Time Handling
+
 - Zoom stores all times in UTC internally
 - Provide `timezone` field alongside `start_time` for local time input
 - Use ISO 8601 format: `yyyy-MM-ddTHH:mm:ssZ` (UTC) or `yyyy-MM-ddTHH:mm:ss` (with timezone field)
@@ -179,12 +197,14 @@ Most Zoom list endpoints use token-based pagination:
 ## Known Pitfalls
 
 ### Plan Requirements
+
 - Most recording and participant features require Pro plan or higher
 - Webinar features require Webinar add-on
 - AI meeting summaries require AI Companion feature enabled
 - Archived files require "Meeting and Webinar Archiving" enabled by Zoom Support
 
 ### Rate Limits
+
 - Meeting creation: 100 requests/day, 100 updates per meeting in 24 hours
 - `ZOOM_GET_PAST_MEETING_PARTICIPANTS`: Moderate throttle; add delays for batch processing
 - `ZOOM_GET_DAILY_USAGE_REPORT`: Heavy rate limit
@@ -192,6 +212,7 @@ Most Zoom list endpoints use token-based pagination:
 - `ZOOM_LIST_MEETINGS`, `ZOOM_LIST_ALL_RECORDINGS`: Medium rate limit
 
 ### Parameter Quirks
+
 - Nested settings use double underscore notation (e.g., `settings__waiting_room`)
 - `start_url` expires in 2 hours; renew via API if needed
 - `join_before_host` is automatically disabled when `waiting_room` is `true`
@@ -220,14 +241,17 @@ Most Zoom list endpoints use token-based pagination:
 | List archived files | `ZOOM_LIST_ARCHIVED_FILES` | `from`, `to` |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

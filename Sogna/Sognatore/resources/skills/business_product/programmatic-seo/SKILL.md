@@ -8,7 +8,6 @@ id: skill-programmatic-seo
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 ---
 
 # Programmatic SEO
@@ -351,14 +350,17 @@ If triggered, **halt indexing or roll back**:
 - **analytics-tracking** – Measure performance and validate value
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

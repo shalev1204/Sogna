@@ -8,7 +8,6 @@ id: skill-c4-context
 owner: [[orchestrator]]
 ---
 
-
 # C4 Context Level: System Context
 
 ## Use this skill when
@@ -62,12 +61,14 @@ owner: [[orchestrator]]
 1. [Step 1]: [Description]
 2. [Step 2]: [Description]
 3. [Step 3]: [Description]
+
    ...
 
 ### [External System] Integration Journey
 
 1. [Step 1]: [Description]
 2. [Step 2]: [Description]
+
    ...
 
 ## External Systems and Dependencies
@@ -87,6 +88,7 @@ owner: [[orchestrator]]
 
 - Container Documentation
 - Component Documentation
+
 ```
 
 ## Context Diagram Template
@@ -149,11 +151,13 @@ When creating context documentation, provide:
 - Consistent documentation format
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

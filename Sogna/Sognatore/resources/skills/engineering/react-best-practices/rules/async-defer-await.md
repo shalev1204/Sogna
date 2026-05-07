@@ -91,6 +91,7 @@ async function updateResource(resourceId: string, userId: string) {
 This optimization is especially valuable when the skipped branch is frequently taken, or when the deferred operation is expensive.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

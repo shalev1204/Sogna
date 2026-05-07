@@ -35,6 +35,7 @@ Simultaneously, you need to keep the food production plant running (product in p
 Keeping both facilities at full load throughout the event and accepting the $4.5M bill as a cost of doing business. The second mistake: attempting to renegotiate or dispute the contract after the event — courts consistently enforce index pricing during price spikes because that is the contract structure.
 
 **Expert Approach:**
+
 1. **Immediate load curtailment (Hour 0-4):** Reduce all discretionary load at both facilities. Target: 30-40% load reduction without shutting production lines. Turn off office HVAC (employees can layer up for a week), reduce warehouse lighting to emergency levels, shut down non-essential compressed air (only keep production-critical compressors), and turn off electric water heaters. A 35% load reduction on 9 MW combined peak saves approximately $1.6M over 5 days at $5,000/MWh.
 
 2. **Production schedule modification (Hour 4-12):** Shift production to overnight hours (10 PM - 6 AM) when prices typically dip to $1,000-$2,000/MWh even during extreme events (the sun isn't up, wind may be producing, and some thermal generation returns overnight). Run the Houston plant at minimum load during daytime peak hours (keep product in process alive but don't start new batches).
@@ -52,12 +53,14 @@ Keeping both facilities at full load throughout the event and accepting the $4.5
    - Maintain a cash reserve equal to 2 weeks of energy cost at $500/MWh
 
 **Key Indicators:**
+
 - ERCOT weather forecasts showing temperatures >20°F below seasonal norms for >3 days warrant pre-event hedging action
 - Natural gas spot prices at Houston Ship Channel exceeding $10/MMBtu signal potential generator fuel supply issues
 - ERCOT Conservation Voltage Reduction or EEA Level 1 declarations are early warnings — act before EEA3
 - Monitor ERCOT's generation outage report: if forced outages exceed 20 GW, price spikes above $1,000/MWh are likely
 
 **Documentation Required:**
+
 - Real-time price records from the ISO settlement system
 - Facility load data during the event (to demonstrate curtailment efforts for internal reporting and potential rate dispute)
 - Generator rental invoices and fuel costs
@@ -66,6 +69,7 @@ Keeping both facilities at full load throughout the event and accepting the $4.5
 - Post-event contract restructuring analysis
 
 **Resolution Timeline:**
+
 - Hours 0-6: Implement all immediate load curtailment measures
 - Hours 6-24: Execute production schedule shifts, secure backup generation if available
 - Days 2-5: Maintain curtailed operations, monitor market for normalization signals
@@ -93,6 +97,7 @@ The company cannot exit the VPPA without paying a termination fee based on the m
 Terminating the VPPA immediately and paying the $16M termination fee. This crystallizes the loss. The second mistake: ignoring the problem and hoping basis narrows — structural congestion rarely self-corrects without transmission investment.
 
 **Expert Approach:**
+
 1. **Quantify the actual basis exposure.** Request hourly settlement data from the PPA counterparty. Calculate generation-weighted basis for each month. Identify whether basis is seasonal (wider in summer when AC load drives Dominion congestion) or persistent year-round.
 
 2. **Model forward basis expectations.** Engage an energy consultant or your supplier's market analytics team to model forward basis between AEP and Dominion zones. Key factors: planned transmission upgrades (PJM RTEP projects that relieve the constraint), new generation additions in AEP zone (more wind/solar behind the constraint worsens basis), and load growth in Dominion zone.
@@ -109,12 +114,14 @@ Terminating the VPPA immediately and paying the $16M termination fee. This cryst
 6. **Portfolio-level offset.** If you have other facilities in the AEP zone, the VPPA's node-price settlement is actually favorable for loads in that zone (where LMPs are lower). Consider whether any current or planned facility expansion in AEP territory could benefit from the VPPA's economics.
 
 **Key Indicators:**
+
 - Basis widening beyond 150% of historical average for 2+ consecutive quarters signals structural change
 - PJM RTEP transmission projects targeting the constrained corridor may take 5-7 years to complete
 - New generation interconnection queue in the generator's zone exceeding 3 GW is a bearish signal for basis
 - FTR auction results showing increasing clearing prices on the relevant path confirm market recognition of the congestion
 
 **Documentation Required:**
+
 - Monthly VPPA settlement statements
 - Hourly generation-weighted basis calculations
 - FTR auction results and cost analysis
@@ -142,6 +149,7 @@ The damage is done — a single 15-minute interval set the peak, and the ratchet
 Calling Georgia Power and asking them to waive the ratchet. They won't — it's a tariff provision approved by the Georgia Public Service Commission, not a negotiable contract term. The second mistake: assuming nothing can be done and absorbing the $174K cost.
 
 **Expert Approach:**
+
 1. **Immediate investigation (Day 1):** Pull the interval data for commissioning week. Identify the exact 15-minute interval(s) that set the new peak. Determine whether the peak was caused by legitimate commissioning (all equipment at rated load) or by an avoidable event (existing HVAC running at maximum while new equipment was at full test load).
 
 2. **Tariff analysis:** Review the PLM-4 tariff document line-by-line. Some tariffs have provisions for "temporary service" or "construction power" that could apply if the commissioning load was billed under a temporary service agreement. If the contractor should have been on temporary service during commissioning, the peak may not count against the permanent meter. This is rare but worth checking.
@@ -155,6 +163,7 @@ Calling Georgia Power and asking them to waive the ratchet. They won't — it's 
 6. **Financial recovery:** If the electrical contractor failed to follow a commissioning plan that specified load management during testing, evaluate whether the excess demand charges ($174K) are recoverable as consequential damages under the construction contract. Review the contract's commissioning provisions and liability clauses.
 
 **Key Indicators:**
+
 - Any planned equipment installation >200 kW capacity should trigger a commissioning demand management plan
 - Request interval data within 48 hours of commissioning to identify ratchet exposure before the billing cycle closes
 - If your tariff has a demand ratchet, the energy manager must be involved in all capital project commissioning plans
@@ -179,6 +188,7 @@ The rate case will take 12-18 months to adjudicate. The proposed $0.014/kWh incr
 Ignoring the rate case because "we have a fixed-price contract" and only discovering the cost increase when the new tariff rates take effect. The second mistake: blaming the energy supplier for not protecting against distribution rate increases — the supplier explicitly passes these through in the contract, and there is no commercial product that can fix distribution rates (these are regulated, not competitive).
 
 **Expert Approach:**
+
 1. **Rate case analysis (Week 1):** Obtain the full rate case filing from the PUCO docket. Focus on the cost of service study for the GS-3 rate class. Identify what specific distribution cost components are driving the increase (infrastructure replacement, storm hardening, grid modernization, rate of return request). Calculate the exact impact on each hospital facility based on their billing determinants.
 
 2. **Intervention evaluation (Week 2-3):** Large C&I customers have the right to intervene in rate cases. Intervention allows you to file testimony challenging the utility's cost allocation, rate design, or revenue requirement. The hospital system's $2.5M+ annual impact justifies the cost of intervention ($50K-$150K in legal and expert witness fees). Contact a utility regulatory attorney in Ohio.
@@ -192,12 +202,14 @@ Ignoring the rate case because "we have a fixed-price contract" and only discove
 6. **Demand-side response:** A rate case that increases distribution charges makes demand charge management more valuable. Every kW of peak reduction now saves more per month. Re-run the ROI analysis for battery storage, demand response, and load management projects with the proposed new rates — projects that were marginal at old rates may now have strong payback.
 
 **Key Indicators:**
+
 - Monitor your state PUC docket for utility rate case filings quarterly
 - Track the authorized rate of return — utilities filing for ROE >10% in the current interest rate environment will face pushback
 - Rate cases proposing >15% overall increases typically settle at 50-65% of the request
 - Infrastructure replacement riders often bypass rate case proceedings — monitor these separately
 
 **Documentation Required:**
+
 - Rate case docket filing and all testimony
 - Facility-level billing determinant analysis
 - Impact assessment under proposed and likely settlement scenarios
@@ -225,6 +237,7 @@ The solar farm continues to generate during negative-price hours because it earn
 Demanding that the developer curtail during negative price hours (the contract doesn't require this). The second mistake: building a financial model that assumes negative pricing will revert to historical norms — the structural drivers are getting stronger, not weaker.
 
 **Expert Approach:**
+
 1. **Contract review:** Examine the PPA for any provisions related to economic curtailment, negative pricing, or market price floors. Modern PPAs (post-2020) often include a "negative price curtailment" clause where the developer is curtailed when market prices go negative for >2 consecutive hours, and the offtaker is not obligated to purchase during curtailed hours. Older PPAs may lack this provision.
 
 2. **Economic curtailment negotiation:** Approach the developer to add a negative price curtailment provision. The developer's perspective: they lose PPA revenue ($28/MWh) and may lose PTC value during curtailed hours, but they also avoid the operational cost of generating into a negative-price market and maintain grid operator goodwill (CAISO can mandate curtailment for reliability — voluntary curtailment preserves the developer's standing). Propose: curtailment when the 15-minute LMP is negative, with the developer retaining RECs for curtailed hours (they can sell them separately to partially offset lost PPA revenue).
@@ -236,6 +249,7 @@ Demanding that the developer curtail during negative price hours (the contract d
 5. **Settlement structure revision:** Negotiate a change from "buy all output at $28/MWh" to "buy all output at $28/MWh with a market price floor of $0/MWh." Under this revised structure, during negative price hours, the company pays $28/MWh (not $36/MWh above market) because the settlement reference price is floored at zero. The developer absorbs the negative market price risk.
 
 **Key Indicators:**
+
 - CAISO negative pricing frequency exceeding 300 hours/year and growing YoY signals structural oversupply
 - New solar interconnection queue in the generator's zone exceeding 5 GW indicates the problem will worsen
 - CAISO proposed market reforms (extended day-ahead market, WEIM expansion) may partially mitigate negative pricing through broader geographic dispatch
@@ -259,6 +273,7 @@ The solar array and the DR program each made financial sense individually. But t
 Installing behind-the-meter solar and enrolling in DR programs without modeling the CBL interaction. The second mistake: reducing the DR commitment to match the new (lower) CBL, which sacrifices significant capacity revenue.
 
 **Expert Approach:**
+
 1. **CBL methodology analysis:** Request the detailed CBL calculation methodology from PJM or your curtailment service provider (CSP). Some DR programs allow CBL adjustment for behind-the-meter generation — PJM's rules have evolved, and recent provisions may allow the CBL to be calculated on a "gross load" basis (metered load + estimated solar generation) rather than "net load" basis. If gross load CBL is available, apply for the adjustment.
 
 2. **Solar metering:** Install a revenue-grade meter on the solar array's output (separate from the utility meter). This provides real-time solar generation data that can be used to adjust the CBL. The meter cost ($2,000-$5,000 installed) is trivial compared to the lost DR revenue.
@@ -273,6 +288,7 @@ Installing behind-the-meter solar and enrolling in DR programs without modeling 
 5. **Re-evaluate the overall value stack.** Recalculate the total economic benefit of each component (solar PPA savings, DR revenue, capacity tag reduction, TOU arbitrage) with the interaction effects included. The optimal configuration may involve sizing the DR commitment to a level that is achievable regardless of solar output, rather than maximizing the individual DR commitment.
 
 **Key Indicators:**
+
 - Before installing behind-the-meter generation at a facility enrolled in DR, model the CBL impact for all weather scenarios
 - DR programs using CBL-10 (average of 10 prior similar days) are more vulnerable to solar cannibalization than those using metered generation adjustment
 - PJM's wholesale market rules for DR are updated annually — check for behind-the-meter generation accommodation provisions
@@ -295,6 +311,7 @@ The PLC is set by metered data during the 5CP hours — there's no appeals proce
 Treating PLC management as "nice to have" rather than a critical operational priority. The second mistake: scheduling generator maintenance during summer months (June-September) when coincident peaks are most likely.
 
 **Expert Approach:**
+
 1. **Generator maintenance scheduling (preventive):** Never schedule backup generator maintenance during June-September. If maintenance must occur during summer, complete it on a single unit at a time and only on days when the PJM weather forecast shows temperatures below the 5CP trigger zone (typically <90°F for ComEd zone). Maintain at least 80% of generator capacity available during all summer weekday afternoon hours.
 
 2. **Temporary load policies:** Establish a policy that no temporary or emergency load additions are accepted during June-September without explicit approval from the energy procurement team. The $250K capacity charge increase from 2 MW of temporary load far exceeds any revenue from the colocation contract (unless the contract is specifically priced for capacity cost pass-through).
@@ -309,6 +326,7 @@ Treating PLC management as "nice to have" rather than a critical operational pri
 5. **Financial recovery:** Calculate whether the temporary colocation client's contract covers the capacity cost increase. If not, renegotiate the contract to include capacity cost pass-through. For future emergency colocation requests during summer, quote the capacity cost impact explicitly: "Adding 2 MW during potential 5CP hours will cost $71,540/year in capacity charges — this must be included in the colocation pricing."
 
 **Key Indicators:**
+
 - PJM summer weather forecasts predicting temperatures >92°F for the ComEd zone on 3+ consecutive weekdays signal likely 5CP hours
 - PJM issuing hot weather alerts or emergency procedures is a near-certain 5CP indicator
 - Backup generator availability below 80% during June-September is a capacity management risk
@@ -333,6 +351,7 @@ The PPA contract allocates curtailment risk to the offtaker (the company pays th
 Assuming the developer can solve the curtailment problem (they can't — it's a grid-level transmission constraint). The second mistake: projecting future generation using the developer's original P50 without adjusting for actual curtailment experience.
 
 **Expert Approach:**
+
 1. **Rebase generation projections.** Using 12 months of actual data, create an adjusted generation projection: actual wind resource (may differ from developer's model), actual curtailment rate (680 hours, not 250), and trend-adjust curtailment based on ERCOT interconnection queue data. A reasonable forward projection might be 225,000-240,000 MWh/year with curtailment worsening 1-2% per year until new transmission is built.
 
 2. **Curtailment clause renegotiation.** Approach the developer to renegotiate the curtailment allocation. Propose a shared risk model: developer bears first 4% of curtailment (their original projection); offtaker bears next 2%; any curtailment above 6% is the developer's risk. The developer may agree because locking in the PPA relationship is preferable to losing the offtaker's volume entirely.
@@ -344,6 +363,7 @@ Assuming the developer can solve the curtailment problem (they can't — it's a 
 5. **Portfolio diversification.** For the next renewable procurement, avoid West Texas siting. Diversify to the Texas Gulf Coast (solar, lower curtailment) or outside ERCOT entirely (PJM wind/solar where curtailment is minimal). A portfolio of 2-3 projects across different regions reduces curtailment concentration risk.
 
 **Key Indicators:**
+
 - ERCOT curtailment orders exceeding 5% of annual hours for a specific generator region signals structural congestion
 - ERCOT interconnection queue exceeding 2× existing generation capacity in a constrained zone is a bearish curtailment signal
 - Developer reporting curtailment exceeding P90 projections in year 1 indicates the projections were based on outdated grid conditions
@@ -368,6 +388,7 @@ The more insidious risk: even without formal re-regulation, Ohio could introduce
 Ignoring the legislative risk because "re-regulation never happens." It happened in Ohio once before (SB 221 in 2008 attempted partial re-regulation), and Virginia effectively re-regulated in 2007 before partially deregulating again. The second mistake: panicking and trying to exit competitive contracts — the contracts are favorable, and any exit would involve early termination fees.
 
 **Expert Approach:**
+
 1. **Assess probability.** Engage a regulatory affairs consultant or your energy supplier's government relations team to assess the bill's likelihood of passage. Track committee votes, sponsor count, and utility lobbying positions. If the utility supports re-regulation (they often do, as it restores their captive customer base), the bill has stronger prospects.
 
 2. **Coalition advocacy.** Join or form a C&I customer coalition opposing re-regulation. Large commercial customers benefit most from competition and have the strongest voice against re-regulation. Provide testimony on the consumer savings from competitive supply — a retail chain saving $1.24M/year is a compelling data point.
@@ -384,6 +405,7 @@ Ignoring the legislative risk because "re-regulation never happens." It happened
    Present scenarios to the CFO with probability weights. Budget to the expected value.
 
 **Key Indicators:**
+
 - State legislature introducing electricity market reform bills after consumer price spike events
 - Utility lobbying spend increasing for "market reform" or "default service enhancement"
 - Residential customer complaint rates exceeding 3× historical average (political pressure builds)
@@ -409,6 +431,7 @@ The structural congestion is unlikely to reverse quickly — the data center loa
 Assuming the congestion is temporary and will revert to historical levels. Structural congestion caused by load growth and generation retirement is persistent until the grid is physically reconfigured. The second mistake: trying to renegotiate the supply contract — the supplier is delivering at the agreed-upon hub price and is not responsible for zonal congestion.
 
 **Expert Approach:**
+
 1. **Immediate contract restructuring:** Switch the supply contract settlement point from Western Hub to the JCPL zone (load zone pricing). The supplier will quote a higher price that reflects the zone premium, but this eliminates the basis exposure. The company pays a known, locked-in price that includes congestion, rather than a low hub price plus an unpredictable congestion pass-through.
 
 2. **FTR procurement:** Purchase Financial Transmission Rights (FTRs) from Western Hub to the JCPL zone in PJM's monthly or annual FTR auction. An FTR pays the congestion component between the two points — if congestion is $18/MWh and you hold an FTR for your load volume, you receive $18/MWh × volume in FTR settlement, offsetting the congestion charge on your utility bill.
@@ -420,12 +443,14 @@ Assuming the congestion is temporary and will revert to historical levels. Struc
 5. **Budget reforecast:** Immediately reforecast the energy budget using the new basis reality. Use $55-$60/MWh as the delivered cost assumption until the contract is restructured. Present to finance with a clear explanation of the structural change and the remediation timeline.
 
 **Key Indicators:**
+
 - PJM Congestion reports showing zonal basis >$10/MWh for >30% of peak hours indicates structural congestion
 - Generator retirement announcements in your zone without replacement capacity signal worsening congestion
 - Large load interconnection applications (data centers, industrial facilities) in your zone increase future congestion risk
 - PJM RTEP project approvals targeting your constraint indicate relief timeline (but delivery is typically 4-7 years out)
 
 **Documentation Required:**
+
 - Hourly LMP data for Western Hub and JCPL zone (12+ months)
 - Basis calculation spreadsheet (generation-weighted for PPA, load-weighted for supply)
 - FTR auction bid strategy and results
@@ -434,6 +459,7 @@ Assuming the congestion is temporary and will revert to historical levels. Struc
 - Communication log with supplier regarding settlement point change
 
 **Resolution Timeline:**
+
 - Week 1: Quantify basis exposure, pull LMP data, reforecast budget
 - Week 2-3: Evaluate FTR procurement, contact supplier about settlement point change
 - Month 2: Execute contract restructuring (settlement point or FTR hedge)
@@ -458,6 +484,7 @@ Complicating factor: healthcare facilities cannot tolerate billing disruption. H
 Doing nothing because the contract is favorable and hoping GreenPeak survives. The second mistake: exercising the termination right immediately and losing the below-market rate. Both extremes are wrong.
 
 **Expert Approach:**
+
 1. **Credit monitoring (immediate):** Set up alerts for further credit actions on GreenPeak — S&P CreditWatch, Moody's review, and any SEC filings (8-K, 10-Q with going concern language). A further downgrade to BB or below, or a going concern note, significantly increases default probability.
 
 2. **Contract review:** Examine the contract for:
@@ -474,6 +501,7 @@ Doing nothing because the contract is favorable and hoping GreenPeak survives. T
 6. **Ongoing monitoring cadence:** Review GreenPeak's financial health monthly. Track: credit rating changes, SEC filings, employee LinkedIn departures (mass exits from a supplier signal trouble), utility regulatory filings (some states require REPs to post bonds), and industry rumors (energy industry is small — your broker will hear about financial distress before it hits the news).
 
 **Key Indicators:**
+
 - Supplier credit downgrade below BBB- (investment grade threshold) is the first warning
 - Supplier requesting early payment, changing payment terms, or delaying customer credits signals cash flow problems
 - Supplier laying off commercial/pricing staff suggests they're de-risking by not taking new business
@@ -481,6 +509,7 @@ Doing nothing because the contract is favorable and hoping GreenPeak survives. T
 - If 2+ other C&I buyers report the same supplier is requesting contract modifications, the supplier is restructuring its book
 
 **Documentation Required:**
+
 - Credit rating history and monitoring alerts
 - Adequate assurance demand letter and GreenPeak response
 - Replacement supplier indicative pricing
@@ -489,6 +518,7 @@ Doing nothing because the contract is favorable and hoping GreenPeak survives. T
 - Contingency communication plan for hospitals (billing continuity)
 
 **Resolution Timeline:**
+
 - Week 1: Demand adequate assurance, initiate backup supplier RFP
 - Week 2-3: Receive GreenPeak response to assurance demand, evaluate backup bids
 - Month 1-2: If assurance is posted, continue monitoring. If refused, evaluate termination.
@@ -502,6 +532,7 @@ Doing nothing because the contract is favorable and hoping GreenPeak survives. T
 A food and beverage company operates 35 facilities across 18 states: 15 manufacturing plants (2-12 MW each), 12 distribution centers (500 kW - 3 MW each), and 8 corporate/R&D offices (200-800 kW each). Total electricity consumption: 680 GWh/year, $58M annual energy spend. The facilities are split: 20 in deregulated markets (PJM, ERCOT, NYISO, ISO-NE), 10 in regulated markets (Georgia, Florida, Alabama, Tennessee), and 5 in markets with limited competition (partial deregulation or pilot programs).
 
 The VP of Sustainability has committed the company to RE100 by 2030. The CFO wants 5% annual energy cost reduction. The Director of Operations wants zero disruption to production. Currently, each facility manages its own utility relationship — there is no centralized energy procurement function. Tariff selection, contract renewals, and demand charge management are handled by facility managers with no energy expertise, resulting in:
+
 - 12 facilities on suboptimal tariff schedules (estimated $1.2M/year in unnecessary charges)
 - 6 deregulated sites on utility default service (never switched to competitive supply — $2.1M/year above market)
 - No demand charge management programs at any facility
@@ -516,7 +547,9 @@ The mixed regulatory landscape means no single strategy works everywhere. A VPPA
 Trying to do everything at once — hiring a consultant, issuing an enterprise RFP, signing a mega-VPPA, and installing batteries at every site simultaneously. This overwhelms the organization, produces poor execution on every front, and alienates facility managers who feel central procurement is disrupting their operations.
 
 **Expert Approach:**
+
 1. **Phase 0: Data assembly and baselining (Month 1-3).**
+
    Deploy an energy management information system (EMIS) like EnergyCAP, Urjanet, or UtilityAPI to automatically collect utility bill data for all 35 sites. This eliminates the manual data collection bottleneck. Target: complete 12-month utility bill history and interval data for all sites within 90 days.
 
 2. **Phase 1: Quick wins (Month 2-6).** Prioritize actions with immediate savings and minimal disruption:
@@ -548,12 +581,14 @@ Trying to do everything at once — hiring a consultant, issuing an enterprise R
    - Annually: total energy spend vs. prior year (weather-normalized), cost avoidance from optimization, sustainability target progress, 3-year procurement strategy refresh
 
 **Key Indicators:**
+
 - If quick wins (Phase 1) don't deliver $2M+ in annual savings, the baseline analysis was wrong — revisit data
 - Facility manager resistance to centralized procurement is the #1 implementation risk — address it through communication and shared savings incentives
 - RE100 progress requires committed procurement volume, not just REC purchases — if RE% stalls at 30-40%, it's because the VPPA/PPA pipeline isn't producing
 - Total energy cost as a percentage of revenue should decrease YoY (weather-normalized) — if it's flat or increasing, the optimization program isn't working
 
 **Documentation Required:**
+
 - 35-site energy baseline (utility bills, interval data, tariff schedules, contracts)
 - Phase 1 savings tracking (actual vs. projected by initiative)
 - Portfolio procurement RFP and award documentation
@@ -563,6 +598,7 @@ Trying to do everything at once — hiring a consultant, issuing an enterprise R
 - Quarterly energy management committee reports
 
 **Resolution Timeline:**
+
 - Month 1-3: Data assembly, EMIS deployment, Phase 0 complete
 - Month 2-6: Phase 1 quick wins executed, $2.5M-$4M/year savings captured
 - Month 4-12: Phase 2 strategic procurement, first VPPA executed
@@ -590,6 +626,7 @@ The LDC's OFO is legally enforceable — the tariff allows curtailment of non-cr
 Assuming "firm" gas service means guaranteed delivery under all conditions. Firm transportation is firm relative to interruptible service — but OFOs can curtail even firm customers. The second mistake: relying entirely on gas without a dual-fuel backup for critical process heat.
 
 **Expert Approach:**
+
 1. **Immediate triage (Hour 0-2):** Calculate the cost of each option per MMBtu equivalent:
    - Spot gas: $28/MMBtu delivered
    - Electric resistance heating: $180/MWh ÷ 3,412 BTU/kWh × 1,000,000 = $52.75/MMBtu equivalent (even more expensive than spot gas and subject to demand charge spikes)
@@ -608,12 +645,14 @@ Assuming "firm" gas service means guaranteed delivery under all conditions. Firm
 6. **Contractual protection (next renewal):** At the next gas contract renewal, negotiate a "firm-firm" or "no-notice" transportation agreement that provides the highest curtailment priority available from the LDC. This costs 10-20% more than standard firm transportation but eliminates OFO exposure. Alternatively, negotiate a "supplemental supply" agreement with a gas marketer that automatically activates when the LDC issues an OFO — pre-arranged backup supply at a pre-negotiated spread above the index.
 
 **Key Indicators:**
+
 - Weather forecasts showing >10 consecutive days below 20°F in the Northeast signal potential OFO conditions
 - LDC "system alerts" or "constraint days" preceding a full OFO — act on alerts, don't wait for the OFO
 - Henry Hub spot gas exceeding $5/MMBtu during winter signals tight national supply — regional prices will spike harder
 - Electricity price correlation: when gas spot is elevated, electricity spot is elevated proportionally — electric heating is not a cheap alternative during gas supply emergencies
 
 **Documentation Required:**
+
 - LDC Operational Flow Order notification and curtailment percentage
 - Spot gas purchase confirmations and pricing
 - Product-at-risk calculation and decision documentation
@@ -623,6 +662,7 @@ Assuming "firm" gas service means guaranteed delivery under all conditions. Firm
 - Gas contract renewal strategy with enhanced curtailment protection
 
 **Resolution Timeline:**
+
 - Hour 0-4: Triage, spot gas procurement, demand limiting controls
 - Days 1-15: Manage blended gas supply (contract + spot), monitor cold snap duration
 - Week 3: Post-event financial analysis, present cost impact to management
@@ -631,6 +671,7 @@ Assuming "firm" gas service means guaranteed delivery under all conditions. Firm
 - Next renewal: Execute firm-firm or no-notice gas transportation agreement
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

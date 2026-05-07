@@ -4,21 +4,24 @@ description: Analise de mercado imobiliario para leiloes. Liquidez, desagio tipi
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - market-analysis
 - real-estate
 - roi
 - brazilian
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-leiloeiro-mercado
 owner: [[orchestrator]]
 ---
-
 
 # SKILL DE MERCADO — ANALISTA DE ATIVOS IMOBILIÁRIOS EM LEILÃO
 
@@ -62,6 +65,7 @@ investimento, liquidez, retorno e timing de mercado.
 | Imóvel rural | 180-360 dias | 360+ dias | 360+ dias | 360+ dias |
 
 **Fatores que aceleram a venda:**
+
 - Preço abaixo do mercado (10-15% de desconto)
 - Imóvel reformado e apresentável
 - Documentação regularizada
@@ -69,6 +73,7 @@ investimento, liquidez, retorno e timing de mercado.
 - Corretor CRECI com carteira de clientes
 
 **Fatores que travam a venda:**
+
 - Pendências documentais (ITBI não pago, matrícula não atualizada)
 - Imóvel em mau estado / obras inacabadas
 - Débitos não quitados que aparecem na matrícula
@@ -81,35 +86,43 @@ investimento, liquidez, retorno e timing de mercado.
 **Leilões Judiciais (CPC):**
 ```
 1º Leilão (mínimo = avaliação):
+
   - Frequência de arrematação no 1º: 20-30%
   - Deságio médio nas arrematações do 1º: 0-15% (compram pela avaliação)
 
 2º Leilão (sem mínimo / veda vil preço):
+
   - Frequência de arrematação no 2º: 50-70%
   - Deságio médio nas arrematações do 2º: 30-50%
   - Deságio máximo observado: até 65-70% (imóveis problemáticos)
+
 ```
 
 **Leilões Extrajudiciais (Lei 9.514/97 — Bancos):**
 ```
 1º Leilão (mínimo = valor do imóvel, dado em contrato):
+
   - Frequência de arrematação: 30-50%
   - Deságio médio: 20-35%
   - CEF: deságio médio histórico ~28%
 
 2º Leilão (mínimo = saldo devedor):
+
   - Frequência de arrematação: 60-80%
   - Deságio médio: 35-55%
   - Oportunidade: saldo devedor pode ser muito menor que valor de mercado
+
 ```
 
 **Venda Direta Bancária:**
 ```
 Negociação direta (sem concorrência):
+
   - Deságio médio: 15-30%
   - Menos competição que leilão
   - Possibilidade de financiamento pelo próprio banco
   - CEF financia até 80% do valor de avaliação nas vendas diretas
+
 ```
 
 ## Mapa De Deságio Por Situação Do Imóvel
@@ -143,6 +156,7 @@ Lucro bruto: 15-20% sobre o investido em 3-9 meses
 ```
 
 **Análise:**
+
 - Retorno bruto esperado: 15-25%
 - Prazo: 3-12 meses
 - Risco: médio (se imóvel bem selecionado)
@@ -163,6 +177,7 @@ Lucro bruto: 30-50% sobre o investido
 ```
 
 **Análise:**
+
 - Retorno bruto esperado: 30-50%
 - Prazo: 6-18 meses
 - Risco: médio-alto (risco de obra e mercado)
@@ -183,6 +198,7 @@ Yield superior ao mercado pela base de custo menor
 ```
 
 **Yield típico no Brasil:**
+
 - Yield mercado normal: 4-6% a.a. (grandes capitais)
 - Yield em imóvel arrematado com 30% de deságio: 6-9% a.a.
 - Yield em imóvel arrematado com 40% de deságio: 7-12% a.a.
@@ -238,6 +254,7 @@ Retorno Anualizado (a.a.):          ____%
 ```
 
 **Benchmarks de comparação:**
+
 - CDI 2024: ~10.5% a.a.
 - IPCA 2024: ~4.5% a.a.
 - LCI/LCA isentas: ~9-10% a.a.
@@ -262,6 +279,7 @@ BAIXA DE JUROS (SELIC baixa):
 ```
 
 **Sazonalidade:**
+
 - **Dezembro/Janeiro:** Leilões com menos concorrência (férias, festas)
 - **Março-Abril:** Início de ano fiscal — leilões da Caixa com novos lotes
 - **Julho:** Período de férias — competição reduzida
@@ -270,6 +288,7 @@ BAIXA DE JUROS (SELIC baixa):
 ## Análise Por Banco
 
 **Caixa Econômica Federal:**
+
 - Maior estoque de imóveis retomados do Brasil (>20.000 imóveis em 2024)
 - Programas próprios: Venda Online, Licitação Aberta, Proposta Online
 - Forte em imóveis do PMCMV/MCMV — popular/econômico
@@ -277,11 +296,13 @@ BAIXA DE JUROS (SELIC baixa):
 - Diferencial: possibilidade de usar FGTS para completar o pagamento
 
 **Santander:**
+
 - Estoque médio, foco em imóveis de médio-alto padrão
 - Plataforma santanderx.com.br
 - Leilões mensais regulares
 
 **Itaú/Bradesco/BB:**
+
 - Estoques menores, imóveis de todos os padrões
 - Leilões extrajudiciais mais frequentes que judiciais
 - Tendem a limpar o estoque em dezembro
@@ -320,6 +341,7 @@ Identificar o perfil correto do comprador final aumenta a velocidade de venda:
 ## Rotina De Monitoramento Semanal
 
 ```
+
 1. ALERTAS ATIVOS:
    - ZAP Imóveis: configurar alertas por bairro, tipo e preço
    - Viva Real: idem
@@ -327,6 +349,7 @@ Identificar o perfil correto do comprador final aumenta a velocidade de venda:
    - Leilão Judicial (TJ): configurar alertas por comarca
 
 2. ANÁLISE DE NOVO LOTE (30 min):
+
    a) Abrir edital → verificar Bloco 1-8 (SKILL de Edital)
    b) Pesquisar comparáveis no ZAP/Viva Real no bairro
    c) Verificar Google Street View da localização
@@ -344,6 +367,7 @@ Identificar o perfil correto do comprador final aumenta a velocidade de venda:
    - ROI líquido vs. CDI
    - Capital disponível e prazo
    - Lance máximo definido → ENTRAR NO LEILÃO
+
 ```
 
 ---
@@ -362,6 +386,7 @@ FIIs - dividend yield médio:     ~10-12% a.a. (IFIX)
 ```
 
 **Impacto no Mercado de Leilões (Selic 13,25%):**
+
 - Crédito imobiliário mais caro → mais inadimplência → MAIS LEILÕES
 - Taxa de financiamento habitacional: ~11-13% a.a. (TR+10 a TR+12)
 - Demanda por imóveis desacelera → mais tempo para vender
@@ -412,6 +437,7 @@ Para superar CDI em 12 meses:
 | **Leilão — Reforma** | **30-60% no período** | **Alto** | **6-18 meses** | **R$ 150k+** |
 
 **Conclusão:** Leilão só supera CDI de forma consistente com:
+
 1. Deságio mínimo de 25-30%
 2. Due diligence completa (reduzir surpresas)
 3. Estratégia de saída definida antes do lance
@@ -458,6 +484,7 @@ Esta skill implementa as seguintes políticas de governança:
 - **warning_threshold**: ROI abaixo do CDI dispara warning_threshold com alerta automático
 
 Políticas adicionais:
+
 - **Responsável:** Ecossistema Leiloeiro IA
 - **Escopo:** Análise de mercado imobiliário e estratégias de investimento em leilão
 - **Limitações:** Projeções e estimativas. Não constitui recomendação de investimento.
@@ -469,6 +496,7 @@ Políticas adicionais:
 ## Referências
 
 Fontes e referências de mercado:
+
 - ZAP Imóveis (zapimoveis.com.br) — dados de mercado
 - Viva Real (vivareal.com.br) — comparativos de preço
 - FIPEZAP — índice de preços imobiliários
@@ -498,11 +526,13 @@ Fontes e referências de mercado:
 - `leiloeiro-juridico` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

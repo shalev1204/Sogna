@@ -76,9 +76,11 @@ Android Bottom Navigation:
 RULE: Each tab maintains its own navigation stack.
 
 User journey:
+
 1. Home tab → Drill into item → Add to cart
 2. Switch to Profile tab
 3. Switch back to Home tab
+
 → Should return to "Add to cart" screen, NOT home root
 
 Implementation:
@@ -266,25 +268,30 @@ Hierarchy should match navigation:
 ### Deep Link Navigation Rules
 
 ```
+
 1. FULL STACK CONSTRUCTION
+
    Deep link to myapp://product/123 should:
    ├── Put Home at root of stack
    ├── Push Product screen on top
    └── Back button returns to Home
 
 2. AUTHENTICATION AWARENESS
+
    If deep link requires auth:
    ├── Save intended destination
    ├── Redirect to login
    ├── After login, navigate to destination
 
 3. INVALID LINKS
+
    If deep link target doesn't exist:
    ├── Navigate to fallback (home)
    ├── Show error message
    └── Never crash or blank screen
 
 4. STATEFUL NAVIGATION
+
    Deep link during active session:
    ├── Don't blow away current stack
    ├── Push on top OR

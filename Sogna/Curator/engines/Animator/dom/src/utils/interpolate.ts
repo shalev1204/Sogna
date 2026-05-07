@@ -2,7 +2,6 @@ import {
     clamp,
     EasingFunction,
     invariant,
-    sognaflowGlobalConfig,
     noop,
     pipe,
     progress,
@@ -22,8 +21,7 @@ function createMixers<T>(
     customMixer?: MixerFactory<T>
 ) {
     const mixers: Array<Mixer<T>> = []
-    const mixerFactory: MixerFactory<T> =
-        customMixer || sognaflowGlobalConfig.mix || Mix
+    const mixerFactory: MixerFactory<T> = customMixer || Mix
     const numMixers = output.length - 1
 
     for (let i = 0; i < numMixers; i++) {
@@ -38,6 +36,24 @@ function createMixers<T>(
     }
 
     return mixers
+}
+
+function createBinaryInterpolator<T>(input: number[], mixer: Mixer<T>) {
+    return (v: number) => {
+        const p = progress(input[0], input[1], v)
+        return mixer(p)
+    }
+}
+
+function createMultiInterpolator<T>(input: number[], mixers: Mixer<T>[]) {
+    return (v: number) => {
+        let i = 0
+        for (; i < input.length - 2; i++) {
+            if (v < input[i + 1]) break
+        }
+        const p = progress(input[i], input[i + 1], v)
+        return mixers[i](p)
+    }
 }
 
 /**
@@ -68,8 +84,7 @@ export function Interpolate<T>(
 
     invariant(
         inputLength === output.length,
-        "Both input and output ranges must be the same length",
-        "range-length"
+        "Both input and output ranges must be the same length"
     )
 
     /**
@@ -79,8 +94,6 @@ export function Interpolate<T>(
     if (inputLength === 1) return () => output[0]
     if (inputLength === 2 && output[0] === output[1]) return () => output[1]
 
-    const isZeroDeltaRange = input[0] === input[1]
-
     // If input runs highest -> lowest, reverse both arrays
     if (input[0] > input[inputLength - 1]) {
         input = [...input].reverse()
@@ -88,26 +101,15 @@ export function Interpolate<T>(
     }
 
     const mixers = createMixers(output, ease, mixer)
-    const numMixers = mixers.length
-
-    const interpolator = (v: number): T => {
-        if (isZeroDeltaRange && v < input[0]) return output[0]
-
-        let i = 0
-
-        if (numMixers > 1) {
-            for (; i < input.length - 2; i++) {
-                if (v < input[i + 1]) break
-            }
-        }
-
-        const progressInRange = progress(input[i], input[i + 1], v)
-
-        return mixers[i](progressInRange)
-    }
+    const interpolator =
+        inputLength === 2
+            ? createBinaryInterpolator(input, mixers[0])
+            : createMultiInterpolator(input, mixers)
 
     return isClamp
         ? (v: number) =>
               interpolator(clamp(input[0], input[inputLength - 1], v))
         : interpolator
 }
+
+export const interpolate = Interpolate

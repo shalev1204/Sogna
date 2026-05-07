@@ -14,6 +14,7 @@ Use this structure when reporting SwiftUI performance findings so the user can q
 ## Template
 
 ```markdown
+
 ## Summary
 
 [One short paragraph on the most likely bottleneck and whether the conclusion is code-backed or trace-backed.]
@@ -54,6 +55,7 @@ Use this structure when reporting SwiftUI performance findings so the user can q
 - If no metrics are available, omit the table and say what should be measured next.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

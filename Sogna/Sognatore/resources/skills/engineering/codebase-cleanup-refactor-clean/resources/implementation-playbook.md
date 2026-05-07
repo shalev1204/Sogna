@@ -12,7 +12,9 @@ This file contains detailed patterns, checklists, and code samples referenced by
 ## Instructions
 
 ### 1. Code Analysis
+
 First, analyze the current code for:
+
 - **Code Smells**
   - Long methods/functions (>20 lines)
   - Large classes (>200 lines)
@@ -43,6 +45,7 @@ First, analyze the current code for:
 Create a prioritized refactoring plan:
 
 **Immediate Fixes (High Impact, Low Effort)**
+
 - Extract magic numbers to constants
 - Improve variable and function names
 - Remove dead code
@@ -51,13 +54,16 @@ Create a prioritized refactoring plan:
 
 **Method Extraction**
 ```
+
 # Before
+
 def process_order(order):
     # 50 lines of validation
     # 30 lines of calculation
     # 40 lines of notification
 
 # After
+
 def process_order(order):
     validate_order(order)
     total = calculate_order_total(order)
@@ -65,12 +71,14 @@ def process_order(order):
 ```
 
 **Class Decomposition**
+
 - Extract responsibilities to separate classes
 - Create interfaces for dependencies
 - Implement dependency injection
 - Use composition over inheritance
 
 **Pattern Application**
+
 - Factory pattern for object creation
 - Strategy pattern for algorithm variants
 - Observer pattern for event handling
@@ -83,7 +91,9 @@ Provide concrete examples of applying each SOLID principle:
 
 **Single Responsibility Principle (SRP)**
 ```python
+
 # BEFORE: Multiple responsibilities in one class
+
 class UserManager:
     def create_user(self, data):
         # Validate data
@@ -94,6 +104,7 @@ class UserManager:
         pass
 
 # AFTER: Each class has one responsibility
+
 class UserValidator:
     def validate(self, data): pass
 
@@ -123,7 +134,9 @@ class UserService:
 
 **Open/Closed Principle (OCP)**
 ```python
+
 # BEFORE: Modification required for new discount types
+
 class DiscountCalculator:
     def calculate(self, order, discount_type):
         if discount_type == "percentage":
@@ -135,6 +148,7 @@ class DiscountCalculator:
             pass
 
 # AFTER: Open for extension, closed for modification
+
 from abc import ABC, abstractmethod
 
 class DiscountStrategy(ABC):
@@ -287,7 +301,9 @@ func (s *UserService) CreateUser(name string) {
 **Scenario 1: Legacy Monolith to Clean Modular Architecture**
 
 ```python
+
 # BEFORE: 500-line monolithic file
+
 class OrderSystem:
     def process_order(self, order_data):
         # Validation (100 lines)
@@ -311,7 +327,9 @@ class OrderSystem:
         log_file.write(f"Order processed: {order_data}")
 
 # AFTER: Clean, modular architecture
+
 # domain/entities.py
+
 from dataclasses import dataclass
 from typing import List
 from decimal import Decimal
@@ -332,6 +350,7 @@ class Order:
         return sum(item.price * item.quantity for item in self.items)
 
 # domain/repositories.py
+
 from abc import ABC, abstractmethod
 
 class OrderRepository(ABC):
@@ -342,6 +361,7 @@ class OrderRepository(ABC):
     def find_by_id(self, order_id: str) -> Order: pass
 
 # infrastructure/mysql_order_repository.py
+
 class MySQLOrderRepository(OrderRepository):
     def __init__(self, connection_pool):
         self.pool = connection_pool
@@ -356,6 +376,7 @@ class MySQLOrderRepository(OrderRepository):
             return cursor.lastrowid
 
 # application/validators.py
+
 class OrderValidator:
     def validate(self, order: Order) -> None:
         if not order.customer_id:
@@ -366,6 +387,7 @@ class OrderValidator:
             raise ValueError("Order total must be positive")
 
 # application/services.py
+
 class OrderService:
     def __init__(
         self,
@@ -499,6 +521,7 @@ let userEmail = new Email("test@example.com"); // Validation automatic
 Priority = (Business Value × Technical Debt) / (Effort × Risk)
 
 Business Value (1-10):
+
 - Critical path code: 10
 - Frequently changed: 8
 - User-facing features: 7
@@ -506,21 +529,25 @@ Business Value (1-10):
 - Legacy unused: 2
 
 Technical Debt (1-10):
+
 - Causes production bugs: 10
 - Blocks new features: 8
 - Hard to test: 6
 - Style issues only: 2
 
 Effort (hours):
+
 - Rename variables: 1-2
 - Extract methods: 2-4
 - Refactor class: 4-8
 - Architecture change: 40+
 
 Risk (1-10):
+
 - No tests, high coupling: 10
 - Some tests, medium coupling: 5
 - Full tests, loose coupling: 2
+
 ```
 
 **Technical Debt Prioritization Decision Tree**
@@ -542,7 +569,9 @@ Is it causing production bugs?
 **AI-Assisted Code Review Integration**
 
 ```yaml
+
 # .github/workflows/ai-review.yml
+
 name: AI Code Review
 risk: unknown
 on: [pull_request]
@@ -551,21 +580,28 @@ jobs:
   ai-review:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
 
       # GitHub Copilot Autofix
+
       - uses: github/copilot-autofix@v1
+
         with:
           languages: 'python,typescript,go'
 
       # CodeRabbit AI Review
+
       - uses: coderabbitai/action@v1
+
         with:
           review_type: 'comprehensive'
           focus: 'security,performance,maintainability'
 
       # Codium AI PR-Agent
+
       - uses: codiumai/pr-agent@v1
+
         with:
           commands: '/review --pr_reviewer.num_code_suggestions=5'
 ```
@@ -573,7 +609,9 @@ jobs:
 **Static Analysis Toolchain**
 
 ```python
+
 # pyproject.toml
+
 [tool.ruff]
 line-length = 100
 select = [
@@ -623,29 +661,38 @@ fail_under = 80
 **Automated Refactoring Suggestions**
 
 ```python
+
 # Use Sourcery for automatic refactoring suggestions
+
 # sourcery.yaml
+
 rules:
+
   - id: convert-to-list-comprehension
   - id: merge-duplicate-blocks
   - id: use-named-expression
   - id: inline-immediately-returned-variable
 
 # Example: Sourcery will suggest
+
 # BEFORE
+
 result = []
 for item in items:
     if item.is_active:
         result.append(item.name)
 
 # AFTER (auto-suggested)
+
 result = [item.name for item in items if item.is_active]
 ```
 
 **Code Quality Dashboard Configuration**
 
 ```yaml
+
 # sonar-project.properties
+
 sonar.projectKey=my-project
 sonar.sources=src
 sonar.tests=tests
@@ -653,10 +700,12 @@ sonar.coverage.exclusions=**/*_test.py,**/test_*.py
 sonar.python.coverage.reportPaths=coverage.xml
 
 # Quality Gates
+
 sonar.qualitygate.wait=true
 sonar.qualitygate.timeout=300
 
 # Thresholds
+
 sonar.coverage.threshold=80
 sonar.duplications.threshold=3
 sonar.maintainability.rating=A
@@ -667,24 +716,33 @@ sonar.security.rating=A
 **Security-Focused Refactoring**
 
 ```python
+
 # Use Semgrep for security-aware refactoring
+
 # .semgrep.yml
+
 rules:
+
   - id: sql-injection-risk
+
     pattern: execute($QUERY)
     message: Potential SQL injection
     severity: ERROR
     fix: Use parameterized queries
 
   - id: hardcoded-secrets
+
     pattern: password = "..."
     message: Hardcoded password detected
     severity: ERROR
     fix: Use environment variables or secret manager
 
 # CodeQL security analysis
+
 # .github/workflows/codeql.yml
+
 - uses: github/codeql-action/analyze@v3
+
   with:
     category: "/language:python"
     queries: security-extended,security-and-quality
@@ -695,6 +753,7 @@ rules:
 Provide the complete refactored code with:
 
 **Clean Code Principles**
+
 - Meaningful names (searchable, pronounceable, no abbreviations)
 - Functions do one thing well
 - No side effects
@@ -704,7 +763,9 @@ Provide the complete refactored code with:
 
 **Error Handling**
 ```python
+
 # Use specific exceptions
+
 class OrderValidationError(Exception):
     pass
 
@@ -712,6 +773,7 @@ class InsufficientInventoryError(Exception):
     pass
 
 # Fail fast with clear messages
+
 def validate_order(order):
     if not order.items:
         raise OrderValidationError("Order must contain at least one item")
@@ -759,6 +821,7 @@ class TestOrderProcessor:
 ```
 
 **Test Coverage**
+
 - All public methods tested
 - Edge cases covered
 - Error conditions verified
@@ -769,6 +832,7 @@ class TestOrderProcessor:
 Provide clear comparisons showing improvements:
 
 **Metrics**
+
 - Cyclomatic complexity reduction
 - Lines of code per method
 - Test coverage increase
@@ -777,16 +841,19 @@ Provide clear comparisons showing improvements:
 **Example**
 ```
 Before:
+
 - processData(): 150 lines, complexity: 25
 - 0% test coverage
 - 3 responsibilities mixed
 
 After:
+
 - validateInput(): 20 lines, complexity: 4
 - transformData(): 25 lines, complexity: 5
 - saveResults(): 15 lines, complexity: 3
 - 95% test coverage
 - Clear separation of concerns
+
 ```
 
 ### 10. Migration Guide
@@ -794,6 +861,7 @@ After:
 If breaking changes are introduced:
 
 **Step-by-Step Migration**
+
 1. Install new dependencies
 2. Update import statements
 3. Replace deprecated methods
@@ -802,7 +870,9 @@ If breaking changes are introduced:
 
 **Backward Compatibility**
 ```python
+
 # Temporary adapter for smooth migration
+
 class LegacyOrderProcessor:
     def __init__(self):
         self.processor = OrderProcessor()
@@ -819,13 +889,16 @@ Include specific optimizations:
 
 **Algorithm Improvements**
 ```python
+
 # Before: O(n²)
+
 for item in items:
     for other in items:
         if item.id == other.id:
             # process
 
 # After: O(n)
+
 item_map = {item.id: item for item in items}
 for item_id, item in item_map.items():
     # process
@@ -887,6 +960,7 @@ Rate issues found and improvements made:
 Focus on delivering practical, incremental improvements that can be adopted immediately while maintaining system stability.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

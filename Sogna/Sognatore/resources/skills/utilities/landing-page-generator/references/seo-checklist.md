@@ -33,18 +33,21 @@ This checklist ensures landing pages are optimized for search engine visibility 
 ## Core Web Vitals Targets
 
 ### Largest Contentful Paint (LCP) - Target: < 2.5s
+
 - [ ] Optimize hero image (WebP format, proper dimensions)
 - [ ] Preload critical resources (`<link rel="preload">`)
 - [ ] Use CDN for static assets
 - [ ] Minimize render-blocking CSS and JavaScript
 
 ### First Input Delay (FID) / Interaction to Next Paint (INP) - Target: < 200ms
+
 - [ ] Defer non-critical JavaScript
 - [ ] Break up long tasks (>50ms)
 - [ ] Minimize third-party script impact
 - [ ] Use `requestAnimationFrame` for visual updates
 
 ### Cumulative Layout Shift (CLS) - Target: < 0.1
+
 - [ ] Set explicit width/height on images and videos
 - [ ] Reserve space for dynamic content (ads, embeds)
 - [ ] Use `font-display: swap` for web fonts
@@ -116,6 +119,7 @@ This checklist ensures landing pages are optimized for search engine visibility 
 - [ ] **E-E-A-T signals**: Author expertise, company authority, trust indicators
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

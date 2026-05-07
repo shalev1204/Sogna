@@ -18,3 +18,5 @@ export const StatsBuffer: InactiveStatsBuffer | ActiveStatsBuffer = {
     value: null,
     addProjectionMetrics: null,
 }
+
+export const statsBuffer = StatsBuffer

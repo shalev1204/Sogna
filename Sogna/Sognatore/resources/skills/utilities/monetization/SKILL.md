@@ -4,22 +4,25 @@ description: "Estrategia e implementacao de monetizacao para produtos digitais -
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - monetization
 - stripe
 - saas
 - pricing
 - subscriptions
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-monetization
 owner: [[orchestrator]]
 ---
-
 
 # MONETIZATION - Do Produto ao Revenue
 
@@ -47,6 +50,7 @@ Estrategia e implementacao de monetizacao para produtos digitais - Stripe, subsc
 ## A Regra De Ouro
 
 Usuarios pagam quando:
+
 1. O produto resolve um problema real (need)
 2. A solucao e melhor que alternativas (differentiation)
 3. O preco e percebido como justo (value perception)
@@ -211,12 +215,18 @@ def get_subscription_status(customer_id: str) -> dict:
 
 **Metodo 1: Value-Based Pricing (Recomendado)**
 ```
+
 1. Calcule o valor economico entregue ao usuario
+
    Ex: produto economiza 2h/semana = R$ 200/mes de valor
+
 2. Capture 10-30% do valor criado
+
    Ex: R$ 29/mes = 14% do valor
+
 3. Valide com pesquisa de willingness-to-pay
 4. Teste 3 price points (A/B test)
+
 ```
 
 **Metodo 2: Competitive Anchor**
@@ -410,11 +420,13 @@ async def check_usage_and_upsell(user_id: str, usage: dict):
 - `product-inventor` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

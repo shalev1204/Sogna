@@ -34,7 +34,9 @@ marts/            Final analytics tables
 ## Quick Start
 
 ```yaml
+
 # dbt_project.yml
+
 name: 'analytics'
 risk: unknown
 version: '1.0.0'
@@ -62,7 +64,9 @@ models:
 ```
 
 ```
+
 # Project structure
+
 models/
 ├── staging/
 │   ├── stripe/
@@ -90,11 +94,15 @@ models/
 ### Pattern 1: Source Definitions
 
 ```yaml
+
 # models/staging/stripe/_stripe__sources.yml
+
 version: 2
 
 sources:
+
   - name: stripe
+
     description: Raw Stripe data loaded via Fivetran
     database: raw
     schema: stripe
@@ -104,30 +112,45 @@ sources:
       warn_after: {count: 12, period: hour}
       error_after: {count: 24, period: hour}
     tables:
+
       - name: customers
+
         description: Stripe customer records
         columns:
+
           - name: id
+
             description: Primary key
             tests:
+
               - unique
               - not_null
           - name: email
+
             description: Customer email
+
           - name: created
+
             description: Account creation timestamp
 
       - name: payments
+
         description: Stripe payment transactions
         columns:
+
           - name: id
+
             tests:
+
               - unique
               - not_null
           - name: customer_id
+
             tests:
+
               - not_null
               - relationships:
+
                   to: source('stripe', 'customers')
                   field: id
 ```
@@ -375,58 +398,84 @@ select * from final
 ### Pattern 5: Testing and Documentation
 
 ```yaml
+
 # models/marts/core/_core__models.yml
+
 version: 2
 
 models:
+
   - name: dim_customers
+
     description: Customer dimension with payment and order metrics
     columns:
+
       - name: customer_key
+
         description: Surrogate key for the customer dimension
         tests:
+
           - unique
           - not_null
 
       - name: customer_id
+
         description: Natural key from source system
         tests:
+
           - unique
           - not_null
 
       - name: email
+
         description: Customer email address
         tests:
+
           - not_null
 
       - name: customer_tier
+
         description: Customer value tier based on lifetime value
         tests:
+
           - accepted_values:
+
               values: ['high', 'medium', 'low']
 
       - name: lifetime_value
+
         description: Total amount paid by customer
         tests:
+
           - dbt_utils.expression_is_true:
+
               expression: ">= 0"
 
   - name: fct_orders
+
     description: Order fact table with all order transactions
     tests:
+
       - dbt_utils.recency:
+
           datepart: day
           field: created_at
           interval: 1
     columns:
+
       - name: order_id
+
         tests:
+
           - unique
           - not_null
       - name: customer_key
+
         tests:
+
           - not_null
           - relationships:
+
               to: ref('dim_customers')
               field: customer_key
 ```
@@ -509,7 +558,9 @@ where created_date >= dateadd(day, -3, current_date)
 ## dbt Commands
 
 ```bash
+
 # Development
+
 dbt run                          # Run all models
 dbt run --select staging         # Run staging models only
 dbt run --select +fct_orders     # Run fct_orders and its upstream
@@ -517,15 +568,18 @@ dbt run --select fct_orders+     # Run fct_orders and its downstream
 dbt run --full-refresh           # Rebuild incremental models
 
 # Testing
+
 dbt test                         # Run all tests
 dbt test --select stg_stripe     # Test specific models
 dbt build                        # Run + test in DAG order
 
 # Documentation
+
 dbt docs generate                # Generate docs
 dbt docs serve                   # Serve docs locally
 
 # Debugging
+
 dbt compile                      # Compile SQL without running
 dbt debug                        # Test connection
 dbt ls --select tag:critical     # List models by tag
@@ -534,6 +588,7 @@ dbt ls --select tag:critical     # List models by tag
 ## Best Practices
 
 ### Do's
+
 - **Use staging layer** - Clean data once, use everywhere
 - **Test aggressively** - Not null, unique, relationships
 - **Document everything** - Column descriptions, model descriptions
@@ -541,6 +596,7 @@ dbt ls --select tag:critical     # List models by tag
 - **Version control** - dbt project in Git
 
 ### Don'ts
+
 - **Don't skip staging** - Raw → mart is tech debt
 - **Don't hardcode dates** - Use `{{ var('start_date') }}`
 - **Don't repeat logic** - Extract to macros
@@ -555,6 +611,7 @@ dbt ls --select tag:critical     # List models by tag
 - [dbt Discourse](https://discourse.getdbt.com/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

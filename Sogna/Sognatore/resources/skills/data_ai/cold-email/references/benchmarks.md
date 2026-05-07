@@ -90,6 +90,7 @@ North America: 4.1% response. Europe: 3.1%. Asia-Pacific: 2.8%. Shorter, more di
 | Sam Nelson     | Agoge Sequence — Triple on Day 1 (email + LinkedIn + call)      | Multi-channel, tiered personalization           |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

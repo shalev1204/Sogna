@@ -8,7 +8,6 @@ id: skill-azure-mgmt-apimanagement-py
 owner: [[eng-api]]
 ---
 
-
 # Azure API Management SDK for Python
 
 Manage Azure API Management services, APIs, products, and policies.
@@ -281,14 +280,17 @@ user = client.user.create_or_update(
 6. **Version your APIs** using APIM's versioning features
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

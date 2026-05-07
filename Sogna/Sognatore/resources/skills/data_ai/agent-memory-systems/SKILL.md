@@ -11,7 +11,6 @@ id: skill-agent-memory-systems
 owner: [[orchestrator]]
 ---
 
-
 # Agent Memory Systems
 
 Memory is the cornerstone of intelligent agents. Without it, every interaction
@@ -107,19 +106,23 @@ Three memory types for different purposes:
    - Rules, skills, workflows
    - Often implemented as few-shot examples
    - "How did I solve this before?"
+
 """
 
 ## LangMem Implementation
+
 """
 from langmem import MemoryStore
 from langgraph.graph import StateGraph
 
 # Initialize memory store
+
 memory = MemoryStore(
     connection_string=os.environ["POSTGRES_URL"]
 )
 
 # Semantic memory: user profile
+
 await memory.semantic.upsert(
     namespace="user_profile",
     key=user_id,
@@ -131,6 +134,7 @@ await memory.semantic.upsert(
 )
 
 # Episodic memory: past interaction
+
 await memory.episodic.add(
     namespace="conversations",
     content={
@@ -143,6 +147,7 @@ await memory.episodic.add(
 )
 
 # Procedural memory: learned pattern
+
 await memory.procedural.add(
     namespace="skills",
     content={
@@ -154,6 +159,7 @@ await memory.procedural.add(
 """
 
 ## Memory Retrieval at Runtime
+
 """
 async def prepare_context(user_id, query):
     # Get user profile (semantic)
@@ -206,6 +212,7 @@ Decision matrix:
 """
 
 ## Pinecone (Enterprise Scale)
+
 """
 from pinecone import Pinecone
 
@@ -213,6 +220,7 @@ pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
 index = pc.Index("agent-memory")
 
 # Upsert with metadata
+
 index.upsert(
     vectors=[
         {
@@ -230,6 +238,7 @@ index.upsert(
 )
 
 # Query with filter
+
 results = index.query(
     vector=query_embedding,
     filter={"user_id": user_id, "type": "episodic"},
@@ -239,6 +248,7 @@ results = index.query(
 """
 
 ## Qdrant (Complex Filtering)
+
 """
 from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct, Filter, FieldCondition
@@ -246,6 +256,7 @@ from qdrant_client.models import PointStruct, Filter, FieldCondition
 client = QdrantClient(url="http://localhost:6333")
 
 # Complex filtering with Qdrant
+
 results = client.search(
     collection_name="agent_memory",
     query_vector=query_embedding,
@@ -263,6 +274,7 @@ results = client.search(
 """
 
 ## ChromaDB (Prototyping)
+
 """
 import chromadb
 
@@ -270,6 +282,7 @@ client = chromadb.PersistentClient(path="./memory_db")
 collection = client.get_or_create_collection("agent_memory")
 
 # Simple and fast for prototypes
+
 collection.add(
     ids=[str(uuid4())],
     embeddings=[embedding],
@@ -294,10 +307,12 @@ Breaking documents into retrievable chunks
 
 """
 The chunking dilemma:
+
 - Too large: Vector loses specificity
 - Too small: Loses context
 
 Optimal chunk size depends on:
+
 - Document type (code vs prose vs data)
 - Query patterns (factual vs exploratory)
 - Embedding model (each has sweet spot)
@@ -306,6 +321,7 @@ General guidance: 256-512 tokens for most use cases
 """
 
 ## Fixed-Size Chunking (Baseline)
+
 """
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
@@ -319,11 +335,13 @@ chunks = splitter.split_text(document)
 """
 
 ## Semantic Chunking (Better Quality)
+
 """
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_openai import OpenAIEmbeddings
 
 # Splits based on semantic similarity
+
 splitter = SemanticChunker(
     embeddings=OpenAIEmbeddings(),
     breakpoint_threshold_type="percentile",
@@ -334,10 +352,12 @@ chunks = splitter.split_text(document)
 """
 
 ## Structure-Aware Chunking (Documents with Hierarchy)
+
 """
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 
 # Respect document structure
+
 splitter = MarkdownHeaderTextSplitter(
     headers_to_split_on=[
         ("#", "Header 1"),
@@ -347,12 +367,17 @@ splitter = MarkdownHeaderTextSplitter(
 )
 
 chunks = splitter.split_text(markdown_doc)
+
 # Each chunk has header metadata for context
+
 """
 
 ## Contextual Chunking (Anthropic's Approach)
+
 """
+
 # Add context to each chunk before embedding
+
 # Reduces retrieval failures by 35%
 
 def add_context_to_chunk(chunk, document_summary):
@@ -365,6 +390,7 @@ def add_context_to_chunk(chunk, document_summary):
     return context_prompt
 
 # Embed the contextualized chunk, not raw chunk
+
 for chunk in chunks:
     contextualized = add_context_to_chunk(chunk, summary)
     embedding = embed(contextualized)
@@ -372,10 +398,12 @@ for chunk in chunks:
 """
 
 ## Code-Specific Chunking
+
 """
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
 
 # Language-aware splitting
+
 python_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.PYTHON,
     chunk_size=1000,
@@ -383,6 +411,7 @@ python_splitter = RecursiveCharacterTextSplitter.from_language(
 )
 
 # Respects function/class boundaries
+
 chunks = python_splitter.split_text(python_code)
 """
 
@@ -403,6 +432,7 @@ Pattern: Subconscious memory formation
 """
 
 ## LangGraph Background Processing
+
 """
 from langgraph.graph import StateGraph
 from langgraph.checkpoint.postgres import PostgresSaver
@@ -414,6 +444,7 @@ async def background_memory_processor(thread_id: str):
     # Extract insights without time pressure
     insights = await llm.invoke('''
         Analyze this conversation and extract:
+
         1. Key facts learned about the user
         2. User preferences revealed
         3. Tasks completed or pending
@@ -435,13 +466,16 @@ async def background_memory_processor(thread_id: str):
         )
 
 # Trigger on conversation end or idle timeout
+
 @on_conversation_idle(timeout_minutes=5)
 async def process_conversation(thread_id):
     await background_memory_processor(thread_id)
 """
 
 ## Memory Consolidation (Like Sleep)
+
 """
+
 # Periodically consolidate and deduplicate memories
 
 async def consolidate_memories(user_id: str):
@@ -483,17 +517,21 @@ Forgetting old, irrelevant memories
 
 """
 Not all memories should live forever:
+
 - Old preferences may be outdated
 - Task details lose relevance
 - Conflicting memories confuse retrieval
 
 Implement intelligent decay based on:
+
 - Recency (when was it created/accessed?)
 - Frequency (how often is it retrieved?)
 - Importance (is it a core fact or detail?)
+
 """
 
 ## Time-Based Decay
+
 """
 from datetime import datetime, timedelta
 
@@ -514,13 +552,16 @@ async def decay_old_memories(namespace: str, max_age_days: int):
 """
 
 ## Utility-Based Decay (MIRIX Approach)
+
 """
 def calculate_memory_utility(memory):
     '''
     Composite utility score inspired by cognitive science:
+
     - Recency: When was it last accessed?
     - Frequency: How often is it accessed?
     - Importance: How critical is this information?
+
     '''
     now = datetime.now()
 
@@ -573,7 +614,9 @@ context about what system is being configured is nearly useless.
 Recommended fix:
 
 ## Contextual Chunking (Anthropic's approach)
+
 # Add document context to each chunk before embedding
+
 # Reduces retrieval failures by 35%
 
 def contextualize_chunk(chunk, document):
@@ -592,6 +635,7 @@ def contextualize_chunk(chunk, document):
     return f"{context}\n\n{chunk}"
 
 # Embed the contextualized version
+
 for chunk in chunks:
     contextualized = contextualize_chunk(chunk, full_doc)
     embedding = embed(contextualized)
@@ -599,7 +643,9 @@ for chunk in chunks:
     store(original=chunk, embedding=embedding)
 
 ## Hierarchical Chunking
+
 # Store at multiple granularities
+
 chunks_small = split(doc, size=256)
 chunks_medium = split(doc, size=512)
 chunks_large = split(doc, size=1024)
@@ -619,6 +665,7 @@ fragments instead of complete answers.
 
 Why this breaks:
 Optimal chunk size depends on query patterns:
+
 - Factual queries need small, specific chunks
 - Conceptual queries need larger context
 - Code needs function-level boundaries
@@ -629,6 +676,7 @@ Default 1000 characters works for nothing specific.
 Recommended fix:
 
 ## Test different sizes
+
 from sklearn.metrics import recall_score
 
 def evaluate_chunk_size(documents, test_queries, chunk_size):
@@ -644,11 +692,13 @@ def evaluate_chunk_size(documents, test_queries, chunk_size):
     return correct_retrievals / len(test_queries)
 
 # Test multiple sizes
+
 for size in [256, 512, 768, 1024]:
     recall = evaluate_chunk_size(docs, test_queries, size)
     print(f"Size {size}: Recall@5 = {recall:.2%}")
 
 ## Size recommendations by content type
+
 CHUNK_SIZES = {
     "documentation": 512,   # Complete concepts
     "code": 1000,          # Function-level
@@ -657,6 +707,7 @@ CHUNK_SIZES = {
 }
 
 ## Use overlap to prevent boundary issues
+
 splitter = RecursiveCharacterTextSplitter(
     chunk_size=512,
     chunk_overlap=50,  # 10% overlap
@@ -683,15 +734,18 @@ Without metadata filtering, retrieval is just word matching.
 Recommended fix:
 
 ## Always filter by metadata first
+
 # Don't rely on semantic similarity alone
 
 # Bad: Only semantic search
+
 results = index.query(
     vector=query_embedding,
     top_k=5
 )
 
 # Good: Filter then search
+
 results = index.query(
     vector=query_embedding,
     filter={
@@ -703,11 +757,13 @@ results = index.query(
 )
 
 ## Use hybrid search (semantic + keyword)
+
 from qdrant_client import QdrantClient
 
 client = QdrantClient(...)
 
 # Hybrid search with fusion
+
 results = client.search(
     collection_name="memories",
     query_vector=semantic_embedding,
@@ -716,14 +772,17 @@ results = client.search(
 )
 
 ## Rerank results with cross-encoder
+
 from sentence_transformers import CrossEncoder
 
 reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
 # Initial retrieval (recall-oriented)
+
 candidates = index.query(query_embedding, top_k=20)
 
 # Rerank (precision-oriented)
+
 pairs = [(query, c.text) for c in candidates]
 scores = reranker.predict(pairs)
 reranked = sorted(zip(candidates, scores), key=lambda x: x[1], reverse=True)
@@ -748,6 +807,7 @@ for preferences and mutable facts.
 Recommended fix:
 
 ## Add temporal scoring
+
 from datetime import datetime, timedelta
 
 def time_decay_score(memory, half_life_days=30):
@@ -772,6 +832,7 @@ def retrieve_with_recency(query, user_id):
     return sorted(candidates, key=lambda x: x.final_score, reverse=True)[:5]
 
 ## Update instead of append for preferences
+
 async def update_preference(user_id, category, value):
     # Delete old preference
     await memory.delete(
@@ -786,6 +847,7 @@ async def update_preference(user_id, category, value):
     )
 
 ## Explicit versioning for facts
+
 await memory.upsert(
     id=f"fact-{fact_id}-v{version}",
     content=new_fact,
@@ -815,6 +877,7 @@ same topic (preferences). Agent has no way to know which is current.
 Recommended fix:
 
 ## Detect conflicts on storage
+
 async def store_with_conflict_check(memory, user_id):
     # Find potentially conflicting memories
     similar = await index.query(
@@ -836,6 +899,7 @@ async def store_with_conflict_check(memory, user_id):
     await index.upsert(memory)
 
 ## Conflict detection heuristic
+
 def is_contradictory(new_content, old_content):
     # Use LLM to detect contradiction
     result = llm.invoke(f'''
@@ -849,6 +913,7 @@ def is_contradictory(new_content, old_content):
     return result.strip().upper() == "YES"
 
 ## Periodic consolidation
+
 async def consolidate_memories(user_id):
     all_memories = await index.list(filter={"user_id": user_id})
     clusters = cluster_by_topic(all_memories)
@@ -882,6 +947,7 @@ out.
 Recommended fix:
 
 ## Budget tokens for different memory types
+
 TOKEN_BUDGET = {
     "system_prompt": 500,
     "user_profile": 200,
@@ -908,6 +974,7 @@ def budget_aware_retrieval(query, context_limit=4000):
     return build_context(profile, recent, memories)
 
 ## Dynamic k based on chunk size
+
 def retrieve_with_budget(query, max_tokens=1000):
     avg_chunk_tokens = 150  # From your data
     max_k = max_tokens // avg_chunk_tokens
@@ -945,6 +1012,7 @@ Mixing models creates garbage similarity scores.
 Recommended fix:
 
 ## Track embedding model in metadata
+
 await index.upsert(
     id=doc_id,
     vector=embedding,
@@ -956,6 +1024,7 @@ await index.upsert(
 )
 
 ## Filter by model version on retrieval
+
 results = index.query(
     vector=query_embedding,
     filter={"embedding_model": current_model},
@@ -963,6 +1032,7 @@ results = index.query(
 )
 
 ## Migration strategy for model upgrades
+
 async def migrate_embeddings(old_model, new_model):
     # Get all documents with old model
     old_docs = await index.list(filter={"embedding_model": old_model})
@@ -979,8 +1049,11 @@ async def migrate_embeddings(old_model, new_model):
         )
 
 ## Use separate collections during migration
+
 # Old collection: production queries
+
 # New collection: re-embedding in progress
+
 # Switch over when complete
 
 ## Validation Checks
@@ -1072,6 +1145,7 @@ Message: Ensure same embedding model for indexing and querying.
 Works well with: `autonomous-agents`, `multi-agent-orchestration`, `llm-architect`, `agent-tool-builder`
 
 ## When to Use
+
 - User mentions or implies: agent memory
 - User mentions or implies: long-term memory
 - User mentions or implies: memory systems
@@ -1086,11 +1160,13 @@ Works well with: `autonomous-agents`, `multi-agent-orchestration`, `llm-architec
 - User mentions or implies: conversation history
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

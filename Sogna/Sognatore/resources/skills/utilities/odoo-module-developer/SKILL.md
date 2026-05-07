@@ -7,7 +7,6 @@ id: skill-odoo-module-developer
 owner: [[orchestrator]]
 ---
 
-
 # Odoo Module Developer
 
 ## Overview
@@ -105,6 +104,7 @@ class HospitalPatient(models.Model):
 - Does not generate automated test files — use `@odoo-automated-tests` for that.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

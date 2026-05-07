@@ -14,14 +14,17 @@ cmake_minimum_required(VERSION 3.20)
 project(MyProject VERSION 1.0.0 LANGUAGES CXX)
 
 # Set C++ standard
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Export compile commands for tools
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Compiler warnings
+
 if(MSVC)
     add_compile_options(/W4 /WX)
 else()
@@ -29,6 +32,7 @@ else()
 endif()
 
 # Create library target
+
 add_library(mylib
     src/mylib.cpp
     include/mylib.h
@@ -45,10 +49,12 @@ target_include_directories(mylib
 target_compile_features(mylib PUBLIC cxx_std_20)
 
 # Create executable
+
 add_executable(myapp src/main.cpp)
 target_link_libraries(myapp PRIVATE mylib)
 
 # Dependencies with FetchContent
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -61,10 +67,12 @@ FetchContent_MakeAvailable(fmt)
 target_link_libraries(mylib PUBLIC fmt::fmt)
 
 # Testing
+
 enable_testing()
 add_subdirectory(tests)
 
 # Install rules
+
 include(GNUInstallDirs)
 install(TARGETS mylib myapp
     EXPORT MyProjectTargets
@@ -81,37 +89,45 @@ install(DIRECTORY include/
 ## Sanitizers
 
 ```cmake
+
 # AddressSanitizer (ASan) - memory errors
+
 set(CMAKE_CXX_FLAGS_ASAN
     "-g -O1 -fsanitize=address -fno-omit-frame-pointer"
     CACHE STRING "Flags for ASan build"
 )
 
 # UndefinedBehaviorSanitizer (UBSan)
+
 set(CMAKE_CXX_FLAGS_UBSAN
     "-g -O1 -fsanitize=undefined -fno-omit-frame-pointer"
     CACHE STRING "Flags for UBSan build"
 )
 
 # ThreadSanitizer (TSan) - data races
+
 set(CMAKE_CXX_FLAGS_TSAN
     "-g -O1 -fsanitize=thread -fno-omit-frame-pointer"
     CACHE STRING "Flags for TSan build"
 )
 
 # MemorySanitizer (MSan) - uninitialized reads
+
 set(CMAKE_CXX_FLAGS_MSAN
     "-g -O1 -fsanitize=memory -fno-omit-frame-pointer"
     CACHE STRING "Flags for MSan build"
 )
 
 # Usage: cmake -DCMAKE_BUILD_TYPE=ASAN ..
+
 ```
 
 ## Static Analysis
 
 ```yaml
+
 # .clang-tidy configuration
+
 ---
 Checks: >
   *,
@@ -124,30 +140,48 @@ Checks: >
 WarningsAsErrors: '*'
 
 CheckOptions:
+
   - key: readability-identifier-naming.ClassCase
+
     value: CamelCase
+
   - key: readability-identifier-naming.FunctionCase
+
     value: lower_case
+
   - key: readability-identifier-naming.VariableCase
+
     value: lower_case
+
   - key: readability-identifier-naming.ConstantCase
+
     value: UPPER_CASE
+
   - key: readability-identifier-naming.MemberCase
+
     value: lower_case
+
   - key: readability-identifier-naming.MemberSuffix
+
     value: '_'
+
   - key: modernize-use-nullptr.NullMacros
+
     value: 'NULL'
 ```
 
 ```bash
+
 # Run clang-tidy
+
 clang-tidy src/*.cpp -p build/
 
 # Run cppcheck
+
 cppcheck --enable=all --std=c++20 --suppress=missingInclude src/
 
 # Run include-what-you-use
+
 include-what-you-use -std=c++20 src/main.cpp
 ```
 
@@ -299,18 +333,23 @@ BENCHMARK_MAIN();
 ```
 
 ```bash
+
 # Profiling with perf (Linux)
+
 perf record -g ./myapp
 perf report
 
 # Profiling with Instruments (macOS)
+
 instruments -t "Time Profiler" ./myapp
 
 # Valgrind callgrind
+
 valgrind --tool=callgrind ./myapp
 kcachegrind callgrind.out.*
 
 # Memory profiling
+
 valgrind --tool=massif ./myapp
 ms_print massif.out.*
 ```
@@ -318,7 +357,9 @@ ms_print massif.out.*
 ## Conan Package Manager
 
 ```python
+
 # conanfile.txt
+
 [requires]
 fmt/10.1.1
 spdlog/1.12.0
@@ -333,7 +374,9 @@ fmt:header_only=True
 ```
 
 ```cmake
+
 # CMakeLists.txt with Conan
+
 cmake_minimum_required(VERSION 3.20)
 project(MyProject)
 
@@ -356,7 +399,9 @@ target_link_libraries(tests
 ```
 
 ```bash
+
 # Install dependencies
+
 conan install . --output-folder=build --build=missing
 cd build
 cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
@@ -366,7 +411,9 @@ cmake --build .
 ## CI/CD with GitHub Actions
 
 ```yaml
+
 # .github/workflows/ci.yml
+
 name: CI
 risk: unknown
 
@@ -382,21 +429,26 @@ jobs:
         build_type: [Debug, Release]
 
     steps:
+
     - uses: actions/checkout@v3
 
     - name: Install dependencies
+
       run: |
         pip install conan
         conan install . --output-folder=build --build=missing
 
     - name: Configure
+
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
     - name: Build
+
       run: cmake --build build --config ${{ matrix.build_type }}
 
     - name: Test
+
       run: ctest --test-dir build -C ${{ matrix.build_type }}
 
   sanitizers:
@@ -406,28 +458,34 @@ jobs:
         sanitizer: [asan, ubsan, tsan]
 
     steps:
+
     - uses: actions/checkout@v3
 
     - name: Build with sanitizer
+
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.sanitizer }}
         cmake --build build
 
     - name: Run tests
+
       run: ctest --test-dir build
 
   static-analysis:
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v3
 
     - name: Run clang-tidy
+
       run: |
         cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         clang-tidy src/*.cpp -p build/
 
     - name: Run cppcheck
+
       run: cppcheck --enable=all --error-exitcode=1 src/
 ```
 
@@ -448,6 +506,7 @@ jobs:
 | Valgrind | Memory profiler | `valgrind --tool=memcheck ./app` |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

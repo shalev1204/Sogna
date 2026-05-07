@@ -8,7 +8,6 @@ id: skill-azure-ai-voicelive-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.AI.VoiceLive (.NET)
 
 Real-time voice AI SDK for building bidirectional voice assistants with Azure AI.
@@ -29,7 +28,9 @@ dotnet add package NAudio                    # For audio capture/playback
 AZURE_VOICELIVE_ENDPOINT=https://<resource>.services.ai.azure.com/
 AZURE_VOICELIVE_MODEL=gpt-4o-realtime-preview
 AZURE_VOICELIVE_VOICE=en-US-AvaNeural
+
 # Optional: API key if not using Entra ID
+
 AZURE_VOICELIVE_API_KEY=<your-api-key>
 ```
 
@@ -269,14 +270,17 @@ if (serverEvent is SessionUpdateError error)
 | Quickstart | https://learn.microsoft.com/azure/ai-services/speech-service/voice-live-quickstart |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

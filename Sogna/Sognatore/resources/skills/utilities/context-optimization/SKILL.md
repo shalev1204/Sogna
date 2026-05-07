@@ -7,13 +7,14 @@ id: skill-context-optimization
 owner: [[orchestrator]]
 ---
 
-
 # Context Optimization Techniques
 
 Context optimization extends the effective capacity of limited context windows through strategic compression, masking, caching, and partitioning. The goal is not to magically increase context windows but to make better use of available capacity. Effective optimization can double or triple effective context capacity without requiring larger models or longer contexts.
 
 ## When to Use
+
 Activate this skill when:
+
 - Context limits constrain task complexity
 - Optimizing for cost reduction (fewer tokens = lower costs)
 - Reducing latency for long conversations
@@ -99,12 +100,14 @@ Monitor signals for optimization triggers: token utilization above 80%, degradat
 ### Optimization Decision Framework
 
 When to optimize:
+
 - Context utilization exceeds 70%
 - Response quality degrades as conversations extend
 - Costs increase due to long contexts
 - Latency increases with conversation length
 
 What to apply:
+
 - Tool outputs dominate: observation masking
 - Retrieved documents dominate: summarization or partitioning
 - Message history dominates: compaction with summarization
@@ -133,7 +136,9 @@ if len(observation) > max_length:
 
 **Example 3: Cache-Friendly Ordering**
 ```python
+
 # Stable content first
+
 context = [system_prompt, tool_definitions]  # Cacheable
 context += [reused_templates]  # Reusable
 context += [unique_content]  # Unique
@@ -161,14 +166,17 @@ This skill builds on context-fundamentals and context-degradation. It connects t
 ## References
 
 Internal reference:
+
 - Optimization Techniques Reference - Detailed technical reference
 
 Related skills in this collection:
+
 - context-fundamentals - Context basics
 - context-degradation - Understanding when to optimize
 - evaluation - Measuring optimization
 
 External resources:
+
 - Research on context window limitations
 - KV-cache optimization techniques
 - Production engineering guides
@@ -183,11 +191,13 @@ External resources:
 **Version**: 1.0.0
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

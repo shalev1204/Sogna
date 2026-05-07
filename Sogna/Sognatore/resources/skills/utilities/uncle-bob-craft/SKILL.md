@@ -11,7 +11,6 @@ id: skill-uncle-bob-craft
 owner: [[orchestrator]]
 ---
 
-
 # Uncle Bob Craft
 
 Apply Robert C. Martin (Uncle Bob) criteria for **code review and production**: Clean Code, Clean Architecture, The Clean Coder, Clean Agile, and design-pattern discipline. This skill is **complementary** to the existing `@clean-code` skill (which focuses on the Clean Code book) and to your project's linter/formatter—it does not replace them.
@@ -94,10 +93,12 @@ Use this to ask for an Uncle Bob–oriented review:
 
 ```markdown
 Please review this change using Uncle Bob craft criteria (@uncle-bob-craft):
+
 1. Dependency Rule and boundaries — do dependencies point inward?
 2. SOLID in context — any violations in the touched code?
 3. Smells — list rigidity, fragility, immobility, viscosity, needless complexity/repetition, or opacity.
 4. Suggest one or two concrete refactors (e.g., extract function, invert dependency).
+
 Do not duplicate lint/format; focus on structure and design.
 ```
 
@@ -141,12 +142,15 @@ def process(order: dict) -> dict:
 ## Common Pitfalls
 
 - **Problem:** Treating every class as needing a Factory or Strategy.  
+
   **Solution:** Introduce patterns only when you have a real design need (third duplication, second axis of change).
 
 - **Problem:** Review only listing "violates SOLID" without saying where or how.  
+
   **Solution:** Point to the file/function and which principle (e.g., "SRP: this function parses and persists; split into parse and persist").
 
 - **Problem:** Skipping the project linter because "we applied Uncle Bob."  
+
   **Solution:** This skill is about craft and design; always run the project's lint and format.
 
 ## Related Skills
@@ -166,6 +170,7 @@ def process(order: dict) -> dict:
 - **Summaries, not the books.** Full Clean Code heuristics, component principles (REP/CCP/CRP, ADP/SDP/SAP), and detailed stories are in the books; we reference the most used parts. See [reference.md](./reference.md) "Scope and attribution."
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

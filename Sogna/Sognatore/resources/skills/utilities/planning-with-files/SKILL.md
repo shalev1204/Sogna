@@ -8,7 +8,6 @@ id: skill-planning-with-files
 owner: [[orchestrator]]
 ---
 
-
 # Planning with Files
 
 Work like Manus: Use persistent markdown files as your "working memory on disk."
@@ -59,27 +58,35 @@ Filesystem = Disk (persistent, unlimited)
 ## Critical Rules
 
 ### 1. Create Plan First
+
 Never start a complex task without `task_plan.md`. Non-negotiable.
 
 ### 2. The 2-Action Rule
+
 > "After every 2 view/browser/search operations, IMMEDIATELY save key findings to text files."
 
 This prevents visual/multimodal information from being lost.
 
 ### 3. Read Before Decide
+
 Before major decisions, read the plan file. This keeps goals in your attention window.
 
 ### 4. Update After Act
+
 After completing any phase:
+
 - Mark phase status: `in_progress` → `complete`
 - Log any errors encountered
 - Note files created/modified
 
 ### 5. Log ALL Errors
+
 Every error goes in the plan file. This builds knowledge and prevents repetition.
 
 ```markdown
+
 ## Errors Encountered
+
 | Error | Attempt | Resolution |
 |-------|---------|------------|
 | FileNotFoundError | 1 | Created default config |
@@ -87,6 +94,7 @@ Every error goes in the plan file. This builds knowledge and prevents repetition
 ```
 
 ### 6. Never Repeat Failures
+
 ```
 if action_failed:
     next_action != same_action
@@ -143,6 +151,7 @@ If you can answer these, your context management is solid:
 ## When to Use This Pattern
 
 **Use for:**
+
 - Multi-step tasks (3+ steps)
 - Research tasks
 - Building/creating projects
@@ -150,6 +159,7 @@ If you can answer these, your context management is solid:
 - Anything requiring organization
 
 **Skip for:**
+
 - Simple questions
 - Single-file edits
 - Quick lookups
@@ -187,11 +197,13 @@ Helper scripts for automation:
 | Create files in skill directory | Create files in your project |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

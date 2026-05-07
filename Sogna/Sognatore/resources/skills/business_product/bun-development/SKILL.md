@@ -33,21 +33,27 @@ Use this skill when:
 ### 1.1 Installation
 
 ```bash
+
 # macOS / Linux
+
 <!-- @sentinel-ignore: Instalación oficial de Bun autorizada por Apex -->
 curl -fsSL https://bun.sh/install | bash
 
 # Windows
+
 powershell -c "irm bun.sh/install.ps1 | iex"
 
 # Homebrew
+
 brew tap oven-sh/bun
 brew install bun
 
 # npm (if needed)
+
 npm install -g bun
 
 # Upgrade
+
 bun upgrade
 ```
 
@@ -69,19 +75,27 @@ bun upgrade
 ### 2.1 Create New Project
 
 ```bash
+
 # Initialize project
+
 bun init
 
 # Creates:
+
 # ├── package.json
+
 # ├── tsconfig.json
+
 # ├── index.ts
+
 # └── README.md
 
 # With specific template
+
 bun create <template> <project-name>
 
 # Examples
+
 bun create react my-app        # React app
 bun create next my-app         # Next.js app
 bun create vite my-app         # Vite app
@@ -144,24 +158,30 @@ bun create elysia my-api       # Elysia API
 ### 3.1 Installing Packages
 
 ```bash
+
 # Install from package.json
+
 bun install              # or 'bun i'
 
 # Add dependencies
+
 bun add express          # Regular dependency
 bun add -d typescript    # Dev dependency
 bun add -D @types/node   # Dev dependency (alias)
 bun add --optional pkg   # Optional dependency
 
 # From specific registry
+
 bun add lodash --registry https://registry.npmmirror.com
 
 # Install specific version
+
 bun add react@18.2.0
 bun add react@latest
 bun add react@next
 
 # From git
+
 bun add github:user/repo
 bun add git+https://github.com/user/repo.git
 ```
@@ -169,41 +189,53 @@ bun add git+https://github.com/user/repo.git
 ### 3.2 Removing & Updating
 
 ```bash
+
 # Remove package
+
 bun remove lodash
 
 # Update packages
+
 bun update              # Update all
 bun update lodash       # Update specific
 bun update --latest     # Update to latest (ignore ranges)
 
 # Check outdated
+
 bun outdated
 ```
 
 ### 3.3 bunx (npx equivalent)
 
 ```bash
+
 # Execute package binaries
+
 bunx prettier --write .
 bunx tsc --init
 bunx create-react-app my-app
 
 # With specific version
+
 bunx -p typescript@4.9 tsc --version
 
 # Run without installing
+
 bunx cowsay "Hello from Bun!"
 ```
 
 ### 3.4 Lockfile
 
 ```bash
+
 # bun.lockb is a binary lockfile (faster parsing)
+
 # To generate text lockfile for debugging:
+
 bun install --yarn    # Creates yarn.lock
 
 # Trust existing lockfile
+
 bun install --frozen-lockfile
 ```
 
@@ -214,20 +246,26 @@ bun install --frozen-lockfile
 ### 4.1 Basic Execution
 
 ```bash
+
 # Run TypeScript directly (no build step!)
+
 bun run index.ts
 
 # Run JavaScript
+
 bun run index.js
 
 # Run with arguments
+
 bun run server.ts --port 3000
 
 # Run package.json script
+
 bun run dev
 bun run build
 
 # Short form (for scripts)
+
 bun dev
 bun build
 ```
@@ -235,10 +273,13 @@ bun build
 ### 4.2 Watch Mode
 
 ```bash
+
 # Auto-restart on file changes
+
 bun --watch run index.ts
 
 # With hot reloading
+
 bun --hot run server.ts
 ```
 
@@ -256,7 +297,9 @@ const dbUrl = process.env.DATABASE_URL;
 ```
 
 ```bash
+
 # Run with specific env file
+
 bun --env-file=.env.production run index.ts
 ```
 
@@ -427,22 +470,29 @@ describe("Math operations", () => {
 ### 6.2 Running Tests
 
 ```bash
+
 # Run all tests
+
 bun test
 
 # Run specific file
+
 bun test math.test.ts
 
 # Run matching pattern
+
 bun test --grep "adds"
 
 # Watch mode
+
 bun test --watch
 
 # With coverage
+
 bun test --coverage
 
 # Timeout
+
 bun test --timeout 5000
 ```
 
@@ -512,10 +562,13 @@ expect(spy).toHaveBeenCalled();
 ### 7.1 Basic Build
 
 ```bash
+
 # Bundle for production
+
 bun build ./src/index.ts --outdir ./dist
 
 # With options
+
 bun build ./src/index.ts \
   --outdir ./dist \
   --target browser \
@@ -559,14 +612,18 @@ if (!result.success) {
 ### 7.3 Compile to Executable
 
 ```bash
+
 # Create standalone executable
+
 bun build ./src/cli.ts --compile --outfile myapp
 
 # Cross-compile
+
 bun build ./src/cli.ts --compile --target=bun-linux-x64 --outfile myapp-linux
 bun build ./src/cli.ts --compile --target=bun-darwin-arm64 --outfile myapp-mac
 
 # With embedded assets
+
 bun build ./src/cli.ts --compile --outfile myapp --embed ./assets
 ```
 
@@ -597,18 +654,24 @@ console.log(__filename);
 ### 8.2 Common Migration Steps
 
 ```bash
+
 # 1. Install Bun
+
 curl -fsSL https://bun.sh/install | bash
 
 # 2. Replace package manager
+
 rm -rf node_modules package-lock.json
 bun install
 
 # 3. Update scripts in package.json
+
 # "start": "node index.js" → "start": "bun run index.ts"
+
 # "test": "jest" → "test": "bun test"
 
 # 4. Add Bun types
+
 bun add -d @types/bun
 ```
 
@@ -675,10 +738,13 @@ new Elysia().get("/", () => "Hello!").listen(3000);
 ### 9.3 Bundle for Production
 
 ```bash
+
 # Always bundle and minify for production
+
 bun build ./src/index.ts --outdir ./dist --minify --target node
 
 # Then run the bundle
+
 bun run ./dist/index.js
 ```
 
@@ -708,11 +774,13 @@ bun run ./dist/index.js
 - [Bun Discord](https://bun.sh/discord)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

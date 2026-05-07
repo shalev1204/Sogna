@@ -7,7 +7,6 @@ id: skill-odoo-performance-tuner
 owner: [[eng-perf]], [[ops-security]]
 ---
 
-
 # Odoo Performance Tuner
 
 ## Overview
@@ -32,6 +31,7 @@ This skill helps diagnose and resolve Odoo performance problems — from slow pa
 ### Example 1: Recommended Worker Configuration
 
 ```ini
+
 # odoo.conf — tuned for a 4-core, 8GB RAM server
 
 workers = 9                   # (CPU_cores × 2) + 1 — never set to 0 in production
@@ -79,15 +79,18 @@ Prerequisites: Run Odoo with ?debug=1 in the URL to enable debug mode.
 Menu: Settings → Technical → Profiling
 
 Steps:
+
   1. Click "Enable Profiling" — set a duration (e.g., 60 seconds)
   2. Navigate to and reproduce the slow action
   3. Return to Settings → Technical → Profiling → View Results
 
 What to look for:
+
   - Total SQL queries > 100 on a single page  → N+1 query problem
   - Single queries taking > 100ms             → missing DB index
   - Same query repeated many times            → missing cache, use @ormcache
   - Python time high but SQL low             → compute field inefficiency
+
 ```
 
 ## Best Practices
@@ -98,7 +101,9 @@ What to look for:
 - ✅ **Do:** Use `@tools.ormcache` decorator on methods pulled repeatedly with the same arguments.
 - ❌ **Don't:** Set `workers = 0` in production — single-threaded mode serializes all requests and blocks all users on any slow operation.
 - ❌ **Don't:** Ignore `limit_memory_soft` — workers exceeding it are recycled between requests; without the limit they grow unbounded and crash.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - ❌ **Don't:** Directly manipulate `prefetch_ids` on recordsets — rely on Odoo's automatic batch prefetching, which activates by default.
 
 ## Limitations
@@ -109,6 +114,7 @@ What to look for:
 - Does not cover **Redis-based session store** or **Celery task queue** optimizations, which are advanced patterns for very high-traffic instances.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

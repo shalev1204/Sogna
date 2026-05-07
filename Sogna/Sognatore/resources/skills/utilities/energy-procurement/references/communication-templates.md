@@ -83,6 +83,7 @@ Common variables used across templates:
 {{our_company}} is conducting a competitive electricity supply procurement for {{num_facilities}} facilities across {{iso_name}} territory. We are inviting {{supplier_name}} to participate based on your market position and capabilities in our service territory.
 
 **RFP Summary:**
+
 - **Scope:** {{num_facilities}} commercial and industrial facilities
 - **Total annual consumption:** {{annual_consumption_mwh}}
 - **Aggregate peak demand:** {{peak_demand_kw}}
@@ -91,12 +92,14 @@ Common variables used across templates:
 - **Bid deadline:** {{rfp_deadline}}, 5:00 PM ET
 
 **Included with this invitation:**
+
 1. RFP response template (Excel) with site-level detail
 2. 36 months of 15-minute interval data for each facility (CSV)
 3. Current tariff information and utility account numbers
 4. Evaluation criteria and weighting
 
 **Evaluation criteria:**
+
 - Total cost across three price scenarios (40%)
 - Supplier credit quality and financial stability (20%)
 - Contract flexibility including volume tolerance and early termination provisions (15%)
@@ -104,6 +107,7 @@ Common variables used across templates:
 - Market intelligence and advisory capabilities (10%)
 
 **Key requirements:**
+
 - All bids must include volume tolerance of ±10% minimum
 - Pricing must be provided for all three product structures independently
 - Supplier must demonstrate minimum BBB credit rating or equivalent
@@ -121,6 +125,7 @@ We look forward to {{supplier_name}}'s participation.
 ---
 
 **Tone Notes:**
+
 - Do not share current pricing with bidders. "Current contract details are confidential" is the standard response.
 - Do not disclose the number of bidders. "We have invited a competitive field" is sufficient.
 - Respond to all clarification questions in a consolidated Q&A sent to all bidders simultaneously to maintain fairness.
@@ -142,20 +147,24 @@ We look forward to {{supplier_name}}'s participation.
 Thank you for the term sheet for {{ppa_project_name}} ({{ppa_capacity_mw}}). We've completed our initial review and have the following feedback organized by commercial, financial, and operational terms.
 
 **Commercial Terms:**
+
 - **Strike price:** The proposed {{ppa_strike_price}} is within our target range based on current forward curves. We would like to discuss a price escalator structure — 0% escalation for years 1-5 with a [CPI-linked / fixed 1.5%] escalator beginning year 6.
 - **Settlement point:** We request settlement at the {{iso_name}} [load zone / hub] rather than the project node, to reduce our basis risk exposure. We understand this may require a price adjustment and are prepared to discuss.
 - **Contract volume:** We would like to discuss a partial offtake ({{our_offtake_mw}} MW of the {{ppa_capacity_mw}} project) with right of first refusal on additional capacity.
 
 **Risk Allocation:**
+
 - **Curtailment:** We request that the developer bear curtailment risk for the first 5% annually, with shared risk (50/50) for curtailment between 5-10%, and developer risk above 10%. The current term sheet allocates all curtailment risk to the offtaker, which is not acceptable for a {{ppa_term_years}}-year commitment.
 - **Negative pricing:** We require a negative price floor provision: during intervals when the settlement point LMP is negative, no settlement occurs (neither party pays). This protects both parties from volatile negative pricing hours.
 - **Change of law:** The term sheet's change-of-law provision is one-sided. We propose mutual termination rights if a regulatory change materially affects the economics for either party, with a defined materiality threshold of {{materiality_threshold}}.
 
 **Financial and Credit:**
+
 - **Credit support:** We are prepared to provide [a parent guarantee / an LC] for an amount equal to {{credit_support_amount}}, sized to 2 years of potential negative mark-to-market exposure under our stress scenario.
 - **Accounting treatment:** We require confirmation that the PPA structure qualifies for normal purchases and normal sales (NPNS) exception under ASC 815, or alternatively that hedge accounting is achievable. Our treasury team will need to review the final contract with our auditors.
 
 **REC Provisions:**
+
 - **Vintage delivery:** RECs must be delivered within 12 months of generation to maintain RE100 compliance.
 - **Replacement RECs:** If the project underdelivers RECs by more than 10% in any year, the developer provides replacement RECs from a comparable facility at no additional cost.
 
@@ -167,6 +176,7 @@ We would welcome a call this week to discuss these points. Please suggest availa
 ---
 
 **Tone Notes:**
+
 - PPA negotiations are multi-round. The first response should establish your key positions without ultimatums.
 - Always frame risk allocation as "fair to both parties" rather than "we won't accept your risk."
 - Developers receive dozens of term sheet responses — be specific and organized to stand out as a serious offtaker.
@@ -206,6 +216,7 @@ We would welcome a call this week to discuss these points. Please suggest availa
 **III. Requested Relief**
 
 {{our_company}} requests that the Commission:
+
 - Set ROE at the midpoint of comparable authorized returns (approximately {{recommended_roe}}%)
 - Adopt a coincident-peak cost allocation methodology for the {{rate_schedule}} rate class
 - Include annual commission review and a cumulative cap on the proposed infrastructure rider
@@ -230,6 +241,7 @@ To: {{dr_program_administrator}}
 {{our_company}} hereby applies to enroll {{facility_name}} in the {{dr_program_name}} for the {{delivery_year}} delivery year.
 
 **Facility Information:**
+
 - **Facility:** {{facility_name}}
 - **Address:** {{facility_address}}
 - **Utility account:** {{account_number}}
@@ -238,6 +250,7 @@ To: {{dr_program_administrator}}
 - **Current peak demand:** {{peak_demand_kw}}
 
 **Curtailment Capability:**
+
 - **Committed curtailment capacity:** {{dr_commitment_kw}} kW
 - **Minimum notification time required:** {{notification_minutes}} minutes
 - **Maximum curtailment duration:** {{max_duration_hours}} hours
@@ -284,6 +297,7 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 | **Total** | **${{prior_year_total}}** | **${{base_case_total}}** | **{{total_change}}** |
 
 **Key Assumptions:**
+
 - Electricity forward curve: {{forward_curve_source}} as of {{curve_date}}
 - Natural gas: Henry Hub {{gas_assumption}} + basis of {{basis_assumption}}
 - Weather: 10-year normal HDD/CDD
@@ -300,6 +314,7 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 | Market stress (2× forward) | ${{elec_stress}} | ${{gas_stress}} | ${{stress_total}} | {{stress_delta}} |
 
 **Decisions Requested:**
+
 1. Approve the base case budget of ${{base_case_total}}
 2. Authorize procurement of an additional {{additional_hedge_pct}}% hedge to bring total hedged position to {{target_hedge_pct}}%
 3. Approve ${{capex_amount}} capital budget for demand charge mitigation at {{capex_facilities}}
@@ -338,6 +353,7 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 **RE100 Progress:** {{our_company}} has achieved {{re_pct_current}}% renewable electricity in {{report_year}}, on track for our commitment of 100% by {{re_target}}.
 
 **Forward-Looking Targets:**
+
 - {{re_target_next_year}}% renewable electricity by end of {{next_year}}
 - Execute additional {{next_ppa_mw}} MW of renewable procurement by Q2 {{next_year}}
 - Reduce Scope 2 market-based emissions by {{scope2_reduction_target}}% by {{target_year}} (vs. {{baseline_year}} baseline)
@@ -367,6 +383,7 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 | Rate/tariff changes | ${{tariff_impact}} | {{tariff_description}} |
 
 **Actions Taken:**
+
 1. {{action_1}}
 2. {{action_2}}
 3. {{action_3}}
@@ -392,16 +409,19 @@ Our current supply agreement expires {{contract_end}}, and we'd like to discuss 
 To frame the discussion, here is our perspective on renewal:
 
 **What's worked well:**
+
 - Billing accuracy and operational execution have been excellent
 - Market intelligence updates have been valuable for our procurement planning
 - The account management team has been responsive and proactive
 
 **Where we'd like to see improvement:**
+
 - Our current rate of {{current_rate}} was competitive at signing but the forward curve for the renewal period ({{contract_start}} through {{new_contract_end}}) is currently {{market_rate}} — we need renewal pricing that reflects current market conditions
 - We'd like to discuss [block-and-index structure / increased volume tolerance / REC bundling] for the renewal term
 
 **Our process:**
 We are conducting a competitive evaluation for this renewal. We've invited {{num_bidders}} suppliers to provide indicative pricing. Our decision timeline:
+
 - Indicative pricing review: {{pricing_review_date}}
 - Shortlist and final negotiation: {{negotiation_date}}
 - Contract execution: {{execution_date}}
@@ -414,6 +434,7 @@ We would welcome a call on {{proposed_call_date}} to discuss {{supplier_name}}'s
 ---
 
 **Tone Notes:**
+
 - Name the competitive process but don't bluff about the number of bidders.
 - Lead with what's worked well — the incumbent relationship has value and you should acknowledge it.
 - Be transparent about timeline so the supplier can allocate pricing resources.
@@ -443,6 +464,7 @@ As a large commercial and industrial electricity consumer in {{iso_name}} territ
 
 **Recommendation:**
 {{our_company}} recommends that the Commission [approve with modifications / reject / defer pending further analysis] the proposed {{program_or_rule}} changes, specifically incorporating the following modifications:
+
 - {{recommendation_1}}
 - {{recommendation_2}}
 
@@ -475,15 +497,18 @@ Respectfully submitted,
 | Scope 2 emissions (market-based) | {{current_emissions}} MT CO₂e | {{target_emissions}} MT | {{emissions_status}} |
 
 **Strategic Priorities:**
+
 1. **Cost management:** [1-2 sentence summary of procurement strategy and results]
 2. **Sustainability:** [1-2 sentence summary of RE100 progress and next milestones]
 3. **Risk management:** [1-2 sentence summary of hedge position and market outlook]
 
 **Decisions Requested:**
+
 1. Approve execution of a {{ppa_term_years}}-year virtual PPA with {{ppa_project_name}} at {{ppa_strike_price}} for {{ppa_capacity_mw}} MW — projected NPV of ${{ppa_npv}} over the contract term, delivering {{ppa_annual_recs}} RECs annually toward our RE100 commitment.
 2. Authorize ${{capex_amount}} in capital expenditure for battery energy storage at {{capex_facilities}} — projected {{payback_years}}-year payback with stacked value of ${{annual_savings}}/year in demand charge and capacity cost reduction.
 
 **Risk Summary:**
+
 - Market risk: {{hedge_pct}}% hedged through {{hedge_end}}. Unhedged exposure: ${{unhedged_exposure}} at current forwards.
 - Regulatory risk: {{regulatory_summary}}
 - Supplier risk: All supply contracts with investment-grade counterparties. No credit concerns.
@@ -493,12 +518,14 @@ Respectfully submitted,
 ---
 
 **Tone Notes:**
+
 - Board communication must be under 2 pages. Provide appendices for detail.
 - Lead with the "ask" — if you need board approval for a PPA or capital project, put it in the executive summary.
 - Quantify everything. "Good progress on sustainability" means nothing. "38% RE, on track for 50% by year-end" means everything.
 - Acknowledge risks explicitly. A board that discovers unmentioned risks loses trust in management.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

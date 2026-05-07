@@ -8,7 +8,6 @@ id: skill-azure-monitor-opentelemetry-exporter-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure Monitor OpenTelemetry Exporter for Python
 
 Low-level exporter for sending OpenTelemetry traces, metrics, and logs to Application Insights.
@@ -26,6 +25,7 @@ APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=h
 ```
 
 ## When to Use
+
 | Scenario | Use |
 |----------|-----|
 | Quick setup, auto-instrumentation | `azure-monitor-opentelemetry` (distro) |
@@ -41,17 +41,20 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 
 # Create exporter
+
 exporter = AzureMonitorTraceExporter(
     connection_string="InstrumentationKey=xxx;..."
 )
 
 # Configure tracer provider
+
 trace.set_tracer_provider(TracerProvider())
 trace.get_tracer_provider().add_span_processor(
     BatchSpanProcessor(exporter)
 )
 
 # Use tracer
+
 tracer = trace.get_tracer(__name__)
 with tracer.start_as_current_span("my-span"):
     print("Hello, World!")
@@ -66,15 +69,18 @@ from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
 from azure.monitor.opentelemetry.exporter import AzureMonitorMetricExporter
 
 # Create exporter
+
 exporter = AzureMonitorMetricExporter(
     connection_string="InstrumentationKey=xxx;..."
 )
 
 # Configure meter provider
+
 reader = PeriodicExportingMetricReader(exporter, export_interval_millis=60000)
 metrics.set_meter_provider(MeterProvider(metric_readers=[reader]))
 
 # Use meter
+
 meter = metrics.get_meter(__name__)
 counter = meter.create_counter("requests_total")
 counter.add(1, {"route": "/api/users"})
@@ -90,20 +96,24 @@ from opentelemetry.sdk._logs.export import BatchLogRecordProcessor
 from azure.monitor.opentelemetry.exporter import AzureMonitorLogExporter
 
 # Create exporter
+
 exporter = AzureMonitorLogExporter(
     connection_string="InstrumentationKey=xxx;..."
 )
 
 # Configure logger provider
+
 logger_provider = LoggerProvider()
 logger_provider.add_log_record_processor(BatchLogRecordProcessor(exporter))
 set_logger_provider(logger_provider)
 
 # Add handler to Python logging
+
 handler = LoggingHandler(level=logging.INFO, logger_provider=logger_provider)
 logging.getLogger().addHandler(handler)
 
 # Use logging
+
 logger = logging.getLogger(__name__)
 logger.info("This will be sent to Application Insights")
 ```
@@ -116,6 +126,7 @@ Exporters read `APPLICATIONINSIGHTS_CONNECTION_STRING` automatically:
 from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 
 # Connection string from environment
+
 exporter = AzureMonitorTraceExporter()
 ```
 
@@ -140,6 +151,7 @@ from opentelemetry.sdk.trace.sampling import ParentBasedTraceIdRatio
 from azure.monitor.opentelemetry.exporter import ApplicationInsightsSampler
 
 # Sample 10% of traces
+
 sampler = ApplicationInsightsSampler(sampling_ratio=0.1)
 
 trace.set_tracer_provider(TracerProvider(sampler=sampler))
@@ -175,6 +187,7 @@ from azure.identity import AzureAuthorityHosts, DefaultAzureCredential
 from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 
 # Azure Government
+
 credential = DefaultAzureCredential(authority=AzureAuthorityHosts.AZURE_GOVERNMENT)
 exporter = AzureMonitorTraceExporter(
     connection_string="InstrumentationKey=xxx;IngestionEndpoint=https://xxx.in.applicationinsights.azure.us/",
@@ -209,11 +222,13 @@ exporter = AzureMonitorTraceExporter(
 6. **Use the distro** (`azure-monitor-opentelemetry`) unless you need custom pipelines
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

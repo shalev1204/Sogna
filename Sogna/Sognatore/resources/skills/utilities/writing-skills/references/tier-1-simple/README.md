@@ -41,13 +41,16 @@ metadata:
 # Flatten with Flags
 
 ## When to Use
+
 - Code has 3+ levels of nesting
 - Conditions are hard to follow
 
 ## The Pattern
+
 Replace nested conditions with early returns and flag variables.
 
 ## Before
+
 ```javascript
 function process(data) {
   if (data) {
@@ -62,6 +65,7 @@ function process(data) {
 ```
 
 ## After
+
 ```javascript
 function process(data) {
   if (!data) return null;
@@ -80,6 +84,7 @@ function process(data) {
 - [ ] Description uses "Use when..." pattern
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

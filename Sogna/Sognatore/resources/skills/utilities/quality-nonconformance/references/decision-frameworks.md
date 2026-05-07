@@ -73,12 +73,14 @@ START: Non-conformance identified and documented
 Medical device non-conformances carry additional requirements:
 
 **Pre-Market (Design/Development):**
+
 - Non-conformances during design verification/validation must be documented in the Design History File (DHF)
 - Disposition must consider risk per ISO 14971 — severity and probability of harm to the patient
 - Use-as-is is rarely acceptable for a design non-conformance; it implies the design intent is wrong
 - CAPA is almost always required to prevent recurrence in production
 
 **Post-Market (Production/Field):**
+
 - Non-conformances that could affect device safety or performance require evaluation for field action (recall, correction, removal) per 21 CFR 806
 - The threshold is low: if there is any reasonable possibility of harm, evaluate formally
 - Document the decision NOT to file a field action as rigorously as the decision to file one
@@ -98,17 +100,20 @@ Medical device non-conformances carry additional requirements:
 ### 1.3 Automotive Environment (IATF 16949) Specific Logic
 
 **Customer Notification Requirements:**
+
 - Any non-conformance on product shipped to the customer: notification within 24 hours of discovery
 - Any process change affecting fit, form, function, or performance: PPAP resubmission required
 - Use-as-is disposition: typically requires a formal deviation request to the customer through their supplier portal (e.g., GM's GQTS, Ford's MQAS, Stellantis' SQP)
 - Customer may accept, reject, or accept with conditions (reduced quantity, time-limited deviation)
 
 **Control Plan Integration:**
+
 - When a non-conformance reveals a gap in the control plan, the control plan must be updated as part of the corrective action
 - Special characteristics (safety/significant characteristics identified with shield or diamond symbols) have zero tolerance for non-conformance: 100% containment and immediate CAPA
 - The reaction plan column of the control plan specifies the predetermined response — follow it first, then investigate
 
 **Controlled Shipping Levels:**
+
 - **CS-1 (Internal Controlled Shipping):** Supplier adds an additional inspection/sort step beyond normal controls and submits inspection data with each shipment
 - **CS-2 (External Controlled Shipping):** Third-party inspection at supplier's facility, at supplier's cost, with direct reporting to customer quality
 - CS-1 and CS-2 are distinct from the general supplier escalation ladder — they are customer-mandated containment measures, not supplier-initiated improvements
@@ -116,18 +121,21 @@ Medical device non-conformances carry additional requirements:
 ### 1.4 Aerospace Environment (AS9100) Specific Logic
 
 **Customer/Authority Approval:**
+
 - Use-as-is and repair dispositions ALWAYS require customer approval per AS9100 §8.7.1
 - If the customer is a prime contractor working under a government contract, the government quality representative (DCMA or equivalent) may also need to approve
 - Non-conformances on parts with key characteristics require notification to the design authority
 - First Article Inspection (FAI) per AS9102 becomes invalid if a non-conformance indicates the process has changed from the qualified state — partial or full FAI resubmission may be required
 
 **Counterfeit Part Prevention:**
+
 - If a non-conformance raises suspicion of counterfeit material (unexpected material composition, incorrect markings, suspect documentation), invoke the counterfeit prevention procedure per AS9100 §8.1.4
 - Quarantine the suspect material in a separate area from other MRB material
 - Report to GIDEP (Government-Industry Data Exchange Program) if counterfeit is confirmed
 - Do not return suspect counterfeit material to the supplier — it must be quarantined and may need to be retained as evidence
 
 **Traceability Requirements:**
+
 - Aerospace non-conformances must maintain lot, batch, heat, and serial number traceability throughout the disposition process
 - Scrap disposition must include documented destruction of serialized parts to prevent re-entry into the supply chain
 - OASIS database updates may be required for supplier quality events
@@ -150,12 +158,14 @@ Medical device non-conformances carry additional requirements:
 ### 2.2 The 5 Whys: When It Works and When It Doesn't
 
 **5 Whys works well when:**
+
 - The failure is a single event with a clear before/after state change
 - Each "why" can be verified with data (measurement, observation, record review)
 - The causal chain does not branch — there is a single dominant cause
 - The investigation can reach a systemic cause (process, system, or design issue) within 5 iterations
 
 **5 Whys fails when:**
+
 - Multiple independent causes interact to produce the failure (combinatorial causes)
 - The analyst stops at "human error" or "operator mistake" — this is never a root cause
 - Each "why" is answered with opinion rather than verified data
@@ -177,6 +187,7 @@ Medical device non-conformances carry additional requirements:
 For each M category, specific investigation questions that separate thorough analysis from checkbox exercises:
 
 **Man (Personnel):**
+
 - Was the operator trained AND certified on this specific operation?
 - When was the most recent certification renewal?
 - Was this the operator's normal workstation or were they cross-trained/temporary?
@@ -184,6 +195,7 @@ For each M category, specific investigation questions that separate thorough ana
 - Check operator error rate data — is this an isolated event or a pattern for this individual?
 
 **Machine (Equipment):**
+
 - When was the last preventive maintenance performed (date AND what was done)?
 - Is the machine within its calibration cycle for all measuring functions?
 - Were any alarms, warnings, or parameter drifts logged before the event?
@@ -191,6 +203,7 @@ For each M category, specific investigation questions that separate thorough ana
 - Check the machine's historical Cpk trend — has capability been declining?
 
 **Material:**
+
 - Is this a new lot of raw material? When did the lot change?
 - Were incoming inspection results within normal range, or marginal-pass?
 - Does the material certificate match what was physically received (heat number, mill, composition)?
@@ -198,6 +211,7 @@ For each M category, specific investigation questions that separate thorough ana
 - Were any material substitutions or equivalents authorized?
 
 **Method (Process):**
+
 - Is the work instruction current revision? When was it last revised?
 - Does the operator actually follow the work instruction as written (observation, not assumption)?
 - Were any process parameters changed recently (speeds, feeds, temperatures, pressures, cure times)?
@@ -205,6 +219,7 @@ For each M category, specific investigation questions that separate thorough ana
 - Is there a gap between the documented method and the actual method (tribal knowledge)?
 
 **Measurement:**
+
 - Was the measurement system used for this inspection validated (Gauge R&R)?
 - Is the gauge within calibration? Check both certificate and physical condition.
 - Was the correct measurement method used (per the control plan or inspection instruction)?
@@ -212,6 +227,7 @@ For each M category, specific investigation questions that separate thorough ana
 - For attribute inspections (go/no-go, visual): what is the inspection effectiveness rate?
 
 **Mother Nature (Environment):**
+
 - Were ambient conditions (temperature, humidity) within process specification?
 - Were there any environmental events (power fluctuation, compressed air pressure drop, vibration from construction)?
 - Is there a shift-to-shift or day-to-day correlation in the data (temperature cycling, humidity changes)?
@@ -237,21 +253,25 @@ Each D-step has specific outputs required before advancing. Skipping gates creat
 ### 2.5 Fault Tree Analysis: Construction Methodology
 
 **Step 1: Define the Top Event**
+
 - State the undesired event in specific, measurable terms
 - Example: "Shaft diameter exceeds USL of 25.05mm on finished machined part"
 - Not: "Bad parts" or "Quality problem"
 
 **Step 2: Identify Immediate Causes (Level 1)**
+
 - What must be true for the top event to occur?
 - Use AND gates (all causes must be present) and OR gates (any single cause is sufficient)
 - Example: "Shaft OD too large" can be caused by (OR gate): tool wear, incorrect tool offset, material oversize, thermal expansion, fixture misalignment
 
 **Step 3: Decompose Each Cause (Levels 2–N)**
+
 - For each Level 1 cause, ask: what causes this?
 - Continue decomposing until you reach basic events (events with known failure rates or that cannot be further decomposed)
 - Example: "Tool wear" caused by (AND gate): extended run time + inadequate tool change interval + no in-process SPC alert
 
 **Step 4: Quantify (when data is available)**
+
 - Assign probability values to basic events using historical data, MTBF data, or engineering estimates
 - Calculate top event probability through the gate logic
 - Identify the minimal cut sets (smallest combinations of basic events that cause the top event)
@@ -264,6 +284,7 @@ Each D-step has specific outputs required before advancing. Skipping gates creat
 ### 3.1 CAPA Initiation Criteria
 
 **Always initiate CAPA for:**
+
 - Repeat non-conformance: same failure mode occurring 3+ times in 12 months
 - Customer complaint involving product performance, safety, or regulatory compliance
 - External audit finding (FDA, notified body, customer, registrar)
@@ -273,6 +294,7 @@ Each D-step has specific outputs required before advancing. Skipping gates creat
 - Post-market surveillance data indicating potential safety concern
 
 **Consider CAPA (judgment call) for:**
+
 - Repeat non-conformance: same failure mode 2 times in 12 months
 - Internal audit finding of moderate significance
 - Supplier non-conformance with systemic indicators
@@ -280,6 +302,7 @@ Each D-step has specific outputs required before advancing. Skipping gates creat
 - Process deviation from validated parameters without product impact
 
 **Do NOT initiate CAPA for:**
+
 - Isolated non-conformance with clear, non-recurring cause (one-off tool breakage, power outage)
 - Non-conformance fully addressed by NCR disposition with no systemic implication
 - Customer cosmetic preference that doesn't violate any specification
@@ -518,6 +541,7 @@ When a control chart signals an out-of-control condition, follow this response b
 ### 5.3 Skip-Lot Qualification Requirements
 
 **Qualification Criteria (all must be met):**
+
 1. Supplier is on the Approved Supplier List with "preferred" or "qualified" status
 2. Minimum 10 consecutive lots accepted at normal inspection level
 3. Supplier's process capability (Cpk) for critical characteristics ≥ 1.33, verified by supplier data AND incoming inspection data
@@ -541,12 +565,14 @@ When a control chart signals an out-of-control condition, follow this response b
 ### 6.1 Detailed Escalation Process
 
 **Level 0: Normal Operations**
+
 - Supplier meets scorecard expectations (PPM < threshold, OTD > threshold, SCAR closure on time)
 - Standard incoming inspection level
 - Quarterly scorecard review
 - Annual audit (if risk-based schedule warrants)
 
 **Level 1: SCAR Issued**
+
 - **Trigger:** Single significant non-conformance (> $5,000 impact or safety/regulatory concern) OR 3+ minor non-conformances on the same part in 90 days
 - **Actions:**
   - Formal SCAR issued with 8D or equivalent RCA requirement
@@ -557,6 +583,7 @@ When a control chart signals an out-of-control condition, follow this response b
 - **Exit criteria:** SCAR accepted and closed with verified effectiveness (90-day monitoring)
 
 **Level 2: Supplier on Watch / Probation**
+
 - **Trigger:** SCAR not responded to within timeline OR corrective action not effective (recurrence during monitoring) OR scorecard falls below minimum threshold for 2 consecutive quarters
 - **Actions:**
   - Supplier notified of probation status in writing (Quality Manager or Director level)
@@ -568,6 +595,7 @@ When a control chart signals an out-of-control condition, follow this response b
 - **Exit criteria:** Improvement plan accepted + 2 consecutive quarters meeting scorecard minimum + no new SCARs
 
 **Level 3: Controlled Shipping**
+
 - **Trigger:** Continued failures during watch period OR critical quality escape that reaches customer
 - **Actions:**
   - Controlled Shipping Level 1 (CS-1): Supplier adds additional sort/inspection step with data submitted per shipment
@@ -578,6 +606,7 @@ When a control chart signals an out-of-control condition, follow this response b
 - **Exit criteria:** 90 consecutive days of zero non-conformances under controlled shipping + root cause fully addressed + systemic improvements validated
 
 **Level 4: New Source Qualification / Phase-Out**
+
 - **Trigger:** No sustained improvement under controlled shipping OR supplier unwilling/unable to invest in required improvements
 - **Actions:**
   - Formal notification to supplier of intent to transfer business
@@ -589,6 +618,7 @@ When a control chart signals an out-of-control condition, follow this response b
 - **Timeline:** Depends on part complexity and alternate source readiness; typically 3-12 months
 
 **Level 5: ASL Removal**
+
 - **Trigger:** Qualification of alternate source complete OR supplier's quality system failure is fundamental (e.g., data falsification, loss of certification)
 - **Actions:**
   - Formal removal from Approved Supplier List
@@ -674,7 +704,9 @@ ROI = (Failure Cost Reduction - Investment Cost) / Investment Cost × 100%
 
 Where:
   Failure Cost Reduction = (Current internal + external failure costs)
+
                           - (Projected failure costs after investment)
+
   Investment Cost = Prevention cost increase + appraisal cost change
 ```
 
@@ -741,6 +773,7 @@ Where:
 **Frequency:** Scheduled weekly; ad hoc for urgent dispositions (safety-critical, production-blocking)
 
 **Required Attendees:**
+
 - Quality Engineering (chair, facilitates and documents)
 - Design/Product Engineering (functional impact assessment)
 - Manufacturing Engineering (reworkability assessment)
@@ -749,6 +782,7 @@ Where:
 - Optional: Regulatory Affairs (if regulatory implications), Customer Quality (if customer notification required)
 
 **Standard Agenda:**
+
 1. Review of new NCRs pending disposition (by priority: safety first, then production-blocking, then age)
 2. Presentation of data package per NCR (measurements, photographs, process data)
 3. Engineering assessment of functional impact
@@ -776,6 +810,7 @@ Each MRB disposition must include:
 | CAPA reference (if initiated) | Link to systemic corrective action | Quality Engineering |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -9,7 +9,6 @@ id: skill-ddd-tactical-patterns
 owner: [[orchestrator]]
 ---
 
-
 # DDD Tactical Patterns
 
 ## Use this skill when
@@ -56,6 +55,7 @@ class Order {
 - It should be paired with testing patterns for invariant coverage.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

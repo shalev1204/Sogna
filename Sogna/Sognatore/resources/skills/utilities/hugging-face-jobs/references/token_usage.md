@@ -12,6 +12,7 @@ version: 1.0.0
 ## Overview
 
 Hugging Face tokens are authentication credentials that allow your jobs to interact with the Hub. They're required for:
+
 - Pushing models/datasets to Hub
 - Accessing private repositories
 - Creating new repositories
@@ -21,17 +22,20 @@ Hugging Face tokens are authentication credentials that allow your jobs to inter
 ## Token Types
 
 ### Read Token
+
 - **Permissions:** Download models/datasets, read private repos
 - **Use case:** Jobs that only need to download/read content
 - **Creation:** https://huggingface.co/settings/tokens
 
 ### Write Token
+
 - **Permissions:** Push models/datasets, create repos, modify content
 - **Use case:** Jobs that need to upload results (most common)
 - **Creation:** https://huggingface.co/settings/tokens
 - **⚠️ Required for:** Pushing models, datasets, or any uploads
 
 ### Organization Token
+
 - **Permissions:** Act on behalf of an organization
 - **Use case:** Jobs running under organization namespace
 - **Creation:** Organization settings → Tokens
@@ -48,12 +52,14 @@ hf_jobs("uv", {
 ```
 
 **How it works:**
+
 1. `$HF_TOKEN` is a placeholder that gets replaced with your actual token
 2. Uses the token from your logged-in session (`hf auth login`)
 3. Token is encrypted server-side when passed as a secret
 4. Most secure and convenient method
 
 **Benefits:**
+
 - ✅ No token exposure in code
 - ✅ Uses your current login session
 - ✅ Automatically updated if you re-login
@@ -61,6 +67,7 @@ hf_jobs("uv", {
 - ✅ Token encrypted server-side
 
 **Requirements:**
+
 - Must be logged in: `hf auth login` or `hf_whoami()` works
 - Token must have required permissions
 
@@ -78,11 +85,13 @@ api.run_uv_job(
 ```
 
 **How it works:**
+
 1. `get_token()` retrieves the token from your logged-in session
 2. The actual token value is passed to the `secrets` parameter
 3. Token is encrypted server-side
 
 **Why `"$HF_TOKEN"` fails with `HfApi().run_uv_job()`:**
+
 - The Python API passes the literal string `"$HF_TOKEN"` (9 characters) as the token
 - The Jobs server receives this invalid string instead of a real token
 - Result: `401 Unauthorized` errors when the script tries to authenticate
@@ -98,11 +107,13 @@ hf_jobs("uv", {
 ```
 
 **When to use:**
+
 - Only if automatic token doesn't work
 - Testing with a specific token
 - Organization tokens (use with caution)
 
 **Security concerns:**
+
 - ❌ Token visible in code/logs
 - ❌ Must manually update if token rotates
 - ❌ Risk of token exposure
@@ -118,11 +129,13 @@ hf_jobs("uv", {
 ```
 
 **Difference from secrets:**
+
 - `env` variables are visible in job logs
 - `secrets` are encrypted server-side
 - Always prefer `secrets` for tokens
 
 **When to use:**
+
 - Only for non-sensitive configuration
 - Never use for tokens (use `secrets` instead)
 
@@ -136,9 +149,11 @@ Tokens passed via `secrets` are available as environment variables in your scrip
 import os
 
 # Get token from environment
+
 token = os.environ.get("HF_TOKEN")
 
 # Verify token exists
+
 if not token:
     raise ValueError("HF_TOKEN not found in environment!")
 ```
@@ -158,6 +173,7 @@ api.upload_file(...)
 from huggingface_hub import HfApi
 
 # Automatically uses HF_TOKEN env var
+
 api = HfApi()  # ✅ Simpler, uses token from environment
 api.upload_file(...)
 ```
@@ -168,10 +184,12 @@ from transformers import AutoModel
 from datasets import load_dataset
 
 # Auto-detects HF_TOKEN from environment
+
 model = AutoModel.from_pretrained("username/model")
 dataset = load_dataset("username/dataset")
 
 # For push operations, token is auto-detected
+
 model.push_to_hub("username/new-model")
 dataset.push_to_hub("username/new-dataset")
 ```
@@ -179,8 +197,11 @@ dataset.push_to_hub("username/new-dataset")
 ### Complete Example
 
 ```python
+
 # /// script
+
 # dependencies = ["huggingface-hub", "datasets"]
+
 # ///
 
 import os
@@ -188,16 +209,20 @@ from huggingface_hub import HfApi
 from datasets import Dataset
 
 # Verify token is available
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN required for Hub operations!"
 
 # Use token for Hub operations
+
 api = HfApi()  # Auto-detects HF_TOKEN
 
 # Create and push dataset
+
 data = {"text": ["Hello", "World"]}
 dataset = Dataset.from_dict(data)
 
 # Push to Hub (token auto-detected)
+
 dataset.push_to_hub("username/my-dataset")
 
 print("✅ Dataset pushed successfully!")
@@ -223,16 +248,19 @@ except Exception as e:
 import os
 
 # Check token exists
+
 if "HF_TOKEN" not in os.environ:
     raise ValueError("HF_TOKEN not found in environment!")
 
 token = os.environ["HF_TOKEN"]
 
 # Verify token format (should start with "hf_")
+
 if not token.startswith("hf_"):
     raise ValueError(f"Invalid token format: {token[:10]}...")
 
 # Test token works
+
 from huggingface_hub import whoami
 try:
     user_info = whoami(token=token)
@@ -251,11 +279,13 @@ except Exception as e:
 ```
 
 **Causes:**
+
 1. Token missing from job
 2. Token invalid or expired
 3. Token not passed correctly
 
 **Solutions:**
+
 1. Add `secrets={"HF_TOKEN": "$HF_TOKEN"}` to job config
 2. Verify `hf_whoami()` works locally
 3. Re-login: `hf auth login`
@@ -263,7 +293,9 @@ except Exception as e:
 
 **Verification:**
 ```python
+
 # In your script
+
 import os
 assert "HF_TOKEN" in os.environ, "HF_TOKEN missing!"
 ```
@@ -276,11 +308,13 @@ assert "HF_TOKEN" in os.environ, "HF_TOKEN missing!"
 ```
 
 **Causes:**
+
 1. Token lacks required permissions (read-only token used for write)
 2. No access to private repository
 3. Organization permissions insufficient
 
 **Solutions:**
+
 1. Ensure token has write permissions
 2. Check token type at https://huggingface.co/settings/tokens
 3. Verify access to target repository
@@ -304,30 +338,36 @@ ValueError: HF_TOKEN not found
 ```
 
 **Causes:**
+
 1. `secrets` not passed in job config
 2. Wrong key name (should be `HF_TOKEN`)
 3. Using `env` instead of `secrets`
 
 **Solutions:**
+
 1. Use `secrets={"HF_TOKEN": "$HF_TOKEN"}` (not `env`)
 2. Verify key name is exactly `HF_TOKEN`
 3. Check job config syntax
 
 **Correct configuration:**
 ```python
+
 # ✅ Correct
+
 hf_jobs("uv", {
     "script": "...",
     "secrets": {"HF_TOKEN": "$HF_TOKEN"}
 })
 
 # ❌ Wrong - using env instead of secrets
+
 hf_jobs("uv", {
     "script": "...",
     "env": {"HF_TOKEN": "$HF_TOKEN"}  # Less secure
 })
 
 # ❌ Wrong - wrong key name
+
 hf_jobs("uv", {
     "script": "...",
     "secrets": {"TOKEN": "$HF_TOKEN"}  # Wrong key
@@ -343,11 +383,13 @@ Repository not found or access denied
 ```
 
 **Causes:**
+
 1. Token doesn't have access to private repo
 2. Repository doesn't exist and can't be created
 3. Wrong namespace
 
 **Solutions:**
+
 1. Use token from account with access
 2. Verify repo visibility (public vs private)
 3. Check namespace matches token owner
@@ -371,14 +413,18 @@ except Exception as e:
 
 **❌ Bad:**
 ```python
+
 # Never do this!
+
 token = "hf_abc123xyz..."
 api = HfApi(token=token)
 ```
 
 **✅ Good:**
 ```python
+
 # Use environment variable
+
 token = os.environ.get("HF_TOKEN")
 api = HfApi(token=token)
 ```
@@ -451,21 +497,28 @@ hf_jobs("uv", {
 ```python
 hf_jobs("uv", {
     "script": """
+
 # /// script
+
 # dependencies = ["transformers"]
+
 # ///
 
 import os
 from transformers import AutoModel, AutoTokenizer
 
 # Verify token
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN required!"
 
 # Load and process model
+
 model = AutoModel.from_pretrained("base-model")
+
 # ... process model ...
 
 # Push to Hub (token auto-detected)
+
 model.push_to_hub("username/my-model")
 print("✅ Model pushed!")
 """,
@@ -480,17 +533,22 @@ print("✅ Model pushed!")
 ```python
 hf_jobs("uv", {
     "script": """
+
 # /// script
+
 # dependencies = ["datasets"]
+
 # ///
 
 import os
 from datasets import load_dataset
 
 # Verify token
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN required!"
 
 # Load private dataset (token auto-detected)
+
 dataset = load_dataset("private-org/private-dataset")
 print(f"✅ Loaded {len(dataset)} examples")
 """,
@@ -505,8 +563,11 @@ print(f"✅ Loaded {len(dataset)} examples")
 ```python
 hf_jobs("uv", {
     "script": """
+
 # /// script
+
 # dependencies = ["datasets", "huggingface-hub"]
+
 # ///
 
 import os
@@ -514,13 +575,16 @@ from datasets import Dataset
 from huggingface_hub import HfApi
 
 # Verify token
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN required!"
 
 # Create dataset
+
 data = {"text": ["Sample 1", "Sample 2"]}
 dataset = Dataset.from_dict(data)
 
 # Push to Hub
+
 api = HfApi()  # Auto-detects HF_TOKEN
 dataset.push_to_hub("username/my-dataset")
 print("✅ Dataset pushed!")
@@ -576,6 +640,7 @@ assert "HF_TOKEN" in os.environ, "HF_TOKEN required!"
 7. **Rotate tokens** - generate new tokens periodically
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

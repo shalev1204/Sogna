@@ -32,7 +32,9 @@ info:
   title: API Title
   version: 1.0.0
 servers:
+
   - url: https://api.example.com/v1
+
 paths:
   /resources:
     get: ...
@@ -64,8 +66,10 @@ info:
     All endpoints require Bearer token authentication.
 
     ## Rate Limiting
+
     - 1000 requests per minute for standard tier
     - 10000 requests per minute for enterprise tier
+
   version: 2.0.0
   contact:
     name: API Support
@@ -76,19 +80,31 @@ info:
     url: https://opensource.org/licenses/MIT
 
 servers:
+
   - url: https://api.example.com/v2
+
     description: Production
+
   - url: https://staging-api.example.com/v2
+
     description: Staging
+
   - url: http://localhost:3000/v2
+
     description: Local development
 
 tags:
+
   - name: Users
+
     description: User management operations
+
   - name: Profiles
+
     description: User profile operations
+
   - name: Admin
+
     description: Administrative operations
 
 paths:
@@ -98,16 +114,22 @@ paths:
       summary: List all users
       description: Returns a paginated list of users with optional filtering.
       tags:
+
         - Users
+
       parameters:
+
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/LimitParam'
         - name: status
+
           in: query
           description: Filter by user status
           schema:
             $ref: '#/components/schemas/UserStatus'
+
         - name: search
+
           in: query
           description: Search by name or email
           schema:
@@ -131,6 +153,7 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
       security:
+
         - bearerAuth: []
 
     post:
@@ -138,7 +161,9 @@ paths:
       summary: Create a new user
       description: Creates a new user account and sends welcome email.
       tags:
+
         - Users
+
       requestBody:
         required: true
         content:
@@ -180,17 +205,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       security:
+
         - bearerAuth: []
 
   /users/{userId}:
     parameters:
+
       - $ref: '#/components/parameters/UserIdParam'
 
     get:
       operationId: getUser
       summary: Get user by ID
       tags:
+
         - Users
+
       responses:
         '200':
           description: Successful response
@@ -201,13 +230,16 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
       security:
+
         - bearerAuth: []
 
     patch:
       operationId: updateUser
       summary: Update user
       tags:
+
         - Users
+
       requestBody:
         required: true
         content:
@@ -226,20 +258,24 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
       security:
+
         - bearerAuth: []
 
     delete:
       operationId: deleteUser
       summary: Delete user
       tags:
+
         - Users
         - Admin
+
       responses:
         '204':
           description: User deleted
         '404':
           $ref: '#/components/responses/NotFound'
       security:
+
         - bearerAuth: []
         - apiKey: []
 
@@ -248,11 +284,13 @@ components:
     User:
       type: object
       required:
+
         - id
         - email
         - name
         - status
         - createdAt
+
       properties:
         id:
           type: string
@@ -299,8 +337,10 @@ components:
     CreateUserRequest:
       type: object
       required:
+
         - email
         - name
+
       properties:
         email:
           type: string
@@ -337,8 +377,10 @@ components:
     UserListResponse:
       type: object
       required:
+
         - data
         - pagination
+
       properties:
         data:
           type: array
@@ -350,10 +392,12 @@ components:
     Pagination:
       type: object
       required:
+
         - page
         - limit
         - total
         - totalPages
+
       properties:
         page:
           type: integer
@@ -376,8 +420,10 @@ components:
     Error:
       type: object
       required:
+
         - code
         - message
+
       properties:
         code:
           type: string
@@ -438,7 +484,9 @@ components:
             code: VALIDATION_ERROR
             message: Invalid request parameters
             details:
+
               - field: email
+
                 message: Must be a valid email address
 
     Unauthorized:
@@ -485,7 +533,9 @@ components:
     UserListExample:
       value:
         data:
+
           - id: "550e8400-e29b-41d4-a716-446655440000"
+
             email: "john@example.com"
             name: "John Doe"
             status: "active"
@@ -513,13 +563,17 @@ components:
       description: API key for service-to-service calls
 
 security:
+
   - bearerAuth: []
+
 ```
 
 ### Template 2: Code-First Generation (Python/FastAPI)
 
 ```python
+
 # FastAPI with automatic OpenAPI generation
+
 from fastapi import FastAPI, HTTPException, Query, Path, Depends
 from pydantic import BaseModel, Field, EmailStr
 from typing import Optional, List
@@ -542,6 +596,7 @@ app = FastAPI(
 )
 
 # Enums
+
 class UserStatus(str, Enum):
     active = "active"
     inactive = "inactive"
@@ -554,6 +609,7 @@ class UserRole(str, Enum):
     admin = "admin"
 
 # Models
+
 class UserBase(BaseModel):
     email: EmailStr = Field(..., description="User email address")
     name: str = Field(..., min_length=1, max_length=100, description="Display name")
@@ -614,6 +670,7 @@ class ErrorResponse(BaseModel):
     request_id: Optional[str] = Field(None, alias="requestId")
 
 # Endpoints
+
 @app.get(
     "/users",
     response_model=UserListResponse,
@@ -638,6 +695,7 @@ async def list_users(
     - **limit**: Number of items per page (max 100)
     - **status**: Filter by user status
     - **search**: Search by name or email
+
     """
     # Implementation
     pass
@@ -701,6 +759,7 @@ async def delete_user(
     pass
 
 # Export OpenAPI spec
+
 if __name__ == "__main__":
     import json
     print(json.dumps(app.openapi(), indent=2))
@@ -798,11 +857,13 @@ interface ErrorResponse {
 @Tags("Users")
 export class UsersController extends Controller {
   /**
+
    * List all users with pagination and filtering
    * @param page Page number (1-based)
    * @param limit Items per page (max 100)
    * @param status Filter by user status
    * @param search Search by name or email
+
    */
   @Get()
   @Security("bearerAuth")
@@ -839,7 +900,9 @@ export class UsersController extends Controller {
   }
 
   /**
+
    * Create a new user
+
    */
   @Post()
   @Security("bearerAuth")
@@ -854,8 +917,10 @@ export class UsersController extends Controller {
   }
 
   /**
+
    * Get user by ID
    * @param userId User ID
+
    */
   @Get("{userId}")
   @Security("bearerAuth")
@@ -867,8 +932,10 @@ export class UsersController extends Controller {
   }
 
   /**
+
    * Update user attributes
    * @param userId User ID
+
    */
   @Patch("{userId}")
   @Security("bearerAuth")
@@ -882,8 +949,10 @@ export class UsersController extends Controller {
   }
 
   /**
+
    * Delete user
    * @param userId User ID
+
    */
   @Delete("{userId}")
   @Tags("Users", "Admin")
@@ -901,11 +970,14 @@ export class UsersController extends Controller {
 ### Template 4: Validation & Linting
 
 ```bash
+
 # Install validation tools
+
 npm install -g @stoplight/spectral-cli
 npm install -g @redocly/cli
 
 # Spectral ruleset (.spectral.yaml)
+
 cat > .spectral.yaml << 'EOF'
 extends: ["spectral:oas", "spectral:asyncapi"]
 
@@ -947,11 +1019,14 @@ rules:
 EOF
 
 # Run Spectral
+
 spectral lint openapi.yaml
 
 # Redocly config (redocly.yaml)
+
 cat > redocly.yaml << 'EOF'
 extends:
+
   - recommended
 
 rules:
@@ -961,10 +1036,13 @@ rules:
   request-mime-type:
     severity: error
     allowedValues:
+
       - application/json
+
   response-mime-type:
     severity: error
     allowedValues:
+
       - application/json
       - application/problem+json
 
@@ -972,12 +1050,15 @@ theme:
   openapi:
     generateCodeSamples:
       languages:
+
         - lang: curl
         - lang: python
         - lang: javascript
+
 EOF
 
 # Run Redocly
+
 redocly lint openapi.yaml
 redocly bundle openapi.yaml -o bundled.yaml
 redocly preview-docs openapi.yaml
@@ -986,10 +1067,13 @@ redocly preview-docs openapi.yaml
 ## SDK Generation
 
 ```bash
+
 # OpenAPI Generator
+
 npm install -g @openapitools/openapi-generator-cli
 
 # Generate TypeScript client
+
 openapi-generator-cli generate \
   -i openapi.yaml \
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -998,6 +1082,7 @@ openapi-generator-cli generate \
   --additional-properties=supportsES6=true,npmName=@myorg/api-client
 
 # Generate Python client
+
 openapi-generator-cli generate \
   -i openapi.yaml \
   -g python \
@@ -1005,6 +1090,7 @@ openapi-generator-cli generate \
   --additional-properties=packageName=api_client
 
 # Generate Go client
+
 openapi-generator-cli generate \
   -i openapi.yaml \
   -g go \
@@ -1014,6 +1100,7 @@ openapi-generator-cli generate \
 ## Best Practices
 
 ### Do's
+
 - **Use $ref** - Reuse schemas, parameters, responses
 - **Add examples** - Real-world values help consumers
 - **Document errors** - All possible error codes
@@ -1021,6 +1108,7 @@ openapi-generator-cli generate \
 - **Use semantic versioning** - For spec changes
 
 ### Don'ts
+
 - **Don't use generic descriptions** - Be specific
 - **Don't skip security** - Define all schemes
 - **Don't forget nullable** - Be explicit about null
@@ -1035,6 +1123,7 @@ openapi-generator-cli generate \
 - [Spectral](https://stoplight.io/open-source/spectral)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

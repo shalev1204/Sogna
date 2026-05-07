@@ -8,7 +8,6 @@ id: skill-event-sourcing-architect
 owner: [[ops-security]]
 ---
 
-
 # Event Sourcing Architect
 
 Expert in event sourcing, CQRS, and event-driven architecture patterns. Masters event store design, projection building, saga orchestration, and eventual consistency patterns. Use PROACTIVELY for event-sourced systems, audit trail requirements, or complex domain modeling with temporal queries.
@@ -69,11 +68,13 @@ Expert in event sourcing, CQRS, and event-driven architecture patterns. Masters 
 Works well with: `saga-orchestration`, `architecture-patterns`, `dbos-*`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

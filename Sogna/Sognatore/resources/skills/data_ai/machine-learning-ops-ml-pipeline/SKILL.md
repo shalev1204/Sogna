@@ -8,7 +8,6 @@ id: skill-machine-learning-ops-ml-pipeline
 owner: [[orchestrator]]
 ---
 
-
 # Machine Learning Pipeline - Multi-Agent MLOps Orchestration
 
 Design and implement a complete ML pipeline for: $ARGUMENTS
@@ -41,6 +40,7 @@ This workflow orchestrates multiple specialized agents to build a production-rea
 - **Continuous improvement**: Automated retraining, A/B testing, and drift detection
 
 The multi-agent approach ensures each aspect is handled by domain experts:
+
 - Data engineers handle ingestion and quality
 - Data scientists design features and experiments
 - ML engineers implement training pipelines
@@ -55,6 +55,7 @@ prompt: |
   Analyze and design data pipeline for ML system with requirements: $ARGUMENTS
 
   Deliverables:
+
   1. Data source audit and ingestion strategy:
      - Source systems and connection patterns
      - Schema validation using Pydantic/Great Expectations
@@ -83,6 +84,7 @@ prompt: |
   Using data architecture from: {phase1.data-engineer.output}
 
   Deliverables:
+
   1. Feature engineering pipeline:
      - Transformation specifications
      - Feature store schema (Feast/Tecton)
@@ -113,6 +115,7 @@ prompt: |
   Using data pipeline: {phase1.data-engineer.output}
 
   Build comprehensive training system:
+
   1. Training pipeline implementation:
      - Modular training code with clear interfaces
      - Hyperparameter optimization (Optuna/Ray Tune)
@@ -140,6 +143,7 @@ prompt: |
   Optimize and productionize ML code from: {phase2.ml-engineer.output}
 
   Focus areas:
+
   1. Code quality and structure:
      - Refactor for production standards
      - Add comprehensive error handling
@@ -170,6 +174,7 @@ prompt: |
   With optimized code from: {phase2.python-pro.output}
 
   Implementation requirements:
+
   1. Model serving infrastructure:
      - REST/gRPC APIs with FastAPI/TorchServe
      - Batch prediction pipelines (Airflow/Kubeflow)
@@ -203,6 +208,7 @@ prompt: |
   Design Kubernetes infrastructure for ML workloads from: {phase3.mlops-engineer.output}
 
   Kubernetes-specific requirements:
+
   1. Workload orchestration:
      - Training job scheduling with Kubeflow
      - GPU resource allocation and sharing
@@ -233,6 +239,7 @@ prompt: |
   Using Kubernetes infrastructure: {phase3.kubernetes-architect.output}
 
   Monitoring framework:
+
   1. Model performance monitoring:
      - Prediction accuracy tracking
      - Latency and throughput metrics
@@ -311,6 +318,7 @@ prompt: |
 ## Final Deliverables
 
 Upon completion, the orchestrated pipeline will provide:
+
 - End-to-end ML pipeline with full automation
 - Comprehensive documentation and runbooks
 - Production-ready infrastructure as code
@@ -320,11 +328,13 @@ Upon completion, the orchestrated pipeline will provide:
 - Disaster recovery and rollback procedures
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

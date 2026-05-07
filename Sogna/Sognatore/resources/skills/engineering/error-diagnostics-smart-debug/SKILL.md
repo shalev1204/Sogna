@@ -8,7 +8,6 @@ id: skill-error-diagnostics-smart-debug
 owner: [[debugger]]
 ---
 
-
 ## Use this skill when
 
 - Working on error diagnostics smart debug tasks or workflows
@@ -33,6 +32,7 @@ You are an expert AI-assisted debugging specialist with deep knowledge of modern
 Process issue from: $ARGUMENTS
 
 Parse for:
+
 - Error messages/stack traces
 - Reproduction steps
 - Affected components/services
@@ -43,7 +43,9 @@ Parse for:
 ## Workflow
 
 ### 1. Initial Triage
+
 Use Task tool (subagent_type="debugger") for AI-powered analysis:
+
 - Error pattern recognition
 - Stack trace analysis with probable causes
 - Component dependency analysis
@@ -52,7 +54,9 @@ Use Task tool (subagent_type="debugger") for AI-powered analysis:
 - Recommend debugging strategy
 
 ### 2. Observability Data Collection
+
 For production/staging issues, gather:
+
 - Error tracking (Sentry, Rollbar, Bugsnag)
 - APM metrics (DataDog, New Relic, Dynatrace)
 - Distributed traces (Jaeger, Zipkin, Honeycomb)
@@ -60,6 +64,7 @@ For production/staging issues, gather:
 - Session replays (LogRocket, FullStory)
 
 Query for:
+
 - Error frequency/trends
 - Affected user cohorts
 - Environment-specific patterns
@@ -68,7 +73,9 @@ Query for:
 - Deployment timeline correlation
 
 ### 3. Hypothesis Generation
+
 For each hypothesis include:
+
 - Probability score (0-100%)
 - Supporting evidence from logs/traces/code
 - Falsification criteria
@@ -76,6 +83,7 @@ For each hypothesis include:
 - Expected symptoms if true
 
 Common categories:
+
 - Logic errors (race conditions, null handling)
 - State management (stale cache, incorrect transitions)
 - Integration failures (API changes, timeouts, auth)
@@ -84,6 +92,7 @@ Common categories:
 - Data corruption (schema mismatches, encoding)
 
 ### 4. Strategy Selection
+
 Select based on issue characteristics:
 
 **Interactive Debugging**: Reproducible locally → VS Code/Chrome DevTools, step-through
@@ -93,7 +102,9 @@ Select based on issue characteristics:
 **Statistical**: Small % of cases → Delta debugging, compare success vs failure
 
 ### 5. Intelligent Instrumentation
+
 AI suggests optimal breakpoint/logpoint locations:
+
 - Entry points to affected functionality
 - Decision nodes where behavior diverges
 - State mutation points
@@ -103,6 +114,7 @@ AI suggests optimal breakpoint/logpoint locations:
 Use conditional breakpoints and logpoints for production-like environments.
 
 ### 6. Production-Safe Techniques
+
 **Dynamic Instrumentation**: OpenTelemetry spans, non-invasive attributes
 **Feature-Flagged Debug Logging**: Conditional logging for specific users
 **Sampling-Based Profiling**: Continuous profiling with minimal overhead (Pyroscope)
@@ -110,7 +122,9 @@ Use conditional breakpoints and logpoints for production-like environments.
 **Gradual Traffic Shifting**: Canary deploy debug version to 10% traffic
 
 ### 7. Root Cause Analysis
+
 AI-powered code flow analysis:
+
 - Full execution path reconstruction
 - Variable state tracking at decision points
 - External dependency interaction analysis
@@ -120,7 +134,9 @@ AI-powered code flow analysis:
 - Fix complexity estimation
 
 ### 8. Fix Implementation
+
 AI generates fix with:
+
 - Code changes required
 - Impact assessment
 - Risk level
@@ -128,19 +144,23 @@ AI generates fix with:
 - Rollback strategy
 
 ### 9. Validation
+
 Post-fix verification:
+
 - Run test suite
 - Performance comparison (baseline vs fix)
 - Canary deployment (monitor error rate)
 - AI code review of fix
 
 Success criteria:
+
 - Tests pass
 - No performance regression
 - Error rate unchanged or decreased
 - No new edge cases introduced
 
 ### 10. Prevention
+
 - Generate regression tests using AI
 - Update knowledge base with root cause
 - Add monitoring/alerts for similar issues
@@ -190,6 +210,7 @@ span.setAttribute('debug.paymentMethodId', methodId);
 ## Output Format
 
 Provide structured report:
+
 1. **Issue Summary**: Error, frequency, impact
 2. **Root Cause**: Detailed diagnosis with evidence
 3. **Fix Proposal**: Code changes, risk, impact
@@ -203,11 +224,13 @@ Focus on actionable insights. Use AI assistance throughout for pattern recogniti
 Issue to debug: $ARGUMENTS
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

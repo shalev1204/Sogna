@@ -112,6 +112,7 @@ SS = Z × σ_d × √(LT)
 ```
 
 Where:
+
 - Z = z-score for the target service level (see lookup table below)
 - σ_d = standard deviation of demand per period (use same period as LT)
 - LT = lead time in periods
@@ -138,6 +139,7 @@ SS = Z × √(LT_avg × σ_d² + d_avg² × σ_LT²)
 ```
 
 Where:
+
 - LT_avg = average lead time in periods
 - σ_LT = standard deviation of lead time in periods
 - d_avg = average demand per period
@@ -166,9 +168,12 @@ Normal-distribution formulas fail when demand has many zero periods. Use empiric
 
 1. Collect the last 52 periods of demand data (include zeros).
 2. Generate 10,000 bootstrap samples of length (LT + R) by random sampling with
+
    replacement from the historical demand.
+
 3. Compute the sum of each bootstrap sample (= simulated demand during lead time + review).
 4. The safety stock is the (service level)th percentile of the simulated demand totals
+
    minus the mean simulated demand total.
 
 **Example:** For 95% service level, safety stock = P95 of bootstrap demand — mean of
@@ -180,11 +185,14 @@ formulas miss.
 When an item has < 8 weeks of own demand history:
 
 1. Identify 3–5 analogous items matching on: category, price point (±20%), brand tier
+
    (national/private label), pack size, and target demographic.
+
 2. Compute the average σ_d and CV across the analogs.
 3. Apply a "new product uncertainty premium" of 1.25× to the analog σ_d.
 4. Use the standard formula with the inflated σ_d: `SS = Z × (1.25 × σ_d_analog) × √(LT + R)`.
 5. Every 2 weeks, blend own-history σ_d with the analog σ_d. By week 8, use 70% own history
+
    and 30% analog. By week 12, use 100% own history.
 
 ### 2.6 Safety Stock Cost-Optimization
@@ -197,6 +205,7 @@ Optimal SL = 1 − (H / (H + S × D/Q))
 ```
 
 Where:
+
 - H = holding cost per unit per period
 - S = stockout cost per unit (lost margin + customer goodwill + substitution cost)
 - D = demand per period
@@ -221,6 +230,7 @@ promotional history is the #1 source of systematic forecast error in retail.
 
 Strip promotional periods from the demand history before fitting the baseline model.
 Flag weeks as "promotional" if any of the following were active:
+
 - Temporary price reduction (TPR) > 5% off regular price
 - Feature in circular, digital ad, or endcap display
 - BOGO or multi-buy offer
@@ -337,15 +347,24 @@ spread over its consumption period.
 When planning the annual promotional calendar, apply these rules:
 
 1. **Minimum inter-promotion gap:** 4 weeks between promotions on the same SKU. Shorter
+
    gaps train customers to only buy on deal, eroding brand equity and baseline velocity.
+
 2. **Maximum promotional frequency:** 13 weeks per year (25%) for any single SKU.
+
    Beyond this, the "promotional price" becomes the reference price in consumers' minds.
+
 3. **Seasonal alignment:** Promote seasonal items during the build phase (first 40% of
+
    the season), not during peak or decline. Promoting at peak wastes money on demand
    that would have occurred anyway. Promoting during decline is a markdown, not a promotion.
+
 4. **Cross-category coordination:** Avoid promoting close substitutes simultaneously.
+
    Stagger promotions across substitutes by at least 2 weeks to avoid self-cannibalization.
+
 5. **Vendor funding alignment:** Match promotional timing to vendor trade fund availability.
+
    Many CPG manufacturers operate on calendar quarters — funds not committed by quarter-end
    expire. Plan key promos in weeks 8–12 of each quarter when vendors are motivated to
    spend remaining funds.
@@ -381,10 +400,15 @@ and management attention.
 
 5. **Exception overrides:**
    - New items (< 13 weeks) are auto-classified one tier higher than their data suggests
+
      until they have sufficient history. A new item computing as C is treated as B.
+
    - Items with contractual obligations (planogram commitment, vendor agreement) are
+
      classified minimum B regardless of current sales velocity.
+
    - Items flagged as strategic by merchandising (e.g., traffic drivers, competitive
+
      price match items) are classified minimum A.
 
 #### Reclassification Schedule
@@ -401,10 +425,12 @@ forecasting method selection and safety stock strategies.
 #### Classification Procedure
 
 1. **Compute de-seasonalized, de-promoted demand** for each SKU over the trailing 52 weeks.
+
    Remove seasonal indices and promotional lift periods so that the variability metric
    reflects genuine demand uncertainty, not planned variation.
 
 2. **Compute the coefficient of variation (CV):**
+
    ```
    CV = σ_demand / μ_demand
    ```
@@ -419,6 +445,7 @@ forecasting method selection and safety stock strategies.
 | Z | > 1.0 | Erratic/lumpy — demand is highly variable or intermittent | High — no model will be highly accurate |
 
 4. **Supplement with ADI (Average Demand Interval):** Items with ADI > 2.0 (meaning
+
    demand occurs less than every other period) should be classified Z regardless of CV,
    because the intermittency itself creates forecast difficulty that CV alone doesn't capture.
 
@@ -505,12 +532,19 @@ aggregate safety stock by 5–8%.
 **Actions to reduce lead time:**
 
 1. For strategic vendors: negotiate VMI (vendor-managed inventory) where the vendor
+
    monitors your inventory and ships proactively. Eliminates order processing delay.
+
 2. For all vendors: provide rolling 8-week forecasts to allow pre-positioning. Reduces
+
    production/picking time on non-stock items.
+
 3. Internally: invest in receiving automation (ASN-enabled receiving, barcode scanning)
+
    to cut receiving from 2–3 days to same-day.
+
 4. Negotiate consolidated weekly shipments vs. per-PO shipments to reduce transit
+
    frequency while maintaining fill rate.
 
 ### 5.4 MOQ (Minimum Order Quantity) Negotiation Framework
@@ -532,21 +566,32 @@ When a vendor's MOQ creates excess inventory, evaluate these options in order:
 
 1. Document your current order volume and growth trajectory with this vendor.
 2. Compute the cost of their current lead time to your business: excess safety stock
+
    carrying cost + stockout cost from lead time variability.
+
 3. Identify what you can offer in return: longer-term commitments, higher volumes,
+
    fewer order frequency changes, rolling forecasts.
+
 4. Know your BATNA (best alternative): have a qualified secondary supplier identified.
 
 **Negotiation structure:**
 
 1. Present the data: "Over the past 6 months, your average lead time has been X days
+
    with a standard deviation of Y. This variability costs us $Z annually in excess
    safety stock."
+
 2. Propose the target: "We're requesting a committed lead time of X−2 days with a
+
    guarantee of CV < 0.15."
+
 3. Offer the exchange: "In return, we can commit to rolling 8-week forecasts updated
+
    weekly, and we'll consolidate to 2 orders per week instead of daily."
+
 4. Set the timeline: "Let's implement this for Q2 and review the scorecard at the
+
    end of Q2 QBR."
 
 ---
@@ -635,12 +680,14 @@ Hold-to-Next-Season Net = (Expected Sell Price × Sell-Through Estimate)
 ```
 
 **Liquidation is preferred when:**
+
 - Hold-to-next-season sell-through estimate < 60% (style risk, trend change)
 - Holding cost for 9–12 months > 15% of original cost (typical for most retailers)
 - Warehouse space is constrained and the space has higher-value alternative use
 - The product is trend/fashion and will be visually dated next season
 
 **Holding is preferred when:**
+
 - Product is a classic/carryover style with minimal fashion risk
 - Hold-to-next-season sell-through estimate > 80%
 - Warehouse space is available at low marginal cost
@@ -714,11 +761,13 @@ Not every new product succeeds. The kill decision should be structured, not emot
 | Category manager assessment | "Would not re-buy" | After 8 weeks |
 
 When a kill decision is made:
+
 1. Cancel all open POs immediately.
 2. Halt any planned promotions.
 3. Mark down remaining inventory at 30% off for 3 weeks, then 50% for 2 weeks.
 4. Liquidate any remainder after 5 weeks.
 5. Document the post-mortem: why did the analog-based forecast fail? Was it the
+
    analogs, the product, the pricing, or the competitive context?
 
 ---
@@ -753,11 +802,16 @@ degrade forecast accuracy over time.
    - ±25–50%: Requires director approval
    - > ±50%: Requires VP approval (or planning committee)
 3. **Override accuracy tracking:** Every override is tracked against actuals. If a planner's
+
    overrides have a WMAPE > 40% over a quarter, their override authority is reviewed.
+
 4. **Sunset rule:** Overrides expire after 4 weeks. If the condition persists, a new
+
    override (with fresh justification) must be created. This prevents stale overrides
    from contaminating forecasts months later.
+
 5. **No "consensus" overrides:** Overrides from demand review meetings where forecasts
+
    are adjusted to match sales team wishful thinking are the #1 source of positive bias.
    Require every meeting override to cite a specific, verifiable external signal.
 
@@ -863,11 +917,13 @@ Do not send more than a store can merchandise. Excess units in the backroom crea
 shrinkage, damage, and out-of-date risk (for perishables).
 
 **Allocation frequency:**
+
 - A-items: allocate with every DC-to-store shipment (typically 2–5× per week)
 - B-items: allocate 1–2× per week
 - C-items: allocate weekly or bi-weekly
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

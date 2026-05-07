@@ -14,9 +14,11 @@ This file contains detailed patterns, checklists, and code samples referenced by
 You are a monitoring and observability expert specializing in implementing comprehensive monitoring solutions. Set up metrics collection, distributed tracing, log aggregation, and create insightful dashboards that provide full visibility into system health and performance.
 
 ## Context
+
 The user needs to implement or improve monitoring and observability. Focus on the three pillars of observability (metrics, logs, traces), setting up monitoring infrastructure, creating actionable dashboards, and establishing effective alerting strategies.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -25,7 +27,9 @@ $ARGUMENTS
 
 **Prometheus Configuration**
 ```yaml
+
 # prometheus.yml
+
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
@@ -35,27 +39,39 @@ global:
 
 alerting:
   alertmanagers:
+
     - static_configs:
         - targets: ['alertmanager:9093']
 
 rule_files:
+
   - "alerts/*.yml"
   - "recording_rules/*.yml"
 
 scrape_configs:
+
   - job_name: 'prometheus'
+
     static_configs:
+
       - targets: ['localhost:9090']
 
   - job_name: 'node'
+
     static_configs:
+
       - targets: ['node-exporter:9100']
 
   - job_name: 'application'
+
     kubernetes_sd_configs:
+
       - role: pod
+
     relabel_configs:
+
       - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+
         action: keep
         regex: true
 ```
@@ -231,7 +247,9 @@ export class TracingSetup {
 
 **Fluentd Configuration**
 ```yaml
+
 # fluent.conf
+
 <source>
   @type tail
   path /var/log/containers/*.log
@@ -274,7 +292,9 @@ export class TracingSetup {
 
 **Structured Logging Library**
 ```python
+
 # structured_logging.py
+
 import json
 import logging
 from datetime import datetime
@@ -326,12 +346,18 @@ class StructuredLogger:
 
 **Alert Rules**
 ```yaml
+
 # alerts/application.yml
+
 groups:
+
   - name: application
+
     interval: 30s
     rules:
+
       - alert: HighErrorRate
+
         expr: |
           sum(rate(http_requests_total{status_code=~"5.."}[5m])) by (service)
           / sum(rate(http_requests_total[5m])) by (service) > 0.05
@@ -343,6 +369,7 @@ groups:
           description: "Error rate is {{ $value | humanizePercentage }}"
 
       - alert: SlowResponseTime
+
         expr: |
           histogram_quantile(0.95,
             sum(rate(http_request_duration_seconds_bucket[5m])) by (service, le)
@@ -354,14 +381,18 @@ groups:
           summary: "Slow response time on {{ $labels.service }}"
 
   - name: infrastructure
+
     rules:
+
       - alert: HighCPUUsage
+
         expr: avg(rate(container_cpu_usage_seconds_total[5m])) by (pod) > 0.8
         for: 15m
         labels:
           severity: warning
 
       - alert: HighMemoryUsage
+
         expr: |
           container_memory_working_set_bytes / container_spec_memory_limit_bytes > 0.9
         for: 10m
@@ -371,7 +402,9 @@ groups:
 
 **Alertmanager Configuration**
 ```yaml
+
 # alertmanager.yml
+
 global:
   resolve_timeout: 5m
   slack_api_url: '$SLACK_API_URL'
@@ -384,26 +417,36 @@ route:
   receiver: 'default'
 
   routes:
+
     - match:
+
         severity: critical
       receiver: pagerduty
       continue: true
 
     - match_re:
+
         severity: critical|warning
       receiver: slack
 
 receivers:
+
   - name: 'slack'
+
     slack_configs:
+
       - channel: '#alerts'
+
         title: '{{ .GroupLabels.alertname }}'
         text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'
         send_resolved: true
 
   - name: 'pagerduty'
+
     pagerduty_configs:
+
       - service_key: '$PAGERDUTY_SERVICE_KEY'
+
         description: '{{ .GroupLabels.alertname }}: {{ .Annotations.summary }}'
 ```
 
@@ -441,11 +484,15 @@ export class SLOManager {
         const errorBudget = 1 - (slo.target / 100);
 
         return `
+
 # ${slo.name} SLO
+
 - record: slo:${this.sanitizeName(slo.name)}:error_budget
+
   expr: ${errorBudget}
 
 - record: slo:${this.sanitizeName(slo.name)}:consumed_error_budget
+
   expr: |
     1 - (sum(rate(successful_requests[${slo.window}])) / sum(rate(total_requests[${slo.window}])))
         `;
@@ -457,7 +504,9 @@ export class SLOManager {
 
 **Terraform Configuration**
 ```hcl
+
 # monitoring.tf
+
 module "prometheus" {
   source = "./modules/prometheus"
 
@@ -512,6 +561,7 @@ module "alertmanager" {
 Focus on creating a monitoring system that provides actionable insights, reduces MTTR, and enables proactive issue detection.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,12 +8,12 @@ id: skill-m365-agents-ts
 owner: [[orchestrator]]
 ---
 
-
 # Microsoft 365 Agents SDK (TypeScript)
 
 Build enterprise agents for Microsoft 365, Teams, and Copilot Studio using the Microsoft 365 Agents SDK with Express hosting, AgentApplication routing, streaming responses, and Copilot Studio client integrations.
 
 ## Before implementation
+
 - Use the microsoft-docs MCP to verify the latest API signatures for AgentApplication, startServer, and CopilotStudioClient.
 - Confirm package versions on npm before wiring up samples or templates.
 
@@ -186,14 +186,17 @@ window.WebChat.renderWebChat({
 | GitHub samples | https://github.com/microsoft/Agents/tree/main/samples/nodejs |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

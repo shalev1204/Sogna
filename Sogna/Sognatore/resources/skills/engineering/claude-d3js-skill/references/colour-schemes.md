@@ -20,6 +20,7 @@ d3.schemeCategory10
 ```
 
 **Characteristics:**
+
 - 10 distinct colours
 - Good colour-blind accessibility
 - Default choice for most categorical data
@@ -34,6 +35,7 @@ d3.schemeTableau10
 ```
 
 **Characteristics:**
+
 - 10 colours optimised for data visualisation
 - Professional appearance
 - Excellent distinguishability
@@ -48,6 +50,7 @@ d3.schemeAccent
 ```
 
 **Characteristics:**
+
 - Bright, vibrant colours
 - High contrast
 - Modern aesthetic
@@ -62,6 +65,7 @@ d3.schemeDark2
 ```
 
 **Characteristics:**
+
 - Subdued palette
 - Professional appearance
 - Good for dark backgrounds
@@ -76,6 +80,7 @@ d3.schemePaired
 ```
 
 **Characteristics:**
+
 - Pairs of light and dark variants
 - Useful for nested categories
 - 12 distinct colours
@@ -90,6 +95,7 @@ d3.schemePastel2 // 8 colours
 ```
 
 **Characteristics:**
+
 - Soft, low-saturation colours
 - Gentle appearance
 - Good for large areas
@@ -105,6 +111,7 @@ d3.schemeSet3 // 12 colours - pastel
 ```
 
 **Characteristics:**
+
 - Set1: High saturation, maximum distinction
 - Set2: Professional, balanced
 - Set3: Subtle, many categories
@@ -124,6 +131,7 @@ d3.schemeBlues[9] // 9-step discrete version
 ```
 
 **Other single-hue options:**
+
 - `d3.interpolateGreens` / `d3.schemeGreens`
 - `d3.interpolateOranges` / `d3.schemeOranges`
 - `d3.interpolatePurples` / `d3.schemePurples`
@@ -131,6 +139,7 @@ d3.schemeBlues[9] // 9-step discrete version
 - `d3.interpolateGreys` / `d3.schemeGreys`
 
 **Use cases:**
+
 - Simple heat maps
 - Choropleth maps
 - Density plots
@@ -144,6 +153,7 @@ d3.interpolateViridis
 ```
 
 **Characteristics:**
+
 - Perceptually uniform
 - Colour-blind friendly
 - Print-safe
@@ -151,6 +161,7 @@ d3.interpolateViridis
 - Monotonically increasing perceived lightness
 
 **Other perceptually-uniform options:**
+
 - `d3.interpolatePlasma` - Purple to yellow
 - `d3.interpolateInferno` - Black to white through red/orange
 - `d3.interpolateMagma` - Black to white through purple
@@ -164,6 +175,7 @@ d3.interpolateWarm  // Orange to yellow
 ```
 
 **Use cases:**
+
 - Scientific visualisation
 - Medical imaging
 - Any high-precision data visualisation
@@ -184,6 +196,7 @@ d3.schemeYlGnBu[9]
 ```
 
 **Other multi-hue:**
+
 - `d3.interpolateBuGn` - Blue to green
 - `d3.interpolateBuPu` - Blue to purple
 - `d3.interpolateGnBu` - Green to blue
@@ -209,6 +222,7 @@ d3.schemeRdBu[11]
 ```
 
 **Characteristics:**
+
 - Intuitive temperature metaphor
 - Strong contrast
 - Clear positive/negative distinction
@@ -223,6 +237,7 @@ d3.schemeRdYlBu[11]
 ```
 
 **Characteristics:**
+
 - Three-colour gradient
 - Softer transition through yellow
 - More visual steps
@@ -242,6 +257,7 @@ d3.interpolateSpectral // Full spectrum
 ```
 
 **Other options:**
+
 - `d3.interpolateBrBG` - Brown to blue-green
 - `d3.interpolatePiYG` - Pink to yellow-green
 - `d3.interpolatePRGn` - Purple to green
@@ -337,26 +353,31 @@ const colourScale = d3.scaleOrdinal()
 ### Universal colour meanings
 
 **Red:**
+
 - Danger, error, negative
 - High temperature
 - Debt, loss
 
 **Green:**
+
 - Success, positive
 - Growth, vegetation
 - Profit, gain
 
 **Blue:**
+
 - Trust, calm
 - Water, cold
 - Information, neutral
 
 **Yellow/Orange:**
+
 - Warning, caution
 - Energy, warmth
 - Attention
 
 **Grey:**
+
 - Neutral, inactive
 - Missing data
 - Background
@@ -407,6 +428,7 @@ const highContrast = {
 ```
 
 **WCAG guidelines:**
+
 - Normal text: 4.5:1 minimum
 - Large text: 3:1 minimum
 - UI components: 3:1 minimum
@@ -427,6 +449,7 @@ const symbols = ['circle', 'square', 'triangle', 'diamond'];
 ### Testing
 
 Test visualisations for colour blindness:
+
 - Chrome DevTools (Rendering > Emulate vision deficiencies)
 - Colour Oracle (free desktop application)
 - Coblis (online simulator)
@@ -564,6 +587,7 @@ function selectCategoricalScheme(categories) {
 - **Colour-blind safe (diverging):** `d3.interpolatePuOr` or `d3.interpolateBrBG`
 
 **Always remember:**
+
 1. Test for colour-blindness
 2. Ensure sufficient contrast
 3. Use semantic colours appropriately
@@ -571,6 +595,7 @@ function selectCategoricalScheme(categories) {
 5. Keep it simple (fewer colours = clearer visualisation)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

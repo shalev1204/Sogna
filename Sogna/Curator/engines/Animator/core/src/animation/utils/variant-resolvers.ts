@@ -1,4 +1,4 @@
-import { sognaflowValue } from "sognaflow-dom"
+import { issognaflowValue, sognaflowValue } from "sognaflow-dom"
 
 type VariantNameList = string[]
 type VariantName = string | VariantNameList
@@ -17,8 +17,9 @@ const labelsToArray = (label?: VariantName): VariantNameList => {
 export const resolveVariantLabels = (
     variant?: UnresolvedVariant
 ): VariantNameList => {
-    const unresolvedVariant =
-        variant instanceof sognaflowValue ? (variant.get() as string) : variant
+    const unresolvedVariant = issognaflowValue(variant)
+        ? (variant.get() as string)
+        : (variant as VariantName)
 
     return Array.from(new Set(labelsToArray(unresolvedVariant)))
 }

@@ -12,7 +12,9 @@ version: 1.0.0
 ### Modular Schema Structure
 
 ```graphql
+
 # user.graphql
+
 type User {
   id: ID!
   email: String!
@@ -30,6 +32,7 @@ extend type Mutation {
 }
 
 # post.graphql
+
 type Post {
   id: ID!
   title: String!
@@ -91,6 +94,7 @@ type Query {
 }
 
 # Query example
+
 {
   search(query: "graphql") {
     ... on User {
@@ -163,6 +167,7 @@ type Query {
 }
 
 # Usage
+
 {
   users(first: 10, after: "cursor123") {
     edges {
@@ -346,6 +351,7 @@ type UserStatus {
 }
 
 # Client usage
+
 subscription {
   postAdded {
     id
@@ -393,6 +399,7 @@ type User {
 }
 
 # Query
+
 query GetUser($isOwner: Boolean!) {
   user(id: "123") {
     name
@@ -452,6 +459,7 @@ type Query {
 }
 
 # Usage
+
 {
   user(id: "123") {
     ... on User {
@@ -506,6 +514,7 @@ class PostLoader(DataLoader):
         return [post_map.get(pid) for pid in post_ids]
 
 # Resolver
+
 @user_type.field("posts")
 async def resolve_posts(user, info):
     loader = info.context["loaders"]["post"]
@@ -556,18 +565,22 @@ type User {
 ### Schema Evolution
 
 ```graphql
+
 # v1 - Initial
+
 type User {
   name: String!
 }
 
 # v2 - Add optional field (backward compatible)
+
 type User {
   name: String!
   email: String
 }
 
 # v3 - Deprecate and add new field
+
 type User {
   name: String! @deprecated(reason: "Use firstName/lastName")
   firstName: String!
@@ -590,6 +603,7 @@ type User {
 10. **Documentation**: Document all fields with descriptions
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

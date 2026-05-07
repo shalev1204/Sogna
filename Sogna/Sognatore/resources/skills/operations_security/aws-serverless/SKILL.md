@@ -10,7 +10,6 @@ id: skill-aws-serverless
 owner: [[ops-security]]
 ---
 
-
 # AWS Serverless
 
 Specialized skill for building production-ready serverless applications on AWS.
@@ -98,7 +97,9 @@ async function processRequest(data) {
 ```
 
 ```python
+
 # Python Lambda Handler
+
 # handler.py
 
 import json
@@ -108,6 +109,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 # Initialize outside handler (reused across invocations)
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -168,7 +170,9 @@ REST API and HTTP API integration with Lambda
 **When to use**: Building REST APIs backed by Lambda,Need HTTP endpoints for functions
 
 ```yaml
+
 # template.yaml (SAM)
+
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
@@ -189,12 +193,17 @@ Resources:
       StageName: prod
       CorsConfiguration:
         AllowOrigins:
+
           - "*"
+
         AllowMethods:
+
           - GET
           - POST
           - DELETE
+
         AllowHeaders:
+
           - "*"
 
   # Lambda Functions
@@ -210,7 +219,9 @@ Resources:
             Path: /items/{id}
             Method: GET
       Policies:
+
         - DynamoDBReadPolicy:
+
             TableName: !Ref ItemsTable
 
   CreateItemFunction:
@@ -225,7 +236,9 @@ Resources:
             Path: /items
             Method: POST
       Policies:
+
         - DynamoDBCrudPolicy:
+
             TableName: !Ref ItemsTable
 
   # DynamoDB Table
@@ -233,10 +246,14 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
+
         - AttributeName: id
+
           AttributeType: S
       KeySchema:
+
         - AttributeName: id
+
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
 
@@ -309,7 +326,9 @@ Lambda triggered by SQS for reliable async processing
 **When to use**: Decoupled, asynchronous processing,Need retry logic and DLQ,Processing messages in batches
 
 ```yaml
+
 # template.yaml
+
 Resources:
   ProcessorFunction:
     Type: AWS::Serverless::Function
@@ -322,6 +341,7 @@ Resources:
             Queue: !GetAtt ProcessingQueue.Arn
             BatchSize: 10
             FunctionResponseTypes:
+
               - ReportBatchItemFailures  # Partial batch failure handling
 
   ProcessingQueue:
@@ -370,7 +390,9 @@ async function processMessage(message) {
 ```
 
 ```python
+
 # Python version
+
 import json
 import logging
 
@@ -406,17 +428,23 @@ React to DynamoDB table changes with Lambda
 **When to use**: Real-time reactions to data changes,Cross-region replication,Audit logging, notifications
 
 ```yaml
+
 # template.yaml
+
 Resources:
   ItemsTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: items
       AttributeDefinitions:
+
         - AttributeName: id
+
           AttributeType: S
       KeySchema:
+
         - AttributeName: id
+
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
       StreamSpecification:
@@ -504,7 +532,9 @@ const AWS = require('aws-sdk');  // Don't do this!
 ## 2. Use SnapStart (Java/.NET)
 
 ```yaml
+
 # template.yaml
+
 Resources:
   JavaFunction:
     Type: AWS::Serverless::Function
@@ -519,7 +549,9 @@ Resources:
 ## 3. Right-size Memory
 
 ```yaml
+
 # More memory = more CPU = faster init
+
 Resources:
   FastFunction:
     Type: AWS::Serverless::Function
@@ -549,7 +581,9 @@ Resources:
 ## 5. Keep Init Light
 
 ```python
+
 # GOOD - Lazy initialization
+
 _table = None
 
 def get_table():
@@ -579,25 +613,33 @@ Local testing and debugging with SAM CLI
 **When to use**: Local development and testing,Debugging Lambda functions,Testing API Gateway locally
 
 ```bash
+
 # Install SAM CLI
+
 pip install aws-sam-cli
 
 # Initialize new project
+
 sam init --runtime nodejs20.x --name my-api
 
 # Build the project
+
 sam build
 
 # Run locally
+
 sam local start-api
 
 # Invoke single function
+
 sam local invoke GetItemFunction --event events/get.json
 
 # Local debugging (Node.js with VS Code)
+
 sam local invoke --debug-port 5858 GetItemFunction
 
 # Deploy
+
 sam deploy --guided
 ```
 
@@ -702,7 +744,9 @@ export class ApiStack extends cdk.Stack {
 ```
 
 ```bash
+
 # CDK commands
+
 npm install -g aws-cdk
 cdk init app --language typescript
 cdk synth    # Generate CloudFormation
@@ -729,6 +773,7 @@ invocation duration. Previously, cold start initialization wasn't billed
 for the full duration.
 
 This affects functions with:
+
 - Heavy dependency loading (large packages)
 - Slow initialization code
 - Frequent cold starts (low traffic or poor concurrency)
@@ -740,11 +785,15 @@ Recommended fix:
 ## Measure your INIT phase
 
 ```bash
+
 # Check CloudWatch Logs for INIT_REPORT
+
 # Look for Init Duration in milliseconds
 
 # Example log line:
+
 # INIT_REPORT Init Duration: 423.45 ms
+
 ```
 
 ## Reduce INIT duration
@@ -812,6 +861,7 @@ Why this breaks:
 Default Lambda timeout is only 3 seconds. Maximum is 15 minutes.
 
 Common timeout causes:
+
 - Default timeout too short for workload
 - Downstream service taking longer than expected
 - Network issues in VPC
@@ -825,7 +875,9 @@ Recommended fix:
 ## Set appropriate timeout
 
 ```yaml
+
 # template.yaml
+
 Resources:
   MyFunction:
     Type: AWS::Serverless::Function
@@ -888,6 +940,7 @@ When Lambda exceeds memory allocation, AWS forcibly terminates
 the runtime. This happens without raising a catchable exception.
 
 Common causes:
+
 - Processing large files in memory
 - Memory leaks across invocations
 - Buffering entire response bodies
@@ -942,8 +995,11 @@ exports.handler = async (event, context) => {
 ## Use Lambda Power Tuning
 
 ```bash
+
 # Find optimal memory setting
+
 # https://github.com/alexcasalboni/aws-lambda-power-tuning
+
 ```
 
 ### VPC-Attached Lambda Cold Start Delay
@@ -977,8 +1033,11 @@ Resources:
     Properties:
       VpcConfig:
         SecurityGroupIds:
+
           - !Ref LambdaSecurityGroup
+
         SubnetIds:
+
           - !Ref PrivateSubnet1
           - !Ref PrivateSubnet2  # Multiple AZs
 
@@ -988,7 +1047,9 @@ Resources:
       GroupDescription: Lambda SG
       VpcId: !Ref VPC
       SecurityGroupEgress:
+
         - IpProtocol: tcp
+
           FromPort: 443
           ToPort: 443
           CidrIp: 0.0.0.0/0  # Allow HTTPS outbound
@@ -997,14 +1058,18 @@ Resources:
 ## Use VPC endpoints for AWS services
 
 ```yaml
+
 # Avoid NAT Gateway for AWS service calls
+
 DynamoDBEndpoint:
   Type: AWS::EC2::VPCEndpoint
   Properties:
     ServiceName: !Sub com.amazonaws.${AWS::Region}.dynamodb
     VpcId: !Ref VPC
     RouteTableIds:
+
       - !Ref PrivateRouteTable
+
     VpcEndpointType: Gateway
 
 S3Endpoint:
@@ -1018,6 +1083,7 @@ S3Endpoint:
 ## Only use VPC when necessary
 
 Don't attach Lambda to VPC unless you need:
+
 - Access to RDS/ElastiCache in VPC
 - Access to private EC2 instances
 - Compliance requirements
@@ -1038,6 +1104,7 @@ Extra billing for idle time.
 Why this breaks:
 By default, Lambda waits for the Node.js event loop to be empty
 before returning. If you have:
+
 - Unresolved setTimeout/setInterval
 - Dangling database connections
 - Pending callbacks
@@ -1097,6 +1164,7 @@ Response truncated or failed
 
 Why this breaks:
 API Gateway has hard payload limits:
+
 - REST API: 10 MB request/response
 - HTTP API: 10 MB request/response
 - Lambda itself: 6 MB sync response, 256 KB async
@@ -1172,6 +1240,7 @@ Lambda writing to source bucket/table that triggers it.
 
 Why this breaks:
 Lambda can accidentally trigger itself:
+
 - S3 trigger writes back to same bucket
 - DynamoDB trigger updates same table
 - SNS publishes to topic that triggers it
@@ -1182,7 +1251,9 @@ Recommended fix:
 ## Use different buckets/prefixes
 
 ```yaml
+
 # S3 trigger with prefix filter
+
 Events:
   S3Event:
     Type: S3
@@ -1192,11 +1263,15 @@ Events:
       Filter:
         S3Key:
           Rules:
+
             - Name: prefix
+
               Value: uploads/  # Only trigger on uploads/
 
 # Output to different bucket or prefix
+
 # OutputBucket or processed/ prefix
+
 ```
 
 ## Add idempotency checks
@@ -1339,14 +1414,17 @@ Message: Hardcoded table name. Use environment variable for portability.
 - user needs AI integration -> llm-architect (Lambda calling Bedrock or external LLMs)
 
 ## When to Use
+
 Use this skill when the request clearly matches the capabilities and patterns described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -32,9 +32,11 @@ You are an SLO (Service Level Objective) expert specializing in implementing rel
 - Do not alert on metrics that include sensitive or personal data.
 
 ## Context
+
 The user needs to implement SLOs to establish reliability targets, measure service performance, and make data-driven decisions about reliability vs. feature development. Focus on practical SLO implementation that aligns with business objectives.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -194,13 +196,16 @@ class SLIImplementation:
                 'definition': 'Percentage of successful requests',
                 'formula': 'successful_requests / total_requests * 100',
                 'implementation': '''
+
 # Prometheus query for API availability
+
 api_availability = """
 sum(rate(http_requests_total{status!~"5.."}[5m])) / 
 sum(rate(http_requests_total[5m])) * 100
 """
 
 # Implementation
+
 class APIAvailabilitySLI:
     def __init__(self, prometheus_client):
         self.prom = prometheus_client
@@ -231,7 +236,9 @@ class APIAvailabilitySLI:
                 'definition': 'Percentage of requests faster than threshold',
                 'formula': 'fast_requests / total_requests * 100',
                 'implementation': '''
+
 # Latency SLI with multiple thresholds
+
 class LatencySLI:
     def __init__(self, thresholds_ms):
         self.thresholds = thresholds_ms  # e.g., {'p50': 100, 'p95': 500, 'p99': 1000}
@@ -388,18 +395,26 @@ Implement comprehensive SLO monitoring:
 
 **SLO Monitoring Implementation**
 ```yaml
+
 # Prometheus recording rules for SLO
+
 groups:
+
   - name: slo_rules
+
     interval: 30s
     rules:
       # Request rate
+
       - record: service:request_rate
+
         expr: |
           sum(rate(http_requests_total[5m])) by (service, method, route)
 
       # Success rate
+
       - record: service:success_rate_5m
+
         expr: |
           (
             sum(rate(http_requests_total{status!~"5.."}[5m])) by (service)
@@ -408,7 +423,9 @@ groups:
           ) * 100
 
       # Multi-window success rates
+
       - record: service:success_rate_30m
+
         expr: |
           (
             sum(rate(http_requests_total{status!~"5.."}[30m])) by (service)
@@ -417,6 +434,7 @@ groups:
           ) * 100
 
       - record: service:success_rate_1h
+
         expr: |
           (
             sum(rate(http_requests_total{status!~"5.."}[1h])) by (service)
@@ -425,26 +443,32 @@ groups:
           ) * 100
 
       # Latency percentiles
+
       - record: service:latency_p50_5m
+
         expr: |
           histogram_quantile(0.50,
             sum(rate(http_request_duration_seconds_bucket[5m])) by (service, le)
           )
 
       - record: service:latency_p95_5m
+
         expr: |
           histogram_quantile(0.95,
             sum(rate(http_request_duration_seconds_bucket[5m])) by (service, le)
           )
 
       - record: service:latency_p99_5m
+
         expr: |
           histogram_quantile(0.99,
             sum(rate(http_request_duration_seconds_bucket[5m])) by (service, le)
           )
 
       # Error budget burn rate
+
       - record: service:error_budget_burn_rate_1h
+
         expr: |
           (
             1 - (
@@ -457,12 +481,18 @@ groups:
 
 **Alert Configuration**
 ```yaml
+
 # Multi-window multi-burn-rate alerts
+
 groups:
+
   - name: slo_alerts
+
     rules:
       # Fast burn alert (2% budget in 1 hour)
+
       - alert: ErrorBudgetFastBurn
+
         expr: |
           (
             service:error_budget_burn_rate_5m{service="api"} > 14.4
@@ -481,7 +511,9 @@ groups:
             This will exhaust 2% of monthly budget in 1 hour.
 
       # Slow burn alert (10% budget in 6 hours)
+
       - alert: ErrorBudgetSlowBurn
+
         expr: |
           (
             service:error_budget_burn_rate_30m{service="api"} > 3
@@ -937,7 +969,9 @@ class SLOAutomation:
     def create_slo_as_code(self):
         """Define SLOs as code"""
         return '''
+
 # slo_definitions.yaml
+
 apiVersion: slo.dev/v1
 kind: ServiceLevelObjective
 metadata:
@@ -952,22 +986,30 @@ spec:
     counter:
       metric: http_requests_total
       filters:
+
         - status_code != 5xx
+
     total:
       metric: http_requests_total
 
   objectives:
+
     - displayName: 30-day rolling window
+
       window: 30d
       target: 0.999
 
   alerting:
     burnRates:
+
       - severity: critical
+
         shortWindow: 1h
         longWindow: 5m
         burnRate: 14.4
+
       - severity: warning
+
         shortWindow: 6h
         longWindow: 30m
         burnRate: 3
@@ -1031,21 +1073,25 @@ class SLOGovernance:
     def create_slo_review_process(self):
         """Create structured SLO review process"""
         return '''
+
 # Weekly SLO Review Template
 
 ## Agenda (30 minutes)
 
 ### 1. SLO Performance Review (10 min)
+
 - Current SLO status for all services
 - Error budget consumption rate
 - Trend analysis
 
 ### 2. Incident Review (10 min)
+
 - Incidents impacting SLOs
 - Root cause analysis
 - Action items
 
 ### 3. Decision Making (10 min)
+
 - Release approvals/deferrals
 - Resource allocation
 - Priority adjustments
@@ -1061,11 +1107,13 @@ class SLOGovernance:
 ## Output Template
 
 ### Service: [Service Name]
+
 - **SLO Status**: [Green/Yellow/Red]
 - **Error Budget**: [XX%] remaining
 - **Key Issues**: [List]
 - **Actions**: [List with owners]
 - **Decisions**: [List]
+
 '''
 ```
 
@@ -1084,6 +1132,7 @@ class SLOGovernance:
 Focus on creating meaningful SLOs that balance reliability with feature velocity, providing clear signals for engineering decisions and fostering a culture of reliability.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

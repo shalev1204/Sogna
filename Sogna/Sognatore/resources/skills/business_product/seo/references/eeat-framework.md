@@ -6,7 +6,9 @@ version: 1.0.0
 ---
 
 # E-E-A-T Evaluation Framework
+
 ## Updated per Google Quality Rater Guidelines: September 11, 2025
+
 ## Plus December 2025 Core Update Implications
 
 ## Overview
@@ -21,6 +23,7 @@ other three signals plus direct trust indicators.
 > **E-E-A-T now applies to ALL competitive queries, not just YMYL.**
 
 The December 2025 core update was described as a "watershed moment" that:
+
 - Extended E-E-A-T evaluation to virtually all competitive queries
 - Made author attribution standards tighter across all categories
 - Penalized anonymous or generic authorship even for non-YMYL content
@@ -38,6 +41,7 @@ The December 2025 core update was described as a "watershed moment" that:
 ## YMYL (Your Money or Your Life)
 
 Topics requiring **highest** E-E-A-T standards (but E-E-A-T now matters everywhere):
+
 - Health and safety
 - Financial advice and transactions
 - Legal information
@@ -53,6 +57,7 @@ Topics requiring **highest** E-E-A-T standards (but E-E-A-T now matters everywhe
 First-hand knowledge and personal involvement with the topic.
 
 ### Signals to Check
+
 - [ ] Author has demonstrable first-hand experience with the topic
 - [ ] Content includes original photos, screenshots, or data
 - [ ] Case studies or real-world examples with specific details
@@ -61,6 +66,7 @@ First-hand knowledge and personal involvement with the topic.
 - [ ] Specific anecdotes that couldn't be fabricated
 
 ### Scoring
+
 - **Strong**: Multiple first-hand experience signals, original content
 - **Moderate**: Some personal experience evident
 - **Weak**: Generic information, no personal touch
@@ -73,6 +79,7 @@ First-hand knowledge and personal involvement with the topic.
 Formal qualifications, training, and demonstrated knowledge.
 
 ### Signals to Check
+
 - [ ] Author credentials relevant to topic (bio, certifications)
 - [ ] Technical accuracy and depth appropriate for audience
 - [ ] Claims supported by evidence or sources
@@ -81,6 +88,7 @@ Formal qualifications, training, and demonstrated knowledge.
 - [ ] Byline with author name and credentials visible
 
 ### Scoring
+
 - **Strong**: Verified credentials, deep technical accuracy
 - **Moderate**: Demonstrable knowledge, some credentials
 - **Weak**: Surface-level information, no credentials
@@ -93,6 +101,7 @@ Formal qualifications, training, and demonstrated knowledge.
 Recognition by others as a go-to source.
 
 ### Signals to Check
+
 - [ ] Site recognized as authority in its niche
 - [ ] Author recognized as expert (external citations, speaking, publications)
 - [ ] Content cited by other authoritative sources
@@ -102,6 +111,7 @@ Recognition by others as a go-to source.
 - [ ] Professional affiliations
 
 ### Scoring
+
 - **Strong**: Widely recognized authority, cited by others
 - **Moderate**: Growing recognition, some external validation
 - **Weak**: No external recognition
@@ -114,6 +124,7 @@ Recognition by others as a go-to source.
 The most important factor, overall reliability and transparency.
 
 ### Signals to Check
+
 - [ ] Clear contact information (physical address, phone, email)
 - [ ] Privacy policy and terms of service
 - [ ] HTTPS with valid certificate
@@ -125,6 +136,7 @@ The most important factor, overall reliability and transparency.
 - [ ] Return/refund policy visible
 
 ### Scoring
+
 - **Strong**: Full transparency, verified business, positive reputation
 - **Moderate**: Good trust signals, minor gaps
 - **Weak**: Missing key trust signals
@@ -135,13 +147,16 @@ The most important factor, overall reliability and transparency.
 ## September 2025 QRG Updates
 
 ### AI Content Assessment
+
 Raters now formally evaluate whether content appears AI-generated:
+
 - AI content is **acceptable** if it demonstrates genuine E-E-A-T
 - Low-quality AI content (generic, no unique value) is penalized
 - The presence of AI-generated content is not inherently penalizing
 - What matters: does the content provide unique value regardless of creation method?
 
 ### Markers of Low-Quality AI Content
+
 - Generic phrasing without specificity
 - Lack of original insight or unique perspective
 - No first-hand experience signals
@@ -150,15 +165,19 @@ Raters now formally evaluate whether content appears AI-generated:
 - No author attribution or expertise signals
 
 ### New Spam Categories
+
 - **Expired domain abuse**: Buying expired domains for their backlinks
 - **Site reputation abuse**: Using reputable site to host low-quality content
 - **Scaled content abuse**: Mass-producing content without value
 
 ### AI Overview Evaluation
+
 Raters assess quality of AI-generated summaries in search results.
 
 ### RSL 1.0 (Really Simple Licensing)
+
 New machine-readable content licensing standard (December 2025) for AI training:
+
 - Backed by: Reddit, Yahoo, Medium, Quora, Cloudflare, Akamai, Creative Commons
 - Allows publishers to specify AI licensing terms
 - Augments robots.txt for AI-specific permissions
@@ -168,6 +187,7 @@ New machine-readable content licensing standard (December 2025) for AI training:
 ## Experience Signals Are Critical Differentiators
 
 The December 2025 update elevated the "Experience" dimension as a key differentiator:
+
 - First-person narrative ("I tested this...", "In my experience...")
 - Original photos and screenshots (not stock images)
 - Specific examples with verifiable details
@@ -192,35 +212,41 @@ The December 2025 update elevated the "Experience" dimension as a key differenti
 ## Improvement Recommendations by Score
 
 ### 0-29 (Critical)
+
 1. Add contact information and about page
 2. Establish author identity with credentials
 3. Implement HTTPS
 4. Remove deceptive elements
 
 ### 30-49 (Major)
+
 1. Add author bios with credentials
 2. Include first-hand experience content
 3. Get external citations/mentions
 4. Add customer testimonials
 
 ### 50-69 (Moderate)
+
 1. Deepen content with original research
 2. Build topical authority through content clusters
 3. Pursue industry recognition
 4. Document processes and methodologies
 
 ### 70-89 (Minor)
+
 1. Maintain freshness with regular updates
 2. Expand author presence across platforms
 3. Pursue speaking/publication opportunities
 4. Add video/multimedia demonstrating expertise
 
 ### 90-100 (Maintenance)
+
 1. Continue publishing high-quality content
 2. Monitor and respond to reputation issues
 3. Keep credentials and certifications current
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

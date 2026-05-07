@@ -1,7 +1,7 @@
-import { animations } from "../../../sognaflow/features/animations"
-import { drag } from "../../../sognaflow/features/drag"
-import { gestureAnimations } from "../../../sognaflow/features/gestures"
-import { layout } from "../../../sognaflow/features/layout"
+import { animations } from "../../../motion/features/animations"
+import { drag } from "../../../motion/features/drag"
+import { gestureAnimations } from "../../../motion/features/gestures"
+import { layout } from "../../../motion/features/layout"
 
 export const featureBundle = {
     ...animations,

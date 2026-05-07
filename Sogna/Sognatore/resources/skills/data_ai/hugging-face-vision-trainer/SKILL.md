@@ -7,7 +7,6 @@ id: skill-hugging-face-vision-trainer
 owner: [[orchestrator]]
 ---
 
-
 # Vision Model Training on Hugging Face Jobs
 
 Train object detection, image classification, and SAM/SAM2 segmentation models on managed cloud GPUs. No local GPU setup required—results are automatically saved to the Hugging Face Hub.
@@ -15,6 +14,7 @@ Train object detection, image classification, and SAM/SAM2 segmentation models o
 ## When to Use This Skill
 
 Use this skill when users want to:
+
 - Fine-tune object detection models (D-FINE, RT-DETR v2, DETR, YOLOS) on cloud GPUs or local
 - Fine-tune image classification models (timm: MobileNetV3, MobileViT, ResNet, ViT/DINOv3, or any Transformers classifier) on cloud GPUs or local
 - Fine-tune SAM or SAM2 models for segmentation / image matting using bbox or point prompts
@@ -42,12 +42,14 @@ uv run scripts/estimate_cost.py --help
 Before starting any training job, verify:
 
 ### Account & Authentication
+
 - Hugging Face Account with [Pro](https://hf.co/pro), [Team](https://hf.co/enterprise), or [Enterprise](https://hf.co/enterprise) plan (Jobs require paid plan)
 - Authenticated login: Check with `hf_whoami()` (tool) or `hf auth whoami` (terminal)
 - Token has **write** permissions
 - **MUST pass token in job secrets** — see directive #3 below for syntax (MCP tool vs Python API)
 
 ### Dataset Requirements — Object Detection
+
 - Dataset must exist on Hub
 - Annotations must use the `objects` column with `bbox`, `category` (and optionally `area`) sub-fields
 - Bboxes can be in **xywh (COCO)** or **xyxy (Pascal VOC)** format — auto-detected and converted
@@ -56,6 +58,7 @@ Before starting any training job, verify:
 - **ALWAYS validate unknown datasets** before GPU training (see Dataset Validation section)
 
 ### Dataset Requirements — Image Classification
+
 - Dataset must exist on Hub
 - Must have an **`image` column** (PIL images) and a **`label` column** (integer class IDs or strings)
 - The label column can be `ClassLabel` type (with names) or plain integers/strings — strings are auto-remapped
@@ -63,6 +66,7 @@ Before starting any training job, verify:
 - **ALWAYS validate unknown datasets** before GPU training (see Dataset Validation section)
 
 ### Dataset Requirements — SAM/SAM2 Segmentation
+
 - Dataset must exist on Hub
 - Must have an **`image` column** (PIL images) and a **`mask` column** (binary ground-truth segmentation mask)
 - Must have a **prompt** — either:
@@ -74,6 +78,7 @@ Before starting any training job, verify:
 - **ALWAYS validate unknown datasets** before GPU training (see Dataset Validation section)
 
 ### Critical Settings
+
 - **Timeout must exceed expected training time** — Default 30min is TOO SHORT. See directive #6 for recommended values.
 - **Hub push must be enabled** — `push_to_hub=True`, `hub_model_id="username/model-name"`, token in `secrets`
 
@@ -125,11 +130,13 @@ Copy this checklist and track progress:
 
 ```
 Training Progress:
+
 - [ ] Step 1: Verify prerequisites (account, token, dataset)
 - [ ] Step 2: Validate dataset format (run dataset_inspector.py)
 - [ ] Step 3: Ask user about dataset size and validation split
 - [ ] Step 4: Prepare training script (OD: scripts/object_detection_training.py, IC: scripts/image_classification_training.py, SAM: scripts/sam_segmentation_training.py)
 - [ ] Step 5: Save script locally, submit job, and report details
+
 ```
 
 **Step 1: Verify prerequisites**
@@ -228,6 +235,7 @@ print(f"Job ID: {job_info.id}")
 | Timeout format | String (`"4h"`) | Seconds (`14400`) |
 
 **Rules for both methods:**
+
 - The training script MUST include PEP 723 inline metadata with dependencies
 - Do NOT use `image` or `command` parameters (those belong to `run_job()`, not `run_uv_job()`)
 
@@ -545,24 +553,31 @@ api.get_job(job_id="your-job-id")                # Job details
 ## Common failure modes
 
 ### OOM (CUDA out of memory)
+
 Reduce `per_device_train_batch_size` (try 4, then 2), reduce `IMAGE_SIZE`, or upgrade hardware.
 
 ### Dataset format errors
+
 Run `scripts/dataset_inspector.py` first. The training script auto-detects xyxy vs xywh, converts string categories to integer IDs, and adds `image_id` if missing. Ensure `objects.bbox` contains 4-value coordinate lists in absolute pixels and `objects.category` contains either integer IDs or string labels.
 
 ### Hub push failures (401)
+
 Verify: (1) job secrets include token (see directive #2), (2) script sets `training_args.hub_token` BEFORE creating the `Trainer`, (3) `push_to_hub=True` is set, (4) correct `hub_model_id`, (5) token has write permissions.
 
 ### Job timeout
+
 Increase timeout (see directive #5 table), reduce epochs/dataset, or use checkpoint strategy with `hub_strategy="every_save"`.
 
 ### KeyError: 'test' (missing test split)
+
 The object detection training script handles this gracefully — it falls back to the `validation` split. Ensure you're using the latest `scripts/object_detection_training.py`.
 
 ### Single-class dataset: "iteration over a 0-d tensor"
+
 `torchmetrics.MeanAveragePrecision` returns scalar (0-d) tensors for per-class metrics when there's only one class. The template `scripts/object_detection_training.py` handles this by calling `.unsqueeze(0)` on these tensors. Ensure you're using the latest template.
 
 ### Poor detection performance (mAP < 0.15)
+
 Increase epochs (30-50), ensure 500+ images, check per-class mAP for imbalanced classes, try different learning rates (1e-5 to 1e-4), increase image size.
 
 For comprehensive troubleshooting: see [references/reliability_principles.md](references/reliability_principles.md)
@@ -598,11 +613,13 @@ For comprehensive troubleshooting: see [references/reliability_principles.md](re
 - [Image Classification Datasets](https://huggingface.co/datasets?task_categories=task_categories:image-classification)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

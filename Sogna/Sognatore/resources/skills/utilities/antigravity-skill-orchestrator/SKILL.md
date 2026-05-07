@@ -10,7 +10,6 @@ id: skill-antigravity-skill-orchestrator
 owner: [[orchestrator]]
 ---
 
-
 # Sognatore-skill-orchestrator
 
 ## Overview
@@ -27,20 +26,25 @@ The `skill-orchestrator` is a meta-skill designed to enhance the AI agent's abil
 ## Core Concepts
 
 ### Task Evaluation Guardrails
+
 Not every task requires a specialized skill. For straightforward issues (e.g., small CSS fixes, simple script writing, renaming a variable), **DO NOT USE** specialized skills. Over-engineering simple tasks wastes tokens and time. 
 
 Additionally, the orchestrator is strictly forbidden from creating new skills. Its sole purpose is to combine and use existing skills provided by the community or present in the current environment.
 
 Before invoking any skills, evaluate the task:
+
 1. **Is the task simple/contained?** Solve it directly using the agent's ordinary file editing, search, and terminal capabilities available in the current environment.
 2. **Is the task complex/multi-domain?** Only then should you proceed to orchestrate skills.
 
 ### Skill Selection & Combinations
+
 When a task is deemed complex, identify the necessary domains (e.g., frontend, database, deployment). Search available skills in the current environment to find the most relevant ones. If the required skills are not found locally, consult the master skill catalog.
 
 ### Master Skill Catalog
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 The Sognatore ecosystem maintains a master catalog of highly curated skills at `https://raw.githubusercontent.com/sickn33/Sognatore-awesome-skills/main/CATALOG.md`. When local skills are insufficient, fetch this catalog to discover appropriate skills across the 9 primary categories:
+
 - `architecture`
 - `business`
 - `data-ai`
@@ -52,35 +56,46 @@ The Sognatore ecosystem maintains a master catalog of highly curated skills at `
 - `workflow`
 
 ### Memory Integration (`@agent-memory-mcp`)
+
 To build institutional knowledge, the orchestrator relies on the `agent-memory-mcp` skill to record and retrieve successful skill combinations.
 
 ## Step-by-Step Guide
 
 ### 1. Task Evaluation & Guardrail Check
+
 [Triggered when facing a new user request that might need skills]
+
 1. Read the user's request.
 2. Ask yourself: "Can I solve this efficiently with just basic file editing and terminal commands?"
 3. If YES: Proceed without invoking specialized skills. Stop the orchestration here.
 4. If NO: Proceed to step 2.
 
 ### 2. Retrieve Past Knowledge
+
 [Triggered if the task is complex]
+
 1. Use the `memory_search` tool provided by `agent-memory-mcp` to search for similar past tasks.
    - Example query: `memory_search({ query: "skill combination for react native and firebase", type: "skill_combination" })`
 2. If a working combination exists, read the details using `memory_read`.
 3. If no relevant memory exists, proceed to Step 3.
 
 ### 3. Discover and Select Skills
+
 [Triggered if no past knowledge covers this task]
+
 1. Analyze the core requirements (e.g., "needs a React UI, a Node.js backend, and a PostgreSQL database").
 2. Query the locally available skills using the current environment's skill list or equivalent discovery mechanism to find the best match for each requirement.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 3. **If local skills are insufficient**, fetch the master catalog with the web or command-line retrieval tools available in the current environment: `https://raw.githubusercontent.com/sickn33/Sognatore-awesome-skills/main/CATALOG.md`.
 4. Scan the catalog's 9 main categories to identify the appropriate skills to bring into the current context.
 5. Select the minimal set of skills needed. **Do not over-select.**
 
 ### 4. Apply Skills and Track the Combination
+
 [Triggered after executing the task using the selected skills]
+
 1. Assume the task was completed successfully using a new combination of skills (e.g., `@react-patterns` + `@nodejs-backend-patterns` + `@postgresql`).
 2. Record this combination for future use using `memory_write` from `agent-memory-mcp`.
    - Ensure the type is `skill_combination`.
@@ -89,10 +104,12 @@ To build institutional knowledge, the orchestrator relies on the `agent-memory-m
 ## Examples
 
 ### Example 1: Handling a Simple Task (The Guardrail in Action)
+
 **User Request:** "Change the color of the submit button in `index.css` to blue."
 **Action:** The skill orchestrator evaluates the task. It determines this is a "simple/contained" task. It **does not** invoke specialized skills. It directly edits `index.css`.
 
 ### Example 2: Recording a New Skill Combination
+
 ```javascript
 // Using the agent-memory-mcp tool after successfully building a complex feature
 memory_write({ 
@@ -104,6 +121,7 @@ memory_write({
 ```
 
 ### Example 3: Retrieving a Combination
+
 ```javascript
 // At the start of a new e-commerce task
 memory_search({ 
@@ -128,11 +146,13 @@ memory_read({ key: "combination-ecommerce-checkout" })
 - `@agent-memory-mcp` - Essential for this skill to function. Provides the persistent storage for skill combinations.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

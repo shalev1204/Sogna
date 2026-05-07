@@ -10,7 +10,6 @@ id: skill-progressive-web-app
 owner: [[orchestrator]]
 ---
 
-
 # Progressive Web Apps (PWAs)
 
 ## Overview
@@ -35,7 +34,9 @@ Every PWA implementation must include these files at minimum:
 
 - [ ] `index.html` — Links manifest, registers service worker
 - [ ] `manifest.json` — Full app metadata and icon set
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - [ ] `sw.js` — Service worker with install, activate, and fetch handlers
 - [ ] `app.js` — Main app logic with SW registration and install prompt handling
 - [ ] `offline.html` — Fallback page shown when navigation fails offline (required — missing file will cause install to fail)
@@ -83,6 +84,7 @@ Defines how the app appears when installed. Must be linked from `<head>` via `<l
 ```
 
 **Key fields:**
+
 - `display`: `standalone` hides browser UI; `minimal-ui` shows minimal controls; `browser` is standard tab.
 - `purpose: "maskable"` on icons enables adaptive icons on Android (safe zone matters — keep content in center 80%).
 - `screenshots` is optional but required for Chrome's enhanced install dialog on desktop.
@@ -310,19 +312,23 @@ async function staleWhileRevalidate(request) {
 ## Edge Cases & Platform Notes
 
 ### iOS / Safari Quirks
+
 - Safari supports manifests and service workers but **does not support `beforeinstallprompt`** — users must install via the Share → "Add to Home Screen" menu manually.
 - Use the `apple-mobile-web-app-*` meta tags (shown in `index.html` above) for proper iOS integration.
 - Safari may clear service worker caches after ~7 days of inactivity (Intelligent Tracking Prevention).
 
 ### HTTPS Requirement
+
 - Service workers only register on `https://` origins. `http://localhost` is the only exception for development.
 - Use a tool like `mkcert` or `ngrok` if you need HTTPS locally with a custom hostname.
 
 ### Cache-Busting on Deploy
+
 - Always increment `CACHE_VERSION` in `sw.js` when deploying new assets. This ensures activate clears old caches and users get fresh files.
 - A common pattern is to inject the version automatically via your build tool (e.g., Vite, Webpack).
 
 ### Opaque Responses (cross-origin requests)
+
 - Requests to external origins (e.g., CDN fonts, third-party APIs) return "opaque" responses that cannot be inspected. Cache them with caution — a failed opaque response still gets a `200` status.
 - Prefer `staleWhileRevalidate` for cross-origin resources, or use a library like Workbox which handles this safely.
 
@@ -361,11 +367,13 @@ registerRoute(({ request }) => request.destination === 'script', new StaleWhileR
 - [ ] Tested on iOS Safari (manual install flow) and Android Chrome (install prompt)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

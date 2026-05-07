@@ -8,7 +8,6 @@ id: skill-ai-md
 owner: [[orchestrator]]
 ---
 
-
 # AI.MD v4 — The Complete AI-Native Conversion System
 
 ## When to Use This Skill
@@ -47,10 +46,13 @@ When each rule has its own line, the model processes it as a distinct unit.
 Full attention weight on each rule.
 
 ```
+
 # ONE LINE = attention splits 5 ways (some rules drop to near-zero weight)
+
 EVIDENCE: no-fabricate no-guess | 禁用詞:應該是/可能是 → 先拿數據 | Read/Grep→行號 curl→數據 | "好像"/"覺得"→自己先跑test | guess=shame-wall
 
 # FIVE LINES = each rule gets full attention
+
 EVIDENCE:
   core: no-fabricate | no-guess | unsure=say-so
   banned: 應該是/可能是/感覺是/推測 → 先拿數據
@@ -65,10 +67,13 @@ Natural language forces the model to INFER meaning from context.
 Labels DECLARE meaning explicitly. No inference needed = no misinterpretation.
 
 ```
+
 # AI must infer: what does (防搞混) modify? what does 例外 apply to?
+
 GATE-1: 收到任務→先用一句話複述(防搞混)(長對話中每個新任務都重新觸發) | 例外: signals命中「處理一下」=直接執行
 
 # AI reads labels directly: trigger→action→exception. Zero ambiguity.
+
 GATE-1 複述:
   trigger: new-task
   action: first-sentence="你要我做的是___"
@@ -88,10 +93,13 @@ the model matches it directly to the corresponding label — like a hash table l
 instead of a full-text search.
 
 ```
+
 # BURIED: AI scans the whole sentence, might miss the connection
+
 加新功能→第一句問schema | 新增API/endpoint=必確認health-check.py覆蓋
 
 # ANCHORED: label "new-api:" directly matches user saying "加個 API"
+
 MOAT:
   new-feature: 第一句問schema/契約/關聯
   new-api: 必確認health-check.py覆蓋(GATE-5)
@@ -111,6 +119,7 @@ Here's the exact mental model I use when converting natural language instruction
 I read the CLAUDE.md **as if I'm building a state machine**, not reading a document.
 
 For each sentence, I ask:
+
 1. **Is this a TRIGGER?** (What input activates this behavior?)
 2. **Is this an ACTION?** (What should the AI do?)
 3. **Is this a CONSTRAINT?** (What should the AI NOT do?)
@@ -140,16 +149,20 @@ It needs to be 3 separate instructions.
 they are separate rules and MUST be on separate lines.
 
 ```
+
 # Input: one sentence hiding 4 rules
+
 禁用詞:應該是/可能是→先拿數據 | "好像"/"覺得"→自己先跑test(不是問user)→有數據才能決定
 
 # Analysis: I find 4 hidden rules
+
 Rule 1: certain words are banned → use data instead
 Rule 2: hearing doubt words → run self-test
 Rule 3: don't ask the user for data → look it up yourself
 Rule 4: preference claims → require A/B comparison before accepting
 
 # Output: 4 atomic rules
+
 banned: 應該是/可能是/感覺是/推測 → 先拿數據
 hear-doubt: "好像"/"覺得" → self-test(curl/benchmark)
 self-serve: 禁反問user(自己查)
@@ -201,7 +214,9 @@ The model processes instructions top-to-bottom. Priority = position.
 **Grouping technique:** Rules that share a DOMAIN become sub-items under one heading.
 
 ```
+
 # FLAT (bad): 7 unrelated rules, model treats equally
+
 1. no guessing
 2. backup before editing
 3. use tables for output
@@ -211,6 +226,7 @@ The model processes instructions top-to-bottom. Priority = position.
 7. all claims need proof
 
 # GROUPED (good): 3 domains, model understands hierarchy
+
 EVIDENCE:               ← domain: truthfulness
   core: no-guess
   banned: 應該是
@@ -315,6 +331,7 @@ are less standardized across models.
 ### Technique 2: State Machine Gates
 
 Instead of treating rules as a flat list, model them as a **state machine**:
+
 - Each gate has a `trigger` (input state)
 - Each gate has an `action` (transition)
 - Gates have `priority` (which fires first when multiple match)
@@ -355,12 +372,15 @@ When the same concept appears in multiple rules, DON'T repeat it.
 Use a cross-reference label.
 
 ```
+
 # BAD: health-check mentioned in 3 places
+
 GATE-5: ...check health-check.py...
 MOAT: ...must check health-check.py...
 SCOPE: ...verify health-check.py exists...
 
 # GOOD: single source of truth + cross-reference
+
 GATE-5 驗收:
   checks:
     新增API → 確認health-check.py覆蓋
@@ -375,13 +395,16 @@ Delete ALL text that exists to explain WHY a rule exists.
 AI needs WHAT to do, not WHY.
 
 ```
+
 # DELETE these human explanations:
+
 (防搞混)                     → motivation
 (不是大爆破,是每次順手一點)    → metaphor
 (想清楚100倍後才做現在的)     → backstory
 (因為用戶是非工程師)          → justification
 
 # KEEP only the actionable instruction:
+
 action: first-sentence="你要我做的是___"
 refactor: 同區塊連續第3次修改 → extract
 ```
@@ -434,6 +457,7 @@ Restore: cp ~/.claude/CLAUDE.md.bak-pre-distill ~/.claude/CLAUDE.md
 ## AI-Native Template
 
 ```xml
+
 # PROJECT-NAME | lang:xx | for-AI-parsing | optimize=results-over-format
 
 <user>
@@ -512,6 +536,7 @@ Tested 2026-03, washinmura.jp CLAUDE.md, 5 rounds, 4 models:
 | R4 (AI-native convert) | structured labels | **8/8** | **7/8** | **8/8** |
 
 Key findings:
+
 1. **More prose rules = worse compliance** (R1→R3: scores dropped as rules grew)
 2. **Structured format = restored + exceeded** (R4: back to max despite more rules)
 3. **Cross-model consistency**: Format that works for one model works for all (except Grok)
@@ -521,11 +546,13 @@ Key findings:
 might be HURTING your AI's performance. Structure > Prose. Always.**
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

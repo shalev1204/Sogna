@@ -10,7 +10,6 @@ id: skill-plaid-fintech
 owner: [[orchestrator]]
 ---
 
-
 # Plaid Fintech
 
 Expert patterns for Plaid API integration including Link token flows,
@@ -291,6 +290,7 @@ app.post('/api/plaid/webhooks', async (req, res) => {
 ### Context
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - fetching transactions
 - transaction history
 - account activity
@@ -852,6 +852,7 @@ Message: Transaction sync without cursor persistence. Store cursor for increment
 - user needs mobile app -> mobile-developer (React Native Plaid SDK)
 
 ## When to Use
+
 - User mentions or implies: plaid
 - User mentions or implies: bank account linking
 - User mentions or implies: bank connection
@@ -863,11 +864,13 @@ Message: Transaction sync without cursor persistence. Store cursor for increment
 - User mentions or implies: identity verification banking
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -3,7 +3,7 @@ export declare const rootProjectionNode: {
     current: IProjectionNode | undefined;
 };
 export declare const HTMLProjectionNode: {
-    new (latestValues?: import("../..").ResolvedValues, parent?: IProjectionNode | undefined): {
+    new (latestValues?: import("../../index.js").ResolvedValues, parent?: IProjectionNode | undefined): {
         id: number;
         animationId: number;
         animationCommitId: number;
@@ -44,9 +44,9 @@ export declare const HTMLProjectionNode: {
         treeScale: import("sognaflow-utils").Point;
         resumeFrom?: IProjectionNode;
         resumingFrom?: IProjectionNode;
-        latestValues: import("../..").ResolvedValues;
+        latestValues: import("../../index.js").ResolvedValues;
         eventHandlers: Map<import("./types.js").LayoutEvents, import("sognaflow-utils").SubscriptionManager<any>>;
-        nodes?: import("../..").FlatTree;
+        nodes?: import("../utils/flat-tree.js").FlatTree;
         depth: number;
         prevTransformTemplateValue: string | undefined;
         preserveOpacity?: boolean;
@@ -62,7 +62,7 @@ export declare const HTMLProjectionNode: {
         isUpdateBlocked(): boolean;
         isTreeAnimationBlocked(): boolean;
         startUpdate(): void;
-        getTransformTemplate(): import("../..").TransformTemplate | undefined;
+        getTransformTemplate(): import("../../index.js").TransformTemplate | undefined;
         willUpdate(shouldNotifyListeners?: boolean): void;
         updateScheduled: boolean;
         update(): void;
@@ -107,31 +107,31 @@ export declare const HTMLProjectionNode: {
         show(): void;
         scheduleRender(notifyAll?: boolean): void;
         createProjectionDeltas(): void;
-        animationValues?: import("../..").ResolvedValues;
-        pendingAnimation?: import("../..").Process;
-        currentAnimation?: import("../..").JSAnimation<number>;
+        animationValues?: import("../../index.js").ResolvedValues;
+        pendingAnimation?: import("../../index.js").Process;
+        currentAnimation?: import("../../index.js").JSAnimation<number>;
         mixTargetDelta: (progress: number) => void;
         animationProgress: number;
         setAnimationOrigin(delta: import("sognaflow-utils").Delta, hasOnlyRelativeTargetChanged?: boolean): void;
-        sognaflowValue?: import("../..").SognaflowValue<number>;
-        startAnimation(options: import("../..").ValueAnimationOptions<number>): void;
+        sognaflowValue?: import("../../index.js").SognaflowValue<number>;
+        startAnimation(options: import("../../index.js").ValueAnimationOptions<number>): void;
         completeAnimation(): void;
         finishAnimation(): void;
         applyTransformsToTarget(): void;
-        sharedNodes: Map<string, import("../..").NodeStack>;
+        sharedNodes: Map<string, import("../shared/stack.js").NodeStack>;
         registerSharedNode(layoutId: string, node: IProjectionNode): void;
         isLead(): boolean;
         getLead(): IProjectionNode<unknown> | /*elided*/ any;
         getPrevLead(): IProjectionNode<unknown> | undefined;
-        getStack(): import("../..").NodeStack | undefined;
+        getStack(): import("../shared/stack.js").NodeStack | undefined;
         promote({ needsReset, transition, preserveFollowOpacity, }?: {
             needsReset?: boolean;
-            transition?: import("../..").Transition;
+            transition?: import("../../index.js").Transition;
             preserveFollowOpacity?: boolean;
         }): void;
         relegate(): boolean;
         resetSkewAndRotation(): void;
-        applyProjectionStyles(targetStyle: any, styleProp?: import("../..").SognaflowStyle): void;
+        applyProjectionStyles(targetStyle: any, styleProp?: import("../../index.js").SognaflowStyle): void;
         clearSnapshot(): void;
         resetTree(): void;
     };

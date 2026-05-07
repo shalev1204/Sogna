@@ -12,6 +12,7 @@ version: 1.0.0
 ## Why Persistence is Required
 
 When running on Hugging Face Jobs:
+
 - Environment is temporary
 - All files deleted on job completion
 - No local disk persistence
@@ -97,9 +98,11 @@ assert "HF_TOKEN" in os.environ, "HF_TOKEN required for Hub operations!"
 from huggingface_hub import HfApi
 
 # Auto-detects HF_TOKEN from environment
+
 api = HfApi()
 
 # Or explicitly pass token
+
 api = HfApi(token=os.environ.get("HF_TOKEN"))
 ```
 
@@ -110,8 +113,11 @@ api = HfApi(token=os.environ.get("HF_TOKEN"))
 ```python
 hf_jobs("uv", {
     "script": """
+
 # /// script
+
 # dependencies = ["datasets", "huggingface-hub"]
+
 # ///
 
 import os
@@ -119,13 +125,16 @@ from datasets import Dataset
 from huggingface_hub import HfApi
 
 # Verify token
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN required!"
 
 # Process data
+
 data = {"text": ["Sample 1", "Sample 2"]}
 dataset = Dataset.from_dict(data)
 
 # Push to Hub
+
 dataset.push_to_hub("username/my-dataset")
 print("✅ Dataset pushed!")
 """,
@@ -140,22 +149,29 @@ print("✅ Dataset pushed!")
 ```python
 hf_jobs("uv", {
     "script": """
+
 # /// script
+
 # dependencies = ["transformers"]
+
 # ///
 
 import os
 from transformers import AutoModel, AutoTokenizer
 
 # Verify token
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN required!"
 
 # Load and process model
+
 model = AutoModel.from_pretrained("base-model")
 tokenizer = AutoTokenizer.from_pretrained("base-model")
+
 # ... process model ...
 
 # Push to Hub
+
 model.push_to_hub("username/my-model")
 tokenizer.push_to_hub("username/my-model")
 print("✅ Model pushed!")
@@ -171,8 +187,11 @@ print("✅ Model pushed!")
 ```python
 hf_jobs("uv", {
     "script": """
+
 # /// script
+
 # dependencies = ["huggingface-hub", "pandas"]
+
 # ///
 
 import os
@@ -181,18 +200,22 @@ import pandas as pd
 from huggingface_hub import HfApi
 
 # Verify token
+
 assert "HF_TOKEN" in os.environ, "HF_TOKEN required!"
 
 # Generate results
+
 results = {"accuracy": 0.95, "loss": 0.05}
 df = pd.DataFrame([results])
 
 # Save files
+
 with open("results.json", "w") as f:
     json.dump(results, f)
 df.to_csv("results.csv", index=False)
 
 # Push to Hub
+
 api = HfApi()
 api.upload_file("results.json", "results.json", "username/results", repo_type="dataset")
 api.upload_file("results.csv", "results.csv", "username/results", repo_type="dataset")
@@ -266,11 +289,13 @@ api.create_repo(
 ### Repository Naming
 
 **Valid names:**
+
 - `username/my-model`
 - `username/model-name`
 - `organization/model-name`
 
 **Invalid names:**
+
 - `model-name` (missing username)
 - `username/model name` (spaces not allowed)
 - `username/MODEL` (uppercase discouraged)
@@ -282,6 +307,7 @@ api.create_repo(
 **Cause:** HF_TOKEN not provided or invalid
 
 **Solutions:**
+
 1. Verify `secrets={"HF_TOKEN": "$HF_TOKEN"}` in job config
 2. Check you're logged in: `hf_whoami()`
 3. Re-login: `hf auth login`
@@ -291,6 +317,7 @@ api.create_repo(
 **Cause:** No write access to repository
 
 **Solutions:**
+
 1. Check repository namespace matches your username
 2. Verify you're a member of organization (if using org namespace)
 3. Check token has write permissions
@@ -300,6 +327,7 @@ api.create_repo(
 **Cause:** Repository doesn't exist and auto-creation failed
 
 **Solutions:**
+
 1. Manually create repository first
 2. Check repository name format
 3. Verify namespace exists
@@ -309,6 +337,7 @@ api.create_repo(
 **Cause:** Network issues or Hub unavailable
 
 **Solutions:**
+
 1. Check logs for specific error
 2. Verify token is valid
 3. Retry push operation
@@ -360,6 +389,7 @@ Upload file results.json: 100%
 Always verify both are configured before submitting any job that produces results.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -612,6 +612,7 @@ public struct Disabled : IComponentData, IEnableableComponent { }
 ## Best Practices
 
 ### Do's
+
 - **Use ISystem over SystemBase** - Better performance
 - **Burst compile everything** - Massive speedup
 - **Batch structural changes** - Use ECB
@@ -619,6 +620,7 @@ public struct Disabled : IComponentData, IEnableableComponent { }
 - **Use Aspects** - Clean component grouping
 
 ### Don'ts
+
 - **Don't use managed types** - Breaks Burst
 - **Don't structural change in jobs** - Use ECB
 - **Don't over-architect** - Start simple
@@ -632,6 +634,7 @@ public struct Disabled : IComponentData, IEnableableComponent { }
 - [Burst User Guide](https://docs.unity3d.com/Packages/com.unity.burst@latest)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

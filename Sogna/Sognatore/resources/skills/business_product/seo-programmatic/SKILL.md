@@ -6,17 +6,18 @@ date_added: "2026-03-21"
 user-invokable: true
 argument-hint: "[url or plan]"
 allowed-tools:
+
   - Read
   - Grep
   - Glob
   - Bash
   - WebFetch
   - Write
+
 version: 1.0.0
 id: skill-seo-programmatic
 owner: [[prod-pm]], [[biz-marketing]]
 ---
-
 
 # Programmatic SEO Analysis & Planning
 
@@ -24,6 +25,7 @@ Build and audit SEO pages generated at scale from structured data sources.
 Enforces quality gates to prevent thin content penalties and index bloat.
 
 ## When to Use
+
 - Use when the user wants programmatic SEO planning or review.
 - Use when designing templates, data-driven pages, or scalable URL systems.
 - Use when preventing thin content and index bloat across large page sets.
@@ -31,6 +33,7 @@ Enforces quality gates to prevent thin content penalties and index bloat.
 ## Data Source Assessment
 
 Evaluate the data powering programmatic pages:
+
 - **CSV/JSON files**: Row count, column uniqueness, missing values
 - **API endpoints**: Response structure, data freshness, rate limits
 - **Database queries**: Record count, field completeness, update frequency
@@ -42,6 +45,7 @@ Evaluate the data powering programmatic pages:
 ## Template Engine Planning
 
 Design templates that produce unique, valuable pages:
+
 - **Variable injection points**: Title, H1, body sections, meta description, schema
 - **Content blocks**: Static (shared across pages) vs dynamic (unique per page)
 - **Conditional logic**: Show/hide sections based on data availability
@@ -54,6 +58,7 @@ Design templates that produce unique, valuable pages:
 ## URL Pattern Strategy
 
 ### Common Patterns
+
 - `/tools/[tool-name]`: Tool/product directory pages
 - `/[city]/[service]`: Location + service pages
 - `/integrations/[platform]`: Integration landing pages
@@ -61,6 +66,7 @@ Design templates that produce unique, valuable pages:
 - `/templates/[template-name]`: Downloadable template pages
 
 ### URL Rules
+
 - Lowercase, hyphenated slugs derived from data
 - Logical hierarchy reflecting site architecture
 - No duplicate slugs; enforce uniqueness at generation time
@@ -97,6 +103,7 @@ Google's Scaled Content Abuse policy (introduced March 2024) saw major enforceme
 - **Result:** Google reported 45% reduction in low-quality, unoriginal content in search results post-March 2024 enforcement
 
 **Enhanced quality gates for programmatic pages:**
+
 - **Content differentiation:** ≥30-40% of content must be genuinely unique between any two programmatic pages (not just city/keyword string replacement)
 - **Human review:** Minimum 5-10% sample review of generated pages before publishing
 - **Progressive rollout:** Publish in batches of 50-100 pages. Monitor indexing and rankings for 2-4 weeks before expanding. Never publish 500+ programmatic pages simultaneously without explicit quality review.
@@ -106,6 +113,7 @@ Google's Scaled Content Abuse policy (introduced March 2024) saw major enforceme
 > **Recommendation:** The WARNING gate at `<40% unique content` remains appropriate. Consider a HARD STOP at `<30%` unique content to prevent scaled content abuse risk.
 
 ### Safe Programmatic Pages (OK at scale)
+
 ✅ Integration pages (with real setup docs, API details, screenshots)
 ✅ Template/tool pages (with downloadable content, usage instructions)
 ✅ Glossary pages (200+ word definitions with examples, related terms)
@@ -113,6 +121,7 @@ Google's Scaled Content Abuse policy (introduced March 2024) saw major enforceme
 ✅ Data-driven pages (unique statistics, charts, analysis per record)
 
 ### Penalty Risk (avoid at scale)
+
 ❌ Location pages with only city name swapped in identical text
 ❌ "Best [tool] for [industry]" without industry-specific value
 ❌ "[Competitor] alternative" without real comparison data
@@ -120,6 +129,7 @@ Google's Scaled Content Abuse policy (introduced March 2024) saw major enforceme
 ❌ Pages where >60% of content is shared template boilerplate
 
 ### Uniqueness Calculation
+
 Unique content % = (words unique to this page) / (total words on page) × 100
 
 Measure against all other pages in the programmatic set. Shared headers, footers, and navigation are excluded from the calculation. Template boilerplate text IS included.
@@ -156,6 +166,7 @@ Measure against all other pages in the programmatic set. Shared headers, footers
 ### Programmatic SEO Score: XX/100
 
 ### Assessment Summary
+
 | Category | Status | Score |
 |----------|--------|-------|
 | Data Quality | ✅/⚠️/❌ | XX/100 |
@@ -166,11 +177,15 @@ Measure against all other pages in the programmatic set. Shared headers, footers
 | Index Management | ✅/⚠️/❌ | XX/100 |
 
 ### Critical Issues (fix immediately)
+
 ### High Priority (fix within 1 week)
+
 ### Medium Priority (fix within 1 month)
+
 ### Low Priority (backlog)
 
 ### Recommendations
+
 - Data source improvements
 - Template modifications
 - URL pattern adjustments
@@ -186,11 +201,13 @@ Measure against all other pages in the programmatic set. Shared headers, footers
 | Quality gate violation | Halt analysis at the HARD STOP threshold (500+ pages without justification or <30% unique content). Present findings and require explicit user approval to continue. |
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

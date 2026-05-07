@@ -8,7 +8,6 @@ id: skill-hig-components-content
 owner: [[orchestrator]]
 ---
 
-
 # Apple HIG: Content Components
 
 Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered.
@@ -28,6 +27,7 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 6. **Handle empty states.** Show a meaningful empty state with guidance on how to populate it, not a blank screen.
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 7. **Optimize for performance.** Use lazy loading, cell reuse, pagination, and prefetching for large datasets.
 
 ## Reference Index
@@ -82,14 +82,17 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 *Built by [Raintree Technology](https://raintree.technology) · [More developer tools](https://raintree.technology)*
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -13,7 +13,6 @@ id: skill-faf-expert
 owner: [[orchestrator]]
 ---
 
-
 # FAF Expert - Advanced AI Context Architecture
 
 **Master the IANA-registered format that makes AI understand your projects.**
@@ -36,8 +35,11 @@ Use FAF Expert when you need:
 ## Real-World Examples
 
 ### Example 1: Legacy Enterprise Java System
+
 ```yaml
+
 # Achieved: 92% Gold tier with FAF Expert
+
 project:
   name: enterprise-payment-api
   goal: Mission-critical payment processing system
@@ -55,8 +57,11 @@ human_context:
 ```
 
 ### Example 2: Modern React Dashboard
+
 ```yaml
+
 # Achieved: 97% Gold tier performance
+
 project:
   name: analytics-dashboard
   goal: Real-time analytics for SaaS platform
@@ -73,11 +78,13 @@ stack:
 ## Core Capabilities
 
 ### 🏆 Championship Scoring System
+
 - **Gold Tier (95%+)**: Production-ready AI context
 - **Silver Tier (85%+)**: Professional development standard  
 - **Bronze Tier (70%+)**: Solid foundation for AI assistance
 
 ### 🔧 MCP Server Configuration
+
 Expert setup of claude-faf-mcp with 33 tools:
 ```json
 {
@@ -91,14 +98,18 @@ Expert setup of claude-faf-mcp with 33 tools:
 ```
 
 ### 🔄 Bi-Directional Sync
+
 Keep context synchronized across platforms:
+
 - `.faf` ↔ `CLAUDE.md` 
 - `.faf` ↔ `.cursorrules`
 - `.faf` ↔ `GEMINI.md`
 - `.faf` ↔ `AGENTS.md`
 
 ### 📊 Mk4 Architecture Framework
+
 33-slot IANA format for comprehensive project context:
+
 - Project identity and goals
 - Technical stack detection  
 - Human context (who/what/why/where/when/how)
@@ -108,38 +119,51 @@ Keep context synchronized across platforms:
 ## Getting Started
 
 ### Quick Installation
+
 ```bash
+
 # Install FAF CLI
+
 npm install -g faf-cli
 
 # Initialize your project
+
 faf init
 
 # Score AI-readiness
+
 faf score --details
 
 # Set up MCP server
+
 faf mcp install
 ```
 
 ### Expert Commands
+
 ```bash
+
 # Advanced scoring with breakdown
+
 faf score --championship --verbose
 
 # Multi-platform sync
+
 faf bi-sync --target all
 
 # Validate format compliance
+
 faf validate --strict
 
 # Enhanced AI optimization
+
 faf enhance --model claude --focus completeness
 ```
 
 ## Success Metrics
 
 **Real Performance Data:**
+
 - **52k+ downloads** across FAF ecosystem
 - **800+ comprehensive tests** (CLI + MCP)
 - **IANA-registered format** (application/vnd.faf+yaml)
@@ -149,6 +173,7 @@ faf enhance --model claude --focus completeness
 ## Platform Compatibility
 
 ### Supported AI Tools
+
 - ✅ **Claude Code** - Native MCP integration
 - ✅ **Cursor** - .cursorrules sync
 - ✅ **Gemini CLI** - GEMINI.md sync  
@@ -156,6 +181,7 @@ faf enhance --model claude --focus completeness
 - ✅ **Universal** - Works with any AI that reads YAML
 
 ### MCP Servers Available
+
 - `claude-faf-mcp` - 33 tools, 391 tests
 - `grok-faf-mcp` - xAI/Grok optimized
 - `rust-faf-mcp` - Native performance (4.3MB binary)
@@ -164,6 +190,7 @@ faf enhance --model claude --focus completeness
 ## Advanced Patterns
 
 ### Enterprise Configuration
+
 ```yaml
 faf_version: "3.0"
 project:
@@ -183,8 +210,11 @@ stack:
 ```
 
 ### Legacy System Revival
+
 ```yaml
+
 # Transform 10-year-old codebase to AI-ready
+
 project:
   archaeology: true
   modernization_target: 2026
@@ -206,12 +236,14 @@ stack:
 ## When to Use faf-wizard Instead
 
 Use `faf-wizard` for:
+
 - ✅ Quick project setup
 - ✅ One-click generation
 - ✅ Beginner-friendly workflow
 - ✅ Automated stack detection
 
 Use `faf-expert` for:
+
 - 🎯 Fine-tuned configuration
 - 🎯 Championship scoring optimization
 - 🎯 Multi-platform sync management
@@ -223,11 +255,13 @@ Use `faf-expert` for:
 *Master the format that makes AI understand your projects. FAF Expert - for when you need championship-grade AI context architecture.*
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

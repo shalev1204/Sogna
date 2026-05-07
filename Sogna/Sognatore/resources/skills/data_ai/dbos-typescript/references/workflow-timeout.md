@@ -36,6 +36,7 @@ const handle = await DBOS.startWorkflow(processTask, {
 ```
 
 Key timeout behaviors:
+
 - Timeouts are **start-to-completion**: the timeout begins when the workflow starts execution, not when it's enqueued
 - Timeouts are **durable**: they persist across restarts, so workflows can have very long timeouts (hours, days, weeks)
 - Cancellation happens at the **beginning of the next step** - the current step completes first
@@ -44,6 +45,7 @@ Key timeout behaviors:
 Reference: [Workflow Timeouts](https://docs.dbos.dev/typescript/tutorials/workflow-tutorial#workflow-timeouts)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

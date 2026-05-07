@@ -48,12 +48,14 @@ function hasChanges(current: string[], original: string[]) {
 ```
 
 This new approach is more efficient because:
+
 - It avoids the overhead of sorting and joining the arrays when lengths differ
 - It avoids consuming memory for the joined strings (especially important for large arrays)
 - It avoids mutating the original arrays
 - It returns early when a difference is found
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

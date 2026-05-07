@@ -133,12 +133,14 @@ import anthropic
 client = anthropic.Anthropic()
 
 # 1. Upload once
+
 uploaded = client.beta.files.upload(
     file=("contract.pdf", open("contract.pdf", "rb"), "application/pdf"),
 )
 print(f"Uploaded: {uploaded.id}")
 
 # 2. Ask multiple questions using the same file_id
+
 questions = [
     "What are the key terms and conditions?",
     "What is the termination clause?",
@@ -165,10 +167,12 @@ for question in questions:
     print(f"A: {response.content[0].text[:200]}")
 
 # 3. Clean up when done
+
 client.beta.files.delete(uploaded.id)
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

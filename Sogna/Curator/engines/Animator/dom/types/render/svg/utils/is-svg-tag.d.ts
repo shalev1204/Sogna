@@ -1,1 +1,1 @@
-export declare const IsSVGTag: (tag: unknown) => boolean;
+export declare const isSVGTag: (tag: unknown) => boolean;

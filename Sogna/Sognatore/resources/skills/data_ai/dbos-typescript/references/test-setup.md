@@ -101,6 +101,7 @@ describe("integration tests", () => {
 ```
 
 Key points:
+
 - Call `DBOS.shutdown()` before resetting and reconfiguring
 - Reset the database between tests for isolation
 - Set a generous `beforeEach` timeout (10s) for database setup
@@ -109,6 +110,7 @@ Key points:
 Reference: [Testing & Mocking](https://docs.dbos.dev/typescript/tutorials/testing)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

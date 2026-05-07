@@ -162,6 +162,7 @@ Examples:
 ## Specification (spec.md) Structure
 
 ```markdown
+
 # {Track Title}
 
 ## Overview
@@ -231,11 +232,13 @@ Description of the non-functional requirement (performance, security, etc.)
 
 - [ ] Question that needs resolution
 - [x] Resolved question - Answer
+
 ```
 
 ## Plan (plan.md) Structure
 
 ```markdown
+
 # Implementation Plan: {Track Title}
 
 Track ID: `{track-id}`
@@ -306,16 +309,19 @@ Use consistent markers in plan.md:
 Example:
 
 ```markdown
+
 - [x] **Task 1.1**: Set up database schema `abc1234`
 - [~] **Task 1.2**: Implement user model
 - [ ] **Task 1.3**: Add validation logic
 - [!] **Task 1.4**: Integrate auth service (blocked: waiting for API key)
 - [-] **Task 1.5**: Legacy migration (skipped: not needed)
+
 ```
 
 ## Track Registry (tracks.md) Format
 
 ```markdown
+
 # Track Registry
 
 ## Active Tracks
@@ -536,52 +542,64 @@ Before starting implementation, verify plan.md:
 
 ```
 Phase 1: Foundation
+
 - Data models
 - Database migrations
 - Basic API structure
 
 Phase 2: Core Logic
+
 - Business logic implementation
 - Input validation
 - Error handling
 
 Phase 3: Integration
+
 - UI integration
 - API documentation
 - End-to-end tests
+
 ```
 
 ### Bug Fix Track Pattern
 
 ```
 Phase 1: Reproduction
+
 - Write failing test capturing bug
 - Document reproduction steps
 
 Phase 2: Fix
+
 - Implement fix
 - Verify test passes
 - Check for regressions
 
 Phase 3: Verification
+
 - Manual verification
 - Update documentation if needed
+
 ```
 
 ### Refactor Track Pattern
 
 ```
 Phase 1: Preparation
+
 - Add characterization tests
 - Document current behavior
 
 Phase 2: Refactoring
+
 - Apply changes incrementally
 - Maintain green tests throughout
 
 Phase 3: Cleanup
+
 - Remove dead code
 - Update documentation
+
 ```
 
 ## Best Practices
@@ -598,6 +616,7 @@ Phase 3: Cleanup
 10. **Clear acceptance criteria**: Every requirement must be testable
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

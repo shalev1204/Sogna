@@ -8,7 +8,6 @@ id: skill-threat-modeling-expert
 owner: [[biz-hr]], [[ops-security]]
 ---
 
-
 # Threat Modeling Expert
 
 Expert in threat modeling methodologies, security architecture review, and risk assessment. Masters STRIDE, PASTA, attack trees, and security requirement extraction. Use PROACTIVELY for security architecture reviews, threat identification, or building secure-by-design systems.
@@ -66,11 +65,13 @@ Expert in threat modeling methodologies, security architecture review, and risk 
 - Review regularly, not just at design time
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

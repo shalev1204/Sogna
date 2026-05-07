@@ -71,14 +71,18 @@ import { ThemeProvider } from "next-themes"
 ## Changing the Theme
 
 ```bash
+
 # Apply a preset code from ui.shadcn.com.
+
 npx shadcn@latest init --preset a2r6bw --force
 
 # Switch to a named preset.
+
 npx shadcn@latest init --preset radix-nova --force
 npx shadcn@latest init --reinstall  # update existing components to match
 
 # Use a custom theme URL.
+
 npx shadcn@latest init --preset "https://ui.shadcn.com/init?base=radix&style=nova&theme=blue&..." --force
 ```
 
@@ -209,6 +213,7 @@ npx shadcn@latest add button --diff button.tsx # see the diff for a specific fil
 See [Updating Components in SKILL.md](./SKILL.md#updating-components) for the full smart merge workflow.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

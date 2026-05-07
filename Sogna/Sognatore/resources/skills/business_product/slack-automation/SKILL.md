@@ -8,7 +8,6 @@ id: skill-slack-automation
 owner: [[prod-pm]]
 ---
 
-
 # Slack Automation via Rube MCP
 
 Automate Slack workspace operations including messaging, search, channel management, and reaction workflows through Composio's Slack toolkit.
@@ -35,6 +34,7 @@ Automate Slack workspace operations including messaging, search, channel managem
 **When to use**: User wants to post a message to a Slack channel or DM
 
 **Tool sequence**:
+
 1. `SLACK_FIND_CHANNELS` - Resolve channel name to channel ID [Prerequisite]
 2. `SLACK_LIST_ALL_CHANNELS` - Fallback if FIND_CHANNELS returns empty/ambiguous results [Fallback]
 3. `SLACK_FIND_USERS` - Resolve user for DMs or @mentions [Optional]
@@ -43,6 +43,7 @@ Automate Slack workspace operations including messaging, search, channel managem
 6. `SLACK_UPDATES_A_SLACK_MESSAGE` - Edit the posted message if corrections needed [Optional]
 
 **Key parameters**:
+
 - `channel`: Channel ID or name (without '#' prefix)
 - `markdown_text`: Preferred field for formatted messages (supports headers, bold, italic, code blocks)
 - `text`: Raw text fallback (deprecated in favor of markdown_text)
@@ -50,6 +51,7 @@ Automate Slack workspace operations including messaging, search, channel managem
 - `blocks`: Block Kit layout blocks (deprecated, use markdown_text)
 
 **Pitfalls**:
+
 - `SLACK_FIND_CHANNELS` requires `query` param; missing it errors with "Invalid request data provided"
 - `SLACK_SEND_MESSAGE` requires valid channel plus one of markdown_text/text/blocks/attachments
 - Invalid block payloads return error=invalid_blocks (max 50 blocks)
@@ -61,18 +63,21 @@ Automate Slack workspace operations including messaging, search, channel managem
 **When to use**: User wants to find specific messages across the workspace
 
 **Tool sequence**:
+
 1. `SLACK_FIND_CHANNELS` - Resolve channel for scoped search with `in:#channel` [Optional]
 2. `SLACK_FIND_USERS` - Resolve user for author filter with `from:@user` [Optional]
 3. `SLACK_SEARCH_MESSAGES` - Run keyword search across accessible conversations [Required]
 4. `SLACK_FETCH_MESSAGE_THREAD_FROM_A_CONVERSATION` - Expand threads for relevant hits [Required]
 
 **Key parameters**:
+
 - `query`: Search string supporting modifiers (`in:#channel`, `from:@user`, `before:YYYY-MM-DD`, `after:YYYY-MM-DD`, `has:link`, `has:file`)
 - `count`: Results per page (max 100), or total with auto_paginate=true
 - `sort`: 'score' (relevance) or 'timestamp' (chronological)
 - `sort_dir`: 'asc' or 'desc'
 
 **Pitfalls**:
+
 - Validation fails if `query` is missing/empty
 - `ok=true` can still mean no hits (`response.data.messages.total=0`)
 - Matches are under `response.data.messages.matches` (sometimes also `response.data_preview.messages.matches`)
@@ -84,6 +89,7 @@ Automate Slack workspace operations including messaging, search, channel managem
 **When to use**: User wants to list channels, users, or workspace info
 
 **Tool sequence**:
+
 1. `SLACK_FETCH_TEAM_INFO` - Validate connectivity and get workspace identity [Required]
 2. `SLACK_LIST_ALL_CHANNELS` - Enumerate public channels [Required]
 3. `SLACK_LIST_CONVERSATIONS` - Include private channels and DMs [Optional]
@@ -92,11 +98,13 @@ Automate Slack workspace operations including messaging, search, channel managem
 6. `SLACK_LIST_USER_GROUPS_FOR_TEAM_WITH_OPTIONS` - List user groups [Optional]
 
 **Key parameters**:
+
 - `cursor`: Pagination cursor from `response_metadata.next_cursor`
 - `limit`: Results per page (default varies; set explicitly for large workspaces)
 - `types`: Channel types filter ('public_channel', 'private_channel', 'im', 'mpim')
 
 **Pitfalls**:
+
 - Workspace metadata is nested under `response.data.team`, not top-level
 - `SLACK_LIST_ALL_CHANNELS` returns public channels only; use `SLACK_LIST_CONVERSATIONS` for private/IM coverage
 - `SLACK_LIST_ALL_USERS` can hit HTTP 429 rate limits; honor Retry-After header
@@ -107,6 +115,7 @@ Automate Slack workspace operations including messaging, search, channel managem
 **When to use**: User wants to add reactions or manage threaded conversations
 
 **Tool sequence**:
+
 1. `SLACK_SEARCH_MESSAGES` or `SLACK_FETCH_CONVERSATION_HISTORY` - Find the target message [Prerequisite]
 2. `SLACK_ADD_REACTION_TO_AN_ITEM` - Add an emoji reaction [Required]
 3. `SLACK_FETCH_ITEM_REACTIONS` - List reactions on a message [Optional]
@@ -115,12 +124,14 @@ Automate Slack workspace operations including messaging, search, channel managem
 6. `SLACK_FETCH_MESSAGE_THREAD_FROM_A_CONVERSATION` - Read full thread [Optional]
 
 **Key parameters**:
+
 - `channel`: Channel ID where the message lives
 - `timestamp` / `ts`: Message timestamp (unique identifier like '1234567890.123456')
 - `name`: Emoji name without colons (e.g., 'thumbsup', 'wave::skin-tone-3')
 - `thread_ts`: Parent message timestamp for threaded replies
 
 **Pitfalls**:
+
 - Reactions require exact channel ID + message timestamp pair
 - Emoji names use Slack's naming convention without colons
 - `SLACK_FETCH_CONVERSATION_HISTORY` only returns main channel timeline, NOT threaded replies
@@ -131,33 +142,41 @@ Automate Slack workspace operations including messaging, search, channel managem
 **When to use**: User wants to schedule a message for future delivery
 
 **Tool sequence**:
+
 1. `SLACK_FIND_CHANNELS` - Resolve channel ID [Prerequisite]
 2. `SLACK_SCHEDULE_MESSAGE` - Schedule the message with `post_at` timestamp [Required]
 
 **Key parameters**:
+
 - `channel`: Resolved channel ID
 - `post_at`: Unix timestamp for delivery (up to 120 days in advance)
 - `text` / `blocks`: Message content
 
 **Pitfalls**:
+
 - Scheduling is limited to 120 days in advance
 - `post_at` must be a Unix timestamp, not ISO 8601
 
 ## Common Patterns
 
 ### ID Resolution
+
 Always resolve display names to IDs before operations:
+
 - **Channel name -> Channel ID**: `SLACK_FIND_CHANNELS` with `query` param
 - **User name -> User ID**: `SLACK_FIND_USERS` with `search_query` or `email`
 - **DM channel**: `SLACK_OPEN_DM` with resolved user IDs
 
 ### Pagination
+
 Most list endpoints use cursor-based pagination:
+
 - Follow `response_metadata.next_cursor` until empty
 - Set explicit `limit` values (e.g., 100-200) for reliable paging
 - De-duplicate results by `id` across pages
 
 ### Message Formatting
+
 - Prefer `markdown_text` over `text` or `blocks` for formatted messages
 - Use `<@USER_ID>` format to mention users (not @username)
 - Use `\n` for line breaks in markdown_text
@@ -192,14 +211,17 @@ Most list endpoints use cursor-based pagination:
 | Workspace info | `SLACK_FETCH_TEAM_INFO` | (none) |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

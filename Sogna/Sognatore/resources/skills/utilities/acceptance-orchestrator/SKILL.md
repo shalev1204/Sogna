@@ -8,7 +8,6 @@ id: skill-acceptance-orchestrator
 owner: [[orchestrator]]
 ---
 
-
 # Acceptance Orchestrator
 
 ## Overview
@@ -18,6 +17,7 @@ Orchestrate coding work as a state machine that ends only when acceptance criter
 Core rule: **do not optimize for "code changed"; optimize for "DoD proven".**
 
 ## When to Use
+
 - The task already has an issue or clear acceptance criteria and should run end-to-end with minimal human re-intervention.
 - You need structured handoff across implementation, review, deployment, and final verification.
 - You want explicit stop conditions and escalation instead of silent partial completion.
@@ -29,6 +29,7 @@ Core rule: **do not optimize for "code changed"; optimize for "DoD proven".**
 - `verification-before-completion`
 
 Optional supporting skills:
+
 - `deploy-dev`
 - `pr-watch`
 - `pr-review-autopilot`
@@ -37,12 +38,14 @@ Optional supporting skills:
 ## Inputs
 
 Require these inputs:
+
 - issue id or issue body
 - issue status
 - acceptance criteria (DoD)
 - target environment (`dev` default)
 
 Fixed defaults:
+
 - max iteration rounds = `2`
 - PR review polling = `3m -> 6m -> 10m`
 
@@ -89,6 +92,7 @@ Fixed defaults:
 Move to `accepted` only when every acceptance criterion has matching evidence.
 
 Move to `escalated` when any of these happen:
+
 - DoD still fails after `2` full rounds
 - missing secrets/permissions/external dependency blocks progress
 - task needs production action or destructive operation approval
@@ -97,6 +101,7 @@ Move to `escalated` when any of these happen:
 ## Human Gates
 
 Always stop for human confirmation on:
+
 - prod/stage deploys beyond agreed scope
 - destructive git/data operations
 - billing or security posture changes
@@ -105,6 +110,7 @@ Always stop for human confirmation on:
 ## Output Contract
 
 When reporting status, always include:
+
 - `Status`: intake / executing / accepted / escalated
 - `Acceptance Criteria`: pass/fail checklist
 - `Evidence`: commands, logs, API results, or runtime proof
@@ -114,11 +120,13 @@ When reporting status, always include:
 Do not report "done" unless status is `accepted`.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

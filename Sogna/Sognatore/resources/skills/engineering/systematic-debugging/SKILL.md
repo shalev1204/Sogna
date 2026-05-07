@@ -8,7 +8,6 @@ id: skill-systematic-debugging
 owner: [[debugger]]
 ---
 
-
 # Systematic Debugging
 
 ## Overview
@@ -28,7 +27,9 @@ NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 If you haven't completed Phase 1, you cannot propose fixes.
 
 ## When to Use
+
 Use for ANY technical issue:
+
 - Test failures
 - Bugs in production
 - Unexpected behavior
@@ -37,6 +38,7 @@ Use for ANY technical issue:
 - Integration issues
 
 **Use this ESPECIALLY when:**
+
 - Under time pressure (emergencies make guessing tempting)
 - "Just one quick fix" seems obvious
 - You've already tried multiple fixes
@@ -44,6 +46,7 @@ Use for ANY technical issue:
 - You don't fully understand the issue
 
 **Don't skip when:**
+
 - Issue seems simple (simple bugs have root causes too)
 - You're in a hurry (rushing guarantees rework)
 - Manager wants it fixed NOW (systematic is faster than thrashing)
@@ -81,6 +84,7 @@ You MUST complete each phase before proceeding to the next.
    **BEFORE proposing fixes, add diagnostic instrumentation:**
    ```
    For EACH component boundary:
+
      - Log what data enters component
      - Log what data exits component
      - Verify environment/config propagation
@@ -119,6 +123,7 @@ You MUST complete each phase before proceeding to the next.
    See `root-cause-tracing.md` in this directory for the complete backward tracing technique.
 
    **Quick version:**
+
    - Where does bad value originate?
    - What called this with bad value?
    - Keep tracing up until you find the source
@@ -204,11 +209,13 @@ You MUST complete each phase before proceeding to the next.
 5. **If 3+ Fixes Failed: Question Architecture**
 
    **Pattern indicating architectural problem:**
+
    - Each fix reveals new shared state/coupling/problem in different place
    - Fixes require "massive refactoring" to implement
    - Each fix creates new symptoms elsewhere
 
    **STOP and question fundamentals:**
+
    - Is this pattern fundamentally sound?
    - Are we "sticking with it through sheer inertia"?
    - Should we refactor architecture vs. continue fixing symptoms?
@@ -220,6 +227,7 @@ You MUST complete each phase before proceeding to the next.
 ## Red Flags - STOP and Follow Process
 
 If you catch yourself thinking:
+
 - "Quick fix for now, investigate later"
 - "Just try changing X and see if it works"
 - "Add multiple changes, run tests"
@@ -239,6 +247,7 @@ If you catch yourself thinking:
 ## your human partner's Signals You're Doing It Wrong
 
 **Watch for these redirections:**
+
 - "Is that not happening?" - You assumed without verifying
 - "Will it show us...?" - You should have added evidence gathering
 - "Stop guessing" - You're proposing fixes without understanding
@@ -289,23 +298,27 @@ These techniques are part of systematic debugging and available in this director
 - **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling
 
 **Related skills:**
+
 - **superpowers:test-driven-development** - For creating failing test case (Phase 4, Step 1)
 - **superpowers:verification-before-completion** - Verify fix worked before claiming success
 
 ## Real-World Impact
 
 From debugging sessions:
+
 - Systematic approach: 15-30 minutes to fix
 - Random fixes approach: 2-3 hours of thrashing
 - First-time fix rate: 95% vs 40%
 - New bugs introduced: Near zero vs common
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

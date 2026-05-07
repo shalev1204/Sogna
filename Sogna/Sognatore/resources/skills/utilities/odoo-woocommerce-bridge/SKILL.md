@@ -7,7 +7,6 @@ id: skill-odoo-woocommerce-bridge
 owner: [[orchestrator]]
 ---
 
-
 # Odoo ↔ WooCommerce Bridge
 
 ## Overview
@@ -49,6 +48,7 @@ import xmlrpc.client
 import os
 
 # WooCommerce client
+
 wcapi = API(
     url=os.getenv("WC_URL", "https://mystore.com"),
     consumer_key=os.getenv("WC_KEY"),
@@ -57,12 +57,12 @@ wcapi = API(
 )
 
 # Odoo client
+
 odoo_url = os.getenv("ODOO_URL", "https://myodoo.example.com")
 db = os.getenv("ODOO_DB", "my_db")
 uid = int(os.getenv("ODOO_UID", "2"))
 pwd = os.getenv("ODOO_PASSWORD")
 models = xmlrpc.client.ServerProxy(f"{odoo_url}/xmlrpc/2/object")
-
 
 def sync_orders():
     # Get unprocessed WooCommerce orders
@@ -138,11 +138,13 @@ def sync_inventory_to_woocommerce():
 - ❌ **Don't:** Sync draft or cancelled WooCommerce orders to Odoo — filter by `status = processing` or `completed`.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

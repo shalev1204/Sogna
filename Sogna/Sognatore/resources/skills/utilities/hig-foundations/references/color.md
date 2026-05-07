@@ -275,6 +275,7 @@ June 5, 2023| Updated guidance for using background color in watchOS.
 December 19, 2022| Corrected RGB values for system mint color (Dark Mode) in iOS and iPadOS.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

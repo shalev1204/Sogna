@@ -70,13 +70,16 @@ Common variables used across templates:
 ## 1. RMA Approval Notification
 
 ### When to Use
+
 - Customer has initiated a return request and it has been approved under standard policy or an authorised exception.
 - Send immediately upon RMA approval to minimise the time the customer holds the product.
 
 ### Tone Guidance
+
 Warm and efficient. The customer made a decision to return — make it easy. Lead with the actionable information (RMA number, shipping instructions), not the policy.
 
 ### What NOT to Say
+
 - Do not ask "are you sure?" or attempt to dissuade the return at this stage.
 - Do not include language that implies the customer did something wrong.
 - Do not bury the shipping instructions below marketing content.
@@ -101,6 +104,7 @@ Your return for **{{product_name}}** (Order {{order_number}}) has been approved.
 4. Drop off the package at any {{carrier_name}} location.
 
 **Important Details:**
+
 - Please ship your return by **{{rma_expiry}}** — the RMA expires after this date.
 - Once we receive and inspect your return, your refund of **{{refund_amount}}** will be processed to your {{payment_method}} within {{business_days}} business days.
 
@@ -114,13 +118,16 @@ Best regards,
 ## 2. RMA Denial Notification
 
 ### When to Use
+
 - The return request does not meet policy requirements (outside window, excluded category, condition not met).
 - Always provide specific reasons and alternative options.
 
 ### Tone Guidance
+
 Empathetic but clear. The customer will be disappointed. Acknowledge their situation, explain the specific reason (not generic "per our policy"), and always offer at least one alternative path forward.
 
 ### What NOT to Say
+
 - Do not use "unfortunately" more than once.
 - Do not cite policy section numbers or legalistic language.
 - Do not close the door completely — always provide an alternative or escalation path.
@@ -141,11 +148,15 @@ After reviewing your request, we're unable to process a standard return because 
 **We understand this is frustrating, and we want to help. Here are your options:**
 
 {{#if warranty_eligible}}
+
 - **Warranty claim:** Your product is still covered under the manufacturer's warranty through {{warranty_end_date}}. We can help you file a warranty claim for repair or replacement. Just reply to this email and we'll get that started.
+
 {{/if}}
 
 {{#if exchange_eligible}}
+
 - **Exchange:** While we can't offer a refund, we can arrange an exchange for the same product or a similar item. A {{restocking_fee_pct}}% restocking fee would apply.
+
 {{/if}}
 
 - **Store credit:** We may be able to offer store credit on a case-by-case basis. If you'd like us to review this option, please reply with any additional details about your situation.
@@ -164,13 +175,16 @@ Sincerely,
 ## 3. Fraud Investigation Hold Notice
 
 ### When to Use
+
 - A return has been flagged by the fraud scoring system (score ≥ 65) and requires review before the refund is processed.
 - The customer must be informed of the delay without revealing the fraud investigation.
 
 ### Tone Guidance
+
 Neutral and professional. This is a "processing delay" notification. NEVER use the words "fraud," "suspicious," "investigation," or "flagged." The customer may be entirely legitimate — the hold is precautionary.
 
 ### What NOT to Say
+
 - Never say "your return has been flagged."
 - Never reference fraud, theft, or abuse.
 - Never imply the customer has done something wrong.
@@ -222,10 +236,12 @@ Thank you for your patience,
 ## 4. Vendor RTV Claim Submission
 
 ### When to Use
+
 - Submitting a return-to-vendor claim for defective products, vendor-caused quality issues, or vendor compliance violations.
 - Attach all supporting documentation (photos, inspection reports, customer complaint data).
 
 ### Tone Guidance
+
 Professional and evidence-based. Vendors respond to data, not complaints. Lead with the facts: SKU, quantity, defect description, return rate data. Reference the vendor agreement section that covers defect claims.
 
 ### Template
@@ -252,12 +268,14 @@ Please find below our return-to-vendor claim for defective merchandise received 
 **Total Claim Amount:** {{total_claim_amount}}
 
 **Supporting Documentation (attached):**
+
 - Defect photographs ({{photo_count}} images)
 - Inspection reports for each SKU
 - Customer return data by SKU (return rate, complaint summary)
 - Original purchase order(s): {{po_numbers}}
 
 **Defect Rate Analysis:**
+
 - SKU {{sku_1}}: {{defect_rate_1}}% return rate ({{period}}), versus category baseline of {{baseline_rate}}%
 - Excess returns above baseline: {{excess_units}} units
 
@@ -278,10 +296,12 @@ Regards,
 ## 5. Customer Refund Confirmation
 
 ### When to Use
+
 - Refund has been processed. This is the final communication for a standard return.
 - Send immediately when the refund is initiated (not when it clears the customer's bank).
 
 ### Tone Guidance
+
 Warm and concise. Lead with the refund amount and timeline. The customer wants to know: how much and when.
 
 ### Template
@@ -295,6 +315,7 @@ Hi {{customer_name}},
 Your refund for **{{product_name}}** (Order {{order_number}}) has been processed.
 
 **Refund Details:**
+
 - **Amount:** {{refund_amount}}
 - **Refunded to:** {{payment_method}}
 - **Expected arrival:** {{refund_timeline}}
@@ -317,9 +338,11 @@ Best,
 ## 6. Restocking Fee Explanation
 
 ### When to Use
+
 - When a restocking fee is applied and the customer questions it (either proactively at the time of return or in response to a complaint).
 
 ### Tone Guidance
+
 Transparent and factual. Explain what the fee covers. Do not be apologetic about the policy, but do be clear about the specific dollar amounts.
 
 ### Template
@@ -357,9 +380,11 @@ Regards,
 ## 7. Warranty Claim Filing to Manufacturer
 
 ### When to Use
+
 - Filing a warranty claim with the manufacturer on behalf of the customer or for retailer-held defective inventory.
 
 ### Tone Guidance
+
 Formal and thorough. Manufacturers process warranty claims based on documentation quality. Include everything upfront to avoid back-and-forth.
 
 ### Template
@@ -384,16 +409,19 @@ To: {{manufacturer_warranty_dept}}
 | Date Defect Reported | {{defect_report_date}} |
 
 **Customer Information:**
+
 - Name: {{customer_name}}
 - Original Order: {{order_number}}
 - Customer has been provided interim resolution: {{interim_resolution}}
 
 **Defect Documentation:**
+
 - Photographs of defect: attached ({{photo_count}} images)
 - Functional test results: {{test_results}}
 - Customer description of defect: "{{customer_defect_statement}}"
 
 **Product Condition:**
+
 - Physical condition: {{physical_condition}}
 - Modifications: {{modifications_noted}}
 - Accessories present: {{accessories_status}}
@@ -413,10 +441,12 @@ Regards,
 ## 8. Disposition Report (Internal)
 
 ### When to Use
+
 - Weekly or monthly summary of returns disposition outcomes for management review.
 - Used to track recovery rates, identify disposition efficiency opportunities, and monitor fraud trends.
 
 ### Tone Guidance
+
 Data-first, concise. Management reads these for trends and exceptions, not prose.
 
 ### Template
@@ -481,10 +511,12 @@ Distribution: {{distribution_list}}
 ## 9. Return Policy Exception Approval
 
 ### When to Use
+
 - When an exception to standard return policy has been approved (outside window, missing receipt, condition outside standard acceptance criteria).
 - Documents the exception for audit trail and communicates the decision to the customer.
 
 ### Tone Guidance
+
 Customer-facing version: warm, conveys that you went above and beyond. Internal version: factual, documents the business justification.
 
 ### Customer-Facing Template
@@ -539,6 +571,7 @@ Best,
 | Notes | {{approval_notes}} |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

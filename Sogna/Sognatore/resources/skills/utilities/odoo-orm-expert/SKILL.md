@@ -7,7 +7,6 @@ id: skill-odoo-orm-expert
 owner: [[orchestrator]]
 ---
 
-
 # Odoo ORM Expert
 
 ## Overview
@@ -32,7 +31,9 @@ This skill teaches you Odoo's Object Relational Mapper (ORM) in depth. It covers
 ### Example 1: Search with Domain Filters
 
 ```python
+
 # Find all confirmed sale orders for a specific customer, created this year
+
 import datetime
 
 start_of_year = datetime.date.today().replace(month=1, day=1).strftime('%Y-%m-%d')
@@ -44,7 +45,9 @@ orders = self.env['sale.order'].search([
 ], order='date_order desc', limit=50)
 
 # Note: pass dates as 'YYYY-MM-DD' strings in domains,
+
 # NOT as fields.Date objects — the ORM serializes them correctly.
+
 ```
 
 ### Example 2: Computed Field
@@ -65,11 +68,14 @@ def _compute_total_order_count(self):
 ### Example 3: Safe Bulk Write (avoid N+1)
 
 ```python
+
 # ✅ GOOD: One query for all records
+
 partners = self.env['res.partner'].search([('country_id', '=', False)])
 partners.write({'country_id': self.env.ref('base.us').id})
 
 # ❌ BAD: Triggers a separate query per record
+
 for partner in partners:
     partner.country_id = self.env.ref('base.us').id
 ```
@@ -92,6 +98,7 @@ for partner in partners:
 - ORM behavior can differ slightly between Odoo SaaS and On-Premise due to config overrides.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

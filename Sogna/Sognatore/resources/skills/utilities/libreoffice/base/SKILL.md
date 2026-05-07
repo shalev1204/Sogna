@@ -9,7 +9,6 @@ id: skill-base
 owner: [[orchestrator]]
 ---
 
-
 # LibreOffice Base
 
 ## Overview
@@ -19,6 +18,7 @@ LibreOffice Base skill for creating, managing, and automating database workflows
 ## When to Use This Skill
 
 Use this skill when:
+
 - Creating new databases in ODB format
 - Connecting to external databases (MySQL, PostgreSQL, etc.)
 - Automating database operations and reports
@@ -28,30 +28,35 @@ Use this skill when:
 ## Core Capabilities
 
 ### 1. Database Creation
+
 - Create new ODB databases from scratch
 - Design tables, views, and relationships
 - Create embedded HSQLDB/Firebird databases
 - Connect to external databases
 
 ### 2. Data Operations
+
 - Import data from CSV, spreadsheets
 - Export data to various formats
 - Query execution and management
 - Batch data processing
 
 ### 3. Form and Report Automation
+
 - Create data entry forms
 - Design custom reports
 - Automate report generation
 - Build form templates
 
 ### 4. Query and SQL
+
 - Visual query design
 - SQL query execution
 - Query optimization
 - Result set manipulation
 
 ### 5. Integration
+
 - Command-line automation
 - Python scripting with UNO
 - JDBC/ODBC connectivity
@@ -61,11 +66,13 @@ Use this skill when:
 ### Creating a New Database
 
 #### Method 1: Command-Line
+
 ```bash
 soffice --base
 ```
 
 #### Method 2: Python with UNO
+
 ```python
 import uno
 
@@ -111,6 +118,7 @@ def connect_to_mysql(host, port, database, user, password):
 ## Database Connection Reference
 
 ### Supported Database Types
+
 - HSQLDB (embedded)
 - Firebird (embedded)
 - MySQL/MariaDB
@@ -122,16 +130,21 @@ def connect_to_mysql(host, port, database, user, password):
 ### Connection Strings
 
 ```
+
 # MySQL
+
 sdbc:mysql:jdbc:mysql://localhost:3306/database
 
 # PostgreSQL
+
 sdbc:postgresql://localhost:5432/database
 
 # SQLite
+
 sdbc:sqlite:file:///path/to/database.db
 
 # ODBC
+
 sdbc:odbc:DSN_NAME
 ```
 
@@ -163,12 +176,14 @@ pip install sqlalchemy # SQL toolkit
 ## Troubleshooting
 
 ### Cannot open socket
+
 ```bash
 killall soffice.bin
 soffice --headless --accept="socket,host=localhost,port=8100;urp;"
 ```
 
 ### Connection Issues
+
 - Verify database server is running
 - Check connection string format
 - Ensure JDBC/ODBC drivers are installed
@@ -190,11 +205,13 @@ soffice --headless --accept="socket,host=localhost,port=8100;urp;"
 - workflow-automation
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -106,6 +106,7 @@ Use `className` for layout (e.g. `max-w-md`, `mx-auto`, `mt-4`), **not** for ove
 ```
 
 To customize a component's appearance, prefer these approaches in order:
+
 1. **Built-in variants** — `variant="outline"`, `variant="destructive"`, etc.
 2. **Semantic color tokens** — `bg-primary`, `text-muted-foreground`.
 3. **CSS variables** — define custom colors in the global CSS file (see [customization.md](../customization.md)).
@@ -169,6 +170,7 @@ import { cn } from "@/lib/utils"
 `Dialog`, `Sheet`, `Drawer`, `AlertDialog`, `DropdownMenu`, `Popover`, `Tooltip`, `HoverCard` handle their own stacking. Never add `z-50` or `z-[999]`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

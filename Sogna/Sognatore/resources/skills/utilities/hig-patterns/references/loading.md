@@ -63,6 +63,7 @@ June 9, 2025| Revised guidance for storing downloads to reflect downloading larg
 June 10, 2024| Added guidelines for showing progress and storing downloads, and enhanced guidance for games.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

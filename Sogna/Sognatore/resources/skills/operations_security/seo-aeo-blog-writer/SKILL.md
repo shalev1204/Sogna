@@ -8,7 +8,6 @@ id: skill-seo-aeo-blog-writer
 owner: [[biz-marketing]], [[ops-security]]
 ---
 
-
 # SEO-AEO Blog Writer
 
 ## Overview
@@ -27,23 +26,29 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 ## How It Works
 
 ### Step 1: Write the TL;DR Block First
+
 Write a 2–3 sentence direct answer to the article's core question. Place it immediately after the H1 in a blockquote. This is the first block AI engines attempt to extract.
 
 ### Step 2: Build the Heading Skeleton
+
 Set H1, H2s (4–6), and H3s before writing any body content. The first H2 must be a "What Is" section with a clean definition sentence as its opening line.
 
 ### Step 3: Write Body Sections
+
 Follow the section order: What Is → Why It Matters → How It Works (with H3 sub-concepts) → Practical Steps → Common Mistakes → FAQ → Conclusion.
 
 ### Step 4: Write 5 FAQ Entries
+
 Use long-tail and secondary keywords as questions. Each answer must be under 50 words and self-contained — readable without any surrounding context.
 
 ### Step 5: Run AEO and SEO Checklists
+
 Verify TL;DR presence, definition sentence, FAQ count, keyword placement, and heading structure before outputting.
 
 ## Examples
 
 ### Example: TL;DR Block
+
 How to Manage a Remote Engineering Team
 
 TL;DR: Managing a remote engineering team requires async
@@ -51,8 +56,8 @@ communication tools, clear documentation standards, and
 timezone-aware sprint planning. Teams that nail these three
 areas ship consistently regardless of where members are located.
 
-
 ### Example: FAQ Section
+
 Q: What is the biggest challenge of remote engineering teams?
 A: Async communication. Without shared hours, decisions slow down
 and context gets lost. Teams that document decisions in writing
@@ -74,9 +79,11 @@ Avoid live calls across more than 2 timezones.
 ## Common Pitfalls
 
 - **Problem:** TL;DR block is too vague to be extracted as a direct answer
+
   **Solution:** The TL;DR must answer the article's core question in 2–3 sentences. If it doesn't answer a specific question, rewrite it.
 
 - **Problem:** FAQ answers reference "as mentioned above" or other context
+
   **Solution:** Every FAQ answer must stand completely alone — no references to other parts of the article.
 
 ## Related Skills
@@ -91,11 +98,13 @@ Avoid live calls across more than 2 timezones.
 - [Full Blog Writer SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/blog-writer/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

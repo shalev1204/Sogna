@@ -10,6 +10,7 @@ version: 1.0.0
 **Trackio** is an experiment tracking library that provides real-time metrics visualization for remote training on Hugging Face Jobs infrastructure.
 
 ⚠️ **IMPORTANT**: For Jobs training (remote cloud GPUs):
+
 - Training happens on ephemeral cloud runners (not your local machine)
 - Trackio syncs metrics to a Hugging Face Space for real-time monitoring
 - Without a Space, metrics are lost when the job completes
@@ -19,12 +20,19 @@ version: 1.0.0
 
 **Step 1: Add trackio dependency**
 ```python
+
 # /// script
+
 # dependencies = [
+
 #     "trl>=0.12.0",
+
 #     "trackio",  # Required!
+
 # ]
+
 # ///
+
 ```
 
 **Step 2: Create a Trackio Space (one-time setup)**
@@ -33,6 +41,7 @@ version: 1.0.0
 Pass a `space_id` to `trackio.init()` and Trackio will automatically create the Space if it doesn't exist.
 
 **Option B: Create manually**
+
 - Create Space via Hub UI at https://huggingface.co/new-space
 - Select Gradio SDK
 - OR use command: `hf repos create my-trackio-dashboard --type space --space-sdk gradio`
@@ -69,6 +78,7 @@ trackio.finish()  # Ensures final metrics are synced
 ## What Trackio Tracks
 
 Trackio automatically logs:
+
 - ✅ Training loss
 - ✅ Learning rate
 - ✅ GPU utilization
@@ -107,6 +117,7 @@ trackio.init(
 ```
 
 **Key principles:**
+
 - **Space ID**: Use `{username}/trackio` with "trackio" as default space name
 - **Run naming**: Unless otherwise specified, name the run in a way the user will recognize
 - **Config**: Keep minimal - don't automatically capture job metadata unless requested
@@ -117,7 +128,9 @@ trackio.init(
 The `group` parameter helps organize related runs together in the dashboard sidebar. This is useful when user is running multiple experiments with different configurations but wants to compare them together:
 
 ```python
+
 # Example: Group runs by experiment type
+
 trackio.init(project="my-project", run_name="baseline-run-1", group="baseline")
 trackio.init(project="my-project", run_name="augmented-run-1", group="augmented")
 trackio.init(project="my-project", run_name="tuned-run-1", group="tuned")
@@ -126,7 +139,9 @@ trackio.init(project="my-project", run_name="tuned-run-1", group="tuned")
 Runs with the same group name can be grouped together in the sidebar, making it easier to compare related experiments. You can group by any configuration parameter:
 
 ```python
+
 # Hyperparameter sweep - group by learning rate
+
 trackio.init(project="hyperparam-sweep", run_name="lr-0.001-run", group="lr_0.001")
 trackio.init(project="hyperparam-sweep", run_name="lr-0.01-run", group="lr_0.01")
 ```
@@ -151,18 +166,23 @@ hf_jobs("uv", {
 ```python
 hf_jobs("uv", {
     "script": """
+
 # Training script - trackio config from environment
+
 import trackio
 from datetime import datetime
 
 # Auto-generate run name
+
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
 run_name = f"sft_qwen25_{timestamp}"
 
 # Project and space_id can come from environment variables
+
 trackio.init(run_name=run_name, group="SFT")
 
 # ... training code ...
+
 trackio.finish()
 """,
     "flavor": "a10g-large",
@@ -172,11 +192,13 @@ trackio.finish()
 ```
 
 **When to use environment variables:**
+
 - Managing multiple jobs with same configuration
 - Keeping training scripts portable across projects
 - Separating configuration from code
 
 **When to use direct parameters:**
+
 - Single job with specific configuration
 - When clarity in code is preferred
 - When each job has different project/space
@@ -184,6 +206,7 @@ trackio.finish()
 ## Viewing the Dashboard
 
 After starting training:
+
 1. Navigate to the Space: `https://huggingface.co/spaces/username/trackio`
 2. The Gradio dashboard shows all tracked experiments
 3. Filter by project, compare runs, view charts with smoothing
@@ -194,6 +217,7 @@ After starting training:
 - **Weights & Biases**: Best for team collaboration, requires account
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

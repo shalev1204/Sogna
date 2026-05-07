@@ -12,12 +12,12 @@ id: skill-makepad-deployment
 owner: [[ops-security]]
 ---
 
-
 # Makepad Packaging & Deployment
 
 This skill covers packaging Makepad applications for all supported platforms.
 
 ## When to Use
+
 - You need to package, distribute, or automate deployment of a Makepad application.
 - The task involves desktop installers, APK/IPA builds, WebAssembly output, or CI-based release artifacts.
 - You need guidance on `cargo-packager`, `cargo-makepad`, or GitHub Actions packaging flows for Makepad.
@@ -45,13 +45,16 @@ jobs:
   package:
     runs-on: ubuntu-22.04
     steps:
+
       - uses: actions/checkout@v4
       - uses: Project-Robius-China/makepad-packaging-action@v1
+
         with:
           args: --target x86_64-unknown-linux-gnu --release
 ```
 
 Notes:
+
 - Desktop packages must run on matching OS runners (Linux/Windows/macOS).
 - iOS builds require macOS runners.
 - Android builds can run on any OS runner.
@@ -66,10 +69,13 @@ Desktop packaging uses `cargo-packager` with `robius-packaging-commands` for res
 ### Install Tools
 
 ```bash
+
 # Install cargo-packager
+
 cargo install cargo-packager --locked
 
 # Install robius-packaging-commands (v0.2.1)
+
 cargo install --version 0.2.1 --locked \
     --git https://github.com/project-robius/robius-packaging-commands.git \
     robius-packaging-commands
@@ -85,7 +91,9 @@ product_name = "YourAppName"
 identifier = "com.yourcompany.yourapp"
 authors = ["Your Name or Team"]
 description = "A brief description of your Makepad application"
+
 # Note: long_description has 80 character max per line
+
 long_description = """
 Your detailed description here.
 Keep each line under 80 characters.
@@ -94,6 +102,7 @@ icons = ["./assets/icon.png"]
 out_dir = "./dist"
 
 # Pre-packaging command to collect resources
+
 before-packaging-command = """
 robius-packaging-commands before-packaging \
     --force-makepad \
@@ -102,6 +111,7 @@ robius-packaging-commands before-packaging \
 """
 
 # Resources to include in package
+
 resources = [
     # Makepad built-in resources (required)
     { src = "./dist/resources/makepad_widgets", target = "makepad_widgets" },
@@ -126,12 +136,15 @@ robius-packaging-commands before-each-package \
 ### Linux (Debian/Ubuntu)
 
 ```bash
+
 # Install dependencies
+
 sudo apt-get update
 sudo apt-get install libssl-dev libsqlite3-dev pkg-config \
     binfmt-support libxcursor-dev libx11-dev libasound2-dev libpulse-dev
 
 # Build package
+
 cargo packager --release
 ```
 
@@ -140,7 +153,9 @@ Output: `.deb` file in `./dist/`
 ### Windows
 
 ```bash
+
 # Build NSIS installer
+
 cargo packager --release --formats nsis
 ```
 
@@ -149,7 +164,9 @@ Output: `.exe` installer in `./dist/`
 ### macOS
 
 ```bash
+
 # Build package
+
 cargo packager --release
 ```
 
@@ -158,22 +175,28 @@ Output: `.dmg` file in `./dist/`
 ### Platform-Specific Configuration
 
 ```toml
+
 # Linux (Debian)
+
 [package.metadata.packager.deb]
 depends = "./dist/depends_deb.txt"
 desktop_template = "./packaging/your-app.desktop"
 section = "utils"
 
 # macOS
+
 [package.metadata.packager.macos]
 minimum_system_version = "11.0"
 frameworks = []
 info_plist_path = "./packaging/Info.plist"
 entitlements = "./packaging/Entitlements.plist"
+
 # Optional: signing identity for distribution
+
 signing_identity = "Developer ID Application: Your Name (XXXXXXXXXX)"
 
 # macOS DMG
+
 [package.metadata.packager.dmg]
 background = "./packaging/dmg_background.png"
 window_size = { width = 960, height = 540 }
@@ -181,6 +204,7 @@ app_position = { x = 200, y = 250 }
 application_folder_position = { x = 760, y = 250 }
 
 # Windows NSIS
+
 [package.metadata.packager.nsis]
 appdata_paths = [
     "$APPDATA/$PUBLISHER/$PRODUCTNAME",
@@ -204,13 +228,17 @@ cargo install --force --git https://github.com/makepad/makepad.git \
 ### Android
 
 ```bash
+
 # Install Android toolchain
+
 cargo makepad android install-toolchain
 
 # Full NDK (recommended for complete support)
+
 cargo makepad android install-toolchain --full-ndk
 
 # Build APK
+
 cargo makepad android build -p your-app --release
 ```
 
@@ -224,7 +252,9 @@ cargo makepad android run -p your-app --release
 ### iOS
 
 ```bash
+
 # Install iOS toolchain
+
 cargo makepad apple ios install-toolchain
 ```
 
@@ -269,14 +299,18 @@ zip -r your-app-ios.ipa Payload
 Build your Makepad app for web browsers.
 
 ```bash
+
 # Install Wasm toolchain
+
 cargo makepad wasm install-toolchain
 
 # Build and run
+
 cargo makepad wasm run -p your-app --release
 ```
 
 Output in `./target/makepad-wasm-app/release/your-app/`:
+
 - `index.html` - Entry point
 - `*.wasm` - WebAssembly module
 - `*.js` - JavaScript bridge
@@ -286,7 +320,9 @@ Output in `./target/makepad-wasm-app/release/your-app/`:
 ```bash
 cd ./target/makepad-wasm-app/release/your-app
 python3 -m http.server 8080
+
 # Open http://localhost:8080
+
 ```
 
 ---
@@ -387,6 +423,7 @@ appdata_paths = ["$LOCALAPPDATA/$PRODUCTNAME"]
 ### Missing Resources
 
 If app crashes with missing resources:
+
 1. Check `resources` array in Cargo.toml includes all Makepad resources
 2. Verify `before-packaging-command` runs successfully
 3. Check `./dist/resources/` contains expected files
@@ -394,6 +431,7 @@ If app crashes with missing resources:
 ### iOS Provisioning
 
 For iOS device deployment:
+
 1. Create empty app in Xcode with same org/app identifiers
 2. Run on physical device once to generate provisioning profile
 3. Note the profile path, certificate fingerprint
@@ -402,7 +440,9 @@ For iOS device deployment:
 ### Android SDK Issues
 
 ```bash
+
 # Reinstall toolchain with full NDK
+
 cargo makepad android install-toolchain --full-ndk
 ```
 
@@ -420,11 +460,13 @@ cargo makepad android install-toolchain --full-ndk
 - [makepad-packaging-action](https://github.com/marketplace/actions/makepad-packaging-action)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

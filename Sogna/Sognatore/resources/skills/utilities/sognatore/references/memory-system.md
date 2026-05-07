@@ -80,11 +80,17 @@ Enhanced memory architecture based on 2025 research (MIRIX, A-Mem, MemGPT, AriGr
 |   +-- 2026-01-06.json
 
 # Related: Metrics System (separate from memory)
+
 # .sognatore/metrics/
+
 # +-- efficiency/              # Task cost tracking (time, agents, retries)
+
 # +-- rewards/                 # Outcome/efficiency/preference signals
+
 # +-- dashboard.json           # Rolling 7-day metrics summary
+
 # See references/tool-orchestration.md for details
+
 ```
 
 ---
@@ -241,13 +247,16 @@ Each memory note can link to related notes:
 Reusable action sequences:
 
 ```markdown
+
 # Skill: API Endpoint Implementation
 
 ## Prerequisites
+
 - OpenAPI spec exists at .sognatore/specs/openapi.yaml
 - Database schema defined
 
 ## Steps
+
 1. Read endpoint spec from openapi.yaml
 2. Create route handler in src/routes/{resource}.ts
 3. Implement request validation using spec schema
@@ -258,13 +267,16 @@ Reusable action sequences:
 8. Run tests, verify passing
 
 ## Common Errors & Fixes
+
 - Missing return type: Add `: void` to handler
 - Schema mismatch: Regenerate types from spec
 
 ## Exit Criteria
+
 - All contract tests pass
 - Response matches OpenAPI spec
 - No TypeScript errors
+
 ```
 
 ---
@@ -394,9 +406,11 @@ When switching between agents:
 def prune_episodic_memories():
     """
     Keep episodic memories from:
+
     - Last 7 days (full detail)
     - Last 30 days (summarized)
     - Older: only if referenced by semantic memory
+
     """
     now = datetime.now()
 
@@ -440,17 +454,22 @@ def merge_duplicate_semantics():
 CONTINUITY.md is working memory - it references but doesn't duplicate long-term memory:
 
 ```markdown
+
 ## Relevant Memories (Auto-Retrieved)
+
 - [sem-001] Express handlers need explicit return types
 - [ep-2026-01-05-012] Similar endpoint implementation succeeded
 - [skill: api-implementation] Standard API implementation flow
 
 ## Mistakes to Avoid (From Learnings)
+
 - Don't forget return type annotations
 - Run contract tests before marking complete
+
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

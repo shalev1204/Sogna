@@ -1,5 +1,5 @@
 import { CreateSognaflowValue } from ".";
-import { JSAnimation } from "../animation/jsanimation.js";
+import { JSAnimation } from "../animation/JSAnimation.js";
 import { Frame } from "../frameloop";
 import { IsSognaflowValue } from "./utils/is-sognaflow-value.js";
 /**
@@ -61,7 +61,7 @@ export function AttachFollow(value, source, options = {}) {
         }
         // Use the running animation's analytical velocity for accuracy,
         // falling back to the sognaflowValue's velocity for the initial animation.
-        // This prevents systematic velocity loss at high frame rates (240hz+).
+        // This prevents systematic velocity loss at high Frame rates (240hz+).
         const velocity = activeAnimation
             ? activeAnimation.getGeneratorVelocity()
             : value.getVelocity();
@@ -77,8 +77,8 @@ export function AttachFollow(value, source, options = {}) {
             onUpdate: latestSetter,
         });
     };
-    // Use a stable function reference so the frame loop Set deduplicates
-    // multiple calls within the same frame (e.g. rapid mouse events)
+    // Use a stable function reference so the Frame loop Set deduplicates
+    // multiple calls within the same Frame (e.g. rapid mouse events)
     const scheduleAnimation = () => {
         startAnimation();
         value.animation = activeAnimation ?? undefined;
@@ -118,4 +118,5 @@ function parseValue(v, unit) {
 function asNumber(v) {
     return typeof v === "number" ? v : parseFloat(v);
 }
+export { FollowValue as followValue, AttachFollow as attachFollow };
 //# sourceMappingURL=follow-value.js.map

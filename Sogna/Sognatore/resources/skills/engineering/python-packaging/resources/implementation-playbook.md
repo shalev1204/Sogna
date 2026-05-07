@@ -28,24 +28,28 @@ Comprehensive guide to creating, structuring, and distributing Python packages u
 ## Core Concepts
 
 ### 1. Package Structure
+
 - **Source layout**: `src/package_name/` (recommended)
 - **Flat layout**: `package_name/` (simpler but less flexible)
 - **Package metadata**: pyproject.toml, setup.py, or setup.cfg
 - **Distribution formats**: wheel (.whl) and source distribution (.tar.gz)
 
 ### 2. Modern Packaging Standards
+
 - **PEP 517/518**: Build system requirements
 - **PEP 621**: Metadata in pyproject.toml
 - **PEP 660**: Editable installs
 - **pyproject.toml**: Single source of configuration
 
 ### 3. Build Backends
+
 - **setuptools**: Traditional, widely used
 - **hatchling**: Modern, opinionated
 - **flit**: Lightweight, for pure Python
 - **poetry**: Dependency management + packaging
 
 ### 4. Distribution
+
 - **PyPI**: Python Package Index (public)
 - **TestPyPI**: Testing before production
 - **Private repositories**: JFrog, AWS CodeArtifact, etc.
@@ -117,6 +121,7 @@ my-package/
 ```
 
 **Advantages:**
+
 - Prevents accidentally importing from source
 - Cleaner test imports
 - Better isolation
@@ -141,6 +146,7 @@ my-package/
 ```
 
 **Simpler but:**
+
 - Can import package without installing
 - Less professional for libraries
 
@@ -201,16 +207,20 @@ description = "Package with dynamic version"
 version = {attr = "my_package.__version__"}
 
 # Or use setuptools-scm for git-based versioning
+
 [tool.setuptools_scm]
 write_to = "src/my_package/_version.py"
 ```
 
 **In __init__.py:**
 ```python
+
 # src/my_package/__init__.py
+
 __version__ = "1.0.0"
 
 # Or with setuptools-scm
+
 from importlib.metadata import version
 __version__ = version("my-package")
 ```
@@ -220,7 +230,9 @@ __version__ = version("my-package")
 ### Pattern 6: CLI with Click
 
 ```python
+
 # src/my_package/cli.py
+
 import click
 
 @click.group()
@@ -268,7 +280,9 @@ my-tool repeat --count=3
 ### Pattern 7: CLI with argparse
 
 ```python
+
 # src/my_package/cli.py
+
 import argparse
 import sys
 
@@ -318,40 +332,54 @@ if __name__ == "__main__":
 ### Pattern 8: Build Package Locally
 
 ```bash
+
 # Install build tools
+
 pip install build twine
 
 # Build distribution
+
 python -m build
 
 # This creates:
+
 # dist/
+
 #   my-package-1.0.0.tar.gz (source distribution)
+
 #   my_package-1.0.0-py3-none-any.whl (wheel)
 
 # Check the distribution
+
 twine check dist/*
 ```
 
 ### Pattern 9: Publishing to PyPI
 
 ```bash
+
 # Install publishing tools
+
 pip install twine
 
 # Test on TestPyPI first
+
 twine upload --repository testpypi dist/*
 
 # Install from TestPyPI to test
+
 pip install --index-url https://test.pypi.org/simple/ my-package
 
 # If all good, publish to PyPI
+
 twine upload dist/*
 ```
 
 **Using API tokens (recommended):**
 ```bash
+
 # Create ~/.pypirc
+
 [distutils]
 index-servers =
     pypi
@@ -369,7 +397,9 @@ password = pypi-...your-test-token...
 ### Pattern 10: Automated Publishing with GitHub Actions
 
 ```yaml
+
 # .github/workflows/publish.yml
+
 name: Publish to PyPI
 
 on:
@@ -381,24 +411,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Set up Python
+
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
       - name: Install dependencies
+
         run: |
           pip install build twine
 
       - name: Build package
+
         run: python -m build
 
       - name: Check package
+
         run: twine check dist/*
 
       - name: Publish to PyPI
+
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
@@ -421,7 +457,9 @@ my_package = [
 
 **Accessing data files:**
 ```python
+
 # src/my_package/loader.py
+
 from importlib.resources import files
 import json
 
@@ -432,6 +470,7 @@ def load_config():
         return json.load(f)
 
 # Python 3.9+
+
 from importlib.resources import files
 
 data = files("my_package").joinpath("data/file.txt").read_text()
@@ -442,13 +481,16 @@ data = files("my_package").joinpath("data/file.txt").read_text()
 **For large projects split across multiple repositories:**
 
 ```
+
 # Package 1: company-core
+
 company/
 └── core/
     ├── __init__.py
     └── models.py
 
 # Package 2: company-api
+
 company/
 └── api/
     ├── __init__.py
@@ -458,7 +500,9 @@ company/
 **Do NOT include __init__.py in the namespace directory (company/):**
 
 ```toml
+
 # company-core/pyproject.toml
+
 [project]
 name = "company-core"
 
@@ -467,6 +511,7 @@ where = ["."]
 include = ["company.core*"]
 
 # company-api/pyproject.toml
+
 [project]
 name = "company-api"
 
@@ -477,7 +522,9 @@ include = ["company.api*"]
 
 **Usage:**
 ```python
+
 # Both packages can be imported under same namespace
+
 from company.core import models
 from company.api import routes
 ```
@@ -497,7 +544,9 @@ ext-modules = [
 
 **Or with setup.py:**
 ```python
+
 # setup.py
+
 from setuptools import setup, Extension
 
 setup(
@@ -516,13 +565,19 @@ setup(
 ### Pattern 14: Semantic Versioning
 
 ```python
+
 # src/my_package/__init__.py
+
 __version__ = "1.2.3"
 
 # Semantic versioning: MAJOR.MINOR.PATCH
+
 # MAJOR: Breaking changes
+
 # MINOR: New features (backward compatible)
+
 # PATCH: Bug fixes
+
 ```
 
 **Version constraints in dependencies:**
@@ -553,6 +608,7 @@ local_scheme = "dirty-tag"
 ```
 
 **Creates versions like:**
+
 - `1.0.0` (from git tag)
 - `1.0.1.dev3+g1234567` (3 commits after tag)
 
@@ -561,34 +617,45 @@ local_scheme = "dirty-tag"
 ### Pattern 16: Editable Install
 
 ```bash
+
 # Install in development mode
+
 pip install -e .
 
 # With optional dependencies
+
 pip install -e ".[dev]"
 pip install -e ".[dev,docs]"
 
 # Now changes to source code are immediately reflected
+
 ```
 
 ### Pattern 17: Testing in Isolated Environment
 
 ```bash
+
 # Create virtual environment
+
 python -m venv test-env
 source test-env/bin/activate  # Linux/Mac
+
 # test-env\Scripts\activate  # Windows
 
 # Install package
+
 pip install dist/my_package-1.0.0-py3-none-any.whl
 
 # Test it works
+
 python -c "import my_package; print(my_package.__version__)"
 
 # Test CLI
+
 my-tool --help
 
 # Cleanup
+
 deactivate
 rm -rf test-env
 ```
@@ -598,6 +665,7 @@ rm -rf test-env
 ### Pattern 18: README.md Template
 
 ```markdown
+
 # My Package
 
 [![PyPI version](https://badge.fury.io/py/my-package.svg)](https://pypi.org/project/my-package/)
@@ -644,7 +712,9 @@ pytest
 ### Pattern 19: Multi-Architecture Wheels
 
 ```yaml
+
 # .github/workflows/wheels.yml
+
 name: Build wheels
 
 on: [push, pull_request]
@@ -658,12 +728,15 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
+
       - uses: actions/checkout@v3
 
       - name: Build wheels
+
         uses: pypa/cibuildwheel@v2.16.2
 
       - uses: actions/upload-artifact@v3
+
         with:
           path: ./wheelhouse/*.whl
 ```
@@ -671,15 +744,19 @@ jobs:
 ### Pattern 20: Private Package Index
 
 ```bash
+
 # Install from private index
+
 pip install my-package --index-url https://private.pypi.org/simple/
 
 # Or add to pip.conf
+
 [global]
 index-url = https://private.pypi.org/simple/
 extra-index-url = https://pypi.org/simple/
 
 # Upload to private index
+
 twine upload --repository-url https://private.pypi.org/ dist/*
 ```
 
@@ -688,7 +765,9 @@ twine upload --repository-url https://private.pypi.org/ dist/*
 ### .gitignore for Python Packages
 
 ```gitignore
+
 # Build artifacts
+
 build/
 dist/
 *.egg-info/
@@ -696,27 +775,32 @@ dist/
 .eggs/
 
 # Python
+
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 
 # Virtual environments
+
 venv/
 env/
 ENV/
 
 # IDE
+
 .vscode/
 .idea/
 *.swp
 
 # Testing
+
 .pytest_cache/
 .coverage
 htmlcov/
 
 # Distribution
+
 *.whl
 *.tar.gz
 ```
@@ -724,7 +808,9 @@ htmlcov/
 ### MANIFEST.in
 
 ```
+
 # MANIFEST.in
+
 include README.md
 include LICENSE
 include pyproject.toml
@@ -774,6 +860,7 @@ recursive-exclude * *.py[co]
 10. **Automate publishing** with CI/CD
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

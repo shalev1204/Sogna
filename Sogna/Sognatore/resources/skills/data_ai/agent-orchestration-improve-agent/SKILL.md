@@ -8,7 +8,6 @@ id: skill-agent-orchestration-improve-agent
 owner: [[orchestrator]]
 ---
 
-
 # Agent Performance Optimization Workflow
 
 Systematic improvement of existing agents through performance analysis, prompt engineering, and continuous iteration.
@@ -87,12 +86,14 @@ Generate quantitative baseline metrics:
 
 ```
 Performance Baseline:
+
 - Task Success Rate: [X%]
 - Average Corrections per Task: [Y]
 - Tool Call Efficiency: [Z%]
 - User Satisfaction Score: [1-10]
 - Average Response Latency: [Xms]
 - Token Efficiency Ratio: [X:Y]
+
 ```
 
 ## Phase 2: Prompt Engineering Improvements
@@ -156,11 +157,13 @@ Implement self-correction mechanisms:
 
 ```
 Constitutional Principles:
+
 1. Verify factual accuracy before responding
 2. Self-check for potential biases or harmful content
 3. Validate output format matches requirements
 4. Ensure response completeness
 5. Maintain consistency with previous responses
+
 ```
 
 Add critique-and-revise loops:
@@ -191,12 +194,14 @@ Create representative test scenarios:
 
 ```
 Test Categories:
+
 1. Golden path scenarios (common successful cases)
 2. Previously failed tasks (regression testing)
 3. Edge cases and corner scenarios
 4. Stress tests (complex, multi-step tasks)
 5. Adversarial inputs (potential breaking points)
 6. Cross-domain tasks (combining capabilities)
+
 ```
 
 ### 3.2 A/B Testing Framework
@@ -206,11 +211,13 @@ Compare original vs improved agent:
 ```
 Use: parallel-test-runner
 Config:
+
   - Agent A: Original version
   - Agent B: Improved version
   - Test set: 100 representative tasks
   - Metrics: Success rate, speed, token usage
   - Evaluation: Blind human review + automated scoring
+
 ```
 
 Statistical significance testing:
@@ -298,6 +305,7 @@ Quick recovery mechanism:
 
 ```
 Rollback Triggers:
+
 - Success rate drops >10% from baseline
 - Critical errors increase >5%
 - User complaints spike
@@ -305,11 +313,13 @@ Rollback Triggers:
 - Safety violations detected
 
 Rollback Process:
+
 1. Detect issue via monitoring
 2. Alert team immediately
 3. Switch to previous stable version
 4. Analyze root cause
 5. Fix and re-test before retry
+
 ```
 
 ### 4.4 Continuous Monitoring
@@ -355,11 +365,13 @@ Establish regular improvement cadence:
 Remember: Agent optimization is an iterative process. Each cycle builds upon previous learnings, gradually improving performance while maintaining stability and safety.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

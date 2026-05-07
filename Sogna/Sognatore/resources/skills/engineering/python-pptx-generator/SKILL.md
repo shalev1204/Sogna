@@ -12,7 +12,6 @@ id: skill-python-pptx-generator
 owner: [[orchestrator]]
 ---
 
-
 # Python PPTX Generator
 
 ## Overview
@@ -94,12 +93,15 @@ Output: A python-pptx script with executive-friendly slide titles, concise bulle
 ## Common Pitfalls
 
 - **Problem:** The generated script uses placeholder text instead of real content  
+
   **Solution:** Draft the narrative first, then turn each slide into specific titles and bullets
 
 - **Problem:** The deck uses too many slides for the requested audience  
+
   **Solution:** Compress the outline to the most important 4 to 8 slides unless the user explicitly wants a longer deck
 
 - **Problem:** The script forgets to save or print a completion message  
+
   **Solution:** Always end with `prs.save(...)` and a short success print
 
 ## Related Skills
@@ -108,11 +110,13 @@ Output: A python-pptx script with executive-friendly slide titles, concise bulle
 - `@docx-official` - Use when the requested output should be a document instead of a slide deck
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

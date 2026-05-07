@@ -8,7 +8,6 @@ id: skill-axiom
 owner: [[orchestrator]]
 ---
 
-
 # Axiom — First-Principles Assumption Auditor / 第一性原理拆解器
 
 Strip any question down to its irreducible truths, then rebuild from there.
@@ -61,6 +60,7 @@ Do NOT start decomposing assumptions yet. First confirm the problem itself is co
 Many people ask "Should I quit my job?" when the real question is "Why can't I grow in my current role?" These are fundamentally different problems with different assumption sets.
 
 **Ask:**
+
 - Who defined this problem? You, someone else's expectations, or a social narrative?
 - Is this the root problem, or a symptom of something deeper?
 - Restate the core question in one sentence.
@@ -129,10 +129,12 @@ For detailed identification methods, examples, and edge cases, reference `refere
 Score every assumption on two dimensions:
 
 **Fragility / 脆弱性 (1-5):** How easily can this assumption be disproven?
+
 - 1 = Nearly impossible to overturn (e.g., physical laws)
 - 5 = Extremely easy to disprove (e.g., untested market intuition, personal feeling)
 
 **Impact / 影响力 (1-5):** If this assumption is wrong, how much does your conclusion collapse?
+
 - 1 = Barely affects the final conclusion
 - 5 = Foundational pillar — if wrong, everything falls apart
 
@@ -159,6 +161,7 @@ Each Top 3 entry MUST include a specific, actionable verification question.
 Keep ONLY the assumptions that survived scrutiny. Rebuild the conclusion from scratch using only verified premises.
 
 **Critical requirements:**
+
 - Explicitly compare "Original Thinking" vs "Rebuilt Thinking" side by side
 - If the rebuilt conclusion is identical to the original, explain WHY — the analysis must demonstrate that either a genuine shift occurred, or provide specific reasons why the original reasoning was already sound
 - Highlight the cognitive shift so the user can see what changed and why
@@ -213,6 +216,7 @@ Each scenario contains 10-15 "high-frequency hidden assumptions" specific to tha
 ## Quick Output Mode / 快捷输出
 
 If the user explicitly requests a quick analysis or is short on time:
+
 - Skip the full 5-phase walkthrough
 - Output directly: the **Top 3 most dangerous assumptions** with risk scores and one actionable verification question each
 - End with: "你最该验证的一件事是…" / "The single most important thing to verify is…"
@@ -222,9 +226,11 @@ If the user explicitly requests a quick analysis or is short on time:
 ## Example / 示例
 
 ### Chinese Example / 中文示例
+
 See `examples/walkthrough-zh.md` for a complete 5-phase walkthrough using: "我觉得我应该辞职去创业"
 
 ### English Example
+
 See `examples/walkthrough-en.md` for a complete 5-phase walkthrough using: "I'm thinking about dropping out of my CS degree to join a startup"
 
 ---
@@ -258,11 +264,13 @@ See `examples/walkthrough-en.md` for a complete 5-phase walkthrough using: "I'm 
 - `examples/walkthrough-en.md` — Complete English example (dropping out for startup)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

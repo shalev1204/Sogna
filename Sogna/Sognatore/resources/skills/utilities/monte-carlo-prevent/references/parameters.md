@@ -39,6 +39,7 @@ search(query="orders_status") → returns mcon, full_table_id, warehouse
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

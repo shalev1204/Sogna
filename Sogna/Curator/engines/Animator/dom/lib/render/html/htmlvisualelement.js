@@ -1,12 +1,12 @@
-import { IsCSSVariableName as isCSSVariableName } from "../../animation/utils/is-css-variable.js";
-import { TransformProps as transformProps } from "../utils/keys-transform.js";
-import { DefaultTransformValue as defaultTransformValue, ReadTransformValue as readTransformValue, } from "../dom/parse-transform.js";
+import { IsCSSVariableName } from "../../animation/utils/is-css-variable.js";
+import { TransformProps } from "../utils/keys-transform.js";
+import { defaultTransformValue, readTransformValue, } from "../dom/parse-transform.js";
 import { measureViewportBox } from "../../projection/utils/measure.js";
-import { DOMVisualElement } from "../dom/domvisualelement.js";
-import { BuildHTMLStyles as buildHTMLStyles } from "./utils/build-styles.js";
-import { RenderHTML as renderHTML } from "./utils/render.js";
+import { DOMVisualElement } from "../dom/DOMVisualElement.js";
+import { buildHTMLStyles } from "./utils/build-styles.js";
+import { renderHTML } from "./utils/render.js";
 import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values.js";
-export function GetComputedStyle(element) {
+export function getComputedStyle(element) {
     return window.getComputedStyle(element);
 }
 export class HTMLVisualElement extends DOMVisualElement {
@@ -16,14 +16,14 @@ export class HTMLVisualElement extends DOMVisualElement {
         this.renderInstance = renderHTML;
     }
     readValueFromInstance(instance, key) {
-        if (transformProps.has(key)) {
+        if (TransformProps.has(key)) {
             return this.projection?.isProjecting
                 ? defaultTransformValue(key)
                 : readTransformValue(instance, key);
         }
         else {
-            const computedStyle = GetComputedStyle(instance);
-            const value = (isCSSVariableName(key)
+            const computedStyle = getComputedStyle(instance);
+            const value = (IsCSSVariableName(key)
                 ? computedStyle.getPropertyValue(key)
                 : computedStyle[key]) || 0;
             return typeof value === "string" ? value.trim() : value;

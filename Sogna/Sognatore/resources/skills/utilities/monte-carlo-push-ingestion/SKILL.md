@@ -13,7 +13,6 @@ id: skill-monte-carlo-push-ingestion
 owner: [[orchestrator]]
 ---
 
-
 # Monte Carlo Push Ingestion
 
 You are an agent that helps customers collect metadata, lineage, and query logs from their
@@ -37,15 +36,21 @@ new infrastructure is the ingress layer; everything after it is shared.
 When generating any push-ingestion script, you MUST:
 
 1. **Read the corresponding template** before writing any code. Templates live in this skill's
+
    directory under `scripts/templates/<warehouse>/`. To find them, glob for
    `**/push-ingestion/scripts/templates/<warehouse>/*.py` — this works regardless of where the
    skill is installed. Do NOT search from the current working directory alone.
+
 2. **Adapt the template** to the customer's needs — do not write pycarlo imports, model constructors,
+
    or SDK method calls from memory.
+
 3. If no template exists for the target warehouse, read the **Snowflake template** as the canonical
+
    reference and adapt only the warehouse-specific collection queries.
 
 Template files follow this naming pattern:
+
 - `collect_<flow>.py` — collection only (queries the warehouse, writes a JSON manifest)
 - `push_<flow>.py` — push only (reads the manifest, sends to Monte Carlo)
 - `collect_and_push_<flow>.py` — combined (imports from both, runs in sequence)
@@ -83,16 +88,21 @@ service = IngestionService(mc_client=client)
 ### Method signatures
 
 ```python
+
 # Metadata
+
 service.send_metadata(resource_uuid=..., resource_type=..., events=[RelationalAsset(...)])
 
 # Lineage (table or column)
+
 service.send_lineage(resource_uuid=..., resource_type=..., events=[LineageEvent(...)])
 
 # Query logs — note: log_type, NOT resource_type
+
 service.send_query_logs(resource_uuid=..., log_type=..., events=[QueryLogEntry(...)])
 
 # Extract invocation ID from any response
+
 service.extract_invocation_id(result)
 ```
 
@@ -133,6 +143,7 @@ All generated scripts MUST use these exact variable names. Do NOT invent alterna
 
 Tell Claude your warehouse or data platform and Monte Carlo resource UUID and this skill will
 generate a ready-to-run Python script that:
+
 - Connects to your warehouse using the idiomatic driver for that platform
 - Discovers databases, schemas, and tables
 - Extracts the right columns — names, types, row counts, byte counts, last modified time, descriptions
@@ -150,6 +161,7 @@ Production-ready example scripts built from these templates are published in the
 [mcd-public-resources](https://github.com/monte-carlo-data/mcd-public-resources) repo:
 
 - **[BigQuery Iceberg (BigLake) tables](https://github.com/monte-carlo-data/mcd-public-resources/tree/main/examples/push-ingestion/bigquery/push-iceberg-tables)** —
+
   metadata and query log collection for BigQuery Iceberg tables that are invisible to Monte
   Carlo's standard pull collector (which uses `__TABLES__`). Includes a `--only-freshness-and-volume`
   flag for fast periodic pushes that skip the schema/fields query — useful for hourly cron jobs
@@ -173,6 +185,7 @@ Production-ready example scripts built from these templates are published in the
 → Load `references/prerequisites.md`
 
 Two separate API keys are required. This is the most common setup stumbling block:
+
 - **Ingestion key** (scope=Ingestion) — for pushing data
 - **GraphQL API key** — for verification queries
 
@@ -223,6 +236,7 @@ exceed **1MB** (Kinesis limit). All push endpoints support batching.
 anomaly detector behavior because the training pipeline aggregates into hourly buckets.
 
 **Per flow, see:**
+
 - Metadata (schema + volume + freshness): `references/push-metadata.md`
 - Table and column lineage: `references/push-lineage.md`
 - Query logs: `references/push-query-logs.md`
@@ -235,6 +249,7 @@ After pushing, verify data is visible in Monte Carlo using the GraphQL API (Grap
 getTableLineage, getDerivedTablesPartialLineage, getAggregatedQueries)
 
 Timing expectations:
+
 - **Metadata**: visible within a few minutes
 - **Table lineage**: visible within seconds to a few minutes (fast direct path to Neo4j)
 - **Column lineage**: a few minutes
@@ -284,16 +299,20 @@ Customers can invoke these explicitly instead of describing their intent in pros
 When pushed data isn't appearing, work through these five checkpoints in order:
 
 1. **Did the SDK return a `202` and an `invocation_id`?**
+
    If not, the gateway rejected the request — check auth headers and `resource.uuid`.
 
 2. **Is the integration key the right type?**
+
    Must be scope `Ingestion`, created via `montecarlo integrations create-key --scope Ingestion`.
    A standard GraphQL API key will not work for push.
 
 3. **Is `resource.uuid` correct and authorized?**
+
    The key can be scoped to specific warehouse UUIDs. If the UUID doesn't match, you get `403`.
 
 4. **Did the normalizer process it?**
+
    Use the `invocation_id` to search CloudWatch logs for the relevant Lambda. For query logs,
    check the `log_type` — Hive requires `"hive-s3"`, not `"hive"`.
 
@@ -305,24 +324,41 @@ When pushed data isn't appearing, work through these five checkpoints in order:
 ## Known gotchas
 
 - **`log_type` vs `resource_type`**: metadata and lineage use `resource_type` (e.g. `"data-lake"`);
+
   query logs use **`log_type`** — the only endpoint where the field name differs. Wrong value →
   `Unsupported ingest query-log log_type` error.
+
 - **`invocation_id` must be saved**: every output manifest should include it — it's your
+
   only tracing handle once the request leaves the SDK.
+
 - **Query log async delay**: at least 15-20 minutes. `getAggregatedQueries` will return 0 until
+
   processing completes — this is expected, not a bug.
+
 - **Custom lineage `expireAt` defaults to 7 days**: nodes vanish silently unless you set
+
   `expireAt: "9999-12-31"` for permanent nodes.
+
 - **Push tables are never auto-deleted**: the periodic cleanup job excludes them by default
+
   (`exclude_push_tables=True`). Delete them explicitly via `deletePushIngestedTables` (max
   1,000 MCONs per call; also deletes lineage nodes and all edges touching those nodes).
+
 - **Anomaly detectors need history**: pushing once is not enough. Freshness needs 7+ pushes
+
   over ~2 weeks; volume needs 10–48 samples over ~42 days. Push at most once per hour.
+
 - **Batching required for large payloads**: the compressed request body must not exceed 1MB.
+
   Split large event lists into batches.
+
 - **Column lineage expires after 10 days**: unlike table metadata and table lineage (which
+
   never expire), column lineage has a 10-day TTL, same as pulled column lineage.
+
 - **Quote SQL identifiers in warehouse queries**: database, schema, and table names must be
+
   quoted to handle mixed-case or special characters. The quoting syntax varies by warehouse —
   Snowflake and Redshift use double quotes (`"{db}"`), BigQuery/Databricks/Hive use backticks
   (`` `db` ``). The templates already handle this correctly for each warehouse — follow the
@@ -363,15 +399,18 @@ Call `_check_available_memory()` before connecting to the warehouse.
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 Additionally, when fetching query history:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Use `cursor.fetchmany(batch_size)` in a loop instead of `cursor.fetchall()` when possible
 - For very large result sets, consider adding a LIMIT clause and processing in windows
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

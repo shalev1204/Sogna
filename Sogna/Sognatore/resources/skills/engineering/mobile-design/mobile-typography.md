@@ -357,16 +357,21 @@ Recommendations:
 ### Loading Strategy
 
 ```
+
 1. SYSTEM FONT FALLBACK
+
    Show system font → swap when custom loads
  
 2. FONT DISPLAY SWAP
+
    font-display: swap (CSS)
  
 3. PRELOAD CRITICAL FONTS
+
    Preload fonts needed above the fold
  
 4. DON'T BLOCK RENDER
+
    Don't wait for fonts to show content
 ```
 
@@ -440,6 +445,7 @@ Long text: 1.5-1.75
 > **Remember:** If users can't read your text, your app is broken. Typography isn't decoration—it's the primary interface. Test on real devices, in real conditions, with accessibility settings enabled.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

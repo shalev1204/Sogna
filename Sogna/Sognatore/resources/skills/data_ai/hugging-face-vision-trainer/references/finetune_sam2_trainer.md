@@ -195,8 +195,11 @@ def compute_loss(outputs, labels, num_items_in_batch=None):
 ## Train with Trainer
 
 Key settings:
+
 - `remove_unused_columns=False`: the Trainer must keep `input_boxes`,
+
   `original_sizes`, etc. that are not in the model's `forward()` signature.
+
 - `compute_loss_func`: our custom DiceCE loss.
 - `report_to="trackio"`: logs the training loss to trackio.
 
@@ -256,6 +259,7 @@ plt.show()
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

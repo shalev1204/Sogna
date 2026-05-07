@@ -6,6 +6,7 @@ version: 1.0.0
 ---
 
 <!-- Updated: 2026-02-07 -->
+
 # Local Service Business SEO Strategy Template
 
 ## Industry Characteristics
@@ -44,10 +45,12 @@ version: 1.0.0
 ## Quality Gates
 
 ### Location Page Limits
+
 - ⚠️ **WARNING** at 30+ location pages
 - 🛑 **HARD STOP** at 50+ location pages
 
 ### Unique Content Requirements
+
 | Page Type | Min Words | Unique % |
 |-----------|-----------|----------|
 | Primary Location | 600 | 60%+ |
@@ -55,6 +58,7 @@ version: 1.0.0
 | Service Page | 800 | 100% |
 
 ### What Makes Location Pages Unique
+
 - Local landmarks and neighborhoods
 - Specific services offered at that location
 - Local team members
@@ -73,6 +77,7 @@ version: 1.0.0
 | Reviews | LocalBusiness (with AggregateRating) |
 
 ### LocalBusiness Schema Example
+
 ```json
 {
   "@context": "https://schema.org",
@@ -122,6 +127,7 @@ Google updated SAB guidelines to **disallow entire states or countries** as serv
 AI Overviews appear for only ~0.14% of local keywords (March 2025 data), local SEO faces significantly less AI disruption than other verticals. However, ChatGPT and Perplexity are increasingly used for local recommendations.
 
 To optimize for AI local visibility:
+
 - Ensure presence on expert-curated "best of" lists (ranked #1 AI visibility factor in Whitespark 2026 report)
 - Maintain consistent NAP (Name, Address, Phone) across all platforms
 - Build genuine review volume and quality
@@ -130,18 +136,21 @@ To optimize for AI local visibility:
 ## Content Priorities
 
 ### High Priority
+
 1. Homepage with clear service area
 2. Core service pages
 3. Primary city page
 4. Contact page with all locations
 
 ### Medium Priority
+
 1. Service + location combination pages
 2. FAQ page
 3. About/team page
 4. Reviews/testimonials page
 
 ### Blog Topics
+
 - Seasonal maintenance tips
 - How to choose a [service provider]
 - Warning signs of [problem]
@@ -167,6 +176,7 @@ To optimize for AI local visibility:
 - [ ] Monitor AI citation in ChatGPT and Perplexity local recommendations
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

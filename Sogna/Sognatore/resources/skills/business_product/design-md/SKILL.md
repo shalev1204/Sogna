@@ -8,7 +8,6 @@ id: skill-design-md
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # Stitch DESIGN.md Skill
 
 You are an expert Design Systems Lead. Your goal is to analyze the provided technical assets and synthesize a "Semantic Design System" into a file named `DESIGN.md`.
@@ -16,6 +15,7 @@ You are an expert Design Systems Lead. Your goal is to analyze the provided tech
 ## When to Use This Skill
 
 Use this skill when:
+
 - Analyzing Stitch projects
 - Creating DESIGN.md files
 - Synthesizing semantic design systems
@@ -53,6 +53,7 @@ To analyze a Stitch project, you must retrieve screen metadata and design assets
    - Extract the Screen ID from the screen's `name` field
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 4. **Metadata fetch**: 
    - Call `[prefix]:get_screen` with both `projectId` and `screenId` (both as numeric IDs only)
    - This returns the complete screen object including:
@@ -62,7 +63,9 @@ To analyze a Stitch project, you must retrieve screen metadata and design assets
      - Project metadata including `designTheme` with color and style information
 
 5. **Asset download**:
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
    - Use `web_fetch` or `read_url_content` to download the HTML code from `htmlCode.downloadUrl`
    - Optionally download the screenshot from `screenshot.downloadUrl` for visual reference
    - Parse the HTML to extract Tailwind classes, custom CSS, and component patterns
@@ -76,25 +79,32 @@ To analyze a Stitch project, you must retrieve screen metadata and design assets
 ## Analysis & Synthesis Instructions
 
 ### 1. Extract Project Identity (JSON)
+
 - Locate the Project Title
 - Locate the specific Project ID (e.g., from the `name` field in the JSON)
 
 ### 2. Define the Atmosphere (Image/HTML)
+
 Evaluate the screenshot and HTML structure to capture the overall "vibe." Use evocative adjectives to describe the mood (e.g., "Airy," "Dense," "Minimalist," "Utilitarian").
 
 ### 3. Map the Color Palette (Tailwind Config/JSON)
+
 Identify the key colors in the system. For each color, provide:
+
 - A descriptive, natural language name that conveys its character (e.g., "Deep Muted Teal-Navy")
 - The specific hex code in parentheses for precision (e.g., "#294056")
 - Its specific functional role (e.g., "Used for primary actions")
 
 ### 4. Translate Geometry & Shape (CSS/Tailwind)
+
 Convert technical `border-radius` and layout values into physical descriptions:
+
 - Describe `rounded-full` as "Pill-shaped"
 - Describe `rounded-lg` as "Subtly rounded corners"
 - Describe `rounded-none` as "Sharp, squared-off edges"
 
 ### 5. Describe Depth & Elevation
+
 Explain how the UI handles layers. Describe the presence and quality of shadows (e.g., "Flat," "Whisper-soft diffused shadows," or "Heavy, high-contrast drop shadows").
 
 ## Output Guidelines
@@ -107,24 +117,31 @@ Explain how the UI handles layers. Describe the presence and quality of shadows 
 ## Output Format (DESIGN.md Structure)
 
 ```markdown
+
 # Design System: [Project Title]
+
 **Project ID:** [Insert Project ID Here]
 
 ## 1. Visual Theme & Atmosphere
+
 (Description of the mood, density, and aesthetic philosophy.)
 
 ## 2. Color Palette & Roles
+
 (List colors by Descriptive Name + Hex Code + Functional Role.)
 
 ## 3. Typography Rules
+
 (Description of font family, weight usage for headers vs. body, and letter-spacing character.)
 
 ## 4. Component Stylings
+
 * **Buttons:** (Shape description, color assignment, behavior).
 * **Cards/Containers:** (Corner roundness description, background color, shadow depth).
 * **Inputs/Forms:** (Stroke style, background).
 
 ## 5. Layout Principles
+
 (Description of whitespace strategy, margins, and grid alignment.)
 ```
 
@@ -133,16 +150,19 @@ Explain how the UI handles layers. Describe the presence and quality of shadows 
 To use this skill for the Furniture Collection project:
 
 1. **Retrieve project information:**
+
    ```
    Use the Stitch MCP Server to get the Furniture Collection project
    ```
 
 2. **Get the Home page screen details:**
+
    ```
    Retrieve the Home page screen's code, image, and screen object information
    ```
 
 3. **Reference best practices:**
+
    ```
    Review the Stitch Effective Prompting Guide at:
    https://stitch.withgoogle.com/docs/learn/prompting/
@@ -184,11 +204,13 @@ To use this skill for the Furniture Collection project:
 - ❌ Ignoring subtle design details like shadows or spacing patterns
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -54,6 +54,7 @@ By default, macOS displays a box’s title above it.
 [`NSBox`](https://developer.apple.com/documentation/AppKit/NSBox) — AppKit
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

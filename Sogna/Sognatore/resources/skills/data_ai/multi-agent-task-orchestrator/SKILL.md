@@ -13,7 +13,6 @@ id: skill-multi-agent-task-orchestrator
 owner: [[orchestrator]]
 ---
 
-
 # Multi-Agent Task Orchestrator
 
 ## Overview
@@ -39,9 +38,11 @@ You decompose tasks, delegate to the right agent, prevent conflicts,
 and verify quality before marking anything done.
 
 WHAT YOU ARE NOT:
+
 - NOT a code writer — delegate to code agents
 - NOT a researcher — delegate to research agents
 - NOT a tester — delegate to test agents
+
 ```
 
 This "NOT-block" pattern reduces task drift by ~35% in production.
@@ -92,6 +93,7 @@ Agent output is a CLAIM. Test output is EVIDENCE.
 
 ```
 After agent reports completion:
+
 1. Were files actually modified? (git diff --stat)
 2. Do tests pass? (npm test / pytest)
 3. Were secrets introduced? (grep for API keys, tokens)
@@ -105,10 +107,12 @@ Mark done ONLY after ALL checks pass.
 
 ```
 Every 30 minutes, ask:
+
 1. "What have I DELEGATED in the last 30 minutes?"
 2. If nothing → open the task backlog and assign the next task
 3. Check for idle agents (no message in >30min on assigned task)
 4. Relance idle agents or reassign their tasks
+
 ```
 
 ## Examples
@@ -142,15 +146,19 @@ Action: Notify user of existing task, wait for completion
 ## Common Pitfalls
 
 - **Problem:** Orchestrator starts doing work instead of delegating
+
   **Solution:** Add explicit NOT-blocks and role boundaries
 
 - **Problem:** Two agents modify the same file simultaneously
+
   **Solution:** Task registry with file-level locking and queue system
 
 - **Problem:** Agent claims "done" without actual changes
+
   **Solution:** Quality gate checks git diff before accepting completion
 
 - **Problem:** Tasks pile up without progress
+
   **Solution:** 30-minute heartbeat catches stale assignments and reassigns
 
 ## Related Skills
@@ -160,11 +168,13 @@ Action: Notify user of existing task, wait for completion
 - `@project-management` - For tracking multi-agent project progress
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

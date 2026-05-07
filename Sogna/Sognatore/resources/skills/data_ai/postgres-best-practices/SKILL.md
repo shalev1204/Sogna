@@ -8,13 +8,14 @@ id: skill-postgres-best-practices
 owner: [[orchestrator]]
 ---
 
-
 # Supabase Postgres Best Practices
 
 Comprehensive performance optimization guide for Postgres, maintained by Supabase. Contains rules across 8 categories, prioritized by impact to guide automated query optimization and schema design.
 
 ## When to Use
+
 Reference these guidelines when:
+
 - Writing SQL queries or designing schemas
 - Implementing indexes or query optimization
 - Reviewing database performance issues
@@ -46,6 +47,7 @@ rules/_sections.md
 ```
 
 Each rule file contains:
+
 - Brief explanation of why it matters
 - Incorrect SQL example with explanation
 - Correct SQL example with explanation
@@ -58,14 +60,17 @@ Each rule file contains:
 For the complete guide with all rules expanded: `AGENTS.md`
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

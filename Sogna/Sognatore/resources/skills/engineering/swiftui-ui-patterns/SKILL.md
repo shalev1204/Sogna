@@ -8,12 +8,12 @@ id: skill-swiftui-ui-patterns
 owner: [[orchestrator]]
 ---
 
-
 # SwiftUI UI Patterns
 
 ## Quick start
 
 ## When to Use
+
 - When creating or refactoring SwiftUI screens, flows, or reusable UI components.
 - When you need guidance on navigation, sheets, async state, previews, or component patterns.
 
@@ -93,6 +93,7 @@ Choose the ownership location first, then pick the wrapper. Do not introduce a r
 ## Component references
 
 Use `references/components-index.md` as the entry point. Each component reference should include:
+
 - Intent and best-fit scenarios.
 - Minimal usage pattern with local conventions.
 - Pitfalls and performance notes.
@@ -105,11 +106,13 @@ Use `references/components-index.md` as the entry point. Each component referenc
 - Update `references/components-index.md` with the new entry.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

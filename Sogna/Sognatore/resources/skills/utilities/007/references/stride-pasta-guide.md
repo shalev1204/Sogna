@@ -21,6 +21,7 @@ version: 1.0.0
 | **Both** | Critical systems, compliance requirements | High | Complete threat landscape |
 
 **Rule of thumb:**
+
 - Quick code review or PR? -> STRIDE on changed components
 - New system design or architecture review? -> PASTA full process
 - Production system with sensitive data? -> Both (PASTA for strategy, STRIDE for each component)
@@ -37,13 +38,17 @@ STRIDE categorizes threats into six types. For each, ask: "Can an attacker do th
 
 **Examples:**
 ```
+
 # API without authentication
+
 GET /api/users/123/data  # Anyone can access any user's data
 
 # Forged JWT with weak secret
+
 jwt.encode({"user_id": "admin", "role": "superuser"}, "password123")
 
 # Webhook without origin verification
+
 POST /webhooks/payment  # No signature validation, anyone can send fake events
 ```
 
@@ -59,13 +64,17 @@ POST /webhooks/payment  # No signature validation, anyone can send fake events
 
 **Examples:**
 ```
+
 # SQL injection modifying data
+
 POST /api/transfer {"amount": "100; UPDATE accounts SET balance=999999 WHERE id=1"}
 
 # Man-in-the-middle on HTTP (not HTTPS)
+
 # Attacker intercepts and modifies API response
 
 # Unsigned configuration files
+
 config.yaml loaded without integrity check -> attacker modifies log_level: DEBUG to expose secrets
 ```
 
@@ -81,12 +90,16 @@ config.yaml loaded without integrity check -> attacker modifies log_level: DEBUG
 
 **Examples:**
 ```
+
 # No audit logging on financial transactions
+
 def transfer_money(from_acc, to_acc, amount):
     db.execute("UPDATE accounts ...")  # No log of who did this, when, or why
 
 # Logs stored on same server (attacker can delete)
+
 # User deletes their own audit trail after unauthorized access
+
 ```
 
 **Detection patterns:** Missing audit logs, logs without timestamps/user IDs, mutable log storage, no log forwarding.
@@ -101,16 +114,20 @@ def transfer_money(from_acc, to_acc, amount):
 
 **Examples:**
 ```python
+
 # Stack trace in production API response
+
 {
   "error": "NullPointerException at com.app.UserService.getUser(UserService.java:42)",
   "database": "postgresql://admin:s3cret@db.internal:5432/users"
 }
 
 # .env file exposed via web server
+
 GET /.env  # Returns API_KEY=sk-live-xxxxx, DB_PASSWORD=...
 
 # Verbose error messages
+
 "User admin@company.com not found" vs "Invalid credentials" (leaks valid emails)
 ```
 
@@ -126,14 +143,18 @@ GET /.env  # Returns API_KEY=sk-live-xxxxx, DB_PASSWORD=...
 
 **Examples:**
 ```python
+
 # Unbounded query with no pagination
+
 GET /api/users  # Returns 10 million records, crashes server
 
 # ReDoS - Regular expression denial of service
+
 import re
 re.match(r"(a+)+$", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!")  # Exponential backtracking
 
 # No rate limiting on expensive operation
+
 POST /api/reports/generate  # Each request takes 30s and 2GB RAM
 ```
 
@@ -149,13 +170,17 @@ POST /api/reports/generate  # Each request takes 30s and 2GB RAM
 
 **Examples:**
 ```python
+
 # IDOR - Insecure Direct Object Reference
+
 GET /api/users/123/admin-panel  # Only checks if user is logged in, not if they're admin
 
 # Role manipulation via mass assignment
+
 POST /api/register {"name": "John", "email": "john@test.com", "role": "admin"}
 
 # Path traversal
+
 GET /api/files?path=../../etc/passwd
 ```
 
@@ -186,6 +211,7 @@ Risk appetite: LOW (financial data)
 
 ```
 Components:
+
 - Frontend: React SPA (app.example.com)
 - API Gateway: Kong (api.example.com)
 - Backend: FastAPI (internal)
@@ -193,6 +219,7 @@ Components:
 - Queue: RabbitMQ (internal)
 - External: Stripe API, SendGrid
 - Infrastructure: AWS ECS, RDS, S3
+
 ```
 
 ### Stage 3: Application Decomposition
@@ -277,6 +304,7 @@ GOAL: Steal user payment data
 Use this template for every identified threat:
 
 ```markdown
+
 ### THREAT-{ID}: {Short Title}
 
 **Category:** STRIDE category (S/T/R/I/D/E)
@@ -285,6 +313,7 @@ Use this template for every identified threat:
 **Prerequisites:** What the attacker needs (access level, knowledge, tools)
 
 **Impact:**
+
 - Confidentiality: HIGH/MEDIUM/LOW
 - Integrity: HIGH/MEDIUM/LOW
 - Availability: HIGH/MEDIUM/LOW
@@ -294,10 +323,12 @@ Use this template for every identified threat:
 **Severity:** CRITICAL/HIGH/MEDIUM/LOW (Impact x Probability)
 
 **Evidence/Detection:**
+
 - How to detect if this is being exploited
 - Log patterns, monitoring alerts
 
 **Mitigation:**
+
 - [ ] Short-term fix (hotfix)
 - [ ] Long-term fix (architectural)
 - [ ] Monitoring/alerting to add
@@ -402,6 +433,7 @@ agent_security:
 | **Low Probability** | LOW | LOW | MEDIUM |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

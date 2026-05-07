@@ -17,8 +17,10 @@ Combines: React.FC, useSuspenseQuery, cache-first, useCallback, styling, error h
 
 ```typescript
 /**
+
  * User profile display component
  * Demonstrates modern patterns with Suspense and TanStack Query
+
  */
 import React, { useState, useCallback, useMemo } from 'react';
 import { Box, Paper, Typography, Button, Avatar } from '@mui/material';
@@ -295,8 +297,10 @@ export type { User, CreateUserPayload, UpdateUserPayload } from './types';
 
 ```typescript
 /**
+
  * User profile route
  * Path: /users/:userId
+
  */
 
 import { createFileRoute } from '@tanstack/react-router';
@@ -540,6 +544,7 @@ export default UserDashboard;
 ```
 
 **Benefits:**
+
 - Each section loads independently
 - User sees partial content sooner
 - Better perceived perblogance
@@ -556,8 +561,10 @@ import { postApi } from '../api/postApi';
 import type { Post } from '../types';
 
 /**
+
  * Smart post hook with cache-first strategy
  * Reuses data from grid cache when available
+
  */
 export function useSuspensePost(blogId: number, postId: number) {
     const queryClient = useQueryClient();
@@ -599,6 +606,7 @@ export function useSuspensePost(blogId: number, postId: number) {
 ```
 
 **Why this pattern:**
+
 - Checks grid cache before API
 - Instant data if user came from grid
 - Falls back to API if not cached
@@ -610,8 +618,10 @@ export function useSuspensePost(blogId: number, postId: number) {
 
 ```typescript
 /**
+
  * Project catalog route
  * Path: /project-catalog
+
  */
 
 import { createFileRoute } from '@tanstack/react-router';
@@ -883,6 +893,7 @@ export const useToggleUserStatus = () => {
 **See other resources for detailed explanations of each pattern.**
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

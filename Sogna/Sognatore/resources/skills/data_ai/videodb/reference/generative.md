@@ -31,6 +31,7 @@ image = coll.generate_image(
 )
 
 # Access the generated image
+
 print(image.id)
 print(image.generate_url())  # returns a signed download URL
 ```
@@ -137,10 +138,13 @@ All three audio methods return an `Audio` object with `.id`, `.name`, `.length`,
 Use `coll.generate_text()` to run LLM analysis. This is a **Collection-level** method -- pass any context (transcripts, descriptions) directly in the prompt string.
 
 ```python
+
 # Get transcript from a video first
+
 transcript_text = video.get_transcript_text()
 
 # Generate analysis using collection LLM
+
 result = coll.generate_text(
     prompt=f"Summarize the key points discussed in this video:\n{transcript_text}",
     model_name="pro",
@@ -172,6 +176,7 @@ Combine scene extraction with text generation:
 from videodb import SceneExtractionType
 
 # First index scenes
+
 video.index_scenes(
     extraction_type=SceneExtractionType.time_based,
     extraction_config={"time": 10},
@@ -179,9 +184,11 @@ video.index_scenes(
 )
 
 # Get transcript for spoken context
+
 transcript_text = video.get_transcript_text()
 
 # Analyze with collection LLM
+
 result = coll.generate_text(
     prompt=(
         f"Given this video transcript:\n{transcript_text}\n\n"
@@ -245,9 +252,11 @@ coll = conn.get_collection()
 video = coll.get_video("your-video-id")
 
 # Get transcript
+
 transcript_text = video.get_transcript_text()
 
 # Generate narration script using collection LLM
+
 result = coll.generate_text(
     prompt=(
         f"Write a professional narration script for this video content:\n"
@@ -258,6 +267,7 @@ result = coll.generate_text(
 script = result["output"]
 
 # Convert script to speech
+
 narration = coll.generate_voice(text=script)
 print(f"Narration audio: {narration.id}")
 ```
@@ -284,12 +294,14 @@ coll = conn.get_collection()
 video = coll.get_video("your-video-id")
 
 # Generate background music
+
 music = coll.generate_music(
     prompt="calm ambient background music for a tutorial video",
     duration=60,
 )
 
 # Build timeline with video + music overlay
+
 timeline = Timeline(conn)
 timeline.add_inline(VideoAsset(asset_id=video.id))
 timeline.add_overlay(0, AudioAsset(asset_id=music.id, disable_other_tracks=False))
@@ -313,6 +325,7 @@ result = coll.generate_text(
 )
 
 # result["output"] is a dict when response_type="json"
+
 print(result["output"]["summary"])
 print(result["output"]["topics"])
 ```
@@ -328,6 +341,7 @@ print(result["output"]["topics"])
 - **Aspect ratios for images**: Choose from `"1:1"`, `"9:16"`, `"16:9"`, `"4:3"`, or `"3:4"`.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

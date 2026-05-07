@@ -21,10 +21,12 @@ This skill uses a **hybrid authentication approach** that combines the best of b
 Playwright/Patchright has a known bug ([#36139](https://github.com/microsoft/playwright/issues/36139)) where **session cookies** (cookies without an `Expires` attribute) do not persist correctly when using `launch_persistent_context()` with `user_data_dir`.
 
 **What happens:**
+
 - ✅ Persistent cookies (with `Expires` date) → Saved correctly to browser profile
 - ❌ Session cookies (without `Expires`) → **Lost after browser restarts**
 
 **Impact:**
+
 - Some Google auth cookies are session cookies
 - Users experience random authentication failures
 - "Works on my machine" syndrome (depends on which cookies Google uses)
@@ -44,7 +46,9 @@ const context = await chromium.launchPersistentContext(userDataDir, {
 But **Python's Playwright API doesn't support this** ([#14949](https://github.com/microsoft/playwright/issues/14949)):
 
 ```python
+
 # Python - NOT SUPPORTED!
+
 context = playwright.chromium.launch_persistent_context(
     user_data_dir=profile_dir,
     storage_state="state.json",  # ← Parameter not available in Python!
@@ -69,7 +73,9 @@ context = playwright.chromium.launch_persistent_context(
     user_data_dir="browser_profile/",
     channel="chrome"
 )
+
 # User logs in...
+
 context.storage_state(path="state.json")  # Save all cookies
 ```
 
@@ -79,13 +85,16 @@ context.storage_state(path="state.json")  # Save all cookies
 2. **Manually inject cookies** from `state.json` (adds session cookies)
 
 ```python
+
 # Step 1: Launch with browser profile
+
 context = playwright.chromium.launch_persistent_context(
     user_data_dir="browser_profile/",
     channel="chrome"
 )
 
 # Step 2: Manually inject cookies from state.json
+
 with open("state.json", 'r') as f:
     state = json.load(f)
     context.add_cookies(state['cookies'])  # ← Workaround for session cookies!
@@ -128,14 +137,17 @@ Even though we use `user_data_dir`, we **still need `state.json`** because:
 ## Code References
 
 **Setup:** `scripts/auth_manager.py:94-120`
+
 - Lines 100-113: Launch persistent context with `channel="chrome"`
 - Line 167: Save to `state.json` via `context.storage_state()`
 
 **Runtime:** `scripts/ask_question.py:77-118`
+
 - Lines 86-99: Launch persistent context
 - Lines 101-118: Manual cookie injection workaround
 
 **Validation:** `scripts/auth_manager.py:236-298`
+
 - Lines 262-275: Launch persistent context
 - Lines 277-287: Manual cookie injection for validation
 
@@ -150,7 +162,9 @@ Even though we use `user_data_dir`, we **still need `state.json`** because:
 If Playwright adds support for `storage_state` parameter in Python's `launch_persistent_context()`, we can simplify to:
 
 ```python
+
 # Future (when Python API supports it):
+
 context = playwright.chromium.launch_persistent_context(
     user_data_dir="browser_profile/",
     storage_state="state.json",  # ← Would handle everything automatically!
@@ -161,6 +175,7 @@ context = playwright.chromium.launch_persistent_context(
 Until then, our hybrid approach is the most reliable solution.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

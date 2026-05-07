@@ -43,12 +43,15 @@ The **youtube-summarizer** skill automates the extraction of YouTube video trans
 Activate this skill with any of these phrases:
 
 ```bash
+
 # English
+
 copilot> summarize this video: https://www.youtube.com/watch?v=VIDEO_ID
 copilot> summarize youtube video https://youtu.be/VIDEO_ID
 copilot> extract youtube transcript https://youtube.com/watch?v=VIDEO_ID
 
 # Portuguese (also supported)
+
 copilot> resume este video: https://www.youtube.com/watch?v=VIDEO_ID
 ```
 
@@ -60,8 +63,10 @@ The skill will automatically check for dependencies and offer to install them:
 ⚠️  youtube-transcript-api not installed
 
 Would you like me to install it now?
+
 - [x] Yes - Install with pip
 - [ ] No - I'll install manually
+
 ```
 
 Select "Yes" and the skill handles installation automatically.
@@ -77,6 +82,7 @@ copilot> summarize this video: https://www.youtube.com/watch?v=abc123
 ```
 
 **Output:**
+
 - Comprehensive summary of lecture content
 - Key concepts and terminology
 - Examples and practical applications
@@ -89,6 +95,7 @@ copilot> summarize youtube video https://youtu.be/xyz789
 ```
 
 **Output:**
+
 - Step-by-step breakdown of tutorial
 - Code snippets and commands mentioned
 - Best practices highlighted
@@ -101,6 +108,7 @@ copilot> extract youtube transcript https://youtube.com/watch?v=def456
 ```
 
 **Output:**
+
 - Speaker insights and arguments
 - Statistics and data points
 - Case studies and examples
@@ -113,6 +121,7 @@ copilot> summarize youtube video https://youtu.be/ghi789
 ```
 
 **Output:**
+
 - Vocabulary and expressions used
 - Grammar points explained
 - Cultural references
@@ -125,6 +134,7 @@ copilot> summarize youtube video https://www.youtube.com/watch?v=jkl012
 ```
 
 **Output:**
+
 - Research findings presented
 - Methodology explained
 - Results and conclusions
@@ -137,6 +147,7 @@ copilot> summarize youtube video https://www.youtube.com/watch?v=jkl012
 Every summary follows this comprehensive structure:
 
 ```markdown
+
 # [Video Title]
 
 **Canal:** [Channel Name]
@@ -147,38 +158,46 @@ Every summary follows this comprehensive structure:
 ---
 
 ## 📊 Síntese Executiva
+
 [High-level overview, 2-3 paragraphs]
 
 ---
 
 ## 📝 Resumo Detalhado
+
 ### [Topic 1]
+
 [Detailed analysis with examples, data, quotes]
 
 ### [Topic 2]
+
 [Continued breakdown...]
 
 ---
 
 ## 💡 Principais Insights
+
 - **Insight 1:** [Explanation]
 - **Insight 2:** [Explanation]
 
 ---
 
 ## 📚 Conceitos e Terminologia
+
 - **Term 1:** [Definition]
 - **Term 2:** [Definition]
 
 ---
 
 ## 🔗 Recursos Mencionados
+
 - [Resource 1]
 - [Resource 2]
 
 ---
 
 ## 📌 Conclusão
+
 [Final synthesis and key takeaways]
 ```
 
@@ -247,8 +266,10 @@ Unfortunately, transcripts are not enabled for this video.
 ❌ Invalid YouTube URL format
 
 Expected format examples:
+
 - https://www.youtube.com/watch?v=VIDEO_ID
 - https://youtu.be/VIDEO_ID
+
 ```
 
 **Solution:** Ensure you're providing a complete, valid YouTube URL.
@@ -259,9 +280,11 @@ Expected format examples:
 ❌ Unable to access video
 
 Possible reasons:
+
 1. Video is private or unlisted
 2. Video has been removed
 3. Invalid video ID
+
 ```
 
 **Solution:** Verify the URL and ensure the video is public.
@@ -273,6 +296,7 @@ Possible reasons:
 ### Q: How long does it take to generate a summary?
 
 **A:** Depends on video length:
+
 - Short videos (5-10 min): 30-60 seconds
 - Medium videos (20-40 min): 1-2 minutes
 - Long videos (60+ min): 2-5 minutes
@@ -296,6 +320,7 @@ Possible reasons:
 ### Q: Can I save the summary to a file?
 
 **A:** Yes! After the summary is generated, the skill offers flexible save options:
+
 - **Summary only** - Markdown file with structured summary
 - **Summary + transcript** - Markdown file with summary and raw transcript appended
 - **Transcript only** - Plain text file with raw transcript (NEW in v1.2.0)
@@ -306,6 +331,7 @@ Files are saved as `resumo-{VIDEO_ID}-{YYYY-MM-DD}.md` (summary) or `transcript-
 ### Q: When should I save just the transcript?
 
 **A:** Use the transcript-only option when you:
+
 - Need raw content for further analysis
 - Want to process the text with other tools
 - Prefer to create your own summary later
@@ -320,15 +346,19 @@ Files are saved as `resumo-{VIDEO_ID}-{YYYY-MM-DD}.md` (summary) or `transcript-
 Install the skill globally to use it across all projects:
 
 ```bash
+
 # Clone the repository
+
 git clone https://github.com/ericgandrade/cli-ai-skills.git
 cd cli-ai-skills
 
 # Run the install script
+
 ./scripts/install-skills.sh $(pwd)
 ```
 
 This creates symlinks in:
+
 - `~/.copilot/skills/youtube-summarizer/` (GitHub Copilot CLI)
 - `~/.claude/skills/youtube-summarizer/` (Claude Code)
 
@@ -337,7 +367,9 @@ This creates symlinks in:
 Add to a specific project:
 
 ```bash
+
 # Copy skill to your project
+
 cp -r cli-ai-skills/.github/skills/youtube-summarizer .github/skills/
 ```
 
@@ -366,6 +398,7 @@ Found a bug or have a feature request? Contributions welcome!
 *Version 1.1.0 | Last updated: February 2026*
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-k8s-security-policies
 owner: [[ops-security]]
 ---
 
-
 # Kubernetes Security Policies
 
 Comprehensive guide for implementing NetworkPolicy, PodSecurityPolicy, RBAC, and Pod Security Standards in Kubernetes.
@@ -41,6 +40,7 @@ Implement defense-in-depth security for Kubernetes clusters using network polici
 ## Pod Security Standards
 
 ### 1. Privileged (Unrestricted)
+
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -53,6 +53,7 @@ metadata:
 ```
 
 ### 2. Baseline (Minimally restrictive)
+
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -65,6 +66,7 @@ metadata:
 ```
 
 ### 3. Restricted (Most restrictive)
+
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -79,6 +81,7 @@ metadata:
 ## Network Policies
 
 ### Default Deny All
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -88,11 +91,14 @@ metadata:
 spec:
   podSelector: {}
   policyTypes:
+
   - Ingress
   - Egress
+
 ```
 
 ### Allow Frontend to Backend
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -104,18 +110,25 @@ spec:
     matchLabels:
       app: backend
   policyTypes:
+
   - Ingress
+
   ingress:
+
   - from:
     - podSelector:
+
         matchLabels:
           app: frontend
     ports:
+
     - protocol: TCP
+
       port: 8080
 ```
 
 ### Allow DNS
+
 ```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -125,14 +138,20 @@ metadata:
 spec:
   podSelector: {}
   policyTypes:
+
   - Egress
+
   egress:
+
   - to:
     - namespaceSelector:
+
         matchLabels:
           name: kube-system
     ports:
+
     - protocol: UDP
+
       port: 53
 ```
 
@@ -141,6 +160,7 @@ spec:
 ## RBAC Configuration
 
 ### Role (Namespace-scoped)
+
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -148,24 +168,30 @@ metadata:
   name: pod-reader
   namespace: production
 rules:
+
 - apiGroups: [""]
+
   resources: ["pods"]
   verbs: ["get", "watch", "list"]
 ```
 
 ### ClusterRole (Cluster-wide)
+
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: secret-reader
 rules:
+
 - apiGroups: [""]
+
   resources: ["secrets"]
   verbs: ["get", "watch", "list"]
 ```
 
 ### RoleBinding
+
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -173,10 +199,14 @@ metadata:
   name: read-pods
   namespace: production
 subjects:
+
 - kind: User
+
   name: jane
   apiGroup: rbac.authorization.k8s.io
+
 - kind: ServiceAccount
+
   name: default
   namespace: production
 roleRef:
@@ -190,6 +220,7 @@ roleRef:
 ## Pod Security Context
 
 ### Restricted Pod
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -203,19 +234,24 @@ spec:
     seccompProfile:
       type: RuntimeDefault
   containers:
+
   - name: app
+
     image: myapp:1.0
     securityContext:
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
       capabilities:
         drop:
+
         - ALL
+
 ```
 
 ## Policy Enforcement with OPA Gatekeeper
 
 ### ConstraintTemplate
+
 ```yaml
 apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate
@@ -235,7 +271,9 @@ spec:
               items:
                 type: string
   targets:
+
     - target: admission.k8s.gatekeeper.sh
+
       rego: |
         package k8srequiredlabels
         violation[{"msg": msg, "details": {"missing_labels": missing}}] {
@@ -248,6 +286,7 @@ spec:
 ```
 
 ### Constraint
+
 ```yaml
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
@@ -256,7 +295,9 @@ metadata:
 spec:
   match:
     kinds:
+
       - apiGroups: ["apps"]
+
         kinds: ["Deployment"]
   parameters:
     labels: ["app", "environment"]
@@ -265,6 +306,7 @@ spec:
 ## Service Mesh Security (Istio)
 
 ### PeerAuthentication (mTLS)
+
 ```yaml
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
@@ -277,6 +319,7 @@ spec:
 ```
 
 ### AuthorizationPolicy
+
 ```yaml
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
@@ -289,8 +332,10 @@ spec:
       app: backend
   action: ALLOW
   rules:
+
   - from:
     - source:
+
         principals: ["cluster.local/ns/production/sa/frontend"]
 ```
 
@@ -310,6 +355,7 @@ spec:
 ## Compliance Frameworks
 
 ### CIS Kubernetes Benchmark
+
 - Use RBAC authorization
 - Enable audit logging
 - Use Pod Security Standards
@@ -318,6 +364,7 @@ spec:
 - Enable node authentication
 
 ### NIST Cybersecurity Framework
+
 - Implement defense in depth
 - Use network segmentation
 - Configure security monitoring
@@ -328,14 +375,18 @@ spec:
 
 **NetworkPolicy not working:**
 ```bash
+
 # Check if CNI supports NetworkPolicy
+
 kubectl get nodes -o wide
 kubectl describe networkpolicy <name>
 ```
 
 **RBAC permission denied:**
 ```bash
+
 # Check effective permissions
+
 kubectl auth can-i list pods --as system:serviceaccount:default:my-sa
 kubectl auth can-i '*' '*' --as system:serviceaccount:default:my-sa
 ```
@@ -352,11 +403,13 @@ kubectl auth can-i '*' '*' --as system:serviceaccount:default:my-sa
 - `gitops-workflow` - For automated policy deployment
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

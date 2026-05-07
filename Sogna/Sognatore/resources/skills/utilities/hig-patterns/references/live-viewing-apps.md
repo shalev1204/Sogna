@@ -82,6 +82,7 @@ If you support digital video recording (DVR) in the cloud, follow these guidelin
 [Playing video](https://developer.apple.com/design/human-interface-guidelines/playing-video)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

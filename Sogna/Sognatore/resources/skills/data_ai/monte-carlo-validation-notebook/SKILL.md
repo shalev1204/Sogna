@@ -13,7 +13,6 @@ id: skill-monte-carlo-validation-notebook
 owner: [[orchestrator]]
 ---
 
-
 > **Tip:** This skill works well with Sonnet. Run `/model sonnet` before invoking for faster generation.
 
 Generate a SQL Notebook with validation queries for dbt changes.
@@ -21,6 +20,7 @@ Generate a SQL Notebook with validation queries for dbt changes.
 **Arguments:** $ARGUMENTS
 
 Parse the arguments:
+
 - **Target** (required): first argument — a GitHub PR URL or local dbt repo path
 - **MC Base URL** (optional): `--mc-base-url <URL>` — defaults to `https://getmontecarlo.com`
 - **Models** (optional): `--models <model1,model2,...>` — comma-separated list of model filenames (without `.sql` extension) to generate queries for. Only these models will be included. By default, all changed models are included up to a maximum of 10.
@@ -30,6 +30,7 @@ Parse the arguments:
 # Setup
 
 **Prerequisites:**
+
 - **`gh`** (GitHub CLI) — required for PR mode. Must be authenticated (`gh auth status`).
 - **`python3`** — required for helper scripts.
 - **`pyyaml`** — install with `pip3 install pyyaml` (or `pip install pyyaml`, `uv pip install pyyaml`, etc.)
@@ -44,6 +45,7 @@ This skill includes two helper scripts in `${CLAUDE_PLUGIN_ROOT}/skills/monte-ca
 # Mode Detection
 
 Auto-detect mode from the target argument:
+
 - If target looks like a URL (contains `://` or `github.com`) -> **PR mode**
 - If target is a path (`.`, `/path/to/repo`, relative path) -> **Local mode**
 
@@ -59,6 +61,7 @@ The output is an import URL that opens directly in the notebook interface:
 ```
 
 **Key Features:**
+
 - **Database Parameters**: Two `text` parameters (`prod_db` and `dev_db`) for selecting databases
 - **Schema Inference**: Automatically infers schema per model from `dbt_project.yml` and model configs
 - **Single-table queries**: Basic validation queries using `{{prod_db}}.<SCHEMA>.<TABLE>`
@@ -79,7 +82,9 @@ default_context:       # optional database/schema context
   database: string
   schema: string
 cells:
+
   - id: string
+
     type: sql | markdown | parameter
     content: string    # SQL, markdown, or parameter config (JSON)
     display_type: table | bar | timeseries
@@ -90,7 +95,9 @@ cells:
 Parameter cells allow defining variables referenced in SQL via `{{param_name}}` syntax:
 
 ```yaml
+
 - id: param-prod-db
+
   type: parameter
   content:
     name: prod_db              # variable name
@@ -102,6 +109,7 @@ Parameter cells allow defining variables referenced in SQL via `{{param_name}}` 
 ```
 
 Parameter types:
+
 - `text`: Free-form text input (used for database names)
 - `schema_selector`: Two dropdowns (database -> schema), value stored as `DATABASE.SCHEMA`
 - `dropdown`: Select from predefined options
@@ -120,16 +128,19 @@ The approach differs based on mode:
    - Example: `https://github.com/monte-carlo-data/dbt/pull/3386` -> owner=`monte-carlo-data`, repo=`dbt`, PR=`3386`
 
 2. Fetch PR metadata using `gh`:
+
 ```bash
 gh pr view <PR#> --repo <owner>/<repo> --json number,title,author,mergedAt,headRefOid
 ```
 
 3. Fetch the list of changed files:
+
 ```bash
 gh pr view <PR#> --repo <owner>/<repo> --json files --jq '.files[].path'
 ```
 
 4. Fetch the diff:
+
 ```bash
 gh pr diff <PR#> --repo <owner>/<repo>
 ```
@@ -137,12 +148,15 @@ gh pr diff <PR#> --repo <owner>/<repo>
 5. Filter the changed files list to only `.sql` files under `models/` or `snapshots/` directories (at any depth — e.g., `models/`, `analytics/models/`, `dbt/models/`). These are the dbt models to analyze. If no model SQL files were changed, report that and stop.
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 6. For each changed model file, fetch the full file content at the head SHA:
+
 ```bash
 gh api repos/<owner>/<repo>/contents/<file_path>?ref=<head_sha> --jq '.content' | python3 -c "import sys,base64; sys.stdout.write(base64.b64decode(sys.stdin.read()).decode())"
 ```
 
 7. **Fetch dbt_project.yml** for schema resolution. Detect the dbt project root by looking at the changed file paths — find the common parent directory that contains `dbt_project.yml`. Try these paths in order until one succeeds:
+
 ```bash
 gh api repos/<owner>/<repo>/contents/<dbt_root>/dbt_project.yml?ref=<head_sha> --jq '.content' | python3 -c "import sys,base64; sys.stdout.write(base64.b64decode(sys.stdin.read()).decode())"
 ```
@@ -155,6 +169,7 @@ Save `dbt_project.yml` to `/tmp/validation_notebook_working/<PR#>/dbt_project.ym
 1. Change to the target directory.
 
 2. Get current branch info:
+
 ```bash
 git rev-parse --abbrev-ref HEAD
 ```
@@ -162,6 +177,7 @@ git rev-parse --abbrev-ref HEAD
 3. Detect base branch - try `main`, `master`, `develop` in order, or use upstream tracking branch.
 
 4. Get the list of changed SQL files compared to base branch:
+
 ```bash
 git diff --name-only <base_branch>...HEAD -- '*.sql'
 ```
@@ -169,6 +185,7 @@ git diff --name-only <base_branch>...HEAD -- '*.sql'
 5. Filter to only `.sql` files under `models/` or `snapshots/` directories (at any depth — e.g., `models/`, `analytics/models/`, `dbt/models/`). If no model SQL files were changed, report that and stop.
 
 6. Get the diff for each changed file:
+
 ```bash
 git diff <base_branch>...HEAD -- <file_path>
 ```
@@ -176,6 +193,7 @@ git diff <base_branch>...HEAD -- <file_path>
 7. Read model files directly from the filesystem.
 
 8. **Find dbt_project.yml**:
+
 ```bash
 find . -name "dbt_project.yml" -type f | head -1
 ```
@@ -193,6 +211,7 @@ After filtering to `.sql` files under `models/` or `snapshots/`:
 1. **If `--models` was specified:** Filter the changed files list to only include models whose filename (without `.sql` extension, case-insensitive) matches one of the specified model names. If any specified model is not found in the changed files, warn the user but continue with the models that were found. If none match, report that and stop.
 
 2. **Model cap:** If more than 10 models remain after filtering, select the first 10 (by file path order) and warn the user:
+
    ```
    ⚠️ <total_count> models changed — generating validation queries for the first 10 only.
    To generate for specific models, re-run with: --models <model1,model2,...>
@@ -206,11 +225,13 @@ For EACH changed dbt model `.sql` file, parse and extract:
 ### 2a. Model Metadata
 
 **Output table name** -- Derive from file name:
+
 - `<any_path>/models/<subdir>/<model_name>.sql` -> table is `<MODEL_NAME>` (uppercase, taken from the filename)
 
 **Output schema** -- Use the schema resolution script:
 
 1. **Setup**: Save `dbt_project.yml` and model files to `/tmp/validation_notebook_working/<id>/` preserving paths:
+
    ```
    /tmp/validation_notebook_working/<id>/
    +-- dbt_project.yml
@@ -219,6 +240,7 @@ For EACH changed dbt model `.sql` file, parse and extract:
    ```
 
 2. **Run the script** for each model:
+
    ```bash
    python3 ${CLAUDE_PLUGIN_ROOT}/skills/monte-carlo-validation-notebook/scripts/resolve_dbt_schema.py /tmp/validation_notebook_working/<id>/dbt_project.yml /tmp/validation_notebook_working/<id>/models/<path>/<model>.sql
    ```
@@ -230,15 +252,18 @@ For EACH changed dbt model `.sql` file, parse and extract:
 **Note**: Do NOT manually parse dbt_project.yml or model configs for schema -- always use the script. It handles model config overrides, dbt_project.yml routing rules, PROD_ prefix for custom schemas, and defaults to `PROD`.
 
 **Config block** -- Look for `{{ config(...) }}` and extract:
+
 - `materialized` -- 'table', 'view', 'incremental', 'ephemeral'
 - `unique_key` -- the dedup key (may be a string or list)
 - `cluster_by` -- clustering fields (may contain the time axis)
 
 **Core segmentation fields** -- Scan the entire model SQL for fields likely to be business keys:
+
 - Fields named `*_id` (e.g., `account_id`, `resource_id`, `monitor_id`) that appear in JOIN ON, GROUP BY, PARTITION BY, or `unique_key`
 - Deduplicate and rank by frequency. Take the top 3.
 
 **Time axis field** -- Detect the model's time dimension (in priority order):
+
 1. `is_incremental()` block: field used in the WHERE comparison
 2. `cluster_by` config: timestamp/date fields
 3. Field name conventions: `ingest_ts`, `created_time`, `date_part`, `timestamp`, `run_start_time`, `export_ts`, `event_created_time`
@@ -259,6 +284,7 @@ Parse the diff hunks for this file. Classify each changed line:
 ### 2c. Model Classification
 
 Classify each model as **new** or **modified** based on the diff:
+
 - If the diff for this file contains `new file mode` → classify as **new**
 - Otherwise → classify as **modified**
 
@@ -278,6 +304,7 @@ Correct: `{{prod_db}}.PROD.AGENT_RUNS`
 Wrong: `${prod_db}.PROD.AGENT_RUNS`
 
 **Table Reference Format:**
+
 - Use `{{prod_db}}.<SCHEMA>.<TABLE_NAME>` for prod queries
 - Use `{{dev_db}}.<SCHEMA>.<TABLE_NAME>` for dev queries
 - `<SCHEMA>` is **hardcoded per-model** using the output from the schema resolution script
@@ -289,6 +316,7 @@ Wrong: `${prod_db}.PROD.AGENT_RUNS`
 For new models, all queries target `{{dev_db}}` only. No comparison queries are generated since no prod table exists.
 
 #### Pattern 7-new: Total Row Count
+
 **Trigger:** Always.
 
 ```sql
@@ -297,6 +325,7 @@ FROM {{dev_db}}.<SCHEMA>.<TABLE_NAME>
 ```
 
 #### Pattern 9: Sample Data Preview
+
 **Trigger:** Always.
 
 ```sql
@@ -306,6 +335,7 @@ LIMIT 20
 ```
 
 #### Pattern 2-new: Core Segmentation Counts
+
 **Trigger:** Always.
 
 ```sql
@@ -319,6 +349,7 @@ LIMIT 100
 ```
 
 #### Pattern 5: Uniqueness Check
+
 **Trigger:** Always for new models (verify unique_key constraint from the start).
 
 ```sql
@@ -339,6 +370,7 @@ LIMIT 100
 ```
 
 #### Pattern 6-new: NULL Rate Check (all columns)
+
 **Trigger:** Always. Checks all output columns since everything is new.
 
 ```sql
@@ -353,6 +385,7 @@ FROM {{dev_db}}.<SCHEMA>.<TABLE_NAME>
 ```
 
 #### Pattern 8: Time-Axis Continuity
+
 **Trigger:** Model is `materialized='incremental'` OR a time axis field was identified.
 
 ```sql
@@ -373,6 +406,7 @@ LIMIT 30
 For modified models, single-table queries use `{{prod_db}}` and comparison queries use both.
 
 #### Pattern 7: Total Row Count
+
 **Trigger:** Always.
 
 ```sql
@@ -381,6 +415,7 @@ FROM {{prod_db}}.<SCHEMA>.<TABLE_NAME>
 ```
 
 #### Pattern 9: Sample Data Preview
+
 **Trigger:** Always.
 
 ```sql
@@ -390,6 +425,7 @@ LIMIT 20
 ```
 
 #### Pattern 2: Core Segmentation Counts
+
 **Trigger:** Always.
 
 ```sql
@@ -403,6 +439,7 @@ LIMIT 100
 ```
 
 #### Pattern 1: Changed Field Distribution
+
 **Trigger:** Changed fields found in Phase 2b. **Exclude added columns** (from "New columns" in Phase 2b) — only include fields that exist in prod.
 
 ```sql
@@ -417,6 +454,7 @@ LIMIT 100
 ```
 
 #### Pattern 5: Uniqueness Check
+
 **Trigger:** JOIN condition changed, `unique_key` changed, or model is incremental.
 
 ```sql
@@ -437,6 +475,7 @@ LIMIT 100
 ```
 
 #### Pattern 6: NULL Rate Check
+
 **Trigger:** New column added, or column wrapped in COALESCE/NULLIF.
 
 **Important:** Added columns (from "New columns" in Phase 2b) do NOT exist in prod yet. For added columns, query `{{dev_db}}` only. For modified columns (COALESCE/NULLIF changes), compare both databases.
@@ -468,6 +507,7 @@ FROM {{dev_db}}.<SCHEMA>.<TABLE_NAME>
 ```
 
 #### Pattern 8: Time-Axis Continuity
+
 **Trigger:** Model is `materialized='incremental'` OR a time axis field was identified.
 
 ```sql
@@ -482,6 +522,7 @@ LIMIT 30
 ```
 
 #### Pattern 3: Before/After Comparison
+
 **Trigger:** Always (for changed fields + top segmentation field). **Modified models only.**
 
 **Important:** Exclude added columns (from "New columns" in Phase 2b) from `<group_fields>`. Only use fields that exist in BOTH prod and dev. Added columns don't exist in prod and will cause query errors.
@@ -509,6 +550,7 @@ LIMIT 100
 ```
 
 #### Pattern 7b: Row Count Comparison
+
 **Trigger:** Always. **Modified models only.**
 
 ```sql
@@ -520,6 +562,7 @@ SELECT 'dev' AS source, COUNT(*) AS row_count FROM {{dev_db}}.<SCHEMA>.<TABLE_NA
 ## Phase 4: Build Notebook YAML
 
 ### 4a. Metadata
+
 ```yaml
 version: 1
 metadata:
@@ -534,8 +577,11 @@ metadata:
 **Only include `prod_db` if there are modified models.** If all models are new, only include `dev_db`.
 
 ```yaml
+
 # Include ONLY if there are modified models:
+
 - id: param-prod-db
+
   type: parameter
   content:
     name: prod_db
@@ -546,7 +592,9 @@ metadata:
   display_type: table
 
 # Always include:
+
 - id: param-dev-db
+
   type: parameter
   content:
     name: dev_db
@@ -558,31 +606,43 @@ metadata:
 ```
 
 ### 4c. Markdown Summary Cell
+
 ```yaml
+
 - id: cell-summary
+
   type: markdown
   content: |
     # Validation Queries for <PR or Local Branch>
     ## Summary
+
     - **Title:** <title>
     - **Author:** <author>
     - **Source:** <PR URL or "Local branch: <branch>">
     - **Status:** <merge_timestamp or "Not yet merged" or "N/A (local)">
+
     ## Changes
     <brief description based on diff analysis>
     ## Changed Models
+
     - `<SCHEMA>.<TABLE_NAME>` (from `<file_path>`)
+
     ## How to Use
+
     1. Select your Snowflake connector above
     2. Set **dev_db** to your dev database (e.g., `PERSONAL_JSMITH`)
     3. If modified models are present, set **prod_db** to your prod database (e.g., `ANALYTICS`)
     4. Run single-table queries first, then comparison queries
+
   display_type: table
 ```
 
 ### 4d. SQL Cell Format
+
 ```yaml
+
 - id: cell-<pattern>-<model>-<index>
+
   type: sql
   content: |
     /*
@@ -603,6 +663,7 @@ metadata:
 Cells are ordered consistently for both model types, following this sequence:
 
 **New models:**
+
 1. Summary markdown cell (note that model is new)
 2. Parameter cells (dev_db only — no prod_db if all models are new)
 3. Total row count (Pattern 7-new)
@@ -611,6 +672,7 @@ Cells are ordered consistently for both model types, following this sequence:
 6. Uniqueness check (Pattern 5), NULL rate check (Pattern 6-new), Time-axis continuity (Pattern 8)
 
 **Modified models:**
+
 1. Summary markdown cell
 2. Parameter cells (prod_db, dev_db)
 3. Total row count (Pattern 7)
@@ -624,17 +686,22 @@ Cells are ordered consistently for both model types, following this sequence:
 
 1. Write notebook YAML to `/tmp/validation_notebook_working/<id>/notebook.yaml`
 2. Run the URL generation script:
+
 ```bash
 python3 ${CLAUDE_PLUGIN_ROOT}/skills/monte-carlo-validation-notebook/scripts/generate_notebook_url.py /tmp/validation_notebook_working/<id>/notebook.yaml --mc-base-url <MC_BASE_URL>
 ```
+
 3. The script validates both YAML syntax and notebook schema (required fields on metadata and cells). If validation fails, read the error messages carefully, fix the YAML to match the spec in Phase 4, and re-run.
 
 ## Phase 6: Output
 
 Present:
 ```markdown
+
 # Validation Notebook Generated
+
 ## Summary
+
 - **Source:** PR #<number> - <title> OR Local: <branch>
 - **Author:** <author>
 - **Changed Models:** <count> models (of <total_count> changed)
@@ -643,6 +710,7 @@ Present:
 > ⚠️ If models were capped: "Only the first 10 of <total_count> changed models were included. Re-run with `--models` to select specific models."
 
 ## Notebook Opened
+
 The notebook has been opened directly in your browser.
 Select your Snowflake connector in the notebook interface to begin running queries.
 *Make sure MC Bridge is running. Let me know if you want tips on how to install this locally*
@@ -689,11 +757,13 @@ gh api repos/monte-carlo-data/mc-bridge/readme --jq '.content' | base64 --decode
 Focus on: how to install, configure connections, and run MC Bridge. Don't dump the entire README — extract just the setup-relevant sections.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

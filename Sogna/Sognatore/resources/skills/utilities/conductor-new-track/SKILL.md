@@ -8,7 +8,6 @@ id: skill-conductor-new-track
 owner: [[orchestrator]]
 ---
 
-
 # New Track
 
 Create a new track (feature, bug fix, chore, or refactor) with a detailed specification and phased implementation plan.
@@ -54,6 +53,7 @@ What type of track is this?
 2. Bug - Fix for existing issue
 3. Chore - Maintenance, dependencies, config
 4. Refactor - Code improvement without behavior change
+
 ```
 
 ## Interactive Specification Gathering
@@ -98,6 +98,7 @@ Does this depend on any existing code, APIs, or other tracks?
 1. No dependencies
 2. Depends on existing code (specify)
 3. Depends on incomplete track (specify)
+
 ```
 
 **Q5: Scope Boundaries**
@@ -194,6 +195,7 @@ Validate uniqueness:
 Create `conductor/tracks/{trackId}/spec.md`:
 
 ```markdown
+
 # Specification: {Track Title}
 
 **Track ID:** {trackId}
@@ -250,9 +252,11 @@ Here is the specification I've generated:
 {spec content}
 
 Is this specification correct?
+
 1. Yes, proceed to plan generation
 2. No, let me edit (opens for inline edits)
 3. Start over with different inputs
+
 ```
 
 ## Plan Generation
@@ -262,6 +266,7 @@ After spec approval, generate `conductor/tracks/{trackId}/plan.md`:
 ### Plan Structure
 
 ```markdown
+
 # Implementation Plan: {Track Title}
 
 **Track ID:** {trackId}
@@ -338,10 +343,12 @@ Here is the implementation plan:
 {plan content}
 
 Is this plan correct?
+
 1. Yes, create the track
 2. No, let me edit (opens for inline edits)
 3. Add more phases/tasks
 4. Start over
+
 ```
 
 ## Track Creation
@@ -401,6 +408,7 @@ After plan approval:
 
    - Back to Tracks
    - Product Context
+
    ```
 
 4. Register in `conductor/tracks.md`:
@@ -419,15 +427,18 @@ Track ID: {trackId}
 Location: conductor/tracks/{trackId}/
 
 Files created:
+
 - spec.md - Requirements specification
 - plan.md - Phased implementation plan
 - metadata.json - Track metadata
 - index.md - Track navigation
 
 Next steps:
+
 1. Review spec.md and plan.md, make any edits
 2. Run /conductor:implement {trackId} to start implementation
 3. Run /conductor:status to see project progress
+
 ```
 
 ## Error Handling
@@ -437,6 +448,7 @@ Next steps:
 - If tracks.md update fails: Warn user to manually register track
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

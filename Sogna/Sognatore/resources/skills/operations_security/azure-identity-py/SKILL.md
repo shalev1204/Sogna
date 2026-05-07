@@ -8,7 +8,6 @@ id: skill-azure-identity-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Identity SDK for Python
 
 Authentication library for Azure SDK clients using Microsoft Entra ID (formerly Azure AD).
@@ -22,12 +21,15 @@ pip install azure-identity
 ## Environment Variables
 
 ```bash
+
 # Service Principal (for production/CI)
+
 AZURE_TENANT_ID=<your-tenant-id>
 AZURE_CLIENT_ID=<your-client-id>
 AZURE_CLIENT_SECRET=<your-client-secret>
 
 # User-assigned Managed Identity (optional)
+
 AZURE_CLIENT_ID=<managed-identity-client-id>
 ```
 
@@ -40,6 +42,7 @@ from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient
 
 # Works in local dev AND production without code changes
+
 credential = DefaultAzureCredential()
 
 client = BlobServiceClient(
@@ -64,7 +67,9 @@ client = BlobServiceClient(
 ### Customizing DefaultAzureCredential
 
 ```python
+
 # Exclude credentials you don't need
+
 credential = DefaultAzureCredential(
     exclude_environment_credential=True,
     exclude_shared_token_cache_credential=True,
@@ -72,6 +77,7 @@ credential = DefaultAzureCredential(
 )
 
 # Enable interactive browser (disabled by default)
+
 credential = DefaultAzureCredential(
     exclude_interactive_browser_credential=False
 )
@@ -87,9 +93,11 @@ For Azure-hosted resources (VMs, App Service, Functions, AKS):
 from azure.identity import ManagedIdentityCredential
 
 # System-assigned managed identity
+
 credential = ManagedIdentityCredential()
 
 # User-assigned managed identity
+
 credential = ManagedIdentityCredential(
     client_id="<user-assigned-mi-client-id>"
 )
@@ -131,6 +139,7 @@ from azure.identity import (
 )
 
 # Try managed identity first, fall back to CLI
+
 credential = ChainedTokenCredential(
     ManagedIdentityCredential(client_id="<user-assigned-mi-client-id>"),
     AzureCliCredential()
@@ -158,10 +167,12 @@ from azure.identity import DefaultAzureCredential
 credential = DefaultAzureCredential()
 
 # Get token for a specific scope
+
 token = credential.get_token("https://management.azure.com/.default")
 print(f"Token expires: {token.expires_on}")
 
 # For Azure Database for PostgreSQL
+
 token = credential.get_token("https://ossrdbms-aad.database.windows.net/.default")
 ```
 
@@ -195,14 +206,17 @@ async def main():
 7. **Exclude unused credentials** to speed up authentication
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

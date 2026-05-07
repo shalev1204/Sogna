@@ -114,10 +114,13 @@ Some 400 errors are specifically related to parameter validation:
 **Common mistake with extended thinking:**
 
 ```
+
 # Wrong: budget_tokens must be < max_tokens
+
 thinking: budget_tokens=10000, max_tokens=1000  → Error!
 
 # Correct
+
 thinking: budget_tokens=10000, max_tokens=16000
 ```
 
@@ -212,6 +215,7 @@ try {
 All exception classes extend `Anthropic.APIError`, which has a `status` property. Use `instanceof` checks from most specific to least specific (e.g., check `RateLimitError` before `APIError`).
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -7,7 +7,6 @@ id: skill-blog-writing-guide
 owner: [[ops-security]]
 ---
 
-
 # Sentry Blog Writing Skill
 
 This skill enforces Sentry's blog writing standards across every post — whether you're helping an engineer write their first blog post or a marketer draft a product announcement.
@@ -17,6 +16,7 @@ This skill enforces Sentry's blog writing standards across every post — whethe
 What follows are the core principles to internalize and apply to every piece of content.
 
 ## When to Use
+
 - You need to draft or edit a Sentry blog post.
 - The task involves technical storytelling, product announcements, or engineering deep-dives in Sentry's blog voice.
 - You want blog content that is opinionated, specific, and technically credible rather than generic marketing copy.
@@ -63,6 +63,7 @@ Structure every post around what the reader is actually wondering, not your inte
 4. **How do I use/try/implement this?** (Concrete next steps)
 
 For engineering deep-dives, also address:
+
 5. **What did we try that didn't work?** (Builds trust)
 6. **What are the known limitations?** (Shows intellectual honesty)
 
@@ -75,6 +76,7 @@ For engineering deep-dives, also address:
 ## Technical Quality Standards
 
 **Numbers over adjectives.** If you make a performance claim, include the number.
+
 - Bad: "This significantly reduced our error processing time."
 - Good: "This reduced our p99 error processing time from 340ms to 45ms — a 7.5× improvement."
 
@@ -89,11 +91,13 @@ For engineering deep-dives, also address:
 The title is the highest-leverage sentence in the post. It must stop a developer scrolling through their RSS feed or Twitter.
 
 **Strong titles** make a specific claim, tell a story, or promise a specific payoff:
+
 - "The metrics product we built worked. But we killed it and started over anyway"
 - "How we reduced release delays by 5% by fixing Salt"
 - "Your JavaScript bundle has 47% dead code. Here's how to find it."
 
 **Weak titles** are vague announcements:
+
 - "Introducing our new metrics product"
 - "Performance improvements in Sentry"
 - "AI-powered debugging with Seer"
@@ -119,6 +123,7 @@ Here's the quick map by post type:
 Before publishing, ask: Would a developer share this post? Does it have a shot at getting on Hacker News? If the answer is no, the post either needs more depth, more original insight, or it belongs in the changelog instead.
 
 Posts worth sharing contain at least one of:
+
 - A technical decision explained with trade-offs
 - Original data or research not found elsewhere
 - A real-world debugging story with specific details
@@ -143,6 +148,7 @@ Posts worth sharing contain at least one of:
 Run through both checklists:
 
 **Technical Review:**
+
 - All technical claims accurate
 - Code samples work
 - Architecture descriptions match reality
@@ -150,6 +156,7 @@ Run through both checklists:
 - No oversimplifications that would make an expert cringe
 
 **Editorial Review:**
+
 - Opening hooks reader within 2 sentences
 - Passes the "would I share this?" test
 - No corporate language, filler, or fluff
@@ -158,6 +165,7 @@ Run through both checklists:
 - Title is specific and compelling
 
 **Final Check:**
+
 - Author byline is correct (real person's name)
 - Links to docs/getting-started included
 - Post doesn't duplicate what's in the changelog
@@ -165,11 +173,13 @@ Run through both checklists:
 When providing feedback, be specific and constructive. Quote the weak passage, explain why it's weak, and rewrite it to show the standard.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

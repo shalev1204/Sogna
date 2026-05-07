@@ -9,7 +9,6 @@ id: skill-prompt-caching
 owner: [[orchestrator]]
 ---
 
-
 # Prompt Caching
 
 Caching strategies for LLM prompts including Anthropic prompt caching, response caching, and CAG (Cache Augmented Generation)
@@ -218,6 +217,7 @@ Severity: HIGH
 Situation: Slow response when cache miss, slower than no caching
 
 Symptoms:
+
 - Slow responses on cache miss
 - Cache hit rate below 50%
 - Higher latency than uncached
@@ -286,6 +286,7 @@ Severity: HIGH
 Situation: Users get outdated or wrong information from cache
 
 Symptoms:
+
 - Users report wrong information
 - Answers don't match current data
 - Complaints about outdated responses
@@ -357,6 +358,7 @@ Severity: MEDIUM
 Situation: Cache misses despite similar prompts
 
 Symptoms:
+
 - Cache hit rate lower than expected
 - Cache creation tokens high, read low
 - Similar prompts not hitting cache
@@ -462,11 +464,13 @@ Skills: prompt-caching, context-window-management, rag-implementation
 Workflow:
 
 ```
+
 1. Analyze query patterns
 2. Implement prompt caching for stable prefixes
 3. Add response caching for frequent queries
 4. Consider CAG for stable document sets
 5. Monitor and optimize hit rates
+
 ```
 
 ## Related Skills
@@ -474,6 +478,7 @@ Workflow:
 Works well with: `context-window-management`, `rag-implementation`, `conversation-memory`
 
 ## When to Use
+
 - User mentions or implies: prompt caching
 - User mentions or implies: cache prompt
 - User mentions or implies: response cache
@@ -481,11 +486,13 @@ Works well with: `context-window-management`, `rag-implementation`, `conversatio
 - User mentions or implies: cache augmented
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

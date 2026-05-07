@@ -20,6 +20,7 @@ This skill provides step-by-step instructions for building production-ready Helm
 ## When to Use This Skill
 
 Use this skill when you need to:
+
 - Create new Helm charts from scratch
 - Package Kubernetes applications for distribution
 - Manage multi-environment deployments with Helm
@@ -30,6 +31,7 @@ Use this skill when you need to:
 ## Helm Overview
 
 **Helm** is the package manager for Kubernetes that:
+
 - Templates Kubernetes manifests for reusability
 - Manages application releases and rollbacks
 - Handles dependencies between charts
@@ -77,34 +79,48 @@ version: 1.0.0      # Chart version
 appVersion: "2.1.0" # Application version
 
 # Keywords for chart discovery
+
 keywords:
+
   - web
   - api
   - backend
 
 # Maintainer information
+
 maintainers:
+
   - name: DevOps Team
+
     email: devops@example.com
     url: https://github.com/example/my-app
 
 # Source code repository
+
 sources:
+
   - https://github.com/example/my-app
 
 # Homepage
+
 home: https://example.com
 
 # Chart icon
+
 icon: https://example.com/icon.png
 
 # Dependencies
+
 dependencies:
+
   - name: postgresql
+
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: postgresql.enabled
+
   - name: redis
+
     version: "17.0.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: redis.enabled
@@ -117,32 +133,42 @@ dependencies:
 **Organize values hierarchically:**
 
 ```yaml
+
 # Image configuration
+
 image:
   repository: myapp
   tag: "1.0.0"
   pullPolicy: IfNotPresent
 
 # Number of replicas
+
 replicaCount: 3
 
 # Service configuration
+
 service:
   type: ClusterIP
   port: 80
   targetPort: 8080
 
 # Ingress configuration
+
 ingress:
   enabled: false
   className: nginx
   hosts:
+
     - host: app.example.com
+
       paths:
+
         - path: /
+
           pathType: Prefix
 
 # Resources
+
 resources:
   requests:
     memory: "256Mi"
@@ -152,6 +178,7 @@ resources:
     cpu: "500m"
 
 # Autoscaling
+
 autoscaling:
   enabled: false
   minReplicas: 2
@@ -159,16 +186,21 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
 
 # Environment variables
+
 env:
+
   - name: LOG_LEVEL
+
     value: "info"
 
 # ConfigMap data
+
 configMap:
   data:
     APP_MODE: production
 
 # Dependencies
+
 postgresql:
   enabled: true
   auth:
@@ -206,11 +238,15 @@ spec:
         {{- include "my-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
+
       - name: {{ .Chart.Name }}
+
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
+
         - name: http
+
           containerPort: {{ .Values.service.targetPort }}
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
@@ -271,7 +307,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 **Add dependencies in Chart.yaml:**
 ```yaml
 dependencies:
+
   - name: postgresql
+
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: postgresql.enabled
@@ -285,7 +323,9 @@ helm dependency build
 
 **Override dependency values:**
 ```yaml
+
 # values.yaml
+
 postgresql:
   enabled: true
   auth:
@@ -302,19 +342,25 @@ postgresql:
 
 **Validation commands:**
 ```bash
+
 # Lint the chart
+
 helm lint my-app/
 
 # Dry-run installation
+
 helm install my-app ./my-app --dry-run --debug
 
 # Template rendering
+
 helm template my-app ./my-app
 
 # Template with values
+
 helm template my-app ./my-app -f values-prod.yaml
 
 # Show computed values
+
 helm show values ./my-app
 ```
 
@@ -342,16 +388,22 @@ echo "All validations passed!"
 **Package the chart:**
 ```bash
 helm package my-app/
+
 # Creates: my-app-1.0.0.tgz
+
 ```
 
 **Create chart repository:**
 ```bash
+
 # Create index
+
 helm repo index .
 
 # Upload to repository
+
 # AWS S3 example
+
 aws s3 sync . s3://my-helm-charts/ --exclude "*" --include "*.tgz" --include "index.yaml"
 ```
 
@@ -397,9 +449,13 @@ autoscaling:
 ingress:
   enabled: true
   hosts:
+
     - host: app.example.com
+
       paths:
+
         - path: /
+
           pathType: Prefix
 
 postgresql:
@@ -418,7 +474,9 @@ helm install my-app ./my-app -f values-prod.yaml --namespace production
 
 **Pre-install hook:**
 ```yaml
+
 # templates/pre-install-job.yaml
+
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -431,7 +489,9 @@ spec:
   template:
     spec:
       containers:
+
       - name: db-setup
+
         image: postgres:15
         command: ["psql", "-c", "CREATE DATABASE myapp"]
       restartPolicy: Never
@@ -439,7 +499,9 @@ spec:
 
 **Test connection:**
 ```yaml
+
 # templates/tests/test-connection.yaml
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -448,7 +510,9 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
+
   - name: wget
+
     image: busybox
     command: ['wget']
     args: ['{{ include "my-app.fullname" . }}:{{ .Values.service.port }}']
@@ -480,7 +544,9 @@ spec:
 ```yaml
 env:
 {{- range .Values.env }}
+
 - name: {{ .name }}
+
   value: {{ .value | quote }}
 {{- end }}
 ```
@@ -499,9 +565,11 @@ data:
 global:
   imageRegistry: docker.io
   imagePullSecrets:
+
     - name: regcred
 
 # Use in templates:
+
 image: {{ .Values.global.imageRegistry }}/{{ .Values.image.repository }}
 ```
 
@@ -550,6 +618,7 @@ kubectl get events --sort-by='.lastTimestamp'
 - `gitops-workflow` - For automated Helm chart deployments
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,9 +1,9 @@
-import { CreateProjectionNode } from "./create-projection-node.js";
-import { DocumentProjectionNode } from "./documentprojectionnode.js";
+import { createProjectionNode } from "./create-projection-node.js";
+import { DocumentProjectionNode } from "./DocumentProjectionNode.js";
 export const rootProjectionNode = {
     current: undefined,
 };
-export const HTMLProjectionNode = CreateProjectionNode({
+export const HTMLProjectionNode = createProjectionNode({
     measureScroll: (instance) => ({
         x: instance.scrollLeft,
         y: instance.scrollTop,

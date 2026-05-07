@@ -8,7 +8,6 @@ id: skill-freshdesk-automation
 owner: [[orchestrator]]
 ---
 
-
 # Freshdesk Automation via Rube MCP
 
 Automate Freshdesk customer support workflows including ticket management, contact and company operations, notes, replies, and ticket search through Composio's Freshdesk toolkit.
@@ -35,6 +34,7 @@ Automate Freshdesk customer support workflows including ticket management, conta
 **When to use**: User wants to create a new support ticket, update an existing ticket, or view ticket details.
 
 **Tool sequence**:
+
 1. `FRESHDESK_SEARCH_CONTACTS` - Find requester by email to get requester_id [Optional]
 2. `FRESHDESK_LIST_TICKET_FIELDS` - Check available custom fields and statuses [Optional]
 3. `FRESHDESK_CREATE_TICKET` - Create a new ticket with subject, description, requester info [Required]
@@ -42,6 +42,7 @@ Automate Freshdesk customer support workflows including ticket management, conta
 5. `FRESHDESK_VIEW_TICKET` - Retrieve full ticket details by ID [Optional]
 
 **Key parameters for FRESHDESK_CREATE_TICKET**:
+
 - `subject`: Ticket subject (required)
 - `description`: HTML content of the ticket (required)
 - `email`: Requester email (at least one requester identifier required)
@@ -55,6 +56,7 @@ Automate Freshdesk customer support workflows including ticket management, conta
 - `custom_fields`: Object with `cf_<field_name>` keys
 
 **Pitfalls**:
+
 - At least one requester identifier is required: `requester_id`, `email`, `phone`, `facebook_id`, `twitter_id`, or `unique_external_id`
 - If `phone` is provided without `email`, then `name` becomes mandatory
 - `description` supports HTML formatting
@@ -67,12 +69,14 @@ Automate Freshdesk customer support workflows including ticket management, conta
 **When to use**: User wants to find tickets by status, priority, date range, agent, or custom fields.
 
 **Tool sequence**:
+
 1. `FRESHDESK_GET_TICKETS` - List tickets with simple filters (status, priority, agent) [Required]
 2. `FRESHDESK_GET_SEARCH` - Advanced ticket search with query syntax [Required]
 3. `FRESHDESK_VIEW_TICKET` - Get full details for specific tickets from results [Optional]
 4. `FRESHDESK_LIST_TICKET_FIELDS` - Check available fields for search queries [Optional]
 
 **Key parameters for FRESHDESK_GET_TICKETS**:
+
 - `status`: Filter by status integer (2=Open, 3=Pending, 4=Resolved, 5=Closed)
 - `priority`: Filter by priority integer (1-4)
 - `agent_id`: Filter by assigned agent
@@ -83,10 +87,12 @@ Automate Freshdesk customer support workflows including ticket management, conta
 - `sort_by` / `sort_order`: Sort field and direction
 
 **Key parameters for FRESHDESK_GET_SEARCH**:
+
 - `query`: Query string like `"status:2 AND priority:3"` or `"(created_at:>'2024-01-01' AND tag:'urgent')"`
 - `page`: Page number (1-10, max 300 total results)
 
 **Pitfalls**:
+
 - `FRESHDESK_GET_SEARCH` query must be enclosed in double quotes
 - Query string limited to 512 characters
 - Maximum 10 pages (300 results) from search endpoints
@@ -99,6 +105,7 @@ Automate Freshdesk customer support workflows including ticket management, conta
 **When to use**: User wants to send a reply to a customer, add internal notes, or view conversation history.
 
 **Tool sequence**:
+
 1. `FRESHDESK_VIEW_TICKET` - Verify ticket exists and check current state [Prerequisite]
 2. `FRESHDESK_REPLY_TO_TICKET` - Send a public reply to the requester [Required]
 3. `FRESHDESK_ADD_NOTE_TO_TICKET` - Add a private or public note [Required]
@@ -106,6 +113,7 @@ Automate Freshdesk customer support workflows including ticket management, conta
 5. `FRESHDESK_UPDATE_CONVERSATIONS` - Edit an existing note [Optional]
 
 **Key parameters for FRESHDESK_REPLY_TO_TICKET**:
+
 - `ticket_id`: Ticket ID (integer, required)
 - `body`: Reply content, supports HTML (required)
 - `cc_emails` / `bcc_emails`: Additional recipients (max 50 total across to/cc/bcc)
@@ -113,12 +121,14 @@ Automate Freshdesk customer support workflows including ticket management, conta
 - `user_id`: Agent ID to reply on behalf of
 
 **Key parameters for FRESHDESK_ADD_NOTE_TO_TICKET**:
+
 - `ticket_id`: Ticket ID (integer, required)
 - `body`: Note content, supports HTML (required)
 - `private`: true for agent-only visibility, false for public (default true)
 - `notify_emails`: Only accepts agent email addresses, not external contacts
 
 **Pitfalls**:
+
 - There are two reply tools: `FRESHDESK_REPLY_TO_TICKET` (more features) and `FRESHDESK_REPLY_TICKET` (simpler); both work
 - `FRESHDESK_ADD_NOTE_TO_TICKET` defaults to private (agent-only); set `private: false` for public notes
 - `notify_emails` in notes only accepts agent emails, not customer emails
@@ -129,6 +139,7 @@ Automate Freshdesk customer support workflows including ticket management, conta
 **When to use**: User wants to create, search, or manage customer contacts and company records.
 
 **Tool sequence**:
+
 1. `FRESHDESK_SEARCH_CONTACTS` - Search contacts by email, phone, or company [Required]
 2. `FRESHDESK_GET_CONTACTS` - List contacts with filters [Optional]
 3. `FRESHDESK_IMPORT_CONTACT` - Bulk import contacts from CSV [Optional]
@@ -139,10 +150,12 @@ Automate Freshdesk customer support workflows including ticket management, conta
 8. `FRESHDESK_LIST_COMPANY_FIELDS` - Check available company fields [Optional]
 
 **Key parameters for FRESHDESK_SEARCH_CONTACTS**:
+
 - `query`: Search string like `"email:'user@example.com'"` (required)
 - `page`: Pagination (1-10, max 30 per page)
 
 **Key parameters for FRESHDESK_CREATE_COMPANIES**:
+
 - `name`: Company name (required)
 - `domains`: Array of domain strings for auto-association with contacts
 - `health_score`: "Happy", "Doing okay", or "At risk"
@@ -150,6 +163,7 @@ Automate Freshdesk customer support workflows including ticket management, conta
 - `industry`: Standard industry classification
 
 **Pitfalls**:
+
 - `FRESHDESK_SEARCH_CONTACTS` requires exact matches; partial/regex searches are not supported
 - `FRESHDESK_SEARCH_COMPANIES` cannot search by standard `name` field; use custom fields or `created_at`
 - Company custom fields do NOT use the `cf_` prefix (unlike ticket custom fields)
@@ -159,13 +173,17 @@ Automate Freshdesk customer support workflows including ticket management, conta
 ## Common Patterns
 
 ### ID Resolution
+
 Always resolve display values to IDs before operations:
+
 - **Requester email -> requester_id**: `FRESHDESK_SEARCH_CONTACTS` with `"email:'user@example.com'"`
 - **Company name -> company_id**: `FRESHDESK_GET_COMPANIES` and match by name (search by name not supported)
 - **Agent name -> agent_id**: Not directly available; use agent_id from ticket responses or admin configuration
 
 ### Pagination
+
 Freshdesk uses page-based pagination:
+
 - `FRESHDESK_GET_TICKETS`: `page` (starting at 1) and `per_page` (max 100)
 - `FRESHDESK_GET_SEARCH`: `page` (1-10, 30 results per page, max 300 total)
 - `FRESHDESK_SEARCH_CONTACTS`: `page` (1-10, 30 per page)
@@ -174,15 +192,18 @@ Freshdesk uses page-based pagination:
 ## Known Pitfalls
 
 ### ID Formats
+
 - Ticket IDs, contact IDs, company IDs, agent IDs, and group IDs are all integers
 - There are no string-based IDs in Freshdesk
 
 ### Rate Limits
+
 - Freshdesk enforces per-account API rate limits based on plan tier
 - Bulk operations should be paced to avoid 429 responses
 - Search endpoints are limited to 300 total results (10 pages of 30)
 
 ### Parameter Quirks
+
 - Status values: 2=Open, 3=Pending, 4=Resolved, 5=Closed (integers, not strings)
 - Priority values: 1=Low, 2=Medium, 3=High, 4=Urgent (integers, not strings)
 - Source values: 1=Email, 2=Portal, 3=Phone, 7=Chat, 9=Feedback Widget, 10=Outbound Email
@@ -192,6 +213,7 @@ Freshdesk uses page-based pagination:
 - `FRESHDESK_LIST_ALL_TICKETS` returns all tickets with no filter parameters
 
 ### Response Structure
+
 - Ticket details include nested objects for requester, assignee, and conversation data
 - Search results are paginated with a maximum of 300 results across 10 pages
 - Conversation lists include both replies and notes in chronological order
@@ -222,14 +244,17 @@ Freshdesk uses page-based pagination:
 | List company fields | `FRESHDESK_LIST_COMPANY_FIELDS` | (none) |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

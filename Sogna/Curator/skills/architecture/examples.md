@@ -8,6 +8,7 @@
 
 ```yaml
 Requirements:
+
   - <1000 users initially
   - Solo developer
   - Fast to market (8 weeks)
@@ -22,14 +23,17 @@ Architecture Decisions:
   Database: PostgreSQL (ACID for orders)
 
 Trade-offs Accepted:
+
   - Monolith → Can't scale independently (team doesn't justify it)
   - No Repository → Less testable (simple CRUD doesn't need it)
   - JWT → No social login initially (can add later)
 
 Future Migration Path:
+
   - Users > 10K → Extract payment service
   - Team > 3 → Add Repository pattern
   - Social login requested → Add OAuth
+
 ```
 
 ---
@@ -38,6 +42,7 @@ Future Migration Path:
 
 ```yaml
 Requirements:
+
   - 1K-100K users
   - 5-10 developers
   - Long-term (12+ months)
@@ -53,14 +58,17 @@ Architecture Decisions:
   Database: PostgreSQL
 
 Trade-offs Accepted:
+
   - Modular Monolith → Some module coupling (microservices not justified)
   - Partial DDD → No full aggregates (no domain experts)
   - RabbitMQ later → Initial synchronous (add when proven needed)
 
 Migration Path:
+
   - Team > 10 → Consider microservices
   - Domains conflict → Extract bounded contexts
   - Read performance issues → Add CQRS
+
 ```
 
 ---
@@ -69,6 +77,7 @@ Migration Path:
 
 ```yaml
 Requirements:
+
   - 100K+ users
   - 10+ developers
   - Multiple business domains
@@ -86,9 +95,11 @@ Architecture Decisions:
   CQRS: Selected services
 
 Operational Requirements:
+
   - Service mesh (Istio/Linkerd)
   - Distributed tracing (Jaeger/Tempo)
   - Centralized logging (ELK/Loki)
   - Circuit breakers (Resilience4j)
   - Kubernetes/Helm
+
 ```

@@ -8,7 +8,6 @@ id: skill-azure-search-documents-py
 owner: [[orchestrator]]
 ---
 
-
 # Azure AI Search SDK for Python
 
 Full-text, vector, and hybrid search with AI enrichment capabilities.
@@ -153,6 +152,7 @@ for result in results:
 from azure.search.documents.models import VectorizedQuery
 
 # Your query embedding (1536 dimensions)
+
 query_vector = get_embedding("semantic search capabilities")
 
 vector_query = VectorizedQuery(
@@ -237,7 +237,9 @@ for facet_name, facet_values in results.get_facets().items():
 ## Autocomplete & Suggest
 
 ```python
+
 # Autocomplete
+
 results = client.autocomplete(
     search_text="sea",
     suggester_name="my-suggester",
@@ -245,6 +247,7 @@ results = client.autocomplete(
 )
 
 # Suggest
+
 results = client.suggest(
     search_text="sea",
     suggester_name="my-suggester",
@@ -268,6 +271,7 @@ from azure.search.documents.indexes.models import (
 indexer_client = SearchIndexerClient(endpoint, AzureKeyCredential(key))
 
 # Create data source
+
 data_source = SearchIndexerDataSourceConnection(
     name="my-datasource",
     type="azureblob",
@@ -277,6 +281,7 @@ data_source = SearchIndexerDataSourceConnection(
 indexer_client.create_or_update_data_source_connection(data_source)
 
 # Create skillset
+
 skillset = SearchIndexerSkillset(
     name="my-skillset",
     skills=[
@@ -289,6 +294,7 @@ skillset = SearchIndexerSkillset(
 indexer_client.create_or_update_skillset(skillset)
 
 # Create indexer
+
 indexer = SearchIndexer(
     name="my-indexer",
     data_source_name="my-datasource",
@@ -316,7 +322,6 @@ indexer_client.create_or_update_indexer(indexer)
 | references/semantic-ranking.md | Semantic configuration, captions, answers, hybrid patterns |
 | scripts/setup_vector_index.py | CLI script to create vector-enabled search index |
 
-
 ---
 
 ## Additional Azure AI Search Patterns
@@ -336,7 +341,9 @@ pip install azure-search-documents azure-identity
 ```bash
 AZURE_SEARCH_ENDPOINT=https://<search-service>.search.windows.net
 AZURE_SEARCH_INDEX_NAME=<index-name>
+
 # For API key auth (not recommended for production)
+
 AZURE_SEARCH_API_KEY=<api-key>
 ```
 
@@ -425,10 +432,12 @@ index_client.create_or_update_index(index)
 from azure.search.documents import SearchIndexingBufferedSender
 
 # Batch upload with automatic batching
+
 with SearchIndexingBufferedSender(endpoint, index_name, credential) as sender:
     sender.upload_documents(documents)
 
 # Direct operations via SearchClient
+
 search_client = SearchClient(endpoint, index_name, credential)
 search_client.upload_documents(documents)      # Add new
 search_client.merge_documents(documents)       # Update existing
@@ -439,10 +448,13 @@ search_client.delete_documents(documents)      # Remove
 ## Search Patterns
 
 ```python
+
 # Basic search
+
 results = search_client.search(search_text="query")
 
 # Vector search
+
 from azure.search.documents.models import VectorizedQuery
 
 results = search_client.search(
@@ -455,6 +467,7 @@ results = search_client.search(
 )
 
 # Hybrid search (vector + keyword)
+
 results = search_client.search(
     search_text="query",
     vector_queries=[VectorizedQuery(vector=embedding, k_nearest_neighbors=5, fields="embedding")],
@@ -463,6 +476,7 @@ results = search_client.search(
 )
 
 # With filters
+
 results = search_client.search(
     search_text="query",
     filter="category eq 'technology'",
@@ -476,6 +490,7 @@ results = search_client.search(
 For LLM-powered Q&A with answer synthesis, see references/agentic-retrieval.md.
 
 Key concepts:
+
 - **Knowledge Source**: Points to a search index
 - **Knowledge Base**: Wraps knowledge sources + LLM for query planning and synthesis
 - **Output modes**: `EXTRACTIVE_DATA` (raw chunks) or `ANSWER_SYNTHESIS` (LLM-generated answers)
@@ -531,14 +546,17 @@ except HttpResponseError as e:
 ```
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

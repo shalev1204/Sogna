@@ -8,7 +8,6 @@ id: skill-azure-resource-manager-durabletask-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.ResourceManager.DurableTask (.NET)
 
 Management plane SDK for provisioning and managing Azure Durable Task Scheduler resources via Azure Resource Manager.
@@ -32,7 +31,9 @@ dotnet add package Azure.Identity
 ```bash
 AZURE_SUBSCRIPTION_ID=<your-subscription-id>
 AZURE_RESOURCE_GROUP=<your-resource-group>
+
 # For service principal auth (optional)
+
 AZURE_TENANT_ID=<tenant-id>
 AZURE_CLIENT_ID=<client-id>
 AZURE_CLIENT_SECRET=<client-secret>
@@ -381,14 +382,17 @@ await scheduler.DeleteAsync(WaitUntil.Completed);
 - [NuGet: Azure.ResourceManager.DurableTask](https://www.nuget.org/packages/Azure.ResourceManager.DurableTask)
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -1,4 +1,5 @@
 # SOGNA - UNICORN CORE RULES
+
 @tier: apex
 @domain: ecosystem
 @version: 1.0.1
@@ -6,6 +7,7 @@
 This file defines the absolute behavior and technical standards for any AI agent interacting with the Sogna Ecosystem. Deviating from these rules marks a failure in agent orchestration.
 
 ## Rule Architecture
+
 @category: behavior
 
 These agents MUST adhere to the following consolidated protocol:

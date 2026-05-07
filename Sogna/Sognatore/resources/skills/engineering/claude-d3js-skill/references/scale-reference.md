@@ -29,11 +29,13 @@ scale.invert(250); // Returns 50
 ```
 
 **Use cases:**
+
 - Most common scale for quantitative data
 - Axes, bar lengths, position encoding
 - Temperature, prices, counts, measurements
 
 **Methods:**
+
 - `.domain([min, max])` - Set input domain
 - `.range([min, max])` - Set output range
 - `.invert(value)` - Get domain value from range value
@@ -62,6 +64,7 @@ const sqrtScale2 = d3.scaleSqrt()
 ```
 
 **Use cases:**
+
 - Perceptual scaling (human perception is non-linear)
 - Area encoding (use square root to map values to circle radii)
 - Emphasising differences in small or large values
@@ -82,6 +85,7 @@ logScale(1000); // Returns 500
 ```
 
 **Use cases:**
+
 - Data spanning multiple orders of magnitude
 - Population, GDP, wealth distributions
 - Logarithmic axes
@@ -105,12 +109,14 @@ timeScale.invert(400); // Returns Date object for mid-2022
 ```
 
 **Use cases:**
+
 - Time series visualisations
 - Timeline axes
 - Temporal animations
 - Date-based interactions
 
 **Methods:**
+
 - `.nice()` - Extend domain to nice time intervals
 - `.ticks(count)` - Generate nicely-spaced tick values
 - All linear scale methods apply
@@ -133,6 +139,7 @@ quantizeScale.thresholds(); // Returns [33.33, 66.67]
 ```
 
 **Use cases:**
+
 - Binning continuous data
 - Heat map colours
 - Risk categories (low/medium/high)
@@ -152,6 +159,7 @@ quantileScale.quantiles(); // Returns quantile thresholds
 ```
 
 **Use cases:**
+
 - Equal-size groups regardless of distribution
 - Percentile-based categorisation
 - Handling skewed distributions
@@ -172,6 +180,7 @@ thresholdScale(25);  // Returns 'hot'
 ```
 
 **Use cases:**
+
 - Custom breakpoints
 - Grade boundaries (A, B, C, D, F)
 - Temperature categories
@@ -195,15 +204,18 @@ colourScale(100); // Returns darkest blue
 **Available interpolators:**
 
 **Single hue:**
+
 - `d3.interpolateBlues`, `d3.interpolateGreens`, `d3.interpolateReds`
 - `d3.interpolateOranges`, `d3.interpolatePurples`, `d3.interpolateGreys`
 
 **Multi-hue:**
+
 - `d3.interpolateViridis`, `d3.interpolateInferno`, `d3.interpolateMagma`
 - `d3.interpolatePlasma`, `d3.interpolateWarm`, `d3.interpolateCool`
 - `d3.interpolateCubehelixDefault`, `d3.interpolateTurbo`
 
 **Use cases:**
+
 - Heat maps, choropleth maps
 - Continuous data visualisation
 - Temperature, elevation, density
@@ -222,6 +234,7 @@ divergingScale(10);  // Returns blue
 ```
 
 **Available interpolators:**
+
 - `d3.interpolateRdBu` - Red to blue
 - `d3.interpolateRdYlBu` - Red, yellow, blue
 - `d3.interpolateRdYlGn` - Red, yellow, green
@@ -233,6 +246,7 @@ divergingScale(10);  // Returns blue
 - `d3.interpolateSpectral` - Rainbow spectrum
 
 **Use cases:**
+
 - Data with meaningful midpoint (zero, average, neutral)
 - Positive/negative values
 - Above/below comparisons
@@ -250,6 +264,7 @@ const sequentialQuantileScale = d3.scaleSequentialQuantile(d3.interpolateBlues)
 ```
 
 **Use cases:**
+
 - Perceptually uniform binning
 - Handling outliers
 - Skewed distributions
@@ -275,12 +290,14 @@ bandScale.paddingOuter(); // Returns outer padding (at edges)
 ```
 
 **Use cases:**
+
 - Bar charts (most common use case)
 - Grouped elements
 - Categorical axes
 - Heat map cells
 
 **Padding options:**
+
 - `.padding(value)` - Sets both inner and outer padding (0-1)
 - `.paddingInner(value)` - Padding between bands (0-1)
 - `.paddingOuter(value)` - Padding at edges (0-1)
@@ -304,6 +321,7 @@ pointScale.step(); // Returns distance between points
 ```
 
 **Use cases:**
+
 - Line chart categorical x-axis
 - Scatter plot with categorical axis
 - Node positions in network graphs
@@ -329,6 +347,7 @@ const customScale = d3.scaleOrdinal()
 **Built-in colour schemes:**
 
 **Categorical:**
+
 - `d3.schemeCategory10` - 10 colours
 - `d3.schemeAccent` - 8 colours
 - `d3.schemeDark2` - 8 colours
@@ -341,6 +360,7 @@ const customScale = d3.scaleOrdinal()
 - `d3.schemeTableau10` - 10 colours
 
 **Use cases:**
+
 - Category colours
 - Legend items
 - Multi-series charts
@@ -516,6 +536,7 @@ const colourScale = d3.scaleOrdinal()
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

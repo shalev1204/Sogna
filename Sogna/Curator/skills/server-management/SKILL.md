@@ -12,7 +12,6 @@ id: skill-server-management
 owner: [[orchestrator]]
 ---
 
-
 # Server Management
 
 > Server management principles for production operations.

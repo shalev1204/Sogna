@@ -9,7 +9,6 @@ id: skill-ddd-strategic-design
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-
 # DDD Strategic Design
 
 ## Use this skill when
@@ -55,6 +54,7 @@ classify subdomains, and propose team ownership.
 - It should be followed by tactical design before implementation.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

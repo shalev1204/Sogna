@@ -32,6 +32,7 @@ Factors that determine animation speed:
 ### Choosing Duration
 
 Ask yourself:
+
 1. How far is the element moving?
 2. How important is it to notice this change?
 3. Is the user waiting, or is this background?

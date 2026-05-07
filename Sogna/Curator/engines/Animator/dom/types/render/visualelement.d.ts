@@ -1,5 +1,5 @@
 import { Box } from "sognaflow-utils";
-import { KeyframeResolver } from "../animation/keyframes/keyframesresolver.js";
+import { KeyframeResolver } from "../animation/keyframes/KeyframesResolver.js";
 import type { AnyResolvedKeyframe } from "../animation/types.js";
 import type { SognaflowNodeOptions } from "../node/types.js";
 import { SognaflowValue } from "../value";
@@ -156,7 +156,7 @@ export declare abstract class VisualElement<Instance = unknown, RenderState = un
     manuallyAnimateOnMount: boolean;
     /**
      * This can be set by AnimatePresence to force components that mount
-     * at the same time as it to mount as if they have initial={false} set.
+     * at the same Time as it to mount as if they have initial={false} set.
      */
     blockInitialAnimation: boolean;
     /**
@@ -268,11 +268,11 @@ export declare abstract class VisualElement<Instance = unknown, RenderState = un
     /**
      * Returns the variant definition with a given name.
      */
-    getVariant(name: string): import("..").Variant | undefined;
+    getVariant(name: string): import("../index.js").Variant | undefined;
     /**
      * Returns the defined default transition on this component.
      */
-    getDefaultTransition(): import("..").Transition | undefined;
+    getDefaultTransition(): import("../index.js").Transition | undefined;
     getTransformPagePoint(): any;
     getClosestVariantNode(): VisualElement | undefined;
     /**

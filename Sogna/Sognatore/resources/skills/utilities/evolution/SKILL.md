@@ -7,7 +7,6 @@ id: skill-evolution
 owner: [[orchestrator]]
 ---
 
-
 <!-- security-allowlist: curl-pipe-bash -->
 
 # Makepad Skills Evolution
@@ -15,6 +14,7 @@ owner: [[orchestrator]]
 This skill enables makepad-skills to self-improve continuously during development.
 
 ## When to Use
+
 - You are maintaining `makepad-skills` and want the skill library to improve itself during development.
 - You need the workflow for deciding when a new pattern should become a skill update or hook-driven evolution.
 - You are working on self-correction, self-validation, or version adaptation for the skill set.
@@ -38,7 +38,9 @@ This skill enables makepad-skills to self-improve continuously during developmen
 For reliable automatic triggering, use Claude Code hooks. Install with `--with-hooks`:
 
 ```bash
+
 # Install makepad-skills with hooks enabled
+
 curl -fsSL https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh | bash -s -- --with-hooks
 ```
 
@@ -156,6 +158,7 @@ Trigger skill evolution when any of these occur during development:
 ### Step 1: Identify Knowledge Worth Capturing
 
 Ask yourself:
+
 - Is this a reusable pattern? (not project-specific)
 - Did it take significant effort to figure out?
 - Would it help other Makepad developers?
@@ -177,11 +180,13 @@ Core Concept/API             → makepad-dsl/ or makepad-widgets/
 
 **For Patterns**:
 ```markdown
+
 ## Pattern N: [Pattern Name]
 
 Brief description of what this pattern solves.
 
 ### live_design!
+
 ```rust
 live_design! {
     // DSL code
@@ -189,6 +194,7 @@ live_design! {
 ```
 
 ### Rust Implementation
+
 ```rust
 // Rust code
 ```
@@ -196,6 +202,7 @@ live_design! {
 
 **For Troubleshooting**:
 ```markdown
+
 ### [Error Type/Message]
 
 **Symptom**: What the developer sees
@@ -219,14 +226,18 @@ Add an evolution marker above new content:
 ### Step 5: Submit via Git
 
 ```bash
+
 # Create branch for your contribution
+
 git checkout -b evolution/add-loading-pattern
 
 # Commit your changes
+
 git add robius-widget-patterns/_base/my-pattern.md
 git commit -m "evolution: add loading state pattern from my-app"
 
 # Push and create PR
+
 git push origin evolution/add-loading-pattern
 ```
 
@@ -265,17 +276,21 @@ Periodically verify skill content is still accurate.
 ### Validation Checklist
 
 ```markdown
+
 ## Validation Report
 
 ### Code Examples
+
 - [ ] All `live_design!` examples parse correctly
 - [ ] All Rust code compiles
 - [ ] All patterns work as documented
 
 ### API Accuracy
+
 - [ ] Widget names exist in makepad-widgets
 - [ ] Method signatures are correct
 - [ ] Event types are accurate
+
 ```
 
 ### Validation Prompt
@@ -301,6 +316,7 @@ Provide version-specific guidance for different Makepad branches.
 Claude should detect Makepad version from:
 
 1. **Cargo.toml branch reference**:
+
    ```toml
    makepad-widgets = { git = "...", branch = "dev" }
    ```
@@ -331,6 +347,7 @@ Claude analyzes the current project to detect:
 ## Quality Guidelines
 
 ### DO Add
+
 - Generic, reusable patterns
 - Common errors with clear solutions
 - Well-tested shader effects
@@ -338,6 +355,7 @@ Claude analyzes the current project to detect:
 - Performance optimizations
 
 ### DON'T Add
+
 - Project-specific code
 - Unverified solutions
 - Duplicate content
@@ -393,15 +411,19 @@ skills/
 Use these prompts to trigger self-evolution:
 
 ### After Solving a Problem
+
 > "This solution should be added to makepad-skills for future reference."
 
 ### After Creating a Widget
+
 > "This widget pattern is reusable. Let me add it to makepad-patterns."
 
 ### After Debugging
+
 > "This error and its fix should be documented in makepad-troubleshooting."
 
 ### After Completing a Feature
+
 > "Review what I learned and update makepad-skills if applicable."
 
 ---
@@ -426,11 +448,13 @@ If yes to any, evolve the appropriate skill!
 - [Project Robius](https://github.com/project-robius)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

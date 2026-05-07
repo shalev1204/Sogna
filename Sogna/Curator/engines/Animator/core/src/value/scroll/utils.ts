@@ -1,4 +1,4 @@
-import { sognaflowValue, sognaflowValue } from "sognaflow-dom"
+import { sognaflowValue } from "sognaflow-dom"
 
 /**
  * @public

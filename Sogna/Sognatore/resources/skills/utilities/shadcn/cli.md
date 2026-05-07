@@ -77,25 +77,33 @@ Accepts component names, registry-prefixed names (`@magicui/shimmer-button`), UR
 Use `--dry-run` to preview what `add` would do without writing any files. `--diff` and `--view` both imply `--dry-run`.
 
 ```bash
+
 # Preview all changes.
+
 npx shadcn@latest add button --dry-run
 
 # Show diffs for all files (top 5).
+
 npx shadcn@latest add button --diff
 
 # Show the diff for a specific file.
+
 npx shadcn@latest add button --diff button.tsx
 
 # Show contents for all files (top 5).
+
 npx shadcn@latest add button --view
 
 # Show the full content of a specific file.
+
 npx shadcn@latest add button --view button.tsx
 
 # Works with URLs too.
+
 npx shadcn@latest add https://api.npoint.io/abc123 --dry-run
 
 # CSS diffs.
+
 npx shadcn@latest add button --diff globals.css
 ```
 
@@ -264,6 +272,7 @@ Ask the user first: **reinstall**, **merge**, or **skip** existing components?
 - **Skip** → `npx shadcn@latest init --preset <code> --force --no-reinstall`. Only updates config and CSS variables, leaves existing components as-is.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

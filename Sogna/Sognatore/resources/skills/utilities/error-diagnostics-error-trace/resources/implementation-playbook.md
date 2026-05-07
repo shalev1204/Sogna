@@ -14,9 +14,11 @@ This file contains detailed patterns, checklists, and code samples referenced by
 You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging, and ensure teams can quickly identify and resolve production issues.
 
 ## Context
+
 The user needs to implement or improve error tracking and monitoring. Focus on real-time error detection, meaningful alerts, error grouping, performance monitoring, and integration with popular error tracking services.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -598,7 +600,9 @@ Set up intelligent alerting:
 
 **Alert Manager**
 ```python
+
 # alert_manager.py
+
 from dataclasses import dataclass
 from typing import List, Dict, Optional
 from datetime import datetime, timedelta
@@ -707,6 +711,7 @@ class AlertManager:
         self.alert_history[rule.name] = datetime.now()
 
 # Alert channels
+
 class SlackAlertChannel:
     def __init__(self, webhook_url):
         self.webhook_url = webhook_url
@@ -1382,6 +1387,7 @@ const ErrorStream: React.FC = () => {
 Focus on providing comprehensive error visibility, intelligent alerting, and quick error resolution capabilities.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,10 +8,10 @@ id: skill-mcp-builder-ms
 owner: [[orchestrator]]
 ---
 
-
 # MCP Server Development Guide
 
 ## When to Use
+
 Use this skill when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
 
 ## Overview
@@ -89,6 +89,7 @@ Start with the sitemap to find relevant pages: `https://modelcontextprotocol.io/
 Then fetch specific pages with `.md` suffix for markdown format (e.g., `https://modelcontextprotocol.io/specification/draft.md`).
 
 Key pages to review:
+
 - Specification overview and architecture
 - Transport mechanisms (streamable HTTP, stdio)
 - Tool, resource, and prompt definitions
@@ -115,14 +116,17 @@ Key pages to review:
 - **MCP Best Practices**: 📋 View Best Practices - Core guidelines
 
 **For TypeScript (recommended):**
+
 - **TypeScript SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`
 - ⚡ TypeScript Guide - TypeScript patterns and examples
 
 **For Python:**
+
 - **Python SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
 - 🐍 Python Guide - Python patterns and examples
 
 **For C#/.NET (Microsoft ecosystem):**
+
 - 🔷 Microsoft MCP Patterns - C# patterns, Azure MCP architecture, command hierarchy
 
 #### 1.4 Plan Your Implementation
@@ -140,6 +144,7 @@ Prioritize comprehensive API coverage. List endpoints to implement, starting wit
 #### 2.1 Set Up Project Structure
 
 See language-specific guides for project setup:
+
 - ⚡ TypeScript Guide - Project structure, package.json, tsconfig.json
 - 🐍 Python Guide - Module organization, dependencies
 - 🔷 Microsoft MCP Patterns - C# project structure, command hierarchy
@@ -147,6 +152,7 @@ See language-specific guides for project setup:
 #### 2.2 Implement Core Infrastructure
 
 Create shared utilities:
+
 - API client with authentication
 - Error handling helpers
 - Response formatting (JSON/Markdown)
@@ -157,27 +163,32 @@ Create shared utilities:
 For each tool:
 
 **Input Schema:**
+
 - Use Zod (TypeScript) or Pydantic (Python)
 - Include constraints and clear descriptions
 - Add examples in field descriptions
 
 **Output Schema:**
+
 - Define `outputSchema` where possible for structured data
 - Use `structuredContent` in tool responses (TypeScript SDK feature)
 - Helps clients understand and process tool outputs
 
 **Tool Description:**
+
 - Concise summary of functionality
 - Parameter descriptions
 - Return type schema
 
 **Implementation:**
+
 - Async/await for I/O operations
 - Proper error handling with actionable messages
 - Support pagination where applicable
 - Return both text content and structured data when using modern SDKs
 
 **Annotations:**
+
 - `readOnlyHint`: true/false
 - `destructiveHint`: true/false
 - `idempotentHint`: true/false
@@ -190,6 +201,7 @@ For each tool:
 #### 3.1 Code Quality
 
 Review for:
+
 - No duplicated code (DRY principle)
 - Consistent error handling
 - Full type coverage
@@ -198,10 +210,12 @@ Review for:
 #### 3.2 Build and Test
 
 **TypeScript:**
+
 - Run `npm run build` to verify compilation
 - Test with MCP Inspector: `npx @modelcontextprotocol/inspector`
 
 **Python:**
+
 - Verify syntax: `python -m py_compile your_server.py`
 - Test with MCP Inspector
 
@@ -231,6 +245,7 @@ To create effective evaluations, follow the process outlined in the evaluation g
 #### 4.3 Evaluation Requirements
 
 Ensure each question is:
+
 - **Independent**: Not dependent on other questions
 - **Read-only**: Only non-destructive operations required
 - **Complex**: Requiring multiple tool calls and deep exploration
@@ -261,7 +276,9 @@ Create an XML file with this structure:
 Load these resources as needed during development:
 
 ### Core MCP Documentation (Load First)
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - **MCP Protocol**: Start with sitemap at `https://modelcontextprotocol.io/sitemap.xml`, then fetch specific pages with `.md` suffix
 - 📋 MCP Best Practices - Universal MCP guidelines including:
   - Server and tool naming conventions
@@ -271,6 +288,7 @@ Load these resources as needed during development:
   - Security and error handling standards
 
 ### Microsoft MCP Documentation (For Azure/Foundry)
+
 - 🔷 Microsoft MCP Patterns - Microsoft-specific patterns including:
   - Azure MCP Server architecture (48+ Azure services)
   - C#/.NET command implementation patterns
@@ -279,11 +297,13 @@ Load these resources as needed during development:
   - Testing infrastructure with Bicep templates
 
 ### SDK Documentation (Load During Phase 1/2)
+
 - **Python SDK**: Fetch from `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
 - **TypeScript SDK**: Fetch from `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`
 - **Microsoft MCP SDK**: See Microsoft MCP Patterns for C#/.NET
 
 ### Language-Specific Implementation Guides (Load During Phase 2)
+
 - 🐍 Python Implementation Guide - Complete Python/FastMCP guide with:
   - Server initialization patterns
   - Pydantic model examples
@@ -306,6 +326,7 @@ Load these resources as needed during development:
   - Live test patterns with Bicep
 
 ### Evaluation Guide (Load During Phase 4)
+
 - ✅ Evaluation Guide - Complete evaluation creation guide with:
   - Question creation guidelines
   - Answer verification strategies
@@ -314,11 +335,13 @@ Load these resources as needed during development:
   - Running an evaluation with the provided scripts
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

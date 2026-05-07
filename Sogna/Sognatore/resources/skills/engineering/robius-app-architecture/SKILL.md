@@ -11,17 +11,19 @@ id: skill-robius-app-architecture
 owner: [[system-architect]]
 ---
 
-
 # Robius App Architecture Skill
 
 Best practices for structuring Makepad applications based on the Robrix and Moly codebases - production applications built with Makepad and Robius framework.
 
 **Source codebases:**
+
 - **Robrix**: Matrix chat client - complex sync/async with background subscriptions
 - **Moly**: AI chat application - cross-platform (native + WASM) with streaming APIs
 
 ## When to Use
+
 Use this skill when:
+
 - Building a Makepad application with async backend integration
 - Designing sync/async communication patterns in Makepad
 - Structuring a Robius-style application
@@ -333,11 +335,13 @@ impl AppMain for App {
   - `spawn()` platform-agnostic function
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

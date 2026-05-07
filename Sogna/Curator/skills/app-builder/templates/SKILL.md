@@ -6,7 +6,6 @@ id: skill-templates
 owner: [[orchestrator]]
 ---
 
-
 # Project Templates
 
 > Quick-start templates for scaffolding new projects.

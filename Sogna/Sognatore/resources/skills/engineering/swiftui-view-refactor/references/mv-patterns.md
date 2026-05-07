@@ -17,13 +17,16 @@ Inspired by the user's provided source, "SwiftUI in 2025: Forget MVVM" (Thomas R
 - Prefer `@State`, `@Environment`, `@Query`, `.task`, `.task(id:)`, and `onChange` before reaching for a view model.
 - Keep business logic in services, models, or domain types, not in the view body.
 - Split large screens into smaller view types before inventing a view model layer.
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Avoid manual fetching or state plumbing that duplicates SwiftUI or SwiftData mechanisms.
 - Test services, models, and transformations first; views should stay simple and declarative.
 
 ## When to avoid a view model
 
 Do not introduce a view model when it would mostly:
+
 - mirror local view state,
 - wrap values already available through `@Environment`,
 - duplicate `@Query`, `@State`, or `Binding`-based data flow,
@@ -35,6 +38,7 @@ In these cases, simplify the view and data flow instead of adding indirection.
 ## When a view model may be justified
 
 A view model can be reasonable when at least one of these is true:
+
 - the user explicitly asks for one,
 - the codebase already standardizes on a view model pattern for that feature,
 - the screen needs a long-lived reference model with behavior that does not fit naturally in services alone,
@@ -85,6 +89,7 @@ struct FeedView: View {
 ```
 
 Why this is preferred:
+
 - state stays close to the UI that renders it,
 - dependencies come from the environment instead of a wrapper object,
 - the view coordinates UI flow while the service owns the real work.
@@ -141,6 +146,7 @@ Avoid adding a view model that manually fetches and mirrors the same state unles
 ## Testing guidance
 
 Prefer to test:
+
 - services and business rules,
 - models and state transformations,
 - async workflows at the service layer,
@@ -151,6 +157,7 @@ Do not introduce a view model primarily to make a simple SwiftUI view "testable.
 ## Refactor checklist
 
 When refactoring toward MV:
+
 - Remove view models that only wrap environment dependencies or local view state.
 - Replace optional or delayed-initialized view models when plain view state is enough.
 - Pull business logic out of the view body and into services/models.
@@ -162,6 +169,7 @@ When refactoring toward MV:
 Treat view models as the exception, not the default.
 
 In modern SwiftUI, the default stack is:
+
 - `@State` for local state,
 - `@Environment` for shared dependencies,
 - `@Query` for SwiftData-backed collections,
@@ -171,6 +179,7 @@ In modern SwiftUI, the default stack is:
 Reach for a view model only when the feature clearly needs one.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

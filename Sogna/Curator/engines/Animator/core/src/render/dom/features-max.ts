@@ -1,8 +1,8 @@
 "use client"
 
-import { drag } from "../../sognaflow/features/drag"
-import { layout } from "../../sognaflow/features/layout"
-import { FeatureBundle } from "../../sognaflow/features/types"
+import { drag } from "../../motion/features/drag"
+import { layout } from "../../motion/features/layout"
+import { FeatureBundle } from "../../motion/features/types"
 import { domAnimation } from "./features-animation.js"
 
 /**

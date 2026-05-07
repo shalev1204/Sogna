@@ -4,21 +4,24 @@ description: Analise e auditoria de editais de leilao judicial e extrajudicial. 
 risk: safe
 date_added: '2026-03-06'
 tags:
+
 - auction
 - legal-analysis
 - risk
 - brazilian
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-leiloeiro-edital
 owner: [[orchestrator]]
 ---
-
 
 # SKILL DE EDITAL — ANÁLISE PERICIAL DE EDITAIS DE LEILÃO
 
@@ -57,6 +60,7 @@ Ao receber um edital (ou informações dele), execute SEMPRE os 8 blocos abaixo:
 ## Bloco 1 — Identificação E Enquadramento
 
 **Extrair do edital:**
+
 - Número do processo (se judicial)
 - Nome do leiloeiro e habilitação (CRC/Junta Comercial)
 - Plataforma de leilão (presencial / online — qual portal)
@@ -78,6 +82,7 @@ Data/Hora: ___________
 ## Bloco 2 — Descrição E Localização Do Imóvel
 
 **Verificar:**
+
 - Endereço completo e preciso (CEP, número, complemento)
 - Tipo: casa, apartamento, terreno, sala comercial, galpão, rural
 - Área total e área construída (comparar com matrícula)
@@ -88,6 +93,7 @@ Data/Hora: ___________
 - Vaga de garagem inclusa (se sim, matrícula própria ou vinculada?)
 
 **Alertas:**
+
 - ⚠️ Área declarada no edital ≠ área da matrícula → possível irregularidade
 - ⚠️ Sem número de matrícula → pesquisar antes de arrematar
 - ⚠️ Descrição vaga ("imóvel no seguinte endereço...") → solicitar laudo de avaliação
@@ -106,11 +112,13 @@ Avaliador responsável:             _______________
 ```
 
 **Análise de Deságio:**
+
 - Deságio sobre VAN no lance mínimo do 1º: ____%
 - Deságio sobre VAN no lance mínimo do 2º: ____%
 - Deságio real (comparado ao valor de mercado estimado): ____%
 
 **Alertas:**
+
 - ⚠️ Avaliação com mais de 12 meses → risco de defasagem — pedir reavaliação possível (Art. 873 CPC)
 - ⚠️ VAN muito abaixo do mercado → investigar laudos ou favorecimento
 - ⚠️ VAN muito acima do mercado → leilão não vai arrematar no 1º; aguardar 2º
@@ -121,6 +129,7 @@ Avaliador responsável:             _______________
 ## Bloco 4 — Situação Do Imóvel (Posse E Ocupação)
 
 **Verificar no edital:**
+
 - [ ] Imóvel desocupado (pronto para uso)
 - [ ] Imóvel ocupado pelo executado/devedor
 - [ ] Imóvel ocupado por terceiro (locatário ou invasor)
@@ -137,6 +146,7 @@ Avaliador responsável:             _______________
 | Terceiro invasor | Alto | Ação reintegração | 6-24 meses |
 
 **Se ocupado, verificar:**
+
 - Há previsão no edital de quem responde pela desocupação?
 - Há liminar de imissão na posse já concedida?
 - O arrematante recebe com ou sem assistência jurídica do banco/credor?
@@ -147,6 +157,7 @@ Avaliador responsável:             _______________
 ## 5.1 Responsabilidade Por Débitos — O Que Diz O Edital?
 
 **Verificar especificamente:**
+
 - [ ] IPTU — valor dos débitos e quem responde
 - [ ] Condomínio — valor dos débitos e quem responde
 - [ ] Taxa de lixo, iluminação pública
@@ -165,6 +176,7 @@ Avaliador responsável:             _______________
 
 **QUANTIFICAR SEMPRE:**
 Antes de arrematar, obter:
+
 1. Certidão de débitos de IPTU (prefeitura)
 2. Extrato de débitos de condomínio (síndico/administradora)
 3. Declaração de débitos de água/gás
@@ -172,6 +184,7 @@ Antes de arrematar, obter:
 ## 5.2 Ônus Reais Registrados Na Matrícula
 
 **Verificar no edital e na matrícula:**
+
 - [ ] Hipoteca (qual banco, qual valor, qual data)
 - [ ] Alienação fiduciária anterior (antes da penhora)
 - [ ] Usufruto registrado (quem é o usufrutuário? vida útil estimada?)
@@ -181,6 +194,7 @@ Antes de arrematar, obter:
 - [ ] Penhoras anteriores (outro processo — qual é a preferência?)
 
 **Atenção especial:**
+
 - Usufruto vitalício → arrematante não tem direito de uso enquanto o usufrutuário viver
 - Aforamento → pagar laudêmio + foro anual à SPU
 - Hipoteca anterior à penhora → verificar se foi citada na execução (sub-rogação)
@@ -190,6 +204,7 @@ Antes de arrematar, obter:
 ## Bloco 6 — Condições De Pagamento
 
 **Extrair do edital:**
+
 - Forma de pagamento aceita (dinheiro, TED, cheque, carta de crédito)
 - Prazo para pagamento à vista
 - Possibilidade de parcelamento — Art. 895 CPC:
@@ -224,12 +239,14 @@ Lance arrematado:                  R$ _____________
 **Verificar itens de conformidade do edital:**
 
 **a) Publicação do edital (Art. 887 CPC / Art. 27 Lei 9.514):**
+
 - [ ] Publicado no Diário Oficial?
 - [ ] Publicado em jornal de grande circulação?
 - [ ] Publicado no portal do tribunal (se judicial)?
 - [ ] Antecedência mínima de 5 dias respeitada?
 
 **b) Intimações obrigatórias (Art. 889 CPC):**
+
 - [ ] Devedor/fiduciante intimado?
 - [ ] Cônjuge/companheiro intimado?
 - [ ] Credor hipotecário intimado (se houver)?
@@ -237,11 +254,13 @@ Lance arrematado:                  R$ _____________
 - [ ] Titular de direito de preferência intimado?
 
 **c) Leiloeiro habilitado:**
+
 - [ ] Nome e matrícula na Junta Comercial
 - [ ] Credenciado no juízo (se judicial)
 - [ ] Leilão extrajudicial: leiloeiro nomeado pelo credor fiduciário
 
 **d) Edital completo (Art. 887, §1º CPC):**
+
 - [ ] Descrição do bem
 - [ ] Valor de avaliação
 - [ ] Ônus existentes
@@ -344,6 +363,7 @@ Os editais de venda direta bancária têm formato diferente dos judiciais. Ponto
 
 **Estrutura do edital CEF:**
 ```
+
 1. Identificação do lote (número, endereço, matrícula)
 2. Valor mínimo de venda (VMAV — Valor Mínimo de Aquisição e Venda)
 3. Forma de pagamento aceita:
@@ -354,9 +374,11 @@ Os editais de venda direta bancária têm formato diferente dos judiciais. Ponto
 5. Responsabilidade por débitos: geralmente a cargo do arrematante
 6. Comissão do leiloeiro/intermediário: 5%
 7. Prazo para desocupação (se ocupado): responsabilidade do comprador
+
 ```
 
 **Diferenciais CEF:**
+
 - Possibilidade de usar FGTS (desde que atenda requisitos SFH)
 - Financiamento até 360 meses pelo próprio banco
 - Desconto adicional para pagamento à vista
@@ -366,6 +388,7 @@ Os editais de venda direta bancária têm formato diferente dos judiciais. Ponto
 ## Venda Direta Bb / Santander / Itaú
 
 **Padrão comum:**
+
 - Edital simplificado (não segue CPC)
 - Valor de venda definido pelo banco (laudo interno)
 - Comissão de intermediação: 5-6%
@@ -464,6 +487,7 @@ Esta skill implementa as seguintes políticas de governança:
 - **warning_threshold**: Score de risco >10/14 dispara warning_threshold com alerta automático
 
 Políticas adicionais:
+
 - **Responsável:** Ecossistema Leiloeiro IA
 - **Escopo:** Análise pericial de editais de leilão judicial e extrajudicial
 - **Limitações:** Análise baseada em informações fornecidas. Não acessa processos judiciais.
@@ -508,11 +532,13 @@ Políticas adicionais:
 - `leiloeiro-mercado` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

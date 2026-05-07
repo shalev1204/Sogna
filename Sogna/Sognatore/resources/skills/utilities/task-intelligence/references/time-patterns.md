@@ -68,6 +68,7 @@ Baseado em execuções reais do ecossistema.
 | Task já feita antes (memória ativa) | ×0.5 a ×0.7 |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

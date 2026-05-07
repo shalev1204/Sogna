@@ -25,6 +25,7 @@ The skill-creator automates the entire workflow of creating new CLI skills for G
 ## When to Use
 
 Use this skill when you want to:
+
 - Create a new CLI skill following official standards
 - Extend CLI functionality with custom capabilities
 - Package domain knowledge into a reusable skill format
@@ -38,7 +39,9 @@ Use this skill when you want to:
 This skill is part of the `cli-ai-skills` repository. To use it:
 
 ```bash
+
 # Clone the repository
+
 git clone https://github.com/yourusername/cli-ai-skills.git
 cd cli-ai-skills
 ```
@@ -48,14 +51,18 @@ cd cli-ai-skills
 Install via symlinks to make the skill available everywhere:
 
 ```bash
+
 # For GitHub Copilot CLI
+
 ln -sf "$(pwd)/.github/skills/skill-creator" ~/.copilot/skills/skill-creator
 
 # For Claude Code
+
 ln -sf "$(pwd)/.claude/skills/skill-creator" ~/.claude/skills/skill-creator
 ```
 
 **Benefits of global installation:**
+
 - Works in any directory
 - Auto-updates when you `git pull` the repository
 - No configuration files needed
@@ -71,14 +78,18 @@ If you prefer to use the skill only within this repository, no installation is n
 Simply ask the CLI to create a new skill:
 
 ```bash
+
 # GitHub Copilot CLI
+
 gh copilot "create a new skill for debugging Python errors"
 
 # Claude Code
+
 claude "create a skill that helps with git workflows"
 ```
 
 The skill will guide you through with visual progress tracking:
+
 1. **Brainstorming** (20%) - Define purpose, triggers, and type
 2. **Prompt Enhancement** (40%, optional) - Enhance with prompt-engineer skill
 3. **File Generation** (60%) - Create files from templates
@@ -99,6 +110,7 @@ Each phase displays a progress bar:
 ```
 
 The skill will:
+
 - Use the specialized `code-skill-template.md`
 - Ask about specific frameworks (React, Vue, etc.)
 - Include code examples in the `examples/` folder
@@ -110,6 +122,7 @@ The skill will:
 ```
 
 The skill will:
+
 - Use `documentation-skill-template.md`
 - Ask about documentation formats
 - Set up references for style guides
@@ -121,6 +134,7 @@ The skill will:
 ```
 
 The skill will:
+
 - Generate files only in `.github/skills/`
 - Skip Claude-specific installation
 - Validate against Copilot requirements
@@ -174,6 +188,7 @@ When you create a skill, this structure is generated:
 ## Configuration
 
 **No configuration needed!** This skill uses runtime discovery to:
+
 - Detect installed platforms (Copilot CLI, Claude Code)
 - Find repository root automatically
 - Extract author info from git config
@@ -182,6 +197,7 @@ When you create a skill, this structure is generated:
 ## Validation
 
 Every skill created is automatically validated for:
+
 - ✅ **YAML Frontmatter** - Required fields and format
 - ✅ **Description Format** - Third-person, trigger phrases
 - ✅ **Word Count** - 1,500-2,000 ideal, under 5,000 max
@@ -212,6 +228,7 @@ cd cli-ai-skills
 ### "Platform not detected" Warning
 
 If platforms aren't detected:
+
 1. Choose "Repository only" installation
 2. Manually specify platform during setup
 3. Install globally later using provided commands
@@ -219,6 +236,7 @@ If platforms aren't detected:
 ### Validation Failures
 
 If validation finds issues:
+
 - Review suggestions in the output
 - Choose automatic fixes for common problems
 - Manually edit files for complex issues
@@ -229,6 +247,7 @@ If validation finds issues:
 ### Prompt Engineer Integration
 
 Enhance your skill descriptions with AI:
+
 1. Enable during Phase 2 (Prompt Refinement)
 2. Skill will invoke `prompt-engineer` automatically
 3. Review enhanced output before proceeding
@@ -236,6 +255,7 @@ Enhance your skill descriptions with AI:
 ### Bundled Resources
 
 For complex skills, use bundled resources:
+
 - **references/** - Detailed documentation (no word limit)
 - **examples/** - Working code samples users can run
 - **scripts/** - Automation utilities loaded on demand
@@ -250,6 +270,7 @@ scripts/update-skill-version.sh your-skill-name 1.1.0
 ## Contributing
 
 Created a useful skill? Share it:
+
 1. Ensure validation passes
 2. Add usage examples
 3. Update main README.md
@@ -265,6 +286,7 @@ Created a useful skill? Share it:
 ## Support
 
 For issues or questions:
+
 - Check existing skills in `.github/skills/` for examples
 - Review `resources/skills-development.md` for methodology
 - Open an issue in the repository
@@ -277,6 +299,7 @@ For issues or questions:
 **Last Updated:** 2026-02-01
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

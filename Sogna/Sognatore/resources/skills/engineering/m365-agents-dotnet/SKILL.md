@@ -8,13 +8,14 @@ id: skill-m365-agents-dotnet
 owner: [[orchestrator]]
 ---
 
-
 # Microsoft 365 Agents SDK (.NET)
 
 ## Overview
+
 Build enterprise agents for Microsoft 365, Teams, and Copilot Studio using the Microsoft.Agents SDK with ASP.NET Core hosting, agent routing, and MSAL-based authentication.
 
 ## Before implementation
+
 - Use the microsoft-docs MCP to verify the latest APIs for AddAgent, AgentApplication, and authentication options.
 - Confirm package versions in NuGet for the Microsoft.Agents.* packages you plan to use.
 
@@ -294,14 +295,17 @@ await foreach (var activity in client.AskQuestionAsync("Hello!", null))
 | GitHub samples | https://github.com/microsoft/agents |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

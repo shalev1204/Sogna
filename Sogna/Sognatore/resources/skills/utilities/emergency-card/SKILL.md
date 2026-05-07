@@ -7,7 +7,6 @@ id: skill-emergency-card
 owner: [[orchestrator]]
 ---
 
-
 # 紧急医疗信息卡生成器
 
 生成紧急情况下快速访问的医疗信息摘要，用于急救或就医。
@@ -15,7 +14,9 @@ owner: [[orchestrator]]
 ## 核心功能
 
 ### 1. 紧急信息提取
+
 从用户的健康数据中提取最关键的信息：
+
 - **严重过敏**：优先提取4级（过敏性休克）和3级过敏
 - **当前用药**：活跃药物的名称、剂量、频率
 - **急症情况**：需要紧急处理的医疗状况
@@ -23,20 +24,26 @@ owner: [[orchestrator]]
 - **紧急联系人**：快速联系的家属信息
 
 ### 2. 信息优先级排序
+
 按照医疗紧急程度对信息排序：
+
 1. **P0 - 危急信息**：过敏性休克、严重药物过敏、危及生命的疾病
 2. **P1 - 重要信息**：当前用药、慢性病、植入物
 3. **P2 - 一般信息**：血型、年龄、体重、最近检查
 
 ### 3. 多格式输出
+
 支持多种输出格式以适应不同场景：
+
 - **HTML格式**：可打印网页，使用Tailwind CSS和Lucide图标（推荐）
 - **JSON格式**：结构化数据，便于系统集成
 - **文本格式**：简洁可读，适合打印携带
 - **PDF格式**：专业打印，适合长期保存
 
 #### HTML格式（新增）
+
 生成独立的HTML文件，包含：
+
 - Tailwind CSS样式（通过CDN）
 - Lucide图标（通过CDN）
 - 响应式设计
@@ -46,16 +53,20 @@ owner: [[orchestrator]]
 
 使用方式：
 ```bash
+
 # 生成标准卡片
+
 python scripts/generate_emergency_card.py
 
 # 指定卡片类型
+
 python scripts/generate_emergency_card.py standard
 python scripts/generate_emergency_card.py child
 python scripts/generate_emergency_card.py elderly
 python scripts/generate_emergency_card.py severe
 
 # 指定打印尺寸
+
 python scripts/generate_emergency_card.py standard a4       # A4标准
 python scripts/generate_emergency_card.py standard wallet   # 钱包卡
 python scripts/generate_emergency_card.py standard large    # 大字版（老年）
@@ -64,6 +75,7 @@ python scripts/generate_emergency_card.py standard large    # 大字版（老年
 输出文件：`emergency-cards/emergency-card-{variant}-{YYYY-MM-DD}.html`
 
 ### 4. 离线可用
+
 - 支持手机保存（相册、文件）
 - 支持打印携带（钱包、包）
 - 支持云端备份（可选）
@@ -71,7 +83,9 @@ python scripts/generate_emergency_card.py standard large    # 大字版（老年
 ## 使用说明
 
 ### 触发条件
+
 当用户提到以下场景时，使用此技能：
+
 - ✅ "生成紧急医疗信息卡"
 - ✅ "我需要旅行，如何快速提供医疗信息"
 - ✅ "把我的过敏信息整理成卡片"
@@ -82,6 +96,7 @@ python scripts/generate_emergency_card.py standard large    # 大字版（老年
 ### 执行步骤
 
 #### 步骤 1: 读取用户基础数据
+
 从以下数据源读取信息：
 
 ```javascript
@@ -107,6 +122,7 @@ const dischargeSummaries = glob('data/出院小结/**/*.json');
 #### 步骤 2: 提取关键信息
 
 ##### 2.1 基础信息
+
 ```javascript
 const basicInfo = {
   name: profile.basic_info?.name || "未设置",
@@ -121,6 +137,7 @@ const basicInfo = {
 ```
 
 #### 2.2 严重过敏
+
 ```javascript
 // 过滤出3-4级严重过敏
 const criticalAllergies = allergies.allergies
@@ -134,6 +151,7 @@ const criticalAllergies = allergies.allergies
 ```
 
 #### 2.3 慢性疾病诊断（新增）
+
 ```javascript
 // 从慢性病管理数据中提取诊断信息
 const chronicConditions = [];
@@ -188,6 +206,7 @@ try {
 ```
 
 #### 2.4 当前用药
+
 ```javascript
 // 只包含活跃的药物
 const currentMedications = medications.medications
@@ -202,6 +221,7 @@ const currentMedications = medications.medications
 ```
 
 ##### 2.4 医疗状况
+
 从出院小结中提取诊断信息：
 ```javascript
 const medicalConditions = dischargeSummaries
@@ -217,6 +237,7 @@ const medicalConditions = dischargeSummaries
 ```
 
 ##### 2.5 植入物
+
 从手术记录中提取植入物信息：
 ```javascript
 const implants = surgeries
@@ -233,6 +254,7 @@ const implants = surgeries
 ```
 
 ##### 2.6 近期辐射暴露
+
 ```javascript
 const recentRadiation = {
   total_dose_last_year: calculateTotalDose(radiation.records, 'last_year'),
@@ -262,9 +284,11 @@ const emergencyCard = {
 #### 步骤 4: 格式化输出
 
 ##### JSON格式
+
 直接输出结构化JSON数据。
 
 ##### 文本格式
+
 生成易读的文本卡片：
 ```
 ╔═══════════════════════════════════════════════════════════╗
@@ -313,6 +337,7 @@ const emergencyCard = {
 ```
 
 ##### 二维码格式
+
 将JSON数据转换为二维码图片：
 ```javascript
 const qrCode = generateQRCode(JSON.stringify(emergencyCard));
@@ -367,37 +392,44 @@ saveFile('emergency-card-qr.png', emergencyCard.qr_code);
 ## 数据源
 
 ### 主要数据源
+
 - **data/profile.json**：用户基础信息、血型、紧急联系人
 - **data/allergies.json**：过敏史和严重程度分级
 - **data/medications/medications.json**：当前用药计划和剂量
 
 ### 慢性病数据源（新增）
+
 - **data/hypertension-tracker.json**：高血压管理数据（诊断日期、分级、血压控制、靶器官损害、心血管风险）
 - **data/diabetes-tracker.json**：糖尿病管理数据（类型、HbA1c、血糖控制、并发症筛查）
 - **data/copd-tracker.json**：COPD管理数据（GOLD分级、CAT评分、急性加重史、肺功能）
 
 ### 辅助数据源
+
 - **data/radiation-records.json**：近期辐射暴露记录
 - **data/手术记录/**/*.json**：手术植入物信息
 - **data/出院小结/**/*.json**：医疗诊断信息
 
 ### 可选数据源
+
 - **data/index.json**：全局数据索引
 
 ## 安全性原则
 
 ### 必须遵循
+
 - ❌ 不添加用药建议（仅列出当前用药）
 - ❌ 不提供诊断结论（仅列出已知诊断）
 - ❌ 不给出治疗建议（不替代医生）
 - ❌ 标注免责声明（仅供参考）
 
 ### 信息准确度
+
 - ✅ 仅提取已记录的信息（不推测或推断）
 - ✅ 标注信息来源和更新时间
 - ✅ 建议定期更新信息
 
 ### 隐私保护
+
 - ✅ 敏感信息可选隐藏
 - ✅ 电话号码部分隐藏（如：138****1234）
 - ✅ 所有数据仅保存在本地
@@ -405,16 +437,19 @@ saveFile('emergency-card-qr.png', emergencyCard.qr_code);
 ## 错误处理
 
 ### 数据缺失
+
 - **过敏数据缺失**：输出"未记录过敏史"
 - **用药数据缺失**：输出"未记录当前用药"
 - **植入物数据缺失**：输出"无植入物"
 
 ### 文件读取失败
+
 - **无法读取profile.json**：使用默认值（姓名：未设置）
 - **无法读取allergies.json**：跳过过敏信息
 - **继续生成其他信息**：不因单个文件失败而中断
 
 ### 二维码生成失败
+
 - 降级为文本格式输出
 - 提示用户手动记录信息
 
@@ -430,16 +465,18 @@ saveFile('emergency-card-qr.png', emergencyCard.qr_code);
 
 详细格式请参考相关文档。
 
-
 ## When to Use
+
 Use this skill when tackling tasks related to its primary domain or functionality as described above.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -135,6 +135,7 @@ Tool use is also available through the non-beta `com.anthropic.models.messages.M
 For manual tool loops, define tools as JSON schema in the request, handle `tool_use` blocks in the response, send `tool_result` back, and loop until `stop_reason` is `"end_turn"`. See the [shared tool use concepts](../shared/tool-use-concepts.md) for the agentic loop pattern.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

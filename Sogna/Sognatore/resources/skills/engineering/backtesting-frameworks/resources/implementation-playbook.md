@@ -324,14 +324,18 @@ class VectorizedBacktester:
         }
 
 # Example usage
+
 def momentum_signal(prices: pd.DataFrame, lookback: int = 20) -> pd.Series:
     """Simple momentum strategy: long when price > SMA, else flat."""
     sma = prices["close"].rolling(lookback).mean()
     return (prices["close"] > sma).astype(int)
 
 # Run backtest
+
 # backtester = VectorizedBacktester()
+
 # results = backtester.run(price_data, lambda p: momentum_signal(p, 50))
+
 ```
 
 ### Pattern 3: Walk-Forward Optimization
@@ -634,6 +638,7 @@ def calculate_metrics(returns: pd.Series, rf_rate: float = 0.02) -> Dict[str, fl
 ## Best Practices
 
 ### Do's
+
 - **Use point-in-time data** - Avoid look-ahead bias
 - **Include transaction costs** - Realistic estimates
 - **Test out-of-sample** - Always reserve data
@@ -641,6 +646,7 @@ def calculate_metrics(returns: pd.Series, rf_rate: float = 0.02) -> Dict[str, fl
 - **Monte Carlo analysis** - Understand uncertainty
 
 ### Don'ts
+
 - **Don't overfit** - Limit parameters
 - **Don't ignore survivorship** - Include delisted
 - **Don't use adjusted data carelessly** - Understand adjustments
@@ -654,6 +660,7 @@ def calculate_metrics(returns: pd.Series, rf_rate: float = 0.02) -> Dict[str, fl
 - [Backtrader Documentation](https://www.backtrader.com/docu/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

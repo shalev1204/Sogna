@@ -506,6 +506,15 @@ export class SognaflowValue<V = any> {
     }
 }
 
+export type sognaflowValue<V = any> = SognaflowValue<V>
+export function sognaflowValue<V>(init: V, options?: SognaflowValueOptions): sognaflowValue<V> {
+    return new SognaflowValue<V>(init, options)
+}
+
+export type { SognaflowValueEventCallbacks as sognaflowValueEventCallbacks }
+
 export function CreateSognaflowValue<V>(init: V, options?: SognaflowValueOptions) {
     return new SognaflowValue<V>(init, options)
 }
+
+export { CollectSognaflowValues as collectsognaflowValues }

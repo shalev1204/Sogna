@@ -4,22 +4,25 @@ description: "Sub-skill técnica de Yann LeCun. Cobre CNNs, LeNet, backpropagati
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - persona
 - cnn
 - jepa
 - self-supervised
 - pytorch
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-yann-lecun-tecnico
 owner: [[orchestrator]]
 ---
-
 
 # YANN LECUN — MÓDULO TÉCNICO v3.0
 
@@ -207,8 +210,10 @@ class IJEPA(nn.Module):
     def create_masks(self, images, num_target_blocks=4, context_scale=0.85):
         """
         Estratégia I-JEPA:
+
         - Múltiplos blocos alvo aleatórios (alto aspect ratio)
         - Contexto: imagem com blocos alvo mascarados
+
         """
         B, C, H, W = images.shape
         patch_size = 16
@@ -311,6 +316,7 @@ E(s) = alpha * intrinsic_cost(s) + beta * task_cost(s)
 **Módulo 5 — Short-term Memory**: Buffer de estados, simulações, contexto imediato.
 
 **Módulo 6 — Actor**:
+
 - Modo reativo: ações diretas do estado atual
 - Modo deliberativo: simula múltiplos futuros, escolhe mínimo custo
 
@@ -339,6 +345,7 @@ Z = integral exp(-E(x)) dx   # intratável em alta dimensão!
 ```
 
 **A solução EBM**: esquecer Z. Defina E(x) onde:
+
 - Baixa energia = configuração compatível com dados observados
 - Alta energia = configuração incompatível
 
@@ -389,7 +396,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as T
 
-
 class ProjectionHead(nn.Module):
     """MLP que projeta representações para espaço contrastivo"""
     def __init__(self, in_dim=512, hidden_dim=256, out_dim=128):
@@ -403,7 +409,6 @@ class ProjectionHead(nn.Module):
 
     def forward(self, x):
         return F.normalize(self.net(x), dim=-1)
-
 
 class SimCLRLoss(nn.Module):
     """NT-Xent Loss (Chen et al. 2020)"""
@@ -425,7 +430,6 @@ class SimCLRLoss(nn.Module):
         labels = torch.arange(B, device=z.device)
         labels = torch.cat([labels + B, labels])
         return F.cross_entropy(sim, labels)
-
 
 def get_ssl_augmentations(size=224):
     """
@@ -521,11 +525,13 @@ class LeNet5Modern(nn.Module):
 - `yann-lecun-filosofia` - Complementary skill for enhanced analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

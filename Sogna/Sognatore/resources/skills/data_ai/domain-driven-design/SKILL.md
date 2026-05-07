@@ -9,7 +9,6 @@ id: skill-domain-driven-design
 owner: [[prod-design]]
 ---
 
-
 # Domain-Driven Design
 
 ## Use this skill when
@@ -77,6 +76,7 @@ Then route to the right next skill and list artifacts we must produce this week.
 - It should not be used as a justification to over-engineer simple systems.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,15 +8,16 @@ id: skill-computer-vision-expert
 owner: [[orchestrator]]
 ---
 
-
 # Computer Vision Expert (SOTA 2026)
 
 **Role**: Advanced Vision Systems Architect & Spatial Intelligence Expert
 
 ## Purpose
+
 To provide expert guidance on designing, implementing, and optimizing state-of-the-art computer vision pipelines. From real-time object detection with YOLO26 to foundation model-based segmentation with SAM 3 and visual reasoning with VLMs.
 
 ## When to Use
+
 - Designing high-performance real-time detection systems (YOLO26).
 - Implementing zero-shot or text-guided segmentation tasks (SAM 3).
 - Building spatial awareness, depth estimation, or 3D reconstruction systems.
@@ -26,20 +27,24 @@ To provide expert guidance on designing, implementing, and optimizing state-of-t
 ## Capabilities
 
 ### 1. Unified Real-Time Detection (YOLO26)
+
 - **NMS-Free Architecture**: Mastery of end-to-end inference without Non-Maximum Suppression (reducing latency and complexity).
 - **Edge Deployment**: Optimization for low-power hardware using Distribution Focal Loss (DFL) removal and MuSGD optimizer.
 - **Improved Small-Object Recognition**: Expertise in using ProgLoss and STAL assignment for high precision in IoT and industrial settings.
 
 ### 2. Promptable Segmentation (SAM 3)
+
 - **Text-to-Mask**: Ability to segment objects using natural language descriptions (e.g., "the blue container on the right").
 - **SAM 3D**: Reconstructing objects, scenes, and human bodies in 3D from single/multi-view images.
 - **Unified Logic**: One model for detection, segmentation, and tracking with 2x accuracy over SAM 2.
 
 ### 3. Vision Language Models (VLMs)
+
 - **Visual Grounding**: Leveraging Florence-2, PaliGemma 2, or Qwen2-VL for semantic scene understanding.
 - **Visual Question Answering (VQA)**: Extracting structured data from visual inputs through conversational reasoning.
 
 ### 4. Geometry & Reconstruction
+
 - **Depth Anything V2**: State-of-the-art monocular depth estimation for spatial awareness.
 - **Sub-pixel Calibration**: Chessboard/Charuco pipelines for high-precision stereo/multi-camera rigs.
 - **Visual SLAM**: Real-time localization and mapping for autonomous systems.
@@ -47,14 +52,17 @@ To provide expert guidance on designing, implementing, and optimizing state-of-t
 ## Patterns
 
 ### 1. Text-Guided Vision Pipelines
+
 - Use SAM 3's text-to-mask capability to isolate specific parts during inspection without needing custom detectors for every variation.
 - Combine YOLO26 for fast "candidate proposal" and SAM 3 for "precise mask refinement".
 
 ### 2. Deployment-First Design
+
 - Leverage YOLO26's simplified ONNX/TensorRT exports (NMS-free).
 - Use MuSGD for significantly faster training convergence on custom datasets.
 
 ### 3. Progressive 3D Scene Reconstruction
+
 - Integrate monocular depth maps with geometric homographies to build accurate 2.5D/3D representations of scenes.
 
 ## Anti-Patterns
@@ -73,14 +81,17 @@ To provide expert guidance on designing, implementing, and optimizing state-of-t
 | Hardware Compatibility | Low | YOLO26 simplified architecture is highly compatible with NPU/TPUs. |
 
 ## Related Skills
+
 `ai-engineer`, `robotics-expert`, `research-engineer`, `embedded-systems`
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

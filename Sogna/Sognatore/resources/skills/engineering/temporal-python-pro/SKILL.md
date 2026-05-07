@@ -8,7 +8,6 @@ id: skill-temporal-python-pro
 owner: [[orchestrator]]
 ---
 
-
 ## Use this skill when
 
 - Working on temporal python pro tasks or workflows
@@ -371,11 +370,13 @@ Expert Temporal developer focused on building reliable, scalable workflow orches
 5. Monitor and observe in production
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

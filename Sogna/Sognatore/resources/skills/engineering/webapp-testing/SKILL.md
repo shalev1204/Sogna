@@ -8,12 +8,12 @@ id: skill-webapp-testing
 owner: [[eng-qa]]
 ---
 
-
 # Web Application Testing
 
 To test local web applications, write native Python Playwright scripts.
 
 **Helper Scripts Available**:
+
 - `scripts/with_server.py` - Manages server lifecycle (supports multiple servers)
 
 **Always run scripts with `--help` first** to see usage. DO NOT read the source until you try running the script first and find that a customized solution is abslutely necessary. These scripts can be very large and thus pollute your context window. They exist to be called directly as black-box scripts rather than ingested into your context window.
@@ -31,10 +31,12 @@ User task → Is it static HTML?
         │        Then use the helper + write simplified Playwright script
         │
         └─ Yes → Reconnaissance-then-action:
+
             1. Navigate and wait for networkidle
             2. Take screenshot or inspect DOM
             3. Identify selectors from rendered state
             4. Execute actions with discovered selectors
+
 ```
 
 ## Example: Using with_server.py
@@ -70,6 +72,7 @@ with sync_playwright() as p:
 ## Reconnaissance-Then-Action Pattern
 
 1. **Inspect rendered DOM**:
+
    ```python
    page.screenshot(path='/tmp/inspect.png', full_page=True)
    content = page.content()
@@ -101,14 +104,17 @@ with sync_playwright() as p:
   - `console_logging.py` - Capturing console logs during automation
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

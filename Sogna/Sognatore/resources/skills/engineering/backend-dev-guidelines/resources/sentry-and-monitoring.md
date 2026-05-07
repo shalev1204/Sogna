@@ -112,6 +112,7 @@ Sentry.setContext('runtime', {
 ```
 
 **Critical Points:**
+
 - PII protection built-in (beforeSend)
 - Filter non-critical errors
 - Comprehensive integrations
@@ -343,11 +344,13 @@ async function good() {
 ---
 
 **Related Files:**
+
 - SKILL.md
 - [routing-and-controllers.md](routing-and-controllers.md)
 - [async-and-errors.md](async-and-errors.md)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

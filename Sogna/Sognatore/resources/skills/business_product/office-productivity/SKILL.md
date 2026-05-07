@@ -9,7 +9,6 @@ id: skill-office-productivity
 owner: [[prod-pm]]
 ---
 
-
 # Office Productivity Workflow Bundle
 
 ## Overview
@@ -19,6 +18,7 @@ Comprehensive office productivity workflow for document creation, spreadsheet au
 ## When to Use This Workflow
 
 Use this workflow when:
+
 - Creating office documents programmatically
 - Automating document workflows
 - Converting between document formats
@@ -31,11 +31,13 @@ Use this workflow when:
 ### Phase 1: Document Creation
 
 #### Skills to Invoke
+
 - `libreoffice-writer` - LibreOffice Writer
 - `docx-official` - Microsoft Word
 - `pdf-official` - PDF handling
 
 #### Actions
+
 1. Design document template
 2. Create document structure
 3. Add content programmatically
@@ -43,6 +45,7 @@ Use this workflow when:
 5. Export to required formats
 
 #### Copy-Paste Prompts
+
 ```
 Use @libreoffice-writer to create ODT documents
 ```
@@ -54,11 +57,13 @@ Use @docx-official to create Word documents
 ### Phase 2: Spreadsheet Automation
 
 #### Skills to Invoke
+
 - `libreoffice-calc` - LibreOffice Calc
 - `xlsx-official` - Excel spreadsheets
 - `googlesheets-automation` - Google Sheets
 
 #### Actions
+
 1. Design spreadsheet structure
 2. Create formulas
 3. Import data
@@ -66,6 +71,7 @@ Use @docx-official to create Word documents
 5. Export reports
 
 #### Copy-Paste Prompts
+
 ```
 Use @libreoffice-calc to create ODS spreadsheets
 ```
@@ -77,12 +83,14 @@ Use @xlsx-official to create Excel reports
 ### Phase 3: Presentation Generation
 
 #### Skills to Invoke
+
 - `libreoffice-impress` - LibreOffice Impress
 - `pptx-official` - PowerPoint
 - `frontend-slides` - HTML slides
 - `nanobanana-ppt-skills` - AI PPT generation
 
 #### Actions
+
 1. Design slide template
 2. Generate slides from data
 3. Add charts and graphics
@@ -90,6 +98,7 @@ Use @xlsx-official to create Excel reports
 5. Export presentations
 
 #### Copy-Paste Prompts
+
 ```
 Use @libreoffice-impress to create ODP presentations
 ```
@@ -105,11 +114,13 @@ Use @frontend-slides to create HTML presentations
 ### Phase 4: Format Conversion
 
 #### Skills to Invoke
+
 - `libreoffice-writer` - Document conversion
 - `libreoffice-calc` - Spreadsheet conversion
 - `pdf-official` - PDF conversion
 
 #### Actions
+
 1. Identify source format
 2. Choose target format
 3. Perform conversion
@@ -117,6 +128,7 @@ Use @frontend-slides to create HTML presentations
 5. Batch process files
 
 #### Copy-Paste Prompts
+
 ```
 Use @libreoffice-writer to convert documents
 ```
@@ -124,11 +136,13 @@ Use @libreoffice-writer to convert documents
 ### Phase 5: Document Automation
 
 #### Skills to Invoke
+
 - `libreoffice-writer` - Mail merge
 - `workflow-automation` - Workflow automation
 - `file-organizer` - File organization
 
 #### Actions
+
 1. Design automation workflow
 2. Create templates
 3. Set up data sources
@@ -136,6 +150,7 @@ Use @libreoffice-writer to convert documents
 5. Distribute outputs
 
 #### Copy-Paste Prompts
+
 ```
 Use @libreoffice-writer to perform mail merge
 ```
@@ -147,11 +162,13 @@ Use @workflow-automation to automate document workflows
 ### Phase 6: Graphics and Diagrams
 
 #### Skills to Invoke
+
 - `libreoffice-draw` - Vector graphics
 - `canvas-design` - Canvas design
 - `mermaid-expert` - Diagram generation
 
 #### Actions
+
 1. Design graphics
 2. Create diagrams
 3. Generate charts
@@ -159,6 +176,7 @@ Use @workflow-automation to automate document workflows
 5. Integrate with documents
 
 #### Copy-Paste Prompts
+
 ```
 Use @libreoffice-draw to create vector graphics
 ```
@@ -170,10 +188,12 @@ Use @mermaid-expert to create diagrams
 ### Phase 7: Database Integration
 
 #### Skills to Invoke
+
 - `libreoffice-base` - LibreOffice Base
 - `database-architect` - Database design
 
 #### Actions
+
 1. Connect to data sources
 2. Create forms
 3. Design reports
@@ -181,6 +201,7 @@ Use @mermaid-expert to create diagrams
 5. Generate output
 
 #### Copy-Paste Prompts
+
 ```
 Use @libreoffice-base to create database reports
 ```
@@ -188,18 +209,21 @@ Use @libreoffice-base to create database reports
 ## Office Application Workflows
 
 ### LibreOffice
+
 ```
 Skills: libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-draw, libreoffice-base
 Formats: ODT, ODS, ODP, ODG, ODB
 ```
 
 ### Microsoft Office
+
 ```
 Skills: docx-official, xlsx-official, pptx-official
 Formats: DOCX, XLSX, PPTX
 ```
 
 ### Google Workspace
+
 ```
 Skills: googlesheets-automation, google-drive-automation, gmail-automation
 Formats: Google Docs, Sheets, Slides
@@ -221,11 +245,13 @@ Formats: Google Docs, Sheets, Slides
 - `database` - Data integration
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

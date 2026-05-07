@@ -7,12 +7,12 @@ id: skill-plotly
 owner: [[orchestrator]]
 ---
 
-
 ---
 name: plotly
 risk: safe
 description: Interactive visualization library. Use when you need hover info, zoom, pan, or web-embeddable charts. Best for dashboards, exploratory analysis, and presentations. For static publication figures use matplotlib or scientific-visualization.
 license: ## When to Use
+
 - You need interactive charts with hover, zoom, pan, or web embedding.
 - You are building dashboards, exploratory analysis notebooks, or presentations that benefit from rich interaction.
 - You want to choose between Plotly Express and Graph Objects for the same visualization task.
@@ -41,7 +41,9 @@ fig.show()
 ## Choosing Between APIs
 
 ### Use Plotly Express (px)
+
 For quick, standard visualizations with sensible defaults:
+
 - Working with pandas DataFrames
 - Creating common chart types (scatter, line, bar, histogram, etc.)
 - Need automatic color encoding and legends
@@ -50,7 +52,9 @@ For quick, standard visualizations with sensible defaults:
 See reference/plotly-express.md for complete guide.
 
 ### Use Graph Objects (go)
+
 For fine-grained control and custom visualizations:
+
 - Chart types not in Plotly Express (3D mesh, isosurface, complex financial charts)
 - Building complex multi-trace figures from scratch
 - Need precise control over individual components
@@ -101,10 +105,13 @@ fig.add_trace(go.Scatter(x=[1, 2], y=[3, 4]), row=1, col=1)
 **Templates:** Apply coordinated styling:
 ```python
 fig = px.scatter(df, x='x', y='y', template='plotly_dark')
+
 # Built-in: plotly_white, plotly_dark, ggplot2, seaborn, simple_white
+
 ```
 
 **Customization:** Control every aspect of appearance:
+
 - Colors (discrete sequences, continuous scales)
 - Fonts and text
 - Axes (ranges, ticks, grids)
@@ -117,6 +124,7 @@ For complete layout and styling options, see reference/layouts-styling.md.
 ### 3. Interactivity
 
 Built-in interactive features:
+
 - Hover tooltips with customizable data
 - Pan and zoom
 - Legend toggling
@@ -126,15 +134,19 @@ Built-in interactive features:
 - Animations
 
 ```python
+
 # Custom hover template
+
 fig.update_traces(
     hovertemplate='<b>%{x}</b><br>Value: %{y:.2f}<extra></extra>'
 )
 
 # Add rangeslider
+
 fig.update_xaxes(rangeslider_visible=True)
 
 # Animations
+
 fig = px.scatter(df, x='x', y='y', animation_frame='year')
 ```
 
@@ -169,12 +181,15 @@ For complete export options, see reference/export-interactivity.md.
 import plotly.express as px
 
 # Scatter plot with trendline
+
 fig = px.scatter(df, x='temperature', y='yield', trendline='ols')
 
 # Heatmap from matrix
+
 fig = px.imshow(correlation_matrix, text_auto=True, color_continuous_scale='RdBu')
 
 # 3D surface plot
+
 import plotly.graph_objects as go
 fig = go.Figure(data=[go.Surface(z=z_data, x=x_data, y=y_data)])
 ```
@@ -182,24 +197,31 @@ fig = go.Figure(data=[go.Surface(z=z_data, x=x_data, y=y_data)])
 ### Statistical Analysis
 
 ```python
+
 # Distribution comparison
+
 fig = px.histogram(df, x='values', color='group', marginal='box', nbins=30)
 
 # Box plot with all points
+
 fig = px.box(df, x='category', y='value', points='all')
 
 # Violin plot
+
 fig = px.violin(df, x='group', y='measurement', box=True)
 ```
 
 ### Time Series and Financial
 
 ```python
+
 # Time series with rangeslider
+
 fig = px.line(df, x='date', y='price')
 fig.update_xaxes(rangeslider_visible=True)
 
 # Candlestick chart
+
 import plotly.graph_objects as go
 fig = go.Figure(data=[go.Candlestick(
     x=df['date'],
@@ -271,11 +293,13 @@ app.run_server(debug=True)
 - Community forum: https://community.plotly.com/
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

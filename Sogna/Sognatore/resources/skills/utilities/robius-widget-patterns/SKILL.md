@@ -11,17 +11,19 @@ id: skill-robius-widget-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Robius Widget Patterns Skill
 
 Best practices for designing reusable Makepad widgets based on Robrix and Moly codebase patterns.
 
 **Source codebases:**
+
 - **Robrix**: Matrix chat client - Avatar, RoomsList, RoomScreen widgets
 - **Moly**: AI chat application - Slot, ChatLine, PromptInput, AdaptiveView widgets
 
 ## When to Use
+
 Use this skill when:
+
 - Creating reusable Makepad widgets
 - Designing widget component APIs
 - Implementing text/image toggle patterns
@@ -430,11 +432,13 @@ impl Widget for ItemsList {
   - Sidebar navigation with radio buttons
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

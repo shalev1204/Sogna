@@ -7,7 +7,6 @@ id: skill-odoo-edi-connector
 owner: [[orchestrator]]
 ---
 
-
 # Odoo EDI Connector
 
 ## Overview
@@ -74,7 +73,6 @@ def process_850(edi_file_path):
 
             # Extract partner (N1 segment — Buyer)
 
-
                         # Extract partner (N1 segment — Buyer)                  
             partner_name = transaction.get_segment('N1')[2] if transaction.get_segment('N1') else "Unknown"                                                                             
             
@@ -138,11 +136,13 @@ IEA*1*{isa_control}~"""
 - ❌ **Don't:** Hardcode trading partner qualifiers — store them in a configuration table per partner.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

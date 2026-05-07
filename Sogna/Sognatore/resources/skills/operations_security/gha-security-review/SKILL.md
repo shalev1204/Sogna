@@ -8,7 +8,6 @@ id: skill-gha-security-review
 owner: [[ops-security]]
 ---
 
-
 <!--
 Attack patterns and real-world examples sourced from the HackerBot Claw campaign analysis
 by StepSecurity (2025): https://www.stepsecurity.io/blog/hackerbot-claw-github-actions-exploitation
@@ -21,6 +20,7 @@ Find exploitable vulnerabilities in GitHub Actions workflows. Every finding MUST
 This skill encodes attack patterns from real GitHub Actions exploits — not generic CI/CD theory.
 
 ## When to Use
+
 - You are reviewing GitHub Actions workflows for exploitable security issues.
 - The task requires tracing a concrete attack path from an external attacker to workflow execution or secret exposure.
 - You need a security review of workflow files, composite actions, or workflow-related scripts with evidence-based findings only.
@@ -46,6 +46,7 @@ Review the workflows provided (file, diff, or repo). Research the codebase as ne
 Only report vulnerabilities exploitable by an **external attacker** — someone **without** write access to the repository. The attacker can open PRs from forks, create issues, and post comments. They cannot push to branches, trigger `workflow_dispatch`, or trigger manual workflows.
 
 **Do not flag** vulnerabilities that require write access to exploit:
+
 - `workflow_dispatch` input injection — requires write access to trigger
 - Expression injection in `push`-only workflows on protected branches
 - `workflow_call` input injection where all callers are internal
@@ -96,6 +97,7 @@ Load references selectively — only what's relevant to the triggers found.
 ### Check 1: Pwn Request
 
 Does the workflow use `pull_request_target` AND check out fork code?
+
 - Look for `actions/checkout` with `ref:` pointing to PR head
 - Look for local actions (`./.github/actions/`) that would come from the fork
 - Check if any `run:` step executes code from the checked-out PR
@@ -103,6 +105,7 @@ Does the workflow use `pull_request_target` AND check out fork code?
 ### Check 2: Expression Injection
 
 Are `${{ }}` expressions used inside `run:` blocks in externally-triggerable workflows?
+
 - Map every `${{ }}` expression in every `run:` step
 - Confirm the value is attacker-controlled (PR title, branch name, comment body — not numeric IDs, SHAs, or repository names)
 - Confirm the expression is in a `run:` block, not `if:`, `with:`, or job-level `env:`
@@ -110,6 +113,7 @@ Are `${{ }}` expressions used inside `run:` blocks in externally-triggerable wor
 ### Check 3: Unauthorized Command Execution
 
 Does an `issue_comment`-triggered workflow execute commands without authorization?
+
 - Is there an `author_association` check?
 - Can any GitHub user trigger the command?
 - Does the command handler also use injectable expressions?
@@ -117,12 +121,14 @@ Does an `issue_comment`-triggered workflow execute commands without authorizatio
 ### Check 4: Credential Escalation
 
 Are elevated credentials (PATs, deploy keys) accessible to untrusted code?
+
 - What's the blast radius of each secret?
 - Could a compromised workflow steal long-lived tokens?
 
 ### Check 5: Config File Poisoning
 
 Does the workflow load configuration from PR-supplied files?
+
 - AI agent instructions: `CLAUDE.md`, `AGENTS.md`, `.cursorrules`
 - Build configuration: `Makefile`, shell scripts
 
@@ -173,11 +179,13 @@ If any link is broken, mark MEDIUM (needs verification) or drop the finding.
 ## Step 4: Report Findings
 
 ````markdown
+
 ## GitHub Actions Security Review
 
 ### Findings
 
 #### [GHA-001] [Title] (Severity: Critical/High/Medium)
+
 - **Workflow**: `.github/workflows/release.yml:15`
 - **Trigger**: `pull_request_target`
 - **Confidence**: HIGH — confirmed through attack path tracing
@@ -187,20 +195,24 @@ If any link is broken, mark MEDIUM (needs verification) or drop the finding.
 - **Fix**: [Code that fixes the issue]
 
 ### Needs Verification
+
 [MEDIUM confidence items with explanation of what to verify]
 
 ### Reviewed and Cleared
+
 [Workflows reviewed and confirmed safe]
 ````
 
 If no findings: "No exploitable vulnerabilities identified. All workflows reviewed and cleared."
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

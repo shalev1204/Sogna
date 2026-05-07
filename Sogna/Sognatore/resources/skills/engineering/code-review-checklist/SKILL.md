@@ -8,7 +8,6 @@ id: skill-code-review-checklist
 owner: [[orchestrator]]
 ---
 
-
 # Code Review Checklist
 
 ## Overview
@@ -29,6 +28,7 @@ Provide a systematic checklist for conducting thorough code reviews. This skill 
 ### Step 1: Understand the Context
 
 Before reviewing code, I'll help you understand:
+
 - What problem does this code solve?
 - What are the requirements?
 - What files were changed and why?
@@ -38,6 +38,7 @@ Before reviewing code, I'll help you understand:
 ### Step 2: Review Functionality
 
 Check if the code works correctly:
+
 - Does it solve the stated problem?
 - Are edge cases handled?
 - Is error handling appropriate?
@@ -47,6 +48,7 @@ Check if the code works correctly:
 ### Step 3: Review Code Quality
 
 Assess code maintainability:
+
 - Is the code readable and clear?
 - Are names descriptive?
 - Is it properly structured?
@@ -56,6 +58,7 @@ Assess code maintainability:
 ### Step 4: Review Security
 
 Check for security issues:
+
 - Are inputs validated?
 - Is sensitive data protected?
 - Are there SQL injection risks?
@@ -65,6 +68,7 @@ Check for security issues:
 ### Step 5: Review Performance
 
 Look for performance issues:
+
 - Are there unnecessary loops?
 - Is database access optimized?
 - Are there memory leaks?
@@ -74,6 +78,7 @@ Look for performance issues:
 ### Step 6: Review Tests
 
 Verify test coverage:
+
 - Are there tests for new code?
 - Do tests cover edge cases?
 - Are tests meaningful?
@@ -85,9 +90,11 @@ Verify test coverage:
 ### Example 1: Functionality Review Checklist
 
 ```markdown
+
 ## Functionality Review
 
 ### Requirements
+
 - [ ] Code solves the stated problem
 - [ ] All acceptance criteria are met
 - [ ] Edge cases are handled
@@ -95,6 +102,7 @@ Verify test coverage:
 - [ ] User input is validated
 
 ### Logic
+
 - [ ] No logical errors or bugs
 - [ ] Conditions are correct (no off-by-one errors)
 - [ ] Loops terminate correctly
@@ -102,6 +110,7 @@ Verify test coverage:
 - [ ] State management is correct
 
 ### Error Handling
+
 - [ ] Errors are caught appropriately
 - [ ] Error messages are clear and helpful
 - [ ] Errors don't expose sensitive information
@@ -135,9 +144,11 @@ function createUser(email, password) {
 ### Example 2: Security Review Checklist
 
 ```markdown
+
 ## Security Review
 
 ### Input Validation
+
 - [ ] All user inputs are validated
 - [ ] SQL injection is prevented (use parameterized queries)
 - [ ] XSS is prevented (escape output)
@@ -145,6 +156,7 @@ function createUser(email, password) {
 - [ ] File uploads are validated (type, size, content)
 
 ### Authentication & Authorization
+
 - [ ] Authentication is required where needed
 - [ ] Authorization checks are present
 - [ ] Passwords are hashed (never stored plain text)
@@ -152,6 +164,7 @@ function createUser(email, password) {
 - [ ] Tokens expire appropriately
 
 ### Data Protection
+
 - [ ] Sensitive data is encrypted
 - [ ] API keys are not hardcoded
 - [ ] Environment variables are used for secrets
@@ -159,6 +172,7 @@ function createUser(email, password) {
 - [ ] Database credentials are secure
 
 ### Dependencies
+
 - [ ] No known vulnerable dependencies
 - [ ] Dependencies are up to date
 - [ ] Unnecessary dependencies are removed
@@ -195,9 +209,11 @@ if (!API_KEY) {
 ### Example 3: Code Quality Review Checklist
 
 ```markdown
+
 ## Code Quality Review
 
 ### Readability
+
 - [ ] Code is easy to understand
 - [ ] Variable names are descriptive
 - [ ] Function names explain what they do
@@ -205,6 +221,7 @@ if (!API_KEY) {
 - [ ] Magic numbers are replaced with constants
 
 ### Structure
+
 - [ ] Functions are small and focused
 - [ ] Code follows DRY principle (Don't Repeat Yourself)
 - [ ] Proper separation of concerns
@@ -212,6 +229,7 @@ if (!API_KEY) {
 - [ ] No dead code or commented-out code
 
 ### Maintainability
+
 - [ ] Code is modular and reusable
 - [ ] Dependencies are minimal
 - [ ] Changes are backwards compatible
@@ -307,12 +325,14 @@ function processOrder(order) {
 ## Complete Review Checklist
 
 ### Pre-Review
+
 - [ ] Read the PR description and linked issues
 - [ ] Understand what problem is being solved
 - [ ] Check if tests pass in CI/CD
 - [ ] Pull the branch and run it locally
 
 ### Functionality
+
 - [ ] Code solves the stated problem
 - [ ] Edge cases are handled
 - [ ] Error handling is appropriate
@@ -320,6 +340,7 @@ function processOrder(order) {
 - [ ] No logical errors
 
 ### Security
+
 - [ ] No SQL injection vulnerabilities
 - [ ] No XSS vulnerabilities
 - [ ] Authentication/authorization is correct
@@ -327,6 +348,7 @@ function processOrder(order) {
 - [ ] No hardcoded secrets
 
 ### Performance
+
 - [ ] No unnecessary database queries
 - [ ] No N+1 query problems
 - [ ] Efficient algorithms used
@@ -334,6 +356,7 @@ function processOrder(order) {
 - [ ] Caching used appropriately
 
 ### Code Quality
+
 - [ ] Code is readable and clear
 - [ ] Names are descriptive
 - [ ] Functions are focused and small
@@ -341,6 +364,7 @@ function processOrder(order) {
 - [ ] Follows project conventions
 
 ### Tests
+
 - [ ] New code has tests
 - [ ] Tests cover edge cases
 - [ ] Tests are meaningful
@@ -348,6 +372,7 @@ function processOrder(order) {
 - [ ] Test coverage is adequate
 
 ### Documentation
+
 - [ ] Code comments explain why, not what
 - [ ] API documentation is updated
 - [ ] README is updated if needed
@@ -355,6 +380,7 @@ function processOrder(order) {
 - [ ] Migration guide provided if needed
 
 ### Git
+
 - [ ] Commit messages are clear
 - [ ] No merge conflicts
 - [ ] Branch is up to date with main
@@ -364,16 +390,20 @@ function processOrder(order) {
 ## Common Pitfalls
 
 ### Problem: Missing Edge Cases
+
 **Symptoms:** Code works for happy path but fails on edge cases
 **Solution:** Ask "What if...?" questions
+
 - What if the input is null?
 - What if the array is empty?
 - What if the user is not authenticated?
 - What if the network request fails?
 
 ### Problem: Security Vulnerabilities
+
 **Symptoms:** Code exposes security risks
 **Solution:** Use security checklist
+
 - Run security scanners (npm audit, Snyk)
 - Check OWASP Top 10
 - Validate all inputs
@@ -381,16 +411,20 @@ function processOrder(order) {
 - Never trust user input
 
 ### Problem: Poor Test Coverage
+
 **Symptoms:** New code has no tests or inadequate tests
 **Solution:** Require tests for all new code
+
 - Unit tests for functions
 - Integration tests for features
 - Edge case tests
 - Error case tests
 
 ### Problem: Unclear Code
+
 **Symptoms:** Reviewer can't understand what code does
 **Solution:** Request improvements
+
 - Better variable names
 - Explanatory comments
 - Smaller functions
@@ -399,6 +433,7 @@ function processOrder(order) {
 ## Review Comment Templates
 
 ### Requesting Changes
+
 ```markdown
 **Issue:** [Describe the problem]
 
@@ -416,6 +451,7 @@ function processOrder(order) {
 ```
 
 ### Asking Questions
+
 ```markdown
 **Question:** [Your question]
 
@@ -425,6 +461,7 @@ function processOrder(order) {
 ```
 
 ### Praising Good Code
+
 ```markdown
 **Nice!** [What you liked]
 
@@ -450,11 +487,13 @@ This is great because [explain why]
 **Pro Tip:** Use a checklist template for every review to ensure consistency and thoroughness. Customize it for your team's specific needs!
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

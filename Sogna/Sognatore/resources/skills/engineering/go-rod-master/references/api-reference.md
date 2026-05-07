@@ -119,6 +119,7 @@ Every `Must*` method has a corresponding error-returning version (without the `M
 | `stealth.JS` | Raw JS string with all stealth evasions |
 
 **What stealth.JS injects:**
+
 - Removes `navigator.webdriver` detection
 - Spoofs WebGL vendor/renderer to real GPU values
 - Fixes Chrome plugin array (`PluginArray` type, count=3)
@@ -155,6 +156,7 @@ page.Call(ctx, "", "Page.setAdBlockingEnabled", map[string]bool{"enabled": true}
 Full CDP protocol reference: https://chromedevtools.github.io/devtools-protocol/
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

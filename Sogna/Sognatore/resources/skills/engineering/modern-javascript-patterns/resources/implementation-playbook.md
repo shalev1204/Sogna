@@ -940,6 +940,7 @@ const first = doubled.next().value;  // Only computes first value
 - **ES6 Features**: http://es6-features.org/
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

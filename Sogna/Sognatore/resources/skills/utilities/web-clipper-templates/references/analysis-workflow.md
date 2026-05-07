@@ -87,6 +87,7 @@ Compare the available data from your analysis with the properties required by th
 - If the Base requires `ingredients` but the page has no Schema or clear list structure, warn the user that this field might need manual entry or a prompt variable.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

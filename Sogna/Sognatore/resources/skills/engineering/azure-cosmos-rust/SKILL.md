@@ -8,7 +8,6 @@ id: skill-azure-cosmos-rust
 owner: [[orchestrator]]
 ---
 
-
 # Azure Cosmos DB SDK for Rust
 
 Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database.
@@ -138,14 +137,17 @@ cargo add azure_data_cosmos --features key_auth
 | crates.io | https://crates.io/crates/azure_data_cosmos |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

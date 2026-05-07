@@ -48,6 +48,7 @@ select status, customer_id, total from orders where status = 'shipped';
 Reference: [Index-Only Scans](https://www.postgresql.org/docs/current/indexes-index-only-scans.html)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

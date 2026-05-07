@@ -33,10 +33,12 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you optimize m
 **Example 4: Full Metadata Package**
 ```
 Hey Claude—I just added the "app-store-optimization" skill. Can you create optimized metadata for both Apple App Store and Google Play Store? Here's my app info:
+
 - Name: TaskFlow
 - Category: Productivity
 - Key features: AI task prioritization, team collaboration, calendar integration
 - Target keywords: task manager, productivity app, team tasks
+
 ```
 
 ### Competitor Analysis
@@ -56,11 +58,13 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you compare my
 **Example 7: Calculate Overall ASO Health**
 ```
 Hey Claude—I just added the "app-store-optimization" skill. Can you calculate my app's ASO health score? Here are my metrics:
+
 - Average rating: 4.2 stars
 - Total ratings: 3,500
 - Keywords in top 10: 3
 - Keywords in top 50: 12
 - Conversion rate: 4.5%
+
 ```
 
 **Example 8: Identify Improvement Areas**
@@ -78,8 +82,10 @@ Hey Claude—I just added the "app-store-optimization" skill. I want to A/B test
 **Example 10: Analyze Test Results**
 ```
 Hey Claude—I just added the "app-store-optimization" skill. Can you analyze my A/B test results?
+
 - Variant A (control): 2,500 visitors, 125 installs
 - Variant B (new icon): 2,500 visitors, 150 installs
+
 Is this statistically significant? Should I implement variant B?
 ```
 
@@ -100,19 +106,23 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you help me tr
 **Example 13: Analyze User Reviews**
 ```
 Hey Claude—I just added the "app-store-optimization" skill. Can you analyze my recent reviews and tell me:
+
 - Overall sentiment (positive/negative ratio)
 - Most common complaints
 - Most requested features
 - Bugs that need immediate fixing
+
 ```
 
 **Example 14: Generate Review Response Templates**
 ```
 Hey Claude—I just added the "app-store-optimization" skill. Can you create professional response templates for:
+
 - Users reporting crashes
 - Feature requests
 - Positive 5-star reviews
 - General complaints
+
 ```
 
 ### Launch Planning
@@ -135,6 +145,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 ## What to Provide
 
 ### For Keyword Research
+
 - App name and category
 - Target audience description
 - Key features and unique value proposition
@@ -142,6 +153,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Geographic markets to target
 
 ### For Metadata Optimization
+
 - Current app name
 - Platform (Apple, Google, or both)
 - Target keywords (prioritized list)
@@ -150,18 +162,21 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Current metadata (for optimization)
 
 ### For Competitor Analysis
+
 - Your app category
 - List of competitor app names or IDs
 - Platform (Apple or Google)
 - Specific aspects to analyze (keywords, visuals, ratings)
 
 ### For ASO Score Calculation
+
 - Metadata quality metrics (title length, description length, keyword density)
 - Rating data (average rating, total ratings, recent ratings)
 - Keyword rankings (top 10, top 50, top 100 counts)
 - Conversion metrics (impression-to-install rate, downloads)
 
 ### For A/B Testing
+
 - Test type (icon, screenshot, title, description)
 - Control variant details
 - Test variant details
@@ -169,18 +184,21 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - For results analysis: visitor and conversion counts for both variants
 
 ### For Localization
+
 - Current market and language
 - Budget level (low, medium, high)
 - Target number of markets
 - Current metadata text for translation
 
 ### For Review Analysis
+
 - Recent reviews (text, rating, date)
 - Platform (Apple or Google)
 - Time period to analyze
 - Specific focus (bugs, features, sentiment)
 
 ### For Launch Planning
+
 - Platform (Apple, Google, or both)
 - Target launch date
 - App category
@@ -189,6 +207,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 ## What You'll Get
 
 ### Keyword Research Output
+
 - Prioritized keyword list with search volume estimates
 - Competition level analysis
 - Relevance scores
@@ -196,6 +215,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Strategic recommendations
 
 ### Metadata Optimization Output
+
 - Optimized titles (multiple options)
 - Optimized descriptions (short and full)
 - Keyword field optimization (Apple)
@@ -204,6 +224,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Before/after comparison
 
 ### Competitor Analysis Output
+
 - Ranked competitors by ASO strength
 - Common keyword patterns
 - Keyword gaps and opportunities
@@ -212,6 +233,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Actionable recommendations
 
 ### ASO Score Output
+
 - Overall score (0-100)
 - Breakdown by category (metadata, ratings, keywords, conversion)
 - Strengths and weaknesses
@@ -219,6 +241,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Expected impact of improvements
 
 ### A/B Test Output
+
 - Test design with hypothesis
 - Required sample size calculation
 - Duration estimates
@@ -227,6 +250,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Learnings and insights
 
 ### Localization Output
+
 - Prioritized target markets
 - Estimated translation costs
 - ROI projections
@@ -235,6 +259,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Phased implementation plan
 
 ### Review Analysis Output
+
 - Sentiment distribution (positive/neutral/negative)
 - Common themes and topics
 - Top issues requiring fixes
@@ -243,6 +268,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 - Trend analysis over time
 
 ### Launch Planning Output
+
 - Platform-specific checklists (Apple, Google, Universal)
 - Timeline with milestones
 - Compliance validation
@@ -266,15 +292,19 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 ## Common Workflows
 
 ### New App Launch
+
 1. Keyword research → Competitor analysis → Metadata optimization → Pre-launch checklist → Launch timing optimization
 
 ### Improving Existing App
+
 1. ASO score calculation → Identify gaps → Metadata optimization → A/B testing → Review analysis → Implement changes
 
 ### International Expansion
+
 1. Localization planning → Market prioritization → Metadata translation → ROI analysis → Phased rollout
 
 ### Ongoing Optimization
+
 1. Monthly keyword ranking tracking → Quarterly metadata updates → Continuous A/B testing → Review monitoring → Seasonal campaigns
 
 ## Need Help?
@@ -288,6 +318,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you create a c
 The skill can handle comprehensive, multi-phase ASO projects as well as specific tactical optimizations.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

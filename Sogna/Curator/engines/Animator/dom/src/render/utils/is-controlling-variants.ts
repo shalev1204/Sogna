@@ -15,3 +15,6 @@ export function IsControllingVariants(props: SognaflowNodeOptions) {
 export function IsVariantNode(props: SognaflowNodeOptions) {
     return Boolean(IsControllingVariants(props) || props.variants)
 }
+
+export const isControllingVariants = IsControllingVariants
+export const isVariantNode = IsVariantNode

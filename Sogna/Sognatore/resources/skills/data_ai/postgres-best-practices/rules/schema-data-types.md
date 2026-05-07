@@ -51,6 +51,7 @@ Key guidelines:
 Reference: [Data Types](https://www.postgresql.org/docs/current/datatype.html)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

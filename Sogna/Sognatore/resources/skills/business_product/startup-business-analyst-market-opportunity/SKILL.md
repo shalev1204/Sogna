@@ -12,7 +12,6 @@ id: skill-startup-business-analyst-market-opportunity
 owner: [[prod-pm]]
 ---
 
-
 # Market Opportunity Analysis
 
 Generate a comprehensive market opportunity analysis for a startup, including Total Addressable Market (TAM), Serviceable Available Market (SAM), and Serviceable Obtainable Market (SOM) calculations using both bottom-up and top-down methodologies.
@@ -37,6 +36,7 @@ Generate a comprehensive market opportunity analysis for a startup, including To
 ## What This Command Does
 
 This command guides through an interactive market sizing process to:
+
 1. Define the target market and customer segments
 2. Gather relevant market data
 3. Calculate TAM using bottom-up methodology
@@ -52,6 +52,7 @@ When this command is invoked, follow these steps:
 ### Step 1: Gather Context
 
 Ask the user for essential information:
+
 - **Product/Service Description:** What problem is being solved?
 - **Target Customers:** Who is the ideal customer? (industry, size, geography)
 - **Business Model:** How does pricing work? (subscription, transaction, etc.)
@@ -61,6 +62,7 @@ Ask the user for essential information:
 ### Step 2: Activate market-sizing-analysis Skill
 
 The market-sizing-analysis skill provides comprehensive methodologies. Reference it for:
+
 - Bottom-up calculation frameworks
 - Top-down validation approaches
 - Industry-specific templates
@@ -69,18 +71,21 @@ The market-sizing-analysis skill provides comprehensive methodologies. Reference
 ### Step 3: Conduct Bottom-Up Analysis
 
 **For B2B/SaaS:**
+
 1. Define customer segments (company size, industry, use case)
 2. Estimate number of companies in each segment
 3. Determine average contract value (ACV) per segment
 4. Calculate TAM: Σ (Segment Size × ACV)
 
 **For Consumer/Marketplace:**
+
 1. Define target user demographics
 2. Estimate total addressable users
 3. Determine average revenue per user (ARPU)
 4. Calculate TAM: Total Users × ARPU × Frequency
 
 **For Transactions/E-commerce:**
+
 1. Estimate total transaction volume (GMV)
 2. Determine take rate or margin
 3. Calculate TAM: Total GMV × Take Rate
@@ -88,11 +93,13 @@ The market-sizing-analysis skill provides comprehensive methodologies. Reference
 ### Step 4: Gather Market Data
 
 Use available tools to research:
+
 - **WebSearch:** Find industry reports, market size estimates, public company data
 - **Cite all sources** with URLs and publication dates
 - **Document assumptions** clearly
 
 Recommended data sources (from skill):
+
 - Government data (Census, BLS)
 - Industry reports (Gartner, Forrester, Statista)
 - Public company filings (10-K reports)
@@ -102,6 +109,7 @@ Recommended data sources (from skill):
 ### Step 5: Top-Down Validation
 
 Validate bottom-up calculation:
+
 1. Find total market category size from research
 2. Apply geographic filters
 3. Apply segment/product filters
@@ -112,6 +120,7 @@ If variance > 30%, investigate and explain differences.
 ### Step 6: Calculate SAM
 
 Apply realistic filters to narrow TAM:
+
 - **Geographic:** Regions actually serviceable
 - **Product Capability:** Features needed to serve
 - **Market Readiness:** Customers ready to adopt
@@ -127,10 +136,12 @@ SAM = TAM × Geographic % × Product Fit % × Market Readiness %
 Calculate realistic obtainable market share:
 
 **Conservative Approach (Recommended):**
+
 - Year 3: 2-3% of SAM
 - Year 5: 4-6% of SAM
 
 **Consider:**
+
 - Competitive intensity
 - Available resources (funding, team)
 - Go-to-market effectiveness
@@ -141,49 +152,58 @@ Calculate realistic obtainable market share:
 Generate a comprehensive markdown report with:
 
 **Section 1: Executive Summary**
+
 - Market opportunity in one paragraph
 - TAM/SAM/SOM headline numbers
 
 **Section 2: Market Definition**
+
 - Problem being solved
 - Target customer profile
 - Geographic scope
 - Time horizon
 
 **Section 3: Bottom-Up Analysis**
+
 - Customer segment breakdown
 - Segment sizing with sources
 - TAM calculation with formula
 - Assumptions documented
 
 **Section 4: Top-Down Validation**
+
 - Industry category and size
 - Filter application
 - Validated TAM
 - Comparison to bottom-up
 
 **Section 5: SAM Calculation**
+
 - Filters applied with rationale
 - SAM formula and result
 - Segment-level breakdown
 
 **Section 6: SOM Projection**
+
 - Market share assumptions
 - Year 3 and Year 5 estimates
 - Customer count implications
 - Revenue projections
 
 **Section 7: Market Growth**
+
 - Industry growth rate (CAGR)
 - Key growth drivers
 - 5-year market evolution
 
 **Section 8: Validation and Sanity Checks**
+
 - Public company comparisons
 - Customer count validation
 - Competitive context
 
 **Section 9: Investment Thesis**
+
 - Market opportunity assessment
 - Key positives and risks
 - Venture-scale potential
@@ -192,6 +212,7 @@ Generate a comprehensive markdown report with:
 ### Step 9: Save Report
 
 Offer to save the report as a markdown file:
+
 - Suggest filename: `market-opportunity-analysis-YYYY-MM-DD.md`
 - Use Write tool to create file
 - Confirm file location with user
@@ -199,6 +220,7 @@ Offer to save the report as a markdown file:
 ## Tips for Best Results
 
 **Do:**
+
 - Start with bottom-up (most credible)
 - Always triangulate with top-down
 - Cite all data sources
@@ -208,6 +230,7 @@ Offer to save the report as a markdown file:
 - Explain any data gaps or limitations
 
 **Don't:**
+
 - Rely solely on top-down
 - Cherry-pick optimistic data
 - Claim >10% SOM without strong justification
@@ -237,6 +260,7 @@ What's your pricing model?
 ## Integration with Other Commands
 
 This command pairs well with:
+
 - `/financial-projections` - Use SOM to build revenue model
 - `/business-case` - Include market sizing in business case
 
@@ -248,11 +272,13 @@ This command pairs well with:
 - Conservative estimates build credibility with investors
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

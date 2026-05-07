@@ -4,22 +4,25 @@ description: "Integracao completa com Amazon Alexa para criar skills de voz inte
 risk: critical
 date_added: '2026-03-06'
 tags:
+
 - voice
 - alexa
 - aws
 - smart-home
 - iot
+
 tools:
+
 - claude-code
 - Sognatore
 - cursor
 - gemini-cli
 - codex-cli
+
 version: 1.0.0
 id: skill-amazon-alexa
 owner: [[orchestrator]]
 ---
-
 
 # AMAZON ALEXA — Voz Inteligente com Claude
 
@@ -53,9 +56,11 @@ Integracao completa com Amazon Alexa para criar skills de voz inteligentes, tran
     Fala          Transcricao      Logica          Inteligencia
       ↑               ↑               ↑                ↑
    Usuario         Intent        Handler          Anthropic
+
                                + DynamoDB
                                + Polly TTS
                                + APL Visual
+
 ```
 
 ## Componentes Da Arquitetura Auri
@@ -209,7 +214,6 @@ def launch_handler(handler_input: HandlerInput) -> Response:
     greeting = f"Oi{', ' + name if name else ''}! Eu sou a Auri. Como posso ajudar?"
     return (handler_input.response_builder
             .speak(greeting).ask("Em que posso ajudar?").response)
-
 
 @sb.request_handler(can_handle_func=is_intent_name("ChatIntent"))
 def chat_handler(handler_input: HandlerInput) -> Response:
@@ -663,11 +667,13 @@ def get_secret(secret_name):
 - Not providing enough project context for accurate analysis
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -2,20 +2,22 @@
 name: burpsuite-project-parser
 description: Searches and explores Burp Suite project files (.burp) from the command line. Use when searching response headers or bodies with regex patterns, extracting security audit findings, dumping proxy history or site map data, or analyzing HTTP traffic captured in a Burp project.
 allowed-tools:
+
   - Bash
   - Read
+
 risk: offensive
 version: 1.0.0
 id: skill-burpsuite-project-parser
 owner: [[orchestrator]]
 ---
 
-
 # Burp Project Parser
 
 Search and extract data from Burp Suite project files using the burpsuite-project-file-parser extension.
 
 ## When to Use
+
 - Searching response headers or bodies with regex patterns
 - Extracting security audit findings from Burp projects
 - Dumping proxy history or site map data
@@ -26,10 +28,12 @@ Search and extract data from Burp Suite project files using the burpsuite-projec
 This skill **delegates parsing to Burp Suite Professional** - it does not parse .burp files directly.
 
 **Required:**
+
 1. **Burp Suite Professional** - Must be installed ([portswigger.net](https://portswigger.net/burp/pro))
 2. **burpsuite-project-file-parser extension** - Provides CLI functionality
 
 **Install the extension:**
+
 1. Download from [github.com/BuffaloWill/burpsuite-project-file-parser](https://github.com/BuffaloWill/burpsuite-project-file-parser)
 2. In Burp Suite: Extender → Extensions → Add
 3. Select the downloaded JAR file
@@ -42,6 +46,7 @@ Use the wrapper script:
 ```
 
 The script uses environment variables for platform compatibility:
+
 - `BURP_JAVA`: Path to Java executable
 - `BURP_JAR`: Path to burpsuite_pro.jar
 
@@ -69,11 +74,14 @@ See [Platform Configuration](#platform-configuration) for setup instructions.
 **Start with headers, not bodies:**
 
 ```bash
+
 # GOOD - headers only, safe to retrieve
+
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory.request.headers | head -c 50000
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory.response.headers | head -c 50000
 
 # BAD - full records include bodies, can be gigabytes
+
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory  # NEVER DO THIS
 ```
 
@@ -81,11 +89,14 @@ See [Platform Configuration](#platform-configuration) for setup instructions.
 **Only fetch bodies for specific URLs after reviewing headers, and ALWAYS truncate:**
 
 ```bash
+
 # 1. First, find interesting URLs from headers
+
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory.response.headers | \
   jq -r 'select(.headers | test("text/html")) | .url' | head -n 20
 
 # 2. Then search bodies with targeted regex - MUST truncate body to 1000 chars
+
 {baseDir}/scripts/burp-search.sh project.burp "responseBody='.*specific-pattern.*'" | \
   head -n 10 | jq -c '.body = (.body[:1000] + "...[TRUNCATED]")'
 ```
@@ -95,6 +106,7 @@ See [Platform Configuration](#platform-configuration) for setup instructions.
 ## Regex Search Operations
 
 ### Search Response Headers
+
 ```bash
 responseHeader='.*regex.*'
 ```
@@ -106,13 +118,16 @@ responseHeader='.*(nginx|Apache|Servlet).*' | head -c 50000
 ```
 
 ### Search Response Bodies
+
 ```bash
 responseBody='.*regex.*'
 ```
 **MANDATORY: Always truncate body content to 1000 chars max.** Response bodies can be megabytes each.
 
 ```bash
+
 # REQUIRED format - always truncate .body field
+
 {baseDir}/scripts/burp-search.sh project.burp "responseBody='.*<form.*action.*'" | \
   head -n 10 | jq -c '.body = (.body[:1000] + "...[TRUNCATED]")'
 ```
@@ -122,6 +137,7 @@ responseBody='.*regex.*'
 ## Other Operations
 
 ### Extract Audit Items
+
 ```bash
 auditItems
 ```
@@ -130,14 +146,17 @@ Returns all security findings. Output includes: name, severity, confidence, host
 **Note:** Audit items are small (no bodies) - safe to retrieve with `head -n 100`.
 
 ### Dump Proxy History (AVOID)
+
 ```bash
 proxyHistory
 ```
 **NEVER use this directly.** Use sub-component filters instead:
+
 - `proxyHistory.request.headers`
 - `proxyHistory.response.headers`
 
 ### Dump Site Map (AVOID)
+
 ```bash
 siteMap
 ```
@@ -152,7 +171,9 @@ siteMap
 Before any search, check BOTH record count AND byte size:
 
 ```bash
+
 # Check record count AND total bytes - never skip this step
+
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory | wc -cl
 {baseDir}/scripts/burp-search.sh project.burp "responseHeader='.*Server.*'" | wc -cl
 {baseDir}/scripts/burp-search.sh project.burp auditItems | wc -cl
@@ -174,12 +195,14 @@ The `wc -cl` output shows: `<bytes> <lines>` (e.g., `524288 42` means 512KB acro
 If count/size is too high:
 
 1. **Use sub-component filters** (see table above):
+
    ```bash
    # Instead of: proxyHistory (gigabytes)
    # Use: proxyHistory.request.headers (kilobytes)
    ```
 
 2. **Narrow regex patterns:**
+
    ```bash
    # Too broad (matches everything):
    responseHeader='.*'
@@ -190,6 +213,7 @@ If count/size is too high:
    ```
 
 3. **Filter with jq before retrieving:**
+
    ```bash
    # Get only specific content types
    {baseDir}/scripts/burp-search.sh project.burp proxyHistory.response.headers | \
@@ -201,25 +225,32 @@ If count/size is too high:
 Even after narrowing, always pipe through truncation:
 
 ```bash
+
 # ALWAYS use head -c to limit total bytes (max 50KB)
+
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory.request.headers | head -c 50000
 
 # For body searches, truncate each JSON object's body field:
+
 {baseDir}/scripts/burp-search.sh project.burp "responseBody='pattern'" | \
   head -n 20 | jq -c '.body = (.body | if length > 1000 then .[:1000] + "...[TRUNCATED]" else . end)'
 
 # Limit both record count AND byte size:
+
 {baseDir}/scripts/burp-search.sh project.burp auditItems | head -n 50 | head -c 50000
 ```
 
 **Hard limits to enforce:**
+
 - `head -c 50000` (50KB max) on ALL output
 - **Truncate `.body` fields to 1000 chars - MANDATORY, no exceptions**
+
   ```bash
   jq -c '.body = (.body[:1000] + "...[TRUNCATED]")'
   ```
 
 **Never run these without counting first AND truncating:**
+
 - `proxyHistory` / `siteMap` (full dumps - always use sub-component filters)
 - `responseBody='...'` searches (bodies can be megabytes each)
 - Any broad regex like `.*` or `.+`
@@ -229,21 +260,25 @@ Even after narrowing, always pipe through truncation:
 1. **Identify scope** - What are you looking for? (specific vuln type, endpoint, header pattern)
 
 2. **Search audit items first** - Start with Burp's findings:
+
    ```bash
    {baseDir}/scripts/burp-search.sh project.burp auditItems | jq 'select(.severity == "High")'
    ```
 
 3. **Check confidence scores** - Filter for actionable findings:
+
    ```bash
    ... | jq 'select(.confidence == "Certain" or .confidence == "Firm")'
    ```
 
 4. **Extract affected URLs** - Get the attack surface:
+
    ```bash
    ... | jq -r '.url' | sort -u
    ```
 
 5. **Search raw traffic for context** - Examine actual requests/responses:
+
    ```bash
    {baseDir}/scripts/burp-search.sh project.burp "responseBody='pattern'"
    ```
@@ -267,6 +302,7 @@ A "High severity, Tentative confidence" finding is frequently a false positive. 
 ### When Proxy History is Incomplete
 
 Proxy history only contains what Burp captured. It may be missing traffic due to:
+
 - **Scope filters** excluding domains
 - **Intercept settings** dropping requests
 - **Browser traffic** not routed through Burp proxy
@@ -276,6 +312,7 @@ If you don't find expected traffic, check Burp's scope and proxy settings in the
 ### HTTP Body Encoding
 
 Response bodies may be gzip compressed, chunked, or use non-UTF8 encoding. Regex patterns that work on plaintext may silently fail on encoded responses. If searches return fewer results than expected:
+
 - Check if responses are compressed
 - Try broader patterns or search headers first
 - Use Burp's UI to inspect raw vs rendered response
@@ -363,11 +400,13 @@ If not using the wrapper script, invoke directly:
 ```
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

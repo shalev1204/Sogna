@@ -312,19 +312,24 @@ Project: _______________
 Platform: iOS / Android / Both
 
 1. Default pattern I will NOT use in this project:
+
    └── _______________
    
 2. Context-specific focus for this project:
+
    └── _______________
 
 3. Platform-specific differences I will implement:
+
    └── iOS: _______________
    └── Android: _______________
 
 4. Area I will specifically optimize for performance:
+
    └── _______________
 
 5. Unique challenge of this project:
+
    └── _______________
 
 🧠 If I can't fill this commitment → I don't understand the project well enough.

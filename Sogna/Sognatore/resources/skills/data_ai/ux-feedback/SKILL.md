@@ -13,7 +13,6 @@ id: skill-ux-feedback
 owner: [[orchestrator]]
 ---
 
-
 # UX Feedback
 
 ## Overview
@@ -21,7 +20,9 @@ owner: [[orchestrator]]
 Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill ensures data-dependent UI does not stop at the happy path. It adds the four core feedback states every serious product needs: loading, empty, error, and success.
 
 ## When to Use
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
+
 - Use when a component or page fetches, mutates, or depends on async data
 - Use when a flow currently renders only the success path
 - Use when a card, list, or page needs better state communication
@@ -48,6 +49,7 @@ Use toasts or equivalent lightweight confirmation for completed actions. Add und
 ## Output
 
 Return:
+
 1. The data-dependent areas identified
 2. The loading, empty, error, and success states added for each one
 3. Any reusable empty-state or toast patterns created
@@ -66,11 +68,13 @@ Return:
 - [Source skill](https://github.com/bitjaru/styleseed/blob/main/seeds/toss/.claude/skills/ux-feedback/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

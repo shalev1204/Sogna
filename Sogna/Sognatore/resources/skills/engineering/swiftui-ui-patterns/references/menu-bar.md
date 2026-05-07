@@ -108,6 +108,7 @@ struct ItemCommands: Commands {
 - Don’t use menu items as the only discoverable entry point for critical features.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

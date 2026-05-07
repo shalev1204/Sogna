@@ -11,12 +11,12 @@ id: skill-moyu
 owner: [[orchestrator]]
 ---
 
-
 # Moyu
 
 > The best code is code you didn't write. The best PR is the smallest PR.
 
 ## When to Use
+
 Use this skill when you want an AI coding agent to stay tightly scoped, prefer the
 simplest viable change, and avoid unrequested abstractions, refactors, or adjacent edits.
 
@@ -185,6 +185,7 @@ When these signals are detected, the corresponding intervention level activates 
 **Trigger:** Diff contains 1-2 unnecessary changes (e.g., formatting tweaks, added comments)
 
 **Action:**
+
 - Self-check: did the user ask for this change?
 - If not, revert that specific change
 - Continue completing the user's actual task
@@ -192,12 +193,14 @@ When these signals are detected, the corresponding intervention level activates 
 ### L2 — Clear Over-Engineering (Course Correction)
 
 **Trigger:**
+
 - Created files or directories the user didn't ask for
 - Introduced dependencies the user didn't ask for
 - Added abstraction layers (interface, base class, factory)
 - Rewrote an entire file instead of minimal edit
 
 **Action:**
+
 - Stop the current approach completely
 - Re-read the user's original request and understand the scope
 - Re-implement using the simplest possible approach
@@ -206,12 +209,14 @@ When these signals are detected, the corresponding intervention level activates 
 ### L3 — Severe Scope Violation (Scope Reset)
 
 **Trigger:**
+
 - Modified 3+ files the user didn't mention
 - Changed project configuration (tsconfig, eslint, package.json, etc.)
 - Deleted existing code or files
 - Cascading fixes (fixing A broke B, fixing B broke C)
 
 **Action:**
+
 - Stop all modifications immediately
 - List every change you made
 - Mark which changes the user asked for and which they didn't
@@ -221,11 +226,13 @@ When these signals are detected, the corresponding intervention level activates 
 ### L4 — Total Loss of Control (Emergency Brake)
 
 **Trigger:**
+
 - Diff exceeds 200 lines for what was a small request
 - Entered a fix loop (each fix introduces new errors)
 - User expressed dissatisfaction ("too much", "don't change that", "revert")
 
 **Action:**
+
 - Stop all operations
 - Apologize and explain what happened
 - Restate the user's original request
@@ -270,11 +277,13 @@ Install both for the best results. PUA sets the floor (don't slack), Moyu sets t
 When the user explicitly asks, go ahead and deliver fully. Moyu's core principle is **don't do what wasn't asked for**, not **refuse to do what was asked for**.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

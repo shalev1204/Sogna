@@ -8,13 +8,13 @@ id: skill-nodejs-best-practices
 owner: [[orchestrator]]
 ---
 
-
 # Node.js Best Practices
 
 > Principles and decision-making for Node.js development in 2025.
 > **Learn to THINK, not memorize code patterns.**
 
 ## When to Use
+
 Use this skill when making Node.js architecture decisions, choosing frameworks, designing async patterns, or applying security and deployment best practices.
 
 ---
@@ -63,6 +63,7 @@ What are you building?
 | **Learning curve** | Low | Medium | Low |
 
 ### Selection Questions to Ask:
+
 1. What's the deployment target?
 2. Is cold start time critical?
 3. Does team have existing experience?
@@ -130,11 +131,13 @@ Request Flow:
 ```
 
 ### Why This Matters:
+
 - **Testability**: Mock layers independently
 - **Flexibility**: Swap database without touching business logic
 - **Clarity**: Each layer has single responsibility
 
 ### When to Simplify:
+
 - Small scripts → Single file OK
 - Prototypes → Less structure acceptable
 - Always ask: "Will this grow?"
@@ -307,6 +310,7 @@ node --test src/**/*.test.ts
 ## 10. Anti-Patterns to Avoid
 
 ### ❌ DON'T:
+
 - Use Express for new edge projects (use Hono)
 - Use sync methods in production code
 - Put business logic in controllers
@@ -316,6 +320,7 @@ node --test src/**/*.test.ts
 - Block event loop with CPU work
 
 ### ✅ DO:
+
 - Choose framework based on context
 - Ask user for preferences when unclear
 - Use layered architecture for growing projects
@@ -341,11 +346,13 @@ Before implementing:
 > **Remember**: Node.js best practices are about decision-making, not memorizing patterns. Every project deserves fresh consideration based on its requirements.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

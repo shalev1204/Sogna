@@ -15,7 +15,6 @@ id: skill-lambdatest-agent-skills
 owner: [[eng-qa]]
 ---
 
-
 # LambdaTest Agent Skills — Test Automation Registry (46 Skills)
 
 ## Overview
@@ -23,6 +22,7 @@ owner: [[eng-qa]]
 This skill is a curated index of 46 production-grade test automation skills sourced from the [LambdaTest/agent-skills](https://github.com/LambdaTest/agent-skills) repository. It teaches AI coding assistants how to write, structure, and execute test automation code across every major framework and 15+ programming languages. Instead of generating generic test code, the AI becomes a senior QA automation architect that understands correct project structure, dependency versions, cloud execution, CI/CD integration, and common debugging patterns for each framework.
 
 This skill adapts material from an external GitHub repository:
+
 - `source_repo: LambdaTest/agent-skills`
 - `source_type: community`
 
@@ -209,18 +209,23 @@ The skill generates a `conftest.py` with shared fixtures, parametrized test case
 ## Common Pitfalls
 
 - **Problem:** Tests pass locally but fail on CI
+
   **Solution:** Ensure headless mode is enabled in CI, and that browser versions match between local and CI environments. Use the framework's built-in CI detection where available.
 
 - **Problem:** Flaky tests due to timing issues
+
   **Solution:** Replace `sleep()` with explicit waits — `waitForSelector` in Playwright, `WebDriverWait` in Selenium, `cy.get().should()` in Cypress.
 
 - **Problem:** Cloud tests fail with authentication errors
+
   **Solution:** Verify `LT_USERNAME` and `LT_ACCESS_KEY` are correctly set as environment variables and match the credentials on the LambdaTest dashboard.
 
 - **Problem:** Wrong browser capabilities for cloud execution
+
   **Solution:** Use the LambdaTest Capabilities Generator at https://www.lambdatest.com/capabilities-generator/ to get the correct capability object for your target browser and OS.
 
 - **Problem:** Mobile tests fail with "device not found"
+
   **Solution:** For local runs, verify the emulator/simulator is running and `adb devices` (Android) or Simulator is active (iOS). For cloud runs, check the device name matches exactly what LambdaTest supports.
 
 ## Related Skills
@@ -231,6 +236,7 @@ The skill generates a `conftest.py` with shared fixtures, parametrized test case
 - `@debugging-strategies` — Use when diagnosing systematic test failures
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

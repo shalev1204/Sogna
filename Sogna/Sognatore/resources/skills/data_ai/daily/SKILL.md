@@ -11,8 +11,8 @@ id: skill-daily
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use
+
 - You are building a real-time voice or multimodal AI application that uses Daily or Pipecat-style transports.
 - You need guidance on low-latency audio, video, text, and AI service orchestration in one pipeline.
 - You want a capability reference before choosing services, transports, or workflow patterns for an interactive agent.
@@ -86,7 +86,9 @@ Agents can integrate with 20+ LLM providers including OpenAI, Anthropic, Google 
 Agents can enable LLMs to call external functions and APIs during conversations:
 
 ```python
+
 # Define functions using standard schema
+
 weather_function = FunctionSchema(
     name="get_current_weather",
     description="Get the current weather in a location",
@@ -95,6 +97,7 @@ weather_function = FunctionSchema(
 )
 
 # Register function handlers
+
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 async def fetch_weather(params: FunctionCallParams):
     location = params.arguments.get("location")
@@ -313,11 +316,13 @@ Pipecat integrates with:
 > For additional documentation and navigation, see: https://docs.pipecat.ai/llms.txt
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

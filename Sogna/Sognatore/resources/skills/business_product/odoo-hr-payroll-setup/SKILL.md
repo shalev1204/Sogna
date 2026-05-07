@@ -7,7 +7,6 @@ id: skill-odoo-hr-payroll-setup
 owner: [[prod-pm]], [[biz-hr]]
 ---
 
-
 # Odoo HR & Payroll Setup
 
 ## Overview
@@ -109,6 +108,7 @@ Employer taxes (e.g., FUTA, SUTA) post as separate journal entries.
 - **Expense reimbursements** via payslip (e.g., mileage, home office) require a custom salary rule input and are not covered in standard HR Payroll documentation.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -8,7 +8,6 @@ id: skill-seo-aeo-landing-page-writer
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-
 # SEO-AEO Landing Page Writer
 
 ## Overview
@@ -27,13 +26,17 @@ Part of the [SEO-AEO Engine](https://github.com/mrprewsh/seo-aeo-engine).
 ## How It Works
 
 ### Step 1: Map Inputs
+
 Extract product name, audience, primary keyword, pain points, features, benefits, USPs, social proof, and CTAs. Map every feature to a user outcome before writing any copy.
 
 ### Step 2: Write AEO Extraction Sentence
+
 Write one 25–40 word sentence that answers "What is [product]?" — standalone, no jargon, placed in a blockquote immediately after the H1. This is the sentence AI engines extract.
 
 ### Step 3: Follow the Narrative Arc
+
 Write sections in this exact order:
+
 1. Hero — H1 + AEO sentence + CTA
 2. Problem — audience pain, no product mention yet
 3. Solution — introduce product as the answer
@@ -47,11 +50,13 @@ Write sections in this exact order:
 11. Final CTA
 
 ### Step 4: Run SEO and AEO Checklists
+
 Verify keyword placement, heading hierarchy, FAQ count, AEO block presence, and meta description placeholder before outputting.
 
 ## Examples
 
 ### Example 1: Hero Section Output
+
 Ship Faster With Your Remote Team
 
 Syncro is a remote-first project management platform that helps
@@ -63,6 +68,7 @@ scattered spreadsheets.
 "4,000+ remote teams" · "40% fewer status meetings" · "4.8/5 on G2"
 
 ### Example 2: FAQ Section Output
+
 Q: What is Syncro?
 A: Syncro is a remote-first project management platform for
 distributed engineering teams. It centralises task tracking,
@@ -84,9 +90,11 @@ users. A 14-day free trial is available — no credit card required.
 ## Common Pitfalls
 
 - **Problem:** Product mentioned in the pain section
+
   **Solution:** The pain section exists to build empathy. Save the product introduction for the solution section.
 
 - **Problem:** FAQ answers are too long to be extracted by AI engines
+
   **Solution:** Every FAQ answer must be under 50 words and self-contained.
 
 ## Related Skills
@@ -101,11 +109,13 @@ users. A 14-day free trial is available — no credit card required.
 - [Full Landing Page Writer SKILL.md](https://github.com/mrprewsh/seo-aeo-engine/blob/main/.agent/skills/landing-page-writer/SKILL.md)
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

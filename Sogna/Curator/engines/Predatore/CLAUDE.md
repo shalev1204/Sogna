@@ -23,41 +23,53 @@ Mode: Activated via `Sognatore predatore` which sets `PREDATORE_LOCAL=1`.
 ### Usage via Sogna
 
 ```bash
+
 # Run a pentest via the Sognatore orchestrator
+
 node Sognatore.js predatore start -u <url> -r /path/to/repo
 ```
 
 ### Local Native Start
 
 ```bash
+
 # Predatore-specific usage (inside toolkit/engines/predatore)
+
 ./predatore start -u <url> -r /path/to/repo
 ```
 
 ### Common Commands
 
 ```bash
+
 # Setup (credential configuration)
+
 npx @Sogna/Predatore setup
 
 # Workspaces & Resume
+
 ./predatore start -u <url> -r my-repo -w my-audit    # New named workspace
 ./predatore start -u <url> -r my-repo -w my-audit    # Resume (same command)
 ./predatore workspaces                                 # List all workspaces
 
 # Monitor
+
 ./predatore logs <workspace>            # Tail workflow log
 ./predatore status                      # Show running workers
+
 # Temporal Web UI: http://localhost:8233
 
 # Stop
+
 ./predatore stop                        # Preserves workflow data
 ./predatore stop --clean                # Full cleanup including volumes (confirms first)
 
 # Image management
+
 ./predatore build [--no-cache]          # Build worker image locally
 
 # Build TypeScript (development)
+
 pnpm run build                       # Build all packages via Turborepo
 pnpm run check                       # Type-check all packages
 pnpm biome:fix                       # Auto-fix lint, format, and import sorting
@@ -211,12 +223,16 @@ Comments must be **timeless** — no references to this conversation, refactorin
 - `/** JSDoc */` — file headers (after license) and exported functions/interfaces
 
 - `// N. Description` — numbered sequential steps inside function bodies. Use when a
+
   function has 3+ distinct phases where at least one isn't immediately obvious from the
   code. Each step marks the start of a logical phase. Reference: `AgentExecutionService.execute`
   (steps 1-9) and `injectModelIntoReport` (steps 1-5)
+
 - `// === Section ===` — high-level dividers between groups of functions in long files,
+
   or to label major branching/classification blocks (e.g., `// === SPENDING CAP SAFEGUARD ===`).
   Not for sequential steps inside function bodies — use numbered steps for that
+
 - `// NOTE:` / `// WARNING:` / `// IMPORTANT:` — gotchas and constraints
 
 **Never:** obvious comments, conversation references ("as discussed"), history ("moved from X")

@@ -31,9 +31,11 @@ You are a compliance expert specializing in regulatory requirements for software
 - Protect sensitive data and limit access to audit artifacts.
 
 ## Context
+
 The user needs to ensure their application meets regulatory requirements and industry standards. Focus on practical implementation of compliance controls, automated monitoring, and audit trail generation.
 
 ## Requirements
+
 $ARGUMENTS
 
 ## Instructions
@@ -269,7 +271,9 @@ class DataPortabilityService:
 
 **Privacy by Design**
 ```python
+
 # Implement privacy by design principles
+
 class PrivacyByDesign:
     def implement_data_minimization(self):
         """
@@ -333,7 +337,9 @@ class SOC2SecurityControls:
         """
         controls = {
             'authentication': '''
+
 # Multi-factor authentication
+
 class MFAEnforcement:
     def enforce_mfa(self, user, resource_sensitivity):
         if resource_sensitivity == 'high':
@@ -361,7 +367,9 @@ class MFAEnforcement:
         return all(factors)
 ''',
             'authorization': '''
+
 # Role-based access control
+
 class RBACAuthorization:
     def __init__(self):
         self.roles = {
@@ -386,7 +394,9 @@ class RBACAuthorization:
         return False
 ''',
             'encryption': '''
+
 # Encryption at rest and in transit
+
 class EncryptionControls:
     def __init__(self):
         self.kms = KeyManagementService()
@@ -720,7 +730,9 @@ class CardDataProtection:
         return response['token']
 ''',
             'network_segmentation': '''
+
 # Network segmentation for PCI compliance
+
 class PCINetworkSegmentation:
     def configure_network_zones(self):
         """
@@ -855,7 +867,9 @@ class ComplianceDashboard:
 
 **Automated Compliance Checks**
 ```yaml
+
 # .github/workflows/compliance-check.yml
+
 name: Compliance Checks
 
 on:
@@ -863,6 +877,7 @@ on:
     branches: [main, develop]
   pull_request:
   schedule:
+
     - cron: '0 0 * * *'  # Daily compliance check
 
 jobs:
@@ -870,36 +885,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - uses: actions/checkout@v3
 
     - name: GDPR Compliance Check
+
       run: |
         python scripts/compliance/gdpr_checker.py
 
     - name: Security Headers Check
+
       run: |
         python scripts/compliance/security_headers.py
 
     - name: Dependency License Check
+
       run: |
         license-checker --onlyAllow 'MIT;Apache-2.0;BSD-3-Clause;ISC'
 
     - name: PII Detection Scan
+
       run: |
         # Scan for hardcoded PII
         python scripts/compliance/pii_scanner.py
 
     - name: Encryption Verification
+
       run: |
         # Verify all sensitive data is encrypted
         python scripts/compliance/encryption_checker.py
 
     - name: Generate Compliance Report
+
       if: always()
       run: |
         python scripts/compliance/generate_report.py > compliance-report.json
 
     - name: Upload Compliance Report
+
       uses: actions/upload-artifact@v3
       with:
         name: compliance-report
@@ -917,24 +940,30 @@ def generate_privacy_policy(company_info, data_practices):
     Generate GDPR-compliant privacy policy
     """
     policy = f"""
+
 # Privacy Policy
 
 **Last Updated**: {datetime.now().strftime('%B %d, %Y')}
 
 ## 1. Data Controller
+
 {company_info['name']}
 {company_info['address']}
 Email: {company_info['privacy_email']}
 DPO: {company_info.get('dpo_contact', 'privacy@company.com')}
 
 ## 2. Data We Collect
+
 {generate_data_collection_section(data_practices['data_types'])}
 
 ## 3. Legal Basis for Processing
+
 {generate_legal_basis_section(data_practices['purposes'])}
 
 ## 4. Your Rights
+
 Under GDPR, you have the following rights:
+
 - Right to access your personal data
 - Right to rectification 
 - Right to erasure ('right to be forgotten')
@@ -944,12 +973,15 @@ Under GDPR, you have the following rights:
 - Rights related to automated decision making
 
 ## 5. Data Retention
+
 {generate_retention_policy(data_practices['retention_periods'])}
 
 ## 6. International Transfers
+
 {generate_transfer_section(data_practices['international_transfers'])}
 
 ## 7. Contact Us
+
 To exercise your rights, contact: {company_info['privacy_email']}
 """
 
@@ -970,6 +1002,7 @@ To exercise your rights, contact: {company_info['privacy_email']}
 Focus on practical implementation that balances compliance requirements with business operations and user experience.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

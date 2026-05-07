@@ -120,11 +120,17 @@ and other specifically excluded articles do not classify in Section XVI regardle
 with machines.
 
 **Note 2 — Parts classification hierarchy:**
+
 1. Parts that are goods included in any heading of Chapters 84 or 85 (other than 8409, 8431,
+
    8448, 8466, 8473, 8503, 8522, 8529, 8538) are classified in their OWN heading, not as parts.
+
 2. Other parts, if suitable for use solely or principally with a particular machine, classify WITH
+
    that machine.
+
 3. Parts suitable for use with multiple machines classify under the "catch-all" parts headings
+
    (8409, 8431, etc.) or under heading 8487 (miscellaneous machine parts).
 
 **Note 3 — Composite machines:** A machine that performs two or more complementary functions
@@ -145,23 +151,36 @@ function-specific heading, not as ADP.
 ### 1.5 Common Classification Disputes and Resolution
 
 **Dispute: Is it a "part" or an "accessory"?**
+
 - Parts are essential to the functioning of the machine and are consumed in, or physically
+
   integrated with, the machine during use. Without the part, the machine does not function.
+
 - Accessories enhance or supplement the machine's function but are not essential. The machine
+
   functions without the accessory.
+
 - Classification impact: Parts often follow the machine's classification. Accessories may classify
+
   independently under their own material or function heading, often at a different duty rate.
 
 **Dispute: Is the food "prepared" (Chapter 16/19/20/21) or raw (Chapters 2-14)?**
+
 - "Prepared" generally means processed beyond what is necessary for preservation or transport.
+
   Frozen raw shrimp: Chapter 3. Cooked shrimp: Chapter 16. Shrimp tempura (battered and fried): Chapter 16.
+
 - Simple operations that do NOT constitute "preparation": washing, trimming, freezing, chilling,
+
   sorting by size, packing. These maintain the product in Chapter 2-14.
+
 - Watch for Chapter notes — Chapter 20 Note 1 excludes vegetables "prepared or preserved by
+
   vinegar" (heading 2001 is the specific provision) from the general Chapter 7 vegetable headings.
 
 **Dispute: Is it a "set" under GRI 3(b)?**
 A "set put up for retail sale" must meet ALL three conditions:
+
 1. Consists of at least two different articles classifiable in different headings
 2. Consists of articles put up together to meet a particular need or carry out a specific activity
 3. Put up in a manner suitable for sale directly to users without repacking
@@ -244,15 +263,18 @@ USMCA Annex 4-B contains product-specific rules for every HS heading. Many rules
 a tariff shift requirement with an RVC threshold. Common patterns:
 
 - **Pure tariff shift:** "A change to heading 9403 from any other chapter." All non-originating
+
   materials must come from chapters other than 94 (furniture). If you use non-originating wood
   from Chapter 44 to make a wooden table, the wood satisfies this rule because Chapter 44 ≠ Chapter 94.
   But if you import non-originating table legs already classified in heading 9403, the tariff shift fails.
 
 - **Tariff shift with exceptions:** "A change to heading 6204 from any heading outside the group
+
   of headings 6201-6212, except from heading 5106-5113 or 5204-5212..." These carve-outs
   are designed to prevent simple assembly operations from conferring origin.
 
 - **Tariff shift OR RVC:** "A change to heading 8471 from any other heading; or No required
+
   change in tariff classification, provided there is a regional value content of not less than
   45 percent under the transaction-value method or not less than 35 percent under the net cost method."
   The exporter may choose whichever alternative is easier to satisfy.
@@ -264,6 +286,7 @@ a tariff shift requirement with an RVC threshold. Common patterns:
 RVC = ((TV - VNM) / TV) × 100
 ```
 Where:
+
 - TV = Transaction Value of the good (adjusted to FOB)
 - VNM = Value of Non-originating Materials (including parts, materials consumed in production)
 
@@ -272,8 +295,11 @@ Where:
 RVC = ((NC - VNM) / NC) × 100
 ```
 Where:
+
 - NC = Total cost minus sales promotion, marketing, after-sales service, royalties, shipping and
+
   packing costs, and non-allowable interest
+
 - VNM = same as above
 
 The net cost method typically produces a HIGHER RVC because it removes costs that inflate the
@@ -282,6 +308,7 @@ denominator. Use it when margins are thin or when significant royalty/promotion 
 **Automotive Rules (USMCA-specific):**
 
 USMCA introduced the most complex automotive rules of origin ever negotiated:
+
 - Passenger vehicles: 75% RVC using net cost method (phased in from 62.5%)
 - Core parts (engines, transmissions, body/chassis): separate 75% RVC requirement
 - Principal parts (brakes, axles, suspension): 70% RVC
@@ -296,22 +323,29 @@ USMCA introduced the most complex automotive rules of origin ever negotiated:
 - No self-certification for high-value consignments without REX registration
 - Bilateral cumulation only (UK + EU, not with third countries unless separate agreements exist)
 - "Insufficient processing" list: operations that NEVER confer origin regardless of tariff shift
+
   (e.g., simple assembly, packaging, mixing, ironing of textiles, sharpening/grinding)
+
 - Tolerance: 10% of ex-works price for non-originating materials that don't satisfy the list rule
+
   (15% for products of Chapters 50-63, textiles — but measured by weight, not value)
 
 **List Rules Structure:**
 
 EU-UK TCA Annex ORIG-2 provides rules in four columns:
+
 1. HS heading of the finished product
 2. Description of the product
 3. Working or processing on non-originating materials that confers origin
 4. Alternative rule (if available)
 
 Example: Heading 8418 (refrigerators)
+
 - Rule: "Manufacture in which all materials used are classified within a heading other than
+
   that of the product" AND "the value of all non-originating materials used does not exceed
   40% of the ex-works price of the product"
+
 - Both conditions must be met (they are cumulative, not alternative)
 
 ### 2.4 RCEP Rules of Origin
@@ -325,8 +359,11 @@ Example: Heading 8418 (refrigerators)
   - Build-down: RVC = ((FOB - VNM) / FOB) × 100 ≥ 40%
 - Certificate of Origin (Form RCEP) or approved exporter origin declaration
 - "Back-to-back" certificates allowed for goods transshipped through a non-party (critical for
+
   Singapore/Hong Kong hub operations)
+
 - Product-specific rules for Chapters 50-63 (textiles) are notably restrictive — many require
+
   two-step processing (yarn → fabric → garment)
 
 ### 2.5 AfCFTA Rules of Origin (Summary)
@@ -335,6 +372,7 @@ Example: Heading 8418 (refrigerators)
 - Cumulation: up to 60% of materials can originate from other AfCFTA member states
 - Simplified rules for LDC member states
 - Product-specific rules still being negotiated for many tariff lines — check the latest Protocol
+
   on Rules of Origin annexes before relying on general rules
 
 ---
@@ -442,12 +480,15 @@ influence the price:
 1. The price was settled in a manner consistent with normal pricing practices in the industry
 2. The price was settled in a manner consistent with how the seller prices to unrelated buyers
 3. The price is adequate to ensure recovery of all costs plus a profit equivalent to the
+
    firm's overall profit over a representative period in sales of goods of the same class or kind
+
 4. Transfer pricing documentation showing the price was set at arm's length under OECD guidelines
 
 **Test values (alternative to circumstances of sale):**
 
 The transaction value is acceptable if it closely approximates one of:
+
 - Transaction value on identical or similar goods sold to unrelated buyers in the importing country
 - Deductive value for identical or similar goods
 - Computed value for identical or similar goods
@@ -479,23 +520,33 @@ assists is one of the top findings in CBP Focused Assessments and triggers penal
 ### 3.4 Royalties and Licence Fees
 
 Royalties are dutiable additions to transaction value when they are:
+
 1. Related to the imported goods (not to post-importation activity), AND
 2. Paid as a condition of the sale (the buyer cannot buy the goods without paying the royalty)
 
 **Dutiable examples:**
+
 - Royalty paid to the seller (or a related party) for the right to manufacture using a patented
+
   process — the royalty directly relates to production of the imported goods
+
 - Trademark licence fee paid to the parent company where the manufacturer will only produce
+
   goods bearing the trademark for the licensed importer
+
 - Technology licence fee where the foreign producer can only access the technology through the
+
   buyer's licence
 
 **Non-dutiable examples:**
+
 - Royalty for the right to distribute or resell in the importing country (post-importation activity)
 - Royalty paid to an unrelated third party where the seller has no knowledge of or interest in
+
   the royalty arrangement and the royalty is not a condition of the sale
 
 **The "condition of sale" analysis is fact-intensive.** Look at:
+
 - Would the seller sell the goods to the buyer without the royalty being paid?
 - Does the seller have any involvement in, or control over, the royalty arrangement?
 - Can the buyer source the goods elsewhere if the royalty is not paid?
@@ -624,7 +675,9 @@ enhanced due diligence before proceeding:
 
 1. **Contributory CBP error:** Did CBP accept prior entries with the same error without comment?
 2. **Cooperation:** Full cooperation with the investigation, including production of records and
+
    internal investigation findings
+
 3. **Immediate corrective action:** Did the importer fix the problem as soon as it was discovered?
 4. **Prior good record:** Clean compliance history for 5+ years
 5. **Inability to pay:** Financial hardship (documented) can reduce monetary penalties
@@ -692,19 +745,26 @@ START: You have discovered a potential customs violation
 ### 5.3 Export Control Penalty Framework
 
 **BIS (EAR) Penalties:**
+
 - Civil: Up to $330,198 per violation OR twice the value of the transaction, whichever is greater
+
   (adjusted annually for inflation)
+
 - Criminal: Up to $1,000,000 per violation and 20 years imprisonment
 - Denial of export privileges: automatic bar from all exports/re-exports from the US
 
 **DDTC (ITAR) Penalties:**
+
 - Civil: Up to $1,301,256 per violation (adjusted annually)
 - Criminal: Up to $1,000,000 per violation and 20 years imprisonment
 - Debarment from all ITAR-controlled exports
 
 **OFAC Penalties:**
+
 - Vary by sanctions programme, but civil penalties can exceed $330,000 per violation for
+
   IEEPA-based sanctions
+
 - Criminal: up to $1,000,000 and 20 years imprisonment under IEEPA
 - Strict liability for OFAC violations — no intent required for civil penalties
 
@@ -717,6 +777,7 @@ START: You have discovered a potential customs violation
 When a CBP Focused Assessment is announced, the following preparation is critical:
 
 **Documentation to assemble:**
+
 - [ ] Internal compliance manual / SOP documentation
 - [ ] Organisational chart showing compliance function reporting lines
 - [ ] Training records for all personnel involved in import operations
@@ -731,6 +792,7 @@ When a CBP Focused Assessment is announced, the following preparation is critica
 - [ ] Record retention policy and evidence of compliance
 
 **Pre-assessment self-audit:**
+
 1. Pull 50 representative entries spanning the audit period
 2. Re-classify the top 20 by value — does the classification still hold?
 3. Re-value 10 entries including related-party transactions — are assists captured?
@@ -771,6 +833,7 @@ insurance in the invoice price:
 | DDP | DEDUCT: inland freight + import duties (duty is never part of customs value) | DEDUCT: inland freight from EU border + import duties |
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

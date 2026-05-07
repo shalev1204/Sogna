@@ -374,7 +374,9 @@ async def test_workflow_signals(workflow_env):
 **Target**: ≥80% coverage of workflow decision logic
 
 ```python
+
 # Test all branches
+
 @pytest.mark.parametrize("condition,expected", [
     (True, "branch-a"),
     (False, "branch-b"),
@@ -390,7 +392,9 @@ async def test_workflow_branches(workflow_env, condition, expected):
 **Target**: ≥80% coverage of activity logic
 
 ```python
+
 # Test activity edge cases
+
 @pytest.mark.parametrize("input,expected", [
     ("valid", "success"),
     ("", "empty-input-error"),
@@ -423,7 +427,9 @@ tests/
 ### Shared Fixtures
 
 ```python
+
 # conftest.py
+
 import pytest
 from temporalio.testing import WorkflowEnvironment
 
@@ -462,6 +468,7 @@ def mock_inventory_service():
 - Python SDK Samples: github.com/temporalio/samples-python
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

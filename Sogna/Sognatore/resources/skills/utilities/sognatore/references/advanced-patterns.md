@@ -187,17 +187,21 @@ def synthesize_with_validity_alignment(reviews):
 
 ```yaml
 review_team:
+
   - role: "security_analyst"
+
     model: opus
     expertise: ["OWASP", "auth", "injection"]
     personality: "paranoid"
 
   - role: "performance_engineer"
+
     model: sonnet
     expertise: ["complexity", "caching", "async"]
     personality: "pragmatic"
 
   - role: "maintainability_advocate"
+
     model: opus
     expertise: ["SOLID", "patterns", "readability"]
     personality: "perfectionist"
@@ -460,6 +464,7 @@ Level 4: Hierarchical Planning + Decomposition
 - [Awesome Agentic Patterns](https://github.com/nibzard/awesome-agentic-patterns)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

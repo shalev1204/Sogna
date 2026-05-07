@@ -8,8 +8,8 @@ id: skill-energy-procurement
 owner: [[orchestrator]]
 ---
 
-
 ## When to Use
+
 Use this skill when managing energy procurement tasks, such as optimizing electricity or gas tariffs, evaluating Power Purchase Agreements (PPAs), or developing long-term energy cost management strategies for commercial or industrial facilities.
 
 # Energy Procurement
@@ -199,6 +199,7 @@ Track monthly, review quarterly with finance and sustainability:
 - For communication templates covering RFPs, PPA negotiations, rate cases, and internal reporting, see [communication-templates.md](references/communication-templates.md)
 
 ## When to Use
+
 Use this skill when you need to **design, audit, or optimise an energy procurement strategy** for commercial or industrial facilities:
 
 - Evaluating fixed vs. index vs. block-and-index contracts, PPAs, or VPPAs.
@@ -206,11 +207,13 @@ Use this skill when you need to **design, audit, or optimise an energy procureme
 - Preparing RFPs, supplier negotiations, or executive decision memos about multi-site energy strategy, risk, and sustainability tradeoffs.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

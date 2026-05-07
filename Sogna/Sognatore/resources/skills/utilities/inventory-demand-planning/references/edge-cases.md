@@ -31,6 +31,7 @@ There is no demand history for this exact item, and the nearest analogs (existin
 Accepting the merchandising team's optimistic "gut feel" as the forecast and ordering aggressively. Or, conversely, ordering so conservatively that the product launches out-of-stock in week 2, killing momentum and making the launch look like a failure when it was actually a supply failure.
 
 **Expert Approach:**
+
 1. Build a structured analog set. Score candidates on category (snack bars), price point ($3–$4), brand tier (private label), format (single serve), and target demo (health-conscious). Select the top 3–5 analogs even if they're imperfect.
 2. Compute the median weekly velocity of the analogs at the same lifecycle stage (launch weeks 1–13). Weight by analog similarity score. Typical private-label snack bar launch velocity is 2–4 units/store/week after the trial bump.
 3. Build three scenarios: conservative (2 units/store/week), base (3.5 units/store/week), optimistic (6 units/store/week). For 120 stores, this yields weekly demand of 240, 420, or 720 units.
@@ -40,6 +41,7 @@ Accepting the merchandising team's optimistic "gut feel" as the forecast and ord
 7. Plan a week-3 evaluation checkpoint with merchandising. If sell-through is < 40% of base scenario, begin discussing promotional support. If > 150%, ensure reorder is en route.
 
 **Documentation Required:**
+
 - Analog selection with scoring rationale
 - Three-scenario forecast with assumptions
 - Initial buy calculation with safety stock methodology
@@ -48,6 +50,7 @@ Accepting the merchandising team's optimistic "gut feel" as the forecast and ord
 - Week-3 checkpoint agenda
 
 **Resolution Timeline:**
+
 - Weeks -8 to -6: Analog selection, scenario modeling, initial buy decision
 - Weeks -6 to -4: PO placement, promotional material preparation
 - Week 0: Launch
@@ -69,6 +72,7 @@ The instinct is to chase the demand — place a massive order and ride the wave.
 Ordering 10,000+ units from the vendor based on the spike's peak demand. When the order arrives 8 weeks later, demand has returned to 20–30 units/week (slightly elevated baseline), and you're sitting on 10,000 units — 300+ weeks of supply.
 
 **Expert Approach:**
+
 1. Do NOT place a large emergency order based on peak demand. Viral spikes typically follow this decay pattern: peak in days 1–5, 50% decay by day 10, 80% decay by day 21, new baseline establishes by day 30–45 (usually 1.5–3× the pre-viral level).
 2. With 2,400 units in DC and ~180 units/day demand, you have ~13 days of supply. Implement allocation rules immediately: cap store-level fulfillment at 3× historical daily average (6 units/store/day max). This stretches DC supply to ~20 days and prevents a single high-traffic store from claiming all the inventory.
 3. Contact the vendor. Determine: (a) do they have any finished goods inventory in Portland? (b) can they expedite a partial shipment by air from Shenzhen? (c) what is the minimum order for an air shipment? Air freight at ~$5/unit on a $4.50 cost item is expensive but justified if you can capture $8.99 retail during the spike.
@@ -77,12 +81,14 @@ Ordering 10,000+ units from the vendor based on the spike's peak demand. When th
 6. After the spike subsides (day 30+), assess the new baseline. If it's 2–3× the pre-viral level, adjust the forecast model upward. If it's back to pre-viral levels, return to the standard model. Do not permanently inflate the forecast based on a one-time event.
 
 **Key Indicators:**
+
 - Social media engagement half-life (how quickly the video's daily views are declining)
 - Store-level POS day-over-day trend (is demand decelerating?)
 - Amazon price and availability for the same or similar product (competitor action)
 - Geographic concentration of demand (if concentrated in a few markets, the spike is more narrow)
 
 **Documentation Required:**
+
 - Social media monitoring data (daily view counts, engagement)
 - Daily POS data at store level during the spike
 - Allocation rules implemented and their rationale
@@ -90,6 +96,7 @@ Ordering 10,000+ units from the vendor based on the spike's peak demand. When th
 - Post-spike baseline reassessment (at day 30 and day 60)
 
 **Resolution Timeline:**
+
 - Hours 0–4: Detect the spike via POS anomaly alerts; identify the social media source
 - Hours 4–12: Implement store-level allocation caps; contact vendor for emergency supply
 - Day 1–3: Monitor daily POS; track social media engagement decay
@@ -120,6 +127,7 @@ Your safety stock was calibrated for 14-day lead time. At the old lead time, you
 Accepting the vendor's new lead time without recalculating safety stock and reorder points. The planner orders the same quantities at the same frequency and discovers a stockout 3 weeks later when the gap becomes visible.
 
 **Expert Approach:**
+
 1. Immediately recalculate safety stock and reorder points using the new 28-day lead time. Document the before/after impact.
 2. Assess the inventory gap: Current on-hand (2,800) will last 3.5 weeks. The delayed PO (2,400 units) arrives in 24 days (~3.4 weeks). At 800 units/week consumption, you'll need 800 × 3.4 = 2,720 units in those 3.4 weeks, leaving only 80 units when the PO arrives — essentially zero safety stock.
 3. Place an emergency order immediately. Target quantity: enough to bridge the gap plus rebuild safety stock. Emergency order = (new SS − projected SS at PO arrival) + buffer = (396 − 80) + 400 = ~716 units. Round up to a case pack multiple.
@@ -129,6 +137,7 @@ Accepting the vendor's new lead time without recalculating safety stock and reor
 7. Communicate to merchandising: service level on this item will temporarily drop from 97% to ~92% for the next 4–6 weeks. If this is unacceptable, discuss promotional alternatives or substitution strategies.
 
 **Documentation Required:**
+
 - Before/after safety stock and ROP calculations
 - Inventory position timeline projection (weekly, for the next 8 weeks)
 - Emergency order details and vendor response
@@ -136,6 +145,7 @@ Accepting the vendor's new lead time without recalculating safety stock and reor
 - Communication to merchandising and category management
 
 **Resolution Timeline:**
+
 - Hour 0: Vendor notification received
 - Hours 0–4: Recalculate safety stock, ROP, and inventory position with new lead time
 - Hours 4–8: Place emergency order for the inventory gap
@@ -148,10 +158,14 @@ Accepting the vendor's new lead time without recalculating safety stock and reor
 
 **Dual-Source Strategy Post-Crisis:**
 After any single-source lead time shock, evaluate dual-sourcing economics:
+
 - If the category is A-tier (>$500K annual purchases), dual-source at 70/30 split.
+
   The 30% secondary supplier provides insurance and keeps the primary vendor competitive.
+
 - If B-tier ($100K–$500K), qualify a backup but keep orders single-source until triggered.
 - If C-tier (<$100K), the qualification cost may exceed the risk. Accept single-source
+
   and carry additional safety stock instead.
 
 ---
@@ -168,6 +182,7 @@ Your forecast model doesn't incorporate competitive promotional activity (most d
 Letting the automated forecast adjust downward based on the depressed actual sales. The model doesn't know why sales dropped, so it interprets it as a trend change. Two weeks later, when demand recovers, the system doesn't have enough inventory because it ordered based on the depressed forecast.
 
 **Expert Approach:**
+
 1. Confirm the cause: verify the competitive promotion through field observation, competitive intelligence, or syndicated data (Nielsen/IRI). Don't assume — there could be multiple causes.
 2. Once confirmed, apply a manual forecast override for the promotional period. Set the forecast to the depressed level (390 units/week) for the known duration of the competitive promotion (typically 2–4 weeks).
 3. Critically: also apply a forward override for the recovery period. When the competitive promo ends, expect a 10–20% bounce-back above the pre-event baseline for 1–2 weeks as customers who delayed purchases return. Set the recovery forecast to 660–720 units/week for weeks 1–2 post-competitive-promo.
@@ -176,12 +191,14 @@ Letting the automated forecast adjust downward based on the depressed actual sal
 6. After the event, mark these 2–4 weeks as "competitive interference" in the demand history so the baseline model excludes them from future training data.
 
 **Key Indicators:**
+
 - Duration of the competitive promotion (check competitor circulars/websites weekly)
 - Whether additional competitors pile on (competitive cascades happen in laundry, soda, and cereal)
 - Whether the demand recovery follows the expected bounce-back pattern
 - Whether the competitive promotion was a one-time event or signals a strategic price repositioning
 
 **Documentation Required:**
+
 - Competitive intelligence source and verification
 - Manual override with reason code "competitive_promo_external"
 - Adjusted PO schedule for the event window
@@ -189,6 +206,7 @@ Letting the automated forecast adjust downward based on the depressed actual sal
 - Post-event analysis comparing actuals to the override forecast
 
 **Resolution Timeline:**
+
 - Day 0–1: Detect the velocity drop; confirm competitive cause via field reports
 - Day 1–2: Apply manual forecast override for the dip and the expected recovery
 - Day 2–5: Adjust incoming POs downward for the promotional window
@@ -215,6 +233,7 @@ This is a permanent demand level shift, not a temporary dip. The Holt-Winters mo
 Waiting for the model to self-correct. Or, conversely, panicking and switching the model entirely when a simple level adjustment would suffice.
 
 **Expert Approach:**
+
 1. Confirm the regime change: the tracking signal at +4.8 for 2+ periods is a clear indicator. Verify by computing the new mean demand (310 units/week) and comparing to the model's level component.
 2. Do NOT switch the forecast model yet. The seasonal pattern may still be valid — the item is still seasonal cereal. What changed is the level (intercept), not the pattern.
 3. Apply a one-time level adjustment: reset the Holt-Winters level component to the current 4-week average (310 units/week). Keep the seasonal indices and trend parameters. Re-initialize the model from this new level.
@@ -224,12 +243,14 @@ Waiting for the model to self-correct. Or, conversely, panicking and switching t
 7. Classify the competitor product as a "regime change event" and add it to the demand planning log. Propose to merchandising that they evaluate their assortment response (match the competitor product, promote Cheerios, or accept the share loss).
 
 **Key Indicators:**
+
 - Tracking signal trend (is it stabilizing at the new level or still diverging?)
 - Competitor product's velocity (is it still growing, or has it plateaued?)
 - Category total velocity (is the category growing, or is this a zero-sum shift?)
 - Customer switching behavior (if loyalty card data is available)
 
 **Documentation Required:**
+
 - Tracking signal history showing the drift from normal to ±4.8
 - Before/after forecast comparison at the new demand level
 - Safety stock recalculation with the new σ_d
@@ -238,6 +259,7 @@ Waiting for the model to self-correct. Or, conversely, panicking and switching t
 - Merchandising communication and their response
 
 **Resolution Timeline:**
+
 - Day 0: Tracking signal triggers model review
 - Day 1–3: Confirm regime change vs. temporary dip; analyze root cause
 - Day 3–5: Apply level adjustment; recalculate safety stock; adjust POs
@@ -265,6 +287,7 @@ Every replenishment decision for the past several weeks has been based on a posi
 Correcting the inventory in the WMS and moving on. The correction fixes the symptom but not the cause. Next month, phantom inventory will reappear.
 
 **Expert Approach:**
+
 1. Immediately conduct a full physical count on this SKU at the DC and at the 10 highest-volume stores. Adjust WMS/POS inventory records to match physical counts.
 2. Recalculate the inventory position with corrected numbers. You likely need to place an emergency order — the corrected IP is probably below the reorder point.
 3. Place an emergency order: the delta between the old (phantom) IP and the corrected IP is 1,300 units at the DC alone, plus whatever store-level adjustments are needed. Rush this order if possible.
@@ -278,6 +301,7 @@ Correcting the inventory in the WMS and moving on. The correction fixes the symp
 7. Adjust safety stock upward by 10–15% for the category until the root cause is resolved and verified, to buffer against ongoing phantom inventory risk.
 
 **Documentation Required:**
+
 - Physical count vs. system count by location
 - Root cause investigation findings
 - Emergency order details
@@ -286,6 +310,7 @@ Correcting the inventory in the WMS and moving on. The correction fixes the symp
 - Safety stock adjustment and rationale
 
 **Resolution Timeline:**
+
 - Day 0: Customer complaints or lost-sales signals trigger investigation
 - Day 0–1: Physical count at DC; confirm phantom inventory exists
 - Day 1–2: Adjust WMS records; place emergency order; expand screening to all A-items
@@ -316,29 +341,35 @@ You can't order less than the MOQ, but ordering 500 units every month means you'
 Accepting the MOQ without quantifying the cost. Or, alternatively, fighting the vendor on MOQ without considering the alternatives.
 
 **Expert Approach:**
+
 1. Quantify the total cost of the MOQ constraint: annual excess holding cost ($9,100), waste risk (if shelf life is limited), and opportunity cost of the working capital.
 2. Evaluate options in order:
+
    a. **Negotiate a dollar minimum instead of unit minimum:** If you order all 5 SKUs together, the combined order is 2,500 units × $3.50 = $8,750 per order. Propose a $6,000 order minimum with flexibility to allocate across SKUs based on need. Many importers prefer this because they still get a meaningful order.
    b. **Extend the review period:** Instead of monthly orders, order every 6 weeks. This increases the target order-up-to level, making the MOQ less excessive. But it also increases safety stock needs.
    c. **Accept the MOQ for top 2–3 SKUs and negotiate lower for the bottom 2:** Concentrate volume on the fast movers and ask for 300-unit MOQ on the slowest.
    d. **Cross-dock or consolidate with other retailers:** If you're part of a buying group or co-op, combine orders with other members to share the MOQ.
    e. **Assess the overage as forward stock:** If the product has 18+ months of shelf life, 12.5 weeks of supply is tolerable. The holding cost may be acceptable relative to the value of carrying the brand.
+
 3. Before negotiating, know your BATNA: are there alternative Italian pasta brands with better terms? What would switching cost (delisting fees, lost loyal customers)?
 4. Propose a 6-month trial: "We'd like to test a $5,000 minimum order across the 5 SKUs for Q3 and Q4. If our order frequency and reliability are maintained, we'd like to formalize this for the annual agreement."
 
 **Key Indicators:**
+
 - Shelf life remaining on excess inventory (critical for food products)
 - Sell-through rate of excess units before the next order arrives
 - Whether the vendor has other regional customers you could consolidate with
 - Total vendor spend as leverage for negotiation
 
 **Documentation Required:**
+
 - Annual excess holding cost calculation per SKU and total for the vendor
 - Vendor negotiation correspondence and outcome
 - Comparison of options evaluated (lower MOQ vs. dollar minimum vs. accept overage)
 - Any agreed trial terms and review dates
 
 **Resolution Timeline:**
+
 - Month 0: Quantify the MOQ cost impact across all SKUs from this vendor
 - Month 0–1: Prepare negotiation package; identify BATNA (alternative suppliers)
 - Month 1: Present to vendor at the next order cycle or QBR
@@ -371,6 +402,7 @@ Holt-Winters seasonal indices are indexed to week numbers, not to event dates. A
 Running the Holt-Winters model without adjusting for the holiday shift. Or manually shifting the seasonal indices but forgetting to shift the promotional calendar, vendor order deadlines, and markdown timing.
 
 **Expert Approach:**
+
 1. Before the forecasting cycle begins (typically 12–16 weeks before Easter), compute the calendar-week shift: ΔW = Easter_this_year_week − Easter_last_year_week. This year, ΔW = +3 weeks.
 2. Shift the seasonal indices: for any SKU with Easter-linked seasonality, shift the 52-week seasonal index array by ΔW positions. Index for week 10 last year now applies to week 13 this year.
 3. Apply the same shift to the build schedule: the 6-week selling window moves from weeks 8–13 (last year) to weeks 11–16 (this year). Vendor orders that were placed in January for March delivery now need to be placed for April delivery.
@@ -381,6 +413,7 @@ Running the Holt-Winters model without adjusting for the holiday shift. Or manua
 8. Model the "gap" period: the 3 weeks between last year's Easter and this year's Easter will have lower demand than last year's model suggests but higher demand than a non-Easter baseline. Use a blended estimate.
 
 **Documentation Required:**
+
 - Holiday shift calculation and affected SKUs
 - Shifted seasonal indices (before and after)
 - Adjusted vendor order schedule
@@ -397,13 +430,21 @@ candy) are particularly steep because the product has zero value after Easter we
 A mistimed buy can easily cost $30K–$60K in margin erosion on a category this size.
 
 **Other Holiday Shifts to Monitor:**
+
 - **Thanksgiving:** Always the 4th Thursday of November, but the gap between Thanksgiving
+
   and Christmas (22–29 days) affects holiday season build timing.
+
 - **Ramadan:** Shifts ~11 days earlier each year (lunar calendar). Critical for retailers
+
   with significant Muslim customer demographics. Specialty food demand shifts.
+
 - **Chinese New Year:** Falls between Jan 21 and Feb 20. Affects import lead times from
+
   China by 2–3 weeks (factory closures).
+
 - **Back-to-school:** Not a fixed holiday but a regional event. Northern states start
+
   in late August; Southern states start in early August. A planner managing both regions
   needs different seasonal indices for the same categories.
 
@@ -421,6 +462,7 @@ Weather-driven demand spikes are temporary but intense. The heat wave will end i
 Treating the heat wave as the start of summer. Placing orders sized for sustained summer demand when this is a 10-day weather event. Or, alternatively, doing nothing because "March orders are already placed" and letting stores run out.
 
 **Expert Approach:**
+
 1. Separate items into "weather-temporary" and "weather-pull-forward" categories:
    - **Weather-temporary:** Items consumed during the heat wave that won't reduce summer demand (e.g., ice cream eaten today doesn't reduce ice cream eaten in July). These need incremental inventory for the event only.
    - **Weather-pull-forward:** Items purchased now that would have been purchased later (e.g., sunscreen, fans). These pull demand from the summer season — over-ordering now creates a surplus later.
@@ -431,6 +473,7 @@ Treating the heat wave as the start of summer. Placing orders sized for sustaine
 6. Do NOT let the heat wave contaminate the seasonal baseline model. Tag these 10 days as "weather event" in the demand history so the model ignores them when computing seasonal indices for next year.
 
 **Documentation Required:**
+
 - Weather forecast data (NWS source) and affected geographic regions
 - Category classification: weather-temporary vs. weather-pull-forward
 - Emergency order details by category
@@ -439,6 +482,7 @@ Treating the heat wave as the start of summer. Placing orders sized for sustaine
 - Demand history tagging for model hygiene
 
 **Resolution Timeline:**
+
 - Day 0–1: Weather alert triggers category review; classify temporary vs. pull-forward
 - Day 1–2: Place emergency orders for weather-temporary items via DSD and regional distributors
 - Day 2–3: Adjust allocations to stores in the affected region; reduce allocations to unaffected regions
@@ -471,12 +515,15 @@ During the transition, V1 and V2 will cannibalize each other. Total brand demand
 Buying V2 aggressively to capture the introductory discount while ignoring the V1 run-down plan. Six weeks later, V1 is occupying shelf space, DC slots, and working capital while V2 is the seller.
 
 **Expert Approach:**
+
 1. Model the transition as a combined brand forecast with a split ratio that shifts over time:
    - Weeks 1–2 (post-V2 launch): V1 retains 70% of brand volume, V2 captures 30% (trial phase)
    - Weeks 3–4: V1 at 50%, V2 at 50%
    - Weeks 5–6: V1 at 30%, V2 at 70%
    - Weeks 7+: V1 at 10%, V2 at 90%
+
    These ratios are estimates — adjust based on brand's historical transition data and customer research.
+
 2. Run down V1 inventory intentionally. Stop reordering V1 immediately — you have 12.8 weeks at current rate, but demand will decline per the split model. Compute V1 sales under the declining split: ~250 × (0.7 + 0.7 + 0.5 + 0.5 + 0.3 + 0.3 + 0.1 + 0.1) = ~800 units over 8 weeks. You have 3,200 in the system — you'll have ~2,400 excess.
 3. Initiate V1 markdowns early — don't wait for the product to become unsellable. Week 1 post-V2 launch: take 20% off V1 to accelerate sell-through. Week 4: 40% off. Week 6: liquidate or donate any remainder.
 4. Size the V2 introductory buy conservatively: 4 weeks of supply at the V2 split rate, not at the full brand rate. That's ~250 × (0.3 + 0.5 + 0.7 + 0.9) = ~600 units for the first 4 weeks. Take the introductory discount on 600–800 units, not the 2,000+ the manufacturer will suggest.
@@ -484,6 +531,7 @@ Buying V2 aggressively to capture the introductory discount while ignoring the V
 6. Track the actual V1/V2 split weekly and adjust. If V2 takes off faster than modeled, accelerate V1 markdowns. If V2 is slow, hold V1 price and defer V2 reorder.
 
 **Documentation Required:**
+
 - Combined brand forecast with V1/V2 split ratios
 - V1 run-down plan with markdown schedule
 - V2 introductory buy calculation
@@ -491,6 +539,7 @@ Buying V2 aggressively to capture the introductory discount while ignoring the V
 - Weekly V1/V2 split tracking vs. plan
 
 **Resolution Timeline:**
+
 - Weeks -6 to -4: Build V1/V2 combined forecast; compute V1 run-down plan
 - Week -4: Stop V1 reorders; negotiate manufacturer markdown support
 - Week -2: Set V1 markdown schedule; finalize V2 introductory buy
@@ -521,6 +570,7 @@ You can't serve all stores at their normal levels. Pro-rata allocation (giving e
 Pro-rata allocation across all stores. Every store gets 40% of normal, every store stocks out in ~4 days, and the customer experience is universally bad rather than selectively managed.
 
 **Expert Approach:**
+
 1. Calculate the allocation by store tier to maximize total units sold (minimize lost sales):
    - Top 20 stores: allocate at 70% of their normal rate (252 units/week). These stores have the highest traffic; even partial stock generates more sales per unit than full stock at a low-traffic store.
    - Middle 40 stores: allocate at 35% of their normal rate (~110 units/week). Enough to maintain some presence.
@@ -533,6 +583,7 @@ Pro-rata allocation across all stores. Every store gets 40% of normal, every sto
 6. Track lost sales using a proxy: compare same-store sales of complementary items (protein bars, shakers) — a decline suggests customers are going elsewhere entirely.
 
 **Documentation Required:**
+
 - Allocation model with tier breakdowns
 - Weekly allocation vs. sell-through by tier
 - Customer purchase limit implementation
@@ -540,6 +591,7 @@ Pro-rata allocation across all stores. Every store gets 40% of normal, every sto
 - Supplier communication and expected resolution timeline
 
 **Resolution Timeline:**
+
 - Day 0: Supplier confirms constraint; demand planner receives allocation
 - Day 0–1: Build tiered allocation model; communicate to store operations
 - Day 1–2: Implement POS purchase limits; prepare substitution signage
@@ -568,6 +620,7 @@ The sales team may be right — the distribution deal is real and the incrementa
 Either accepting the sales team's number at face value (leading to chronic over-forecasting) or rejecting it entirely (leading to under-investment in growth).
 
 **Expert Approach:**
+
 1. Never accept or reject an override without a probability-weighted approach. Ask the sales team to commit to a probability of close and timing:
    - Probability the deal closes: 70% (sales team's estimate — discount to 50% based on historical calibration)
    - If it closes, when will volume start? 4 weeks (sales team) — add 4 weeks for historical optimism = 8 weeks realistic
@@ -579,6 +632,7 @@ Either accepting the sales team's number at face value (leading to chronic over-
 6. Distribute the override unevenly across SKUs: the new account likely won't carry all 15 SKUs. Ask the sales team which 5–8 SKUs the new account will stock, and concentrate the override there.
 
 **Documentation Required:**
+
 - S&OP meeting notes with the original override request
 - Probability-weighted override calculation
 - Staged implementation plan by month and SKU
@@ -586,6 +640,7 @@ Either accepting the sales team's number at face value (leading to chronic over-
 - Post-event accuracy tracking
 
 **Resolution Timeline:**
+
 - S&OP meeting: Capture the override request; apply probability weighting
 - Day 1–3: Compute the staged override and distribute across relevant SKUs
 - Week 1: Adjust POs to reflect the staged override (not the full $30K)
@@ -609,6 +664,7 @@ overrides. A sales team with a 48% realization rate on new account overrides sho
 their stated volume multiplied by 0.48, not accepted at face value.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

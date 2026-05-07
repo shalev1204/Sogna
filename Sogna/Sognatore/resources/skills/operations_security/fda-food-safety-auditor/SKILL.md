@@ -7,7 +7,6 @@ id: skill-fda-food-safety-auditor
 owner: [[ops-security]]
 ---
 
-
 # FDA Food Safety Auditor
 
 ## Overview
@@ -47,11 +46,15 @@ the product may be unsafe. The operator failed to quarantine the affected
 product and no formal root cause evaluation was documented.
 
 Required Actions:
+
 1. Place all product produced during the deviation window on hold.
 2. Conduct a risk assessment to determine product disposition.
 3. Document a formal Corrective Action identifying the root cause
+
    (e.g., valve failure, calibration drift).
+
 4. Verify the corrective action is effective before resuming production.
+
 ```
 
 ## Best Practices
@@ -62,11 +65,13 @@ Required Actions:
 - ❌ **Don't:** Close a CCP deviation without completing a full product disposition.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

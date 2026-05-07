@@ -8,7 +8,6 @@ id: skill-game-design
 owner: [[prod-design]], [[game-developer]], [[prod-pm]]
 ---
 
-
 # Game Design Principles
 
 > Design thinking for engaging games.
@@ -21,10 +20,12 @@ owner: [[prod-design]], [[game-developer]], [[prod-pm]]
 
 ```
 Every game needs a fun 30-second loop:
+
 1. ACTION → Player does something
 2. FEEDBACK → Game responds
 3. REWARD → Player feels good
 4. REPEAT
+
 ```
 
 ### Loop Examples
@@ -134,14 +135,17 @@ Just Right → Flow → Engagement
 > **Remember:** Fun is discovered through iteration, not designed on paper.
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -41,10 +41,12 @@ class_name Player
 extends CharacterBody2D
 
 # Signals
+
 signal health_changed(new_health: int)
 signal died
 
 # Exports (Inspector-editable)
+
 @export var speed: float = 200.0
 @export var max_health: int = 100
 @export_range(0, 1) var damage_reduction: float = 0.0
@@ -53,11 +55,13 @@ signal died
 @export var attack_cooldown: float = 0.5
 
 # Onready (initialized when ready)
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var hitbox: Area2D = $Hitbox
 
 # Private variables (convention: underscore prefix)
+
 var _health: int
 var _can_attack: bool = true
 
@@ -83,7 +87,9 @@ func take_damage(amount: int) -> void:
 ### Pattern 1: State Machine
 
 ```gdscript
+
 # state_machine.gd
+
 class_name StateMachine
 extends Node
 
@@ -138,7 +144,9 @@ func transition_to(state_name: StringName, msg: Dictionary = {}) -> void:
 ```
 
 ```gdscript
+
 # state.gd
+
 class_name State
 extends Node
 
@@ -161,7 +169,9 @@ func handle_input(_event: InputEvent) -> void:
 ```
 
 ```gdscript
+
 # player_idle.gd
+
 class_name PlayerIdle
 extends State
 
@@ -186,7 +196,9 @@ func handle_input(event: InputEvent) -> void:
 ### Pattern 2: Autoload Singletons
 
 ```gdscript
+
 # game_manager.gd (Add to Project Settings > Autoload)
+
 extends Node
 
 signal game_started
@@ -252,23 +264,29 @@ func _save_high_score() -> void:
 ```
 
 ```gdscript
+
 # event_bus.gd (Global signal bus)
+
 extends Node
 
 # Player events
+
 signal player_spawned(player: Node2D)
 signal player_died(player: Node2D)
 signal player_health_changed(health: int, max_health: int)
 
 # Enemy events
+
 signal enemy_spawned(enemy: Node2D)
 signal enemy_died(enemy: Node2D, position: Vector2)
 
 # Item events
+
 signal item_collected(item_type: StringName, value: int)
 signal powerup_activated(powerup_type: StringName)
 
 # Level events
+
 signal level_started(level_number: int)
 signal level_completed(level_number: int, time: float)
 signal checkpoint_reached(checkpoint_id: int)
@@ -277,7 +295,9 @@ signal checkpoint_reached(checkpoint_id: int)
 ### Pattern 3: Resource-based Data
 
 ```gdscript
+
 # weapon_data.gd
+
 class_name WeaponData
 extends Resource
 
@@ -292,7 +312,9 @@ extends Resource
 ```
 
 ```gdscript
+
 # character_stats.gd
+
 class_name CharacterStats
 extends Resource
 
@@ -304,6 +326,7 @@ signal stat_changed(stat_name: StringName, new_value: float)
 @export var speed: float = 200.0
 
 # Runtime values (not saved)
+
 var _current_health: float
 
 func _init() -> void:
@@ -329,7 +352,9 @@ func duplicate_for_runtime() -> CharacterStats:
 ```
 
 ```gdscript
+
 # Using resources
+
 class_name Character
 extends CharacterBody2D
 
@@ -355,7 +380,9 @@ func _on_stat_changed(stat_name: StringName, value: float) -> void:
 ### Pattern 4: Object Pooling
 
 ```gdscript
+
 # object_pool.gd
+
 class_name ObjectPool
 extends Node
 
@@ -427,7 +454,9 @@ func return_all() -> void:
 ```
 
 ```gdscript
+
 # pooled_bullet.gd
+
 class_name PooledBullet
 extends Area2D
 
@@ -466,7 +495,9 @@ func _on_body_entered(body: Node2D) -> void:
 ### Pattern 5: Component System
 
 ```gdscript
+
 # health_component.gd
+
 class_name HealthComponent
 extends Node
 
@@ -519,7 +550,9 @@ func _start_invincibility() -> void:
 ```
 
 ```gdscript
+
 # hitbox_component.gd
+
 class_name HitboxComponent
 extends Area2D
 
@@ -543,7 +576,9 @@ func _on_area_entered(area: Area2D) -> void:
 ```
 
 ```gdscript
+
 # hurtbox_component.gd
+
 class_name HurtboxComponent
 extends Area2D
 
@@ -566,7 +601,9 @@ func receive_hit(hitbox: HitboxComponent) -> void:
 ### Pattern 6: Scene Management
 
 ```gdscript
+
 # scene_manager.gd (Autoload)
+
 extends Node
 
 signal scene_loading_started(scene_path: String)
@@ -670,7 +707,9 @@ func _play_transition_in() -> void:
 ### Pattern 7: Save System
 
 ```gdscript
+
 # save_manager.gd (Autoload)
+
 extends Node
 
 const SAVE_PATH := "user://savegame.save"
@@ -731,7 +770,9 @@ func has_save() -> bool:
 ```
 
 ```gdscript
+
 # saveable.gd (Attach to saveable nodes)
+
 class_name Saveable
 extends Node
 
@@ -766,24 +807,31 @@ func load_save_data(data: Dictionary) -> void:
 ## Performance Tips
 
 ```gdscript
+
 # 1. Cache node references
+
 @onready var sprite := $Sprite2D  # Good
+
 # $Sprite2D in _process()  # Bad - repeated lookup
 
 # 2. Use object pooling for frequent spawning
+
 # See Pattern 4
 
 # 3. Avoid allocations in hot paths
+
 var _reusable_array: Array = []
 
 func _process(_delta: float) -> void:
     _reusable_array.clear()  # Reuse instead of creating new
 
 # 4. Use static typing
+
 func calculate(value: float) -> float:  # Good
     return value * 2.0
 
 # 5. Disable processing when not needed
+
 func _on_off_screen() -> void:
     set_process(false)
     set_physics_process(false)
@@ -792,6 +840,7 @@ func _on_off_screen() -> void:
 ## Best Practices
 
 ### Do's
+
 - **Use signals for decoupling** - Avoid direct references
 - **Type everything** - Static typing catches errors
 - **Use resources for data** - Separate data from logic
@@ -799,6 +848,7 @@ func _on_off_screen() -> void:
 - **Use Autoloads sparingly** - Only for truly global systems
 
 ### Don'ts
+
 - **Don't use `get_node()` in loops** - Cache references
 - **Don't couple scenes tightly** - Use signals
 - **Don't put logic in resources** - Keep them data-only
@@ -812,6 +862,7 @@ func _on_off_screen() -> void:
 - [Godot Recipes](https://kidscancode.org/godot_recipes/)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

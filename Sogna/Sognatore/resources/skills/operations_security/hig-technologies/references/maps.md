@@ -209,6 +209,7 @@ September 12, 2023| Added artwork.
 September 23, 2022| Added guidelines for presenting custom information, refined best practices, and consolidated guidance into one page.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

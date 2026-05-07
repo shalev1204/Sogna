@@ -9,7 +9,6 @@ id: skill-inngest
 owner: [[orchestrator]]
 ---
 
-
 # Inngest Integration
 
 Inngest expert for serverless-first background jobs, event-driven workflows,
@@ -405,10 +404,12 @@ Skills: inngest, nextjs-app-router, vercel-deployment
 Workflow:
 
 ```
+
 1. Define Inngest functions (inngest)
 2. Set up serve handler in Next.js (nextjs-app-router)
 3. Configure function timeouts (vercel-deployment)
 4. Deploy and test (vercel-deployment)
+
 ```
 
 ### AI Pipeline
@@ -418,10 +419,12 @@ Skills: inngest, ai-agents-architect, supabase-backend
 Workflow:
 
 ```
+
 1. Design AI workflow steps (ai-agents-architect)
 2. Implement with Inngest durability (inngest)
 3. Store results in database (supabase-backend)
 4. Handle retries for API failures (inngest)
+
 ```
 
 ### Webhook Processing
@@ -431,10 +434,12 @@ Skills: inngest, stripe-integration, backend
 Workflow:
 
 ```
+
 1. Receive webhook (backend)
 2. Send to Inngest with idempotency (inngest)
 3. Process payment logic (stripe-integration)
 4. Update application state (backend)
+
 ```
 
 ### Email Automation
@@ -444,10 +449,12 @@ Skills: inngest, email-systems, supabase-backend
 Workflow:
 
 ```
+
 1. Trigger event from user action (inngest)
 2. Schedule drip emails with step.sleep (inngest)
 3. Send emails with retry (email-systems)
 4. Track email status (supabase-backend)
+
 ```
 
 ### Scheduled Tasks
@@ -457,10 +464,12 @@ Skills: inngest, backend, analytics-architecture
 Workflow:
 
 ```
+
 1. Define cron triggers (inngest)
 2. Implement processing logic (backend)
 3. Aggregate and report data (analytics-architecture)
 4. Handle failures with alerting (inngest)
+
 ```
 
 ## Related Skills
@@ -468,6 +477,7 @@ Workflow:
 Works well with: `nextjs-app-router`, `vercel-deployment`, `supabase-backend`, `email-systems`, `ai-agents-architect`, `stripe-integration`
 
 ## When to Use
+
 - User mentions or implies: inngest
 - User mentions or implies: serverless background job
 - User mentions or implies: event-driven workflow
@@ -478,11 +488,13 @@ Works well with: `nextjs-app-router`, `vercel-deployment`, `supabase-backend`, `
 - User mentions or implies: fan out
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

@@ -74,6 +74,7 @@ Para que Sognatore opere a su máxima capacidad, el **EnvOracle** busca tus clav
 - **DeepSeek (`DEEPSEEK_API_KEY`)**: Líder en eficiencia y razonamiento avanzado para codificación.
 - **OpenRouter (`OPENROUTER_API_KEY`)**: Pasarela universal para acceder a cientos de modelos (Llama 3, Qwen, Mistral).
 - **OpenAI (`OPENAI_API_KEY`)**: Especialista versátil para razonamiento y fallback.
+
 Usa `sognatore setup` para configurar estas claves de forma interactiva.
 
 ---

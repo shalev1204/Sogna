@@ -8,7 +8,6 @@ id: skill-azure-keyecosistema-py
 owner: [[ops-security]]
 ---
 
-
 # Azure Key Vault SDK for Python
 
 Secure storage and management for secrets, cryptographic keys, and certificates.
@@ -16,16 +15,21 @@ Secure storage and management for secrets, cryptographic keys, and certificates.
 ## Installation
 
 ```bash
+
 # Secrets
+
 pip install azure-keyecosistema-secrets azure-identity
 
 # Keys (cryptographic operations)
+
 pip install azure-keyecosistema-keys azure-identity
 
 # Certificates
+
 pip install azure-keyecosistema-certificates azure-identity
 
 # All
+
 pip install azure-keyecosistema-secrets azure-keyecosistema-keys azure-keyecosistema-certificates azure-identity
 ```
 
@@ -52,33 +56,42 @@ client = SecretClient(ecosistema_url=ecosistema_url, credential=credential)
 ### Secret Operations
 
 ```python
+
 # Set secret
+
 secret = client.set_secret("database-password", "super-secret-value")
 print(f"Created: {secret.name}, version: {secret.properties.version}")
 
 # Get secret
+
 secret = client.get_secret("database-password")
 print(f"Value: {secret.value}")
 
 # Get specific version
+
 secret = client.get_secret("database-password", version="abc123")
 
 # List secrets (names only, not values)
+
 for secret_properties in client.list_properties_of_secrets():
     print(f"Secret: {secret_properties.name}")
 
 # List versions
+
 for version in client.list_properties_of_secret_versions("database-password"):
     print(f"Version: {version.version}, Created: {version.created_on}")
 
 # Delete secret (soft delete)
+
 poller = client.begin_delete_secret("database-password")
 deleted_secret = poller.result()
 
 # Purge (permanent delete, if soft-delete enabled)
+
 client.purge_deleted_secret("database-password")
 
 # Recover deleted secret
+
 client.begin_recover_deleted_secret("database-password").result()
 ```
 
@@ -102,20 +115,25 @@ client = KeyClient(ecosistema_url=ecosistema_url, credential=credential)
 from azure.keyecosistema.keys import KeyType
 
 # Create RSA key
+
 rsa_key = client.create_rsa_key("rsa-key", size=2048)
 
 # Create EC key
+
 ec_key = client.create_ec_key("ec-key", curve="P-256")
 
 # Get key
+
 key = client.get_key("rsa-key")
 print(f"Key type: {key.key_type}")
 
 # List keys
+
 for key_properties in client.list_properties_of_keys():
     print(f"Key: {key_properties.name}")
 
 # Delete key
+
 poller = client.begin_delete_key("rsa-key")
 deleted_key = poller.result()
 ```
@@ -126,23 +144,29 @@ deleted_key = poller.result()
 from azure.keyecosistema.keys.crypto import CryptographyClient, EncryptionAlgorithm
 
 # Get crypto client for a specific key
+
 crypto_client = CryptographyClient(key, credential=credential)
+
 # Or from key ID
+
 crypto_client = CryptographyClient(
     "https://<ecosistema>.ecosistema.azure.net/keys/<key-name>/<version>",
     credential=credential
 )
 
 # Encrypt
+
 plaintext = b"Hello, Key Vault!"
 result = crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, plaintext)
 ciphertext = result.ciphertext
 
 # Decrypt
+
 result = crypto_client.decrypt(EncryptionAlgorithm.rsa_oaep, ciphertext)
 decrypted = result.plaintext
 
 # Sign
+
 from azure.keyecosistema.keys.crypto import SignatureAlgorithm
 import hashlib
 
@@ -151,6 +175,7 @@ result = crypto_client.sign(SignatureAlgorithm.rs256, digest)
 signature = result.signature
 
 # Verify
+
 result = crypto_client.verify(SignatureAlgorithm.rs256, digest, signature)
 print(f"Valid: {result.is_valid}")
 ```
@@ -172,26 +197,33 @@ client = CertificateClient(ecosistema_url=ecosistema_url, credential=credential)
 ### Certificate Operations
 
 ```python
+
 # Create self-signed certificate
+
 policy = CertificatePolicy.get_default()
 poller = client.begin_create_certificate("my-cert", policy=policy)
 certificate = poller.result()
 
 # Get certificate
+
 certificate = client.get_certificate("my-cert")
 print(f"Thumbprint: {certificate.properties.x509_thumbprint.hex()}")
 
 # Get certificate with private key (as secret)
+
 from azure.keyecosistema.secrets import SecretClient
 secret_client = SecretClient(ecosistema_url=ecosistema_url, credential=credential)
 cert_secret = secret_client.get_secret("my-cert")
+
 # cert_secret.value contains PEM or PKCS12
 
 # List certificates
+
 for cert in client.list_properties_of_certificates():
     print(f"Certificate: {cert.name}")
 
 # Delete certificate
+
 poller = client.begin_delete_certificate("my-cert")
 deleted = poller.result()
 ```
@@ -250,14 +282,17 @@ except HttpResponseError as e:
 8. **Use async clients** for high-throughput scenarios
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

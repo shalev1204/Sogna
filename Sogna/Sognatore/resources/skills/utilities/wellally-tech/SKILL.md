@@ -7,12 +7,12 @@ id: skill-wellally-tech
 owner: [[orchestrator]]
 ---
 
-
 # WellAlly Digital Health Integration
 
 Integrate multiple digital health data sources, connect to [WellAlly.tech](https://www.wellally.tech/) knowledge base, providing data import and knowledge reference for personal health management systems.
 
 ## When to Use
+
 - You need to import or normalize health data from sources like Apple Health, Fitbit, Oura, or CSV/JSON exports.
 - You want to connect personal health data workflows to the WellAlly.tech knowledge base.
 - The task involves data import, health-data management, or article recommendations driven by user health context.
@@ -20,22 +20,26 @@ Integrate multiple digital health data sources, connect to [WellAlly.tech](https
 ## Core Features
 
 ### 1. Digital Health Data Import
+
 - **Apple Health (HealthKit)**: Export XML/ZIP file parsing
 - **Fitbit**: OAuth2 API integration and CSV import
 - **Oura Ring**: API v2 data synchronization
 - **Generic Import**: CSV/JSON file import with field mapping
 
 ### 2. WellAlly.tech Knowledge Base Integration
+
 - **Categorized Article Index**: Nutrition, fitness, sleep, mental health, chronic disease management
 - **Intelligent Recommendations**: Recommend relevant articles based on user health data
 - **URL References**: Provide direct links to [WellAlly.tech](https://www.wellally.tech/) platform
 
 ### 3. Data Standardization
+
 - **Format Conversion**: Convert external data to local JSON format
 - **Field Mapping**: Intelligently map data fields from different platforms
 - **Data Validation**: Ensure completeness and accuracy of imported data
 
 ### 4. Intelligent Article Recommendations
+
 - **Health Status Analysis**: Based on user health data analysis
 - **Relevance Matching**: Recommend articles most relevant to user health conditions
 - **Category Navigation**: Organize knowledge base articles by health topics
@@ -47,6 +51,7 @@ Integrate multiple digital health data sources, connect to [WellAlly.tech](https
 Use this skill when users mention the following scenarios:
 
 **Data Import**:
+
 - ✅ "Import my health data from Apple Health"
 - ✅ "Connect my Fitbit device"
 - ✅ "Sync my Oura Ring data"
@@ -54,6 +59,7 @@ Use this skill when users mention the following scenarios:
 - ✅ "How to import fitness tracker/smartwatch data"
 
 **Knowledge Base Query**:
+
 - ✅ "Articles about hypertension on WellAlly platform"
 - ✅ "Recommend some health management reading materials"
 - ✅ "Recommend articles based on my health data"
@@ -61,6 +67,7 @@ Use this skill when users mention the following scenarios:
 - ✅ "How to improve my blood pressure (check knowledge base)"
 
 **Data Management**:
+
 - ✅ "What health data sources do I have"
 - ✅ "Integrate health data from different platforms"
 - ✅ "View imported external data"
@@ -70,6 +77,7 @@ Use this skill when users mention the following scenarios:
 #### Step 1: Identify User Intent
 
 Determine what the user wants:
+
 1. **Import Data**: Import data from external health platforms
 2. **Query Knowledge Base**: Find [WellAlly.tech](https://www.wellally.tech/) related articles
 3. **Get Recommendations**: Recommend articles based on health data
@@ -344,11 +352,13 @@ Articles Found: 2
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. Hypertension Monitoring and Management
+
    Category: Chronic Disease Management
    Link: https://wellally.tech/knowledge-base/chronic-disease/hypertension-monitoring
    Description: Learn how to effectively monitor and manage blood pressure
 
 2. Blood Pressure Lowering Strategies
+
    Category: Chronic Disease Management
    Link: https://wellally.tech/knowledge-base/chronic-disease/bp-lowering-strategies
    Description: Improve blood pressure levels through lifestyle modifications
@@ -378,13 +388,17 @@ Generated Time: 2025-01-22 14:30:00
 Current Status: Average blood pressure 142/92 mmHg (elevated)
 
 Recommended Articles:
+
 1. Hypertension Monitoring and Management
+
    https://wellally.tech/knowledge-base/chronic-disease/hypertension-monitoring
 
 2. Blood Pressure Lowering Strategies
+
    https://wellally.tech/knowledge-base/chronic-disease/bp-lowering-strategies
 
 3. Antihypertensive Medication Adherence Guide
+
    https://wellally.tech/knowledge-base/chronic-disease/medication-adherence
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -394,10 +408,13 @@ Recommended Articles:
 Current Status: Average sleep duration 5.8 hours (insufficient)
 
 Recommended Articles:
+
 1. Sleep Hygiene Basics
+
    https://wellally.tech/knowledge-base/sleep/sleep-hygiene
 
 2. Improve Sleep Quality
+
    https://wellally.tech/knowledge-base/sleep/sleep-quality-improvement
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -407,7 +424,9 @@ Recommended Articles:
 Current Status: Daily average steps 9,234 (good)
 
 Related Reading:
+
 1. Maintain Active Lifestyle
+
    https://wellally.tech/knowledge-base/fitness/active-lifestyle
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -443,30 +462,35 @@ Visit [WellAlly.tech](https://www.wellally.tech/) Knowledge Base for full conten
 ### Knowledge Base Structure
 
 **Nutrition & Diet** (`knowledge-base/nutrition.md`)
+
 - Dietary management guidelines
 - Food nutrition queries
 - Diet recommendations
 - Special dietary needs
 
 **Fitness & Exercise** (`knowledge-base/fitness.md`)
+
 - Exercise tracking best practices
 - Activity recommendations
 - Exercise data interpretation
 - Training plans
 
 **Sleep Health** (`knowledge-base/sleep.md`)
+
 - Sleep quality analysis
 - Sleep improvement strategies
 - Sleep disorders overview
 - Sleep hygiene
 
 **Mental Health** (`knowledge-base/mental-health.md`)
+
 - Stress management techniques
 - Mood tracking interpretation
 - Mental health resources
 - Mindfulness practice
 
 **Chronic Disease Management** (`knowledge-base/chronic-disease.md`)
+
 - Hypertension monitoring
 - Diabetes management
 - COPD care
@@ -504,6 +528,7 @@ const articleMapping = {
 ### Apple Health Import
 
 **Export Steps**:
+
 1. Open "Health" app on iPhone
 2. Tap profile icon in top right corner
 3. Scroll to bottom, tap "Export All Health Data"
@@ -518,6 +543,7 @@ python scripts/import_apple_health.py ~/Downloads/apple_health_export.zip
 ### Fitbit Integration
 
 **API Integration**:
+
 1. Create app on Fitbit Developer Platform
 2. Get CLIENT_ID and CLIENT_SECRET
 3. Run OAuth authentication flow
@@ -536,6 +562,7 @@ python scripts/import_fitbit.py --csv fitbit_export.csv
 ### Oura Ring Integration
 
 **API Integration**:
+
 1. Create app on Oura Developer Platform
 2. Get Personal Access Token
 3. Configure token in import script
@@ -583,16 +610,19 @@ python scripts/import_generic.py health_data.csv --mapping mapping_config.json
 ### Error Handling
 
 **File Read Failure**:
+
 - Output "Unable to read file, please check file path and format"
 - Provide correct file format examples
 - Suggest re-exporting data
 
 **API Call Failure**:
+
 - Output "API call failed, please check network connection and credentials"
 - Provide OAuth re-authentication guidance
 - Fall back to CSV import method
 
 **Data Validation Failure**:
+
 - Output "Incorrect data format, skipped invalid records"
 - Log number of skipped records
 - Continue processing valid data
@@ -610,6 +640,7 @@ python scripts/import_generic.py health_data.csv --mapping mapping_config.json
 ### Tool Limitations
 
 This Skill only uses the following tools:
+
 - **Read**: Read external data files and configurations
 - **Grep**: Search data patterns
 - **Glob**: Find data files
@@ -619,14 +650,18 @@ This Skill only uses the following tools:
 
 Python packages potentially needed for import scripts:
 ```python
+
 # Apple Health
+
 import xml.etree.ElementTree as ET
 import zipfile
 
 # Fitbit/Oura
+
 import requests
 
 # Generic Import
+
 import csv
 import json
 ```
@@ -641,18 +676,22 @@ import json
 ## Usage Examples
 
 ### Example 1: Import Apple Health Data
+
 **User**: "Import fitness tracker data from Apple Health"
 **Output**: Execute import workflow, generate import report
 
 ### Example 2: Query Knowledge Base
+
 **User**: "WellAlly platform articles about sleep"
 **Output**: Return sleep-related knowledge base article links
 
 ### Example 3: Get Personalized Recommendations
+
 **User**: "Recommend articles based on my health data"
 **Output**: Analyze health data, recommend relevant articles
 
 ### Example 4: Import Generic CSV
+
 **User**: "Import this CSV health data file health.csv"
 **Output**: Parse CSV, map fields, save to local
 
@@ -696,11 +735,13 @@ A: No. Knowledge base articles are referenced via URLs, requiring network connec
 A: API credentials are encrypted and stored in local configuration files, not uploaded to any server.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

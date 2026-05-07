@@ -18,6 +18,7 @@ version: 1.0.0
 **Sognatore** is a Claude Code skill that provides a multi-agent autonomous startup system. It dynamically orchestrates specialized agents across 6 swarms to take a PRD from idea to fully deployed product. It spawns only the agents needed - from a few for simple projects to 100+ for complex startups.
 
 ### Key Features
+
 - 37 specialized agent types across 6 swarms (Engineering, Operations, Business, Data, Product, Growth)
 - Dynamic agent scaling based on project complexity
 - Task tool for subagent dispatch with fresh context
@@ -71,11 +72,13 @@ sognatore/
 ## How to Use
 
 ### Quick Start (Recommended)
+
 ```bash
 ./autonomy/run.sh ./docs/requirements.md
 ```
 
 ### What run.sh Does
+
 1. Checks prerequisites (Claude CLI, Python, Git, curl)
 2. Verifies skill installation
 3. Initializes `.sognatore/` directory
@@ -85,8 +88,11 @@ sognatore/
 7. Continues until completion or max retries
 
 ### Monitor Progress
+
 ```bash
+
 # In another terminal
+
 watch -n 2 cat .sognatore/STATUS.txt
 ```
 
@@ -95,6 +101,7 @@ watch -n 2 cat .sognatore/STATUS.txt
 ## Key Technical Details
 
 ### Claude Code Invocation
+
 The autonomy runner pipes the prompt through stdin for live output:
 ```bash
 echo "$prompt" | claude --dangerously-skip-permissions
@@ -103,6 +110,7 @@ echo "$prompt" | claude --dangerously-skip-permissions
 **Important:** Using `-p` flag doesn't stream output properly. Piping through stdin shows interactive output.
 
 ### State Files
+
 - `.sognatore/state/orchestrator.json` - Current phase, metrics
 - `.sognatore/autonomy-state.json` - Retry count, status, PID
 - `.sognatore/queue/*.json` - Task queues
@@ -110,6 +118,7 @@ echo "$prompt" | claude --dangerously-skip-permissions
 - `.sognatore/logs/*.log` - Execution logs
 
 ### Environment Variables
+
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `SOGNATORE_MAX_RETRIES` | 50 | Max retry attempts |
@@ -136,18 +145,22 @@ echo "$prompt" | claude --dangerously-skip-permissions
 ## Known Issues & Solutions
 
 ### 1. "Blank output when running autonomously"
+
 **Cause:** Using `-p` flag doesn't stream output
 **Solution:** Use stdin pipe: `echo "$prompt" | claude --dangerously-skip-permissions`
 
 ### 2. "Vibe Kanban not showing tasks"
+
 **Cause:** Vibe Kanban is UI-driven, doesn't read JSON files automatically
 **Solution:** Use `.sognatore/STATUS.txt` for monitoring, or run Vibe Kanban separately
 
 ### 3. "timeout command not found on macOS"
+
 **Cause:** macOS doesn't have GNU coreutils
 **Solution:** Perl-based fallback in test scripts
 
 ### 4. "TTY raw mode error"
+
 **Cause:** Running Claude in non-interactive mode
 **Solution:** Latest commit (008ed86) adds `--no-input` flag
 
@@ -188,6 +201,7 @@ Run all tests:
 ## Important Files to Read First
 
 When starting a new session, read these files:
+
 1. `SKILL.md` - The actual skill instructions
 2. `autonomy/run.sh` - Main entry point
 3. `VERSION` and `CHANGELOG.md` - Current state
@@ -213,6 +227,7 @@ When starting a new session, read these files:
 - **Features Added:** Real-time streaming output via stream-json, web dashboard with Anthropic design
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

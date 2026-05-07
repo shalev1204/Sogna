@@ -8,7 +8,6 @@ id: skill-android-jetpack-compose-expert
 owner: [[orchestrator]]
 ---
 
-
 # Android Jetpack Compose Expert
 
 ## Overview
@@ -156,11 +155,13 @@ fun AppNavHost(navController: NavHostController) {
 **Solution:** Check if you are creating new object instances (like `List` or `Modifier`) inside the composition without `remember`, or if you are updating state inside the composition phase instead of a side-effect or callback. Use Layout Inspector to debug recomposition counts.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

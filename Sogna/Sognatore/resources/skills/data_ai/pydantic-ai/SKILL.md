@@ -11,7 +11,6 @@ id: skill-pydantic-ai
 owner: [[orchestrator]]
 ---
 
-
 # PydanticAI — Typed AI Agents in Python
 
 ## Overview
@@ -34,6 +33,7 @@ PydanticAI is a Python agent framework from the Pydantic team that brings the sa
 pip install pydantic-ai
 
 # Install extras for specific providers
+
 pip install 'pydantic-ai[openai]'       # OpenAI / Azure OpenAI
 pip install 'pydantic-ai[anthropic]'    # Anthropic Claude
 pip install 'pydantic-ai[gemini]'       # Google Gemini
@@ -47,6 +47,7 @@ pip install 'pydantic-ai[vertexai]'     # Google Vertex AI
 from pydantic_ai import Agent
 
 # Simple agent — returns a plain string
+
 agent = Agent(
     'anthropic:claude-sonnet-4-6',
     system_prompt='You are a helpful assistant. Be concise.',
@@ -154,6 +155,7 @@ async def create_refund(ctx: RunContext[Deps], order_id: str, reason: str) -> di
     return await ctx.deps.db.create_refund(order_id, reason, ctx.deps.user_id)
 
 # Usage
+
 async def handle_support(user_id: str, message: str):
     deps = Deps(db=get_db(), user_id=user_id)
     result = await support_agent.run(message, deps=deps)
@@ -218,10 +220,12 @@ from pydantic_ai.messages import ModelMessagesTypeAdapter
 agent = Agent('openai:gpt-4o', system_prompt='You are a helpful assistant.')
 
 # First turn
+
 result1 = agent.run_sync('My name is Alice.')
 history = result1.all_messages()
 
 # Second turn — passes conversation history
+
 result2 = agent.run_sync('What is my name?', message_history=history)
 print(result2.data)  # "Your name is Alice."
 ```
@@ -333,15 +337,19 @@ async def research_and_write(topic: str) -> BlogPost:
 ## Common Pitfalls
 
 - **Problem:** `ValidationError` on every LLM response — structured output never validates
+
   **Solution:** Simplify `result_type` fields. Use `Optional` and `default` where appropriate. The model may struggle with overly strict schemas.
 
 - **Problem:** Tool is never called by the LLM
+
   **Solution:** Write a clear, specific docstring for the tool function — PydanticAI sends the docstring as the tool description to the LLM.
 
 - **Problem:** `RunContext` dependency is `None` inside a tool
+
   **Solution:** Pass `deps=` when calling `agent.run()` or `agent.run_sync()`. Dependencies are not set globally.
 
 - **Problem:** `asyncio.run()` error when calling `agent.run()` inside FastAPI
+
   **Solution:** Use `await agent.run()` directly in async FastAPI route handlers — don't wrap in `asyncio.run()`.
 
 ## Related Skills
@@ -352,11 +360,13 @@ async def research_and_write(topic: str) -> BlogPost:
 - `@agent-orchestration-multi-agent-optimize` — Orchestrating multiple PydanticAI agents
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

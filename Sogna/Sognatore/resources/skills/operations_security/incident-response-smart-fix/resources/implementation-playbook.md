@@ -24,6 +24,7 @@ Use Task tool with subagent_type="error-debugging::error-detective" followed by 
 Analyze error traces, logs, and observability data for: $ARGUMENTS
 
 Deliverables:
+
 1. Error signature analysis: exception type, message patterns, frequency, first occurrence
 2. Stack trace deep dive: failure location, call chain, involved components
 3. Reproduction steps: minimal test case, environment requirements, data fixtures needed
@@ -37,10 +38,12 @@ Deliverables:
 7. Related symptoms: similar errors, cascading failures, upstream/downstream impacts
 
 Modern debugging techniques to employ:
+
 - AI-assisted log analysis (pattern detection, anomaly identification)
 - Distributed trace correlation across microservices
 - Production-safe debugging (no code changes, use observability data)
 - Error fingerprinting for deduplication and tracking
+
 ```
 
 **Expected output:**
@@ -63,12 +66,14 @@ RELATED_ISSUES: [similar errors, cascading failures]
 Perform root cause investigation using error-detective output:
 
 Context from Error-Detective:
+
 - Error signature: {ERROR_SIGNATURE}
 - Stack trace: {STACK_TRACE}
 - Reproduction: {REPRODUCTION}
 - Observability: {OBSERVABILITY_LINKS}
 
 Deliverables:
+
 1. Root cause hypothesis with supporting evidence
 2. Code-level analysis: variable states, control flow, timing issues
 3. Git bisect analysis: identify introducing commit (automate with git bisect run)
@@ -78,11 +83,13 @@ Deliverables:
 7. Fix strategy options with tradeoffs (quick fix vs proper fix)
 
 Context needed for next phase:
+
 - Exact file paths and line numbers requiring changes
 - Data structures or API contracts affected
 - Dependencies that may need updates
 - Test scenarios to verify the fix
 - Performance characteristics to maintain
+
 ```
 
 **Expected output:**
@@ -109,31 +116,37 @@ Use Task tool with subagent_type="error-debugging::debugger" and subagent_type="
 Perform deep code analysis and bisect investigation:
 
 Context from Phase 1:
+
 - Root cause: {ROOT_CAUSE}
 - Affected files: {AFFECTED_FILES}
 - Failure mechanism: {FAILURE_MECHANISM}
 - Introducing commit: {INTRODUCING_COMMIT}
 
 Deliverables:
+
 1. Code path analysis: trace execution from entry point to failure
 2. Variable state tracking: values at key decision points
 3. Control flow analysis: branches taken, loops, async operations
 4. Git bisect automation: create bisect script to identify exact breaking commit
+
    ```bash
    git bisect start HEAD v1.2.3
    git bisect run ./test_reproduction.sh
    ```
+
 5. Dependency compatibility matrix: version combinations that work/fail
 6. Configuration analysis: environment variables, feature flags, deployment configs
 7. Timing and race condition analysis: async operations, event ordering, locks
 8. Memory and resource analysis: leaks, exhaustion, contention
 
 Modern investigation techniques:
+
 - AI-assisted code explanation (Claude/Copilot to understand complex logic)
 - Automated git bisect with reproduction test
 - Dependency graph analysis (npm ls, go mod graph, pip show)
 - Configuration drift detection (compare staging vs production)
 - Time-travel debugging using production traces
+
 ```
 
 **Expected output:**
@@ -154,11 +167,13 @@ ISOLATION_VERIFICATION: {confirmed single root cause vs multiple issues}
 Review code logic and identify design issues:
 
 Context from Debugger:
+
 - Code path: {CODE_PATH}
 - State at failure: {STATE_AT_FAILURE}
 - Bisect result: {BISECT_RESULT}
 
 Deliverables:
+
 1. Logic flaw analysis: incorrect assumptions, missing edge cases, wrong algorithms
 2. Type safety gaps: where stronger types could prevent the issue
 3. Error handling review: missing try-catch, unhandled promises, panic scenarios
@@ -168,12 +183,14 @@ Deliverables:
 7. Fix design: minimal change vs refactoring vs architectural improvement
 
 Review checklist:
+
 - Are null/undefined values handled correctly?
 - Are async operations properly awaited/chained?
 - Are error cases explicitly handled?
 - Are type assertions safe?
 - Are API contracts respected?
 - Are side effects isolated?
+
 ```
 
 **Expected output:**
@@ -192,6 +209,7 @@ ARCHITECTURAL_CONCERNS: {if systemic issues exist}
 Based on Phase 2 output, route to appropriate domain agent using Task tool:
 
 **Routing Logic:**
+
 - Python issues → subagent_type="python-development::python-pro"
 - TypeScript/JavaScript → subagent_type="javascript-typescript::typescript-pro"
 - Go → subagent_type="systems-programming::golang-pro"
@@ -205,6 +223,7 @@ Based on Phase 2 output, route to appropriate domain agent using Task tool:
 Implement production-safe fix with comprehensive test coverage:
 
 Context from Phase 2:
+
 - Root cause: {ROOT_CAUSE}
 - Logic flaws: {LOGIC_FLAWS}
 - Fix design: {FIX_DESIGN}
@@ -212,6 +231,7 @@ Context from Phase 2:
 - Similar vulnerabilities: {SIMILAR_VULNERABILITIES}
 
 Deliverables:
+
 1. Minimal fix implementation addressing root cause (not symptoms)
 2. Unit tests:
    - Specific failure case reproduction
@@ -234,6 +254,7 @@ Deliverables:
    - Structured logging for debugging
 
 Modern implementation techniques (2024/2025):
+
 - AI pair programming (GitHub Copilot, Claude Code) for test generation
 - Type-driven development (leverage TypeScript, mypy, clippy)
 - Contract-first APIs (OpenAPI, gRPC schemas)
@@ -241,6 +262,7 @@ Modern implementation techniques (2024/2025):
 - Defensive programming (explicit error handling, validation)
 
 Implementation requirements:
+
 - Follow existing code patterns and conventions
 - Add strategic debug logging (JSON structured logs)
 - Include comprehensive type annotations
@@ -248,6 +270,7 @@ Implementation requirements:
 - Maintain backward compatibility (version APIs if breaking)
 - Add OpenTelemetry spans for distributed tracing
 - Include metric counters for monitoring (success/failure rates)
+
 ```
 
 **Expected output:**
@@ -285,12 +308,14 @@ Use Task tool with subagent_type="unit-testing::test-automator" and subagent_typ
 Run comprehensive regression testing and verify fix quality:
 
 Context from Phase 3:
+
 - Fix summary: {FIX_SUMMARY}
 - Changed files: {CHANGED_FILES}
 - Test coverage: {TEST_COVERAGE}
 - Test results: {TEST_RESULTS}
 
 Deliverables:
+
 1. Full test suite execution:
    - Unit tests (all existing + new)
    - Integration tests
@@ -319,11 +344,13 @@ Deliverables:
    - Fuzzing for input validation
 
 Modern testing practices (2024/2025):
+
 - AI-generated test cases (GitHub Copilot, Claude Code)
 - Snapshot testing for UI/API contracts
 - Visual regression testing for frontend
 - Chaos engineering for resilience testing
 - Production traffic replay for load testing
+
 ```
 
 **Expected output:**
@@ -359,11 +386,13 @@ TEST_QUALITY: {deterministic: true/false, coverage_adequate: true/false}
 Measure performance impact and validate no regressions:
 
 Context from Test-Automator:
+
 - Test results: {TEST_RESULTS}
 - Code coverage: {CODE_COVERAGE}
 - Fix summary: {FIX_SUMMARY}
 
 Deliverables:
+
 1. Performance benchmarks:
    - Response time (p50, p95, p99)
    - Throughput (requests/second)
@@ -391,10 +420,12 @@ Deliverables:
    - Cost implications (cloud resources)
 
 Modern performance practices:
+
 - OpenTelemetry instrumentation
 - Continuous profiling (Pyroscope, pprof)
 - Real User Monitoring (RUM)
 - Synthetic monitoring
+
 ```
 
 **Expected output:**
@@ -432,12 +463,14 @@ PRODUCTION_READY: {yes/no + blockers if no}
 Perform final code review and approve for deployment:
 
 Context from Testing:
+
 - Test results: {TEST_RESULTS}
 - Regression detected: {REGRESSION_DETECTED}
 - Performance impact: {PERFORMANCE_IMPACT}
 - Security scan: {SECURITY_SCAN}
 
 Deliverables:
+
 1. Code quality review:
    - Follows project conventions
    - No code smells or anti-patterns
@@ -465,6 +498,7 @@ Deliverables:
    - Success metrics defined
 
 Review checklist:
+
 - All tests pass
 - No performance regressions
 - Security vulnerabilities addressed
@@ -472,6 +506,7 @@ Review checklist:
 - Backward compatibility maintained
 - Observability adequate
 - Deployment plan clear
+
 ```
 
 **Expected output:**
@@ -511,6 +546,7 @@ Use Task tool with subagent_type="comprehensive-review::code-reviewer" for preve
 Document fix and implement prevention strategies to avoid recurrence:
 
 Context from Phase 4:
+
 - Final verdict: {FINAL_VERDICT}
 - Review status: {REVIEW_STATUS}
 - Root cause: {ROOT_CAUSE}
@@ -518,6 +554,7 @@ Context from Phase 4:
 - Monitoring requirements: {MONITORING_REQUIREMENTS}
 
 Deliverables:
+
 1. Code documentation:
    - Inline comments for non-obvious logic (minimal)
    - Function/class documentation updates
@@ -554,11 +591,13 @@ Deliverables:
    - Document testing strategy gaps
 
 Modern prevention practices (2024/2025):
+
 - AI-assisted code review rules (GitHub Copilot, Claude Code)
 - Continuous security scanning (Snyk, Dependabot)
 - Infrastructure as Code validation (Terraform validate, CloudFormation Linter)
 - Contract testing for APIs (Pact, OpenAPI validation)
 - Observability-driven development (instrument before deploying)
+
 ```
 
 **Expected output:**
@@ -619,6 +658,7 @@ For issues spanning multiple domains, orchestrate specialized agents sequentiall
 **Example 1: Database Performance Issue Causing Application Timeouts**
 
 **Sequence:**
+
 1. **Phase 1-2**: error-detective + debugger identify slow database queries
 2. **Phase 3a**: Task(subagent_type="database-cloud-optimization::database-optimizer")
    - Optimize query with proper indexes
@@ -633,6 +673,7 @@ For issues spanning multiple domains, orchestrate specialized agents sequentiall
 **Example 2: Frontend JavaScript Error in Production**
 
 **Sequence:**
+
 1. **Phase 1**: error-detective analyzes Sentry error reports
    - Context: "TypeError: Cannot read property 'map' of undefined, 500+ occurrences in last hour, affects Safari users on iOS 14"
 2. **Phase 2**: debugger + code-reviewer investigate
@@ -651,6 +692,7 @@ For issues spanning multiple domains, orchestrate specialized agents sequentiall
 **Example 3: Security Vulnerability in Authentication**
 
 **Sequence:**
+
 1. **Phase 1**: error-detective reviews security scan report
    - Context: "SQL injection vulnerability in login endpoint, Snyk severity: HIGH"
 2. **Phase 2**: debugger + security-auditor investigate
@@ -671,23 +713,28 @@ For issues spanning multiple domains, orchestrate specialized agents sequentiall
 Context for {next_agent}:
 
 Completed by {previous_agent}:
+
 - {summary_of_work}
 - {key_findings}
 - {changes_made}
 
 Remaining work:
+
 - {specific_tasks_for_next_agent}
 - {files_to_modify}
 - {constraints_to_follow}
 
 Dependencies:
+
 - {systems_or_components_affected}
 - {data_needed}
 - {integration_points}
 
 Success criteria:
+
 - {measurable_outcomes}
 - {verification_steps}
+
 ```
 
 ## Configuration Options
@@ -695,6 +742,7 @@ Success criteria:
 Customize workflow behavior by setting priorities at invocation:
 
 **VERIFICATION_LEVEL**: Controls depth of testing and validation
+
 - **minimal**: Quick fix with basic tests, skip performance benchmarks
   - Use for: Low-risk bugs, cosmetic issues, documentation fixes
   - Phases: 1-2-3 (skip detailed Phase 4)
@@ -709,6 +757,7 @@ Customize workflow behavior by setting priorities at invocation:
   - Timeline: ~1-2 days
 
 **PREVENTION_FOCUS**: Controls investment in future prevention
+
 - **none**: Fix only, no prevention work
   - Use for: One-off issues, legacy code being deprecated, external library bugs
   - Output: Code fix + tests only
@@ -720,12 +769,14 @@ Customize workflow behavior by setting priorities at invocation:
   - Output: Fix + tests + linting + monitoring + architecture docs + postmortem
 
 **ROLLOUT_STRATEGY**: Controls deployment approach
+
 - **immediate**: Deploy directly to production (for hotfixes, low-risk changes)
 - **canary**: Gradual rollout to subset of traffic (default for medium-risk)
 - **blue-green**: Full environment switch with instant rollback capability
 - **feature-flag**: Deploy code but control activation via feature flags (high-risk changes)
 
 **OBSERVABILITY_LEVEL**: Controls instrumentation depth
+
 - **minimal**: Basic error logging only
 - **standard**: Structured logs + key metrics (default)
 - **comprehensive**: Full distributed tracing + custom dashboards + SLOs
@@ -735,10 +786,12 @@ Customize workflow behavior by setting priorities at invocation:
 Issue: Users experiencing timeout errors on checkout page (500+ errors/hour)
 
 Config:
+
 - VERIFICATION_LEVEL: comprehensive (affects revenue)
 - PREVENTION_FOCUS: comprehensive (high business impact)
 - ROLLOUT_STRATEGY: canary (test on 5% traffic first)
 - OBSERVABILITY_LEVEL: comprehensive (need detailed monitoring)
+
 ```
 
 ## Modern Debugging Tools Integration
@@ -746,6 +799,7 @@ Config:
 This workflow leverages modern 2024/2025 tools:
 
 **Observability Platforms:**
+
 - Sentry (error tracking, release tracking, performance monitoring)
 - DataDog (APM, logs, traces, infrastructure monitoring)
 - OpenTelemetry (vendor-neutral distributed tracing)
@@ -753,18 +807,21 @@ This workflow leverages modern 2024/2025 tools:
 - New Relic (APM, synthetic monitoring)
 
 **AI-Assisted Debugging:**
+
 - GitHub Copilot (code suggestions, test generation, bug pattern recognition)
 - Claude Code (comprehensive code analysis, architecture review)
 - Sourcegraph Cody (codebase search and understanding)
 - Tabnine (code completion with bug prevention)
 
 **Git and Version Control:**
+
 - Automated git bisect with reproduction scripts
 - GitHub Actions for automated testing on bisect commits
 - Git blame analysis for identifying code ownership
 - Commit message analysis for understanding changes
 
 **Testing Frameworks:**
+
 - Jest/Vitest (JavaScript/TypeScript unit/integration tests)
 - pytest (Python testing with fixtures and parametrization)
 - Go testing + testify (Go unit and table-driven tests)
@@ -772,6 +829,7 @@ This workflow leverages modern 2024/2025 tools:
 - k6/Locust (load and performance testing)
 
 **Static Analysis:**
+
 - ESLint/Prettier (JavaScript/TypeScript linting and formatting)
 - Ruff/mypy (Python linting and type checking)
 - golangci-lint (Go comprehensive linting)
@@ -779,6 +837,7 @@ This workflow leverages modern 2024/2025 tools:
 - SonarQube (enterprise code quality and security)
 
 **Performance Profiling:**
+
 - Chrome DevTools (frontend performance)
 - pprof (Go profiling)
 - py-spy (Python profiling)
@@ -786,6 +845,7 @@ This workflow leverages modern 2024/2025 tools:
 - Flame graphs for CPU/memory analysis
 
 **Security Scanning:**
+
 - Snyk (dependency vulnerability scanning)
 - Dependabot (automated dependency updates)
 - OWASP ZAP (security testing)
@@ -797,12 +857,14 @@ This workflow leverages modern 2024/2025 tools:
 A fix is considered complete when ALL of the following are met:
 
 **Root Cause Understanding:**
+
 - Root cause is identified with supporting evidence
 - Failure mechanism is clearly documented
 - Introducing commit identified (if applicable via git bisect)
 - Similar vulnerabilities catalogued
 
 **Fix Quality:**
+
 - Fix addresses root cause, not just symptoms
 - Minimal code changes (avoid over-engineering)
 - Follows project conventions and patterns
@@ -810,6 +872,7 @@ A fix is considered complete when ALL of the following are met:
 - Backward compatibility maintained (or breaking changes documented)
 
 **Testing Verification:**
+
 - All existing tests pass (zero regressions)
 - New tests cover the specific bug reproduction
 - Edge cases and error paths tested
@@ -817,12 +880,14 @@ A fix is considered complete when ALL of the following are met:
 - Test coverage increased (or maintained at high level)
 
 **Performance & Security:**
+
 - No performance degradation (p95 latency within 5% of baseline)
 - No security vulnerabilities introduced
 - Resource usage acceptable (memory, CPU, I/O)
 - Load testing passed for high-traffic changes
 
 **Deployment Readiness:**
+
 - Code review approved by domain expert
 - Rollback plan documented and tested
 - Feature flags configured (if applicable)
@@ -830,6 +895,7 @@ A fix is considered complete when ALL of the following are met:
 - Runbook updated with troubleshooting steps
 
 **Prevention Measures:**
+
 - Static analysis rules added (if applicable)
 - Type system improvements implemented (if applicable)
 - Documentation updated (code, API, runbook)
@@ -837,6 +903,7 @@ A fix is considered complete when ALL of the following are met:
 - Knowledge base article created (if novel issue)
 
 **Metrics:**
+
 - Mean Time to Recovery (MTTR): < 4 hours for SEV2+
 - Bug recurrence rate: 0% (same root cause should not recur)
 - Test coverage: No decrease, ideally increase
@@ -845,6 +912,7 @@ A fix is considered complete when ALL of the following are met:
 Issue to resolve: $ARGUMENTS
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

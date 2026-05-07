@@ -1,5 +1,5 @@
-import { Px as px } from "../../value/types/numbers/units.js";
-export function PixelsToPercent(pixels, axis) {
+import { Px } from "../../value/types/numbers/units.js";
+export function pixelsToPercent(pixels, axis) {
     if (axis.max === axis.min)
         return 0;
     return (pixels / (axis.max - axis.min)) * 100;
@@ -11,7 +11,7 @@ export function PixelsToPercent(pixels, axis) {
  * borderRadius in both states. If we animate between the two in pixels that will trigger
  * a paint each time. If we animate between the two in percentage we'll avoid a paint.
  */
-export const CorrectBorderRadius = {
+export const correctBorderRadius = {
     correct: (latest, node) => {
         if (!node.target)
             return latest;
@@ -20,7 +20,7 @@ export const CorrectBorderRadius = {
          * going to be stretched appropriately. Otherwise, if it's a pixel, convert it to a number.
          */
         if (typeof latest === "string") {
-            if (px.test(latest)) {
+            if (Px.test(latest)) {
                 latest = parseFloat(latest);
             }
             else {
@@ -31,8 +31,8 @@ export const CorrectBorderRadius = {
          * If latest is a number, it's a pixel value. We use the current viewportBox to calculate that
          * pixel value as a percentage of each axis
          */
-        const x = PixelsToPercent(latest, node.target.x);
-        const y = PixelsToPercent(latest, node.target.y);
+        const x = pixelsToPercent(latest, node.target.x);
+        const y = pixelsToPercent(latest, node.target.y);
         return `${x}% ${y}%`;
     },
 };

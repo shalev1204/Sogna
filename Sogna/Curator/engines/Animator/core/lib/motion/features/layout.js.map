@@ -1,0 +1,1 @@
+{"version":3,"file":"layout.js","sourceRoot":"","sources":["../../../src/motion/features/layout.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,kBAAkB,EAAE,MAAM,eAAe,CAAA;AAClD,OAAO,EAAE,aAAa,EAAE,MAAM,2BAA2B,CAAA;AAGzD,MAAM,CAAC,MAAM,MAAM,GAAoB;IACnC,MAAM,EAAE;QACJ,cAAc,EAAE,kBAAkB;QAClC,aAAa;KAChB;CACJ,CAAA"}

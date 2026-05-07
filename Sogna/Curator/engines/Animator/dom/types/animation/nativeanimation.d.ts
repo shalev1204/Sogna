@@ -1,5 +1,5 @@
 import { AnimationPlaybackControlsWithThen, AnyResolvedKeyframe, DOMValueAnimationOptions, TimelineWithFallback } from "./types.js";
-import { WithPromise } from "./utils/withpromise.js";
+import { WithPromise } from "./utils/WithPromise.js";
 export interface NativeAnimationOptions<V extends AnyResolvedKeyframe = number> extends DOMValueAnimationOptions<V> {
     pseudoElement?: string;
     startTime?: number;

@@ -8,7 +8,6 @@ id: skill-airflow-dag-patterns
 owner: [[orchestrator]]
 ---
 
-
 # Apache Airflow DAG Patterns
 
 Production-ready patterns for Apache Airflow including DAG design, operators, sensors, testing, and deployment strategies.
@@ -47,11 +46,13 @@ Refer to `resources/implementation-playbook.md` for detailed patterns, checklist
 - `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

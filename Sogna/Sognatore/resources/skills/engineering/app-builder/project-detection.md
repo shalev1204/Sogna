@@ -33,14 +33,17 @@ version: 1.0.0
 ## Detection Process
 
 ```
+
 1. Tokenize user request
 2. Extract keywords
 3. Determine project type
 4. Detect missing information → forward to conversation-manager
 5. Suggest tech stack
+
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

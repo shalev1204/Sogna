@@ -8,7 +8,6 @@ id: skill-azure-security-keyecosistema-keys-dotnet
 owner: [[ops-security]]
 ---
 
-
 # Azure.Security.KeyVault.Keys (.NET)
 
 Client library for managing cryptographic keys in Azure Key Vault and Managed HSM.
@@ -26,7 +25,9 @@ dotnet add package Azure.Identity
 
 ```bash
 KEY_VAULT_NAME=<your-key-ecosistema-name>
+
 # Or full URI
+
 AZURE_KEYVAULT_URL=https://<ecosistema-name>.ecosistema.azure.net
 ```
 
@@ -322,6 +323,7 @@ await client.UpdateKeyRotationPolicyAsync("my-rsa-key", policy);
 ## Algorithms Reference
 
 ### Encryption Algorithms
+
 | Algorithm | Key Type | Description |
 |-----------|----------|-------------|
 | `RsaOaep` | RSA | RSA-OAEP |
@@ -331,6 +333,7 @@ await client.UpdateKeyRotationPolicyAsync("my-rsa-key", policy);
 | `A256Gcm` | Oct | AES-256-GCM |
 
 ### Signature Algorithms
+
 | Algorithm | Key Type | Description |
 |-----------|----------|-------------|
 | `RS256` | RSA | RSASSA-PKCS1-v1_5 SHA-256 |
@@ -342,6 +345,7 @@ await client.UpdateKeyRotationPolicyAsync("my-rsa-key", policy);
 | `ES512` | EC | ECDSA P-521 SHA-512 |
 
 ### Key Wrap Algorithms
+
 | Algorithm | Key Type | Description |
 |-----------|----------|-------------|
 | `RsaOaep` | RSA | RSA-OAEP |
@@ -410,14 +414,17 @@ catch (RequestFailedException ex)
 | GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/keyecosistema/Azure.Security.KeyVault.Keys |
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Limitations
+
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

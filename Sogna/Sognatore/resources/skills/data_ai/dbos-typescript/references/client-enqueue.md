@@ -65,6 +65,7 @@ const result = await handle.getResult(); // type: string
 ```
 
 **Enqueue options:**
+
 - `workflowName` (required): Name of the workflow function
 - `queueName` (required): Name of the queue
 - `workflowClassName`: Class name if the workflow is a class method
@@ -80,6 +81,7 @@ Always call `client.destroy()` when done.
 Reference: [DBOS Client Enqueue](https://docs.dbos.dev/typescript/reference/client#enqueue)
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

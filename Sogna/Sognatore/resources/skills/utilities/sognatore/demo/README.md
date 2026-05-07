@@ -12,16 +12,20 @@ Video demonstration of Sognatore - Multi-agent autonomous startup system.
 ## Quick Start
 
 ```bash
+
 # Full end-to-end demo with screen recording (RECOMMENDED)
+
 ./demo/record-full-demo.sh simple-todo
 
 # Or run the simulated terminal demo
+
 ./demo/run-demo-auto.sh
 ```
 
 ## Full End-to-End Demo
 
 The `record-full-demo.sh` script creates a real demo showing:
+
 - Sognatore running autonomously
 - Dashboard with agents and tasks
 - App being built in real-time
@@ -43,13 +47,17 @@ Arrange your screen like this before running:
 ### Run the Demo
 
 ```bash
+
 # Simple todo app (5-10 min)
+
 ./demo/record-full-demo.sh simple-todo
 
 # Static landing page (3-5 min)
+
 ./demo/record-full-demo.sh static-landing
 
 # Full-stack app (15-30 min)
+
 ./demo/record-full-demo.sh full-stack
 ```
 
@@ -69,26 +77,34 @@ The dashboard opens at: http://127.0.0.1:57374/dashboard/index.html
 ### Option 1: Asciinema (Terminal Recording)
 
 ```bash
+
 # Record
+
 ./demo/record-demo.sh
 
 # Play back
+
 asciinema play demo/recordings/loki-demo.cast
 
 # Upload to asciinema.org
+
 asciinema upload demo/recordings/loki-demo.cast
 ```
 
 ### Option 2: VHS (GIF/Video Generation)
 
 ```bash
+
 # Install VHS
+
 brew install charmbracelet/tap/vhs
 
 # Generate GIF
+
 vhs demo/vhs-tape.tape
 
 # Output: demo/loki-demo.gif
+
 ```
 
 ### Option 3: Screen Recording
@@ -111,6 +127,7 @@ See `voice-over-script.md` for the complete narration script with timestamps.
 ## Demo Scenarios
 
 ### Simple Todo App (5 min)
+
 Best for quick demos. Shows core Sognatore workflow.
 
 ```bash
@@ -118,7 +135,9 @@ Best for quick demos. Shows core Sognatore workflow.
 ```
 
 ### Full-Stack Demo (15-20 min)
+
 Complete demonstration including:
+
 - Kanban board visualization
 - Parallel agent execution
 - Code review process
@@ -144,6 +163,7 @@ Complete demonstration including:
 5. Export as MP4
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

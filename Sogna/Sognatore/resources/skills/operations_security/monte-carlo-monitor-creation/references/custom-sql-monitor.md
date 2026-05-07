@@ -214,6 +214,7 @@ Alert when the latest row in a downstream table is more than 2 hours behind the 
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.

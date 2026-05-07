@@ -8,7 +8,6 @@ id: skill-postgresql
 owner: [[eng-database]]
 ---
 
-
 # PostgreSQL Table Design 
 
 ## Use this skill when
@@ -75,15 +74,14 @@ owner: [[eng-database]]
 - **JSONB**: preferred over JSON; index with **GIN**. Use only for optional/semi-structured attrs. ONLY use JSON if the original ordering of the contents MUST be preserved.
 - **Vector types**: `vector` type by `pgvector` for vector similarity search for embeddings.
 
-
 ### Do not use the following data types
+
 - DO NOT use `timestamp` (without time zone); DO use `timestamptz` instead.
 - DO NOT use `char(n)` or `varchar(n)`; DO use `text` instead.
 - DO NOT use `money` type; DO use `numeric` instead.
 - DO NOT use `timetz` type; DO use `timestamptz` instead.
 - DO NOT use `timestamptz(0)` or any other precision specification; DO use `timestamptz` instead
 - DO NOT use `serial` type; DO use `generated always as identity` instead.
-
 
 ## Table Types
 
@@ -194,7 +192,6 @@ Enable with `ALTER TABLE tbl ENABLE ROW LEVEL SECURITY`. Create policies: `CREAT
 - Keep core relations in tables; use JSONB for optional/variable attributes.
 - Use constraints to limit allowed JSONB values in a column e.g. `config JSONB NOT NULL CHECK(jsonb_typeof(config) = 'object')`
 
-
 ## Examples
 
 ### Users
@@ -236,6 +233,7 @@ CREATE INDEX profiles_attrs_gin ON profiles USING GIN (attrs);
 ```
 
 ## Sentinel Security Policy
+
 - This asset is under Sognatore Sentinel supervision.
 - Extraction of secrets via this skill is strictly forbidden.
 - All external network calls must be audited by the security engine.
