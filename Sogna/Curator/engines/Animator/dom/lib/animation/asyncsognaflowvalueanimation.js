@@ -1,11 +1,11 @@
 import { sognaflowGlobalConfig, noop } from "sognaflow-utils";
-import { JSAnimation } from "./JSAnimation.js";
+import { JSAnimation } from "./jsanimation.js";
 import { GetFinalKeyframe } from "./keyframes/get-final.js";
-import { KeyframeResolver as DefaultKeyframeResolver, flushKeyframeResolvers, } from "./keyframes/KeyframesResolver.js";
-import { NativeAnimationExtended } from "./NativeAnimationExtended.js";
+import { KeyframeResolver as DefaultKeyframeResolver, flushKeyframeResolvers, } from "./keyframes/keyframesresolver.js";
+import { NativeAnimationExtended } from "./nativeanimationextended.js";
 import { canAnimate } from "./utils/can-animate.js";
 import { MakeAnimationInstant } from "./utils/make-animation-instant.js";
-import { WithPromise } from "./utils/WithPromise.js";
+import { WithPromise } from "./utils/withpromise.js";
 import { supportsBrowserAnimation } from "./waapi/supports/waapi.js";
 /**
  * Maximum time allowed between an animation being created and it being
@@ -192,4 +192,4 @@ export class AsyncSognaflowValueAnimation extends WithPromise {
         this.keyframeResolver?.cancel();
     }
 }
-//# sourceMappingURL=AsyncsognaflowValueAnimation.js.map
+//# sourceMappingURL=asyncsognaflowvalueanimation.js.map

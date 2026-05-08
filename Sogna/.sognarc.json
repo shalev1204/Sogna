@@ -1,6 +1,7 @@
 {
   "project": "Sogna",
   "version": "0.1.0",
+  "slogan": "Build for the Second One",
   "environment": "Development/Beta",
   "securityTier": "max",
   "strictMode": true,

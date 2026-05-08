@@ -8,10 +8,10 @@ import {
     readTransformValue,
 } from "../dom/parse-transform.js"
 import { measureViewportBox } from "../../projection/utils/measure.js"
-import { DOMVisualElement } from "../dom/DOMVisualElement.js"
+import { DOMVisualElement } from "../dom/domvisualelement.js"
 import type { DOMVisualElementOptions } from "../dom/types.js"
 import type { ResolvedValues, SognaflowConfigContextProps } from "../types.js"
-import type { VisualElement } from "../VisualElement.js"
+import type { VisualElement } from "../visualelement.js"
 import { HTMLRenderState } from "./types.js"
 import { buildHTMLStyles } from "./utils/build-styles.js"
 import { renderHTML } from "./utils/render.js"

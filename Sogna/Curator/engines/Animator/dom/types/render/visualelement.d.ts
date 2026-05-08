@@ -1,5 +1,5 @@
 import { Box } from "sognaflow-utils";
-import { KeyframeResolver } from "../animation/keyframes/KeyframesResolver.js";
+import { KeyframeResolver } from "../animation/keyframes/keyframesresolver.js";
 import type { AnyResolvedKeyframe } from "../animation/types.js";
 import type { SognaflowNodeOptions } from "../node/types.js";
 import { SognaflowValue } from "../value";

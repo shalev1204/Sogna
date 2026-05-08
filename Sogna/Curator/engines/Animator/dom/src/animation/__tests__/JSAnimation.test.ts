@@ -1,6 +1,6 @@
 import { noop, reverseEasing } from "sognaflow-utils"
 import { frame } from "../../frameloop"
-import { JSAnimation, animateValue } from "../JSAnimation.js"
+import { JSAnimation, animateValue } from "../jsanimation.js"
 import { AnyResolvedKeyframe, ValueAnimationOptions } from "../types.js"
 import { syncDriver } from "./utils.js"
 

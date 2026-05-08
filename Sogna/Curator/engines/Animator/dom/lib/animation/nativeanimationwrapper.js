@@ -1,4 +1,4 @@
-import { NativeAnimation } from "./NativeAnimation.js";
+import { NativeAnimation } from "./nativeanimation.js";
 export class NativeAnimationWrapper extends NativeAnimation {
     constructor(animation) {
         super();
@@ -9,4 +9,4 @@ export class NativeAnimationWrapper extends NativeAnimation {
         };
     }
 }
-//# sourceMappingURL=NativeAnimationWrapper.js.map
+//# sourceMappingURL=nativeanimationwrapper.js.map

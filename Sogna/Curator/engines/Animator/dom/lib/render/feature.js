@@ -10,4 +10,4 @@ export class Feature {
     }
     update() { }
 }
-//# sourceMappingURL=Feature.js.map
+//# sourceMappingURL=feature.js.map

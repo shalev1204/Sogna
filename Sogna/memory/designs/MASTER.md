@@ -46,7 +46,7 @@
   - Entrance: `backOut` for cards (duration: 0.5s)
   - Hover Scale: `1.02` with spring physics.
 
-### Design Tokens (CSS - Tier Max)
+### Design Tokens (CSS)
 
 ```css
 :root {

@@ -142,4 +142,4 @@ export class KeyframeResolver {
             this.scheduleResolve();
     }
 }
-//# sourceMappingURL=KeyframesResolver.js.map
+//# sourceMappingURL=keyframesresolver.js.map

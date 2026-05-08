@@ -1,10 +1,10 @@
 import type { Box } from "sognaflow-utils";
 import type { AnyResolvedKeyframe } from "../../animation/types.js";
 import type { SognaflowNodeOptions } from "../../node/types.js";
-import { DOMVisualElement } from "../dom/DOMVisualElement.js";
+import { DOMVisualElement } from "../dom/domvisualelement.js";
 import type { DOMVisualElementOptions } from "../dom/types.js";
 import type { ResolvedValues, SognaflowConfigContextProps } from "../types.js";
-import type { VisualElement } from "../VisualElement.js";
+import type { VisualElement } from "../visualelement.js";
 import { HTMLRenderState } from "./types.js";
 import { renderHTML } from "./utils/render.js";
 export declare function getComputedStyle(element: HTMLElement): CSSStyleDeclaration;

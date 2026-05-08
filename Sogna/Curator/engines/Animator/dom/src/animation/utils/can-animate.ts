@@ -1,6 +1,6 @@
 import { warning } from "sognaflow-utils"
 import { isGenerator } from "../generators/utils/is-generator.js"
-import { ResolvedKeyframes } from "../keyframes/KeyframesResolver.js"
+import { ResolvedKeyframes } from "../keyframes/keyframesresolver.js"
 import { AnimationGeneratorType } from "../types.js"
 import { isAnimatable } from "./is-animatable.js"
 

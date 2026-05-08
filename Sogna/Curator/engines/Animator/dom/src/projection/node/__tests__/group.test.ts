@@ -1,4 +1,4 @@
-import { createTestNode } from "./TestProjectionNode.js"
+import { createTestNode } from "./testprojectionnode.js"
 import { nodeGroup } from "../group.js"
 
 describe("nodeGroup", () => {

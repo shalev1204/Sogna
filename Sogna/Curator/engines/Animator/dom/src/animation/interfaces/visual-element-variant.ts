@@ -3,7 +3,7 @@ import { CalcChildStagger } from "../utils/calc-child-stagger.js"
 import type { VisualElementAnimationOptions } from "./types.js"
 import { AnimateTarget } from "./visual-element-target.js"
 import type { DynamicOption } from "../types.js"
-import type { VisualElement } from "../../render/VisualElement.js"
+import type { VisualElement } from "../../render/visualelement.js"
 
 export function AnimateVariant(
     visualElement: VisualElement,

@@ -1,5 +1,5 @@
 import { SognaflowValue } from "../../value"
-import { SognaflowValueState } from "../SognaflowValueState.js"
+import { SognaflowValueState } from "../sognaflowvaluestate.js"
 
 export function createEffect<Subject extends object>(
     addValue: (

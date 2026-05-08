@@ -34,7 +34,7 @@ All cross-agent communication MUST follow this structure:
 
 Before executing a method that modifies the `memory/` or `toolkit/` state, the agent MUST:
 
-1. **Validate Context**: Read `SOGNA_CONTEXT.md`.
+1. **Validate Context**: Read `sogna.md`.
 2. **Permission Check**: Query the `Sentinel` permission proxy.
 3. **Consensus**: In high-risk operations, a dual-agent audit (e.g., Antigravity + Auditor) is required.
 

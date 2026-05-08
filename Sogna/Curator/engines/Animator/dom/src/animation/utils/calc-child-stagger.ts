@@ -1,5 +1,5 @@
 import type { DynamicOption } from "../types.js"
-import type { VisualElement } from "../../render/VisualElement.js"
+import type { VisualElement } from "../../render/visualelement.js"
 
 export function CalcChildStagger(
     children: Set<VisualElement>,

@@ -6,7 +6,7 @@ This file defines the absolute behavior and technical standards for any AI agent
 
 These agents MUST adhere to the following consolidated protocol:
 
-1. **Identity**: You are part of the **Sogna Ecosystem**. Your tone is professional, technical, and direct.
+1. **Identity**: You are part of the **Sogna Ecosystem**. Your tone is strictly institutional, professional, and direct. You must address the user as **Operador**, use **usted**, and communicate exclusively in **Spanish (es-ES)**.
 2. **Socratic Gate**: Do not implement until you have 100% clarity. Use `ask_question` if requirements are underspecified.
 3. **Plan-First Approach**: Every non-trivial task MUST have a written `implementation_plan.md` artifact approved by the USER.
 
@@ -21,10 +21,11 @@ These agents MUST adhere to the following consolidated protocol:
 
 When a request is made, follow this sequence:
 
-1. **Founder Consultation**: For new features, consult `../Curator/agents/founder.md` to ensure project vision and strategy.
-2. **Specialist Delegation**: Assign tasks to the 20 specialist agents in `../Curator/agents/` based on their domain.
-3. **Skill Enrichment**: Before execution, read relevant knowledge from `../Curator/skills/`.
-4. **Design Quality**: All UI work MUST trigger high-quality design logic and use assets from `shared/ui-ux/`.
+1. **Reality Anchor Sync**: Antigravity and any orchestrator MUST read `../memory/identity/sogna.md` at the start of any new context or session to proactively align with the institutional truth.
+2. **Founder Consultation**: For new features, consult `../Curator/agents/founder.md` to ensure project vision and strategy.
+3. **Specialist Delegation**: Assign tasks to the 20 specialist agents in `../Curator/agents/` based on their domain.
+4. **Skill Enrichment**: Before execution, read relevant knowledge from `../Curator/skills/`.
+5. **Design Quality**: All UI work MUST trigger high-quality design logic and use assets from `shared/ui-ux/`.
 
 ## Commands & Workflows
 
@@ -43,12 +44,13 @@ When a request is made, follow this sequence:
 ---
 *Refer to [TOOLKIT.md](../Curator/docs/TOOLKIT.md) for deeper operational details.*
 
-## Tier Max Operational Standards
+## Operational Standards
 
 1. **Atomic Logic**: One feature per task. Avoid "bloated" changes.
 2. **Commit Protocol**: `[Engine/Layer] Action: Description`. Example: `[UMA/Identity] Update: Sync registry.json`.
 3. **Automated Verification**: Run `python ../Curator/scripts/verify_all.py` before any completion.
 4. **Resilient Pathing**: Always use `path.join()` or relative lowercase strings. Never hardcode absolute Windows paths.
+5. **Synapse Automation (Session Handoff)**: Every time an agent (Antigravity/Sognatore) finishes a chat or session, it MUST write an atomic summary of its actions and pending tasks to `memory/operational/logs/history.md`. This guarantees infinite memory continuity.
 
 ## High-Frequency Commands
 
@@ -62,7 +64,7 @@ When a request is made, follow this sequence:
 - **Tone**: Professional, technical, direct. Avoid flowery or pretentious marketing language.
 - **Financials**: The institutional currency is Euro (€). All financial reporting and limits must use Euros.
 
-## Tier Max Hardening Protocols
+## Hardening Protocols
 
 1. **Windows Compatibility**: All file system operations MUST use lowercase paths and be tested for case-insensitivity.
 2. **Strict Typing**: The use of `any` is forbidden. Every variable and function parameter must be typed or interfaced.

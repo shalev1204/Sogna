@@ -229,7 +229,7 @@ export class MemoryHub {
   private async recallIdentity(query: string): Promise<MemoryResult[]> {
     await this.ensureRegistry();
     const hits: MemoryResult[] = [];
-    const identityFiles = this.registry?.layers?.identity?.files || ['rules.md', 'SOGNA_CONTEXT.md'];
+    const identityFiles = this.registry?.layers?.identity?.files || ['rules.md', 'sogna.md'];
     const weight = this.registry?.layers?.identity?.weight || 1.0;
 
     const isRegex = query.startsWith('/') && query.endsWith('/');
@@ -239,7 +239,8 @@ export class MemoryHub {
     }
 
     await Promise.all(identityFiles.map(async (fileName: string) => {
-      const filePath = path.join(this.rootMemory, fileName);
+      const layerPath = this.registry?.layers?.identity?.path || 'identity';
+      const filePath = path.join(this.rootMemory, layerPath, fileName);
       const content = await this.getCachedContent(filePath);
       if (!content) return;
 
@@ -291,7 +292,7 @@ export class MemoryHub {
    * Ensures the system is "connected to everything".
    */
   async fireSynapse(engine: string, type: string, data: any): Promise<void> {
-    const synapseDir = path.join(this.rootMemory, 'synapses', engine.toLowerCase());
+    const synapseDir = path.join(this.rootMemory, 'operational', 'synapses', engine.toLowerCase());
     await fs.ensureDir(synapseDir);
     
     const synapseFile = path.join(synapseDir, `${type.toLowerCase()}.jsonl`);
@@ -310,7 +311,7 @@ export class MemoryHub {
    * Recalls behavioral synapses for a specific engine.
    */
   async recallSynapses(engine: string, type?: string): Promise<any[]> {
-    const synapseDir = path.join(this.rootMemory, 'synapses', engine.toLowerCase());
+    const synapseDir = path.join(this.rootMemory, 'operational', 'synapses', engine.toLowerCase());
     if (!(await fs.pathExists(synapseDir))) return [];
 
     let files = await fs.readdir(synapseDir);
@@ -601,15 +602,15 @@ export class MemoryHub {
     const archiveAfter = this.registry?.synthesis?.archive_after_days || 30;
 
     // 1. Archive Navigator Cache (Non-destructive)
-    const navCache = path.join(this.rootMemory, 'Navigator/cache');
+    const navCache = path.join(this.rootMemory, 'operational', 'navigator', 'cache');
     await pruning.pruneDirectory(navCache, 7);
     
     // 2. Archive Operational Session Data
-    const agentDir = path.join(this.rootMemory, 'agent');
+    const agentDir = path.join(this.rootMemory, 'operational', 'agent');
     await pruning.pruneDirectory(agentDir, archiveAfter);
 
     // 3. Archive Synapse Logs
-    const synapsesDir = path.join(this.rootMemory, 'synapses');
+    const synapsesDir = path.join(this.rootMemory, 'operational', 'synapses');
     await pruning.pruneDirectory(synapsesDir, archiveAfter);
     
     // 4. Entropy Control for Neural Index

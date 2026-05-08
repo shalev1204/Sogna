@@ -1,11 +1,11 @@
 import { IsSognaflowValue } from "../../value/utils/is-sognaflow-value.js"
 import type { SognaflowValue } from "../../value"
 import type { AnyResolvedKeyframe } from "../../animation/types.js"
-import { DOMKeyframesResolver } from "../../animation/keyframes/DOMKeyframesResolver.js"
+import { DOMKeyframesResolver } from "../../animation/keyframes/domkeyframesresolver.js"
 import type { SognaflowNodeOptions } from "../../node/types.js"
 import type { DOMVisualElementOptions } from "./types.js"
 import type { HTMLRenderState } from "../html/types.js"
-import { VisualElement, SognaflowStyle } from "../VisualElement.js"
+import { VisualElement, SognaflowStyle } from "../visualelement.js"
 
 export abstract class DOMVisualElement<
     Instance extends HTMLElement | SVGElement = HTMLElement,

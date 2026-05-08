@@ -1,9 +1,9 @@
 import { Axis, AxisDelta, Box, Delta, Point, SubscriptionManager } from "sognaflow-utils";
-import { JSAnimation } from "../../animation/JSAnimation.js";
+import { JSAnimation } from "../../animation/jsanimation.js";
 import { Transition, ValueAnimationOptions } from "../../animation/types.js";
 import type { Process } from "../../frameloop/types.js";
 import type { ResolvedValues } from "../../render/types.js";
-import type { SognaflowStyle } from "../../render/VisualElement.js";
+import type { SognaflowStyle } from "../../render/visualelement.js";
 import { SognaflowValue } from "../../value";
 import { NodeStack } from "../shared/stack.js";
 import { FlatTree } from "../utils/flat-tree.js";

@@ -11,7 +11,7 @@ class UmaBridge {
     this.root = path.resolve(process.cwd(), 'memory');
     this.registryPath = path.join(this.root, 'registry.json');
     this.securityDir = path.join(this.root, 'security');
-    this.incidentLog = path.join(this.securityDir, 'INCIDENT_LOG.md');
+    this.incidentLog = path.join(this.securityDir, 'incident_log.md');
     this.blacklistPath = path.join(this.securityDir, 'blacklist.json');
   }
 

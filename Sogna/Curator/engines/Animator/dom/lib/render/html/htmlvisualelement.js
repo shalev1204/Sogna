@@ -2,7 +2,7 @@ import { IsCSSVariableName } from "../../animation/utils/is-css-variable.js";
 import { TransformProps } from "../utils/keys-transform.js";
 import { defaultTransformValue, readTransformValue, } from "../dom/parse-transform.js";
 import { measureViewportBox } from "../../projection/utils/measure.js";
-import { DOMVisualElement } from "../dom/DOMVisualElement.js";
+import { DOMVisualElement } from "../dom/domvisualelement.js";
 import { buildHTMLStyles } from "./utils/build-styles.js";
 import { renderHTML } from "./utils/render.js";
 import { ScrapeSognaflowValuesFromProps } from "./utils/scrape-sognaflow-values.js";
@@ -39,4 +39,4 @@ export class HTMLVisualElement extends DOMVisualElement {
         return ScrapeSognaflowValuesFromProps(props, prevProps, visualElement);
     }
 }
-//# sourceMappingURL=HTMLVisualElement.js.map
+//# sourceMappingURL=htmlvisualelement.js.map

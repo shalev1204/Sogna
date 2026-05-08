@@ -1,5 +1,5 @@
 import { sognaflowGlobalConfig } from "sognaflow-utils"
-import type { VisualElement } from "../../render/VisualElement.js"
+import type { VisualElement } from "../../render/visualelement.js"
 import { IsWillChangeSognaflowValue } from "./is.js"
 
 export function AddValueToWillChange(

@@ -1,4 +1,4 @@
-import { createTestNode } from "./TestProjectionNode.js"
+import { createTestNode } from "./testprojectionnode.js"
 import { propagateDirtyNodes, cleanDirtyNodes } from "../create-projection-node.js"
 import type { IProjectionNode } from "../types.js"
 import { nextFrame, nextMicrotask } from "./utils.js"

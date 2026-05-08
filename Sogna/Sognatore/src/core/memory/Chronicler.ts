@@ -18,6 +18,7 @@ interface MemoryIndex {
     fileName: string;
     timestamp: string;
     blocks: string[];
+    keywords?: string[]; // Semantic Optimization
     properties?: Record<string, any>; // Added for indexing
   }>;
   lastUpdated: string;
@@ -99,6 +100,7 @@ export class Chronicler {
       const content = await fs.readFile(filePath, 'utf-8');
       const fragment = this.parseFragment(content, filePath);
       const blocks = this.extractBlocks(fragment.content);
+      const keywords = this.extractKeywords(fragment.content);
 
       index.fragments.push({
         key: fragment.key,
@@ -106,6 +108,7 @@ export class Chronicler {
         fileName: filePath,
         timestamp: fragment.timestamp,
         blocks,
+        keywords,
         properties: fragment.properties
       });
     }
@@ -121,6 +124,22 @@ export class Chronicler {
       blocks.push(match[1]);
     }
     return blocks;
+  }
+
+  private extractKeywords(content: string): string[] {
+    // Basic Semantic Optimization: Extract common high-value words
+    const words = content.toLowerCase().replace(/[^a-z0-9áéíóúñ\s]/g, ' ').split(/\s+/);
+    const stopWords = new Set(['el', 'la', 'los', 'las', 'un', 'una', 'en', 'para', 'por', 'con', 'de', 'del', 'a', 'y', 'o', 'que', 'the', 'is', 'a', 'an', 'and', 'or', 'for', 'to', 'in', 'of', 'with', 'on']);
+    const frequency: Record<string, number> = {};
+    for (const w of words) {
+      if (w.length > 3 && !stopWords.has(w)) {
+        frequency[w] = (frequency[w] || 0) + 1;
+      }
+    }
+    return Object.entries(frequency)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 15)
+      .map(entry => entry[0]);
   }
 
   /**
@@ -161,6 +180,7 @@ export class Chronicler {
       fileName,
       timestamp,
       blocks,
+      keywords: this.extractKeywords(fragment.content),
       properties: props // Persist properties in index
     };
     index.fragments.push(newFragment);
@@ -193,10 +213,11 @@ export class Chronicler {
     const indexMatches = index.fragments.filter(f => {
       if (isBlock) return f.blocks.includes(query.slice(1));
       if (regex) {
-        return regex.test(f.key) || f.tags.some(t => regex!.test(t));
+        return regex.test(f.key) || f.tags.some(t => regex!.test(t)) || (f.keywords && f.keywords.some(k => regex!.test(k)));
       }
       return f.key.toLowerCase().includes(q) || 
-             f.tags.some(t => t.toLowerCase().includes(q));
+             f.tags.some(t => t.toLowerCase().includes(q)) ||
+             (f.keywords && f.keywords.some(k => k.includes(q)));
     });
 
     const results: KnowledgeFragment[] = [];
@@ -227,7 +248,7 @@ export class Chronicler {
         const allFiles = await fs.readdir(sourceDir);
         for (const file of allFiles) {
           const filePath = path.join(sourceDir, file);
-          if (!file.endsWith('.md') || seenFiles.has(filePath) || file === 'index.json') continue;
+          if (!(file.endsWith('.md') || file.endsWith('.csv')) || seenFiles.has(filePath) || file === 'index.json') continue;
           
           const content = await fs.readFile(filePath, 'utf-8');
           const matchFound = regex ? regex.test(content) : content.toLowerCase().includes(q);
@@ -312,8 +333,8 @@ export class Chronicler {
       if (!properties.swarm) {
         if (filePath.includes('skills')) properties.swarm = 'Skills';
         else if (filePath.includes('agents')) properties.swarm = 'Agents';
-        else if (filePath.includes('Sentinel')) properties.swarm = 'Security';
-        else if (filePath.includes('Predatore')) properties.swarm = 'Offensive';
+        else if (filePath.includes('sentinel')) properties.swarm = 'Security';
+        else if (filePath.includes('predatore')) properties.swarm = 'Offensive';
         else if (filePath.includes('engines')) properties.swarm = 'Engines';
         else if (filePath.includes('observability')) properties.swarm = 'Monitor';
         else if (filePath.includes('intelligence')) properties.swarm = 'Core';
@@ -389,7 +410,7 @@ export class Chronicler {
       await PruningService.getInstance().prune(this.indexFile, {
         minWeight: 0.2,
         maxAgeDays: 60,
-        preserveTags: ['institutional', 'sovereign', 'Sentinel']
+        preserveTags: ['institutional', 'sovereign', 'sentinel']
       });
       // Re-read after pruning to ensure we encrypt the clean version
       const data = await fs.readFile(this.indexFile, 'utf8');
@@ -424,7 +445,7 @@ export class Chronicler {
         const stat = await fs.stat(filePath);
         if (stat && stat.isDirectory()) {
           results = results.concat(await this.getFilesRecursively(filePath));
-        } else if (file.endsWith('.md')) {
+        } else if (file.endsWith('.md') || file.endsWith('.csv')) {
           results.push(filePath);
         }
       }

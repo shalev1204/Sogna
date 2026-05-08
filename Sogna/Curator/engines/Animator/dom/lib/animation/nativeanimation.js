@@ -2,7 +2,7 @@ import { invariant, millisecondsToSeconds, noop, secondsToMilliseconds, } from "
 import { setStyle } from "../render/dom/style-set.js";
 import { supportsScrollTimeline } from "../utils/supports/scroll-timeline.js";
 import { GetFinalKeyframe } from "./keyframes/get-final.js";
-import { WithPromise } from "./utils/WithPromise.js";
+import { WithPromise } from "./utils/withpromise.js";
 import { startWaapiAnimation } from "./waapi/start-waapi-animation.js";
 import { applyGeneratorOptions } from "./waapi/utils/apply-generator.js";
 /**
@@ -173,4 +173,4 @@ export class NativeAnimation extends WithPromise {
         }
     }
 }
-//# sourceMappingURL=NativeAnimation.js.map
+//# sourceMappingURL=nativeanimation.js.map

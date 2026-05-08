@@ -124,7 +124,7 @@ for eng in engines:
 
 # 3. Integridad de Gobernanza (SOGNA PRO)
 print("Sentinel-Doctor: Verificando integridad de gobernanza...")
-# Legacy files (commands.md, optimization_log.md) have been purged as per Tier Max protocol.
+# Legacy files (commands.md, optimization_log.md) have been purged as per structural protocol.
 # Only verify core architecture files.
 db_files = [".sognarc.json"]
 for dbf in db_files:

@@ -1630,7 +1630,7 @@ Nodes (1): Persist design system to design-system/<project>/ folder using Master
 ### Community 770 - "Community 770"
 
 Cohesion: 1.0
-Nodes (1): Format design system as MASTER.md with hierarchical override logic.
+Nodes (1): Format design system as master.md with hierarchical override logic.
 
 ### Community 771 - "Community 771"
 
@@ -1969,7 +1969,7 @@ Nodes (1): Detect page type from context and search results.
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
-- **Thin community `Community 770`** (1 nodes): `Format design system as MASTER.md with hierarchical override logic.`
+- **Thin community `Community 770`** (1 nodes): `Format design system as master.md with hierarchical override logic.`
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 

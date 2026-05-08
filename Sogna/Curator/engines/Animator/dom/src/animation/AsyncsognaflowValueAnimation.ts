@@ -1,12 +1,12 @@
 import { sognaflowGlobalConfig, noop } from "sognaflow-utils"
-import { JSAnimation } from "./JSAnimation.js"
+import { JSAnimation } from "./jsanimation.js"
 import { GetFinalKeyframe } from "./keyframes/get-final.js"
 import {
     KeyframeResolver as DefaultKeyframeResolver,
     flushKeyframeResolvers,
     ResolvedKeyframes,
-} from "./keyframes/KeyframesResolver.js"
-import { NativeAnimationExtended } from "./NativeAnimationExtended.js"
+} from "./keyframes/keyframesresolver.js"
+import { NativeAnimationExtended } from "./nativeanimationextended.js"
 import {
     AnimationPlaybackControls,
     AnyResolvedKeyframe,
@@ -15,7 +15,7 @@ import {
 } from "./types.js"
 import { canAnimate } from "./utils/can-animate.js"
 import { MakeAnimationInstant } from "./utils/make-animation-instant.js"
-import { WithPromise } from "./utils/WithPromise.js"
+import { WithPromise } from "./utils/withpromise.js"
 import { supportsBrowserAnimation } from "./waapi/supports/waapi.js"
 
 /**

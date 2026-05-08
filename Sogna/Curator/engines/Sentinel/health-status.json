@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-05-08T17:33:25Z",
+  "timestamp": "2026-05-08T21:52:31Z",
   "system_status": "STABLE",
   "Curator": {
     "status": "STABLE",
-    "latency_ms": 677,
+    "latency_ms": 773,
     "errors": []
   },
   "Engines": {
     "Animator": {
       "status": "UNINSTALLED",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 6245,
+      "latency_ms": 6098,
       "checks": [
         "[config] node_modules MISSING",
         "[core\\client] node_modules MISSING",
@@ -30,25 +30,25 @@
     "Assembler": {
       "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 6001,
+      "latency_ms": 6025,
       "checks": []
     },
     "Navigator": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 1684,
+      "latency_ms": 1676,
       "checks": []
     },
     "Predatore": {
       "status": "STABLE",
       "type": "NodeJS/TS",
-      "latency_ms": 3778,
+      "latency_ms": 3741,
       "checks": []
     },
     "Sentinel": {
       "status": "UNINSTALLED",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 1994,
+      "latency_ms": 1932,
       "checks": [
         "[.] node_modules MISSING"
       ]
@@ -56,13 +56,13 @@
     "Studio": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 7742,
+      "latency_ms": 7761,
       "checks": []
     },
     "Stylist": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 460,
+      "latency_ms": 446,
       "checks": []
     }
   }

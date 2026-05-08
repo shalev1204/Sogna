@@ -1,7 +1,7 @@
 import { AnalyseComplexValue } from "../../../value/types/complex"
 import { GetAnimatableNone } from "../../../value/types/utils/animatable-none.js"
 import { AnyResolvedKeyframe } from "../../types.js"
-import { UnresolvedKeyframes } from "../KeyframesResolver.js"
+import { UnresolvedKeyframes } from "../keyframesresolver.js"
 
 /**
  * If we encounter keyframes like "none" or "0" and we also have keyframes like

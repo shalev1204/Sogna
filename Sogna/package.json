@@ -1,6 +1,7 @@
 {
   "name": "sogna",
   "version": "0.1.0",
+  "slogan": "Build for the Second One",
   "type": "module",
   "private": true,
   "sogna_governance": "./.sognarc.json",
@@ -12,10 +13,10 @@
     "clean": "turbo run clean",
     "prepare": "husky Curator/engines/Sentinel/.husky",
     "sogna:dev": "vite",
-    "sogna:start": "node Curator/bin/Sogna.js",
+    "sogna:start": "node Curator/bin/sogna.js",
     "sogna:dream": "node Curator/bin/dream.js",
-    "sognatore:core": "node Curator/bin/Sognatore.js",
-    "sentinel:audit": "python Curator/engines/Sentinel/Sentinel-doctor.py",
+    "sognatore:core": "node Curator/bin/sognatore.js",
+    "sentinel:audit": "python Curator/engines/Sentinel/sentinel-doctor.py",
     "sentinel:veto": "node Curator/engines/Sentinel/bin/Sentinel-veto.js",
     "memory:sync": "node Curator/bin/memory_sync.js"
   },
@@ -52,6 +53,7 @@
     }
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^6.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-terser": "^0.4.4",

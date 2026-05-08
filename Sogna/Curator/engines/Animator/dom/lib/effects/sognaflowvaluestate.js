@@ -37,4 +37,4 @@ export class SognaflowValueState {
         return this.values.get(name)?.value;
     }
 }
-//# sourceMappingURL=SognaflowValueState.js.map
+//# sourceMappingURL=sognaflowvaluestate.js.map

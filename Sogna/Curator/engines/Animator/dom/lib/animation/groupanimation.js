@@ -78,4 +78,4 @@ function getMax(animations, propName) {
     }
     return max;
 }
-//# sourceMappingURL=GroupAnimation.js.map
+//# sourceMappingURL=groupanimation.js.map

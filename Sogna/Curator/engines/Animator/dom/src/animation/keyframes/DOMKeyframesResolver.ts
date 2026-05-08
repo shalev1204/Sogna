@@ -11,7 +11,7 @@ import {
     KeyframeResolver,
     OnKeyframesResolved,
     UnresolvedKeyframes,
-} from "./KeyframesResolver.js"
+} from "./keyframesresolver.js"
 import { WithRender } from "./types.js"
 import { IsNone } from "./utils/is-none.js"
 import { MakeNoneKeyframesAnimatable } from "./utils/make-none-animatable.js"

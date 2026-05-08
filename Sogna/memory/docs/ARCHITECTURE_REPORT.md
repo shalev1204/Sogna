@@ -1657,7 +1657,7 @@ Nodes (1): Extract AST nodes and edges from a list of code files.      Two-pass 
 ### Community 768 - "Community 768"
 
 Cohesion: 1.0
-Nodes (1): Extrae los tokens de diseño (variables CSS) de MASTER.md.
+Nodes (1): Extrae los tokens de diseño (variables CSS) de master.md.
 
 ### Community 769 - "Community 769"
 
@@ -1857,7 +1857,7 @@ Nodes (1): Persist design system to design-system/<project>/ folder using Master
 ### Community 808 - "Community 808"
 
 Cohesion: 1.0
-Nodes (1): Format design system as MASTER.md with hierarchical override logic.
+Nodes (1): Format design system as master.md with hierarchical override logic.
 
 ### Community 809 - "Community 809"
 
@@ -2032,7 +2032,7 @@ Nodes (1): Persist design system to design-system/<project>/ folder using Master
 ### Community 843 - "Community 843"
 
 Cohesion: 1.0
-Nodes (1): Format design system as MASTER.md with hierarchical override logic.
+Nodes (1): Format design system as master.md with hierarchical override logic.
 
 ### Community 844 - "Community 844"
 
@@ -2351,7 +2351,7 @@ Nodes (1): Detect page type from context and search results.
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
-- **Thin community `Community 768`** (1 nodes): `Extrae los tokens de diseño (variables CSS) de MASTER.md.`
+- **Thin community `Community 768`** (1 nodes): `Extrae los tokens de diseño (variables CSS) de master.md.`
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
@@ -2511,7 +2511,7 @@ Nodes (1): Detect page type from context and search results.
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
-- **Thin community `Community 808`** (1 nodes): `Format design system as MASTER.md with hierarchical override logic.`
+- **Thin community `Community 808`** (1 nodes): `Format design system as master.md with hierarchical override logic.`
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
@@ -2651,7 +2651,7 @@ Nodes (1): Detect page type from context and search results.
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
-- **Thin community `Community 843`** (1 nodes): `Format design system as MASTER.md with hierarchical override logic.`
+- **Thin community `Community 843`** (1 nodes): `Format design system as master.md with hierarchical override logic.`
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 

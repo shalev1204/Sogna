@@ -1,7 +1,7 @@
 import { TransformProps } from "../utils/keys-transform.js";
 import { GetDefaultValueType } from "../../value/types/maps/defaults.js";
 import { createBox } from "../../projection/geometry/models.js";
-import { DOMVisualElement } from "../dom/DOMVisualElement.js";
+import { DOMVisualElement } from "../dom/domvisualelement.js";
 import { camelToDash } from "../dom/utils/camel-to-dash.js";
 import { buildSVGAttrs } from "./utils/build-attrs.js";
 import { camelCaseAttributes } from "./utils/camel-case-attrs.js";
@@ -40,4 +40,4 @@ export class SVGVisualElement extends DOMVisualElement {
         super.mount(instance);
     }
 }
-//# sourceMappingURL=SVGVisualElement.js.map
+//# sourceMappingURL=svgvisualelement.js.map

@@ -1,8 +1,8 @@
 import { clamp } from "sognaflow-utils";
 import { Time } from "../frameloop/sync-time.js";
 import { setStyle } from "../render/dom/style-set.js";
-import { JSAnimation } from "./JSAnimation.js";
-import { NativeAnimation } from "./NativeAnimation.js";
+import { JSAnimation } from "./jsanimation.js";
+import { NativeAnimation } from "./nativeanimation.js";
 import { replaceTransitionType } from "./utils/replace-transition-type.js";
 import { replaceStringEasing } from "./waapi/utils/unsupported-easing.js";
 /**
@@ -82,4 +82,4 @@ export class NativeAnimationExtended extends NativeAnimation {
         sampleAnimation.stop();
     }
 }
-//# sourceMappingURL=NativeAnimationExtended.js.map
+//# sourceMappingURL=nativeanimationextended.js.map

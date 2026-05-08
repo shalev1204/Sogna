@@ -2,7 +2,7 @@ import { Easing } from "sognaflow-utils";
 import { SVGAttributes } from "../render/svg/types.js";
 import { SognaflowValue } from "../value";
 import { Driver } from "./drivers/types.js";
-import { KeyframeResolver } from "./keyframes/KeyframesResolver.js";
+import { KeyframeResolver } from "./keyframes/keyframesresolver.js";
 import { WithRender } from "./keyframes/types.js";
 export type AnyResolvedKeyframe = string | number;
 export interface ProgressTimeline {

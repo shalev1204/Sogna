@@ -1,9 +1,9 @@
-import { GroupAnimation } from "../animation/GroupAnimation.js";
+import { GroupAnimation } from "../animation/groupanimation.js";
 import { Frame } from "../frameloop";
 import { copyBoxInto } from "../projection/geometry/copy.js";
 import { createBox } from "../projection/geometry/models.js";
-import { HTMLProjectionNode } from "../projection/node/HTMLProjectionNode.js";
-import { HTMLVisualElement } from "../render/html/HTMLVisualElement.js";
+import { HTMLProjectionNode } from "../projection/node/htmlprojectionnode.js";
+import { HTMLVisualElement } from "../render/html/htmlvisualelement.js";
 import { visualElementStore } from "../render/store.js";
 import { ResolveElements } from "../utils/resolve-elements.js";
 const layoutSelector = "[data-layout], [data-layout-id]";
@@ -263,4 +263,4 @@ function collectAnimations(afterRecords) {
     });
     return Array.from(animations);
 }
-//# sourceMappingURL=LayoutAnimationBuilder.js.map
+//# sourceMappingURL=layoutanimationbuilder.js.map

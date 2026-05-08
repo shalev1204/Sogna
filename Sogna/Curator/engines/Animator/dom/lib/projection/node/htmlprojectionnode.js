@@ -1,5 +1,5 @@
 import { createProjectionNode } from "./create-projection-node.js";
-import { DocumentProjectionNode } from "./DocumentProjectionNode.js";
+import { DocumentProjectionNode } from "./documentprojectionnode.js";
 export const rootProjectionNode = {
     current: undefined,
 };
@@ -22,4 +22,4 @@ export const HTMLProjectionNode = createProjectionNode({
     },
     checkIsScrollRoot: (instance) => Boolean(window.getComputedStyle(instance).position === "fixed"),
 });
-//# sourceMappingURL=HTMLProjectionNode.js.map
+//# sourceMappingURL=htmlprojectionnode.js.map

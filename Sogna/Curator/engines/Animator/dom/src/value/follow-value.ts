@@ -1,5 +1,5 @@
 import { SognaflowValue, CreateSognaflowValue } from "."
-import { JSAnimation } from "../animation/JSAnimation.js"
+import { JSAnimation } from "../animation/jsanimation.js"
 import { AnyResolvedKeyframe, ValueAnimationTransition } from "../animation/types.js"
 import { Frame } from "../frameloop"
 import { IsSognaflowValue } from "./utils/is-sognaflow-value.js"

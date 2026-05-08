@@ -1,4 +1,4 @@
-import { NativeAnimation } from "../NativeAnimation.js"
+import { NativeAnimation } from "../nativeanimation.js"
 import { AnyResolvedKeyframe } from "../types.js"
 
 const animationMaps = new WeakMap<

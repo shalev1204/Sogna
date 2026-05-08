@@ -1,5 +1,5 @@
 import { createBox } from "../../projection/geometry/models.js";
-import { VisualElement } from "../VisualElement.js";
+import { VisualElement } from "../visualelement.js";
 function isObjectKey(key, object) {
     return key in object;
 }
@@ -36,4 +36,4 @@ export class ObjectVisualElement extends VisualElement {
         return 0;
     }
 }
-//# sourceMappingURL=ObjectVisualElement.js.map
+//# sourceMappingURL=objectvisualelement.js.map

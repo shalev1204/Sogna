@@ -8,4 +8,4 @@ export const DocumentProjectionNode = createProjectionNode({
     }),
     checkIsScrollRoot: () => true,
 });
-//# sourceMappingURL=DocumentProjectionNode.js.map
+//# sourceMappingURL=documentprojectionnode.js.map

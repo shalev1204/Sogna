@@ -1,6 +1,6 @@
 import { ResolveVariant } from "../../render/utils/resolve-dynamic-variants.js"
 import type { AnimationDefinition } from "../../node/types.js"
-import type { VisualElement } from "../../render/VisualElement.js"
+import type { VisualElement } from "../../render/visualelement.js"
 import type { VisualElementAnimationOptions } from "./types.js"
 import { AnimateTarget } from "./visual-element-target.js"
 import { AnimateVariant } from "./visual-element-variant.js"

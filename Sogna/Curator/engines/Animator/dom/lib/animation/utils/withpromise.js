@@ -22,4 +22,4 @@ export class WithPromise {
         return this.finished.then(onResolve, onReject);
     }
 }
-//# sourceMappingURL=WithPromise.js.map
+//# sourceMappingURL=withpromise.js.map

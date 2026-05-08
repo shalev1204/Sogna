@@ -9,7 +9,7 @@ import { calcGeneratorDuration } from "./generators/utils/calc-duration.js";
 import { getGeneratorVelocity } from "./generators/utils/velocity.js";
 import { GetFinalKeyframe } from "./keyframes/get-final.js";
 import { replaceTransitionType } from "./utils/replace-transition-type.js";
-import { WithPromise } from "./utils/WithPromise.js";
+import { WithPromise } from "./utils/withpromise.js";
 const percentToProgress = (percent) => percent / 100;
 export class JSAnimation extends WithPromise {
     constructor(options) {
@@ -384,4 +384,4 @@ export class JSAnimation extends WithPromise {
 export function AnimateValue(options) {
     return new JSAnimation(options);
 }
-//# sourceMappingURL=JSAnimation.js.map
+//# sourceMappingURL=jsanimation.js.map

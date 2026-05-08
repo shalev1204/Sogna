@@ -1,10 +1,10 @@
-export * from "./animation/AsyncsognaflowValueAnimation.js";
-export * from "./animation/GroupAnimation.js";
-export * from "./animation/GroupAnimationWithThen.js";
-export * from "./animation/JSAnimation.js";
-export * from "./animation/NativeAnimation.js";
-export * from "./animation/NativeAnimationExtended.js";
-export * from "./animation/NativeAnimationWrapper.js";
+export * from "./animation/asyncsognaflowvalueanimation.js";
+export * from "./animation/groupanimation.js";
+export * from "./animation/groupanimationwiththen.js";
+export * from "./animation/jsanimation.js";
+export * from "./animation/nativeanimation.js";
+export * from "./animation/nativeanimationextended.js";
+export * from "./animation/nativeanimationwrapper.js";
 export * from "./animation/types.js";
 export * from "./animation/utils/active-animations.js";
 export { CalcChildStagger } from "./animation/utils/calc-child-stagger.js";
@@ -32,8 +32,8 @@ export * from "./animation/generators/spring.js";
 export * from "./animation/generators/utils/calc-duration.js";
 export * from "./animation/generators/utils/create-generator-easing.js";
 export * from "./animation/generators/utils/is-generator.js";
-export * from "./animation/keyframes/DOMKeyframesResolver.js";
-export * from "./animation/keyframes/KeyframesResolver.js";
+export * from "./animation/keyframes/domkeyframesresolver.js";
+export * from "./animation/keyframes/keyframesresolver.js";
 export * from "./animation/keyframes/offsets/default.js";
 export * from "./animation/keyframes/offsets/fill.js";
 export * from "./animation/keyframes/offsets/time.js";
@@ -133,15 +133,15 @@ export * from "./view/types.js";
 export * from "./view/utils/get-layer-info.js";
 export * from "./view/utils/get-view-animations.js";
 // Visual Element
-export { DOMVisualElement } from "./render/dom/DOMVisualElement.js";
+export { DOMVisualElement } from "./render/dom/domvisualelement.js";
 export * from "./render/dom/types.js";
-export { Feature } from "./render/Feature.js";
-export { HTMLVisualElement } from "./render/html/HTMLVisualElement.js";
+export { Feature } from "./render/feature.js";
+export { HTMLVisualElement } from "./render/html/htmlvisualelement.js";
 export * from "./render/html/types.js";
-export { ObjectVisualElement } from "./render/object/ObjectVisualElement.js";
+export { ObjectVisualElement } from "./render/object/objectvisualelement.js";
 export { visualElementStore } from "./render/store.js";
-export { SVGVisualElement } from "./render/svg/SVGVisualElement.js";
-export { GetFeatureDefinitions, GetFeatureDefinitions as getFeatureDefinitions, SetFeatureDefinitions, SetFeatureDefinitions as setFeatureDefinitions, VisualElement, } from "./render/VisualElement.js";
+export { SVGVisualElement } from "./render/svg/svgvisualelement.js";
+export { GetFeatureDefinitions, GetFeatureDefinitions as getFeatureDefinitions, SetFeatureDefinitions, SetFeatureDefinitions as setFeatureDefinitions, VisualElement, } from "./render/visualelement.js";
 // Animation State
 export { checkVariantsDidChange, createAnimationState, } from "./render/utils/animation-state.js";
 // Variant utilities
@@ -184,9 +184,9 @@ export { Delay, Delay as delay, DelayInSeconds, DelayInSeconds as delayInSeconds
 export { ResolveSognaflowValue, ResolveSognaflowValue as resolvesognaflowValue, } from "./value/utils/resolve-sognaflow-value.js";
 // Projection node system
 export { cleanDirtyNodes, createProjectionNode, propagateDirtyNodes, } from "./projection/node/create-projection-node.js";
-export { DocumentProjectionNode } from "./projection/node/DocumentProjectionNode.js";
+export { DocumentProjectionNode } from "./projection/node/documentprojectionnode.js";
 export { nodeGroup } from "./projection/node/group.js";
-export { HTMLProjectionNode, rootProjectionNode, } from "./projection/node/HTMLProjectionNode.js";
+export { HTMLProjectionNode, rootProjectionNode, } from "./projection/node/htmlprojectionnode.js";
 export { globalProjectionState } from "./projection/node/state.js";
 export { NodeStack } from "./projection/shared/stack.js";
 // HTML/SVG utilities
@@ -204,7 +204,7 @@ export { ScrapeSognaflowValuesFromProps as ScrapeSVGSognaflowValuesFromProps, Sc
 /**
  * Layout animations
  */
-export { LayoutAnimationBuilder, parseAnimateLayoutArgs, } from "./layout/LayoutAnimationBuilder.js";
+export { LayoutAnimationBuilder, parseAnimateLayoutArgs, } from "./layout/layoutanimationbuilder.js";
 /**
  * Deprecated
  */
