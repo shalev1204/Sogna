@@ -5,8 +5,8 @@ import { MutableRefObject, useContext, useMemo, useRef } from "react"
 import {
     LayoutGroupContext,
     LayoutGroupContextProps,
-} from "../../context/LayoutGroupContext.js"
-import { DeprecatedLayoutGroupContext } from "../../context/DeprecatedLayoutGroupContext.js"
+} from "../../context/layoutgroupcontext.js"
+import { DeprecatedLayoutGroupContext } from "../../context/deprecatedlayoutgroupcontext.js"
 import { nodeGroup } from "../../projection.js"
 import { useForceUpdate } from "../../utils/use-force-update.js"
 

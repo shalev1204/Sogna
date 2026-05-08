@@ -11,7 +11,7 @@ The Sogna ecosystem has officially reached **Terminal Superiority**. After a mul
 
 | Domain | Institutional DNA (Claw) | Sogna Apex Implementation | Status |
 |---|---|---|---|
-| **Shell Security** | 18+ Validation Submodules | Institutional `PolicyEngine` (Toolkit) | **PARITY+** |
+| **Shell Security** | 18+ Validation Submodules | Institutional `PolicyEngine` (Curator) | **PARITY+** |
 | **Context Hygiene** | NUL-byte & Size Guards | `ToolRegistry` Silent Sanity Locks | **PARITY** |
 | **Workspace Safety** | Canonical Path Jail | `ensureInWorkspace` helper | **PARITY** |
 | **Efficiency** | 16KB Truncation | Surgical Truncation with precision footer | **SUPERIOR** |

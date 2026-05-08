@@ -1,4 +1,4 @@
-﻿## Design System: SOGNA INSTITUTIONAL INTERFACE
+## Design System: SOGNA INSTITUTIONAL INTERFACE
 
 ### Pattern
 
@@ -37,29 +37,20 @@
 - **Body:** Inter
 - **Mood:** Futuristic + Scientific typography
 
-### Key Effects
+### Key Effects (Premium Layer)
 
-Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emission, high readability, visible focus
+- **Glassmorphism**: `backdrop-filter: blur(12px) saturate(180%); background: rgba(5, 5, 16, 0.7);`
+- **Glow**: Minimal cyan glow (`text-shadow: 0 0 10px var(--color-primary)`).
+- **Motion (SognaFlow)**: 
+  - Standard Ease: `cubic-bezier(0.4, 0, 0.2, 1)` (300ms)
+  - Entrance: `backOut` for cards (duration: 0.5s)
+  - Hover Scale: `1.02` with spring physics.
 
-### Avoid (Anti-patterns)
-
-- Generic tech design
-- No viz
-
-### Pre-Delivery Checklist
-
-- [ ] No emojis as icons (use SVG: Heroicons/Lucide)
-- [ ] cursor-pointer on all clickable elements
-- [ ] Hover states with smooth transitions (150-300ms)
-- [ ] Light mode: text contrast 4.5:1 minimum
-- [ ] Focus states visible for keyboard nav
-- [ ] prefers-reduced-motion respected
-- [ ] Responsive: 375px, 768px, 1024px, 1440px
-
-### Design Tokens (CSS)
+### Design Tokens (CSS - Tier Max)
 
 ```css
 :root {
+  /* Colors */
   --color-primary: #00FFFF;
   --color-on-primary: #0F172A;
   --color-secondary: #7B61FF;
@@ -70,13 +61,24 @@ Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emiss
   --color-border: #333344;
   --color-destructive: #EF4444;
   --color-ring: #00FFFF;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(5, 5, 16, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(12px);
+
+  /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
-  --density-scale: 1.0;
-  --base-gap: calc(1rem * var(--density-scale));
-  --base-padding: calc(1.5rem * var(--density-scale));
+  
+  /* Animation (SognaFlow Tokens) */
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 ```

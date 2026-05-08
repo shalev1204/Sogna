@@ -1,5 +1,5 @@
 import { Feature, type VisualElement } from "sognaflow-dom";
-import { VisualElementDragControls } from "./VisualElementDragControls.js";
+import { VisualElementDragControls } from "./visualelementdragcontrols.js";
 export declare class DragGesture extends Feature<HTMLElement> {
     controls: VisualElementDragControls;
     removeGroupControls: Function;

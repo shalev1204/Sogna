@@ -2,11 +2,11 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { invariant, warning } from "sognaflow-utils";
 import { forwardRef, useContext } from "react";
-import { LayoutGroupContext } from "../context/LayoutGroupContext.js";
-import { LazyContext } from "../context/LazyContext.js";
-import { sognaflowConfigContext } from "../context/MotionConfigContext.js";
-import { sognaflowContext } from "../context/MotionContext/index.js";
-import { useCreatesognaflowContext } from "../context/MotionContext/create.js";
+import { LayoutGroupContext } from "../context/layoutgroupcontext.js";
+import { LazyContext } from "../context/lazycontext.js";
+import { sognaflowConfigContext } from "../context/motionconfigcontext.js";
+import { sognaflowContext } from "../context/motioncontext/index.js";
+import { useCreatesognaflowContext } from "../context/motioncontext/create.js";
 import { useRender } from "../render/dom/use-render.js";
 import { isSVGComponent } from "../render/dom/utils/is-svg-component.js";
 import { useHTMLVisualState } from "../render/html/use-html-visual-state.js";

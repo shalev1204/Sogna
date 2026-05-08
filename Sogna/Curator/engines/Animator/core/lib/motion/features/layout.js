@@ -1,5 +1,5 @@
 import { HTMLProjectionNode } from "sognaflow-dom";
-import { MeasureLayout } from "./layout/MeasureLayout.js";
+import { MeasureLayout } from "./layout/measurelayout.js";
 export const layout = {
     layout: {
         ProjectionNode: HTMLProjectionNode,

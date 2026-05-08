@@ -1,6 +1,6 @@
 "use client";
 import { useContext } from "react";
-import { PresenceContext } from "../../context/PresenceContext.js";
+import { PresenceContext } from "../../context/presencecontext.js";
 export function usePresenceData() {
     const context = useContext(PresenceContext);
     return context ? context.custom : undefined;

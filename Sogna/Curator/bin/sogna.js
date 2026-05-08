@@ -154,8 +154,8 @@ program
 
     const SOGNA_ROOT_CHECK = path.join(__dirname, '..', '..');
     checkFile('Motor Sognatore', path.join(SOGNA_ROOT_CHECK, 'Sognatore'));
-    checkFile('Toolkit Antigravity', path.join(SOGNA_ROOT_CHECK, 'toolkit'));
-    checkFile('Identidad Soberana', path.join(SOGNA_ROOT_CHECK, 'memory', 'rules.md'));
+    checkFile('Curator Management Layer', path.join(SOGNA_ROOT_CHECK, 'Curator'));
+    checkFile('Identidad Soberana', path.join(SOGNA_ROOT_CHECK, 'memory', 'identity', 'rules.md'));
     checkFile('Metadatos de Agente', path.join(SOGNA_ROOT_CHECK, 'Sognatore', 'config', 'agent_metadata.json'));
 
     if (options.secure) {
@@ -176,13 +176,13 @@ program
   .command('toolkit')
   .description('Explore the legacy Antigravity Toolkit assets')
   .action(async () => {
-    const toolkitPath = path.join(process.cwd(), 'Sogna', 'toolkit');
+    const toolkitPath = path.join(process.cwd(), 'Sogna', 'Curator');
     if (!fs.existsSync(toolkitPath)) {
-      console.log(chalk.red(`\n✘ No se encontró el Toolkit en Sogna/toolkit.`));
+      console.log(chalk.red(`\n✘ No se encontró el Curator en Sogna/Curator.`));
       return;
     }
 
-    console.log(chalk.magenta(`\n[SOGNA] 🛠️  Explorando Antigravity Toolkit...`));
+    console.log(chalk.magenta(`\n[SOGNA] 🛠️  Explorando Curator Management Layer...`));
     
     const categories = ['engines', 'data', 'bin'];
     for (const cat of categories) {

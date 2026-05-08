@@ -3,7 +3,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { isHTMLElement } from "sognaflow-dom";
 import * as React from "react";
 import { useContext, useId, useInsertionEffect, useRef } from "react";
-import { sognaflowConfigContext } from "../../context/MotionConfigContext.js";
+import { sognaflowConfigContext } from "../../context/motionconfigcontext.js";
 import { useComposedRefs } from "../../utils/use-composed-ref.js";
 /**
  * Measurement functionality has to be within a separate component
@@ -101,4 +101,4 @@ export function PopChild({ children, isPresent, anchorX, anchorY, root, pop }) {
             ? children
             : React.cloneElement(children, { ref: composedRef }) }));
 }
-//# sourceMappingURL=PopChild.js.map
+//# sourceMappingURL=popchild.js.map

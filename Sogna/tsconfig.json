@@ -32,6 +32,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "Sognatore/src", "Curator/engines"],
+  "include": ["src", "Sognatore/src", "Curator/engines", "scratch"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

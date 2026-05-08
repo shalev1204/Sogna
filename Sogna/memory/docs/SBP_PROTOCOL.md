@@ -11,7 +11,7 @@ The Sogna Bridge Protocol (SBP) is the mandatory communication standard for all 
 Every message or command in the ecosystem must be attributed to a registered Agent ID.
 
 - **Nucleus Agents**: Antigravity, Sognatore-Core.
-- **Specialist Agents**: IDs located in `toolkit/agents/`.
+- **Specialist Agents**: IDs located in `Curator/agents/`.
 - **Worker Swarms**: Predatore-X instances.
 
 ## 2. Command Format (JSON-RPC 2.0 based)
@@ -49,7 +49,7 @@ Errors must NEVER be swallowed. The SBP requires:
 
 Only designated **Intelligence Swarms** (Brain, System-Architect) can write to the semantic memory.
 
-- **Toolkit to Sognatore**: Via `MemoryHub.ts`.
+- **Curator to Sognatore**: Via `MemoryHub.ts`.
 - **Sognatore to Toolkit**: Via `AuditRegistry.json` updates.
 
 ---

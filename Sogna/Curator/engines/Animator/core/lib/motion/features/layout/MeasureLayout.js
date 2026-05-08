@@ -3,8 +3,8 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { frame, microtask, globalProjectionState } from "sognaflow-dom";
 import { Component, useContext } from "react";
 import { usePresence } from "../../../components/animate-presence/use-presence.js";
-import { LayoutGroupContext, } from "../../../context/LayoutGroupContext.js";
-import { SwitchLayoutGroupContext } from "../../../context/SwitchLayoutGroupContext.js";
+import { LayoutGroupContext, } from "../../../context/layoutgroupcontext.js";
+import { SwitchLayoutGroupContext } from "../../../context/switchlayoutgroupcontext.js";
 /**
  * Track whether we've taken any snapshots yet. If not,
  * we can safely skip notification of didUpdate.
@@ -130,4 +130,4 @@ export function MeasureLayout(props) {
     const layoutGroup = useContext(LayoutGroupContext);
     return (_jsx(MeasureLayoutWithContext, { ...props, layoutGroup: layoutGroup, switchLayoutGroup: useContext(SwitchLayoutGroupContext), isPresent: isPresent, safeToRemove: safeToRemove }));
 }
-//# sourceMappingURL=MeasureLayout.js.map
+//# sourceMappingURL=measurelayout.js.map

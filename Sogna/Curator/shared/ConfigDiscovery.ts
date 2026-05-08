@@ -1,7 +1,7 @@
-import fs from 'fs-extra';
-import path from 'path';
-import os from 'os';
-import dotenv from 'dotenv';
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import * as os from 'os';
+import * as dotenv from 'dotenv';
 
 export interface SognaConfig {
     securityTier: 'standard' | 'high' | 'max';

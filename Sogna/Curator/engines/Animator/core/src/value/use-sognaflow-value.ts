@@ -2,7 +2,7 @@
 
 import { sognaflowValue } from "sognaflow-dom"
 import { useContext, useEffect, useState } from "react"
-import { sognaflowConfigContext } from "../context/MotionConfigContext"
+import { sognaflowConfigContext } from "../context/motionconfigcontext"
 import { useConstant } from "../utils/use-constant.js"
 
 /**

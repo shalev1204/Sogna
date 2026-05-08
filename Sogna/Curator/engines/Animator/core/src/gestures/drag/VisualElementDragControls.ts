@@ -25,7 +25,7 @@ import { extractEventInfo } from "../../events/event-info.js"
 import { sognaflowProps } from "../../motion/types"
 import { getContextWindow } from "../../utils/get-context-window.js"
 import { isRefObject } from "../../utils/is-ref-object.js"
-import { PanSession } from "../pan/PanSession.js"
+import { PanSession } from "../pan/pansession.js"
 import {
     applyConstraints,
     calcOrigin,

@@ -1,7 +1,7 @@
 "use client";
 import { cancelFrame, frame } from "sognaflow-dom";
 import { useContext, useEffect, useRef } from "react";
-import { sognaflowConfigContext } from "../context/MotionConfigContext.js";
+import { sognaflowConfigContext } from "../context/motionconfigcontext.js";
 export function useAnimationFrame(callback) {
     const initialTimestamp = useRef(0);
     const { isStatic } = useContext(sognaflowConfigContext);

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { sognaflowConfigContext } from "../../context/MotionConfigContext.js";
+import { sognaflowConfigContext } from "../../context/motionconfigcontext.js";
 import { IsValidProp } from "../../render/dom/utils/filter-props.js";
 export interface sognaflowConfigProps extends Partial<sognaflowConfigContext> {
     children?: React.ReactNode;

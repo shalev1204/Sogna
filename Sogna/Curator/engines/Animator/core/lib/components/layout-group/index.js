@@ -1,8 +1,8 @@
 "use client";
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useContext, useMemo, useRef } from "react";
-import { LayoutGroupContext, } from "../../context/LayoutGroupContext.js";
-import { DeprecatedLayoutGroupContext } from "../../context/DeprecatedLayoutGroupContext.js";
+import { LayoutGroupContext, } from "../../context/layoutgroupcontext.js";
+import { DeprecatedLayoutGroupContext } from "../../context/deprecatedlayoutgroupcontext.js";
 import { nodeGroup } from "../../projection.js";
 import { useForceUpdate } from "../../utils/use-force-update.js";
 const shouldInheritGroup = (inherit) => inherit === true;

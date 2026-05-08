@@ -1,4 +1,4 @@
-import { PresenceContextProps } from "../../context/PresenceContext.js";
+import { PresenceContextProps } from "../../context/presencecontext.js";
 export type SafeToRemove = () => void;
 type AlwaysPresent = [true, null];
 type Present = [true];

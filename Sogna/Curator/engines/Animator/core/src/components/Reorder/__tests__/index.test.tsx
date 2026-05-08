@@ -1,6 +1,6 @@
 import { useContext, useLayoutEffect, useRef } from "react"
 import { Reorder } from ".."
-import { ReorderContext } from "../../../context/ReorderContext.js"
+import { ReorderContext } from "../../../context/reordercontext.js"
 import { render } from "../../../jest.setup.js"
 
 describe("Reorder", () => {

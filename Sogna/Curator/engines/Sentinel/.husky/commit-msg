@@ -1,20 +1,17 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
 echo "\n📋 [SOGNA] Verifying institutional commit rigor..."
 
 COMMIT_MSG=$(cat "$1")
-# Expresión regular para Conventional Commits adaptado a Sogna
-# Permite: feat, fix, refactor, chore, docs, style, test, build, ci, revert
-# Ejemplo: "feat: implement Animator DOM core"
+# Expresion regular para Conventional Commits adaptado a Sogna
 REGEXP="^(feat|fix|refactor|chore|docs|style|test|build|ci|revert)(\(.+\))?: .+$"
 
 if ! echo "$COMMIT_MSG" | grep -iqE "$REGEXP"; then
-  echo "❌ Error: El mensaje del commit no sigue el rigor institucional de Sogna."
-  echo "Formato requerido: <tipo>(opcional): <descripción>"
-  echo "Tipos válidos: feat, fix, refactor, chore, docs, style, test, build, ci, revert"
+  echo "\xe2\x9d\x8c Error: El mensaje del commit no sigue el rigor institucional de Sogna."
+  echo "Formato requerido: <tipo>(opcional): <descripci\xc3\xb3n>"
+  echo "Tipos v\xc3\xa1lidos: feat, fix, refactor, chore, docs, style, test, build, ci, revert"
   echo "Tu mensaje fue: \"$COMMIT_MSG\""
   exit 1
 fi
 
-echo "✅ [SOGNA] Rigor verificado. Procediendo..."
+echo "\xe2\x9c\x85 [SOGNA] Rigor verificado. Procediendo..."

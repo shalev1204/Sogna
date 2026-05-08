@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import chalk from 'chalk';
-import path from 'path';
+import * as path from 'path';
 
 export interface PruningOptions {
   minWeight: number;

@@ -13,9 +13,33 @@ export interface PolicyResult {
   errors: string[];
 }
 
+export interface SecurityContext {
+  intent?: string;
+  command?: string;
+  sensitive?: boolean;
+  tokens_consumed?: number;
+  provider?: string;
+  path?: string;
+  content?: string;
+  agentPid?: number;
+  [key: string]: unknown;
+}
+
+export interface PreExecutionPolicy {
+  name: string;
+  rule: string;
+  action?: Decision;
+}
+
+export interface PreDeploymentPolicy {
+  name: string;
+  gates: string[];
+  action?: Decision;
+}
+
 export interface ApprovalGatePolicy {
   name: string;
-  action: string;
+  action: Decision;
   reason: string;
   phase?: string;
   timeout_minutes?: number;
@@ -27,16 +51,24 @@ export interface ResourcePolicy {
   name: string;
   providers?: string[];
   max_tokens?: number;
-  on_exceed?: string;
+  on_exceed?: Decision;
 }
 
-export const RULE_EVALUATORS: Record<string, (context: any) => boolean> = {
+export interface DataPolicy {
+  name: string;
+  type: 'PII' | 'SECRET' | 'CREDENTIAL' | string;
+  action?: Decision;
+}
+
+export type AnyPolicy = PreExecutionPolicy | PreDeploymentPolicy | ApprovalGatePolicy | ResourcePolicy | DataPolicy;
+
+export const RULE_EVALUATORS: Record<string, (context: SecurityContext) => boolean> = {
   'no-destructive': (ctx) => !/rm\s+-rf\s+\//.test(ctx.intent || ctx.command || ''),
   'no-env-leak': (ctx) => !/printenv|env|set/.test(ctx.intent || ctx.command || ''),
-  'workspace-only': (ctx) => true, // Placeholder for actual boundary check
+  'workspace-only': (_ctx) => true, // Placeholder for actual boundary check
 };
 
-export function evaluateRule(rule: string, context: any): boolean {
+export function evaluateRule(rule: string, context: SecurityContext): boolean {
   const evaluator = RULE_EVALUATORS[rule];
   if (evaluator) return evaluator(context);
   
@@ -45,7 +77,7 @@ export function evaluateRule(rule: string, context: any): boolean {
     const regex = new RegExp(rule);
     return !regex.test(context.intent || context.command || '');
   } catch (_) {
-    return true; // Safe by default if rule is malformed? No, but let's maintain flow.
+    return true; // Safe by default if rule is malformed
   }
 }
 
@@ -65,32 +97,41 @@ export function scanContent(content: string, type: string): string[] {
   return findings;
 }
 
+export interface PolicyStructure {
+  pre_execution?: PreExecutionPolicy[];
+  pre_deployment?: PreDeploymentPolicy[];
+  approval_gates?: ApprovalGatePolicy[];
+  resource?: ResourcePolicy[];
+  data?: DataPolicy[];
+  policies?: PolicyStructure; // Handle nested wrap
+}
+
 // Core Validators
-export function validatePreExecution(entry: any): PolicyResult {
+export function validatePreExecution(entry: Partial<PreExecutionPolicy>): PolicyResult {
   const errors: string[] = [];
   if (!entry || !entry.rule) errors.push('Rule definition missing');
   return { valid: errors.length === 0, errors };
 }
 
-export function validatePreDeployment(entry: any): PolicyResult {
+export function validatePreDeployment(entry: Partial<PreDeploymentPolicy>): PolicyResult {
   const errors: string[] = [];
   if (!entry || !entry.gates) errors.push('Gating definition missing');
   return { valid: errors.length === 0, errors };
 }
 
-export function validateResource(entry: any): PolicyResult {
+export function validateResource(entry: Partial<ResourcePolicy>): PolicyResult {
   const errors: string[] = [];
   if (!entry || (!entry.providers && !entry.max_tokens)) errors.push('Resource constraint missing');
   return { valid: errors.length === 0, errors };
 }
 
-export function validateData(entry: any): PolicyResult {
+export function validateData(entry: Partial<DataPolicy>): PolicyResult {
   const errors: string[] = [];
   if (!entry || !entry.type) errors.push('Data scan type missing');
   return { valid: errors.length === 0, errors };
 }
 
-export function validateApprovalGate(entry: any): PolicyResult {
+export function validateApprovalGate(entry: Partial<ApprovalGatePolicy>): PolicyResult {
   const errors: string[] = [];
   if (!entry || !entry.name) errors.push('Gate name missing');
   return { valid: errors.length === 0, errors };

@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useContext, useEffect, useId } from "react";
-import { PresenceContext, } from "../../context/PresenceContext.js";
+import { PresenceContext, } from "../../context/presencecontext.js";
 /**
  * When a component is the child of `AnimatePresence`, it can use `usePresence`
  * to access information about whether it's still present in the React tree.

@@ -8,14 +8,14 @@ import {
 } from "sognaflow-dom"
 import * as React from "react"
 import { useContext, useEffect, useInsertionEffect, useRef } from "react"
-import { LazyContext } from "../../context/LazyContext.js"
-import { sognaflowConfigContext } from "../../context/MotionConfigContext.js"
-import { sognaflowContext } from "../../context/MotionContext/index.js"
-import { PresenceContext } from "../../context/PresenceContext.js"
+import { LazyContext } from "../../context/lazycontext.js"
+import { sognaflowConfigContext } from "../../context/motionconfigcontext.js"
+import { sognaflowContext } from "../../context/motioncontext/index.js"
+import { PresenceContext } from "../../context/presencecontext.js"
 import {
     InitialProsognaflowConfig,
     SwitchLayoutGroupContext,
-} from "../../context/SwitchLayoutGroupContext.js"
+} from "../../context/switchlayoutgroupcontext.js"
 import { sognaflowProps } from "../../motion/types"
 import type { IProjectionNode } from "sognaflow-dom"
 import { DOMsognaflowComponents } from "../../render/dom/types.js"

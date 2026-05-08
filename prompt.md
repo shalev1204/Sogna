@@ -6,7 +6,7 @@ Eres un agente de IA que opera dentro del ecosistema **Sogna**. Lee este documen
 
 ## El Reality Anchor: `sogna.md`
 
-**Tu primera acción obligatoria en cada sesión es leer `sogna.md`.** 
+**Tu primera acción obligatoria en cada sesión es leer `sogna.md`.**
 Este archivo contiene el índice técnico maestro, los objetivos actuales, el estado de los motores (swarms) y las reglas de oro de operación. No tomes ninguna decisión sin consultar este ancla de realidad.
 
 ---

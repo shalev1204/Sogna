@@ -14,7 +14,7 @@
     {
       "key": "agent-manager",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\agent-manager.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\agent-manager.md",
       "timestamp": "2026-04-30T17:56:33.494Z",
       "blocks": [],
       "properties": {
@@ -47,7 +47,7 @@
     {
       "key": "biz-finance",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-finance.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-finance.md",
       "timestamp": "2026-04-30T17:56:33.494Z",
       "blocks": [],
       "properties": {
@@ -81,7 +81,7 @@
     {
       "key": "biz-hr",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-hr.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-hr.md",
       "timestamp": "2026-04-30T17:56:33.494Z",
       "blocks": [],
       "properties": {
@@ -115,7 +115,7 @@
     {
       "key": "biz-investor",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-investor.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-investor.md",
       "timestamp": "2026-04-30T17:56:33.495Z",
       "blocks": [],
       "properties": {
@@ -150,7 +150,7 @@
     {
       "key": "biz-legal",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-legal.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-legal.md",
       "timestamp": "2026-04-30T17:56:33.495Z",
       "blocks": [],
       "properties": {
@@ -185,7 +185,7 @@
     {
       "key": "biz-marketing",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-marketing.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-marketing.md",
       "timestamp": "2026-04-30T17:56:33.495Z",
       "blocks": [],
       "properties": {
@@ -220,7 +220,7 @@
     {
       "key": "biz-partnerships",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-partnerships.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-partnerships.md",
       "timestamp": "2026-04-30T17:56:33.495Z",
       "blocks": [],
       "properties": {
@@ -254,7 +254,7 @@
     {
       "key": "biz-sales",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-sales.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-sales.md",
       "timestamp": "2026-04-30T17:56:33.495Z",
       "blocks": [],
       "properties": {
@@ -287,7 +287,7 @@
     {
       "key": "biz-support",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\biz-support.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\biz-support.md",
       "timestamp": "2026-04-30T17:56:33.496Z",
       "blocks": [],
       "properties": {
@@ -322,7 +322,7 @@
     {
       "key": "brain",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\brain.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\brain.md",
       "timestamp": "2026-04-30T17:56:33.496Z",
       "blocks": [],
       "properties": {
@@ -355,7 +355,7 @@
     {
       "key": "code-archaeologist",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\code-archaeologist.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\code-archaeologist.md",
       "timestamp": "2026-04-30T17:56:33.496Z",
       "blocks": [],
       "properties": {
@@ -394,7 +394,7 @@
     {
       "key": "data-analyst",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\data-analyst.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\data-analyst.md",
       "timestamp": "2026-04-30T17:56:33.496Z",
       "blocks": [],
       "properties": {
@@ -425,7 +425,7 @@
     {
       "key": "data-engineer",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\data-engineer.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\data-engineer.md",
       "timestamp": "2026-04-30T17:56:33.496Z",
       "blocks": [],
       "properties": {
@@ -456,7 +456,7 @@
     {
       "key": "data-scientist",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\data-scientist.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\data-scientist.md",
       "timestamp": "2026-04-30T17:56:33.497Z",
       "blocks": [],
       "properties": {
@@ -486,7 +486,7 @@
     {
       "key": "debugger",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\debugger.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\debugger.md",
       "timestamp": "2026-04-30T17:56:33.497Z",
       "blocks": [],
       "properties": {
@@ -523,7 +523,7 @@
     {
       "key": "devops-engineer",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\devops-engineer.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\devops-engineer.md",
       "timestamp": "2026-04-30T17:56:33.497Z",
       "blocks": [],
       "properties": {
@@ -562,7 +562,7 @@
     {
       "key": "documentation-writer",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\documentation-writer.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\documentation-writer.md",
       "timestamp": "2026-04-30T17:56:33.497Z",
       "blocks": [],
       "properties": {
@@ -593,7 +593,7 @@
     {
       "key": "eng-api",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-api.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-api.md",
       "timestamp": "2026-04-30T17:56:33.497Z",
       "blocks": [],
       "properties": {
@@ -632,7 +632,7 @@
     {
       "key": "eng-backend",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-backend.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-backend.md",
       "timestamp": "2026-04-30T17:56:33.497Z",
       "blocks": [],
       "properties": {
@@ -671,7 +671,7 @@
     {
       "key": "eng-database",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-database.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-database.md",
       "timestamp": "2026-04-30T17:56:33.498Z",
       "blocks": [],
       "properties": {
@@ -711,7 +711,7 @@
     {
       "key": "eng-frontend",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-frontend.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-frontend.md",
       "timestamp": "2026-04-30T17:56:33.498Z",
       "blocks": [],
       "properties": {
@@ -751,7 +751,7 @@
     {
       "key": "eng-infra",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-infra.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-infra.md",
       "timestamp": "2026-04-30T17:56:33.498Z",
       "blocks": [],
       "properties": {
@@ -794,7 +794,7 @@
     {
       "key": "eng-mobile",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-mobile.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-mobile.md",
       "timestamp": "2026-04-30T17:56:33.498Z",
       "blocks": [],
       "properties": {
@@ -833,7 +833,7 @@
     {
       "key": "eng-perf",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-perf.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-perf.md",
       "timestamp": "2026-04-30T17:56:33.499Z",
       "blocks": [],
       "properties": {
@@ -872,7 +872,7 @@
     {
       "key": "eng-qa",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\eng-qa.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\eng-qa.md",
       "timestamp": "2026-04-30T17:56:33.499Z",
       "blocks": [],
       "properties": {
@@ -912,7 +912,7 @@
     {
       "key": "explorer-agent",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\explorer-agent.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\explorer-agent.md",
       "timestamp": "2026-04-30T17:56:33.500Z",
       "blocks": [],
       "properties": {
@@ -942,7 +942,7 @@
     {
       "key": "founder",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\founder.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\founder.md",
       "timestamp": "2026-04-30T17:56:33.500Z",
       "blocks": [],
       "properties": {
@@ -973,7 +973,7 @@
     {
       "key": "game-developer",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\game-developer.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\game-developer.md",
       "timestamp": "2026-04-30T17:56:33.500Z",
       "blocks": [],
       "properties": {
@@ -1012,7 +1012,7 @@
     {
       "key": "growth-ads",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\growth-ads.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\growth-ads.md",
       "timestamp": "2026-04-30T17:56:33.500Z",
       "blocks": [],
       "properties": {
@@ -1044,7 +1044,7 @@
     {
       "key": "growth-content",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\growth-content.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\growth-content.md",
       "timestamp": "2026-04-30T17:56:33.500Z",
       "blocks": [],
       "properties": {
@@ -1075,7 +1075,7 @@
     {
       "key": "growth-hacker",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\growth-hacker.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\growth-hacker.md",
       "timestamp": "2026-04-30T17:56:33.501Z",
       "blocks": [],
       "properties": {
@@ -1106,7 +1106,7 @@
     {
       "key": "growth-viral",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\growth-viral.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\growth-viral.md",
       "timestamp": "2026-04-30T17:56:33.501Z",
       "blocks": [],
       "properties": {
@@ -1137,7 +1137,7 @@
     {
       "key": "nucleus-antigravity",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\nucleus-antigravity.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\nucleus-antigravity.md",
       "timestamp": "2026-04-30T17:56:33.501Z",
       "blocks": [],
       "properties": {
@@ -1173,7 +1173,7 @@
     {
       "key": "ops-compliance",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-compliance.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-compliance.md",
       "timestamp": "2026-04-30T17:56:33.501Z",
       "blocks": [],
       "properties": {
@@ -1207,7 +1207,7 @@
     {
       "key": "ops-cost",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-cost.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-cost.md",
       "timestamp": "2026-04-30T17:56:33.501Z",
       "blocks": [],
       "properties": {
@@ -1242,7 +1242,7 @@
     {
       "key": "ops-devops",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-devops.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-devops.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1276,7 +1276,7 @@
     {
       "key": "ops-incident",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-incident.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-incident.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1310,7 +1310,7 @@
     {
       "key": "ops-monitor",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-monitor.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-monitor.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1344,7 +1344,7 @@
     {
       "key": "ops-release",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-release.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-release.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1379,7 +1379,7 @@
     {
       "key": "ops-security",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-security.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-security.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1414,7 +1414,7 @@
     {
       "key": "ops-sre",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\ops-sre.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\ops-sre.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1448,7 +1448,7 @@
     {
       "key": "orchestrator",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\orchestrator.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\orchestrator.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1487,7 +1487,7 @@
     {
       "key": "penetration-tester",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\penetration-tester.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\penetration-tester.md",
       "timestamp": "2026-04-30T17:56:33.502Z",
       "blocks": [],
       "properties": {
@@ -1518,7 +1518,7 @@
     {
       "key": "prod-design",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\prod-design.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\prod-design.md",
       "timestamp": "2026-04-30T17:56:33.503Z",
       "blocks": [],
       "properties": {
@@ -1550,7 +1550,7 @@
     {
       "key": "prod-pm",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\prod-pm.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\prod-pm.md",
       "timestamp": "2026-04-30T17:56:33.503Z",
       "blocks": [],
       "properties": {
@@ -1582,7 +1582,7 @@
     {
       "key": "prod-techwriter",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\prod-techwriter.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\prod-techwriter.md",
       "timestamp": "2026-04-30T17:56:33.503Z",
       "blocks": [],
       "properties": {
@@ -1614,7 +1614,7 @@
     {
       "key": "product-manager",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\product-manager.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\product-manager.md",
       "timestamp": "2026-04-30T17:56:33.503Z",
       "blocks": [],
       "properties": {
@@ -1645,7 +1645,7 @@
     {
       "key": "review-code",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\review-code.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\review-code.md",
       "timestamp": "2026-04-30T17:56:33.503Z",
       "blocks": [],
       "properties": {
@@ -1679,7 +1679,7 @@
     {
       "key": "review-legal",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\review-legal.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\review-legal.md",
       "timestamp": "2026-04-30T17:56:33.504Z",
       "blocks": [],
       "properties": {
@@ -1712,7 +1712,7 @@
     {
       "key": "review-security",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\review-security.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\review-security.md",
       "timestamp": "2026-04-30T17:56:33.504Z",
       "blocks": [],
       "properties": {
@@ -1745,7 +1745,7 @@
     {
       "key": "security-auditor",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\security-auditor.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\security-auditor.md",
       "timestamp": "2026-04-30T17:56:33.504Z",
       "blocks": [],
       "properties": {
@@ -1776,7 +1776,7 @@
     {
       "key": "supervisor",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\supervisor.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\supervisor.md",
       "timestamp": "2026-04-30T17:56:33.504Z",
       "blocks": [],
       "properties": {
@@ -1809,7 +1809,7 @@
     {
       "key": "system-architect",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\system-architect.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\system-architect.md",
       "timestamp": "2026-04-30T17:56:33.504Z",
       "blocks": [],
       "properties": {
@@ -1841,7 +1841,7 @@
     {
       "key": "test-engineer",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\agents\\test-engineer.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\agents\\test-engineer.md",
       "timestamp": "2026-04-30T17:56:33.504Z",
       "blocks": [],
       "properties": {
@@ -1880,7 +1880,7 @@
     {
       "key": "skill: CORE_KNOWLEDGE - THE FOUNDATION",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\CORE_KNOWLEDGE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\CORE_KNOWLEDGE.md",
       "timestamp": "2026-04-30T17:56:33.505Z",
       "blocks": [],
       "properties": {
@@ -1896,7 +1896,7 @@
     {
       "key": "skill-api-patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.505Z",
       "blocks": [],
       "properties": {
@@ -1920,7 +1920,7 @@
     {
       "key": "API Style Selection (2025)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\api-style.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\api-style.md",
       "timestamp": "2026-04-30T17:56:33.505Z",
       "blocks": [],
       "properties": {
@@ -1931,7 +1931,7 @@
     {
       "key": "Authentication Patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\auth.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\auth.md",
       "timestamp": "2026-04-30T17:56:33.505Z",
       "blocks": [],
       "properties": {
@@ -1942,7 +1942,7 @@
     {
       "key": "API Documentation Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\documentation.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\documentation.md",
       "timestamp": "2026-04-30T17:56:33.505Z",
       "blocks": [],
       "properties": {
@@ -1953,7 +1953,7 @@
     {
       "key": "GraphQL Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\graphql.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\graphql.md",
       "timestamp": "2026-04-30T17:56:33.505Z",
       "blocks": [],
       "properties": {
@@ -1964,7 +1964,7 @@
     {
       "key": "Rate Limiting Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\rate-limiting.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\rate-limiting.md",
       "timestamp": "2026-04-30T17:56:33.506Z",
       "blocks": [],
       "properties": {
@@ -1975,7 +1975,7 @@
     {
       "key": "Response Format Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\response.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\response.md",
       "timestamp": "2026-04-30T17:56:33.506Z",
       "blocks": [],
       "properties": {
@@ -1986,7 +1986,7 @@
     {
       "key": "REST Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\rest.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\rest.md",
       "timestamp": "2026-04-30T17:56:33.506Z",
       "blocks": [],
       "properties": {
@@ -1997,7 +1997,7 @@
     {
       "key": "API Security Testing",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\security-testing.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\security-testing.md",
       "timestamp": "2026-04-30T17:56:33.506Z",
       "blocks": [],
       "properties": {
@@ -2008,7 +2008,7 @@
     {
       "key": "tRPC Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\trpc.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\trpc.md",
       "timestamp": "2026-04-30T17:56:33.506Z",
       "blocks": [],
       "properties": {
@@ -2019,7 +2019,7 @@
     {
       "key": "Versioning Strategies",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\api-patterns\\versioning.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\api-patterns\\versioning.md",
       "timestamp": "2026-04-30T17:56:33.506Z",
       "blocks": [],
       "properties": {
@@ -2030,7 +2030,7 @@
     {
       "key": "skill-app-builder",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.507Z",
       "blocks": [],
       "properties": {
@@ -2053,7 +2053,7 @@
     {
       "key": "Agent Coordination",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\agent-coordination.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\agent-coordination.md",
       "timestamp": "2026-04-30T17:56:33.507Z",
       "blocks": [],
       "properties": {
@@ -2064,7 +2064,7 @@
     {
       "key": "Feature Building",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\feature-building.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\feature-building.md",
       "timestamp": "2026-04-30T17:56:33.507Z",
       "blocks": [],
       "properties": {
@@ -2075,7 +2075,7 @@
     {
       "key": "Project Type Detection",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\project-detection.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\project-detection.md",
       "timestamp": "2026-04-30T17:56:33.507Z",
       "blocks": [],
       "properties": {
@@ -2086,7 +2086,7 @@
     {
       "key": "Project Scaffolding",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\scaffolding.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\scaffolding.md",
       "timestamp": "2026-04-30T17:56:33.507Z",
       "blocks": [],
       "properties": {
@@ -2097,7 +2097,7 @@
     {
       "key": "Tech Stack Selection (2026)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\tech-stack.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\tech-stack.md",
       "timestamp": "2026-04-30T17:56:33.508Z",
       "blocks": [],
       "properties": {
@@ -2108,7 +2108,7 @@
     {
       "key": "skill-templates",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.508Z",
       "blocks": [],
       "properties": {
@@ -2127,7 +2127,7 @@
     {
       "key": "Astro Static Site Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\astro-static\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\astro-static\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.508Z",
       "blocks": [],
       "properties": {
@@ -2140,7 +2140,7 @@
     {
       "key": "Chrome Extension Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\chrome-extension\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\chrome-extension\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.508Z",
       "blocks": [],
       "properties": {
@@ -2153,7 +2153,7 @@
     {
       "key": "CLI Tool Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\cli-tool\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\cli-tool\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.508Z",
       "blocks": [],
       "properties": {
@@ -2166,7 +2166,7 @@
     {
       "key": "Electron Desktop App Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\electron-desktop\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\electron-desktop\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.509Z",
       "blocks": [],
       "properties": {
@@ -2179,7 +2179,7 @@
     {
       "key": "Express.js API Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\express-api\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\express-api\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.509Z",
       "blocks": [],
       "properties": {
@@ -2192,7 +2192,7 @@
     {
       "key": "Flutter App Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\flutter-app\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\flutter-app\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.509Z",
       "blocks": [],
       "properties": {
@@ -2205,7 +2205,7 @@
     {
       "key": "Turborepo Monorepo Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\monorepo-turborepo\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\monorepo-turborepo\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.509Z",
       "blocks": [],
       "properties": {
@@ -2218,7 +2218,7 @@
     {
       "key": "Next.js Full-Stack Template (2026 Edition)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\nextjs-fullstack\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\nextjs-fullstack\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.509Z",
       "blocks": [],
       "properties": {
@@ -2231,7 +2231,7 @@
     {
       "key": "Next.js SaaS Template (Updated 2026)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\nextjs-saas\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\nextjs-saas\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.510Z",
       "blocks": [],
       "properties": {
@@ -2244,7 +2244,7 @@
     {
       "key": "Next.js Static Site Template (Modern Edition)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\nextjs-static\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\nextjs-static\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.510Z",
       "blocks": [],
       "properties": {
@@ -2257,7 +2257,7 @@
     {
       "key": "Nuxt 4 Full-Stack Template (2026 Edition)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\nuxt-app\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\nuxt-app\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.510Z",
       "blocks": [],
       "properties": {
@@ -2270,7 +2270,7 @@
     {
       "key": "FastAPI API Template",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\python-fastapi\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\python-fastapi\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.511Z",
       "blocks": [],
       "properties": {
@@ -2283,7 +2283,7 @@
     {
       "key": "React Native App Template (2026 Edition)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\app-builder\\templates\\react-native-app\\TEMPLATE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\app-builder\\templates\\react-native-app\\TEMPLATE.md",
       "timestamp": "2026-04-30T17:56:33.511Z",
       "blocks": [],
       "properties": {
@@ -2296,7 +2296,7 @@
     {
       "key": "Skill: Architectural Sentinel (Mentor Guide)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\architectural_sentinel.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\architectural_sentinel.md",
       "timestamp": "2026-04-30T17:56:33.511Z",
       "blocks": [],
       "properties": {
@@ -2312,7 +2312,7 @@
     {
       "key": "skill-architecture",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\architecture\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\architecture\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.511Z",
       "blocks": [],
       "properties": {
@@ -2336,7 +2336,7 @@
     {
       "key": "Context Discovery",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\architecture\\context-discovery.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\architecture\\context-discovery.md",
       "timestamp": "2026-04-30T17:56:33.511Z",
       "blocks": [],
       "properties": {
@@ -2347,7 +2347,7 @@
     {
       "key": "Architecture Examples",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\architecture\\examples.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\architecture\\examples.md",
       "timestamp": "2026-04-30T17:56:33.512Z",
       "blocks": [],
       "properties": {
@@ -2358,7 +2358,7 @@
     {
       "key": "Pattern Selection Guidelines",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\architecture\\pattern-selection.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\architecture\\pattern-selection.md",
       "timestamp": "2026-04-30T17:56:33.512Z",
       "blocks": [],
       "properties": {
@@ -2369,7 +2369,7 @@
     {
       "key": "Architecture Patterns Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\architecture\\patterns-reference.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\architecture\\patterns-reference.md",
       "timestamp": "2026-04-30T17:56:33.513Z",
       "blocks": [],
       "properties": {
@@ -2380,7 +2380,7 @@
     {
       "key": "Trade-off Analysis & ADR",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\architecture\\trade-off-analysis.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\architecture\\trade-off-analysis.md",
       "timestamp": "2026-04-30T17:56:33.513Z",
       "blocks": [],
       "properties": {
@@ -2391,7 +2391,7 @@
     {
       "key": "skill-bash-linux",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\bash-linux\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\bash-linux\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.513Z",
       "blocks": [],
       "properties": {
@@ -2415,7 +2415,7 @@
     {
       "key": "skill-behavioral-modes",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\behavioral-modes\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\behavioral-modes\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.514Z",
       "blocks": [],
       "properties": {
@@ -2439,7 +2439,7 @@
     {
       "key": "skill-brainstorming",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\brainstorming\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\brainstorming\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.514Z",
       "blocks": [],
       "properties": {
@@ -2463,7 +2463,7 @@
     {
       "key": "Dynamic Question Generation",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\brainstorming\\dynamic-questioning.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\brainstorming\\dynamic-questioning.md",
       "timestamp": "2026-04-30T17:56:33.514Z",
       "blocks": [],
       "properties": {
@@ -2474,7 +2474,7 @@
     {
       "key": "skill-clean-code",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\clean-code\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\clean-code\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.514Z",
       "blocks": [],
       "properties": {
@@ -2500,7 +2500,7 @@
     {
       "key": "skill-cloud-action",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\cloud-action\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\cloud-action\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.515Z",
       "blocks": [],
       "properties": {
@@ -2523,7 +2523,7 @@
     {
       "key": "skill-code-review-checklist",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\code-review-checklist\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\code-review-checklist\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.515Z",
       "blocks": [],
       "properties": {
@@ -2547,7 +2547,7 @@
     {
       "key": "skill-database-design",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\database-design\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\database-design\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.515Z",
       "blocks": [],
       "properties": {
@@ -2572,7 +2572,7 @@
     {
       "key": "Database Selection (2025)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\database-design\\database-selection.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\database-design\\database-selection.md",
       "timestamp": "2026-04-30T17:56:33.515Z",
       "blocks": [],
       "properties": {
@@ -2583,7 +2583,7 @@
     {
       "key": "Indexing Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\database-design\\indexing.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\database-design\\indexing.md",
       "timestamp": "2026-04-30T17:56:33.515Z",
       "blocks": [],
       "properties": {
@@ -2594,7 +2594,7 @@
     {
       "key": "Migration Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\database-design\\migrations.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\database-design\\migrations.md",
       "timestamp": "2026-04-30T17:56:33.516Z",
       "blocks": [],
       "properties": {
@@ -2605,7 +2605,7 @@
     {
       "key": "Query Optimization",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\database-design\\optimization.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\database-design\\optimization.md",
       "timestamp": "2026-04-30T17:56:33.516Z",
       "blocks": [],
       "properties": {
@@ -2616,7 +2616,7 @@
     {
       "key": "ORM Selection (2025)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\database-design\\orm-selection.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\database-design\\orm-selection.md",
       "timestamp": "2026-04-30T17:56:33.516Z",
       "blocks": [],
       "properties": {
@@ -2627,7 +2627,7 @@
     {
       "key": "Schema Design Principles",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\database-design\\schema-design.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\database-design\\schema-design.md",
       "timestamp": "2026-04-30T17:56:33.516Z",
       "blocks": [],
       "properties": {
@@ -2638,7 +2638,7 @@
     {
       "key": "skill-deployment-procedures",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\deployment-procedures\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\deployment-procedures\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.516Z",
       "blocks": [],
       "properties": {
@@ -2662,7 +2662,7 @@
     {
       "key": "Antigravity Skills",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\doc.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\doc.md",
       "timestamp": "2026-04-30T17:56:33.517Z",
       "blocks": [],
       "properties": {
@@ -2678,7 +2678,7 @@
     {
       "key": "skill-documentation-templates",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\documentation-templates\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\documentation-templates\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.517Z",
       "blocks": [],
       "properties": {
@@ -2702,7 +2702,7 @@
     {
       "key": "skill-frontend-design",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.517Z",
       "blocks": [],
       "properties": {
@@ -2727,7 +2727,7 @@
     {
       "key": "Animation Guidelines Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\animation-guide.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\animation-guide.md",
       "timestamp": "2026-04-30T17:56:33.517Z",
       "blocks": [],
       "properties": {
@@ -2738,7 +2738,7 @@
     {
       "key": "Color System Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\color-system.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\color-system.md",
       "timestamp": "2026-04-30T17:56:33.517Z",
       "blocks": [],
       "properties": {
@@ -2749,7 +2749,7 @@
     {
       "key": "Decision Trees & Context Templates",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\decision-trees.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\decision-trees.md",
       "timestamp": "2026-04-30T17:56:33.518Z",
       "blocks": [],
       "properties": {
@@ -2760,7 +2760,7 @@
     {
       "key": "Motion Graphics Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\motion-graphics.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\motion-graphics.md",
       "timestamp": "2026-04-30T17:56:33.518Z",
       "blocks": [],
       "properties": {
@@ -2771,7 +2771,7 @@
     {
       "key": "Typography System Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\typography-system.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\typography-system.md",
       "timestamp": "2026-04-30T17:56:33.518Z",
       "blocks": [],
       "properties": {
@@ -2782,7 +2782,7 @@
     {
       "key": "UX Psychology Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\ux-psychology.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\ux-psychology.md",
       "timestamp": "2026-04-30T17:56:33.518Z",
       "blocks": [],
       "properties": {
@@ -2793,7 +2793,7 @@
     {
       "key": "Visual Effects Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\frontend-design\\visual-effects.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\frontend-design\\visual-effects.md",
       "timestamp": "2026-04-30T17:56:33.519Z",
       "blocks": [],
       "properties": {
@@ -2804,7 +2804,7 @@
     {
       "key": "skill-2d-games",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\2d-games\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\2d-games\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.519Z",
       "blocks": [],
       "properties": {
@@ -2824,7 +2824,7 @@
     {
       "key": "skill-3d-games",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\3d-games\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\3d-games\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.519Z",
       "blocks": [],
       "properties": {
@@ -2844,7 +2844,7 @@
     {
       "key": "skill-game-development",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.519Z",
       "blocks": [],
       "properties": {
@@ -2869,7 +2869,7 @@
     {
       "key": "skill-game-art",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\game-art\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\game-art\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.519Z",
       "blocks": [],
       "properties": {
@@ -2889,7 +2889,7 @@
     {
       "key": "skill-game-audio",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\game-audio\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\game-audio\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -2909,7 +2909,7 @@
     {
       "key": "skill-game-design",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\game-design\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\game-design\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -2930,7 +2930,7 @@
     {
       "key": "skill-mobile-games",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\mobile-games\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\mobile-games\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -2951,7 +2951,7 @@
     {
       "key": "skill-multiplayer",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\multiplayer\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\multiplayer\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -2971,7 +2971,7 @@
     {
       "key": "skill-pc-games",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\pc-games\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\pc-games\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -2991,7 +2991,7 @@
     {
       "key": "skill-vr-ar",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\vr-ar\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\vr-ar\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -3011,7 +3011,7 @@
     {
       "key": "skill-web-games",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\game-development\\web-games\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\game-development\\web-games\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -3031,7 +3031,7 @@
     {
       "key": "skill-geo-fundamentals",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\geo-fundamentals\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\geo-fundamentals\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.520Z",
       "blocks": [],
       "properties": {
@@ -3055,7 +3055,7 @@
     {
       "key": "skill-i18n-localization",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\i18n-localization\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\i18n-localization\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.521Z",
       "blocks": [],
       "properties": {
@@ -3079,7 +3079,7 @@
     {
       "key": "skill-intelligent-routing",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\intelligent-routing\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\intelligent-routing\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.521Z",
       "blocks": [],
       "properties": {
@@ -3103,7 +3103,7 @@
     {
       "key": "skill-lint-and-validate",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\lint-and-validate\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\lint-and-validate\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.521Z",
       "blocks": [],
       "properties": {
@@ -3127,7 +3127,7 @@
     {
       "key": "skill-mcp-builder",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mcp-builder\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mcp-builder\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.521Z",
       "blocks": [],
       "properties": {
@@ -3151,7 +3151,7 @@
     {
       "key": "skill-mcp-guard",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mcp-guard\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mcp-guard\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.521Z",
       "blocks": [],
       "properties": {
@@ -3173,7 +3173,7 @@
     {
       "key": "skill-mobile-design",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.521Z",
       "blocks": [],
       "properties": {
@@ -3198,7 +3198,7 @@
     {
       "key": "Mobile Decision Trees",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\decision-trees.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\decision-trees.md",
       "timestamp": "2026-04-30T17:56:33.522Z",
       "blocks": [],
       "properties": {
@@ -3209,7 +3209,7 @@
     {
       "key": "Mobile Backend Patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-backend.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-backend.md",
       "timestamp": "2026-04-30T17:56:33.522Z",
       "blocks": [],
       "properties": {
@@ -3220,7 +3220,7 @@
     {
       "key": "Mobile Color System Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-color-system.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-color-system.md",
       "timestamp": "2026-04-30T17:56:33.523Z",
       "blocks": [],
       "properties": {
@@ -3231,7 +3231,7 @@
     {
       "key": "Mobile Debugging Guide",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-debugging.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-debugging.md",
       "timestamp": "2026-04-30T17:56:33.523Z",
       "blocks": [],
       "properties": {
@@ -3242,7 +3242,7 @@
     {
       "key": "Mobile Design Thinking",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-design-thinking.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-design-thinking.md",
       "timestamp": "2026-04-30T17:56:33.523Z",
       "blocks": [],
       "properties": {
@@ -3253,7 +3253,7 @@
     {
       "key": "Mobile Navigation Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-navigation.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-navigation.md",
       "timestamp": "2026-04-30T17:56:33.523Z",
       "blocks": [],
       "properties": {
@@ -3264,7 +3264,7 @@
     {
       "key": "Mobile Performance Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-performance.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-performance.md",
       "timestamp": "2026-04-30T17:56:33.523Z",
       "blocks": [],
       "properties": {
@@ -3275,7 +3275,7 @@
     {
       "key": "Mobile Testing Patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-testing.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-testing.md",
       "timestamp": "2026-04-30T17:56:33.524Z",
       "blocks": [],
       "properties": {
@@ -3286,7 +3286,7 @@
     {
       "key": "Mobile Typography Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\mobile-typography.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\mobile-typography.md",
       "timestamp": "2026-04-30T17:56:33.524Z",
       "blocks": [],
       "properties": {
@@ -3297,7 +3297,7 @@
     {
       "key": "Android Platform Guidelines",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\platform-android.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\platform-android.md",
       "timestamp": "2026-04-30T17:56:33.524Z",
       "blocks": [],
       "properties": {
@@ -3308,7 +3308,7 @@
     {
       "key": "iOS Platform Guidelines",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\platform-ios.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\platform-ios.md",
       "timestamp": "2026-04-30T17:56:33.524Z",
       "blocks": [],
       "properties": {
@@ -3319,7 +3319,7 @@
     {
       "key": "Touch Psychology Reference",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\mobile-design\\touch-psychology.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\mobile-design\\touch-psychology.md",
       "timestamp": "2026-04-30T17:56:33.525Z",
       "blocks": [],
       "properties": {
@@ -3330,7 +3330,7 @@
     {
       "key": "1. Eliminating Waterfalls",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\1-async-eliminating-waterfalls.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\1-async-eliminating-waterfalls.md",
       "timestamp": "2026-04-30T17:56:33.525Z",
       "blocks": [],
       "properties": {
@@ -3341,7 +3341,7 @@
     {
       "key": "2. Bundle Size Optimization",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\2-bundle-bundle-size-optimization.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\2-bundle-bundle-size-optimization.md",
       "timestamp": "2026-04-30T17:56:33.525Z",
       "blocks": [],
       "properties": {
@@ -3352,7 +3352,7 @@
     {
       "key": "3. Server-Side Performance",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\3-server-server-side-performance.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\3-server-server-side-performance.md",
       "timestamp": "2026-04-30T17:56:33.525Z",
       "blocks": [],
       "properties": {
@@ -3363,7 +3363,7 @@
     {
       "key": "4. Client-Side Data Fetching",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\4-client-client-side-data-fetching.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\4-client-client-side-data-fetching.md",
       "timestamp": "2026-04-30T17:56:33.526Z",
       "blocks": [],
       "properties": {
@@ -3374,7 +3374,7 @@
     {
       "key": "5. Re-render Optimization",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\5-rerender-re-render-optimization.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\5-rerender-re-render-optimization.md",
       "timestamp": "2026-04-30T17:56:33.526Z",
       "blocks": [],
       "properties": {
@@ -3385,7 +3385,7 @@
     {
       "key": "6. Rendering Performance",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\6-rendering-rendering-performance.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\6-rendering-rendering-performance.md",
       "timestamp": "2026-04-30T17:56:33.526Z",
       "blocks": [],
       "properties": {
@@ -3396,7 +3396,7 @@
     {
       "key": "7. JavaScript Performance",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\7-js-javascript-performance.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\7-js-javascript-performance.md",
       "timestamp": "2026-04-30T17:56:33.526Z",
       "blocks": [],
       "properties": {
@@ -3407,7 +3407,7 @@
     {
       "key": "8. Advanced Patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\8-advanced-advanced-patterns.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\8-advanced-advanced-patterns.md",
       "timestamp": "2026-04-30T17:56:33.527Z",
       "blocks": [],
       "properties": {
@@ -3418,7 +3418,7 @@
     {
       "key": "Cache Components: `use cache` & `cacheLife`",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\9-cache-components.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\9-cache-components.md",
       "timestamp": "2026-04-30T17:56:33.527Z",
       "blocks": [],
       "properties": {
@@ -3429,7 +3429,7 @@
     {
       "key": "skill-nextjs-react-expert",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nextjs-react-expert\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nextjs-react-expert\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.527Z",
       "blocks": [],
       "properties": {
@@ -3453,7 +3453,7 @@
     {
       "key": "skill-nodejs-best-practices",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\nodejs-best-practices\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\nodejs-best-practices\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.527Z",
       "blocks": [],
       "properties": {
@@ -3477,7 +3477,7 @@
     {
       "key": "skill-omniscience",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\omniscience\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\omniscience\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.527Z",
       "blocks": [],
       "properties": {
@@ -3500,7 +3500,7 @@
     {
       "key": "skill-parallel-agents",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\parallel-agents\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\parallel-agents\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.527Z",
       "blocks": [],
       "properties": {
@@ -3524,7 +3524,7 @@
     {
       "key": "skill-performance-profiling",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\performance-profiling\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\performance-profiling\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.528Z",
       "blocks": [],
       "properties": {
@@ -3548,7 +3548,7 @@
     {
       "key": "skill-plan-writing",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\plan-writing\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\plan-writing\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.528Z",
       "blocks": [],
       "properties": {
@@ -3572,7 +3572,7 @@
     {
       "key": "skill-powershell-windows",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\powershell-windows\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\powershell-windows\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.528Z",
       "blocks": [],
       "properties": {
@@ -3596,7 +3596,7 @@
     {
       "key": "skill-python-patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\python-patterns\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\python-patterns\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.528Z",
       "blocks": [],
       "properties": {
@@ -3619,7 +3619,7 @@
     {
       "key": "skill-red-team-tactics",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\red-team-tactics\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\red-team-tactics\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.528Z",
       "blocks": [],
       "properties": {
@@ -3643,7 +3643,7 @@
     {
       "key": "skill-rust-pro",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\rust-pro\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\rust-pro\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.529Z",
       "blocks": [],
       "properties": {
@@ -3666,7 +3666,7 @@
     {
       "key": "skill-seo-fundamentals",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\seo-fundamentals\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\seo-fundamentals\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.529Z",
       "blocks": [],
       "properties": {
@@ -3690,7 +3690,7 @@
     {
       "key": "skill-server-management",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\server-management\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\server-management\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.529Z",
       "blocks": [],
       "properties": {
@@ -3714,7 +3714,7 @@
     {
       "key": "skill-systematic-debugging",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\systematic-debugging\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\systematic-debugging\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.530Z",
       "blocks": [],
       "properties": {
@@ -3738,7 +3738,7 @@
     {
       "key": "skill-tailwind-patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\tailwind-patterns\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\tailwind-patterns\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.531Z",
       "blocks": [],
       "properties": {
@@ -3762,7 +3762,7 @@
     {
       "key": "skill-tdd-workflow",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\tdd-workflow\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\tdd-workflow\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.531Z",
       "blocks": [],
       "properties": {
@@ -3786,7 +3786,7 @@
     {
       "key": "skill-testing-patterns",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\testing-patterns\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\testing-patterns\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.531Z",
       "blocks": [],
       "properties": {
@@ -3810,7 +3810,7 @@
     {
       "key": "skill-vulnerability-scanner",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\vulnerability-scanner\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\vulnerability-scanner\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.532Z",
       "blocks": [],
       "properties": {
@@ -3834,7 +3834,7 @@
     {
       "key": "Security Checklists",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\vulnerability-scanner\\checklists.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\vulnerability-scanner\\checklists.md",
       "timestamp": "2026-04-30T17:56:33.532Z",
       "blocks": [],
       "properties": {
@@ -3845,7 +3845,7 @@
     {
       "key": "skill-web-design-guidelines",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\web-design-guidelines\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\web-design-guidelines\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.533Z",
       "blocks": [],
       "properties": {
@@ -3872,7 +3872,7 @@
     {
       "key": "skill-webapp-testing",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\skills\\webapp-testing\\SKILL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\skills\\webapp-testing\\SKILL.md",
       "timestamp": "2026-04-30T17:56:33.533Z",
       "blocks": [],
       "properties": {
@@ -3896,7 +3896,7 @@
     {
       "key": "Sentinel Security Ecosystem: Sovereign Defense HQ 🛡️",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Sentinel\\README.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Sentinel\\README.md",
       "timestamp": "2026-04-30T17:56:33.533Z",
       "blocks": [],
       "properties": {
@@ -3907,7 +3907,7 @@
     {
       "key": "🛡️  SENTINEL THREAD INTEL (System Feed)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Sentinel\\reports\\THREAD_INTEL.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Sentinel\\reports\\THREAD_INTEL.md",
       "timestamp": "2026-04-30T17:56:33.534Z",
       "blocks": [],
       "properties": {
@@ -3918,7 +3918,7 @@
     {
       "key": "Find most recent session",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\.claude\\commands\\debug.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\.claude\\commands\\debug.md",
       "timestamp": "2026-04-30T17:56:33.537Z",
       "blocks": [],
       "properties": {
@@ -3929,7 +3929,7 @@
     {
       "key": "pr",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\.claude\\commands\\pr.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\.claude\\commands\\pr.md",
       "timestamp": "2026-04-30T17:56:33.537Z",
       "blocks": [],
       "properties": {
@@ -3941,7 +3941,7 @@
     {
       "key": "review",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\.claude\\commands\\review.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\.claude\\commands\\review.md",
       "timestamp": "2026-04-30T17:56:33.538Z",
       "blocks": [],
       "properties": {
@@ -3952,7 +3952,7 @@
     {
       "key": "CLAUDE.md",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\CLAUDE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\CLAUDE.md",
       "timestamp": "2026-04-30T17:56:33.538Z",
       "blocks": [],
       "properties": {
@@ -3963,7 +3963,7 @@
     {
       "key": "Coverage and Roadmap",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\COVERAGE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\COVERAGE.md",
       "timestamp": "2026-04-30T17:56:33.538Z",
       "blocks": [],
       "properties": {
@@ -3974,7 +3974,7 @@
     {
       "key": "Predatore Pro",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\PREDATORE-PRO.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\PREDATORE-PRO.md",
       "timestamp": "2026-04-30T17:56:33.538Z",
       "blocks": [],
       "properties": {
@@ -3985,7 +3985,7 @@
     {
       "key": "Sognatore Predatore —  AI Pentester",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\README.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\README.md",
       "timestamp": "2026-04-30T17:56:33.539Z",
       "blocks": [],
       "properties": {
@@ -3996,7 +3996,7 @@
     {
       "key": "Predatore â€” AI Pentester by Sogna",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\engines\\Predatore\\apps\\cli\\README.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\engines\\Predatore\\apps\\cli\\README.md",
       "timestamp": "2026-04-30T17:56:33.539Z",
       "blocks": [],
       "properties": {
@@ -52574,7 +52574,7 @@
     {
       "key": "📜 Absorption Closure: Terminal Superiority Achieved",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\ABSORPTION_CLOSURE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\docs\\ABSORPTION_CLOSURE.md",
       "timestamp": "2026-04-30T17:56:34.090Z",
       "blocks": [],
       "properties": {
@@ -52585,7 +52585,7 @@
     {
       "key": "🩺 Sogna Apex Diagnostic Report",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\DIAGNOSTICS.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\docs\\DIAGNOSTICS.md",
       "timestamp": "2026-04-30T17:56:34.090Z",
       "blocks": [],
       "properties": {
@@ -52607,7 +52607,7 @@
     {
       "key": "SOGNA CORE CONTEXT (SMS)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\SOGNA_CONTEXT.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\identity\\SOGNA_CONTEXT.md",
       "timestamp": "2026-04-30T17:56:34.090Z",
       "blocks": [],
       "properties": {
@@ -52618,7 +52618,7 @@
     {
       "key": "🗺️ Architectural Map: Sogna Project",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\architectural_map.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\docs\\architectural_map.md",
       "timestamp": "2026-04-30T17:56:34.091Z",
       "blocks": [],
       "properties": {
@@ -52629,7 +52629,7 @@
     {
       "key": "SOGNA SESSION HISTORY",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\logs\\history.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\operational\\logs\\history.md",
       "timestamp": "2026-04-30T17:56:34.091Z",
       "blocks": [],
       "properties": {
@@ -52640,7 +52640,7 @@
     {
       "key": "SOGNA - UNICORN CORE RULES",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\rules.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\identity\\rules.md",
       "timestamp": "2026-04-30T17:56:34.091Z",
       "blocks": [],
       "properties": {
@@ -52673,7 +52673,7 @@
     {
       "key": "Sogna Strategic Intent: Unified Creator",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\strategic_intent.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\identity\\strategic_intent.md",
       "timestamp": "2026-04-30T17:56:34.091Z",
       "blocks": [],
       "properties": {
@@ -52684,7 +52684,7 @@
     {
       "key": "USER PROFILE",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\user_profile.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\memory\\identity\\user_profile.md",
       "timestamp": "2026-04-30T17:56:34.092Z",
       "blocks": [],
       "properties": {
@@ -52695,7 +52695,7 @@
     {
       "key": "Antigravity Kit Architecture",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\ARCHITECTURE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\ARCHITECTURE.md",
       "timestamp": "2026-04-30T17:56:34.092Z",
       "blocks": [],
       "properties": {
@@ -52706,7 +52706,7 @@
     {
       "key": "🧠 Arquitectura de Memoria Neuronal",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\MEMORY_ARCHITECTURE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\MEMORY_ARCHITECTURE.md",
       "timestamp": "2026-04-30T17:56:34.092Z",
       "blocks": [],
       "properties": {
@@ -52720,7 +52720,7 @@
     {
       "key": "🌉 Especificación de Interfaz Neuronal (Toolkit ↔ Sognatore)",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\NEURAL_INTERFACE.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\NEURAL_INTERFACE.md",
       "timestamp": "2026-04-30T17:56:34.092Z",
       "blocks": [],
       "properties": {
@@ -52737,7 +52737,7 @@
     {
       "key": "🐝 Swarm Neural Network",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\SWARMS.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\SWARMS.md",
       "timestamp": "2026-04-30T17:56:34.092Z",
       "blocks": [],
       "properties": {
@@ -52793,7 +52793,7 @@
     {
       "key": "🧠 SYNAPSE_MAP - Enrutamiento Neuronal",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\SYNAPSE_MAP.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\SYNAPSE_MAP.md",
       "timestamp": "2026-04-30T17:56:34.092Z",
       "blocks": [],
       "properties": {
@@ -52804,7 +52804,7 @@
     {
       "key": "Sognatore ANTIGRAVITY TOOLKIT",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\TOOLKIT.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\TOOLKIT.md",
       "timestamp": "2026-04-30T17:56:34.093Z",
       "blocks": [],
       "properties": {
@@ -52815,7 +52815,7 @@
     {
       "key": "TOOLKIT_MAP: Anatomía de la Inteligencia Sogna 🧠",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\TOOLKIT_MAP.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\TOOLKIT_MAP.md",
       "timestamp": "2026-04-30T17:56:34.093Z",
       "blocks": [],
       "properties": {
@@ -52826,7 +52826,7 @@
     {
       "key": "Estrategia de Optimización de Tokens (Toolkit & Chat) 📉",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\TOOLKIT_OPTIMIZATION.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\TOOLKIT_OPTIMIZATION.md",
       "timestamp": "2026-04-30T17:56:34.093Z",
       "blocks": [],
       "properties": {
@@ -52837,7 +52837,7 @@
     {
       "key": "🔄 Workflow-Swarm Matrix",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\WORKFLOWS_MAP.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\WORKFLOWS_MAP.md",
       "timestamp": "2026-04-30T17:56:34.093Z",
       "blocks": [],
       "properties": {
@@ -52874,7 +52874,7 @@
     {
       "key": "RULE: CLI - TERMINAL STANDARDS",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\rules\\CLI.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\rules\\CLI.md",
       "timestamp": "2026-04-30T17:56:34.093Z",
       "blocks": [],
       "properties": {
@@ -52886,7 +52886,7 @@
     {
       "key": "GEMINI.md - Antigravity Kit",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\rules\\GEMINI.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\rules\\GEMINI.md",
       "timestamp": "2026-04-30T17:56:34.093Z",
       "blocks": [],
       "properties": {
@@ -52898,7 +52898,7 @@
     {
       "key": "RULE: STYLING - AESTHETIC EXCELLENCE",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\rules\\STYLING.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\rules\\STYLING.md",
       "timestamp": "2026-04-30T17:56:34.094Z",
       "blocks": [],
       "properties": {
@@ -52909,7 +52909,7 @@
     {
       "key": "Guía de Optimización de Sogna",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\tests\\security_training\\optimization_guide.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\tests\\security_training\\optimization_guide.md",
       "timestamp": "2026-04-30T17:56:34.094Z",
       "blocks": [],
       "properties": {
@@ -52920,7 +52920,7 @@
     {
       "key": "workflow-brainstorm",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\brainstorm.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\brainstorm.md",
       "timestamp": "2026-04-30T17:56:34.094Z",
       "blocks": [],
       "properties": {
@@ -52937,7 +52937,7 @@
     {
       "key": "workflow-create",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\create.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\create.md",
       "timestamp": "2026-04-30T17:56:34.094Z",
       "blocks": [],
       "properties": {
@@ -52954,7 +52954,7 @@
     {
       "key": "workflow-debug",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\debug.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\debug.md",
       "timestamp": "2026-04-30T17:56:34.094Z",
       "blocks": [],
       "properties": {
@@ -52971,7 +52971,7 @@
     {
       "key": "workflow-deploy",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\deploy.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\deploy.md",
       "timestamp": "2026-04-30T17:56:34.094Z",
       "blocks": [],
       "properties": {
@@ -52988,7 +52988,7 @@
     {
       "key": "workflow-enhance",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\enhance.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\enhance.md",
       "timestamp": "2026-04-30T17:56:34.095Z",
       "blocks": [],
       "properties": {
@@ -53005,7 +53005,7 @@
     {
       "key": "workflow-orchestrate",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\orchestrate.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\orchestrate.md",
       "timestamp": "2026-04-30T17:56:34.095Z",
       "blocks": [],
       "properties": {
@@ -53021,7 +53021,7 @@
     {
       "key": "workflow-plan",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\plan.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\plan.md",
       "timestamp": "2026-04-30T17:56:34.095Z",
       "blocks": [],
       "properties": {
@@ -53038,7 +53038,7 @@
     {
       "key": "workflow-preview",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\preview.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\preview.md",
       "timestamp": "2026-04-30T17:56:34.095Z",
       "blocks": [],
       "properties": {
@@ -53054,7 +53054,7 @@
     {
       "key": "workflow-status",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\status.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\status.md",
       "timestamp": "2026-04-30T17:56:34.095Z",
       "blocks": [],
       "properties": {
@@ -53070,7 +53070,7 @@
     {
       "key": "workflow-test",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\test.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\test.md",
       "timestamp": "2026-04-30T17:56:34.095Z",
       "blocks": [],
       "properties": {
@@ -53087,7 +53087,7 @@
     {
       "key": "workflow-ui-ux-pro-max",
       "tags": [],
-      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\toolkit\\workflow\\ui-ux-pro-max.md",
+      "fileName": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna\\Curator\\workflow\\ui-ux-pro-max.md",
       "timestamp": "2026-04-30T17:56:34.095Z",
       "blocks": [],
       "properties": {

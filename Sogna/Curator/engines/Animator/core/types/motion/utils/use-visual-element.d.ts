@@ -1,6 +1,6 @@
 import { type HTMLRenderState, type SVGRenderState, type VisualElement } from "sognaflow-dom";
 import * as React from "react";
-import { sognaflowConfigContext } from "../../context/MotionConfigContext.js";
+import { sognaflowConfigContext } from "../../context/motionconfigcontext.js";
 import { sognaflowProps } from "../../motion/types";
 import { DOMsognaflowComponents } from "../../render/dom/types.js";
 import { CreateVisualElement } from "../../render/types.js";

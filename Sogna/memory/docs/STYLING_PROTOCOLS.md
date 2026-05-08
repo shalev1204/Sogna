@@ -39,7 +39,7 @@ Sogna uses the `Stylist` engine to determine the "vibe" based on 161 industries.
 - ❌ **AI Gradients**: No generic "AI-generated" purple/pink gradients.
 - ❌ **Harsh Motion**: No bouncy or jittery animations.
 - ❌ **Layout Chaos**: No inconsistent spacing or misaligned grids.
-- ❌ **Dark Mode Default**: Unless industry-specific, default to a clean, institutional Light Mode.
+- ❌ **Light Mode Default**: Unless explicitly requested, default to the institutional **Dark Mode (OLED)** for power efficiency and high-fidelity aesthetics.
 
 ---
 *"The quality of the UI is the signature of the Sogna creator."*

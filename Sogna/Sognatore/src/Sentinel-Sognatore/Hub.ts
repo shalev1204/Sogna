@@ -4,9 +4,10 @@ import * as path from 'path';
 import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
-import crypto from 'crypto';
+import * as crypto from 'crypto';
 import { SecurityAudit } from './SecurityAudit.js';
 import { CodeScanner } from './CodeScanner.js';
+import { SignatureEntry } from './SecurityTypes.js';
 
 export enum SecurityState {
   ALIVE = 'ALIVE',
@@ -28,7 +29,7 @@ export class Hub {
   private readonly SENTINEL_PATH: string;
   private readonly SIGNATURES_PATH: string;
   private readonly INTEL_REPORT_PATH: string;
-  private signaturesCache: Record<string, any> = {};
+  private signaturesCache: Record<string, SignatureEntry> = {};
   private mtimeCache: Record<string, number> = {};
 
   private constructor() {
@@ -45,7 +46,9 @@ export class Hub {
       return process.cwd(); // Fallback
     };
 
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    // @ts-ignore: import.meta is allowed at runtime in Sogna environment
+    const metaUrl = (import.meta as unknown as { url: string }).url;
+    const __dirname = path.dirname(fileURLToPath(metaUrl));
     this.sognatoreRoot = findRoot(__dirname);
 
     const findGitRoot = (start: string): string => {
@@ -117,8 +120,8 @@ export class Hub {
       const MAX_ENTRIES = 10000;
       if (Object.keys(this.signaturesCache).length > MAX_ENTRIES) {
         const sortedKeys = Object.keys(this.signaturesCache).sort((a, b) => {
-          const tA = new Date((this.signaturesCache[a] as any).timestamp || 0).getTime();
-          const tB = new Date((this.signaturesCache[b] as any).timestamp || 0).getTime();
+          const tA = new Date(this.signaturesCache[a].timestamp || 0).getTime();
+          const tB = new Date(this.signaturesCache[b].timestamp || 0).getTime();
           return tB - tA; // Newest first
         });
 

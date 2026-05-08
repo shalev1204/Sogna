@@ -8,4 +8,4 @@ export const sognaflowConfigContext = createContext({
     isStatic: false,
     reducedsognaflow: "never",
 });
-//# sourceMappingURL=MotionConfigContext.js.map
+//# sourceMappingURL=motionconfigcontext.js.map

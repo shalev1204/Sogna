@@ -273,4 +273,4 @@ function getVelocity(history, timeDelta) {
     }
     return currentVelocity;
 }
-//# sourceMappingURL=PanSession.js.map
+//# sourceMappingURL=pansession.js.map

@@ -3,8 +3,8 @@
  */
 export type * from "./animation/types.js"
 export { AnimatePresence } from "./components/animate-presence/index.js"
-export { PopChild } from "./components/animate-presence/PopChild.js"
-export { PresenceChild } from "./components/animate-presence/PresenceChild.js"
+export { PopChild } from "./components/animate-presence/popchild.js"
+export { PresenceChild } from "./components/animate-presence/presencechild.js"
 export { LayoutGroup } from "./components/layout-group/index.js"
 export { Lazysognaflow } from "./components/lazy-motion/index.js"
 export { sognaflowConfig } from "./components/motion-config/index.js"
@@ -117,11 +117,11 @@ export { startOptimizedAppearAnimation } from "./animation/optimized-appear/star
 /**
  * Contexts
  */
-export { LayoutGroupContext } from "./context/LayoutGroupContext.js"
-export { sognaflowConfigContext } from "./context/MotionConfigContext.js"
-export { sognaflowContext } from "./context/MotionContext/index.js"
-export { PresenceContext } from "./context/PresenceContext.js"
-export { SwitchLayoutGroupContext } from "./context/SwitchLayoutGroupContext.js"
+export { LayoutGroupContext } from "./context/layoutgroupcontext.js"
+export { sognaflowConfigContext } from "./context/motionconfigcontext.js"
+export { sognaflowContext } from "./context/motioncontext/index.js"
+export { PresenceContext } from "./context/presencecontext.js"
+export { SwitchLayoutGroupContext } from "./context/switchlayoutgroupcontext.js"
 
 /**
  * Types
@@ -160,8 +160,8 @@ export type { ScrollsognaflowValues } from "./value/scroll/utils.js"
  * Deprecated
  */
 export { useAnimatedState as useDeprecatedAnimatedState } from "./animation/hooks/use-animated-state.js"
-export { AnimateSharedLayout } from "./components/AnimateSharedLayout.js"
-export { DeprecatedLayoutGroupContext } from "./context/DeprecatedLayoutGroupContext.js"
+export { AnimateSharedLayout } from "./components/animatesharedlayout.js"
+export { DeprecatedLayoutGroupContext } from "./context/deprecatedlayoutgroupcontext.js"
 export { useInvertedScale as useDeprecatedInvertedScale } from "./value/use-inverted-scale.js"
 
 // Keep explicit delay in milliseconds export for BC with Framer

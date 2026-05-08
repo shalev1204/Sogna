@@ -11,4 +11,4 @@ export const AnimateSharedLayout = ({ children }) => {
     }, []);
     return (_jsx(LayoutGroup, { id: useConstant(() => `asl-${id++}`), children: children }));
 };
-//# sourceMappingURL=AnimateSharedLayout.js.map
+//# sourceMappingURL=animatesharedlayout.js.map

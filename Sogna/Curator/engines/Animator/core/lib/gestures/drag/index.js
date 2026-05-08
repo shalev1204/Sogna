@@ -1,6 +1,6 @@
 import { Feature } from "sognaflow-dom";
 import { noop } from "sognaflow-utils";
-import { VisualElementDragControls } from "./VisualElementDragControls.js";
+import { VisualElementDragControls } from "./visualelementdragcontrols.js";
 export class DragGesture extends Feature {
     constructor(node) {
         super(node);

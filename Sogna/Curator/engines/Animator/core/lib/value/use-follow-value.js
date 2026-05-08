@@ -1,7 +1,7 @@
 "use client";
 import { attachFollow, issognaflowValue, } from "sognaflow-dom";
 import { useContext, useInsertionEffect } from "react";
-import { sognaflowConfigContext } from "../context/MotionConfigContext.js";
+import { sognaflowConfigContext } from "../context/motionconfigcontext.js";
 import { usesognaflowValue } from "./use-sognaflow-value";
 import { useTransform } from "./use-transform.js";
 export function useFollowValue(source, options = {}) {

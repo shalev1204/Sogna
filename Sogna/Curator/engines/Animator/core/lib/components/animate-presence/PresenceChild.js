@@ -2,9 +2,9 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import * as React from "react";
 import { useId, useMemo } from "react";
-import { PresenceContext, } from "../../context/PresenceContext.js";
+import { PresenceContext, } from "../../context/presencecontext.js";
 import { useConstant } from "../../utils/use-constant.js";
-import { PopChild } from "./PopChild.js";
+import { PopChild } from "./popchild.js";
 export const PresenceChild = ({ children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, anchorX, anchorY, root }) => {
     const presenceChildren = useConstant(newChildrenMap);
     const id = useId();
@@ -57,4 +57,4 @@ export const PresenceChild = ({ children, initial, isPresent, onExitComplete, cu
 function newChildrenMap() {
     return new Map();
 }
-//# sourceMappingURL=PresenceChild.js.map
+//# sourceMappingURL=presencechild.js.map

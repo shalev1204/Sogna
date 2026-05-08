@@ -7,7 +7,7 @@ export interface AuditEntry {
   enforcementPoint: string;
   decision: string;
   reason: string;
-  context: any;
+  context: Record<string, unknown>;
   previousHash: string;
   hash: string;
 }
@@ -53,7 +53,7 @@ export class SecurityAudit {
   /**
    * Records a security decision with a cryptographic signature chain.
    */
-  public logDecision(enforcementPoint: string, decision: string, reason: string, context: any): void {
+  public logDecision(enforcementPoint: string, decision: string, reason: string, context: Record<string, unknown>): void {
     const entry: Partial<AuditEntry> = {
       timestamp: new Date().toISOString(),
       enforcementPoint,
@@ -69,7 +69,7 @@ export class SecurityAudit {
       .digest('hex');
     
     entry.hash = hash;
-    this.lastHash = hash;
+    this.lastHash = hash as string;
 
     // Asynchronous append for high-performance non-blocking architecture
     fs.promises.appendFile(this.logPath, JSON.stringify(entry) + '\n').catch(err => {

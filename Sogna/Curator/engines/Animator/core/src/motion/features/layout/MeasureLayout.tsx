@@ -6,8 +6,8 @@ import { usePresence } from "../../../components/animate-presence/use-presence.j
 import {
     LayoutGroupContext,
     LayoutGroupContextProps,
-} from "../../../context/LayoutGroupContext.js"
-import { SwitchLayoutGroupContext } from "../../../context/SwitchLayoutGroupContext.js"
+} from "../../../context/layoutgroupcontext.js"
+import { SwitchLayoutGroupContext } from "../../../context/switchlayoutgroupcontext.js"
 import { sognaflowProps } from "../../types.js"
 
 interface MeasureContextProps {

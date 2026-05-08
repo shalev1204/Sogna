@@ -25,12 +25,41 @@ export interface CostProjectEntry {
   timestamp: string;
 }
 
+export interface HistoryEntry {
+  type: 'alert' | 'shutdown' | string;
+  timestamp: string;
+  threshold?: number;
+  percentage?: number;
+  projectId?: string;
+  reason?: string;
+  [key: string]: string | number | boolean | undefined;
+}
+
+export interface BudgetAlert {
+  threshold: number;
+  message: string;
+}
+
+export interface BudgetStatus {
+  remaining: number;
+  percentage: number;
+  alerts: BudgetAlert[];
+  exceeded: boolean;
+}
+
+export interface EfficiencyReport {
+  agentId: string;
+  avgTokens: number;
+  status: 'NEEDS_PRUNING' | 'OPTIMAL';
+  recommendation: string;
+}
+
 export interface CostState {
   projects: Record<string, { totalTokens: number; entries: CostProjectEntry[] }>;
   agents: Record<string, { totalTokens: number; model?: string; entries: number }>;
   totalTokens: number;
   triggeredAlerts: string[];
-  history: any[];
+  history: HistoryEntry[];
 }
 
 export interface BudgetConfig {
@@ -181,7 +210,7 @@ export class Treasurer extends EventEmitter {
     this._requestSave();
   }
 
-  public checkBudget(projectId?: string): { remaining: number; percentage: number; alerts: any[]; exceeded: boolean } {
+  public checkBudget(projectId?: string): BudgetStatus {
     if (!this._budgetConfig) {
       return { remaining: Infinity, percentage: 0, alerts: [], exceeded: false };
     }
@@ -195,7 +224,7 @@ export class Treasurer extends EventEmitter {
     const remaining = Math.max(0, max - consumed);
     const exceeded = consumed >= max;
 
-    const alerts = [];
+    const alerts: BudgetAlert[] = [];
     for (const threshold of this._budgetConfig.alerts) {
       if (percentage >= threshold) {
         alerts.push({
@@ -247,23 +276,23 @@ export class Treasurer extends EventEmitter {
     }
   }
 
-  private _addHistory(type: string, data: any): void {
+  private _addHistory(type: string, data: Partial<HistoryEntry>): void {
     if (this._state.history.length > MAX_STATE_ENTRIES) {
       this._state.history.splice(0, this._state.history.length - MAX_STATE_ENTRIES);
     }
-    this._state.history.push({ ...data, type, timestamp: new Date().toISOString() });
+    this._state.history.push({ ...data, type, timestamp: new Date().toISOString() } as HistoryEntry);
   }
 
-  public getAgentReport(): Record<string, any> {
+  public getAgentReport(): Record<string, { totalTokens: number; model?: string; entries: number }> {
     return { ...this._state.agents };
   }
 
-  public getProjectReport(projectId?: string): any {
+  public getProjectReport(projectId?: string): Record<string, { totalTokens: number; entries: CostProjectEntry[] }> | { totalTokens: number; entries: CostProjectEntry[] } | null {
     if (projectId) return this._state.projects[projectId] || null;
     return { ...this._state.projects };
   }
 
-  public getHistory(): any[] {
+  public getHistory(): HistoryEntry[] {
     return [...this._state.history];
   }
 
@@ -278,8 +307,8 @@ export class Treasurer extends EventEmitter {
    * ADAPTIVE OPTIMIZER: Analyzes token efficiency.
    * Returns a report of agents that are consuming high tokens with low successful frequency.
    */
-  public getEfficiencyOptimization(): any {
-    const report: any[] = [];
+  public getEfficiencyOptimization(): EfficiencyReport[] {
+    const report: EfficiencyReport[] = [];
     for (const [agentId, data] of Object.entries(this._state.agents)) {
       const avgTokens = data.totalTokens / (data.entries || 1);
       const isHighConsumer = avgTokens > 1000; // Threshold for investigation
@@ -294,4 +323,3 @@ export class Treasurer extends EventEmitter {
     return report;
   }
 }
-

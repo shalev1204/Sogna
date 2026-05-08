@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { LazyContext } from "../../context/LazyContext.js"
+import { LazyContext } from "../../context/lazycontext.js"
 import { loadFeatures } from "../../motion/features/load-features"
 import { FeatureBundle, LazyFeatureBundle } from "../../motion/features/types"
 import { CreateVisualElement } from "../../render/types.js"

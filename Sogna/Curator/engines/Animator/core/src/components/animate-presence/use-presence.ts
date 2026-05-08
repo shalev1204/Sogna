@@ -4,7 +4,7 @@ import { useCallback, useContext, useEffect, useId } from "react"
 import {
     PresenceContext,
     PresenceContextProps,
-} from "../../context/PresenceContext.js"
+} from "../../context/presencecontext.js"
 
 export type SafeToRemove = () => void
 

@@ -2,7 +2,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
 import { resolveTransition } from "sognaflow-dom";
-import { sognaflowConfigContext } from "../../context/MotionConfigContext.js";
+import { sognaflowConfigContext } from "../../context/motionconfigcontext.js";
 import { loadExternalIsValidProp, } from "../../render/dom/utils/filter-props.js";
 import { useConstant } from "../../utils/use-constant.js";
 /**

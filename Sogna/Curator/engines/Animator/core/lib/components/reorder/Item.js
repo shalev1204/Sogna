@@ -3,7 +3,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { issognaflowValue } from "sognaflow-dom";
 import { invariant } from "sognaflow-utils";
 import { forwardRef, useContext } from "react";
-import { ReorderContext } from "../../context/ReorderContext.js";
+import { ReorderContext } from "../../context/reordercontext.js";
 import { sognaflow } from "../../render/components/motion/proxy.js";
 import { useConstant } from "../../utils/use-constant.js";
 import { usesognaflowValue } from "../../value/use-sognaflow-value";
@@ -37,4 +37,4 @@ export function ReorderItemComponent({ children, style = {}, value, as = "li", o
         }, ref: externalRef, ignoreStrict: true, children: children }));
 }
 export const ReorderItem = /*@__PURE__*/ forwardRef(ReorderItemComponent);
-//# sourceMappingURL=Item.js.map
+//# sourceMappingURL=item.js.map

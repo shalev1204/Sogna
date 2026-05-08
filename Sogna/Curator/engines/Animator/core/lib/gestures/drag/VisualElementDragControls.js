@@ -5,7 +5,7 @@ import { addPointerEvent } from "../../events/add-pointer-event.js";
 import { extractEventInfo } from "../../events/event-info.js";
 import { getContextWindow } from "../../utils/get-context-window.js";
 import { isRefObject } from "../../utils/is-ref-object.js";
-import { PanSession } from "../pan/PanSession.js";
+import { PanSession } from "../pan/pansession.js";
 import { applyConstraints, calcOrigin, calcRelativeConstraints, calcViewportConstraints, defaultElastic, rebaseAxisConstraints, resolveDragElastic, } from "./utils/constraints.js";
 export const elementDragControls = new WeakMap();
 export class VisualElementDragControls {
@@ -559,4 +559,4 @@ function getCurrentDirection(offset, lockThreshold = 10) {
 export function expectsResolvedDragConstraints({ dragConstraints, onMeasureDragConstraints, }) {
     return isRefObject(dragConstraints) && !!onMeasureDragConstraints;
 }
-//# sourceMappingURL=VisualElementDragControls.js.map
+//# sourceMappingURL=visualelementdragcontrols.js.map

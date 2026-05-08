@@ -1,11 +1,11 @@
 "use client";
 import { optimizedAppearDataAttribute, } from "sognaflow-dom";
 import { useContext, useEffect, useInsertionEffect, useRef } from "react";
-import { LazyContext } from "../../context/LazyContext.js";
-import { sognaflowConfigContext } from "../../context/MotionConfigContext.js";
-import { sognaflowContext } from "../../context/MotionContext/index.js";
-import { PresenceContext } from "../../context/PresenceContext.js";
-import { SwitchLayoutGroupContext, } from "../../context/SwitchLayoutGroupContext.js";
+import { LazyContext } from "../../context/lazycontext.js";
+import { sognaflowConfigContext } from "../../context/motionconfigcontext.js";
+import { sognaflowContext } from "../../context/motioncontext/index.js";
+import { PresenceContext } from "../../context/presencecontext.js";
+import { SwitchLayoutGroupContext, } from "../../context/switchlayoutgroupcontext.js";
 import { isRefObject } from "../../utils/is-ref-object.js";
 import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect.js";
 export function useVisualElement(Component, visualState, props, createVisualElement, ProjectionNodeConstructor, isSVG) {

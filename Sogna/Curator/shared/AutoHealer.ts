@@ -132,7 +132,7 @@ export class AutoHealer {
   }
 
   resetAttempts(contextId: string) {
-    for (const key of this.attemptMap.keys()) {
+    for (const key of Array.from(this.attemptMap.keys())) {
       if (key.startsWith(contextId)) this.attemptMap.delete(key);
     }
   }

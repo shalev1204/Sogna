@@ -1,7 +1,7 @@
 "use client";
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from "react";
-import { LazyContext } from "../../context/LazyContext.js";
+import { LazyContext } from "../../context/lazycontext.js";
 import { loadFeatures } from "../../motion/features/load-features";
 /**
  * Used in conjunction with the `m` component to reduce bundle size.

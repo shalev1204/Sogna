@@ -2,7 +2,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { invariant } from "sognaflow-utils";
 import { forwardRef, useEffect, useRef } from "react";
-import { ReorderContext } from "../../context/ReorderContext.js";
+import { ReorderContext } from "../../context/reordercontext.js";
 import { sognaflow } from "../../render/components/motion/proxy.js";
 import { useConstant } from "../../utils/use-constant.js";
 import { checkReorder } from "./utils/check-reorder.js";
@@ -81,4 +81,4 @@ export const ReorderGroup = /*@__PURE__*/ forwardRef(ReorderGroupComponent);
 function compareMin(a, b) {
     return a.layout.min - b.layout.min;
 }
-//# sourceMappingURL=Group.js.map
+//# sourceMappingURL=group.js.map

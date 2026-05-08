@@ -29,8 +29,8 @@
 
 To verify the ecosystem's state, run the following commands:
 
-- **Standard Audit**: `node toolkit/bin/sogna.js doctor`
-- **Security Audit (Sentinel)**: `node toolkit/bin/sogna.js doctor --secure`
+- **Standard Audit**: `node Curator/bin/sogna.js doctor`
+- **Security Audit (Sentinel)**: `node Curator/bin/sogna.js doctor --secure`
 
 ## ✅ Final Certification
 

@@ -9,7 +9,14 @@ import {
   validateResource,
   validateData,
   validateApprovalGate,
-  RULE_EVALUATORS 
+  RULE_EVALUATORS,
+  PolicyStructure,
+  SecurityContext,
+  PreExecutionPolicy,
+  PreDeploymentPolicy,
+  ResourcePolicy,
+  DataPolicy,
+  ApprovalGatePolicy
 } from './PolicyTypes.js';
 import { PermissionMode } from './SecurityTypes.js';
 // @Sentinel-ignore: Justificación técnica
@@ -24,14 +31,16 @@ import { ActivityProfile } from './ActivityProfile.js';
  * Sognatore Policy Engine - Core Evaluation Engine
  */
 
-export function parseSimpleYaml(text: string): any {
+type YamlValue = string | number | boolean | null | YamlValue[] | { [key: string]: YamlValue };
+
+export function parseSimpleYaml(text: string): YamlValue {
   if (!text || typeof text !== 'string') return null;
   const lines = text.split('\n');
   return _parseBlock(lines, 0, 0).value;
 }
 
-function _parseBlock(lines: string[], startIdx: number, baseIndent: number): { value: any, endIdx: number } {
-  const result: any = {};
+function _parseBlock(lines: string[], startIdx: number, baseIndent: number): { value: Record<string, YamlValue>, endIdx: number } {
+  const result: Record<string, YamlValue> = {};
   let i = startIdx;
 
   while (i < lines.length) {
@@ -91,8 +100,8 @@ function _parseBlock(lines: string[], startIdx: number, baseIndent: number): { v
   return { value: result, endIdx: i };
 }
 
-function _parseArray(lines: string[], startIdx: number, baseIndent: number): { value: any[], endIdx: number } {
-  const result: any[] = [];
+function _parseArray(lines: string[], startIdx: number, baseIndent: number): { value: YamlValue[], endIdx: number } {
+  const result: YamlValue[] = [];
   let i = startIdx;
 
   while (i < lines.length) {
@@ -161,7 +170,7 @@ function _parseArray(lines: string[], startIdx: number, baseIndent: number): { v
   return { value: result, endIdx: i };
 }
 
-function _parseScalar(v: string): any {
+function _parseScalar(v: string): YamlValue {
   if (v === 'true') return true;
   if (v === 'false') return false;
   if (v === 'null' || v === '~') return null;
@@ -176,8 +185,8 @@ function _parseScalar(v: string): any {
 export class Engine {
   private static instance: Engine | null = null;
   private _projectDir: string;
-  private _options: any;
-  private _policies: any = null;
+  private _options: Record<string, unknown>;
+  private _policies: PolicyStructure | null = null;
   private _policyPath: string | null = null;
   private _loaded = false;
   private _watcher: boolean = false;
@@ -187,7 +196,7 @@ export class Engine {
   private _threatL1Cache: Map<string, { decision: Decision; reason: string; timestamp: number }> = new Map();
   private readonly THREAT_CACHE_TTL = 300000; // 5 minutes
 
-  public static getInstance(projectDir?: string, options?: any): Engine {
+  public static getInstance(projectDir?: string, options?: Record<string, unknown>): Engine {
     if (!this.instance) {
       this.instance = new Engine(projectDir, options);
     }
@@ -206,7 +215,7 @@ export class Engine {
     return this._globalMode;
   }
 
-  constructor(projectDir?: string, options?: any) {
+  constructor(projectDir?: string, options?: Record<string, unknown>) {
     this._projectDir = projectDir || process.cwd();
     this._options = options || {};
     this._executiveBinaryPath = path.resolve(this._projectDir, 'toolkit/executive-core/target/release/executive-core.exe');
@@ -458,28 +467,28 @@ export class Engine {
     };
   }
 
-  private _evaluatePreExecution(entries: any[], context: any, violations: any[]): void {
+  private _evaluatePreExecution(entries: PreExecutionPolicy[], context: SecurityContext, violations: { name: string, action: Decision, reason: string }[]): void {
     for (const entry of entries) {
       const result = evaluateRule(entry.rule, context);
       if (result === false) {
         violations.push({
           name: entry.name,
-          action: entry.action || 'deny',
+          action: entry.action || Decision.DENY,
           reason: `Rule violated: ${entry.rule}`,
         });
       }
     }
   }
 
-  private _evaluatePreDeployment(entries: any[], context: any, violations: any[]): void {
-    const passedGates = context.passed_gates || [];
+  private _evaluatePreDeployment(entries: PreDeploymentPolicy[], context: SecurityContext, violations: { name: string, action: Decision, reason: string }[]): void {
+    const passedGates = (context.passed_gates as string[]) || [];
     for (const entry of entries) {
       if (!entry.gates || !Array.isArray(entry.gates)) continue;
       for (const gate of entry.gates) {
         if (!passedGates.includes(gate)) {
           violations.push({
             name: entry.name,
-            action: entry.action || 'deny',
+            action: entry.action || Decision.DENY,
             reason: `Required gate not passed: ${gate}`,
           });
         }
@@ -487,13 +496,13 @@ export class Engine {
     }
   }
 
-  private _evaluateResource(entries: any[], context: any, violations: any[]): void {
+  private _evaluateResource(entries: ResourcePolicy[], context: SecurityContext, violations: { name: string, action: Decision, reason: string }[]): void {
     for (const entry of entries) {
       if (entry.providers && Array.isArray(entry.providers)) {
         if (context.provider && !entry.providers.includes(context.provider)) {
           violations.push({
             name: entry.name,
-            action: entry.action || 'deny',
+            action: Decision.DENY, // Resource provider mismatch is always deny
             reason: `Provider "${context.provider}" not approved`,
           });
         }
@@ -502,7 +511,7 @@ export class Engine {
         if (context.tokens_consumed >= entry.max_tokens) {
           violations.push({
             name: entry.name,
-            action: entry.on_exceed === 'require_approval' ? 'require_approval' : 'deny',
+            action: entry.on_exceed === 'require_approval' ? Decision.REQUIRE_APPROVAL : Decision.DENY,
             reason: `Token budget exceeded: ${context.tokens_consumed} >= ${entry.max_tokens}`,
           });
         }
@@ -510,14 +519,14 @@ export class Engine {
     }
   }
 
-  private _evaluateData(entries: any[], context: any, violations: any[]): void {
+  private _evaluateData(entries: DataPolicy[], context: SecurityContext, violations: { name: string, action: Decision, reason: string, findings?: string[] }[]): void {
     if (!context.content) return;
     for (const entry of entries) {
       const findings = scanContent(context.content, entry.type);
       if (findings.length > 0) {
         violations.push({
           name: entry.name,
-          action: entry.action || 'deny',
+          action: entry.action || Decision.DENY,
           reason: `${entry.type} detected`,
           findings,
         });
@@ -525,7 +534,7 @@ export class Engine {
     }
   }
 
-  private _callExecutiveCore(context: any): { decision: Decision; reason: string } {
+  private _callExecutiveCore(context: SecurityContext): { decision: Decision; reason: string } {
     const cargoContext = {
       tool_name: context.tool_name || 'policy_eval',
       arguments: context.arguments || {},
@@ -554,12 +563,12 @@ export class Engine {
     }
   }
 
-  public getApprovalGates(): any[] {
+  public getApprovalGates(): ApprovalGatePolicy[] {
     const policies = this._policies?.policies || this._policies;
     return policies?.approval_gates || [];
   }
 
-  public getResourcePolicies(): any[] {
+  public getResourcePolicies(): ResourcePolicy[] {
     const policies = this._policies?.policies || this._policies;
     return policies?.resource || [];
   }

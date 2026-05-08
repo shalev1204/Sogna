@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DragControlOptions } from "./VisualElementDragControls.js";
+import { DragControlOptions } from "./visualelementdragcontrols.js";
 /**
  * Can manually trigger a drag gesture on one or more `drag`-enabled `sognaflow` components.
  *

@@ -31,6 +31,10 @@ Technical overview of implemented defense mechanisms.
 - **T011 (Prototype Pollution)**: Secure loop auditing and object-freeze policies.
 - **T012 (Network Control)**: Data exfiltration prevention via domain whitelisting.
 
+### Phase 4: Deception & Counter-Intelligence
+
+- **Honeypot Decoy**: Deployment of `master_key.bak` (Fake) to monitor unauthorized access attempts within the `memory/security` perimeter. Any interaction with this file triggers an immediate system-wide VETO.
+
 ---
 
 ## 2. Recent Incident & Veto Reports

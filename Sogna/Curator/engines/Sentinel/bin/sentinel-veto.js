@@ -43,6 +43,7 @@ console.log("\n🛡️  [SENTINEL] Modo Apex: Iniciando auditoría institucional
 
 const args = process.argv.slice(2);
 const scanAll = args.includes('--all');
+const scanStaged = args.includes('--staged');
 const isFixMode = args.includes('--fix');
 const vetoThreshold = process.env.SENTINEL_STRICT !== 'false';
 let report = [];
@@ -89,7 +90,7 @@ function signFile(filePath, cachedHash = null) {
     }
 }
 
-let filesToAnalyze = args.filter(a => !a.startsWith('--'));
+let filesToAnalyze = scanStaged || scanAll ? [] : args.filter(a => !a.startsWith('--'));
 
 if (scanAll) {
     console.log('[SENTINEL] Escaneando todo el proyecto Sogna...');
@@ -102,6 +103,19 @@ if (scanAll) {
         filesToAnalyze = [...new Set([...filesToAnalyze, ...allFiles])];
     } catch (err) {
         console.warn('[SENTINEL] No se pudo obtener la lista de archivos de git. Usando argumentos manuales.');
+    }
+} else if (scanStaged) {
+    console.log('[SENTINEL] Escaneando archivos en staging...');
+    try {
+        const { execSync } = require('child_process');
+        // Get only staged files that match our criteria
+        const output = execSync('git diff --cached --name-only', { encoding: 'utf-8', cwd: ROOT_DIR });
+        const stagedFiles = output.split('\n')
+            .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json')))
+            .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini'));
+        filesToAnalyze = [...new Set([...filesToAnalyze, ...stagedFiles])];
+    } catch (err) {
+        console.warn('[SENTINEL] No se pudo obtener la lista de archivos staged de git.');
     }
 }
 

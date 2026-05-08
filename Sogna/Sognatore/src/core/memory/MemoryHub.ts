@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import path from 'path';
+import * as path from 'path';
 import chalk from 'chalk';
 import { Chronicler, type KnowledgeFragment } from './Chronicler.js';
 import { ImmuneSystem, type HealthReport } from './ImmuneSystem.js';
@@ -398,8 +398,9 @@ export class MemoryHub {
       // 3. Check colleagues specifically
       if (f.properties?.colleagues) {
         const colleaguesStr = String(f.properties.colleagues);
-        const matches = colleaguesStr.matchAll(/\[\[(.*?)\]\]/g);
-        for (const match of matches) {
+        const colleaguesRegex = /\[\[(.*?)\]\]/g;
+        let match;
+        while ((match = colleaguesRegex.exec(colleaguesStr)) !== null) {
           edges.push({ source: f.key, target: match[1] });
         }
       }

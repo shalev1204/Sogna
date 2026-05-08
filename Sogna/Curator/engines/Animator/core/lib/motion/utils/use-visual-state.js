@@ -1,8 +1,8 @@
 "use client";
 import { isAnimationControls, isControllingVariants as checkIsControllingVariants, isVariantNode as checkIsVariantNode, resolveVariantFromProps, } from "sognaflow-dom";
 import { useContext } from "react";
-import { sognaflowContext } from "../../context/MotionContext/index.js";
-import { PresenceContext, } from "../../context/PresenceContext.js";
+import { sognaflowContext } from "../../context/motioncontext/index.js";
+import { PresenceContext, } from "../../context/presencecontext.js";
 import { useConstant } from "../../utils/use-constant.js";
 import { resolvesognaflowValue } from "sognaflow-dom";
 function makeState({ scrapesognaflowValuesFromProps, createRenderState, }, props, context, presenceContext) {

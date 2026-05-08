@@ -9,3 +9,9 @@ export interface ValidationResult {
   warn?: boolean;
   reason?: string;
 }
+
+export interface SignatureEntry {
+  hash: string;
+  timestamp: string;
+  [key: string]: unknown;
+}

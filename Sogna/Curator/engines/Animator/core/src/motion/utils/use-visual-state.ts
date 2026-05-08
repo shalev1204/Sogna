@@ -9,11 +9,11 @@ import {
     resolveVariantFromProps,
 } from "sognaflow-dom"
 import { useContext } from "react"
-import { sognaflowContext, sognaflowContextProps } from "../../context/MotionContext/index.js"
+import { sognaflowContext, sognaflowContextProps } from "../../context/motioncontext/index.js"
 import {
     PresenceContext,
     type PresenceContextProps,
-} from "../../context/PresenceContext.js"
+} from "../../context/presencecontext.js"
 import { ScrapesognaflowValuesFromProps } from "../../render/types.js"
 import { useConstant } from "../../utils/use-constant.js"
 import { resolvesognaflowValue } from "sognaflow-dom"

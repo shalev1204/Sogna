@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import path from 'path';
+import * as path from 'path';
 import { fileURLToPath } from 'url';
 
 export interface KnowledgeFragment {
@@ -95,7 +95,7 @@ export class Chronicler {
       files.forEach(f => allFiles.add(f));
     }
 
-    for (const filePath of allFiles) {
+    for (const filePath of Array.from(allFiles)) {
       const content = await fs.readFile(filePath, 'utf-8');
       const fragment = this.parseFragment(content, filePath);
       const blocks = this.extractBlocks(fragment.content);

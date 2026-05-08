@@ -6,4 +6,4 @@ import { createContext } from "react";
  * @deprecated
  */
 export const DeprecatedLayoutGroupContext = createContext(null);
-//# sourceMappingURL=DeprecatedLayoutGroupContext.js.map
+//# sourceMappingURL=deprecatedlayoutgroupcontext.js.map

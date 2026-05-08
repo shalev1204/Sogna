@@ -67,7 +67,7 @@ class LanguageConfig:
 
 def _read_text(node, source: bytes | memoryview) -> str:
     if isinstance(source, memoryview):
-        return str(source[node.start_byte:node.end_byte], "utf-8", errors="replace")
+        return bytes(source[node.start_byte:node.end_byte]).decode("utf-8", errors="replace")
     return source[node.start_byte:node.end_byte].decode("utf-8", errors="replace")
 
 
@@ -733,7 +733,7 @@ def _extract_generic(path: Path, config: LanguageConfig) -> dict:
 
     def _probe_dynamic_configs(source: bytes) -> dict:
         """Lightweight regex-based extraction for exported config objects."""
-        text = source.decode("utf-8", errors="replace")
+        text = bytes(source).decode("utf-8", errors="replace")
         meta = {}
         # Match 'export const agent = { ... }' or 'export const config = { ... }'
         pattern = r"export\s+const\s+(agent|config|metadata)\s*=\s*({[\s\S]*?});"
@@ -1430,7 +1430,7 @@ def _extract_python_rationale(path: Path, result: dict) -> None:
             if child.type == "expression_statement":
                 for sub in child.children:
                     if sub.type in ("string", "concatenated_string"):
-                        text = source[sub.start_byte:sub.end_byte].decode("utf-8", errors="replace")
+                        text = _read_text(sub, source)
                         text = text.strip("\"'").strip('"""').strip("'''").strip()
                         if len(text) > 20:
                             return text, child.start_point[0] + 1
@@ -1474,7 +1474,7 @@ def _extract_python_rationale(path: Path, result: dict) -> None:
             name_node = node.child_by_field_name("name")
             body = node.child_by_field_name("body")
             if name_node and body:
-                class_name = source[name_node.start_byte:name_node.end_byte].decode("utf-8", errors="replace")
+                class_name = _read_text(name_node, source)
                 nid = _make_id(stem, class_name)
                 ds = _get_docstring(body)
                 if ds:
@@ -1486,7 +1486,7 @@ def _extract_python_rationale(path: Path, result: dict) -> None:
             name_node = node.child_by_field_name("name")
             body = node.child_by_field_name("body")
             if name_node and body:
-                func_name = source[name_node.start_byte:name_node.end_byte].decode("utf-8", errors="replace")
+                func_name = _read_text(name_node, source)
                 nid = _make_id(parent_nid, func_name) if parent_nid != file_nid else _make_id(stem, func_name)
                 ds = _get_docstring(body)
                 if ds:
@@ -1498,7 +1498,7 @@ def _extract_python_rationale(path: Path, result: dict) -> None:
     walk_docstrings(root, file_nid)
 
     # Rationale comments (# NOTE:, # IMPORTANT:, etc.)
-    source_text = source.decode("utf-8", errors="replace")
+    source_text = bytes(source).decode("utf-8", errors="replace")
     for lineno, line_text in enumerate(source_text.splitlines(), start=1):
         stripped = line_text.strip()
         if any(stripped.startswith(p) for p in _RATIONALE_PREFIXES):
@@ -2799,12 +2799,12 @@ def _resolve_cross_file_imports(
                         # Dig into relative_import → dotted_name → identifier
                         for sub in child.children:
                             if sub.type == "dotted_name":
-                                raw = source[sub.start_byte:sub.end_byte].decode("utf-8", errors="replace")
+                                raw = _read_text(sub, source)
                                 target_stem = raw.split(".")[-1]
                                 break
                         break
                     if child.type == "dotted_name" and target_stem is None:
-                        raw = source[child.start_byte:child.end_byte].decode("utf-8", errors="replace")
+                        raw = _read_text(child, source)
                         target_stem = raw.split(".")[-1]
 
                 if not target_stem or target_stem not in stem_to_entities:
@@ -2822,14 +2822,14 @@ def _resolve_cross_file_imports(
                         continue
                     if child.type == "dotted_name":
                         imported_names.append(
-                            source[child.start_byte:child.end_byte].decode("utf-8", errors="replace")
+                            _read_text(child, source)
                         )
                     elif child.type == "aliased_import":
                         # `import X as Y` - take the original name
                         name_node = child.child_by_field_name("name")
                         if name_node:
                             imported_names.append(
-                                source[name_node.start_byte:name_node.end_byte].decode("utf-8", errors="replace")
+                                _read_text(name_node, source)
                             )
 
                 line = node.start_point[0] + 1
@@ -3104,7 +3104,7 @@ def extract_elixir(path: Path) -> dict:
     def _get_alias_text(node) -> str | None:
         for child in node.children:
             if child.type == "alias":
-                return source[child.start_byte:child.end_byte].decode("utf-8", errors="replace")
+                return _read_text(child, source)
         return None
 
     def walk(node, parent_module_nid: str | None = None) -> None:
@@ -3129,7 +3129,7 @@ def extract_elixir(path: Path) -> dict:
                 walk(child, parent_module_nid)
             return
 
-        keyword = source[identifier_node.start_byte:identifier_node.end_byte].decode("utf-8", errors="replace")
+        keyword = _read_text(identifier_node, source)
         line = node.start_point[0] + 1
 
         if keyword == "defmodule":
@@ -3151,10 +3151,10 @@ def extract_elixir(path: Path) -> dict:
                     if child.type == "call":
                         for sub in child.children:
                             if sub.type == "identifier":
-                                func_name = source[sub.start_byte:sub.end_byte].decode("utf-8", errors="replace")
+                                func_name = _read_text(sub, source)
                                 break
                     elif child.type == "identifier":
-                        func_name = source[child.start_byte:child.end_byte].decode("utf-8", errors="replace")
+                        func_name = _read_text(child, source)
                         break
             if not func_name:
                 return
@@ -3202,7 +3202,7 @@ def extract_elixir(path: Path) -> dict:
             return
         for child in node.children:
             if child.type == "identifier":
-                kw = source[child.start_byte:child.end_byte].decode("utf-8", errors="replace")
+                kw = _read_text(child, source)
                 if kw in _SKIP_KEYWORDS:
                     for c in node.children:
                         walk_calls(c, caller_nid)
@@ -3211,13 +3211,13 @@ def extract_elixir(path: Path) -> dict:
         callee_name: str | None = None
         for child in node.children:
             if child.type == "dot":
-                dot_text = source[child.start_byte:child.end_byte].decode("utf-8", errors="replace")
+                dot_text = _read_text(child, source)
                 parts = dot_text.rstrip(".").split(".")
                 if parts:
                     callee_name = parts[-1]
                 break
             if child.type == "identifier":
-                callee_name = source[child.start_byte:child.end_byte].decode("utf-8", errors="replace")
+                callee_name = _read_text(child, source)
                 break
         if callee_name:
             tgt_nid = label_to_nid.get(callee_name.lower())

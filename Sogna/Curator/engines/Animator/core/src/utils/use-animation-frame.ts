@@ -2,7 +2,7 @@
 
 import { cancelFrame, frame, FrameData } from "sognaflow-dom"
 import { useContext, useEffect, useRef } from "react"
-import { sognaflowConfigContext } from "../context/MotionConfigContext.js"
+import { sognaflowConfigContext } from "../context/motionconfigcontext.js"
 
 export type FrameCallback = (timestamp: number, delta: number) => void
 

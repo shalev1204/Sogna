@@ -1,10 +1,10 @@
 
-import JavaScriptObfuscator from 'javascript-obfuscator';
+import * as JavaScriptObfuscator from 'javascript-obfuscator';
 import fs from 'fs-extra';
-import path from 'path';
-import crypto from 'crypto';
+import * as path from 'path';
+import * as crypto from 'crypto';
 import chalk from 'chalk';
-import os from 'os';
+import * as os from 'os';
 
 /**
  * Sognatore Guardian - The Security & Privacy Sentinel
@@ -131,7 +131,7 @@ export class Guardian {
       /crypto/i, /auth/i, /payment/i, /pricing/i, /formula/i, /strategy/i,
       /db_conn/i, /apikey/i, /credential/i, /private/i,
       /\(\s*.*\s*\)\s*=>\s*\{.*[+\-*/].*\}/, // Heuristic for arrow functions with math logic
-      /class\s+\w+\s+\{.*(calc|eval|process|secure).*\}/is, // Heuristic for logic classes
+      /class\s+\w+\s+\{[\s\S]*(calc|eval|process|secure)[\s\S]*\}/i, // Heuristic for logic classes
       /[a-f0-9]{32,}/i, // Long hex strings (potential hashes/keys)
       /(?:[A-Za-z0-9+/]{4}){10,}(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?/ // Base64 blobs
     ];

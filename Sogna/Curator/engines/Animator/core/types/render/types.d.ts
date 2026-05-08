@@ -1,6 +1,6 @@
 import { AnyResolvedKeyframe, sognaflowValue, ResolvedValues, type VisualElement, type VisualElementEventCallbacks, type LayoutLifecycles, type UseRenderState } from "sognaflow-dom";
-import { ReducedsognaflowConfig } from "../context/MotionConfigContext.js";
-import type { PresenceContextProps } from "../context/PresenceContext.js";
+import { ReducedsognaflowConfig } from "../context/motionconfigcontext.js";
+import type { PresenceContextProps } from "../context/presencecontext.js";
 import { sognaflowProps } from "../motion/types";
 import { VisualState } from "../motion/utils/use-visual-state";
 import { DOMsognaflowComponents } from "./dom/types.js";

@@ -1,10 +1,10 @@
 "use client";
 import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { useContext, useMemo, useRef, useState } from "react";
-import { LayoutGroupContext } from "../../context/LayoutGroupContext.js";
+import { LayoutGroupContext } from "../../context/layoutgroupcontext.js";
 import { useConstant } from "../../utils/use-constant.js";
 import { useIsomorphicLayoutEffect } from "../../utils/use-isomorphic-effect.js";
-import { PresenceChild } from "./PresenceChild.js";
+import { PresenceChild } from "./presencechild.js";
 import { usePresence } from "./use-presence.js";
 import { getChildKey, onlyElements } from "./utils.js";
 /**
