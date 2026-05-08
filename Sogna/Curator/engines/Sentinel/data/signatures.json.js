@@ -18200,8 +18200,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Curator/engines/Sentinel/data/signatures.json.js": {
-    "hash": "617815488bf6979a6ea2b060eedc06039374ff103938c143f16e5c5d5b131208",
-    "timestamp": "2026-05-08T19:22:24.355Z",
+    "hash": "7cdc7dc6ad75e3ba7d4ad5aee6c3f8739a358a5c5275c8a792af92a067f27086",
+    "timestamp": "2026-05-08T19:22:37.385Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Curator/engines/Sentinel/health-status.json": {
